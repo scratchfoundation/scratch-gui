@@ -2137,6 +2137,36 @@
         ]
     },
     {
+        "name": "City Bus-a",
+        "md5": "accf64aceae7997b7533fb51624ca297.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "bus",
+            "vehicle"
+        ],
+        "info": [
+            107,
+            67,
+            1
+        ]
+    },
+    {
+        "name": "City Bus-b",
+        "md5": "b9ea0e326ffa98bc58a73bdf17c9542b.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "bus",
+            "vehicle"
+        ],
+        "info": [
+            107,
+            67,
+            1
+        ]
+    },
+    {
         "name": "Cloud",
         "md5": "47005a1f20309f577a03a67abbb6b94e.svg",
         "type": "costume",
@@ -3612,6 +3642,51 @@
         ]
     },
     {
+        "name": "Easel-a",
+        "md5": "edc81e35c94c07dc380c43ea9b311394.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            69,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Easel-b",
+        "md5": "cac798e8cf0364fa9a8bc52b85bda6b2.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            69,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Easel-c",
+        "md5": "afbf42eb496694afb31f9ea69b3a1a7a.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            68,
+            94,
+            1
+        ]
+    },
+    {
         "name": "Egg-a",
         "md5": "6f1a24a63d16c45425aa2eb64934a278.svg",
         "type": "costume",
@@ -3956,6 +4031,86 @@
         "info": [
             63,
             45,
+            1
+        ]
+    },
+    {
+        "name": "Fishbowl-a",
+        "md5": "9d1013e04ca7425f680a4b4e6dd6ede6.svg",
+        "type": "costume",
+        "tags": [
+            "fishbowl",
+            "fish",
+            "animal",
+            "pet"
+        ],
+        "info": [
+            28,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "Fishbowl-b",
+        "md5": "0bbfc827e8d2f3da6db82efe95563f93.svg",
+        "type": "costume",
+        "tags": [
+            "fishbowl",
+            "fish",
+            "animal",
+            "pet"
+        ],
+        "info": [
+            28,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-a",
+        "md5": "b30ec8ff043e0f1747591d564d56d7fa.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food"
+        ],
+        "info": [
+            121,
+            125,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-b",
+        "md5": "afd51531621d2b33869b47342311b363.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food"
+        ],
+        "info": [
+            121,
+            101,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-c",
+        "md5": "42f88485a25bf9a683d28957db9f969f.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food"
+        ],
+        "info": [
+            121,
+            92,
             1
         ]
     },
@@ -6988,6 +7143,66 @@
         ]
     },
     {
+        "name": "Motorcycle-a",
+        "md5": "5065a917834923efc3e0c112d5791e80.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-b",
+        "md5": "fe0923cb08c0b7c373de1daf8b74de74.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-c",
+        "md5": "6af27b2b5e1eeae9e60702630e6909a8.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-d",
+        "md5": "c5d78ac1de3a7f786a4ca6dc0fe087d4.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
         "name": "Mouse1-a",
         "md5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
         "type": "costume",
@@ -8293,6 +8508,36 @@
         ]
     },
     {
+        "name": "Radio-a",
+        "md5": "d2266f31369a97fdf7ec37090bf0a968.svg",
+        "type": "costume",
+        "tags": [
+            "radio",
+            "music",
+            "beatbox"
+        ],
+        "info": [
+            52,
+            38,
+            1
+        ]
+    },
+    {
+        "name": "Radio-b",
+        "md5": "cd4cff5586d0167fd992772360bddf68.svg",
+        "type": "costume",
+        "tags": [
+            "radio",
+            "music",
+            "beatbox"
+        ],
+        "info": [
+            51,
+            84,
+            1
+        ]
+    },
+    {
         "name": "Rainbow",
         "md5": "680a806bd87a28c8b25b5f9b6347f022.svg",
         "type": "costume",
@@ -8384,6 +8629,45 @@
         "info": [
             39,
             70,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot A",
+        "md5": "a17c1ce38c261395ae268f3b8a9037db.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            55,
+            86,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot B",
+        "md5": "bfb5afe62358ef542f118299bb53d4b7.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            52,
+            88,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot C",
+        "md5": "f925e3bde178001133a11fa97847a9ae.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            72,
+            91,
             1
         ]
     },
@@ -9884,6 +10168,51 @@
         "info": [
             36,
             87,
+            1
+        ]
+    },
+    {
+        "name": "Truck-a",
+        "md5": "51404247db5cdbc082336dfa4c03d675.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            49,
+            1
+        ]
+    },
+    {
+        "name": "Truck-b",
+        "md5": "1887b8233d1b0728f715a3985f0e01b6.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            58,
+            1
+        ]
+    },
+    {
+        "name": "Truck-c",
+        "md5": "e45bc3f87d9f603e588abe14b63b8e90.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            58,
             1
         ]
     },

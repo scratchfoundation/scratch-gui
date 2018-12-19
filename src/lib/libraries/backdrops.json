@@ -119,6 +119,20 @@
         ]
     },
     {
+        "name": "Bedroom 1",
+        "md5": "7aa6bbb2ddc4c10f901e1a50aeac1c7e.png",
+        "type": "backdrop",
+        "tags": [
+            "bedroom",
+            "indoors"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
         "name": "Bedroom 2",
         "md5": "e2f8b0dbd0a65d2ad8bfc21616662a6a.png",
         "type": "backdrop",
@@ -301,6 +315,23 @@
         "tags": [
             "outdoors",
             "boston"
+        ],
+        "info": [
+            960,
+            720,
+            2
+        ]
+    },
+    {
+        "name": "Colorful City",
+        "md5": "04d18ddd1b85f0ea30beb14b8da49f60.png",
+        "type": "backdrop",
+        "tags": [
+            "city",
+            "town",
+            "road",
+            "skyline",
+            "outdoors"
         ],
         "info": [
             960,

@@ -58,20 +58,20 @@ class TipsLibrary extends React.PureComponent {
         });
     }
     render () {
-        const decksLibraryThumbnailData = Object.entries(decksLibraryContent)
-            .filter(([, item]) =>
+        const decksLibraryThumbnailData = Object.keys(decksLibraryContent)
+            .filter(id =>
                 // Scratch Desktop doesn't want tutorials with `requiredProjectId`
-                notScratchDesktop() || !item.hasOwnProperty('requiredProjectId')
+                notScratchDesktop() || !decksLibraryContent[id].hasOwnProperty('requiredProjectId')
             )
-            .map(([id, item]) => ({
-                rawURL: item.img,
+            .map(id => ({
+                rawURL: decksLibraryContent[id].img,
                 id: id,
-                name: item.name,
+                name: decksLibraryContent[id].name,
                 featured: true,
-                tags: item.tags,
-                urlId: item.urlId,
-                requiredProjectId: item.requiredProjectId,
-                hidden: item.hidden || false
+                tags: decksLibraryContent[id].tags,
+                urlId: decksLibraryContent[id].urlId,
+                requiredProjectId: decksLibraryContent[id].requiredProjectId,
+                hidden: decksLibraryContent[id].hidden || false
             }));
 
         if (!this.props.visible) return null;

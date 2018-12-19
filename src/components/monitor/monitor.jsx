@@ -83,6 +83,7 @@ const MonitorComponent = props => (
                         />
                     </MenuItem>
                 ) : null}
+                {props.onHide && <MenuItem divider />}
                 {props.onHide &&
                     <MenuItem onClick={props.onHide}>
                         <FormattedMessage

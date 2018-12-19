@@ -6276,7 +6276,7 @@
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "costume",
         "tags": [
-            "animal",
+            "animals",
             "insect",
             "arthropod",
             "antennae",
@@ -6292,7 +6292,13 @@
         "name": "Ladybug2-b",
         "md5": "a2bb15ace808e070a2b815502952b292.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "animals",
+            "insect",
+            "arthropod",
+            "antennae",
+            "aphids"
+        ],
         "info": [
             49,
             28,
@@ -10295,6 +10301,7 @@
             "people",
             "ipzy",
             "castle",
+            "animals",
             "amphibians",
             "magic"
         ],

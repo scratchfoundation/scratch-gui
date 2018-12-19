@@ -2544,7 +2544,7 @@
             "cat",
             "kitty",
             "kitten",
-            "animal",
+            "animals",
             "mammal"
         ],
         "info": [
@@ -6787,7 +6787,7 @@
             "sounds": [
                 {
                     "soundName": "fairydust",
-                    "soundID": 0,
+                    "soundID": -1,
                     "md5": "b92de59d992a655c1b542223a784cda6.wav",
                     "sampleCount": 11247,
                     "rate": 22050,
@@ -9327,7 +9327,7 @@
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "sprite",
         "tags": [
-            "animal",
+            "animals",
             "insect",
             "arthropod",
             "antennae",

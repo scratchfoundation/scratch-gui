@@ -74,10 +74,12 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleProjectChanged () {
-            this.props.onProjectChanged();
+            if (this.props.shouldEmitUpdates) {
+                this.props.onProjectChanged();
+            }
         }
         handleTargetsUpdate (data) {
-            if (this.props.shouldEmitTargetsUpdate) {
+            if (this.props.shouldEmitUpdates) {
                 this.props.onTargetsUpdate(data);
             }
         }
@@ -115,7 +117,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
-                shouldEmitTargetsUpdate,
+                shouldEmitUpdates,
                 onBlockDragUpdate,
                 onGreenFlag,
                 onKeyDown,
@@ -152,7 +154,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
-        shouldEmitTargetsUpdate: PropTypes.bool,
+        shouldEmitUpdates: PropTypes.bool,
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
@@ -161,8 +163,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onGreenFlag: () => ({})
     };
     const mapStateToProps = state => ({
-        // Do not emit target updates in fullscreen or player only mode
-        shouldEmitTargetsUpdate: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly,
+        // Do not emit target or project updates in fullscreen or player only mode
+        shouldEmitUpdates: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly,
         vm: state.scratchGui.vm,
         username: state.session && state.session.session && state.session.session.user ?
             state.session.session.user.username : ''

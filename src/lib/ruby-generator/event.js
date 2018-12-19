@@ -22,13 +22,13 @@ export default function (Generator) {
 
     Generator.event_whenbackdropswitchesto = function (block) {
         block.isStatement = true;
-        const backdrop = Generator.quote_(Generator.getFieldValue(block, 'BACKDROP') || null);
+        const backdrop = Generator.quote_(Generator.getFieldValue(block, 'BACKDROP') || '');
         return `${Generator.spriteName()}.when(:backdrop_switches, ${backdrop}) do\n`;
     };
 
     Generator.event_whengreaterthan = function (block) {
         block.isStatement = true;
-        const lh = Generator.quote_(Generator.getFieldValue(block, 'WHENGREATERTHANMENU') || null);
+        const lh = Generator.quote_(Generator.getFieldValue(block, 'WHENGREATERTHANMENU').toLowerCase() || '');
         const rh = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || '0';
         return `${Generator.spriteName()}.when(:greater_than, ${lh}, ${rh}) do\n`;
     };

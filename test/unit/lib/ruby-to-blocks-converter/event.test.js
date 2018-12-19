@@ -372,7 +372,7 @@ describe('RubyToBlocksConverter/Event', () => {
 
     describe('event_whengreaterthan', () => {
         test('normal', () => {
-            code = 'self.when(:greater_than, "LOUDNESS", 10) { }';
+            code = 'self.when(:greater_than, "loudness", 10) { }';
             expected = [
                 {
                     opcode: 'event_whengreaterthan',
@@ -392,7 +392,10 @@ describe('RubyToBlocksConverter/Event', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'self.when(:greater_than, "TIMER", 10) { }';
+            code = 'self.when(:greater_than, "LOUDNESS", 10) { }';
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = 'self.when(:greater_than, "timer", 10) { }';
             expected = [
                 {
                     opcode: 'event_whengreaterthan',
@@ -412,7 +415,7 @@ describe('RubyToBlocksConverter/Event', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'self.when(:greater_than, "LOUDNESS", x) { }';
+            code = 'self.when(:greater_than, "loudness", x) { }';
             expected = [
                 {
                     opcode: 'event_whengreaterthan',
@@ -433,7 +436,7 @@ describe('RubyToBlocksConverter/Event', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'self.when(:greater_than, "LOUDNESS", 10) { bounce_if_on_edge }';
+            code = 'self.when(:greater_than, "loudness", 10) { bounce_if_on_edge }';
             expected = [
                 {
                     opcode: 'event_whengreaterthan',
@@ -456,7 +459,7 @@ describe('RubyToBlocksConverter/Event', () => {
             ];
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
-            code = 'self.when(:greater_than, "LOUDNESS", 10) { bounce_if_on_edge; move(10) }';
+            code = 'self.when(:greater_than, "loudness", 10) { bounce_if_on_edge; move(10) }';
             expected = [
                 {
                     opcode: 'event_whengreaterthan',
@@ -481,7 +484,7 @@ describe('RubyToBlocksConverter/Event', () => {
         test('hat', () => {
             code = `
                 bounce_if_on_edge
-                self.when(:greater_than, "LOUDNESS", 10) do
+                self.when(:greater_than, "loudness", 10) do
                 end
                 bounce_if_on_edge
             `;
@@ -510,18 +513,18 @@ describe('RubyToBlocksConverter/Event', () => {
         test('invalid', () => {
             [
                 'self.when(:greater_than)',
-                'self.when("LOUDNESS")',
-                'self.when(:greater_than, "LOUDNESS")',
-                'self.when(:greater_than, "LOUDNESS", 10, 11)'
+                'self.when("loudness")',
+                'self.when(:greater_than, "loudness")',
+                'self.when(:greater_than, "loudness", 10, 11)'
             ].forEach(c => {
                 convertAndExpectToEqualRubyStatement(converter, target, c, c);
             });
 
             [
                 'self.when(:greater_than) { bounce_if_on_edge }',
-                'self.when(:greater_than, "LOUDNESS") { bounce_if_on_edge }',
+                'self.when(:greater_than, "loudness") { bounce_if_on_edge }',
                 'self.when(:greater_than, "invalid", 10) { bounce_if_on_edge }',
-                'self.when(:greater_than, "LOUDNESS", 10, 11) { bounce_if_on_edge }'
+                'self.when(:greater_than, "loudness", 10, 11) { bounce_if_on_edge }'
             ].forEach(c => {
                 expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
                 const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
@@ -532,7 +535,7 @@ describe('RubyToBlocksConverter/Event', () => {
         test('error', () => {
             code = `
                 forever do
-                  self.when(:greater_than, "LOUDNESS", 10) do
+                  self.when(:greater_than, "loudness", 10) do
                   end
                 end
             `;

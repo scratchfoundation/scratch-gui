@@ -57,10 +57,10 @@ const EventConverter = {
                 break;
             case 'greater_than':
                 if (args.length === 3 &&
-                    this._isString(args[1]) && GreaterThanMenu.indexOf(args[1].toString()) >= 0 &&
+                    this._isString(args[1]) && GreaterThanMenu.indexOf(args[1].toString().toUpperCase()) >= 0 &&
                     this._isNumberOrBlock(args[2])) {
                     block = this._createBlock('event_whengreaterthan', 'hat');
-                    this._addField(block, 'WHENGREATERTHANMENU', args[1]);
+                    this._addField(block, 'WHENGREATERTHANMENU', args[1].toString().toUpperCase());
                     this._addNumberInput(block, 'VALUE', 'math_number', args[2], 10);
                     this._setParent(rubyBlock, block);
                 }

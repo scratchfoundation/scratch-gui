@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component {
         // Display fallback UI
         this.setState({
             hasError: true,
-            errorId: window.Raven ? window.Raven.lastEventId() : null
+            errorId: window.Sentry ? window.Sentry.lastEventId() : null
         });
 
         // Log errors to analytics, separating supported browsers from unsupported.
@@ -37,8 +37,13 @@ class ErrorBoundary extends React.Component {
                 action: this.props.action,
                 label: error.message
             });
-            if (window.Raven) {
-                window.Raven.captureException(error, {extra: info});
+            if (window.Sentry) {
+                window.Sentry.withScope(scope => {
+                    Object.keys(info).forEach(key => {
+                        scope.setExtra(key, info[key]);
+                    });
+                    window.Sentry.captureException(error);
+                });
             }
         } else {
             analytics.event({

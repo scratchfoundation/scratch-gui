@@ -70,11 +70,9 @@ export default appTarget => {
                 isScratchDesktop
                 showTelemetryModal
                 canSave={false}
-                telemetryModalHandlers={{
-                    onCancel: handleTelemetryModalCancel,
-                    onOptIn: handleTelemetryModalOptIn,
-                    onOptOut: handleTelemetryModalOptOut
-                }}
+                onTelemetryModalCancel={handleTelemetryModalCancel}
+                onTelemetryModalOptIn={handleTelemetryModalOptIn}
+                onTelemetryModalOptOut={handleTelemetryModalOptOut}
             /> :
             <WrappedGui
                 backpackVisible

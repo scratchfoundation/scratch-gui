@@ -104,12 +104,14 @@ const GUIComponent = props => {
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
+        onTelemetryModalCancel,
+        onTelemetryModalOptIn,
+        onTelemetryModalOptOut,
         previewInfoVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeMode,
         targetIsStage,
-        telemetryModalHandlers,
         telemetryModalVisible,
         tipsLibraryVisible,
         vm,
@@ -157,7 +159,9 @@ const GUIComponent = props => {
                 ) : null}
                 {telemetryModalVisible ? (
                     <TelemetryModal
-                        {...telemetryModalHandlers}
+                        onCancel={onTelemetryModalCancel}
+                        onOptIn={onTelemetryModalOptIn}
+                        onOptOut={onTelemetryModalOptOut}
                         onRequestClose={onRequestCloseTelemetryModal}
                     />
                 ) : null}
@@ -393,6 +397,9 @@ GUIComponent.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onTelemetryModalCancel: PropTypes.func,
+    onTelemetryModalOptIn: PropTypes.func,
+    onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
@@ -401,11 +408,6 @@ GUIComponent.propTypes = {
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
-    telemetryModalHandlers: PropTypes.shape({
-        onCancel: PropTypes.func,
-        onOptIn: PropTypes.func.isRequired,
-        onOptOut: PropTypes.func.isRequired
-    }),
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired

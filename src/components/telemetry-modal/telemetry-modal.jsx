@@ -72,11 +72,15 @@ class TelemetryModal extends React.PureComponent {
     }
     handleOptIn () {
         this.props.onRequestClose();
-        this.props.onOptIn();
+        if (this.props.onOptIn) {
+            this.props.onOptIn();
+        }
     }
     handleOptOut () {
         this.props.onRequestClose();
-        this.props.onOptOut();
+        if (this.props.onOptOut) {
+            this.props.onOptOut();
+        }
     }
     render () {
         return (<ReactModal

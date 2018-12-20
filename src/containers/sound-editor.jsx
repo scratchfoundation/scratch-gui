@@ -5,7 +5,6 @@ import WavEncoder from 'wav-encoder';
 
 import {connect} from 'react-redux';
 
-import analytics from '../lib/analytics';
 import {computeChunkedRMS} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';

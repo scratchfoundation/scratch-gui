@@ -53,10 +53,10 @@
                 {
                     "costumeName": "abby-d",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
+                    "baseLayerMD5": "2d05d4da65e7b5009a491d8153d37253.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 31,
-                    "rotationCenterY": 100
+                    "rotationCenterX": 32,
+                    "rotationCenterY": 101
                 }
             ],
             "currentCostumeIndex": 0,
@@ -818,7 +818,7 @@
     },
     {
         "name": "Bananas",
-        "md5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
+        "md5": "1a76b68e056954f5c8ac1f073df1533d.svg",
         "type": "sprite",
         "tags": [
             "food",
@@ -856,7 +856,7 @@
                 {
                     "costumeName": "bananas",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
+                    "baseLayerMD5": "1a76b68e056954f5c8ac1f073df1533d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 39,
                     "rotationCenterY": 38
@@ -1569,7 +1569,7 @@
     },
     {
         "name": "Bowtie",
-        "md5": "aebd82272a5f4a1dd3c23d6e98537017.svg",
+        "md5": "7d876f3ba4b04f3193a701ed30b4490c.svg",
         "type": "sprite",
         "tags": [
             "fashion",
@@ -1595,12 +1595,12 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "bowtie-a",
+                    "costumeName": "bowtie",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "aebd82272a5f4a1dd3c23d6e98537017.svg",
+                    "baseLayerMD5": "7d876f3ba4b04f3193a701ed30b4490c.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 13,
-                    "rotationCenterY": 7
+                    "rotationCenterX": 15,
+                    "rotationCenterY": 8
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2587,7 +2587,7 @@
     },
     {
         "name": "Cat Flying",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "md5": "bf6b9f91e6928be67eda5154ca5fb2c6.svg",
         "type": "sprite",
         "tags": [
             "animals",
@@ -2616,18 +2616,18 @@
                 {
                     "costumeName": "cat flying-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+                    "baseLayerMD5": "bf6b9f91e6928be67eda5154ca5fb2c6.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 67,
-                    "rotationCenterY": 48
+                    "rotationCenterX": 55,
+                    "rotationCenterY": 37
                 },
                 {
                     "costumeName": "cat flying-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+                    "baseLayerMD5": "6a5f707419e619463135f5bae599fa5b.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 42,
-                    "rotationCenterY": 44
+                    "rotationCenterX": 44,
+                    "rotationCenterY": 46
                 }
             ],
             "currentCostumeIndex": 0,
@@ -2679,8 +2679,8 @@
                 },
                 {
                     "costumeName": "catcher-b",
-                    "baseLayerID": -1,
-                    "baseLayerMD5": "51e05176613d533fbb592a8e6025a537.svg",
+                    "baseLayerID": 0,
+                    "baseLayerMD5": "799a822cffc9460c0bf1b387cbd5e06b.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 41,
                     "rotationCenterY": 47
@@ -2934,7 +2934,7 @@
     },
     {
         "name": "Chick",
-        "md5": "7c41418084a117ef14857618a70df9b9.svg",
+        "md5": "7cd74ad0da97a828e8499ee181c9dbb1.svg",
         "type": "sprite",
         "tags": [
             "animals",
@@ -2963,26 +2963,26 @@
                 {
                     "costumeName": "chick-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "7c41418084a117ef14857618a70df9b9.svg",
+                    "baseLayerMD5": "7cd74ad0da97a828e8499ee181c9dbb1.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 31,
+                    "rotationCenterX": 32,
                     "rotationCenterY": 37
                 },
                 {
                     "costumeName": "chick-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "9cfe1ba390fd88c6f81c603242e63c32.svg",
+                    "baseLayerMD5": "07c2dad5f7063fddf7705f4817fad4f6.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 31,
+                    "rotationCenterX": 32,
                     "rotationCenterY": 37
                 },
                 {
                     "costumeName": "chick-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "d51e02cf87c23718b7ebd753467d7a6f.svg",
+                    "baseLayerMD5": "272d3e4503a4123df62f25b67bad6f03.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 21,
-                    "rotationCenterY": 23
+                    "rotationCenterY": 24
                 }
             ],
             "currentCostumeIndex": 0,
@@ -3003,7 +3003,8 @@
         "tags": [
             "city",
             "bus",
-            "vehicle"
+            "vehicle",
+            "car"
         ],
         "info": [
             0,
@@ -3225,11 +3226,12 @@
         }
     },
     {
-        "name": "Convertible3",
+        "name": "Convertible 2",
         "md5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
         "type": "sprite",
         "tags": [
             "transportation",
+            "car",
             "things"
         ],
         "info": [
@@ -3238,7 +3240,7 @@
             1
         ],
         "json": {
-            "objName": "Convertible3",
+            "objName": "Convertible 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3251,7 +3253,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "convertible3",
+                    "costumeName": "convertible 3",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
                     "bitmapResolution": 1,
@@ -3592,7 +3594,7 @@
     },
     {
         "name": "Dani",
-        "md5": "03b95a052b8fce4149aef1594f5c3c62.svg",
+        "md5": "e620d1c3143b5ff05a0e4df89576e054.svg",
         "type": "sprite",
         "tags": [
             "people"
@@ -3618,26 +3620,26 @@
                 {
                     "costumeName": "Dani-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "03b95a052b8fce4149aef1594f5c3c62.svg",
+                    "baseLayerMD5": "e620d1c3143b5ff05a0e4df89576e054.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 141
                 },
                 {
                     "costumeName": "Dani-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "6c1f49c1f20be5610ca0946961241e3e.svg",
+                    "baseLayerMD5": "4de54672f1c7af00623a0ee3bc490ba7.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 86,
+                    "rotationCenterY": 141
                 },
                 {
                     "costumeName": "Dani-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "dcdfd6dc8aff7d6632bd171dc38671bf.svg",
+                    "baseLayerMD5": "b4a303342f9b7ed6a74059054347dd30.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 37,
+                    "rotationCenterY": 138
                 }
             ],
             "currentCostumeIndex": 0,
@@ -4023,7 +4025,7 @@
     },
     {
         "name": "Dinosaur4",
-        "md5": "d52d2be6278ecf6e086e62d1380aecf2.svg",
+        "md5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
         "type": "sprite",
         "tags": [
             "animals",
@@ -4054,14 +4056,14 @@
                 {
                     "costumeName": "dinosaur4-a",
                     "baseLayerID": 0,
-                    "baseLayerMD5": "d52d2be6278ecf6e086e62d1380aecf2.svg",
+                    "baseLayerMD5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 59,
+                    "rotationCenterX": 60,
                     "rotationCenterY": 52
                 },
                 {
                     "costumeName": "dinosaur4-b",
-                    "baseLayerID": 1,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "cfe906702bbd30bc3bb8acb53079b6b0.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 87,
@@ -4069,7 +4071,7 @@
                 },
                 {
                     "costumeName": "dinosaur4-c",
-                    "baseLayerID": 2,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "1879b07cfe788b0258afada17aa46973.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 59,
@@ -4077,7 +4079,7 @@
                 },
                 {
                     "costumeName": "dinosaur4-d",
-                    "baseLayerID": 3,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "52c17657698ab82881ed3ccf83080684.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 89,
@@ -5151,7 +5153,7 @@
     },
     {
         "name": "Drum-snare",
-        "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
+        "md5": "ace58710b8fa5fca8fb5bbca15e7d19c.svg",
         "type": "sprite",
         "tags": [
             "music",
@@ -5194,18 +5196,18 @@
                 {
                     "costumeName": "drum-snare-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
+                    "baseLayerMD5": "ace58710b8fa5fca8fb5bbca15e7d19c.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 23,
-                    "rotationCenterY": 50
+                    "rotationCenterX": 21,
+                    "rotationCenterY": 32
                 },
                 {
                     "costumeName": "drum-snare-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "f6d2f2a6e1055dab6262336625ddf652.svg",
+                    "baseLayerMD5": "f6120839d3f73b262571add2444c443a.svg",
                     "bitmapResolution": 1,
-                    "rotationCenterX": 36,
-                    "rotationCenterY": 66
+                    "rotationCenterX": 34,
+                    "rotationCenterY": 48
                 }
             ],
             "currentCostumeIndex": 0,
@@ -5987,7 +5989,8 @@
             "city",
             "truck",
             "vehicle",
-            "food"
+            "food",
+            "car"
         ],
         "info": [
             0,
@@ -8303,7 +8306,7 @@
             "sounds": [
                 {
                     "soundName": "bird",
-                    "soundID": 0,
+                    "soundID": -1,
                     "md5": "18bd4b634a3f992a16b30344c7d810e0.wav",
                     "sampleCount": 3840,
                     "rate": 11025,
@@ -10240,7 +10243,7 @@
         ],
         "info": [
             0,
-            4,
+            5,
             1
         ],
         "json": {
@@ -10271,6 +10274,14 @@
                     "bitmapResolution": 1,
                     "rotationCenterX": 42,
                     "rotationCenterY": 64
+                },
+                {
+                    "costumeName": "milk-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "287b322e939ad54691aef4876c48f422.svg",
+                    "bitmapResolution": 1,
+                    "rotationCenterX": 47,
+                    "rotationCenterY": 56
                 },
                 {
                     "costumeName": "milk-d",
@@ -10458,6 +10469,7 @@
         "tags": [
             "city",
             "vehicle",
+            "bike",
             "motorcycle"
         ],
         "info": [
@@ -11753,7 +11765,7 @@
                 },
                 {
                     "costumeName": "pitcher-d",
-                    "baseLayerID": 0,
+                    "baseLayerID": -1,
                     "baseLayerMD5": "d75a06e24f717e8647db27e94618e693.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 84,
@@ -15069,7 +15081,8 @@
         "tags": [
             "truck",
             "city",
-            "vehicle"
+            "vehicle",
+            "car"
         ],
         "info": [
             0,
@@ -18793,7 +18806,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -18855,7 +18868,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -18917,7 +18930,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -18979,7 +18992,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19041,7 +19054,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19103,7 +19116,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19165,7 +19178,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19227,7 +19240,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19289,7 +19302,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19351,7 +19364,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19413,7 +19426,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19475,7 +19488,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19537,7 +19550,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19599,7 +19612,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19661,7 +19674,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19723,7 +19736,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19785,7 +19798,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19847,7 +19860,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19909,7 +19922,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -19971,7 +19984,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20033,7 +20046,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20095,7 +20108,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20157,7 +20170,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20219,7 +20232,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20281,7 +20294,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,
@@ -20343,7 +20356,7 @@
         "type": "sprite",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             0,

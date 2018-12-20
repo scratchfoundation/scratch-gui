@@ -46,7 +46,7 @@
     },
     {
         "name": "Abby-d",
-        "md5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
+        "md5": "2d05d4da65e7b5009a491d8153d37253.svg",
         "type": "costume",
         "tags": [
             "people",
@@ -54,8 +54,8 @@
             "drawing"
         ],
         "info": [
-            31,
-            100,
+            32,
+            101,
             1
         ]
     },
@@ -687,7 +687,7 @@
     },
     {
         "name": "Bananas",
-        "md5": "1d56c40cd7486cb5ab7c9b116da8b539.svg",
+        "md5": "1a76b68e056954f5c8ac1f073df1533d.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -1150,17 +1150,15 @@
         ]
     },
     {
-        "name": "Bowtie-a",
-        "md5": "aebd82272a5f4a1dd3c23d6e98537017.svg",
+        "name": "Bowtie",
+        "md5": "7d876f3ba4b04f3193a701ed30b4490c.svg",
         "type": "costume",
         "tags": [
-            "fashion",
-            "bowtie",
-            "clothing"
+            "fashion"
         ],
         "info": [
-            13,
-            7,
+            15,
+            8,
             1
         ]
     },
@@ -1780,7 +1778,7 @@
     },
     {
         "name": "Cat Flying-a",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "md5": "bf6b9f91e6928be67eda5154ca5fb2c6.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1789,25 +1787,24 @@
             "kitten"
         ],
         "info": [
-            67,
-            48,
+            55,
+            37,
             1
         ]
     },
     {
         "name": "Cat Flying-b",
-        "md5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+        "md5": "6a5f707419e619463135f5bae599fa5b.svg",
         "type": "costume",
         "tags": [
             "animals",
-            "flying",
             "cat",
             "kitty",
             "kitten"
         ],
         "info": [
-            42,
             44,
+            46,
             1
         ]
     },
@@ -1867,7 +1864,7 @@
     },
     {
         "name": "Catcher-b",
-        "md5": "51e05176613d533fbb592a8e6025a537.svg",
+        "md5": "799a822cffc9460c0bf1b387cbd5e06b.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -2090,7 +2087,7 @@
     },
     {
         "name": "Chick-a",
-        "md5": "7c41418084a117ef14857618a70df9b9.svg",
+        "md5": "7cd74ad0da97a828e8499ee181c9dbb1.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2099,14 +2096,14 @@
             "owen davey"
         ],
         "info": [
-            31,
+            32,
             37,
             1
         ]
     },
     {
         "name": "Chick-b",
-        "md5": "9cfe1ba390fd88c6f81c603242e63c32.svg",
+        "md5": "07c2dad5f7063fddf7705f4817fad4f6.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2115,14 +2112,14 @@
             "owen davey"
         ],
         "info": [
-            31,
+            32,
             37,
             1
         ]
     },
     {
         "name": "Chick-c",
-        "md5": "d51e02cf87c23718b7ebd753467d7a6f.svg",
+        "md5": "272d3e4503a4123df62f25b67bad6f03.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2132,7 +2129,7 @@
         ],
         "info": [
             21,
-            23,
+            24,
             1
         ]
     },
@@ -2143,7 +2140,8 @@
         "tags": [
             "city",
             "bus",
-            "vehicle"
+            "vehicle",
+            "car"
         ],
         "info": [
             107,
@@ -2158,7 +2156,8 @@
         "tags": [
             "city",
             "bus",
-            "vehicle"
+            "vehicle",
+            "car"
         ],
         "info": [
             107,
@@ -2260,11 +2259,12 @@
         ]
     },
     {
-        "name": "Convertible3",
+        "name": "Convertible 3",
         "md5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
         "type": "costume",
         "tags": [
             "transportation",
+            "car",
             "things"
         ],
         "info": [
@@ -2375,40 +2375,40 @@
     },
     {
         "name": "Dani-a",
-        "md5": "03b95a052b8fce4149aef1594f5c3c62.svg",
+        "md5": "e620d1c3143b5ff05a0e4df89576e054.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            240,
-            180,
+            37,
+            141,
             1
         ]
     },
     {
         "name": "Dani-b",
-        "md5": "6c1f49c1f20be5610ca0946961241e3e.svg",
+        "md5": "4de54672f1c7af00623a0ee3bc490ba7.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            240,
-            180,
+            86,
+            141,
             1
         ]
     },
     {
         "name": "Dani-c",
-        "md5": "dcdfd6dc8aff7d6632bd171dc38671bf.svg",
+        "md5": "b4a303342f9b7ed6a74059054347dd30.svg",
         "type": "costume",
         "tags": [
             "people"
         ],
         "info": [
-            240,
-            180,
+            37,
+            138,
             1
         ]
     },
@@ -2743,7 +2743,7 @@
     },
     {
         "name": "Dinosaur4-a",
-        "md5": "d52d2be6278ecf6e086e62d1380aecf2.svg",
+        "md5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2754,7 +2754,7 @@
             "alex eben meyer"
         ],
         "info": [
-            59,
+            60,
             52,
             1
         ]
@@ -3553,29 +3553,29 @@
     },
     {
         "name": "Drum-snare-a",
-        "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
+        "md5": "ace58710b8fa5fca8fb5bbca15e7d19c.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
-            23,
-            50,
+            21,
+            32,
             1
         ]
     },
     {
         "name": "Drum-snare-b",
-        "md5": "f6d2f2a6e1055dab6262336625ddf652.svg",
+        "md5": "f6120839d3f73b262571add2444c443a.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
-            36,
-            66,
+            34,
+            48,
             1
         ]
     },
@@ -4041,7 +4041,7 @@
         "tags": [
             "fishbowl",
             "fish",
-            "animal",
+            "animals",
             "pet"
         ],
         "info": [
@@ -4057,7 +4057,7 @@
         "tags": [
             "fishbowl",
             "fish",
-            "animal",
+            "animals",
             "pet"
         ],
         "info": [
@@ -4074,7 +4074,8 @@
             "city",
             "truck",
             "vehicle",
-            "food"
+            "food",
+            "car"
         ],
         "info": [
             121,
@@ -4090,7 +4091,8 @@
             "city",
             "truck",
             "vehicle",
-            "food"
+            "food",
+            "car"
         ],
         "info": [
             121,
@@ -4106,7 +4108,8 @@
             "city",
             "truck",
             "vehicle",
-            "food"
+            "food",
+            "car"
         ],
         "info": [
             121,
@@ -6990,6 +6993,21 @@
         ]
     },
     {
+        "name": "Milk-c",
+        "md5": "287b322e939ad54691aef4876c48f422.svg",
+        "type": "costume",
+        "tags": [
+            "food",
+            "drink",
+            "alex eben meyer"
+        ],
+        "info": [
+            47,
+            56,
+            1
+        ]
+    },
+    {
         "name": "Milk-d",
         "md5": "df4f5d863fa680331aa6c8f867b9fcbb.svg",
         "type": "costume",
@@ -7148,6 +7166,7 @@
         "type": "costume",
         "tags": [
             "city",
+            "bike",
             "vehicle",
             "motorcycle"
         ],
@@ -7164,6 +7183,7 @@
         "tags": [
             "city",
             "vehicle",
+            "bike",
             "motorcycle"
         ],
         "info": [
@@ -7179,6 +7199,7 @@
         "tags": [
             "city",
             "vehicle",
+            "bike",
             "motorcycle"
         ],
         "info": [
@@ -7194,6 +7215,7 @@
         "tags": [
             "city",
             "vehicle",
+            "bike",
             "motorcycle"
         ],
         "info": [
@@ -10178,6 +10200,7 @@
         "tags": [
             "truck",
             "city",
+            "car",
             "vehicle"
         ],
         "info": [
@@ -10193,6 +10216,7 @@
         "tags": [
             "truck",
             "city",
+            "car",
             "vehicle"
         ],
         "info": [
@@ -10208,6 +10232,7 @@
         "tags": [
             "truck",
             "city",
+            "car",
             "vehicle"
         ],
         "info": [
@@ -11571,7 +11596,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11585,7 +11610,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11599,7 +11624,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11613,7 +11638,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11627,7 +11652,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -11641,7 +11666,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11655,7 +11680,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11669,7 +11694,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11683,7 +11708,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11697,7 +11722,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11711,7 +11736,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11725,7 +11750,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11739,7 +11764,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11753,7 +11778,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11767,7 +11792,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11781,7 +11806,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11795,7 +11820,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11809,7 +11834,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -11823,7 +11848,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11837,7 +11862,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11851,7 +11876,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -11865,7 +11890,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11879,7 +11904,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11893,7 +11918,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11907,7 +11932,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             9,
@@ -11921,7 +11946,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             9,
@@ -11935,7 +11960,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             7,
@@ -11949,7 +11974,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -11963,7 +11988,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -11977,7 +12002,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             12,
@@ -11991,7 +12016,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12005,7 +12030,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12019,7 +12044,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -12033,7 +12058,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12047,7 +12072,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12061,7 +12086,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,
@@ -12075,7 +12100,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             30,
@@ -12089,7 +12114,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             30,
@@ -12103,7 +12128,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             27,
@@ -12117,7 +12142,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             26,
@@ -12131,7 +12156,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             26,
@@ -12145,7 +12170,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12159,7 +12184,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12173,7 +12198,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12187,7 +12212,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12201,7 +12226,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12215,7 +12240,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12229,7 +12254,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,
@@ -12243,7 +12268,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12257,7 +12282,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12271,7 +12296,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12285,7 +12310,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12299,7 +12324,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12313,7 +12338,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12327,7 +12352,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -12341,7 +12366,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -12355,7 +12380,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -12369,7 +12394,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12383,7 +12408,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12397,7 +12422,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12411,7 +12436,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12425,7 +12450,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12439,7 +12464,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -12453,7 +12478,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12467,7 +12492,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12481,7 +12506,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12495,7 +12520,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             37,
@@ -12509,7 +12534,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             37,
@@ -12523,7 +12548,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             34,
@@ -12537,7 +12562,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12551,7 +12576,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12565,7 +12590,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12579,7 +12604,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12593,7 +12618,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12607,7 +12632,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12621,7 +12646,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12635,7 +12660,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12649,7 +12674,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,

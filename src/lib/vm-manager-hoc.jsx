@@ -53,6 +53,9 @@ const vmManagerHOC = function (WrappedComponent) {
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
+                    // Mark all the assets as clean since they just got loaded
+                    this.props.vm.assets.forEach(asset => (asset.clean = true));
+
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
                     // Wrap in a setTimeout because skin loading in
                     // the renderer can be async.
@@ -130,7 +133,7 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         onError: error => dispatch(projectError(error)),
         onLoadedProject: (loadingState, canSave) =>
-            dispatch(onLoadedProject(loadingState, canSave)),
+            dispatch(onLoadedProject(loadingState, canSave, true)),
         onSetProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
 

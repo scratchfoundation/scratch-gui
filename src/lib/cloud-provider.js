@@ -60,7 +60,6 @@ class CloudProvider {
 
     onMessage (event) {
         const messageString = event.data;
-        log.info(`Received websocket message: ${messageString}`);
         // Multiple commands can be received, newline separated
         messageString.split('\n').forEach(message => {
             if (message) { // .split can also contain '' in the array it returns
@@ -156,7 +155,6 @@ class CloudProvider {
      */
     _sendCloudData (data) {
         this.connection.send(`${data}\n`);
-        log.info(`Sent message to clouddata server: ${data}`);
     }
 
     /**

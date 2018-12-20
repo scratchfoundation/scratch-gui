@@ -100,7 +100,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
-            window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+            // Cant unset the beforeunload because it might no longer belong to this component
+            // i.e. if another of this component has been mounted before this one gets unmounted
+            // which happens when going from project to editor view.
+            // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
@@ -278,6 +281,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onUpdateProjectThumbnail(
                         projectId, dataURItoBlob(dataURI));
                 });
+                this.props.vm.renderer.draw();
             } catch (e) {
                 log.error('Project thumbnail save error', e);
                 // This is intentionally fire/forget because a failure
@@ -332,8 +336,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
     }
 
     ProjectSaverComponent.propTypes = {
+        autoSaveIntervalSecs: PropTypes.number,
         autoSaveTimeoutId: PropTypes.number,
-        autosaveIntervalSecs: PropTypes.number,
         canCreateNew: PropTypes.bool,
         canSave: PropTypes.bool,
         isAnyCreatingNewState: PropTypes.bool,

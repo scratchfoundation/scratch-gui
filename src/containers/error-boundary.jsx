@@ -12,7 +12,8 @@ class ErrorBoundary extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            hasError: false
+            hasError: false,
+            errorId: null
         };
     }
 
@@ -24,7 +25,10 @@ class ErrorBoundary extends React.Component {
         };
 
         // Display fallback UI
-        this.setState({hasError: true});
+        this.setState({
+            hasError: true,
+            errorId: window.Raven ? window.Raven.lastEventId() : null
+        });
 
         // Log errors to analytics, separating supported browsers from unsupported.
         if (supportedBrowser()) {
@@ -33,6 +37,9 @@ class ErrorBoundary extends React.Component {
                 action: this.props.action,
                 label: error.message
             });
+            if (window.Raven) {
+                window.Raven.captureException(error, {extra: info});
+            }
         } else {
             analytics.event({
                 category: 'Unsupported Browser Error',
@@ -56,7 +63,12 @@ class ErrorBoundary extends React.Component {
     render () {
         if (this.state.hasError) {
             if (supportedBrowser()) {
-                return <CrashMessageComponent onReload={this.handleReload} />;
+                return (
+                    <CrashMessageComponent
+                        eventId={this.state.errorId}
+                        onReload={this.handleReload}
+                    />
+                );
             }
             return (<BrowserModalComponent
                 isRtl={this.props.isRtl}

@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    elementIsVisible,
     findByText,
     findByXpath,
     getDriver,
@@ -124,4 +125,27 @@ describe('Working with sprites', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Use browser back button to close library', async () => {
+        await driver.get('https://www.google.com');
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        const abbyElement = await findByText('Abby'); // Should show editor for new costume
+        await elementIsVisible(abbyElement);
+        await driver.navigate().back();
+        try {
+            // should throw error because library is no longer visible
+            await elementIsVisible(abbyElement);
+            throw 'ShouldNotGetHere'; // eslint-disable-line no-throw-literal
+        } catch (e) {
+            expect(e.constructor.name).toEqual('StaleElementReferenceError');
+        }
+        const costumesElement = await findByText('Costumes'); // Should show editor for new costume
+        await elementIsVisible(costumesElement);
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
 });

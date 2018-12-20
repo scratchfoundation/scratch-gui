@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import bowser from 'bowser';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
 import log from '../lib/log.js';
 import supportedBrowser from '../lib/supported-browser';
-import analytics from '../lib/analytics';
 
 class ErrorBoundary extends React.Component {
     constructor (props) {
@@ -24,35 +22,22 @@ class ErrorBoundary extends React.Component {
             message: 'Unknown error'
         };
 
+        // Log errors to analytics, leaving out supported browsers from unsupported.
+        if (supportedBrowser() && window.Sentry) {
+            window.Sentry.withScope(scope => {
+                Object.keys(info).forEach(key => {
+                    scope.setExtra(key, info[key]);
+                });
+                scope.setExtra('action', this.props.action);
+                window.Sentry.captureException(error);
+            });
+        }
+
         // Display fallback UI
         this.setState({
             hasError: true,
             errorId: window.Sentry ? window.Sentry.lastEventId() : null
         });
-
-        // Log errors to analytics, separating supported browsers from unsupported.
-        if (supportedBrowser()) {
-            analytics.event({
-                category: 'error',
-                action: this.props.action,
-                label: error.message
-            });
-            if (window.Sentry) {
-                window.Sentry.withScope(scope => {
-                    Object.keys(info).forEach(key => {
-                        scope.setExtra(key, info[key]);
-                    });
-                    scope.setExtra('action', this.props.action);
-                    window.Sentry.captureException(error);
-                });
-            }
-        } else {
-            analytics.event({
-                category: 'Unsupported Browser Error',
-                action: `(Unsupported Browser) ${this.props.action}`,
-                label: `${bowser.name} ${error.message}`
-            });
-        }
 
         // Log error locally for debugging as well.
         log.error(`Unhandled Error: ${error.stack}\nComponent stack: ${info.componentStack}`);

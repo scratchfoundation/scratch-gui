@@ -42,6 +42,7 @@ class ErrorBoundary extends React.Component {
                     Object.keys(info).forEach(key => {
                         scope.setExtra(key, info[key]);
                     });
+                    scope.setExtra('action', this.props.action);
                     window.Sentry.captureException(error);
                 });
             }

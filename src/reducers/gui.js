@@ -122,7 +122,19 @@ const initPreviewInfo = function (currentState) {
         currentState,
         {
             modals: {
-                previewInfo: true
+                previewInfo: true // this key must match `MODAL_PREVIEW_INFO` in modals.js
+            }
+        }
+    );
+};
+
+const initTelemetryModal = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                telemetryModal: true // this key must match `MODAL_TELEMETRY` in modals.js
             }
         }
     );
@@ -165,5 +177,6 @@ export {
     initFullScreen,
     initPlayer,
     initPreviewInfo,
+    initTelemetryModal,
     initTutorialCard
 };

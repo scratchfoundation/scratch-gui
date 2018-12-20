@@ -6,9 +6,22 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
+import log from '../lib/log.js';
 
 const onClickLogo = () => {
     window.location = 'https://scratch.mit.edu';
+};
+
+const handleTelemetryModalCancel = () => {
+    log('User canceled telemetry modal');
+};
+
+const handleTelemetryModalOptIn = () => {
+    log('User opted into telemetry');
+};
+
+const handleTelemetryModalOptOut = () => {
+    log('User opted out of telemetry');
 };
 
 /*
@@ -55,7 +68,13 @@ export default appTarget => {
         simulateScratchDesktop ?
             <WrappedGui
                 isScratchDesktop
+                showTelemetryModal
                 canSave={false}
+                telemetryModalHandlers={{
+                    onCancel: handleTelemetryModalCancel,
+                    onOptIn: handleTelemetryModalOptIn,
+                    onOptOut: handleTelemetryModalOptOut
+                }}
             /> :
             <WrappedGui
                 backpackVisible

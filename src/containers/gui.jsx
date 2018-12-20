@@ -7,7 +7,6 @@ import VM from 'scratch-vm';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
-import {openExtensionLibrary} from '../reducers/modals';
 import {
     getIsError,
     getIsShowingProject
@@ -22,7 +21,9 @@ import {
 
 import {
     closeCostumeLibrary,
-    closeBackdropLibrary
+    closeBackdropLibrary,
+    closeTelemetryModal,
+    openExtensionLibrary
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
@@ -128,6 +129,7 @@ GUI.propTypes = {
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     projectTitle: PropTypes.string,
+    telemetryModalVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
@@ -157,11 +159,12 @@ const mapStateToProps = state => {
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         previewInfoVisible: state.scratchGui.modals.previewInfo,
         projectId: state.scratchGui.projectState.projectId,
+        soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
         targetIsStage: (
             state.scratchGui.targets.stage &&
             state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
         ),
-        soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+        telemetryModalVisible: state.scratchGui.modals.telemetryModal,
         tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
         vm: state.scratchGui.vm
     };
@@ -174,6 +177,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
     onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
 });
 

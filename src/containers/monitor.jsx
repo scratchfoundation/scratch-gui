@@ -1,10 +1,14 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import monitorAdapter from '../lib/monitor-adapter.js';
 import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx';
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
+import {getVariable, setVariableValue} from '../lib/variable-utils';
+import importCSV from '../lib/import-csv';
+import downloadText from '../lib/download-text';
 
 import {connect} from 'react-redux';
 import {Map} from 'immutable';
@@ -21,6 +25,14 @@ const availableModes = opcode => (
     })
 );
 
+const messages = defineMessages({
+    columnPrompt: {
+        defaultMessage: 'Which column should be used (1-{numberOfColumns})?',
+        description: 'Prompt for which column should be used',
+        id: 'gui.monitors.importListColumnPrompt'
+    }
+});
+
 class Monitor extends React.Component {
     constructor (props) {
         super(props);
@@ -30,6 +42,8 @@ class Monitor extends React.Component {
             'handleSetModeToDefault',
             'handleSetModeToLarge',
             'handleSetModeToSlider',
+            'handleImport',
+            'handleExport',
             'setElement'
         ]);
     }
@@ -124,9 +138,29 @@ class Monitor extends React.Component {
     setElement (monitorElt) {
         this.element = monitorElt;
     }
+    handleImport () {
+        importCSV().then(rows => {
+            const numberOfColumns = rows[0].length;
+            let columnNumber = 1;
+            if (numberOfColumns > 1) {
+                const msg = this.props.intl.formatMessage(messages.columnPrompt, {numberOfColumns});
+                columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
+            }
+            const newListValue = rows.map(row => row[columnNumber - 1])
+                .filter(item => typeof item === 'string'); // CSV importer can leave undefineds
+            const {vm, targetId, id: variableId} = this.props;
+            setVariableValue(vm, targetId, variableId, newListValue);
+        });
+    }
+    handleExport () {
+        const {vm, targetId, id: variableId} = this.props;
+        const variable = getVariable(vm, targetId, variableId);
+        downloadText(`${variable.name}.txt`, variable.value.join('\r\n'));
+    }
     render () {
         const monitorProps = monitorAdapter(this.props);
         const showSliderOption = availableModes(this.props.opcode).indexOf('slider') !== -1;
+        const isList = this.props.mode === 'list';
         return (
             <MonitorComponent
                 componentRef={this.setElement}
@@ -139,9 +173,11 @@ class Monitor extends React.Component {
                 targetId={this.props.targetId}
                 width={this.props.width}
                 onDragEnd={this.handleDragEnd}
+                onExport={isList ? this.handleExport : null}
+                onImport={isList ? this.handleImport : null}
                 onNextMode={this.handleNextMode}
-                onSetModeToDefault={this.handleSetModeToDefault}
-                onSetModeToLarge={this.handleSetModeToLarge}
+                onSetModeToDefault={isList ? null : this.handleSetModeToDefault}
+                onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
                 onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
             />
         );
@@ -153,6 +189,7 @@ Monitor.propTypes = {
     draggable: PropTypes.bool,
     height: PropTypes.number,
     id: PropTypes.string.isRequired,
+    intl: intlShape,
     max: PropTypes.number,
     min: PropTypes.number,
     mode: PropTypes.oneOf(['default', 'slider', 'large', 'list']),
@@ -190,7 +227,8 @@ const mapDispatchToProps = dispatch => ({
     resizeMonitorRect: (id, newWidth, newHeight) => dispatch(resizeMonitorRect(id, newWidth, newHeight)),
     removeMonitorRect: id => dispatch(removeMonitorRect(id))
 });
-export default connect(
+
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Monitor);
+)(Monitor));

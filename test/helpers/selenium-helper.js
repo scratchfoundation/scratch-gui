@@ -15,7 +15,6 @@ class SeleniumHelper {
             'clickButton',
             'clickXpath',
             'elementIsVisible',
-            'elementIsNotVisible',
             'findByText',
             'findByXpath',
             'getDriver',
@@ -28,9 +27,6 @@ class SeleniumHelper {
 
     elementIsVisible (element) {
         return this.driver.wait(until.elementIsVisible(element));
-    }
-    elementIsNotVisible (element) {
-        return this.driver.wait(until.elementIsNotVisible(element));
     }
 
     get scope () {

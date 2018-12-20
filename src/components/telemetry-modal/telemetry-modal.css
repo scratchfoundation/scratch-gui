@@ -28,7 +28,7 @@
 
 .illustration {
     width: 100%;
-    height: 128px;
+    height: 123px;
     background-color: $motion-primary;
     background-image: url('./telemetry-modal-header.png');
     background-size: cover;

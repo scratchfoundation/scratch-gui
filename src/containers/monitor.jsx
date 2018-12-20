@@ -146,7 +146,8 @@ class Monitor extends React.Component {
                 const msg = this.props.intl.formatMessage(messages.columnPrompt, {numberOfColumns});
                 columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
             }
-            const newListValue = rows.map(row => row[columnNumber - 1]);
+            const newListValue = rows.map(row => row[columnNumber - 1])
+                .filter(item => typeof item === 'string'); // CSV importer can leave undefineds
             const {vm, targetId, id: variableId} = this.props;
             setVariableValue(vm, targetId, variableId, newListValue);
         });

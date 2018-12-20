@@ -1,6 +1,8 @@
 # smalruby3-gui
 #### Smalruby3 GUI is a set of React components that comprise the interface for creating and running Smalruby 3.0 projects. It forked from [LLK/scratch-gui](https://github.com/LLK/scratch-gui) .
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UNkinwLk6uQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Installation
 This requires you to have Git and Node.js installed.
 

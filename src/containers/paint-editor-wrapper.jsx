@@ -4,8 +4,6 @@ import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
 
-import analytics from '../lib/analytics';
-
 import {connect} from 'react-redux';
 
 class PaintEditorWrapper extends React.Component {
@@ -15,9 +13,6 @@ class PaintEditorWrapper extends React.Component {
             'handleUpdateImage',
             'handleUpdateName'
         ]);
-    }
-    componentDidMount () {
-        analytics.pageview('/editors/paint');
     }
     shouldComponentUpdate (nextProps) {
         return this.props.imageId !== nextProps.imageId ||

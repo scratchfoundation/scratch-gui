@@ -1,5 +1,3 @@
-import analytics from '../lib/analytics';
-
 const OPEN_MODAL = 'scratch-gui/modals/OPEN_MODAL';
 const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
@@ -59,51 +57,39 @@ const closeModal = function (modal) {
     };
 };
 const openBackdropLibrary = function () {
-    analytics.pageview('/libraries/backdrops');
     return openModal(MODAL_BACKDROP_LIBRARY);
 };
 const openCameraCapture = function () {
-    analytics.pageview('/modals/camera');
     return openModal(MODAL_CAMERA_CAPTURE);
 };
 const openCostumeLibrary = function () {
-    analytics.pageview('/libraries/costumes');
     return openModal(MODAL_COSTUME_LIBRARY);
 };
 const openExtensionLibrary = function () {
-    analytics.pageview('/libraries/extensions');
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
 const openImportInfo = function () {
-    analytics.pageview('modals/import');
     return openModal(MODAL_IMPORT_INFO);
 };
 const openLoadingProject = function () {
-    analytics.pageview('modals/loading');
     return openModal(MODAL_LOADING_PROJECT);
 };
 const openPreviewInfo = function () {
-    analytics.pageview('/modals/preview');
     return openModal(MODAL_PREVIEW_INFO);
 };
 const openSoundLibrary = function () {
-    analytics.pageview('/libraries/sounds');
     return openModal(MODAL_SOUND_LIBRARY);
 };
 const openSpriteLibrary = function () {
-    analytics.pageview('/libraries/sprites');
     return openModal(MODAL_SPRITE_LIBRARY);
 };
 const openSoundRecorder = function () {
-    analytics.pageview('/modals/microphone');
     return openModal(MODAL_SOUND_RECORDER);
 };
 const openConnectionModal = function () {
-    analytics.pageview('/modals/connection');
     return openModal(MODAL_CONNECTION);
 };
 const openTipsLibrary = function () {
-    analytics.pageview('/modals/tips');
     return openModal(MODAL_TIPS_LIBRARY);
 };
 const closeBackdropLibrary = function () {

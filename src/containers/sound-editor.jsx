@@ -44,7 +44,6 @@ class SoundEditor extends React.Component {
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
-        analytics.pageview('/editors/sound');
     }
     componentWillReceiveProps (newProps) {
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected

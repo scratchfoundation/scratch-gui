@@ -100,7 +100,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
-            window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+            // Cant unset the beforeunload because it might no longer belong to this component
+            // i.e. if another of this component has been mounted before this one gets unmounted
+            // which happens when going from project to editor view.
+            // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {

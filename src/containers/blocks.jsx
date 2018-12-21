@@ -8,7 +8,6 @@ import VMScratchBlocks from '../lib/blocks';
 import defineRubyBlocks from '../lib/define-ruby-blocks';
 import VM from 'scratch-vm';
 
-import analytics from '../lib/analytics';
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
@@ -114,8 +113,6 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
-
-        analytics.pageview('/editors/blocks');
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (

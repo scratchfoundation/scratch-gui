@@ -452,7 +452,7 @@ const onLoadedProject = (loadingState, canSave, success) => {
                 type: DONE_LOADING_VM_WITHOUT_ID
             };
         default:
-            break;
+            return;
         }
     }
     return {

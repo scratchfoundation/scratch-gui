@@ -24,6 +24,7 @@ import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
+import PreviewModal from '../../containers/preview-modal.jsx';
 import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
@@ -31,7 +32,7 @@ import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
-
+import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -103,13 +104,19 @@ const GUIComponent = props => {
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
+        onTelemetryModalCancel,
+        onTelemetryModalOptIn,
+        onTelemetryModalOptOut,
+        previewInfoVisible,
         showComingSoon,
         soundsTabVisible,
         rubyTabVisible,
         stageSizeMode,
         targetIsStage,
+        telemetryModalVisible,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -151,6 +158,17 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                {previewInfoVisible ? (
+                    <PreviewModal />
+                ) : null}
+                {telemetryModalVisible ? (
+                    <TelemetryModal
+                        onCancel={onTelemetryModalCancel}
+                        onOptIn={onTelemetryModalOptIn}
+                        onOptOut={onTelemetryModalOptOut}
+                        onRequestClose={onRequestCloseTelemetryModal}
+                    />
+                ) : null}
                 {loading ? (
                     <Loader />
                 ) : null}
@@ -400,17 +418,23 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onTelemetryModalCancel: PropTypes.func,
+    onTelemetryModalOptIn: PropTypes.func,
+    onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
     rubyTabVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
+    telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };

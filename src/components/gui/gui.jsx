@@ -31,6 +31,7 @@ import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
+import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -100,13 +101,18 @@ const GUIComponent = props => {
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
+        onTelemetryModalCancel,
+        onTelemetryModalOptIn,
+        onTelemetryModalOptOut,
         previewInfoVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeMode,
         targetIsStage,
+        telemetryModalVisible,
         tipsLibraryVisible,
         vm,
         ...componentProps
@@ -150,6 +156,14 @@ const GUIComponent = props => {
             >
                 {previewInfoVisible ? (
                     <PreviewModal />
+                ) : null}
+                {telemetryModalVisible ? (
+                    <TelemetryModal
+                        onCancel={onTelemetryModalCancel}
+                        onOptIn={onTelemetryModalOptIn}
+                        onOptOut={onTelemetryModalOptOut}
+                        onRequestClose={onRequestCloseTelemetryModal}
+                    />
                 ) : null}
                 {loading ? (
                     <Loader />
@@ -379,9 +393,13 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onTabSelect: PropTypes.func,
+    onTelemetryModalCancel: PropTypes.func,
+    onTelemetryModalOptIn: PropTypes.func,
+    onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
@@ -390,6 +408,7 @@ GUIComponent.propTypes = {
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
+    telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };

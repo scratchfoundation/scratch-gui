@@ -8,6 +8,7 @@ const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
 const MODAL_IMPORT_INFO = 'importInfo';
 const MODAL_LOADING_PROJECT = 'loadingProject';
 const MODAL_PREVIEW_INFO = 'previewInfo';
+const MODAL_TELEMETRY = 'telemetryModal';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
 const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
@@ -22,6 +23,7 @@ const initialState = {
     [MODAL_IMPORT_INFO]: false,
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_PREVIEW_INFO]: false,
+    [MODAL_TELEMETRY]: false,
     [MODAL_SOUND_LIBRARY]: false,
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
@@ -77,6 +79,9 @@ const openLoadingProject = function () {
 const openPreviewInfo = function () {
     return openModal(MODAL_PREVIEW_INFO);
 };
+const openTelemetryModal = function () {
+    return openModal(MODAL_TELEMETRY);
+};
 const openSoundLibrary = function () {
     return openModal(MODAL_SOUND_LIBRARY);
 };
@@ -113,6 +118,9 @@ const closeLoadingProject = function () {
 const closePreviewInfo = function () {
     return closeModal(MODAL_PREVIEW_INFO);
 };
+const closeTelemetryModal = function () {
+    return closeModal(MODAL_TELEMETRY);
+};
 const closeSpriteLibrary = function () {
     return closeModal(MODAL_SPRITE_LIBRARY);
 };
@@ -141,6 +149,7 @@ export {
     openSoundLibrary,
     openSpriteLibrary,
     openSoundRecorder,
+    openTelemetryModal,
     openTipsLibrary,
     openConnectionModal,
     closeBackdropLibrary,
@@ -153,6 +162,7 @@ export {
     closeSpriteLibrary,
     closeSoundLibrary,
     closeSoundRecorder,
+    closeTelemetryModal,
     closeTipsLibrary,
     closeConnectionModal
 };

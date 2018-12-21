@@ -25,6 +25,7 @@ import {
     getIsAnyCreatingNewState,
     getIsCreatingCopy,
     getIsCreatingNew,
+    getIsLoading,
     getIsManualUpdating,
     getIsRemixing,
     getIsShowingWithId,
@@ -59,6 +60,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         componentDidUpdate (prevProps) {
+            if (!this.props.isAnyCreatingNewState && prevProps.isAnyCreatingNewState) {
+                this.reportTelemetryEvent('projectWasCreated');
+            }
+            if (!this.props.isLoading && prevProps.isLoading) {
+                this.reportTelemetryEvent('projectDidLoad');
+            }
+
             if (this.props.projectChanged && !prevProps.projectChanged) {
                 this.scheduleAutoSave();
             }
@@ -289,6 +297,46 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
 
+        /**
+         * Report a telemetry event.
+         * @param {string} event - one of `projectWasCreated`, `projectDidLoad`, `projectDidSave`, `projectWasUploaded`
+         */
+        //TODO make a telemetry HOC and move this stuff there
+        reportTelemetryEvent (event) {
+            if (this.props.onProjectTelemetryEvent) {
+                //TODO move most or all of this into a collectMetadata() method on the VM/Runtime
+                const metadata = {
+                    projectName: this.props.reduxProjectTitle,
+                    language: this.props.locale,
+                    spriteCount: 0,
+                    blocksCount: 0,
+                    costumesCount: 0,
+                    listsCount: 0,
+                    scriptCount: 0,
+                    soundsCount: 0,
+                    variablesCount: 0
+                };
+
+                for (const target of this.props.vm.runtime.targets) {
+                    ++metadata.spriteCount;
+                    metadata.blocksCount += Object.keys(target.sprite.blocks._blocks).length;
+                    metadata.costumesCount += target.sprite.costumes_.length;
+                    metadata.scriptCount += target.sprite.blocks._scripts.length;
+                    metadata.soundsCount += target.sprite.sounds.length;
+                    for (const variableName in target.variables) {
+                        const variable = target.variables[variableName];
+                        if (variable.type === 'list') {
+                            ++metadata.listsCount;
+                        } else {
+                            ++metadata.variablesCount;
+                        }
+                    }
+                }
+
+                this.props.onProjectTelemetryEvent(event, metadata);
+            }
+        }
+
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -298,6 +346,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 isCreatingNew,
                 projectChanged,
                 isAnyCreatingNewState,
+                isLoading,
                 isManualUpdating,
                 isRemixing,
                 isShowingSaveable,
@@ -342,6 +391,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         isAnyCreatingNewState: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
         isCreatingNew: PropTypes.bool,
+        isLoading: PropTypes.bool,
         isManualUpdating: PropTypes.bool,
         isRemixing: PropTypes.bool,
         isShared: PropTypes.bool,
@@ -354,6 +404,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onProjectTelemetryEvent: PropTypes.func,
         onRemixing: PropTypes.func,
         onShowAlert: PropTypes.func,
         onShowCopySuccessAlert: PropTypes.func,
@@ -379,6 +430,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         return {
             autoSaveTimeoutId: state.scratchGui.timeout.autoSaveTimeoutId,
             isAnyCreatingNewState: getIsAnyCreatingNewState(loadingState),
+            isLoading: getIsLoading(loadingState),
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
             isRemixing: getIsRemixing(loadingState),
@@ -388,6 +440,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isUpdating: getIsUpdating(loadingState),
             isManualUpdating: getIsManualUpdating(loadingState),
             loadingState: loadingState,
+            locale: state.locales.locale,
             projectChanged: state.scratchGui.projectChanged,
             reduxProjectId: state.scratchGui.projectState.projectId,
             reduxProjectTitle: state.scratchGui.projectTitle,

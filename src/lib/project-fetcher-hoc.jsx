@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
-    defaultProjectId,
     getIsCreatingNew,
     getIsFetchingWithId,
     getIsLoading,
@@ -21,7 +20,6 @@ import {
     BLOCKS_TAB_INDEX
 } from '../reducers/editor-tab';
 
-import analytics from './analytics';
 import log from './log';
 import storage from './storage';
 
@@ -79,17 +77,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         // Treat failure to load as an error
                         // Throw to be caught by catch later on
                         throw new Error('Could not find project');
-                    }
-                })
-                .then(() => {
-                    if (projectId !== defaultProjectId) {
-                        // if not default project, register a project load event
-                        analytics.event({
-                            category: 'project',
-                            action: 'Load Project',
-                            label: projectId,
-                            nonInteraction: true
-                        });
                     }
                 })
                 .catch(err => {

@@ -15,6 +15,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'elementIsVisible',
             'findByText',
             'findByXpath',
             'getDriver',
@@ -24,6 +25,10 @@ class SeleniumHelper {
             'rightClickText',
             'takeScreenshot'
         ]);
+    }
+
+    elementIsVisible (element) {
+        return this.driver.wait(until.elementIsVisible(element));
     }
 
     get scope () {

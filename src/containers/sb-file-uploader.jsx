@@ -136,7 +136,7 @@ class SBFileUploader extends React.Component {
     renderFileInput () {
         return (
             <input
-                accept=".sb2,.sb3"
+                accept=".sb,.sb2,.sb3"
                 ref={this.setFileInput}
                 style={{display: 'none'}}
                 type="file"

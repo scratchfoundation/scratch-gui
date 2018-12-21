@@ -5,7 +5,6 @@ import WavEncoder from 'wav-encoder';
 
 import {connect} from 'react-redux';
 
-import analytics from '../lib/analytics';
 import {computeChunkedRMS} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
@@ -44,7 +43,6 @@ class SoundEditor extends React.Component {
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
-        analytics.pageview('/editors/sound');
     }
     componentWillReceiveProps (newProps) {
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected

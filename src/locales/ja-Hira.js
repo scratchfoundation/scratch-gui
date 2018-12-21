@@ -12,5 +12,10 @@ export default {
     'gui.smalruby3.menuBar.generateRubyFromCode': 'コードからルビーにへんかんします',
     'gui.smalruby3.unsupportedBrowser.description': 'もうしわけありません。スモウルビー3.0はインターネットエクスプローラ、ビヴァルディ、オペラ、シルクをサポートしていません。グーグル クローム、モジラ ファイアーフォックス、マイクロソフト エッジのようなあたらしいブラウザのりようをおすすめします。',
     'gui.smalruby3.webglModal.description': 'ざんねんながら、ブラウザーやコンピューターが{webGlLink}ようです。このぎじゅつはスモウルビー3.0のじっこうにひっすです。',
-    'gui.smalruby3.alerts.convertRubyToBlocksError': 'ルビーからコードにへんかんできませんでした。ルビーをなおしてください！'
+    'gui.smalruby3.alerts.convertRubyToBlocksError': 'ルビーからコードにへんかんできませんでした。ルビーをなおしてください！',
+    'gui.smalruby3.telemetryOptIn.label': 'スモウルビーをかいぜんするためのりようじょうきょうのほうこく',
+    'gui.smalruby3.telemetryOptIn.body1': 'スモウルビーのかいはつしゃはせかいじゅうでスモウルビーがどのようにつかわれているのかをりかいしたいとかんがえています。そのてだすけのために、みなさんのスモウルビーのりようじょうきょうをスモウルビーのかいはつしゃにていきょうしていただけないでしょうか。',
+    'gui.smalruby3.telemetryOptIn.body2': 'ていきょうしていただくじょうほうにはどのげんごをせんたくしたか、どのブロックをつかったか、ほぞん・よみこみ・プロジェクトのアップロードなどのイベントをふくみます。ただし、ユーザめいなどのこじんてきなじょうほうはいっさいふくみません。',
+    'gui.telemetryOptIn.buttonTextNo': 'いいえ、けっこうです。',
+    'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーのかいぜんにきょうりょくします。'
 };

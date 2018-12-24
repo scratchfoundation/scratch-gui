@@ -53,7 +53,7 @@ class DirectionPicker extends React.Component {
     constructor (props) {
         super(props);
         this.isNum = function (x) {
-            return !isNaN(x);
+            return !isNaN(x) || x === '-';
         };
     }
 

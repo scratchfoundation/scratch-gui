@@ -31,6 +31,13 @@ const messages = defineMessages({
 });
 
 class SpriteInfo extends React.Component {
+    constructor (props) {
+        super(props);
+        this.isNum = function (x) {
+            return !isNaN(x);
+        };
+
+    }
     shouldComponentUpdate (nextProps) {
         return (
             this.props.rotationStyle !== nextProps.rotationStyle ||
@@ -110,6 +117,7 @@ class SpriteInfo extends React.Component {
                         placeholder="x"
                         tabIndex="0"
                         type="text"
+                        validateInput={this.isNum}
                         value={this.props.disabled ? '' : this.props.x}
                         onSubmit={this.props.onChangeX}
                     />
@@ -137,6 +145,7 @@ class SpriteInfo extends React.Component {
                         placeholder="y"
                         tabIndex="0"
                         type="text"
+                        validateInput={this.isNum}
                         value={this.props.disabled ? '' : this.props.y}
                         onSubmit={this.props.onChangeY}
                     />
@@ -237,6 +246,7 @@ class SpriteInfo extends React.Component {
                                 label={sizeLabel}
                                 tabIndex="0"
                                 type="text"
+                                validateInput={this.isNum}
                                 value={this.props.disabled ? '' : this.props.size}
                                 onSubmit={this.props.onChangeSize}
                             />

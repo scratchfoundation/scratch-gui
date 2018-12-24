@@ -35,7 +35,13 @@ export default function (Input) {
             this.setState({value: null});
         }
         handleChange (e) {
-            this.setState({value: e.target.value});
+            const validateInput =
+                typeof this.props.validateInput === 'undefined' ?
+                    () => true :
+                    this.props.validateInput;
+            if (validateInput(e.target.value)) {
+                this.setState({value: e.target.value});
+            }
         }
         render () {
             const bufferedValue = this.state.value === null ? this.props.value : this.state.value;

@@ -36,7 +36,9 @@ class SpriteInfo extends React.Component {
         this.isNum = function (x) {
             return !isNaN(x) || x === '-';
         };
-
+        this.isNonNegNum = function (x) {
+            return !isNaN(x) && x >= 0;
+        };
     }
     shouldComponentUpdate (nextProps) {
         return (
@@ -246,7 +248,7 @@ class SpriteInfo extends React.Component {
                                 label={sizeLabel}
                                 tabIndex="0"
                                 type="text"
-                                validateInput={this.isNum}
+                                validateInput={this.isNonNegNum}
                                 value={this.props.disabled ? '' : this.props.size}
                                 onSubmit={this.props.onChangeSize}
                             />

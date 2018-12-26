@@ -6,7 +6,6 @@ import bowser from 'bowser';
  */
 export default function () {
     if (bowser.msie ||
-        bowser.vivaldi ||
         bowser.opera ||
         bowser.silk) {
         return false;

@@ -39,7 +39,7 @@ const WebGlModal = ({intl, ...props}) => (
                             webGlLink: (
                                 <a
                                     className={styles.faqLink}
-                                    href="https://en.wikipedia.org/wiki/WebGL#Support"
+                                    href="https://get.webgl.org/"
                                 >
                                     <FormattedMessage
                                         defaultMessage="does not support WebGL"

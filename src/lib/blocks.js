@@ -260,8 +260,12 @@ export default function (vm) {
                     return stageOptions.concat(stageVariableMenuItems);
                 }
                 // Get all the local variables (no lists) and add them to the menu.
-                const spriteVariableOptions =
-                    vm.runtime.getSpriteTargetByName(selectedItem).getAllVariableNamesInScopeByType('', true);
+                const target = vm.runtime.getSpriteTargetByName(selectedItem);
+                let spriteVariableOptions = [];
+                // The target should exist, but there are ways for it not to (e.g. #4203).
+                if (target) {
+                    spriteVariableOptions = target.getAllVariableNamesInScopeByType('', true);
+                }
                 const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable, variable]);
                 return spriteOptions.concat(spriteVariableMenuItems);
             }

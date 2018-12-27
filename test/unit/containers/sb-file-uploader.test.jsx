@@ -65,14 +65,14 @@ describe('SBFileUploader Container', () => {
         expect(projectName).toBe('my project is great');
     });
 
-    test('sets blank title with .sb filename', () => {
+    test('correctly sets title with .sb filename', () => {
         const wrapper = shallowWithIntl(getContainer(), {context: {store}});
         const instance = wrapper
             .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
             .dive() // unwrap InjectIntl(SBFileUploader)
             .instance(); // SBFileUploader
         const projectName = instance.getProjectTitleFromFilename('my project is great.sb');
-        expect(projectName).toBe('');
+        expect(projectName).toBe('my project is great');
     });
 
     test('sets blank title with filename with no extension', () => {

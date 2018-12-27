@@ -141,6 +141,7 @@ const GUIComponent = props => {
             <StageWrapper
                 isRendererSupported={isRendererSupported}
                 isRtl={isRtl}
+                loading={loading}
                 stageSize={STAGE_SIZE_MODES.large}
                 vm={vm}
             >

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import React from 'react';
 
+import VM from 'scratch-vm';
+
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CommunityButton from './community-button.jsx';
@@ -54,11 +56,12 @@ import {
     loginMenuOpen
 } from '../../reducers/menus';
 
+import collectMetadata from '../../lib/collect-metadata';
+
 import styles from './menu-bar.css';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
-import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './icon--profile.png';
 import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
@@ -153,6 +156,7 @@ class MenuBar extends React.Component {
             'handleCloseFileMenuAndThen',
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'handleSaveToComputer',
             'restoreOptionMessage'
         ]);
     }
@@ -217,6 +221,16 @@ class MenuBar extends React.Component {
         return () => {
             this.props.onRequestCloseFile();
             fn();
+        };
+    }
+    handleSaveToComputer (downloadProject) {
+        return () => {
+            this.props.onRequestCloseFile();
+            downloadProject();
+            if (this.props.onProjectTelemetryEvent) {
+                const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
+                this.props.onProjectTelemetryEvent('projectDidSave', metadata);
+            }
         };
     }
     handleLanguageMouseUp (e) {
@@ -395,7 +409,7 @@ class MenuBar extends React.Component {
                                     <SB3Downloader>{(className, downloadProject) => (
                                         <MenuItem
                                             className={className}
-                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
+                                            onClick={this.handleSaveToComputer(downloadProject)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Save to your computer"
@@ -714,6 +728,7 @@ MenuBar.propTypes = {
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
+    onProjectTelemetryEvent: PropTypes.func,
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
@@ -728,7 +743,8 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     showComingSoon: PropTypes.bool,
-    username: PropTypes.string
+    username: PropTypes.string,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 MenuBar.defaultProps = {
@@ -746,11 +762,13 @@ const mapStateToProps = state => {
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
+        locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
         projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
-        username: user ? user.username : null
+        username: user ? user.username : null,
+        vm: state.scratchGui.vm
     };
 };
 

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import xhr from 'xhr';
 
+import collectMetadata from '../lib/collect-metadata';
 import log from '../lib/log';
 import storage from '../lib/storage';
 import dataURItoBlob from '../lib/data-uri-to-blob';
@@ -304,35 +305,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         //TODO make a telemetry HOC and move this stuff there
         reportTelemetryEvent (event) {
             if (this.props.onProjectTelemetryEvent) {
-                //TODO move most or all of this into a collectMetadata() method on the VM/Runtime
-                const metadata = {
-                    projectName: this.props.reduxProjectTitle,
-                    language: this.props.locale,
-                    spriteCount: 0,
-                    blocksCount: 0,
-                    costumesCount: 0,
-                    listsCount: 0,
-                    scriptCount: 0,
-                    soundsCount: 0,
-                    variablesCount: 0
-                };
-
-                for (const target of this.props.vm.runtime.targets) {
-                    ++metadata.spriteCount;
-                    metadata.blocksCount += Object.keys(target.sprite.blocks._blocks).length;
-                    metadata.costumesCount += target.sprite.costumes_.length;
-                    metadata.scriptCount += target.sprite.blocks._scripts.length;
-                    metadata.soundsCount += target.sprite.sounds.length;
-                    for (const variableName in target.variables) {
-                        const variable = target.variables[variableName];
-                        if (variable.type === 'list') {
-                            ++metadata.listsCount;
-                        } else {
-                            ++metadata.variablesCount;
-                        }
-                    }
-                }
-
+                const metadata = collectMetadata(this.props.vm, this.props.reduxProjectTitle, this.props.locale);
                 this.props.onProjectTelemetryEvent(event, metadata);
             }
         }

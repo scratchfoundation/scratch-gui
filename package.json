@@ -110,7 +110,7 @@
     "scratch-render": "0.1.0-prerelease.20181226153401",
     "scratch-storage": "1.2.2",
     "scratch-svg-renderer": "0.2.0-prerelease.20181220183040",
-    "scratch-vm": "0.2.0-prerelease.20181226213940",
+    "scratch-vm": "0.2.0-prerelease.20190102175344",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",

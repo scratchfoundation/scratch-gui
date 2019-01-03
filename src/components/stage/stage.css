@@ -9,9 +9,9 @@
     */
     display: block;
 
-    /* Attach border radius directly to canvas to prevent needing overflow:hidden; */
     border-radius: $space;
     border: $stage-standard-border-width solid $ui-black-transparent;
+    overflow: hidden;
 
     /* @todo: This is for overriding the value being set somewhere. Where is it being set? */
     background-color: transparent;

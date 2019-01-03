@@ -68,6 +68,10 @@ const getStageDimensions = (stageSize, isFullScreen) => {
         stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
         stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;
     }
+    
+    // Round off dimensions to prevent resampling/blurriness
+    stageDimensions.height = Math.round(stageDimensions.height);
+    stageDimensions.width = Math.round(stageDimensions.width);
 
     return stageDimensions;
 };

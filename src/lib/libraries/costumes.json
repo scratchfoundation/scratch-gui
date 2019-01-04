@@ -348,7 +348,7 @@
         ]
     },
     {
-        "name": "Arrow1-a",
+        "name": "Arrow 1-a",
         "md5": "62f8794dd120e9b4ead4d098d50fc64b.svg",
         "type": "costume",
         "tags": [
@@ -363,7 +363,7 @@
         ]
     },
     {
-        "name": "Arrow1-b",
+        "name": "Arrow 1-b",
         "md5": "a157dc7e33d7c7a048af933de999e397.svg",
         "type": "costume",
         "tags": [
@@ -378,7 +378,7 @@
         ]
     },
     {
-        "name": "Arrow1-c",
+        "name": "Arrow 1-c",
         "md5": "d3b389e91f7beb22b2b1a80af09990ee.svg",
         "type": "costume",
         "tags": [
@@ -393,7 +393,7 @@
         ]
     },
     {
-        "name": "Arrow1-d",
+        "name": "Arrow 1-d",
         "md5": "412717ff731e9f19003a5840054057eb.svg",
         "type": "costume",
         "tags": [
@@ -632,7 +632,7 @@
         ]
     },
     {
-        "name": "Balloon1-a",
+        "name": "Balloon 1-a",
         "md5": "bc96a1fb5fe794377acd44807e421ce2.svg",
         "type": "costume",
         "tags": [
@@ -650,7 +650,7 @@
         ]
     },
     {
-        "name": "Balloon1-b",
+        "name": "Balloon 1-b",
         "md5": "d7bb51d9c38af6314bd2b4058d2a592d.svg",
         "type": "costume",
         "tags": [
@@ -668,7 +668,7 @@
         ]
     },
     {
-        "name": "Balloon1-c",
+        "name": "Balloon 1-c",
         "md5": "247cef27b665d77d9efaca69327cae77.svg",
         "type": "costume",
         "tags": [
@@ -1052,7 +1052,7 @@
         ]
     },
     {
-        "name": "Bell1",
+        "name": "Bell",
         "md5": "f35056c772395455d703773657e1da6e.svg",
         "type": "costume",
         "tags": [
@@ -1353,7 +1353,7 @@
         ]
     },
     {
-        "name": "Butterfly1-a",
+        "name": "Butterfly 1-a",
         "md5": "8419d4851defd1e862e4f7c1699d2190.svg",
         "type": "costume",
         "tags": [
@@ -1370,7 +1370,7 @@
         ]
     },
     {
-        "name": "Butterfly1-b",
+        "name": "Butterfly 1-b",
         "md5": "0873714e8d55d9eeb0bc8e8ab64441cc.svg",
         "type": "costume",
         "tags": [
@@ -1387,7 +1387,7 @@
         ]
     },
     {
-        "name": "Butterfly1-c",
+        "name": "Butterfly 1-c",
         "md5": "9c422631ca8d46413487f5dd627b65c6.svg",
         "type": "costume",
         "tags": [
@@ -1404,7 +1404,7 @@
         ]
     },
     {
-        "name": "Butterfly2-a",
+        "name": "Butterfly 2-a",
         "md5": "836d4cc7889f4a1cbcb0303934f31f79.svg",
         "type": "costume",
         "tags": [
@@ -1422,7 +1422,7 @@
         ]
     },
     {
-        "name": "Butterfly2-b",
+        "name": "Butterfly 2-b",
         "md5": "55dd0671a359d7c35f7b78f4176660e8.svg",
         "type": "costume",
         "tags": [
@@ -1440,7 +1440,7 @@
         ]
     },
     {
-        "name": "Button1",
+        "name": "Button 1",
         "md5": "7ef67c5bc8cf7df64fdb3b1d6b250f71.svg",
         "type": "costume",
         "tags": [
@@ -1456,7 +1456,7 @@
         ]
     },
     {
-        "name": "Button2-a",
+        "name": "Button 2-a",
         "md5": "c0051ff23e9aae78295964206793c1e3.svg",
         "type": "costume",
         "tags": [
@@ -1471,7 +1471,7 @@
         ]
     },
     {
-        "name": "Button2-b",
+        "name": "Button 2-b",
         "md5": "712a561dc0ad66e348b8247e566b50ef.svg",
         "type": "costume",
         "tags": [
@@ -1486,7 +1486,7 @@
         ]
     },
     {
-        "name": "Button3-a",
+        "name": "Button 3-a",
         "md5": "ffb2a9c21084c58fdb677c8d12a97519.svg",
         "type": "costume",
         "tags": [
@@ -1501,7 +1501,7 @@
         ]
     },
     {
-        "name": "Button3-b",
+        "name": "Button 3-b",
         "md5": "7a9ccb55e4da36f48811ab125d2492e0.svg",
         "type": "costume",
         "tags": [
@@ -1516,7 +1516,7 @@
         ]
     },
     {
-        "name": "Button4-a",
+        "name": "Button 4-a",
         "md5": "ecfe263bc256349777e571eaf39761d4.svg",
         "type": "costume",
         "tags": [
@@ -1530,7 +1530,7 @@
         ]
     },
     {
-        "name": "Button4-b",
+        "name": "Button 4-b",
         "md5": "9c49edde00b80cd22d636a0577a9b1c9.svg",
         "type": "costume",
         "tags": [
@@ -1544,7 +1544,7 @@
         ]
     },
     {
-        "name": "Button5-a",
+        "name": "Button 5-a",
         "md5": "71e97245b7be4fd6fe3ba8cdeecadaf1.svg",
         "type": "costume",
         "tags": [
@@ -2245,7 +2245,7 @@
         ]
     },
     {
-        "name": "Convertible",
+        "name": "Convertible 1",
         "md5": "5b883f396844ff5cfecd7c95553fa4fb.png",
         "type": "costume",
         "tags": [
@@ -2259,7 +2259,7 @@
         ]
     },
     {
-        "name": "Convertible 3",
+        "name": "Convertible 2",
         "md5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
         "type": "costume",
         "tags": [
@@ -2530,7 +2530,7 @@
         ]
     },
     {
-        "name": "Dinosaur1-a",
+        "name": "Dinosaur 1-a",
         "md5": "e70ab4de006f3df64e776abf912a62be.svg",
         "type": "costume",
         "tags": [
@@ -2546,7 +2546,7 @@
         ]
     },
     {
-        "name": "Dinosaur1-b",
+        "name": "Dinosaur 1-b",
         "md5": "af2d8211a65dce9871d49fa70671ce0c.svg",
         "type": "costume",
         "tags": [
@@ -2562,7 +2562,7 @@
         ]
     },
     {
-        "name": "Dinosaur1-c",
+        "name": "Dinosaur 1-c",
         "md5": "a2bb28d5ba55ba997bec63772437cecf.svg",
         "type": "costume",
         "tags": [
@@ -2578,7 +2578,7 @@
         ]
     },
     {
-        "name": "Dinosaur1-d",
+        "name": "Dinosaur 1-d",
         "md5": "91f3dba45e8cec7bdff31ed5acde2c85.svg",
         "type": "costume",
         "tags": [
@@ -2594,7 +2594,7 @@
         ]
     },
     {
-        "name": "Dinosaur2-a",
+        "name": "Dinosaur 2-a",
         "md5": "f49719e8f2440f5d328f2604e97eb71d.svg",
         "type": "costume",
         "tags": [
@@ -2610,7 +2610,7 @@
         ]
     },
     {
-        "name": "Dinosaur2-b",
+        "name": "Dinosaur 2-b",
         "md5": "1af6b3af3bf2cda862bbe01034a336bb.svg",
         "type": "costume",
         "tags": [
@@ -2626,7 +2626,7 @@
         ]
     },
     {
-        "name": "Dinosaur2-c",
+        "name": "Dinosaur 2-c",
         "md5": "e83b30a4517bbe155e2b4a6367c8f70b.svg",
         "type": "costume",
         "tags": [
@@ -2642,7 +2642,7 @@
         ]
     },
     {
-        "name": "Dinosaur2-d",
+        "name": "Dinosaur 2-d",
         "md5": "8244f1fb159237179d1caaa69c070060.svg",
         "type": "costume",
         "tags": [
@@ -2658,7 +2658,7 @@
         ]
     },
     {
-        "name": "Dinosaur3-a",
+        "name": "Dinosaur 3-a",
         "md5": "c4867c44f38df5bde472844878d5beea.svg",
         "type": "costume",
         "tags": [
@@ -2675,7 +2675,7 @@
         ]
     },
     {
-        "name": "Dinosaur3-b",
+        "name": "Dinosaur 3-b",
         "md5": "b682c1e58ea1c6bea737670f57517b6f.svg",
         "type": "costume",
         "tags": [
@@ -2692,7 +2692,7 @@
         ]
     },
     {
-        "name": "Dinosaur3-c",
+        "name": "Dinosaur 3-c",
         "md5": "47a617ca48f4782efeeb60199cff801e.svg",
         "type": "costume",
         "tags": [
@@ -2709,7 +2709,7 @@
         ]
     },
     {
-        "name": "Dinosaur3-d",
+        "name": "Dinosaur 3-d",
         "md5": "710ff3380d6872b04785db97dc0565c6.svg",
         "type": "costume",
         "tags": [
@@ -2726,7 +2726,7 @@
         ]
     },
     {
-        "name": "Dinosaur3-e",
+        "name": "Dinosaur 3-e",
         "md5": "6f40025c1157f37858adf7fa85090e64.svg",
         "type": "costume",
         "tags": [
@@ -2742,7 +2742,7 @@
         ]
     },
     {
-        "name": "Dinosaur4-a",
+        "name": "Dinosaur 4-a",
         "md5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
         "type": "costume",
         "tags": [
@@ -2760,7 +2760,7 @@
         ]
     },
     {
-        "name": "Dinosaur4-b",
+        "name": "Dinosaur 4-b",
         "md5": "cfe906702bbd30bc3bb8acb53079b6b0.svg",
         "type": "costume",
         "tags": [
@@ -2778,7 +2778,7 @@
         ]
     },
     {
-        "name": "Dinosaur4-c",
+        "name": "Dinosaur 4-c",
         "md5": "1879b07cfe788b0258afada17aa46973.svg",
         "type": "costume",
         "tags": [
@@ -2796,7 +2796,7 @@
         ]
     },
     {
-        "name": "Dinosaur4-d",
+        "name": "Dinosaur 4-d",
         "md5": "52c17657698ab82881ed3ccf83080684.svg",
         "type": "costume",
         "tags": [
@@ -2814,7 +2814,7 @@
         ]
     },
     {
-        "name": "Diver1",
+        "name": "Diver 1",
         "md5": "853803d5600b66538474909c5438c8ee.svg",
         "type": "costume",
         "tags": [
@@ -2832,7 +2832,7 @@
         ]
     },
     {
-        "name": "Diver2",
+        "name": "Diver 2",
         "md5": "248d3e69ada69a64b1077149ef6a931a.svg",
         "type": "costume",
         "tags": [
@@ -2990,7 +2990,7 @@
         ]
     },
     {
-        "name": "Dm Top R Leg",
+        "name": "Dm Top R Leg 1",
         "md5": "12db59633a1709a2c39534d35263791f.png",
         "type": "costume",
         "tags": [
@@ -3004,7 +3004,7 @@
         ]
     },
     {
-        "name": "Dm Top R Leg2",
+        "name": "Dm Top R Leg 2",
         "md5": "fcb8c2b6cf9b7e6ce9df521b2486deb3.png",
         "type": "costume",
         "tags": [],
@@ -3029,7 +3029,7 @@
         ]
     },
     {
-        "name": "Dog1-a",
+        "name": "Dog 1-a",
         "md5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
         "type": "costume",
         "tags": [
@@ -3045,7 +3045,7 @@
         ]
     },
     {
-        "name": "Dog1-b",
+        "name": "Dog 1-b",
         "md5": "598f4aa3d8f671375d1d2b3acf753416.svg",
         "type": "costume",
         "tags": [
@@ -3061,7 +3061,7 @@
         ]
     },
     {
-        "name": "Dog2-a",
+        "name": "Dog 2-a",
         "md5": "e921f865b19b27cd99e16a341dbf09c2.svg",
         "type": "costume",
         "tags": [
@@ -3077,7 +3077,7 @@
         ]
     },
     {
-        "name": "Dog2-b",
+        "name": "Dog 2-b",
         "md5": "891f2fb7daf79ba8b224a9173eeb0a63.svg",
         "type": "costume",
         "tags": [
@@ -3093,7 +3093,7 @@
         ]
     },
     {
-        "name": "Dog2-c",
+        "name": "Dog 2-c",
         "md5": "cd236d5eef4431dea82983ac9eec406b.svg",
         "type": "costume",
         "tags": [
@@ -3335,7 +3335,7 @@
         ]
     },
     {
-        "name": "Dragon1-a",
+        "name": "Dragon 1-a",
         "md5": "ee0082b436d6d5dc3de33047166e7bf2.svg",
         "type": "costume",
         "tags": [
@@ -3351,7 +3351,7 @@
         ]
     },
     {
-        "name": "Dragon1-b",
+        "name": "Dragon 1-b",
         "md5": "bb58ce36997fa205a86a085f202837fd.svg",
         "type": "costume",
         "tags": [
@@ -4473,7 +4473,7 @@
         ]
     },
     {
-        "name": "Giga Walk1",
+        "name": "Giga Walk 1",
         "md5": "f76bc420011db2cdb2de378c1536f6da.svg",
         "type": "costume",
         "tags": [
@@ -4487,7 +4487,7 @@
         ]
     },
     {
-        "name": "Giga Walk2",
+        "name": "Giga Walk 2",
         "md5": "43b5874e8a54f93bd02727f0abf6905b.svg",
         "type": "costume",
         "tags": [
@@ -4501,7 +4501,7 @@
         ]
     },
     {
-        "name": "Giga Walk3",
+        "name": "Giga Walk 3",
         "md5": "9aab3bbb375765391978be4f6d478ab3.svg",
         "type": "costume",
         "tags": [
@@ -5102,7 +5102,7 @@
         ]
     },
     {
-        "name": "Guitar-electric1-a",
+        "name": "Guitar-electric 1-a",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "costume",
         "tags": [
@@ -5116,7 +5116,7 @@
         ]
     },
     {
-        "name": "Guitar-electric1-b",
+        "name": "Guitar-electric 1-b",
         "md5": "3632184c19c66a088a99568570d61b13.svg",
         "type": "costume",
         "tags": [
@@ -5130,7 +5130,7 @@
         ]
     },
     {
-        "name": "Guitar-electric2-a",
+        "name": "Guitar-electric 2-a",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "costume",
         "tags": [
@@ -5144,7 +5144,7 @@
         ]
     },
     {
-        "name": "Guitar-electric2-b",
+        "name": "Guitar-electric 2-b",
         "md5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
         "type": "costume",
         "tags": [
@@ -5659,7 +5659,7 @@
         ]
     },
     {
-        "name": "Hippo1-a",
+        "name": "Hippo 1-a",
         "md5": "c1353c4a5eec5e6f32ed053e6f6e8f99.svg",
         "type": "costume",
         "tags": [
@@ -5677,7 +5677,7 @@
         ]
     },
     {
-        "name": "Hippo1-b",
+        "name": "Hippo 1-b",
         "md5": "e65ed93bbb9cccf698fc7e774ab609a6.svg",
         "type": "costume",
         "tags": [
@@ -6418,7 +6418,7 @@
         ]
     },
     {
-        "name": "Ladybug2",
+        "name": "Ladybug 1",
         "md5": "f16a1ccc69a4a8190a927f1595aa7bfa.svg",
         "type": "costume",
         "tags": [
@@ -6434,7 +6434,7 @@
         ]
     },
     {
-        "name": "Ladybug2-a",
+        "name": "Ladybug 2-a",
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "costume",
         "tags": [
@@ -6451,7 +6451,7 @@
         ]
     },
     {
-        "name": "Ladybug2-b",
+        "name": "Ladybug 2-b",
         "md5": "a2bb15ace808e070a2b815502952b292.svg",
         "type": "costume",
         "tags": [
@@ -7225,7 +7225,7 @@
         ]
     },
     {
-        "name": "Mouse1-a",
+        "name": "Mouse-a",
         "md5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
         "type": "costume",
         "tags": [
@@ -7240,7 +7240,7 @@
         ]
     },
     {
-        "name": "Mouse1-b",
+        "name": "Mouse-b",
         "md5": "f5e477a3f94fc98ba3cd927228405646.svg",
         "type": "costume",
         "tags": [
@@ -7438,7 +7438,7 @@
         ]
     },
     {
-        "name": "Orange",
+        "name": "Orange 1",
         "md5": "27d5dfbadceea215e983d2641ce3e51f.svg",
         "type": "costume",
         "tags": [
@@ -7452,7 +7452,7 @@
         ]
     },
     {
-        "name": "Orange2-a",
+        "name": "Orange 2-a",
         "md5": "8a7d8515df41f83c1326ec3233a3a42a.svg",
         "type": "costume",
         "tags": [
@@ -7467,7 +7467,7 @@
         ]
     },
     {
-        "name": "Orange2-b",
+        "name": "Orange 2-b",
         "md5": "70c7f1822ffdb37157c304273dae9102.svg",
         "type": "costume",
         "tags": [
@@ -7786,7 +7786,7 @@
         ]
     },
     {
-        "name": "Penguin-a",
+        "name": "Penguin 1-a",
         "md5": "0e78708b8988802d2209a34b50292bd3.svg",
         "type": "costume",
         "tags": [
@@ -7808,7 +7808,7 @@
         ]
     },
     {
-        "name": "Penguin-b",
+        "name": "Penguin 1-b",
         "md5": "43af2a0b7f922ec5dc94217b2f3e08e4.svg",
         "type": "costume",
         "tags": [
@@ -7830,7 +7830,7 @@
         ]
     },
     {
-        "name": "Penguin-c",
+        "name": "Penguin 1-c",
         "md5": "4f35c3940957e3ffc2e83a2565942171.svg",
         "type": "costume",
         "tags": [
@@ -7852,7 +7852,7 @@
         ]
     },
     {
-        "name": "Penguin2-a",
+        "name": "Penguin 2-a",
         "md5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
         "type": "costume",
         "tags": [
@@ -7868,7 +7868,7 @@
         ]
     },
     {
-        "name": "Penguin2-b",
+        "name": "Penguin 2-b",
         "md5": "b224a582395e0847c2ef4eefcfbc4546.svg",
         "type": "costume",
         "tags": [
@@ -7884,7 +7884,7 @@
         ]
     },
     {
-        "name": "Penguin2-c",
+        "name": "Penguin 2-c",
         "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
         "type": "costume",
         "tags": [
@@ -7900,7 +7900,7 @@
         ]
     },
     {
-        "name": "Penguin2-d",
+        "name": "Penguin 2-d",
         "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
         "type": "costume",
         "tags": [
@@ -7916,7 +7916,7 @@
         ]
     },
     {
-        "name": "Pico Walk1",
+        "name": "Pico Walk 1",
         "md5": "8eab5fe20dd249bf22964298b1d377eb.svg",
         "type": "costume",
         "tags": [
@@ -7930,7 +7930,7 @@
         ]
     },
     {
-        "name": "Pico Walk2",
+        "name": "Pico Walk 2",
         "md5": "39ecd3c38d3f2cd81e3a17ee6c25699f.svg",
         "type": "costume",
         "tags": [
@@ -7944,7 +7944,7 @@
         ]
     },
     {
-        "name": "Pico Walk3",
+        "name": "Pico Walk 3",
         "md5": "43f7d92dcf9eadf77c07a6fc1eb4104f.svg",
         "type": "costume",
         "tags": [
@@ -7958,7 +7958,7 @@
         ]
     },
     {
-        "name": "Pico Walk4",
+        "name": "Pico Walk 4",
         "md5": "2582d012d57bca59bc0315c5c5954958.svg",
         "type": "costume",
         "tags": [
@@ -8095,7 +8095,7 @@
         ]
     },
     {
-        "name": "Planet2",
+        "name": "Planet",
         "md5": "978784738c1d9dd4b1d397fd18bdf406.svg",
         "type": "costume",
         "tags": [
@@ -8655,7 +8655,7 @@
         ]
     },
     {
-        "name": "Retro Robot A",
+        "name": "Retro Robot-a",
         "md5": "a17c1ce38c261395ae268f3b8a9037db.svg",
         "type": "costume",
         "tags": [
@@ -8668,7 +8668,7 @@
         ]
     },
     {
-        "name": "Retro Robot B",
+        "name": "Retro Robot-b",
         "md5": "bfb5afe62358ef542f118299bb53d4b7.svg",
         "type": "costume",
         "tags": [
@@ -8681,7 +8681,7 @@
         ]
     },
     {
-        "name": "Retro Robot C",
+        "name": "Retro Robot-c",
         "md5": "f925e3bde178001133a11fa97847a9ae.svg",
         "type": "costume",
         "tags": [
@@ -9109,7 +9109,7 @@
         ]
     },
     {
-        "name": "Shark-a",
+        "name": "Shark 1-a",
         "md5": "4ca6776e9c021e8b21c3346793c9361d.svg",
         "type": "costume",
         "tags": [
@@ -9125,7 +9125,7 @@
         ]
     },
     {
-        "name": "Shark-b",
+        "name": "Shark 1-b",
         "md5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
         "type": "costume",
         "tags": [
@@ -9141,7 +9141,7 @@
         ]
     },
     {
-        "name": "Shark2-a",
+        "name": "Shark 2-a",
         "md5": "7c0a907eae79462f69f8e2af8e7df828.svg",
         "type": "costume",
         "tags": [
@@ -9160,7 +9160,7 @@
         ]
     },
     {
-        "name": "Shark2-b",
+        "name": "Shark 2-b",
         "md5": "cff9ae87a93294693a0650b38a7a33d2.svg",
         "type": "costume",
         "tags": [
@@ -9179,7 +9179,7 @@
         ]
     },
     {
-        "name": "Shark2-c",
+        "name": "Shark 2-c",
         "md5": "afeae3f998598424f7c50918507f6ce6.svg",
         "type": "costume",
         "tags": [
@@ -9198,7 +9198,7 @@
         ]
     },
     {
-        "name": "Shirt-a",
+        "name": "Shirt",
         "md5": "659465944053fe6fb6aa1ed0e11be9aa.svg",
         "type": "costume",
         "tags": [
@@ -9316,7 +9316,7 @@
         ]
     },
     {
-        "name": "Singer1",
+        "name": "Singer",
         "md5": "e47ef1af3b925e5ac9e3b3f809d440b3.svg",
         "type": "costume",
         "tags": [
@@ -9366,7 +9366,7 @@
         ]
     },
     {
-        "name": "Skeleton-d",
+        "name": "Skeleton-c",
         "md5": "155efd0dfdc59a0e2a546a4a7d068ece.svg",
         "type": "costume",
         "tags": [
@@ -9384,7 +9384,7 @@
         ]
     },
     {
-        "name": "Skeleton-e",
+        "name": "Skeleton-d",
         "md5": "c41a11468602522cdc6dec7043215f65.svg",
         "type": "costume",
         "tags": [
@@ -9735,7 +9735,7 @@
         ]
     },
     {
-        "name": "Taco",
+        "name": "Taco-a",
         "md5": "bc78fb90ed373d56c11d5fafa4203ccd.svg",
         "type": "costume",
         "tags": [
@@ -9749,7 +9749,7 @@
         ]
     },
     {
-        "name": "Taco-wizard",
+        "name": "Taco-b",
         "md5": "5e9e65db20d403b590578ed44b1a3792.svg",
         "type": "costume",
         "tags": [
@@ -9757,7 +9757,8 @@
             "fantasy",
             "abrakadabra",
             "alakazam",
-            "designerd"
+            "designerd",
+            "wizard"
         ],
         "info": [
             125,
@@ -10149,7 +10150,7 @@
         ]
     },
     {
-        "name": "Tree1",
+        "name": "Tree 1",
         "md5": "8c40e2662c55d17bc384f47165ac43c1.svg",
         "type": "costume",
         "tags": [
@@ -10270,7 +10271,7 @@
         ]
     },
     {
-        "name": "Unicorn",
+        "name": "Unicorn 1",
         "md5": "c491fd1867375aa0160b013788d188e5.svg",
         "type": "costume",
         "tags": [

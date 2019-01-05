@@ -390,7 +390,7 @@
         }
     },
     {
-        "name": "Arrow1",
+        "name": "Arrow",
         "md5": "62f8794dd120e9b4ead4d098d50fc64b.svg",
         "type": "sprite",
         "tags": [
@@ -405,7 +405,7 @@
             1
         ],
         "json": {
-            "objName": "Arrow1",
+            "objName": "Arrow",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -418,7 +418,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "arrow1-a",
+                    "costumeName": "arrow-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "62f8794dd120e9b4ead4d098d50fc64b.svg",
                     "bitmapResolution": 1,
@@ -426,7 +426,7 @@
                     "rotationCenterY": 23
                 },
                 {
-                    "costumeName": "arrow1-b",
+                    "costumeName": "arrow-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a157dc7e33d7c7a048af933de999e397.svg",
                     "bitmapResolution": 1,
@@ -434,7 +434,7 @@
                     "rotationCenterY": 23
                 },
                 {
-                    "costumeName": "arrow1-c",
+                    "costumeName": "arrow-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d3b389e91f7beb22b2b1a80af09990ee.svg",
                     "bitmapResolution": 1,
@@ -442,7 +442,7 @@
                     "rotationCenterY": 28
                 },
                 {
-                    "costumeName": "arrow1-d",
+                    "costumeName": "arrow-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "412717ff731e9f19003a5840054057eb.svg",
                     "bitmapResolution": 1,
@@ -749,7 +749,7 @@
         }
     },
     {
-        "name": "Balloon1",
+        "name": "Balloon",
         "md5": "bc96a1fb5fe794377acd44807e421ce2.svg",
         "type": "sprite",
         "tags": [
@@ -768,7 +768,7 @@
             1
         ],
         "json": {
-            "objName": "Balloon1",
+            "objName": "Balloon",
             "sounds": [
                 {
                     "soundName": "Pop",
@@ -781,7 +781,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "balloon1-a",
+                    "costumeName": "balloon-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bc96a1fb5fe794377acd44807e421ce2.svg",
                     "bitmapResolution": 1,
@@ -789,7 +789,7 @@
                     "rotationCenterY": 94
                 },
                 {
-                    "costumeName": "balloon1-b",
+                    "costumeName": "balloon-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d7bb51d9c38af6314bd2b4058d2a592d.svg",
                     "bitmapResolution": 1,
@@ -797,7 +797,7 @@
                     "rotationCenterY": 94
                 },
                 {
-                    "costumeName": "balloon1-c",
+                    "costumeName": "balloon-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "247cef27b665d77d9efaca69327cae77.svg",
                     "bitmapResolution": 1,
@@ -1403,7 +1403,7 @@
             "objName": "Bell",
             "sounds": [
                 {
-                    "soundName": "xylo1",
+                    "soundName": "xylo 1",
                     "soundID": -1,
                     "md5": "6ac484e97c1c1fe1384642e26a125e70.wav",
                     "sampleCount": 238232,
@@ -1421,7 +1421,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "bell1",
+                    "costumeName": "bell",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f35056c772395455d703773657e1da6e.svg",
                     "bitmapResolution": 1,
@@ -1548,7 +1548,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "bowl-a",
+                    "costumeName": "bowl",
                     "baseLayerID": -1,
                     "baseLayerMD5": "86f616639846f06fef29931e6b9b59de.svg",
                     "bitmapResolution": 1,
@@ -1858,7 +1858,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "butterfly1-a",
+                    "costumeName": "butterfly 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8419d4851defd1e862e4f7c1699d2190.svg",
                     "bitmapResolution": 1,
@@ -1866,7 +1866,7 @@
                     "rotationCenterY": 49
                 },
                 {
-                    "costumeName": "butterfly1-b",
+                    "costumeName": "butterfly 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "0873714e8d55d9eeb0bc8e8ab64441cc.svg",
                     "bitmapResolution": 1,
@@ -1874,7 +1874,7 @@
                     "rotationCenterY": 49
                 },
                 {
-                    "costumeName": "butterfly1-c",
+                    "costumeName": "butterfly 1-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9c422631ca8d46413487f5dd627b65c6.svg",
                     "bitmapResolution": 1,
@@ -1925,7 +1925,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "butterfly2-a",
+                    "costumeName": "butterfly 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "836d4cc7889f4a1cbcb0303934f31f79.svg",
                     "bitmapResolution": 1,
@@ -1933,7 +1933,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "butterfly2-b",
+                    "costumeName": "butterfly 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "55dd0671a359d7c35f7b78f4176660e8.svg",
                     "bitmapResolution": 1,
@@ -1953,7 +1953,7 @@
         }
     },
     {
-        "name": "Button1",
+        "name": "Button 1",
         "md5": "7ef67c5bc8cf7df64fdb3b1d6b250f71.svg",
         "type": "sprite",
         "tags": [
@@ -1968,7 +1968,7 @@
             1
         ],
         "json": {
-            "objName": "Button1",
+            "objName": "Button 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -1981,7 +1981,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "button1",
+                    "costumeName": "button 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7ef67c5bc8cf7df64fdb3b1d6b250f71.svg",
                     "bitmapResolution": 1,
@@ -2001,7 +2001,7 @@
         }
     },
     {
-        "name": "Button2",
+        "name": "Button 2",
         "md5": "c0051ff23e9aae78295964206793c1e3.svg",
         "type": "sprite",
         "tags": [
@@ -2015,7 +2015,7 @@
             1
         ],
         "json": {
-            "objName": "Button2",
+            "objName": "Button 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2028,7 +2028,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "button2-a",
+                    "costumeName": "button 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c0051ff23e9aae78295964206793c1e3.svg",
                     "bitmapResolution": 1,
@@ -2036,7 +2036,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "button2-b",
+                    "costumeName": "button 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "712a561dc0ad66e348b8247e566b50ef.svg",
                     "bitmapResolution": 1,
@@ -2056,7 +2056,7 @@
         }
     },
     {
-        "name": "Button3",
+        "name": "Button 3",
         "md5": "ffb2a9c21084c58fdb677c8d12a97519.svg",
         "type": "sprite",
         "tags": [
@@ -2071,7 +2071,7 @@
             1
         ],
         "json": {
-            "objName": "Button3",
+            "objName": "Button 3",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2084,7 +2084,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "button3-a",
+                    "costumeName": "button 3-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ffb2a9c21084c58fdb677c8d12a97519.svg",
                     "bitmapResolution": 1,
@@ -2092,7 +2092,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "button3-b",
+                    "costumeName": "button 3-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7a9ccb55e4da36f48811ab125d2492e0.svg",
                     "bitmapResolution": 1,
@@ -2112,7 +2112,7 @@
         }
     },
     {
-        "name": "Button4",
+        "name": "Button 4",
         "md5": "ecfe263bc256349777e571eaf39761d4.svg",
         "type": "sprite",
         "tags": [
@@ -2125,7 +2125,7 @@
             1
         ],
         "json": {
-            "objName": "Button4",
+            "objName": "Button 4",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2138,7 +2138,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "button4-a",
+                    "costumeName": "button 4-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ecfe263bc256349777e571eaf39761d4.svg",
                     "bitmapResolution": 1,
@@ -2146,7 +2146,7 @@
                     "rotationCenterY": 34
                 },
                 {
-                    "costumeName": "button4-b",
+                    "costumeName": "button 4-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9c49edde00b80cd22d636a0577a9b1c9.svg",
                     "bitmapResolution": 1,
@@ -2166,7 +2166,7 @@
         }
     },
     {
-        "name": "Button5",
+        "name": "Button 5",
         "md5": "71e97245b7be4fd6fe3ba8cdeecadaf1.svg",
         "type": "sprite",
         "tags": [
@@ -2182,7 +2182,7 @@
             1
         ],
         "json": {
-            "objName": "Button5",
+            "objName": "Button 5",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -2195,7 +2195,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "button5-a",
+                    "costumeName": "button 5-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "71e97245b7be4fd6fe3ba8cdeecadaf1.svg",
                     "bitmapResolution": 1,
@@ -2203,7 +2203,7 @@
                     "rotationCenterY": 72
                 },
                 {
-                    "costumeName": "button5-b",
+                    "costumeName": "button 5-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "54cd55512f7571060e6e64168e541222.svg",
                     "bitmapResolution": 1,
@@ -2556,7 +2556,7 @@
             "objName": "Cat 2",
             "sounds": [
                 {
-                    "soundName": "meow2",
+                    "soundName": "meow 2",
                     "soundID": -1,
                     "md5": "cf51a0c4088942d95bcc20af13202710.wav",
                     "sampleCount": 6512,
@@ -3136,7 +3136,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "cloud-a",
+                    "costumeName": "clouds-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c7d7de8e29179407f03b054fa640f4d0.svg",
                     "bitmapResolution": 1,
@@ -3144,7 +3144,7 @@
                     "rotationCenterY": 19
                 },
                 {
-                    "costumeName": "cloud-b",
+                    "costumeName": "clouds-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "d8595350ebb460494c9189dabb968336.svg",
                     "bitmapResolution": 1,
@@ -3152,7 +3152,7 @@
                     "rotationCenterY": 20
                 },
                 {
-                    "costumeName": "cloud-c",
+                    "costumeName": "clouds-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "395fc991e64ac0a4aa46758ab4bc65cb.svg",
                     "bitmapResolution": 1,
@@ -3160,7 +3160,7 @@
                     "rotationCenterY": 9
                 },
                 {
-                    "costumeName": "cloud-d",
+                    "costumeName": "clouds-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1767e704acb11ffa409f77cc79ba7e86.svg",
                     "bitmapResolution": 1,
@@ -3180,7 +3180,7 @@
         }
     },
     {
-        "name": "Convertible",
+        "name": "Convertible 1",
         "md5": "5b883f396844ff5cfecd7c95553fa4fb.png",
         "type": "sprite",
         "tags": [
@@ -3193,7 +3193,7 @@
             1
         ],
         "json": {
-            "objName": "Convertible",
+            "objName": "Convertible 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3206,7 +3206,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "convertible",
+                    "costumeName": "convertible 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5b883f396844ff5cfecd7c95553fa4fb.png",
                     "bitmapResolution": 2,
@@ -3253,7 +3253,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "convertible 3",
+                    "costumeName": "convertible 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
                     "bitmapResolution": 1,
@@ -3520,7 +3520,7 @@
                     "rotationCenterY": 240
                 },
                 {
-                    "costumeName": "dm top R leg2",
+                    "costumeName": "dm top R leg 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "fcb8c2b6cf9b7e6ce9df521b2486deb3.png",
                     "bitmapResolution": 2,
@@ -3800,7 +3800,7 @@
         }
     },
     {
-        "name": "Dinosaur1",
+        "name": "Dinosaur 1",
         "md5": "e70ab4de006f3df64e776abf912a62be.svg",
         "type": "sprite",
         "tags": [
@@ -3814,7 +3814,7 @@
             1
         ],
         "json": {
-            "objName": "Dinosaur1",
+            "objName": "Dinosaur 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3827,7 +3827,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur1-a",
+                    "costumeName": "dinosaur 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e70ab4de006f3df64e776abf912a62be.svg",
                     "bitmapResolution": 1,
@@ -3835,7 +3835,7 @@
                     "rotationCenterY": 92
                 },
                 {
-                    "costumeName": "dinosaur1-b",
+                    "costumeName": "dinosaur 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "af2d8211a65dce9871d49fa70671ce0c.svg",
                     "bitmapResolution": 1,
@@ -3843,7 +3843,7 @@
                     "rotationCenterY": 47
                 },
                 {
-                    "costumeName": "dinosaur1-c",
+                    "costumeName": "dinosaur 1-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a2bb28d5ba55ba997bec63772437cecf.svg",
                     "bitmapResolution": 1,
@@ -3851,7 +3851,7 @@
                     "rotationCenterY": 91
                 },
                 {
-                    "costumeName": "dinosaur1-d",
+                    "costumeName": "dinosaur 1-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "91f3dba45e8cec7bdff31ed5acde2c85.svg",
                     "bitmapResolution": 1,
@@ -3871,7 +3871,7 @@
         }
     },
     {
-        "name": "Dinosaur2",
+        "name": "Dinosaur 2",
         "md5": "f49719e8f2440f5d328f2604e97eb71d.svg",
         "type": "sprite",
         "tags": [
@@ -3886,7 +3886,7 @@
             1
         ],
         "json": {
-            "objName": "Dinosaur2",
+            "objName": "Dinosaur 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3899,7 +3899,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur2-a",
+                    "costumeName": "dinosaur 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f49719e8f2440f5d328f2604e97eb71d.svg",
                     "bitmapResolution": 1,
@@ -3907,7 +3907,7 @@
                     "rotationCenterY": 67
                 },
                 {
-                    "costumeName": "dinosaur2-b",
+                    "costumeName": "dinosaur 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1af6b3af3bf2cda862bbe01034a336bb.svg",
                     "bitmapResolution": 1,
@@ -3915,7 +3915,7 @@
                     "rotationCenterY": 67
                 },
                 {
-                    "costumeName": "dinosaur2-c",
+                    "costumeName": "dinosaur 2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e83b30a4517bbe155e2b4a6367c8f70b.svg",
                     "bitmapResolution": 1,
@@ -3923,7 +3923,7 @@
                     "rotationCenterY": 67
                 },
                 {
-                    "costumeName": "dinosaur2-d",
+                    "costumeName": "dinosaur 2-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8244f1fb159237179d1caaa69c070060.svg",
                     "bitmapResolution": 1,
@@ -3943,7 +3943,7 @@
         }
     },
     {
-        "name": "Dinosaur3",
+        "name": "Dinosaur 3",
         "md5": "c4867c44f38df5bde472844878d5beea.svg",
         "type": "sprite",
         "tags": [
@@ -3959,7 +3959,7 @@
             1
         ],
         "json": {
-            "objName": "Dinosaur3",
+            "objName": "Dinosaur 3",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -3972,7 +3972,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur3-a",
+                    "costumeName": "dinosaur 3-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c4867c44f38df5bde472844878d5beea.svg",
                     "bitmapResolution": 1,
@@ -3980,7 +3980,7 @@
                     "rotationCenterY": 42
                 },
                 {
-                    "costumeName": "dinosaur3-b",
+                    "costumeName": "dinosaur 3-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b682c1e58ea1c6bea737670f57517b6f.svg",
                     "bitmapResolution": 1,
@@ -3988,7 +3988,7 @@
                     "rotationCenterY": 59
                 },
                 {
-                    "costumeName": "dinosaur3-c",
+                    "costumeName": "dinosaur 3-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "47a617ca48f4782efeeb60199cff801e.svg",
                     "bitmapResolution": 1,
@@ -3996,7 +3996,7 @@
                     "rotationCenterY": 59
                 },
                 {
-                    "costumeName": "dinosaur3-d",
+                    "costumeName": "dinosaur 3-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "710ff3380d6872b04785db97dc0565c6.svg",
                     "bitmapResolution": 1,
@@ -4004,7 +4004,7 @@
                     "rotationCenterY": 65
                 },
                 {
-                    "costumeName": "dinosaur3-e",
+                    "costumeName": "dinosaur 3-e",
                     "baseLayerID": -1,
                     "baseLayerMD5": "6f40025c1157f37858adf7fa85090e64.svg",
                     "bitmapResolution": 1,
@@ -4024,7 +4024,7 @@
         }
     },
     {
-        "name": "Dinosaur4",
+        "name": "Dinosaur 4",
         "md5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
         "type": "sprite",
         "tags": [
@@ -4041,7 +4041,7 @@
             1
         ],
         "json": {
-            "objName": "Dinosaur4",
+            "objName": "Dinosaur 4",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4054,7 +4054,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dinosaur4-a",
+                    "costumeName": "dinosaur 4-a",
                     "baseLayerID": 0,
                     "baseLayerMD5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
                     "bitmapResolution": 1,
@@ -4062,7 +4062,7 @@
                     "rotationCenterY": 52
                 },
                 {
-                    "costumeName": "dinosaur4-b",
+                    "costumeName": "dinosaur 4-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cfe906702bbd30bc3bb8acb53079b6b0.svg",
                     "bitmapResolution": 1,
@@ -4070,7 +4070,7 @@
                     "rotationCenterY": 52
                 },
                 {
-                    "costumeName": "dinosaur4-c",
+                    "costumeName": "dinosaur 4-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1879b07cfe788b0258afada17aa46973.svg",
                     "bitmapResolution": 1,
@@ -4078,7 +4078,7 @@
                     "rotationCenterY": 52
                 },
                 {
-                    "costumeName": "dinosaur4-d",
+                    "costumeName": "dinosaur 4-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "52c17657698ab82881ed3ccf83080684.svg",
                     "bitmapResolution": 1,
@@ -4098,7 +4098,7 @@
         }
     },
     {
-        "name": "Dinosaur5",
+        "name": "Dinosaur 5",
         "md5": "42e3bf118c775ba54239af4276800a0a.png",
         "type": "sprite",
         "tags": [
@@ -4112,7 +4112,7 @@
             2
         ],
         "json": {
-            "objName": "Dinosaur5",
+            "objName": "Dinosaur 5",
             "sounds": [
                 {
                     "soundName": "dance funky",
@@ -4209,7 +4209,7 @@
         }
     },
     {
-        "name": "Diver1",
+        "name": "Diver 1",
         "md5": "853803d5600b66538474909c5438c8ee.svg",
         "type": "sprite",
         "tags": [
@@ -4226,7 +4226,7 @@
             1
         ],
         "json": {
-            "objName": "Diver1",
+            "objName": "Diver 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4239,7 +4239,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "diver1",
+                    "costumeName": "diver 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "853803d5600b66538474909c5438c8ee.svg",
                     "bitmapResolution": 1,
@@ -4259,7 +4259,7 @@
         }
     },
     {
-        "name": "Diver2",
+        "name": "Diver 2",
         "md5": "248d3e69ada69a64b1077149ef6a931a.svg",
         "type": "sprite",
         "tags": [
@@ -4276,7 +4276,7 @@
             1
         ],
         "json": {
-            "objName": "Diver2",
+            "objName": "Diver 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -4289,7 +4289,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "diver2",
+                    "costumeName": "diver 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "248d3e69ada69a64b1077149ef6a931a.svg",
                     "bitmapResolution": 1,
@@ -4309,7 +4309,7 @@
         }
     },
     {
-        "name": "Dog1",
+        "name": "Dog 1",
         "md5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
         "type": "sprite",
         "tags": [
@@ -4324,10 +4324,10 @@
             1
         ],
         "json": {
-            "objName": "Dog1",
+            "objName": "Dog 1",
             "sounds": [
                 {
-                    "soundName": "dog1",
+                    "soundName": "dog 1",
                     "soundID": -1,
                     "md5": "b15adefc3c12f758b6dc6a045362532f.wav",
                     "sampleCount": 3672,
@@ -4337,7 +4337,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dog1-a",
+                    "costumeName": "dog 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "39ddefa0cc58f3b1b06474d63d81ef56.svg",
                     "bitmapResolution": 1,
@@ -4345,7 +4345,7 @@
                     "rotationCenterY": 80
                 },
                 {
-                    "costumeName": "dog1-b",
+                    "costumeName": "dog 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "598f4aa3d8f671375d1d2b3acf753416.svg",
                     "bitmapResolution": 1,
@@ -4365,7 +4365,7 @@
         }
     },
     {
-        "name": "Dog2",
+        "name": "Dog 2",
         "md5": "e921f865b19b27cd99e16a341dbf09c2.svg",
         "type": "sprite",
         "tags": [
@@ -4380,10 +4380,10 @@
             1
         ],
         "json": {
-            "objName": "Dog2",
+            "objName": "Dog 2",
             "sounds": [
                 {
-                    "soundName": "dog1",
+                    "soundName": "dog 1",
                     "soundID": -1,
                     "md5": "b15adefc3c12f758b6dc6a045362532f.wav",
                     "sampleCount": 3672,
@@ -4393,7 +4393,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "dog2-a",
+                    "costumeName": "dog 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e921f865b19b27cd99e16a341dbf09c2.svg",
                     "bitmapResolution": 1,
@@ -4401,7 +4401,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "dog2-b",
+                    "costumeName": "dog 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "891f2fb7daf79ba8b224a9173eeb0a63.svg",
                     "bitmapResolution": 1,
@@ -4409,7 +4409,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "dog2-c",
+                    "costumeName": "dog 2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cd236d5eef4431dea82983ac9eec406b.svg",
                     "bitmapResolution": 1,
@@ -4950,7 +4950,7 @@
             "objName": "Drum Kit",
             "sounds": [
                 {
-                    "soundName": "Drum Bass1",
+                    "soundName": "Drum Bass 1",
                     "soundID": -1,
                     "md5": "48328c874353617451e4c7902cc82817.wav",
                     "sampleCount": 6528,
@@ -4958,7 +4958,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "Drum Bass2",
+                    "soundName": "Drum Bass 2",
                     "soundID": -1,
                     "md5": "711a1270d1cf2e5de9b145ee539213e4.wav",
                     "sampleCount": 3791,
@@ -4966,7 +4966,7 @@
                     "format": "adpcm"
                 },
                 {
-                    "soundName": "Drum Bass3",
+                    "soundName": "Drum Bass 3",
                     "soundID": -1,
                     "md5": "c21704337b16359ea631b5f8eb48f765.wav",
                     "sampleCount": 8576,
@@ -6300,7 +6300,7 @@
         }
     },
     {
-        "name": "Frog",
+        "name": "Frog 1",
         "md5": "285483a688eed2ff8010c65112f99c41.svg",
         "type": "sprite",
         "tags": [
@@ -6317,7 +6317,7 @@
             1
         ],
         "json": {
-            "objName": "Frog",
+            "objName": "Frog 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6330,7 +6330,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "frog",
+                    "costumeName": "frog 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "285483a688eed2ff8010c65112f99c41.svg",
                     "bitmapResolution": 1,
@@ -6350,7 +6350,7 @@
         }
     },
     {
-        "name": "Frog 2 ",
+        "name": "Frog 2",
         "md5": "07160d455202e95f5b4b5c842eff6788.svg",
         "type": "sprite",
         "tags": [
@@ -6366,7 +6366,7 @@
             1
         ],
         "json": {
-            "objName": "Frog 2 ",
+            "objName": "Frog 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -6730,7 +6730,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "Giga walk1",
+                    "costumeName": "Giga walk 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f76bc420011db2cdb2de378c1536f6da.svg",
                     "bitmapResolution": 1,
@@ -6738,7 +6738,7 @@
                     "rotationCenterY": 107
                 },
                 {
-                    "costumeName": "Giga walk2",
+                    "costumeName": "Giga walk 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "43b5874e8a54f93bd02727f0abf6905b.svg",
                     "bitmapResolution": 1,
@@ -6746,7 +6746,7 @@
                     "rotationCenterY": 107
                 },
                 {
-                    "costumeName": "Giga walk3",
+                    "costumeName": "Giga walk 3",
                     "baseLayerID": -1,
                     "baseLayerMD5": "9aab3bbb375765391978be4f6d478ab3.svg",
                     "bitmapResolution": 1,
@@ -7486,7 +7486,7 @@
         }
     },
     {
-        "name": "Guitar-electric1",
+        "name": "Guitar-electric 1",
         "md5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
         "type": "sprite",
         "tags": [
@@ -7499,7 +7499,7 @@
             8
         ],
         "json": {
-            "objName": "Guitar-electric1",
+            "objName": "Guitar-electric 1",
             "sounds": [
                 {
                     "soundName": "C Elec Guitar",
@@ -7568,7 +7568,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "guitar-electric1-a",
+                    "costumeName": "guitar-electric 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b2b469b9d11fd23bdd671eab94dc58ff.svg",
                     "bitmapResolution": 1,
@@ -7576,7 +7576,7 @@
                     "rotationCenterY": 85
                 },
                 {
-                    "costumeName": "guitar-electric1-b",
+                    "costumeName": "guitar-electric 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "3632184c19c66a088a99568570d61b13.svg",
                     "bitmapResolution": 1,
@@ -7596,7 +7596,7 @@
         }
     },
     {
-        "name": "Guitar-electric2",
+        "name": "Guitar-electric 2",
         "md5": "1fc433b89038f9e16092c9f4d7514cca.svg",
         "type": "sprite",
         "tags": [
@@ -7609,7 +7609,7 @@
             8
         ],
         "json": {
-            "objName": "Guitar-electric2",
+            "objName": "Guitar-electric 2",
             "sounds": [
                 {
                     "soundName": "C Elec Guitar",
@@ -7678,7 +7678,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "guitar-electric2-a",
+                    "costumeName": "guitar-electric 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "1fc433b89038f9e16092c9f4d7514cca.svg",
                     "bitmapResolution": 1,
@@ -7686,7 +7686,7 @@
                     "rotationCenterY": 94
                 },
                 {
-                    "costumeName": "guitar-electric2-b",
+                    "costumeName": "guitar-electric 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7b843dbc93d4b2ea31fa67cca3d5077c.svg",
                     "bitmapResolution": 1,
@@ -7900,7 +7900,7 @@
         }
     },
     {
-        "name": "Hat1 ",
+        "name": "Hat",
         "md5": "52540f9dba4537f79f1ad3067d44e3f6.svg",
         "type": "sprite",
         "tags": [
@@ -7914,7 +7914,7 @@
             1
         ],
         "json": {
-            "objName": "Hat1 ",
+            "objName": "Hat",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -8359,7 +8359,7 @@
         }
     },
     {
-        "name": "Hippo1",
+        "name": "Hippo",
         "md5": "c1353c4a5eec5e6f32ed053e6f6e8f99.svg",
         "type": "sprite",
         "tags": [
@@ -8378,7 +8378,7 @@
             1
         ],
         "json": {
-            "objName": "Hippo1",
+            "objName": "Hippo",
             "sounds": [
                 {
                     "soundName": "meow",
@@ -8391,7 +8391,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "hippo1-a",
+                    "costumeName": "hippo-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c1353c4a5eec5e6f32ed053e6f6e8f99.svg",
                     "bitmapResolution": 1,
@@ -8399,7 +8399,7 @@
                     "rotationCenterY": 65
                 },
                 {
-                    "costumeName": "hippo1-b",
+                    "costumeName": "hippo-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e65ed93bbb9cccf698fc7e774ab609a6.svg",
                     "bitmapResolution": 1,
@@ -8930,7 +8930,7 @@
             "objName": "Jouvi Dance",
             "sounds": [
                 {
-                    "soundName": "dance celebrate2",
+                    "soundName": "dance celebrate 2",
                     "soundID": -1,
                     "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
                     "sampleCount": 176401,
@@ -9541,7 +9541,7 @@
         }
     },
     {
-        "name": "Ladybug1",
+        "name": "Ladybug 1",
         "md5": "f16a1ccc69a4a8190a927f1595aa7bfa.svg",
         "type": "sprite",
         "tags": [
@@ -9556,7 +9556,7 @@
             1
         ],
         "json": {
-            "objName": "Ladybug1",
+            "objName": "Ladybug 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9569,7 +9569,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "ladybug2",
+                    "costumeName": "ladybug 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f16a1ccc69a4a8190a927f1595aa7bfa.svg",
                     "bitmapResolution": 1,
@@ -9589,7 +9589,7 @@
         }
     },
     {
-        "name": "Ladybug2",
+        "name": "Ladybug 2",
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "sprite",
         "tags": [
@@ -9605,7 +9605,7 @@
             1
         ],
         "json": {
-            "objName": "Ladybug2",
+            "objName": "Ladybug 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -9618,7 +9618,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "ladybug2-a",
+                    "costumeName": "ladybug 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
                     "bitmapResolution": 1,
@@ -9626,7 +9626,7 @@
                     "rotationCenterY": 28
                 },
                 {
-                    "costumeName": "ladybug2-b",
+                    "costumeName": "ladybug 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a2bb15ace808e070a2b815502952b292.svg",
                     "bitmapResolution": 1,
@@ -9888,7 +9888,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "llama",
+                    "costumeName": "llama-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f5841f36b41c4df26f9c724d913c279b.svg",
                     "bitmapResolution": 1,
@@ -10163,7 +10163,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "Snare Beatbox",
+                    "soundName": "Snare Beatbox 1",
                     "soundID": -1,
                     "md5": "c642c4c00135d890998f351faec55498.wav",
                     "sampleCount": 5630,
@@ -10171,7 +10171,7 @@
                     "format": "adpcm"
                 },
                 {
-                    "soundName": "Snare Beatbox2",
+                    "soundName": "Snare Beatbox 2",
                     "soundID": -1,
                     "md5": "7ede1382b578d8fc32850b48d082d914.wav",
                     "sampleCount": 4960,
@@ -10543,7 +10543,7 @@
         }
     },
     {
-        "name": "Mouse1",
+        "name": "Mouse",
         "md5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
         "type": "sprite",
         "tags": [
@@ -10557,7 +10557,7 @@
             1
         ],
         "json": {
-            "objName": "Mouse1",
+            "objName": "Mouse",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10570,7 +10570,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "mouse1-a",
+                    "costumeName": "mouse-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e1f0c26afecbe9d4b9923d8e6bf489a8.svg",
                     "bitmapResolution": 1,
@@ -10578,7 +10578,7 @@
                     "rotationCenterY": 27
                 },
                 {
-                    "costumeName": "mouse1-b",
+                    "costumeName": "mouse-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f5e477a3f94fc98ba3cd927228405646.svg",
                     "bitmapResolution": 1,
@@ -10856,7 +10856,7 @@
         }
     },
     {
-        "name": "Orange",
+        "name": "Orange 1",
         "md5": "27d5dfbadceea215e983d2641ce3e51f.svg",
         "type": "sprite",
         "tags": [
@@ -10869,7 +10869,7 @@
             1
         ],
         "json": {
-            "objName": "Orange",
+            "objName": "Orange 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10882,7 +10882,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "orange",
+                    "costumeName": "orange 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "27d5dfbadceea215e983d2641ce3e51f.svg",
                     "bitmapResolution": 1,
@@ -10902,7 +10902,7 @@
         }
     },
     {
-        "name": "Orange2",
+        "name": "Orange 2",
         "md5": "8a7d8515df41f83c1326ec3233a3a42a.svg",
         "type": "sprite",
         "tags": [
@@ -10916,7 +10916,7 @@
             1
         ],
         "json": {
-            "objName": "Orange2",
+            "objName": "Orange 2",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -10929,7 +10929,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "orange2-a",
+                    "costumeName": "orange 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8a7d8515df41f83c1326ec3233a3a42a.svg",
                     "bitmapResolution": 1,
@@ -10937,7 +10937,7 @@
                     "rotationCenterY": 24
                 },
                 {
-                    "costumeName": "orange2-b",
+                    "costumeName": "orange 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "70c7f1822ffdb37157c304273dae9102.svg",
                     "bitmapResolution": 1,
@@ -11357,7 +11357,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "Party Hat-e",
+                    "costumeName": "Party Hat-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e69516f2a9bb6d632fdaba4fadd8f8f1.svg",
                     "bitmapResolution": 1,
@@ -11431,7 +11431,7 @@
         }
     },
     {
-        "name": "Penguin",
+        "name": "Penguin 1",
         "md5": "0e78708b8988802d2209a34b50292bd3.svg",
         "type": "sprite",
         "tags": [
@@ -11451,7 +11451,7 @@
             1
         ],
         "json": {
-            "objName": "Penguin",
+            "objName": "Penguin 1",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11464,7 +11464,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "penguin-a",
+                    "costumeName": "penguin 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "0e78708b8988802d2209a34b50292bd3.svg",
                     "bitmapResolution": 1,
@@ -11472,7 +11472,7 @@
                     "rotationCenterY": 46
                 },
                 {
-                    "costumeName": "penguin-b",
+                    "costumeName": "penguin 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "43af2a0b7f922ec5dc94217b2f3e08e4.svg",
                     "bitmapResolution": 1,
@@ -11480,7 +11480,7 @@
                     "rotationCenterY": 46
                 },
                 {
-                    "costumeName": "penguin-c",
+                    "costumeName": "penguin 1-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4f35c3940957e3ffc2e83a2565942171.svg",
                     "bitmapResolution": 1,
@@ -11528,7 +11528,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "penguin2-a",
+                    "costumeName": "penguin 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c17d9e4bdb59c574e0c34aa70af516da.svg",
                     "bitmapResolution": 1,
@@ -11536,7 +11536,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "penguin2-b",
+                    "costumeName": "penguin 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "b224a582395e0847c2ef4eefcfbc4546.svg",
                     "bitmapResolution": 1,
@@ -11544,7 +11544,7 @@
                     "rotationCenterY": 61
                 },
                 {
-                    "costumeName": "penguin2-c",
+                    "costumeName": "penguin 2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "35fec7aa5f60cca945fe0615413f1f08.svg",
                     "bitmapResolution": 1,
@@ -11552,7 +11552,7 @@
                     "rotationCenterY": 62
                 },
                 {
-                    "costumeName": "penguin2-d",
+                    "costumeName": "penguin 2-d",
                     "baseLayerID": -1,
                     "baseLayerMD5": "18fa51a64ebd5518f0c5c465525346e5.svg",
                     "bitmapResolution": 1,
@@ -11668,7 +11668,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "Pico walk1",
+                    "costumeName": "Pico walk 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8eab5fe20dd249bf22964298b1d377eb.svg",
                     "bitmapResolution": 1,
@@ -11676,7 +11676,7 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "Pico walk2",
+                    "costumeName": "Pico walk 2",
                     "baseLayerID": -1,
                     "baseLayerMD5": "39ecd3c38d3f2cd81e3a17ee6c25699f.svg",
                     "bitmapResolution": 1,
@@ -11684,7 +11684,7 @@
                     "rotationCenterY": 71
                 },
                 {
-                    "costumeName": "Pico walk3",
+                    "costumeName": "Pico walk 3",
                     "baseLayerID": -1,
                     "baseLayerMD5": "43f7d92dcf9eadf77c07a6fc1eb4104f.svg",
                     "bitmapResolution": 1,
@@ -11692,7 +11692,7 @@
                     "rotationCenterY": 70
                 },
                 {
-                    "costumeName": "Pico walk4",
+                    "costumeName": "Pico walk 4",
                     "baseLayerID": -1,
                     "baseLayerMD5": "2582d012d57bca59bc0315c5c5954958.svg",
                     "bitmapResolution": 1,
@@ -11784,7 +11784,7 @@
         }
     },
     {
-        "name": "Planet2",
+        "name": "Planet",
         "md5": "978784738c1d9dd4b1d397fd18bdf406.svg",
         "type": "sprite",
         "tags": [
@@ -11796,7 +11796,7 @@
             1
         ],
         "json": {
-            "objName": "Planet2",
+            "objName": "Planet",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -11809,7 +11809,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "planet2",
+                    "costumeName": "planet",
                     "baseLayerID": -1,
                     "baseLayerMD5": "978784738c1d9dd4b1d397fd18bdf406.svg",
                     "bitmapResolution": 1,
@@ -12180,7 +12180,7 @@
             "objName": "Puppy",
             "sounds": [
                 {
-                    "soundName": "dog2",
+                    "soundName": "dog 2",
                     "soundID": -1,
                     "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
                     "sampleCount": 3168,
@@ -12342,7 +12342,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "snare beatbox2",
+                    "soundName": "snare beatbox 2",
                     "soundID": -1,
                     "md5": "7ede1382b578d8fc32850b48d082d914.wav",
                     "sampleCount": 4960,
@@ -12578,7 +12578,7 @@
             "objName": "Retro Robot",
             "sounds": [
                 {
-                    "soundName": "computer beeps1",
+                    "soundName": "computer beep 1",
                     "soundID": -1,
                     "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
                     "sampleCount": 19200,
@@ -12586,7 +12586,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "computer beeps2",
+                    "soundName": "computer beep 2",
                     "soundID": -1,
                     "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
                     "sampleCount": 9536,
@@ -12596,7 +12596,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "Retro Robot a",
+                    "costumeName": "Retro Robot-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "a17c1ce38c261395ae268f3b8a9037db.svg",
                     "bitmapResolution": 1,
@@ -12604,7 +12604,7 @@
                     "rotationCenterY": 86
                 },
                 {
-                    "costumeName": "Retro Robot b",
+                    "costumeName": "Retro Robot-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bfb5afe62358ef542f118299bb53d4b7.svg",
                     "bitmapResolution": 1,
@@ -12612,7 +12612,7 @@
                     "rotationCenterY": 88
                 },
                 {
-                    "costumeName": "Retro Robot c",
+                    "costumeName": "Retro Robot-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "f925e3bde178001133a11fa97847a9ae.svg",
                     "bitmapResolution": 1,
@@ -12736,7 +12736,7 @@
             "objName": "Robot",
             "sounds": [
                 {
-                    "soundName": "computer beep",
+                    "soundName": "computer beep 1",
                     "soundID": -1,
                     "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
                     "sampleCount": 9536,
@@ -12831,7 +12831,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "laser1",
+                    "soundName": "laser 1",
                     "soundID": -1,
                     "md5": "46571f8ec0f2cc91666c80e312579082.wav",
                     "sampleCount": 516,
@@ -12839,7 +12839,7 @@
                     "format": ""
                 },
                 {
-                    "soundName": "laser2",
+                    "soundName": "laser 2",
                     "soundID": -1,
                     "md5": "27654ed2e3224f0a3f77c244e4fae9aa.wav",
                     "sampleCount": 755,
@@ -13335,7 +13335,7 @@
         }
     },
     {
-        "name": "Shark",
+        "name": "Shark 1",
         "md5": "4ca6776e9c021e8b21c3346793c9361d.svg",
         "type": "sprite",
         "tags": [
@@ -13350,7 +13350,7 @@
             1
         ],
         "json": {
-            "objName": "Shark",
+            "objName": "Shark 1",
             "sounds": [
                 {
                     "soundName": "chomp",
@@ -13363,7 +13363,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "shark-a",
+                    "costumeName": "shark 1-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "4ca6776e9c021e8b21c3346793c9361d.svg",
                     "bitmapResolution": 1,
@@ -13371,7 +13371,7 @@
                     "rotationCenterY": 60
                 },
                 {
-                    "costumeName": "shark-b",
+                    "costumeName": "shark 1-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "0bb623f0bbec53ee9667cee0b7ad6d47.svg",
                     "bitmapResolution": 1,
@@ -13438,7 +13438,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "shark2-a",
+                    "costumeName": "shark 2-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "7c0a907eae79462f69f8e2af8e7df828.svg",
                     "bitmapResolution": 1,
@@ -13446,7 +13446,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "shark2-b",
+                    "costumeName": "shark 2-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "cff9ae87a93294693a0650b38a7a33d2.svg",
                     "bitmapResolution": 1,
@@ -13454,7 +13454,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "shark2-c",
+                    "costumeName": "shark 2-c",
                     "baseLayerID": -1,
                     "baseLayerMD5": "afeae3f998598424f7c50918507f6ce6.svg",
                     "bitmapResolution": 1,
@@ -13500,7 +13500,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "shirt-a",
+                    "costumeName": "shirt",
                     "baseLayerID": -1,
                     "baseLayerMD5": "659465944053fe6fb6aa1ed0e11be9aa.svg",
                     "bitmapResolution": 1,
@@ -13656,7 +13656,7 @@
         }
     },
     {
-        "name": "Singer1",
+        "name": "Singer",
         "md5": "e47ef1af3b925e5ac9e3b3f809d440b3.svg",
         "type": "sprite",
         "tags": [
@@ -13669,7 +13669,7 @@
             1
         ],
         "json": {
-            "objName": "Singer1",
+            "objName": "Singer",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -13682,7 +13682,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "Singer1",
+                    "costumeName": "Singer",
                     "baseLayerID": -1,
                     "baseLayerMD5": "e47ef1af3b925e5ac9e3b3f809d440b3.svg",
                     "bitmapResolution": 1,
@@ -13996,28 +13996,7 @@
         ],
         "json": {
             "objName": "Speaker",
-            "variables": [
-                {
-                    "name": "scale degree",
-                    "value": 1,
-                    "isPersistent": false
-                },
-                {
-                    "name": "octave",
-                    "value": 0,
-                    "isPersistent": false
-                },
-                {
-                    "name": "note number",
-                    "value": 62,
-                    "isPersistent": false
-                },
-                {
-                    "name": "loop number",
-                    "value": 1,
-                    "isPersistent": false
-                }
-            ],
+            "variables": [],
             "sounds": [
                 {
                     "soundName": "Drive Around",
@@ -14226,7 +14205,7 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "costumeName": "starfish-b ",
+                    "costumeName": "starfish-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "ad8007f4e63693984d4adc466ffa3ad2.svg",
                     "bitmapResolution": 1,
@@ -14421,7 +14400,7 @@
         }
     },
     {
-        "name": "Sunglasses1",
+        "name": "Sunglasses",
         "md5": "424393e8705aeadcfecb8559ce4dcea2.svg",
         "type": "sprite",
         "tags": [
@@ -14434,7 +14413,7 @@
             1
         ],
         "json": {
-            "objName": "Sunglasses1",
+            "objName": "Sunglasses",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -14501,7 +14480,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "Taco",
+                    "costumeName": "Taco-a",
                     "baseLayerID": -1,
                     "baseLayerMD5": "bc78fb90ed373d56c11d5fafa4203ccd.svg",
                     "bitmapResolution": 1,
@@ -14509,7 +14488,7 @@
                     "rotationCenterY": 48
                 },
                 {
-                    "costumeName": "Taco-wizard",
+                    "costumeName": "Taco-b",
                     "baseLayerID": -1,
                     "baseLayerMD5": "5e9e65db20d403b590578ed44b1a3792.svg",
                     "bitmapResolution": 1,
@@ -14973,7 +14952,7 @@
         }
     },
     {
-        "name": "Tree1",
+        "name": "Tree",
         "md5": "8c40e2662c55d17bc384f47165ac43c1.svg",
         "type": "sprite",
         "tags": [
@@ -14987,7 +14966,7 @@
             1
         ],
         "json": {
-            "objName": "Tree1",
+            "objName": "Tree",
             "sounds": [
                 {
                     "soundName": "pop",
@@ -15000,7 +14979,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "tree1",
+                    "costumeName": "tree",
                     "baseLayerID": -1,
                     "baseLayerMD5": "8c40e2662c55d17bc384f47165ac43c1.svg",
                     "bitmapResolution": 1,
@@ -15249,7 +15228,7 @@
         }
     },
     {
-        "name": "Unicorn",
+        "name": "Unicorn 1",
         "md5": "c491fd1867375aa0160b013788d188e5.svg",
         "type": "sprite",
         "tags": [
@@ -15263,7 +15242,7 @@
             1
         ],
         "json": {
-            "objName": "Unicorn",
+            "objName": "Unicorn 1",
             "sounds": [
                 {
                     "soundName": "Magic Spell",
@@ -15276,7 +15255,7 @@
             ],
             "costumes": [
                 {
-                    "costumeName": "unicorn",
+                    "costumeName": "unicorn 1",
                     "baseLayerID": -1,
                     "baseLayerMD5": "c491fd1867375aa0160b013788d188e5.svg",
                     "bitmapResolution": 1,

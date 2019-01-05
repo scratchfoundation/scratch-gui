@@ -143,7 +143,7 @@
         ]
     },
     {
-        "name": "Alien Creak1",
+        "name": "Alien Creak 1",
         "md5": "0377a7476136e5e8c780c64a4828922d.wav",
         "sampleCount": 8045,
         "rate": 11025,
@@ -154,7 +154,7 @@
         ]
     },
     {
-        "name": "Alien Creak2",
+        "name": "Alien Creak 2",
         "md5": "21f82b7f1a83c501539c5031aea4fa8c.wav",
         "sampleCount": 8300,
         "rate": 11025,
@@ -312,7 +312,7 @@
         "tags": []
     },
     {
-        "name": "Beat Box1",
+        "name": "Beat Box 1",
         "md5": "663270af0235bf14c890ba184631675f.wav",
         "sampleCount": 5729,
         "rate": 11025,
@@ -325,7 +325,7 @@
         ]
     },
     {
-        "name": "Beat Box2",
+        "name": "Beat Box 2",
         "md5": "b9b8073f6aa9a60085ad11b0341a4af2.wav",
         "sampleCount": 5729,
         "rate": 11025,
@@ -924,15 +924,18 @@
         ]
     },
     {
-        "name": "Computer Beep",
+        "name": "Computer Beep 1",
         "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
         "sampleCount": 9536,
         "rate": 11025,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "electronic"
+        ]
     },
     {
-        "name": "Computer Beep2",
+        "name": "Computer Beep 2",
         "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
         "sampleCount": 19200,
         "rate": 11025,
@@ -955,7 +958,7 @@
         ]
     },
     {
-        "name": "Cough1",
+        "name": "Cough 1",
         "md5": "98ec3e1eeb7893fca519aa52cc1ef3c1.wav",
         "sampleCount": 7516,
         "rate": 11025,
@@ -965,7 +968,7 @@
         ]
     },
     {
-        "name": "Cough2",
+        "name": "Cough 2",
         "md5": "467fe8ef3cab475af4b3088fd1261510.wav",
         "sampleCount": 16612,
         "rate": 22050,
@@ -1241,7 +1244,7 @@
         ]
     },
     {
-        "name": "Dance Celebrate",
+        "name": "Dance Celebrate 1",
         "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
         "sampleCount": 176401,
         "rate": 22050,
@@ -1253,7 +1256,7 @@
         ]
     },
     {
-        "name": "Dance Celebrate2",
+        "name": "Dance Celebrate 2",
         "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
         "sampleCount": 176401,
         "rate": 22050,
@@ -1383,7 +1386,7 @@
         ]
     },
     {
-        "name": "Dog1",
+        "name": "Dog 1",
         "md5": "b15adefc3c12f758b6dc6a045362532f.wav",
         "sampleCount": 3672,
         "rate": 22050,
@@ -1393,7 +1396,7 @@
         ]
     },
     {
-        "name": "Dog2",
+        "name": "Dog 2",
         "md5": "cd8fa8390b0efdd281882533fbfcfcfb.wav",
         "sampleCount": 3168,
         "rate": 22050,
@@ -1474,7 +1477,7 @@
         ]
     },
     {
-        "name": "Drum Bass1",
+        "name": "Drum Bass 1",
         "md5": "48328c874353617451e4c7902cc82817.wav",
         "sampleCount": 6528,
         "rate": 22050,
@@ -1482,7 +1485,7 @@
         "tags": []
     },
     {
-        "name": "Drum Bass2",
+        "name": "Drum Bass 2",
         "md5": "711a1270d1cf2e5de9b145ee539213e4.wav",
         "sampleCount": 3791,
         "rate": 22050,
@@ -1490,7 +1493,7 @@
         "tags": []
     },
     {
-        "name": "Drum Bass3",
+        "name": "Drum Bass 3",
         "md5": "c21704337b16359ea631b5f8eb48f765.wav",
         "sampleCount": 8576,
         "rate": 22050,
@@ -1582,7 +1585,7 @@
         ]
     },
     {
-        "name": "Drum Set1",
+        "name": "Drum Set 1",
         "md5": "38a2bb8129bddb4e8eaa06781cfa3040.wav",
         "sampleCount": 46080,
         "rate": 22050,
@@ -1595,7 +1598,7 @@
         ]
     },
     {
-        "name": "Drum Set2",
+        "name": "Drum Set 2",
         "md5": "738e871fda577295e8beb9021f670e28.wav",
         "sampleCount": 37440,
         "rate": 22050,
@@ -2233,7 +2236,7 @@
         ]
     },
     {
-        "name": "Guitar Chords1",
+        "name": "Guitar Chords 1",
         "md5": "2b1a5bc63580d8625cf24ff3d7622c0b.wav",
         "sampleCount": 123264,
         "rate": 22050,
@@ -2245,7 +2248,7 @@
         ]
     },
     {
-        "name": "Guitar Chords2",
+        "name": "Guitar Chords 2",
         "md5": "e956f15da397a13fae0c90d9fe4571fb.wav",
         "sampleCount": 158976,
         "rate": 22050,
@@ -2430,7 +2433,7 @@
         "tags": []
     },
     {
-        "name": "Human Beatbox1",
+        "name": "Human Beatbox 1",
         "md5": "37f37455c35fea71449926eb0bff05dd.wav",
         "sampleCount": 103680,
         "rate": 22050,
@@ -2444,7 +2447,7 @@
         ]
     },
     {
-        "name": "Human Beatbox2",
+        "name": "Human Beatbox 2",
         "md5": "f62e9f7deeb0e06268df6edffa14f5de.wav",
         "sampleCount": 62392,
         "rate": 22050,
@@ -2531,7 +2534,7 @@
         ]
     },
     {
-        "name": "Laser1",
+        "name": "Laser 1",
         "md5": "46571f8ec0f2cc91666c80e312579082.wav",
         "sampleCount": 516,
         "rate": 11025,
@@ -2539,7 +2542,7 @@
         "tags": []
     },
     {
-        "name": "Laser2",
+        "name": "Laser 2",
         "md5": "27654ed2e3224f0a3f77c244e4fae9aa.wav",
         "sampleCount": 755,
         "rate": 11025,
@@ -2547,7 +2550,7 @@
         "tags": []
     },
     {
-        "name": "Laugh1",
+        "name": "Laugh 1",
         "md5": "1e8e7fb94103282d02a4bb597248c788.wav",
         "sampleCount": 13547,
         "rate": 11025,
@@ -2558,7 +2561,7 @@
         ]
     },
     {
-        "name": "Laugh2",
+        "name": "Laugh 2",
         "md5": "8b1e025f38b0635f7e34e9afcace1b5e.wav",
         "sampleCount": 14662,
         "rate": 11025,
@@ -2569,7 +2572,7 @@
         ]
     },
     {
-        "name": "Laugh3",
+        "name": "Laugh 3",
         "md5": "86dee6fa7cd73095ba17e4d666a27804.wav",
         "sampleCount": 32065,
         "rate": 11025,
@@ -2688,7 +2691,7 @@
         ]
     },
     {
-        "name": "Medieval1",
+        "name": "Medieval 1",
         "md5": "9329fef6a59c5406d70cbe5837976d6b.wav",
         "sampleCount": 213120,
         "rate": 22050,
@@ -2700,7 +2703,7 @@
         ]
     },
     {
-        "name": "Medieval2",
+        "name": "Medieval 2",
         "md5": "7bc8c4a9d0525f04451356c6cc483dd7.wav",
         "sampleCount": 324288,
         "rate": 22050,
@@ -2712,7 +2715,7 @@
         ]
     },
     {
-        "name": "Meow",
+        "name": "Meow 1",
         "md5": "83c36d806dc92327b9e7049a565c6bff.wav",
         "sampleCount": 18688,
         "rate": 22050,
@@ -2723,7 +2726,7 @@
         ]
     },
     {
-        "name": "Meow2",
+        "name": "Meow 2",
         "md5": "cf51a0c4088942d95bcc20af13202710.wav",
         "sampleCount": 6512,
         "rate": 11025,
@@ -3085,7 +3088,7 @@
         ]
     },
     {
-        "name": "Scream1",
+        "name": "Scream 1",
         "md5": "10420bb2f5a3ab440f3b10fc8ea2b08b.wav",
         "sampleCount": 6628,
         "rate": 11025,
@@ -3096,7 +3099,7 @@
         ]
     },
     {
-        "name": "Scream2",
+        "name": "Scream 2",
         "md5": "e06e29398d770dae3cd57447439752ef.wav",
         "sampleCount": 17010,
         "rate": 22050,
@@ -3170,7 +3173,7 @@
         "tags": []
     },
     {
-        "name": "Singer1",
+        "name": "Singer 1",
         "md5": "92ee32e9be5ed7b69370fc38bb550597.wav",
         "sampleCount": 23653,
         "rate": 11025,
@@ -3183,7 +3186,7 @@
         ]
     },
     {
-        "name": "Singer2",
+        "name": "Singer 2",
         "md5": "5d3d2865906889e866b3edf154e6cf5d.wav",
         "sampleCount": 28636,
         "rate": 11025,
@@ -3256,7 +3259,7 @@
         ]
     },
     {
-        "name": "Snare Beatbox",
+        "name": "Snare Beatbox 1",
         "md5": "c642c4c00135d890998f351faec55498.wav",
         "sampleCount": 5630,
         "rate": 22050,
@@ -3264,7 +3267,7 @@
         "tags": []
     },
     {
-        "name": "Snare Beatbox2",
+        "name": "Snare Beatbox 2",
         "md5": "7ede1382b578d8fc32850b48d082d914.wav",
         "sampleCount": 4960,
         "rate": 22050,
@@ -3295,7 +3298,7 @@
         ]
     },
     {
-        "name": "Sneeze1",
+        "name": "Sneeze 1",
         "md5": "31600c613823710b66a74f4dd54c4cdd.wav",
         "sampleCount": 11818,
         "rate": 11025,
@@ -3306,7 +3309,7 @@
         ]
     },
     {
-        "name": "Sneeze2",
+        "name": "Sneeze 2",
         "md5": "42b5a31628083f3089f494f2ba644660.wav",
         "sampleCount": 15218,
         "rate": 22050,
@@ -3567,7 +3570,7 @@
         "tags": []
     },
     {
-        "name": "Techno",
+        "name": "Techno 1",
         "md5": "8700dac70c8e08f4a5d21411980304bb.wav",
         "sampleCount": 175680,
         "rate": 22050,
@@ -3579,7 +3582,7 @@
         ]
     },
     {
-        "name": "Techno2",
+        "name": "Techno 2",
         "md5": "693b428f3797561a11ad0ddbd897b5df.wav",
         "sampleCount": 327168,
         "rate": 22050,
@@ -3591,7 +3594,7 @@
         ]
     },
     {
-        "name": "Telephone Ring",
+        "name": "Telephone Ring 1",
         "md5": "276f97d3a9d0f9938b37db8225af97f5.wav",
         "sampleCount": 74666,
         "rate": 22050,
@@ -3602,7 +3605,7 @@
         ]
     },
     {
-        "name": "Telephone Ring2",
+        "name": "Telephone Ring 2",
         "md5": "d0096aa9ecc28c0729a99b0349399371.wav",
         "sampleCount": 25373,
         "rate": 22050,
@@ -3613,7 +3616,7 @@
         ]
     },
     {
-        "name": "Teleport",
+        "name": "Teleport 1",
         "md5": "2d625187556c4323169fc1a8f29a7a7d.wav",
         "sampleCount": 110250,
         "rate": 22050,
@@ -3626,7 +3629,7 @@
         ]
     },
     {
-        "name": "Teleport2",
+        "name": "Teleport 2",
         "md5": "7e5019890a930f3535604cf9cad63ba4.wav",
         "sampleCount": 15898,
         "rate": 22050,
@@ -3639,7 +3642,7 @@
         ]
     },
     {
-        "name": "Teleport3",
+        "name": "Teleport 3",
         "md5": "58f76f299a1df2373d4fca3614221186.wav",
         "sampleCount": 95440,
         "rate": 22050,
@@ -3773,7 +3776,7 @@
         ]
     },
     {
-        "name": "Trumpet1",
+        "name": "Trumpet 1",
         "md5": "851c9e2c38e5e71922231a8f64c37e70.wav",
         "sampleCount": 25800,
         "rate": 11025,
@@ -3785,7 +3788,7 @@
         ]
     },
     {
-        "name": "Trumpet2",
+        "name": "Trumpet 2",
         "md5": "dd73f891deca0241b800ed203408b6f3.wav",
         "sampleCount": 23424,
         "rate": 11025,
@@ -3950,7 +3953,7 @@
         "tags": []
     },
     {
-        "name": "Xylo1",
+        "name": "Xylo 1",
         "md5": "6ac484e97c1c1fe1384642e26a125e70.wav",
         "sampleCount": 238232,
         "rate": 22050,
@@ -3961,7 +3964,7 @@
         ]
     },
     {
-        "name": "Xylo2",
+        "name": "Xylo 2",
         "md5": "d38fc904a0acfc27854baf7335ed46f9.wav",
         "sampleCount": 246552,
         "rate": 22050,
@@ -3972,7 +3975,7 @@
         ]
     },
     {
-        "name": "Xylo3",
+        "name": "Xylo 3",
         "md5": "786a7a66e96c801ca2efed59b20bf025.wav",
         "sampleCount": 208832,
         "rate": 22050,
@@ -3983,7 +3986,7 @@
         ]
     },
     {
-        "name": "Xylo4",
+        "name": "Xylo 4",
         "md5": "b3ee7b6515eaf85aebab3c624c1423e9.wav",
         "sampleCount": 77184,
         "rate": 22050,

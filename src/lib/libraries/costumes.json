@@ -348,7 +348,7 @@
         ]
     },
     {
-        "name": "Arrow 1-a",
+        "name": "Arrow-a",
         "md5": "62f8794dd120e9b4ead4d098d50fc64b.svg",
         "type": "costume",
         "tags": [
@@ -363,7 +363,7 @@
         ]
     },
     {
-        "name": "Arrow 1-b",
+        "name": "Arrow-b",
         "md5": "a157dc7e33d7c7a048af933de999e397.svg",
         "type": "costume",
         "tags": [
@@ -378,7 +378,7 @@
         ]
     },
     {
-        "name": "Arrow 1-c",
+        "name": "Arrow-c",
         "md5": "d3b389e91f7beb22b2b1a80af09990ee.svg",
         "type": "costume",
         "tags": [
@@ -393,7 +393,7 @@
         ]
     },
     {
-        "name": "Arrow 1-d",
+        "name": "Arrow-d",
         "md5": "412717ff731e9f19003a5840054057eb.svg",
         "type": "costume",
         "tags": [
@@ -632,7 +632,7 @@
         ]
     },
     {
-        "name": "Balloon 1-a",
+        "name": "Balloon-a",
         "md5": "bc96a1fb5fe794377acd44807e421ce2.svg",
         "type": "costume",
         "tags": [
@@ -650,7 +650,7 @@
         ]
     },
     {
-        "name": "Balloon 1-b",
+        "name": "Balloon-b",
         "md5": "d7bb51d9c38af6314bd2b4058d2a592d.svg",
         "type": "costume",
         "tags": [
@@ -668,7 +668,7 @@
         ]
     },
     {
-        "name": "Balloon 1-c",
+        "name": "Balloon-c",
         "md5": "247cef27b665d77d9efaca69327cae77.svg",
         "type": "costume",
         "tags": [
@@ -1136,7 +1136,7 @@
         ]
     },
     {
-        "name": "Bowl-a",
+        "name": "Bowl",
         "md5": "86f616639846f06fef29931e6b9b59de.svg",
         "type": "costume",
         "tags": [
@@ -2181,7 +2181,7 @@
         ]
     },
     {
-        "name": "Cloud-a",
+        "name": "Clouds-a",
         "md5": "c7d7de8e29179407f03b054fa640f4d0.svg",
         "type": "costume",
         "tags": [
@@ -2197,7 +2197,7 @@
         ]
     },
     {
-        "name": "Cloud-b",
+        "name": "Clouds-b",
         "md5": "d8595350ebb460494c9189dabb968336.svg",
         "type": "costume",
         "tags": [
@@ -2213,7 +2213,7 @@
         ]
     },
     {
-        "name": "Cloud-c",
+        "name": "Clouds-c",
         "md5": "395fc991e64ac0a4aa46758ab4bc65cb.svg",
         "type": "costume",
         "tags": [
@@ -2229,7 +2229,7 @@
         ]
     },
     {
-        "name": "Cloud-d",
+        "name": "Clouds-d",
         "md5": "1767e704acb11ffa409f77cc79ba7e86.svg",
         "type": "costume",
         "tags": [
@@ -6747,7 +6747,7 @@
         ]
     },
     {
-        "name": "Llama",
+        "name": "Llama-a",
         "md5": "f5841f36b41c4df26f9c724d913c279b.svg",
         "type": "costume",
         "tags": [
@@ -7744,7 +7744,7 @@
         ]
     },
     {
-        "name": "Party Hat-e",
+        "name": "Party Hat-c",
         "md5": "e69516f2a9bb6d632fdaba4fadd8f8f1.svg",
         "type": "costume",
         "tags": [
@@ -10150,7 +10150,7 @@
         ]
     },
     {
-        "name": "Tree 1",
+        "name": "Tree",
         "md5": "8c40e2662c55d17bc384f47165ac43c1.svg",
         "type": "costume",
         "tags": [
@@ -10494,7 +10494,7 @@
         ]
     },
     {
-        "name": "Witch",
+        "name": "Witch 1",
         "md5": "c991196a708294535a1dbdce7189c23c.svg",
         "type": "costume",
         "tags": [
@@ -10512,7 +10512,7 @@
         ]
     },
     {
-        "name": "Witch-a",
+        "name": "Witch 2-a",
         "md5": "cbc54e15cd62f0c16369587377636099.svg",
         "type": "costume",
         "tags": [
@@ -10530,7 +10530,7 @@
         ]
     },
     {
-        "name": "Witch-b",
+        "name": "Witch 2-b",
         "md5": "64d2c4c51e6cb6008cd5e93f77e6f591.svg",
         "type": "costume",
         "tags": [
@@ -10548,7 +10548,7 @@
         ]
     },
     {
-        "name": "Witch-c",
+        "name": "Witch 2-c",
         "md5": "00b768c3da5b4ee3efddf05d1eb88de2.svg",
         "type": "costume",
         "tags": [
@@ -10566,7 +10566,7 @@
         ]
     },
     {
-        "name": "Witch-d",
+        "name": "Witch 2-d",
         "md5": "4fe4c0ee34a9028f2c6988b7294a61c1.svg",
         "type": "costume",
         "tags": [

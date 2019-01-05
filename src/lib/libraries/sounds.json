@@ -3856,17 +3856,6 @@
         ]
     },
     {
-        "name": "Whinny",
-        "md5": "f9513bacf2fc665de05a8dd9bcb88117.wav",
-        "sampleCount": 46108,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": [
-            "animals",
-            "horse"
-        ]
-    },
-    {
         "name": "Whistle Thump",
         "md5": "a3fab5681aedaa678982173ed9ca3d36.wav",
         "sampleCount": 14441,

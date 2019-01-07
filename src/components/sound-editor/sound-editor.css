@@ -79,6 +79,7 @@ $border-radius: 0.25rem;
     font-size: 0.85rem;
     transition: 0.2s;
     user-select: none;
+    margin: 0px;
 }
 
 .button > img {

@@ -55,6 +55,10 @@
     overflow-y: auto;
 }
 
+.scroll-wrapper-dragging {
+    background-color: $drop-highlight;
+}
+
 .items-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -80,12 +84,12 @@
 }
 
 .raised {
-    background-color: #8cbcff;
+    background-color: $drop-highlight;
     transition: all 0.25s ease;
 }
 
 .raised:hover {
-    background-color: #8cbcff;
+    background-color: $drop-highlight;
     transform: scale(1.05);
 }
 
@@ -94,7 +98,7 @@
     animation-duration: 500ms;
     animation-iteration-count: 1;
     animation-timing-function: ease-in-out;
-    background-color: #8cbcff;
+    background-color: $drop-highlight;
 }
 
 @keyframes wiggle {

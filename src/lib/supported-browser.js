@@ -10,6 +10,14 @@ export default function () {
         bowser.silk) {
         return false;
     }
-    // @todo Should also test for versions of supported browsers
-    return true;
+    // IMPORTANT: If you change versions here, also change them in www
+    // minimum versions for recommended browsers
+    const minVersions = {
+        chrome: '63',
+        msedge: '15',
+        firefox: '57',
+        safari: '11'
+    };
+    // strict mode == false so any browser not mentioned in the min Versions is ok
+    return bowser.check(minVersions, false);
 }

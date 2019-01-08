@@ -210,6 +210,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
         storeProject (projectId, requestParams) {
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();
+            // Serialize VM state now before embarking on
+            // the asynchronous journey of storing assets to
+            // the server. This ensures that assets don't update
+            // while in the process of saving a project (e.g. the
+            // serialized project refers to a newer asset than what
+            // we just finished saving).
+            const savedVMState = this.props.vm.toJSON();
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -224,7 +231,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 )
             ).then(() => {
                 const opts = {
-                    body: this.props.vm.toJSON(),
+                    body: savedVMState,
                     // If we set json:true then the body is double-stringified, so don't
                     headers: {
                         'Content-Type': 'application/json'

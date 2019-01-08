@@ -48,18 +48,25 @@ const StageComponent = props => {
                 }}
                 onDoubleClick={onDoubleClick}
             >
-                <DOMElementRenderer
+                <Box
                     className={classNames(
                         styles.stage,
                         {[styles.stageOverlayContent]: isFullScreen}
                     )}
-                    domElement={canvas}
                     style={{
                         height: stageDimensions.height,
                         width: stageDimensions.width
                     }}
-                    {...boxProps}
-                />
+                >
+                    <DOMElementRenderer
+                        domElement={canvas}
+                        style={{
+                            height: stageDimensions.height,
+                            width: stageDimensions.width
+                        }}
+                        {...boxProps}
+                    />
+                </Box>
                 <Box className={styles.monitorWrapper}>
                     <MonitorList
                         draggable={useEditorDragStyle}

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
 import log from '../lib/log.js';
-import supportedBrowser from '../lib/supported-browser';
+import {recommendedBrowser} from '../lib/supported-browser';
 
 class ErrorBoundary extends React.Component {
     constructor (props) {
@@ -22,8 +22,8 @@ class ErrorBoundary extends React.Component {
             message: 'Unknown error'
         };
 
-        // Log errors to analytics, leaving out supported browsers from unsupported.
-        if (supportedBrowser() && window.Sentry) {
+        // Log errors to analytics, leaving out browsers that are not in our recommended set
+        if (recommendedBrowser() && window.Sentry) {
             window.Sentry.withScope(scope => {
                 Object.keys(info).forEach(key => {
                     scope.setExtra(key, info[key]);
@@ -53,7 +53,7 @@ class ErrorBoundary extends React.Component {
 
     render () {
         if (this.state.hasError) {
-            if (supportedBrowser()) {
+            if (recommendedBrowser()) {
                 return (
                     <CrashMessageComponent
                         eventId={this.state.errorId}
@@ -62,6 +62,7 @@ class ErrorBoundary extends React.Component {
                 );
             }
             return (<BrowserModalComponent
+                error
                 isRtl={this.props.isRtl}
                 onBack={this.handleBack}
             />);

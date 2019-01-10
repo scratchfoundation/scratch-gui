@@ -70,6 +70,10 @@ const getIsLoading = loadingState => (
 const getIsLoadingUpload = loadingState => (
     loadingState === LoadingState.LOADING_VM_FILE_UPLOAD
 );
+const getIsLoaded = loadingState => (
+    loadingState === LoadingState.SHOWING_WITH_ID ||
+    loadingState === LoadingState.SHOWING_WITHOUT_ID
+);
 const getIsCreatingNew = loadingState => (
     loadingState === LoadingState.CREATING_NEW
 );
@@ -547,6 +551,7 @@ export {
     getIsError,
     getIsFetchingWithId,
     getIsFetchingWithoutId,
+    getIsLoaded,
     getIsLoading,
     getIsLoadingWithId,
     getIsLoadingUpload,

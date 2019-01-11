@@ -335,6 +335,7 @@ const GUIComponent = props => {
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
                                 isRendererSupported={isRendererSupported}
+                                isRtl={isRtl}
                                 stageSize={stageSize}
                                 vm={vm}
                             />

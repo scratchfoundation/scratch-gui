@@ -12,6 +12,7 @@ import styles from './stage-wrapper.css';
 
 const StageWrapperComponent = function (props) {
     const {
+        isFullScreen,
         isRtl,
         isRendererSupported,
         loading,
@@ -41,13 +42,14 @@ const StageWrapperComponent = function (props) {
                 }
             </Box>
             {loading ? (
-                <Loader />
+                <Loader isFullScreen={isFullScreen} />
             ) : null}
         </Box>
     );
 };
 
 StageWrapperComponent.propTypes = {
+    isFullScreen: PropTypes.bool,
     isRendererSupported: PropTypes.bool.isRequired,
     isRtl: PropTypes.bool.isRequired,
     loading: PropTypes.bool,

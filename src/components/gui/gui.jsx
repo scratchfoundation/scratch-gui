@@ -83,6 +83,7 @@ const GUIComponent = props => {
         importInfoVisible,
         intl,
         isCreating,
+        isFullScreen,
         isPlayerOnly,
         isRtl,
         isShared,
@@ -139,6 +140,7 @@ const GUIComponent = props => {
 
         return isPlayerOnly ? (
             <StageWrapper
+                isFullScreen={isFullScreen}
                 isRendererSupported={isRendererSupported}
                 isRtl={isRtl}
                 loading={loading}
@@ -380,6 +382,7 @@ GUIComponent.propTypes = {
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
+    isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,

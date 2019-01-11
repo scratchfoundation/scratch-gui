@@ -35,7 +35,7 @@ describe('Loading scratch gui', () => {
 
         test('Load 2.0 project using import modal', async () => {
             await loadUri(uri);
-            await clickText('View 2.0 Project');
+            await clickText('View Online Project');
             const el = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             const projectId = '96708228';
             await el.sendKeys(`scratch.mit.edu/projects/${projectId}`);
@@ -55,7 +55,7 @@ describe('Loading scratch gui', () => {
 
         test('Invalid url when loading project through modal lets you try again', async () => {
             await loadUri(uri);
-            await clickText('View 2.0 Project');
+            await clickText('View Online Project');
             let el = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             await el.sendKeys('thisisnotaurl');
             await clickXpath('//button[@title="View Project"]');
@@ -114,7 +114,7 @@ describe('Loading scratch gui', () => {
 
         test('Creating new project resets active tab to Code tab', async () => {
             await loadUri(uri);
-            await clickText('View 2.0 Project');
+            await clickText('View Online Project');
             const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
@@ -133,7 +133,7 @@ describe('Loading scratch gui', () => {
 
         test('Not logged in->made no changes to project->create new project should not show alert', async () => {
             await loadUri(uri);
-            await clickText('View 2.0 Project');
+            await clickText('View Online Project');
             const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
@@ -150,7 +150,7 @@ describe('Loading scratch gui', () => {
 
         test('Not logged in->made a change to project->create new project should show alert', async () => {
             await loadUri(uri);
-            await clickText('View 2.0 Project');
+            await clickText('View Online Project');
             const inputElement = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);

@@ -11,21 +11,15 @@ import styles from './import-modal.css';
 
 const messages = defineMessages({
     title: {
-        id: 'gui.importInfo.title',
-        defaultMessage: 'View a Scratch 2.0 Project',
-        description: 'Scratch 2.0 import modal label - for accessibility'
+        id: 'gui.standaloneImportInfo.title',
+        defaultMessage: 'View an Scratch Project',
+        description: 'Scratch import modal label - for accessibility'
     },
     formDescription: {
-        defaultMessage:
-            'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Beta will not be saved.',
+        defaultMessage: // eslint-disable-next-line max-len
+            'Enter a link to one of your shared Scratch projects. Changes made in this Standalone version will not be saved.',
         description: 'Import project message',
-        id: 'gui.importInfo.betamessage'
-    },
-    previewFormDescription: {
-        defaultMessage:
-            'Enter a link to one of your shared Scratch projects. Changes made in this 3.0 Preview will not be saved.',
-        description: 'Import project message',
-        id: 'gui.importInfo.message'
+        id: 'gui.standaloneImportInfo.message'
     },
     invalidFormatError: {
         id: 'gui.importInfo.invalidFormatError',
@@ -100,7 +94,7 @@ const ImportModal = ({intl, ...props}) => (
                     >
                         <FormattedMessage
                             defaultMessage="View"
-                            description="Label for button to load a scratch 2.0 project"
+                            description="Label for button to load a scratch project"
                             id="gui.importModal.viewproject"
                         />
                     </button>
@@ -127,19 +121,19 @@ const ImportModal = ({intl, ...props}) => (
                 </Box>
                 <Box className={styles.faqLinkText}>
                     <FormattedMessage
-                        defaultMessage="To learn more, go to the {previewFaqLink}."
-                        description="Invitation to try 3.0 preview"
-                        id="gui.importInfo.previewfaq"
+                        defaultMessage="To learn more, go to the {developersLink}."
+                        description="Invitation to try 3.0 standalone"
+                        id="gui.standaloneImportInfo.previewfaq"
                         values={{
-                            previewFaqLink: (
+                            developersLink: (
                                 <a
                                     className={styles.faqLink}
-                                    href="//scratch.mit.edu/3faq"
+                                    href="//scratch.mit.edu/developers"
                                 >
                                     <FormattedMessage
-                                        defaultMessage="FAQ"
-                                        description="link to Scratch 3.0 FAQ page"
-                                        id="gui.importInfo.previewfaqlinktext"
+                                        defaultMessage="For Developers Page"
+                                        description="link to Scratch 3.0 For Developers page"
+                                        id="gui.standaloneImportInfo.developerslinktext"
                                     />
                                 </a>
                             )

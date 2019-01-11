@@ -9,14 +9,14 @@ import catIcon from './happy-cat.png';
 
 const messages = defineMessages({
     label: {
-        id: 'gui.previewInfo.label',
-        defaultMessage: 'Try Scratch 3.0',
-        description: 'Scratch 3.0 modal label - for accessibility'
+        id: 'gui.standaloneInfo.label',
+        defaultMessage: 'Try Scratch Standalone',
+        description: 'Scratch modal label - for accessibility'
     },
     previewWelcome: {
-        defaultMessage: 'Welcome to the Scratch 3.0 Beta',
-        description: 'Header for Preview Info Modal',
-        id: 'gui.previewInfo.welcome'
+        defaultMessage: 'Welcome to the Scratch Standalone',
+        description: 'Header for Standalone Info Modal',
+        id: 'gui.standaloneInfo.welcome'
     },
     notNowTooltip: {
         defaultMessage: 'Not Now',
@@ -29,9 +29,9 @@ const messages = defineMessages({
         id: 'gui.previewModal.tryittooltip'
     },
     viewProjectTooltip: {
-        defaultMessage: 'View 2.0 Project',
-        description: 'Tooltip for View 2.0 Project button',
-        id: 'gui.previewModal.viewprojecttooltip'
+        defaultMessage: 'View Online Project',
+        description: 'Tooltip for View Online Project button',
+        id: 'gui.standaloneModal.viewprojecttooltip'
     }
 });
 
@@ -49,17 +49,17 @@ const PreviewModal = ({intl, ...props}) => (
             <Box className={styles.body}>
                 <h2>
                     <FormattedMessage
-                        defaultMessage="Welcome to the Scratch 3.0 Beta"
-                        description="Header for Beta Info Modal"
-                        id="gui.previewInfo.betawelcome"
+                        defaultMessage="Welcome to the Scratch Standalone"
+                        description="Header for Standalone Info Modal"
+                        id="gui.standaloneInfo.betawelcome"
                     />
                 </h2>
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="We're working on the next generation of Scratch. We're excited for you to try it!"
-                        description="Invitation to try 3.0 Beta"
-                        id="gui.previewInfo.invitation"
+                        defaultMessage="This is the standalone version of Scratch. Let's use it for developing Scratch!"
+                        description="Invitation to try Scratch Standalone"
+                        id="gui.standaloneInfo.invitation"
                     />
                     { /* eslint-enable max-len */ }
                 </p>
@@ -72,7 +72,7 @@ const PreviewModal = ({intl, ...props}) => (
                     >
                         <FormattedMessage
                             defaultMessage="Not Now"
-                            description="Label for button to back out of trying Scratch 3.0 Beta"
+                            description="Label for button to back out of trying Scratch Standalone"
                             id="gui.previewInfo.notnow"
                         />
                     </button>
@@ -83,7 +83,7 @@ const PreviewModal = ({intl, ...props}) => (
                     >
                         <FormattedMessage
                             defaultMessage="Try It! {caticon}"
-                            description="Label for button to try Scratch 3.0 Beta"
+                            description="Label for button to try Scratch Standalone"
                             id="gui.previewModal.tryit"
                             values={{
                                 caticon: (
@@ -101,27 +101,27 @@ const PreviewModal = ({intl, ...props}) => (
                         onClick={props.onViewProject}
                     >
                         <FormattedMessage
-                            defaultMessage="View 2.0 Project"
-                            description="Label for button to import a 2.0 project"
-                            id="gui.previewModal.viewproject"
+                            defaultMessage="View Online Project"
+                            description="Label for button to import an online project"
+                            id="gui.standaloneModal.viewproject"
                         />
                     </button>
                 </Box>
                 <Box className={styles.faqLinkText}>
                     <FormattedMessage
-                        defaultMessage="To learn more, go to the {previewFaqLink}."
-                        description="Invitation to try 3.0 Beta"
-                        id="gui.previewInfo.previewfaq"
+                        defaultMessage="To learn more, go to the {developersLink}."
+                        description="Invitation to try Standalone"
+                        id="gui.standaloneInfo.developers"
                         values={{
-                            previewFaqLink: (
+                            developersLink: (
                                 <a
                                     className={styles.faqLink}
-                                    href="//scratch.mit.edu/3faq"
+                                    href="//scratch.mit.edu/developers"
                                 >
                                     <FormattedMessage
-                                        defaultMessage="FAQ"
-                                        description="link to Scratch 3.0 FAQ page"
-                                        id="gui.previewInfo.previewfaqlinktext"
+                                        defaultMessage="For Developers Page"
+                                        description="link to Scratch For Developers page"
+                                        id="gui.standaloneInfo.previewfaqdeveloperslinktext"
                                     />
                                 </a>
                             )

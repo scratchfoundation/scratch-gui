@@ -1,5 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import classNames from 'classnames';
 import styles from './loader.css';
 import PropTypes from 'prop-types';
 
@@ -148,7 +149,11 @@ class LoaderComponent extends React.Component {
     }
     render () {
         return (
-            <div className={styles.background}>
+            <div
+                className={classNames(styles.background, {
+                    [styles.fullscreen]: this.props.isFullScreen
+                })}
+            >
                 <div className={styles.container}>
                     <div className={styles.blockAnimation}>
                         <img
@@ -189,9 +194,11 @@ class LoaderComponent extends React.Component {
 }
 
 LoaderComponent.propTypes = {
+    isFullScreen: PropTypes.bool,
     messageId: PropTypes.string
 };
 LoaderComponent.defaultProps = {
+    isFullScreen: false,
     messageId: 'gui.loader.headline'
 };
 

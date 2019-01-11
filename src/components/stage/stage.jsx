@@ -81,11 +81,10 @@ const StageComponent = props => {
                     />
                 </Box>
                 {isStarted ? null : (
-                    <Box className={styles.greenFlagOverlayWrapper}>
-                        <GreenFlagOverlay
-                            className={styles.greenFlagOverlay}
-                        />
-                    </Box>
+                    <GreenFlagOverlay
+                        className={styles.greenFlagOverlay}
+                        wrapperClass={styles.greenFlagOverlayWrapper}
+                    />
                 )}
                 {isColorPicking && colorInfo ? (
                     <Box className={styles.colorPickerWrapper}>

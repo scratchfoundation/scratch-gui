@@ -48,6 +48,11 @@ class SeleniumHelper {
         if (USE_HEADLESS) {
             args.push('--headless');
         }
+
+        // Stub getUserMedia to prevent permissions access issues
+        args.push('--use-fake-ui-for-media-stream');
+        args.push('--fake-device-for-media-stream');
+
         chromeCapabilities.set('chromeOptions', {args});
         chromeCapabilities.setLoggingPrefs({
             performance: 'ALL'

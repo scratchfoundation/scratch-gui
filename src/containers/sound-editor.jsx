@@ -120,8 +120,10 @@ class SoundEditor extends React.Component {
             const sampleCount = samples.length;
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
-            const clippedSamples = samples.slice(startIndex, endIndex);
-            this.submitNewSamples(clippedSamples, sampleRate);
+            if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
+                const clippedSamples = samples.slice(startIndex, endIndex);
+                this.submitNewSamples(clippedSamples, sampleRate);
+            }
         }
     }
     handleUpdateTrimEnd (trimEnd) {

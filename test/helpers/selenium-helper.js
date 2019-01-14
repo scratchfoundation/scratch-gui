@@ -49,9 +49,8 @@ class SeleniumHelper {
             args.push('--headless');
         }
 
-        // Stub getUserMedia to prevent permissions access issues
-        args.push('--use-fake-ui-for-media-stream');
-        args.push('--fake-device-for-media-stream');
+        // Stub getUserMedia to always not allow access
+        args.push('--use-fake-ui-for-media-stream=deny');
 
         chromeCapabilities.set('chromeOptions', {args});
         chromeCapabilities.setLoggingPrefs({

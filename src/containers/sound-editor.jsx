@@ -136,6 +136,12 @@ class SoundEditor extends React.Component {
             if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
                 const clippedSamples = samples.slice(startIndex, endIndex);
                 this.submitNewSamples(clippedSamples, sampleRate);
+            } else {
+                // Just clear the trim state, it cannot be completed
+                this.setState({
+                    trimStart: null,
+                    trimEnd: null
+                });
             }
         }
     }

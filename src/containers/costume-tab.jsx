@@ -206,7 +206,7 @@ class CostumeTab extends React.Component {
         this.fileInput.click();
     }
     handleDrop (dropInfo) {
-        if (dropInfo.dragType === DragConstants.COSTUME) {
+        if (dropInfo.dragType === DragConstants.COSTUME && dropInfo.newIndex !== null) {
             const sprite = this.props.vm.editingTarget.sprite;
             const activeCostume = sprite.costumes[this.state.selectedCostumeIndex];
             this.props.vm.reorderCostume(this.props.vm.editingTarget.id,

@@ -34,11 +34,35 @@ class SB3Downloader extends React.Component {
                 this.props.onSaveFinished();
             }
             // Use special ms version if available to get it working on Edge.
-            if (navigator.msSaveOrOpenBlob) {
+            if (navigator.msSaeOrOpenBlob) {
                 navigator.msSaveOrOpenBlob(content, this.props.projectFilename);
                 return;
             }
+            
+            console.log(content);
+           
+            /*
+            const fileReader = new FileReader
+            fileReader.onload = () =>{
+                console.log(fileReader.result)
+            }
+            fileReader.readAsArrayBuffer(content)
+            */
 
+            /* post contetent to SEIHIHANTEI*/
+            const formData = new FormData();
+
+            formData.append('blob' ,content ,'sb3');
+            
+            /*post server nod*/
+            fetch('http://localhost:3000/' ,{
+                method : 'POST',
+                mode : 'cors',
+                //headers : { "Content-Type" : "multipart/form-data" },
+                body: formData
+            }).then({ 
+            }).catch();
+            
             const url = window.URL.createObjectURL(content);
             downloadLink.href = url;
             downloadLink.download = this.props.projectFilename;

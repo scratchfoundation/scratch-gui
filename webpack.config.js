@@ -35,7 +35,11 @@ const base = {
         rules: [{
             test: /\.jsx?$/,
             loader: 'babel-loader',
-            include: [path.resolve(__dirname, 'src'), /node_modules[\\/]scratch-[^\\/]+[\\/]src/],
+            include: [
+                path.resolve(__dirname, 'src'),
+                /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
+                /node_modules[\\/]@vernier[\\/]dist // Vernier build needs to be transpiled for es5
+            ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config
                 // in much lower dependencies.

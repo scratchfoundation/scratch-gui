@@ -16,6 +16,9 @@ import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
+import gdxforImage from './gdxfor.png';
+import gdxforInsetImage from './gdxfor-small.svg';
+
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -238,8 +241,8 @@ export default [
         name: 'GDX-FOR',
         extensionId: 'gdxfor',
         collaborator: 'Vernier',
-        iconURL: microbitImage,
-        insetIconURL: microbitMenuImage,
+        iconURL: gdxforImage,
+        insetIconURL: gdxforInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Connect your projects with the world."
@@ -253,7 +256,7 @@ export default [
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: microbitPeripheralImage,
-        smallPeripheralImage: microbitMenuImage,
+        smallPeripheralImage: gdxforInsetImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

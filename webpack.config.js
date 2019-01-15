@@ -38,8 +38,7 @@ const base = {
             include: [
                 path.resolve(__dirname, 'src'),
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
-                // Vernier build needs to be transpiled for es5
-                /node_modules[\\/]@vernier[\\/]godirect[\\/]dist/
+                /node_modules[\\/]@vernier[\\/]dist // Vernier build needs to be transpiled for es5
             ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config

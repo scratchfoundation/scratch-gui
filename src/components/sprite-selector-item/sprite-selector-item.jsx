@@ -37,11 +37,15 @@ const SpriteSelectorItem = props => (
             <div className={styles.number}>{props.number}</div>
         )}
         {props.costumeURL ? (
-            <img
-                className={styles.spriteImage}
-                draggable={false}
-                src={props.costumeURL}
-            />
+            <div className={styles.spriteImageOuter}>
+                <div className={styles.spriteImageInner}>
+                    <img
+                        className={styles.spriteImage}
+                        draggable={false}
+                        src={props.costumeURL}
+                    />
+                </div>
+            </div>
         ) : null}
         <div className={styles.spriteInfo}>
             <div className={styles.spriteName}>{props.name}</div>

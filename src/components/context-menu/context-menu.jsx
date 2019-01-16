@@ -17,7 +17,16 @@ const StyledMenuItem = props => (
     />
 );
 
+const BorderedMenuItem = props => (
+    <MenuItem
+        {...props}
+        attributes={{className: styles.menuItemBordered}}
+    />
+);
+
+
 export {
+    BorderedMenuItem,
     StyledContextMenu as ContextMenu,
     StyledMenuItem as MenuItem
 };

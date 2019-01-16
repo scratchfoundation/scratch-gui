@@ -17,23 +17,20 @@
     z-index: $z-index-context-menu;
 }
 
-.menu-item, .menu-item-bordered {
+.menu-item {
     padding: 8px 12px;
     white-space: nowrap;
     cursor: pointer;
     transition: 0.1s ease;
 }
 
-.menu-item-bordered {
-    border-top: 3px solid $text-primary;
-}
-
-.menu-item:hover, .menu-item-bordered:hover {
+.menu-item:hover {
+    background: $motion-primary;
     color: white;
 }
 
-.menu-item:hover {
-    background: $motion-primary;
+.menu-item-bordered {
+    border-top: 2px solid $text-primary-transparent;
 }
 
 .menu-item-bordered:hover {

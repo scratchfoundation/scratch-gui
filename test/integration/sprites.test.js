@@ -76,6 +76,17 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Deleting by x button on sprite tile', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickXpath('//*[@aria-label="Close"]'); // Only visible close button is on the sprite
+        // Confirm that the stage has been switched to
+        await findByText('Stage selected: no motion blocks');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a sprite by uploading a png', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');

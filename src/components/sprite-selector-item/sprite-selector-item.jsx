@@ -5,7 +5,7 @@ import React from 'react';
 import CloseButton from '../close-button/close-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
-import {BorderedMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
+import {ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import {FormattedMessage} from 'react-intl';
 
 // react-contextmenu requires unique id to match trigger and context menu
@@ -64,6 +64,15 @@ const SpriteSelectorItem = props => (
                         />
                     </MenuItem>
                 ) : null}
+                {props.onDeleteButtonClick ? (
+                    <MenuItem onClick={props.onDeleteButtonClick}>
+                        <FormattedMessage
+                            defaultMessage="delete"
+                            description="Menu item to delete in the right click menu"
+                            id="gui.spriteSelectorItem.contextMenuDelete"
+                        />
+                    </MenuItem>
+                ) : null }
                 {props.onExportButtonClick ? (
                     <MenuItem onClick={props.onExportButtonClick}>
                         <FormattedMessage
@@ -72,15 +81,6 @@ const SpriteSelectorItem = props => (
                             id="gui.spriteSelectorItem.contextMenuExport"
                         />
                     </MenuItem>
-                ) : null }
-                {props.onDeleteButtonClick ? (
-                    <BorderedMenuItem onClick={props.onDeleteButtonClick}>
-                        <FormattedMessage
-                            defaultMessage="delete"
-                            description="Menu item to delete in the right click menu"
-                            id="gui.spriteSelectorItem.contextMenuDelete"
-                        />
-                    </BorderedMenuItem>
                 ) : null }
             </ContextMenu>
         ) : null}

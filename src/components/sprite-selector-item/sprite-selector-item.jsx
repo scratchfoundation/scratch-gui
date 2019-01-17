@@ -26,13 +26,6 @@ const SpriteSelectorItem = props => (
         disable={props.dragging}
         id={`${props.name}-${contextMenuId}`}
     >
-        {(props.selected && props.onDeleteButtonClick) ? (
-            <CloseButton
-                className={styles.deleteButton}
-                size={CloseButton.SIZE_SMALL}
-                onClick={props.onDeleteButtonClick}
-            />
-        ) : null }
         {typeof props.number === 'undefined' ? null : (
             <div className={styles.number}>{props.number}</div>
         )}
@@ -53,6 +46,13 @@ const SpriteSelectorItem = props => (
                 <div className={styles.spriteDetails}>{props.details}</div>
             ) : null}
         </div>
+        {(props.selected && props.onDeleteButtonClick) ? (
+            <CloseButton
+                className={styles.deleteButton}
+                size={CloseButton.SIZE_SMALL}
+                onClick={props.onDeleteButtonClick}
+            />
+        ) : null }
         {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (

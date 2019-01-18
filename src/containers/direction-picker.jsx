@@ -12,11 +12,16 @@ class DirectionPicker extends React.Component {
             'handleClosePopover',
             'handleClickLeftRight',
             'handleClickDontRotate',
-            'handleClickAllAround'
+            'handleClickAllAround',
+            'handleChangeDirection'
         ]);
         this.state = {
-            popoverOpen: false
+            popoverOpen: false,
+            direction: props.direction
         };
+    }
+    componentWillReceiveProps (nextProps) {
+        this.setState({direction: nextProps.direction});
     }
     handleOpenPopover () {
         this.setState({popoverOpen: true});
@@ -33,15 +38,23 @@ class DirectionPicker extends React.Component {
     handleClickDontRotate () {
         this.props.onChangeRotationStyle(RotationStyles.DONT_ROTATE);
     }
+    handleChangeDirection (direction) {
+        // Wrap clamp the dial output to [-180, 180]
+        const clamped = Math.round(direction - (Math.floor((direction + 179) / 360) * 360));
+        this.setState({direction: Math.round(clamped)}); // Display as rounded
+
+        // Send the raw direction to the VM, it will wrap it but not round it
+        this.props.onChangeDirection(direction);
+    }
     render () {
         return (
             <DirectionComponent
-                direction={this.props.direction}
+                direction={this.state.direction}
                 disabled={this.props.disabled}
                 labelAbove={this.props.labelAbove}
                 popoverOpen={this.state.popoverOpen && !this.props.disabled}
                 rotationStyle={this.props.rotationStyle}
-                onChangeDirection={this.props.onChangeDirection}
+                onChangeDirection={this.handleChangeDirection}
                 onClickAllAround={this.handleClickAllAround}
                 onClickDontRotate={this.handleClickDontRotate}
                 onClickLeftRight={this.handleClickLeftRight}

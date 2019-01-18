@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
+import throttle from 'lodash.throttle';
 
 import {connect} from 'react-redux';
 
@@ -34,7 +35,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // mounts.
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
-            this.props.vm.on('targetsUpdate', this.handleTargetsUpdate);
+            this.props.vm.on('targetsUpdate', throttle(this.handleTargetsUpdate, 500));
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);

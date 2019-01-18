@@ -34,5 +34,5 @@
 }
 
 .menu-item-bordered:hover {
-    background: $error-light;
+    background: $error-primary;
 }

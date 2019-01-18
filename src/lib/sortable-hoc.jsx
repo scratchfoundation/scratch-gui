@@ -33,9 +33,10 @@ const SortableHOC = function (WrappedComponent) {
                 }
                 this.containerBox = this.ref.getBoundingClientRect();
             } else if (!newProps.dragInfo.dragging && this.props.dragInfo.dragging) {
-                this.props.onDrop(Object.assign({}, this.props.dragInfo, {
-                    newIndex: this.getMouseOverIndex()
-                }));
+                const newIndex = this.getMouseOverIndex();
+                if (newIndex !== null) {
+                    this.props.onDrop(Object.assign({}, this.props.dragInfo, {newIndex}));
+                }
             }
         }
 

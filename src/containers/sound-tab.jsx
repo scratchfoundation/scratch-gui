@@ -130,7 +130,7 @@ class SoundTab extends React.Component {
     }
 
     handleDrop (dropInfo) {
-        if (dropInfo.dragType === DragConstants.SOUND && dropInfo.newIndex !== null) {
+        if (dropInfo.dragType === DragConstants.SOUND) {
             const sprite = this.props.vm.editingTarget.sprite;
             const activeSound = sprite.sounds[this.state.selectedSoundIndex];
 

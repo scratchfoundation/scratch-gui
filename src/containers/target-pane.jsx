@@ -163,7 +163,7 @@ class TargetPane extends React.Component {
     }
     handleDrop (dragInfo) {
         const {sprite: targetId} = this.props.hoveredTarget;
-        if (dragInfo.dragType === DragConstants.SPRITE && dragInfo.newIndex !== null) {
+        if (dragInfo.dragType === DragConstants.SPRITE) {
             // Add one to both new and target index because we are not counting/moving the stage
             this.props.vm.reorderTarget(dragInfo.index + 1, dragInfo.newIndex + 1);
         } else if (dragInfo.dragType === DragConstants.BACKPACK_SPRITE) {

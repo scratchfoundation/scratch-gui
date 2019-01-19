@@ -224,7 +224,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               "flexWrap": undefined,
               "height": undefined,
               "justifyContent": undefined,
-              "left": "50%",
+              "transform": "translateX(50%)",
               "width": undefined,
             }
           }

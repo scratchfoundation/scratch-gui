@@ -164,7 +164,9 @@ const vmListenerHOC = function (WrappedComponent) {
     };
     const mapStateToProps = state => ({
         // Do not emit target or project updates in fullscreen or player only mode
-        shouldEmitUpdates: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly,
+        // or when recording sounds (it leads to garbled recordings on low-power machines)
+        shouldEmitUpdates: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly &&
+            !state.scratchGui.modals.soundRecorder,
         vm: state.scratchGui.vm,
         username: state.session && state.session.session && state.session.session.user ?
             state.session.session.user.username : ''

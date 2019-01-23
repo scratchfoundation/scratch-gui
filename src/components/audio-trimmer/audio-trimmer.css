@@ -53,6 +53,15 @@ $hover-scale: 2;
     border: 1px solid $red-tertiary;
 }
 
+.playhead-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .playhead {
     /*
         Even though playhead is just a line, it is 100% width (the width of the waveform)

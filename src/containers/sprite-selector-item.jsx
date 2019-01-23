@@ -29,9 +29,6 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseMove',
             'handleMouseUp'
         ]);
-
-        // Asset ID of the current decoded costume
-        this.decodedAssetId = null;
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;

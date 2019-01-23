@@ -40,14 +40,6 @@ const SaveStatus = ({
         </div>
     ));
 
-// Listen for Control/Command + S.
-document.addEventListener("keydown", function(e) {
-  if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-    e.preventDefault();
-    onClickSave();
-  }
-}, false);
-
 SaveStatus.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
     onClickSave: PropTypes.func,

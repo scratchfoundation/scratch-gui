@@ -18,7 +18,6 @@
 
     text-align: center;
     cursor: pointer;
-    transition: 0.25s ease-out;
 
     user-select: none;
     touch-action: none;

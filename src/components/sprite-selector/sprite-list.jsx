@@ -8,8 +8,11 @@ import Box from '../box/box.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 import SortableHOC from '../../lib/sortable-hoc.jsx';
 import SortableAsset from '../asset-panel/sortable-asset.jsx';
+import ThrottledPropertyHOC from '../../lib/throttled-property-hoc.jsx';
 
 import styles from './sprite-selector.css';
+
+const ThrottledSpriteSelectorItem = ThrottledPropertyHOC('asset', 500, SpriteSelectorItem);
 
 const SpriteList = function (props) {
     const {
@@ -74,7 +77,7 @@ const SpriteList = function (props) {
                             onAddSortable={onAddSortable}
                             onRemoveSortable={onRemoveSortable}
                         >
-                            <SpriteSelectorItem
+                            <ThrottledSpriteSelectorItem
                                 asset={sprite.costume && sprite.costume.asset}
                                 className={classNames(styles.sprite, {
                                     [styles.raised]: isRaised,

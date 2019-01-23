@@ -10,6 +10,7 @@ import {activateTab, COSTUMES_TAB_INDEX} from '../reducers/editor-tab';
 import {setHoveredSprite} from '../reducers/hovered-target';
 import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
+import ThrottledPropertyHOC from '../lib/throttled-property-hoc.jsx';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
 import {fetchCode} from '../lib/backpack-api';
@@ -27,7 +28,9 @@ const dragTypes = [
     DragConstants.BACKPACK_CODE
 ];
 
-const DroppableStage = DropAreaHOC(dragTypes)(StageSelectorComponent);
+const DroppableThrottledStage = DropAreaHOC(dragTypes)(
+    ThrottledPropertyHOC('url', 500)(StageSelectorComponent)
+);
 
 class StageSelector extends React.Component {
     constructor (props) {
@@ -116,7 +119,7 @@ class StageSelector extends React.Component {
         const componentProps = omit(this.props, [
             'asset', 'dispatchSetHoveredSprite', 'id', 'intl', 'onActivateTab', 'onSelect']);
         return (
-            <DroppableStage
+            <DroppableThrottledStage
                 fileInputRef={this.setFileInput}
                 onBackdropFileUpload={this.handleBackdropUpload}
                 onBackdropFileUploadClick={this.handleFileUploadClick}

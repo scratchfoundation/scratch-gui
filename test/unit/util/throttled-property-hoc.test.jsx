@@ -13,7 +13,7 @@ describe('VMListenerHOC', () => {
                 value={propToThrottle}
             />
         );
-        const WrappedComponent = ThrottledPropertyHOC('propToThrottle', throttleTime, Component);
+        const WrappedComponent = ThrottledPropertyHOC('propToThrottle', throttleTime)(Component);
 
         global.Date.now = () => 0;
 

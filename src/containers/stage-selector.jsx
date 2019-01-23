@@ -29,7 +29,7 @@ const dragTypes = [
 ];
 
 const DroppableThrottledStage = DropAreaHOC(dragTypes)(
-    ThrottledPropertyHOC('url', 500, StageSelectorComponent)
+    ThrottledPropertyHOC('url', 500)(StageSelectorComponent)
 );
 
 class StageSelector extends React.Component {

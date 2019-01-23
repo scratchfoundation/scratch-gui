@@ -65,7 +65,7 @@ const mapStateToProps = state => {
 const ConnectedComponent = connect(
     mapStateToProps
 )(
-    ThrottledPropertyHOC('asset', 500, Watermark)
+    ThrottledPropertyHOC('asset', 500)(Watermark)
 );
 
 export default ConnectedComponent;

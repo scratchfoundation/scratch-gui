@@ -12,7 +12,7 @@ import ThrottledPropertyHOC from '../../lib/throttled-property-hoc.jsx';
 
 import styles from './sprite-selector.css';
 
-const ThrottledSpriteSelectorItem = ThrottledPropertyHOC('asset', 500, SpriteSelectorItem);
+const ThrottledSpriteSelectorItem = ThrottledPropertyHOC('asset', 500)(SpriteSelectorItem);
 
 const SpriteList = function (props) {
     const {

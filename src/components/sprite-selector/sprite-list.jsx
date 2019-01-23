@@ -80,7 +80,7 @@ const SpriteList = function (props) {
                                     [styles.raised]: isRaised,
                                     [styles.receivedBlocks]: receivedBlocks
                                 })}
-                                dragPayload={sprite}
+                                dragPayload={sprite.id}
                                 dragType={DragConstants.SPRITE}
                                 id={sprite.id}
                                 index={index}

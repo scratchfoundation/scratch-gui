@@ -238,15 +238,15 @@ export default [
 
     },
     {
-        name: 'GDX-FOR',
+        name: 'GoDirect Force & Acceleration',
         extensionId: 'gdxfor',
         collaborator: 'Vernier',
         iconURL: gdxforImage,
         insetIconURL: gdxforInsetImage,
         description: (
             <FormattedMessage
-                defaultMessage="Connect your projects with the world."
-                description="Description for the 'GDX-FOR' extension"
+                defaultMessage="Sense push, pull, motion, and spin."
+                description="Description for the Vernier Go Direct Force and Acceleration sensor extension"
                 id="gui.extension.gdxfor.description"
             />
         ),

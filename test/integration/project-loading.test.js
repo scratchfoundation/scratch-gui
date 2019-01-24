@@ -24,13 +24,6 @@ describe('Loading scratch gui', () => {
         await driver.quit();
     });
 
-    test('The "Not Now" button sends you to scratch', async () => {
-        await loadUri(uri);
-        await clickText('Not Now');
-        const currentUrl = await driver.getCurrentUrl();
-        await expect(currentUrl).toEqual('https://scratch.mit.edu/');
-    });
-
     describe('Loading projects by ID', () => {
 
         test('Load 2.0 project using import modal', async () => {

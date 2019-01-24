@@ -305,10 +305,11 @@ $fade-out-distance: 15px;
 .alerts-container {
     display: flex;
     justify-content: center;
-    width: 100%;
     z-index: $z-index-alerts;
     position: absolute;
     margin-top: 53px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /*

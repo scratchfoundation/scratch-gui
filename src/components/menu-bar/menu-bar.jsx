@@ -227,7 +227,8 @@ class MenuBar extends React.Component {
         };
     }
     handleKeyPress (event) {
-        if (event.key === 's' && event.ctrlKey) {
+        const modifier = (window.navigator.platform === 'MacIntel') ? event.metaKey : event.ctrlKey;
+        if (modifier && event.key === 's') {
             this.props.onClickSave();
             event.preventDefault();
         }

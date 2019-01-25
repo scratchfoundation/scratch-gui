@@ -151,10 +151,17 @@ class MenuBar extends React.Component {
             'handleClickSeeCommunity',
             'handleClickShare',
             'handleCloseFileMenuAndThen',
+            'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'restoreOptionMessage'
         ]);
+    }
+    componentDidMount () {
+        document.addEventListener('keydown', this.handleKeyPress);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('keydown', this.handleKeyPress);
     }
     handleClickNew () {
         let readyToReplaceProject = true;
@@ -218,6 +225,12 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseFile();
             fn();
         };
+    }
+    handleKeyPress (event) {
+        if (event.key === 's' && event.ctrlKey) {
+            this.props.onClickSave();
+            event.preventDefault();
+        }
     }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {

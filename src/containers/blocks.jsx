@@ -170,13 +170,16 @@ class Blocks extends React.Component {
     }
 
     setLocale () {
-        this.workspace.getFlyout().setRecyclingEnabled(false);
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
+                this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
-                this.updateToolbox();
-                this.workspace.getFlyout().setRecyclingEnabled(true);
+                // refreshWorkspace will cause a toolbox update
+                // wait for update to go through before reenabling recycling
+                this.withToolboxUpdates(() => {
+                    this.workspace.getFlyout().setRecyclingEnabled(true);
+                });
             });
     }
 

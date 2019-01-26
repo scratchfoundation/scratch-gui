@@ -3,7 +3,6 @@ import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
     clickText,
-    clickXpath,
     getDriver,
     getLogs,
     loadUri

@@ -27,7 +27,6 @@ describe('Working with costumes', () => {
 
     test('Adding a costume through the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         const el = await findByXpath("//input[@placeholder='Search']");
@@ -40,7 +39,6 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by surprise button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -53,7 +51,6 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by paint button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -66,7 +63,6 @@ describe('Working with costumes', () => {
 
     test('Duplicating a costume', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         await rightClickText('costume1', scope.costumesTab);
@@ -82,7 +78,6 @@ describe('Working with costumes', () => {
 
     test('Converting bitmap/vector in paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         // Convert the first costume to bitmap.
@@ -106,7 +101,6 @@ describe('Working with costumes', () => {
 
     test('Undo/redo in the paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickText('costume1', scope.costumesTab);
         await clickText('Convert to Bitmap', scope.costumesTab);
@@ -121,7 +115,6 @@ describe('Working with costumes', () => {
 
     test('Adding an svg from file', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -137,7 +130,6 @@ describe('Working with costumes', () => {
 
     test('Adding a png from file (gh-3582)', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -155,7 +147,6 @@ describe('Working with costumes', () => {
         await driver.manage()
             .window()
             .setSize(1244, 768); // Letters filter not visible at 1024 width
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         await clickText('Letters');

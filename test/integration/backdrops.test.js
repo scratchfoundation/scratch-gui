@@ -26,7 +26,6 @@ describe('Working with backdrops', () => {
 
     test('Adding a backdrop from the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Start on the sounds tab of sprite1 to test switching behavior
         await clickText('Sounds');

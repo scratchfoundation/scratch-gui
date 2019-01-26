@@ -26,7 +26,6 @@ describe('Localization', () => {
 
     test('Localization', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Add a sprite to make sure it stays when switching languages
         await clickText('Costumes');

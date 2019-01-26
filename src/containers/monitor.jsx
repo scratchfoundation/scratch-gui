@@ -9,6 +9,7 @@ import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect
 import {getVariable, setVariableValue} from '../lib/variable-utils';
 import importCSV from '../lib/import-csv';
 import downloadText from '../lib/download-text';
+import SliderPrompt from './slider-prompt.jsx';
 
 import {connect} from 'react-redux';
 import {Map} from 'immutable';
@@ -42,10 +43,16 @@ class Monitor extends React.Component {
             'handleSetModeToDefault',
             'handleSetModeToLarge',
             'handleSetModeToSlider',
+            'handleSliderPromptClose',
+            'handleSliderPromptOk',
+            'handleSliderPromptOpen',
             'handleImport',
             'handleExport',
             'setElement'
         ]);
+        this.state = {
+            sliderPrompt: false
+        };
     }
     componentDidMount () {
         let rect;
@@ -135,6 +142,22 @@ class Monitor extends React.Component {
             mode: 'slider'
         }));
     }
+    handleSliderPromptClose () {
+        this.setState({sliderPrompt: false});
+    }
+    handleSliderPromptOpen () {
+        this.setState({sliderPrompt: true});
+    }
+    handleSliderPromptOk (min, max) {
+        if (min < max) {
+            this.props.vm.runtime.requestUpdateMonitor(Map({
+                id: this.props.id,
+                sliderMin: min,
+                sliderMax: max
+            }));
+        }
+        this.handleSliderPromptClose();
+    }
     setElement (monitorElt) {
         this.element = monitorElt;
     }
@@ -162,24 +185,33 @@ class Monitor extends React.Component {
         const showSliderOption = availableModes(this.props.opcode).indexOf('slider') !== -1;
         const isList = this.props.mode === 'list';
         return (
-            <MonitorComponent
-                componentRef={this.setElement}
-                {...monitorProps}
-                draggable={this.props.draggable}
-                height={this.props.height}
-                max={this.props.max}
-                min={this.props.min}
-                mode={this.props.mode}
-                targetId={this.props.targetId}
-                width={this.props.width}
-                onDragEnd={this.handleDragEnd}
-                onExport={isList ? this.handleExport : null}
-                onImport={isList ? this.handleImport : null}
-                onNextMode={this.handleNextMode}
-                onSetModeToDefault={isList ? null : this.handleSetModeToDefault}
-                onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
-                onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
-            />
+            <React.Fragment>
+                {(this.state.sliderPrompt && <SliderPrompt
+                    defaultMaxValue={this.props.max}
+                    defaultMinValue={this.props.min}
+                    onCancel={this.handleSliderPromptClose}
+                    onOk={this.handleSliderPromptOk}
+                />)}
+                <MonitorComponent
+                    componentRef={this.setElement}
+                    {...monitorProps}
+                    draggable={this.props.draggable}
+                    height={this.props.height}
+                    max={this.props.max}
+                    min={this.props.min}
+                    mode={this.props.mode}
+                    targetId={this.props.targetId}
+                    width={this.props.width}
+                    onDragEnd={this.handleDragEnd}
+                    onExport={isList ? this.handleExport : null}
+                    onImport={isList ? this.handleImport : null}
+                    onNextMode={this.handleNextMode}
+                    onSetModeToDefault={isList ? null : this.handleSetModeToDefault}
+                    onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
+                    onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
+                    onSliderPromptOpen={this.handleSliderPromptOpen}
+                />
+            </React.Fragment>
         );
     }
 }

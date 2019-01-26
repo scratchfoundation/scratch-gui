@@ -84,6 +84,14 @@ const MonitorComponent = props => (
                             id="gui.monitor.contextMenu.slider"
                         />
                     </MenuItem>}
+                {props.onSliderPromptOpen && props.mode === 'slider' &&
+                    <MenuItem onClick={props.onSliderPromptOpen}>
+                        <FormattedMessage
+                            defaultMessage="change slider range"
+                            description="Menu item to change the slider range"
+                            id="gui.monitor.contextMenu.sliderRange"
+                        />
+                    </MenuItem>}
                 {props.onImport &&
                     <MenuItem onClick={props.onImport}>
                         <FormattedMessage
@@ -103,7 +111,6 @@ const MonitorComponent = props => (
             </ContextMenu>
         ), document.body)}
     </ContextMenuTrigger>
-
 );
 
 MonitorComponent.categories = categories;
@@ -122,7 +129,8 @@ MonitorComponent.propTypes = {
     onNextMode: PropTypes.func.isRequired,
     onSetModeToDefault: PropTypes.func,
     onSetModeToLarge: PropTypes.func,
-    onSetModeToSlider: PropTypes.func
+    onSetModeToSlider: PropTypes.func,
+    onSliderPromptOpen: PropTypes.func
 };
 
 MonitorComponent.defaultProps = {

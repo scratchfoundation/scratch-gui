@@ -248,22 +248,18 @@ TargetPane.propTypes = {
     ...targetPaneProps
 };
 
-const mapStateToProps = state => ({
-    editingTarget: state.scratchGui.targets.editingTarget,
-    hoveredTarget: state.scratchGui.hoveredTarget,
-    sprites: Object.keys(state.scratchGui.targets.sprites).reduce((sprites, k) => {
-        let {direction, size, x, y, ...sprite} = state.scratchGui.targets.sprites[k];
-        if (typeof direction !== 'undefined') direction = Math.round(direction);
-        if (typeof x !== 'undefined') x = Math.round(x);
-        if (typeof y !== 'undefined') y = Math.round(y);
-        if (typeof size !== 'undefined') size = Math.round(size);
-        sprites[k] = {...sprite, direction, size, x, y};
-        return sprites;
-    }, {}),
-    stage: state.scratchGui.targets.stage,
-    raiseSprites: state.scratchGui.blockDrag,
-    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
-});
+const mapStateToProps = state => {
+    const props = {
+        editingTarget: state.scratchGui.targets.editingTarget,
+        hoveredTarget: state.scratchGui.hoveredTarget,
+        sprites: state.scratchGui.targets.sprites,
+        stage: state.scratchGui.targets.stage,
+        raiseSprites: state.scratchGui.blockDrag,
+        spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
+    };
+    return props;
+};
+
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
         e.preventDefault();

@@ -94,6 +94,11 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
+        // Store the xml of the toolbox that is actually rendered.
+        // This is used in componentDidUpdate instead of prevProps, because
+        // the xml can change while e.g. on the costumes tab.
+        this._renderedToolboxXML = this.props.toolboxXML;
+
         // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
         // componentDidUpdate so the toolbox will still correctly be updated
@@ -117,7 +122,7 @@ class Blocks extends React.Component {
         return (
             this.state.prompt !== nextState.prompt ||
             this.props.isVisible !== nextProps.isVisible ||
-            this.props.toolboxXML !== nextProps.toolboxXML ||
+            this._renderedToolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
             this.props.locale !== nextProps.locale ||
@@ -131,13 +136,17 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        if (prevProps.toolboxXML !== this.props.toolboxXML) {
+        // Only rerender the toolbox when the blocks are visible and the xml is
+        // different from the previously rendered toolbox xml.
+        // Do not check against prevProps.toolboxXML because that may not have been rendered.
+        if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
             // rather than update the toolbox "sync" -- update it in the next frame
             clearTimeout(this.toolboxUpdateTimeout);
             this.toolboxUpdateTimeout = setTimeout(() => {
                 this.updateToolbox();
             }, 0);
         }
+
         if (this.props.isVisible === prevProps.isVisible) {
             if (this.props.stageSize !== prevProps.stageSize) {
                 // force workspace to redraw for the new stage size
@@ -155,7 +164,6 @@ class Blocks extends React.Component {
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
-                this.updateToolbox();
             }
 
             window.dispatchEvent(new Event('resize'));
@@ -189,6 +197,8 @@ class Blocks extends React.Component {
         const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
         this.workspace.updateToolbox(this.props.toolboxXML);
+        this._renderedToolboxXML = this.props.toolboxXML;
+
         // In order to catch any changes that mutate the toolbox during "normal runtime"
         // (variable changes/etc), re-enable toolbox refresh.
         // Using the setter function will rerender the entire toolbox which we just rendered.

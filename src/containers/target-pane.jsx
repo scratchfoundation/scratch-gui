@@ -248,17 +248,14 @@ TargetPane.propTypes = {
     ...targetPaneProps
 };
 
-const mapStateToProps = state => {
-    const props = {
-        editingTarget: state.scratchGui.targets.editingTarget,
-        hoveredTarget: state.scratchGui.hoveredTarget,
-        sprites: state.scratchGui.targets.sprites,
-        stage: state.scratchGui.targets.stage,
-        raiseSprites: state.scratchGui.blockDrag,
-        spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
-    };
-    return props;
-};
+const mapStateToProps = state => ({
+    editingTarget: state.scratchGui.targets.editingTarget,
+    hoveredTarget: state.scratchGui.hoveredTarget,
+    sprites: state.scratchGui.targets.sprites,
+    stage: state.scratchGui.targets.stage,
+    raiseSprites: state.scratchGui.blockDrag,
+    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
+});
 
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {

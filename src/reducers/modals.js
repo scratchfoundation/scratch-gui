@@ -5,7 +5,6 @@ const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_CAMERA_CAPTURE = 'cameraCapture';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
-const MODAL_IMPORT_INFO = 'importInfo';
 const MODAL_LOADING_PROJECT = 'loadingProject';
 const MODAL_TELEMETRY = 'telemetryModal';
 const MODAL_SOUND_LIBRARY = 'soundLibrary';
@@ -19,7 +18,6 @@ const initialState = {
     [MODAL_CAMERA_CAPTURE]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
-    [MODAL_IMPORT_INFO]: false,
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_TELEMETRY]: false,
     [MODAL_SOUND_LIBRARY]: false,
@@ -68,9 +66,6 @@ const openCostumeLibrary = function () {
 const openExtensionLibrary = function () {
     return openModal(MODAL_EXTENSION_LIBRARY);
 };
-const openImportInfo = function () {
-    return openModal(MODAL_IMPORT_INFO);
-};
 const openLoadingProject = function () {
     return openModal(MODAL_LOADING_PROJECT);
 };
@@ -104,9 +99,6 @@ const closeCostumeLibrary = function () {
 const closeExtensionLibrary = function () {
     return closeModal(MODAL_EXTENSION_LIBRARY);
 };
-const closeImportInfo = function () {
-    return closeModal(MODAL_IMPORT_INFO);
-};
 const closeLoadingProject = function () {
     return closeModal(MODAL_LOADING_PROJECT);
 };
@@ -135,7 +127,6 @@ export {
     openCameraCapture,
     openCostumeLibrary,
     openExtensionLibrary,
-    openImportInfo,
     openLoadingProject,
     openSoundLibrary,
     openSpriteLibrary,
@@ -147,7 +138,6 @@ export {
     closeCameraCapture,
     closeCostumeLibrary,
     closeExtensionLibrary,
-    closeImportInfo,
     closeLoadingProject,
     closeSpriteLibrary,
     closeSoundLibrary,

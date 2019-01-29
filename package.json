@@ -29,6 +29,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
+  "dependencies": {
+    "scratch-vm": "github:kchadha/scratch-vm#project-dirty-state-fixes"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
@@ -110,7 +113,6 @@
     "scratch-render": "0.1.0-prerelease.20190128154859",
     "scratch-storage": "1.2.2",
     "scratch-svg-renderer": "0.2.0-prerelease.20190125192231",
-    "scratch-vm": "0.2.0-prerelease.20190128192220",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",

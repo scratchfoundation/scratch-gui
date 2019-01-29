@@ -23,7 +23,6 @@ import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
-import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
@@ -168,9 +167,6 @@ const GUIComponent = props => {
                 ) : null}
                 {isCreating ? (
                     <Loader messageId="gui.loader.creating" />
-                ) : null}
-                {importInfoVisible ? (
-                    <ImportModal />
                 ) : null}
                 {isRendererSupported ? null : (
                     <WebGlModal isRtl={isRtl} />

@@ -60,8 +60,9 @@ describe('Loading scratch gui', () => {
             await loadUri(`${uri}#${projectId}`);
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Full Screen Control"]');
+            await new Promise(resolve => setTimeout(resolve, 500));
             await clickXpath('//img[@title="Go"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             await clickXpath('//img[@title="Stop"]');
             prevSize.then(value => {
                 driver.manage()

@@ -33,6 +33,9 @@ describe('Hardware extension connection modal', () => {
     });
 
     test('Message saying Scratch Link is unavailable (BLE)', async () => {
+        await driver.quit();
+        driver = getDriver();
+
         await loadUri(uri);
 
         await driver.executeScript(websocketFakeoutJs);

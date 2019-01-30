@@ -5,7 +5,6 @@
 */
 
 /* Toolbox z-index: 40; set in scratch-blocks */
-$z-index-menu-bar: 41;
 $z-index-extension-button: 42;
 $z-index-stage-indicator: 45;
 $z-index-add-button: 46;
@@ -15,6 +14,7 @@ $z-index-monitor: 48; /* monitors go over add buttons */
 
 $z-index-card: 480;
 $z-index-alerts: 490;
+$z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorials */
 $z-index-loader: 500;
 $z-index-modal: 510;
 

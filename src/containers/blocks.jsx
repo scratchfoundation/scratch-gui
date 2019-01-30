@@ -50,6 +50,7 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
+            'getToolboxXML',
             'handleCategorySelected',
             'handleConnectionModalStart',
             'handleDrop',
@@ -307,12 +308,32 @@ class Blocks extends React.Component {
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
     }
+    getToolboxXML () {
+        // Use try/catch because this requires digging pretty deep into the VM
+        // Code inside intentionally ignores several error situations (no stage, etc.)
+        // Because they would get caught by this try/catch
+        try {
+            let {editingTarget: target, runtime} = this.props.vm;
+            const stage = runtime.getTargetForStage();
+            if (!target) target = stage; // If no editingTarget, use the stage
+
+            const stageCostumes = stage.getCostumes();
+            const targetCostumes = target.getCostumes();
+            const targetSounds = target.getSounds();
+            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+            return makeToolboxXML(target.isStage, target.id, dynamicBlocksXML,
+                targetCostumes[0].name,
+                stageCostumes[0].name,
+                targetSounds.length > 0 ? targetSounds[0].name : ''
+            );
+        } catch {
+            return null;
+        }
+    }
     onWorkspaceUpdate (data) {
         // When we change sprites, update the toolbox to have the new sprite's blocks
-        if (this.props.vm.editingTarget) {
-            const target = this.props.vm.editingTarget;
-            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        const toolboxXML = this.getToolboxXML();
+        if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
         }
 
@@ -360,12 +381,9 @@ class Blocks extends React.Component {
         // this actually defines blocks and MUST run regardless of the UI state
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json).filter(x => x));
 
-        // update the toolbox view: this can be skipped if we're not looking at a target, etc.
-        const runtime = this.props.vm.runtime;
-        const target = runtime.getEditingTarget() || runtime.getTargetForStage();
-        if (target) {
-            const dynamicBlocksXML = runtime.getBlocksXML();
-            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        // Update the toolbox with new blocks
+        const toolboxXML = this.getToolboxXML();
+        if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
         }
     }

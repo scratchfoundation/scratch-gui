@@ -190,4 +190,42 @@ describe('Working with the blocks', () => {
         await driver.sleep(500); // Wait for scroll to finish
         await clickText('newname', scope.blocksTab);
     });
+
+    // NOTE: This test describes the current behavior so that changes are not
+    // introduced inadvertly, but I know this is not the desired behavior
+    test('Adding costumes DOES NOT update the default costume name in the toolbox', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+
+        // By default, costume1 is in the costume tab
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('costume1', scope.blocksTab);
+
+        // Also check that adding a new costume does not update the list
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath('//button[@aria-label="Paint"]');
+        await clickText('costume3', scope.costumesTab);
+        // Check that the menu has not been updated
+        await clickText('Code');
+        await clickText('costume1', scope.blocksTab);
+    });
+
+    // NOTE: This test describes the current behavior so that changes are not
+    // introduced inadvertly, but I know this is not the desired behavior
+    test('Adding a sound DOES NOT update the default sound name in the toolbox', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Sounds');
+        await clickXpath('//button[@aria-label="Choose a Sound"]');
+        await clickText('A Bass', scope.modal); // Should close the modal
+        await clickText('Code');
+        await clickText('Sound', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('Meow', scope.blocksTab); // Meow, not A Bass
+    });
 });

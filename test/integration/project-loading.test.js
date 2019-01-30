@@ -156,7 +156,9 @@ describe('Loading scratch gui', () => {
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
-            await clickText('move');
+            await clickText('Sounds');
+            await clickXpath('//button[@aria-label="Choose a Sound"]');
+            await clickText('A Bass', scope.modal); // Should close the modal
             await clickXpath(
                 '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'

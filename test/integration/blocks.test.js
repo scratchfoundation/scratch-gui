@@ -158,7 +158,7 @@ describe('Working with the blocks', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Record option from sound block menu opens sound recorder', async () => {
+    test('Record option from sound block menu opens sound recorder', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
@@ -173,5 +173,21 @@ describe('Working with the blocks', () => {
         await findByText('Record Sound'); // Sound recorder is open
         const logs = await getLogs();
         await expect(logs).toEqual([]);
+    });
+
+    test('Renaming costume changes the default costume name in the toolbox', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+
+        // Rename the costume
+        await clickText('Costumes');
+        const el = await findByXpath("//input[@value='costume1']");
+        await el.sendKeys('newname');
+
+        // Make sure it is updated in the block menu
+        await clickText('Code');
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('newname', scope.blocksTab);
     });
 });

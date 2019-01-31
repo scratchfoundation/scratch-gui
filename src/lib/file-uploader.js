@@ -206,7 +206,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
                 size: 100,
                 rotationStyle: 'all around',
                 direction: 90,
-                draggable: true,
+                draggable: false,
                 currentCostume: 0,
                 blocks: {},
                 variables: {},

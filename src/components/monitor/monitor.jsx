@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import {FormattedMessage} from 'react-intl';
 import {ContextMenuTrigger} from 'react-contextmenu';
-import {ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
+import {BorderedMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import Box from '../box/box.jsx';
 import DefaultMonitor from './default-monitor.jsx';
 import LargeMonitor from './large-monitor.jsx';
@@ -85,13 +85,13 @@ const MonitorComponent = props => (
                         />
                     </MenuItem>}
                 {props.onSliderPromptOpen && props.mode === 'slider' &&
-                    <MenuItem onClick={props.onSliderPromptOpen}>
+                    <BorderedMenuItem onClick={props.onSliderPromptOpen}>
                         <FormattedMessage
                             defaultMessage="change slider range"
                             description="Menu item to change the slider range"
                             id="gui.monitor.contextMenu.sliderRange"
                         />
-                    </MenuItem>}
+                    </BorderedMenuItem>}
                 {props.onImport &&
                     <MenuItem onClick={props.onImport}>
                         <FormattedMessage

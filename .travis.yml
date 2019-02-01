@@ -23,7 +23,7 @@ before_deploy:
 - >
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then
     npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
-    if [ "$TRAVIS_BRANCH" == "develop" ]; then export NPM_TAG=develop; fi
+    if [ "$TRAVIS_BRANCH" == "master" ]; then export NPM_TAG=stable; fi
     git config --global user.email $(git log --pretty=format:"%ae" -n1)
     git config --global user.name $(git log --pretty=format:"%an" -n1)
     export BEFORE_DEPLOY_RAN=true

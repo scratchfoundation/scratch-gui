@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
+import bowser from 'bowser';
 import React from 'react';
 
 import Box from '../box/box.jsx';
@@ -227,7 +228,7 @@ class MenuBar extends React.Component {
         };
     }
     handleKeyPress (event) {
-        const modifier = (window.navigator.platform === 'MacIntel') ? event.metaKey : event.ctrlKey;
+        const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
         if (modifier && event.key === 's') {
             this.props.onClickSave();
             event.preventDefault();

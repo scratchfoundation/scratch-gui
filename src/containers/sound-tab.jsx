@@ -21,6 +21,7 @@ import soundLibraryContent from '../lib/libraries/sounds.json';
 import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
+import download from '../lib/download-url';
 
 import {connect} from 'react-redux';
 
@@ -44,6 +45,7 @@ class SoundTab extends React.Component {
             'handleSelectSound',
             'handleDeleteSound',
             'handleDuplicateSound',
+            'handleExportSound',
             'handleNewSound',
             'handleSurpriseSound',
             'handleFileUploadClick',
@@ -84,6 +86,12 @@ class SoundTab extends React.Component {
             this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
         }
         this.props.dispatchUpdateRestore({restoreFun, deletedItem: 'Sound'});
+    }
+
+    handleExportSound (soundIndex) {
+        const item = this.props.vm.editingTarget.sprite.sounds[soundIndex];
+        const soundDataURL = item.asset.encodeDataURI();
+        download(`${item.name}.${item.asset.dataFormat}`, soundDataURL);
     }
 
     handleDuplicateSound (soundIndex) {
@@ -236,6 +244,7 @@ class SoundTab extends React.Component {
                 onDeleteClick={this.handleDeleteSound}
                 onDrop={this.handleDrop}
                 onDuplicateClick={this.handleDuplicateSound}
+                onExportClick={this.handleExportSound}
                 onItemClick={this.handleSelectSound}
             >
                 {sprite.sounds && sprite.sounds[this.state.selectedSoundIndex] ? (

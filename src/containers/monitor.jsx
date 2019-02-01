@@ -8,7 +8,7 @@ import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx'
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
 import {getVariable, setVariableValue} from '../lib/variable-utils';
 import importCSV from '../lib/import-csv';
-import downloadText from '../lib/download-text';
+import download from '../lib/download-url';
 
 import {connect} from 'react-redux';
 import {Map} from 'immutable';
@@ -155,7 +155,8 @@ class Monitor extends React.Component {
     handleExport () {
         const {vm, targetId, id: variableId} = this.props;
         const variable = getVariable(vm, targetId, variableId);
-        downloadText(`${variable.name}.txt`, variable.value.join('\r\n'));
+        const text = variable.value.join('\r\n');
+        download(`${variable.name}.txt`, `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
     }
     render () {
         const monitorProps = monitorAdapter(this.props);

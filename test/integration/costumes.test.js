@@ -160,4 +160,19 @@ describe('Working with costumes', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Costumes animate on mouseover', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        const searchElement = await findByXpath("//input[@placeholder='Search']");
+        await searchElement.sendKeys('abb');
+        const abbyElement = await findByXpath('//*[span[text()="Abby"]]');
+        driver.actions()
+            .mouseMove(abbyElement)
+            .perform();
+        // wait for one of Abby's alternate costumes to appear
+        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/b6e23922f23b49ddc6f62f675e77417c.svg/get/"]');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

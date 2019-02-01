@@ -170,7 +170,6 @@ describe('Working with the blocks', () => {
 
     test('Renaming costume changes the default costume name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Rename the costume
         await clickText('Costumes');
@@ -188,7 +187,6 @@ describe('Working with the blocks', () => {
     // introduced inadvertly, but I know this is not the desired behavior
     test('Adding costumes DOES NOT update the default costume name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // By default, costume1 is in the costume tab
         await clickText('Looks', scope.blocksTab);
@@ -212,7 +210,6 @@ describe('Working with the blocks', () => {
     // introduced inadvertly, but I know this is not the desired behavior
     test('Adding a sound DOES NOT update the default sound name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
         await clickXpath('//button[@aria-label="Choose a Sound"]');
         await clickText('A Bass', scope.modal); // Should close the modal

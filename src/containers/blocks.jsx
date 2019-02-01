@@ -24,6 +24,7 @@ import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
+import newBlockIds from '../lib/new-block-ids';
 
 import {
     activateTab,
@@ -451,7 +452,8 @@ class Blocks extends React.Component {
     handleDrop (dragInfo) {
         fetch(dragInfo.payload.bodyUrl)
             .then(response => response.json())
-            .then(blocks => this.props.vm.shareBlocksToTarget(blocks, this.props.vm.editingTarget.id))
+            .then(blocks => this.props.vm.shareBlocksToTarget(
+                newBlockIds(blocks), this.props.vm.editingTarget.id))
             .then(() => {
                 this.props.vm.refreshWorkspace();
                 this.updateToolbox(); // To show new variables/custom blocks

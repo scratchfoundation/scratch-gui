@@ -13,6 +13,8 @@ import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
+import download from '../lib/download-url';
+import getCostumeUrl from '../lib/get-costume-url';
 
 import {
     closeCameraCapture,
@@ -86,6 +88,7 @@ class CostumeTab extends React.Component {
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
+            'handleExportCostume',
             'handleNewCostume',
             'handleNewBlankCostume',
             'handleSurpriseCostume',
@@ -136,6 +139,12 @@ class CostumeTab extends React.Component {
             this.setState({selectedCostumeIndex: target.currentCostume});
         }
     }
+    getCostumeData (costumeItem) {
+        if (costumeItem.url) return costumeItem.url;
+        if (!costumeItem.asset) return null;
+
+        return getCostumeUrl(costumeItem.asset);
+    }
     handleSelectCostume (costumeIndex) {
         this.props.vm.editingTarget.setCostume(costumeIndex);
         this.setState({selectedCostumeIndex: costumeIndex});
@@ -149,6 +158,10 @@ class CostumeTab extends React.Component {
     }
     handleDuplicateCostume (costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
+    }
+    handleExportCostume (costumeIndex) {
+        const item = this.props.vm.editingTarget.sprite.costumes[costumeIndex];
+        download(`${item.name}.${item.asset.dataFormat}`, this.getCostumeData(item));
     }
     handleNewCostume (costume, fromCostumeLibrary) {
         if (fromCostumeLibrary) {
@@ -312,6 +325,7 @@ class CostumeTab extends React.Component {
                     this.handleDeleteCostume : null}
                 onDrop={this.handleDrop}
                 onDuplicateClick={this.handleDuplicateCostume}
+                onExportClick={this.handleExportCostume}
                 onItemClick={this.handleSelectCostume}
             >
                 {target.costumes ?

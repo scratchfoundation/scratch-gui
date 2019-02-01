@@ -1,5 +1,5 @@
 import storage from './storage';
-import {SVGRenderer} from 'scratch-svg-renderer';
+import {inlineSvgFonts} from 'scratch-svg-renderer';
 
 // Contains 'font-family', but doesn't only contain 'font-family="none"'
 const HAS_FONT_REGEXP = 'font-family(?!="none")';
@@ -21,9 +21,7 @@ const getCostumeUrl = (function () {
         if (asset.assetType === storage.AssetType.ImageVector) {
             const svgString = asset.decodeText();
             if (svgString.match(HAS_FONT_REGEXP)) {
-                const svgRenderer = new SVGRenderer();
-                svgRenderer.loadString(svgString);
-                const svgText = svgRenderer.toString(true /* shouldInjectFonts */);
+                const svgText = inlineSvgFonts(svgString);
                 cachedUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
             } else {
                 cachedUrl = asset.encodeDataURI();

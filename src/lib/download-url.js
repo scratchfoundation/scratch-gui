@@ -1,6 +1,6 @@
-export default (filename, text) => {
+export default (filename, url) => {
     const pom = document.createElement('a');
-    pom.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+    pom.setAttribute('href', url);
     pom.setAttribute('download', filename);
 
     if (document.createEvent) {

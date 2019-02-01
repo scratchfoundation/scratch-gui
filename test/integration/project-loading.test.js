@@ -102,7 +102,9 @@ describe('Loading scratch gui', () => {
         test('Not logged in->made a change to project->create new project should show alert', async () => {
             await loadUri(uri);
             await new Promise(resolve => setTimeout(resolve, 2000));
-            await clickText('move');
+            await clickText('Sounds');
+            await clickXpath('//button[@aria-label="Choose a Sound"]');
+            await clickText('A Bass', scope.modal); // Should close the modal
             await clickXpath(
                 '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'

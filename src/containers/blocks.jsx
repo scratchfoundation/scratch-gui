@@ -50,6 +50,7 @@ class Blocks extends React.Component {
         bindAll(this, [
             'attachVM',
             'detachVM',
+            'getToolboxXML',
             'handleCategorySelected',
             'handleConnectionModalStart',
             'handleDrop',
@@ -94,6 +95,11 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
+        // Store the xml of the toolbox that is actually rendered.
+        // This is used in componentDidUpdate instead of prevProps, because
+        // the xml can change while e.g. on the costumes tab.
+        this._renderedToolboxXML = this.props.toolboxXML;
+
         // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
         // componentDidUpdate so the toolbox will still correctly be updated
@@ -117,7 +123,7 @@ class Blocks extends React.Component {
         return (
             this.state.prompt !== nextState.prompt ||
             this.props.isVisible !== nextProps.isVisible ||
-            this.props.toolboxXML !== nextProps.toolboxXML ||
+            this._renderedToolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
             this.props.locale !== nextProps.locale ||
@@ -131,13 +137,17 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        if (prevProps.toolboxXML !== this.props.toolboxXML) {
+        // Only rerender the toolbox when the blocks are visible and the xml is
+        // different from the previously rendered toolbox xml.
+        // Do not check against prevProps.toolboxXML because that may not have been rendered.
+        if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
             // rather than update the toolbox "sync" -- update it in the next frame
             clearTimeout(this.toolboxUpdateTimeout);
             this.toolboxUpdateTimeout = setTimeout(() => {
                 this.updateToolbox();
             }, 0);
         }
+
         if (this.props.isVisible === prevProps.isVisible) {
             if (this.props.stageSize !== prevProps.stageSize) {
                 // force workspace to redraw for the new stage size
@@ -155,7 +165,6 @@ class Blocks extends React.Component {
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
-                this.updateToolbox();
             }
 
             window.dispatchEvent(new Event('resize'));
@@ -170,13 +179,16 @@ class Blocks extends React.Component {
     }
 
     setLocale () {
-        this.workspace.getFlyout().setRecyclingEnabled(false);
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
+                this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
-                this.updateToolbox();
-                this.workspace.getFlyout().setRecyclingEnabled(true);
+                // refreshWorkspace will cause a toolbox update
+                // wait for update to go through before reenabling recycling
+                this.withToolboxUpdates(() => {
+                    this.workspace.getFlyout().setRecyclingEnabled(true);
+                });
             });
     }
 
@@ -186,6 +198,8 @@ class Blocks extends React.Component {
         const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
         this.workspace.updateToolbox(this.props.toolboxXML);
+        this._renderedToolboxXML = this.props.toolboxXML;
+
         // In order to catch any changes that mutate the toolbox during "normal runtime"
         // (variable changes/etc), re-enable toolbox refresh.
         // Using the setter function will rerender the entire toolbox which we just rendered.
@@ -294,12 +308,32 @@ class Blocks extends React.Component {
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
     }
+    getToolboxXML () {
+        // Use try/catch because this requires digging pretty deep into the VM
+        // Code inside intentionally ignores several error situations (no stage, etc.)
+        // Because they would get caught by this try/catch
+        try {
+            let {editingTarget: target, runtime} = this.props.vm;
+            const stage = runtime.getTargetForStage();
+            if (!target) target = stage; // If no editingTarget, use the stage
+
+            const stageCostumes = stage.getCostumes();
+            const targetCostumes = target.getCostumes();
+            const targetSounds = target.getSounds();
+            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+            return makeToolboxXML(target.isStage, target.id, dynamicBlocksXML,
+                targetCostumes[0].name,
+                stageCostumes[0].name,
+                targetSounds.length > 0 ? targetSounds[0].name : ''
+            );
+        } catch {
+            return null;
+        }
+    }
     onWorkspaceUpdate (data) {
         // When we change sprites, update the toolbox to have the new sprite's blocks
-        if (this.props.vm.editingTarget) {
-            const target = this.props.vm.editingTarget;
-            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        const toolboxXML = this.getToolboxXML();
+        if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
         }
 
@@ -347,12 +381,9 @@ class Blocks extends React.Component {
         // this actually defines blocks and MUST run regardless of the UI state
         this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json).filter(x => x));
 
-        // update the toolbox view: this can be skipped if we're not looking at a target, etc.
-        const runtime = this.props.vm.runtime;
-        const target = runtime.getEditingTarget() || runtime.getTargetForStage();
-        if (target) {
-            const dynamicBlocksXML = runtime.getBlocksXML();
-            const toolboxXML = makeToolboxXML(target.isStage, target.id, dynamicBlocksXML);
+        // Update the toolbox with new blocks
+        const toolboxXML = this.getToolboxXML();
+        if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
         }
     }

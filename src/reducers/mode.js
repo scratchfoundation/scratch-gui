@@ -9,14 +9,15 @@ const initialState = {
     hasEverEnteredEditor: true
 };
 
-const reducer = function (state = initialState, action) {
+const reducer = function (state, action) {
+    if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case SET_FULL_SCREEN:
-        return Object.assign(state, {
+        return Object.assign({}, state, {
             isFullScreen: action.isFullScreen
         });
     case SET_PLAYER:
-        return Object.assign(state, {
+        return Object.assign({}, state, {
             isPlayerOnly: action.isPlayerOnly,
             hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly
         });

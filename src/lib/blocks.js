@@ -247,6 +247,7 @@ export default function (vm) {
                 }
                 // Get all the stage variables (no lists) so we can add them to menu when the stage is selected.
                 const stageVariableOptions = vm.runtime.getTargetForStage().getAllVariableNamesInScopeByType('');
+                stageVariableOptions.sort(ScratchBlocks.scratchBlocksUtils.compareStrings);
                 const stageVariableMenuItems = stageVariableOptions.map(variable => [variable, variable]);
                 if (sensingOfBlock.inputs.OBJECT.shadow !== sensingOfBlock.inputs.OBJECT.block) {
                     // There's a block dropped on top of the menu. It'd be nice to evaluate it and
@@ -265,6 +266,7 @@ export default function (vm) {
                 // The target should exist, but there are ways for it not to (e.g. #4203).
                 if (target) {
                     spriteVariableOptions = target.getAllVariableNamesInScopeByType('', true);
+                    spriteVariableOptions.sort(ScratchBlocks.scratchBlocksUtils.compareStrings);
                 }
                 const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable, variable]);
                 return spriteOptions.concat(spriteVariableMenuItems);

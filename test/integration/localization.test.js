@@ -24,7 +24,7 @@ describe('Localization', () => {
         await driver.quit();
     });
 
-    test('Localization', async () => {
+    test('Switching languages', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
 
@@ -49,6 +49,17 @@ describe('Localization', () => {
         // After switching languages, make sure Apple sprite still exists
         await rightClickText('Apple', scope.spriteTile); // Make sure it is there
 
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    // Regression test for #4476, blocks in wrong language when loaded with locale
+    test('Loading with locale shows correct blocks', async () => {
+        await loadUri(`${uri}?locale=de`);
+        await clickXpath('//button[@title="Ausprobieren!"]'); // "Try It"
+        await clickText('Fühlen'); // Sensing category in German
+        await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks to scroll
+        await clickText('Antwort'); // Find the "answer" block in German
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

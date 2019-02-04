@@ -49,6 +49,9 @@ describe('Localization', () => {
         // After switching languages, make sure Apple sprite still exists
         await rightClickText('Apple', scope.spriteTile); // Make sure it is there
 
+        // Remounting re-attaches the beforeunload callback. Make sure to remove it
+        driver.executeScript('window.onbeforeunload = undefined;');
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

@@ -14,6 +14,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'elementIsVisible',
             'findByText',
             'findByXpath',
             'getDriver',
@@ -22,6 +23,10 @@ class SeleniumHelper {
             'loadUri',
             'rightClickText'
         ]);
+    }
+
+    elementIsVisible (element) {
+        return this.driver.wait(until.elementIsVisible(element));
     }
 
     get scope () {
@@ -43,6 +48,10 @@ class SeleniumHelper {
         if (USE_HEADLESS) {
             args.push('--headless');
         }
+
+        // Stub getUserMedia to always not allow access
+        args.push('--use-fake-ui-for-media-stream=deny');
+
         chromeCapabilities.set('chromeOptions', {args});
         chromeCapabilities.setLoggingPrefs({
             performance: 'ALL'

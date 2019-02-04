@@ -10,9 +10,18 @@
     padding: 1.5rem 2.25rem;
 }
 
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
 .label {
     font-weight: 500;
     margin: 0 0 0.75rem;
+}
+
+.disabled-label {
+    opacity: 0.5;
 }
 
 .variable-name-text-input {
@@ -68,35 +77,16 @@
     margin-right: 0.5rem;
 }
 
-.more-options {
+.cloud-option {
+    display:flex;
     border-top: 1px dashed hsla(0, 0%, 0%, .25);
     overflow: visible;
-    padding: 1rem;
+    padding: 1rem 0;
     text-align: center;
-    margin: 0 0 1rem;
-}
-
-.more-options-accordion {
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
 }
 
-.more-options-text {
+.cloud-option-text {
     opacity: .5;
-}
-
-.more-options-icon {
-    width: .75rem;
-    height: .75rem;
-    vertical-align: middle;
-    padding-bottom: .2rem;
-    opacity: .5;
-}
-
-[dir="ltr"] .more-options-icon {
-    margin-left: .5rem;
-}
-
-[dir="rtl"] .more-options-icon {
-    margin-right: .5rem;
 }

@@ -1,4 +1,5 @@
 @import "../../css/colors.css";
+@import "../../css/units.css";
 @import "../../css/z-index.css";
 
 $main-button-size: 2.75rem;
@@ -153,7 +154,7 @@ button::-moz-focus-inner {
 
 .tooltip {
     border: 1px solid hsla(0, 0%, 0%, .1) !important;
-    border-radius: .25rem !important;
+    border-radius: $form-radius !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     z-index: $z-index-tooltip !important;

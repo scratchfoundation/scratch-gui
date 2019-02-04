@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    elementIsVisible,
     findByText,
     findByXpath,
     getDriver,
@@ -75,6 +76,17 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Deleting by x button on sprite tile', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickXpath('//*[@aria-label="Close"]'); // Only visible close button is on the sprite
+        // Confirm that the stage has been switched to
+        await findByText('Stage selected: no motion blocks');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a sprite by uploading a png', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
@@ -91,7 +103,7 @@ describe('Working with sprites', () => {
 
     // This test fails because uploading an SVG as a sprite changes the scaling
     // Enable when this is fixed issues/3608
-    test.skip('Adding a sprite by uploading an svg (gh-3608)', async () => {
+    test('Adding a sprite by uploading an svg (gh-3608)', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
@@ -109,4 +121,42 @@ describe('Working with sprites', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Adding a letter sprite through the Letters filter in the library', async () => {
+        await loadUri(uri);
+        await driver.manage()
+            .window()
+            .setSize(1244, 768); // Letters filter not visible at 1024 width
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        await clickText('Letters');
+        await clickText('Block-B', scope.modal); // Closes modal
+        await rightClickText('Block-B', scope.spriteTile); // Make sure it is there
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Use browser back button to close library', async () => {
+        await driver.get('https://www.google.com');
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        const abbyElement = await findByText('Abby'); // Should show editor for new costume
+        await elementIsVisible(abbyElement);
+        await driver.navigate().back();
+        try {
+            // should throw error because library is no longer visible
+            await elementIsVisible(abbyElement);
+            throw 'ShouldNotGetHere'; // eslint-disable-line no-throw-literal
+        } catch (e) {
+            expect(e.constructor.name).toEqual('StaleElementReferenceError');
+        }
+        const costumesElement = await findByText('Costumes'); // Should show editor for new costume
+        await elementIsVisible(costumesElement);
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
 });

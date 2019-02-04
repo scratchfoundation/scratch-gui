@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
-import CloudProvider from '../lib/cloud-provider';
 
+import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
     getIsLoadingWithId,
@@ -28,12 +28,15 @@ const vmManagerHOC = function (WrappedComponent) {
             ]);
         }
         componentDidMount () {
-            if (this.props.vm.initialized) return;
-            this.audioEngine = new AudioEngine();
-            this.props.vm.attachAudioEngine(this.audioEngine);
-            this.props.vm.setCompatibilityMode(true);
-            this.props.vm.start();
-            this.props.vm.initialized = true;
+            if (!this.props.vm.initialized) {
+                this.audioEngine = new AudioEngine();
+                this.props.vm.attachAudioEngine(this.audioEngine);
+                this.props.vm.setCompatibilityMode(true);
+                this.props.vm.initialized = true;
+            }
+            if (!this.props.isPlayerOnly && !this.props.isStarted) {
+                this.props.vm.start();
+            }
         }
         componentDidUpdate (prevProps) {
             // if project is in loading state, AND fonts are loaded,
@@ -42,22 +45,28 @@ const vmManagerHOC = function (WrappedComponent) {
                 (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
                 this.loadProject();
             }
+            // Start the VM if entering editor mode with an unstarted vm
+            if (!this.props.isPlayerOnly && !this.props.isStarted) {
+                this.props.vm.start();
+            }
         }
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
-                    // If the cloud host exists, open a cloud connection and
-                    // set the vm's cloud provider.
-                    if (this.props.cloudHost) {
-                        // TODO check if we should actually
-                        // connect to cloud data based on info from the loaded project and
-                        // info about the user (e.g. scratcher status)
-                        this.props.vm.setCloudProvider(new CloudProvider(
-                            this.props.cloudHost,
-                            this.props.vm,
-                            this.props.username,
-                            this.props.projectId));
+                    // Wrap in a setTimeout because skin loading in
+                    // the renderer can be async.
+                    setTimeout(() => this.props.onSetProjectUnchanged());
+
+                    // If the vm is not running, call draw on the renderer manually
+                    // This draws the state of the loaded project with no blocks running
+                    // which closely matches the 2.0 behavior, except for monitors–
+                    // 2.0 runs monitors and shows updates (e.g. timer monitor)
+                    // before the VM starts running other hat blocks.
+                    if (!this.props.isStarted) {
+                        // Wrap in a setTimeout because skin loading in
+                        // the renderer can be async.
+                        setTimeout(() => this.props.vm.renderer.draw());
                     }
                 })
                 .catch(e => {
@@ -67,14 +76,13 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                cloudHost,
                 fontsLoaded,
                 loadingState,
+                isStarted,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
+                onSetProjectUnchanged,
                 projectData,
-                projectId,
-                username,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -95,9 +103,11 @@ const vmManagerHOC = function (WrappedComponent) {
         cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
+        isPlayerOnly: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onError: PropTypes.func,
         onLoadedProject: PropTypes.func,
+        onSetProjectUnchanged: PropTypes.func,
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
@@ -107,17 +117,21 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
             projectData: state.scratchGui.projectState.projectData,
             projectId: state.scratchGui.projectState.projectId,
-            loadingState: loadingState
+            loadingState: loadingState,
+            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+            isStarted: state.scratchGui.vmStatus.started
         };
     };
 
     const mapDispatchToProps = dispatch => ({
         onError: error => dispatch(projectError(error)),
         onLoadedProject: (loadingState, canSave) =>
-            dispatch(onLoadedProject(loadingState, canSave))
+            dispatch(onLoadedProject(loadingState, canSave, true)),
+        onSetProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.

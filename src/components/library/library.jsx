@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import LibraryItem from '../library-item/library-item.jsx';
+import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
@@ -33,11 +33,9 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleBlur',
             'handleClose',
             'handleFilterChange',
             'handleFilterClear',
-            'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect',
@@ -55,12 +53,6 @@ class LibraryComponent extends React.Component {
             prevState.selectedTag !== this.state.selectedTag) {
             this.scrollToTop();
         }
-    }
-    handleBlur (id) {
-        this.handleMouseLeave(id);
-    }
-    handleFocus (id) {
-        this.handleMouseEnter(id);
     }
     handleSelect (id) {
         this.handleClose();
@@ -98,10 +90,12 @@ class LibraryComponent extends React.Component {
                 (dataItem.tags || [])
                     // Second argument to map sets `this`
                     .map(String.prototype.toLowerCase.call, String.prototype.toLowerCase)
-                    .concat((typeof dataItem.name === 'string' ?
+                    .concat(dataItem.name ?
+                        (typeof dataItem.name === 'string' ?
                         // Use the name if it is a string, else use formatMessage to get the translated name
-                        dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
-                    ).toLowerCase())
+                            dataItem.name : this.props.intl.formatMessage(dataItem.name.props)
+                        ).toLowerCase() :
+                        null)
                     .join('\n') // unlikely to partially match newlines
                     .indexOf(this.state.filterQuery.toLowerCase()) !== -1
             ));
@@ -170,27 +164,28 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => {
-                        const scratchURL = dataItem.md5 ?
-                            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
-                            dataItem.rawURL;
-                        return (
-                            <LibraryItem
-                                description={dataItem.description}
-                                disabled={dataItem.disabled}
-                                featured={dataItem.featured}
-                                iconURL={scratchURL}
-                                id={index}
-                                key={`item_${index}`}
-                                name={dataItem.name}
-                                onBlur={this.handleBlur}
-                                onFocus={this.handleFocus}
-                                onMouseEnter={this.handleMouseEnter}
-                                onMouseLeave={this.handleMouseLeave}
-                                onSelect={this.handleSelect}
-                            />
-                        );
-                    })}
+                    {this.getFilteredData().map((dataItem, index) => (
+                        <LibraryItem
+                            bluetoothRequired={dataItem.bluetoothRequired}
+                            collaborator={dataItem.collaborator}
+                            description={dataItem.description}
+                            disabled={dataItem.disabled}
+                            extensionId={dataItem.extensionId}
+                            featured={dataItem.featured}
+                            hidden={dataItem.hidden}
+                            iconMd5={dataItem.md5}
+                            iconRawURL={dataItem.rawURL}
+                            icons={dataItem.json && dataItem.json.costumes}
+                            id={index}
+                            insetIconURL={dataItem.insetIconURL}
+                            internetConnectionRequired={dataItem.internetConnectionRequired}
+                            key={`item_${index}`}
+                            name={dataItem.name}
+                            onMouseEnter={this.handleMouseEnter}
+                            onMouseLeave={this.handleMouseLeave}
+                            onSelect={this.handleSelect}
+                        />
+                    ))}
                 </div>
             </Modal>
         );
@@ -207,7 +202,7 @@ LibraryComponent.propTypes = {
             name: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.node
-            ]).isRequired,
+            ]),
             rawURL: PropTypes.string
         })
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */

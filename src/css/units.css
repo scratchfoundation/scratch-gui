@@ -22,3 +22,9 @@ $form-radius: calc($space / 2);
 /* layout contants from `layout-constants.js` */
 $full-size: 1095px;
 $full-size-paint: 1249px;
+
+$menu-bar-standard-font-size: 0.75rem;
+$menu-bar-large-font-size: 0.875rem;
+$menu-bar-button-size: 2rem;
+
+$menu-bar-item-max-width: 12rem;

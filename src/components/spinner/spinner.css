@@ -1,19 +1,20 @@
 @import "../../css/colors.css";
 
 .spinner {
-    width: 1rem;
-    height: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
     display: inline-block;
     position: relative;
     border-radius: 50%;
     border-width: .1875rem;
     border-style: solid;
     border-color: $ui-white-transparent;
+    box-sizing: content-box;
 }
 
-.spinner::after, .spinner::before {
-    width: .625rem;
-    height: .625rem;
+.spinner::before, .spinner::after {
+    width: 1.25rem;
+    height: 1.25rem;
     content: '';
     border-radius: 50%;
     display: block;
@@ -28,6 +29,16 @@
     animation: spin 1.5s cubic-bezier(0.4, 0.1, 0.4, 1) infinite;
 }
 
+.small {
+    width: .5rem;
+    height: .5rem;
+}
+
+.small::before, .small::after {
+    width: .5rem;
+    height: .5rem;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -38,17 +49,25 @@
   }
 }
 
-.spinner.orange {
+.spinner.success {
+    border-color: $extensions-transparent;
+}
+
+.spinner.success::after {
+    border-top-color: $extensions-primary;
+}
+
+.spinner.warn {
     border-color: $error-transparent;
 }
 
-.spinner.orange::after {
+.spinner.warn::after {
     border-top-color: $error-primary;
 }
 
-.spinner.white {
+.spinner.info {
     border-color: $ui-white-transparent;
 }
-.spinner.white::after {
+.spinner.info::after {
     border-top-color: $ui-white;
 }

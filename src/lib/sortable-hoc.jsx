@@ -68,16 +68,22 @@ const SortableHOC = function (WrappedComponent) {
             }
             return ordering;
         }
+
         getMouseOverIndex () {
             // MouseOverIndex is the index that the current drag wants to place the
             // the dragging object. Obviously only exists if there is a drag (i.e. currentOffset).
+            // Return null if outside the container, zero if there are no boxes.
             let mouseOverIndex = null;
             if (this.props.dragInfo.currentOffset) {
                 const {x, y} = this.props.dragInfo.currentOffset;
                 const {top, left, bottom, right} = this.containerBox;
                 if (x >= left && x <= right && y >= top && y <= bottom) {
-                    mouseOverIndex = indexForPositionOnList(
-                        this.props.dragInfo.currentOffset, this.boxes);
+                    if (this.boxes.length === 0) {
+                        mouseOverIndex = 0;
+                    } else {
+                        mouseOverIndex = indexForPositionOnList(
+                            this.props.dragInfo.currentOffset, this.boxes);
+                    }
                 }
             }
             return mouseOverIndex;

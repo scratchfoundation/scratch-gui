@@ -80,17 +80,6 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Adding a backdrop', async () => {
-        await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
-        await clickXpath('//button[@aria-label="Choose a Backdrop"]');
-        const el = await findByXpath("//input[@placeholder='Search']");
-        await el.sendKeys('blue');
-        await clickText('Blue Sky'); // Should close the modal
-        const logs = await getLogs();
-        await expect(logs).toEqual([]);
-    });
-
     test('Converting bitmap/vector in paint editor', async () => {
         await loadUri(uri);
         await clickXpath('//button[@title="Try It"]');
@@ -160,4 +149,36 @@ describe('Working with costumes', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Adding a letter costume through the Letters filter in the library', async () => {
+        await loadUri(uri);
+        await driver.manage()
+            .window()
+            .setSize(1244, 768); // Letters filter not visible at 1024 width
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        await clickXpath('//button[@aria-label="Choose a Costume"]');
+        await clickText('Letters');
+        await clickText('Block-a', scope.modal); // Closes modal
+        await rightClickText('Block-a', scope.costumesTab); // Make sure it is there
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Costumes animate on mouseover', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        const searchElement = await findByXpath("//input[@placeholder='Search']");
+        await searchElement.sendKeys('abb');
+        const abbyElement = await findByXpath('//*[span[text()="Abby"]]');
+        driver.actions()
+            .mouseMove(abbyElement)
+            .perform();
+        // wait for one of Abby's alternate costumes to appear
+        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/b6e23922f23b49ddc6f62f675e77417c.svg/get/"]');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
 });

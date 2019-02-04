@@ -14,11 +14,14 @@ import modalReducer, {modalsInitialState} from './modals';
 import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
+import projectChangedReducer, {projectChangedInitialState} from './project-changed';
 import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
+import fontsLoadedReducer, {fontsLoadedInitialState} from './fonts-loaded';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
+import timeoutReducer, {timeoutInitialState} from './timeout';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
@@ -45,10 +48,13 @@ const guiInitialState = {
     modals: modalsInitialState,
     monitors: monitorsInitialState,
     monitorLayout: monitorLayoutInitialState,
+    projectChanged: projectChangedInitialState,
     projectState: projectStateInitialState,
     projectTitle: projectTitleInitialState,
+    fontsLoaded: fontsLoadedInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
+    timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState
@@ -60,7 +66,10 @@ const initPlayer = function (currentState) {
         currentState,
         {mode: {
             isFullScreen: currentState.mode.isFullScreen,
-            isPlayerOnly: true
+            isPlayerOnly: true,
+            // When initializing in player mode, make sure to reset
+            // hasEverEnteredEditorMode
+            hasEverEnteredEditor: false
         }}
     );
 };
@@ -70,7 +79,21 @@ const initFullScreen = function (currentState) {
         currentState,
         {mode: {
             isFullScreen: true,
-            isPlayerOnly: currentState.mode.isPlayerOnly
+            isPlayerOnly: currentState.mode.isPlayerOnly,
+            hasEverEnteredEditor: currentState.mode.hasEverEnteredEditor
+        }}
+    );
+};
+
+const initEmbedded = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {mode: {
+            showBranding: true,
+            isFullScreen: true,
+            isPlayerOnly: true,
+            hasEverEnteredEditor: false
         }}
     );
 };
@@ -80,9 +103,6 @@ const initTutorialCard = function (currentState, deckId) {
         {},
         currentState,
         {
-            modals: {
-                previewInfo: false
-            },
             cards: {
                 visible: true,
                 content: decks,
@@ -96,14 +116,25 @@ const initTutorialCard = function (currentState, deckId) {
     );
 };
 
-const initTutorialLibrary = function (currentState) {
+const initPreviewInfo = function (currentState) {
     return Object.assign(
         {},
         currentState,
         {
             modals: {
-                previewInfo: false,
-                tipsLibrary: true
+                previewInfo: true // this key must match `MODAL_PREVIEW_INFO` in modals.js
+            }
+        }
+    );
+};
+
+const initTelemetryModal = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                telemetryModal: true // this key must match `MODAL_TELEMETRY` in modals.js
             }
         }
     );
@@ -126,10 +157,13 @@ const guiReducer = combineReducers({
     modals: modalReducer,
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,
+    projectChanged: projectChangedReducer,
     projectState: projectStateReducer,
     projectTitle: projectTitleReducer,
+    fontsLoaded: fontsLoadedReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
+    timeout: timeoutReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer
@@ -139,8 +173,10 @@ export {
     guiReducer as default,
     guiInitialState,
     guiMiddleware,
+    initEmbedded,
     initFullScreen,
     initPlayer,
-    initTutorialCard,
-    initTutorialLibrary
+    initPreviewInfo,
+    initTelemetryModal,
+    initTutorialCard
 };

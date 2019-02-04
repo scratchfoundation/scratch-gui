@@ -303,11 +303,10 @@ $fade-out-distance: 15px;
 /* Alerts */
 
 .alerts-container {
-    width: 520px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     z-index: $z-index-alerts;
-    left: 0;
-    right: 0;
-    margin: auto;
     position: absolute;
     margin-top: 53px;
 }

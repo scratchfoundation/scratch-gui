@@ -89,8 +89,8 @@ const messages = defineMessages({
         id: 'gui.opcodeLabels.date'
     },
     sensing_current_dayofweek: {
-        defaultMessage: 'dayofweek',
-        description: 'Label for the current dayofweek monitor when shown on the stage',
+        defaultMessage: 'day of week',
+        description: 'Label for the current day of week monitor when shown on the stage',
         id: 'gui.opcodeLabels.dayofweek'
     },
     sensing_current_hour: {
@@ -210,7 +210,7 @@ class OpcodeLabels {
         this._opcodeMap.sensing_loudness.labelFn = () => this._translator(messages.sensing_loudness);
         this._opcodeMap.sensing_username.labelFn = () => this._translator(messages.sensing_username);
         this._opcodeMap.sensing_current.labelFn = params => {
-            switch (params.CURRENTMENU) {
+            switch (params.CURRENTMENU.toLowerCase()) {
             case 'year':
                 return this._translator(messages.sensing_current_year);
             case 'month':
@@ -238,7 +238,7 @@ class OpcodeLabels {
     getLabel (opcode) {
         if (opcode in this._opcodeMap) return this._opcodeMap[opcode];
         return {
-            category: 'data',
+            category: 'extension',
             label: opcode
         };
     }

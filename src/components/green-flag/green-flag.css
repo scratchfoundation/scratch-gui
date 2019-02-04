@@ -8,11 +8,10 @@
     user-select: none;
     user-drag: none;
     cursor: pointer;
-    transition: 0.2s ease-out;
 }
 
 .green-flag:hover {
-    transform: scale(1.2);
+    background-color: $motion-light-transparent;
 }
 
 .green-flag.is-active {

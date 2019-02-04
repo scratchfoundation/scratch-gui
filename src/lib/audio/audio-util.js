@@ -1,3 +1,5 @@
+const SOUND_BYTE_LIMIT = 10 * 1000 * 1000; // 10mb
+
 const computeRMS = function (samples, scaling = 0.55) {
     if (samples.length === 0) return 0;
     // Calculate RMS, adapted from https://github.com/Tonejs/Tone.js/blob/master/Tone/component/Meter.js#L88
@@ -23,5 +25,6 @@ const computeChunkedRMS = function (samples, chunkSize = 1024) {
 
 export {
     computeRMS,
-    computeChunkedRMS
+    computeChunkedRMS,
+    SOUND_BYTE_LIMIT
 };

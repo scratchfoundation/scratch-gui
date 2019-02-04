@@ -12,6 +12,9 @@ $hover-scale: 2;
     left: 0;
     width: 100%;
     height: 100%;
+
+    /* Force the browser to paint separately to avoid composite cost with waveform */
+    transform: translateZ(0);
 }
 
 .trim-background {
@@ -50,8 +53,25 @@ $hover-scale: 2;
     border: 1px solid $red-tertiary;
 }
 
+.playhead-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .playhead {
-    border: 1px solid $motion-primary;
+    /*
+        Even though playhead is just a line, it is 100% width (the width of the waveform)
+        so that we can use transform: translateX() using percentages.
+    */
+    width: 100%;
+    border-left: 1px solid $motion-primary;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
 }
 
 .start-trim-line {

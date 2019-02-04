@@ -46,7 +46,7 @@
     },
     {
         "name": "Abby-d",
-        "md5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
+        "md5": "2d05d4da65e7b5009a491d8153d37253.svg",
         "type": "costume",
         "tags": [
             "people",
@@ -54,8 +54,8 @@
             "drawing"
         ],
         "info": [
-            31,
-            100,
+            32,
+            101,
             1
         ]
     },
@@ -75,7 +75,7 @@
     },
     {
         "name": "Andie-a",
-        "md5": "936abdaaac3a3f7d27e5f30b3da00e5f.svg",
+        "md5": "419ff5a76adbb4b076c072f68267fdeb.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -88,13 +88,13 @@
         ],
         "info": [
             86,
-            77,
+            81,
             1
         ]
     },
     {
         "name": "Andie-b",
-        "md5": "cc2953492b40e231fdee3d8c9994a646.svg",
+        "md5": "a6a766912b4e43064ee3f389c72925b4.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -107,13 +107,13 @@
         ],
         "info": [
             46,
-            77,
+            106,
             1
         ]
     },
     {
         "name": "Andie-c",
-        "md5": "76e26ccb79a94d3e89f67e64b4cb9731.svg",
+        "md5": "fac1025857d2c28391cb31f39a80df54.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -126,13 +126,13 @@
         ],
         "info": [
             52,
-            36,
+            65,
             1
         ]
     },
     {
         "name": "Andie-d",
-        "md5": "80fa011244f3e3be56b96ebcb9e40d59.svg",
+        "md5": "7af50835e05d43e5e07cd2d641e7401e.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -144,8 +144,8 @@
             "alex eben meyer"
         ],
         "info": [
-            86,
-            43,
+            87,
+            72,
             1
         ]
     },
@@ -263,7 +263,7 @@
     },
     {
         "name": "Anina Stance",
-        "md5": "b66762519d9542c0ab4fe754b47fe593.png",
+        "md5": "84c5e22b4303c7c1fb707125706c9aaa.png",
         "type": "costume",
         "tags": [
             "people",
@@ -687,7 +687,7 @@
     },
     {
         "name": "Bananas",
-        "md5": "40bb8a1afe88cec78254f6fcfee98242.svg",
+        "md5": "1a76b68e056954f5c8ac1f073df1533d.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -697,14 +697,14 @@
             "fruit"
         ],
         "info": [
-            36,
-            37,
+            39,
+            38,
             1
         ]
     },
     {
         "name": "Baseball",
-        "md5": "ae05a2a1fc22ce5929b8a67f695bfc9c.svg",
+        "md5": "838dc2b2278619d3a9beefc6c8072a08.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -720,7 +720,7 @@
     },
     {
         "name": "Basketball",
-        "md5": "b15c425f3eef68e7d095ee91321cb52a.svg",
+        "md5": "482f04cbffa835c4abf29ab996d3fbbd.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -728,14 +728,14 @@
             "alex eben meyer"
         ],
         "info": [
-            26,
-            26,
+            23,
+            23,
             1
         ]
     },
     {
         "name": "Bat-a",
-        "md5": "3b6274510488d5b26447c1c266475801.svg",
+        "md5": "75bf9a5c5ec7dc9325a0301b6f6e72dd.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -746,14 +746,14 @@
             "alex eben meyer"
         ],
         "info": [
-            65,
-            61,
+            80,
+            60,
             1
         ]
     },
     {
         "name": "Bat-b",
-        "md5": "8b20987d450379a445cbfc41ff2a3874.svg",
+        "md5": "b92d4967a0c233b0e78d6e834653f846.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -764,14 +764,14 @@
             "alex eben meyer"
         ],
         "info": [
-            65,
+            39,
             61,
             1
         ]
     },
     {
         "name": "Bat-c",
-        "md5": "c6d6a6892638e489902fbba803050de1.svg",
+        "md5": "56b1458bd81b8ac2401c216f7352343c.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -782,14 +782,14 @@
             "alex eben meyer"
         ],
         "info": [
-            65,
-            61,
+            68,
+            66,
             1
         ]
     },
     {
         "name": "Bat-d",
-        "md5": "e3da64838b2c74b6dd9a080b030e327e.svg",
+        "md5": "7f806f928a192aab0b0d03aa96a89a67.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -800,14 +800,14 @@
             "alex eben meyer"
         ],
         "info": [
-            65,
-            61,
+            29,
+            62,
             1
         ]
     },
     {
         "name": "Batter-a",
-        "md5": "cc7510ea0a0e2f6eaf232f8ca73e3b53.svg",
+        "md5": "f7357c4cef5f31c6460e4f69dd0adabb.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -816,14 +816,14 @@
             "alex eben meyer"
         ],
         "info": [
-            44,
-            71,
+            46,
+            80,
             1
         ]
     },
     {
         "name": "Batter-b",
-        "md5": "7e7f9ce18fd84e0e95a96ad30fb58c8c.svg",
+        "md5": "c60fe1da0dcddedfd152384c60cbd5cc.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -832,14 +832,14 @@
             "alex eben meyer"
         ],
         "info": [
-            14,
-            58,
+            16,
+            67,
             1
         ]
     },
     {
         "name": "Batter-c",
-        "md5": "05cc730290919069b8d08447214c7293.svg",
+        "md5": "165c30e123e785d4cbbc0d9621f1c349.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -848,14 +848,14 @@
             "alex eben meyer"
         ],
         "info": [
-            92,
-            57,
+            94,
+            66,
             1
         ]
     },
     {
         "name": "Batter-d",
-        "md5": "24c32bf9bf066e36e49beb03ccd3db8f.svg",
+        "md5": "e82529d9c31b56a3dd098ccc94be68a6.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -864,8 +864,8 @@
             "alex eben meyer"
         ],
         "info": [
-            64,
-            95,
+            70,
+            102,
             1
         ]
     },
@@ -902,7 +902,7 @@
     },
     {
         "name": "Bear-b",
-        "md5": "d6517131718621a7aae8fc4f27de1ded.svg",
+        "md5": "92a64ce184c8515217e0e98e49624622.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -910,8 +910,8 @@
             "walking"
         ],
         "info": [
-            80,
-            140,
+            94,
+            191,
             1
         ]
     },
@@ -1069,7 +1069,7 @@
     },
     {
         "name": "Ben-a",
-        "md5": "7f32d8d78ad64f50c018b7b578de2e18.svg",
+        "md5": "4386d05d5abd6e1aa0a93b7b447d1b39.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1079,14 +1079,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            75,
+            53,
+            69,
             1
         ]
     },
     {
         "name": "Ben-b",
-        "md5": "fb012e5d1baf80d33ae95fba3511151a.svg",
+        "md5": "90db137cd0743204d02fdc9be1c8eb94.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1096,14 +1096,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            75,
+            53,
+            67,
             1
         ]
     },
     {
         "name": "Ben-c",
-        "md5": "be0b1397965cf8ff2c4cecb84795138a.svg",
+        "md5": "5f05d41ede773b3bb379286e86a5b869.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1113,14 +1113,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            75,
+            71,
+            72,
             1
         ]
     },
     {
         "name": "Ben-d",
-        "md5": "e2aefdb538ebbb24e1ab1464f75ef134.svg",
+        "md5": "6f6e246567c0639c758ed4f6930be76f.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1130,8 +1130,8 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            75,
+            42,
+            72,
             1
         ]
     },
@@ -1150,41 +1150,15 @@
         ]
     },
     {
-        "name": "Bowtie-01",
-        "md5": "aebd82272a5f4a1dd3c23d6e98537017.svg",
+        "name": "Bowtie",
+        "md5": "7d876f3ba4b04f3193a701ed30b4490c.svg",
         "type": "costume",
         "tags": [
             "fashion"
         ],
         "info": [
-            13,
-            7,
-            1
-        ]
-    },
-    {
-        "name": "Bowtie-a",
-        "md5": "534d9924d2f9bfe240f041e3ce55ccf5.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            11,
-            4,
-            1
-        ]
-    },
-    {
-        "name": "Bowtie-b",
-        "md5": "8be1e90e19cd1faced8a2e83c2b5c90d.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            11,
-            4,
+            15,
+            8,
             1
         ]
     },
@@ -1668,7 +1642,7 @@
     },
     {
         "name": "Casey-a",
-        "md5": "30a4dafa852311b2a07d72e1bb060326.svg",
+        "md5": "b7269d70079e96299666cc7b3f8eabc3.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1677,14 +1651,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            75,
+            62,
             1
         ]
     },
     {
         "name": "Casey-b",
-        "md5": "c8c0a25bebac8b35b8eae7ddd716d061.svg",
+        "md5": "d22f6e818106f247f91e1c7c315863c3.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1693,14 +1667,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            60,
+            74,
             1
         ]
     },
     {
         "name": "Casey-c",
-        "md5": "104d363c48c373384c6c80abbbbb0ad6.svg",
+        "md5": "a6ea02408a3f8366dfd704aae9a6ed0b.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1709,14 +1683,14 @@
             "alex eben meyer"
         ],
         "info": [
-            61,
-            61,
+            57,
+            72,
             1
         ]
     },
     {
         "name": "Casey-d",
-        "md5": "3d4bddb908bf912b938c111bfa38c28a.svg",
+        "md5": "033ef301acfdfbc38774a14a559c1654.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1725,8 +1699,8 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            71,
+            74,
             1
         ]
     },
@@ -1804,7 +1778,7 @@
     },
     {
         "name": "Cat Flying-a",
-        "md5": "1e81725d2d2c7de4a2dd4a145198a43c.svg",
+        "md5": "bf6b9f91e6928be67eda5154ca5fb2c6.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1813,31 +1787,30 @@
             "kitten"
         ],
         "info": [
-            67,
-            48,
+            55,
+            37,
             1
         ]
     },
     {
         "name": "Cat Flying-b",
-        "md5": "0d192725870ef0eda50d91cab0e3c9c5.svg",
+        "md5": "6a5f707419e619463135f5bae599fa5b.svg",
         "type": "costume",
         "tags": [
             "animals",
-            "flying",
             "cat",
             "kitty",
             "kitten"
         ],
         "info": [
-            42,
             44,
+            46,
             1
         ]
     },
     {
         "name": "Cat-a",
-        "md5": "09dc888b0b7df19f70d81588ae73420e.svg",
+        "md5": "b7853f557e4426412e64bb3da6531a99.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1849,14 +1822,14 @@
             "scratch cat"
         ],
         "info": [
-            47,
-            55,
+            48,
+            50,
             1
         ]
     },
     {
         "name": "Cat-b",
-        "md5": "3696356a03a8d938318876a593572843.svg",
+        "md5": "e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -1868,14 +1841,14 @@
             "scratch cat"
         ],
         "info": [
-            47,
-            55,
+            46,
+            53,
             1
         ]
     },
     {
         "name": "Catcher-a",
-        "md5": "6700cf1d4d653283161d2bad20f74d39.svg",
+        "md5": "27c88c54a59b9fff7e3e4763a6e9874e.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -1884,14 +1857,14 @@
             "alex eben meyer"
         ],
         "info": [
-            34,
-            33,
+            41,
+            51,
             1
         ]
     },
     {
         "name": "Catcher-b",
-        "md5": "d59c293e6fb4e15aa6bcfca5b1d0f2a6.svg",
+        "md5": "799a822cffc9460c0bf1b387cbd5e06b.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -1900,14 +1873,14 @@
             "alex eben meyer"
         ],
         "info": [
-            34,
-            29,
+            41,
+            47,
             1
         ]
     },
     {
         "name": "Catcher-c",
-        "md5": "55a2b54e5e414c9e2a17caf73ad06b87.svg",
+        "md5": "a6f2bf8b354e8d1a789f8e6f83133d02.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -1916,14 +1889,14 @@
             "alex eben meyer"
         ],
         "info": [
-            53,
-            69,
+            60,
+            87,
             1
         ]
     },
     {
         "name": "Catcher-d",
-        "md5": "d8943c5c2700e49f26f77826b9a3c238.svg",
+        "md5": "c86af45d9168bfb81259e5bb40be1778.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -1932,8 +1905,8 @@
             "alex eben meyer"
         ],
         "info": [
-            79,
-            28,
+            86,
+            46,
             1
         ]
     },
@@ -2003,7 +1976,7 @@
     },
     {
         "name": "Champ99-a",
-        "md5": "1cb9d1a98cebc8a1d83af7633fdb9cd0.png",
+        "md5": "7b073f47fbd9421e0d60daacc157f506.png",
         "type": "costume",
         "tags": [
             "people",
@@ -2114,7 +2087,7 @@
     },
     {
         "name": "Chick-a",
-        "md5": "0abf71fb210bbda7eac0bb6ecaab25de.svg",
+        "md5": "7cd74ad0da97a828e8499ee181c9dbb1.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2123,14 +2096,14 @@
             "owen davey"
         ],
         "info": [
-            20,
-            21,
+            32,
+            37,
             1
         ]
     },
     {
         "name": "Chick-b",
-        "md5": "3577aafabcfd6bcc7f7512be940a18b7.svg",
+        "md5": "07c2dad5f7063fddf7705f4817fad4f6.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2139,8 +2112,56 @@
             "owen davey"
         ],
         "info": [
-            20,
+            32,
+            37,
+            1
+        ]
+    },
+    {
+        "name": "Chick-c",
+        "md5": "272d3e4503a4123df62f25b67bad6f03.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "chicken",
+            "farm",
+            "owen davey"
+        ],
+        "info": [
             21,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "City Bus-a",
+        "md5": "accf64aceae7997b7533fb51624ca297.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "bus",
+            "vehicle",
+            "car"
+        ],
+        "info": [
+            107,
+            67,
+            1
+        ]
+    },
+    {
+        "name": "City Bus-b",
+        "md5": "b9ea0e326ffa98bc58a73bdf17c9542b.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "bus",
+            "vehicle",
+            "car"
+        ],
+        "info": [
+            107,
+            67,
             1
         ]
     },
@@ -2238,11 +2259,12 @@
         ]
     },
     {
-        "name": "Convertible3",
+        "name": "Convertible 3",
         "md5": "b6ac3c9e1789cba2302d2ef82d62d019.svg",
         "type": "costume",
         "tags": [
             "transportation",
+            "car",
             "things"
         ],
         "info": [
@@ -2353,43 +2375,40 @@
     },
     {
         "name": "Dani-a",
-        "md5": "f3038fb0f4a00806b02081c6789dd8cf.svg",
+        "md5": "e620d1c3143b5ff05a0e4df89576e054.svg",
         "type": "costume",
         "tags": [
-            "people",
-            "fashion"
+            "people"
         ],
         "info": [
-            49,
-            115,
+            37,
+            141,
             1
         ]
     },
     {
         "name": "Dani-b",
-        "md5": "e5c7dd4905a78e1d54087b7165dd1e8c.svg",
+        "md5": "4de54672f1c7af00623a0ee3bc490ba7.svg",
         "type": "costume",
         "tags": [
-            "people",
-            "fashion"
+            "people"
         ],
         "info": [
-            82,
-            115,
+            86,
+            141,
             1
         ]
     },
     {
         "name": "Dani-c",
-        "md5": "cbc5f9c67022af201d498bc9b35608b8.svg",
+        "md5": "b4a303342f9b7ed6a74059054347dd30.svg",
         "type": "costume",
         "tags": [
-            "people",
-            "fashion"
+            "people"
         ],
         "info": [
-            49,
-            113,
+            37,
+            138,
             1
         ]
     },
@@ -2512,7 +2531,7 @@
     },
     {
         "name": "Dinosaur1-a",
-        "md5": "75d367961807fff8e81f556da81dec24.svg",
+        "md5": "e70ab4de006f3df64e776abf912a62be.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2528,7 +2547,7 @@
     },
     {
         "name": "Dinosaur1-b",
-        "md5": "ecdaee9c08ae68fd7a67f81302f00a97.svg",
+        "md5": "af2d8211a65dce9871d49fa70671ce0c.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2544,7 +2563,7 @@
     },
     {
         "name": "Dinosaur1-c",
-        "md5": "02078a81abd2e10cb62ebcc853a40c92.svg",
+        "md5": "a2bb28d5ba55ba997bec63772437cecf.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2560,7 +2579,7 @@
     },
     {
         "name": "Dinosaur1-d",
-        "md5": "c9ed031bc9bf11416142880f89436be9.svg",
+        "md5": "91f3dba45e8cec7bdff31ed5acde2c85.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2569,14 +2588,14 @@
             "sauropod"
         ],
         "info": [
-            98,
+            99,
             91,
             1
         ]
     },
     {
         "name": "Dinosaur2-a",
-        "md5": "5493f5deffe7aed451cd8b255740de4a.svg",
+        "md5": "f49719e8f2440f5d328f2604e97eb71d.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2585,14 +2604,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            63,
+            67,
             1
         ]
     },
     {
         "name": "Dinosaur2-b",
-        "md5": "70bba739b7df0bd08abb31026d078ee7.svg",
+        "md5": "1af6b3af3bf2cda862bbe01034a336bb.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2601,14 +2620,14 @@
             "alex eben meyer"
         ],
         "info": [
-            74,
+            76,
             67,
             1
         ]
     },
     {
         "name": "Dinosaur2-c",
-        "md5": "4a51679d86aafcc9cee1c010fc141288.svg",
+        "md5": "e83b30a4517bbe155e2b4a6367c8f70b.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2617,14 +2636,14 @@
             "alex eben meyer"
         ],
         "info": [
-            62,
+            64,
             67,
             1
         ]
     },
     {
         "name": "Dinosaur2-d",
-        "md5": "47053664449b24749aaf199925b19f8e.svg",
+        "md5": "8244f1fb159237179d1caaa69c070060.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2633,14 +2652,14 @@
             "alex eben meyer"
         ],
         "info": [
-            71,
-            66,
+            73,
+            67,
             1
         ]
     },
     {
         "name": "Dinosaur3-a",
-        "md5": "17636db6f607c14a03a36e18abfea86a.svg",
+        "md5": "c4867c44f38df5bde472844878d5beea.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2650,14 +2669,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            113,
+            42,
             1
         ]
     },
     {
         "name": "Dinosaur3-b",
-        "md5": "1b20afc713b04ca5d01b25d050aa35ac.svg",
+        "md5": "b682c1e58ea1c6bea737670f57517b6f.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2667,14 +2686,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            113,
+            59,
             1
         ]
     },
     {
         "name": "Dinosaur3-c",
-        "md5": "4700613077afa7c62659b3fd7d7c748e.svg",
+        "md5": "47a617ca48f4782efeeb60199cff801e.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2684,14 +2703,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            47,
+            59,
             1
         ]
     },
     {
         "name": "Dinosaur3-d",
-        "md5": "a03f110ed12b73acc9bd84037fd6ae96.svg",
+        "md5": "710ff3380d6872b04785db97dc0565c6.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2701,14 +2720,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            113,
+            65,
             1
         ]
     },
     {
         "name": "Dinosaur3-e",
-        "md5": "00e24e40535a1a621fee0f70895b2b61.svg",
+        "md5": "6f40025c1157f37858adf7fa85090e64.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2717,14 +2736,14 @@
             "alex eben meyer"
         ],
         "info": [
-            115,
-            72,
+            41,
+            40,
             1
         ]
     },
     {
         "name": "Dinosaur4-a",
-        "md5": "9da591f8a6da251c800adb12a02c43cb.svg",
+        "md5": "d87b5e3c45f5d234c7aa47107c788f18.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2735,14 +2754,14 @@
             "alex eben meyer"
         ],
         "info": [
-            59,
-            54,
+            60,
+            52,
             1
         ]
     },
     {
         "name": "Dinosaur4-b",
-        "md5": "a3028e87caeb8338f50b2c6dec9f23d2.svg",
+        "md5": "cfe906702bbd30bc3bb8acb53079b6b0.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2753,14 +2772,14 @@
             "alex eben meyer"
         ],
         "info": [
-            86,
-            54,
+            87,
+            52,
             1
         ]
     },
     {
         "name": "Dinosaur4-c",
-        "md5": "9a4bbc1b104c8112be82c252a6ecfd11.svg",
+        "md5": "1879b07cfe788b0258afada17aa46973.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2772,13 +2791,13 @@
         ],
         "info": [
             59,
-            54,
+            52,
             1
         ]
     },
     {
         "name": "Dinosaur4-d",
-        "md5": "45061ff84a25723625d04f0476687633.svg",
+        "md5": "52c17657698ab82881ed3ccf83080684.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -2790,7 +2809,7 @@
         ],
         "info": [
             89,
-            90,
+            88,
             1
         ]
     },
@@ -3111,7 +3130,7 @@
     },
     {
         "name": "Dorian-a",
-        "md5": "b042b1a5fde03dd5abbc2f3f78d11a2c.svg",
+        "md5": "503f1d4d0fe61d071e1dd8b5233cceb0.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -3120,14 +3139,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            60,
+            65,
             1
         ]
     },
     {
         "name": "Dorian-b",
-        "md5": "d0b58b672606601ecfa3a406b537fa10.svg",
+        "md5": "d5f795ef2395bcd11ceee0b0c24c9341.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -3136,14 +3155,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            60,
+            65,
             1
         ]
     },
     {
         "name": "Dorian-c",
-        "md5": "445e461c73a5920098764a4cbad5bfe0.svg",
+        "md5": "4ad4ddf4251b9b5bcb16d8d77213685f.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -3152,14 +3171,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            77,
+            67,
             1
         ]
     },
     {
         "name": "Dorian-d",
-        "md5": "ba93ede3bbf75c0f707b0fb982bc27e8.svg",
+        "md5": "67fba4e187ecf42749bdd44e64f29192.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -3168,68 +3187,72 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            72,
+            77,
+            53,
             1
         ]
     },
     {
         "name": "Dot-a",
-        "md5": "47c975e37f9a89c01d0d4d6fd17ef847.svg",
+        "md5": "3b9e6830365aeadb63c21b681777b783.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
         "info": [
             52,
-            69,
+            67,
             1
         ]
     },
     {
         "name": "Dot-b",
-        "md5": "a9b7d5f7afa0c69c4044a3f541b9ab90.svg",
+        "md5": "a80a07906ffbb9671dba3633223859af.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
         "info": [
             65,
-            69,
+            67,
             1
         ]
     },
     {
         "name": "Dot-c",
-        "md5": "5b7967159c9b83b0d0ed4f051ec2c9e9.svg",
+        "md5": "1e1bdccbab5b566beb7f91b5ec01352f.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
         "info": [
-            49,
-            70,
+            51,
+            69,
             1
         ]
     },
     {
         "name": "Dot-d",
-        "md5": "23ffa385654304e4cac454390dde3606.svg",
+        "md5": "06d70d5de0e25f97c1c606e513ab019c.svg",
         "type": "costume",
         "tags": [
+            "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
         "info": [
-            59,
-            69,
+            57,
+            67,
             1
         ]
     },
@@ -3344,7 +3367,54 @@
         ]
     },
     {
-        "name": "Dress-01",
+        "name": "Dragonfly-a",
+        "md5": "87aaecd2fb73580e6f1f38c5a2e579a9.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "dragonfly",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            108,
+            52,
+            1
+        ]
+    },
+    {
+        "name": "Dragonfly-b",
+        "md5": "4e775a49bd5a7a6d38392731924f72e0.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "dragonfly",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            108,
+            46,
+            1
+        ]
+    },
+    {
+        "name": "Dress-a",
+        "md5": "fa7e0b37a324c212d0f1ce0f701a1ae0.svg",
+        "type": "costume",
+        "tags": [
+            "fashion"
+        ],
+        "info": [
+            57,
+            83,
+            1
+        ]
+    },
+    {
+        "name": "Dress-b",
         "md5": "308b6ad8e6cfe5c2b2c1e3a1eb9cc404.svg",
         "type": "costume",
         "tags": [
@@ -3357,7 +3427,7 @@
         ]
     },
     {
-        "name": "Dress-02",
+        "name": "Dress-c",
         "md5": "1f7a725ba285dc97cb142d4b812db624.svg",
         "type": "costume",
         "tags": [
@@ -3365,19 +3435,6 @@
         ],
         "info": [
             49,
-            83,
-            1
-        ]
-    },
-    {
-        "name": "Dress-03",
-        "md5": "fa7e0b37a324c212d0f1ce0f701a1ae0.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            57,
             83,
             1
         ]
@@ -3496,29 +3553,59 @@
     },
     {
         "name": "Drum-snare-a",
-        "md5": "b0255be93e3c8be6ac687f4199a25c4b.svg",
+        "md5": "ace58710b8fa5fca8fb5bbca15e7d19c.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
-            23,
-            50,
+            21,
+            32,
             1
         ]
     },
     {
         "name": "Drum-snare-b",
-        "md5": "f6d2f2a6e1055dab6262336625ddf652.svg",
+        "md5": "f6120839d3f73b262571add2444c443a.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
-            36,
+            34,
+            48,
+            1
+        ]
+    },
+    {
+        "name": "Drums Conga-a",
+        "md5": "b3da94523b6d3df2dd30602399599ab4.svg",
+        "type": "costume",
+        "tags": [
+            "drums",
+            " music",
+            " ericr"
+        ],
+        "info": [
+            65,
             66,
+            1
+        ]
+    },
+    {
+        "name": "Drums Conga-b",
+        "md5": "037703c2b65f051c12e9b22dcf93856c.svg",
+        "type": "costume",
+        "tags": [
+            "drums",
+            " music",
+            " ericr"
+        ],
+        "info": [
+            66,
+            94,
             1
         ]
     },
@@ -3541,20 +3628,67 @@
     },
     {
         "name": "Earth",
-        "md5": "814197522984a302972998b1a7f92d91.svg",
+        "md5": "d9df2cf4f6eb2460d0de3e4f1e05f40b.svg",
         "type": "costume",
         "tags": [
-            "space"
+            "space",
+            "planet",
+            "earth"
         ],
         "info": [
-            72,
-            72,
+            41,
+            40,
+            1
+        ]
+    },
+    {
+        "name": "Easel-a",
+        "md5": "edc81e35c94c07dc380c43ea9b311394.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            69,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Easel-b",
+        "md5": "cac798e8cf0364fa9a8bc52b85bda6b2.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            69,
+            95,
+            1
+        ]
+    },
+    {
+        "name": "Easel-c",
+        "md5": "afbf42eb496694afb31f9ea69b3a1a7a.svg",
+        "type": "costume",
+        "tags": [
+            "bedroom",
+            "art",
+            "easel"
+        ],
+        "info": [
+            68,
+            94,
             1
         ]
     },
     {
         "name": "Egg-a",
-        "md5": "bc723738dfe626c5c3bb90970d985961.svg",
+        "md5": "6f1a24a63d16c45425aa2eb64934a278.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3562,14 +3696,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            54,
+            18,
+            26,
             1
         ]
     },
     {
         "name": "Egg-b",
-        "md5": "83016b7ff817f99be4a454600b4a78fc.svg",
+        "md5": "7f1320549dd8bfd596c52aec02d898ce.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3577,14 +3711,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            54,
+            23,
+            27,
             1
         ]
     },
     {
         "name": "Egg-c",
-        "md5": "d9a44d151fbd909bdbbcf7877055af6d.svg",
+        "md5": "62ed6f412aae07a575faa51451009168.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3592,14 +3726,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            54,
+            28,
+            27,
             1
         ]
     },
     {
         "name": "Egg-d",
-        "md5": "c91c7f72b8523b0910a84bce7d99c37b.svg",
+        "md5": "0dce0615471ebf1bebc3ba8b4bebbd18.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3607,14 +3741,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            54,
+            19,
+            27,
             1
         ]
     },
     {
         "name": "Egg-e",
-        "md5": "65c15516e62596e1f72e874359fc7254.svg",
+        "md5": "3848cf5708b7c712bb7bb9bbcce636aa.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3622,8 +3756,23 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            54,
+            20,
+            26,
+            1
+        ]
+    },
+    {
+        "name": "Egg-f",
+        "md5": "0f7e63d9f23038a5012409af93c8dfad.svg",
+        "type": "costume",
+        "tags": [
+            "food",
+            "breakfast",
+            "alex eben meyer"
+        ],
+        "info": [
+            31,
+            26,
             1
         ]
     },
@@ -3734,17 +3883,6 @@
         "info": [
             50,
             140,
-            1
-        ]
-    },
-    {
-        "name": "Empty",
-        "md5": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            0,
-            0,
             1
         ]
     },
@@ -3897,6 +4035,89 @@
         ]
     },
     {
+        "name": "Fishbowl-a",
+        "md5": "9d1013e04ca7425f680a4b4e6dd6ede6.svg",
+        "type": "costume",
+        "tags": [
+            "fishbowl",
+            "fish",
+            "animals",
+            "pet"
+        ],
+        "info": [
+            28,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "Fishbowl-b",
+        "md5": "0bbfc827e8d2f3da6db82efe95563f93.svg",
+        "type": "costume",
+        "tags": [
+            "fishbowl",
+            "fish",
+            "animals",
+            "pet"
+        ],
+        "info": [
+            28,
+            24,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-a",
+        "md5": "b30ec8ff043e0f1747591d564d56d7fa.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food",
+            "car"
+        ],
+        "info": [
+            121,
+            125,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-b",
+        "md5": "afd51531621d2b33869b47342311b363.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food",
+            "car"
+        ],
+        "info": [
+            121,
+            101,
+            1
+        ]
+    },
+    {
+        "name": "Food Truck-c",
+        "md5": "42f88485a25bf9a683d28957db9f969f.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "truck",
+            "vehicle",
+            "food",
+            "car"
+        ],
+        "info": [
+            121,
+            92,
+            1
+        ]
+    },
+    {
         "name": "Football Running",
         "md5": "7ee31371b2eafba57cc5a78fc1a787fe.png",
         "type": "costume",
@@ -3939,7 +4160,7 @@
     },
     {
         "name": "Fox-a",
-        "md5": "fab5488e600e81565f0fc285fc7050f8.svg",
+        "md5": "0aef4633e8580e209020b054eb55982f.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -3947,14 +4168,14 @@
             "robert hunter"
         ],
         "info": [
-            94,
-            54,
+            86,
+            44,
             1
         ]
     },
     {
         "name": "Fox-b",
-        "md5": "afb192ae250a74dfac18bfc52d1d6266.svg",
+        "md5": "ae0bb1b900e853ddc8820e0c7bd60f53.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -3962,14 +4183,14 @@
             "robert hunter"
         ],
         "info": [
-            94,
-            54,
+            44,
+            50,
             1
         ]
     },
     {
         "name": "Fox-c",
-        "md5": "29f858d384db7998c0e5183f6a31a3b4.svg",
+        "md5": "3cc3761cbabdcf13dbfdf04048bfbccf.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -3977,17 +4198,18 @@
             "robert hunter"
         ],
         "info": [
-            94,
-            54,
+            48,
+            38,
             1
         ]
     },
     {
         "name": "Frank-a",
-        "md5": "19a09a005d7199d2e681e53a761bfe11.svg",
+        "md5": "8ebcc9a619ae0455df9da42d39f59c1d.svg",
         "type": "costume",
         "tags": [
             "fantasy",
+            "people",
             "spooky",
             "halloween",
             "frankenstein",
@@ -3995,61 +4217,64 @@
             "alex eben meyer"
         ],
         "info": [
-            154,
-            107,
+            97,
+            63,
             1
         ]
     },
     {
         "name": "Frank-b",
-        "md5": "a03102442ee197a39083fba24e852792.svg",
+        "md5": "e605b9d87181c52825ae21597c9c1e07.svg",
         "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
+            "people",
             "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
         ],
         "info": [
-            154,
-            107,
+            105,
+            63,
             1
         ]
     },
     {
         "name": "Frank-c",
-        "md5": "b456d8dc4b7895d61c90dbc909d8a4c6.svg",
+        "md5": "a53378250f07b6dad161516a5317277e.svg",
         "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
+            "people",
             "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
         ],
         "info": [
-            154,
-            107,
+            159,
+            59,
             1
         ]
     },
     {
         "name": "Frank-d",
-        "md5": "8743c01814fed4190a582ba1520e8f6a.svg",
+        "md5": "44b4ba838b60f14d6e7ebddf5df4d4c4.svg",
         "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
+            "people",
             "halloween",
             "frankenstein",
             "monster",
             "alex eben meyer"
         ],
         "info": [
-            154,
+            106,
             107,
             1
         ]
@@ -4069,6 +4294,54 @@
         "info": [
             48,
             30,
+            1
+        ]
+    },
+    {
+        "name": "Frog 2-a",
+        "md5": "07160d455202e95f5b4b5c842eff6788.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "frog",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            101,
+            60,
+            1
+        ]
+    },
+    {
+        "name": "Frog 2-b",
+        "md5": "9663ddb4d100eb4e18702ee13eca835e.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "frog",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            101,
+            58,
+            1
+        ]
+    },
+    {
+        "name": "Frog 2-c",
+        "md5": "5c2ec9de8d1695cd4b59beea45046560.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "frog",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            96,
+            87,
             1
         ]
     },
@@ -4101,7 +4374,7 @@
     },
     {
         "name": "Ghost-a",
-        "md5": "23c317a22dec95421f2532090cc8de48.svg",
+        "md5": "fca9fdf3ec9aafcfbd915105fecb6ce6.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4112,14 +4385,14 @@
             "alex eben meyer"
         ],
         "info": [
-            98,
-            73,
+            37,
+            68,
             1
         ]
     },
     {
         "name": "Ghost-b",
-        "md5": "e86a742d091370950f3353e1e430cdb2.svg",
+        "md5": "9d6e168d234d023476324cb72430e645.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4130,14 +4403,14 @@
             "alex eben meyer"
         ],
         "info": [
-            98,
-            73,
+            41,
+            68,
             1
         ]
     },
     {
         "name": "Ghost-c",
-        "md5": "24a8b71b780bc665c3e6d37c11221137.svg",
+        "md5": "8296c8aa0782b53c5188dabde5fce10f.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4148,14 +4421,14 @@
             "alex eben meyer"
         ],
         "info": [
-            98,
-            73,
+            61,
+            72,
             1
         ]
     },
     {
         "name": "Ghost-d",
-        "md5": "221b794cad3d045008299e3c8440170c.svg",
+        "md5": "2a3c6eb1faa6b2e4403c64945d59e122.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4166,8 +4439,8 @@
             "alex eben meyer"
         ],
         "info": [
-            98,
-            73,
+            78,
+            69,
             1
         ]
     },
@@ -4242,20 +4515,6 @@
         ]
     },
     {
-        "name": "Giga Walk4",
-        "md5": "22e4ae40919cf0fe6b4d7649d14a6e71.svg",
-        "type": "costume",
-        "tags": [
-            "fantasy",
-            "walking"
-        ],
-        "info": [
-            73,
-            110,
-            1
-        ]
-    },
-    {
         "name": "Giga-a",
         "md5": "93cb048a1d199f92424b9c097fa5fa38.svg",
         "type": "costume",
@@ -4317,7 +4576,7 @@
     },
     {
         "name": "Giraffe-a",
-        "md5": "497baa643718a865b0621c1607696800.svg",
+        "md5": "2d3955997d2b3aa8dad9389c61de384f.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4325,14 +4584,14 @@
             "robert hunter"
         ],
         "info": [
-            86,
-            131,
+            87,
+            132,
             1
         ]
     },
     {
         "name": "Giraffe-b",
-        "md5": "0242ae2497839f449af064b40b358b76.svg",
+        "md5": "b129c6016fedc7d03fb7f0a06363af28.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4340,14 +4599,14 @@
             "robert hunter"
         ],
         "info": [
-            86,
-            131,
+            82,
+            132,
             1
         ]
     },
     {
         "name": "Giraffe-c",
-        "md5": "d9e8f8b7d656d4a24c1f4f6c24c5e578.svg",
+        "md5": "1af467957df0350765ba9a10e8d85572.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4356,7 +4615,7 @@
         ],
         "info": [
             86,
-            131,
+            132,
             1
         ]
     },
@@ -4388,20 +4647,6 @@
         "info": [
             39,
             48,
-            1
-        ]
-    },
-    {
-        "name": "Glasses",
-        "md5": "5fcf716b53f223bc86b10ab0eca3e162.svg",
-        "type": "costume",
-        "tags": [
-            "things",
-            "fashion"
-        ],
-        "info": [
-            16,
-            9,
             1
         ]
     },
@@ -4463,7 +4708,7 @@
     },
     {
         "name": "Goalie-a",
-        "md5": "86b0610ea21fdecb99795c5e6d52768c.svg",
+        "md5": "dbf6a1b0402377be2cd8c75a3b4fdf53.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -4472,14 +4717,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            59,
+            63,
             1
         ]
     },
     {
         "name": "Goalie-b",
-        "md5": "af3ef5125d187772240a1120e7eb67ac.svg",
+        "md5": "987d8c2bb6c26cad265a3aa339fe432e.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -4488,14 +4733,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            59,
+            63,
             1
         ]
     },
     {
         "name": "Goalie-c",
-        "md5": "7c9377cedae11a094d2e77bed3edb884.svg",
+        "md5": "52609ef559a29052e72efe08d1384980.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -4504,14 +4749,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            62,
+            61,
             1
         ]
     },
     {
         "name": "Goalie-d",
-        "md5": "bd628034d356d30b0e9b563447471290.svg",
+        "md5": "a4de535b4c4a7c6a65e6736491e01497.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -4520,14 +4765,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            63,
+            62,
             1
         ]
     },
     {
         "name": "Goalie-e",
-        "md5": "b3f6c4c0be9a0f71e9486dea51e513c3.svg",
+        "md5": "ca55a23f3172e9fff061484e00493d2c.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -4536,8 +4781,8 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            59,
+            69,
             1
         ]
     },
@@ -4650,6 +4895,108 @@
         ]
     },
     {
+        "name": "Grasshopper-a",
+        "md5": "fcddf46c04479b07b2944ee36d0b7635.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            103,
+            43,
+            1
+        ]
+    },
+    {
+        "name": "Grasshopper-b",
+        "md5": "40b48bcb95f06a2281ba1cad60c8c504.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            114,
+            118,
+            1
+        ]
+    },
+    {
+        "name": "Grasshopper-c",
+        "md5": "fa9a02a4a6df86612365dc65c065d2cb.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            34,
+            170,
+            1
+        ]
+    },
+    {
+        "name": "Grasshopper-d",
+        "md5": "f80ba703a7fb17a870ec0818add2f3b8.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            70,
+            100,
+            1
+        ]
+    },
+    {
+        "name": "Grasshopper-e",
+        "md5": "6519eeaa65eac086198d6901cf0a5b9e.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            56,
+            86,
+            1
+        ]
+    },
+    {
+        "name": "Grasshopper-f",
+        "md5": "8d865e6bbea03cda509d766085b883f4.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "insect",
+            "bug",
+            "wetland",
+            "owen davey"
+        ],
+        "info": [
+            22,
+            54,
+            1
+        ]
+    },
+    {
         "name": "Green Flag",
         "md5": "173e20ac537d2c278ed621be3db3fc87.svg",
         "type": "costume",
@@ -4664,7 +5011,7 @@
     },
     {
         "name": "Griffin-a",
-        "md5": "d2ddc25b224ad72240f92e632afc7c69.svg",
+        "md5": "1ceea469ec409d0a3a13bd04ea1e756c.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4673,14 +5020,14 @@
             "flying"
         ],
         "info": [
-            150,
-            110,
+            127,
+            109,
             1
         ]
     },
     {
-        "name": "Griffin-fly-a",
-        "md5": "03d75e0c7c34e8618545a5f4913db4ea.svg",
+        "name": "Griffin-b",
+        "md5": "1dd10e8e53c048ad6f95c82501801f48.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4689,14 +5036,14 @@
             "flying"
         ],
         "info": [
-            150,
-            110,
+            127,
+            76,
             1
         ]
     },
     {
-        "name": "Griffin-fly-b",
-        "md5": "ff0795d15b6f3990345f72bc483a3353.svg",
+        "name": "Griffin-c",
+        "md5": "e4d7c3c18463f15083683ce0826adcee.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -4705,8 +5052,24 @@
             "flying"
         ],
         "info": [
-            150,
-            110,
+            127,
+            109,
+            1
+        ]
+    },
+    {
+        "name": "Griffin-d",
+        "md5": "54504b1d8dedf816b0bd599e768f191d.svg",
+        "type": "costume",
+        "tags": [
+            "fantasy",
+            "animals",
+            "ipzy",
+            "flying"
+        ],
+        "info": [
+            144,
+            69,
             1
         ]
     },
@@ -4841,7 +5204,7 @@
     },
     {
         "name": "Hare-a",
-        "md5": "75c2e6085d0eae076ff357b56d5ed5cd.svg",
+        "md5": "8209c43050785e3c4276f84abb52c245.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4855,14 +5218,14 @@
             "robert hunter"
         ],
         "info": [
-            57,
-            49,
+            29,
+            50,
             1
         ]
     },
     {
         "name": "Hare-b",
-        "md5": "fb56d1bef942196c710612906142451b.svg",
+        "md5": "62796e48dc8e540398e0575d79f562fe.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4877,13 +5240,13 @@
         ],
         "info": [
             57,
-            49,
+            35,
             1
         ]
     },
     {
         "name": "Hare-c",
-        "md5": "8de391ae70e54656f777c0ed53a91e1a.svg",
+        "md5": "4bc5c29283dfff4b9c876cc23540a4b5.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -4897,27 +5260,13 @@
             "robert hunter"
         ],
         "info": [
-            57,
-            49,
+            40,
+            40,
             1
         ]
     },
     {
         "name": "Harper-a",
-        "md5": "919eb332bf73df227ec5f214be952a21.svg",
-        "type": "costume",
-        "tags": [
-            "people",
-            "fashion"
-        ],
-        "info": [
-            54,
-            135,
-            1
-        ]
-    },
-    {
-        "name": "Harper-b",
         "md5": "0d5979db40b0a4dcaa601fb7679ef71c.svg",
         "type": "costume",
         "tags": [
@@ -4927,6 +5276,20 @@
         "info": [
             54,
             143,
+            1
+        ]
+    },
+    {
+        "name": "Harper-b",
+        "md5": "c435a1fcdf5f60a29f620fa800e391e0.svg",
+        "type": "costume",
+        "tags": [
+            "people",
+            "fashion"
+        ],
+        "info": [
+            54,
+            134,
             1
         ]
     },
@@ -4945,100 +5308,7 @@
         ]
     },
     {
-        "name": "Hat",
-        "md5": "b3beb1f52d371428d70b65a0c4c5c001.svg",
-        "type": "costume",
-        "tags": [
-            "Fashion"
-        ],
-        "info": [
-            52,
-            60,
-            1
-        ]
-    },
-    {
-        "name": "Hat Beanie",
-        "md5": "3271da33e4108ed08a303c2244739fbf.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            28,
-            19,
-            1
-        ]
-    },
-    {
-        "name": "Hat Party2-a",
-        "md5": "9b7a84fe3e50621752917e4e484a1e2f.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            75,
-            75,
-            1
-        ]
-    },
-    {
-        "name": "Hat Winter",
-        "md5": "6c2ee1b97f6ec2b3457a25a3975a2009.svg",
-        "type": "costume",
-        "tags": [
-            "fashion",
-            "winter"
-        ],
-        "info": [
-            26,
-            101,
-            1
-        ]
-    },
-    {
-        "name": "Hat Wizard",
-        "md5": "581571e8c8f5adeb01565e12b1b77b58.svg",
-        "type": "costume",
-        "tags": [
-            "fashion",
-            "fantasy"
-        ],
-        "info": [
-            76,
-            69,
-            1
-        ]
-    },
-    {
         "name": "Hat-a",
-        "md5": "874462b3e079308d775629c235940d8f.svg",
-        "type": "costume",
-        "tags": [
-            "fashion",
-            "hat"
-        ],
-        "info": [
-            39,
-            22,
-            1
-        ]
-    },
-    {
-        "name": "Hat-b",
-        "md5": "a8ef874bd7542fec62785eac80019417.svg",
-        "type": "costume",
-        "tags": [
-            "fashion",
-            "hat"
-        ],
-        "info": [
-            45,
-            30,
-            1
-        ]
-    },
-    {
-        "name": "Hat-c",
         "md5": "52540f9dba4537f79f1ad3067d44e3f6.svg",
         "type": "costume",
         "tags": [
@@ -5052,7 +5322,21 @@
         ]
     },
     {
-        "name": "Hat-d",
+        "name": "Hat-b",
+        "md5": "874462b3e079308d775629c235940d8f.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "hat"
+        ],
+        "info": [
+            39,
+            22,
+            1
+        ]
+    },
+    {
+        "name": "Hat-c",
         "md5": "b40accecd4bd57fed8bdb96ee15e5c05.svg",
         "type": "costume",
         "tags": [
@@ -5066,24 +5350,22 @@
         ]
     },
     {
-        "name": "Hatchling-a",
-        "md5": "fb9de507b6d95e96cb0df68e401dfd8f.svg",
+        "name": "Hat-d",
+        "md5": "a8ef874bd7542fec62785eac80019417.svg",
         "type": "costume",
         "tags": [
-            "animals",
-            "chicken",
-            "farm",
-            "owen davey"
+            "fashion",
+            "hat"
         ],
         "info": [
-            14,
-            23,
+            45,
+            30,
             1
         ]
     },
     {
-        "name": "Hatchling-b",
-        "md5": "e504303f791a65274d740a20acbac606.svg",
+        "name": "Hatchling-a",
+        "md5": "25e4da6bcd209c60690729f5c7016b83.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5093,13 +5375,13 @@
         ],
         "info": [
             15,
-            35,
+            23,
             1
         ]
     },
     {
-        "name": "Hatchling-c",
-        "md5": "6f9a243d84fbe7ed9a49e8ef9fb7d83c.svg",
+        "name": "Hatchling-b",
+        "md5": "b0f8451e7c52cf2b94b94c4a2051398b.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5108,36 +5390,38 @@
             "owen davey"
         ],
         "info": [
-            31,
-            36,
+            16,
+            38,
             1
         ]
     },
     {
-        "name": "Headband",
-        "md5": "237f77cb3e41c70f714c6d2aa4d38ea1.svg",
+        "name": "Hatchling-c",
+        "md5": "5f70ae46957bf425121ac532dc6a2f34.svg",
         "type": "costume",
         "tags": [
-            "fashion",
-            "antennae"
+            "animals",
+            "chicken",
+            "farm",
+            "owen davey"
         ],
         "info": [
-            53,
-            43,
+            38,
+            72,
             1
         ]
     },
     {
         "name": "Heart Code",
-        "md5": "497c5df9e02467202ff93096dccaf91f.svg",
+        "md5": "1bc73fc472df673a1089d965b537f5ac.svg",
         "type": "costume",
         "tags": [
             "food",
             "sweethearts"
         ],
         "info": [
-            58,
-            61,
+            73,
+            72,
             1
         ]
     },
@@ -5155,16 +5439,16 @@
         ]
     },
     {
-        "name": "Heart Love It",
-        "md5": "d448acd247f10f32bef7823cd433f928.svg",
+        "name": "Heart Love",
+        "md5": "a9d25b961eef81521c8ed38beb1456a0.svg",
         "type": "costume",
         "tags": [
             "food",
             "sweethearts"
         ],
         "info": [
-            58,
-            61,
+            73,
+            72,
             1
         ]
     },
@@ -5204,29 +5488,29 @@
     },
     {
         "name": "Heart Smile",
-        "md5": "74a8f75d139d330b715787edbbacd83d.svg",
+        "md5": "66b29ca063bc74d2bacfc0a06bc7b6fc.svg",
         "type": "costume",
         "tags": [
             "food",
             "sweethearts"
         ],
         "info": [
-            58,
-            61,
+            73,
+            72,
             1
         ]
     },
     {
         "name": "Heart Sweet",
-        "md5": "a39d78d33b051e8b12a4b2a10d77b249.svg",
+        "md5": "9a9a8efa369379ee8538632c43a6a3d1.svg",
         "type": "costume",
         "tags": [
             "food",
             "sweethearts"
         ],
         "info": [
-            58,
-            61,
+            73,
+            72,
             1
         ]
     },
@@ -5312,7 +5596,7 @@
     },
     {
         "name": "Hen-a",
-        "md5": "795ed34983a70c8690fe6c8f4a47a935.svg",
+        "md5": "eb0a9890a92ef616ef8740328eeabb79.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5321,14 +5605,14 @@
             "owen davey"
         ],
         "info": [
-            45,
-            43,
+            60,
+            53,
             1
         ]
     },
     {
         "name": "Hen-b",
-        "md5": "26528a6f0318a2d2294ef7071409be12.svg",
+        "md5": "12aabf8636096f223e9297d2fd8177a4.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5337,14 +5621,14 @@
             "owen davey"
         ],
         "info": [
-            45,
-            43,
+            63,
+            50,
             1
         ]
     },
     {
         "name": "Hen-c",
-        "md5": "7492692df7776c905fdbd4382696afee.svg",
+        "md5": "af2c57d1f12272335629635e669df487.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5353,14 +5637,14 @@
             "owen davey"
         ],
         "info": [
-            35,
-            28,
+            56,
+            53,
             1
         ]
     },
     {
         "name": "Hen-d",
-        "md5": "4bf0cb5453273d0f75db3cd0cd45ac72.svg",
+        "md5": "84d0492c094ec01d73f808c92b4c3138.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -5369,8 +5653,8 @@
             "owen davey"
         ],
         "info": [
-            45,
-            43,
+            51,
+            77,
             1
         ]
     },
@@ -5553,7 +5837,7 @@
     },
     {
         "name": "Jamal-a",
-        "md5": "90f9166fe6500d0c0caad8b1964d6b74.svg",
+        "md5": "c7531e6c05aa488edd6ad3c369204452.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5562,14 +5846,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            105,
+            55,
+            49,
             1
         ]
     },
     {
         "name": "Jamal-b",
-        "md5": "c3d96ef7e99440c2fa76effce1235d3f.svg",
+        "md5": "8b8bd6ff0fe64e7056d1e70c63b9ec9f.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5578,14 +5862,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            105,
+            75,
+            53,
             1
         ]
     },
     {
         "name": "Jamal-c",
-        "md5": "1fb8b9ca79f2c0a327913bd647b53fe5.svg",
+        "md5": "c659f292333f93854be243f84b337ec5.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5594,14 +5878,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            105,
+            54,
+            102,
             1
         ]
     },
     {
         "name": "Jamal-d",
-        "md5": "4adb87e6123161fcaf02f7ac022a5757.svg",
+        "md5": "9dc8cfa22793c43aee826c76d144e09b.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5610,8 +5894,8 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            105,
+            54,
+            95,
             1
         ]
     },
@@ -5642,32 +5926,6 @@
         ],
         "info": [
             20,
-            25,
-            1
-        ]
-    },
-    {
-        "name": "Jeans-a",
-        "md5": "4e283da8c59bcbb9803bdc0016b14c21.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            22,
-            25,
-            1
-        ]
-    },
-    {
-        "name": "Jeans-b",
-        "md5": "01732aa03a48482093fbed3ea402c4a9.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            22,
             25,
             1
         ]
@@ -5920,7 +6178,7 @@
     },
     {
         "name": "Jordyn-a",
-        "md5": "8dd2a2abbb8e639da8576b6e72ef9e59.svg",
+        "md5": "8355df83cca2baa0fdf6269d1311f1ea.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5930,14 +6188,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            51,
+            63,
             1
         ]
     },
     {
         "name": "Jordyn-b",
-        "md5": "9665f543147961551d8dc6f612d9cc41.svg",
+        "md5": "2e2c43bbd7b18524fb132f1426ca3134.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5947,14 +6205,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            51,
+            63,
             1
         ]
     },
     {
         "name": "Jordyn-c",
-        "md5": "ec8c2286070c77ebd9dd40c96eaae3fc.svg",
+        "md5": "5c0d24c53805e16358a2f6f6cc4a456e.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5964,14 +6222,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
             68,
+            61,
             1
         ]
     },
     {
         "name": "Jordyn-d",
-        "md5": "1f9ed7f29800f31ce2ee53196143a3c8.svg",
+        "md5": "ebe2b20b99c1e1b373fd2b02be48aab9.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -5981,8 +6239,8 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            40,
+            61,
             1
         ]
     },
@@ -6180,7 +6438,7 @@
         "md5": "c018a3eed966d5f92c69f2188dfd2aae.svg",
         "type": "costume",
         "tags": [
-            "animal",
+            "animals",
             "insect",
             "arthropod",
             "antennae",
@@ -6196,7 +6454,13 @@
         "name": "Ladybug2-b",
         "md5": "a2bb15ace808e070a2b815502952b292.svg",
         "type": "costume",
-        "tags": [],
+        "tags": [
+            "animals",
+            "insect",
+            "arthropod",
+            "antennae",
+            "aphids"
+        ],
         "info": [
             49,
             28,
@@ -6433,7 +6697,7 @@
     },
     {
         "name": "Lion-a",
-        "md5": "701a41dec023bc03a5ad4e35988b9a86.svg",
+        "md5": "75e6b2178518fa354f1ebf7ab7061ceb.svg",
         "type": "costume",
         "tags": [
             "cat",
@@ -6450,7 +6714,7 @@
     },
     {
         "name": "Lion-b",
-        "md5": "28ac215a2574eeabc2b390a14de3c152.svg",
+        "md5": "7304176fe4dc85758e6b77324a185ea2.svg",
         "type": "costume",
         "tags": [
             "cat",
@@ -6460,14 +6724,14 @@
             "robert hunter"
         ],
         "info": [
-            95,
+            94,
             43,
             1
         ]
     },
     {
         "name": "Lion-c",
-        "md5": "4dbe981721314eb631ef4f7fa920e1a4.svg",
+        "md5": "8411de793909216761cd19fd95418945.svg",
         "type": "costume",
         "tags": [
             "cat",
@@ -6484,7 +6748,7 @@
     },
     {
         "name": "Llama",
-        "md5": "07158eb6d62e309bb60a6bc36baf2300.svg",
+        "md5": "f5841f36b41c4df26f9c724d913c279b.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -6492,14 +6756,14 @@
             "robert hunter"
         ],
         "info": [
-            100,
-            100,
+            72,
+            95,
             1
         ]
     },
     {
         "name": "Llama-b",
-        "md5": "2021eea71514bd2b23e96076750727ae.svg",
+        "md5": "ef3f8491668de2b751d8d7a8921c9879.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -6507,14 +6771,14 @@
             "robert hunter"
         ],
         "info": [
-            100,
-            100,
+            92,
+            90,
             1
         ]
     },
     {
         "name": "Llama-c",
-        "md5": "7837d7247acbc4eebb793452a35aa1f5.svg",
+        "md5": "b0af19d2c7a7c039c060f21874816164.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -6522,8 +6786,8 @@
             "robert hunter"
         ],
         "info": [
-            100,
-            100,
+            73,
+            39,
             1
         ]
     },
@@ -6544,7 +6808,7 @@
     },
     {
         "name": "Max-a",
-        "md5": "e10cca3bdbc09d039c2f937574f7a6ea.svg",
+        "md5": "5cc168bddf4561e6e7f1d30845d6efbf.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6553,14 +6817,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            68,
+            70,
+            61,
             1
         ]
     },
     {
         "name": "Max-b",
-        "md5": "6d8ee139a741cf945d600a8cef0ea2e6.svg",
+        "md5": "8e2ad5735e26c5544b6b1a057f4efa80.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6569,14 +6833,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            68,
+            71,
+            64,
             1
         ]
     },
     {
         "name": "Max-c",
-        "md5": "aa66109994d27de02711f6a0ef6de9ec.svg",
+        "md5": "261a40ebecfe135308befd79c6c07fd5.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6585,14 +6849,14 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            68,
+            46,
+            59,
             1
         ]
     },
     {
         "name": "Max-d",
-        "md5": "a0dbf509d542c7eff6d2ddfc9c9410f1.svg",
+        "md5": "4b6eecd411daddef6422fa3a5850cd52.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6601,8 +6865,8 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            68,
+            37,
+            59,
             1
         ]
     },
@@ -6639,8 +6903,8 @@
         ]
     },
     {
-        "name": "Mermaid-swim-a",
-        "md5": "9f973b89b68f7d8147f157cbac8af341.svg",
+        "name": "Mermaid-c",
+        "md5": "2295784bb8e6354bfa7676089235cb9f.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -6655,8 +6919,8 @@
         ]
     },
     {
-        "name": "Mermaid-swim-b",
-        "md5": "2295784bb8e6354bfa7676089235cb9f.svg",
+        "name": "Mermaid-d",
+        "md5": "9f973b89b68f7d8147f157cbac8af341.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -6700,7 +6964,7 @@
     },
     {
         "name": "Milk-a",
-        "md5": "e6a7964bc4ea38c79a5a31d6ddfb5ba9.svg",
+        "md5": "1b8ec45254b7c40d86e7a33818b77e35.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6708,14 +6972,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            71,
+            32,
+            63,
             1
         ]
     },
     {
         "name": "Milk-b",
-        "md5": "82d4c1855fe0d400433c7344fb2af3b5.svg",
+        "md5": "2ba802dcac09a81f9d82cc9d3b95d71b.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6723,14 +6987,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            71,
+            42,
+            64,
             1
         ]
     },
     {
         "name": "Milk-c",
-        "md5": "50afc991b6fdad4b6547ba98ecf8a6af.svg",
+        "md5": "287b322e939ad54691aef4876c48f422.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6739,13 +7003,13 @@
         ],
         "info": [
             47,
-            44,
+            56,
             1
         ]
     },
     {
         "name": "Milk-d",
-        "md5": "8fc7606a176149d225a541a04fa67473.svg",
+        "md5": "df4f5d863fa680331aa6c8f867b9fcbb.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6753,14 +7017,14 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            71,
+            45,
+            64,
             1
         ]
     },
     {
         "name": "Milk-e",
-        "md5": "f2373d449b1226c44436dced422c2935.svg",
+        "md5": "e642678d42d5e74fe49e6ceb5538724e.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -6768,8 +7032,8 @@
             "alex eben meyer"
         ],
         "info": [
-            68,
-            71,
+            35,
+            45,
             1
         ]
     },
@@ -6893,6 +7157,70 @@
         "info": [
             68,
             99,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-a",
+        "md5": "5065a917834923efc3e0c112d5791e80.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "bike",
+            "vehicle",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-b",
+        "md5": "fe0923cb08c0b7c373de1daf8b74de74.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "bike",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-c",
+        "md5": "6af27b2b5e1eeae9e60702630e6909a8.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "bike",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
+            1
+        ]
+    },
+    {
+        "name": "Motorcycle-d",
+        "md5": "c5d78ac1de3a7f786a4ca6dc0fe087d4.svg",
+        "type": "costume",
+        "tags": [
+            "city",
+            "vehicle",
+            "bike",
+            "motorcycle"
+        ],
+        "info": [
+            52,
+            44,
             1
         ]
     },
@@ -7155,7 +7483,7 @@
     },
     {
         "name": "Outfielder-a",
-        "md5": "fab7218666ba49eae992664acab53159.svg",
+        "md5": "d2e2e4a9249c4cbe479e431a4c985286.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7164,14 +7492,14 @@
             "alex eben meyer"
         ],
         "info": [
-            38,
-            61,
+            42,
+            78,
             1
         ]
     },
     {
         "name": "Outfielder-b",
-        "md5": "a86813067f26947adb68897b870b1b7e.svg",
+        "md5": "5a960b109ae5dbe3c3ea5555894e8c13.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7180,14 +7508,14 @@
             "alex eben meyer"
         ],
         "info": [
-            38,
-            57,
+            42,
+            74,
             1
         ]
     },
     {
         "name": "Outfielder-c",
-        "md5": "f6f1d2b7c6b50cbdac8cdbb55c872114.svg",
+        "md5": "480ab4ce1ab5586e829e1cf804824c8b.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7196,14 +7524,14 @@
             "alex eben meyer"
         ],
         "info": [
-            46,
-            80,
+            67,
+            97,
             1
         ]
     },
     {
         "name": "Outfielder-d",
-        "md5": "c6fb3a8079bce9630ab9499926c16de9.svg",
+        "md5": "e5803b5601e0aafa8d0b227f1b1ae742.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7212,14 +7540,14 @@
             "alex eben meyer"
         ],
         "info": [
-            79,
-            96,
+            130,
+            114,
             1
         ]
     },
     {
         "name": "Owl-a",
-        "md5": "a312273b198fcacf68976e3cc74fadb4.svg",
+        "md5": "5348f1ea36a645322e88796545ca8ca1.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -7227,14 +7555,14 @@
             "robert hunter"
         ],
         "info": [
-            113,
-            54,
+            24,
+            40,
             1
         ]
     },
     {
         "name": "Owl-b",
-        "md5": "c9916dcfe67302367b05be7f3e5c5ddf.svg",
+        "md5": "3d8ba4198a03e484ed63bde584fd5bc1.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -7242,14 +7570,14 @@
             "robert hunter"
         ],
         "info": [
-            113,
-            54,
+            44,
+            46,
             1
         ]
     },
     {
         "name": "Owl-c",
-        "md5": "8ec3a2507f1d6dc9b39f7ae5a1ebfdd3.svg",
+        "md5": "4e81445e70169f074ad50473a78f3381.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -7257,8 +7585,8 @@
             "robert hunter"
         ],
         "info": [
-            113,
-            54,
+            109,
+            41,
             1
         ]
     },
@@ -7388,16 +7716,44 @@
         ]
     },
     {
-        "name": "Partyhat1",
-        "md5": "70a7f535d8857cf9175492415361c361.svg",
+        "name": "Party Hat-a",
+        "md5": "f3ee428806f9fa6d396e30a8d6d0e741.svg",
         "type": "costume",
         "tags": [
             "fashion",
-            "holiday"
+            "winter"
         ],
         "info": [
-            75,
-            75,
+            24,
+            55,
+            1
+        ]
+    },
+    {
+        "name": "Party Hat-b",
+        "md5": "71b51d9680be4aa946eb6642bc044791.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "winter"
+        ],
+        "info": [
+            40,
+            61,
+            1
+        ]
+    },
+    {
+        "name": "Party Hat-e",
+        "md5": "e69516f2a9bb6d632fdaba4fadd8f8f1.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "winter"
+        ],
+        "info": [
+            52,
+            44,
             1
         ]
     },
@@ -7431,9 +7787,10 @@
     },
     {
         "name": "Penguin-a",
-        "md5": "6d85d016129c34c90ef269933a72a7a7.svg",
+        "md5": "0e78708b8988802d2209a34b50292bd3.svg",
         "type": "costume",
         "tags": [
+            "penguin",
             "animals",
             "bird",
             "cold",
@@ -7452,10 +7809,11 @@
     },
     {
         "name": "Penguin-b",
-        "md5": "e93ef702208fad2776a34f57c1c746b1.svg",
+        "md5": "43af2a0b7f922ec5dc94217b2f3e08e4.svg",
         "type": "costume",
         "tags": [
             "animals",
+            "penguin",
             "bird",
             "cold",
             "north pole",
@@ -7466,17 +7824,18 @@
             "robert hunter"
         ],
         "info": [
-            36,
+            26,
             46,
             1
         ]
     },
     {
         "name": "Penguin-c",
-        "md5": "c6d6ec90b897855831a73b3b3b8f202a.svg",
+        "md5": "4f35c3940957e3ffc2e83a2565942171.svg",
         "type": "costume",
         "tags": [
             "animals",
+            "penguin",
             "bird",
             "cold",
             "north pole",
@@ -7487,7 +7846,7 @@
             "robert hunter"
         ],
         "info": [
-            36,
+            35,
             46,
             1
         ]
@@ -7510,6 +7869,22 @@
     },
     {
         "name": "Penguin2-b",
+        "md5": "b224a582395e0847c2ef4eefcfbc4546.svg",
+        "type": "costume",
+        "tags": [
+            "animals",
+            "bird",
+            "winter",
+            "antarctica"
+        ],
+        "info": [
+            54,
+            61,
+            1
+        ]
+    },
+    {
+        "name": "Penguin2-c",
         "md5": "35fec7aa5f60cca945fe0615413f1f08.svg",
         "type": "costume",
         "tags": [
@@ -7525,7 +7900,7 @@
         ]
     },
     {
-        "name": "Penguin2-c",
+        "name": "Penguin2-d",
         "md5": "18fa51a64ebd5518f0c5c465525346e5.svg",
         "type": "costume",
         "tags": [
@@ -7657,7 +8032,7 @@
     },
     {
         "name": "Pitcher-a",
-        "md5": "a8694f8f7867d95c62121e60cb8b4812.svg",
+        "md5": "24008f02de4b0d999d4526d34dec8b76.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7667,13 +8042,13 @@
         ],
         "info": [
             42,
-            63,
+            74,
             1
         ]
     },
     {
         "name": "Pitcher-b",
-        "md5": "13f363056c706870ede82798e6a8bcf6.svg",
+        "md5": "4644ab73c577ed878e3ccaa3d89ccc2b.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7682,14 +8057,14 @@
             "alex eben meyer"
         ],
         "info": [
-            70,
-            86,
+            75,
+            97,
             1
         ]
     },
     {
         "name": "Pitcher-c",
-        "md5": "6e26bd644ecd8d1f1606261d1b8f6a75.svg",
+        "md5": "f46aa0b114a9977c52eeefa252953e2b.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7698,14 +8073,14 @@
             "alex eben meyer"
         ],
         "info": [
-            62,
-            87,
+            69,
+            98,
             1
         ]
     },
     {
         "name": "Pitcher-d",
-        "md5": "120d823290171ad83b6b328a5ffaf60e.svg",
+        "md5": "d75a06e24f717e8647db27e94618e693.svg",
         "type": "costume",
         "tags": [
             "baseball",
@@ -7714,8 +8089,8 @@
             "alex eben meyer"
         ],
         "info": [
-            82,
-            46,
+            84,
+            57,
             1
         ]
     },
@@ -7734,9 +8109,10 @@
     },
     {
         "name": "Polar Bear-a",
-        "md5": "c96435a1b9ad2ed37b2c9c5aac6d1fb4.svg",
+        "md5": "b1d892d9f8a897bc6a446e2ff766ba74.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",
@@ -7748,15 +8124,16 @@
         ],
         "info": [
             104,
-            46,
+            42,
             1
         ]
     },
     {
         "name": "Polar Bear-b",
-        "md5": "4f9b9061414deedeeebd369a496aba07.svg",
+        "md5": "54728e795213e67ac7cecca1c32fe293.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",
@@ -7767,16 +8144,17 @@
             "robert hunter"
         ],
         "info": [
-            104,
-            46,
+            87,
+            47,
             1
         ]
     },
     {
         "name": "Polar Bear-c",
-        "md5": "defad238b915f766449e9dcb719bb6e0.svg",
+        "md5": "7d5812e0aa1cde33771f9270ff521cfe.svg",
         "type": "costume",
         "tags": [
+            "bear",
             "animals",
             "cold",
             "north pole",
@@ -7788,7 +8166,7 @@
         ],
         "info": [
             104,
-            46,
+            43,
             1
         ]
     },
@@ -8002,32 +8380,6 @@
         ]
     },
     {
-        "name": "Pumpkin-costume",
-        "md5": "6f7a5a88e6201082913a099438d626ef.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            39,
-            63,
-            1
-        ]
-    },
-    {
-        "name": "Pumpkin-hat",
-        "md5": "22bdeaf0d8421ffb70775ed77070bee7.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            28,
-            24,
-            1
-        ]
-    },
-    {
         "name": "Puppy Back",
         "md5": "05630bfa94501a3e5d61ce443a0cea70.png",
         "type": "costume",
@@ -8178,6 +8530,36 @@
         ]
     },
     {
+        "name": "Radio-a",
+        "md5": "d2266f31369a97fdf7ec37090bf0a968.svg",
+        "type": "costume",
+        "tags": [
+            "radio",
+            "music",
+            "beatbox"
+        ],
+        "info": [
+            52,
+            38,
+            1
+        ]
+    },
+    {
+        "name": "Radio-b",
+        "md5": "cd4cff5586d0167fd992772360bddf68.svg",
+        "type": "costume",
+        "tags": [
+            "radio",
+            "music",
+            "beatbox"
+        ],
+        "info": [
+            51,
+            84,
+            1
+        ]
+    },
+    {
         "name": "Rainbow",
         "md5": "680a806bd87a28c8b25b5f9b6347f022.svg",
         "type": "costume",
@@ -8195,7 +8577,7 @@
     },
     {
         "name": "Referee-a",
-        "md5": "0959403aeb134ed2932a85c77e261122.svg",
+        "md5": "7caaa6c83b0f947268866b48fbf34ed9.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -8204,14 +8586,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            44,
+            63,
             1
         ]
     },
     {
         "name": "Referee-b",
-        "md5": "866b9e1ad2e0584216dd45fe7d50d6f5.svg",
+        "md5": "b26bc52a8400fa3d51201e9ab4a4dbb2.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -8220,14 +8602,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            44,
+            63,
             1
         ]
     },
     {
         "name": "Referee-c",
-        "md5": "21a3869435fbd470ef60960a78b06b16.svg",
+        "md5": "f96a3af7f21c0b195b8f7a84146b6704.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -8236,14 +8618,14 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            55,
+            62,
             1
         ]
     },
     {
         "name": "Referee-d",
-        "md5": "5e037aca5446a7e57093e45fe6f18c9e.svg",
+        "md5": "d6795f2992d899611ee5889811801e42.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -8252,8 +8634,8 @@
             "alex eben meyer"
         ],
         "info": [
-            76,
-            68,
+            50,
+            63,
             1
         ]
     },
@@ -8269,6 +8651,45 @@
         "info": [
             39,
             70,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot A",
+        "md5": "a17c1ce38c261395ae268f3b8a9037db.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            55,
+            86,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot B",
+        "md5": "bfb5afe62358ef542f118299bb53d4b7.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            52,
+            88,
+            1
+        ]
+    },
+    {
+        "name": "Retro Robot C",
+        "md5": "f925e3bde178001133a11fa97847a9ae.svg",
+        "type": "costume",
+        "tags": [
+            "robot"
+        ],
+        "info": [
+            72,
+            91,
             1
         ]
     },
@@ -8424,52 +8845,7 @@
     },
     {
         "name": "Rocketship-a",
-        "md5": "7d51af7c52e137ef137012595bac928d.svg",
-        "type": "costume",
-        "tags": [
-            "space",
-            "spaceship",
-            "wren mcdonald"
-        ],
-        "info": [
-            66,
-            107,
-            1
-        ]
-    },
-    {
-        "name": "Rocketship-b",
-        "md5": "ae2634705b7a4fd31f4c1d1bb0e12545.svg",
-        "type": "costume",
-        "tags": [
-            "space",
-            "spaceship",
-            "wren mcdonald"
-        ],
-        "info": [
-            53,
-            106,
-            1
-        ]
-    },
-    {
-        "name": "Rocketship-c",
-        "md5": "3d375cd033f1a7161cae56b114f4cfdb.svg",
-        "type": "costume",
-        "tags": [
-            "space",
-            "spaceship",
-            "wren mcdonald"
-        ],
-        "info": [
-            61,
-            107,
-            1
-        ]
-    },
-    {
-        "name": "Rocketship-d",
-        "md5": "a456964f32cd7e7bd83fe076bf29558b.svg",
+        "md5": "85190bb07708855c0896224340e159ed.svg",
         "type": "costume",
         "tags": [
             "space",
@@ -8478,13 +8854,58 @@
         ],
         "info": [
             63,
-            107,
+            92,
+            1
+        ]
+    },
+    {
+        "name": "Rocketship-b",
+        "md5": "2c0f804073ec656a86bbc3ebdf18bf5d.svg",
+        "type": "costume",
+        "tags": [
+            "space",
+            "spaceship",
+            "wren mcdonald"
+        ],
+        "info": [
+            54,
+            92,
+            1
+        ]
+    },
+    {
+        "name": "Rocketship-c",
+        "md5": "13a0accfa405979e4deee12e6eb9c41e.svg",
+        "type": "costume",
+        "tags": [
+            "space",
+            "spaceship",
+            "wren mcdonald"
+        ],
+        "info": [
+            59,
+            91,
+            1
+        ]
+    },
+    {
+        "name": "Rocketship-d",
+        "md5": "f4d0c6da1c167abbd8e86ff720ae24f9.svg",
+        "type": "costume",
+        "tags": [
+            "space",
+            "spaceship",
+            "wren mcdonald"
+        ],
+        "info": [
+            65,
+            91,
             1
         ]
     },
     {
         "name": "Rocketship-e",
-        "md5": "5b5cc9904ba63ca2801b61a73d4dcb7e.svg",
+        "md5": "6e58c447e994a38b51eeb105dff5711c.svg",
         "type": "costume",
         "tags": [
             "space",
@@ -8493,7 +8914,7 @@
         ],
         "info": [
             71,
-            107,
+            111,
             1
         ]
     },
@@ -8513,7 +8934,7 @@
     },
     {
         "name": "Rooster-a",
-        "md5": "8a6f3145a24db10d5a2f90975ce8140c.svg",
+        "md5": "db49a3dc8db15ea2b92d7934488f996b.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -8522,14 +8943,14 @@
             "owen davey"
         ],
         "info": [
-            55,
-            58,
+            59,
+            70,
             1
         ]
     },
     {
         "name": "Rooster-b",
-        "md5": "6a14a205b117fdb0b7a6fad91a989e96.svg",
+        "md5": "c5aa68995a2ac203d6fe2e4dd9d86911.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -8538,14 +8959,14 @@
             "owen davey"
         ],
         "info": [
-            55,
-            59,
+            58,
+            70,
             1
         ]
     },
     {
         "name": "Rooster-c",
-        "md5": "f23408efb8f47022da51c8fba6003cbb.svg",
+        "md5": "b7a5c9f9d387cc7d36d6ed935d2a46b1.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -8554,8 +8975,8 @@
             "owen davey"
         ],
         "info": [
-            55,
-            59,
+            54,
+            72,
             1
         ]
     },
@@ -8641,11 +9062,29 @@
         ]
     },
     {
-        "name": "Scarf1",
+        "name": "Scarf-a",
+        "md5": "5d671a4eb5c42e365d3c0ba1b885d9d8.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "clothing",
+            "blue",
+            "scarf"
+        ],
+        "info": [
+            54,
+            23,
+            1
+        ]
+    },
+    {
+        "name": "Scarf-b",
         "md5": "0c03668b4e26eba969ad803a4e810c78.svg",
         "type": "costume",
         "tags": [
             "fashion",
+            "clothing",
+            "scarf",
             "red"
         ],
         "info": [
@@ -8655,16 +9094,17 @@
         ]
     },
     {
-        "name": "Scarf2",
+        "name": "Scarf-c",
         "md5": "ce66662165e2756070f1b12e0a7cb5db.svg",
         "type": "costume",
         "tags": [
-            "fashion",
+            "fashionclothing",
+            "scarf",
             "purple"
         ],
         "info": [
-            23,
-            16,
+            30,
+            44,
             1
         ]
     },
@@ -8758,54 +9198,6 @@
         ]
     },
     {
-        "name": "Shirt Blouse",
-        "md5": "918a507af6bbae9e7f36f0d949900838.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            35,
-            28,
-            1
-        ]
-    },
-    {
-        "name": "Shirt Collar-a",
-        "md5": "b7ecf6503e27e9ab5c086eaf07d22b94.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            30,
-            57,
-            1
-        ]
-    },
-    {
-        "name": "Shirt Collar-b",
-        "md5": "f1b20c3350e8a7e92a2fb1925ad4158b.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            30,
-            57,
-            1
-        ]
-    },
-    {
-        "name": "Shirt Collar-c",
-        "md5": "5f04b99416a794e04d0855f446780f18.svg",
-        "type": "costume",
-        "tags": [],
-        "info": [
-            30,
-            57,
-            1
-        ]
-    },
-    {
         "name": "Shirt-a",
         "md5": "659465944053fe6fb6aa1ed0e11be9aa.svg",
         "type": "costume",
@@ -8816,45 +9208,6 @@
         "info": [
             46,
             40,
-            1
-        ]
-    },
-    {
-        "name": "Shirt-t",
-        "md5": "5d7fa4f1788f03d2962f1624d6eac800.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            39,
-            28,
-            1
-        ]
-    },
-    {
-        "name": "Shirt2-a",
-        "md5": "5946e7a1e36c6d97ae47d41dd8595a41.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            39,
-            48,
-            1
-        ]
-    },
-    {
-        "name": "Shirt2-a2",
-        "md5": "5b78ab09592126b6bbe2d4907d203909.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            39,
-            48,
             1
         ]
     },
@@ -8915,32 +9268,6 @@
         ]
     },
     {
-        "name": "Shoes1",
-        "md5": "ffab4cc284070b50ac317e515f59f7d8.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            36,
-            23,
-            1
-        ]
-    },
-    {
-        "name": "Shoes2",
-        "md5": "1dc5d568d98405c370b91a230397a7f9.svg",
-        "type": "costume",
-        "tags": [
-            "fashion"
-        ],
-        "info": [
-            40,
-            8,
-            1
-        ]
-    },
-    {
         "name": "Shorts-a",
         "md5": "d9b580c913c0d1d1a996dd733af91e68.svg",
         "type": "costume",
@@ -8978,7 +9305,7 @@
         "type": "costume",
         "tags": [
             "fashion",
-            " pants",
+            "pants",
             "shorts",
             "clothing"
         ],
@@ -9003,23 +9330,8 @@
         ]
     },
     {
-        "name": "Skates",
-        "md5": "97936eccad5c8d86ea9008c5bbb50b63.svg",
-        "type": "costume",
-        "tags": [
-            "fashion",
-            "winter",
-            "sports"
-        ],
-        "info": [
-            39,
-            19,
-            1
-        ]
-    },
-    {
         "name": "Skeleton-a",
-        "md5": "b6ddeecf18e40b99bde7e466759d5a5b.svg",
+        "md5": "e06f6eaf4fd27ff22f4c8207aa13c967.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9030,14 +9342,14 @@
             "alex eben meyer"
         ],
         "info": [
-            75,
-            90,
+            59,
+            100,
             1
         ]
     },
     {
         "name": "Skeleton-b",
-        "md5": "ba3f455026f5d7778af229ddddf83206.svg",
+        "md5": "06769ddf5fad85e101c7beda554d60b9.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9048,32 +9360,14 @@
             "alex eben meyer"
         ],
         "info": [
-            75,
-            90,
-            1
-        ]
-    },
-    {
-        "name": "Skeleton-c",
-        "md5": "af8fb44231f7891d52db5b4ad5c0f58b.svg",
-        "type": "costume",
-        "tags": [
-            "fantasy",
-            "spooky",
-            "halloween",
-            "bones",
-            "monster",
-            "alex eben meyer"
-        ],
-        "info": [
-            75,
+            69,
             90,
             1
         ]
     },
     {
         "name": "Skeleton-d",
-        "md5": "355eb1591be72ea1117b6a4e153010b1.svg",
+        "md5": "155efd0dfdc59a0e2a546a4a7d068ece.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9084,14 +9378,14 @@
             "alex eben meyer"
         ],
         "info": [
-            75,
-            90,
+            51,
+            100,
             1
         ]
     },
     {
         "name": "Skeleton-e",
-        "md5": "d3497858a3b5ad938e41a34bb8103c77.svg",
+        "md5": "c41a11468602522cdc6dec7043215f65.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9102,8 +9396,8 @@
             "alex eben meyer"
         ],
         "info": [
-            75,
-            90,
+            55,
+            89,
             1
         ]
     },
@@ -9182,7 +9476,7 @@
     },
     {
         "name": "Soccer Ball",
-        "md5": "81ff5ad24454e7a0f1f3ae863bb4dd25.svg",
+        "md5": "73eaf05fed60e9d65867508736f84569.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -9191,8 +9485,8 @@
             "alex eben meyer"
         ],
         "info": [
-            26,
-            26,
+            23,
+            22,
             1
         ]
     },
@@ -9291,7 +9585,7 @@
     },
     {
         "name": "Strawberry-a",
-        "md5": "734556fb8e14740f2cbc971238b71d47.svg",
+        "md5": "b4cff4b414b5f7fbf25c7c45abfb6c62.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9299,14 +9593,14 @@
             "alex eben meyer"
         ],
         "info": [
-            57,
-            58,
+            31,
+            47,
             1
         ]
     },
     {
         "name": "Strawberry-b",
-        "md5": "77dadaa80bc5156f655c2196f57972f7.svg",
+        "md5": "ebb8720dc679772e3dcb1b49e0503aa4.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9314,14 +9608,14 @@
             "alex eben meyer"
         ],
         "info": [
-            57,
-            58,
+            43,
+            47,
             1
         ]
     },
     {
         "name": "Strawberry-c",
-        "md5": "19f933b3cf3e8e150753f8fb9bb7a779.svg",
+        "md5": "278dc229a71e2fbff475908ca5c2483e.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9329,14 +9623,14 @@
             "alex eben meyer"
         ],
         "info": [
-            57,
-            58,
+            43,
+            47,
             1
         ]
     },
     {
         "name": "Strawberry-d",
-        "md5": "8e8057da8457e6167de36b7d3d28b4bb.svg",
+        "md5": "68a023e80cb9eff2350374361c034f08.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9344,14 +9638,14 @@
             "alex eben meyer"
         ],
         "info": [
-            57,
-            58,
+            41,
+            47,
             1
         ]
     },
     {
         "name": "Strawberry-e",
-        "md5": "5eb63e64b83f5aa5b75a55329a34efec.svg",
+        "md5": "9fef0cd91ba59163d74f4464b02824b8.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -9359,8 +9653,8 @@
             "alex eben meyer"
         ],
         "info": [
-            57,
-            58,
+            32,
+            36,
             1
         ]
     },
@@ -9383,7 +9677,7 @@
         ]
     },
     {
-        "name": "Sunglasses1",
+        "name": "Sunglasses-a",
         "md5": "424393e8705aeadcfecb8559ce4dcea2.svg",
         "type": "costume",
         "tags": [
@@ -9397,7 +9691,7 @@
         ]
     },
     {
-        "name": "Sunglasses2",
+        "name": "Sunglasses-b",
         "md5": "3185d2295bbf2c5ebd0688c9e4f13076.svg",
         "type": "costume",
         "tags": [
@@ -9407,6 +9701,36 @@
         "info": [
             29,
             10,
+            1
+        ]
+    },
+    {
+        "name": "Tabla-a",
+        "md5": "68ce53b53fcc68744584c28d20144c4f.svg",
+        "type": "costume",
+        "tags": [
+            "drums",
+            " music",
+            " ericr"
+        ],
+        "info": [
+            79,
+            67,
+            1
+        ]
+    },
+    {
+        "name": "Tabla-b",
+        "md5": "01b6ffb8691d32be10fabc77ddfb55b0.svg",
+        "type": "costume",
+        "tags": [
+            "drums",
+            " music",
+            " ericr"
+        ],
+        "info": [
+            86,
+            73,
             1
         ]
     },
@@ -9443,71 +9767,71 @@
     },
     {
         "name": "Takeout-a",
-        "md5": "0cfdefe0df1a032b90c8facd9f5dbe1f.svg",
+        "md5": "05c010b2425c4433353ff85d43ed7a1d.svg",
         "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
         ],
         "info": [
-            78,
-            61,
+            33,
+            41,
             1
         ]
     },
     {
         "name": "Takeout-b",
-        "md5": "48b19c48e32c98a35836ee40e3a7accf.svg",
+        "md5": "26c3be261cbb0327eaa1afe0467c80d0.svg",
         "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
         ],
         "info": [
-            78,
-            61,
+            33,
+            42,
             1
         ]
     },
     {
         "name": "Takeout-c",
-        "md5": "22d33d87883f8fb26c642eccc9b339f0.svg",
+        "md5": "801fa349b34531a15d467fef2b940f87.svg",
         "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
         ],
         "info": [
-            78,
-            61,
+            33,
+            53,
             1
         ]
     },
     {
         "name": "Takeout-d",
-        "md5": "262f1a3730d669dc9d43b3853e397361.svg",
+        "md5": "24e21e2846b59cdf2c390ebe985b3c74.svg",
         "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
         ],
         "info": [
-            78,
-            61,
+            40,
+            42,
             1
         ]
     },
     {
         "name": "Takeout-e",
-        "md5": "528e9df8c3bd173867be4143f8563e87.svg",
+        "md5": "95584a98e22df5ca7370f5c01ebe6d06.svg",
         "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
         ],
         "info": [
-            78,
-            61,
+            41,
+            35,
             1
         ]
     },
@@ -9611,7 +9935,7 @@
     },
     {
         "name": "Ten80 Stance",
-        "md5": "90ca0205c56c6c7f0e8892469de49bda.png",
+        "md5": "f60f99278455c843b7833fb7615428dd.png",
         "type": "costume",
         "tags": [
             "people",
@@ -9870,36 +10194,84 @@
         ]
     },
     {
+        "name": "Truck-a",
+        "md5": "51404247db5cdbc082336dfa4c03d675.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "car",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            49,
+            1
+        ]
+    },
+    {
+        "name": "Truck-b",
+        "md5": "1887b8233d1b0728f715a3985f0e01b6.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "car",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            58,
+            1
+        ]
+    },
+    {
+        "name": "Truck-c",
+        "md5": "e45bc3f87d9f603e588abe14b63b8e90.svg",
+        "type": "costume",
+        "tags": [
+            "truck",
+            "city",
+            "car",
+            "vehicle"
+        ],
+        "info": [
+            174,
+            58,
+            1
+        ]
+    },
+    {
         "name": "Trumpet-a",
-        "md5": "8fa7459ed5877bb14c6625e688be70e7.svg",
+        "md5": "36a48cc311fd28b4517e15d44b11587c.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
-            37,
-            73,
+            57,
+            38,
             1
         ]
     },
     {
         "name": "Trumpet-b",
-        "md5": "7cedda5ec925118f237094cd05381e5d.svg",
+        "md5": "c04cdfd5f05ff2817b6ab78027ef5d22.svg",
         "type": "costume",
         "tags": [
             "music",
             "andrew rae"
         ],
         "info": [
+            55,
             37,
-            73,
             1
         ]
     },
     {
         "name": "Unicorn",
-        "md5": "bd2cf980966c13d5ad3ab403bae4bb05.svg",
+        "md5": "c491fd1867375aa0160b013788d188e5.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9907,8 +10279,8 @@
             "ipzy"
         ],
         "info": [
-            100,
-            100,
+            91,
+            95,
             1
         ]
     },
@@ -9918,6 +10290,7 @@
         "type": "costume",
         "tags": [
             "fantasy",
+            "animals",
             "horse",
             "horn",
             "rainbow"
@@ -9929,8 +10302,8 @@
         ]
     },
     {
-        "name": "Unicorn-run-a",
-        "md5": "c6456df027561c74b70b8b25ab83fec9.svg",
+        "name": "Unicorn Running-a",
+        "md5": "d938a2bfbac8f3caf713d189fd993af5.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9939,14 +10312,14 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
+            118,
+            90,
             1
         ]
     },
     {
-        "name": "Unicorn-run-b",
-        "md5": "f2d6c5b62b56d0cc51598126c74e0ace.svg",
+        "name": "Unicorn Running-b",
+        "md5": "663618fcc0484879de6ad485b288c444.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9955,14 +10328,14 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
+            120,
+            89,
             1
         ]
     },
     {
-        "name": "Unicorn-run-c",
-        "md5": "fba367b11a710bf542333649c4d68e1e.svg",
+        "name": "Unicorn Running-c",
+        "md5": "ceb2f88fe182bc61af4e3864f8b46bba.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9971,14 +10344,14 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
+            121,
+            90,
             1
         ]
     },
     {
-        "name": "Unicorn-run-d",
-        "md5": "20bad70a67e0c7ed3255c65780cdb2a8.svg",
+        "name": "Unicorn Running-d",
+        "md5": "dddad08a2d03f406307ec7155f43c51c.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -9987,14 +10360,14 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
+            120,
+            87,
             1
         ]
     },
     {
-        "name": "Unicorn-run-e",
-        "md5": "39db08aafdde1542e755b8ead8df7a1f.svg",
+        "name": "Unicorn Running-e",
+        "md5": "cf3a00e72f3fc20d9ad15379fdb7b424.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -10003,14 +10376,14 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
+            119,
+            90,
             1
         ]
     },
     {
-        "name": "Unicorn-run-f",
-        "md5": "d66d0625702433a4cbd7591e39676700.svg",
+        "name": "Unicorn Running-f",
+        "md5": "264a70e872af2d3f6b2abad85daf82ae.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -10019,34 +10392,8 @@
             "walking"
         ],
         "info": [
-            130,
-            100,
-            1
-        ]
-    },
-    {
-        "name": "Vest-a",
-        "md5": "f8285ca9564451c62a0e3d75b8a714e8.svg",
-        "type": "costume",
-        "tags": [
-            "fashon"
-        ],
-        "info": [
-            18,
-            62,
-            1
-        ]
-    },
-    {
-        "name": "Vest-b",
-        "md5": "77d553eea3910ab8f5bac3d2da601061.svg",
-        "type": "costume",
-        "tags": [
-            "fashon"
-        ],
-        "info": [
-            18,
-            62,
+            117,
+            86,
             1
         ]
     },
@@ -10127,6 +10474,21 @@
         "info": [
             21,
             15,
+            1
+        ]
+    },
+    {
+        "name": "Winter Hat",
+        "md5": "62678324450bac2154703e2978e8ab61.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "winter",
+            "hat"
+        ],
+        "info": [
+            35,
+            39,
             1
         ]
     },
@@ -10221,6 +10583,21 @@
         ]
     },
     {
+        "name": "Wizard Hat",
+        "md5": "2da561a7e5cbfcda613f4750020d4aa5.svg",
+        "type": "costume",
+        "tags": [
+            "fashion",
+            "fantasy",
+            "winter"
+        ],
+        "info": [
+            34,
+            60,
+            1
+        ]
+    },
+    {
         "name": "Wizard-a",
         "md5": "9632aab80fce1c5bdb58150b29cb0067.svg",
         "type": "costume",
@@ -10281,8 +10658,10 @@
         "tags": [
             "fantasy",
             "people",
+            "animals",
             "ipzy",
             "castle",
+            "animals",
             "amphibians",
             "magic"
         ],
@@ -10299,6 +10678,7 @@
         "tags": [
             "fantasy",
             "people",
+            "animals",
             "ipzy",
             "castle",
             "amphibians",
@@ -10312,11 +10692,12 @@
     },
     {
         "name": "Zebra-a",
-        "md5": "d8392aea6e767a4b5032cffd04e688e3.svg",
+        "md5": "f58632e6b34fa8f9b35219e52ed2c864.svg",
         "type": "costume",
         "tags": [
             "animals",
             "savanna",
+            "zebra",
             "robert hunter"
         ],
         "info": [
@@ -10327,30 +10708,16 @@
     },
     {
         "name": "Zebra-b",
-        "md5": "3a6be1df1d9d9865b6bba4f569de6793.svg",
+        "md5": "ea23797598a55938a2d46f2b0a389fd6.svg",
         "type": "costume",
         "tags": [
             "animals",
             "savanna",
+            "zebra",
             "robert hunter"
         ],
         "info": [
-            97,
-            56,
-            1
-        ]
-    },
-    {
-        "name": "Zebra-c",
-        "md5": "b0d2d3e746493640fc34fd7b2efd6612.svg",
-        "type": "costume",
-        "tags": [
-            "animals",
-            "savanna",
-            "robert hunter"
-        ],
-        "info": [
-            97,
+            96,
             56,
             1
         ]
@@ -11229,7 +11596,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11243,7 +11610,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11257,7 +11624,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11271,7 +11638,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11285,7 +11652,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -11299,7 +11666,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11313,7 +11680,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11327,7 +11694,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11341,7 +11708,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11355,7 +11722,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11369,7 +11736,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11383,7 +11750,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11397,7 +11764,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11411,7 +11778,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11425,7 +11792,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11439,7 +11806,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11453,7 +11820,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             18,
@@ -11467,7 +11834,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -11481,7 +11848,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11495,7 +11862,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             23,
@@ -11509,7 +11876,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -11523,7 +11890,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11537,7 +11904,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11551,7 +11918,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11565,7 +11932,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             9,
@@ -11579,7 +11946,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             9,
@@ -11593,7 +11960,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             7,
@@ -11607,7 +11974,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -11621,7 +11988,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -11635,7 +12002,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             12,
@@ -11649,7 +12016,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11663,7 +12030,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11677,7 +12044,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -11691,7 +12058,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -11705,7 +12072,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -11719,7 +12086,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,
@@ -11733,7 +12100,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             30,
@@ -11747,7 +12114,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             30,
@@ -11761,7 +12128,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             27,
@@ -11775,7 +12142,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             26,
@@ -11789,7 +12156,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             26,
@@ -11803,7 +12170,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11817,7 +12184,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11831,7 +12198,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -11845,7 +12212,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11859,7 +12226,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11873,7 +12240,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11887,7 +12254,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,
@@ -11901,7 +12268,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11915,7 +12282,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -11929,7 +12296,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11943,7 +12310,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11957,7 +12324,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -11971,7 +12338,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -11985,7 +12352,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -11999,7 +12366,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             16,
@@ -12013,7 +12380,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             14,
@@ -12027,7 +12394,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12041,7 +12408,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12055,7 +12422,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12069,7 +12436,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12083,7 +12450,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             24,
@@ -12097,7 +12464,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             21,
@@ -12111,7 +12478,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12125,7 +12492,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             25,
@@ -12139,7 +12506,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12153,7 +12520,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             37,
@@ -12167,7 +12534,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             37,
@@ -12181,7 +12548,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             34,
@@ -12195,7 +12562,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12209,7 +12576,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12223,7 +12590,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12237,7 +12604,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12251,7 +12618,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             22,
@@ -12265,7 +12632,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             20,
@@ -12279,7 +12646,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12293,7 +12660,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             19,
@@ -12307,7 +12674,7 @@
         "type": "costume",
         "tags": [
             "alphabet",
-            "letter"
+            "letters"
         ],
         "info": [
             17,

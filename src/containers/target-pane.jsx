@@ -20,6 +20,7 @@ import sharedMessages from '../lib/shared-messages';
 import {emptySprite} from '../lib/empty-assets';
 import {highlightTarget} from '../reducers/targets';
 import {fetchSprite, fetchCode} from '../lib/backpack-api';
+import randomizeSpritePosition from '../lib/randomize-sprite-position';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -117,6 +118,7 @@ class TargetPane extends React.Component {
     }
     handleSurpriseSpriteClick () {
         const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
+        randomizeSpritePosition(item);
         this.props.vm.addSprite(JSON.stringify(item.json))
             .then(this.handleActivateBlocksTab);
     }
@@ -249,19 +251,12 @@ TargetPane.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
     hoveredTarget: state.scratchGui.hoveredTarget,
-    sprites: Object.keys(state.scratchGui.targets.sprites).reduce((sprites, k) => {
-        let {direction, size, x, y, ...sprite} = state.scratchGui.targets.sprites[k];
-        if (typeof direction !== 'undefined') direction = Math.round(direction);
-        if (typeof x !== 'undefined') x = Math.round(x);
-        if (typeof y !== 'undefined') y = Math.round(y);
-        if (typeof size !== 'undefined') size = Math.round(size);
-        sprites[k] = {...sprite, direction, size, x, y};
-        return sprites;
-    }, {}),
+    sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     raiseSprites: state.scratchGui.blockDrag,
     spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
 });
+
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
         e.preventDefault();

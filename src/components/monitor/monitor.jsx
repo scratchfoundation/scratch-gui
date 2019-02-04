@@ -19,7 +19,8 @@ const categories = {
     sound: '#CF63CF',
     looks: '#9966FF',
     motion: '#4C97FF',
-    list: '#FC662C'
+    list: '#FC662C',
+    extension: '#0FBD8C'
 };
 
 const modes = {
@@ -53,35 +54,52 @@ const MonitorComponent = props => (
                 })}
             </Box>
         </Draggable>
-        {props.mode === 'list' ? null : ReactDOM.createPortal((
+        {ReactDOM.createPortal((
             // Use a portal to render the context menu outside the flow to avoid
             // positioning conflicts between the monitors `transform: scale` and
             // the context menus `position: fixed`. For more details, see
             // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
             <ContextMenu id={`monitor-${props.label}`}>
-                <MenuItem onClick={props.onSetModeToDefault}>
-                    <FormattedMessage
-                        defaultMessage="normal readout"
-                        description="Menu item to switch to the default monitor"
-                        id="gui.monitor.contextMenu.default"
-                    />
-                </MenuItem>
-                <MenuItem onClick={props.onSetModeToLarge}>
-                    <FormattedMessage
-                        defaultMessage="large readout"
-                        description="Menu item to switch to the large monitor"
-                        id="gui.monitor.contextMenu.large"
-                    />
-                </MenuItem>
-                {props.onSetModeToSlider ? (
+                {props.onSetModeToDefault &&
+                    <MenuItem onClick={props.onSetModeToDefault}>
+                        <FormattedMessage
+                            defaultMessage="normal readout"
+                            description="Menu item to switch to the default monitor"
+                            id="gui.monitor.contextMenu.default"
+                        />
+                    </MenuItem>}
+                {props.onSetModeToLarge &&
+                    <MenuItem onClick={props.onSetModeToLarge}>
+                        <FormattedMessage
+                            defaultMessage="large readout"
+                            description="Menu item to switch to the large monitor"
+                            id="gui.monitor.contextMenu.large"
+                        />
+                    </MenuItem>}
+                {props.onSetModeToSlider &&
                     <MenuItem onClick={props.onSetModeToSlider}>
                         <FormattedMessage
                             defaultMessage="slider"
                             description="Menu item to switch to the slider monitor"
                             id="gui.monitor.contextMenu.slider"
                         />
-                    </MenuItem>
-                ) : null}
+                    </MenuItem>}
+                {props.onImport &&
+                    <MenuItem onClick={props.onImport}>
+                        <FormattedMessage
+                            defaultMessage="import"
+                            description="Menu item to import into list monitors"
+                            id="gui.monitor.contextMenu.import"
+                        />
+                    </MenuItem>}
+                {props.onExport &&
+                    <MenuItem onClick={props.onExport}>
+                        <FormattedMessage
+                            defaultMessage="export"
+                            description="Menu item to export from list monitors"
+                            id="gui.monitor.contextMenu.export"
+                        />
+                    </MenuItem>}
             </ContextMenu>
         ), document.body)}
     </ContextMenuTrigger>
@@ -99,14 +117,16 @@ MonitorComponent.propTypes = {
     label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,
+    onExport: PropTypes.func,
+    onImport: PropTypes.func,
     onNextMode: PropTypes.func.isRequired,
-    onSetModeToDefault: PropTypes.func.isRequired,
-    onSetModeToLarge: PropTypes.func.isRequired,
+    onSetModeToDefault: PropTypes.func,
+    onSetModeToLarge: PropTypes.func,
     onSetModeToSlider: PropTypes.func
 };
 
 MonitorComponent.defaultProps = {
-    category: 'data',
+    category: 'extension',
     mode: 'default'
 };
 

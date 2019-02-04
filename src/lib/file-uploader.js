@@ -1,5 +1,6 @@
 import {BitmapAdapter} from 'scratch-svg-renderer';
 import log from './log.js';
+import randomizeSpritePosition from './randomize-sprite-position.js';
 
 /**
  * Extract the file name given a string of the form fileName + ext
@@ -199,7 +200,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
             const newSprite = {
                 name: spriteName,
                 isStage: false,
-                x: 0,
+                x: 0, // x/y will be randomized below
                 y: 0,
                 visible: true,
                 size: 100,
@@ -212,6 +213,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
                 costumes: [vmCostume],
                 sounds: [] // TODO are all of these necessary?
             };
+            randomizeSpritePosition(newSprite);
             // TODO probably just want sprite upload to handle this object directly
             handleSprite(JSON.stringify(newSprite));
         }));

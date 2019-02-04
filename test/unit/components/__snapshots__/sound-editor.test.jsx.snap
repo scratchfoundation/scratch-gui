@@ -211,24 +211,17 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           </div>
         </div>
         <div
-          className=""
-          style={
-            Object {
-              "alignContent": undefined,
-              "alignItems": undefined,
-              "alignSelf": undefined,
-              "flexBasis": undefined,
-              "flexDirection": undefined,
-              "flexGrow": undefined,
-              "flexShrink": undefined,
-              "flexWrap": undefined,
-              "height": undefined,
-              "justifyContent": undefined,
-              "left": "50%",
-              "width": undefined,
+          className={undefined}
+        >
+          <div
+            className=""
+            style={
+              Object {
+                "transform": "translateX(50%)",
+              }
             }
-          }
-        />
+          />
+        </div>
         <div
           className=""
           onMouseDown={[Function]}

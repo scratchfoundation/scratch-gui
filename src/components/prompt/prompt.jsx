@@ -1,14 +1,13 @@
+import classNames from 'classnames';
 import {defineMessages, FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
-import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Modal from '../../containers/modal.jsx';
 
 import styles from './prompt.css';
 
-import dropdownIcon from './icon--dropdown-caret.svg';
 
 const messages = defineMessages({
     forAllSpritesMessage: {
@@ -21,10 +20,10 @@ const messages = defineMessages({
         description: 'Option message when creating a varaible for making it only available to the current sprite',
         id: 'gui.gui.variableScopeOptionSpriteOnly'
     },
-    moreOptionsMessage: {
-        defaultMessage: 'More Options',
-        description: 'Dropdown message for variable/list options',
-        id: 'gui.gui.variablePrompt'
+    cloudVarOptionMessage: {
+        defaultMessage: 'Cloud variable (stored on server)',
+        description: 'Option message when creating a variable for making it a cloud variable, a variable that is stored on the server', /* eslint-disable-line max-len */
+        id: 'gui.gui.cloudVariableOption'
     },
     availableToAllSpritesMessage: {
         defaultMessage: 'This variable will be available to all sprites.',
@@ -48,13 +47,14 @@ const PromptComponent = props => (
                 <input
                     autoFocus
                     className={styles.variableNameTextInput}
+                    defaultValue={props.defaultValue}
                     name={props.label}
-                    placeholder={props.placeholder}
                     onChange={props.onChange}
+                    onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
                 />
             </Box>
-            {props.showMoreOptions ?
+            {props.showVariableOptions ?
                 <div>
                     {props.isStage ?
                         <div className={styles.infoMessage}>
@@ -65,45 +65,48 @@ const PromptComponent = props => (
                         <Box className={styles.optionsRow}>
                             <label>
                                 <input
-                                    defaultChecked
+                                    checked={props.globalSelected}
                                     name="variableScopeOption"
                                     type="radio"
                                     value="global"
-                                    onChange={props.onOptionSelection}
+                                    onChange={props.onScopeOptionSelection}
                                 />
                                 <FormattedMessage
                                     {...messages.forAllSpritesMessage}
                                 />
                             </label>
-                            <label>
+                            <label
+                                className={classNames({[styles.disabledLabel]: props.cloudSelected})}
+                            >
                                 <input
+                                    checked={!props.globalSelected}
+                                    disabled={props.cloudSelected}
                                     name="variableScopeOption"
                                     type="radio"
                                     value="local"
-                                    onChange={props.onOptionSelection}
+                                    onChange={props.onScopeOptionSelection}
                                 />
                                 <FormattedMessage
                                     {...messages.forThisSpriteMessage}
                                 />
                             </label>
                         </Box>}
-                    <Box className={styles.moreOptions}>
-                        <ComingSoonTooltip
-                            className={styles.moreOptionsAccordion}
-                            place="right"
-                            tooltipId="variable-options-accordion"
-                        >
-                            <div className={styles.moreOptionsText}>
+                    {props.showCloudOption ?
+                        <Box className={classNames(styles.cloudOption)}>
+                            <label
+                                className={classNames({[styles.disabledLabel]: !props.canAddCloudVariable})}
+                            >
+                                <input
+                                    checked={props.cloudSelected && props.canAddCloudVariable}
+                                    disabled={!props.canAddCloudVariable}
+                                    type="checkbox"
+                                    onChange={props.onCloudVarOptionChange}
+                                />
                                 <FormattedMessage
-                                    {...messages.moreOptionsMessage}
+                                    {...messages.cloudVarOptionMessage}
                                 />
-                                <img
-                                    className={styles.moreOptionsIcon}
-                                    src={dropdownIcon}
-                                />
-                            </div>
-                        </ComingSoonTooltip>
-                    </Box>
+                            </label>
+                        </Box> : null}
                 </div> : null}
 
             <Box className={styles.buttonRow}>
@@ -133,15 +136,21 @@ const PromptComponent = props => (
 );
 
 PromptComponent.propTypes = {
+    canAddCloudVariable: PropTypes.bool.isRequired,
+    cloudSelected: PropTypes.bool.isRequired,
+    defaultValue: PropTypes.string,
+    globalSelected: PropTypes.bool.isRequired,
     isStage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onCloudVarOptionChange: PropTypes.func,
+    onFocus: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
-    onOptionSelection: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    showMoreOptions: PropTypes.bool.isRequired,
+    onScopeOptionSelection: PropTypes.func.isRequired,
+    showCloudOption: PropTypes.bool.isRequired,
+    showVariableOptions: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 };
 

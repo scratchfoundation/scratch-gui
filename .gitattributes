@@ -6,6 +6,11 @@
 
 # File types which we know are binary
 
+# Treat SVG files as binary so that their contents don't change due to line
+# endings. The contents of SVGs must not change from the way they're stored
+# on assets.scratch.mit.edu so that MD5 calculations don't change.
+*.svg binary
+
 # Prefer LF for most file types
 *.frag text eol=lf
 *.htm text eol=lf

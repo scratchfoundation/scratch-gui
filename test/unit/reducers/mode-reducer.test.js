@@ -12,7 +12,6 @@ test('initialState', () => {
 
 test('set full screen mode', () => {
     const previousState = {
-        isAdmin: true,
         showBranding: false,
         isFullScreen: false,
         isPlayerOnly: false,
@@ -23,7 +22,6 @@ test('set full screen mode', () => {
         isFullScreen: true
     };
     const newState = {
-        isAdmin: true,
         showBranding: false,
         isFullScreen: true,
         isPlayerOnly: false,
@@ -35,7 +33,6 @@ test('set full screen mode', () => {
 
 test('set player mode', () => {
     const previousState = {
-        isAdmin: true,
         showBranding: false,
         isFullScreen: false,
         isPlayerOnly: false,
@@ -46,7 +43,6 @@ test('set player mode', () => {
         isPlayerOnly: true
     };
     const newState = {
-        isAdmin: true,
         showBranding: false,
         isFullScreen: false,
         isPlayerOnly: true,

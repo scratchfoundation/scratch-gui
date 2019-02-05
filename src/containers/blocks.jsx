@@ -455,6 +455,7 @@ class Blocks extends React.Component {
             .then(blocks => this.props.vm.shareBlocksToTarget(blocks, this.props.vm.editingTarget.id))
             .then(() => {
                 this.props.vm.refreshWorkspace();
+                this.updateToolbox(); // To show new variables/custom blocks
             });
     }
     render () {

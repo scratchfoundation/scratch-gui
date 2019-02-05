@@ -102,7 +102,7 @@ const StageSelector = props => {
                         title: intl.formatMessage(messages.addBackdropFromFile),
                         img: fileUploadIcon,
                         onClick: onBackdropFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg', // Bitmap coming soon
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
                         fileChange: onBackdropFileUpload,
                         fileInput: fileInputRef,
                         fileMultiple: true

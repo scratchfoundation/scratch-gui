@@ -158,11 +158,15 @@ class CostumeTab extends React.Component {
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
     handleNewCostume (costume, fromCostumeLibrary) {
-        if (fromCostumeLibrary) {
-            this.props.vm.addCostumeFromLibrary(costume.md5, costume);
-        } else {
-            this.props.vm.addCostume(costume.md5, costume);
-        }
+        const costumes = Array.isArray(costume) ? costume : [costume];
+
+        costumes.forEach(c => {
+            if (fromCostumeLibrary) {
+                this.props.vm.addCostumeFromLibrary(c.md5, c);
+            } else {
+                this.props.vm.addCostume(c.md5, c);
+            }
+        });
     }
     handleNewBlankCostume () {
         const name = this.props.vm.editingTarget.isStage ?
@@ -291,7 +295,7 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg',
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput,
                         fileMultiple: true

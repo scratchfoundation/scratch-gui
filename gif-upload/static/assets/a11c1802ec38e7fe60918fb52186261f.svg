@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>General/Check Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M10,7.73577763 L12.2675846,5.46819305 C12.8909754,4.84480221 13.8988379,4.84194841 14.5284447,5.47155526 C15.1536925,6.096803 15.1476685,7.11655392 14.531807,7.73241542 L12.2642224,10 L14.531807,12.2675846 C15.1551978,12.8909754 15.1580516,13.8988379 14.5284447,14.5284447 C13.903197,15.1536925 12.8834461,15.1476685 12.2675846,14.531807 L10,12.2642224 L7.73241542,14.531807 C7.10902458,15.1551978 6.10116212,15.1580516 5.47155526,14.5284447 C4.84630752,13.903197 4.85233155,12.8834461 5.46819305,12.2675846 L7.73577763,10 L5.46819305,7.73241542 C4.84480221,7.10902458 4.84194841,6.10116212 5.47155526,5.47155526 C6.096803,4.84630752 7.11655392,4.85233155 7.73241542,5.46819305 L10,7.73577763 Z" id="path-1"></path>
+    </defs>
+    <g id="General/Check-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="close-icon" fill="#FFFFFF" xlink:href="#path-1"></use>
+        <g id="Color/White" mask="url(#mask-2)" fill="#FFFFFF">
+            <rect id="Color" x="0" y="0" width="20" height="20"></rect>
+        </g>
+    </g>
+</svg>

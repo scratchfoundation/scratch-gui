@@ -21,21 +21,22 @@ const extractFileName = function (nameExt) {
  * @param {Function} onload The function that handles loading the file
  */
 const handleFileUpload = function (fileInput, onload) {
-    let thisFile = null;
-    const reader = new FileReader();
-    reader.onload = () => {
-        // Reset the file input value now that we have everything we need
-        // so that the user can upload the same sound multiple times if
-        // they choose
-        fileInput.value = null;
-        const fileType = thisFile.type;
-        const fileName = extractFileName(thisFile.name);
+    const readFile = file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same sound multiple times if
+            // they choose
+            fileInput.value = null;
+            const fileType = file.type;
+            const fileName = extractFileName(file.name);
 
-        onload(reader.result, fileType, fileName);
+            onload(reader.result, fileType, fileName);
+        };
+        reader.readAsArrayBuffer(file);
     };
-    if (fileInput.files) {
-        thisFile = fileInput.files[0];
-        reader.readAsArrayBuffer(thisFile);
+    for (let i = 0; i < fileInput.files.length; i++) {
+        readFile(fileInput.files[i]);
     }
 };
 

@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs,
@@ -45,6 +46,32 @@ describe('Working with backdrops', () => {
         // Make sure the backdrop was actually added by going to the backdrops tab
         await clickText('Backdrops');
         await clickText('Blue Sky', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test.only('Adding multiple backdrops at the same time', async () => {
+        const files = [
+            path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
+            path.resolve(__dirname, '../fixtures/100-100.svg')
+        ];
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+
+        const buttonXpath = '//button[@aria-label="Choose a Backdrop"]';
+        const fileXpath = `${buttonXpath}/following-sibling::div//input[@type="file"]`;
+
+        const el = await findByXpath(buttonXpath);
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath(fileXpath);
+        await input.sendKeys(files.join('\n'));
+
+        await clickXpath('//span[text()="Stage"]');
+        await findByText('gh-3582-png', scope.costumesTab);
+        await findByText('100-100', scope.costumesTab);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

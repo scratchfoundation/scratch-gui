@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs,
@@ -181,4 +182,25 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    test.only('Adding multiple costumes at the same time', async () => {
+        const files = [
+            path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
+            path.resolve(__dirname, '../fixtures/100-100.svg')
+        ];
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(files.join('\n'));
+
+        await findByText('gh-3582-png', scope.costumesTab);
+        await findByText('100-100', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

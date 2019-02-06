@@ -4,11 +4,13 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs,
     loadUri,
-    scope
+    scope,
+    waitUntilGone
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -40,7 +42,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await el.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');
@@ -63,7 +65,7 @@ describe('Loading scratch gui', () => {
             await el.clear();
             await el.sendKeys('scratch.mit.edu/projects/96708228');
             await clickXpath('//button[@title="View Project"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');
@@ -77,7 +79,7 @@ describe('Loading scratch gui', () => {
 
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');
@@ -98,7 +100,7 @@ describe('Loading scratch gui', () => {
                 .setSize(1920, 1080);
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Full Screen Control"]');
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
@@ -119,7 +121,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await findByXpath('//*[span[text()="Costumes"]]');
             await clickText('Costumes');
             await clickXpath(
@@ -138,7 +140,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await clickXpath(
                 '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
@@ -155,7 +157,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await inputElement.sendKeys(`scratch.mit.edu/projects/${projectId}`);
             await clickXpath('//button[@title="View Project"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await waitUntilGone(findByText('Loading'));
             await clickText('Sounds');
             await clickXpath('//button[@aria-label="Choose a Sound"]');
             await clickText('A Bass', scope.modal); // Should close the modal

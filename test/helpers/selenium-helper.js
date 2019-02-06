@@ -21,7 +21,8 @@ class SeleniumHelper {
             'getSauceDriver',
             'getLogs',
             'loadUri',
-            'rightClickText'
+            'rightClickText',
+            'waitUntilGone'
         ]);
     }
 
@@ -117,6 +118,10 @@ class SeleniumHelper {
 
     clickButton (text) {
         return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
+    }
+
+    waitUntilGone (element) {
+        return this.driver.wait(until.stalenessOf(element));
     }
 
     getLogs (whitelist) {

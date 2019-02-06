@@ -228,4 +228,21 @@ describe('Working with the blocks', () => {
         await driver.sleep(500); // Wait for scroll to finish
         await clickText('Meow', scope.blocksTab); // Meow, not A Bass
     });
+
+    // Regression test for switching between editor/player causing toolbox to stop updating
+    test('"See inside" after being on project page re-initializing variables', async () => {
+        const playerUri = path.resolve(__dirname, '../../build/player.html');
+        await loadUri(playerUri);
+        await clickText('See inside');
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
+
+        await clickText('See Project Page');
+        await clickText('See inside');
+
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
+    });
 });

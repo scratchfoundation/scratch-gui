@@ -183,6 +183,24 @@ describe('Working with the blocks', () => {
         await clickText('newname', scope.blocksTab);
     });
 
+    test('Renaming costume with a special character should not break toolbox', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+
+        // Rename the costume
+        await clickText('Costumes');
+        const el = await findByXpath("//input[@value='costume1']");
+        await el.sendKeys('<NewCostume>');
+
+        // Make sure it is updated in the block menu
+        await clickText('Code');
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('<NewCostume>', scope.blocksTab);
+
+        await clickText('Sound', scope.blocksTab);
+    });
+
     // NOTE: This test describes the current behavior so that changes are not
     // introduced inadvertly, but I know this is not the desired behavior
     test('Adding costumes DOES NOT update the default costume name in the toolbox', async () => {
@@ -217,5 +235,22 @@ describe('Working with the blocks', () => {
         await clickText('Sound', scope.blocksTab);
         await driver.sleep(500); // Wait for scroll to finish
         await clickText('Meow', scope.blocksTab); // Meow, not A Bass
+    });
+
+    // Regression test for switching between editor/player causing toolbox to stop updating
+    test('"See inside" after being on project page re-initializing variables', async () => {
+        const playerUri = path.resolve(__dirname, '../../build/player.html');
+        await loadUri(playerUri);
+        await clickText('See inside');
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
+
+        await clickText('See Project Page');
+        await clickText('See inside');
+
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
     });
 });

@@ -62,7 +62,7 @@ describe('blocks example', () => {
     test('Load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
-        await waitUntilGone(findByText('Loading'));
+        await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');

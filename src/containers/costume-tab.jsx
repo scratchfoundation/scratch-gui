@@ -13,7 +13,7 @@ import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
-import download from '../lib/download-url';
+import downloadBlob from '../lib/download-blob';
 
 import {
     closeCameraCapture,
@@ -154,7 +154,8 @@ class CostumeTab extends React.Component {
     }
     handleExportCostume (costumeIndex) {
         const item = this.props.vm.editingTarget.sprite.costumes[costumeIndex];
-        download(`${item.name}.${item.asset.dataFormat}`, item.asset.encodeDataURI());
+        const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
+        downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
     handleNewCostume (costume, fromCostumeLibrary) {
         if (fromCostumeLibrary) {

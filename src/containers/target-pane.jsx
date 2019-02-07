@@ -21,6 +21,7 @@ import {emptySprite} from '../lib/empty-assets';
 import {highlightTarget} from '../reducers/targets';
 import {fetchSprite, fetchCode} from '../lib/backpack-api';
 import randomizeSpritePosition from '../lib/randomize-sprite-position';
+import downloadBlob from '../lib/download-blob';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -94,20 +95,7 @@ class TargetPane extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.vm.exportSprite(id).then(content => {
-            const filename = `${spriteName}.sprite3`;
-
-            // Use special ms version if available to get it working on Edge.
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(content, filename);
-                return;
-            }
-
-            const url = window.URL.createObjectURL(content);
-            saveLink.href = url;
-            saveLink.download = filename;
-            saveLink.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(saveLink);
+            downloadBlob(`${spriteName}.sprite3`, content);
         });
     }
     handleSelectSprite (id) {

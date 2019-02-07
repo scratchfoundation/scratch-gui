@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>vernier-force-block-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="vernier-force-block-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Extensions/Hardware/Vernier-Force-Block">
+            <g id="vernier-force" transform="translate(8.000000, 0.500000)">
+                <path d="M11.98,39 C10.3238576,39 8.98,37.6561424 8.98,36 C8.98,35.4438576 9.42385763,35 9.98,35 C10.5361424,35 10.98,35.4438576 10.98,36 C10.98,36.5538576 11.4261424,37 11.98,37 C12.5338576,37 12.98,36.5538576 12.98,36 L12.98,35.83 C12.98,35.5708771 12.8714563,35.308563 12.6864466,35.1235534 L11.8564466,34.2935534 C11.2923853,33.729492 10.98,32.9721944 10.98,32.17 L10.98,30 C10.98,29.4438576 11.4238576,29 11.98,29 C12.5361424,29 12.98,29.4438576 12.98,30 L12.98,32.17 C12.98,32.4291229 13.0885437,32.691437 13.2735534,32.8764466 L14.1035534,33.7064466 C14.6676147,34.270508 14.98,35.0278056 14.98,35.83 L14.98,36 C14.98,37.6561424 13.6361424,39 11.98,39 Z" id="Path" stroke-opacity="0.15" stroke="#000000" fill="#E6E7E8"></path>
+                <path d="M23.71,0.29 C23.52,0.11 23.28,0 23,0 L1,0 C0.72,0 0.48,0.11 0.29,0.29 C0.11,0.48 0,0.72 0,1 L0,27 C0,27.28 0.11,27.52 0.29,27.71 C0.48,27.89 0.72,28 1,28 L23,28 C23.28,28 23.52,27.89 23.71,27.71 C23.89,27.52 24,27.28 24,27 L24,1 C24,0.72 23.89,0.48 23.71,0.29 Z M12,4 C13.93,4 15.27,5.93 14.59,7.75 L13.35,11.06 C13.14,11.63 12.6,12 12,12 C11.4,12 10.86,11.63 10.65,11.06 L9.4,7.74 C9.28,7.41 9.22,7.09 9.22,6.76 C9.22,5.3 10.41,4 12,4 Z" id="Shape" stroke="#7C87A5" fill="#8592AF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M2,2 L2,26 L22,26 L22,2 L2,2 Z M12,4 C13.93,4 15.27,5.93 14.59,7.75 L13.35,11.06 C13.14,11.63 12.6,12 12,12 C11.4,12 10.86,11.63 10.65,11.06 L9.4,7.74 C9.28,7.41 9.22,7.09 9.22,6.76 C9.22,5.3 10.41,4 12,4 Z" id="Shape" stroke="#7C87A5" fill="#5CB1D6" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+                <polygon id="Path" stroke="#7C87A5" fill="#8592AF" stroke-linecap="round" stroke-linejoin="round" points="22 26 2 26 2 20 22 16"></polygon>
+                <path d="M0.29,27.7 L2,26" id="Path" stroke="#7C87A5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M0.29,0.29 L2,2" id="Path" stroke="#7C87A5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M22,2 L23.71,0.29" id="Path" stroke="#7C87A5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M23.71,27.7 L22,26" id="Path" stroke="#7C87A5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle id="Oval" fill="#FFBF00" cx="12" cy="14.82" r="1.18"></circle>
+                <rect id="Rectangle" stroke="#7C87A5" fill="#E6E7E8" stroke-linecap="round" stroke-linejoin="round" x="10" y="28" width="4" height="4"></rect>
+                <path d="M15.49,21.99 L8.48,21.99 C8.21,21.99 7.98,21.77 7.98,21.49 L7.98,21.49 C7.98,21.22 8.2,20.99 8.48,20.99 L15.49,20.99 C15.76,20.99 15.99,21.21 15.99,21.49 L15.99,21.49 C15.98,21.77 15.76,21.99 15.49,21.99 Z" id="Path" fill="#FFBF00"></path>
+                <path d="M17.49,24 L6.48,24 C6.21,24 5.98,23.78 5.98,23.5 L5.98,23.5 C5.98,23.23 6.2,23 6.48,23 L17.49,23 C17.76,23 17.99,23.22 17.99,23.5 L17.99,23.5 C17.98,23.77 17.76,24 17.49,24 Z" id="Path" fill="#FFBF00"></path>
+            </g>
+        </g>
+    </g>
+</svg>

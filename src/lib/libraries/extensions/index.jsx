@@ -17,13 +17,13 @@ import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
 import gdxforImage from './gdxfor.png';
-import gdxforInsetImage from './gdxfor-small.svg';
-
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
 import ev3PeripheralImage from './peripheral-connection/ev3/ev3-hub-illustration.svg';
 import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
+import gdxforPeripheralImage from './peripheral-connection/gdxfor/gdxfor-illustration.svg';
+import gdxforMenuImage from './peripheral-connection/gdxfor/gdxfor-small.svg';
 import wedoPeripheralImage from './peripheral-connection/wedo/wedo-illustration.svg';
 import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
@@ -242,7 +242,7 @@ export default [
         extensionId: 'gdxfor',
         collaborator: 'Vernier',
         iconURL: gdxforImage,
-        insetIconURL: gdxforInsetImage,
+        insetIconURL: gdxforMenuImage,
         description: (
             <FormattedMessage
                 defaultMessage="Sense push, pull, motion, and spin."
@@ -255,15 +255,15 @@ export default [
         bluetoothRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        peripheralImage: microbitPeripheralImage,
-        smallPeripheralImage: gdxforInsetImage,
+        peripheralImage: gdxforPeripheralImage,
+        smallPeripheralImage: gdxforMenuImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
-                description="Message to help people connect to their micro:bit."
+                description="Message to help people connect to their force and acceleration sensor."
                 id="gui.extension.gdxfor.connectingMessage"
             />
         ),
-        helpLink: 'https://scratch.mit.edu/microbit'
+        helpLink: 'https://scratch.mit.edu/force-and-accel'
     }
 ];

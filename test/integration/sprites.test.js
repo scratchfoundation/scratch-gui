@@ -122,6 +122,29 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding a sprite by uploading a gif', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/paddleball.gif'));
+        await clickText('paddleball', scope.spriteTile); // Sprite is named for costume filename
+
+        await clickText('Costumes');
+        await findByText('paddleball-costume1', scope.costumesTab);
+        await findByText('paddleball-costume2', scope.costumesTab);
+        await findByText('paddleball-costume3', scope.costumesTab);
+        await findByText('paddleball-costume4', scope.costumesTab);
+        await findByText('paddleball-costume5', scope.costumesTab);
+        await findByText('paddleball-costume6', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a letter sprite through the Letters filter in the library', async () => {
         await loadUri(uri);
         await driver.manage()

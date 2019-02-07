@@ -3,107 +3,36 @@ import {FormattedMessage} from 'react-intl';
 
 // Intro
 import libraryIntro from './intro/lib-getting-started.jpg';
-import stepMove from './intro/intro1.gif';
-import stepMoveSayHello from './intro/intro2.gif';
 
 // Text to Speech
 import libraryTXTSpeech from './txt/lib_txt-to-speech.jpg';
-import stepAddTXTextension from './txt/01_hoc-add-extensions.gif';
-import stepTXTSpeech from './txt/02_hoc-say-something.gif';
-import stepTXTSetVoice from './txt/03_hoc-set-voice.gif';
-import stepTXTMove from './txt/04_hoc-move-around.gif';
-import stepTXTBackdrop from './txt/05_hoc-add-backdrop.gif';
-import stepTXTAddSprite from './txt/06_hoc-add-character.gif';
-import stepTXTSong from './txt/07_hoc-perform-song.gif';
-import stepTXTColor from './txt/08_hoc-color-click.gif';
-import stepTXTSpin from './txt/09_hoc-spin.gif';
-import stepTXTGrow from './txt/10_hoc-grow-shrink.gif';
 
 // Cartoon Network
 import libraryCartoonNetwork from './cartoonnetwork/lib_CartoonNetwork.jpg';
-import stepCNcharacter from './cartoonnetwork/1-cn-hideshow.gif';
-import stepCNsay from './cartoonnetwork/2-cn-say.gif';
-import stepCNglide from './cartoonnetwork/3-cn-glide.gif';
-import stepCNpicksprite from './cartoonnetwork/4-cn-pick-gem.gif';
-import stepCNcollect from './cartoonnetwork/5-cn-collect.gif';
-import stepCNvariable from './cartoonnetwork/6-cn-variable.gif';
-import stepCNscore from './cartoonnetwork/7-cn-score.gif';
-import stepCNbackdrop from './cartoonnetwork/8-cn-change-backdrop.gif';
 
 // Add sprite
 import libraryAddSprite from './sprite/cover-add-sprite.jpg';
-import stepAddSprite from './sprite/intro-choose-sprite.gif';
 
 // Animate a name
 import libraryAnimate from './animate/lib_animate-a-name.jpg';
-import stepAnimatePickLetter from './animate/animate-name-pick-a-letter.gif';
-import stepAnimatePlaySound from './animate/animate-name-play-sound.gif';
-import stepAnimatePickLetter2 from './animate/animate-name-pick-a-letter2.gif';
-import stepAnimateChangeColor from './animate/animate-name-change-color.gif';
-import stepAnimateSpin from './animate/animate-name-spin.gif';
-import stepAnimateGrow from './animate/animate-name-grow.gif';
-
 
 // Make-Music
 import libraryMakeMusic from './make-music/lib-make-music.jpg';
-import stepPickInstrument from './make-music/make-music-pick-instrument.gif';
-import stepPlaySoundClick from './make-music/make-music-play-sound.gif';
-import stepMakeSong from './make-music/make-music-make-song.gif';
-import stepMakeBeat from './make-music/make-music-make-beat.gif';
-import stepMakeBeatbox from './make-music/make-music-beatbox.gif';
 
 // Chase-Game
 import libraryChaseGame from './chase-game/lib-chasegame.jpg';
-import stepBG from './chase-game/chase-game-add-backdrop.gif';
-import stepAddOcto from './chase-game/chase-game-add-sprite1.gif';
-import stepLeftRight from './chase-game/chase-game-move-rightleft.gif';
-import stepUpDown from './chase-game/chase-game-move-updown.gif';
-import stepAddStar from './chase-game/chase-game-add-sprite2.gif';
-import stepMoveRandom from './chase-game/chase-game-move-randomly.gif';
-import stepWhenTouch from './chase-game/chase-game-touching.gif';
-import stepScoreVariable from './chase-game/chase-game-add-variable.gif';
-import stepScoreWhenTouch from './chase-game/chase-game-change-score.gif';
 
 // Make-A-Game
 import libraryMakeAGame from './game/lib-pop.jpg';
-import stepGamePickSprite from './game/game-pick-sprite.gif';
-import stepGamePlaySound from './game/game-play-sound.gif';
-import stepGameAddScore from './game/game-add-score.gif';
-import stepGameChangeScore from './game/game-change-score.gif';
-import stepRandom from './game/game-random-position.gif';
-import stepGameChangeColor from './game/game-change-color.gif';
-import stepResetScore from './game/game-reset-score.gif';
 
 // Animate A Character
 import libraryAnimateChar from './animate-char/lib_Animate_a_Character.jpg';
-import stepAnimateCharPickBackdrop from './animate-char/animate-char-pick-backdrop.gif';
-import stepAnimateCharPickSprite from './animate-char/animate-char-pick-sprite.gif';
-import stepAnimateCharSaySomething from './animate-char/animate-char-say-something.gif';
-import stepAnimateCharAddSound from './animate-char/animate-char-add-sound.gif';
-import stepAnimateCharTalk from './animate-char/animate-char-talk.gif';
-import stepAnimateCharMove from './animate-char/animate-char-move.gif';
-import stepAnimateCharJump from './animate-char/animate-char-jump.gif';
-import stepAnimateCharChangeColor from './animate-char/animate-char-change-color.gif';
 
 // Tell A Story
 import libraryStory from './story/lib-tell-a-story.jpg';
-import stepStoryPickBackdrop from './story/story-pick-backdrop.gif';
-import stepStoryPickSprite from './story/story-pick-sprite.gif';
-import stepStoryCharSaySomething from './story/story-say-something.gif';
-import stepStoryCharAddAnotherSprite from './story/story-pick-another-sprite.gif';
-import stepStoryFlip from './story/story-flip.gif';
-import stepStoryConversation from './story/story-conversation.gif';
-import stepStoryAddAnotherBackdrop from './story/story-add-background-2.gif';
-import stepStorySwitchBackdrop from './story/story-switch-backdrop.gif';
-import stepStoryHide from './story/story-hide-character.gif';
-import stepStoryShow from './story/story-show-character.gif';
 
 // Video Sensing
 import libraryVideoSens from './videosensing/lib_video_sensing.jpg';
-import stepVideoSensAddExtension from './videosensing/videosens-add-extension.gif';
-import stepVideoSensPet from './videosensing/videosens-pet-cat.gif';
-import stepVideoSensAnimate from './videosensing/videosens-animate.gif';
-import stepVideoSensPop from './videosensing/videosens-pop.gif';
 
 // Videos
 import recordASound from './videos/record-a-sound.jpg';
@@ -138,7 +67,7 @@ export default {
                     id="gui.howtos.intro-move.step_stepMove"
                 />
             ),
-            image: stepMove
+            image: 'stepMove'
         }, {
             title: (
                 <FormattedMessage
@@ -147,7 +76,7 @@ export default {
                     id="gui.howtos.add-a-move-block.step_stepMoveSayHello"
                 />
             ),
-            image: stepMoveSayHello
+            image: 'stepMoveSayHello'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -180,7 +109,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_AddTXTextension"
                 />
             ),
-            image: stepAddTXTextension
+            image: 'stepAddTXTextension'
         }, {
             title: (
                 <FormattedMessage
@@ -189,7 +118,7 @@ export default {
                     id="gui.howtos. say-it-out-loud.step_TXTSpeech"
                 />
             ),
-            image: stepTXTSpeech
+            image: 'stepTXTSpeech'
         }, {
             title: (
                 <FormattedMessage
@@ -198,7 +127,7 @@ export default {
                     id="gui.howtos.say-it-out-loud_TXTSetVoice"
                 />
             ),
-            image: stepTXTSetVoice
+            image: 'stepTXTSetVoice'
         }, {
             title: (
                 <FormattedMessage
@@ -207,7 +136,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTMove"
                 />
             ),
-            image: stepTXTMove
+            image: 'stepTXTMove'
         }, {
             title: (
                 <FormattedMessage
@@ -216,7 +145,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTBackdrop"
                 />
             ),
-            image: stepTXTBackdrop
+            image: 'stepTXTBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -225,7 +154,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTAddSprite"
                 />
             ),
-            image: stepTXTAddSprite
+            image: 'stepTXTAddSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -234,7 +163,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTSong"
                 />
             ),
-            image: stepTXTSong
+            image: 'stepTXTSong'
         }, {
             title: (
                 <FormattedMessage
@@ -243,7 +172,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTColor"
                 />
             ),
-            image: stepTXTColor
+            image: 'stepTXTColor'
         }, {
             title: (
                 <FormattedMessage
@@ -252,7 +181,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTSpin"
                 />
             ),
-            image: stepTXTSpin
+            image: 'stepTXTSpin'
         }, {
             title: (
                 <FormattedMessage
@@ -261,7 +190,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTGrow"
                 />
             ),
-            image: stepTXTGrow
+            image: 'stepTXTGrow'
         }, {
             deckIds: [
                 'animate-a-name',
@@ -295,7 +224,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNcharacter"
                 />
             ),
-            image: stepCNcharacter
+            image: 'stepCNcharacter'
         }, {
             title: (
                 <FormattedMessage
@@ -304,7 +233,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNsay"
                 />
             ),
-            image: stepCNsay
+            image: 'stepCNsay'
         }, {
             title: (
                 <FormattedMessage
@@ -313,7 +242,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNglide"
                 />
             ),
-            image: stepCNglide
+            image: 'stepCNglide'
         }, {
             title: (
                 <FormattedMessage
@@ -322,7 +251,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNpicksprite"
                 />
             ),
-            image: stepCNpicksprite
+            image: 'stepCNpicksprite'
         }, {
             title: (
                 <FormattedMessage
@@ -331,7 +260,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNcollect"
                 />
             ),
-            image: stepCNcollect
+            image: 'stepCNcollect'
         }, {
             title: (
                 <FormattedMessage
@@ -340,7 +269,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNvariable"
                 />
             ),
-            image: stepCNvariable
+            image: 'stepCNvariable'
         }, {
             title: (
                 <FormattedMessage
@@ -349,7 +278,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNscore"
                 />
             ),
-            image: stepCNscore
+            image: 'stepCNscore'
         }, {
             title: (
                 <FormattedMessage
@@ -358,7 +287,7 @@ export default {
                     id="gui.howtos.cartoon-network.step_CNbackdrop"
                 />
             ),
-            image: stepCNbackdrop
+            image: 'stepCNbackdrop'
         },
         {
             video: '6o76f5ivo1'
@@ -392,7 +321,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimatePickLetter"
                 />
             ),
-            image: stepAnimatePickLetter
+            image: 'stepAnimatePickLetter'
         }, {
             title: (
                 <FormattedMessage
@@ -401,7 +330,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimatePlaySound"
                 />
             ),
-            image: stepAnimatePlaySound
+            image: 'stepAnimatePlaySound'
         }, {
             title: (
                 <FormattedMessage
@@ -410,7 +339,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimatePickLetter2"
                 />
             ),
-            image: stepAnimatePickLetter2
+            image: 'stepAnimatePickLetter2'
         }, {
             title: (
                 <FormattedMessage
@@ -419,7 +348,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimateChangeColor"
                 />
             ),
-            image: stepAnimateChangeColor
+            image: 'stepAnimateChangeColor'
         }, {
             title: (
                 <FormattedMessage
@@ -428,7 +357,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimateSpin"
                 />
             ),
-            image: stepAnimateSpin
+            image: 'stepAnimateSpin'
         }, {
             title: (
                 <FormattedMessage
@@ -437,7 +366,7 @@ export default {
                     id="gui.howtos.animate-a-name.step_AnimateGrow"
                 />
             ),
-            image: stepAnimateGrow
+            image: 'stepAnimateGrow'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -468,7 +397,7 @@ export default {
                     id="gui.howtos.Make-Music.step_PickInstrument"
                 />
             ),
-            image: stepPickInstrument
+            image: 'stepPickInstrument'
         },
         {
             title: (
@@ -478,7 +407,7 @@ export default {
                     id="gui.howtos.Make-Music.step_PlaySoundClick"
                 />
             ),
-            image: stepPlaySoundClick
+            image: 'stepPlaySoundClick'
         },
         {
             title: (
@@ -488,7 +417,7 @@ export default {
                     id="gui.howtos.Make-Music.step_MakeSong"
                 />
             ),
-            image: stepMakeSong
+            image: 'stepMakeSong'
         }, {
             title: (
                 <FormattedMessage
@@ -497,7 +426,7 @@ export default {
                     id="gui.howtos.make-music.step_MakeBeat"
                 />
             ),
-            image: stepMakeBeat
+            image: 'stepMakeBeat'
         }, {
             title: (
                 <FormattedMessage
@@ -506,7 +435,7 @@ export default {
                     id="gui.howtos.make-music.step_MakeBeatBox"
                 />
             ),
-            image: stepMakeBeatbox
+            image: 'stepMakeBeatbox'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -537,7 +466,7 @@ export default {
                     id="gui.howtos.Make-A-Game.step_GamePickSprite"
                 />
             ),
-            image: stepGamePickSprite
+            image: 'stepGamePickSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -546,7 +475,7 @@ export default {
                     id="gui.howtos.make-a-game.step_GamePlaySound"
                 />
             ),
-            image: stepGamePlaySound
+            image: 'stepGamePlaySound'
         }, {
             title: (
                 <FormattedMessage
@@ -555,7 +484,7 @@ export default {
                     id="gui.howtos.make-a-game.step_GameAddScore"
                 />
             ),
-            image: stepGameAddScore
+            image: 'stepGameAddScore'
         }, {
             title: (
                 <FormattedMessage
@@ -565,7 +494,7 @@ export default {
                 />
             ),
 
-            image: stepGameChangeScore
+            image: 'stepGameChangeScore'
         }, {
             title: (
                 <FormattedMessage
@@ -574,7 +503,7 @@ export default {
                     id="gui.howtos.make-a-game.step_Random"
                 />
             ),
-            image: stepRandom
+            image: 'stepRandom'
         }, {
             title: (
                 <FormattedMessage
@@ -583,7 +512,7 @@ export default {
                     id="gui.howtos.make-music.step_GameChangeColor"
                 />
             ),
-            image: stepGameChangeColor
+            image: 'stepGameChangeColor'
         }, {
             title: (
                 <FormattedMessage
@@ -592,7 +521,7 @@ export default {
                     id="gui.howtos.make-music.step_ResetScore"
                 />
             ),
-            image: stepResetScore
+            image: 'stepResetScore'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -624,7 +553,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_BG"
                 />
             ),
-            image: stepBG
+            image: 'stepBG'
         }, {
             title: (
                 <FormattedMessage
@@ -633,7 +562,7 @@ export default {
                     id="gui.howtos.chase-game.step_AddOcto"
                 />
             ),
-            image: stepAddOcto
+            image: 'stepAddOcto'
         }, {
             title: (
                 <FormattedMessage
@@ -642,7 +571,7 @@ export default {
                     id="gui.howtos.make-music.step_LeftRight"
                 />
             ),
-            image: stepLeftRight
+            image: 'stepLeftRight'
         }, {
             title: (
                 <FormattedMessage
@@ -651,7 +580,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_UpDown"
                 />
             ),
-            image: stepUpDown
+            image: 'stepUpDown'
         }, {
             title: (
                 <FormattedMessage
@@ -660,7 +589,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_AddStar"
                 />
             ),
-            image: stepAddStar
+            image: 'stepAddStar'
         }, {
             title: (
                 <FormattedMessage
@@ -669,7 +598,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_MoveRandom"
                 />
             ),
-            image: stepMoveRandom
+            image: 'stepMoveRandom'
         }, {
             title: (
                 <FormattedMessage
@@ -678,7 +607,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_WhenTouch"
                 />
             ),
-            image: stepWhenTouch
+            image: 'stepWhenTouch'
         }, {
             title: (
                 <FormattedMessage
@@ -687,7 +616,7 @@ export default {
                     id="gui.howtos.Chase-Game.step_ScoreVariable"
                 />
             ),
-            image: stepScoreVariable
+            image: 'stepScoreVariable'
         }, {
             title: (
                 <FormattedMessage
@@ -696,7 +625,7 @@ export default {
                     id="gui.howtos.Chase-Game.ScoreWhenTouch"
                 />
             ),
-            image: stepScoreWhenTouch
+            image: 'stepScoreWhenTouch'
         }, {
             deckIds: [
                 'add-effects',
@@ -726,7 +655,7 @@ export default {
                     id="gui.howtos.animate-char.step_addbg"
                 />
             ),
-            image: stepAnimateCharPickBackdrop
+            image: 'stepAnimateCharPickBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -735,7 +664,7 @@ export default {
                     id="gui.howtos.animate-char.step_addsprite"
                 />
             ),
-            image: stepAnimateCharPickSprite
+            image: 'stepAnimateCharPickSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -744,7 +673,7 @@ export default {
                     id="gui.howtos.animate-char.step_saysomething"
                 />
             ),
-            image: stepAnimateCharSaySomething
+            image: 'stepAnimateCharSaySomething'
         }, {
             title: (
                 <FormattedMessage
@@ -753,7 +682,7 @@ export default {
                     id="gui.howtos.animate-char.step_addsound"
                 />
             ),
-            image: stepAnimateCharAddSound
+            image: 'stepAnimateCharAddSound'
         }, {
             title: (
                 <FormattedMessage
@@ -762,7 +691,7 @@ export default {
                     id="gui.howtos.animate-char.step_animatetalking"
                 />
             ),
-            image: stepAnimateCharTalk
+            image: 'stepAnimateCharTalk'
         }, {
             title: (
                 <FormattedMessage
@@ -771,7 +700,7 @@ export default {
                     id="gui.howtos.animate-char.step_arrowkeys"
                 />
             ),
-            image: stepAnimateCharMove
+            image: 'stepAnimateCharMove'
         }, {
             title: (
                 <FormattedMessage
@@ -780,7 +709,7 @@ export default {
                     id="gui.howtos.animate-char.step_jump"
                 />
             ),
-            image: stepAnimateCharJump
+            image: 'stepAnimateCharJump'
         }, {
             title: (
                 <FormattedMessage
@@ -789,7 +718,7 @@ export default {
                     id="gui.howtos.animate-char.step_changecolor"
                 />
             ),
-            image: stepAnimateCharChangeColor
+            image: 'stepAnimateCharChangeColor'
         }, {
             deckIds: [
                 'Chase-Game',
@@ -819,7 +748,7 @@ export default {
                     id="gui.howtos.story.step_addbg"
                 />
             ),
-            image: stepStoryPickBackdrop
+            image: 'stepStoryPickBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -828,7 +757,7 @@ export default {
                     id="gui.howtos.story.step_addsprite"
                 />
             ),
-            image: stepStoryPickSprite
+            image: 'stepStoryPickSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -837,7 +766,7 @@ export default {
                     id="gui.howtos.story.step_saysomething"
                 />
             ),
-            image: stepStoryCharSaySomething
+            image: 'stepStoryCharSaySomething'
         }, {
             title: (
                 <FormattedMessage
@@ -846,7 +775,7 @@ export default {
                     id="gui.howtos.story.step_addanothersprite"
                 />
             ),
-            image: stepStoryCharAddAnotherSprite
+            image: 'stepStoryCharAddAnotherSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -855,7 +784,7 @@ export default {
                     id="gui.howtos.story.step_flip"
                 />
             ),
-            image: stepStoryFlip
+            image: 'stepStoryFlip'
         }, {
             title: (
                 <FormattedMessage
@@ -864,7 +793,7 @@ export default {
                     id="gui.howtos.story.step_conversation"
                 />
             ),
-            image: stepStoryConversation
+            image: 'stepStoryConversation'
         }, {
             title: (
                 <FormattedMessage
@@ -873,7 +802,7 @@ export default {
                     id="gui.howtos.story.addanotherbg"
                 />
             ),
-            image: stepStoryAddAnotherBackdrop
+            image: 'stepStoryAddAnotherBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -882,7 +811,7 @@ export default {
                     id="gui.howtos.story.step_swithbg"
                 />
             ),
-            image: stepStorySwitchBackdrop
+            image: 'stepStorySwitchBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -891,7 +820,7 @@ export default {
                     id="gui.howtos.story.step_hidewizard"
                 />
             ),
-            image: stepStoryHide
+            image: 'stepStoryHide'
         }, {
             title: (
                 <FormattedMessage
@@ -900,7 +829,7 @@ export default {
                     id="gui.howtos.story.step_showwizard"
                 />
             ),
-            image: stepStoryShow
+            image: 'stepStoryShow'
         },
         {
             deckIds: [
@@ -931,7 +860,7 @@ export default {
                     id="gui.howtos.videosens.step_addextension"
                 />
             ),
-            image: stepVideoSensAddExtension
+            image: 'stepVideoSensAddExtension'
         }, {
             title: (
                 <FormattedMessage
@@ -940,7 +869,7 @@ export default {
                     id="gui.howtos.videosens.step_pet"
                 />
             ),
-            image: stepVideoSensPet
+            image: 'stepVideoSensPet'
         }, {
             title: (
                 <FormattedMessage
@@ -949,7 +878,7 @@ export default {
                     id="gui.howtos.videosens.step_animate"
                 />
             ),
-            image: stepVideoSensAnimate
+            image: 'stepVideoSensAnimate'
         }, {
             title: (
                 <FormattedMessage
@@ -958,7 +887,7 @@ export default {
                     id="gui.howtos.videosens.step_pop"
                 />
             ),
-            image: stepVideoSensPop
+            image: 'stepVideoSensPop'
         }, {
             deckIds: [
                 'Make-Music',
@@ -987,7 +916,7 @@ export default {
                         id="gui.howtos.add-sprite.step_addSprite"
                     />
                 ),
-                image: stepAddSprite
+                image: 'stepAddSprite'
             },
             {
                 deckIds: [

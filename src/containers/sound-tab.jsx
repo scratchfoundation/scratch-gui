@@ -90,7 +90,7 @@ class SoundTab extends React.Component {
 
     handleExportSound (soundIndex) {
         const item = this.props.vm.editingTarget.sprite.sounds[soundIndex];
-        const blob = new Blob([item.asset.data], {type: item.asset.contentType});
+        const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
 

@@ -159,4 +159,25 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
+    test.only('Adding multiple sprites at the same time', async () => {
+        const files = [
+            path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
+            path.resolve(__dirname, '../fixtures/100-100.svg')
+        ];
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(files.join('\n'));
+
+        await findByText('gh-3582-png', scope.spriteTile);
+        await findByText('100-100', scope.spriteTile);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
 });

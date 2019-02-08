@@ -223,7 +223,8 @@ class SoundTab extends React.Component {
                     onClick: this.handleFileUploadClick,
                     fileAccept: '.wav, .mp3',
                     fileChange: this.handleSoundUpload,
-                    fileInput: this.setFileInput
+                    fileInput: this.setFileInput,
+                    fileMultiple: true
                 }, {
                     title: intl.formatMessage(messages.surpriseSound),
                     img: surpriseIcon,

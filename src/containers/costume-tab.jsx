@@ -293,7 +293,8 @@ class CostumeTab extends React.Component {
                         onClick: this.handleFileUploadClick,
                         fileAccept: '.svg, .png, .jpg, .jpeg',
                         fileChange: this.handleCostumeUpload,
-                        fileInput: this.setFileInput
+                        fileInput: this.setFileInput,
+                        fileMultiple: true
                     },
                     {
                         title: intl.formatMessage(messages.addSurpriseCostumeMsg),

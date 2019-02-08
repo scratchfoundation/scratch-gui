@@ -78,7 +78,10 @@ class StageSelector extends React.Component {
     handleBackdropUpload (e) {
         const storage = this.props.vm.runtime.storage;
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            costumeUpload(buffer, fileType, fileName, storage, this.handleNewBackdrop);
+            costumeUpload(buffer, fileType, storage, vmCostume => {
+                vmCostume.name = fileName;
+                this.handleNewBackdrop(vmCostume);
+            });
         });
     }
     handleFileUploadClick () {

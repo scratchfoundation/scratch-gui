@@ -116,7 +116,7 @@ describe('Working with sprites', () => {
 
         // Check to make sure the size is right
         await clickText('Costumes');
-        await clickText('100-100-costume1', scope.costumesTab); // The name of the costume
+        await clickText('100-1001', scope.costumesTab); // The name of the costume
         await clickText('100 x 100', scope.costumesTab); // The size of the costume
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -134,12 +134,12 @@ describe('Working with sprites', () => {
         await clickText('paddleball', scope.spriteTile); // Sprite is named for costume filename
 
         await clickText('Costumes');
-        await findByText('paddleball-costume1', scope.costumesTab);
-        await findByText('paddleball-costume2', scope.costumesTab);
-        await findByText('paddleball-costume3', scope.costumesTab);
-        await findByText('paddleball-costume4', scope.costumesTab);
-        await findByText('paddleball-costume5', scope.costumesTab);
-        await findByText('paddleball-costume6', scope.costumesTab);
+        await findByText('paddleball1', scope.costumesTab);
+        await findByText('paddleball2', scope.costumesTab);
+        await findByText('paddleball3', scope.costumesTab);
+        await findByText('paddleball4', scope.costumesTab);
+        await findByText('paddleball5', scope.costumesTab);
+        await findByText('paddleball6', scope.costumesTab);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

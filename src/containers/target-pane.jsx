@@ -136,9 +136,7 @@ class TargetPane extends React.Component {
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            const costumeSuffixer = i => this.props.intl.formatMessage(
-                sharedMessages.costume, {index: i});
-            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite, costumeSuffixer);
+            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite);
         });
     }
     setFileInput (input) {

@@ -205,13 +205,20 @@ class CostumeTab extends React.Component {
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
+            costumeUpload(buffer, fileType, storage, vmCostumes => {
+                vmCostumes.forEach((costume, i) => {
+                    costume.name = `${fileName}${i + 1}`;
+                });
+                this.handleNewCostume(vmCostumes);
+            });
         });
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
-        const namer = i => this.props.intl.formatMessage(messages.costume, {index: i});
-        costumeUpload(buffer, 'image/png', namer, storage, this.handleNewCostume);
+        costumeUpload(buffer, 'image/png', storage, vmCostumes => {
+            vmCostumes[0].name = this.props.intl.formatMessage(messages.costume, {index: 1});
+            this.handleNewCostume(vmCostumes);
+        });
     }
     handleFileUploadClick () {
         this.fileInput.click();

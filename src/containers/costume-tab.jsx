@@ -207,7 +207,7 @@ class CostumeTab extends React.Component {
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
-                    costume.name = `${fileName}${i + 1}`;
+                    costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
                 this.handleNewCostume(vmCostumes);
             });

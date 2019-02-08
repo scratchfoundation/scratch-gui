@@ -63,9 +63,13 @@ class StageSelector extends React.Component {
     handleClick () {
         this.props.onSelect(this.props.id);
     }
-    handleNewBackdrop (backdrop) {
-        this.props.vm.addBackdrop(backdrop.md5, backdrop).then(() =>
-            this.props.onActivateTab(COSTUMES_TAB_INDEX));
+    handleNewBackdrop (backdrops_) {
+        const backdrops = Array.isArray(backdrops_) ? backdrops_ : [backdrops_];
+        Promise.all(backdrops.map(backdrop =>
+            this.props.vm.addBackdrop(backdrop.md5, backdrop)
+        )).then(() =>
+            this.props.onActivateTab(COSTUMES_TAB_INDEX)
+        );
     }
     handleSurpriseBackdrop () {
         // @todo should this not add a backdrop you already have?
@@ -80,7 +84,7 @@ class StageSelector extends React.Component {
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
-                    costume.name = `${fileName}${i + 1}`;
+                    costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
                 this.handleNewBackdrop(vmCostumes);
             });

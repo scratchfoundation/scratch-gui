@@ -51,7 +51,7 @@ describe('Working with backdrops', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple backdrops at the same time', async () => {
+    test('Adding multiple backdrops at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')

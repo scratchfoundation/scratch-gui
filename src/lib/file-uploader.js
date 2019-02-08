@@ -210,7 +210,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
         // Make a sprite from an image by making it a costume first
         costumeUpload(fileData, fileType, storage, vmCostumes => {
             vmCostumes.forEach((costume, i) => {
-                costume.name = `${spriteName}${i + 1}`;
+                costume.name = `${spriteName}${i ? i + 1 : ''}`;
             });
             const newSprite = {
                 name: spriteName,

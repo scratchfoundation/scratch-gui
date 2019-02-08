@@ -204,7 +204,7 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple costumes at the same time', async () => {
+    test('Adding multiple costumes at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')

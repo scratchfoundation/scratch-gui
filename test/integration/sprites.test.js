@@ -116,7 +116,7 @@ describe('Working with sprites', () => {
 
         // Check to make sure the size is right
         await clickText('Costumes');
-        await clickText('100-1001', scope.costumesTab); // The name of the costume
+        await clickText('100-100', scope.costumesTab); // The name of the costume
         await clickText('100 x 100', scope.costumesTab); // The size of the costume
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -134,7 +134,7 @@ describe('Working with sprites', () => {
         await clickText('paddleball', scope.spriteTile); // Sprite is named for costume filename
 
         await clickText('Costumes');
-        await findByText('paddleball1', scope.costumesTab);
+        await findByText('paddleball', scope.costumesTab);
         await findByText('paddleball2', scope.costumesTab);
         await findByText('paddleball3', scope.costumesTab);
         await findByText('paddleball4', scope.costumesTab);
@@ -182,7 +182,7 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple sprites at the same time', async () => {
+    test('Adding multiple sprites at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')

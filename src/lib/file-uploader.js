@@ -208,7 +208,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
     case 'image/jpeg':
     case 'image/gif': {
         // Make a sprite from an image by making it a costume first
-        costumeUpload(fileData, fileType, storage, (vmCostumes => {
+        costumeUpload(fileData, fileType, storage, vmCostumes => {
             vmCostumes.forEach((costume, i) => {
                 costume.name = `${spriteName}${i + 1}`;
             });
@@ -231,7 +231,7 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
             randomizeSpritePosition(newSprite);
             // TODO probably just want sprite upload to handle this object directly
             handleSprite(JSON.stringify(newSprite));
-        }));
+        });
         return;
     }
     default: {

@@ -90,18 +90,18 @@ const createVMAsset = function (storage, fileName, assetType, dataFormat, data) 
  * @param {ArrayBuffer | string} fileData The costume data to load (this can be a base64 string
  * iff the image is a bitmap)
  * @param {string} fileType The MIME type of this file
- * @param {string | Function} costumeNameOrNamer String or function producing the user-readable
+ * @param {string | Function} costumeNamer String or function producing the user-readable
  * name to use for the costume. Function will be called with an index in case of gif upload.
  * @param {ScratchStorage} storage The ScratchStorage instance to cache the costume data
  * @param {Function} handleCostume The function to execute on the costume object returned after
  * caching this costume in storage - This function should be responsible for
  * adding the costume to the VM and handling other UI flow that should come after adding the costume
  */
-const costumeUpload = function (fileData, fileType, costumeNameOrNamer, storage, handleCostume) {
+const costumeUpload = function (fileData, fileType, costumeNamer, storage, handleCostume) {
     let costumeFormat = null;
     let assetType = null;
-    const costumeNamer = typeof costumeNameOrNamer === 'string' ?
-        (() => costumeNameOrNamer) : costumeNameOrNamer;
+    const namer = typeof costumeNamer === 'string' ?
+        (() => costumeNamer) : costumeNamer;
     switch (fileType) {
     case 'image/svg+xml': {
         costumeFormat = storage.DataFormat.SVG;
@@ -121,7 +121,7 @@ const costumeUpload = function (fileData, fileType, costumeNameOrNamer, storage,
     case 'image/gif': {
         let costumes = [];
         const onFrame = (frameNumber, dataUrl) => {
-            costumeUpload(dataUrl, 'image/png', costumeNamer(frameNumber + 1), storage, costumes_ => {
+            costumeUpload(dataUrl, 'image/png', namer(frameNumber + 1), storage, costumes_ => {
                 costumes = costumes.concat(costumes_);
             });
         };
@@ -140,7 +140,7 @@ const costumeUpload = function (fileData, fileType, costumeNameOrNamer, storage,
     const addCostumeFromBuffer = function (dataBuffer) {
         const vmCostume = createVMAsset(
             storage,
-            costumeNamer(1),
+            namer(1),
             assetType,
             costumeFormat,
             dataBuffer

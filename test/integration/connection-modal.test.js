@@ -34,7 +34,6 @@ describe('Hardware extension connection modal', () => {
 
     test('Message saying Scratch Link is unavailable (BLE)', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         await driver.executeScript(websocketFakeoutJs);
 
@@ -50,7 +49,6 @@ describe('Hardware extension connection modal', () => {
 
     test('Message saying Scratch Link is unavailable (BT)', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         await driver.executeScript(websocketFakeoutJs);
 

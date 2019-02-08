@@ -29,7 +29,6 @@ describe('Working with sprites', () => {
 
     test('Adding a sprite through the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         await clickText('Apple', scope.modal); // Closes modal
@@ -41,7 +40,6 @@ describe('Working with sprites', () => {
 
     test('Adding a sprite by surprise button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
@@ -53,7 +51,6 @@ describe('Working with sprites', () => {
 
     test('Adding a sprite by paint button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
@@ -66,7 +63,6 @@ describe('Working with sprites', () => {
 
     test('Deleting only sprite does not crash', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
@@ -78,7 +74,6 @@ describe('Working with sprites', () => {
 
     test('Deleting by x button on sprite tile', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickXpath('//*[@aria-label="Close"]'); // Only visible close button is on the sprite
         // Confirm that the stage has been switched to
@@ -89,7 +84,6 @@ describe('Working with sprites', () => {
 
     test('Adding a sprite by uploading a png', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
@@ -105,7 +99,6 @@ describe('Working with sprites', () => {
     // Enable when this is fixed issues/3608
     test('Adding a sprite by uploading an svg (gh-3608)', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
@@ -127,7 +120,6 @@ describe('Working with sprites', () => {
         await driver.manage()
             .window()
             .setSize(1244, 768); // Letters filter not visible at 1024 width
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         await clickText('Letters');
@@ -140,7 +132,6 @@ describe('Working with sprites', () => {
     test('Use browser back button to close library', async () => {
         await driver.get('https://www.google.com');
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         const abbyElement = await findByText('Abby'); // Should show editor for new costume

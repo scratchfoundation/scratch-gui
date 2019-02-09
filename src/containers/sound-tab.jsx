@@ -21,7 +21,7 @@ import soundLibraryContent from '../lib/libraries/sounds.json';
 import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
-import download from '../lib/download-url';
+import downloadBlob from '../lib/download-blob';
 
 import {connect} from 'react-redux';
 
@@ -90,8 +90,8 @@ class SoundTab extends React.Component {
 
     handleExportSound (soundIndex) {
         const item = this.props.vm.editingTarget.sprite.sounds[soundIndex];
-        const soundDataURL = item.asset.encodeDataURI();
-        download(`${item.name}.${item.asset.dataFormat}`, soundDataURL);
+        const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
+        downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
 
     handleDuplicateSound (soundIndex) {
@@ -223,7 +223,8 @@ class SoundTab extends React.Component {
                     onClick: this.handleFileUploadClick,
                     fileAccept: '.wav, .mp3',
                     fileChange: this.handleSoundUpload,
-                    fileInput: this.setFileInput
+                    fileInput: this.setFileInput,
+                    fileMultiple: true
                 }, {
                     title: intl.formatMessage(messages.surpriseSound),
                     img: surpriseIcon,

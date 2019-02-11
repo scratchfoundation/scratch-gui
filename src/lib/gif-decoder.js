@@ -34,10 +34,6 @@ export default (arrayBuffer, {onFrame, onDone}) => {
         const dataUrl = canvas.toDataURL();
 
         switch (disposal) {
-        case 0:
-        case 1: // Both are "keep previous frame"
-            previousData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            break;
         case 2: // "Return to background", blank out the current frame
             ctx.clearRect(x, y, width, height);
             imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -46,8 +42,7 @@ export default (arrayBuffer, {onFrame, onDone}) => {
             imageData = ctx.createImageData(canvas.width, canvas.height);
             imageData.data.set(previousData.data);
             break;
-        default:
-            // Not defined, treat like do-not-dispose
+        default: // 0 and 1, as well as 4+ modes = do-not-dispose, so cache frame
             previousData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             break;
 

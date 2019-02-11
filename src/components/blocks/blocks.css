@@ -1,5 +1,6 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .blocks {
     height: 100%;
@@ -80,6 +81,10 @@
         This does not prevent user interaction on the blocks themselves.
     */
     pointer-events: none;
+}
+
+:global(.blocklyDragSurfaceWrapper) {
+    z-index: $z-index-blockly-drag-surface;
 }
 
 /*

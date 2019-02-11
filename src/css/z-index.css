@@ -18,6 +18,7 @@ $z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorial
 $z-index-loader: 500;
 $z-index-modal: 510;
 
+$z-index-blockly-drag-surface: 1000;
 $z-index-drag-layer: 1000;
 $z-index-monitor-dragging: 1010;
 $z-index-dragging-sprite: 1020; /* so it is draggable into other panes */

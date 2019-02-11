@@ -158,11 +158,15 @@ class CostumeTab extends React.Component {
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
     handleNewCostume (costume, fromCostumeLibrary) {
-        if (fromCostumeLibrary) {
-            this.props.vm.addCostumeFromLibrary(costume.md5, costume);
-        } else {
-            this.props.vm.addCostume(costume.md5, costume);
-        }
+        const costumes = Array.isArray(costume) ? costume : [costume];
+
+        costumes.forEach(c => {
+            if (fromCostumeLibrary) {
+                this.props.vm.addCostumeFromLibrary(c.md5, c);
+            } else {
+                this.props.vm.addCostume(c.md5, c);
+            }
+        });
     }
     handleNewBlankCostume () {
         const name = this.props.vm.editingTarget.isStage ?
@@ -201,13 +205,20 @@ class CostumeTab extends React.Component {
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            costumeUpload(buffer, fileType, fileName, storage, this.handleNewCostume);
+            costumeUpload(buffer, fileType, storage, vmCostumes => {
+                vmCostumes.forEach((costume, i) => {
+                    costume.name = `${fileName}${i ? i + 1 : ''}`;
+                });
+                this.handleNewCostume(vmCostumes);
+            });
         });
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
-        const name = this.props.intl.formatMessage(messages.costume, {index: 1});
-        costumeUpload(buffer, 'image/png', name, storage, this.handleNewCostume);
+        costumeUpload(buffer, 'image/png', storage, vmCostumes => {
+            vmCostumes[0].name = this.props.intl.formatMessage(messages.costume, {index: 1});
+            this.handleNewCostume(vmCostumes);
+        });
     }
     handleFileUploadClick () {
         this.fileInput.click();
@@ -291,7 +302,7 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg',
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput,
                         fileMultiple: true

@@ -151,6 +151,28 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding several costumes with a gif', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/paddleball.gif'));
+
+        await findByText('paddleball', scope.costumesTab);
+        await findByText('paddleball2', scope.costumesTab);
+        await findByText('paddleball3', scope.costumesTab);
+        await findByText('paddleball4', scope.costumesTab);
+        await findByText('paddleball5', scope.costumesTab);
+        await findByText('paddleball6', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a letter costume through the Letters filter in the library', async () => {
         await loadUri(uri);
         await driver.manage()
@@ -182,7 +204,7 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple costumes at the same time', async () => {
+    test('Adding multiple costumes at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')

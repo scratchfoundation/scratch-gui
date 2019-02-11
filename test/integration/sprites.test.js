@@ -116,8 +116,31 @@ describe('Working with sprites', () => {
 
         // Check to make sure the size is right
         await clickText('Costumes');
-        await clickText('100-100-costume1', scope.costumesTab); // The name of the costume
+        await clickText('100-100', scope.costumesTab); // The name of the costume
         await clickText('100 x 100', scope.costumesTab); // The size of the costume
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding a sprite by uploading a gif', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@title="Try It"]');
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/paddleball.gif'));
+        await clickText('paddleball', scope.spriteTile); // Sprite is named for costume filename
+
+        await clickText('Costumes');
+        await findByText('paddleball', scope.costumesTab);
+        await findByText('paddleball2', scope.costumesTab);
+        await findByText('paddleball3', scope.costumesTab);
+        await findByText('paddleball4', scope.costumesTab);
+        await findByText('paddleball5', scope.costumesTab);
+        await findByText('paddleball6', scope.costumesTab);
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
@@ -159,7 +182,7 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple sprites at the same time', async () => {
+    test('Adding multiple sprites at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')

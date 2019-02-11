@@ -9,6 +9,7 @@ import log from '../lib/log';
 import {
     LoadingStates,
     getIsLoadingUpload,
+    getIsShowingWithoutId,
     onLoadedProject,
     requestProjectUpload
 } from '../reducers/project-state';
@@ -42,6 +43,11 @@ const messages = defineMessages({
         id: 'gui.projectLoader.loadError',
         defaultMessage: 'The project file that was selected failed to load.',
         description: 'An error that displays when a local project file fails to load.'
+    },
+    uploadWarning: {
+        id: 'gui.projectLoader.uploadWarning',
+        defaultMessage: 'Replace the contents of the current project?',
+        description: 'A warning before uploading a file on top of another project.'
     }
 });
 
@@ -88,10 +94,25 @@ class SBFileUploader extends React.Component {
     }
     // called when user has finished selecting a file to upload
     handleChange (e) {
+        const {
+            intl,
+            isShowingWithoutId,
+            loadingState,
+            projectChanged
+        } = this.props;
+
         const thisFileInput = e.target;
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];
-            this.props.requestProjectUpload(this.props.loadingState);
+
+            // Allow upload to continue only after confirmation if the project
+            // has changed and is not showing with ID. If it has an ID, this operation
+            // does not currently overwrite that project, so it is safe to do without confirmation.
+            const uploadAllowed = (isShowingWithoutId && projectChanged) ?
+                confirm(intl.formatMessage(messages.uploadWarning)) : // eslint-disable-line no-alert
+                true;
+
+            if (uploadAllowed) this.props.requestProjectUpload(loadingState);
         }
     }
     // called when file upload raw data is available in the reader
@@ -156,10 +177,12 @@ SBFileUploader.propTypes = {
     className: PropTypes.string,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
+    isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -172,7 +195,9 @@ const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         isLoadingUpload: getIsLoadingUpload(loadingState),
+        isShowingWithoutId: getIsShowingWithoutId(loadingState),
         loadingState: loadingState,
+        projectChanged: state.scratchGui.projectChanged,
         vm: state.scratchGui.vm
     };
 };

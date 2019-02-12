@@ -75,7 +75,6 @@ describe('Menu bar settings', () => {
 
     test('User is not warned before uploading project file over a fresh project', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('File');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
@@ -86,7 +85,6 @@ describe('Menu bar settings', () => {
 
     test('User is warned before uploading project file over an edited project', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Change the project by deleting a sprite
         await rightClickText('Sprite1', scope.spriteTile);

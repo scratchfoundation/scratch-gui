@@ -150,7 +150,6 @@ describe('Working with costumes', () => {
 
     test('Adding several costumes with a gif', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)

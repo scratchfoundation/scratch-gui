@@ -117,7 +117,6 @@ describe('Working with sprites', () => {
 
     test('Adding a sprite by uploading a gif', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();

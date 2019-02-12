@@ -156,9 +156,42 @@ class TargetPane extends React.Component {
     }
     handleBlockDragEnd (blocks) {
         if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
-            this.props.vm.shareBlocksToTarget(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
+            this.shareBlocks(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
             this.props.onReceivedBlocks(true);
         }
+    }
+    shareBlocks (blocks, targetId, optFromTargetId) {
+        // Position the top-level block based on the scroll position.
+        const topBlock = blocks.find(block => block.topLevel);
+        if (topBlock) {
+            let metrics;
+            if (this.props.workspaceMetrics.targets[targetId]) {
+                metrics = this.props.workspaceMetrics.targets[targetId];
+            } else {
+                metrics = {
+                    scrollX: 0,
+                    scrollY: 0,
+                    scale: 0.675 // TODO: Define this in a constant somewhere.
+                };
+            }
+
+            // Determine position of the top-level block based on the target's workspace metrics.
+            const {scrollX, scrollY, scale} = metrics;
+            const {width} = this.props.workspaceMetrics.dimensions;
+            const posY = -scrollY + 30;
+            let posX = -scrollX;
+            if (this.props.isRtl) {
+                posX += width - 30;
+            } else {
+                posX += 30;
+            }
+
+            // Actually apply the position!
+            topBlock.x = posX / scale;
+            topBlock.y = posY / scale;
+        }
+
+        this.props.vm.shareBlocksToTarget(blocks, targetId, optFromTargetId);
     }
     handleDrop (dragInfo) {
         const {sprite: targetId} = this.props.hoveredTarget;
@@ -196,22 +229,25 @@ class TargetPane extends React.Component {
             } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
                 fetchCode(dragInfo.payload.bodyUrl)
                     .then(blocks => {
-                        this.props.vm.shareBlocksToTarget(blocks, targetId);
+                        this.shareBlocks(blocks, targetId);
                         this.props.vm.refreshWorkspace();
                     });
             }
         }
     }
     render () {
+        /* eslint-disable no-unused-vars */
         const {
-            onActivateTab, // eslint-disable-line no-unused-vars
-            onReceivedBlocks, // eslint-disable-line no-unused-vars
-            onHighlightTarget, // eslint-disable-line no-unused-vars
-            dispatchUpdateRestore, // eslint-disable-line no-unused-vars
-            onShowImporting, // eslint-disable-line no-unused-vars
-            onCloseImporting, // eslint-disable-line no-unused-vars
+            dispatchUpdateRestore,
+            onActivateTab,
+            onCloseImporting,
+            onHighlightTarget,
+            onReceivedBlocks,
+            onShowImporting,
+            workspaceMetrics,
             ...componentProps
         } = this.props;
+        /* eslint-enable no-unused-vars */
         return (
             <TargetPaneComponent
                 {...componentProps}
@@ -254,10 +290,12 @@ TargetPane.propTypes = {
 const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
     hoveredTarget: state.scratchGui.hoveredTarget,
+    isRtl: state.locales.isRtl,
+    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     raiseSprites: state.scratchGui.blockDrag,
-    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
+    workspaceMetrics: state.scratchGui.workspaceMetrics
 });
 
 const mapDispatchToProps = dispatch => ({

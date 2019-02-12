@@ -27,8 +27,12 @@ describe('Working with costumes', () => {
     });
 
     test('Adding a costume through the library', async () => {
+        // This is needed when running the tests all at once or it just fails...
+        await driver.quit();
+        driver = getDriver();
+
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
+        await driver.sleep(500);
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         const el = await findByXpath("//input[@placeholder='Search']");
@@ -41,7 +45,6 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by surprise button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -54,7 +57,6 @@ describe('Working with costumes', () => {
 
     test('Adding a costume by paint button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -67,7 +69,6 @@ describe('Working with costumes', () => {
 
     test('Duplicating a costume', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         await rightClickText('costume1', scope.costumesTab);
@@ -83,7 +84,6 @@ describe('Working with costumes', () => {
 
     test('Converting bitmap/vector in paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
 
         // Convert the first costume to bitmap.
@@ -107,7 +107,6 @@ describe('Working with costumes', () => {
 
     test('Undo/redo in the paint editor', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickText('costume1', scope.costumesTab);
         await clickText('Convert to Bitmap', scope.costumesTab);
@@ -122,7 +121,6 @@ describe('Working with costumes', () => {
 
     test('Adding an svg from file', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -138,7 +136,6 @@ describe('Working with costumes', () => {
 
     test('Adding a png from file (gh-3582)', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -153,7 +150,6 @@ describe('Working with costumes', () => {
 
     test('Adding several costumes with a gif', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)
@@ -178,7 +174,6 @@ describe('Working with costumes', () => {
         await driver.manage()
             .window()
             .setSize(1244, 768); // Letters filter not visible at 1024 width
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         await clickText('Letters');
@@ -190,7 +185,6 @@ describe('Working with costumes', () => {
 
     test('Costumes animate on mouseover', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         const searchElement = await findByXpath("//input[@placeholder='Search']");
         await searchElement.sendKeys('abb');
@@ -210,7 +204,6 @@ describe('Working with costumes', () => {
             path.resolve(__dirname, '../fixtures/100-100.svg')
         ];
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
         await driver.actions().mouseMove(el)

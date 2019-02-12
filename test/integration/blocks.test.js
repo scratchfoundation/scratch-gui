@@ -29,7 +29,6 @@ describe('Working with the blocks', () => {
 
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Operators', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -41,7 +40,6 @@ describe('Working with the blocks', () => {
 
     test('Switching sprites updates the block menus', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sound', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "Meow" sound block should be visible
@@ -58,7 +56,6 @@ describe('Working with the blocks', () => {
 
     test('Creating variables', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -92,7 +89,6 @@ describe('Working with the blocks', () => {
 
     test('Creating a list', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -127,7 +123,6 @@ describe('Working with the blocks', () => {
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Make a Block');
@@ -146,7 +141,6 @@ describe('Working with the blocks', () => {
 
     test('Adding an extension', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath('//button[@title="Add Extension"]');
 
         await clickText('Pen');
@@ -160,7 +154,6 @@ describe('Working with the blocks', () => {
 
     test('Record option from sound block menu opens sound recorder', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Sound', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -177,7 +170,6 @@ describe('Working with the blocks', () => {
 
     test('Renaming costume changes the default costume name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Rename the costume
         await clickText('Costumes');
@@ -193,7 +185,6 @@ describe('Working with the blocks', () => {
 
     test('Renaming costume with a special character should not break toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Rename the costume
         await clickText('Costumes');
@@ -213,7 +204,6 @@ describe('Working with the blocks', () => {
     // introduced inadvertly, but I know this is not the desired behavior
     test('Adding costumes DOES NOT update the default costume name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // By default, costume1 is in the costume tab
         await clickText('Looks', scope.blocksTab);
@@ -237,7 +227,6 @@ describe('Working with the blocks', () => {
     // introduced inadvertly, but I know this is not the desired behavior
     test('Adding a sound DOES NOT update the default sound name in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
         await clickXpath('//button[@aria-label="Choose a Sound"]');
         await clickText('A Bass', scope.modal); // Should close the modal

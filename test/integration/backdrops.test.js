@@ -27,7 +27,6 @@ describe('Working with backdrops', () => {
 
     test('Adding a backdrop from the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Start on the sounds tab of sprite1 to test switching behavior
         await clickText('Sounds');
@@ -57,7 +56,6 @@ describe('Working with backdrops', () => {
             path.resolve(__dirname, '../fixtures/100-100.svg')
         ];
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         const buttonXpath = '//button[@aria-label="Choose a Backdrop"]';
         const fileXpath = `${buttonXpath}/following-sibling::div//input[@type="file"]`;

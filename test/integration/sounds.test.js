@@ -118,7 +118,6 @@ describe('Working with sounds', () => {
             path.resolve(__dirname, '../fixtures/sneaker.wav')
         ];
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
         const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
         await driver.actions().mouseMove(el)

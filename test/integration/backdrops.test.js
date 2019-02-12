@@ -56,7 +56,6 @@ describe('Working with backdrops', () => {
             path.resolve(__dirname, '../fixtures/100-100.svg')
         ];
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         const buttonXpath = '//button[@aria-label="Choose a Backdrop"]';
         const fileXpath = `${buttonXpath}/following-sibling::div//input[@type="file"]`;

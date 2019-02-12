@@ -185,7 +185,6 @@ describe('Working with the blocks', () => {
 
     test('Renaming costume with a special character should not break toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Rename the costume
         await clickText('Costumes');

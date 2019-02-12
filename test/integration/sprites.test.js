@@ -156,7 +156,6 @@ describe('Working with sprites', () => {
             path.resolve(__dirname, '../fixtures/100-100.svg')
         ];
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();

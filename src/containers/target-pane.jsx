@@ -1,6 +1,6 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
 
@@ -8,9 +8,9 @@ import {
     openSpriteLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
-
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
+import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
@@ -127,7 +127,7 @@ class TargetPane extends React.Component {
         this.props.onActivateTab(BLOCKS_TAB_INDEX);
     }
     handleNewSprite (spriteJSONString) {
-        this.props.vm.addSprite(spriteJSONString)
+        return this.props.vm.addSprite(spriteJSONString)
             .then(this.handleActivateBlocksTab);
     }
     handleFileUploadClick () {
@@ -135,9 +135,16 @@ class TargetPane extends React.Component {
     }
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite);
-        });
+        this.props.onShowImporting();
+        handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
+            spriteUpload(buffer, fileType, fileName, storage, newSprite => {
+                this.handleNewSprite(newSprite).then(() => {
+                    if (fileIndex === fileCount - 1) {
+                        this.props.onCloseImporting();
+                    }
+                });
+            }, this.props.onCloseImporting);
+        }, this.props.onCloseImporting);
     }
     setFileInput (input) {
         this.fileInput = input;
@@ -196,6 +203,8 @@ class TargetPane extends React.Component {
             onReceivedBlocks, // eslint-disable-line no-unused-vars
             onHighlightTarget, // eslint-disable-line no-unused-vars
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
+            onShowImporting, // eslint-disable-line no-unused-vars
+            onCloseImporting, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -232,6 +241,8 @@ const {
 
 TargetPane.propTypes = {
     intl: intlShape.isRequired,
+    onCloseImporting: PropTypes.func,
+    onShowImporting: PropTypes.func,
     ...targetPaneProps
 };
 
@@ -263,7 +274,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onHighlightTarget: id => {
         dispatch(highlightTarget(id));
-    }
+    },
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default injectIntl(connect(

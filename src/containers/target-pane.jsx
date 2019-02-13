@@ -179,11 +179,11 @@ class TargetPane extends React.Component {
             const {scrollX, scrollY, scale} = metrics;
             const {width} = this.props.workspaceMetrics.dimensions;
             const posY = -scrollY + 30;
-            let posX = -scrollX;
+            let posX;
             if (this.props.isRtl) {
-                posX += width - 30;
+                posX = scrollX + 30;
             } else {
-                posX += 30;
+                posX = -scrollX + 30;
             }
 
             // Actually apply the position!

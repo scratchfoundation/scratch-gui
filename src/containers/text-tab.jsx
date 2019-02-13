@@ -1,8 +1,9 @@
-import React from 'react';
-import TextEditor from './text-editor.jsx';
-import AssetPanel from '../components/asset-panel/asset-panel.jsx';
-import PropTypes from 'prop-types';
-import VM from 'scratch-vm';
+import React from "react";
+import PropTypes from "prop-types";
+import VM from "scratch-vm";
+
+import TextEditor from "./text-editor.jsx";
+import AssetPanel from "../components/asset-panel/asset-panel.jsx";
 
 const onItemClick = () => {};
 const selectedItemIndex = 0;

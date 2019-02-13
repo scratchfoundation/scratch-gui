@@ -161,13 +161,12 @@ class CostumeTab extends React.Component {
     handleNewCostume (costume, fromCostumeLibrary) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
-        costumes.forEach(c => {
+        return Promise.all(costumes.map(c => {
             if (fromCostumeLibrary) {
-                this.props.vm.addCostumeFromLibrary(c.md5, c);
-            } else {
-                this.props.vm.addCostume(c.md5, c);
+                return this.props.vm.addCostumeFromLibrary(c.md5, c);
             }
-        });
+            return this.props.vm.addCostume(c.md5, c);
+        }));
     }
     handleNewBlankCostume () {
         const name = this.props.vm.editingTarget.isStage ?
@@ -211,10 +210,11 @@ class CostumeTab extends React.Component {
                 vmCostumes.forEach((costume, i) => {
                     costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
-                this.handleNewCostume(vmCostumes);
-                if (fileIndex === fileCount - 1) {
-                    this.props.onCloseAlert('importingAsset');
-                }
+                this.handleNewCostume(vmCostumes).then(() => {
+                    if (fileIndex === fileCount - 1) {
+                        this.props.onCloseAlert('importingAsset');
+                    }
+                });
             });
         });
     }

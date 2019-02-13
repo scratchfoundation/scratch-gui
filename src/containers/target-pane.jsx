@@ -127,7 +127,7 @@ class TargetPane extends React.Component {
         this.props.onActivateTab(BLOCKS_TAB_INDEX);
     }
     handleNewSprite (spriteJSONString) {
-        this.props.vm.addSprite(spriteJSONString)
+        return this.props.vm.addSprite(spriteJSONString)
             .then(this.handleActivateBlocksTab);
     }
     handleFileUploadClick () {
@@ -138,10 +138,11 @@ class TargetPane extends React.Component {
         this.props.onShowAlert('importingAsset');
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             spriteUpload(buffer, fileType, fileName, storage, newSprite => {
-                this.handleNewSprite(newSprite);
-                if (fileIndex === fileCount - 1) {
-                    this.props.onCloseAlert('importingAsset');
-                }
+                this.handleNewSprite(newSprite).then(() => {
+                    if (fileIndex === fileCount - 1) {
+                        this.props.onCloseAlert('importingAsset');
+                    }
+                });
             });
         });
     }

@@ -95,8 +95,9 @@ const createVMAsset = function (storage, assetType, dataFormat, data) {
  * @param {Function} handleCostume The function to execute on the costume object returned after
  * caching this costume in storage - This function should be responsible for
  * adding the costume to the VM and handling other UI flow that should come after adding the costume
+ * @param {Function} handleError The function to execute if there is an error parsing the costume
  */
-const costumeUpload = function (fileData, fileType, storage, handleCostume) {
+const costumeUpload = function (fileData, fileType, storage, handleCostume, handleError = () => {}) {
     let costumeFormat = null;
     let assetType = null;
     switch (fileType) {
@@ -120,7 +121,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume) {
         const onFrame = (frameNumber, dataUrl) => {
             costumeUpload(dataUrl, 'image/png', storage, costumes_ => {
                 costumes = costumes.concat(costumes_);
-            });
+            }, handleError);
         };
         const onDone = () => {
             handleCostume(costumes);
@@ -129,7 +130,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume) {
         return; // Abandon this load, do not try to load gif itself
     }
     default:
-        log.warn(`Encountered unexpected file type: ${fileType}`);
+        handleError(`Encountered unexpected file type: ${fileType}`);
         return;
     }
 
@@ -153,9 +154,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume) {
     } else {
         // otherwise it's a bitmap
         bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer)
-            .catch(e => {
-                log.error(e);
-            });
+            .catch(handleError);
     }
 };
 
@@ -198,7 +197,7 @@ const soundUpload = function (fileData, fileType, storage, handleSound) {
     handleSound(vmSound);
 };
 
-const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite) {
+const spriteUpload = function (fileData, fileType, spriteName, storage, handleSprite, handleError = () => {}) {
     switch (fileType) {
     case '':
     case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
@@ -233,11 +232,11 @@ const spriteUpload = function (fileData, fileType, spriteName, storage, handleSp
             randomizeSpritePosition(newSprite);
             // TODO probably just want sprite upload to handle this object directly
             handleSprite(JSON.stringify(newSprite));
-        });
+        }, handleError);
         return;
     }
     default: {
-        log.warn(`Encountered unexpected file type: ${fileType}`);
+        handleError(`Encountered unexpected file type: ${fileType}`);
         return;
     }
     }

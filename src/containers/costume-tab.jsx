@@ -215,7 +215,7 @@ class CostumeTab extends React.Component {
                         this.props.onCloseImporting();
                     }
                 });
-            });
+            }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }
     handleCameraBuffer (buffer) {

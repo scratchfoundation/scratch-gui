@@ -93,7 +93,7 @@ class StageSelector extends React.Component {
                         this.props.onCloseImporting();
                     }
                 });
-            });
+            }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }
     handleFileUploadClick () {

@@ -20,8 +20,9 @@ const extractFileName = function (nameExt) {
  * and a function to handle loading the file.
  * @param {Input} fileInput The <input/> element that contains the file being loaded
  * @param {Function} onload The function that handles loading the file
+ * @param {Function} onerror The function that handles any error loading the file
  */
-const handleFileUpload = function (fileInput, onload) {
+const handleFileUpload = function (fileInput, onload, onerror) {
     const readFile = (i, files) => {
         if (i === files.length) {
             // Reset the file input value now that we have everything we need
@@ -38,6 +39,7 @@ const handleFileUpload = function (fileInput, onload) {
             onload(reader.result, fileType, fileName, i, files.length);
             readFile(i + 1, files);
         };
+        reader.onerror = onerror;
         reader.readAsArrayBuffer(file);
     };
     readFile(0, fileInput.files);

@@ -135,16 +135,16 @@ class TargetPane extends React.Component {
     }
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        this.props.onShowAlert('importingAsset');
+        this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             spriteUpload(buffer, fileType, fileName, storage, newSprite => {
                 this.handleNewSprite(newSprite).then(() => {
                     if (fileIndex === fileCount - 1) {
-                        this.props.onCloseAlert('importingAsset');
+                        this.props.onCloseImporting();
                     }
                 });
             });
-        });
+        }, this.props.onCloseImporting);
     }
     setFileInput (input) {
         this.fileInput = input;
@@ -203,8 +203,8 @@ class TargetPane extends React.Component {
             onReceivedBlocks, // eslint-disable-line no-unused-vars
             onHighlightTarget, // eslint-disable-line no-unused-vars
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
-            onShowAlert, // eslint-disable-line no-unused-vars
-            onCloseAlert, // eslint-disable-line no-unused-vars
+            onShowImporting, // eslint-disable-line no-unused-vars
+            onCloseImporting, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -241,8 +241,8 @@ const {
 
 TargetPane.propTypes = {
     intl: intlShape.isRequired,
-    onCloseAlert: PropTypes.func,
-    onShowAlert: PropTypes.func,
+    onCloseImporting: PropTypes.func,
+    onShowImporting: PropTypes.func,
     ...targetPaneProps
 };
 
@@ -275,8 +275,8 @@ const mapDispatchToProps = dispatch => ({
     onHighlightTarget: id => {
         dispatch(highlightTarget(id));
     },
-    onCloseAlert: id => dispatch(closeAlertWithId(id)),
-    onShowAlert: id => dispatch(showStandardAlert(id))
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default injectIntl(connect(

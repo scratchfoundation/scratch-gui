@@ -82,7 +82,7 @@ class StageSelector extends React.Component {
     }
     handleBackdropUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        this.props.onShowAlert('importingAsset');
+        this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
@@ -90,11 +90,11 @@ class StageSelector extends React.Component {
                 });
                 this.handleNewBackdrop(vmCostumes).then(() => {
                     if (fileIndex === fileCount - 1) {
-                        this.props.onCloseAlert('importingAsset');
+                        this.props.onCloseImporting();
                     }
                 });
             });
-        });
+        }, this.props.onCloseImporting);
     }
     handleFileUploadClick () {
         this.fileInput.click();
@@ -133,7 +133,7 @@ class StageSelector extends React.Component {
     render () {
         const componentProps = omit(this.props, [
             'asset', 'dispatchSetHoveredSprite', 'id', 'intl',
-            'onActivateTab', 'onSelect', 'onShowAlert', 'onCloseAlert']);
+            'onActivateTab', 'onSelect', 'onShowImporting', 'onCloseImporting']);
         return (
             <DroppableThrottledStage
                 fileInputRef={this.setFileInput}
@@ -154,9 +154,9 @@ StageSelector.propTypes = {
     ...StageSelectorComponent.propTypes,
     id: PropTypes.string,
     intl: intlShape.isRequired,
-    onCloseAlert: PropTypes.func,
+    onCloseImporting: PropTypes.func,
     onSelect: PropTypes.func,
-    onShowAlert: PropTypes.func
+    onShowImporting: PropTypes.func
 };
 
 const mapStateToProps = (state, {asset, id}) => ({
@@ -178,8 +178,8 @@ const mapDispatchToProps = dispatch => ({
     dispatchSetHoveredSprite: spriteId => {
         dispatch(setHoveredSprite(spriteId));
     },
-    onCloseAlert: id => dispatch(closeAlertWithId(id)),
-    onShowAlert: id => dispatch(showStandardAlert(id))
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default injectIntl(connect(

@@ -204,7 +204,7 @@ class CostumeTab extends React.Component {
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        this.props.onShowAlert('importingAsset');
+        this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
@@ -212,11 +212,11 @@ class CostumeTab extends React.Component {
                 });
                 this.handleNewCostume(vmCostumes).then(() => {
                     if (fileIndex === fileCount - 1) {
-                        this.props.onCloseAlert('importingAsset');
+                        this.props.onCloseImporting();
                     }
                 });
             });
-        });
+        }, this.props.onCloseImporting);
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
@@ -363,12 +363,12 @@ CostumeTab.propTypes = {
     intl: intlShape,
     isRtl: PropTypes.bool,
     onActivateSoundsTab: PropTypes.func.isRequired,
-    onCloseAlert: PropTypes.func.isRequired,
+    onCloseImporting: PropTypes.func.isRequired,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseCameraModal: PropTypes.func.isRequired,
-    onShowAlert: PropTypes.func.isRequired,
+    onShowImporting: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
             costumes: PropTypes.arrayOf(PropTypes.shape({
@@ -414,8 +414,8 @@ const mapDispatchToProps = dispatch => ({
     dispatchUpdateRestore: restoreState => {
         dispatch(setRestore(restoreState));
     },
-    onCloseAlert: id => dispatch(closeAlertWithId(id)),
-    onShowAlert: id => dispatch(showStandardAlert(id))
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default errorBoundaryHOC('Costume Tab')(

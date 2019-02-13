@@ -130,18 +130,18 @@ class SoundTab extends React.Component {
 
     handleSoundUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        this.props.onShowAlert('importingAsset');
+        this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             soundUpload(buffer, fileType, storage, newSound => {
                 newSound.name = fileName;
                 this.props.vm.addSound(newSound).then(() => {
                     this.handleNewSound();
                     if (fileIndex === fileCount - 1) {
-                        this.props.onCloseAlert('importingAsset');
+                        this.props.onCloseImporting();
                     }
                 });
             });
-        });
+        }, this.props.onCloseImporting);
     }
 
     handleDrop (dropInfo) {
@@ -281,11 +281,11 @@ SoundTab.propTypes = {
     intl: intlShape,
     isRtl: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func.isRequired,
-    onCloseAlert: PropTypes.func.isRequired,
+    onCloseImporting: PropTypes.func.isRequired,
     onNewSoundFromLibraryClick: PropTypes.func.isRequired,
     onNewSoundFromRecordingClick: PropTypes.func.isRequired,
     onRequestCloseSoundLibrary: PropTypes.func.isRequired,
-    onShowAlert: PropTypes.func.isRequired,
+    onShowImporting: PropTypes.func.isRequired,
     soundLibraryVisible: PropTypes.bool,
     soundRecorderVisible: PropTypes.bool,
     sprites: PropTypes.shape({
@@ -327,8 +327,8 @@ const mapDispatchToProps = dispatch => ({
     dispatchUpdateRestore: restoreState => {
         dispatch(setRestore(restoreState));
     },
-    onCloseAlert: id => dispatch(closeAlertWithId(id)),
-    onShowAlert: id => dispatch(showStandardAlert(id))
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default errorBoundaryHOC('Sound Tab')(

@@ -6,6 +6,8 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import analytics from '../lib/analytics';
 import log from '../lib/log';
+import sharedMessages from '../lib/shared-messages';
+
 import {
     LoadingStates,
     getIsLoadingUpload,
@@ -43,11 +45,6 @@ const messages = defineMessages({
         id: 'gui.projectLoader.loadError',
         defaultMessage: 'The project file that was selected failed to load.',
         description: 'An error that displays when a local project file fails to load.'
-    },
-    uploadWarning: {
-        id: 'gui.projectLoader.uploadWarning',
-        defaultMessage: 'Replace the contents of the current project?',
-        description: 'A warning before uploading a file on top of another project.'
     }
 });
 
@@ -109,7 +106,7 @@ class SBFileUploader extends React.Component {
             // has changed and is not showing with ID. If it has an ID, this operation
             // does not currently overwrite that project, so it is safe to do without confirmation.
             const uploadAllowed = (isShowingWithoutId && projectChanged) ?
-                confirm(intl.formatMessage(messages.uploadWarning)) : // eslint-disable-line no-alert
+                confirm(intl.formatMessage(sharedMessages.replaceProjectWarning)) : // eslint-disable-line no-alert
                 true;
 
             if (uploadAllowed) this.props.requestProjectUpload(loadingState);

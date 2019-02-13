@@ -35,7 +35,7 @@ const handleFileUpload = function (fileInput, onload) {
         reader.onload = () => {
             const fileType = file.type;
             const fileName = extractFileName(file.name);
-            onload(reader.result, fileType, fileName);
+            onload(reader.result, fileType, fileName, i, files.length);
             readFile(i + 1, files);
         };
         reader.readAsArrayBuffer(file);

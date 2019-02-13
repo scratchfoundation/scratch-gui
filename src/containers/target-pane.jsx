@@ -1,6 +1,6 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
 
@@ -8,9 +8,9 @@ import {
     openSpriteLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
-
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
+import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
@@ -135,8 +135,14 @@ class TargetPane extends React.Component {
     }
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite);
+        this.props.onShowAlert('importingAsset');
+        handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
+            spriteUpload(buffer, fileType, fileName, storage, newSprite => {
+                this.handleNewSprite(newSprite);
+                if (fileIndex === fileCount - 1) {
+                    this.props.onCloseAlert('importingAsset');
+                }
+            });
         });
     }
     setFileInput (input) {
@@ -196,6 +202,8 @@ class TargetPane extends React.Component {
             onReceivedBlocks, // eslint-disable-line no-unused-vars
             onHighlightTarget, // eslint-disable-line no-unused-vars
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
+            onShowAlert, // eslint-disable-line no-unused-vars
+            onCloseAlert, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -232,6 +240,8 @@ const {
 
 TargetPane.propTypes = {
     intl: intlShape.isRequired,
+    onCloseAlert: PropTypes.func,
+    onShowAlert: PropTypes.func,
     ...targetPaneProps
 };
 
@@ -263,7 +273,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onHighlightTarget: id => {
         dispatch(highlightTarget(id));
-    }
+    },
+    onCloseAlert: id => dispatch(closeAlertWithId(id)),
+    onShowAlert: id => dispatch(showStandardAlert(id))
 });
 
 export default injectIntl(connect(

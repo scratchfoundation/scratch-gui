@@ -28,6 +28,7 @@ import {
 } from '../reducers/editor-tab';
 
 import {setRestore} from '../reducers/restore-deletion';
+import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
@@ -204,12 +205,16 @@ class CostumeTab extends React.Component {
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        handleFileUpload(e.target, (buffer, fileType, fileName) => {
+        this.props.onShowAlert('importingAsset');
+        handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
                     costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
                 this.handleNewCostume(vmCostumes);
+                if (fileIndex === fileCount - 1) {
+                    this.props.onCloseAlert('importingAsset');
+                }
             });
         });
     }
@@ -358,10 +363,12 @@ CostumeTab.propTypes = {
     intl: intlShape,
     isRtl: PropTypes.bool,
     onActivateSoundsTab: PropTypes.func.isRequired,
+    onCloseAlert: PropTypes.func.isRequired,
     onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
     onRequestCloseCameraModal: PropTypes.func.isRequired,
+    onShowAlert: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
             costumes: PropTypes.arrayOf(PropTypes.shape({
@@ -406,7 +413,9 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatchUpdateRestore: restoreState => {
         dispatch(setRestore(restoreState));
-    }
+    },
+    onCloseAlert: id => dispatch(closeAlertWithId(id)),
+    onShowAlert: id => dispatch(showStandardAlert(id))
 });
 
 export default errorBoundaryHOC('Costume Tab')(

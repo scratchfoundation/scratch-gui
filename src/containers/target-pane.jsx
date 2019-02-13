@@ -177,7 +177,6 @@ class TargetPane extends React.Component {
 
             // Determine position of the top-level block based on the target's workspace metrics.
             const {scrollX, scrollY, scale} = metrics;
-            const {width} = this.props.workspaceMetrics.dimensions;
             const posY = -scrollY + 30;
             let posX;
             if (this.props.isRtl) {

@@ -9,7 +9,7 @@ let savedImages = {};
 let savedLocale = '';
 
 const loadSpanish = () =>
-    import(/* webpackChunkName: "es-images" */ './es-steps.js')
+    import(/* webpackChunkName: "es-steps" */ './es-steps.js')
         .then(({default: imageData}) => imageData);
 
 const translations = {

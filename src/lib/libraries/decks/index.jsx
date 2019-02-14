@@ -1,49 +1,51 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+// Tutorial thumbnails: Avoid using any text that would need to be
+// translated in thumbnails.
 // Intro
-import libraryIntro from './intro/lib-getting-started.jpg';
+import libraryIntro from './thumbnails/getting-started.jpg';
 
 // Text to Speech
-import libraryTXTSpeech from './txt/lib_txt-to-speech.jpg';
+import libraryTXTSpeech from './thumbnails/text-to-speech.jpg';
 
 // Cartoon Network
-import libraryCartoonNetwork from './cartoonnetwork/lib_CartoonNetwork.jpg';
+import libraryCartoonNetwork from './thumbnails/cartoon-network.jpg';
 
 // Add sprite
-import libraryAddSprite from './sprite/cover-add-sprite.jpg';
+import libraryAddSprite from './thumbnails/add-sprite.jpg';
 
 // Animate a name
-import libraryAnimate from './animate/lib_animate-a-name.jpg';
+import libraryAnimate from './thumbnails/animate-a-name.jpg';
 
 // Make-Music
-import libraryMakeMusic from './make-music/lib-make-music.jpg';
+import libraryMakeMusic from './thumbnails/make-music.jpg';
 
 // Chase-Game
-import libraryChaseGame from './chase-game/lib-chasegame.jpg';
+import libraryChaseGame from './thumbnails/chase-game.jpg';
 
 // Make-A-Game
-import libraryMakeAGame from './game/lib-pop.jpg';
+import libraryMakeAGame from './thumbnails/pop-game.jpg';
 
 // Animate A Character
-import libraryAnimateChar from './animate-char/lib_Animate_a_Character.jpg';
+import libraryAnimateChar from './thumbnails/animate-a-character.jpg';
 
 // Tell A Story
-import libraryStory from './story/lib-tell-a-story.jpg';
+import libraryStory from './thumbnails/tell-a-story.jpg';
 
 // Video Sensing
-import libraryVideoSens from './videosensing/lib_video_sensing.jpg';
+import libraryVideoSens from './thumbnails/video-sensing.jpg';
 
 // Videos
-import recordASound from './videos/record-a-sound.jpg';
-import glideAroundThumb from './videos/glide-around.jpg';
-import changeSizeThumb from './videos/change-size.jpg';
-import switchCostumeThumb from './videos/animate-sprite.jpg';
-import hideAndShowThumb from './videos/hide-and-show.jpg';
-import addBackdropThumb from './videos/add-backdrop.jpg';
-import addEffectsThumb from './videos/add-effects.jpg';
-import moveArrowKeysThumb from './videos/move-arrow-keys.jpg';
-import spinThumb from './videos/spin.jpg';
+import recordASound from './thumbnails/record-a-sound.jpg';
+import glideAroundThumb from './thumbnails/glide-around.jpg';
+import changeSizeThumb from './thumbnails/change-size.jpg';
+import switchCostumeThumb from './thumbnails/animate-sprite.jpg';
+import hideAndShowThumb from './thumbnails/hide-and-show.jpg';
+import addBackdropThumb from './thumbnails/add-backdrop.jpg';
+import addEffectsThumb from './thumbnails/add-effects.jpg';
+import moveArrowKeysThumb from './thumbnails/move-arrow-keys.jpg';
+import spinThumb from './thumbnails/spin.jpg';
 
 export default {
 
@@ -109,16 +111,16 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_AddTXTextension"
                 />
             ),
-            image: 'stepAddTXTextension'
+            image: 'stepAddSpeechExtension'
         }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Say Something"
                     description="Step name for 'Say Something' step"
-                    id="gui.howtos. say-it-out-loud.step_TXTSpeech"
+                    id="gui.howtos.say-it-out-loud.step_TXTSpeech"
                 />
             ),
-            image: 'stepTXTSpeech'
+            image: 'stepSpeechSpeak'
         }, {
             title: (
                 <FormattedMessage
@@ -127,7 +129,7 @@ export default {
                     id="gui.howtos.say-it-out-loud_TXTSetVoice"
                 />
             ),
-            image: 'stepTXTSetVoice'
+            image: 'stepSpeechSetVoice'
         }, {
             title: (
                 <FormattedMessage
@@ -136,7 +138,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTMove"
                 />
             ),
-            image: 'stepTXTMove'
+            image: 'stepSpeechMove'
         }, {
             title: (
                 <FormattedMessage
@@ -145,7 +147,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTBackdrop"
                 />
             ),
-            image: 'stepTXTBackdrop'
+            image: 'stepSpeechBackdrop'
         }, {
             title: (
                 <FormattedMessage
@@ -154,7 +156,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTAddSprite"
                 />
             ),
-            image: 'stepTXTAddSprite'
+            image: 'stepSpeechAddSprite'
         }, {
             title: (
                 <FormattedMessage
@@ -163,7 +165,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTSong"
                 />
             ),
-            image: 'stepTXTSong'
+            image: 'stepSpeechSong'
         }, {
             title: (
                 <FormattedMessage
@@ -172,7 +174,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTColor"
                 />
             ),
-            image: 'stepTXTColor'
+            image: 'stepSpeechColor'
         }, {
             title: (
                 <FormattedMessage
@@ -181,7 +183,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTSpin"
                 />
             ),
-            image: 'stepTXTSpin'
+            image: 'stepSpeechSpin'
         }, {
             title: (
                 <FormattedMessage
@@ -190,7 +192,7 @@ export default {
                     id="gui.howtos.say-it-out-loud.step_TXTGrow"
                 />
             ),
-            image: 'stepTXTGrow'
+            image: 'stepSpeechGrow'
         }, {
             deckIds: [
                 'animate-a-name',

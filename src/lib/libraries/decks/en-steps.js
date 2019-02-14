@@ -1,94 +1,94 @@
 // Intro
-import stepMove from './intro/intro1.gif';
-import stepMoveSayHello from './intro/intro2.gif';
+import stepMove from './steps/getting-started1.en.gif';
+import stepMoveSayHello from './steps/getting-started2.en.gif';
 
 // Text to Speech
-import stepAddTXTextension from './txt/01_hoc-add-extensions.gif';
-import stepTXTSpeech from './txt/02_hoc-say-something.gif';
-import stepTXTSetVoice from './txt/03_hoc-set-voice.gif';
-import stepTXTMove from './txt/04_hoc-move-around.gif';
-import stepTXTBackdrop from './txt/05_hoc-add-backdrop.gif';
-import stepTXTAddSprite from './txt/06_hoc-add-character.gif';
-import stepTXTSong from './txt/07_hoc-perform-song.gif';
-import stepTXTColor from './txt/08_hoc-color-click.gif';
-import stepTXTSpin from './txt/09_hoc-spin.gif';
-import stepTXTGrow from './txt/10_hoc-grow-shrink.gif';
+import stepAddSpeechExtension from './steps/speech-01-add-extensions.en.gif';
+import stepSpeechSpeak from './steps/speech-02-say-something.en.gif';
+import stepSpeechSetVoice from './steps/speech-03-set-voice.en.gif';
+import stepSpeechMove from './steps/speech-04-move-around.en.gif';
+import stepSpeechBackdrop from './steps/speech-05-add-backdrop.en.gif';
+import stepSpeechAddSprite from './steps/speech-06-add-character.en.gif';
+import stepSpeechSong from './steps/speech-07-perform-song.en.gif';
+import stepSpeechColor from './steps/speech-08-color-click.en.gif';
+import stepSpeechSpin from './steps/speech-09-spin.en.gif';
+import stepSpeechGrow from './steps/speech-10-grow-shrink.en.gif';
 
 // Cartoon Network
-import stepCNcharacter from './cartoonnetwork/1-cn-hideshow.gif';
-import stepCNsay from './cartoonnetwork/2-cn-say.gif';
-import stepCNglide from './cartoonnetwork/3-cn-glide.gif';
-import stepCNpicksprite from './cartoonnetwork/4-cn-pick-gem.gif';
-import stepCNcollect from './cartoonnetwork/5-cn-collect.gif';
-import stepCNvariable from './cartoonnetwork/6-cn-variable.gif';
-import stepCNscore from './cartoonnetwork/7-cn-score.gif';
-import stepCNbackdrop from './cartoonnetwork/8-cn-change-backdrop.gif';
+import stepCNcharacter from './steps/cn-1-hideshow.en.gif';
+import stepCNsay from './steps/cn-2-say.en.gif';
+import stepCNglide from './steps/cn-3-glide.en.gif';
+import stepCNpicksprite from './steps/cn-4-pick-gem.en.gif';
+import stepCNcollect from './steps/cn-5-collect.en.gif';
+import stepCNvariable from './steps/cn-6-variable.en.gif';
+import stepCNscore from './steps/cn-7-score.en.gif';
+import stepCNbackdrop from './steps/cn-8-change-backdrop.en.gif';
 
 // Add sprite
-import stepAddSprite from './sprite/intro-choose-sprite.gif';
+import stepAddSprite from './steps/add-sprite.en.gif';
 
 // Animate a name
-import stepAnimatePickLetter from './animate/animate-name-pick-a-letter.gif';
-import stepAnimatePlaySound from './animate/animate-name-play-sound.gif';
-import stepAnimatePickLetter2 from './animate/animate-name-pick-a-letter2.gif';
-import stepAnimateChangeColor from './animate/animate-name-change-color.gif';
-import stepAnimateSpin from './animate/animate-name-spin.gif';
-import stepAnimateGrow from './animate/animate-name-grow.gif';
+import stepAnimatePickLetter from './steps/animate-name-pick-a-letter.en.gif';
+import stepAnimatePlaySound from './steps/animate-name-play-sound.en.gif';
+import stepAnimatePickLetter2 from './steps/animate-name-pick-a-letter2.en.gif';
+import stepAnimateChangeColor from './steps/animate-name-change-color.en.gif';
+import stepAnimateSpin from './steps/animate-name-spin.en.gif';
+import stepAnimateGrow from './steps/animate-name-grow.en.gif';
 
 // Make-Music
-import stepPickInstrument from './make-music/make-music-pick-instrument.gif';
-import stepPlaySoundClick from './make-music/make-music-play-sound.gif';
-import stepMakeSong from './make-music/make-music-make-song.gif';
-import stepMakeBeat from './make-music/make-music-make-beat.gif';
-import stepMakeBeatbox from './make-music/make-music-beatbox.gif';
+import stepPickInstrument from './steps/make-music-pick-instrument.en.gif';
+import stepPlaySoundClick from './steps/make-music-play-sound.en.gif';
+import stepMakeSong from './steps/make-music-make-song.en.gif';
+import stepMakeBeat from './steps/make-music-make-beat.en.gif';
+import stepMakeBeatbox from './steps/make-music-beatbox.en.gif';
 
 // Chase-Game
-import stepBG from './chase-game/chase-game-add-backdrop.gif';
-import stepAddOcto from './chase-game/chase-game-add-sprite1.gif';
-import stepLeftRight from './chase-game/chase-game-move-rightleft.gif';
-import stepUpDown from './chase-game/chase-game-move-updown.gif';
-import stepAddStar from './chase-game/chase-game-add-sprite2.gif';
-import stepMoveRandom from './chase-game/chase-game-move-randomly.gif';
-import stepWhenTouch from './chase-game/chase-game-touching.gif';
-import stepScoreVariable from './chase-game/chase-game-add-variable.gif';
-import stepScoreWhenTouch from './chase-game/chase-game-change-score.gif';
+import stepBG from './steps/chase-game-add-backdrop.en.gif';
+import stepAddOcto from './steps/chase-game-add-sprite1.en.gif';
+import stepLeftRight from './steps/chase-game-move-rightleft.en.gif';
+import stepUpDown from './steps/chase-game-move-updown.en.gif';
+import stepAddStar from './steps/chase-game-add-sprite2.en.gif';
+import stepMoveRandom from './steps/chase-game-move-randomly.en.gif';
+import stepWhenTouch from './steps/chase-game-touching.en.gif';
+import stepScoreVariable from './steps/chase-game-add-variable.en.gif';
+import stepScoreWhenTouch from './steps/chase-game-change-score.en.gif';
 
 // Make-A-Game
-import stepGamePickSprite from './game/game-pick-sprite.gif';
-import stepGamePlaySound from './game/game-play-sound.gif';
-import stepGameAddScore from './game/game-add-score.gif';
-import stepGameChangeScore from './game/game-change-score.gif';
-import stepRandom from './game/game-random-position.gif';
-import stepGameChangeColor from './game/game-change-color.gif';
-import stepResetScore from './game/game-reset-score.gif';
+import stepGamePickSprite from './steps/pop-game-pick-sprite.en.gif';
+import stepGamePlaySound from './steps/pop-game-play-sound.en.gif';
+import stepGameAddScore from './steps/pop-game-add-score.en.gif';
+import stepGameChangeScore from './steps/pop-game-change-score.en.gif';
+import stepRandom from './steps/pop-game-random-position.en.gif';
+import stepGameChangeColor from './steps/pop-game-change-color.en.gif';
+import stepResetScore from './steps/pop-game-reset-score.en.gif';
 
 // Animate A Character
-import stepAnimateCharPickBackdrop from './animate-char/animate-char-pick-backdrop.gif';
-import stepAnimateCharPickSprite from './animate-char/animate-char-pick-sprite.gif';
-import stepAnimateCharSaySomething from './animate-char/animate-char-say-something.gif';
-import stepAnimateCharAddSound from './animate-char/animate-char-add-sound.gif';
-import stepAnimateCharTalk from './animate-char/animate-char-talk.gif';
-import stepAnimateCharMove from './animate-char/animate-char-move.gif';
-import stepAnimateCharJump from './animate-char/animate-char-jump.gif';
-import stepAnimateCharChangeColor from './animate-char/animate-char-change-color.gif';
+import stepAnimateCharPickBackdrop from './steps/animate-char-pick-backdrop.en.gif';
+import stepAnimateCharPickSprite from './steps/animate-char-pick-sprite.en.gif';
+import stepAnimateCharSaySomething from './steps/animate-char-say-something.en.gif';
+import stepAnimateCharAddSound from './steps/animate-char-add-sound.en.gif';
+import stepAnimateCharTalk from './steps/animate-char-talk.en.gif';
+import stepAnimateCharMove from './steps/animate-char-move.en.gif';
+import stepAnimateCharJump from './steps/animate-char-jump.en.gif';
+import stepAnimateCharChangeColor from './steps/animate-char-change-color.en.gif';
 
 // Tell A Story
-import stepStoryPickBackdrop from './story/story-pick-backdrop.gif';
-import stepStoryPickSprite from './story/story-pick-sprite.gif';
-import stepStoryCharSaySomething from './story/story-say-something.gif';
-import stepStoryCharAddAnotherSprite from './story/story-pick-another-sprite.gif';
-import stepStoryFlip from './story/story-flip.gif';
-import stepStoryConversation from './story/story-conversation.gif';
-import stepStoryAddAnotherBackdrop from './story/story-add-background-2.gif';
-import stepStorySwitchBackdrop from './story/story-switch-backdrop.gif';
-import stepStoryHide from './story/story-hide-character.gif';
-import stepStoryShow from './story/story-show-character.gif';
+import stepStoryPickBackdrop from './steps/story-pick-backdrop.en.gif';
+import stepStoryPickSprite from './steps/story-pick-sprite.en.gif';
+import stepStoryCharSaySomething from './steps/story-say-something.en.gif';
+import stepStoryCharAddAnotherSprite from './steps/story-pick-another-sprite.en.gif';
+import stepStoryFlip from './steps/story-flip.en.gif';
+import stepStoryConversation from './steps/story-conversation.en.gif';
+import stepStoryAddAnotherBackdrop from './steps/story-add-background-2.en.gif';
+import stepStorySwitchBackdrop from './steps/story-switch-backdrop.en.gif';
+import stepStoryHide from './steps/story-hide-character.en.gif';
+import stepStoryShow from './steps/story-show-character.en.gif';
 
 // Video Sensing
-import stepVideoSensAddExtension from './videosensing/videosens-add-extension.gif';
-import stepVideoSensPet from './videosensing/videosens-pet-cat.gif';
-import stepVideoSensAnimate from './videosensing/videosens-animate.gif';
-import stepVideoSensPop from './videosensing/videosens-pop.gif';
+import stepVideoSensAddExtension from './steps/videosens-add-extension.en.gif';
+import stepVideoSensPet from './steps/videosens-pet-cat.en.gif';
+import stepVideoSensAnimate from './steps/videosens-animate.en.gif';
+import stepVideoSensPop from './steps/videosens-pop.en.gif';
 
 const enImages = {
     // Intro
@@ -96,16 +96,16 @@ const enImages = {
     stepMoveSayHello: stepMoveSayHello,
 
     // Text to Speech
-    stepAddTXTextension: stepAddTXTextension,
-    stepTXTSpeech: stepTXTSpeech,
-    stepTXTSetVoice: stepTXTSetVoice,
-    stepTXTMove: stepTXTMove,
-    stepTXTBackdrop: stepTXTBackdrop,
-    stepTXTAddSprite: stepTXTAddSprite,
-    stepTXTSong: stepTXTSong,
-    stepTXTColor: stepTXTColor,
-    stepTXTSpin: stepTXTSpin,
-    stepTXTGrow: stepTXTGrow,
+    stepAddSpeechExtension: stepAddSpeechExtension,
+    stepSpeechSpeak: stepSpeechSpeak,
+    stepSpeechSetVoice: stepSpeechSetVoice,
+    stepSpeechMove: stepSpeechMove,
+    stepSpeechBackdrop: stepSpeechBackdrop,
+    stepSpeechAddSprite: stepSpeechAddSprite,
+    stepSpeechSong: stepSpeechSong,
+    stepSpeechColor: stepSpeechColor,
+    stepSpeechSpin: stepSpeechSpin,
+    stepSpeechGrow: stepSpeechGrow,
 
     // Cartoon Network
     stepCNcharacter: stepCNcharacter,

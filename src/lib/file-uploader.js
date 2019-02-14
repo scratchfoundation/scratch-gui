@@ -118,15 +118,14 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
     }
     case 'image/gif': {
         let costumes = [];
-        const onFrame = (frameNumber, dataUrl) => {
+        gifDecoder(fileData, (frameNumber, dataUrl, numFrames) => {
             costumeUpload(dataUrl, 'image/png', storage, costumes_ => {
                 costumes = costumes.concat(costumes_);
+                if (frameNumber === numFrames - 1) {
+                    handleCostume(costumes);
+                }
             }, handleError);
-        };
-        const onDone = () => {
-            handleCostume(costumes);
-        };
-        gifDecoder(fileData, {onFrame, onDone});
+        });
         return; // Abandon this load, do not try to load gif itself
     }
     default:

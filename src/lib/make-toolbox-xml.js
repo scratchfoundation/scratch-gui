@@ -138,6 +138,18 @@ const motion = function (isStage, targetId) {
     `;
 };
 
+const xmlEscape = function (unsafe) {
+    return unsafe.replace(/[<>&'"]/g, c => {
+        switch (c) {
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '&': return '&amp;';
+        case '\'': return '&apos;';
+        case '"': return '&quot;';
+        }
+    });
+};
+
 const looks = function (isStage, targetId, costumeName, backdropName) {
     const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
@@ -713,6 +725,10 @@ const xmlClose = '</xml>';
 const makeToolboxXML = function (isStage, targetId, categoriesXML,
     costumeName = '', backdropName = '', soundName = '') {
     const gap = [categorySeparator];
+
+    costumeName = xmlEscape(costumeName);
+    backdropName = xmlEscape(backdropName);
+    soundName = xmlEscape(soundName);
 
     const everything = [
         xmlOpen,

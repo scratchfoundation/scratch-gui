@@ -20,5 +20,10 @@ export default defineMessages({
         defaultMessage: 'pop',
         description: 'Name of the pop sound, the default sound added to a sprite',
         id: 'gui.sharedMessages.pop'
+    },
+    replaceProjectWarning: {
+        id: 'gui.sharedMessages.replaceProjectWarning',
+        defaultMessage: 'Replace contents of the current project?',
+        description: 'Confirmation that user wants to overwrite the current project contents'
     }
 });

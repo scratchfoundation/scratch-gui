@@ -142,11 +142,7 @@ class Blocks extends React.Component {
         // different from the previously rendered toolbox xml.
         // Do not check against prevProps.toolboxXML because that may not have been rendered.
         if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
-            // rather than update the toolbox "sync" -- update it in the next frame
-            clearTimeout(this.toolboxUpdateTimeout);
-            this.toolboxUpdateTimeout = setTimeout(() => {
-                this.updateToolbox();
-            }, 0);
+            this.requestToolboxUpdate();
         }
 
         if (this.props.isVisible === prevProps.isVisible) {
@@ -178,15 +174,19 @@ class Blocks extends React.Component {
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
     }
-
+    requestToolboxUpdate () {
+        clearTimeout(this.toolboxUpdateTimeout);
+        this.toolboxUpdateTimeout = setTimeout(() => {
+            this.updateToolbox();
+        }, 0);
+    }
     setLocale () {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
                 this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
-                // refreshWorkspace will cause a toolbox update
-                // wait for update to go through before reenabling recycling
+                this.requestToolboxUpdate();
                 this.withToolboxUpdates(() => {
                     this.workspace.getFlyout().setRecyclingEnabled(true);
                 });
@@ -455,6 +455,7 @@ class Blocks extends React.Component {
             .then(blocks => this.props.vm.shareBlocksToTarget(blocks, this.props.vm.editingTarget.id))
             .then(() => {
                 this.props.vm.refreshWorkspace();
+                this.updateToolbox(); // To show new variables/custom blocks
             });
     }
     render () {

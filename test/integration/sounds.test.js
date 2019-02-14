@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs,
@@ -27,7 +28,6 @@ describe('Working with sounds', () => {
 
     test('Adding a sound through the library', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
 
         // Delete the sound
@@ -64,7 +64,6 @@ describe('Working with sounds', () => {
 
     test('Adding a sound by surprise button', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
         const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
         await driver.actions().mouseMove(el)
@@ -77,7 +76,6 @@ describe('Working with sounds', () => {
 
     test('Duplicating a sound', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sounds');
 
         await rightClickText('Meow', scope.soundsTab);
@@ -94,7 +92,6 @@ describe('Working with sounds', () => {
     // Regression test for gui issue #1320
     test('Switching sprites with different numbers of sounds', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Add a sound so this sprite has 2 sounds.
         await clickText('Sounds');
@@ -110,6 +107,27 @@ describe('Working with sounds', () => {
         // Make sure the 'Oops' screen is not visible
         const content = await driver.getPageSource();
         expect(content.indexOf('Oops')).toEqual(-1);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test.only('Adding multiple sounds at the same time', async () => {
+        const files = [
+            path.resolve(__dirname, '../fixtures/movie.wav'),
+            path.resolve(__dirname, '../fixtures/sneaker.wav')
+        ];
+        await loadUri(uri);
+        await clickText('Sounds');
+        const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(files.join('\n'));
+
+        await findByText('movie', scope.soundsTab);
+        await findByText('sneaker', scope.soundsTab);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

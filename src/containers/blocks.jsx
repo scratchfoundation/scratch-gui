@@ -162,6 +162,7 @@ class Blocks extends React.Component {
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
+                this.requestToolboxUpdate();
             }
 
             window.dispatchEvent(new Event('resize'));

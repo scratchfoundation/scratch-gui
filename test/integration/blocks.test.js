@@ -252,4 +252,18 @@ describe('Working with the blocks', () => {
         await driver.sleep(500); // Wait for scroll to finish
         await clickText('my\u00A0variable');
     });
+
+    // Regression test for switching editor tabs causing toolbox to stop updating
+    test('Creating variables after adding extensions updates the toolbox', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        await clickText('Code');
+        await clickText('Variables', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll
+        await clickText('Make a List');
+        const el = await findByXpath("//input[@name='New list name:']");
+        await el.sendKeys('list1');
+        await clickButton('OK');
+        await clickText('list1', scope.blocksTab);
+    });
 });

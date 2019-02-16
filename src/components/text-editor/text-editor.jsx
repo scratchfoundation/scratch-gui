@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { injectIntl } from "react-intl";
+import MonacoEditor from "react-monaco-editor";
 
 class TextEditor extends React.Component {
     constructor(props) {
@@ -32,10 +33,14 @@ class TextEditor extends React.Component {
     }
 
     render() {
-        const { blocks } = this.state;
-        if (blocks && blocks.length > 0)
-            return <div>{this.displayBlocks(blocks)}</div>;
-        return <div>Not found</div>;
+        return (
+            <MonacoEditor
+                height="600"
+                language="javascript"
+                theme="vs-dark"
+                width="800"
+            />
+        );
     }
 }
 

@@ -1,11 +1,13 @@
 const defaultsDeep = require('lodash.defaultsdeep');
 var path = require('path');
 var webpack = require('webpack');
+const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
 
 // Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 // PostCss
 var autoprefixer = require('autoprefixer');
@@ -52,9 +54,13 @@ const base = {
                     '@babel/preset-react'
                 ]
             }
-        },
-        {
+        }, {
             test: /\.css$/,
+            include: MONACO_DIR,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.css$/,
+            exclude: MONACO_DIR,
             use: [{
                 loader: 'style-loader'
             }, {
@@ -176,7 +182,10 @@ module.exports = [
             new CopyWebpackPlugin([{
                 from: 'extension-worker.{js,js.map}',
                 context: 'node_modules/scratch-vm/dist/web'
-            }])
+            }]),
+            new MonacoWebpackPlugin({
+                languages: ['javascript', 'typescript']
+            })
         ])
     })
 ].concat(

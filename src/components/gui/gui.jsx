@@ -172,7 +172,6 @@ const GUIComponent = props => {
                         dir={isRtl ? "rtl" : "ltr"}
                         {...componentProps}
                     >
-                        {previewInfoVisible ? <PreviewModal /> : null}
                         {telemetryModalVisible ? (
                             <TelemetryModal
                                 onCancel={onTelemetryModalCancel}
@@ -185,7 +184,6 @@ const GUIComponent = props => {
                         {isCreating ? (
                             <Loader messageId="gui.loader.creating" />
                         ) : null}
-                        {importInfoVisible ? <ImportModal /> : null}
                         {isRendererSupported ? null : (
                             <WebGlModal isRtl={isRtl} />
                         )}

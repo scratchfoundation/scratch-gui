@@ -1,28 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {injectIntl} from 'react-intl';
+import React from "react";
+import PropTypes from "prop-types";
+import { injectIntl } from "react-intl";
 
 class TextEditor extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             blocks: null
         };
     }
 
-    componentDidUpdate (prevProps) {
-        if (
-            this.props.blocks !== prevProps.blocks
-        ) {
-            this.setState({blocks: this.props.blocks});
+    componentDidUpdate(prevProps) {
+        if (this.props.blocks !== prevProps.blocks) {
+            this.setState({ blocks: this.props.blocks });
         }
     }
 
-    displayBlocks (blocks) {
+    displayBlocks(blocks) {
         if (blocks && blocks.length > 0) {
             blocks.forEach(block => {
-                if (block.type === 'motion_movesteps') {
-                    let value = 'nothing';
+                if (block.type === "motion_movesteps") {
+                    let value = "nothing";
                     block.values.forEach(blockValue => {
                         value = blockValue.value;
                     });
@@ -33,7 +31,7 @@ class TextEditor extends React.Component {
         return blocks;
     }
 
-    render () {
+    render() {
         const { blocks } = this.state;
         if (blocks && blocks.length > 0)
             return <div>{this.displayBlocks(blocks)}</div>;

@@ -445,6 +445,12 @@ class Blocks extends React.Component {
     }
     handleCustomProceduresClose (data) {
         this.props.onRequestCloseCustomProcedures(data);
+
+        // No data: the user cancelled the dialog, so don't do anything to the workspace.
+        if (!data) {
+            return;
+        }
+
         const ws = this.workspace;
         ws.refreshToolboxSelection_();
         ws.toolbox_.scrollToCategoryById('myBlocks');

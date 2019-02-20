@@ -4,6 +4,7 @@
 # NPM
 /node_modules
 npm-*
+/package-lock.json
 
 # Testing
 /.nyc_output

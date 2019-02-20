@@ -5,8 +5,7 @@ import WavEncoder from 'wav-encoder';
 
 import {connect} from 'react-redux';
 
-import analytics from '../lib/analytics';
-import {computeChunkedRMS} from '../lib/audio/audio-util.js';
+import {computeChunkedRMS, SOUND_BYTE_LIMIT} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
@@ -44,7 +43,6 @@ class SoundEditor extends React.Component {
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
-        analytics.pageview('/editors/sound');
     }
     componentWillReceiveProps (newProps) {
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
@@ -67,13 +65,6 @@ class SoundEditor extends React.Component {
         });
     }
     submitNewSamples (samples, sampleRate, skipUndo) {
-        if (!skipUndo) {
-            this.redoStack = [];
-            if (this.undoStack.length >= UNDO_STACK_SIZE) {
-                this.undoStack.shift(); // Drop the first element off the array
-            }
-            this.undoStack.push(this.copyCurrentBuffer());
-        }
         // Encode the new sound into a wav so that it can be stored
         let wavBuffer = null;
         try {
@@ -81,18 +72,38 @@ class SoundEditor extends React.Component {
                 sampleRate: sampleRate,
                 channelData: [samples]
             });
+
+            if (wavBuffer.byteLength > SOUND_BYTE_LIMIT) {
+                // Cancel the sound update by setting to null
+                wavBuffer = null;
+                log.error(`Refusing to encode sound larger than ${SOUND_BYTE_LIMIT} bytes`);
+            }
         } catch (e) {
             // This error state is mostly for the mock sounds used during testing.
             // Any incorrect sound buffer trying to get interpretd as a Wav file
             // should yield this error.
+            // This can also happen if the sound is too be allocated in memory.
             log.error(`Encountered error while trying to encode sound update: ${e}`);
         }
 
-        this.resetState(samples, sampleRate);
-        this.props.vm.updateSoundBuffer(
-            this.props.soundIndex,
-            this.audioBufferPlayer.buffer,
-            wavBuffer ? new Uint8Array(wavBuffer) : new Uint8Array());
+        // Do not submit sound if it could not be encoded (i.e. if too large)
+        if (wavBuffer) {
+            if (!skipUndo) {
+                this.redoStack = [];
+                if (this.undoStack.length >= UNDO_STACK_SIZE) {
+                    this.undoStack.shift(); // Drop the first element off the array
+                }
+                this.undoStack.push(this.copyCurrentBuffer());
+            }
+            this.resetState(samples, sampleRate);
+            this.props.vm.updateSoundBuffer(
+                this.props.soundIndex,
+                this.audioBufferPlayer.buffer,
+                new Uint8Array(wavBuffer));
+
+            return true; // Update succeeded
+        }
+        return false; // Update failed
     }
     handlePlay () {
         this.audioBufferPlayer.play(
@@ -122,8 +133,16 @@ class SoundEditor extends React.Component {
             const sampleCount = samples.length;
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
-            const clippedSamples = samples.slice(startIndex, endIndex);
-            this.submitNewSamples(clippedSamples, sampleRate);
+            if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
+                const clippedSamples = samples.slice(startIndex, endIndex);
+                this.submitNewSamples(clippedSamples, sampleRate);
+            } else {
+                // Just clear the trim state, it cannot be completed
+                this.setState({
+                    trimStart: null,
+                    trimEnd: null
+                });
+            }
         }
     }
     handleUpdateTrimEnd (trimEnd) {
@@ -147,8 +166,8 @@ class SoundEditor extends React.Component {
         effects.process(({renderedBuffer}) => {
             const samples = renderedBuffer.getChannelData(0);
             const sampleRate = renderedBuffer.sampleRate;
-            this.submitNewSamples(samples, sampleRate);
-            this.handlePlay();
+            const success = this.submitNewSamples(samples, sampleRate);
+            if (success) this.handlePlay();
         });
     }
     handleUndo () {

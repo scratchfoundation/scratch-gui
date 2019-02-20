@@ -20,7 +20,7 @@
     padding: 0;
     border-radius: $space;
     user-select: none;
-    width: 500px;
+    width: 640px;
 
     color: $text-primary;
     overflow: hidden;
@@ -28,16 +28,21 @@
 
 .illustration {
     width: 100%;
-    height: 208px;
+    height: 123px;
     background-color: $motion-primary;
-    background-image: url('./welcome.png');
+    background-image: url('./telemetry-modal-header.png');
     background-size: cover;
 }
 
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
-    text-align: center;
+    text-align: left;
+}
+
+.privacy-policy-link {
+    color: $motion-primary;
+    text-decoration: none;
 }
 
 /* Confirmation buttons at the bottom of the modal */
@@ -59,19 +64,13 @@
     cursor: pointer;
 }
 
-.button-row button.ok-button {
+.button-row button.opt-in {
     background: $motion-primary;
     color: white;
 }
 
-.button-row button.no-button {
+.button-row button.opt-out {
     color: $motion-primary;
-}
-
-.button-row button.view-project-button {
-    background: $extensions-primary;
-    border-color: $extensions-primary;
-    color: white;
 }
 
 [dir="ltr"] .button-row button + button {
@@ -80,29 +79,4 @@
 
 [dir="rtl"] .button-row button + button {
     margin-right: 0.5rem;
-}
-
-.cat-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    vertical-align: middle;
-}
-
-[dir="ltr"] .cat-icon {
-    margin-left: .125rem;
-}
-
-[dir="rtl"] .cat-icon {
-    margin-right: .125rem;
-}
-
-.faq-link-text {
-    margin: 2rem 0 .5rem 0;
-    font-size: .875rem;
-    color: $text-primary;
-}
-
-.faq-link {
-    color: $motion-primary;
-    text-decoration: none;
 }

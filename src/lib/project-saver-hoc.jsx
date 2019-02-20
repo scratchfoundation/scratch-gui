@@ -100,7 +100,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
-            window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+            // Cant unset the beforeunload because it might no longer belong to this component
+            // i.e. if another of this component has been mounted before this one gets unmounted
+            // which happens when going from project to editor view.
+            // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
@@ -198,6 +201,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
         storeProject (projectId, requestParams) {
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();
+            // Serialize VM state now before embarking on
+            // the asynchronous journey of storing assets to
+            // the server. This ensures that assets don't update
+            // while in the process of saving a project (e.g. the
+            // serialized project refers to a newer asset than what
+            // we just finished saving).
+            const savedVMState = this.props.vm.toJSON();
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -212,7 +222,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 )
             ).then(() => {
                 const opts = {
-                    body: this.props.vm.toJSON(),
+                    body: savedVMState,
                     // If we set json:true then the body is double-stringified, so don't
                     headers: {
                         'Content-Type': 'application/json'
@@ -278,6 +288,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onUpdateProjectThumbnail(
                         projectId, dataURItoBlob(dataURI));
                 });
+                this.props.vm.renderer.draw();
             } catch (e) {
                 log.error('Project thumbnail save error', e);
                 // This is intentionally fire/forget because a failure

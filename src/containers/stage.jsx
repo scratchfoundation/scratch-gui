@@ -236,7 +236,7 @@ class Stage extends React.Component {
         this.updateRect();
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
-        if (e.button === 0 || e instanceof TouchEvent) {
+        if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
             this.setState({
                 mouseDown: true,
                 mouseDownPosition: mousePosition,
@@ -255,7 +255,12 @@ class Stage extends React.Component {
         };
         this.props.vm.postIOData('mouse', data);
         if (e.preventDefault) {
+            // Prevent default to prevent touch from dragging page
             e.preventDefault();
+            // But we do want any active input to be blurred
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
         }
         if (this.props.isColorPicking) {
             const {r, g, b} = this.state.colorInfo.color;
@@ -315,7 +320,6 @@ class Stage extends React.Component {
         if (this.state.dragId) return;
         const drawableId = this.renderer.pick(x, y);
         if (drawableId === null) return;
-        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
@@ -326,6 +330,9 @@ class Stage extends React.Component {
 
         // Dragging always brings the target to the front
         target.goToFront();
+
+        // Extract the drawable art
+        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
 
         this.props.vm.startDrag(targetId);
         this.setState({

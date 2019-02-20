@@ -79,6 +79,8 @@ const vmManagerHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
                 loadingState,
+                locale,
+                messages,
                 isStarted,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,

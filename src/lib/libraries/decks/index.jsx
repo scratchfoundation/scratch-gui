@@ -116,6 +116,21 @@ import addEffectsThumb from './videos/add-effects.jpg';
 import moveArrowKeysThumb from './videos/move-arrow-keys.jpg';
 import spinThumb from './videos/spin.jpg';
 
+// Fly tutorial
+import libraryFly from './fly/lib_fly.png';
+import stepFlyBackdrop from './fly/01-choose-backdrop.gif';
+import stepFlyCharacter from './fly/02-choose-character.gif';
+import stepFlySay from './fly/03-say-something.gif';
+import stepFlyObject from './fly/04-choose-object.gif';
+import stepFlyFlying from './fly/05-start-flying.gif';
+import stepFlyCostume from './fly/06-switch-costume.gif';
+import stepFlySelectFlyer from './fly/07-select-flyer.gif';
+import stepFlyInteractive from './fly/08-make-interactive.gif';
+import stepFlyCollect from './fly/09-object-to-collect.gif';
+import stepFlyAddScore from './fly/11-add-score.gif';
+import stepFlyKeepScore from './fly/12-keep-score.gif';
+import stepFlyHearts from './fly/13-flying-heart.gif';
+
 export default {
 
     'intro-move-sayhello': {
@@ -156,6 +171,146 @@ export default {
         }
         ],
         urlId: 'getStarted'
+    },
+    'make-it-fly': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Make it Fly"
+                description="Name for the 'Make it Fly' how-to"
+                id="gui.howtos.make-it-fly.name"
+            />
+        ),
+
+        img: libraryFly,
+        steps: [{
+            video: 'zbtdx2dem9'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Sky Background"
+                    description="Step name for 'Choose a Sky Background' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyBackdrop"
+                />
+            ),
+            image: stepFlyBackdrop
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Character"
+                    description="Step name for 'Choose a Character' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyCharacter"
+                />
+            ),
+            image: stepFlyCharacter
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.make-it-fly.step_stepFlySay"
+                />
+            ),
+            image: stepFlySay
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Scenery"
+                    description="Step name for 'Add Scenery' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyObject"
+                />
+            ),
+            image: stepFlyObject
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move the Scenery"
+                    description="Step name for 'Move the Scenery' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyFlying"
+                />
+            ),
+            image: stepFlyFlying
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Switch Looks"
+                    description="Step name for 'Switch Looks' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyCostume"
+                />
+            ),
+            image: stepFlyCostume
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select Flying Sprite"
+                    description="Step name for 'Select Flying Sprite' step"
+                    id="gui.howtos.make-it-fly.step_stepFlySelectFlyer"
+                />
+            ),
+            image: stepFlySelectFlyer
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make it Interactive"
+                    description="Step name for 'Make it Interactive' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyInteractive"
+                />
+            ),
+            image: stepFlyInteractive
+
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose an Object to Collect"
+                    description="Step name for 'Choose an Object to Collect' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyCollect"
+                />
+            ),
+            image: stepFlyCollect
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Flying Hearts"
+                    description="Step name for 'Flying Hearts' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyHearts"
+                />
+            ),
+            image: stepFlyHearts
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select Flying Sprite"
+                    description="Step name for 'Select Flying Sprite' step"
+                    id="gui.howtos.make-it-fly.step_stepFlySelectFlyer"
+                />
+            ),
+            image: stepFlySelectFlyer
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Score"
+                    description="Step name for 'Add Score' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyAddScore"
+                />
+            ),
+            image: stepFlyAddScore
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Keep Score"
+                    description="Step name for 'Keep Score' step"
+                    id="gui.howtos.make-it-fly.step_stepFlyKeepScore"
+                />
+            ),
+            image: stepFlyKeepScore
+
+        }, {
+            deckIds: [
+                'cartoon-network',
+                'Chase-Game'
+            ]
+        }
+        ],
+        urlId: 'make-it-fly'
     },
 
     'say-it-out-loud': {

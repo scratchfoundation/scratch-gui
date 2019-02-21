@@ -3,6 +3,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
+import conditionHOC from '../../lib/condition-hoc.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
@@ -10,12 +11,13 @@ import Loader from '../loader/loader.jsx';
 
 import styles from './stage-wrapper.css';
 
+const IsLoadingLoader = conditionHOC(conditionHOC.loading)(Loader);
+
 const StageWrapperComponent = function (props) {
     const {
         isFullScreen,
         isRtl,
         isRendererSupported,
-        loading,
         stageSize,
         vm
     } = props;
@@ -41,9 +43,7 @@ const StageWrapperComponent = function (props) {
                         null
                 }
             </Box>
-            {loading ? (
-                <Loader isFullScreen={isFullScreen} />
-            ) : null}
+            <IsLoadingLoader isFullScreen={isFullScreen} />
         </Box>
     );
 };

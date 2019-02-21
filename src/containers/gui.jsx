@@ -3,7 +3,6 @@ import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
-import VM from 'scratch-vm';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -29,15 +28,13 @@ import {
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import LocalizationHOC from '../lib/localization-hoc.jsx';
 import ProjectFetcherHOC from '../lib/project-fetcher-hoc.jsx';
-import ProjectSaverHOC from '../lib/project-saver-hoc.jsx';
 import QueryParserHOC from '../lib/query-parser-hoc.jsx';
 import storage from '../lib/storage';
-import vmListenerHOC from '../lib/vm-listener-hoc.jsx';
-import vmManagerHOC from '../lib/vm-manager-hoc.jsx';
-import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
+import delayHOC from '../lib/delay-hoc.jsx';
 
-import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
+
+import BootstrapLoader from '../components/bootstrap-loader/bootstrap-loader.jsx';
 
 const messages = defineMessages({
     defaultProjectTitle: {
@@ -47,33 +44,18 @@ const messages = defineMessages({
     }
 });
 
+const GUIComponentLoad = delayHOC.loadComponent(() => require('./gui.inner.jsx'));
+
+const GUIComponent = delayHOC({
+    ready: true,
+    stall: delayHOC.fetching,
+    weight: 5,
+    placeholder: ({isRtl}) => <BootstrapLoader dir={isRtl ? 'rtl' : 'ltr'} />
+})(GUIComponentLoad);
+
 class GUI extends React.Component {
     componentDidMount () {
-        setIsScratchDesktop(this.props.isScratchDesktop);
-        this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
-    }
-    componentDidUpdate (prevProps) {
-        if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
-            this.props.onUpdateProjectId(this.props.projectId);
-        }
-        if (this.props.projectTitle !== prevProps.projectTitle) {
-            this.setReduxTitle(this.props.projectTitle);
-        }
-        if (this.props.isShowingProject && !prevProps.isShowingProject) {
-            // this only notifies container when a project changes from not yet loaded to loaded
-            // At this time the project view in www doesn't need to know when a project is unloaded
-            this.props.onProjectLoaded();
-        }
-    }
-    setReduxTitle (newTitle) {
-        if (newTitle === null || typeof newTitle === 'undefined') {
-            this.props.onUpdateReduxProjectTitle(
-                this.props.intl.formatMessage(messages.defaultProjectTitle)
-            );
-        } else {
-            this.props.onUpdateReduxProjectTitle(newTitle);
-        }
     }
     render () {
         if (this.props.isError) {
@@ -82,34 +64,31 @@ class GUI extends React.Component {
         }
         const {
             /* eslint-disable no-unused-vars */
-            assetHost,
-            cloudHost,
-            error,
-            isError,
-            isScratchDesktop,
+            // assetHost,
+            // cloudHost,
+            // error,
+            // isError,
+            // isScratchDesktop,
             isShowingProject,
-            onProjectLoaded,
+            // onProjectLoaded,
             onStorageInit,
-            onUpdateProjectId,
-            onUpdateReduxProjectTitle,
-            projectHost,
-            projectId,
-            projectTitle,
+            // onUpdateProjectId,
+            // onUpdateReduxProjectTitle,
+            // projectHost,
+            // projectId,
+            // projectTitle,
             /* eslint-enable no-unused-vars */
             children,
-            fetchingProject,
+            fontsLoaded,
             isLoading,
+            // isBootstrapping,
             loadingStateVisible,
             ...componentProps
         } = this.props;
-        return (
-            <GUIComponent
-                loading={fetchingProject || isLoading || loadingStateVisible}
-                {...componentProps}
-            >
-                {children}
-            </GUIComponent>
-        );
+        return (<GUIComponent
+            {...componentProps}>
+            {children}
+        </GUIComponent>);
     }
 }
 
@@ -118,7 +97,7 @@ GUI.propTypes = {
     children: PropTypes.node,
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    fetchingProject: PropTypes.bool,
+    fontsLoaded: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
     isLoading: PropTypes.bool,
@@ -135,7 +114,6 @@ GUI.propTypes = {
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     projectTitle: PropTypes.string,
     telemetryModalVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 GUI.defaultProps = {
@@ -157,6 +135,7 @@ const mapStateToProps = state => {
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
         costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
         error: state.scratchGui.projectState.error,
+        fontsLoaded: state.scratchGui.fontsLoaded,
         isError: getIsError(loadingState),
         isFullScreen: state.scratchGui.mode.isFullScreen,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
@@ -165,13 +144,12 @@ const mapStateToProps = state => {
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
         soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
-        targetIsStage: (
-            state.scratchGui.targets.stage &&
-            state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
-        ),
+        // targetIsStage: (
+        //     state.scratchGui.targets.stage &&
+        //     state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
+        // ),
         telemetryModalVisible: state.scratchGui.modals.telemetryModal,
-        tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
-        vm: state.scratchGui.vm
+        tipsLibraryVisible: state.scratchGui.modals.tipsLibrary
     };
 };
 
@@ -200,10 +178,6 @@ const WrappedGui = compose(
     FontLoaderHOC,
     QueryParserHOC,
     ProjectFetcherHOC,
-    ProjectSaverHOC,
-    vmListenerHOC,
-    vmManagerHOC,
-    cloudManagerHOC
 )(ConnectedGUI);
 
 WrappedGui.setAppElement = ReactModal.setAppElement;

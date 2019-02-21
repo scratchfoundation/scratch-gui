@@ -75,7 +75,13 @@ const vmListenerHOC = function (WrappedComponent) {
         }
         handleProjectChanged () {
             if (this.props.shouldEmitUpdates) {
-                this.props.onProjectChanged();
+                if (!this._projectChangedPromise) {
+                    this._projectChangedPromise = Promise.resolve()
+                        .then(() => {
+                            this._projectChangedPromise = null;
+                        })
+                        .then(() => this.props.onProjectChanged());
+                }
             }
         }
         handleTargetsUpdate (data) {

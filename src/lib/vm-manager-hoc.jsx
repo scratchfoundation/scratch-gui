@@ -37,13 +37,20 @@ const vmManagerHOC = function (WrappedComponent) {
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
             }
+
+            if (this.props.isLoadingWithId) {
+                Promise.resolve().then(() => {
+                this.loadProject();
+                });
+            }
         }
         componentDidUpdate (prevProps) {
             // if project is in loading state, AND fonts are loaded,
             // and they weren't both that way until now... load project!
-            if (this.props.isLoadingWithId && this.props.fontsLoaded &&
-                (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
+            if (this.props.isLoadingWithId && !prevProps.isLoadingWithId) {
+                Promise.resolve().then(() => {
                 this.loadProject();
+                });
             }
             // Start the VM if entering editor mode with an unstarted vm
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
@@ -76,7 +83,7 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                fontsLoaded,
+                // fontsLoaded,
                 loadingState,
                 isStarted,
                 onError: onErrorProp,
@@ -90,7 +97,6 @@ const vmManagerHOC = function (WrappedComponent) {
             } = this.props;
             return (
                 <WrappedComponent
-                    isLoading={isLoadingWithIdProp}
                     vm={vm}
                     {...componentProps}
                 />
@@ -117,7 +123,7 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
-            fontsLoaded: state.scratchGui.fontsLoaded,
+            // fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
             projectData: state.scratchGui.projectState.projectData,
             projectId: state.scratchGui.projectState.projectId,

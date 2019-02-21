@@ -1,0 +1,50 @@
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: $z-index-loader;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $motion-primary;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.fullscreen {
+    /* Break out of the layout using position: fixed to cover the whole screen */
+    position: fixed;
+    /* Use the fullscreen stage z-index to allow covering full-screen mode */
+    z-index: $z-index-stage-wrapper-overlay;
+}
+
+.block-animation {
+    width: 125px;
+    height: 150px;
+    margin: 50px auto 0px;
+}
+
+.block-animation img {
+    display: block;
+    position: relative;
+    height: 30%;
+    margin-top: -4px;
+}
+
+.top-block,
+.middle-block,
+.bottom-block {
+    visibility: hidden;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.75rem 0;
+}

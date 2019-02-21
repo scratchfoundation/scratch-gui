@@ -53,7 +53,14 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initPlayer,
                     initTelemetryModal
                 } = guiRedux;
-                const {ScratchPaintReducer} = require('scratch-paint');
+
+                // We can save time at this point by loading just the reducer.
+                // The rest of scratch-paint is loaded when its needed. We'll
+                // probably want a better api to handle the relationship here
+                // and in src/index.js.
+
+                // const {ScratchPaintReducer} = require('scratch-paint');
+                const ScratchPaintReducer = require('scratch-paint/src/reducers/scratch-paint-reducer').default;
 
                 let initializedGui = guiInitialState;
                 if (props.isFullScreen || props.isPlayerOnly) {

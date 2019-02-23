@@ -139,15 +139,10 @@ class Monitor extends React.Component {
         this.element = monitorElt;
     }
     handleImport () {
-        importCSV().then(rows => {
-            const numberOfColumns = rows[0].length;
-            let columnNumber = 1;
-            if (numberOfColumns > 1) {
-                const msg = this.props.intl.formatMessage(messages.columnPrompt, {numberOfColumns});
-                columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
-            }
-            const newListValue = rows.map(row => row[columnNumber - 1])
-                .filter(item => typeof item === 'string'); // CSV importer can leave undefineds
+        importCSV(numberOfColumns => {
+            const msg = this.props.intl.formatMessage(messages.columnPrompt, {numberOfColumns});
+            return prompt(msg); // eslint-disable-line no-alert
+        }).then(newListValue => {
             const {vm, targetId, id: variableId} = this.props;
             setVariableValue(vm, targetId, variableId, newListValue);
         });

@@ -14,6 +14,8 @@ import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
 import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
+import speech2textImage from './speech2text.png';
+import speech2textInsetImage from './speech2text-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
 
@@ -118,8 +120,8 @@ export default [
         ),
         extensionId: 'speech2text',
         collaborator: 'Google',
-        iconURL: text2speechImage,
-        insetIconURL: text2speechInsetImage,
+        iconURL: speech2textImage,
+        insetIconURL: speech2textInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Talk to your projects."

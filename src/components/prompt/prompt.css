@@ -10,6 +10,11 @@
     padding: 1.5rem 2.25rem;
 }
 
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
 .label {
     font-weight: 500;
     margin: 0 0 0.75rem;

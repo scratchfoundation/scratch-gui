@@ -78,6 +78,9 @@ class ActionMenu extends React.Component {
         return event => {
             ReactTooltip.hide();
             if (fn) fn(event);
+            // Blur the button so it does not keep focus after being clicked
+            // This prevents keyboard events from triggering the button
+            this.buttonRef.blur();
             this.setState({forceHide: true, isOpen: false}, () => {
                 setTimeout(() => this.setState({forceHide: false}));
             });
@@ -139,7 +142,7 @@ class ActionMenu extends React.Component {
                 <div className={styles.moreButtonsOuter}>
                     <div className={styles.moreButtons}>
                         {(moreButtons || []).map(({img, title, onClick: handleClick,
-                            fileAccept, fileChange, fileInput}, keyId) => {
+                            fileAccept, fileChange, fileInput, fileMultiple}, keyId) => {
                             const isComingSoon = !handleClick;
                             const hasFileInput = fileInput;
                             const tooltipId = `${this.mainTooltipId}-${title}`;
@@ -163,6 +166,7 @@ class ActionMenu extends React.Component {
                                             <input
                                                 accept={fileAccept}
                                                 className={styles.fileInput}
+                                                multiple={fileMultiple}
                                                 ref={fileInput}
                                                 type="file"
                                                 onChange={fileChange}
@@ -195,7 +199,8 @@ ActionMenu.propTypes = {
         onClick: PropTypes.func, // Optional, "coming soon" if no callback provided
         fileAccept: PropTypes.string, // Optional, only for file upload
         fileChange: PropTypes.func, // Optional, only for file upload
-        fileInput: PropTypes.func // Optional, only for file upload
+        fileInput: PropTypes.func, // Optional, only for file upload
+        fileMultiple: PropTypes.bool // Optional, only for file upload
     })),
     onClick: PropTypes.func.isRequired,
     title: PropTypes.node.isRequired,

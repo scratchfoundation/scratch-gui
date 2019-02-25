@@ -19,6 +19,7 @@ const setVariableValue = (vm, targetId, variableId, value) => {
 };
 
 export {
+    getVariable,
     getVariableValue,
     setVariableValue
 };

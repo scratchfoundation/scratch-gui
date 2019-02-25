@@ -4,16 +4,22 @@ import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 
+import {setProjectUnchanged} from '../reducers/project-changed';
 import {
     LoadingStates,
-    defaultProjectId,
+    getIsCreatingNew,
     getIsFetchingWithId,
+    getIsLoading,
+    getIsShowingProject,
     onFetchedProjectData,
     projectError,
     setProjectId
 } from '../reducers/project-state';
+import {
+    activateTab,
+    BLOCKS_TAB_INDEX
+} from '../reducers/editor-tab';
 
-import analytics from './analytics';
 import log from './log';
 import storage from './storage';
 
@@ -54,6 +60,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             if (this.props.isFetchingWithId && !prevProps.isFetchingWithId) {
                 this.fetchProject(this.props.reduxProjectId, this.props.loadingState);
             }
+            if (this.props.isShowingProject && !prevProps.isShowingProject) {
+                this.props.onProjectUnchanged();
+            }
+            if (this.props.isShowingProject && (prevProps.isLoadingProject || prevProps.isCreatingNew)) {
+                this.props.onActivateTab(BLOCKS_TAB_INDEX);
+            }
         }
         fetchProject (projectId, loadingState) {
             return storage
@@ -61,17 +73,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .then(projectAsset => {
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
-                    }
-                })
-                .then(() => {
-                    if (projectId !== defaultProjectId) {
-                        // if not default project, register a project load event
-                        analytics.event({
-                            category: 'project',
-                            action: 'Load Project',
-                            label: projectId,
-                            nonInteraction: true
-                        });
+                    } else {
+                        // Treat failure to load as an error
+                        // Throw to be caught by catch later on
+                        throw new Error('Could not find project');
                     }
                 })
                 .catch(err => {
@@ -84,9 +89,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 assetHost,
                 intl,
+                isLoadingProject: isLoadingProjectProp,
                 loadingState,
+                onActivateTab,
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
+                onProjectUnchanged,
                 projectHost,
                 projectId,
                 reduxProjectId,
@@ -108,9 +116,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         canSave: PropTypes.bool,
         intl: intlShape.isRequired,
         isFetchingWithId: PropTypes.bool,
+        isLoadingProject: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        onActivateTab: PropTypes.func,
         onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
+        onProjectUnchanged: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -122,15 +133,20 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     };
 
     const mapStateToProps = state => ({
+        isCreatingNew: getIsCreatingNew(state.scratchGui.projectState.loadingState),
         isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectState.loadingState),
+        isLoadingProject: getIsLoading(state.scratchGui.projectState.loadingState),
+        isShowingProject: getIsShowingProject(state.scratchGui.projectState.loadingState),
         loadingState: state.scratchGui.projectState.loadingState,
         reduxProjectId: state.scratchGui.projectState.projectId
     });
     const mapDispatchToProps = dispatch => ({
+        onActivateTab: tab => dispatch(activateTab(tab)),
         onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
-        setProjectId: projectId => dispatch(setProjectId(projectId))
+        setProjectId: projectId => dispatch(setProjectId(projectId)),
+        onProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

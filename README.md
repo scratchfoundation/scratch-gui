@@ -13,7 +13,7 @@ npm install https://github.com/LLK/scratch-gui.git
 ```
 If you want to edit/play yourself:
 ```bash
-git clone git@github.com:LLK/scratch-gui.git
+git clone https://github.com/LLK/scratch-gui.git
 cd scratch-gui
 npm install
 ```

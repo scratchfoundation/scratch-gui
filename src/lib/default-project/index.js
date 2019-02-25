@@ -1,4 +1,3 @@
-import {TextEncoder} from 'text-encoding';
 import projectData from './project-data';
 
 /* eslint-disable import/no-unresolved */
@@ -9,8 +8,16 @@ import costume1 from '!raw-loader!./09dc888b0b7df19f70d81588ae73420e.svg';
 import costume2 from '!raw-loader!./3696356a03a8d938318876a593572843.svg';
 /* eslint-enable import/no-unresolved */
 
-const encoder = new TextEncoder();
 const defaultProject = translator => {
+    let _TextEncoder;
+    if (typeof TextEncoder === 'undefined') {
+        _TextEncoder = require('text-encoding').TextEncoder;
+    } else {
+        /* global TextEncoder */
+        _TextEncoder = TextEncoder;
+    }
+    const encoder = new _TextEncoder();
+
     const projectJson = projectData(translator);
     return [{
         id: 0,

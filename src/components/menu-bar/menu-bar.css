@@ -45,6 +45,10 @@
     vertical-align: middle;
 }
 
+.scratch-logo.clickable {
+    cursor: pointer;
+}
+
 .language-icon {
     height:  1.5rem;
     vertical-align: middle;
@@ -194,19 +198,6 @@
 
 .disabled {
     opacity: 0.5;
-}
-
-.save-in-progress {
-  animation: hue-rotate 3s linear infinite;
-}
-
-@keyframes hue-rotate {
-  from {
-    filter: hue-rotate();
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
 }
 
 .mystuff > a {

@@ -1,4 +1,3 @@
-import bindAll from 'lodash.bindall';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,54 +10,21 @@ import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 import wifiConnectionIconURL from './internet-connection.svg';
 
-class LibraryItem extends React.PureComponent {
-    constructor (props) {
-        super(props);
-        bindAll(this, [
-            'handleBlur',
-            'handleClick',
-            'handleFocus',
-            'handleKeyPress',
-            'handleMouseEnter',
-            'handleMouseLeave'
-        ]);
-    }
-    handleBlur () {
-        this.props.onBlur(this.props.id);
-    }
-    handleFocus () {
-        this.props.onFocus(this.props.id);
-    }
-    handleClick (e) {
-        if (!this.props.disabled) {
-            this.props.onSelect(this.props.id);
-        }
-        e.preventDefault();
-    }
-    handleKeyPress (e) {
-        if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            this.props.onSelect(this.props.id);
-        }
-    }
-    handleMouseEnter () {
-        this.props.onMouseEnter(this.props.id);
-    }
-    handleMouseLeave () {
-        this.props.onMouseLeave(this.props.id);
-    }
+/* eslint-disable react/prefer-stateless-function */
+class LibraryItemComponent extends React.PureComponent {
     render () {
         return this.props.featured ? (
             <div
                 className={classNames(
-                        styles.libraryItem,
-                        styles.featuredItem,
-                        {
-                            [styles.disabled]: this.props.disabled
-                        },
-                        this.props.extensionId ? styles.libraryItemExtension : null
+                    styles.libraryItem,
+                    styles.featuredItem,
+                    {
+                        [styles.disabled]: this.props.disabled
+                    },
+                    this.props.extensionId ? styles.libraryItemExtension : null,
+                    this.props.hidden ? styles.hidden : null
                 )}
-                onClick={this.handleClick}
+                onClick={this.props.onClick}
             >
                 <div className={styles.featuredImageContainer}>
                     {this.props.disabled ? (
@@ -142,15 +108,18 @@ class LibraryItem extends React.PureComponent {
             </div>
         ) : (
             <Box
-                className={styles.libraryItem}
+                className={classNames(
+                    styles.libraryItem,
+                    this.props.hidden ? styles.hidden : null
+                )}
                 role="button"
                 tabIndex="0"
-                onBlur={this.handleBlur}
-                onClick={this.handleClick}
-                onFocus={this.handleFocus}
-                onKeyPress={this.handleKeyPress}
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
+                onBlur={this.props.onBlur}
+                onClick={this.props.onClick}
+                onFocus={this.props.onFocus}
+                onKeyPress={this.props.onKeyPress}
+                onMouseEnter={this.props.onMouseEnter}
+                onMouseLeave={this.props.onMouseLeave}
             >
                 {/* Layers of wrapping is to prevent layout thrashing on animation */}
                 <Box className={styles.libraryItemImageContainerWrapper}>
@@ -166,8 +135,10 @@ class LibraryItem extends React.PureComponent {
         );
     }
 }
+/* eslint-enable react/prefer-stateless-function */
 
-LibraryItem.propTypes = {
+
+LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
     description: PropTypes.oneOfType([
@@ -177,24 +148,25 @@ LibraryItem.propTypes = {
     disabled: PropTypes.bool,
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
-    iconURL: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    hidden: PropTypes.bool,
+    iconURL: PropTypes.string,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
-    ]).isRequired,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
+    ]),
+    onBlur: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    wifiConnectionRequired: PropTypes.bool,
+    wifiConnectionRequired: PropTypes.bool
 };
 
-LibraryItem.defaultProps = {
+LibraryItemComponent.defaultProps = {
     disabled: false
 };
 
-export default LibraryItem;
+export default LibraryItemComponent;

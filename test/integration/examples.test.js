@@ -4,13 +4,15 @@ import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
+    findByText,
     clickButton,
     clickText,
     clickXpath,
     findByXpath,
     getDriver,
     getLogs,
-    loadUri
+    loadUri,
+    waitUntilGone
 } = new SeleniumHelper();
 
 let driver;
@@ -29,7 +31,7 @@ describe('player example', () => {
     test('Load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await waitUntilGone(findByText('Loading'));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
@@ -40,9 +42,9 @@ describe('player example', () => {
             .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
                 .filter(m => m.method === 'Network.requestWillBeSent')
                 .map(m => m.params.request.url)
-                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+                .filter(url => url === 'https://projects.scratch.mit.edu/96708228')
             );
-        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/96708228']);
     });
 });
 
@@ -71,9 +73,9 @@ describe('blocks example', () => {
             .then(pLogs => pLogs.map(log => JSON.parse(log.message).message)
                 .filter(m => m.method === 'Network.requestWillBeSent')
                 .map(m => m.params.request.url)
-                .filter(url => url === 'https://projects.scratch.mit.edu/internalapi/project/96708228/get/')
+                .filter(url => url === 'https://projects.scratch.mit.edu/96708228')
             );
-        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/internalapi/project/96708228/get/']);
+        await expect(projectRequests).toEqual(['https://projects.scratch.mit.edu/96708228']);
     });
 
     test('Change categories', async () => {

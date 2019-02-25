@@ -28,6 +28,9 @@ describe('CloudManagerHOC', () => {
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.SHOWING_WITH_ID
+                },
+                mode: {
+                    hasEverEnteredEditor: false
                 }
             }
         });
@@ -36,28 +39,40 @@ describe('CloudManagerHOC', () => {
                 projectState: {
                     projectId: '1234',
                     loadingState: LoadingState.LOADING_WITH_ID
+                },
+                mode: {
+                    hasEverEnteredEditor: false
                 }
             }
         });
         vm = new VM();
         vm.setCloudProvider = jest.fn();
+        vm.runtime = {
+            hasCloudData: jest.fn(() => true)
+        };
         CloudProvider.mockClear();
         mockCloudProviderInstance.requestCloseConnection.mockClear();
     });
     test('when it mounts, the cloud provider is set on the vm', () => {
         const Component = () => (<div />);
         const WrappedComponent = cloudManagerHOC(Component);
+        const onShowCloudInfo = jest.fn();
+
         mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
                 vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
             />
         );
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
     });
 
     test('when cloudHost is missing, the cloud provider is not set on the vm', () => {
@@ -65,6 +80,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 store={store}
                 username="user"
                 vm={vm}
@@ -81,6 +98,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 vm={vm}
@@ -96,6 +115,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -106,17 +127,46 @@ describe('CloudManagerHOC', () => {
         expect(CloudProvider).not.toHaveBeenCalled();
     });
 
-    test('if the isShowingWithId prop becomes true, it sets the cloud provider on the vm', () => {
+    test('when hasCloudPermission is false, the cloud provider is not set on the vm', () => {
         const Component = () => <div />;
         const WrappedComponent = cloudManagerHOC(Component);
-        const mounted = mount(
+        mount(
             <WrappedComponent
+                canSave
                 cloudHost="nonEmpty"
-                store={stillLoadingStore}
+                hasCloudPermission={false}
+                store={store}
                 username="user"
                 vm={vm}
             />
         );
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+    });
+
+    test('if the isShowingWithId prop becomes true, it sets the cloud provider on the vm', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const onShowCloudInfo = jest.fn();
+        vm.runtime.hasCloudData = jest.fn(() => false);
+
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                hasCloudPermission
+                cloudHost="nonEmpty"
+                store={stillLoadingStore}
+                username="user"
+                vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
+            />
+        );
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
+
+        vm.runtime.hasCloudData = jest.fn(() => true);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', true);
+
         mounted.setProps({
             isShowingWithId: true,
             loadingState: LoadingState.SHOWING_WITH_ID
@@ -124,6 +174,7 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider.mock.calls.length).toBe(1);
         expect(CloudProvider).toHaveBeenCalledTimes(1);
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
     });
 
     test('projectId change should not trigger cloudProvider connection unless isShowingWithId becomes true', () => {
@@ -131,6 +182,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={stillLoadingStore}
                 username="user"
@@ -151,11 +204,13 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
     });
 
-    test('when it unmounts, the cloud provider is set on the vm', () => {
+    test('when it unmounts, the cloud provider is reset to null on the vm', () => {
         const Component = () => (<div />);
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -180,6 +235,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -205,6 +262,8 @@ describe('CloudManagerHOC', () => {
         const WrappedComponent = cloudManagerHOC(Component);
         const mounted = mount(
             <WrappedComponent
+                canSave
+                hasCloudPermission
                 cloudHost="nonEmpty"
                 store={store}
                 username="user"
@@ -223,5 +282,138 @@ describe('CloudManagerHOC', () => {
         expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
         expect(requestCloseConnection).toHaveBeenCalledTimes(1);
 
+    });
+
+    test('project without cloud data should not trigger cloud connection', () => {
+        // Mock the vm runtime function so that has cloud data is not
+        // initially true
+        vm.runtime.hasCloudData = jest.fn(() => false);
+
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                canSave
+                hasCloudPermission
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+    });
+
+    test('projectHasCloudData becoming true should trigger a cloud connection', () => {
+        // Mock the vm runtime function so that has cloud data is not
+        // initially true
+        vm.runtime.hasCloudData = jest.fn(() => false);
+        const onShowCloudInfo = jest.fn();
+
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                canSave
+                hasCloudPermission
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+                onShowCloudInfo={onShowCloudInfo}
+            />
+        );
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+        expect(onShowCloudInfo).not.toHaveBeenCalled();
+
+        // Mock VM hasCloudData becoming true and emitting an update
+        vm.runtime.hasCloudData = jest.fn(() => true);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', true);
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(1);
+        expect(CloudProvider).toHaveBeenCalledTimes(1);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(mockCloudProviderInstance);
+        expect(onShowCloudInfo).toHaveBeenCalled();
+    });
+
+    test('projectHasCloudDataUpdate becoming false should trigger cloudProvider disconnection', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        mount(
+            <WrappedComponent
+                canSave
+                hasCloudPermission
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        vm.runtime.hasCloudData = jest.fn(() => false);
+        vm.emit('HAS_CLOUD_DATA_UPDATE', false);
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+    });
+
+    // Editor Mode Connection/Disconnection Tests
+    test('Entering editor mode and can\'t save project should disconnect cloud provider # 1', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                canSave
+                hasCloudPermission
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        mounted.setProps({
+            canSave: false,
+            hasEverEnteredEditor: true
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
+    });
+
+    test('Entering editor mode and can\'t save project should disconnect cloud provider # 2', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        const mounted = mount(
+            <WrappedComponent
+                hasCloudPermission
+                canSave={false}
+                cloudHost="nonEmpty"
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(CloudProvider).toHaveBeenCalled();
+        const requestCloseConnection = mockCloudProviderInstance.requestCloseConnection;
+
+        mounted.setProps({
+            hasEverEnteredEditor: true
+        });
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(2);
+        expect(vm.setCloudProvider).toHaveBeenCalledWith(null);
+        expect(requestCloseConnection).toHaveBeenCalledTimes(1);
     });
 });

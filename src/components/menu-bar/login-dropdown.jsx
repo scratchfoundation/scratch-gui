@@ -35,6 +35,11 @@ const LoginDropdownMessages = defineMessages({ // eslint-disable-line no-unused-
         defaultMessage: 'Need Help?',
         description: 'Button text for user to indicate that they need help',
         id: 'login.needHelp'
+    },
+    validationRequired: {
+        defaultMessage: 'This field is required',
+        description: 'Message to tell user they must enter text in a form field',
+        id: 'form.validationRequired'
     }
 });
 

@@ -1,4 +1,5 @@
 import log from './log.js';
+import throttle from 'lodash.throttle';
 
 
 class CloudProvider {
@@ -20,7 +21,15 @@ class CloudProvider {
 
         this.connectionAttempts = 0;
 
+        // A queue of messages to send which were received before the
+        // connection was ready
+        this.queuedData = [];
+
         this.openConnection();
+
+        // Send a message to the cloud server at a rate of no more
+        // than 10 messages/sec.
+        this.sendCloudData = throttle(this._sendCloudData, 100);
     }
 
     /**
@@ -51,7 +60,6 @@ class CloudProvider {
 
     onMessage (event) {
         const messageString = event.data;
-        log.info(`Received websocket message: ${messageString}`);
         // Multiple commands can be received, newline separated
         messageString.split('\n').forEach(message => {
             if (message) { // .split can also contain '' in the array it returns
@@ -67,6 +75,14 @@ class CloudProvider {
         this.connectionAttempts = 1;
         this.writeToServer('handshake');
         log.info(`Successfully connected to clouddata server.`);
+
+        // Go through the queued data and send off messages that we weren't
+        // ready to send before
+        this.queuedData.forEach(data => {
+            this.sendCloudData(data);
+        });
+        // Reset the queue
+        this.queuedData = [];
     }
 
     onClose () {
@@ -91,12 +107,6 @@ class CloudProvider {
     parseMessage (message) {
         const varData = {};
         switch (message.method) {
-        case 'ack': {
-            varData.varCreate = {
-                name: message.name
-            };
-            break;
-        }
         case 'set': {
             varData.varUpdate = {
                 name: message.name,
@@ -129,16 +139,22 @@ class CloudProvider {
         if (typeof dataValue !== 'undefined' && dataValue !== null) msg.value = dataValue;
 
         const dataToWrite = JSON.stringify(msg);
-        this.sendCloudData(dataToWrite);
+        if (this.connection && this.connection.readyState === WebSocket.OPEN) {
+            this.sendCloudData(dataToWrite);
+        } else if (msg.method === 'create' || msg.method === 'delete' || msg.method === 'rename') {
+            // Save data for sending when connection is open, iff the data
+            // is a create, rename, or  delete
+            this.queuedData.push(dataToWrite);
+        }
+
     }
 
     /**
      * Send a formatted message to the cloud data server.
      * @param {string} data The formatted message to send.
      */
-    sendCloudData (data) {
+    _sendCloudData (data) {
         this.connection.send(`${data}\n`);
-        log.info(`Sent message to clouddata server: ${data}`);
     }
 
     /**

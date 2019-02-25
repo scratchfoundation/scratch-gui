@@ -16,9 +16,7 @@ cache:
 install:
 - npm --production=false install
 - npm --production=false update
-script:
-- npm test
-- if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ] && [ "$TRAVIS_BRANCH" == "master" ]; then  npm run test:smoke; fi
+script: npm run build
 before_deploy:
 - >
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then
@@ -35,6 +33,7 @@ deploy:
     - master
     - develop
     - smoke
+    - feature/test-build-for-vernier-extension
     condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   email: $NPM_EMAIL

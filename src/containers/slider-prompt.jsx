@@ -16,8 +16,8 @@ class SliderPrompt extends React.Component {
         ]);
         this.state = {
             decimalSelected: this.props.defaultDecimal,
-            minValue: 0,
-            maxValue: 100,
+            minValue: this.props.defaultMinValue,
+            maxValue: this.props.defaultMaxValue,
             mustDecimal: this.checkMustDecimal(this.props.defaultMinValue, this.props.defaultMaxValue)
         };
     }

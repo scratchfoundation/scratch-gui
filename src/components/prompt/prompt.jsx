@@ -26,7 +26,7 @@ const messages = defineMessages({
         id: 'gui.gui.cloudVariableOption'
     },
     availableToAllSpritesMessage: {
-        defaultMessage: 'This variable will be available to all sprites.',
+        defaultMessage: 'This list will be available to all sprites.',
         description: 'A message that displays in a variable modal when the stage is selected indicating ' +
             'that the variable being created will available to all sprites.',
         id: 'gui.gui.variablePromptAllSpritesMessage'

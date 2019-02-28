@@ -10,7 +10,7 @@ let savedLocale = '';
 
 const loadSpanish = () =>
     import(/* webpackChunkName: "es-steps" */ './es-steps.js')
-        .then(({default: imageData}) => imageData);
+        .then(({esImages: imageData}) => imageData);
 
 const translations = {
     es: () => loadSpanish()

@@ -108,7 +108,10 @@ class Monitor extends React.Component {
             y: newY
         }));
     }
-    handleNextMode () {
+    handleNextMode (event) {
+        if (event && event.button !== 0) {
+            return;
+        }
         const modes = availableModes(this.props.opcode);
         const modeIndex = modes.indexOf(this.props.mode);
         const newMode = modes[(modeIndex + 1) % modes.length];

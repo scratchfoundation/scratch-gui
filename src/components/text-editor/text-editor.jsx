@@ -1,7 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { injectIntl } from "react-intl";
 import MonacoEditor from "react-monaco-editor";
+import PropTypes from "prop-types";
+import styles from "./text-editor.css";
 
 class TextEditor extends React.Component {
     constructor(props) {

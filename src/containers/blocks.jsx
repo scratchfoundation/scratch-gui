@@ -89,6 +89,13 @@ class Blocks extends React.Component {
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
+        this.ScratchBlocks.precacheTextWidths({
+            isToolbox: true,
+            ScratchBlocks: this.ScratchBlocks,
+            xml: this.props.toolboxXML,
+            root: this.blocks
+        });
+
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
@@ -199,6 +206,13 @@ class Blocks extends React.Component {
 
         const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
+
+        this.ScratchBlocks.precacheTextWidths({
+            isToolbox: true,
+            ScratchBlocks: this.ScratchBlocks,
+            xml: this.props.toolboxXML,
+            root: this.blocks
+        });
         this.workspace.updateToolbox(this.props.toolboxXML);
         this._renderedToolboxXML = this.props.toolboxXML;
 
@@ -346,6 +360,12 @@ class Blocks extends React.Component {
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
         const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
+        this.ScratchBlocks.precacheTextWidths({
+            ScratchBlocks: this.ScratchBlocks,
+            xml: data.xml,
+            dom,
+            root: this.blocks
+        });
         try {
             this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
         } catch (error) {

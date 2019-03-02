@@ -1,5 +1,7 @@
 import ScratchBlocks from 'scratch-blocks';
 
+import createBlocksTextCache from './blocks-text-cache';
+
 /**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
@@ -322,6 +324,8 @@ export default function (vm) {
     ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
         vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
     };
+
+    ScratchBlocks.precacheTextWidths = createBlocksTextCache(ScratchBlocks);
 
     return ScratchBlocks;
 }

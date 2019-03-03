@@ -7,7 +7,7 @@ import ScratchBlocks from 'scratch-blocks';
  */
 export default function (vm) {
 
-    const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
+    const jsonForMenuBlock = function (name, menuOptionsFn, colors, start, validator) {
         return {
             message0: '%1',
             args0: [
@@ -16,7 +16,8 @@ export default function (vm) {
                     name: name,
                     options: function () {
                         return start.concat(menuOptionsFn());
-                    }
+                    },
+                    validator: validator
                 }
             ],
             inputsInline: true,
@@ -207,7 +208,49 @@ export default function (vm) {
         const stage = ScratchBlocks.ScratchMsgs.translate('SENSING_OF_STAGE', 'Stage');
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             [stage, '_stage_']
-        ]);
+        ], function (choice) {
+            const input = this; // eslint-disable-line no-invalid-this
+
+            // Only update property field when object input actually changes.
+            if (choice === input.getValue()) {
+                return;
+            }
+
+            // Determine the new value to put in the property field; this is based on which object is selected, and
+            // should be equal to the first value in the dropdown that would show up when you click the field while
+            // that object is selected.
+            let newValue;
+            if (choice === '_stage_') {
+                newValue = 'backdrop #';
+            } else {
+                newValue = 'x position';
+            }
+
+            const oldBlock = input.sourceBlock_.parentBlock_;
+            const ws = oldBlock.workspace;
+
+            // Since this is a validator function, the value of the object input won't actually be set yet.
+            // We need to set it before we get the XML of the original block; otherwise the XML (and hence the new
+            // block) will have the old object value selected.
+            input.setValue(choice);
+
+            // Get the XML of the original block, then tweak the returned PROPERTY field so that it has the intended
+            // new value. Then generate the new block.
+            const xml = ScratchBlocks.Xml.blockToDom(oldBlock);
+            const field = xml.querySelector('field[name=PROPERTY]');
+            field.removeChild(field.firstChild);
+            field.appendChild(document.createTextNode(newValue));
+            const newBlock = ScratchBlocks.Xml.domToBlock(xml, ws);
+
+            // Restore the new block to its original output connection or position, then discard the original block.
+            if (oldBlock.outputConnection.targetConnection) {
+                newBlock.outputConnection.connect(oldBlock.outputConnection.targetConnection);
+            } else {
+                const xy = oldBlock.getRelativeToSurfaceXY();
+                newBlock.moveBy(xy.x, xy.y);
+            }
+            oldBlock.dispose();
+        });
         this.jsonInit(json);
     };
 

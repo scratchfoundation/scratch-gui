@@ -43,7 +43,9 @@ class RecordModal extends React.Component {
         this.setState({recording: true});
     }
     handleStopRecording (samples, sampleRate, levels, trimStart, trimEnd) {
-        this.setState({samples, sampleRate, levels, trimStart, trimEnd, recording: false});
+        if (samples.length > 0) {
+            this.setState({samples, sampleRate, levels, trimStart, trimEnd, recording: false});
+        }
     }
     handlePlay () {
         this.setState({playing: true});

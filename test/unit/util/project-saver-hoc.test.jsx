@@ -439,4 +439,27 @@ describe('projectSaverHOC', () => {
         });
         expect(mockedOnRemixing).toHaveBeenCalledWith(false);
     });
+
+    test('uses onSetProjectThumbnailer on mount/unmount', () => {
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const setThumb = jest.fn();
+        const mounted = mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+                onSetProjectThumbnailer={setThumb}
+            />
+        );
+        // Set project thumbnailer should be called on mount
+        expect(setThumb).toHaveBeenCalledTimes(1);
+
+        // And it should not pass that function on to wrapped element
+        expect(mounted.find(Component).props().onSetProjectThumbnailer).toBeUndefined();
+
+        // Unmounting should call it again with null
+        mounted.unmount();
+        expect(setThumb).toHaveBeenCalledTimes(2);
+        expect(setThumb.mock.calls[1][0]).toBe(null);
+    });
 });

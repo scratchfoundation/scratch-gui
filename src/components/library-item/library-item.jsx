@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 
+/* eslint-disable react/prefer-stateless-function */
 class LibraryItemComponent extends React.PureComponent {
     render () {
         return this.props.featured ? (
@@ -132,6 +133,8 @@ class LibraryItemComponent extends React.PureComponent {
         );
     }
 }
+/* eslint-enable react/prefer-stateless-function */
+
 
 LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
@@ -151,12 +154,12 @@ LibraryItemComponent.propTypes = {
         PropTypes.string,
         PropTypes.node
     ]),
-    onBlur: PropTypes.func,
-    onClick: PropTypes.func,
-    onFocus: PropTypes.func,
-    onKeyPress: PropTypes.func,
-    onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func
+    onBlur: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired
 };
 
 LibraryItemComponent.defaultProps = {

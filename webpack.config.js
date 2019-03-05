@@ -22,7 +22,8 @@ const base = {
     },
     output: {
         library: 'GUI',
-        filename: '[name].js'
+        filename: '[name].js',
+        chunkFilename: 'chunks/[name].js'
     },
     externals: {
         React: 'react',
@@ -189,7 +190,8 @@ module.exports = [
             },
             output: {
                 libraryTarget: 'umd',
-                path: path.resolve('dist')
+                path: path.resolve('dist'),
+                publicPath: '/static/'
             },
             externals: {
                 React: 'react',

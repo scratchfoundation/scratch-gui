@@ -8,6 +8,7 @@
     justify-content: flex-start;
     flex-basis: 160px;
     height: 160px;
+    max-width: 160px;
     margin: $space;
     padding: 1rem 1rem 0 1rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

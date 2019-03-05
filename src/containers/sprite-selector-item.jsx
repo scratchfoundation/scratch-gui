@@ -14,7 +14,7 @@ import SpriteSelectorItemComponent from '../components/sprite-selector-item/spri
 
 const dragThreshold = 3; // Same as the block drag threshold
 
-class SpriteSelectorItem extends React.Component {
+class SpriteSelectorItem extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -29,19 +29,6 @@ class SpriteSelectorItem extends React.Component {
             'handleMouseMove',
             'handleMouseUp'
         ]);
-
-        // Asset ID of the current decoded costume
-        this.decodedAssetId = null;
-    }
-    shouldComponentUpdate (nextProps) {
-        // Ignore dragPayload due to https://github.com/LLK/scratch-gui/issues/3172.
-        // This function should be removed once the issue is fixed.
-        for (const property in nextProps) {
-            if (property !== 'dragPayload' && this.props[property] !== nextProps[property]) {
-                return true;
-            }
-        }
-        return false;
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;
@@ -153,10 +140,7 @@ SpriteSelectorItem.propTypes = {
     asset: PropTypes.instanceOf(storage.Asset),
     costumeURL: PropTypes.string,
     dispatchSetHoveredSprite: PropTypes.func.isRequired,
-    dragPayload: PropTypes.shape({
-        name: PropTypes.string,
-        body: PropTypes.string
-    }),
+    dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     dragType: PropTypes.string,
     dragging: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

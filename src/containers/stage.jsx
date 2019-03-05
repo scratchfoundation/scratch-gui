@@ -320,7 +320,6 @@ class Stage extends React.Component {
         if (this.state.dragId) return;
         const drawableId = this.renderer.pick(x, y);
         if (drawableId === null) return;
-        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
@@ -331,6 +330,9 @@ class Stage extends React.Component {
 
         // Dragging always brings the target to the front
         target.goToFront();
+
+        // Extract the drawable art
+        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
 
         this.props.vm.startDrag(targetId);
         this.setState({

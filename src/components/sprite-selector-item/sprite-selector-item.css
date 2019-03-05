@@ -18,7 +18,6 @@
 
     text-align: center;
     cursor: pointer;
-    transition: 0.25s ease-out;
 
     user-select: none;
     touch-action: none;
@@ -39,8 +38,24 @@
     filter: drop-shadow(0px 0px 2px  $ui-black-transparent);
 }
 
+/* Outer/Inner chicanery is to prevent layouts when sprite image changes */
+.sprite-image-outer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0);
+}
+
+.sprite-image-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sprite-image {
-    margin: auto;
     user-select: none;
     pointer-events: none;
     max-width: 32px;

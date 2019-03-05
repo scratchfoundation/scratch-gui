@@ -56,7 +56,7 @@ $fade-out-distance: 100px;
 
 .list-item {
     width: 5rem;
-    min-height: 5rem;
+    height: 5rem;
     margin: 0.5rem auto;
 }
 
@@ -72,6 +72,6 @@ $fade-out-distance: 100px;
 
 
 .list-item.placeholder {
-    background: black;
+    background: white;
     filter: opacity(15%) brightness(0%);
 }

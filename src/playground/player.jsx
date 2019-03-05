@@ -21,11 +21,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 import styles from './player.css';
 
 const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
-    <Box
-        className={classNames({
-            [styles.stageOnly]: isPlayerOnly
-        })}
-    >
+    <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
         <GUI
             enableCommunity

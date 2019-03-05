@@ -1,6 +1,6 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
 
@@ -8,9 +8,9 @@ import {
     openSpriteLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
-
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
+import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
@@ -21,6 +21,7 @@ import {emptySprite} from '../lib/empty-assets';
 import {highlightTarget} from '../reducers/targets';
 import {fetchSprite, fetchCode} from '../lib/backpack-api';
 import randomizeSpritePosition from '../lib/randomize-sprite-position';
+import downloadBlob from '../lib/download-blob';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -94,20 +95,7 @@ class TargetPane extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.vm.exportSprite(id).then(content => {
-            const filename = `${spriteName}.sprite3`;
-
-            // Use special ms version if available to get it working on Edge.
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(content, filename);
-                return;
-            }
-
-            const url = window.URL.createObjectURL(content);
-            saveLink.href = url;
-            saveLink.download = filename;
-            saveLink.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(saveLink);
+            downloadBlob(`${spriteName}.sprite3`, content);
         });
     }
     handleSelectSprite (id) {
@@ -139,7 +127,7 @@ class TargetPane extends React.Component {
         this.props.onActivateTab(BLOCKS_TAB_INDEX);
     }
     handleNewSprite (spriteJSONString) {
-        this.props.vm.addSprite(spriteJSONString)
+        return this.props.vm.addSprite(spriteJSONString)
             .then(this.handleActivateBlocksTab);
     }
     handleFileUploadClick () {
@@ -147,10 +135,16 @@ class TargetPane extends React.Component {
     }
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        const costumeSuffix = this.props.intl.formatMessage(sharedMessages.costume, {index: 1});
-        handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite, costumeSuffix);
-        });
+        this.props.onShowImporting();
+        handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
+            spriteUpload(buffer, fileType, fileName, storage, newSprite => {
+                this.handleNewSprite(newSprite).then(() => {
+                    if (fileIndex === fileCount - 1) {
+                        this.props.onCloseImporting();
+                    }
+                });
+            }, this.props.onCloseImporting);
+        }, this.props.onCloseImporting);
     }
     setFileInput (input) {
         this.fileInput = input;
@@ -209,6 +203,8 @@ class TargetPane extends React.Component {
             onReceivedBlocks, // eslint-disable-line no-unused-vars
             onHighlightTarget, // eslint-disable-line no-unused-vars
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
+            onShowImporting, // eslint-disable-line no-unused-vars
+            onCloseImporting, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
         return (
@@ -245,25 +241,20 @@ const {
 
 TargetPane.propTypes = {
     intl: intlShape.isRequired,
+    onCloseImporting: PropTypes.func,
+    onShowImporting: PropTypes.func,
     ...targetPaneProps
 };
 
 const mapStateToProps = state => ({
     editingTarget: state.scratchGui.targets.editingTarget,
     hoveredTarget: state.scratchGui.hoveredTarget,
-    sprites: Object.keys(state.scratchGui.targets.sprites).reduce((sprites, k) => {
-        let {direction, size, x, y, ...sprite} = state.scratchGui.targets.sprites[k];
-        if (typeof direction !== 'undefined') direction = Math.round(direction);
-        if (typeof x !== 'undefined') x = Math.round(x);
-        if (typeof y !== 'undefined') y = Math.round(y);
-        if (typeof size !== 'undefined') size = Math.round(size);
-        sprites[k] = {...sprite, direction, size, x, y};
-        return sprites;
-    }, {}),
+    sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     raiseSprites: state.scratchGui.blockDrag,
     spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
 });
+
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: e => {
         e.preventDefault();
@@ -283,7 +274,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onHighlightTarget: id => {
         dispatch(highlightTarget(id));
-    }
+    },
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
 export default injectIntl(connect(

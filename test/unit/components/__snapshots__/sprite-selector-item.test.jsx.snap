@@ -14,27 +14,23 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
   onTouchStart={[Function]}
 >
   <div
-    aria-label="Close"
-    className=""
-    onClick={[Function]}
-    role="button"
-    tabIndex="0"
-  >
-    <img
-      className=""
-      src="test-file-stub"
-    />
-  </div>
-  <div
     className={undefined}
   >
     5
   </div>
-  <img
+  <div
     className={undefined}
-    draggable={false}
-    src="https://scratch.mit.edu/foo/bar/pony"
-  />
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
   <div
     className={undefined}
   >
@@ -48,6 +44,18 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
     >
       480 x 360
     </div>
+  </div>
+  <div
+    aria-label="Close"
+    className=""
+    onClick={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <img
+      className=""
+      src="test-file-stub"
+    />
   </div>
   <nav
     className="react-contextmenu"
@@ -96,6 +104,28 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   onTouchStart={[Function]}
 >
   <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      Pony sprite
+    </div>
+  </div>
+  <div
     aria-label="Close"
     className=""
     onClick={[Function]}
@@ -106,20 +136,6 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
       className=""
       src="test-file-stub"
     />
-  </div>
-  <img
-    className={undefined}
-    draggable={false}
-    src="https://scratch.mit.edu/foo/bar/pony"
-  />
-  <div
-    className={undefined}
-  >
-    <div
-      className={undefined}
-    >
-      Pony sprite
-    </div>
   </div>
   <nav
     className="react-contextmenu"

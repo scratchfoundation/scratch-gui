@@ -61,7 +61,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 this.fetchProject(this.props.reduxProjectId, this.props.loadingState);
             }
             if (this.props.isShowingProject && !prevProps.isShowingProject) {
-                this.props.onProjectLoaded();
+                this.props.onProjectUnchanged();
             }
             if (this.props.isShowingProject && (prevProps.isLoadingProject || prevProps.isCreatingNew)) {
                 this.props.onActivateTab(BLOCKS_TAB_INDEX);
@@ -94,7 +94,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 onActivateTab,
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
-                onProjectLoaded,
+                onProjectUnchanged,
                 projectHost,
                 projectId,
                 reduxProjectId,
@@ -121,6 +121,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onActivateTab: PropTypes.func,
         onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
+        onProjectUnchanged: PropTypes.func,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -145,7 +146,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId)),
-        onProjectLoaded: () => dispatch(setProjectUnchanged())
+        onProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

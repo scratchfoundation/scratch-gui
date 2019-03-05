@@ -17,6 +17,7 @@ import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
 import makeymakeyInsetImage from './makeymakey-small.svg';
 import boostImage from './boost.png';
+import boostInsetImage from './boost-small.svg';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -239,6 +240,7 @@ export default [
         extensionId: 'boost',
         collaborator: 'LEGO',
         iconURL: boostImage,
+        insetIconURL: boostInsetImage,
         description: (
             <FormattedMessage
                 defaultMessage="Bring robotic creations to life."

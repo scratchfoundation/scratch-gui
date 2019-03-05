@@ -1,55 +1,56 @@
-import classNames from "classnames";
-import omit from "lodash.omit";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from 'classnames';
+import omit from 'lodash.omit';
+import PropTypes from 'prop-types';
+import React from 'react';
 import {
     defineMessages,
     FormattedMessage,
     injectIntl,
     intlShape
-} from "react-intl";
-import { connect } from "react-redux";
-import MediaQuery from "react-responsive";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import tabStyles from "react-tabs/style/react-tabs.css";
-import VM from "scratch-vm";
-import Renderer from "scratch-render";
+} from 'react-intl';
+import {connect} from 'react-redux';
+import MediaQuery from 'react-responsive';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import tabStyles from 'react-tabs/style/react-tabs.css';
+import VM from 'scratch-vm';
+import Renderer from 'scratch-render';
 
-import Blocks from "../../containers/blocks.jsx";
-import CostumeTab from "../../containers/costume-tab.jsx";
-import TargetPane from "../../containers/target-pane.jsx";
-import SoundTab from "../../containers/sound-tab.jsx";
-import StageWrapper from "../../containers/stage-wrapper.jsx";
-import TextTab from "../../containers/text-tab.jsx";
-import Loader from "../loader/loader.jsx";
-import Box from "../box/box.jsx";
-import MenuBar from "../menu-bar/menu-bar.jsx";
-import CostumeLibrary from "../../containers/costume-library.jsx";
-import BackdropLibrary from "../../containers/backdrop-library.jsx";
-import Watermark from "../../containers/watermark.jsx";
-import Backpack from "../../containers/backpack.jsx";
-import WebGlModal from "../../containers/webgl-modal.jsx";
-import TipsLibrary from "../../containers/tips-library.jsx";
-import Cards from "../../containers/cards.jsx";
-import Alerts from "../../containers/alerts.jsx";
-import DragLayer from "../../containers/drag-layer.jsx";
-import ConnectionModal from "../../containers/connection-modal.jsx";
-import TelemetryModal from "../telemetry-modal/telemetry-modal.jsx";
+import Blocks from '../../containers/blocks.jsx';
+import CostumeTab from '../../containers/costume-tab.jsx';
+import TargetPane from '../../containers/target-pane.jsx';
+import SoundTab from '../../containers/sound-tab.jsx';
+import StageWrapper from '../../containers/stage-wrapper.jsx';
+import TextTab from '../../containers/text-tab.jsx';
+import Loader from '../loader/loader.jsx';
+import Box from '../box/box.jsx';
+import MenuBar from '../menu-bar/menu-bar.jsx';
+import CostumeLibrary from '../../containers/costume-library.jsx';
+import BackdropLibrary from '../../containers/backdrop-library.jsx';
+import Watermark from '../../containers/watermark.jsx';
+import Backpack from '../../containers/backpack.jsx';
+import WebGlModal from '../../containers/webgl-modal.jsx';
+import TipsLibrary from '../../containers/tips-library.jsx';
+import Cards from '../../containers/cards.jsx';
+import Alerts from '../../containers/alerts.jsx';
+import DragLayer from '../../containers/drag-layer.jsx';
+import ConnectionModal from '../../containers/connection-modal.jsx';
+import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
-import layout, { STAGE_SIZE_MODES } from "../../lib/layout-constants";
-import { resolveStageSize } from "../../lib/screen-utils";
+import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import {resolveStageSize} from '../../lib/screen-utils';
 
-import styles from "./gui.css";
-import addExtensionIcon from "./icon--extensions.svg";
-import codeIcon from "./icon--code.svg";
-import costumesIcon from "./icon--costumes.svg";
-import soundsIcon from "./icon--sounds.svg";
+import styles from './gui.css';
+import addExtensionIcon from './icon--extensions.svg';
+import codeIcon from './icon--code.svg';
+import costumesIcon from './icon--costumes.svg';
+import soundsIcon from './icon--sounds.svg';
+import textIcon from './icon--text.svg';
 
 const messages = defineMessages({
     addExtension: {
-        id: "gui.gui.addExtension",
-        description: "Button to add an extension in the target pane",
-        defaultMessage: "Add Extension"
+        id: 'gui.gui.addExtension',
+        description: 'Button to add an extension in the target pane',
+        defaultMessage: 'Add Extension'
     }
 });
 
@@ -119,12 +120,12 @@ const GUIComponent = props => {
         tipsLibraryVisible,
         vm,
         ...componentProps
-    } = omit(props, "dispatch");
+    } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
 
-    const handleTextTabActivate = function() {
+    const handleTextTabActivate = () => {
         onActivateTextTab();
         vm.refreshWorkspace();
     };
@@ -169,7 +170,7 @@ const GUIComponent = props => {
                 ) : (
                     <Box
                         className={styles.pageWrapper}
-                        dir={isRtl ? "rtl" : "ltr"}
+                        dir={isRtl ? 'rtl' : 'ltr'}
                         {...componentProps}
                     >
                         {telemetryModalVisible ? (
@@ -300,10 +301,12 @@ const GUIComponent = props => {
                                             </Tab>
                                             <Tab
                                                 className={tabClassNames.tab}
-                                                onClick={() =>
-                                                    handleTextTabActivate()
-                                                }
+                                                onClick={handleTextTabActivate}
                                             >
+                                                <img
+                                                    draggable={false}
+                                                    src={textIcon}
+                                                />
                                                 <FormattedMessage
                                                     defaultMessage="Text"
                                                     description="Button to get to text version of project"
@@ -476,7 +479,7 @@ GUIComponent.propTypes = {
 GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
-    basePath: "./",
+    basePath: './',
     canCreateNew: false,
     canEditTitle: false,
     canRemix: false,

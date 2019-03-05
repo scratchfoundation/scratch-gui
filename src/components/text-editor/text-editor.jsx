@@ -1,28 +1,28 @@
-import React from "react";
-import { injectIntl } from "react-intl";
-import MonacoEditor from "react-monaco-editor";
-import PropTypes from "prop-types";
-import styles from "./text-editor.css";
+import React from 'react';
+import {injectIntl} from 'react-intl';
+import MonacoEditor from 'react-monaco-editor';
+import PropTypes from 'prop-types';
+import styles from './text-editor.css';
 
 class TextEditor extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             blocks: null
         };
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate (prevProps) {
         if (this.props.blocks !== prevProps.blocks) {
-            this.setState({ blocks: this.props.blocks });
+            this.setState({blocks: this.props.blocks});
         }
     }
 
-    displayBlocks(blocks) {
+    displayBlocks (blocks) {
         if (blocks && blocks.length > 0) {
             blocks.forEach(block => {
-                if (block.type === "motion_movesteps") {
-                    let value = "nothing";
+                if (block.type === 'motion_movesteps') {
+                    let value = 'nothing';
                     block.values.forEach(blockValue => {
                         value = blockValue.value;
                     });
@@ -33,7 +33,7 @@ class TextEditor extends React.Component {
         return blocks;
     }
 
-    render() {
+    render () {
         return (
             <MonacoEditor
                 height="600"

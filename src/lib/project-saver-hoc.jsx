@@ -318,7 +318,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * Report a telemetry event.
          * @param {string} event - one of `projectWasCreated`, `projectDidLoad`, `projectDidSave`, `projectWasUploaded`
          */
-        //TODO make a telemetry HOC and move this stuff there
+        // TODO make a telemetry HOC and move this stuff there
         reportTelemetryEvent (event) {
             if (this.props.onProjectTelemetryEvent) {
                 const metadata = collectMetadata(this.props.vm, this.props.reduxProjectTitle, this.props.locale);

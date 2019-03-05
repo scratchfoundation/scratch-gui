@@ -48,6 +48,27 @@ const getAssetTypeForFileExtension = function (fileExtension) {
     }
 };
 
+/**
+ * Figure out an `imageSource` (URI or asset ID & type) for a library item's icon.
+ * @param {object} item - either a library item or one of a library item's costumes.
+ * @returns {object} - an `imageSource` ready to be passed to a `ScratchImage`.
+ */
+const getItemImageSource = function (item) {
+    if (item.hasOwnProperty('rawURL')) {
+        return {
+            uri: item.rawURL
+        };
+    }
+
+    // TODO: adjust libraries to be more storage-friendly; don't use split() here.
+    const md5 = item.md5 || item.baseLayerMD5;
+    const [assetId, fileExtension] = md5.split('.');
+    return {
+        assetId: assetId,
+        assetType: getAssetTypeForFileExtension(fileExtension)
+    };
+};
+
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
@@ -184,15 +205,8 @@ class LibraryComponent extends React.Component {
                     ref={this.setFilteredDataRef}
                 >
                     {this.getFilteredData().map((dataItem, index) => {
-                        const iconSource = {};
-                        if (dataItem.hasOwnProperty('rawURL')) {
-                            iconSource.uri = dataItem.rawURL;
-                        } else {
-                            // TODO: adjust libraries to be more storage-friendly; don't use split() here.
-                            const [assetId, fileExtension] = dataItem.md5.split('.');
-                            iconSource.assetId = assetId;
-                            iconSource.assetType = getAssetTypeForFileExtension(fileExtension);
-                        }
+                        const iconSource = getItemImageSource(dataItem);
+                        const icons = dataItem.json && dataItem.json.costumes.map(getItemImageSource);
                         return (<LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
@@ -202,7 +216,7 @@ class LibraryComponent extends React.Component {
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
                             iconSource={iconSource}
-                            icons={dataItem.json && dataItem.json.costumes}
+                            icons={icons}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}

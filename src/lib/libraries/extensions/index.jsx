@@ -244,7 +244,7 @@ export default [
         description: (
             <FormattedMessage
                 defaultMessage="Bring robotic creations to life."
-                description="Description for the 'Music' extension"
+                description="Description for the 'LEGO BOOST' extension"
                 id="gui.extension.boost.description"
             />
         ),

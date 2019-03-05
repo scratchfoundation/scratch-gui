@@ -78,6 +78,12 @@ class LibraryItemComponent extends React.PureComponent {
                                                 internetConnectionIconURL
                                             }
                                         />
+                                        <img
+                                            src={this.props.bluetoothRequired ?
+                                                bluetoothIconURL :
+                                                internetConnectionIconURL
+                                            }
+                                        />
                                     </div>
                                 </div>
                             ) : null}

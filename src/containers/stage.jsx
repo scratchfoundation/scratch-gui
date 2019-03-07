@@ -112,7 +112,9 @@ class Stage extends React.Component {
     }
     startColorPickingLoop () {
         this.intervalId = setInterval(() => {
-            this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+            if (typeof this.pickX === 'number') {
+                this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+            }
         }, 30);
     }
     stopColorPickingLoop () {

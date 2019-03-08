@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {defineMessages, FormattedMessage, intlShape, injectIntl} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -24,11 +23,6 @@ const messages = defineMessages({
         defaultMessage: 'Change slider range',
         description: 'Title of slider modal',
         id: 'gui.sliderModal.title'
-    },
-    decimal: {
-        defaultMessage: 'Handle as decimal value',
-        description: 'Label of a checkbox which is checked when it should handle decimal values.',
-        id: 'gui.sliderModal.decimal'
     }
 });
 
@@ -45,12 +39,11 @@ const SliderPromptComponent = props => (
             </Box>
             <Box>
                 <input
-                    autoFocus
                     className={styles.minInput}
                     defaultValue={props.defaultMinValue}
                     name={props.intl.formatMessage(messages.minValue)}
-                    step="0.01"
-                    type="number"
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                    type="text"
                     onChange={props.onChangeMin}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
@@ -64,26 +57,12 @@ const SliderPromptComponent = props => (
                     className={styles.maxInput}
                     defaultValue={props.defaultMaxValue}
                     name={props.intl.formatMessage(messages.maxValue)}
-                    step="0.01"
-                    type="number"
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                    type="text"
                     onChange={props.onChangeMax}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
                 />
-            </Box>
-            <Box className={classNames(styles.decimalOption)}>
-                <label
-                    className={classNames({[styles.disabledLabel]: props.mustDecimal})}
-                >
-                    <input
-                        checked={props.decimalSelected || props.mustDecimal}
-                        defaultValue={props.defaultDecimal}
-                        disabled={props.mustDecimal}
-                        type="checkbox"
-                        onChange={props.onDecimalOptionChange}
-                    />
-                    {props.intl.formatMessage(messages.decimal)}
-                </label>
             </Box>
             <Box className={styles.buttonRow}>
                 <button
@@ -112,16 +91,12 @@ const SliderPromptComponent = props => (
 );
 
 SliderPromptComponent.propTypes = {
-    decimalSelected: PropTypes.bool.isRequired,
-    defaultDecimal: PropTypes.bool,
-    defaultMaxValue: PropTypes.number,
-    defaultMinValue: PropTypes.number,
+    defaultMaxValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    defaultMinValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     intl: intlShape,
-    mustDecimal: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChangeMax: PropTypes.func.isRequired,
     onChangeMin: PropTypes.func.isRequired,
-    onDecimalOptionChange: PropTypes.func.isRequired,
     onFocus: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired

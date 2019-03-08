@@ -149,14 +149,14 @@ class Monitor extends React.Component {
         this.setState({sliderPrompt: true});
     }
     handleSliderPromptOk (min, max, decimal) {
-        if (min < max) {
-            this.props.vm.runtime.requestUpdateMonitor(Map({
-                id: this.props.id,
-                sliderMin: min,
-                sliderMax: max,
-                isDiscrete: !decimal
-            }));
-        }
+        const realMin = Math.min(parseFloat(min), parseFloat(max));
+        const realMax = Math.max(parseFloat(min), parseFloat(max));
+        this.props.vm.runtime.requestUpdateMonitor(Map({
+            id: this.props.id,
+            sliderMin: realMin,
+            sliderMax: realMax,
+            isDiscrete: !decimal
+        }));
         this.handleSliderPromptClose();
     }
     setElement (monitorElt) {
@@ -190,9 +190,9 @@ class Monitor extends React.Component {
         return (
             <React.Fragment>
                 {this.state.sliderPrompt && <SliderPrompt
-                    defaultDecimal={!this.props.isDiscrete}
                     defaultMaxValue={parseFloat(this.props.max)}
                     defaultMinValue={parseFloat(this.props.min)}
+                    isDiscrete={this.props.isDiscrete}
                     onCancel={this.handleSliderPromptClose}
                     onOk={this.handleSliderPromptOk}
                 />}

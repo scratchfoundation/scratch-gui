@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import SliderPromptComponent from '../components/slider-prompt/slider-prompt.jsx';
+import log from '../lib/log';
 
 class SliderPrompt extends React.Component {
     constructor (props) {
@@ -11,15 +12,16 @@ class SliderPrompt extends React.Component {
             'handleCancel',
             'handleChangeMin',
             'handleChangeMax',
-            'handleChangeDecimalOption',
-            'handleKeyPress'
+            'handleKeyPress',
+            'validate',
+            'checkMustDecimal',
+            'floaty'
         ]);
         this.state = {
-            decimalSelected: this.props.defaultDecimal,
             minValue: this.props.defaultMinValue,
-            maxValue: this.props.defaultMaxValue,
-            mustDecimal: this.checkMustDecimal(this.props.defaultMinValue, this.props.defaultMaxValue)
+            maxValue: this.props.defaultMaxValue
         };
+        this.decimal = false;
     }
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
@@ -28,43 +30,46 @@ class SliderPrompt extends React.Component {
         event.target.select();
     }
     handleOk () {
+        if (!this.validate()) {
+            this.props.onCancel();
+            return;
+        }
         this.props.onOk(this.state.minValue, this.state.maxValue,
-            (this.state.decimalSelected || this.state.mustDecimal));
+            this.checkMustDecimal(this.state.minValue, this.state.maxValue));
     }
     handleCancel () {
         this.props.onCancel();
     }
+    floaty (value) {
+        const decimal = this.checkMustDecimal(this.state.minValue, this.state.maxValue) || !this.props.isDiscrete;
+        return `${value}${Number.isInteger(parseFloat(value)) && decimal ? '.0' : ''}`;
+    }
+    validate () {
+        log.log(`${this.state.minValue} ${this.state.maxValue}`);
+        return isFinite(this.state.minValue) && isFinite(this.state.maxValue);
+    }
     checkMustDecimal (min, max) {
         if (min === '' || max === '') return false;
-        return !Number.isInteger(parseFloat(min)) || !Number.isInteger(parseFloat(max));
+        return this.decimal ||
+               !Number.isInteger(parseFloat(min)) ||
+               !Number.isInteger(parseFloat(max));
     }
     handleChangeMin (e) {
-        this.setState({
-            minValue: parseFloat(e.target.value),
-            mustDecimal: this.checkMustDecimal(e.target.value, this.state.maxValue)
-        });
+        this.decimal = e.target.value.includes('.');
+        this.setState({minValue: e.target.value ? e.target.value : 0});
     }
     handleChangeMax (e) {
-        this.setState({
-            maxValue: parseFloat(e.target.value),
-            mustDecimal: this.checkMustDecimal(this.state.minValue, e.target.value)
-        });
-    }
-    handleChangeDecimalOption (e) {
-        this.setState({decimalSelected: e.target.checked});
+        this.decimal = e.target.value.includes('.');
+        this.setState({maxValue: e.target.value ? e.target.value : 0});
     }
     render () {
         return (
             <SliderPromptComponent
-                decimalSelected={this.state.decimalSelected}
-                defaultDecimal={this.props.defaultDecimal}
-                defaultMaxValue={this.props.defaultMaxValue}
-                defaultMinValue={this.props.defaultMinValue}
-                mustDecimal={this.state.mustDecimal}
+                defaultMaxValue={this.floaty(this.props.defaultMaxValue)}
+                defaultMinValue={this.floaty(this.props.defaultMinValue)}
                 onCancel={this.handleCancel}
                 onChangeMax={this.handleChangeMax}
                 onChangeMin={this.handleChangeMin}
-                onDecimalOptionChange={this.handleChangeDecimalOption}
                 onFocus={this.handleFocus}
                 onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
@@ -74,9 +79,9 @@ class SliderPrompt extends React.Component {
 }
 
 SliderPrompt.propTypes = {
-    defaultDecimal: PropTypes.bool,
     defaultMaxValue: PropTypes.number,
     defaultMinValue: PropTypes.number,
+    isDiscrete: PropTypes.bool,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired
 };

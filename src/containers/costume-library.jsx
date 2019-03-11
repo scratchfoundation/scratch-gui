@@ -38,11 +38,6 @@ class CostumeLibrary extends React.PureComponent {
             skinId: null
         };
         this.props.vm.addCostumeFromLibrary(item.md5, vmCostume);
-        analytics.event({
-            category: 'library',
-            action: 'Select Costume',
-            label: item.name
-        });
     }
     render () {
         return (

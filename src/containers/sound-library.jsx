@@ -125,11 +125,6 @@ class SoundLibrary extends React.PureComponent {
         this.props.vm.addSound(vmSound).then(() => {
             this.props.onNewSound();
         });
-        analytics.event({
-            category: 'library',
-            action: 'Select Sound',
-            label: soundItem.name
-        });
     }
     render () {
         // @todo need to use this hack to avoid library using md5 for image

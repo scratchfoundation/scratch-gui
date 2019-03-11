@@ -60,7 +60,6 @@ class LibraryComponent extends React.Component {
     }
     handleClose () {
         this.props.onRequestClose();
-        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
     }
     handleTagClick (tag) {
         this.setState({

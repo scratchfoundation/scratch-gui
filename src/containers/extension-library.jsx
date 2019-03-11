@@ -46,18 +46,6 @@ class ExtensionLibrary extends React.PureComponent {
                 });
             }
         }
-        let gaLabel = '';
-        if (typeof (item.name) === 'string') {
-            gaLabel = item.name;
-        } else {
-            // Name is localized, get the default message for the gaLabel
-            gaLabel = item.name.props.defaultMessage;
-        }
-        analytics.event({
-            category: 'library',
-            action: 'Select Extension',
-            label: gaLabel
-        });
     }
     render () {
         const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({

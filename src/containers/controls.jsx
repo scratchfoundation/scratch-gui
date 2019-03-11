@@ -24,19 +24,11 @@ class Controls extends React.Component {
                 this.props.vm.start();
             }
             this.props.vm.greenFlag();
-            analytics.event({
-                category: 'general',
-                action: 'Green Flag'
-            });
         }
     }
     handleStopAllClick (e) {
         e.preventDefault();
         this.props.vm.stopAll();
-        analytics.event({
-            category: 'general',
-            action: 'Stop Button'
-        });
     }
     render () {
         const {

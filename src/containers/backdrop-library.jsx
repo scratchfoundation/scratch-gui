@@ -36,11 +36,6 @@ class BackdropLibrary extends React.Component {
         };
         this.props.vm.setEditingTarget(this.props.stageID);
         this.props.vm.addBackdrop(item.md5, vmBackdrop);
-        analytics.event({
-            category: 'library',
-            action: 'Select Backdrop',
-            label: item.name
-        });
     }
     render () {
         return (

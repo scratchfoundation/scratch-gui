@@ -86,4 +86,10 @@ SliderPrompt.propTypes = {
     onOk: PropTypes.func.isRequired
 };
 
+SliderPrompt.defaultProps = {
+    defaultMaxValue: 100,
+    defaultMinValue: 0,
+    isDiscrete: true
+};
+
 export default SliderPrompt;

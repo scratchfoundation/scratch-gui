@@ -56,12 +56,12 @@ const SliderPromptComponent = props => (
                 <input
                     className={styles.maxInput}
                     name={props.intl.formatMessage(messages.maxValue)}
-                    onChange={props.onChangeMax}
-                    onFocus={props.onFocus}
-                    onKeyPress={props.onKeyPress}
                     pattern="-?[0-9]*(\.[0-9]+)?"
                     type="text"
                     value={props.maxValue}
+                    onChange={props.onChangeMax}
+                    onFocus={props.onFocus}
+                    onKeyPress={props.onKeyPress}
                 />
             </Box>
             <Box className={styles.buttonRow}>

@@ -4,7 +4,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import analytics from '../lib/analytics';
 import log from '../lib/log';
 import sharedMessages from '../lib/shared-messages';
 

@@ -4,7 +4,6 @@ import React from 'react';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
-import analytics from '../lib/analytics';
 import ControlsComponent from '../components/controls/controls.jsx';
 
 class Controls extends React.Component {

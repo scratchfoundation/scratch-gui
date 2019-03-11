@@ -40,13 +40,13 @@ const SliderPromptComponent = props => (
             <Box>
                 <input
                     className={styles.minInput}
-                    defaultValue={props.defaultMinValue}
                     name={props.intl.formatMessage(messages.minValue)}
-                    pattern="-?[0-9]*(\.[0-9]+)?"
-                    type="text"
                     onChange={props.onChangeMin}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                    type="text"
+                    value={props.minValue}
                 />
             </Box>
             <Box className={styles.label}>
@@ -55,13 +55,13 @@ const SliderPromptComponent = props => (
             <Box>
                 <input
                     className={styles.maxInput}
-                    defaultValue={props.defaultMaxValue}
                     name={props.intl.formatMessage(messages.maxValue)}
-                    pattern="-?[0-9]*(\.[0-9]+)?"
-                    type="text"
                     onChange={props.onChangeMax}
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                    type="text"
+                    value={props.maxValue}
                 />
             </Box>
             <Box className={styles.buttonRow}>
@@ -91,9 +91,9 @@ const SliderPromptComponent = props => (
 );
 
 SliderPromptComponent.propTypes = {
-    defaultMaxValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    defaultMinValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     intl: intlShape,
+    maxValue: PropTypes.string,
+    minValue: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
     onChangeMax: PropTypes.func.isRequired,
     onChangeMin: PropTypes.func.isRequired,

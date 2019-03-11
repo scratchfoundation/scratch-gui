@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import SliderPromptComponent from '../components/slider-prompt/slider-prompt.jsx';
-import log from '../lib/log';
 
 class SliderPrompt extends React.Component {
     constructor (props) {
@@ -13,15 +12,17 @@ class SliderPrompt extends React.Component {
             'handleChangeMin',
             'handleChangeMax',
             'handleKeyPress',
-            'validate',
-            'checkMustDecimal',
-            'floaty'
+            'validates',
+            'shouldBeDiscrete'
         ]);
+
+        const {isDiscrete, minValue, maxValue} = this.props;
         this.state = {
-            minValue: this.props.defaultMinValue,
-            maxValue: this.props.defaultMaxValue
+            // For internal use, convert values to strings based on isDiscrete
+            // This is because `<input />` always returns values as strings.
+            minValue: isDiscrete ? minValue.toFixed(0) : minValue.toFixed(2),
+            maxValue: isDiscrete ? maxValue.toFixed(0) : maxValue.toFixed(2)
         };
-        this.decimal = false;
     }
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
@@ -30,43 +31,36 @@ class SliderPrompt extends React.Component {
         event.target.select();
     }
     handleOk () {
-        if (!this.validate()) {
+        const {minValue, maxValue} = this.state;
+        if (!this.validates(minValue, maxValue)) {
             this.props.onCancel();
             return;
         }
-        this.props.onOk(this.state.minValue, this.state.maxValue,
-            this.checkMustDecimal(this.state.minValue, this.state.maxValue));
+        this.props.onOk(
+            parseFloat(minValue),
+            parseFloat(maxValue),
+            this.shouldBeDiscrete(minValue, maxValue));
     }
     handleCancel () {
         this.props.onCancel();
     }
-    floaty (value) {
-        const decimal = this.checkMustDecimal(this.state.minValue, this.state.maxValue) || !this.props.isDiscrete;
-        return `${value}${Number.isInteger(parseFloat(value)) && decimal ? '.0' : ''}`;
-    }
-    validate () {
-        log.log(`${this.state.minValue} ${this.state.maxValue}`);
-        return isFinite(this.state.minValue) && isFinite(this.state.maxValue);
-    }
-    checkMustDecimal (min, max) {
-        if (min === '' || max === '') return false;
-        return this.decimal ||
-               !Number.isInteger(parseFloat(min)) ||
-               !Number.isInteger(parseFloat(max));
-    }
     handleChangeMin (e) {
-        this.decimal = e.target.value.includes('.');
-        this.setState({minValue: e.target.value ? e.target.value : 0});
+        this.setState({minValue: e.target.value});
     }
     handleChangeMax (e) {
-        this.decimal = e.target.value.includes('.');
-        this.setState({maxValue: e.target.value ? e.target.value : 0});
+        this.setState({maxValue: e.target.value});
+    }
+    shouldBeDiscrete (min, max) {
+        return min.indexOf('.') + max.indexOf('.') === -2; // Both -1
+    }
+    validates (min, max) {
+        return isFinite(min) && isFinite(max);
     }
     render () {
         return (
             <SliderPromptComponent
-                defaultMaxValue={this.floaty(this.props.defaultMaxValue)}
-                defaultMinValue={this.floaty(this.props.defaultMinValue)}
+                maxValue={this.state.maxValue}
+                minValue={this.state.minValue}
                 onCancel={this.handleCancel}
                 onChangeMax={this.handleChangeMax}
                 onChangeMin={this.handleChangeMin}
@@ -79,16 +73,16 @@ class SliderPrompt extends React.Component {
 }
 
 SliderPrompt.propTypes = {
-    defaultMaxValue: PropTypes.number,
-    defaultMinValue: PropTypes.number,
     isDiscrete: PropTypes.bool,
+    maxValue: PropTypes.number,
+    minValue: PropTypes.number,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired
 };
 
 SliderPrompt.defaultProps = {
-    defaultMaxValue: 100,
-    defaultMinValue: 0,
+    maxValue: 100,
+    minValue: 0,
     isDiscrete: true
 };
 

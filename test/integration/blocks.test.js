@@ -82,6 +82,15 @@ describe('Working with the blocks', () => {
         // And there should be a monitor visible
         await rightClickText('score', scope.monitors);
         await clickText('slider');
+        await findByXpath("//input[@step='1']");
+
+        // Changing the slider to a decimal should make it have a step size of 0.01
+        await rightClickText('score', scope.monitors);
+        await clickText('change slider range');
+        el = await findByXpath("//input[@name='Maximum value']");
+        await el.sendKeys('.1');
+        await clickButton('OK');
+        await findByXpath("//input[@step='0.01'][@max='100.1']");
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

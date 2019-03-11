@@ -41,12 +41,12 @@ const SliderPromptComponent = props => (
                 <input
                     className={styles.minInput}
                     name={props.intl.formatMessage(messages.minValue)}
-                    onChange={props.onChangeMin}
-                    onFocus={props.onFocus}
-                    onKeyPress={props.onKeyPress}
                     pattern="-?[0-9]*(\.[0-9]+)?"
                     type="text"
                     value={props.minValue}
+                    onChange={props.onChangeMin}
+                    onFocus={props.onFocus}
+                    onKeyPress={props.onKeyPress}
                 />
             </Box>
             <Box className={styles.label}>

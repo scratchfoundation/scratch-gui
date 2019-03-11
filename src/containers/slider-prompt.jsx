@@ -27,9 +27,6 @@ class SliderPrompt extends React.Component {
     handleKeyPress (event) {
         if (event.key === 'Enter') this.handleOk();
     }
-    handleFocus (event) {
-        event.target.select();
-    }
     handleOk () {
         const {minValue, maxValue} = this.state;
         if (!this.validates(minValue, maxValue)) {
@@ -64,7 +61,6 @@ class SliderPrompt extends React.Component {
                 onCancel={this.handleCancel}
                 onChangeMax={this.handleChangeMax}
                 onChangeMin={this.handleChangeMin}
-                onFocus={this.handleFocus}
                 onKeyPress={this.handleKeyPress}
                 onOk={this.handleOk}
             />

@@ -32,12 +32,14 @@ const AudioTrimmer = props => (
         )}
 
         {props.playhead ? (
-            <Box
-                className={classNames(styles.trimLine, styles.playhead)}
-                style={{
-                    left: `${100 * props.playhead}%`
-                }}
-            />
+            <div className={styles.playheadContainer}>
+                <div
+                    className={classNames(styles.trimLine, styles.playhead)}
+                    style={{
+                        transform: `translateX(${100 * props.playhead}%)`
+                    }}
+                />
+            </div>
         ) : null}
 
         {props.trimEnd === null ? null : (

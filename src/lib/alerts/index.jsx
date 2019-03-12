@@ -198,6 +198,20 @@ const alerts = [
         closeButton: true,
         level: AlertLevels.SUCCESS,
         maxDisplaySecs: 15
+    },
+    {
+        alertId: 'importingAsset',
+        alertType: AlertTypes.STANDARD,
+        clearList: [],
+        content: (
+            <FormattedMessage
+                defaultMessage="Importing…"
+                description="Message indicating that project is in process of importing"
+                id="gui.alerts.importing"
+            />
+        ),
+        iconSpinner: true,
+        level: AlertLevels.SUCCESS
     }
 ];
 

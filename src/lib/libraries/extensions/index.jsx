@@ -204,7 +204,7 @@ export default [
         helpLink: 'https://scratch.mit.edu/ev3'
     },
     {
-        name: 'LEGO WeDo 2.0',
+        name: 'LEGO Education WeDo 2.0',
         extensionId: 'wedo2',
         collaborator: 'LEGO',
         iconURL: wedoImage,

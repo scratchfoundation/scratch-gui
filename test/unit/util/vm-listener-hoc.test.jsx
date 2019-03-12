@@ -15,6 +15,7 @@ describe('VMListenerHOC', () => {
         store = mockStore({
             scratchGui: {
                 mode: {},
+                modals: {},
                 vm: vm
             }
         });
@@ -48,5 +49,46 @@ describe('VMListenerHOC', () => {
         );
         const child = wrapper.find(Component);
         expect(child.props().onGreenFlag).toBeUndefined();
+    });
+
+    test('targetsUpdate event from vm triggers targets update action', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = vmListenerHOC(Component);
+        mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+            />
+        );
+        const targetList = [];
+        const editingTarget = 'id';
+        vm.emit('targetsUpdate', {targetList, editingTarget});
+        const actions = store.getActions();
+        expect(actions[0].type).toEqual('scratch-gui/targets/UPDATE_TARGET_LIST');
+        expect(actions[0].targets).toEqual(targetList);
+        expect(actions[0].editingTarget).toEqual(editingTarget);
+    });
+
+    test('targetsUpdate does not dispatch if the sound recorder is visible', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = vmListenerHOC(Component);
+        store = mockStore({
+            scratchGui: {
+                mode: {},
+                modals: {soundRecorder: true},
+                vm: vm
+            }
+        });
+        mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+            />
+        );
+        const targetList = [];
+        const editingTarget = 'id';
+        vm.emit('targetsUpdate', {targetList, editingTarget});
+        const actions = store.getActions();
+        expect(actions.length).toEqual(0);
     });
 });

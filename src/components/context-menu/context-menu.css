@@ -28,3 +28,11 @@
     background: $motion-primary;
     color: white;
 }
+
+.menu-item-bordered {
+    border-top: 1px solid $ui-black-transparent;
+}
+
+.menu-item-bordered:hover {
+    background: $error-primary;
+}

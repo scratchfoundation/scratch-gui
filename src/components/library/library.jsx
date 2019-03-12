@@ -52,11 +52,9 @@ class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleBlur',
             'handleClose',
             'handleFilterChange',
             'handleFilterClear',
-            'handleFocus',
             'handleMouseEnter',
             'handleMouseLeave',
             'handleSelect',
@@ -74,12 +72,6 @@ class LibraryComponent extends React.Component {
             prevState.selectedTag !== this.state.selectedTag) {
             this.scrollToTop();
         }
-    }
-    handleBlur (id) {
-        this.handleMouseLeave(id);
-    }
-    handleFocus (id) {
-        this.handleMouseEnter(id);
     }
     handleSelect (id) {
         this.handleClose();
@@ -210,13 +202,12 @@ class LibraryComponent extends React.Component {
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
                             iconSource={iconSource}
+                            icons={dataItem.json && dataItem.json.costumes}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}
                             key={`item_${index}`}
                             name={dataItem.name}
-                            onBlur={this.handleBlur}
-                            onFocus={this.handleFocus}
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}

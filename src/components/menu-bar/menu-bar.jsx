@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
+import bowser from 'bowser';
 import React from 'react';
 
 import Box from '../box/box.jsx';
@@ -66,13 +67,8 @@ import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
-const messages = defineMessages({
-    confirmNav: {
-        id: 'gui.menuBar.confirmNewWithoutSaving',
-        defaultMessage: 'Replace contents of the current project?',
-        description: 'message for prompting user to confirm that they want to create new project without saving'
-    }
-});
+import sharedMessages from '../../lib/shared-messages';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -151,10 +147,17 @@ class MenuBar extends React.Component {
             'handleClickSeeCommunity',
             'handleClickShare',
             'handleCloseFileMenuAndThen',
+            'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'restoreOptionMessage'
         ]);
+    }
+    componentDidMount () {
+        document.addEventListener('keydown', this.handleKeyPress);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('keydown', this.handleKeyPress);
     }
     handleClickNew () {
         let readyToReplaceProject = true;
@@ -165,7 +168,7 @@ class MenuBar extends React.Component {
         // they'll lose their work.
         if (this.props.projectChanged && !this.props.canCreateNew) {
             readyToReplaceProject = confirm( // eslint-disable-line no-alert
-                this.props.intl.formatMessage(messages.confirmNav)
+                this.props.intl.formatMessage(sharedMessages.replaceProjectWarning)
             );
         }
         this.props.onRequestCloseFile();
@@ -218,6 +221,13 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseFile();
             fn();
         };
+    }
+    handleKeyPress (event) {
+        const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
+        if (modifier && event.key === 's') {
+            this.props.onClickSave();
+            event.preventDefault();
+        }
     }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {

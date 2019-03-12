@@ -54,7 +54,7 @@ const getAssetTypeForFileExtension = function (fileExtension) {
  * @returns {object} - an `imageSource` ready to be passed to a `ScratchImage`.
  */
 const getItemImageSource = function (item) {
-    if (item.hasOwnProperty('rawURL')) {
+    if (item.rawURL) {
         return {
             uri: item.rawURL
         };
@@ -62,11 +62,13 @@ const getItemImageSource = function (item) {
 
     // TODO: adjust libraries to be more storage-friendly; don't use split() here.
     const md5 = item.md5 || item.baseLayerMD5;
-    const [assetId, fileExtension] = md5.split('.');
-    return {
-        assetId: assetId,
-        assetType: getAssetTypeForFileExtension(fileExtension)
-    };
+    if (md5) {
+        const [assetId, fileExtension] = md5.split('.');
+        return {
+            assetId: assetId,
+            assetType: getAssetTypeForFileExtension(fileExtension)
+        };
+    }
 };
 
 class LibraryComponent extends React.Component {

@@ -39,7 +39,11 @@ const MenuItem = ({
     onClick
 }) => (
     <li
-        className={classNames(styles.menuItem, className)}
+        className={classNames(
+            styles.menuItem,
+            styles.hoverable,
+            className
+        )}
         onClick={onClick}
     >
         {children}

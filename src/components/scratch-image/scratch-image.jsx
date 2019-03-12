@@ -68,18 +68,20 @@ class ScratchImage extends React.PureComponent {
      * @returns {object} - the new state values, if any.
      */
     _loadImageSource (imageSource) {
-        if (imageSource.uri) {
-            ScratchImage.pendingImages.delete(this);
-            return {
-                imageURI: imageSource.uri,
-                lastRequestedAsset: null
-            };
-        }
-        if (this.state.lastRequestedAsset !== imageSource.assetId) {
-            ScratchImage.pendingImages.add(this);
-            return {
-                lastRequestedAsset: imageSource.assetId
-            };
+        if (imageSource) {
+            if (imageSource.uri) {
+                ScratchImage.pendingImages.delete(this);
+                return {
+                    imageURI: imageSource.uri,
+                    lastRequestedAsset: null
+                };
+            }
+            if (this.state.lastRequestedAsset !== imageSource.assetId) {
+                ScratchImage.pendingImages.add(this);
+                return {
+                    lastRequestedAsset: imageSource.assetId
+                };
+            }
         }
         // Nothing to do - don't change any state.
         return {};
@@ -116,16 +118,18 @@ class ScratchImage extends React.PureComponent {
     }
 }
 
+ScratchImage.ImageSourcePropType = PropTypes.oneOfType([
+    PropTypes.shape({
+        assetId: PropTypes.string.isRequired,
+        assetType: PropTypes.oneOf(Object.values(storage.AssetType)).isRequired
+    }),
+    PropTypes.shape({
+        uri: PropTypes.string.isRequired
+    })
+]);
+
 ScratchImage.propTypes = {
-    imageSource: PropTypes.oneOfType([
-        PropTypes.shape({
-            assetId: PropTypes.string.isRequired,
-            assetType: PropTypes.oneOf(Object.values(storage.AssetType)).isRequired
-        }),
-        PropTypes.shape({
-            uri: PropTypes.string.isRequired
-        })
-    ]).isRequired
+    imageSource: ScratchImage.ImageSourcePropType.isRequired
 };
 
 export default ScratchImage;

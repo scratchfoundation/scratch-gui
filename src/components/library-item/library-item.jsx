@@ -36,10 +36,12 @@ class LibraryItemComponent extends React.PureComponent {
                             />
                         </div>
                     ) : null}
-                    <ScratchImage
-                        className={styles.featuredImage}
-                        imageSource={this.props.iconSource}
-                    />
+                    {this.props.iconSource ? (
+                        <ScratchImage
+                            className={styles.featuredImage}
+                            imageSource={this.props.iconSource}
+                        />
+                    ) : null}
                 </div>
                 {this.props.insetIconURL ? (
                     <div className={styles.libraryItemInsetImageContainer}>
@@ -147,7 +149,7 @@ LibraryItemComponent.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconSource: ScratchImage.propTypes.imageSource,
+    iconSource: ScratchImage.ImageSourcePropType,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([

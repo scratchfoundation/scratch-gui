@@ -12,6 +12,8 @@ var autoprefixer = require('autoprefixer');
 var postcssVars = require('postcss-simple-vars');
 var postcssImport = require('postcss-import');
 
+const STATIC_PATH = process.env.STATIC_PATH || '/static';
+
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devtool: 'cheap-module-source-map',
@@ -195,7 +197,7 @@ module.exports = [
             output: {
                 libraryTarget: 'umd',
                 path: path.resolve('dist'),
-                publicPath: '/static/'
+                publicPath: `${STATIC_PATH}/`
             },
             externals: {
                 React: 'react',
@@ -208,7 +210,7 @@ module.exports = [
                         loader: 'file-loader',
                         options: {
                             outputPath: 'static/assets/',
-                            publicPath: '/static/assets/'
+                            publicPath: `${STATIC_PATH}/assets/`
                         }
                     }
                 ])

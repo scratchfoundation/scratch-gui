@@ -5,7 +5,6 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
-import analytics from '../lib/analytics';
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import backdropTags from '../lib/libraries/backdrop-tags';
 import LibraryComponent from '../components/library/library.jsx';
@@ -36,11 +35,6 @@ class BackdropLibrary extends React.Component {
         };
         this.props.vm.setEditingTarget(this.props.stageID);
         this.props.vm.addBackdrop(item.md5, vmBackdrop);
-        analytics.event({
-            category: 'library',
-            action: 'Select Backdrop',
-            label: item.name
-        });
     }
     render () {
         return (

@@ -4,7 +4,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import analytics from '../lib/analytics';
 import log from '../lib/log';
 import sharedMessages from '../lib/shared-messages';
 
@@ -119,11 +118,6 @@ class SBFileUploader extends React.Component {
             const filename = this.fileToUpload && this.fileToUpload.name;
             this.props.vm.loadProject(this.reader.result)
                 .then(() => {
-                    analytics.event({
-                        category: 'project',
-                        action: 'Import Project File',
-                        nonInteraction: true
-                    });
                     // Remove the hash if any (without triggering a hash change event or a reload)
                     try { // Can fail e.g. when GUI is loaded from static file (integration tests)
                         history.replaceState({}, document.title, '.');

@@ -106,8 +106,9 @@ class ScratchImage extends React.PureComponent {
                         return (
                             <img
                                 src={this.state.imageURI}
-                                // the element must have non-zero size for VisibilitySensor to work before image load
-                                style={{minWidth: '1px', minHeight: '1px'}}
+                                // The element must have non-zero size for VisibilitySensor to work before image load.
+                                // Some versions of Firefox don't honor CSS minimum size without changing `display`.
+                                style={{display: 'inline-block', minWidth: '1px', minHeight: '1px'}}
                                 {...imgProps}
                             />
                         );

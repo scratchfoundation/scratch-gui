@@ -150,7 +150,6 @@ class MenuBar extends React.Component {
             'handleClickSaveAsCopy',
             'handleClickSeeCommunity',
             'handleClickShare',
-            'handleCloseFileMenuAndThen',
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
@@ -221,12 +220,6 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    handleCloseFileMenuAndThen (fn) {
-        return () => {
-            this.props.onRequestCloseFile();
-            fn();
-        };
-    }
     handleKeyPress (event) {
         const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
         if (modifier && event.key === 's') {
@@ -234,10 +227,10 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
-    handleSaveToComputer (downloadProject) {
+    handleSaveToComputer (downloadProjectCallback) {
         return () => {
             this.props.onRequestCloseFile();
-            downloadProject();
+            downloadProjectCallback();
             if (this.props.onProjectTelemetryEvent) {
                 const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
                 this.props.onProjectTelemetryEvent('projectDidSave', metadata);
@@ -417,10 +410,10 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}
                                     </SBFileUploader>
-                                    <SB3Downloader>{(className, downloadProject) => (
+                                    <SB3Downloader>{(className, downloadProjectCallback) => (
                                         <MenuItem
                                             className={className}
-                                            onClick={this.handleSaveToComputer(downloadProject)}
+                                            onClick={this.handleSaveToComputer(downloadProjectCallback)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Save to your computer"

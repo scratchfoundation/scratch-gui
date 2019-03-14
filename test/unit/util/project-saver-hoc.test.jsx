@@ -22,6 +22,9 @@ describe('projectSaverHOC', () => {
                 timeout: {
                     autoSaveTimeoutId: null
                 }
+            },
+            locales: {
+                locale: 'en'
             }
         });
         vm = new VM();

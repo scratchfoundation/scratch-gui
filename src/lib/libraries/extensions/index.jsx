@@ -163,6 +163,7 @@ export default [
         featured: true,
         disabled: false,
         bluetoothRequired: true,
+        internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: microbitPeripheralImage,
@@ -192,6 +193,7 @@ export default [
         featured: true,
         disabled: false,
         bluetoothRequired: true,
+        internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: ev3PeripheralImage,
@@ -221,6 +223,7 @@ export default [
         featured: true,
         disabled: false,
         bluetoothRequired: true,
+        internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
         peripheralImage: wedoPeripheralImage,
@@ -250,6 +253,7 @@ export default [
         ),
         featured: true,
         disabled: true,
-        bluetoothRequired: true
+        bluetoothRequired: true,
+        internetConnectionRequired: true
     }
 ];

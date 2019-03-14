@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import xhr from 'xhr';
 
+import collectMetadata from '../lib/collect-metadata';
 import log from '../lib/log';
 import storage from '../lib/storage';
 import dataURItoBlob from '../lib/data-uri-to-blob';
@@ -25,6 +26,7 @@ import {
     getIsAnyCreatingNewState,
     getIsCreatingCopy,
     getIsCreatingNew,
+    getIsLoading,
     getIsManualUpdating,
     getIsRemixing,
     getIsShowingWithId,
@@ -61,6 +63,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
             this.props.onSetProjectThumbnailer(this.getProjectThumbnail);
         }
         componentDidUpdate (prevProps) {
+            if (!this.props.isAnyCreatingNewState && prevProps.isAnyCreatingNewState) {
+                this.reportTelemetryEvent('projectWasCreated');
+            }
+            if (!this.props.isLoading && prevProps.isLoading) {
+                this.reportTelemetryEvent('projectDidLoad');
+            }
+
             if (this.props.projectChanged && !prevProps.projectChanged) {
                 this.scheduleAutoSave();
             }
@@ -305,6 +314,18 @@ const ProjectSaverHOC = function (WrappedComponent) {
             this.props.vm.renderer.draw();
         }
 
+        /**
+         * Report a telemetry event.
+         * @param {string} event - one of `projectWasCreated`, `projectDidLoad`, `projectDidSave`, `projectWasUploaded`
+         */
+        // TODO make a telemetry HOC and move this stuff there
+        reportTelemetryEvent (event) {
+            if (this.props.onProjectTelemetryEvent) {
+                const metadata = collectMetadata(this.props.vm, this.props.reduxProjectTitle, this.props.locale);
+                this.props.onProjectTelemetryEvent(event, metadata);
+            }
+        }
+
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -314,6 +335,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 isCreatingNew,
                 projectChanged,
                 isAnyCreatingNewState,
+                isLoading,
                 isManualUpdating,
                 isRemixing,
                 isShowingSaveable,
@@ -359,6 +381,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         isAnyCreatingNewState: PropTypes.bool,
         isCreatingCopy: PropTypes.bool,
         isCreatingNew: PropTypes.bool,
+        isLoading: PropTypes.bool,
         isManualUpdating: PropTypes.bool,
         isRemixing: PropTypes.bool,
         isShared: PropTypes.bool,
@@ -371,6 +394,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
+        onProjectTelemetryEvent: PropTypes.func,
         onRemixing: PropTypes.func,
         onShowAlert: PropTypes.func,
         onShowCopySuccessAlert: PropTypes.func,
@@ -397,6 +421,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         return {
             autoSaveTimeoutId: state.scratchGui.timeout.autoSaveTimeoutId,
             isAnyCreatingNewState: getIsAnyCreatingNewState(loadingState),
+            isLoading: getIsLoading(loadingState),
             isCreatingCopy: getIsCreatingCopy(loadingState),
             isCreatingNew: getIsCreatingNew(loadingState),
             isRemixing: getIsRemixing(loadingState),
@@ -406,6 +431,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             isUpdating: getIsUpdating(loadingState),
             isManualUpdating: getIsManualUpdating(loadingState),
             loadingState: loadingState,
+            locale: state.locales.locale,
             projectChanged: state.scratchGui.projectChanged,
             reduxProjectId: state.scratchGui.projectState.projectId,
             reduxProjectTitle: state.scratchGui.projectTitle,

@@ -237,9 +237,9 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
-        peripheralImage: wedo2PeripheralImage,
-        smallPeripheralImage: wedo2SmallPeripheralImage,
-        peripheralButtonImage: wedo2PeripheralButtonImage,
+        peripheralImage: wedo2PeripheralImage, // TODO: Rename connectionIconURL ??
+        smallPeripheralImage: wedo2SmallPeripheralImage, // TODO: Rename connectionSmallIconURL ??
+        peripheralButtonImage: wedo2PeripheralButtonImage, // TODO: Rename connectionInstructionIconURL ??
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

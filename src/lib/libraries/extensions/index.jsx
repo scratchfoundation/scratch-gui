@@ -22,15 +22,18 @@ import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';
 import microbitIconURL from './microbit/microbit.png';
 import microbitInsetIconURL from './microbit/microbit-small.svg';
 import microbitPeripheralImage from './microbit/microbit-illustration.svg';
+import microbitSmallPeripheralImage from './microbit/microbit-small.svg';
 
 import ev3IconURL from './ev3/ev3.png';
 import ev3InsetIconURL from './ev3/ev3-small.svg';
 import ev3PeripheralImage from './ev3/ev3-hub-illustration.svg';
+import ev3SmallPeripheralImage from './ev3/ev3-small.svg';
 
 import wedo2IconURL from './wedo2/wedo.png';
 import wedo2InsetIconURL from './wedo2/wedo-small.svg';
 import wedo2PeripheralImage from './wedo2/wedo-illustration.svg';
-import wedo2ButtonImage from './wedo2/wedo-button-illustration.svg';
+import wedo2SmallPeripheralImage from './wedo2/wedo-small.svg';
+import wedo2PeripheralButtonImage from './wedo2/wedo-button-illustration.svg';
 
 import boostIconURL from './boost/boost.png';
 import boostInsetIconURL from './boost/boost-small.svg';
@@ -175,7 +178,7 @@ export default [
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: microbitPeripheralImage,
-        smallPeripheralImage: microbitInsetIconURL,
+        smallPeripheralImage: microbitSmallPeripheralImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -205,7 +208,7 @@ export default [
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
         peripheralImage: ev3PeripheralImage,
-        smallPeripheralImage: ev3InsetIconURL,
+        smallPeripheralImage: ev3SmallPeripheralImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
@@ -235,8 +238,8 @@ export default [
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
         peripheralImage: wedo2PeripheralImage,
-        smallPeripheralImage: wedo2InsetIconURL,
-        peripheralButtonImage: wedo2ButtonImage,
+        smallPeripheralImage: wedo2SmallPeripheralImage,
+        peripheralButtonImage: wedo2PeripheralButtonImage,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

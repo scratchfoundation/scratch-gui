@@ -29,11 +29,11 @@ import ev3InsetIconURL from './ev3/ev3-small.svg';
 import ev3PeripheralImage from './ev3/ev3-hub-illustration.svg';
 import ev3SmallPeripheralImage from './ev3/ev3-small.svg';
 
-import wedo2IconURL from './wedo2/wedo.png';
-import wedo2InsetIconURL from './wedo2/wedo-small.svg';
-import wedo2PeripheralImage from './wedo2/wedo-illustration.svg';
-import wedo2SmallPeripheralImage from './wedo2/wedo-small.svg';
-import wedo2PeripheralButtonImage from './wedo2/wedo-button-illustration.svg';
+import wedo2IconURL from './wedo2/wedo.png'; // TODO: Rename wedo2Icon.png ??
+import wedo2InsetIconURL from './wedo2/wedo-small.svg'; // TODO: Rename wedo2InsetIcon.png ??
+import wedo2PeripheralImage from './wedo2/wedo-illustration.svg'; // TODO: Rename wedo2ConnectionIcon.png ??
+import wedo2SmallPeripheralImage from './wedo2/wedo-small.svg'; // TODO: Rename wedo2ConnectionSmallIcon.png ??
+import wedo2PeripheralButtonImage from './wedo2/wedo-button-illustration.svg'; // TODO: Rename wedo2ConnectionInstructionIcon.png ??
 
 import boostIconURL from './boost/boost.png';
 import boostInsetIconURL from './boost/boost-small.svg';

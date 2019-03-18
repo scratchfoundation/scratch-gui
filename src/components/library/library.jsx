@@ -39,7 +39,7 @@ const getAssetTypeForFileExtension = function (fileExtension) {
         sensitivity: 'accent',
         usage: 'search'
     };
-    for (const assetTypeId of Object.keys(storage.AssetType)) {
+    for (const assetTypeId in storage.AssetType) {
         const assetType = storage.AssetType[assetTypeId];
         if (fileExtension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
             return assetType;

@@ -21,19 +21,19 @@ import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';
 
 import microbitIconURL from './microbit/microbit.png';
 import microbitInsetIconURL from './microbit/microbit-small.svg';
-import microbitPeripheralImage from './microbit/microbit-illustration.svg';
-import microbitSmallPeripheralImage from './microbit/microbit-small.svg';
+import microbitConnectionIconURL from './microbit/microbit-illustration.svg';
+import microbitConnectionSmallIconURL from './microbit/microbit-small.svg';
 
 import ev3IconURL from './ev3/ev3.png';
 import ev3InsetIconURL from './ev3/ev3-small.svg';
-import ev3PeripheralImage from './ev3/ev3-hub-illustration.svg';
-import ev3SmallPeripheralImage from './ev3/ev3-small.svg';
+import ev3ConnectionIconURL from './ev3/ev3-hub-illustration.svg';
+import ev3ConnectionSmallIconURL from './ev3/ev3-small.svg';
 
-import wedo2IconURL from './wedo2/wedo.png'; // TODO: Rename wedo2Icon.png ??
-import wedo2InsetIconURL from './wedo2/wedo-small.svg'; // TODO: Rename wedo2InsetIcon.png ??
-import wedo2PeripheralImage from './wedo2/wedo-illustration.svg'; // TODO: Rename wedo2ConnectionIcon.png ??
-import wedo2SmallPeripheralImage from './wedo2/wedo-small.svg'; // TODO: Rename wedo2ConnectionSmallIcon.png ??
-import wedo2PeripheralButtonImage from './wedo2/wedo-button-illustration.svg'; // TODO: Rename wedo2ConnectionInstructionIcon.png ??
+import wedo2IconURL from './wedo2/wedo.png'; // TODO: Rename file names to match variable/prop names?
+import wedo2InsetIconURL from './wedo2/wedo-small.svg';
+import wedo2ConnectionIconURL from './wedo2/wedo-illustration.svg';
+import wedo2ConnectionSmallIconURL from './wedo2/wedo-small.svg';
+import wedo2ConnectionTipIconURL from './wedo2/wedo-button-illustration.svg';
 
 import boostIconURL from './boost/boost.png';
 import boostInsetIconURL from './boost/boost-small.svg';
@@ -177,8 +177,8 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        peripheralImage: microbitPeripheralImage,
-        smallPeripheralImage: microbitSmallPeripheralImage,
+        peripheralImage: microbitConnectionIconURL,
+        smallPeripheralImage: microbitConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -207,8 +207,8 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        peripheralImage: ev3PeripheralImage,
-        smallPeripheralImage: ev3SmallPeripheralImage,
+        peripheralImage: ev3ConnectionIconURL,
+        smallPeripheralImage: ev3ConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
@@ -237,9 +237,9 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
-        peripheralImage: wedo2PeripheralImage, // TODO: Rename connectionIconURL ??
-        smallPeripheralImage: wedo2SmallPeripheralImage, // TODO: Rename connectionSmallIconURL ??
-        peripheralButtonImage: wedo2PeripheralButtonImage, // TODO: Rename connectionInstructionIconURL ??
+        peripheralImage: wedo2ConnectionIconURL,
+        smallPeripheralImage: wedo2ConnectionSmallIconURL,
+        peripheralButtonImage: wedo2ConnectionTipIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

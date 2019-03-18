@@ -232,16 +232,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         () => (asset.clean = true)
                     )
                 )
-            ).then(() => {
-                const {onUpdateProjectData} = this.props;
-                const saveReturnValue = onUpdateProjectData(projectId,
-                    savedVMState, requestParams);
-                // Allow onUpdateProjectData to either return immediately or a promise.
-                if (!(saveReturnValue.then && saveReturnValue.catch)) {
-                    return Promise.resolve(saveReturnValue);
-                }
-                return saveReturnValue;
-            })
+            )
+                .then(() => this.props.onUpdateProjectData(projectId, savedVMState, requestParams))
                 .then(response => {
                     this.props.onSetProjectUnchanged();
                     const id = response.id.toString();

@@ -17,7 +17,7 @@ const ErrorStep = props => (
                 <div className={styles.peripheralActivity}>
                     <img
                         className={styles.peripheralActivityIcon}
-                        src={props.peripheralImage}
+                        src={props.connectionIconURL}
                     />
                 </div>
             </Box>
@@ -70,9 +70,9 @@ const ErrorStep = props => (
 );
 
 ErrorStep.propTypes = {
+    connectionIconURL: PropTypes.string.isRequired,
     onHelp: PropTypes.func,
-    onScanning: PropTypes.func,
-    peripheralImage: PropTypes.string.isRequired
+    onScanning: PropTypes.func
 };
 
 export default ErrorStep;

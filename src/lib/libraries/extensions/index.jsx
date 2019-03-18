@@ -177,8 +177,8 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        peripheralImage: microbitConnectionIconURL,
-        smallPeripheralImage: microbitConnectionSmallIconURL,
+        connectionIconURL: microbitConnectionIconURL,
+        connectionSmallIconURL: microbitConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -207,8 +207,8 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: false,
-        peripheralImage: ev3ConnectionIconURL,
-        smallPeripheralImage: ev3ConnectionSmallIconURL,
+        connectionIconURL: ev3ConnectionIconURL,
+        connectionSmallIconURL: ev3ConnectionSmallIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
@@ -237,9 +237,9 @@ export default [
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,
         useAutoScan: true,
-        peripheralImage: wedo2ConnectionIconURL,
-        smallPeripheralImage: wedo2ConnectionSmallIconURL,
-        peripheralButtonImage: wedo2ConnectionTipIconURL,
+        connectionIconURL: wedo2ConnectionIconURL,
+        connectionSmallIconURL: wedo2ConnectionSmallIconURL,
+        connectionTipIconURL: wedo2ConnectionTipIconURL,
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

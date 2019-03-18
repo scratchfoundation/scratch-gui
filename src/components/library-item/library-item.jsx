@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
+import ScratchImage from '../scratch-image/scratch-image.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';
 
@@ -35,10 +36,12 @@ class LibraryItemComponent extends React.PureComponent {
                             />
                         </div>
                     ) : null}
-                    <img
-                        className={styles.featuredImage}
-                        src={this.props.iconURL}
-                    />
+                    {this.props.iconSource ? (
+                        <ScratchImage
+                            className={styles.featuredImage}
+                            imageSource={this.props.iconSource}
+                        />
+                    ) : null}
                 </div>
                 {this.props.insetIconURL ? (
                     <div className={styles.libraryItemInsetImageContainer}>
@@ -121,9 +124,9 @@ class LibraryItemComponent extends React.PureComponent {
                 {/* Layers of wrapping is to prevent layout thrashing on animation */}
                 <Box className={styles.libraryItemImageContainerWrapper}>
                     <Box className={styles.libraryItemImageContainer}>
-                        <img
+                        <ScratchImage
                             className={styles.libraryItemImage}
-                            src={this.props.iconURL}
+                            imageSource={this.props.iconSource}
                         />
                     </Box>
                 </Box>
@@ -146,7 +149,7 @@ LibraryItemComponent.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconURL: PropTypes.string,
+    iconSource: ScratchImage.ImageSourcePropType,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
     name: PropTypes.oneOfType([

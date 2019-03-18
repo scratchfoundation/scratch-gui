@@ -46,10 +46,10 @@ const ConnectionModalComponent = props => (
 ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node,
     connectionSmallIconURL: PropTypes.string,
+    connectionTipIconURL: PropTypes.string,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,
-    peripheralButtonImage: PropTypes.string,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     title: PropTypes.string.isRequired,
     useAutoScan: PropTypes.bool.isRequired

@@ -39,10 +39,13 @@ class ScratchImage extends React.PureComponent {
             storage
                 .load(imageSource.assetType, imageSource.assetId)
                 .then(asset => {
-                    const dataURI = asset.encodeDataURI();
-                    nextImage.setState({
-                        imageURI: dataURI
-                    });
+                    if (!nextImage.wasUnmounted) {
+                        const dataURI = asset.encodeDataURI();
+
+                        nextImage.setState({
+                            imageURI: dataURI
+                        });
+                    }
                     --this._currentJobs;
                     this.loadPendingImages();
                 });
@@ -57,6 +60,10 @@ class ScratchImage extends React.PureComponent {
     componentWillReceiveProps (nextProps) {
         const newState = this._loadImageSource(nextProps.imageSource);
         this.setState(newState);
+    }
+    componentWillUnmount () {
+        this.wasUnmounted = true;
+        ScratchImage._pendingImages.delete(this);
     }
     /**
      * Calculate the state changes necessary to load the image specified in the provided source info. If the component

@@ -331,5 +331,188 @@ export default function (vm) {
         return collator.compare(str1, str2);
     };
 
+    // Default font returned from CanvasRendering2DContext.font.
+    const SPEC_DEFAULT_FONT = '10px sans-serif';
+
+    // Convert a CSSStyleDecoration into an object without hyphenated keys for
+    // iterating font strings.
+    const fontMembers = ({
+        font: font,
+        'font-style': style = 'normal',
+        'font-varient': variant = 'normal',
+        'font-weight': weight = 'normal',
+        'font-stretch': stretch = 'normal',
+        'font-size': size,
+        'line-height': lineHeight = 'normal',
+        'font-family': family
+    }) => ({
+        font,
+        style,
+        variant,
+        weight,
+        stretch,
+        size,
+        lineHeight,
+        family
+    });
+
+    // Set of functions that produce font strings for
+    // CanvasRendering2DContext.font.
+    const fontFormats = [
+        // Not all browsers (i.e. Firefox) produce this value.
+        ({font}) => font,
+
+        // Same value as `font` that is produced by some browsers.
+        ({style, variant, weight, stretch, size, lineHeight, family}) => (
+            `${style} ${variant} ${weight} ${stretch} ${size} / ${lineHeight} ${family}`
+        ),
+
+        // Remove line height. It will not effect width anyways.
+        ({style, variant, weight, stretch, size, family}) => (
+            `${style} ${variant} ${weight} ${stretch} ${size} ${family}`
+        ),
+
+        // Remove style. That is for italics or oblique fonts. It should not
+        // effect width.
+        ({variant, weight, stretch, size, family}) => (
+            `${variant} ${weight} ${stretch} ${size} ${family}`
+        ),
+
+        // Remove variant. That can change text width but we don't use any
+        // variants.
+        ({weight, stretch, size, family}) => (
+            `${weight} ${stretch} ${size} ${family}`
+        ),
+
+        // Remove stretch. That can change text width but we don't stretch the
+        // text through the font css keys.
+        ({weight, size, family}) => `${weight} ${size} ${family}`,
+
+        // Removing any of the last three would report measure text incorrectly.
+        () => {
+            throw new Error('Could not initialiaze text measuring canvas.');
+        }
+    ];
+
+    // Find a font string that the browser accepts.
+    const findFontString = function (context, computedStyle) {
+        const _members = fontMembers(computedStyle);
+        for (
+            let i = 0;
+            context.font === SPEC_DEFAULT_FONT && i < fontFormats.length;
+            i++
+        ) {
+            context.font = fontFormats[i](_members);
+        }
+    };
+
+    // A cache of element class name to text content/text width pairs.
+    const textRenderCache = {};
+
+    // Cache of canvases with assigned font values to deter text widths with.
+    const fontCanvas = {};
+
+    // Initialize some canvases for measuring text widths.
+    const initMetrics = (classNames, element) => {
+        let root = document.body;
+        if (element.getRootNode().tagName === 'document') {
+            root = element.parentElement;
+        }
+
+        const parent = document.createElementNS(ScratchBlocks.SVG_NS, 'g');
+        const clones = [];
+        for (let i = 0; i < classNames.length; i++) {
+            const className = classNames[i];
+            const elementClone = element.cloneNode();
+            elementClone.className.baseVal = className;
+            clones.push(elementClone);
+            parent.appendChild(elementClone);
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            fontCanvas[className] = context;
+            textRenderCache[className] = {};
+        }
+
+        root.appendChild(parent);
+
+        try {
+            for (let i = 0; i < classNames.length; i++) {
+                const className = classNames[i];
+                try {
+                    // Using CanvasRendering2DContext.measureText does not have
+                    // the DOM style and layout cost that getComputedTextLength
+                    // has. getComputedStyle does have that cost though. So
+                    // calling initMetrics with all the classes to initialize
+                    // reduces the times we'll incure the style and layout cost
+                    // for getComputedStyle.
+                    const computedStyle = window.getComputedStyle(clones[i]);
+                    const context = fontCanvas[className];
+
+                    findFontString(context, computedStyle);
+                } catch (e) {
+                    // console.warn(
+                    //     'Failed to find a font string to measure text ' +
+                    //     'through context.measureText with.',
+                    //     e
+                    // );
+
+                    // Replace the canvas context with a mock object that always
+                    // returns a width of 0.
+                    fontCanvas[className] = {
+                        measureText () {
+                            return {
+                                width: 0
+                            };
+                        }
+                    };
+                }
+            }
+        } finally {
+            root.removeChild(parent);
+        }
+    };
+
+    // Hold on to the original getCachedWidth. We may fallback to it if
+    // measureText reports a width of 0.
+    const _getCachedWidth = ScratchBlocks.Field.getCachedWidth;
+
+    // Replace Field.getCachedWidth. Use a nested cache, it'll be faster than
+    // concatenating a key every visit to this function. Use TextMetrics from
+    // 2D Canvas.
+    ScratchBlocks.Field.getCachedWidth = function (text) {
+        const className = text.className.baseVal;
+        const textContent = text.textContent;
+        if (textRenderCache[className]) {
+            const _cached = textRenderCache[className][textContent];
+            if (_cached) {
+                return _cached;
+            }
+
+            const metrics = fontCanvas[className].measureText(textContent);
+            textRenderCache[className][textContent] =
+                metrics.width || _getCachedWidth.call(this, text);
+            return textRenderCache[className][textContent];
+        }
+
+        if (
+            className === 'blocklyFlyoutLabelText' ||
+            className === 'blocklyText' ||
+            className === 'blocklyText blocklyDropdownText'
+        ) {
+            // These three are commonly used so lets initialize them together.
+            // This will reduce the cost of DOM style and layout while
+            // determining the font.
+            initMetrics(['blocklyFlyoutLabelText', 'blocklyText', 'blocklyText blocklyDropdownText'], text);
+        } else {
+            initMetrics([className], text);
+        }
+
+        const metrics = fontCanvas[className].measureText(textContent);
+        textRenderCache[className][textContent] =
+            metrics.width || _getCachedWidth.call(this, text);
+        return textRenderCache[className][textContent];
+    };
+
     return ScratchBlocks;
 }

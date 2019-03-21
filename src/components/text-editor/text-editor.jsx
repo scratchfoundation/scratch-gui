@@ -1,8 +1,12 @@
 import React from 'react';
 import {injectIntl} from 'react-intl';
 import MonacoEditor from 'react-monaco-editor';
-import PropTypes from 'prop-types';
 import styles from './text-editor.css';
+const options = {
+    automaticLayout: true
+};
+const hello = 'When green flag clicked show variable [myvar]' +
+'if <myvar < 50> then move 100 steps if edge bounce set [myvar] to (myvar+1)else stop all';
 
 class TextEditor extends React.Component {
     constructor (props) {
@@ -35,18 +39,18 @@ class TextEditor extends React.Component {
 
     render () {
         return (
-            <MonacoEditor
-                height="600"
-                language="javascript"
-                theme="vs-dark"
-                width="800"
-            />
+            <div className={styles.editorContainer}>
+                <MonacoEditor
+                    height="100%"
+                    language="javascript"
+                    options={options}
+                    theme="vs-dark"
+                    value={hello}
+                    width="100%"
+                />
+            </div>
         );
     }
 }
-
-TextEditor.propTypes = {
-    blocks: PropTypes.any
-};
 
 export default injectIntl(TextEditor);

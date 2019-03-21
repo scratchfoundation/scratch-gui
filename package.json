@@ -143,6 +143,6 @@
         }
     },
     "dependencies": {
-        "react-monaco-editor": "^0.24.0"
+        "react-monaco-editor": "^0.24.1"
     }
 }

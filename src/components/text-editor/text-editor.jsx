@@ -2,17 +2,16 @@ import React from 'react';
 import {injectIntl} from 'react-intl';
 import MonacoEditor from 'react-monaco-editor';
 import styles from './text-editor.css';
+
 const options = {
     automaticLayout: true
 };
-const hello = 'When green flag clicked show variable [myvar]' +
-'if <myvar < 50> then move 100 steps if edge bounce set [myvar] to (myvar+1)else stop all';
 
 class TextEditor extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            blocks: null
+            blocks: {}
         };
     }
 
@@ -23,21 +22,27 @@ class TextEditor extends React.Component {
     }
 
     displayBlocks (blocks) {
-        if (blocks && blocks.length > 0) {
-            blocks.forEach(block => {
-                if (block.type === 'motion_movesteps') {
-                    let value = 'nothing';
-                    block.values.forEach(blockValue => {
-                        value = blockValue.value;
-                    });
-                    blocks = `Move (${value}) steps`;
+        let blocksText = '';
+        const blocksLength = Object.keys(blocks).length;
+        if (blocksLength > 0) {
+            for (const blockKey in blocks) {
+                const block = blocks[blockKey];
+                if (block.opcode === 'motion_movesteps') {
+                    const inputValue = block.inputs.STEPS[1][1];
+                    blocksText += `Move (${inputValue}) steps\n`;
+                } else if (block.opcode === 'motion_turnright') {
+                    const inputValue = block.inputs.DEGREES[1][1];
+                    blocksText += `Turn (${inputValue}) degrees right\n`;
                 }
-            });
+            }
         }
-        return blocks;
+        return blocksText;
     }
 
     render () {
+        const {blocks} = this.state;
+        const blocksText = this.displayBlocks(blocks);
+
         return (
             <div className={styles.editorContainer}>
                 <MonacoEditor
@@ -45,7 +50,7 @@ class TextEditor extends React.Component {
                     language="javascript"
                     options={options}
                     theme="vs-dark"
-                    value={hello}
+                    value={blocksText}
                     width="100%"
                 />
             </div>

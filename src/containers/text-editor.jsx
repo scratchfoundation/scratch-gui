@@ -2,19 +2,23 @@ import React from 'react';
 import TextEditorComponent from '../components/text-editor/text-editor.jsx';
 import VM from 'scratch-vm';
 import PropTypes from 'prop-types';
-import {convertXMLBlocksToJSON} from '../lib/text/text-util';
+
+import {getBlocksFromVm} from '../lib/text';
 
 class TextEditor extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            blocks: null
+            blocks: {}
         };
     }
 
     componentDidMount () {
-        this.props.vm.on('workspaceUpdate', data => {
-            convertXMLBlocksToJSON(data.xml).then(blocks => {
+        this.props.vm.on('workspaceUpdate', () => {
+            const vmJson = JSON.parse(this.props.vm.toJSON());
+
+            getBlocksFromVm(vmJson, (err, blocks) => {
+                if (err) throw err;
                 this.setState({blocks});
             });
         });
@@ -22,9 +26,8 @@ class TextEditor extends React.Component {
 
     render () {
         const {blocks} = this.state;
-        return (
-            <TextEditorComponent blocks={blocks} />
-        );
+
+        return <TextEditorComponent blocks={blocks} />;
     }
 }
 

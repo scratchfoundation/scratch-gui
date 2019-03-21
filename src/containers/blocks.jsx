@@ -199,8 +199,11 @@ class Blocks extends React.Component {
 
         const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
-        this.workspace.updateToolbox(this.props.toolboxXML);
-        this._renderedToolboxXML = this.props.toolboxXML;
+
+        if (this._renderedToolboxXML !== this.props.toolboxXML) {
+            this.workspace.updateToolbox(this.props.toolboxXML);
+            this._renderedToolboxXML = this.props.toolboxXML;
+        }
 
         // In order to catch any changes that mutate the toolbox during "normal runtime"
         // (variable changes/etc), re-enable toolbox refresh.

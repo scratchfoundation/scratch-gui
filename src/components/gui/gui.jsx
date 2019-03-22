@@ -104,6 +104,7 @@ const GUIComponent = props => {
         onActivateTab,
         onClickLogo,
         onExtensionButtonClick,
+        onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
         onRequestCloseTelemetryModal,

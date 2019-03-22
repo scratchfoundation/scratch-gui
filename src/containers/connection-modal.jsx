@@ -108,12 +108,12 @@ class ConnectionModal extends React.Component {
         return (
             <ConnectionModalComponent
                 connectingMessage={this.state.extension.connectingMessage}
+                connectionIconURL={this.state.extension.connectionIconURL}
+                connectionSmallIconURL={this.state.extension.connectionSmallIconURL}
+                connectionTipIconURL={this.state.extension.connectionTipIconURL}
                 extensionId={this.props.extensionId}
                 name={this.state.extension.name}
-                peripheralButtonImage={this.state.extension.peripheralButtonImage}
-                peripheralImage={this.state.extension.peripheralImage}
                 phase={this.state.phase}
-                smallPeripheralImage={this.state.extension.smallPeripheralImage}
                 title={this.props.extensionId}
                 useAutoScan={this.state.extension.useAutoScan}
                 vm={this.props.vm}

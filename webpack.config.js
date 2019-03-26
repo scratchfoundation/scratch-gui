@@ -41,7 +41,8 @@ const base = {
             include: [
                 path.resolve(__dirname, 'src'),
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
-                /node_modules[\\/]pify/
+                /node_modules[\\/]pify/,
+                /node_modules[\\/]@vernier[\\/]godirect/
             ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config

@@ -65,6 +65,8 @@ import addEffectsThumb from './thumbnails/add-effects.jpg';
 import moveArrowKeysThumb from './thumbnails/move-arrow-keys.jpg';
 import spinThumb from './thumbnails/spin.jpg';
 
+import teachScratchToYourCatThumb from './thumbnails/teach-scratch-to-your-cat.jpg';
+
 export default {
 
     'intro-move-sayhello': {
@@ -348,7 +350,24 @@ export default {
         ],
         urlId: 'imagine'
     },
-    
+
+    'teach-scratch-to-your-cat': {
+        name: (
+            'Teach Scratch to Your Cat'
+        ),
+        img: teachScratchToYourCatThumb,
+        tags: [],
+        steps: [{
+            video: 'u1aibu2mfq'
+        }, {
+            deckIds: [
+                'intro-move-sayhello',
+                'animate-a-name'
+            ]
+        }],
+        urlId: 'teach-scratch-to-your-cat'
+    },
+
     'Make-Music': {
         name: (
             <FormattedMessage

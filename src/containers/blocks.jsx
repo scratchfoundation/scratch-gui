@@ -565,6 +565,16 @@ Blocks.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
+
+let blockSounds = false;
+try {
+    if (window.localStorage && localStorage.getItem && localStorage.getItem('blockSounds') === 'true') {
+        blockSounds = true;
+    }
+} catch (e) {
+    // local storage unavailable
+}
+
 Blocks.defaultOptions = {
     zoom: {
         controls: true,
@@ -590,7 +600,7 @@ Blocks.defaultOptions = {
     },
     comments: true,
     collapse: false,
-    sounds: false
+    sounds: blockSounds
 };
 
 Blocks.defaultProps = {

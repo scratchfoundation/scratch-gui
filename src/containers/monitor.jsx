@@ -1,5 +1,6 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
+import Papa from 'papaparse';
 import PropTypes from 'prop-types';
 import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
@@ -150,8 +151,9 @@ class Monitor extends React.Component {
     handleExport () {
         const {vm, targetId, id: variableId} = this.props;
         const variable = getVariable(vm, targetId, variableId);
-        const text = variable.value.join('\r\n');
-        download(`${variable.name}.txt`, `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+        const rows = variable.value.map(item => [item]);
+        const text = Papa.unparse(rows);
+        download(`${variable.name}.csv`, `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
     }
     render () {
         const monitorProps = monitorAdapter(this.props);

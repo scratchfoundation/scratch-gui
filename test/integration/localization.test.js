@@ -25,8 +25,9 @@ describe('Localization', () => {
     });
 
     test('Switching languages', async () => {
+        await driver.quit();
+        driver = getDriver();
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Add a sprite to make sure it stays when switching languages
         await clickText('Costumes');
@@ -59,7 +60,6 @@ describe('Localization', () => {
     // Regression test for #4476, blocks in wrong language when loaded with locale
     test('Loading with locale shows correct blocks', async () => {
         await loadUri(`${uri}?locale=de`);
-        await clickXpath('//button[@title="Ausprobieren!"]'); // "Try It"
         await clickText('Fühlen'); // Sensing category in German
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks to scroll
         await clickText('Antwort'); // Find the "answer" block in German

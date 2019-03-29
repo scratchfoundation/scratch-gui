@@ -128,6 +128,7 @@ to adjust for the border using a different method */
 }
 
 .question-wrapper {
+    z-index: $z-index-stage-question;
     pointer-events: auto;
 }
 

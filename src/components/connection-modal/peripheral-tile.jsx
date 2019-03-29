@@ -23,7 +23,7 @@ class PeripheralTile extends React.Component {
                 <Box className={styles.peripheralTileName}>
                     <img
                         className={styles.peripheralTileImage}
-                        src={this.props.smallPeripheralImage}
+                        src={this.props.connectionSmallIconURL}
                     />
                     <Box className={styles.peripheralTileNameWrapper}>
                         <Box className={styles.peripheralTileNameLabel}>
@@ -77,11 +77,11 @@ class PeripheralTile extends React.Component {
 }
 
 PeripheralTile.propTypes = {
+    connectionSmallIconURL: PropTypes.string,
     name: PropTypes.string,
     onConnecting: PropTypes.func,
     peripheralId: PropTypes.string,
-    rssi: PropTypes.number,
-    smallPeripheralImage: PropTypes.string
+    rssi: PropTypes.number
 };
 
 export default PeripheralTile;

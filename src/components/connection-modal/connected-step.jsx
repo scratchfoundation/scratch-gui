@@ -15,7 +15,7 @@ const ConnectedStep = props => (
                 <div className={styles.peripheralActivity}>
                     <img
                         className={styles.peripheralActivityIcon}
-                        src={props.peripheralImage}
+                        src={props.connectionIconURL}
                     />
                     <img
                         className={styles.bluetoothConnectedIcon}
@@ -64,9 +64,9 @@ const ConnectedStep = props => (
 );
 
 ConnectedStep.propTypes = {
+    connectionIconURL: PropTypes.string.isRequired,
     onCancel: PropTypes.func,
-    onDisconnect: PropTypes.func,
-    peripheralImage: PropTypes.string.isRequired
+    onDisconnect: PropTypes.func
 };
 
 export default ConnectedStep;

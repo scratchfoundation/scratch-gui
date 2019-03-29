@@ -6,6 +6,8 @@ import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
 import React from 'react';
 
+import VM from 'scratch-vm';
+
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CommunityButton from './community-button.jsx';
@@ -55,6 +57,8 @@ import {
     loginMenuOpen
 } from '../../reducers/menus';
 
+import collectMetadata from '../../lib/collect-metadata';
+
 import styles from './menu-bar.css';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
@@ -67,13 +71,8 @@ import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
-const messages = defineMessages({
-    confirmNav: {
-        id: 'gui.menuBar.confirmNewWithoutSaving',
-        defaultMessage: 'Replace contents of the current project?',
-        description: 'message for prompting user to confirm that they want to create new project without saving'
-    }
-});
+import sharedMessages from '../../lib/shared-messages';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -151,10 +150,10 @@ class MenuBar extends React.Component {
             'handleClickSaveAsCopy',
             'handleClickSeeCommunity',
             'handleClickShare',
-            'handleCloseFileMenuAndThen',
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'handleSaveToComputer',
             'restoreOptionMessage'
         ]);
     }
@@ -173,7 +172,7 @@ class MenuBar extends React.Component {
         // they'll lose their work.
         if (this.props.projectChanged && !this.props.canCreateNew) {
             readyToReplaceProject = confirm( // eslint-disable-line no-alert
-                this.props.intl.formatMessage(messages.confirmNav)
+                this.props.intl.formatMessage(sharedMessages.replaceProjectWarning)
             );
         }
         this.props.onRequestCloseFile();
@@ -221,18 +220,22 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    handleCloseFileMenuAndThen (fn) {
-        return () => {
-            this.props.onRequestCloseFile();
-            fn();
-        };
-    }
     handleKeyPress (event) {
         const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
         if (modifier && event.key === 's') {
             this.props.onClickSave();
             event.preventDefault();
         }
+    }
+    handleSaveToComputer (downloadProjectCallback) {
+        return () => {
+            this.props.onRequestCloseFile();
+            downloadProjectCallback();
+            if (this.props.onProjectTelemetryEvent) {
+                const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
+                this.props.onProjectTelemetryEvent('projectDidSave', metadata);
+            }
+        };
     }
     handleLanguageMouseUp (e) {
         if (!this.props.languageMenuOpen) {
@@ -407,10 +410,10 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}
                                     </SBFileUploader>
-                                    <SB3Downloader>{(className, downloadProject) => (
+                                    <SB3Downloader>{(className, downloadProjectCallback) => (
                                         <MenuItem
                                             className={className}
-                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
+                                            onClick={this.handleSaveToComputer(downloadProjectCallback)}
                                         >
                                             <FormattedMessage
                                                 defaultMessage="Save to your computer"
@@ -748,6 +751,7 @@ MenuBar.propTypes = {
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
+    onProjectTelemetryEvent: PropTypes.func,
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
@@ -762,7 +766,8 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     showComingSoon: PropTypes.bool,
-    username: PropTypes.string
+    username: PropTypes.string,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 MenuBar.defaultProps = {
@@ -780,11 +785,13 @@ const mapStateToProps = state => {
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
+        locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
         projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
-        username: user ? user.username : null
+        username: user ? user.username : null,
+        vm: state.scratchGui.vm
     };
 };
 

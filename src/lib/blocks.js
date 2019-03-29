@@ -245,8 +245,12 @@ export default function (vm) {
                     // The block was in the flyout so look up future block info there.
                     lookupBlocks = vm.runtime.flyoutBlocks;
                 }
+                const sort = function (options) {
+                    options.sort(ScratchBlocks.scratchBlocksUtils.compareStrings);
+                };
                 // Get all the stage variables (no lists) so we can add them to menu when the stage is selected.
                 const stageVariableOptions = vm.runtime.getTargetForStage().getAllVariableNamesInScopeByType('');
+                sort(stageVariableOptions);
                 const stageVariableMenuItems = stageVariableOptions.map(variable => [variable, variable]);
                 if (sensingOfBlock.inputs.OBJECT.shadow !== sensingOfBlock.inputs.OBJECT.block) {
                     // There's a block dropped on top of the menu. It'd be nice to evaluate it and
@@ -265,6 +269,7 @@ export default function (vm) {
                 // The target should exist, but there are ways for it not to (e.g. #4203).
                 if (target) {
                     spriteVariableOptions = target.getAllVariableNamesInScopeByType('', true);
+                    sort(spriteVariableOptions);
                 }
                 const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable, variable]);
                 return spriteOptions.concat(spriteVariableMenuItems);
@@ -313,6 +318,17 @@ export default function (vm) {
 
     ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
         vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
+    };
+
+    // Use a collator's compare instead of localeCompare which internally
+    // creates a collator. Using this is a lot faster in browsers that create a
+    // collator for every localeCompare call.
+    const collator = new Intl.Collator([], {
+        sensitivity: 'base',
+        numeric: true
+    });
+    ScratchBlocks.scratchBlocksUtils.compareStrings = function (str1, str2) {
+        return collator.compare(str1, str2);
     };
 
     return ScratchBlocks;

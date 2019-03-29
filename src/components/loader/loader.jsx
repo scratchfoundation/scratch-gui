@@ -120,15 +120,13 @@ class LoaderComponent extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            messageNumber: 0
+            messageNumber: this.chooseRandomMessage()
         };
     }
     componentDidMount () {
-        this.chooseRandomMessage();
-
         // Start an interval to choose a new message every 5 seconds
         this.intervalId = setInterval(() => {
-            this.chooseRandomMessage();
+            this.setState({messageNumber: this.chooseRandomMessage()});
         }, 5000);
     }
     componentWillUnmount () {
@@ -145,7 +143,7 @@ class LoaderComponent extends React.Component {
                 break;
             }
         }
-        this.setState({messageNumber});
+        return messageNumber;
     }
     render () {
         return (

@@ -25,9 +25,17 @@ const BorderedMenuItem = props => (
     />
 );
 
+const DangerousMenuItem = props => (
+    <MenuItem
+        {...props}
+        attributes={{className: classNames(styles.menuItem, styles.menuItemBordered, styles.menuItemDanger)}}
+    />
+);
+
 
 export {
     BorderedMenuItem,
+    DangerousMenuItem,
     StyledContextMenu as ContextMenu,
     StyledMenuItem as MenuItem
 };

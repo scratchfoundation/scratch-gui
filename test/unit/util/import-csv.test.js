@@ -1,6 +1,6 @@
-import {parse} from '../../../src/lib/import-csv';
+import {parseTxt} from '../../../src/lib/import-csv';
 
-describe('parse', () => {
+describe('parseTxt', () => {
     test('returns single-column data unmodified', () => {
         const lines = [
             'a',
@@ -13,7 +13,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn();
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).not.toHaveBeenCalled();
         });
@@ -42,8 +42,8 @@ describe('parse', () => {
         const onChooseColumn2 = jest.fn().mockReturnValue(2);
 
         return Promise.all([
-            expect(parse(lines, onChooseColumn1)).resolves.toMatchObject(resultColumn1),
-            expect(parse(lines, onChooseColumn2)).resolves.toMatchObject(resultColumn2)
+            expect(parseTxt(lines, onChooseColumn1)).resolves.toMatchObject(resultColumn1),
+            expect(parseTxt(lines, onChooseColumn2)).resolves.toMatchObject(resultColumn2)
         ]).then(() => {
             expect(onChooseColumn1.mock.calls.length).toBe(1);
             expect(onChooseColumn2.mock.calls.length).toBe(1);
@@ -63,7 +63,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn();
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).not.toHaveBeenCalled();
         });
@@ -85,7 +85,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn().mockReturnValue(2);
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).toHaveBeenCalled();
         });
@@ -104,7 +104,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn();
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).not.toHaveBeenCalled();
         });
@@ -121,7 +121,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn();
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).not.toHaveBeenCalled();
         });
@@ -138,7 +138,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn();
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).not.toHaveBeenCalled();
         });
@@ -166,7 +166,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn().mockReturnValue(1);
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).toHaveBeenCalled();
         });
@@ -183,7 +183,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn().mockReturnValue(0);
 
         return (
-            parse(lines, onChooseColumn)
+            parseTxt(lines, onChooseColumn)
         ).then(() => {
             expect(onChooseColumn).toHaveBeenCalledWith(4);
         });
@@ -202,7 +202,7 @@ describe('parse', () => {
 
         const onChooseColumn = jest.fn().mockReturnValue('1.8');
 
-        return expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result);
+        return expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result);
     });
 
     test('returns data unmodified when onChooseColumn returns out-of-bounds or NaN', () => {
@@ -221,9 +221,9 @@ describe('parse', () => {
         const onChooseColumnNaN = jest.fn().mockReturnValue('unicorn');
 
         return Promise.all([
-            expect(parse(lines, onChooseColumn0)).resolves.toMatchObject(result),
-            expect(parse(lines, onChooseColumn3)).resolves.toMatchObject(result),
-            expect(parse(lines, onChooseColumnNaN)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn0)).resolves.toMatchObject(result),
+            expect(parseTxt(lines, onChooseColumn3)).resolves.toMatchObject(result),
+            expect(parseTxt(lines, onChooseColumnNaN)).resolves.toMatchObject(result)
         ]);
     });
 
@@ -248,7 +248,7 @@ describe('parse', () => {
         const onChooseColumn = jest.fn().mockReturnValue(2);
 
         return (
-            expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result)
+            expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result)
         ).then(() => {
             expect(onChooseColumn).toHaveBeenCalledWith(2);
         });
@@ -271,6 +271,6 @@ describe('parse', () => {
 
         const onChooseColumn = jest.fn().mockReturnValue(2);
 
-        return expect(parse(lines, onChooseColumn)).resolves.toMatchObject(result);
+        return expect(parseTxt(lines, onChooseColumn)).resolves.toMatchObject(result);
     });
 });

@@ -2,6 +2,9 @@ import ScratchStorage from 'scratch-storage';
 
 import defaultProject from './default-project';
 
+const DEFAULT_ASSET_SERVER = 'https://assets.scratch.mit.edu';
+const DEFAULT_PROJECT_SERVER = 'https://projects.scratch.mit.edu';
+
 /**
  * Wrapper for ScratchStorage which adds default web sources.
  * @todo make this more configurable
@@ -10,6 +13,8 @@ class Storage extends ScratchStorage {
     constructor () {
         super();
         this.cacheDefaultProject();
+        this.projectHost = DEFAULT_PROJECT_SERVER;
+        this.assetHost = DEFAULT_ASSET_SERVER;
     }
     addOfficialScratchWebStores () {
         this.addWebStore(

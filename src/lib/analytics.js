@@ -6,6 +6,5 @@ GoogleAnalytics.initialize(process.env.GA_ID || window.GA_ID, {
     sampleRate: (process.env.NODE_ENV === 'production') ? 100 : 0,
     forceSSL: true
 });
-*/
 
 export default GoogleAnalytics;

@@ -35,11 +35,11 @@ const ScanningStep = props => (
                     <div className={styles.peripheralTilePane}>
                         {props.peripheralList.map(peripheral =>
                             (<PeripheralTile
+                                connectionSmallIconURL={props.connectionSmallIconURL}
                                 key={peripheral.peripheralId}
                                 name={peripheral.name}
                                 peripheralId={peripheral.peripheralId}
                                 rssi={peripheral.rssi}
-                                smallPeripheralImage={props.smallPeripheralImage}
                                 onConnecting={props.onConnecting}
                             />)
                         )}
@@ -121,6 +121,7 @@ const ScanningStep = props => (
 );
 
 ScanningStep.propTypes = {
+    connectionSmallIconURL: PropTypes.string,
     onConnecting: PropTypes.func,
     onRefresh: PropTypes.func,
     onManual: PropTypes.func,
@@ -130,8 +131,7 @@ ScanningStep.propTypes = {
         rssi: PropTypes.number,
         peripheralId: PropTypes.string
     })),
-    scanning: PropTypes.bool.isRequired,
-    smallPeripheralImage: PropTypes.string
+    scanning: PropTypes.bool.isRequired
 };
 
 ScanningStep.defaultProps = {

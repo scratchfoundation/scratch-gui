@@ -27,7 +27,7 @@ const ConnectionModalComponent = props => (
         className={styles.modalContent}
         contentLabel={props.name}
         headerClassName={styles.header}
-        headerImage={props.smallPeripheralImage}
+        headerImage={props.connectionSmallIconURL}
         id="connectionModal"
         onHelp={props.onHelp}
         onRequestClose={props.onCancel}
@@ -45,13 +45,14 @@ const ConnectionModalComponent = props => (
 
 ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node,
+    connectionSmallIconURL: PropTypes.string,
+    connectionTipIconURL: PropTypes.string,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,
     onManual: PropTypes.func,
     peripheralButtonImage: PropTypes.string,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
-    smallPeripheralImage: PropTypes.string,
     title: PropTypes.string.isRequired,
     useManual: PropTypes.bool,
     useAutoScan: PropTypes.bool.isRequired

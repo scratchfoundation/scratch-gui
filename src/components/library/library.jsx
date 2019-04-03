@@ -9,7 +9,6 @@ import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
-import analytics from '../../lib/analytics';
 
 import styles from './library.css';
 
@@ -60,7 +59,6 @@ class LibraryComponent extends React.Component {
     }
     handleClose () {
         this.props.onRequestClose();
-        analytics.pageview(`/${this.props.id}/search?q=${this.state.filterQuery}`);
     }
     handleTagClick (tag) {
         this.setState({

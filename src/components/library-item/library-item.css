@@ -178,6 +178,10 @@
     font-weight: bold;
 }
 
+.featured-extension-metadata-detail img{
+    margin-right: 0.25rem;
+}
+
 .coming-soon-text {
     position: absolute;
     background-color: $data-primary;

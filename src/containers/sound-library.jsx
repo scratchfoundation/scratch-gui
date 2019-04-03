@@ -5,7 +5,6 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
 
-import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
 
 import soundIcon from '../components/asset-panel/icon--sound.svg';
@@ -124,11 +123,6 @@ class SoundLibrary extends React.PureComponent {
         };
         this.props.vm.addSound(vmSound).then(() => {
             this.props.onNewSound();
-        });
-        analytics.event({
-            category: 'library',
-            action: 'Select Sound',
-            label: soundItem.name
         });
     }
     render () {

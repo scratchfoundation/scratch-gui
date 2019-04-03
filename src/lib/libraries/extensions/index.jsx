@@ -6,8 +6,8 @@ import musicInsetIconURL from './music/music-small.svg';
 
 import martyImage from './marty.png';
 import martyExtImage from './marty_extended.png';
-import martyPeripheralImage from './peripheral-connection/marty/marty-illustration.svg';
-import martyMenuImage from './peripheral-connection/marty/marty-small.svg';
+import martyPeripheralImage from './marty/marty-illustration.svg';
+import martyMenuImage from './marty/marty-small.svg';
 
 import penIconURL from './pen/pen.png';
 import penInsetIconURL from './pen/pen-small.svg';

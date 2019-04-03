@@ -96,6 +96,21 @@ class Blocks extends React.Component {
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
+        // Register buttons under new callback keys for creating variables,
+        // lists, and procedures from extensions.
+
+        const toolboxWorkspace = this.workspace.getFlyout().getWorkspace();
+
+        const varListButtonCallback = type =>
+            (() => this.ScratchBlocks.Variables.createVariable(this.workspace, null, type));
+        const procButtonCallback = () => {
+            this.ScratchBlocks.Procedures.createProcedureDefCallback_(this.workspace);
+        };
+
+        toolboxWorkspace.registerButtonCallback('MAKE_A_VARIABLE', varListButtonCallback(''));
+        toolboxWorkspace.registerButtonCallback('MAKE_A_LIST', varListButtonCallback('list'));
+        toolboxWorkspace.registerButtonCallback('MAKE_A_PROCEDURE', procButtonCallback);
+
         // Store the xml of the toolbox that is actually rendered.
         // This is used in componentDidUpdate instead of prevProps, because
         // the xml can change while e.g. on the costumes tab.

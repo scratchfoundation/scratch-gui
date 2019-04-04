@@ -74,7 +74,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleProjectChanged () {
-            if (this.props.shouldEmitUpdates) {
+            if (this.props.shouldEmitUpdates && !this.props.projectChanged) {
                 this.props.onProjectChanged();
             }
         }
@@ -117,6 +117,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                projectChanged,
                 shouldEmitUpdates,
                 onBlockDragUpdate,
                 onGreenFlag,
@@ -154,6 +155,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
+        projectChanged: PropTypes.bool,
         shouldEmitUpdates: PropTypes.bool,
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
@@ -163,6 +165,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onGreenFlag: () => ({})
     };
     const mapStateToProps = state => ({
+        projectChanged: state.scratchGui.projectChanged,
         // Do not emit target or project updates in fullscreen or player only mode
         // or when recording sounds (it leads to garbled recordings on low-power machines)
         shouldEmitUpdates: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly &&

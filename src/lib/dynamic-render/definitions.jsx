@@ -29,7 +29,7 @@ const skipDispatch = () => ({});
 
 const idleRequire = compose(
     placeholder,
-    addProps({priority: 1}),
+    addProps({priority: 3}),
     schedule,
     gate,
     loadNull
@@ -47,7 +47,7 @@ const idleWhileOperationWithPriority = operation => priority => (
 const idleWhileFetchingWithPriority = idleWhileOperationWithPriority(fetching);
 
 const idleWhileFetching = compose(
-    idleWhileFetchingWithPriority(2),
+    idleWhileFetchingWithPriority(3),
     gate,
     loadComponent
 );
@@ -55,7 +55,7 @@ const idleWhileFetching = compose(
 
 const idleRequireWhileFetching = loadModule => (
     compose(
-        idleWhileFetchingWithPriority(2),
+        idleWhileFetchingWithPriority(3),
         idleRequire(loadModule),
         loadComponent
     )(loadModule)
@@ -64,14 +64,14 @@ const idleRequireWhileFetching = loadModule => (
 const idleWhileLoadingWithPriority = idleWhileOperationWithPriority(loading);
 
 const idleWhileLoading = compose(
-    idleWhileLoadingWithPriority(2),
+    idleWhileLoadingWithPriority(5),
     gate,
     loadComponent
 );
 
 const idleRequireWhileLoading = loadModule => (
     compose(
-        idleWhileLoadingWithPriority(2),
+        idleWhileLoadingWithPriority(5),
         idleRequire(loadModule),
         loadComponent
     )(loadModule)

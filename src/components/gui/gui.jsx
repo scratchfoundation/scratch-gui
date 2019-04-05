@@ -3,18 +3,18 @@ import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
-import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.dynamic.jsx';
 import CostumeTab from '../../containers/costume-tab.dynamic.jsx';
 import TargetPane from '../../containers/target-pane.dynamic.jsx';
 import SoundTab from '../../containers/sound-tab.dynamic.jsx';
-import StageWrapper from '../../containers/stage-wrapper.jsx';
+import StageWrapper from '../../containers/stage-wrapper.dynamic.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.dynamic.jsx';
@@ -34,6 +34,8 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
+import isRendererSupportedHOC from './is-renderer-supported.dynamic.jsx';
+
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
@@ -47,10 +49,6 @@ const messages = defineMessages({
         defaultMessage: 'Add Extension'
     }
 });
-
-// Cache this value to only retrieve it once the first time.
-// Assume that it doesn't change for a session.
-let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
@@ -82,6 +80,7 @@ const GUIComponent = props => {
         isCreating,
         isFullScreen,
         isPlayerOnly,
+        isRendererSupported,
         isRtl,
         isShared,
         loading,
@@ -128,9 +127,9 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    if (isRendererSupported === null) {
-        isRendererSupported = Renderer.isSupported();
-    }
+    // if (isRendererSupported === null) {
+    //     isRendererSupported = Renderer.isSupported();
+    // }
 
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
@@ -375,6 +374,7 @@ GUIComponent.propTypes = {
     isCreating: PropTypes.bool,
     isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
+    isRendererSupported: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
@@ -432,6 +432,8 @@ const mapStateToProps = state => ({
     stageSizeMode: state.scratchGui.stageSize.stageSize
 });
 
-export default injectIntl(connect(
-    mapStateToProps
-)(GUIComponent));
+export default compose(
+    injectIntl,
+    isRendererSupportedHOC,
+    connect(mapStateToProps)
+)(GUIComponent);

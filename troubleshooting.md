@@ -1,4 +1,6 @@
-# Ignoring optional dependencies
+# Troubleshooting
+
+## Ignoring optional dependencies
 
 When running `npm install`, you can get warnings about optionsl dependencies:
 
@@ -15,7 +17,7 @@ npm install --no-optional
 
 Further reading: [Stack Overflow](https://stackoverflow.com/questions/36725181/not-compatible-with-your-operating-system-or-architecture-fsevents1-0-11)
 
-# Resolving dependencies
+## Resolving dependencies
 
 When installing for the first time, you can get warnings which need to be resolved:
 

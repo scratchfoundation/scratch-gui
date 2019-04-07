@@ -121,6 +121,10 @@ If you want to watch the browser as it runs the test, rather than running headle
 USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
 ```
 
+## Troubleshooting
+
+[Troubleshooting](troubleshooting.md)
+
 ## Publishing to GitHub Pages
 You can publish the GUI to github.io so that others on the Internet can view it.
 [Read the wiki for a step-by-step guide.](https://github.com/LLK/scratch-gui/wiki/Publishing-to-GitHub-Pages)

@@ -379,6 +379,11 @@ var BlockType = {
   BOOLEAN: 'Boolean',
 
   /**
+   * A button (not an actual block) for some special action, like making a variable
+   */
+  BUTTON: 'button',
+
+  /**
    * Command block
    */
   COMMAND: 'command',

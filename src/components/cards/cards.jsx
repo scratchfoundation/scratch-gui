@@ -14,7 +14,7 @@ import closeIcon from './icon--close.svg';
 import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 import {translateImage} from '../../lib/libraries/decks/translate-image.js';
 
-const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step}) => (
+const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step, toggle}) => (
     <div className={styles.headerButtons}>
         <div
             className={styles.allButton}
@@ -46,7 +46,7 @@ const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step}) 
                 className={styles.shrinkButton}
                 onClick={onToggleCards}
             >
-                {'Shrink'}
+                {toggle ? 'Shrink' : 'Expand'}
             </div>
             <div
                 className={styles.removeButton}
@@ -115,13 +115,13 @@ ImageStep.propTypes = {
     title: PropTypes.node.isRequired
 };
 
-const NextPrevButtons = ({isRtl, onNextStep, onPrevStep}) => (
+const NextPrevButtons = ({isRtl, onNextStep, onPrevStep, toggle}) => (
     <Fragment>
         {onNextStep ? (
             <div>
-                <div className={isRtl ? styles.leftCard : styles.rightCard} />
+                <div className={isRtl ? styles.leftCard : (toggle ? styles.rightCard : styles.rightCardHidden)} />
                 <div
-                    className={isRtl ? styles.leftButton : styles.rightButton}
+                    className={isRtl ? styles.leftButton : (toggle ? styles.rightButton : styles.rightButtonHidden)}
                     onClick={onNextStep}
                 >
                     <img
@@ -151,13 +151,15 @@ const NextPrevButtons = ({isRtl, onNextStep, onPrevStep}) => (
 NextPrevButtons.propTypes = {
     isRtl: PropTypes.bool,
     onNextStep: PropTypes.func,
-    onPrevStep: PropTypes.func
+    onPrevStep: PropTypes.func,
+    toggle: PropTypes.bool.isRequired
 };
 CardHeader.propTypes = {
     onCloseCards: PropTypes.func.isRequired,
     onShowAll: PropTypes.func.isRequired,
     onToggleCards: PropTypes.func.isRequired,
     step: PropTypes.number,
+    toggle: PropTypes.bool.isRequired,
     totalSteps: PropTypes.number
 };
 
@@ -236,6 +238,7 @@ const Cards = props => {
         onNextStep,
         onPrevStep,
         step,
+        toggle,
         ...posProps
     } = props;
     let {x, y} = posProps;
@@ -266,12 +269,13 @@ const Cards = props => {
                 <div className={styles.card}>
                     <CardHeader
                         step={step}
+                        toggle={toggle}
                         totalSteps={steps.length}
                         onCloseCards={onCloseCards}
                         onShowAll={onShowAll}
                         onToggleCards={onToggleCards}
                     />
-                    <div className={styles.stepBody}>
+                    <div className={toggle ? styles.stepBody : styles.stepBodyHidden}>
                         {steps[step].deckIds ? (
                             <PreviewsStep
                                 content={content}
@@ -332,6 +336,7 @@ Cards.propTypes = {
     onStartDrag: PropTypes.func,
     onToggleCards: PropTypes.func.isRequired,
     step: PropTypes.number.isRequired,
+    toggle: PropTypes.bool.isRequired,
     x: PropTypes.number,
     y: PropTypes.number
 };

@@ -19,6 +19,7 @@ const initialState = {
     step: 0,
     x: 0,
     y: 0,
+    toggle: true,
     dragging: false
 };
 
@@ -31,7 +32,7 @@ const reducer = function (state, action) {
         });
     case TOGGLE_CARDS:
         return Object.assign({}, state, {
-            visible: false
+            toggle: !state.toggle // TODO: make clearer
         });
     case VIEW_CARDS:
         return Object.assign({}, state, {

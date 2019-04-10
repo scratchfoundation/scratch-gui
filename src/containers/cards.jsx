@@ -47,6 +47,7 @@ const mapStateToProps = state => ({
     content: state.scratchGui.cards.content,
     activeDeckId: state.scratchGui.cards.activeDeckId,
     step: state.scratchGui.cards.step,
+    toggle: state.scratchGui.cards.toggle,
     x: state.scratchGui.cards.x,
     y: state.scratchGui.cards.y,
     isRtl: state.locales.isRtl,

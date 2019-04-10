@@ -34,6 +34,10 @@
     border-bottom-right-radius: 0.75rem;
 }
 
+.right-card-hidden {
+    display: none;
+}
+
 .left-card::after, .right-card::after {
     content: "";
     position: absolute;
@@ -60,6 +64,10 @@
     justify-content: center;
     align-items: center;
     transition: all 0.25s ease;
+}
+
+.right-button-hidden {
+    display: none;
 }
 
 .left-button:hover, .right-button:hover {
@@ -153,6 +161,10 @@
     align-items: center;
     position: relative;
     text-align: center;
+}
+
+.step-body-hidden {
+    display: none;
 }
 
 .step-video {

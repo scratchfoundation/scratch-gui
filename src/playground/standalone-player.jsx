@@ -8,9 +8,6 @@ import storage from '../lib/storage';
 // minimal scratch player without the editor view.
 
 const EXAMPLE_PROJECT = 10128067; // 'Make it Dance' Project
-const loadProject = function () {
-    Scratch.vm.downloadProjectId(EXAMPLE_PROJECT);
-};
 
 window.onload = function () {
 
@@ -22,7 +19,7 @@ window.onload = function () {
     storage.addOfficialScratchWebStores();
     vm.attachStorage(storage);
 
-    loadProject();
+    vm.downloadProjectId(EXAMPLE_PROJECT);
 
     vm.on('workspaceUpdate', () => {
         setTimeout(() => vm.greenFlag(), 1000);
@@ -98,5 +95,6 @@ window.onload = function () {
 
     // Run threads
     vm.start();
+
     vm.greenFlag();
 };

@@ -5,6 +5,7 @@ import React from 'react';
 import {
     activateDeck,
     closeCards,
+    toggleCards,
     nextStep,
     prevStep,
     dragCard,
@@ -60,6 +61,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(closeCards());
     },
     onCloseCards: () => dispatch(closeCards()),
+    onToggleCards: () => dispatch(toggleCards()),
     onNextStep: () => dispatch(nextStep()),
     onPrevStep: () => dispatch(prevStep()),
     onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),

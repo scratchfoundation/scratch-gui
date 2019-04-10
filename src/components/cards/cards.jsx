@@ -14,7 +14,7 @@ import closeIcon from './icon--close.svg';
 import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 import {translateImage} from '../../lib/libraries/decks/translate-image.js';
 
-const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
+const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step}) => (
     <div className={styles.headerButtons}>
         <div
             className={styles.allButton}
@@ -156,6 +156,7 @@ NextPrevButtons.propTypes = {
 CardHeader.propTypes = {
     onCloseCards: PropTypes.func.isRequired,
     onShowAll: PropTypes.func.isRequired,
+    onToggleCards: PropTypes.func.isRequired,
     step: PropTypes.number,
     totalSteps: PropTypes.number
 };
@@ -227,6 +228,7 @@ const Cards = props => {
         locale,
         onActivateDeckFactory,
         onCloseCards,
+        onToggleCards,
         onDrag,
         onStartDrag,
         onEndDrag,

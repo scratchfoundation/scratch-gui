@@ -3,6 +3,7 @@ import analytics from '../lib/analytics';
 import decks from '../lib/libraries/decks/index.jsx';
 
 const CLOSE_CARDS = 'scratch-gui/cards/CLOSE_CARDS';
+const TOGGLE_CARDS = 'scratch-gui/cards/TOGGLE_CARDS';
 const VIEW_CARDS = 'scratch-gui/cards/VIEW_CARDS';
 const ACTIVATE_DECK = 'scratch-gui/cards/ACTIVATE_DECK';
 const NEXT_STEP = 'scratch-gui/cards/NEXT_STEP';
@@ -25,6 +26,10 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case CLOSE_CARDS:
+        return Object.assign({}, state, {
+            visible: false
+        });
+    case TOGGLE_CARDS:
         return Object.assign({}, state, {
             visible: false
         });
@@ -92,6 +97,10 @@ const closeCards = function () {
     return {type: CLOSE_CARDS};
 };
 
+const toggleCards = function () {
+    return {type: TOGGLE_CARDS};
+};
+
 const nextStep = function () {
     return {type: NEXT_STEP};
 };
@@ -118,6 +127,7 @@ export {
     activateDeck,
     viewCards,
     closeCards,
+    toggleCards,
     nextStep,
     prevStep,
     dragCard,

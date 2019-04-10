@@ -300,6 +300,7 @@ const Cards = props => {
                     </div>
                     <NextPrevButtons
                         isRtl={isRtl}
+                        toggle={toggle}
                         onNextStep={step < steps.length - 1 ? onNextStep : null}
                         onPrevStep={step > 0 ? onPrevStep : null}
                     />

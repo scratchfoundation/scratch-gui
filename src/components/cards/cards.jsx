@@ -43,7 +43,7 @@ const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step, t
         ) : null}
         <div className={styles.headerButtonsRight}>
             <div
-                className={styles.shrinkButton}
+                className={styles.toggleButton}
                 onClick={onToggleCards}
             >
                 {toggle ? 'Shrink' : 'Expand'}

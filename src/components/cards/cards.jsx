@@ -42,7 +42,10 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
             </div>
         ) : null}
         <div className={styles.headerButtonsRight}>
-            <div className={styles.shrinkButton}>
+            <div
+                className={styles.shrinkButton}
+                onClick={onToggleCards}
+            >
                 {'Shrink'}
             </div>
             <div
@@ -264,6 +267,7 @@ const Cards = props => {
                         totalSteps={steps.length}
                         onCloseCards={onCloseCards}
                         onShowAll={onShowAll}
+                        onToggleCards={onToggleCards}
                     />
                     <div className={styles.stepBody}>
                         {steps[step].deckIds ? (
@@ -324,6 +328,7 @@ Cards.propTypes = {
     onPrevStep: PropTypes.func.isRequired,
     onShowAll: PropTypes.func,
     onStartDrag: PropTypes.func,
+    onToggleCards: PropTypes.func.isRequired,
     step: PropTypes.number.isRequired,
     x: PropTypes.number,
     y: PropTypes.number

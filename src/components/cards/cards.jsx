@@ -41,19 +41,24 @@ const CardHeader = ({onCloseCards, onShowAll, totalSteps, step}) => (
                     ))}
             </div>
         ) : null}
-        <div
-            className={styles.removeButton}
-            onClick={onCloseCards}
-        >
-            <FormattedMessage
-                defaultMessage="Close"
-                description="Title for button to close how-to card"
-                id="gui.cards.close"
-            />
-            <img
-                className={styles.closeIcon}
-                src={closeIcon}
-            />
+        <div className={styles.headerButtonsRight}>
+            <div className={styles.shrinkButton}>
+                {'Shrink'}
+            </div>
+            <div
+                className={styles.removeButton}
+                onClick={onCloseCards}
+            >
+                <FormattedMessage
+                    defaultMessage="Close"
+                    description="Title for button to close how-to card"
+                    id="gui.cards.close"
+                />
+                <img
+                    className={styles.closeIcon}
+                    src={closeIcon}
+                />
+            </div>
         </div>
     </div>
 );

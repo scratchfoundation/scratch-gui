@@ -104,6 +104,25 @@
     font-weight: bold;
 }
 
+.header-buttons-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.shrink-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+}
+
+.shrink-button:hover, .all-button:hover {
+    background-color: $ui-black-transparent;
+}
+
 .remove-button, .all-button {
     cursor: pointer;
     color: white;

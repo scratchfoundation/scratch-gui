@@ -13,6 +13,7 @@ export default `<!doctype html>
     height: 100vh;
     margin: 0 auto;
     width: 133vh;
+    touch-action: manipulation;
   }
   </style>
   <head><meta charset="UTF-8"></head>

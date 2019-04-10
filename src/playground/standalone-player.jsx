@@ -1,7 +1,7 @@
 import VirtualMachine from 'scratch-vm';
 import RenderWebGL from 'scratch-render';
 import AudioEngine from 'scratch-audio';
-import {BitmapAdapter} from 'scratch-svg-renderer';
+import {SVGRenderer, BitmapAdapter} from 'scratch-svg-renderer';
 import storage from '../lib/storage';
 
 // This file is an example of how to create a standalone, full screen
@@ -14,10 +14,12 @@ window.onload = function () {
     // Instantiate the VM.
     const vm = new VirtualMachine();
     vm.attachV2BitmapAdapter(new BitmapAdapter());
+    vm.attachV2SVGAdapter(new SVGRenderer());
 
     // Initialize storage
     storage.addOfficialScratchWebStores();
     vm.attachStorage(storage);
+    vm.setCompatibilityMode(true);
 
     vm.downloadProjectId(EXAMPLE_PROJECT);
 
@@ -33,7 +35,7 @@ window.onload = function () {
     vm.attachAudioEngine(audioEngine);
 
     // Feed mouse events as VM I/O events.
-    document.addEventListener('mousemove', e => {
+    document.body.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
         const coordinates = {
             x: e.clientX - rect.left,
@@ -44,6 +46,7 @@ window.onload = function () {
         vm.postIOData('mouse', coordinates);
     });
     canvas.addEventListener('mousedown', e => {
+        console.log('mousedown');
         const rect = canvas.getBoundingClientRect();
         const data = {
             isDown: true,
@@ -56,6 +59,7 @@ window.onload = function () {
         e.preventDefault();
     });
     canvas.addEventListener('mouseup', e => {
+        console.log('mouseup');
         const rect = canvas.getBoundingClientRect();
         const data = {
             isDown: false,
@@ -69,22 +73,22 @@ window.onload = function () {
     });
 
     // Feed keyboard events as VM I/O events.
-    document.addEventListener('keydown', e => {
+    document.body.addEventListener('keydown', e => {
         // Don't capture keys intended for Blockly inputs.
         if (e.target !== document && e.target !== document.body) {
             return;
         }
         vm.postIOData('keyboard', {
-            key: e.keyCode,
+            key: e.code,
             isDown: true
         });
         e.preventDefault();
     });
-    document.addEventListener('keyup', e => {
+    document.body.addEventListener('keyup', e => {
         // Always capture up events,
         // even those that have switched to other targets.
         vm.postIOData('keyboard', {
-            key: e.keyCode,
+            key: e.code,
             isDown: false
         });
         // E.g., prevent scroll.

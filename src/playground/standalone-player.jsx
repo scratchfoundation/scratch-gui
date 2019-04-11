@@ -19,6 +19,9 @@ window.onload = function () {
     // Initialize storage
     storage.addOfficialScratchWebStores();
     vm.attachStorage(storage);
+
+    // Compatibility mode will set the frame rate to 30 TPS,
+    // which is the standard for the scratch player.
     vm.setCompatibilityMode(true);
 
     vm.downloadProjectId(EXAMPLE_PROJECT);
@@ -46,7 +49,6 @@ window.onload = function () {
         vm.postIOData('mouse', coordinates);
     });
     canvas.addEventListener('mousedown', e => {
-        console.log('mousedown');
         const rect = canvas.getBoundingClientRect();
         const data = {
             isDown: true,
@@ -59,7 +61,6 @@ window.onload = function () {
         e.preventDefault();
     });
     canvas.addEventListener('mouseup', e => {
-        console.log('mouseup');
         const rect = canvas.getBoundingClientRect();
         const data = {
             isDown: false,

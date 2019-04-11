@@ -100,7 +100,6 @@
     "react-test-renderer": "16.2.0",
     "react-tooltip": "3.8.0",
     "react-virtualized": "9.20.1",
-    "react-visibility-sensor": "5.0.2",
     "redux": "3.7.2",
     "redux-mock-store": "^1.2.3",
     "redux-throttle": "0.1.1",

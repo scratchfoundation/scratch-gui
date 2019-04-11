@@ -75,17 +75,21 @@ class LibraryItem extends React.PureComponent {
         const nextIconIndex = (this.state.iconIndex + 1) % this.props.icons.length;
         this.setState({iconIndex: nextIconIndex});
     }
-    curIconSource () {
+    curIconMd5 () {
         if (this.props.icons &&
             this.state.isRotatingIcon &&
             this.state.iconIndex < this.props.icons.length &&
-            this.props.icons[this.state.iconIndex]) {
-            return this.props.icons[this.state.iconIndex];
+            this.props.icons[this.state.iconIndex] &&
+            this.props.icons[this.state.iconIndex].baseLayerMD5) {
+            return this.props.icons[this.state.iconIndex].baseLayerMD5;
         }
-        return this.props.iconSource;
+        return this.props.iconMd5;
     }
     render () {
-        const iconSource = this.curIconSource();
+        const iconMd5 = this.curIconMd5();
+        const iconURL = iconMd5 ?
+            `https://cdn.assets.scratch.mit.edu/internalapi/asset/${iconMd5}/get/` :
+            this.props.iconRawURL;
         return (
             <LibraryItemComponent
                 bluetoothRequired={this.props.bluetoothRequired}
@@ -95,7 +99,8 @@ class LibraryItem extends React.PureComponent {
                 extensionId={this.props.extensionId}
                 featured={this.props.featured}
                 hidden={this.props.hidden}
-                iconSource={iconSource}
+                iconURL={iconURL}
+                icons={this.props.icons}
                 id={this.props.id}
                 insetIconURL={this.props.insetIconURL}
                 internetConnectionRequired={this.props.internetConnectionRequired}
@@ -122,8 +127,13 @@ LibraryItem.propTypes = {
     extensionId: PropTypes.string,
     featured: PropTypes.bool,
     hidden: PropTypes.bool,
-    iconSource: LibraryItemComponent.propTypes.iconSource, // single icon
-    icons: PropTypes.arrayOf(LibraryItemComponent.propTypes.iconSource), // rotating icons
+    iconMd5: PropTypes.string,
+    iconRawURL: PropTypes.string,
+    icons: PropTypes.arrayOf(
+        PropTypes.shape({
+            baseLayerMD5: PropTypes.string
+        })
+    ),
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,

@@ -193,11 +193,7 @@ describe('Working with costumes', () => {
             .mouseMove(abbyElement)
             .perform();
         // wait for one of Abby's alternate costumes to appear
-        const src1 = await abbyElement.findElement({css: 'img'}).getAttribute('src');
-        await driver.sleep(300);
-        const src2 = await abbyElement.findElement({css: 'img'}).getAttribute('src');
-        const sourcesMatch = (src1 === src2);
-        await expect(sourcesMatch).toBeFalsy(); // 'src' attribute should have changed by now
+        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/b6e23922f23b49ddc6f62f675e77417c.svg/get/"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

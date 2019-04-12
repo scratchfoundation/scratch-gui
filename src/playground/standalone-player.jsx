@@ -7,9 +7,13 @@ import storage from '../lib/storage';
 // This file is an example of how to create a standalone, full screen
 // minimal scratch player without the editor view.
 
-const EXAMPLE_PROJECT = 10128067; // 'Make it Dance' Project
-
 window.onload = function () {
+
+    // Get the project id from the hash, or use the default project.
+    let projectId = 0;
+    if (window.location.hash) {
+        projectId = window.location.hash.substring(1);
+    }
 
     // Instantiate the VM.
     const vm = new VirtualMachine();
@@ -24,7 +28,7 @@ window.onload = function () {
     // which is the standard for the scratch player.
     vm.setCompatibilityMode(true);
 
-    vm.downloadProjectId(EXAMPLE_PROJECT);
+    vm.downloadProjectId(projectId);
 
     vm.on('workspaceUpdate', () => {
         setTimeout(() => vm.greenFlag(), 1000);
@@ -100,6 +104,4 @@ window.onload = function () {
 
     // Run threads
     vm.start();
-
-    vm.greenFlag();
 };

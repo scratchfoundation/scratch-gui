@@ -87,11 +87,11 @@ class Backpack extends React.Component {
         switch (dragInfo.dragType) {
         case DragConstants.COSTUME:
             payloader = costumePayload;
-            presaveAsset = dragInfo.asset;
+            presaveAsset = dragInfo.payload.asset;
             break;
         case DragConstants.SOUND:
             payloader = soundPayload;
-            presaveAsset = dragInfo.asset;
+            presaveAsset = dragInfo.payload.asset;
             break;
         case DragConstants.SPRITE:
             payloader = spritePayload;
@@ -109,7 +109,12 @@ class Backpack extends React.Component {
                     // Force the asset to save to the asset server before storing in backpack
                     // Ensures any asset present in the backpack is also on the asset server
                     if (presaveAsset && !presaveAsset.clean) {
-                        return storage.store(presaveAsset).then(() => payload);
+                        return storage.store(
+                            presaveAsset.assetType,
+                            presaveAsset.dataFormat,
+                            presaveAsset.data,
+                            presaveAsset.assetId
+                        ).then(() => payload);
                     }
                     return payload;
                 })

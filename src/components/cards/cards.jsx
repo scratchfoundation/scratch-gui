@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
+import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Draggable from 'react-draggable';
 
@@ -15,7 +16,7 @@ import {translateVideo} from '../../lib/libraries/decks/translate-video.js';
 import {translateImage} from '../../lib/libraries/decks/translate-image.js';
 
 const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step, toggle}) => (
-    <div className={styles.headerButtons}>
+    <div className={toggle ? styles.headerButtons : classNames(styles.headerButtons, styles.headerButtonsHidden)}>
         <div
             className={styles.allButton}
             onClick={onShowAll}

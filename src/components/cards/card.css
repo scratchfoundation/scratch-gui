@@ -112,6 +112,10 @@
     font-weight: bold;
 }
 
+.header-buttons-hidden {
+    border-bottom: 0px;
+}
+
 .header-buttons-right {
     display: flex;
     flex-direction: row;

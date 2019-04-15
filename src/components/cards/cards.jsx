@@ -53,14 +53,14 @@ const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step, t
                 className={styles.removeButton}
                 onClick={onCloseCards}
             >
+                <img
+                    className={styles.closeIcon}
+                    src={closeIcon}
+                />
                 <FormattedMessage
                     defaultMessage="Close"
                     description="Title for button to close how-to card"
                     id="gui.cards.close"
-                />
-                <img
-                    className={styles.closeIcon}
-                    src={closeIcon}
                 />
             </div>
         </div>

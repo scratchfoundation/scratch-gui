@@ -120,9 +120,9 @@ const NextPrevButtons = ({isRtl, onNextStep, onPrevStep, toggle}) => (
     <Fragment>
         {onNextStep ? (
             <div>
-                <div className={isRtl ? styles.leftCard : (toggle ? styles.rightCard : styles.rightCardHidden)} />
+                <div className={toggle ? (isRtl ? styles.leftCard : styles.rightCard) : styles.hidden} />
                 <div
-                    className={isRtl ? styles.leftButton : (toggle ? styles.rightButton : styles.rightButtonHidden)}
+                    className={toggle ? (isRtl ? styles.leftButton : styles.rightButton) : styles.hidden}
                     onClick={onNextStep}
                 >
                     <img
@@ -134,9 +134,9 @@ const NextPrevButtons = ({isRtl, onNextStep, onPrevStep, toggle}) => (
         ) : null}
         {onPrevStep ? (
             <div>
-                <div className={isRtl ? styles.rightCard : styles.leftCard} />
+                <div className={toggle ? (isRtl ? styles.rightCard : styles.leftCard) : styles.hidden} />
                 <div
-                    className={isRtl ? styles.rightButton : styles.leftButton}
+                    className={toggle ? (isRtl ? styles.rightButton : styles.leftButton) : styles.hidden}
                     onClick={onPrevStep}
                 >
                     <img
@@ -276,7 +276,7 @@ const Cards = props => {
                         onShowAll={onShowAll}
                         onToggleCards={onToggleCards}
                     />
-                    <div className={toggle ? styles.stepBody : styles.stepBodyHidden}>
+                    <div className={toggle ? styles.stepBody : styles.hidden}>
                         {steps[step].deckIds ? (
                             <PreviewsStep
                                 content={content}

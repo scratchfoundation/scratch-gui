@@ -54,7 +54,18 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
                     draggable={false}
                     src={expanded ? shrinkIcon : expandIcon}
                 />
-                {expanded ? 'Shrink' : 'Expand'}
+                {expanded ?
+                    <FormattedMessage
+                        defaultMessage="Shrink"
+                        description="Title for button to shrink how-to card"
+                        id="gui.cards.shrink"
+                    /> :
+                    <FormattedMessage
+                        defaultMessage="Expand"
+                        description="Title for button to expand how-to card"
+                        id="gui.cards.expand"
+                    />
+                }
             </div>
             <div
                 className={styles.removeButton}

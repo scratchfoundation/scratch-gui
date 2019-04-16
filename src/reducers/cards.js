@@ -3,7 +3,7 @@ import analytics from '../lib/analytics';
 import decks from '../lib/libraries/decks/index.jsx';
 
 const CLOSE_CARDS = 'scratch-gui/cards/CLOSE_CARDS';
-const TOGGLE_CARDS = 'scratch-gui/cards/TOGGLE_CARDS';
+const SHRINK_EXPAND_CARDS = 'scratch-gui/cards/SHRINK_EXPAND_CARDS';
 const VIEW_CARDS = 'scratch-gui/cards/VIEW_CARDS';
 const ACTIVATE_DECK = 'scratch-gui/cards/ACTIVATE_DECK';
 const NEXT_STEP = 'scratch-gui/cards/NEXT_STEP';
@@ -19,7 +19,7 @@ const initialState = {
     step: 0,
     x: 0,
     y: 0,
-    toggle: true,
+    expanded: true,
     dragging: false
 };
 
@@ -30,9 +30,9 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             visible: false
         });
-    case TOGGLE_CARDS:
+    case SHRINK_EXPAND_CARDS:
         return Object.assign({}, state, {
-            toggle: !state.toggle // TODO: make clearer
+            expanded: !state.expanded
         });
     case VIEW_CARDS:
         return Object.assign({}, state, {
@@ -98,8 +98,8 @@ const closeCards = function () {
     return {type: CLOSE_CARDS};
 };
 
-const toggleCards = function () {
-    return {type: TOGGLE_CARDS};
+const shrinkExpandCards = function () {
+    return {type: SHRINK_EXPAND_CARDS};
 };
 
 const nextStep = function () {
@@ -128,7 +128,7 @@ export {
     activateDeck,
     viewCards,
     closeCards,
-    toggleCards,
+    shrinkExpandCards,
     nextStep,
     prevStep,
     dragCard,

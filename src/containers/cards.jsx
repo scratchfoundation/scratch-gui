@@ -5,7 +5,7 @@ import React from 'react';
 import {
     activateDeck,
     closeCards,
-    toggleCards,
+    shrinkExpandCards,
     nextStep,
     prevStep,
     dragCard,
@@ -47,7 +47,7 @@ const mapStateToProps = state => ({
     content: state.scratchGui.cards.content,
     activeDeckId: state.scratchGui.cards.activeDeckId,
     step: state.scratchGui.cards.step,
-    toggle: state.scratchGui.cards.toggle,
+    expanded: state.scratchGui.cards.expanded,
     x: state.scratchGui.cards.x,
     y: state.scratchGui.cards.y,
     isRtl: state.locales.isRtl,
@@ -62,7 +62,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(closeCards());
     },
     onCloseCards: () => dispatch(closeCards()),
-    onToggleCards: () => dispatch(toggleCards()),
+    onShrinkExpandCards: () => dispatch(shrinkExpandCards()),
     onNextStep: () => dispatch(nextStep()),
     onPrevStep: () => dispatch(prevStep()),
     onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),

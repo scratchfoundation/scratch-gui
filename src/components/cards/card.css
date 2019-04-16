@@ -114,7 +114,7 @@
     flex-direction: row;
 }
 
-.toggle-button {
+.shrink-expand-button {
     cursor: pointer;
     color: white;
     display: flex;
@@ -124,7 +124,7 @@
     padding: 0.75rem;
 }
 
-.toggle-button:hover, .all-button:hover {
+.shrink-expand-button:hover, .all-button:hover {
     background-color: $ui-black-transparent;
 }
 

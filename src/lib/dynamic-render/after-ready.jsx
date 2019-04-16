@@ -10,11 +10,28 @@ class DelayAfterReady extends React.Component {
     constructor (props) {
         super(props);
 
-        this.state = {ready: Boolean(props.ready)};
+        this.ready = this.ready.bind(this);
+
+        if (typeof props.ready === 'function') {
+            this.state = {ready: false};
+            props.ready(this.ready);
+        } else {
+            this.state = {ready: Boolean(props.ready)};
+        }
     }
 
     componentWillReceiveProps (newProps) {
-        if (this.state.ready === false && newProps.ready) {
+        if (this.state.ready === false) {
+            if (typeof newProps.ready === 'function') {
+                newProps.ready(this.ready);
+            } else if (newProps.ready) {
+                this.ready();
+            }
+        }
+    }
+
+    ready () {
+        if (this.state.ready === false) {
             this.setState({ready: true});
         }
     }
@@ -32,7 +49,7 @@ class DelayAfterReady extends React.Component {
 
 DelayAfterReady.propTypes = {
     Component: PropTypes.func,
-    ready: PropTypes.bool
+    ready: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])
 };
 
 const afterReady = WrappedComponent => (

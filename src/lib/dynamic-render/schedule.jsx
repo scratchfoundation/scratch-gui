@@ -1,10 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {flattenStatelessElement} from './element.jsx';
+import {afterReady} from './after-ready.jsx';
 
 // This is similar to VM's TaskQueue but tries to be aware of other activity,
 // delaying execution, and uses a priority value, weight, instead of cost.
+
+const makeCallAfterTimeout = (timeout, ms) => fn => timeout(fn, ms);
+
+const makeTimerLessThanTest = (timer, max) => () => timer() < max;
+
+const makeCallWhen = (timeout, test) => fn => {
+    test();
+    const poolIdleStep = () => {
+        if (test()) fn();
+        else timeout(poolIdleStep);
+    };
+    timeout(poolIdleStep);
+};
 
 const makeTimeout = () => {
     let _nextIdleTimeout = null;
@@ -14,144 +27,79 @@ const makeTimeout = () => {
     };
 };
 
-const makeTimer = (() => {
+const makeTimer = () => {
     let last = Date.now();
     return () => {
         const _last = last;
         const now = last = Date.now();
         return now - _last;
     };
-});
+};
 
-const nextIdle = ((timeout, test) => (
-    function poolNextIdle (fn) {
-        test();
-        const poolIdleStep = () => {
-            if (test()) fn();
-            else timeout(poolIdleStep);
-        };
-        timeout(poolIdleStep);
-    }
-))(
+const callWhenIdle = makeCallWhen(
     // Wait to call step for 5 milliseconds
-    ((timeout, ms) => step => timeout(step, ms))(makeTimeout(), 5),
+    makeCallAfterTimeout(makeTimeout(), 5),
     // Call fn if the time passed is less than 20 milliseconds
-    ((timer, max) => () => timer() < max)(makeTimer(), 20)
+    makeTimerLessThanTest(makeTimer(), 20)
 );
 
-const pool = [];
+const bindCallWhenIdle = fn => () => callWhenIdle(fn);
 
-const _next = (function (fn) {
-    return function poolCallNextWrapped () {
-        nextIdle(fn);
-    };
-}(
-    () => {
-        const item = pool.shift();
-        _next();
-        if (item) item[2]();
-    }
-));
+class IdlePriorityPool {
+    constructor () {
+        this.pool = [];
 
-const _insertInPool = (test, newItem) => {
-    const i = pool.findIndex(item => test(item, newItem));
-    pool.splice(i >= 0 ? i : pool.length, 0, newItem);
-};
-
-const _removeFromPool = (test, oldItem) => {
-    const i = pool.findIndex(item => test(item, oldItem));
-    if (i > -1) pool.splice(i, 1);
-};
-
-const _callPoolNow = item => {
-    if (item[1] < 0) {
-        item[2]();
-        return true;
-    }
-};
-
-const removeFromPoolTest = (item, oldItem) => (item[0] === oldItem[0]);
-const removeFromPool = (...args) => {
-    _removeFromPool(removeFromPoolTest, args);
-};
-
-const addToPoolTest = (item, newItem) => (item[1] > newItem[1]);
-const addToPool = (...args) => {
-    removeFromPool(...args);
-
-    if (_callPoolNow(args)) return;
-
-    _insertInPool(addToPoolTest, args);
-    if (pool.length === 1) {
-        _next();
-    }
-};
-
-class DelayPoolEntrant extends React.Component {
-    constructor (props) {
-        super(props);
-
-        this.state = {ready: null};
-
-        this.start(props);
-
-        this.state.ready = this.state.ready || false;
-    }
-
-    componentWillReceiveProps (newProps) {
-        if (this.state.ready) return;
-        this.start(newProps);
-    }
-
-    componentWillUnmount () {
-        if (this.state.ready) return;
-        this.stop();
-    }
-
-    start ({priority}) {
-        addToPool(this, priority, () => this.ready());
-    }
-
-    stop () {
-        removeFromPool(this);
-    }
-
-    ready () {
-        if (this.state.ready === false) {
-            this.setState({ready: true});
-        } else {
-            // We haven't rendered yet, it would cause an error to call setState
-            // here.
-            // eslint-disable-next-line react/no-direct-mutation-state
-            this.state.ready = true;
-        }
-    }
-
-    render () {
-        const {ready} = this.state;
-        const {Component, ...props} = this.props;
-        return flattenStatelessElement(Component, {
-            ready,
-            ...props
+        this.schedule = bindCallWhenIdle(() => {
+            const item = this.pool.shift();
+            this.schedule();
+            if (item) item[2]();
         });
+    }
+
+    _insert (test, newItem) {
+        const i = this.pool.findIndex(item => test(item, newItem));
+        this.pool.splice(i >= 0 ? i : this.pool.length, 0, newItem);
+    }
+
+    _remove (test, oldItem) {
+        const i = this.pool.findIndex(item => test(item, oldItem));
+        if (i > -1) this.pool.splice(i, 1);
+    }
+
+    removeTest (item, oldItem) {
+        return item[0] === oldItem[0];
+    }
+
+    remove (...args) {
+        this._remove(this.removeTest, args);
+    }
+
+    addTest (item, newItem) {
+        return item[1] > newItem[1];
+    }
+
+    add (...args) {
+        this.remove(...args);
+
+        this._insert(this.addTest, args);
+
+        if (this.pool.length === 1) {
+            this.schedule();
+        }
     }
 }
 
-DelayPoolEntrant.propTypes = {
-    Component: PropTypes.func,
-    priority: PropTypes.number
-};
+const pool = new IdlePriorityPool();
 
-const schedule = WrappedComponent => (
-    function DelaySchedule (props) {
-        return (
-            <DelayPoolEntrant
-                Component={WrappedComponent}
-                {...props}
-            />
-        );
-    }
-);
+const schedule = WrappedComponent => {
+    const DelayAfterReadyWrapped = afterReady(WrappedComponent);
+    return function DelaySchedule ({priority, ...props}) {
+        return (<DelayAfterReadyWrapped
+            ready={priority < 0 || (ready => pool.add(ready, priority, ready))}
+            {...props}
+        />);
+    };
+};
 
 export {
     schedule

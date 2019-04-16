@@ -25,7 +25,7 @@ before_deploy:
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then
     npm --no-git-tag-version version $RELEASE_VERSION
     if [ "$TRAVIS_BRANCH" == "master" ]; then export NPM_TAG=stable; fi
-    if [ "$TRAVIS_BRANCH" == hotfix/* ]; then export NPM_TAG=hotfix; fi
+    if [[ "$TRAVIS_BRANCH" == hotfix/* ]]; then export NPM_TAG=hotfix; fi # double brackets are important for matching the wildcard
     git config --global user.email $(git log --pretty=format:"%ae" -n1)
     git config --global user.name $(git log --pretty=format:"%an" -n1)
     export BEFORE_DEPLOY_RAN=true

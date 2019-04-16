@@ -6,6 +6,9 @@ import Draggable from 'react-draggable';
 
 import styles from './card.css';
 
+import shrinkIcon from './icon--shrink.svg';
+import expandIcon from './icon--expand.svg';
+
 import rightArrow from './icon--next.svg';
 import leftArrow from './icon--prev.svg';
 
@@ -47,6 +50,10 @@ const CardHeader = ({onCloseCards, onToggleCards, onShowAll, totalSteps, step, t
                 className={styles.toggleButton}
                 onClick={onToggleCards}
             >
+                <img
+                    draggable={false}
+                    src={toggle ? shrinkIcon : expandIcon}
+                />
                 {toggle ? 'Shrink' : 'Expand'}
             </div>
             <div

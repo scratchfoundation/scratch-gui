@@ -6,10 +6,20 @@ import {
     collapseElement
 } from './element.jsx';
 
+/**
+ * In case a parent changes the ready state back to false this component can be
+ * used to store the state that ready was previously true and will continue to
+ * be until this component is removed.
+ */
 class DelayAfterReady extends React.Component {
     constructor (props) {
         super(props);
 
+        /**
+         * Bound copy of ready. Using the callback ready style, functions may
+         * depend on ready being a the same function for the same component.
+         * @type {function}
+         */
         this.ready = this.ready.bind(this);
 
         if (typeof props.ready === 'function') {

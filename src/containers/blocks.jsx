@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
+import ArgumentType from 'scratch-vm/src/extension-support/argument-type'; // :(
 
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
@@ -46,6 +47,44 @@ const addFunctionListener = (object, property, callback) => {
 const DroppableBlocks = DropAreaHOC([
     DragConstants.BACKPACK_CODE
 ])(BlocksComponent);
+
+// TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
+// :( where should this live?
+const defineDynamicBlock = (categoryInfo, extendedOpcode) => ({
+    init: function () {
+        const blockJson = {
+            type: extendedOpcode,
+            inputsInline: true,
+            category: categoryInfo.name,
+            colour: categoryInfo.color1,
+            colourSecondary: categoryInfo.color2,
+            colourTertiary: categoryInfo.color3,
+            extensions: ['scratch_extension']
+        };
+        this.jsonInit(blockJson);
+        this.blockInfoText = '{}';
+        this.needsBlockInfoUpdate = true;
+    },
+    mutationToDom: function () {
+        const container = document.createElement('mutation');
+        container.setAttribute('blockInfo', this.blockInfoText);
+        return container;
+    },
+    domToMutation: function (xmlElement) {
+        const blockInfoText = xmlElement.getAttribute('blockInfo');
+        if (!blockInfoText) return;
+        if (!this.needsBlockInfoUpdate) {
+            throw new Error('Attempted to update block info twice');
+        }
+        delete this.needsBlockInfoUpdate;
+        this.blockInfoText = blockInfoText;
+        const blockInfo = JSON.parse(blockInfoText);
+
+        this.interpolate_(blockInfo.text, []);
+        this.setPreviousStatement(true);
+        this.setNextStatement(!blockInfo.isTerminal);
+    }
+});
 
 class Blocks extends React.Component {
     constructor (props) {
@@ -415,22 +454,38 @@ class Blocks extends React.Component {
         this.workspace.clearUndo();
     }
     handleExtensionAdded (categoryInfo) {
+        const defineBlocks = blockInfoArray => {
+            if (blockInfoArray && blockInfoArray.length > 0) {
+                const staticBlocksJson = [];
+                const dynamicBlocksInfo = [];
+                blockInfoArray.forEach(blockInfo => {
+                    if (blockInfo.info && blockInfo.info.isDynamic) {
+                        dynamicBlocksInfo.push(blockInfo);
+                    } else if (blockInfo.json) {
+                        staticBlocksJson.push(blockInfo.json);
+                    }
+                    // otherwise it's a non-block entry such as '---'
+                });
+
+                this.ScratchBlocks.defineBlocksWithJsonArray(staticBlocksJson);
+                dynamicBlocksInfo.forEach(blockInfo => {
+	            // This is creating the block factory / constructor -- NOT a specific instance of the block.
+	            // The factory should only know static info about the block: specifically category info and the opcode.
+	            // Anything else will be picked up from the XML attached to the block instance.
+	            const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
+	            const blockDefinition = defineDynamicBlock(categoryInfo, extendedOpcode);
+	            this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
+	        });
+            }
+        };
+
         // scratch-blocks implements a menu or custom field as a special kind of block
         // these actually define blocks and MUST run regardless of the UI state
-        // skip pseudo-block items that don't have JSON, such as the '---' separator
-        const jsonIsNotEmpty = (json => json);
-        this.ScratchBlocks.defineBlocksWithJsonArray(
+        defineBlocks(
             Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
-                .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition.json)
-                .filter(jsonIsNotEmpty));
-        this.ScratchBlocks.defineBlocksWithJsonArray(
-            categoryInfo.menus
-                .map(menuInfo => menuInfo.json)
-                .filter(jsonIsNotEmpty));
-        this.ScratchBlocks.defineBlocksWithJsonArray(
-            categoryInfo.blocks
-                .map(blockInfo => blockInfo.json)
-                .filter(jsonIsNotEmpty));
+                .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition));
+        defineBlocks(categoryInfo.menus);
+        defineBlocks(categoryInfo.blocks);
 
         // Update the toolbox with new blocks if possible
         const toolboxXML = this.getToolboxXML();

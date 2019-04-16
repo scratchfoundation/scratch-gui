@@ -41,6 +41,24 @@ window.onload = function () {
     const audioEngine = new AudioEngine();
     vm.attachAudioEngine(audioEngine);
 
+    // Resets size of canvas directly for proper image calcuations
+    // when the window is resized
+    const resize = () => {
+      renderer.resize(canvas.clientWidth, canvas.clientHeight);
+    };
+    window.addEventListener('resize', resize);
+
+    resize();
+
+    // Browser fullscreen mode
+    let attemptFullscreen = Boolean(document.body.requestFullscreen);
+    document.body.addEventListener('click', e => {
+        if (attemptFullscreen) {
+            document.body.requestFullscreen();
+            attemptFullscreen = false;
+        }
+    });
+
     // Feed mouse events as VM I/O events.
     document.body.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();

@@ -31,7 +31,7 @@ window.onload = function () {
     vm.downloadProjectId(projectId);
 
     vm.on('workspaceUpdate', () => {
-        setTimeout(() => vm.greenFlag(), 1000);
+        document.getElementById('overlay').classList.remove('hidden');
     });
 
     // Instantiate the renderer and connect it to the VM.
@@ -44,15 +44,18 @@ window.onload = function () {
     // Resets size of canvas directly for proper image calcuations
     // when the window is resized
     const resize = () => {
-      renderer.resize(canvas.clientWidth, canvas.clientHeight);
+        renderer.resize(canvas.clientWidth, canvas.clientHeight);
     };
     window.addEventListener('resize', resize);
 
     resize();
 
-    // Browser fullscreen mode
+    // Start project after green flag clicked and attempt to go
+    // fullscreen
     let attemptFullscreen = Boolean(document.body.requestFullscreen);
-    document.body.addEventListener('click', e => {
+    document.getElementById('green-flag').addEventListener('click', () => {
+        document.getElementById('overlay').classList.add('hidden');
+        vm.greenFlag()
         if (attemptFullscreen) {
             document.body.requestFullscreen();
             attemptFullscreen = false;

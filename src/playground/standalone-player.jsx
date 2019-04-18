@@ -55,7 +55,7 @@ window.onload = function () {
     let attemptFullscreen = Boolean(document.body.requestFullscreen);
     document.getElementById('green-flag').addEventListener('click', () => {
         document.getElementById('overlay').classList.add('hidden');
-        vm.greenFlag()
+        vm.greenFlag();
         if (attemptFullscreen) {
             document.body.requestFullscreen();
             attemptFullscreen = false;

@@ -273,7 +273,7 @@ export default [
         internetConnectionRequired: true
     },
     {
-        name: 'GoDirect Force & Acceleration',
+        name: 'Go Direct Force & Acceleration',
         extensionId: 'gdxfor',
         collaborator: 'Vernier',
         iconURL: gdxforIconURL,

@@ -69,11 +69,11 @@ const VideoStep = ({video, dragging}) => (
             allowFullScreen
             allowTransparency="true"
             frameBorder="0"
-            height="338"
+            height="257"
             scrolling="no"
             src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
             title="📹"
-            width="600"
+            width="466"
         />
         <script
             async

@@ -94,21 +94,28 @@ class SBFileUploader extends React.Component {
             intl,
             isShowingWithoutId,
             loadingState,
-            projectChanged
+            projectChanged,
+            userOwnsProject
         } = this.props;
 
         const thisFileInput = e.target;
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];
 
-            // Allow upload to continue only after confirmation if the project
-            // has changed and is not showing with ID. If it has an ID, this operation
-            // does not currently overwrite that project, so it is safe to do without confirmation.
-            const uploadAllowed = (isShowingWithoutId && projectChanged) ?
-                confirm(intl.formatMessage(sharedMessages.replaceProjectWarning)) : // eslint-disable-line no-alert
-                true;
-
-            if (uploadAllowed) this.props.requestProjectUpload(loadingState);
+            // If user owns the project, or user has changed the project,
+            // we must confirm with the user that they really intend to replace it.
+            // (If they don't own the project and haven't changed it, no need to confirm.)
+            let uploadAllowed = true;
+            if (userOwnsProject || (projectChanged && isShowingWithoutId)) {
+                uploadAllowed = confirm( // eslint-disable-line no-alert
+                    intl.formatMessage(sharedMessages.replaceProjectWarning)
+                );
+            }
+            if (uploadAllowed) {
+                this.props.requestProjectUpload(loadingState);
+            } else {
+                this.props.closeFileMenu();
+            }
         }
     }
     // called when file upload raw data is available in the reader
@@ -164,6 +171,7 @@ SBFileUploader.propTypes = {
     canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
     className: PropTypes.string,
+    closeFileMenu: PropTypes.func,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
     isShowingWithoutId: PropTypes.bool,
@@ -173,6 +181,7 @@ SBFileUploader.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
+    userOwnsProject: PropTypes.bool,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
@@ -192,6 +201,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+    closeFileMenu: () => dispatch(closeFileMenu()),
     onLoadingFinished: (loadingState, success) => {
         dispatch(onLoadedProject(loadingState, ownProps.canSave, success));
         dispatch(closeLoadingProject());

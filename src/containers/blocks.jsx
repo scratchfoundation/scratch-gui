@@ -414,20 +414,33 @@ class Blocks extends React.Component {
         // workspace to be 'undone' here.
         this.workspace.clearUndo();
     }
-    handleExtensionAdded (blocksInfo) {
-        // select JSON from each block info object then reject the pseudo-blocks which don't have JSON, like separators
-        // this actually defines blocks and MUST run regardless of the UI state
-        this.ScratchBlocks.defineBlocksWithJsonArray(blocksInfo.map(blockInfo => blockInfo.json).filter(x => x));
+    handleExtensionAdded (categoryInfo) {
+        // scratch-blocks implements a menu or custom field as a special kind of block
+        // these actually define blocks and MUST run regardless of the UI state
+        // skip pseudo-block items that don't have JSON, such as the '---' separator
+        const jsonIsNotEmpty = (json => json);
+        this.ScratchBlocks.defineBlocksWithJsonArray(
+            Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
+                .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition.json)
+                .filter(jsonIsNotEmpty));
+        this.ScratchBlocks.defineBlocksWithJsonArray(
+            categoryInfo.menus
+                .map(menuInfo => menuInfo.json)
+                .filter(jsonIsNotEmpty));
+        this.ScratchBlocks.defineBlocksWithJsonArray(
+            categoryInfo.blocks
+                .map(blockInfo => blockInfo.json)
+                .filter(jsonIsNotEmpty));
 
-        // Update the toolbox with new blocks
+        // Update the toolbox with new blocks if possible
         const toolboxXML = this.getToolboxXML();
         if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
         }
     }
-    handleBlocksInfoUpdate (blocksInfo) {
+    handleBlocksInfoUpdate (categoryInfo) {
         // @todo Later we should replace this to avoid all the warnings from redefining blocks.
-        this.handleExtensionAdded(blocksInfo);
+        this.handleExtensionAdded(categoryInfo);
     }
     handleCategorySelected (categoryId) {
         const extension = extensionData.find(ext => ext.extensionId === categoryId);

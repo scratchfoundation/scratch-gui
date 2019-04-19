@@ -7,6 +7,7 @@ import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
 import ArgumentType from 'scratch-vm/src/extension-support/argument-type'; // :(
+import BlockType from 'scratch-vm/src/extension-support/block-type'; // :(
 
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
@@ -50,7 +51,7 @@ const DroppableBlocks = DropAreaHOC([
 
 // TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
 // :( where should this live?
-const defineDynamicBlock = (categoryInfo, extendedOpcode) => ({
+const defineDynamicBlock = (ScratchBlocks, categoryInfo, extendedOpcode) => ({
     init: function () {
         const blockJson = {
             type: extendedOpcode,
@@ -81,8 +82,29 @@ const defineDynamicBlock = (categoryInfo, extendedOpcode) => ({
         const blockInfo = JSON.parse(blockInfoText);
 
         this.interpolate_(blockInfo.text, []);
-        this.setPreviousStatement(true);
-        this.setNextStatement(!blockInfo.isTerminal);
+
+        switch (blockInfo.blockType) {
+        case BlockType.COMMAND:
+        case BlockType.CONDITIONAL:
+        case BlockType.LOOP:
+            this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_SQUARE);
+            this.setPreviousStatement(true);
+            this.setNextStatement(!blockInfo.isTerminal);
+            break;
+        case BlockType.REPORTER:
+            this.setOutput('String'); // TODO: distinguish number & string here?
+            this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_ROUND);
+            break;
+        case BlockType.BOOLEAN:
+            this.setOutput('Boolean');
+            this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_HEXAGONAL);
+            break;
+        case BlockType.HAT:
+        case BlockType.EVENT:
+            this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_SQUARE);
+            this.setNextStatement(true);
+            break;
+        }
     }
 });
 
@@ -469,13 +491,13 @@ class Blocks extends React.Component {
 
                 this.ScratchBlocks.defineBlocksWithJsonArray(staticBlocksJson);
                 dynamicBlocksInfo.forEach(blockInfo => {
-	            // This is creating the block factory / constructor -- NOT a specific instance of the block.
-	            // The factory should only know static info about the block: specifically category info and the opcode.
-	            // Anything else will be picked up from the XML attached to the block instance.
-	            const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
-	            const blockDefinition = defineDynamicBlock(categoryInfo, extendedOpcode);
-	            this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
-	        });
+                    // This is creating the block factory / constructor -- NOT a specific instance of the block.
+                    // The factory should only know static info about the block: the category info and the opcode.
+                    // Anything else will be picked up from the XML attached to the block instance.
+                    const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
+                    const blockDefinition = defineDynamicBlock(this.ScratchBlocks, categoryInfo, extendedOpcode);
+                    this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
+                });
             }
         };
 

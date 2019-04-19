@@ -114,6 +114,10 @@
     flex-direction: row;
 }
 
+.header-buttons img {
+    margin-bottom: 2px;
+}
+
 .shrink-expand-button {
     cursor: pointer;
     color: white;
@@ -212,7 +216,7 @@
 }
 
 .close-icon {
-    height: 1rem;
+    height: 1.25rem;
     margin: .125rem 0; /* To offset the .25rem difference in icon size */
 }
 
@@ -223,6 +227,7 @@
 [dir="rtl"] .help-icon {
     margin-left: 0.25rem;
 }
+
 
 [dir="ltr"] .close-icon {
     margin-left: 0.25rem;

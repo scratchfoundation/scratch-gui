@@ -9,6 +9,12 @@
     min-width: 468px;
 }
 
+.card-container-overlay {
+    margin: auto;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 .left-card, .right-card {
     height: 90%;
     position: absolute;

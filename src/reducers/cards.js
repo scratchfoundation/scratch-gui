@@ -31,6 +31,8 @@ const reducer = function (state, action) {
             visible: false
         });
     case SHRINK_EXPAND_CARDS:
+        // Set new position here based on bounds
+        console.log('TODO: set new position based on bounds');
         return Object.assign({}, state, {
             expanded: !state.expanded
         });

@@ -278,64 +278,64 @@ const Cards = props => {
     const steps = content[activeDeckId].steps;
 
     return (
-        <Box
+        /* <Box
             // Use static `cards-overlay` class for bounds of draggables
             className={styles.cardContainerOverlay}
             style={{
                 width: 500, // props.stageSize.width,
                 height: 500 // props.stageSize.height
             }}
+        > */
+        <Draggable
+            bounds="parent"
+            position={{x: x, y: y}}
+            onDrag={onDrag}
+            onStart={onStartDrag}
+            onStop={onEndDrag}
         >
-            <Draggable
-                bounds="parent"
-                position={{x: x, y: y}}
-                onDrag={onDrag}
-                onStart={onStartDrag}
-                onStop={onEndDrag}
-            >
-                <div className={styles.cardContainer}>
-                    <div className={styles.card}>
-                        <CardHeader
-                            expanded={expanded}
-                            step={step}
-                            totalSteps={steps.length}
-                            onCloseCards={onCloseCards}
-                            onShowAll={onShowAll}
-                            onShrinkExpandCards={onShrinkExpandCards}
-                        />
-                        <div className={expanded ? styles.stepBody : styles.hidden}>
-                            {steps[step].deckIds ? (
-                                <PreviewsStep
-                                    content={content}
-                                    deckIds={steps[step].deckIds}
-                                    onActivateDeckFactory={onActivateDeckFactory}
-                                    onShowAll={onShowAll}
+            <div className={styles.cardContainer}>
+                <div className={styles.card}>
+                    <CardHeader
+                        expanded={expanded}
+                        step={step}
+                        totalSteps={steps.length}
+                        onCloseCards={onCloseCards}
+                        onShowAll={onShowAll}
+                        onShrinkExpandCards={onShrinkExpandCards}
+                    />
+                    <div className={expanded ? styles.stepBody : styles.hidden}>
+                        {steps[step].deckIds ? (
+                            <PreviewsStep
+                                content={content}
+                                deckIds={steps[step].deckIds}
+                                onActivateDeckFactory={onActivateDeckFactory}
+                                onShowAll={onShowAll}
+                            />
+                        ) : (
+                            steps[step].video ? (
+                                <VideoStep
+                                    dragging={dragging}
+                                    video={translateVideo(steps[step].video, locale)}
                                 />
                             ) : (
-                                steps[step].video ? (
-                                    <VideoStep
-                                        dragging={dragging}
-                                        video={translateVideo(steps[step].video, locale)}
-                                    />
-                                ) : (
-                                    <ImageStep
-                                        image={translateImage(steps[step].image, locale)}
-                                        title={steps[step].title}
-                                    />
-                                )
-                            )}
-                            {steps[step].trackingPixel && steps[step].trackingPixel}
-                        </div>
-                        <NextPrevButtons
-                            expanded={expanded}
-                            isRtl={isRtl}
-                            onNextStep={step < steps.length - 1 ? onNextStep : null}
-                            onPrevStep={step > 0 ? onPrevStep : null}
-                        />
+                                <ImageStep
+                                    image={translateImage(steps[step].image, locale)}
+                                    title={steps[step].title}
+                                />
+                            )
+                        )}
+                        {steps[step].trackingPixel && steps[step].trackingPixel}
                     </div>
+                    <NextPrevButtons
+                        expanded={expanded}
+                        isRtl={isRtl}
+                        onNextStep={step < steps.length - 1 ? onNextStep : null}
+                        onPrevStep={step > 0 ? onPrevStep : null}
+                    />
                 </div>
-            </Draggable>
-        </Box>
+            </div>
+        </Draggable>
+        /* </Box> */
     );
 };
 

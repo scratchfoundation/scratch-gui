@@ -3,7 +3,7 @@ import React, {Fragment} from 'react';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Draggable from 'react-draggable';
-import Box from '../box/box.jsx';
+// import Box from '../box/box.jsx';
 
 import styles from './card.css';
 

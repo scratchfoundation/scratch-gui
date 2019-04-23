@@ -289,7 +289,7 @@ export default [
         helpLink: 'https://scratch.mit.edu/wedo'
     },
     {
-        name: 'GoDirect Force & Acceleration',
+        name: 'Go Direct Force & Acceleration',
         extensionId: 'gdxfor',
         collaborator: 'Vernier',
         iconURL: gdxforIconURL,

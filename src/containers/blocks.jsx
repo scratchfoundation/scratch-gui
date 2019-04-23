@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
-import ArgumentType from 'scratch-vm/src/extension-support/argument-type'; // :(
 import BlockType from 'scratch-vm/src/extension-support/block-type'; // :(
 
 import log from '../lib/log.js';

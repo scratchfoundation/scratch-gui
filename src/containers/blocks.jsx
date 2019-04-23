@@ -51,7 +51,7 @@ const DroppableBlocks = DropAreaHOC([
 
 // TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
 // :( where should this live?
-const defineDynamicBlock = (ScratchBlocks, categoryInfo, extendedOpcode) => ({
+const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => ({
     init: function () {
         const blockJson = {
             type: extendedOpcode,
@@ -59,9 +59,15 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, extendedOpcode) => ({
             category: categoryInfo.name,
             colour: categoryInfo.color1,
             colourSecondary: categoryInfo.color2,
-            colourTertiary: categoryInfo.color3,
-            extensions: ['scratch_extension']
+            colourTertiary: categoryInfo.color3
         };
+        // There is a scratch-blocks / Blockly extension called "scratch_extension" which adjusts the styling of
+        // blocks to allow for an icon, a feature of Scratch extension blocks. However, Scratch "core" extension
+        // blocks don't have icons and so they should not use 'scratch_extension'. Adding a scratch-blocks / Blockly
+        // extension after `jsonInit` isn't fully supported (?), so we decide now whether there will be an icon.
+        if (staticBlockInfo.blockIconURI || categoryInfo.blockIconURI) {
+            blockJson.extensions = ['scratch_extension'];
+        }
         this.jsonInit(blockJson);
         this.blockInfoText = '{}';
         this.needsBlockInfoUpdate = true;
@@ -495,7 +501,8 @@ class Blocks extends React.Component {
                     // The factory should only know static info about the block: the category info and the opcode.
                     // Anything else will be picked up from the XML attached to the block instance.
                     const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
-                    const blockDefinition = defineDynamicBlock(this.ScratchBlocks, categoryInfo, extendedOpcode);
+                    const blockDefinition =
+                        defineDynamicBlock(this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
                     this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
                 });
             }

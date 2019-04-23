@@ -8,7 +8,7 @@ import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
-import AudioTrimmer from '../../containers/audio-trimmer.jsx';
+import AudioSelector from '../../containers/audio-selector.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './sound-editor.css';
@@ -161,7 +161,7 @@ const SoundEditor = props => (
                     height={160}
                     width={600}
                 />
-                <AudioTrimmer
+                <AudioSelector
                     playhead={props.playhead}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}

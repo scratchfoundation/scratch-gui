@@ -1,11 +1,21 @@
 import VirtualMachine from 'scratch-vm';
 import RenderWebGL from 'scratch-render';
 import AudioEngine from 'scratch-audio';
+import Storage from 'scratch-storage';
 import {SVGRenderer, BitmapAdapter} from 'scratch-svg-renderer';
-import storage from '../lib/storage';
 
-// This file is an example of how to create a standalone, full screen
-// minimal scratch player without the editor view.
+/**
+ * This file is an example of how to create a standalone, full screen
+ * minimal scratch player without the editor view.
+ * This file does not presentally include monitors, which are drawn by the GUI.
+ */
+
+const projectGetConfig = function (projectAsset) {
+    return `https://projects.scratch.mit.edu/${projectAsset.assetId}`;
+};
+const assetGetConfig = function (asset) {
+    return `https://assets.scratch.mit.edu/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
+};
 
 window.onload = function () {
 
@@ -21,7 +31,11 @@ window.onload = function () {
     vm.attachV2SVGAdapter(new SVGRenderer());
 
     // Initialize storage
-    storage.addOfficialScratchWebStores();
+    const storage = new Storage();
+    const AssetType = storage.AssetType;
+    storage.addWebSource([AssetType.Project], projectGetConfig);
+    storage.addWebSource([AssetType.ImageVector, AssetType.ImageBitmap, AssetType.Sound], assetGetConfig);
+
     vm.attachStorage(storage);
 
     // Compatibility mode will set the frame rate to 30 TPS,

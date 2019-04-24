@@ -7,6 +7,7 @@ import React from 'react';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
 import BlockType from 'scratch-vm/src/extension-support/block-type'; // :(
+import ArgumentType from 'scratch-vm/src/extension-support/argument-type'; // :(
 
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
@@ -86,8 +87,6 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
         this.blockInfoText = blockInfoText;
         const blockInfo = JSON.parse(blockInfoText);
 
-        this.interpolate_(blockInfo.text, []);
-
         switch (blockInfo.blockType) {
         case BlockType.COMMAND:
         case BlockType.CONDITIONAL:
@@ -110,6 +109,25 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
             this.setNextStatement(true);
             break;
         }
+
+        // Layout block arguments
+        // TODO handle E/C Blocks
+        const blockText = blockInfo.text;
+        const args = [];
+        let argCount = 0;
+        const scratchBlocksStyleText = blockText.replace(/\[(.+?)]/g, (match, argName) => {
+            const arg = blockInfo.arguments[argName];
+            switch (arg.type) {
+            case ArgumentType.STRING:
+                args.push({type: 'input_value', name: argName});
+                break;
+            case ArgumentType.BOOLEAN:
+                args.push({type: 'input_value', name: argName, check: 'Boolean'});
+                break;
+            }
+            return `%${++argCount}`;
+        });
+        this.interpolate_(scratchBlocksStyleText, args);
     }
 });
 

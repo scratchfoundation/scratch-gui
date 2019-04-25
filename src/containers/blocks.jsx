@@ -98,6 +98,9 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
         case BlockType.REPORTER:
             this.setOutput('String'); // TODO: distinguish number & string here?
             this.setOutputShape(ScratchBlocks.OUTPUT_SHAPE_ROUND);
+            if (!blockInfo.disableMonitor) {
+                this.setCheckboxInFlyout(true);
+            }
             break;
         case BlockType.BOOLEAN:
             this.setOutput('Boolean');

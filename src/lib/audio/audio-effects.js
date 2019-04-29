@@ -16,7 +16,10 @@ class AudioEffects {
     static get effectTypes () {
         return effectTypes;
     }
-    constructor (buffer, name) {
+    constructor (buffer, name, trimStart, trimEnd) {
+        this.trimStartSeconds = (trimStart * buffer.length) / buffer.sampleRate;
+        this.trimEndSeconds = (trimEnd * buffer.length) / buffer.sampleRate;
+
         // Some effects will modify the playback rate and/or number of samples.
         // Need to precompute those values to create the offline audio context.
         const pitchRatio = Math.pow(2, 4 / 12); // A major third
@@ -72,10 +75,10 @@ class AudioEffects {
         let output;
         switch (this.name) {
         case effectTypes.LOUDER:
-            ({input, output} = new VolumeEffect(this.audioContext, 1.25));
+            ({input, output} = new VolumeEffect(this.audioContext, 1.25, this.trimStartSeconds, this.trimEndSeconds));
             break;
         case effectTypes.SOFTER:
-            ({input, output} = new VolumeEffect(this.audioContext, 0.75));
+            ({input, output} = new VolumeEffect(this.audioContext, 0.75, this.trimStartSeconds, this.trimEndSeconds));
             break;
         case effectTypes.ECHO:
             ({input, output} = new EchoEffect(this.audioContext, 0.25));

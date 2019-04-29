@@ -59,9 +59,7 @@ class SoundEditor extends React.Component {
         this.audioBufferPlayer = new AudioBufferPlayer(samples, sampleRate);
         this.setState({
             chunkLevels: computeChunkedRMS(samples),
-            playhead: null,
-            trimStart: null,
-            trimEnd: null
+            playhead: null
         });
     }
     submitNewSamples (samples, sampleRate, skipUndo) {
@@ -162,7 +160,7 @@ class SoundEditor extends React.Component {
         };
     }
     handleEffect (name) {
-        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
+        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, this.state.trimStart, this.state.trimEnd);
         effects.process(({renderedBuffer}) => {
             const samples = renderedBuffer.getChannelData(0);
             const sampleRate = renderedBuffer.sampleRate;

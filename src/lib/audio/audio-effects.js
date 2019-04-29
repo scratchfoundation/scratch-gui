@@ -17,6 +17,8 @@ class AudioEffects {
         return effectTypes;
     }
     constructor (buffer, name, trimStart, trimEnd) {
+        if (trimStart === null) trimStart = 0.0;
+        if (trimEnd === null) trimEnd = 1.0;
         this.trimStartSeconds = (trimStart * buffer.length) / buffer.sampleRate;
         this.trimEndSeconds = (trimEnd * buffer.length) / buffer.sampleRate;
 

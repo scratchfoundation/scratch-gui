@@ -240,7 +240,7 @@ export default [
             />
         ),
         featured: true,
-        disabled: true,
+        disabled: false,
         bluetoothRequired: true,
         internetConnectionRequired: true,
         launchPeripheralConnectionFlow: true,

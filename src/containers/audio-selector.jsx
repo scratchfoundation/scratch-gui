@@ -88,7 +88,7 @@ class AudioSelector extends React.Component {
         this.containerElement = el;
     }
     render () {
-        console.log('start: ', this.props.trimStart, 'end: ', this.props.trimEnd)
+        // console.log('start: ', this.props.trimStart, 'end: ', this.props.trimEnd)
         return (
             <AudioSelectorComponent
                 containerRef={this.storeRef}

@@ -26,18 +26,22 @@ class AudioEffects {
         // Need to precompute those values to create the offline audio context.
         const pitchRatio = Math.pow(2, 4 / 12); // A major third
         let sampleCount = buffer.length;
-        let playbackRate = 1;
+        // let sampleCount = Math.floor((this.trimEndSeconds - this.trimStartSeconds)
+        //     * buffer.sampleRate);
+        this.playbackRate = 1;
         switch (name) {
         case effectTypes.ECHO:
             sampleCount = buffer.length + (0.25 * 3 * buffer.sampleRate);
             break;
         case effectTypes.FASTER:
-            playbackRate = pitchRatio;
-            sampleCount = Math.floor(buffer.length / playbackRate);
+            this.playbackRate = pitchRatio;
+            // sampleCount = Math.floor(buffer.length / this.playbackRate);
+            sampleCount = Math.floor(sampleCount / this.playbackRate);
             break;
         case effectTypes.SLOWER:
-            playbackRate = 1 / pitchRatio;
-            sampleCount = Math.floor(buffer.length / playbackRate);
+            this.playbackRate = 1 / pitchRatio;
+            // sampleCount = Math.floor(buffer.length / this.playbackRate);
+            sampleCount = Math.floor(sampleCount / this.playbackRate);
             break;
         }
         if (window.OfflineAudioContext) {
@@ -77,7 +81,6 @@ class AudioEffects {
 
         this.source = this.audioContext.createBufferSource();
         this.source.buffer = this.buffer;
-        this.source.playbackRate.value = playbackRate;
         this.name = name;
     }
     process (done) {
@@ -85,6 +88,11 @@ class AudioEffects {
         let input;
         let output;
         switch (this.name) {
+        case effectTypes.FASTER:
+        case effectTypes.SLOWER:
+            this.source.playbackRate.setValueAtTime(this.playbackRate, this.trimStartSeconds);
+            this.source.playbackRate.setValueAtTime(1.0, this.trimEndSeconds);
+            break;
         case effectTypes.LOUDER:
             ({input, output} = new VolumeEffect(this.audioContext, 1.25, this.trimStartSeconds, this.trimEndSeconds));
             break;

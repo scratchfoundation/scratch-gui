@@ -103,9 +103,9 @@ export default function LangDef (){
         const regExpStr = textRepresentation.replace(/%\d+/g, '.+'); // => 'for each '.+' in '.+'
         if (!defs.tokenizer[className]) defs.tokenizer[className] = [];
         // DO NEXT - save as a def file
-        const dataExample = [new RegExp(regExpStr), className];
+        // const dataExample = [new RegExp(regExpStr), className];
         // example defs entry: Array [/replace item .+ of .+ with .+/, "data"]
-        console.log(dataExample); // browser -> inspect -> network to view output
+        // console.log(dataExample); // browser -> inspect -> network to view output
         defs.tokenizer[className].push([new RegExp(regExpStr), className]); // => ['for each '.+' in '.+', control]
     });
 

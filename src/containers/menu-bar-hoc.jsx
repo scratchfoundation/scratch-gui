@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 import React from 'react';
 
 const MenuBarHOC = function (WrappedComponent) {
-    class MenuBarComponent extends React.PureComponent {
+    class MenuBarContainer extends React.PureComponent {
         constructor (props) {
             super(props);
 
@@ -16,7 +16,7 @@ const MenuBarHOC = function (WrappedComponent) {
         confirmReadyToReplaceProject (message) {
             let readyToReplaceProject = true;
             if (this.props.projectChanged && !this.props.canCreateNew) {
-                readyToReplaceProject = confirm(message); // eslint-disable-line no-alert
+                readyToReplaceProject = this.props.confirmWithMessage(message);
             }
             return readyToReplaceProject;
         }
@@ -38,17 +38,29 @@ const MenuBarHOC = function (WrappedComponent) {
         }
     }
 
-    MenuBarComponent.propTypes = {
+    MenuBarContainer.propTypes = {
         canCreateNew: PropTypes.bool,
         canSave: PropTypes.bool,
+        confirmWithMessage: PropTypes.func,
         projectChanged: PropTypes.bool
     };
-
-    const _mapStateToProps = state => ({
+    MenuBarContainer.defaultProps = {
+        // default to using standard js confirm
+        confirmWithMessage: message => (confirm(message)) // eslint-disable-line no-alert
+    };
+    const mapStateToProps = state => ({
         projectChanged: state.scratchGui.projectChanged
     });
-
-    return connect(_mapStateToProps)(MenuBarComponent);
+    const mapDispatchToProps = () => ({});
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
+    return connect(
+        mapStateToProps,
+        mapDispatchToProps,
+        mergeProps
+    )(MenuBarContainer);
 };
 
 export default MenuBarHOC;

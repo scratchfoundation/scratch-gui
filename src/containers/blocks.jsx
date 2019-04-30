@@ -180,13 +180,19 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.workspace.dispose();
-        clearTimeout(this.toolboxUpdateTimeout);
+        if (this.toolboxUpdateTimeout) this.toolboxUpdateTimeout.cancel();
     }
     requestToolboxUpdate () {
-        clearTimeout(this.toolboxUpdateTimeout);
-        this.toolboxUpdateTimeout = setTimeout(() => {
-            this.updateToolbox();
-        }, 0);
+        if (this.toolboxUpdateTimeout) this.toolboxUpdateTimeout.cancel();
+        let running = true;
+        this.toolboxUpdateTimeout = Promise.resolve().then(() => {
+            if (running) {
+                this.updateToolbox();
+            }
+        });
+        this.toolboxUpdateTimeout.cancel = () => {
+            running = false;
+        };
     }
     setLocale () {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);

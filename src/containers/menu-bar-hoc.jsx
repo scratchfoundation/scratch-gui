@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import React from 'react';
 
-const ConfirmReplaceHOC = function (WrappedComponent) {
-    class ConfirmReplaceProject extends React.PureComponent {
+const MenuBarHOC = function (WrappedComponent) {
+    class MenuBarComponent extends React.PureComponent {
         constructor (props) {
             super(props);
 
             bindAll(this, [
-                'confirmReadyToReplaceProject'
+                'confirmReadyToReplaceProject',
+                'shouldSaveBeforeTransition'
             ]);
         }
-
         confirmReadyToReplaceProject (message) {
             let readyToReplaceProject = true;
             if (this.props.projectChanged && !this.props.canCreateNew) {
@@ -20,7 +20,9 @@ const ConfirmReplaceHOC = function (WrappedComponent) {
             }
             return readyToReplaceProject;
         }
-
+        shouldSaveBeforeTransition () {
+            return (this.props.canSave && this.props.projectChanged);
+        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -30,13 +32,15 @@ const ConfirmReplaceHOC = function (WrappedComponent) {
             } = this.props;
             return (<WrappedComponent
                 confirmReadyToReplaceProject={this.confirmReadyToReplaceProject}
+                shouldSaveBeforeTransition={this.shouldSaveBeforeTransition}
                 {...props}
             />);
         }
     }
 
-    ConfirmReplaceProject.propTypes = {
+    MenuBarComponent.propTypes = {
         canCreateNew: PropTypes.bool,
+        canSave: PropTypes.bool,
         projectChanged: PropTypes.bool
     };
 
@@ -44,7 +48,7 @@ const ConfirmReplaceHOC = function (WrappedComponent) {
         projectChanged: state.scratchGui.projectChanged
     });
 
-    return connect(_mapStateToProps)(ConfirmReplaceProject);
+    return connect(_mapStateToProps)(MenuBarComponent);
 };
 
-export default ConfirmReplaceHOC;
+export default MenuBarHOC;

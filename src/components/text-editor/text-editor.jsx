@@ -34,7 +34,21 @@ class TextEditor extends React.Component {
         monaco.languages.setMonarchTokensProvider('scratch-text', {
             tokenizer: {
                 root: [
-                    LangDef.defs
+                    // Stuck here
+                    // Add all tokenizers, as created by the LangDef function
+                    // in the 'scratch-text.js' file
+                    // e.g.
+                    [/replace item .+ of .+ with .+/, 'data'],
+                    [/play sound .+ until done/, 'sound'],
+                    [/stop all sounds/, 'sound'],
+                    [/set .+ effect to .+/, 'sound'],
+                    [/change .+ effect by .+/, 'sound'],
+                    [/clear sound effects/, 'sound'],
+                    [/pitch/, 'sound'],
+                    [/pan left\/right/, 'sound'],
+                    [/change volume by .+/, 'sound'],
+                    [/set volume to .+%/, 'sound']
+                    // how to populate all elements here?
                 ]
             }
         });

@@ -99,13 +99,17 @@ export default function LangDef (){
         // Get Msg at [msg]
         const textRepresentation = ScratchBlocks.Msg[msg]; // => Blockly.Msg.CONTROL_FOREACH = 'for each %1 in %2';
         // Convert value to RegExp when %1 clicked => ^when (it?)clicked$
-        // Regulat expresson '.+' = One or more of any character except line break
+        // Regular expresson '.+' = One or more of any character except line break
         const regExpStr = textRepresentation.replace(/%\d+/g, '.+'); // => 'for each '.+' in '.+'
         if (!defs.tokenizer[className]) defs.tokenizer[className] = [];
         // DO NEXT - save as a def file
+        const dataExample = [new RegExp(regExpStr), className];
+        // example defs entry: Array [/replace item .+ of .+ with .+/, "data"]
+        console.log(dataExample); // browser -> inspect -> network to view output
         defs.tokenizer[className].push([new RegExp(regExpStr), className]); // => ['for each '.+' in '.+', control]
     });
-    console.log("Hello!");
-    console.log(LangDef.defs);
+
+    // console.log("Hello!");
+    // console.log(LangDef.defs);
     return defs;
 }

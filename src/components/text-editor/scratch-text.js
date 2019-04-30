@@ -105,5 +105,7 @@ export default function LangDef (){
         // DO NEXT - save as a def file
         defs.tokenizer[className].push([new RegExp(regExpStr), className]); // => ['for each '.+' in '.+', control]
     });
+    console.log("Hello!");
+    console.log(LangDef.defs);
     return defs;
 }

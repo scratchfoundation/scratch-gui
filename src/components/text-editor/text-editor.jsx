@@ -19,7 +19,6 @@ class TextEditor extends React.Component {
         this.state = {
             blocks: {}
         };
-
     }
 
 

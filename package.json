@@ -44,7 +44,7 @@
     "babel-loader": "^8.0.4",
     "base64-loader": "1.0.0",
     "bowser": "1.9.4",
-    "chromedriver": "2.44.1",
+    "chromedriver": "74.0.0",
     "classnames": "2.2.6",
     "computed-style-to-inline-style": "3.0.0",
     "copy-webpack-plugin": "^4.5.1",

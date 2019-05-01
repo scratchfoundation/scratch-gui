@@ -60,9 +60,9 @@ const vmListenerHOC = function (WrappedComponent) {
                 this.props.vm.postIOData('userData', {username: this.props.username});
             }
 
-            // Re-request a targets update when the shouldEmitTargetsUpdate state changes to true
+            // Re-request a targets update when the shouldEmitUpdate state changes to true
             // i.e. when the editor transitions out of fullscreen/player only modes
-            if (this.props.shouldEmitTargetsUpdate && !prevProps.shouldEmitTargetsUpdate) {
+            if (this.props.shouldEmitUpdates && !prevProps.shouldEmitUpdates) {
                 this.props.vm.emitTargetsUpdate(false /* Emit the event, but do not trigger project change */);
             }
         }
@@ -148,8 +148,10 @@ const vmListenerHOC = function (WrappedComponent) {
         onKeyUp: PropTypes.func,
         onMicListeningUpdate: PropTypes.func.isRequired,
         onMonitorsUpdate: PropTypes.func.isRequired,
+        onProjectChanged: PropTypes.func.isRequired,
         onProjectRunStart: PropTypes.func.isRequired,
         onProjectRunStop: PropTypes.func.isRequired,
+        onProjectSaved: PropTypes.func.isRequired,
         onRuntimeStarted: PropTypes.func.isRequired,
         onShowExtensionAlert: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,

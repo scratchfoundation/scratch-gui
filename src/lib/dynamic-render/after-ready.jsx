@@ -26,7 +26,7 @@ class DelayAfterReady extends React.Component {
          * depend on ready being a the same function for the same component.
          * @type {function}
          */
-        this.ready = () => this._step();
+        this.ready = this.ready.bind(this);
 
         // The initial ready value. May be changed synchronously before
         // this.state is set.
@@ -60,6 +60,10 @@ class DelayAfterReady extends React.Component {
 
     componentWillUnmount () {
         this._step = this.readyNoop;
+    }
+
+    ready () {
+        this._step();
     }
 
     readySetTrue () {

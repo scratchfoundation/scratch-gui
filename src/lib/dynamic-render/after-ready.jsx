@@ -16,35 +16,58 @@ class DelayAfterReady extends React.Component {
         super(props);
 
         /**
+         * Internal method to set ready depending on component's mounting state.
+         * @type {function}
+         */
+        this._step = this.readyNoop;
+
+        /**
          * Bound copy of ready. Using the callback ready style, functions may
          * depend on ready being a the same function for the same component.
          * @type {function}
          */
-        this.ready = this.ready.bind(this);
+        this.ready = () => this._step();
+
+        // The initial ready value. May be changed synchronously before
+        // this.state is set.
+        let ready = false;
 
         if (typeof props.ready === 'function') {
-            this.state = {ready: false};
+            this._step = () => {
+                ready = true;
+            };
             props.ready(this.ready);
         } else {
-            this.state = {ready: Boolean(props.ready)};
+            ready = Boolean(props.ready);
+        }
+
+        if (ready === false) {
+            this._step = this.readySetTrue;
+        } else {
+            this._step = this.readyNoop;
+        }
+
+        this.state = {ready};
+    }
+
+    componentWillReceiveProps ({ready}) {
+        if (typeof ready === 'function') {
+            ready(this.ready);
+        } else if (ready) {
+            this.ready();
         }
     }
 
-    componentWillReceiveProps (newProps) {
-        if (this.state.ready === false) {
-            if (typeof newProps.ready === 'function') {
-                newProps.ready(this.ready);
-            } else if (newProps.ready) {
-                this.ready();
-            }
-        }
+    componentWillUnmount () {
+        this._step = this.readyNoop;
     }
 
-    ready () {
-        if (this.state.ready === false) {
-            this.setState({ready: true});
-        }
+    readySetTrue () {
+        this.setState({ready: true});
+        this._step = this.readyNoop;
     }
+
+    readyNoop () {}
 
     render () {
         const {ready} = this.state;

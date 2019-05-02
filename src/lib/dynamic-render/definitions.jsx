@@ -25,6 +25,8 @@ import {
     loading
 } from './selectors';
 
+const skipDispatch = () => ({});
+
 const idleRequire = compose(
     placeholder,
     addProps({priority: 1}),
@@ -37,7 +39,7 @@ const idleWhileOperationWithPriority = operation => priority => (
     compose(
         connect((state, props) => ({
             priority: props.priority || (operation(state) ? priority : -1)
-        })),
+        }), skipDispatch),
         schedule
     )
 );
@@ -76,7 +78,7 @@ const idleRequireWhileLoading = loadModule => (
 );
 
 const afterFetching = compose(
-    connect(state => ({ready: !fetching(state)})),
+    connect(state => ({ready: !fetching(state)}), skipDispatch),
     afterReady,
     gate
 );
@@ -89,7 +91,7 @@ const idleWhileLoadingAfterFetching = compose(
 );
 
 const whileLoading = compose(
-    connect((state, props) => ({ready: props.ready || loading(state)})),
+    connect((state, props) => ({ready: props.ready || loading(state)}), skipDispatch),
     gate,
     loadComponent
 );

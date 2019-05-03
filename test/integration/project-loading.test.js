@@ -1,55 +1,54 @@
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
-const {
-    clickText,
-    clickXpath,
-    findByText,
-    findByXpath,
-    getDriver,
-    getLogs,
-    loadUri,
-    scope,
-    waitUntilGone
-} = new SeleniumHelper();
-
 const uri = path.resolve(__dirname, '../../build/index.html');
 
-let driver;
-
 describe('Loading scratch gui', () => {
-    beforeAll(() => {
-        driver = getDriver();
-    });
-
-    afterAll(async () => {
-        await driver.quit();
-    });
-
     describe('Loading projects by ID', () => {
 
         test('Nonexistent projects show error screen', async () => {
+            const {
+                clickText,
+                getDriver,
+                loadUri
+            } = new SeleniumHelper();
+
+            const driver = await getDriver();
+
             await loadUri(`${uri}#999999999999999999999`);
             await clickText('Oops! Something went wrong.');
+            await driver.quit();
         });
 
         test('Load a project by ID directly through url', async () => {
-            await driver.quit(); // Reset driver to test hitting # url directly
-            driver = getDriver();
+            const {
+                clickXpath,
+                getDriver,
+                getLogs,
+                loadUri
+            } = new SeleniumHelper();
+
+            const driver = await getDriver();
 
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
-            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Go"]');
             await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath('//img[@title="Stop"]');
             const logs = await getLogs();
             await expect(logs).toEqual([]);
+            await driver.quit();
         });
 
         test('Load a project by ID (fullscreen)', async () => {
-            await driver.quit(); // Reset driver to test hitting # url directly
-            driver = getDriver();
+            const {
+                clickXpath,
+                getDriver,
+                getLogs,
+                loadUri
+            } = new SeleniumHelper();
+
+            const driver = await getDriver();
 
             const prevSize = driver.manage()
                 .window()
@@ -60,7 +59,6 @@ describe('Loading scratch gui', () => {
                 .setSize(1920, 1080);
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
-            await waitUntilGone(findByText('Loading'));
             await clickXpath('//img[@title="Full Screen Control"]');
             await new Promise(resolve => setTimeout(resolve, 500));
             await clickXpath('//img[@title="Go"]');
@@ -73,6 +71,28 @@ describe('Loading scratch gui', () => {
             });
             const logs = await getLogs();
             await expect(logs).toEqual([]);
+            await driver.quit();
+        });
+    });
+
+    describe('Creating new projects', () => {
+        const {
+            clickText,
+            clickXpath,
+            findByXpath,
+            getDriver,
+            loadUri,
+            scope
+        } = new SeleniumHelper();
+
+        let driver;
+
+        beforeAll(() => {
+            driver = getDriver();
+        });
+
+        afterAll(async () => {
+            await driver.quit();
         });
 
         test('Creating new project resets active tab to Code tab', async () => {

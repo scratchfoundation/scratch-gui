@@ -44,38 +44,46 @@ class SeleniumHelper {
     }
 
     getDriver () {
-        const chromeCapabilities = webdriver.Capabilities.chrome();
-        const args = [];
-        if (USE_HEADLESS) {
-            args.push('--headless');
+        // It's not safe to replace an existing driver since there may be outstanding async chains already in progress.
+        // Alternative solution: remove/replace all async code in this class which mentions `this.driver`
+        if (!this.driver) {
+            const chromeCapabilities = webdriver.Capabilities.chrome();
+            const args = [];
+            if (USE_HEADLESS) {
+                args.push('--headless');
+            }
+
+            // Stub getUserMedia to always not allow access
+            args.push('--use-fake-ui-for-media-stream=deny');
+
+            chromeCapabilities.set('chromeOptions', {args});
+            chromeCapabilities.setLoggingPrefs({
+                performance: 'ALL'
+            });
+            this.driver = new webdriver.Builder()
+                .forBrowser('chrome')
+                .withCapabilities(chromeCapabilities)
+                .build();
         }
-
-        // Stub getUserMedia to always not allow access
-        args.push('--use-fake-ui-for-media-stream=deny');
-
-        chromeCapabilities.set('chromeOptions', {args});
-        chromeCapabilities.setLoggingPrefs({
-            performance: 'ALL'
-        });
-        this.driver = new webdriver.Builder()
-            .forBrowser('chrome')
-            .withCapabilities(chromeCapabilities)
-            .build();
         return this.driver;
     }
 
     getSauceDriver (username, accessKey, configs) {
-        this.driver = new webdriver.Builder()
-            .withCapabilities({
-                browserName: configs.browserName,
-                platform: configs.platform,
-                version: configs.version,
-                username: username,
-                accessKey: accessKey
-            })
-            .usingServer(`http://${username}:${accessKey
-            }@ondemand.saucelabs.com:80/wd/hub`)
-            .build();
+        // It's not safe to replace an existing driver since there may be outstanding async chains already in progress.
+        // Alternative solution: remove/replace all async code in this class which mentions `this.driver`
+        if (!this.driver) {
+            this.driver = new webdriver.Builder()
+                .withCapabilities({
+                    browserName: configs.browserName,
+                    platform: configs.platform,
+                    version: configs.version,
+                    username: username,
+                    accessKey: accessKey
+                })
+                .usingServer(`http://${username}:${accessKey
+                }@ondemand.saucelabs.com:80/wd/hub`)
+                .build();
+        }
         return this.driver;
     }
 
@@ -90,11 +98,18 @@ class SeleniumHelper {
     loadUri (uri) {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
+        const loaderBackgroundXpath = '//body//*[starts-with(@class,"loader_background_")]';
         return this.driver
             .get(`file://${uri}`)
             .then(() => (
                 this.driver.executeScript('window.onbeforeunload = undefined;')
             ))
+            // look for loader background(s)
+            .then(() => this.driver.findElements(By.xpath(loaderBackgroundXpath)))
+            // if any were found, wait for it/them to go away
+            .then(loaderBackgrounds => Promise.all(loaderBackgrounds.map(
+                loaderBackground => this.waitUntilGone(loaderBackground)
+            )))
             .then(() => (
                 this.driver.manage()
                     .window()

@@ -25,8 +25,6 @@ describe('Localization', () => {
     });
 
     test('Switching languages', async () => {
-        await driver.quit();
-        driver = getDriver();
         await loadUri(uri);
 
         // Add a sprite to make sure it stays when switching languages

@@ -3,22 +3,17 @@
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
-const {
-    findByText,
-    clickButton,
-    clickText,
-    clickXpath,
-    findByXpath,
-    getDriver,
-    getLogs,
-    loadUri,
-    waitUntilGone
-} = new SeleniumHelper();
-
-let driver;
-
 describe('player example', () => {
     const uri = path.resolve(__dirname, '../../build/player.html');
+
+    const {
+        clickXpath,
+        getDriver,
+        getLogs,
+        loadUri
+    } = new SeleniumHelper();
+
+    let driver;
 
     beforeAll(() => {
         driver = getDriver();
@@ -31,7 +26,6 @@ describe('player example', () => {
     test('Load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
-        await waitUntilGone(findByText('Loading'));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
@@ -50,6 +44,18 @@ describe('player example', () => {
 
 describe('blocks example', () => {
     const uri = path.resolve(__dirname, '../../build/blocks-only.html');
+
+    const {
+        clickButton,
+        clickText,
+        clickXpath,
+        findByXpath,
+        getDriver,
+        getLogs,
+        loadUri
+    } = new SeleniumHelper();
+
+    let driver;
 
     beforeAll(() => {
         driver = getDriver();

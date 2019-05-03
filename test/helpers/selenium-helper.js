@@ -95,26 +95,31 @@ class SeleniumHelper {
         return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
     }
 
-    loadUri (uri) {
+    async loadUri (uri) {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
+
+        // there's no meaningful common element rendered in all GUI pages, but we use "box" on all of them :)
+        // this just indicates that React has rendered something at least once
+        // this is the only Xpath I could find that works on all: index, player, blocks-only, compatibility-testing
+        const somethingRenderedXpath = '//body//*[starts-with(@class,"box_box_") or contains(@class," box_box_")]';
         const loaderBackgroundXpath = '//body//*[starts-with(@class,"loader_background_")]';
-        return this.driver
-            .get(`file://${uri}`)
-            .then(() => (
-                this.driver.executeScript('window.onbeforeunload = undefined;')
-            ))
-            // look for loader background(s)
-            .then(() => this.driver.findElements(By.xpath(loaderBackgroundXpath)))
-            // if any were found, wait for it/them to go away
-            .then(loaderBackgrounds => Promise.all(loaderBackgrounds.map(
-                loaderBackground => this.waitUntilGone(loaderBackground)
-            )))
-            .then(() => (
-                this.driver.manage()
-                    .window()
-                    .setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-            ));
+
+        await this.driver.get(`file://${uri}`);
+        const window = await this.driver.manage().window();
+        await window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        await this.driver.executeScript('window.onbeforeunload = undefined;');
+
+        // wait for the app to exist
+        await this.findByXpath(somethingRenderedXpath);
+
+        // look for loader background(s), which if present will be in front of the editor wrapper
+        const loaderBackgrounds = await this.driver.findElements(By.xpath(loaderBackgroundXpath));
+
+        // if any were found, wait for it/them to go away
+        return Promise.all(loaderBackgrounds.map(
+            loaderBackground => this.waitUntilGone(loaderBackground)
+        ));
     }
 
     clickXpath (xpath) {

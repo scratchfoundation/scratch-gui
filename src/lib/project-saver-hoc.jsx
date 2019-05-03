@@ -59,7 +59,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 // but then it'd be hard to turn this listening off in our tests
                 window.onbeforeunload = e => this.leavePageConfirm(e);
             }
+
+            // Allow the GUI consumer to pass in a function to receive a trigger
+            // for triggering thumbnail or whole project saves.
+            // These functions are called with null on unmount to prevent stale references.
             this.props.onSetProjectThumbnailer(this.getProjectThumbnail);
+            this.props.onSetProjectSaver(this.tryToAutoSave);
         }
         componentDidUpdate (prevProps) {
             if (!this.props.isAnyCreatingNewState && prevProps.isAnyCreatingNewState) {
@@ -116,6 +121,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
             // Remove project thumbnailer function since the components are unmounting
             this.props.onSetProjectThumbnailer(null);
+            this.props.onSetProjectSaver(null);
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
@@ -310,6 +316,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onRemixing,
                 onSetProjectUnchanged,
                 onSetProjectThumbnailer,
+                onSetProjectSaver,
                 onShowAlert,
                 onShowCopySuccessAlert,
                 onShowRemixSuccessAlert,
@@ -376,6 +383,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         autoSaveIntervalSecs: 120,
         onRemixing: () => {},
         onSetProjectThumbnailer: () => {},
+        onSetProjectSaver: () => {},
         onUpdateProjectData: saveProjectToServer
     };
     const mapStateToProps = (state, ownProps) => {

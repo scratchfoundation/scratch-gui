@@ -331,5 +331,15 @@ export default function (vm) {
         return collator.compare(str1, str2);
     };
 
+    // Blocks wants to know if 3D CSS transforms are supported. The cross
+    // section of browsers Scratch supports and browsers that support 3D CSS
+    // transforms will make the return always true.
+    //
+    // Shortcutting to true lets us skip an expensive style recalculation when
+    // first loading the Scratch editor.
+    ScratchBlocks.utils.is3dSupported = function () {
+        return true;
+    };
+
     return ScratchBlocks;
 }

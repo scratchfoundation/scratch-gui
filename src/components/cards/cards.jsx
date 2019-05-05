@@ -281,9 +281,7 @@ const Cards = props => {
             className={styles.cardContainerOverlay}
             style={{
                 width: `${window.innerWidth + (2 * 300)}px`,
-                height: `${window.innerHeight + (2 * 300)}px`,
-                top: `${-300}px`,
-                left: `${-300}px`
+                height: `${window.innerHeight + (2 * 300)}px`
             }}
         >
             <Draggable

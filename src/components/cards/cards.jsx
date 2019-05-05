@@ -267,14 +267,14 @@ const Cards = props => {
     // Tutorial cards need to calculate their own dragging bounds
     // to allow for dragging the cards off the left, right and bottom
     // edges of the workspace.
-    const cardHorizontalOffset = 400; // ~80% of card width
-    const cardVerticalOffset = expanded ? 257 : 0; // ~80% of card height, if expanded
+    const cardHorizontalDragOffset = 400; // ~80% of card width
+    const cardVerticalDragOffset = expanded ? 257 : 0; // ~80% of card height, if expanded
     const menuBarHeight = 48; // TODO: get pre-calculated from elsewhere?
 
     if (x === 0 && y === 0) {
         // initialize positions
         x = isRtl ? -292 : 292;
-        x += cardHorizontalOffset;
+        x += cardHorizontalDragOffset;
         // The tallest cards are about 320px high, and the default position is pinned
         // to near the bottom of the blocks palette to allow room to work above.
         const tallCardHeight = 320;
@@ -289,10 +289,10 @@ const Cards = props => {
         <div
             className={styles.cardContainerOverlay}
             style={{
-                width: `${window.innerWidth + (2 * cardHorizontalOffset)}px`,
-                height: `${window.innerHeight - menuBarHeight + cardVerticalOffset}px`,
+                width: `${window.innerWidth + (2 * cardHorizontalDragOffset)}px`,
+                height: `${window.innerHeight - menuBarHeight + cardVerticalDragOffset}px`,
                 top: `${menuBarHeight}px`,
-                left: `${-cardHorizontalOffset}px`
+                left: `${-cardHorizontalDragOffset}px`
             }}
         >
             <Draggable

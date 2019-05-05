@@ -266,9 +266,9 @@ const Cards = props => {
 
     // Tutorial cards need to calculate their own dragging bounds
     // to allow for dragging the cards off the left, right and bottom
-    // edges of the workspace, used in the custom overlay 'card-container-overlay'
-    const cardHorizontalOffset = 400; // 80% of approx. card width
-    const cardVerticalOffset = 256; // 80% of approx. card height
+    // edges of the workspace.
+    const cardHorizontalOffset = 400; // ~80% of card width
+    const cardVerticalOffset = expanded ? 257 : 0; // ~80% of card height, if expanded
     const menuBarHeight = 48; // TODO: get pre-calculated from elsewhere?
 
     if (x === 0 && y === 0) {
@@ -285,7 +285,7 @@ const Cards = props => {
     const steps = content[activeDeckId].steps;
 
     return (
-        // Use a custom overlay to act as the bounding parent for the draggable
+        // Custom overlay to act as the bounding parent for the draggable, using values from above
         <div
             className={styles.cardContainerOverlay}
             style={{

@@ -264,24 +264,35 @@ const Cards = props => {
 
     if (activeDeckId === null) return;
 
+    // Tutorial cards need to calculate their own dragging bounds
+    // to allow for dragging the cards off the left, right and bottom
+    // edges of the workspace, used in the custom overlay 'card-container-overlay'
+    const cardHorizontalOffset = 400; // 80% of approx. card width
+    const cardVerticalOffset = 256; // 80% of approx. card height
+    const menuBarHeight = 48; // TODO: get pre-calculated from elsewhere?
+
     if (x === 0 && y === 0) {
         // initialize positions
         x = isRtl ? -292 : 292;
-        // The tallest cards are about 385px high, and the default position is pinned
+        x += cardHorizontalOffset;
+        // The tallest cards are about 320px high, and the default position is pinned
         // to near the bottom of the blocks palette to allow room to work above.
-        const tallCardHeight = 385;
+        const tallCardHeight = 320;
         const bottomMargin = 60; // To avoid overlapping the backpack region
-        y = window.innerHeight - tallCardHeight - bottomMargin;
+        y = window.innerHeight - tallCardHeight - bottomMargin - menuBarHeight;
     }
 
     const steps = content[activeDeckId].steps;
 
     return (
+        // Use a custom overlay to act as the bounding parent for the draggable
         <div
             className={styles.cardContainerOverlay}
             style={{
-                width: `${window.innerWidth + (2 * 300)}px`,
-                height: `${window.innerHeight + (2 * 300)}px`
+                width: `${window.innerWidth + (2 * cardHorizontalOffset)}px`,
+                height: `${window.innerHeight - menuBarHeight + cardVerticalOffset}px`,
+                top: `${menuBarHeight}px`,
+                left: `${-cardHorizontalOffset}px`
             }}
         >
             <Draggable

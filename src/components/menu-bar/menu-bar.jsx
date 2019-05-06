@@ -715,6 +715,7 @@ MenuBar.propTypes = {
     isShowingProject: PropTypes.bool,
     isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
+    locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
@@ -744,6 +745,7 @@ MenuBar.propTypes = {
     sessionExists: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
+    userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };

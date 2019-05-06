@@ -42,6 +42,9 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             activeDeckId: action.activeDeckId,
             step: 0,
+            x: 0,
+            y: 0,
+            expanded: true,
             visible: true
         });
     case NEXT_STEP:

@@ -107,6 +107,7 @@ const initTutorialCard = function (currentState, deckId) {
                 visible: true,
                 content: decks,
                 activeDeckId: deckId,
+                expanded: true,
                 step: 0,
                 x: 0,
                 y: 0,

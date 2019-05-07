@@ -79,12 +79,16 @@ class SeleniumHelper {
         return this.driver;
     }
 
+    getXpathForText (text, scope) {
+        return `//body//${scope || '*'}//*[contains(text(), '${text}')]`;
+    }
+
     findByXpath (xpath) {
         return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
     }
 
     findByText (text, scope) {
-        return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+        return this.findByXpath(this.getXpathForText(text, scope));
     }
 
     loadUri (uri) {
@@ -102,18 +106,29 @@ class SeleniumHelper {
             ));
     }
 
+    clickLocator (locator, button = Button.LEFT) {
+        return this.driver.wait(async () => {
+            const element = await this.driver.findElement(locator);
+            if (!element) {
+                return false;
+            }
+            return this.driver.actions()
+                .click(element, button)
+                .perform()
+                .then(() => true, () => false);
+        });
+    }
+
     clickXpath (xpath) {
-        return this.findByXpath(xpath).then(el => el.click());
+        return this.clickLocator(By.xpath(xpath));
     }
 
     clickText (text, scope) {
-        return this.findByText(text, scope).then(el => el.click());
+        return this.clickXpath(this.getXpathForText(text, scope));
     }
 
     rightClickText (text, scope) {
-        return this.findByText(text, scope).then(el => this.driver.actions()
-            .click(el, Button.RIGHT)
-            .perform());
+        return this.clickXpath(this.getXpathForText(text, scope), Button.RIGHT);
     }
 
     clickButton (text) {

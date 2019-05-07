@@ -99,41 +99,34 @@ class SeleniumHelper {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
 
-        // there's no meaningful common element rendered in all GUI pages, but we use "box" on all of them :)
-        // this just indicates that React has rendered something at least once
-        // this is the only Xpath I could find that works on all: index, player, blocks-only, compatibility-testing
-        const somethingRenderedXpath = '//body//*[starts-with(@class,"box_box_") or contains(@class," box_box_")]';
-        const loaderBackgroundXpath = '//body//*[starts-with(@class,"loader_background_")]';
-
         await this.driver.get(`file://${uri}`);
         const window = await this.driver.manage().window();
         await window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         await this.driver.executeScript('window.onbeforeunload = undefined;');
-
-        // wait for the app to exist
-        await this.findByXpath(somethingRenderedXpath);
-
-        // look for loader background(s), which if present will be in front of the editor wrapper
-        const loaderBackgrounds = await this.driver.findElements(By.xpath(loaderBackgroundXpath));
-
-        // if any were found, wait for it/them to go away
-        return Promise.all(loaderBackgrounds.map(
-            loaderBackground => this.waitUntilGone(loaderBackground)
-        ));
     }
 
     clickXpath (xpath) {
-        return this.findByXpath(xpath).then(el => el.click());
+        return this.driver.wait(async () => {
+            const element = await this.findByXpath(xpath);
+            return element.click().then(() => true, () => false);
+        });
     }
 
     clickText (text, scope) {
-        return this.findByText(text, scope).then(el => el.click());
+        return this.driver.wait(async () => {
+            const element = await this.findByText(text, scope);
+            return element.click().then(() => true, () => false);
+        });
     }
 
     rightClickText (text, scope) {
-        return this.findByText(text, scope).then(el => this.driver.actions()
-            .click(el, Button.RIGHT)
-            .perform());
+        return this.driver.wait(async () => {
+            const element = await this.findByText(text, scope);
+            return this.driver.actions()
+                .click(element, Button.RIGHT)
+                .perform()
+                .then(() => true, () => false);
+        });
     }
 
     clickButton (text) {

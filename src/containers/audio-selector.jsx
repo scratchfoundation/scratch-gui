@@ -62,7 +62,7 @@ class AudioSelector extends React.Component {
         window.removeEventListener('mouseup', this.handleTrimEndMouseUp);
         window.removeEventListener('touchmove', this.handleTrimEndMouseMove);
         window.removeEventListener('touchend', this.handleTrimEndMouseUp);
-        if (this.props.trimStart === this.props.trimEnd) {
+        if (this.props.trimEnd - this.props.trimStart < MIN_LENGTH) {
             this.clearSelection();
         }
     }

@@ -170,10 +170,10 @@ class SoundEditor extends React.Component {
             const sampleRate = renderedBuffer.sampleRate;
             const success = this.submitNewSamples(samples, sampleRate);
             if (success) {
-                if (this.state.trimStart !== null) {
-                    this.setState({trimStart: adjustedTrimStart, trimEnd: adjustedTrimEnd}, this.handlePlay);
-                } else {
+                if (this.state.trimStart === null) {
                     this.handlePlay();
+                } else {
+                    this.setState({trimStart: adjustedTrimStart, trimEnd: adjustedTrimEnd}, this.handlePlay);
                 }
             }
         });

@@ -26,8 +26,8 @@ class AudioEffects {
         // Need to precompute those values to create the offline audio context.
         const pitchRatio = Math.pow(2, 4 / 12); // A major third
         let sampleCount = buffer.length;
-        const affectedSampleCount = Math.floor((this.trimEndSeconds - this.trimStartSeconds)
-            * buffer.sampleRate);
+        const affectedSampleCount = Math.floor((this.trimEndSeconds - this.trimStartSeconds) *
+            buffer.sampleRate);
         const unaffectedSampleCount = sampleCount - affectedSampleCount;
 
         this.playbackRate = 1;
@@ -37,13 +37,15 @@ class AudioEffects {
             break;
         case effectTypes.FASTER:
             this.playbackRate = pitchRatio;
-            sampleCount = unaffectedSampleCount + affectedSampleCount / this.playbackRate;
-            this.adjustedTrimEndSeconds = this.trimStartSeconds + (affectedSampleCount / this.playbackRate) / buffer.sampleRate;
+            sampleCount = unaffectedSampleCount + (affectedSampleCount / this.playbackRate);
+            this.adjustedTrimEndSeconds = this.trimStartSeconds +
+                ((affectedSampleCount / this.playbackRate) / buffer.sampleRate);
             break;
         case effectTypes.SLOWER:
             this.playbackRate = 1 / pitchRatio;
-            sampleCount = unaffectedSampleCount + affectedSampleCount / this.playbackRate;
-            this.adjustedTrimEndSeconds = this.trimStartSeconds + (affectedSampleCount / this.playbackRate) / buffer.sampleRate;
+            sampleCount = unaffectedSampleCount + (affectedSampleCount / this.playbackRate);
+            this.adjustedTrimEndSeconds = this.trimStartSeconds +
+                ((affectedSampleCount / this.playbackRate) / buffer.sampleRate);
             break;
         }
 
@@ -100,16 +102,20 @@ class AudioEffects {
             this.source.playbackRate.setValueAtTime(1.0, this.adjustedTrimEndSeconds);
             break;
         case effectTypes.LOUDER:
-            ({input, output} = new VolumeEffect(this.audioContext, 1.25, this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            ({input, output} = new VolumeEffect(this.audioContext, 1.25,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.SOFTER:
-            ({input, output} = new VolumeEffect(this.audioContext, 0.75, this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            ({input, output} = new VolumeEffect(this.audioContext, 0.75,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ECHO:
-            ({input, output} = new EchoEffect(this.audioContext, 0.25, this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            ({input, output} = new EchoEffect(this.audioContext, 0.25,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ROBOT:
-            ({input, output} = new RobotEffect(this.audioContext, this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            ({input, output} = new RobotEffect(this.audioContext,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }
 

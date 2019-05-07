@@ -270,10 +270,11 @@ const Cards = props => {
     const cardHorizontalDragOffset = 400; // ~80% of card width
     const cardVerticalDragOffset = expanded ? 257 : 0; // ~80% of card height, if expanded
     const menuBarHeight = 48; // TODO: get pre-calculated from elsewhere?
+    const wideCardWidth = 500;
 
     if (x === 0 && y === 0) {
         // initialize positions
-        x = isRtl ? -292 : 292;
+        x = isRtl ? (-190 - wideCardWidth - cardHorizontalDragOffset) : 292;
         x += cardHorizontalDragOffset;
         // The tallest cards are about 320px high, and the default position is pinned
         // to near the bottom of the blocks palette to allow room to work above.

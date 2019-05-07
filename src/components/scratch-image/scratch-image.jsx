@@ -24,7 +24,7 @@ class ScratchImage extends React.PureComponent {
                 nextImage = image;
                 break;
             } else {
-                nextImage = nextImage || image;
+                // nextImage = nextImage || image;
             }
         }
 
@@ -105,11 +105,16 @@ class ScratchImage extends React.PureComponent {
             >
                 {
                     ({isVisible}) => {
+                        // console.log(isVisible);
                         this.isVisible = isVisible;
                         ScratchImage.loadPendingImages();
                         return (
                             <img
                                 src={this.state.imageURI}
+                                style={{
+                                    minWidth: '1px',
+                                    minHeight: '1px'
+                                }}
                                 {...imgProps}
                             />
                         );

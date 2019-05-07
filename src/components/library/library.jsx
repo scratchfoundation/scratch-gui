@@ -70,6 +70,11 @@ const getItemImageSource = function (item) {
     }
 };
 
+const INITIAL_SHOW_COUNT = 50;
+const STEP_SHOW_COUNT_SIZE = 50;
+
+const STEP_SHOW_COUNT_TIMEOUT = 50; // ms
+
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
@@ -86,8 +91,21 @@ class LibraryComponent extends React.Component {
         this.state = {
             selectedItem: null,
             filterQuery: '',
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG.tag,
+            showCount: INITIAL_SHOW_COUNT,
+            showStep: STEP_SHOW_COUNT_SIZE
         };
+    }
+    componentDidMount () {
+        this.showIntervalId = setInterval(() => {
+            if (this.state.showCount === this.props.data.length) {
+                clearInterval(this.showIntervalId);
+                return;
+            }
+            this.setState(state => ({
+                showCount: Math.min(state.showCount + state.showStep, this.props.data.length)
+            }));
+        }, STEP_SHOW_COUNT_TIMEOUT);
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -125,7 +143,12 @@ class LibraryComponent extends React.Component {
     }
     getFilteredData () {
         if (this.state.selectedTag === 'all') {
-            if (!this.state.filterQuery) return this.props.data;
+            if (!this.state.filterQuery) {
+                if (this.state.showCount !== this.props.data.length) {
+                    return this.props.data.slice(0, this.state.showCount);
+                }
+                return this.props.data;
+            }
             return this.props.data.filter(dataItem => (
                 (dataItem.tags || [])
                     // Second argument to map sets `this`

@@ -7,6 +7,7 @@ import webdriver from 'selenium-webdriver';
 const {By, until, Button} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
+const DEFAULT_TIMEOUT_MILLISECONDS = 5 * 1000;
 
 class SeleniumHelper {
     constructor () {
@@ -26,8 +27,9 @@ class SeleniumHelper {
         ]);
     }
 
-    elementIsVisible (element) {
-        return this.driver.wait(until.elementIsVisible(element));
+    elementIsVisible (element, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(until.elementIsVisible(element), timeout,
+            `elementIsVisible timed out: ${(new Error()).stack}`);
     }
 
     get scope () {
@@ -87,8 +89,9 @@ class SeleniumHelper {
         return this.driver;
     }
 
-    findByXpath (xpath) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
+    findByXpath (xpath, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), timeout,
+            `findByXpath timed out for path: ${xpath}`);
     }
 
     findByText (text, scope) {
@@ -105,36 +108,48 @@ class SeleniumHelper {
         await this.driver.executeScript('window.onbeforeunload = undefined;');
     }
 
-    clickXpath (xpath) {
-        return this.driver.wait(async () => {
-            const element = await this.findByXpath(xpath);
-            return element.click().then(() => true, () => false);
-        });
+    clickXpath (xpath, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(
+            async () => {
+                const element = await this.findByXpath(xpath);
+                return element.click().then(() => true, () => false);
+            },
+            timeout,
+            `clickXpath timed out for xpath "${xpath}"`
+        );
     }
 
-    clickText (text, scope) {
-        return this.driver.wait(async () => {
-            const element = await this.findByText(text, scope);
-            return element.click().then(() => true, () => false);
-        });
+    clickText (text, scope, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(
+            async () => {
+                const element = await this.findByText(text, scope);
+                return element.click().then(() => true, () => false);
+            },
+            timeout,
+            `clickText timed out for text "${text}" in scope "${scope}"`
+        );
     }
 
-    rightClickText (text, scope) {
-        return this.driver.wait(async () => {
-            const element = await this.findByText(text, scope);
-            return this.driver.actions()
-                .click(element, Button.RIGHT)
-                .perform()
-                .then(() => true, () => false);
-        });
+    rightClickText (text, scope, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(
+            async () => {
+                const element = await this.findByText(text, scope);
+                return this.driver.actions()
+                    .click(element, Button.RIGHT)
+                    .perform()
+                    .then(() => true, () => false);
+            },
+            timeout,
+            `clickText timed out for text "${text}" in scope "${scope}"`
+        );
     }
 
     clickButton (text) {
         return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
     }
 
-    waitUntilGone (element) {
-        return this.driver.wait(until.stalenessOf(element));
+    waitUntilGone (element, timeout = DEFAULT_TIMEOUT_MILLISECONDS) {
+        return this.driver.wait(until.stalenessOf(element), timeout, `waitUntilGone timed out for element: ${element}`);
     }
 
     getLogs (whitelist) {

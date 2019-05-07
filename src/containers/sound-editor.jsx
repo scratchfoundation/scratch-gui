@@ -132,15 +132,17 @@ class SoundEditor extends React.Component {
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
             if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
-                const clippedSamples = samples.slice(startIndex, endIndex);
-                this.submitNewSamples(clippedSamples, sampleRate);
-            } else {
-                // Just clear the trim state, it cannot be completed
-                this.setState({
-                    trimStart: null,
-                    trimEnd: null
-                });
+                const firstPart = samples.slice(0, startIndex);
+                const secondPart = samples.slice(endIndex, sampleCount);
+                const newSamples = new Float32Array(firstPart.length + secondPart.length);
+                newSamples.set(firstPart, 0);
+                newSamples.set(secondPart, firstPart.length);
+                this.submitNewSamples(newSamples, sampleRate);
             }
+            this.setState({
+                trimStart: null,
+                trimEnd: null
+            }, this.handlePlay);
         }
     }
     handleUpdateTrimEnd (trimEnd) {

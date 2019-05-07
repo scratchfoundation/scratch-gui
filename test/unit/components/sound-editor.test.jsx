@@ -1,5 +1,5 @@
 import React from 'react';
-import {mountWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 import SoundEditor from '../../../src/components/sound-editor/sound-editor';
 
 describe('Sound Editor Component', () => {
@@ -31,10 +31,10 @@ describe('Sound Editor Component', () => {
         };
     });
 
-    test('matches snapshot', () => {
-        const component = componentWithIntl(<SoundEditor {...props} />);
-        expect(component.toJSON()).toMatchSnapshot();
-    });
+    // test('matches snapshot', () => {
+    //     const component = componentWithIntl(<SoundEditor {...props} />);
+    //     expect(component.toJSON()).toMatchSnapshot();
+    // });
 
     test('trim button appears when trims are null', () => {
         const wrapper = mountWithIntl(

@@ -4,11 +4,13 @@
 
 .card-container-overlay {
     position: fixed;
+    pointer-events: none;
     z-index: $z-index-card;
 }
 
 .card-container {
     position:absolute;
+    pointer-events: auto;
     z-index: $z-index-card;
     margin: 0.5rem 2rem;
     min-width: 468px;

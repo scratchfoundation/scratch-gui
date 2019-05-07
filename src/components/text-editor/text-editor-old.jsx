@@ -6,7 +6,6 @@
 import React from 'react';
 import {injectIntl} from 'react-intl';
 import MonacoEditor from 'react-monaco-editor';
-// import LangDef from './scratch-text';
 import styles from './text-editor.css';
 
 const options = {
@@ -21,7 +20,6 @@ class TextEditor extends React.Component {
         };
     }
 
-
     componentDidUpdate (prevProps) {
         if (this.props.blocks !== prevProps.blocks) {
             this.setState({blocks: this.props.blocks});
@@ -30,12 +28,12 @@ class TextEditor extends React.Component {
 
     editorWillMount (monaco) {
         monaco.languages.register({id: 'scratch-text'});
-        // // monaco.languages.setMonarchTokensProvider('scratch-text', LangDef());
+        monaco.languages.setMonarchTokensProvider('scratch-text', LangDef());
         monaco.languages.setMonarchTokensProvider('scratch-text', {
             tokenizer: {
                 root: [
                     // Stuck here
-                    // Add all tokenizers, as created by the LangDef function
+                  // Add all tokenizers, as created by the LangDef function
                     // in the 'scratch-text.js' file
                     // e.g.
                     [/replace item .+ of .+ with .+/, 'data'],
@@ -47,20 +45,19 @@ class TextEditor extends React.Component {
                     [/pitch/, 'sound'],
                     [/pan left\/right/, 'sound'],
                     [/change volume by .+/, 'sound'],
-                    [/set volume to .+%/, 'sound'],
-                    [/.+ \+ .+/, 'operator']
+                    [/set volume to .+%/, 'sound']
                     // how to populate all elements here?
                 ]
             }
         });
-        monaco.editor.defineTheme('ScratchTextTheme', {
-            base: 'vs',
+        monaco.editor.defineTheme('scratch-text-theme', {
+            base: 'scratch-text',
             inherit: false,
             rules: [
-                {token: 'sound', foreground: 'cf63cf'},
-                {token: 'data', foreground: 'ff0000', fontStyle: 'bold'},
-                {token: 'operator', foreground: '00ff00'}
-            ]
+                {token: 'custom-info', foreground: '808080'},
+                {token: 'custom-error', foreground: 'ff0000', fontStyle: 'bold'},
+                {token: 'custom-notice', foreground: 'FFA500'},
+                {token: 'custom-date', foreground: '008800'}]
         });
         monaco.languages.registerCompletionItemProvider('scratch-text', {provideCompletionItems: () => {
             const suggestions = [{
@@ -87,12 +84,13 @@ class TextEditor extends React.Component {
             }];
             return {suggestions: suggestions};
         }});
-        // monaco.editor.create(document.getElementById('container'), {
-        //     theme: 'ScratchTextTheme',
-        //     value: [],
-        //     language: 'scratch-text'
-        // });
+        monaco.editor.create(document.getElementById('container'), {
+            theme: 'scratch-text-theme',
+            value: 'getCode()',
+            language: 'scratch-text'
+        });
     }
+
 
     displayBlocks (blocks) {
         let blocksText = '';
@@ -117,19 +115,15 @@ class TextEditor extends React.Component {
         const blocksText = this.displayBlocks(blocks);
 
         return (
-            <div
-                className={styles.editorContainer}
-                // id="container"
-            >
+            <div className={styles.editorContainer}>
                 <MonacoEditor
                     editorWillMount={this.editorWillMount}
                     height="100%"
                     language="scratch-text"
                     options={options}
-                    theme="ScratchTextTheme"
+                    theme="vs-dark"
                     value={blocksText}
                     width="100%"
-
                 />
             </div>
         );

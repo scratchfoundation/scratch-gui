@@ -100,10 +100,10 @@ class AudioEffects {
             ({input, output} = new VolumeEffect(this.audioContext, 0.75, this.trimStartSeconds, this.trimEndSeconds));
             break;
         case effectTypes.ECHO:
-            ({input, output} = new EchoEffect(this.audioContext, 0.25));
+            ({input, output} = new EchoEffect(this.audioContext, 0.25, this.trimStartSeconds, this.trimEndSeconds));
             break;
         case effectTypes.ROBOT:
-            ({input, output} = new RobotEffect(this.audioContext, 0.25));
+            ({input, output} = new RobotEffect(this.audioContext, this.trimStartSeconds, this.trimEndSeconds));
             break;
         }
 

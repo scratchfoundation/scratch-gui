@@ -129,7 +129,11 @@ const GUIComponent = props => {
     };
 
     if (isRendererSupported === null) {
-        isRendererSupported = Renderer.isSupported();
+        if (vm.renderer) {
+            isRendererSupported = true;
+        } else {
+            isRendererSupported = Renderer.isSupported();
+        }
     }
 
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {

@@ -7,7 +7,7 @@ import webdriver from 'selenium-webdriver';
 const {By, until, Button} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
-const DEFAULT_TIMEOUT_MILLISECONDS = 5 * 1000;
+const DEFAULT_TIMEOUT_MILLISECONDS = 20 * 1000;
 
 class SeleniumHelper {
     constructor () {

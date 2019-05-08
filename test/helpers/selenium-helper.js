@@ -7,7 +7,11 @@ import webdriver from 'selenium-webdriver';
 const {By, until, Button} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
-const DEFAULT_TIMEOUT_MILLISECONDS = 5 * 1000;
+
+// The main reason for this timeout is so that we can control the timeout message and report details;
+// if we hit the Jasmine default timeout then we get a terse message that we can't control.
+// The Jasmine default timeout is 30 seconds so make sure this is lower.
+const DEFAULT_TIMEOUT_MILLISECONDS = 20 * 1000;
 
 class SeleniumHelper {
     constructor () {

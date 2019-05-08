@@ -118,6 +118,11 @@ $border-radius: 0.25rem;
     color: $text-primary;
     font-size: 0.625rem;
     user-select: none;
+
+}
+
+.disabled {
+    opacity: 0.25;
 }
 
 [dir="ltr"] .trim-button {

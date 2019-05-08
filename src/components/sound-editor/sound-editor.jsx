@@ -143,14 +143,10 @@ const SoundEditor = props => (
             </div>
             <IconButton
                 className={classNames(styles.trimButton, {
-                    [styles.trimButtonActive]: props.trimStart !== null
+                    [styles.disabled]: props.trimStart === null
                 })}
-                img={props.trimStart === null ? trimIcon : trimConfirmIcon}
-                title={props.trimStart === null ? (
-                    <FormattedMessage {...messages.trim} />
-                ) : (
-                    <FormattedMessage {...messages.save} />
-                )}
+                img={trimIcon}
+                title={'delete'}
                 onClick={props.onActivateTrim}
             />
         </div>

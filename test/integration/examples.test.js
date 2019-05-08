@@ -1,5 +1,3 @@
-/* globals Promise */
-
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
@@ -27,7 +25,6 @@ describe('player example', () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
         await clickXpath('//img[@title="Go"]');
-        await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -68,9 +65,7 @@ describe('blocks example', () => {
     test('Load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Go"]');
-        await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -93,7 +88,6 @@ describe('blocks example', () => {
         await clickText('Sensing');
         await clickText('Operators');
         await clickText('Variables');
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Make a Variable');
         let el = await findByXpath("//input[@name='New variable name:']");
         await el.sendKeys('score');

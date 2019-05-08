@@ -63,7 +63,6 @@ describe('Working with backdrops', () => {
         const el = await findByXpath(buttonXpath);
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath(fileXpath);
         await input.sendKeys(files.join('\n'));
 

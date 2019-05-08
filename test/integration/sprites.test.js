@@ -43,7 +43,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         await clickXpath('//button[@aria-label="Surprise"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -54,7 +53,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         await clickXpath('//button[@aria-label="Paint"]');
         await findByText('Convert to Bitmap'); // Make sure we are on the paint editor
         const logs = await getLogs();
@@ -63,7 +61,6 @@ describe('Working with sprites', () => {
 
     test('Deleting only sprite does not crash', async () => {
         await loadUri(uri);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
         // Confirm that the stage has been switched to
@@ -74,7 +71,6 @@ describe('Working with sprites', () => {
 
     test('Deleting by x button on sprite tile', async () => {
         await loadUri(uri);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickXpath('//*[@aria-label="Close"]'); // Only visible close button is on the sprite
         // Confirm that the stage has been switched to
         await findByText('Stage selected: no motion blocks');
@@ -87,7 +83,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/gh-3582-png.png'));
         await clickText('gh-3582-png', scope.spriteTile);
@@ -102,7 +97,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/100-100.svg'));
         await clickText('100-100', scope.spriteTile); // Sprite is named for costume filename
@@ -120,7 +114,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/paddleball.gif'));
         await clickText('paddleball', scope.spriteTile); // Sprite is named for costume filename
@@ -181,7 +174,6 @@ describe('Working with sprites', () => {
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)
             .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
         await input.sendKeys(files.join('\n'));
 
@@ -191,5 +183,4 @@ describe('Working with sprites', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
-
 });

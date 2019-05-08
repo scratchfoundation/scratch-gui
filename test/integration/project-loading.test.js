@@ -33,7 +33,7 @@ describe('Loading scratch gui', () => {
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
             await clickXpath('//img[@title="Go"]');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 2000)); // let project run a bit
             await clickXpath('//img[@title="Stop"]');
             const logs = await getLogs();
             await expect(logs).toEqual([]);
@@ -53,16 +53,15 @@ describe('Loading scratch gui', () => {
             const prevSize = driver.manage()
                 .window()
                 .getSize();
-            await new Promise(resolve => setTimeout(resolve, 2000));
             driver.manage()
                 .window()
                 .setSize(1920, 1080);
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);
             await clickXpath('//img[@title="Full Screen Control"]');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 500)); // wait for full-screen layout change
             await clickXpath('//img[@title="Go"]');
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 1000)); // let project run a bit
             await clickXpath('//img[@title="Stop"]');
             prevSize.then(value => {
                 driver.manage()
@@ -97,7 +96,6 @@ describe('Loading scratch gui', () => {
 
         test('Creating new project resets active tab to Code tab', async () => {
             await loadUri(uri);
-            await new Promise(resolve => setTimeout(resolve, 2000));
             await findByXpath('//*[span[text()="Costumes"]]');
             await clickText('Costumes');
             await clickXpath(
@@ -111,7 +109,6 @@ describe('Loading scratch gui', () => {
 
         test('Not logged in->made no changes to project->create new project should not show alert', async () => {
             await loadUri(uri);
-            await new Promise(resolve => setTimeout(resolve, 2000));
             await clickXpath(
                 '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
@@ -123,7 +120,6 @@ describe('Loading scratch gui', () => {
 
         test('Not logged in->made a change to project->create new project should show alert', async () => {
             await loadUri(uri);
-            await new Promise(resolve => setTimeout(resolve, 2000));
             await clickText('Sounds');
             await clickXpath('//button[@aria-label="Choose a Sound"]');
             await clickText('A Bass', scope.modal); // Should close the modal
@@ -132,7 +128,7 @@ describe('Loading scratch gui', () => {
                 'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
             );
             await clickXpath('//li[span[text()="New"]]');
-            driver.switchTo()
+            await driver.switchTo()
                 .alert()
                 .accept();
             await findByXpath('//*[div[@class="scratchCategoryMenu"]]');

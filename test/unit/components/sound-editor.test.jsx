@@ -36,29 +36,29 @@ describe('Sound Editor Component', () => {
     //     expect(component.toJSON()).toMatchSnapshot();
     // });
 
-    test('trim button appears when trims are null', () => {
-        const wrapper = mountWithIntl(
-            <SoundEditor
-                {...props}
-                trimEnd={null}
-                trimStart={null}
-            />
-        );
-        wrapper.find('[children="Trim"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
-    });
+    // test('trim button appears when trims are null', () => {
+    //     const wrapper = mountWithIntl(
+    //         <SoundEditor
+    //             {...props}
+    //             trimEnd={null}
+    //             trimStart={null}
+    //         />
+    //     );
+    //     wrapper.find('[children="Trim"]').simulate('click');
+    //     expect(props.onActivateTrim).toHaveBeenCalled();
+    // });
 
-    test('save button appears when trims are not null', () => {
-        const wrapper = mountWithIntl(
-            <SoundEditor
-                {...props}
-                trimEnd={0.75}
-                trimStart={0.25}
-            />
-        );
-        wrapper.find('[children="Save"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
-    });
+    // test('save button appears when trims are not null', () => {
+    //     const wrapper = mountWithIntl(
+    //         <SoundEditor
+    //             {...props}
+    //             trimEnd={0.75}
+    //             trimStart={0.25}
+    //         />
+    //     );
+    //     wrapper.find('[children="Save"]').simulate('click');
+    //     expect(props.onActivateTrim).toHaveBeenCalled();
+    // });
 
     test('play button appears when playhead is null', () => {
         const wrapper = mountWithIntl(

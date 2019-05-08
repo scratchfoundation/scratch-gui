@@ -140,14 +140,17 @@ const SoundEditor = props => (
                     </button>
                 </div>
             </div>
-            <IconButton
-                className={classNames(styles.trimButton, {
-                    [styles.disabled]: props.trimStart === null
-                })}
-                img={trimIcon}
+            <button
+                className={classNames(styles.button, styles.trimButton)}
+                disabled={props.trimStart === null}
                 title={'delete'}
                 onClick={props.onActivateTrim}
-            />
+            >
+                <img
+                    draggable={false}
+                    src={trimIcon}
+                />
+            </button>
         </div>
         <div className={styles.row}>
             <div className={styles.waveformContainer}>

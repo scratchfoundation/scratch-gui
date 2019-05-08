@@ -124,26 +124,22 @@ class SoundEditor extends React.Component {
         this.props.vm.renameSound(this.props.soundIndex, name);
     }
     handleActivateTrim () {
-        if (this.state.trimStart === null && this.state.trimEnd === null) {
-            this.setState({trimEnd: 0.95, trimStart: 0.05});
-        } else {
-            const {samples, sampleRate} = this.copyCurrentBuffer();
-            const sampleCount = samples.length;
-            const startIndex = Math.floor(this.state.trimStart * sampleCount);
-            const endIndex = Math.floor(this.state.trimEnd * sampleCount);
-            if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
-                const firstPart = samples.slice(0, startIndex);
-                const secondPart = samples.slice(endIndex, sampleCount);
-                const newSamples = new Float32Array(firstPart.length + secondPart.length);
-                newSamples.set(firstPart, 0);
-                newSamples.set(secondPart, firstPart.length);
-                this.submitNewSamples(newSamples, sampleRate);
-            }
-            this.setState({
-                trimStart: null,
-                trimEnd: null
-            }, this.handlePlay);
+        const {samples, sampleRate} = this.copyCurrentBuffer();
+        const sampleCount = samples.length;
+        const startIndex = Math.floor(this.state.trimStart * sampleCount);
+        const endIndex = Math.floor(this.state.trimEnd * sampleCount);
+        if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
+            const firstPart = samples.slice(0, startIndex);
+            const secondPart = samples.slice(endIndex, sampleCount);
+            const newSamples = new Float32Array(firstPart.length + secondPart.length);
+            newSamples.set(firstPart, 0);
+            newSamples.set(secondPart, firstPart.length);
+            this.submitNewSamples(newSamples, sampleRate);
         }
+        this.setState({
+            trimStart: null,
+            trimEnd: null
+        }, this.handlePlay);
     }
     handleUpdateTrimEnd (trimEnd) {
         this.setState({trimEnd});

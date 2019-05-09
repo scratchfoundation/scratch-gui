@@ -1,6 +1,7 @@
 import EchoEffect from './effects/echo-effect.js';
 import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
+import FlangerEffect from './effects/flanger-effect.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -114,7 +115,7 @@ class AudioEffects {
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ROBOT:
-            ({input, output} = new RobotEffect(this.audioContext,
+            ({input, output} = new FlangerEffect(this.audioContext,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }

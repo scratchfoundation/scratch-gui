@@ -105,10 +105,10 @@ class TargetPane extends React.Component {
         }
     }
     handleSurpriseSpriteClick () {
-        const supriseSprites = spriteLibraryContent.filter(sprite =>
+        const surpriseSprites = spriteLibraryContent.filter(sprite =>
             (sprite.tags.indexOf('letters') === -1) && (sprite.tags.indexOf('numbers') === -1)
         );
-        const item = supriseSprites[Math.floor(Math.random() * supriseSprites.length)];
+        const item = surpriseSprites[Math.floor(Math.random() * surpriseSprites.length)];
         randomizeSpritePosition(item);
         this.props.vm.addSprite(JSON.stringify(item.json))
             .then(this.handleActivateBlocksTab);

@@ -56,14 +56,14 @@ class AudioEffects {
         case effectTypes.MAGIC:
             sampleCount = Math.max(sampleCount, Math.floor((this.trimEndSeconds + 1) * buffer.sampleRate));
             break;
-
         }
 
         this.adjustedTrimStart = this.adjustedTrimStartSeconds / (sampleCount / buffer.sampleRate);
         this.adjustedTrimEnd = this.adjustedTrimEndSeconds / (sampleCount / buffer.sampleRate);
 
         if (window.OfflineAudioContext) {
-            this.audioContext = new window.OfflineAudioContext(1, sampleCount, buffer.sampleRate);
+            const sampleScale = 44100 / buffer.sampleRate;
+            this.audioContext = new window.OfflineAudioContext(1, sampleScale * sampleCount, 44100);
         } else {
             // Need to use webkitOfflineAudioContext, which doesn't support all sample rates.
             // Resample by adjusting sample count to make room and set offline context to desired sample rate.

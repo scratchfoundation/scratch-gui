@@ -24,6 +24,9 @@ import slowerIcon from './icon--slower.svg';
 import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
+import alienIcon from './icon--alien.svg';
+import magicIcon from './icon--magic.svg';
+import reverbIcon from './icon--reverb.svg';
 import reverseIcon from './icon--reverse.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
@@ -83,6 +86,21 @@ const messages = defineMessages({
         id: 'gui.soundEditor.robot',
         description: 'Title of the button to apply the robot effect',
         defaultMessage: 'Robot'
+    },
+    alien: {
+        id: 'gui.soundEditor.alien',
+        description: 'Title of the button to apply the alien effect',
+        defaultMessage: 'Alien'
+    },
+    magic: {
+        id: 'gui.soundEditor.magic',
+        description: 'Title of the button to apply the magic effect',
+        defaultMessage: 'Magic'
+    },
+    reverb: {
+        id: 'gui.soundEditor.reverb',
+        description: 'Title of the button to apply the reverb effect',
+        defaultMessage: 'Reverb'
     },
     louder: {
         id: 'gui.soundEditor.louder',
@@ -220,6 +238,24 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
+                img={alienIcon}
+                title={<FormattedMessage {...messages.alien} />}
+                onClick={props.onAlien}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={magicIcon}
+                title={<FormattedMessage {...messages.magic} />}
+                onClick={props.onMagic}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={reverbIcon}
+                title={<FormattedMessage {...messages.reverb} />}
+                onClick={props.onReverb}
+            />
+            <IconButton
+                className={styles.effectButton}
                 img={louderIcon}
                 title={<FormattedMessage {...messages.louder} />}
                 onClick={props.onLouder}
@@ -247,12 +283,15 @@ SoundEditor.propTypes = {
     intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
+    onAlien: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
+    onMagic: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRedo: PropTypes.func.isRequired,
+    onReverb: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,
     onRobot: PropTypes.func.isRequired,
     onSetTrimEnd: PropTypes.func,

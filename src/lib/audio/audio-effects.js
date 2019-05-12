@@ -2,6 +2,7 @@ import EchoEffect from './effects/echo-effect.js';
 import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
 import FlangerEffect from './effects/flanger-effect.js';
+import ReverbEffect from './effects/reverb-effect.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -10,14 +11,17 @@ const effectTypes = {
     SOFTER: 'lower',
     FASTER: 'faster',
     SLOWER: 'slower',
-    ECHO: 'echo'
+    ECHO: 'echo',
+    ALIEN: 'alien',
+    REVERB: 'reverb',
+    MAGIC: 'magic'
 };
 
 class AudioEffects {
     static get effectTypes () {
         return effectTypes;
     }
-    constructor (buffer, name, trimStart, trimEnd) {
+    constructor (buffer, name, trimStart, trimEnd, impulseResponses) {
         this.trimStartSeconds = (trimStart * buffer.length) / buffer.sampleRate;
         this.trimEndSeconds = (trimEnd * buffer.length) / buffer.sampleRate;
         this.adjustedTrimStartSeconds = this.trimStartSeconds;
@@ -48,6 +52,11 @@ class AudioEffects {
             this.adjustedTrimEndSeconds = this.trimStartSeconds +
                 ((affectedSampleCount / this.playbackRate) / buffer.sampleRate);
             break;
+        case effectTypes.REVERB:
+        case effectTypes.MAGIC:
+            sampleCount = Math.max(sampleCount, Math.floor((this.trimEndSeconds + 1) * buffer.sampleRate));
+            break;
+
         }
 
         this.adjustedTrimStart = this.adjustedTrimStartSeconds / (sampleCount / buffer.sampleRate);
@@ -91,6 +100,8 @@ class AudioEffects {
         this.source = this.audioContext.createBufferSource();
         this.source.buffer = this.buffer;
         this.name = name;
+
+        this.impulseResponses = impulseResponses;
     }
     process (done) {
         // Some effects need to use more nodes and must expose an input and output
@@ -115,7 +126,21 @@ class AudioEffects {
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ROBOT:
+            ({input, output} = new RobotEffect(this.audioContext,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.ALIEN:
             ({input, output} = new FlangerEffect(this.audioContext,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.MAGIC:
+            ({input, output} = new ReverbEffect(this.audioContext,
+                this.impulseResponses[effectTypes.MAGIC],
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.REVERB:
+            ({input, output} = new ReverbEffect(this.audioContext,
+                this.impulseResponses[effectTypes.REVERB],
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }

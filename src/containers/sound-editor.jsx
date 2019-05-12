@@ -13,6 +13,11 @@ import log from '../lib/log.js';
 
 const UNDO_STACK_SIZE = 99;
 
+import SharedAudioContext from '../lib/audio/shared-audio-context.js';
+
+import reverbImpulseResponse from '!arraybuffer-loader!../lib/audio/york-minster-short.wav';
+import magicImpulseResponse from '!arraybuffer-loader!../lib/audio/magic-spell.wav';
+
 class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
@@ -40,6 +45,16 @@ class SoundEditor extends React.Component {
 
         this.redoStack = [];
         this.undoStack = [];
+
+        this.audioContext = new SharedAudioContext();
+        const {effectTypes} = AudioEffects;
+        this.impulseResponses = {};
+        this.audioContext.decodeAudioData(reverbImpulseResponse.slice(0)).then(buffer => {
+            this.impulseResponses[effectTypes.REVERB] = buffer;
+        });
+        this.audioContext.decodeAudioData(magicImpulseResponse.slice(0)).then(buffer => {
+            this.impulseResponses[effectTypes.MAGIC] = buffer;
+        });
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
@@ -160,7 +175,9 @@ class SoundEditor extends React.Component {
     handleEffect (name) {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
-        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd);
+
+        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name,
+            trimStart, trimEnd, this.impulseResponses);
         effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
             const samples = renderedBuffer.getChannelData(0);
             const sampleRate = renderedBuffer.sampleRate;
@@ -173,6 +190,22 @@ class SoundEditor extends React.Component {
                 }
             }
         });
+
+        // this.audioContext.decodeAudioData(impulseResponse.slice(0)).then(buffer => {
+        //     const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd, buffer);
+        //     effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
+        //         const samples = renderedBuffer.getChannelData(0);
+        //         const sampleRate = renderedBuffer.sampleRate;
+        //         const success = this.submitNewSamples(samples, sampleRate);
+        //         if (success) {
+        //             if (this.state.trimStart === null) {
+        //                 this.handlePlay();
+        //             } else {
+        //                 this.setState({trimStart: adjustedTrimStart, trimEnd: adjustedTrimEnd}, this.handlePlay);
+        //             }
+        //         }
+        //     });
+        // });
     }
     handleUndo () {
         this.redoStack.push(this.copyCurrentBuffer());
@@ -202,12 +235,15 @@ class SoundEditor extends React.Component {
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
                 onActivateTrim={this.handleActivateTrim}
+                onAlien={this.effectFactory(effectTypes.ALIEN)}
                 onChangeName={this.handleChangeName}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
+                onMagic={this.effectFactory(effectTypes.MAGIC)}
                 onPlay={this.handlePlay}
                 onRedo={this.handleRedo}
+                onReverb={this.effectFactory(effectTypes.REVERB)}
                 onReverse={this.effectFactory(effectTypes.REVERSE)}
                 onRobot={this.effectFactory(effectTypes.ROBOT)}
                 onSetTrimEnd={this.handleUpdateTrimEnd}

@@ -8,10 +8,15 @@ import {injectIntl} from 'react-intl';
 import MonacoEditor from 'react-monaco-editor';
 // import LangDef from './scratch-text';
 import styles from './text-editor.css';
+import LangDef from './scratch-text';
 
 const options = {
     automaticLayout: true
 };
+
+// var someFunction = function(ds){
+//     foreach()
+// }
 
 class TextEditor extends React.Component {
     constructor (props) {
@@ -31,25 +36,33 @@ class TextEditor extends React.Component {
     editorWillMount (monaco) {
         monaco.languages.register({id: 'scratch-text'});
         // // monaco.languages.setMonarchTokensProvider('scratch-text', LangDef());
+        const keyValues = LangDef();
+        const modKV = Object.entries(keyValues.tokenizer); // .forEach(elements => elements);
+        console.log('KV1 is: ');
+        console.log(typeof (modKV[1][1]));
+        console.log(modKV[1][1]);
         monaco.languages.setMonarchTokensProvider('scratch-text', {
             tokenizer: {
                 root: [
+                    // modKV[1][1],
+                    // Object.entries(modKV.tokenizer)
                     // Stuck here
                     // Add all tokenizers, as created by the LangDef function
                     // in the 'scratch-text.js' file
                     // e.g.
-                    [/replace item .+ of .+ with .+/, 'data'],
-                    [/play sound .+ until done/, 'sound'],
-                    [/stop all sounds/, 'sound'],
-                    [/set .+ effect to .+/, 'sound'],
-                    [/change .+ effect by .+/, 'sound'],
-                    [/clear sound effects/, 'sound'],
-                    [/pitch/, 'sound'],
-                    [/pan left\/right/, 'sound'],
-                    [/change volume by .+/, 'sound'],
-                    [/set volume to .+%/, 'sound'],
-                    [/.+ \+ .+/, 'operator']
-                    // how to populate all elements here?
+                    // keyValues.tokenizer
+                    [/replace item .+ of .+ with .+/, 'data']
+                    // [/play sound .+ until done/, 'sound'],
+                    // [/stop all sounds/, 'sound'],
+                    // [/set .+ effect to .+/, 'sound'],
+                    // [/change .+ effect by .+/, 'sound'],
+                    // [/clear sound effects/, 'sound'],
+                    // [/pitch/, 'sound'],
+                    // [/pan left\/right/, 'sound'],
+                    // [/change volume by .+/, 'sound'],
+                    // [/set volume to .+%/, 'sound'],
+                    // [/.+ \+ .+/, 'operator']
+                    // // how to populate all elements here?
                 ]
             }
         });
@@ -57,9 +70,18 @@ class TextEditor extends React.Component {
             base: 'vs',
             inherit: false,
             rules: [
-                {token: 'sound', foreground: 'cf63cf'},
-                {token: 'data', foreground: 'ff0000', fontStyle: 'bold'},
-                {token: 'operator', foreground: '00ff00'}
+                {token: 'motion', foreground: '4c97ff'},
+                {token: 'looks', foreground: '9966ff'},
+                {token: 'sound', foreground: 'd65cd6'},
+                {token: 'events', foreground: 'ffd500'},
+                {token: 'control', foreground: 'ffab19'},
+                {token: 'sensing', foreground: '4cbfe6'},
+                {token: 'operators', foreground: '40bf4a'},
+                {token: 'variables', foreground: 'ff8c1a'},
+                {token: 'my-blocks', foreground: 'ff6680'}
+                // {token: 'sound', foreground: 'cf63cf'},
+                // {token: 'data', foreground: 'ff0000', fontStyle: 'bold'},
+                // {token: 'operator', foreground: '00ff00'}
             ]
         });
         monaco.languages.registerCompletionItemProvider('scratch-text', {provideCompletionItems: () => {

@@ -6,6 +6,7 @@
 import React from 'react';
 import {injectIntl} from 'react-intl';
 import MonacoEditor from 'react-monaco-editor';
+import LangDef from './scratch-text';
 import styles from './text-editor.css';
 
 const options = {

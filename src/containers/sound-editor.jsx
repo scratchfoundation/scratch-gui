@@ -15,8 +15,10 @@ const UNDO_STACK_SIZE = 99;
 
 import SharedAudioContext from '../lib/audio/shared-audio-context.js';
 
+/* eslint-disable import/no-unresolved */
 import reverbImpulseResponse from '!arraybuffer-loader!../lib/audio/york-minster-short.wav';
 import magicImpulseResponse from '!arraybuffer-loader!../lib/audio/magic-spell.wav';
+/* eslint-enable import/no-unresolved */
 
 class SoundEditor extends React.Component {
     constructor (props) {

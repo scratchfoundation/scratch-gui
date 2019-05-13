@@ -192,22 +192,6 @@ class SoundEditor extends React.Component {
                 }
             }
         });
-
-        // this.audioContext.decodeAudioData(impulseResponse.slice(0)).then(buffer => {
-        //     const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd, buffer);
-        //     effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
-        //         const samples = renderedBuffer.getChannelData(0);
-        //         const sampleRate = renderedBuffer.sampleRate;
-        //         const success = this.submitNewSamples(samples, sampleRate);
-        //         if (success) {
-        //             if (this.state.trimStart === null) {
-        //                 this.handlePlay();
-        //             } else {
-        //                 this.setState({trimStart: adjustedTrimStart, trimEnd: adjustedTrimEnd}, this.handlePlay);
-        //             }
-        //         }
-        //     });
-        // });
     }
     handleUndo () {
         this.redoStack.push(this.copyCurrentBuffer());
@@ -241,6 +225,8 @@ class SoundEditor extends React.Component {
                 onChangeName={this.handleChangeName}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFaster={this.effectFactory(effectTypes.FASTER)}
+                onFadeIn={this.effectFactory(effectTypes.FADEIN)}
+                onFadeOut={this.effectFactory(effectTypes.FADEOUT)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onMagic={this.effectFactory(effectTypes.MAGIC)}
                 onPlay={this.handlePlay}

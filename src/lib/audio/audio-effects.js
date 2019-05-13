@@ -3,6 +3,7 @@ import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
 import FlangerEffect from './effects/flanger-effect.js';
 import ReverbEffect from './effects/reverb-effect.js';
+import FadeEffect from './effects/fade-effect.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -14,7 +15,9 @@ const effectTypes = {
     ECHO: 'echo',
     ALIEN: 'alien',
     REVERB: 'reverb',
-    MAGIC: 'magic'
+    MAGIC: 'magic',
+    FADEIN: 'fade in',
+    FADEOUT: 'fade out'
 };
 
 class AudioEffects {
@@ -141,6 +144,14 @@ class AudioEffects {
         case effectTypes.REVERB:
             ({input, output} = new ReverbEffect(this.audioContext,
                 this.impulseResponses[effectTypes.REVERB],
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.FADEIN:
+            ({input, output} = new FadeEffect(this.audioContext, true,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.FADEOUT:
+            ({input, output} = new FadeEffect(this.audioContext, false,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }

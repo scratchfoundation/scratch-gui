@@ -28,6 +28,8 @@ import alienIcon from './icon--alien.svg';
 import magicIcon from './icon--magic.svg';
 import reverbIcon from './icon--reverb.svg';
 import reverseIcon from './icon--reverse.svg';
+import fadeOutIcon from './icon--fade-out.svg';
+import fadeInIcon from './icon--fade-in.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -116,7 +118,19 @@ const messages = defineMessages({
         id: 'gui.soundEditor.reverse',
         description: 'Title of the button to apply the reverse effect',
         defaultMessage: 'Reverse'
+    },
+    fadeOut: {
+        id: 'gui.soundEditor.fadeOut',
+        description: 'Title of the button to apply the fade out effect',
+        defaultMessage: 'Fade out'
+    },
+    fadeIn: {
+        id: 'gui.soundEditor.fadeIn',
+        description: 'Title of the button to apply the fade in effect',
+        defaultMessage: 'Fade in'
     }
+
+
 });
 
 const SoundEditor = props => (
@@ -272,6 +286,18 @@ const SoundEditor = props => (
                 title={<FormattedMessage {...messages.reverse} />}
                 onClick={props.onReverse}
             />
+            <IconButton
+                className={styles.effectButton}
+                img={fadeOutIcon}
+                title={<FormattedMessage {...messages.fadeOut} />}
+                onClick={props.onFadeOut}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={fadeInIcon}
+                title={<FormattedMessage {...messages.fadeIn} />}
+                onClick={props.onFadeIn}
+            />
         </div>
     </div>
 );
@@ -286,6 +312,8 @@ SoundEditor.propTypes = {
     onAlien: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
+    onFadeIn: PropTypes.func.isRequired,
+    onFadeOut: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onMagic: PropTypes.func.isRequired,

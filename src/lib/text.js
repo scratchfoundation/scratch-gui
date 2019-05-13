@@ -1,3 +1,5 @@
+import uuid from 'uuid/v1';
+
 /**
  * Gets the current set of blocks from a JSON formatted version of the VM
  *
@@ -24,4 +26,27 @@ const getBlocksFromVm = (vm, callback) => {
     callback(false, blocks);
 };
 
-export {getBlocksFromVm};
+/**
+ * Adds a block to the given VM
+ * @param {object} vm A JSON formatted VM
+ * @param {object} block A block object to add to the VM
+ *
+ * @returns {Promise} A promise resolving if successful, otherwise rejecting with any errors
+ */
+const addBlockToVm = (vm, block) => new Promise((resolve, reject) => {
+    try {
+        // Create a unique identifier for the block being created and format it properly
+        const id = uuid().split('-')
+            .join('');
+        // Map the block with a key of the unique ID and a value of the new block
+        vm.targets[1].blocks[id] = block;
+        // Resolve
+        resolve();
+        // If any errors ar ecaught
+    } catch (e) {
+        // Reject with the error
+        reject(e);
+    }
+});
+
+export {getBlocksFromVm, addBlockToVm};

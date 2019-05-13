@@ -224,9 +224,9 @@ class SoundEditor extends React.Component {
                 onAlien={this.effectFactory(effectTypes.ALIEN)}
                 onChangeName={this.handleChangeName}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
-                onFaster={this.effectFactory(effectTypes.FASTER)}
                 onFadeIn={this.effectFactory(effectTypes.FADEIN)}
                 onFadeOut={this.effectFactory(effectTypes.FADEOUT)}
+                onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onMagic={this.effectFactory(effectTypes.MAGIC)}
                 onPlay={this.handlePlay}

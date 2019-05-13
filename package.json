@@ -142,6 +142,7 @@
     }
   },
   "dependencies": {
-    "react-monaco-editor": "^0.25.1"
+    "react-monaco-editor": "^0.25.1",
+    "uuid": "^3.3.2"
   }
 }

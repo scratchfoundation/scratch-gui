@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
  * and the blocks are converted to a text format and put into the monaco editor.
  */
 class TextEditor extends React.Component {
-
     /**
      * Intializes the TextEditor class
      *
@@ -18,8 +17,10 @@ class TextEditor extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            blocks: {}
+            blocks: {},
+            newText: ''
         };
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     /**
@@ -67,7 +68,7 @@ class TextEditor extends React.Component {
                     const inputValue = block.inputs.STEPS[1][1];
                     // Add the proper outputted string to the blocks text with the input value
                     blocksText += `Move (${inputValue}) steps\n`;
-                // If the block is a turnright block
+                    // If the block is a turnright block
                 } else if (block.opcode === 'motion_turnright') {
                     // Get the input value
                     const inputValue = block.inputs.DEGREES[1][1];
@@ -78,6 +79,60 @@ class TextEditor extends React.Component {
         }
         // Return the formatted string of blocks
         return blocksText;
+    }
+
+    /**
+     * Checks for expressions in the monaco editor, and if found converts the strings into blocks
+     * and updates the VM to contain the newly created blocks.
+     *
+     * @param {string} newValue The updated value whenever something new is typed in monaco
+     */
+    handleOnChange (newValue) {
+        // The RegEx for moving steps. ex. Move (10) steps
+        const moveStepsRegEx = /^Move\s\([0-9]+\)\ssteps$/g;
+        // The RegEx for turning right. ex. Turn (15) degress right
+        const turnRightRegEx = /^Turn\s\([[0-9]+\)\sdegrees\sright$/g;
+        // If the text matches the move steps expected format
+        if (moveStepsRegEx.test(newValue)) {
+            // Get the number of steps
+            const numSteps = newValue.split(/[()]/)[1];
+            // Manually create the block with the number of steps
+            const block = {
+                fields: {},
+                inputs: {
+                    STEPS: [1, [4, numSteps]]
+                },
+                next: null,
+                opcode: 'motion_movesteps',
+                parent: null,
+                shadow: false,
+                topLevel: true,
+                x: 100,
+                y: -745
+            };
+            // Add the block to the VM
+            this.props.addBlock(block);
+            // Otherwise if the new string matches the turn right format
+        } else if (turnRightRegEx.test(newValue)) {
+            // Get the number of degrees to turn
+            const degrees = newValue.split(/[()]/)[1];
+            // Manually create the block
+            const block = {
+                fields: {},
+                inputs: {
+                    DEGREES: [1, [4, degrees]]
+                },
+                next: null,
+                opcode: 'motion_turnright',
+                parent: null,
+                shadow: false,
+                topLevel: true,
+                x: 100,
+                y: -945
+            };
+            // And add the block to the VM
+            this.props.addBlock(block);
+        }
     }
 
     render () {
@@ -96,6 +151,7 @@ class TextEditor extends React.Component {
                     theme="vs-dark"
                     value={blocksText}
                     width="100%"
+                    onChange={this.handleOnChange}
                 />
             </div>
         );
@@ -103,6 +159,7 @@ class TextEditor extends React.Component {
 }
 
 TextEditor.propTypes = {
+    addBlock: PropTypes.func,
     blocks: PropTypes.object
 };
 

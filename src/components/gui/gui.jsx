@@ -2,12 +2,7 @@ import classNames from 'classnames';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-    defineMessages,
-    FormattedMessage,
-    injectIntl,
-    intlShape
-} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
@@ -58,6 +53,7 @@ const messages = defineMessages({
 // Assume that it doesn't change for a session.
 let isRendererSupported = null;
 
+// This is where the overall GUI is compiled and rendered.
 const GUIComponent = props => {
     const {
         accountNavOpen,
@@ -126,9 +122,15 @@ const GUIComponent = props => {
         return <Box {...componentProps}>{children}</Box>;
     }
 
+    /**
+     * This method is called whenever the text tab is clicked on in the tab menu.
+     * Here the @function onActivateTextTab function is called that handles the styling
+     * of the text tab and activates the text tab panel.  The VM's workspace is also refreshed
+     * to update the current list of blocks to be used inside the text tab panel.
+     */
     const handleTextTabActivate = () => {
-        onActivateTextTab();
         vm.refreshWorkspace();
+        onActivateTextTab();
     };
 
     const tabClassNames = {
@@ -136,14 +138,8 @@ const GUIComponent = props => {
         tab: classNames(tabStyles.reactTabsTab, styles.tab),
         tabList: classNames(tabStyles.reactTabsTabList, styles.tabList),
         tabPanel: classNames(tabStyles.reactTabsTabPanel, styles.tabPanel),
-        tabPanelSelected: classNames(
-            tabStyles.reactTabsTabPanelSelected,
-            styles.isSelected
-        ),
-        tabSelected: classNames(
-            tabStyles.reactTabsTabSelected,
-            styles.isSelected
-        )
+        tabPanelSelected: classNames(tabStyles.reactTabsTabPanelSelected, styles.isSelected),
+        tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
     if (isRendererSupported === null) {
@@ -164,9 +160,7 @@ const GUIComponent = props => {
                         stageSize={STAGE_SIZE_MODES.large}
                         vm={vm}
                     >
-                        {alertsVisible ? (
-                            <Alerts className={styles.alertsContainer} />
-                        ) : null}
+                        {alertsVisible ? <Alerts className={styles.alertsContainer} /> : null}
                     </StageWrapper>
                 ) : (
                     <Box
@@ -183,20 +177,12 @@ const GUIComponent = props => {
                             />
                         ) : null}
                         {loading ? <Loader /> : null}
-                        {isCreating ? (
-                            <Loader messageId="gui.loader.creating" />
-                        ) : null}
-                        {isRendererSupported ? null : (
-                            <WebGlModal isRtl={isRtl} />
-                        )}
+                        {isCreating ? <Loader messageId="gui.loader.creating" /> : null}
+                        {isRendererSupported ? null : <WebGlModal isRtl={isRtl} />}
                         {tipsLibraryVisible ? <TipsLibrary /> : null}
                         {cardsVisible ? <Cards /> : null}
-                        {alertsVisible ? (
-                            <Alerts className={styles.alertsContainer} />
-                        ) : null}
-                        {connectionModalVisible ? (
-                            <ConnectionModal vm={vm} />
-                        ) : null}
+                        {alertsVisible ? <Alerts className={styles.alertsContainer} /> : null}
+                        {connectionModalVisible ? <ConnectionModal vm={vm} /> : null}
                         {costumeLibraryVisible ? (
                             <CostumeLibrary
                                 vm={vm}
@@ -242,17 +228,11 @@ const GUIComponent = props => {
                                         forceRenderTabPanel
                                         className={tabClassNames.tabs}
                                         selectedIndex={activeTabIndex}
-                                        selectedTabClassName={
-                                            tabClassNames.tabSelected
-                                        }
-                                        selectedTabPanelClassName={
-                                            tabClassNames.tabPanelSelected
-                                        }
+                                        selectedTabClassName={tabClassNames.tabSelected}
+                                        selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                         onSelect={onActivateTab}
                                     >
-                                        <TabList
-                                            className={tabClassNames.tabList}
-                                        >
+                                        <TabList className={tabClassNames.tabList}>
                                             <Tab className={tabClassNames.tab}>
                                                 <img
                                                     draggable={false}
@@ -300,6 +280,9 @@ const GUIComponent = props => {
                                                     id="gui.gui.soundsTab"
                                                 />
                                             </Tab>
+                                            {
+                                                // Below is tab button for the text tab.
+                                            }
                                             <Tab
                                                 className={tabClassNames.tab}
                                                 onClick={handleTextTabActivate}
@@ -315,12 +298,8 @@ const GUIComponent = props => {
                                                 />
                                             </Tab>
                                         </TabList>
-                                        <TabPanel
-                                            className={tabClassNames.tabPanel}
-                                        >
-                                            <Box
-                                                className={styles.blocksWrapper}
-                                            >
+                                        <TabPanel className={tabClassNames.tabPanel}>
+                                            <Box className={styles.blocksWrapper}>
                                                 <Blocks
                                                     canUseCloud={canUseCloud}
                                                     grow={1}
@@ -332,26 +311,14 @@ const GUIComponent = props => {
                                                     vm={vm}
                                                 />
                                             </Box>
-                                            <Box
-                                                className={
-                                                    styles.extensionButtonContainer
-                                                }
-                                            >
+                                            <Box className={styles.extensionButtonContainer}>
                                                 <button
-                                                    className={
-                                                        styles.extensionButton
-                                                    }
-                                                    title={intl.formatMessage(
-                                                        messages.addExtension
-                                                    )}
-                                                    onClick={
-                                                        onExtensionButtonClick
-                                                    }
+                                                    className={styles.extensionButton}
+                                                    title={intl.formatMessage(messages.addExtension)}
+                                                    onClick={onExtensionButtonClick}
                                                 >
                                                     <img
-                                                        className={
-                                                            styles.extensionButtonIcon
-                                                        }
+                                                        className={styles.extensionButtonIcon}
                                                         draggable={false}
                                                         src={addExtensionIcon}
                                                     />
@@ -361,41 +328,27 @@ const GUIComponent = props => {
                                                 <Watermark />
                                             </Box>
                                         </TabPanel>
-                                        <TabPanel
-                                            className={tabClassNames.tabPanel}
-                                        >
-                                            {costumesTabVisible ? (
-                                                <CostumeTab vm={vm} />
-                                            ) : null}
+                                        <TabPanel className={tabClassNames.tabPanel}>
+                                            {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                                         </TabPanel>
-                                        <TabPanel
-                                            className={tabClassNames.tabPanel}
-                                        >
-                                            {soundsTabVisible ? (
-                                                <SoundTab vm={vm} />
-                                            ) : null}
+                                        <TabPanel className={tabClassNames.tabPanel}>
+                                            {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                         </TabPanel>
-                                        <TabPanel
-                                            className={tabClassNames.tabPanel}
-                                        >
+                                        {
+                                            // This is the tab panel that is rendered whenever the text tab is
+                                            // activated.  The VM is passed down to the TextTab so it can get the
+                                            // current list of blocks.
+                                        }
+                                        <TabPanel className={tabClassNames.tabPanel}>
                                             <TextTab vm={vm} />
                                         </TabPanel>
                                     </Tabs>
-                                    {backpackVisible ? (
-                                        <Backpack host={backpackHost} />
-                                    ) : null}
+                                    {backpackVisible ? <Backpack host={backpackHost} /> : null}
                                 </Box>
 
-                                <Box
-                                    className={classNames(
-                                        styles.stageAndTargetWrapper,
-                                        styles[stageSize]
-                                    )}
-                                >
+                                <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                                     <StageWrapper
-                                        isRendererSupported={
-                                            isRendererSupported
-                                        }
+                                        isRendererSupported={isRendererSupported}
                                         isRtl={isRtl}
                                         stageSize={stageSize}
                                         vm={vm}

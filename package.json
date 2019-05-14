@@ -44,7 +44,7 @@
     "babel-loader": "^8.0.4",
     "base64-loader": "1.0.0",
     "bowser": "1.9.4",
-    "chromedriver": "2.44.1",
+    "chromedriver": "74.0.0",
     "classnames": "2.2.6",
     "computed-style-to-inline-style": "3.0.0",
     "copy-webpack-plugin": "^4.5.1",
@@ -92,7 +92,7 @@
     "react-dom": "16.2.0",
     "react-draggable": "3.0.5",
     "react-ga": "2.5.3",
-    "react-intl": "2.4.0",
+    "react-intl": "2.8.0",
     "react-modal": "3.6.1",
     "react-popover": "0.5.10",
     "react-redux": "5.0.7",
@@ -107,13 +107,13 @@
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20190114210212",
-    "scratch-blocks": "0.1.0-prerelease.1552662801",
-    "scratch-l10n": "3.1.20190220143732",
-    "scratch-paint": "0.2.0-prerelease.20190318170811",
-    "scratch-render": "0.1.0-prerelease.20190312125229",
+    "scratch-blocks": "0.1.0-prerelease.1556115881",
+    "scratch-l10n": "3.2.20190501144004",
+    "scratch-paint": "0.2.0-prerelease.20190430175441",
+    "scratch-render": "0.1.0-prerelease.20190419202157",
     "scratch-storage": "1.2.2",
-    "scratch-svg-renderer": "0.2.0-prerelease.20190304180800",
-    "scratch-vm": "0.2.0-prerelease.20190321151527",
+    "scratch-svg-renderer": "0.2.0-prerelease.20190419183947",
+    "scratch-vm": "0.2.0-prerelease.20190430163103",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
@@ -142,6 +142,7 @@
     }
   },
   "dependencies": {
-    "react-monaco-editor": "^0.25.1"
+    "react-monaco-editor": "^0.25.1",
+    "uuid": "^3.3.2"
   }
 }

@@ -41,7 +41,7 @@ describe('Menu bar settings', () => {
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
         );
-        await findByXpath('//*[li[span[text()="Load from your computer"]] and not(@data-tip="tooltip")]');
+        await findByXpath('//*[li[text()="Load from your computer"] and not(@data-tip="tooltip")]');
     });
 
     test('File->Save should be enabled', async () => {

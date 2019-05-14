@@ -64,7 +64,8 @@ class TextEditor extends React.Component {
                     // in the 'scratch-text.js' file
                     // e.g.
                     // keyValues.tokenizer
-                    [/replace item .+ of .+ with .+/, 'data']
+                    [/replace item .+ of .+ with .+/, 'data'],
+                    [/turn .+ .+ degrees/, 'motion']
                     // [/play sound .+ until done/, 'sound'],
                     // [/stop all sounds/, 'sound'],
                     // [/set .+ effect to .+/, 'sound'],

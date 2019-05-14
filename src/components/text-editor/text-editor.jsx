@@ -65,7 +65,7 @@ class TextEditor extends React.Component {
                     // e.g.
                     // keyValues.tokenizer
                     [/replace item .+ of .+ with .+/, 'data'],
-                    [/turn .+ .+ degrees/, 'motion']
+                    [/Turn .+ degrees right/, 'motion']
                     // [/play sound .+ until done/, 'sound'],
                     // [/stop all sounds/, 'sound'],
                     // [/set .+ effect to .+/, 'sound'],

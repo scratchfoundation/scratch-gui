@@ -124,10 +124,11 @@ class SoundEditor extends React.Component {
         }
         return false; // Update failed
     }
-    handlePlay () {
+    handlePlay (playToEnd = false) {
+        this.audioBufferPlayer.stop();
         this.audioBufferPlayer.play(
             this.state.trimStart || 0,
-            this.state.trimEnd || 1,
+            (playToEnd === true) ? 1 : this.state.trimEnd || 1,
             this.handleUpdatePlayhead,
             this.handleStoppedPlaying);
     }

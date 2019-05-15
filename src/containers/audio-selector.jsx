@@ -56,6 +56,7 @@ class AudioSelector extends React.Component {
         window.removeEventListener('mouseup', this.handleTrimStartMouseUp);
         window.removeEventListener('touchmove', this.handleTrimStartMouseMove);
         window.removeEventListener('touchend', this.handleTrimStartMouseUp);
+        this.props.onPlay();
     }
     handleTrimEndMouseUp () {
         window.removeEventListener('mousemove', this.handleTrimEndMouseMove);
@@ -63,7 +64,10 @@ class AudioSelector extends React.Component {
         window.removeEventListener('touchmove', this.handleTrimEndMouseMove);
         window.removeEventListener('touchend', this.handleTrimEndMouseUp);
         if (this.props.trimEnd - this.props.trimStart < MIN_LENGTH) {
+            this.props.onPlay(true);
             this.clearSelection();
+        } else {
+            this.props.onPlay();
         }
     }
     handleTrimStartMouseDown (e) {
@@ -104,6 +108,7 @@ class AudioSelector extends React.Component {
 }
 
 AudioSelector.propTypes = {
+    onPlay: PropTypes.func,
     onSetTrimEnd: PropTypes.func,
     onSetTrimStart: PropTypes.func,
     playhead: PropTypes.number,

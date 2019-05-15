@@ -217,18 +217,33 @@ class SoundEditor extends React.Component {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
 
-        const {samples, sampleRate} = this.copyCurrentBuffer();
-        this.copyBuffer = samples;
+        const trimStartSamples = trimStart * this.props.samples.length;
+        const trimEndSamples = trimEnd * this.props.samples.length;
 
+        const {samples} = this.copyCurrentBuffer();
+        this.copyBuffer = samples.slice(trimStartSamples, trimEndSamples);
     }
     handlePaste () {
-        const newLength = this.props.samples.length + this.copyBuffer.length;
-        console.log(this.props.samples.length, this.copyBuffer.length);
-        const newBuffer = this.audioContext.createBuffer(1, newLength, this.props.sampleRate);
-        const newBufferData = newBuffer.getChannelData(0);
-        this.audioBufferPlayer.buffer.copyFromChannel(newBufferData, 0, 0);
-        newBuffer.copyToChannel(this.copyBuffer, 0, this.props.samples.length);
-        this.submitNewSamples(newBufferData, this.props.sampleRate, false);
+        // If there's no selection, paste at the end of the sound
+        if (this.state.trimStart === null) {
+            const newLength = this.props.samples.length + this.copyBuffer.length;
+            const newSamples = new Float32Array(newLength);
+            newSamples.set(this.props.samples, 0);
+            newSamples.set(this.copyBuffer, this.props.samples.length);
+            this.submitNewSamples(newSamples, this.props.sampleRate, false);
+        } else {
+            //else replace the selection with the pasted sound
+            const trimStartSamples = this.state.trimStart * this.props.samples.length;
+            const trimEndSamples = this.state.trimEnd * this.props.samples.length;
+            const firstPart = this.props.samples.slice(0, trimStartSamples);
+            const lastPart = this.props.samples.slice(trimEndSamples);
+            const newLength = firstPart.length + this.copyBuffer.length + lastPart.length;
+            const newSamples = new Float32Array(newLength);
+            newSamples.set(firstPart, 0);
+            newSamples.set(this.copyBuffer, firstPart.length);
+            newSamples.set(lastPart, firstPart.length + this.copyBuffer.length);
+            this.submitNewSamples(newSamples, this.props.sampleRate, false);
+        }
         this.handlePlay();
     }
     render () {

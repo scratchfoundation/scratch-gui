@@ -172,17 +172,21 @@ const SoundEditor = props => (
                     </button>
                 </div>
             </div>
-            <button
-                className={classNames(styles.button, styles.trimButton)}
-                disabled={props.trimStart === null}
+            <IconButton
+                className={styles.effectButton}
                 title={'delete'}
                 onClick={props.onActivateTrim}
-            >
-                <img
-                    draggable={false}
-                    src={trimIcon}
-                />
-            </button>
+            />
+            <IconButton
+                className={styles.effectButton}
+                title={'copy'}
+                onClick={props.onCopy}
+            />
+            <IconButton
+                className={styles.effectButton}
+                title={'paste'}
+                onClick={props.onPaste}
+            />
         </div>
         <div className={styles.row}>
             <div className={styles.waveformContainer}>
@@ -306,17 +310,20 @@ SoundEditor.propTypes = {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
+    copyBuffer: PropTypes.instanceOf(Float32Array),
     intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
     onAlien: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
+    onCopy: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
     onFadeIn: PropTypes.func.isRequired,
     onFadeOut: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onMagic: PropTypes.func.isRequired,
+    onPaste: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRedo: PropTypes.func.isRequired,
     onReverb: PropTypes.func.isRequired,

@@ -36,7 +36,9 @@ class SoundEditor extends React.Component {
             'handleEffect',
             'handleUndo',
             'handleRedo',
-            'submitNewSamples'
+            'submitNewSamples',
+            'handleCopy',
+            'handlePaste'
         ]);
         this.state = {
             chunkLevels: computeChunkedRMS(this.props.samples),
@@ -57,6 +59,8 @@ class SoundEditor extends React.Component {
         this.audioContext.decodeAudioData(magicImpulseResponse.slice(0)).then(buffer => {
             this.impulseResponses[effectTypes.MAGIC] = buffer;
         });
+
+        this.copyBuffer = null;
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
@@ -209,12 +213,31 @@ class SoundEditor extends React.Component {
             this.handlePlay();
         }
     }
+    handleCopy () {
+        const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
+        const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
+
+        const {samples, sampleRate} = this.copyCurrentBuffer();
+        this.copyBuffer = samples;
+
+    }
+    handlePaste () {
+        const newLength = this.props.samples.length + this.copyBuffer.length;
+        console.log(this.props.samples.length, this.copyBuffer.length);
+        const newBuffer = this.audioContext.createBuffer(1, newLength, this.props.sampleRate);
+        const newBufferData = newBuffer.getChannelData(0);
+        this.audioBufferPlayer.buffer.copyFromChannel(newBufferData, 0, 0);
+        newBuffer.copyToChannel(this.copyBuffer, 0, this.props.samples.length);
+        this.submitNewSamples(newBufferData, this.props.sampleRate, false);
+        this.handlePlay();
+    }
     render () {
         const {effectTypes} = AudioEffects;
         return (
             <SoundEditorComponent
                 canRedo={this.redoStack.length > 0}
                 canUndo={this.undoStack.length > 0}
+                copyBuffer={this.copyBuffer}
                 chunkLevels={this.state.chunkLevels}
                 name={this.props.name}
                 playhead={this.state.playhead}
@@ -223,12 +246,14 @@ class SoundEditor extends React.Component {
                 onActivateTrim={this.handleActivateTrim}
                 onAlien={this.effectFactory(effectTypes.ALIEN)}
                 onChangeName={this.handleChangeName}
+                onCopy={this.handleCopy}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFadeIn={this.effectFactory(effectTypes.FADEIN)}
                 onFadeOut={this.effectFactory(effectTypes.FADEOUT)}
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onMagic={this.effectFactory(effectTypes.MAGIC)}
+                onPaste={this.handlePaste}
                 onPlay={this.handlePlay}
                 onRedo={this.handleRedo}
                 onReverb={this.effectFactory(effectTypes.REVERB)}

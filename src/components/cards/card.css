@@ -2,10 +2,18 @@
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
+.card-container-overlay {
+    position: fixed;
+    pointer-events: none;
+    z-index: $z-index-card;
+}
+
 .card-container {
     position:absolute;
+    pointer-events: auto;
     z-index: $z-index-card;
     margin: 0.5rem 2rem;
+    min-width: 468px;
 }
 
 .left-card, .right-card {
@@ -104,11 +112,38 @@
     font-weight: bold;
 }
 
+.header-buttons-hidden {
+    border-bottom: 0px;
+}
+
+.header-buttons-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-buttons img {
+    margin-bottom: 2px;
+}
+
+.shrink-expand-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+}
+
+.shrink-expand-button:hover, .all-button:hover {
+    background-color: $ui-black-transparent;
+}
+
 .remove-button, .all-button {
     cursor: pointer;
     color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0.75rem;
@@ -137,7 +172,7 @@
 }
 
 .step-video {
-    height: 337px;
+    height: 256px;
 }
 
 .step-image {
@@ -188,7 +223,7 @@
 }
 
 .close-icon {
-    height: 1rem;
+    height: 1.25rem;
     margin: .125rem 0; /* To offset the .25rem difference in icon size */
 }
 
@@ -266,4 +301,8 @@
 .active-step-pip {
     background: $ui-white;
     box-shadow: 0px 0px 0px 2px $ui-black-transparent;
+}
+
+.hidden {
+    display: none;
 }

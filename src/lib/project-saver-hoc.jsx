@@ -1,15 +1,14 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
-import xhr from 'xhr';
 
 import collectMetadata from '../lib/collect-metadata';
 import log from '../lib/log';
 import storage from '../lib/storage';
 import dataURItoBlob from '../lib/data-uri-to-blob';
+import saveProjectToServer from '../lib/save-project-to-server';
 
 import {
     showAlertWithTimeout,
@@ -60,7 +59,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 // but then it'd be hard to turn this listening off in our tests
                 window.onbeforeunload = e => this.leavePageConfirm(e);
             }
+
+            // Allow the GUI consumer to pass in a function to receive a trigger
+            // for triggering thumbnail or whole project saves.
+            // These functions are called with null on unmount to prevent stale references.
             this.props.onSetProjectThumbnailer(this.getProjectThumbnail);
+            this.props.onSetProjectSaver(this.tryToAutoSave);
         }
         componentDidUpdate (prevProps) {
             if (!this.props.isAnyCreatingNewState && prevProps.isAnyCreatingNewState) {
@@ -117,6 +121,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
             // Remove project thumbnailer function since the components are unmounting
             this.props.onSetProjectThumbnailer(null);
+            this.props.onSetProjectSaver(null);
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
@@ -176,8 +181,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         createCopyToStorage () {
             this.props.onShowCreatingCopyAlert();
             return this.storeProject(null, {
-                original_id: this.props.reduxProjectId,
-                is_copy: 1,
+                originalId: this.props.reduxProjectId,
+                isCopy: 1,
                 title: this.props.reduxProjectTitle
             })
                 .then(response => {
@@ -192,8 +197,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         createRemixToStorage () {
             this.props.onShowCreatingRemixAlert();
             return this.storeProject(null, {
-                original_id: this.props.reduxProjectId,
-                is_remix: 1,
+                originalId: this.props.reduxProjectId,
+                isRemix: 1,
                 title: this.props.reduxProjectTitle
             })
                 .then(response => {
@@ -233,47 +238,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         () => (asset.clean = true)
                     )
                 )
-            ).then(() => {
-                const opts = {
-                    body: savedVMState,
-                    // If we set json:true then the body is double-stringified, so don't
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true
-                };
-                const creatingProject = projectId === null || typeof projectId === 'undefined';
-                let qs = queryString.stringify(requestParams);
-                if (qs) qs = `?${qs}`;
-                if (creatingProject) {
-                    Object.assign(opts, {
-                        method: 'post',
-                        url: `${storage.projectHost}/${qs}`
-                    });
-                } else {
-                    Object.assign(opts, {
-                        method: 'put',
-                        url: `${storage.projectHost}/${projectId}${qs}`
-                    });
-                }
-                return new Promise((resolve, reject) => {
-                    xhr(opts, (err, response) => {
-                        if (err) return reject(err);
-                        let body;
-                        try {
-                            // Since we didn't set json: true, we have to parse manually
-                            body = JSON.parse(response.body);
-                        } catch (e) {
-                            return reject(e);
-                        }
-                        body.id = projectId;
-                        if (creatingProject) {
-                            body.id = body['content-name'];
-                        }
-                        resolve(body);
-                    });
-                });
-            })
+            )
+                .then(() => this.props.onUpdateProjectData(projectId, savedVMState, requestParams))
                 .then(response => {
                     this.props.onSetProjectUnchanged();
                     const id = response.id.toString();
@@ -350,6 +316,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onRemixing,
                 onSetProjectUnchanged,
                 onSetProjectThumbnailer,
+                onSetProjectSaver,
                 onShowAlert,
                 onShowCopySuccessAlert,
                 onShowRemixSuccessAlert,
@@ -358,6 +325,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onShowSaveSuccessAlert,
                 onShowSavingAlert,
                 onUpdatedProject,
+                onUpdateProjectData,
                 onUpdateProjectThumbnail,
                 reduxProjectId,
                 reduxProjectTitle,
@@ -375,6 +343,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
     }
 
     ProjectSaverComponent.propTypes = {
+        autoSaveIntervalSecs: PropTypes.number.isRequired,
         autoSaveTimeoutId: PropTypes.number,
         canCreateNew: PropTypes.bool,
         canSave: PropTypes.bool,
@@ -390,12 +359,16 @@ const ProjectSaverHOC = function (WrappedComponent) {
         isShowingWithoutId: PropTypes.bool,
         isUpdating: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        locale: PropTypes.string.isRequired,
         onAutoUpdateProject: PropTypes.func,
         onCreateProject: PropTypes.func,
         onCreatedProject: PropTypes.func,
         onProjectError: PropTypes.func,
         onProjectTelemetryEvent: PropTypes.func,
         onRemixing: PropTypes.func,
+        onSetProjectSaver: PropTypes.func.isRequired,
+        onSetProjectThumbnailer: PropTypes.func.isRequired,
+        onSetProjectUnchanged: PropTypes.func.isRequired,
         onShowAlert: PropTypes.func,
         onShowCopySuccessAlert: PropTypes.func,
         onShowCreatingCopyAlert: PropTypes.func,
@@ -403,17 +376,21 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onShowRemixSuccessAlert: PropTypes.func,
         onShowSaveSuccessAlert: PropTypes.func,
         onShowSavingAlert: PropTypes.func,
+        onUpdateProjectData: PropTypes.func.isRequired,
         onUpdateProjectThumbnail: PropTypes.func,
         onUpdatedProject: PropTypes.func,
         projectChanged: PropTypes.bool,
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectTitle: PropTypes.string,
+        setAutoSaveTimeoutId: PropTypes.func.isRequired,
         vm: PropTypes.instanceOf(VM).isRequired
     };
     ProjectSaverComponent.defaultProps = {
         autoSaveIntervalSecs: 120,
         onRemixing: () => {},
-        onSetProjectThumbnailer: () => {}
+        onSetProjectThumbnailer: () => {},
+        onSetProjectSaver: () => {},
+        onUpdateProjectData: saveProjectToServer
     };
     const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;

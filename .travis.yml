@@ -25,6 +25,7 @@ before_deploy:
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then
     npm --no-git-tag-version version $RELEASE_VERSION
     if [ "$TRAVIS_BRANCH" == "master" ]; then export NPM_TAG=stable; fi
+    if [[ "$TRAVIS_BRANCH" == hotfix/* ]]; then export NPM_TAG=hotfix; fi # double brackets are important for matching the wildcard
     git config --global user.email $(git log --pretty=format:"%ae" -n1)
     git config --global user.name $(git log --pretty=format:"%an" -n1)
     export BEFORE_DEPLOY_RAN=true
@@ -36,6 +37,7 @@ deploy:
     - master
     - develop
     - smoke
+    - hotfix/*
     condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   email: $NPM_EMAIL
@@ -65,7 +67,7 @@ deploy:
 - provider: script
   on:
     all_branches: true
-    condition: $TRAVIS_EVENT_TYPE != cron
+    condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^greenkeeper/
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script

@@ -30,7 +30,7 @@ describe('Working with the how-to library', () => {
     });
 
     test('Backpack can be expanded with backpack host param', async () => {
-        await loadUri(`${uri}?backpack_host=some-value`);
+        await loadUri(`${uri}?backpack_host=https://backpack.scratch.mit.edu`);
 
         // Try activating the backpack from the costumes tab to make sure it isn't pushed off
         await clickText('Costumes');

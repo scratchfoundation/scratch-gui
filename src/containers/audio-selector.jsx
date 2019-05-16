@@ -27,9 +27,10 @@ class AudioSelector extends React.Component {
     handleNewSelectionMouseDown (e) {
         this.initialX = getEventXY(e).x;
         const {width, left} = this.containerElement.getBoundingClientRect();
-        this.initialTrim = (this.initialX - left) / width;
-        this.props.onSetTrimStart(this.initialTrim);
-        this.props.onSetTrimEnd(this.initialTrim);
+        this.initialTrimEnd = (this.initialX - left) / width;
+        this.initialTrimStart = this.initialTrimEnd;
+        this.props.onSetTrimStart(this.initialTrimStart);
+        this.props.onSetTrimEnd(this.initialTrimEnd);
 
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
@@ -40,15 +41,29 @@ class AudioSelector extends React.Component {
     handleTrimStartMouseMove (e) {
         const containerSize = this.containerElement.getBoundingClientRect().width;
         const dx = (getEventXY(e).x - this.initialX) / containerSize;
-        const newTrim = Math.max(0, Math.min(1, this.initialTrim + dx));
-        this.props.onSetTrimStart(newTrim);
+        const newTrim = Math.max(0, Math.min(1, this.initialTrimStart + dx));
+        if (newTrim > this.initialTrimEnd) {
+            if (this.props.trimStart !== this.initialTrimEnd) {
+                this.props.onSetTrimStart(this.initialTrimEnd);
+            }
+            this.props.onSetTrimEnd(newTrim);
+        } else {
+            this.props.onSetTrimStart(newTrim);
+        }
         e.preventDefault();
     }
     handleTrimEndMouseMove (e) {
         const containerSize = this.containerElement.getBoundingClientRect().width;
         const dx = (getEventXY(e).x - this.initialX) / containerSize;
-        const newTrim = Math.min(1, Math.max(0, this.initialTrim + dx));
-        this.props.onSetTrimEnd(newTrim);
+        const newTrim = Math.min(1, Math.max(0, this.initialTrimEnd + dx));
+        if (newTrim < this.initialTrimStart) {
+            if (this.props.trimEnd !== this.initialTrimStart) {
+                this.props.onSetTrimEnd(this.initialTrimStart);
+            }
+            this.props.onSetTrimStart(newTrim);
+        } else {
+            this.props.onSetTrimEnd(newTrim);
+        }
         e.preventDefault();
     }
     handleTrimStartMouseUp () {
@@ -72,7 +87,8 @@ class AudioSelector extends React.Component {
     }
     handleTrimStartMouseDown (e) {
         this.initialX = getEventXY(e).x;
-        this.initialTrim = this.props.trimStart;
+        this.initialTrimStart = this.props.trimStart;
+        this.initialTrimEnd = this.props.trimEnd;
         window.addEventListener('mousemove', this.handleTrimStartMouseMove);
         window.addEventListener('mouseup', this.handleTrimStartMouseUp);
         window.addEventListener('touchmove', this.handleTrimStartMouseMove);
@@ -81,7 +97,8 @@ class AudioSelector extends React.Component {
     }
     handleTrimEndMouseDown (e) {
         this.initialX = getEventXY(e).x;
-        this.initialTrim = this.props.trimEnd;
+        this.initialTrimEnd = this.props.trimEnd;
+        this.initialTrimStart = this.props.trimStart;
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
         window.addEventListener('touchmove', this.handleTrimEndMouseMove);

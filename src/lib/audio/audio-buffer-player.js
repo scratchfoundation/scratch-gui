@@ -54,6 +54,10 @@ class AudioBufferPlayer {
             }
         }
     }
+
+    isPlaying () {
+        return (this.source !== null) && (this.source.onended !== null);
+    }
 }
 
 export default AudioBufferPlayer;

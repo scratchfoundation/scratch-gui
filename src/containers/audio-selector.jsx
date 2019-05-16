@@ -19,18 +19,28 @@ class AudioSelector extends React.Component {
             'handleTrimEndMouseUp',
             'storeRef'
         ]);
+
+        this.state = {
+            trimStart: props.trimStart,
+            trimEnd: props.trimEnd
+        };
+    }
+    componentWillReceiveProps (newProps) {
+        this.setState({
+            trimStart: newProps.trimStart,
+            trimEnd: newProps.trimEnd
+        });
     }
     clearSelection () {
-        this.props.onSetTrimStart(null);
-        this.props.onSetTrimEnd(null);
+        this.props.onSetTrim(null, null);
     }
     handleNewSelectionMouseDown (e) {
         this.initialX = getEventXY(e).x;
         const {width, left} = this.containerElement.getBoundingClientRect();
         this.initialTrimEnd = (this.initialX - left) / width;
         this.initialTrimStart = this.initialTrimEnd;
-        this.props.onSetTrimStart(this.initialTrimStart);
-        this.props.onSetTrimEnd(this.initialTrimEnd);
+        this.props.onSetTrim(this.initialTrimStart, this.initialTrimEnd);
+        // this.props.onStop();
 
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
@@ -43,12 +53,14 @@ class AudioSelector extends React.Component {
         const dx = (getEventXY(e).x - this.initialX) / containerSize;
         const newTrim = Math.max(0, Math.min(1, this.initialTrimStart + dx));
         if (newTrim > this.initialTrimEnd) {
-            if (this.props.trimStart !== this.initialTrimEnd) {
-                this.props.onSetTrimStart(this.initialTrimEnd);
-            }
-            this.props.onSetTrimEnd(newTrim);
+            this.setState({
+                trimStart: this.initialTrimEnd,
+                trimEnd: newTrim
+            });
         } else {
-            this.props.onSetTrimStart(newTrim);
+            this.setState({
+                trimStart: newTrim
+            });
         }
         e.preventDefault();
     }
@@ -57,12 +69,14 @@ class AudioSelector extends React.Component {
         const dx = (getEventXY(e).x - this.initialX) / containerSize;
         const newTrim = Math.min(1, Math.max(0, this.initialTrimEnd + dx));
         if (newTrim < this.initialTrimStart) {
-            if (this.props.trimEnd !== this.initialTrimStart) {
-                this.props.onSetTrimEnd(this.initialTrimStart);
-            }
-            this.props.onSetTrimStart(newTrim);
+            this.setState({
+                trimStart: newTrim,
+                trimEnd: this.initialTrimStart
+            });
         } else {
-            this.props.onSetTrimEnd(newTrim);
+            this.setState({
+                trimEnd: newTrim
+            });
         }
         e.preventDefault();
     }
@@ -71,18 +85,20 @@ class AudioSelector extends React.Component {
         window.removeEventListener('mouseup', this.handleTrimStartMouseUp);
         window.removeEventListener('touchmove', this.handleTrimStartMouseMove);
         window.removeEventListener('touchend', this.handleTrimStartMouseUp);
-        this.props.onPlay();
+        this.props.onSetTrim(this.state.trimStart, this.state.trimEnd);
+        // this.props.onPlay();
     }
     handleTrimEndMouseUp () {
         window.removeEventListener('mousemove', this.handleTrimEndMouseMove);
         window.removeEventListener('mouseup', this.handleTrimEndMouseUp);
         window.removeEventListener('touchmove', this.handleTrimEndMouseMove);
         window.removeEventListener('touchend', this.handleTrimEndMouseUp);
-        if (this.props.trimEnd - this.props.trimStart < MIN_LENGTH) {
-            this.props.onPlay(true);
+        if (this.state.trimEnd - this.state.trimStart < MIN_LENGTH) {
+            this.props.onPlay(true, true);
             this.clearSelection();
         } else {
-            this.props.onPlay();
+            this.props.onSetTrim(this.state.trimStart, this.state.trimEnd);
+            // this.props.onPlay();
         }
     }
     handleTrimStartMouseDown (e) {
@@ -114,8 +130,8 @@ class AudioSelector extends React.Component {
             <AudioSelectorComponent
                 containerRef={this.storeRef}
                 playhead={this.props.playhead}
-                trimEnd={this.props.trimEnd}
-                trimStart={this.props.trimStart}
+                trimEnd={this.state.trimEnd}
+                trimStart={this.state.trimStart}
                 onNewSelectionMouseDown={this.handleNewSelectionMouseDown}
                 onTrimEndMouseDown={this.handleTrimEndMouseDown}
                 onTrimStartMouseDown={this.handleTrimStartMouseDown}
@@ -126,8 +142,8 @@ class AudioSelector extends React.Component {
 
 AudioSelector.propTypes = {
     onPlay: PropTypes.func,
-    onSetTrimEnd: PropTypes.func,
-    onSetTrimStart: PropTypes.func,
+    onSetTrim: PropTypes.func,
+    onStop: PropTypes.func,
     playhead: PropTypes.number,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number

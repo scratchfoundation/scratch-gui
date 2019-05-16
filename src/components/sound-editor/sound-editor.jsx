@@ -200,8 +200,8 @@ const SoundEditor = props => (
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
                     onPlay={props.onPlay}
-                    onSetTrimEnd={props.onSetTrimEnd}
-                    onSetTrimStart={props.onSetTrimStart}
+                    onSetTrim={props.onSetTrim}
+                    onStop={props.onStop}
                 />
             </div>
         </div>

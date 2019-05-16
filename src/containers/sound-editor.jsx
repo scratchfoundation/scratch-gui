@@ -31,8 +31,7 @@ class SoundEditor extends React.Component {
             'handleStopPlaying',
             'handleUpdatePlayhead',
             'handleActivateTrim',
-            'handleUpdateTrimEnd',
-            'handleUpdateTrimStart',
+            'handleUpdateTrim',
             'handleEffect',
             'handleUndo',
             'handleRedo',
@@ -124,7 +123,13 @@ class SoundEditor extends React.Component {
         }
         return false; // Update failed
     }
-    handlePlay (playToEnd = false) {
+    handlePlay (playToEnd = false, stopIfPlaying = false) {
+        if (stopIfPlaying) {
+            if (this.state.playhead !== null) {
+                this.handleStopPlaying();
+                return;
+            }
+        }
         this.audioBufferPlayer.stop();
         this.audioBufferPlayer.play(
             this.state.trimStart || 0,
@@ -163,11 +168,8 @@ class SoundEditor extends React.Component {
             trimEnd: null
         }, this.handlePlay);
     }
-    handleUpdateTrimEnd (trimEnd) {
-        this.setState({trimEnd});
-    }
-    handleUpdateTrimStart (trimStart) {
-        this.setState({trimStart});
+    handleUpdateTrim (trimStart, trimEnd) {
+        this.setState({trimStart, trimEnd});
     }
     effectFactory (name) {
         return () => this.handleEffect(name);
@@ -275,8 +277,7 @@ class SoundEditor extends React.Component {
                 onReverb={this.effectFactory(effectTypes.REVERB)}
                 onReverse={this.effectFactory(effectTypes.REVERSE)}
                 onRobot={this.effectFactory(effectTypes.ROBOT)}
-                onSetTrimEnd={this.handleUpdateTrimEnd}
-                onSetTrimStart={this.handleUpdateTrimStart}
+                onSetTrim={this.handleUpdateTrim}
                 onSlower={this.effectFactory(effectTypes.SLOWER)}
                 onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}

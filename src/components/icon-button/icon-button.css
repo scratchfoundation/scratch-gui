@@ -17,3 +17,8 @@
 .title {
     margin-top: 0.5rem;
 }
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

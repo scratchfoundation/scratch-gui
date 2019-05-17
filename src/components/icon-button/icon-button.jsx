@@ -5,12 +5,17 @@ import styles from './icon-button.css';
 
 const IconButton = ({
     img,
+    disabled,
     className,
     title,
     onClick
 }) => (
     <div
-        className={classNames(styles.container, className)}
+        className={classNames(
+            styles.container,
+            className,
+            disabled ? styles.disabled : null
+        )}
         role="button"
         onClick={onClick}
     >
@@ -27,6 +32,7 @@ const IconButton = ({
 
 IconButton.propTypes = {
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     img: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     title: PropTypes.node.isRequired

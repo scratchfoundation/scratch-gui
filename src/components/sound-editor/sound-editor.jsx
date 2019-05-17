@@ -29,6 +29,9 @@ import reverbIcon from './icon--reverb.svg';
 import reverseIcon from './icon--reverse.svg';
 import fadeOutIcon from './icon--fade-out.svg';
 import fadeInIcon from './icon--fade-in.svg';
+import deleteIcon from './icon--delete.svg';
+import copyIcon from './icon--copy.svg';
+import pasteIcon from './icon--paste.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -173,16 +176,21 @@ const SoundEditor = props => (
             </div>
             <IconButton
                 className={styles.effectButton}
+                disabled={props.trimStart === null}
+                img={deleteIcon}
                 title={'delete'}
                 onClick={props.onActivateTrim}
             />
             <IconButton
                 className={styles.effectButton}
+                img={copyIcon}
                 title={'copy'}
                 onClick={props.onCopy}
             />
             <IconButton
                 className={styles.effectButton}
+                disabled={!props.canPaste}
+                img={pasteIcon}
                 title={'paste'}
                 onClick={props.onPaste}
             />
@@ -307,6 +315,7 @@ const SoundEditor = props => (
 );
 
 SoundEditor.propTypes = {
+    canPaste: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,

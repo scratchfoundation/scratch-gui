@@ -223,16 +223,38 @@ class SoundEditor extends React.Component {
         const trimStartSamples = trimStart * this.props.samples.length;
         const trimEndSamples = trimEnd * this.props.samples.length;
 
-        const {samples} = this.copyCurrentBuffer();
-        this.copyBuffer = samples.slice(trimStartSamples, trimEndSamples);
+        this.copyBuffer = this.copyCurrentBuffer();
+        this.copyBuffer.samples = this.copyBuffer.samples.slice(trimStartSamples, trimEndSamples);
     }
-    handlePaste () {
+    resampleBufferToRate (buffer, newRate) {
+        return new Promise(resolve => {
+            if (window.OfflineAudioContext) {
+                const sampleRateRatio = newRate / buffer.sampleRate;
+                const newLength =  sampleRateRatio * buffer.samples.length;
+                const offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
+                const source = offlineContext.createBufferSource();
+                const audioBuffer = this.audioContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
+                audioBuffer.getChannelData(0).set(buffer.samples);
+                source.buffer = audioBuffer;
+                source.connect(offlineContext.destination);
+                source.start();
+                offlineContext.startRendering();
+                offlineContext.oncomplete = ({renderedBuffer}) => {
+                    resolve({
+                        samples: renderedBuffer.getChannelData(0),
+                        sampleRate: newRate
+                    });
+                };
+            }
+        });
+    }
+    paste () {
         // If there's no selection, paste at the end of the sound
         if (this.state.trimStart === null) {
-            const newLength = this.props.samples.length + this.copyBuffer.length;
+            const newLength = this.props.samples.length + this.copyBuffer.samples.length;
             const newSamples = new Float32Array(newLength);
             newSamples.set(this.props.samples, 0);
-            newSamples.set(this.copyBuffer, this.props.samples.length);
+            newSamples.set(this.copyBuffer.samples, this.props.samples.length);
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
         } else {
             //else replace the selection with the pasted sound
@@ -240,14 +262,25 @@ class SoundEditor extends React.Component {
             const trimEndSamples = this.state.trimEnd * this.props.samples.length;
             const firstPart = this.props.samples.slice(0, trimStartSamples);
             const lastPart = this.props.samples.slice(trimEndSamples);
-            const newLength = firstPart.length + this.copyBuffer.length + lastPart.length;
+            const newLength = firstPart.length + this.copyBuffer.samples.length + lastPart.length;
             const newSamples = new Float32Array(newLength);
             newSamples.set(firstPart, 0);
-            newSamples.set(this.copyBuffer, firstPart.length);
-            newSamples.set(lastPart, firstPart.length + this.copyBuffer.length);
+            newSamples.set(this.copyBuffer.samples, firstPart.length);
+            newSamples.set(lastPart, firstPart.length + this.copyBuffer.samples.length);
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
         }
         this.handlePlay();
+    }
+    handlePaste () {
+        if (this.copyBuffer.sampleRate === this.props.sampleRate) {
+            this.paste();
+        } else {
+            log.warn('pasted audio sample rate does not match editor sample rate, resampling');
+            this.resampleBufferToRate(this.copyBuffer, this.props.sampleRate).then(buffer => {
+                this.copyBuffer = buffer;
+                this.paste();
+            });
+        }
     }
     render () {
         const {effectTypes} = AudioEffects;

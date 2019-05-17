@@ -311,7 +311,7 @@ SoundEditor.propTypes = {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
-    copyBuffer: PropTypes.instanceOf(Float32Array),
+    copyBuffer: PropTypes.object,
     intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,

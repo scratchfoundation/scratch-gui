@@ -230,7 +230,7 @@ class SoundEditor extends React.Component {
         return new Promise(resolve => {
             if (window.OfflineAudioContext) {
                 const sampleRateRatio = newRate / buffer.sampleRate;
-                const newLength =  sampleRateRatio * buffer.samples.length;
+                const newLength = sampleRateRatio * buffer.samples.length;
                 const offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
                 const source = offlineContext.createBufferSource();
                 const audioBuffer = this.audioContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
@@ -257,7 +257,7 @@ class SoundEditor extends React.Component {
             newSamples.set(this.copyBuffer.samples, this.props.samples.length);
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
         } else {
-            //else replace the selection with the pasted sound
+            // else replace the selection with the pasted sound
             const trimStartSamples = this.state.trimStart * this.props.samples.length;
             const trimEndSamples = this.state.trimEnd * this.props.samples.length;
             const firstPart = this.props.samples.slice(0, trimStartSamples);
@@ -288,7 +288,6 @@ class SoundEditor extends React.Component {
             <SoundEditorComponent
                 canRedo={this.redoStack.length > 0}
                 canUndo={this.undoStack.length > 0}
-                copyBuffer={this.copyBuffer}
                 chunkLevels={this.state.chunkLevels}
                 name={this.props.name}
                 playhead={this.state.playhead}

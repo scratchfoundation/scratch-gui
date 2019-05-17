@@ -15,7 +15,6 @@ import styles from './sound-editor.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
-import trimIcon from './icon--trim.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';
@@ -311,7 +310,6 @@ SoundEditor.propTypes = {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
-    copyBuffer: PropTypes.object,
     intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,
@@ -330,8 +328,7 @@ SoundEditor.propTypes = {
     onReverb: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,
     onRobot: PropTypes.func.isRequired,
-    onSetTrimEnd: PropTypes.func,
-    onSetTrimStart: PropTypes.func,
+    onSetTrim: PropTypes.func,
     onSlower: PropTypes.func.isRequired,
     onSofter: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,

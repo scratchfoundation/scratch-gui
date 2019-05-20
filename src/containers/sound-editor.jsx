@@ -69,6 +69,10 @@ class SoundEditor extends React.Component {
             this.redoStack = [];
             this.undoStack = [];
             this.resetState(newProps.samples, newProps.sampleRate);
+            this.setState({
+                trimStart: null,
+                trimEnd: null
+            });
         }
     }
     componentWillUnmount () {

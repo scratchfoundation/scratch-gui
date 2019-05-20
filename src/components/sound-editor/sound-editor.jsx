@@ -189,7 +189,7 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
-                disabled={!props.canPaste}
+                disabled={props.canPaste === false}
                 img={pasteIcon}
                 title={'paste'}
                 onClick={props.onPaste}

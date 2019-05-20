@@ -229,6 +229,8 @@ class SoundEditor extends React.Component {
 
         this.copyBuffer = this.copyCurrentBuffer();
         this.copyBuffer.samples = this.copyBuffer.samples.slice(trimStartSamples, trimEndSamples);
+
+        this.forceUpdate();
     }
     resampleBufferToRate (buffer, newRate) {
         return new Promise(resolve => {

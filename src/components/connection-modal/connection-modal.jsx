@@ -44,7 +44,7 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
-    connectingMessage: PropTypes.node,
+    connectingMessage: PropTypes.node.isRequired,
     connectionSmallIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,
     name: PropTypes.node,
@@ -56,6 +56,10 @@ ConnectionModalComponent.propTypes = {
     title: PropTypes.string.isRequired,
     useManual: PropTypes.bool,
     useAutoScan: PropTypes.bool.isRequired
+};
+
+ConnectionModalComponent.defaultProps = {
+    connectingMessage: 'Connecting'
 };
 
 export {

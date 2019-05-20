@@ -465,4 +465,27 @@ describe('projectSaverHOC', () => {
         expect(setThumb).toHaveBeenCalledTimes(2);
         expect(setThumb.mock.calls[1][0]).toBe(null);
     });
+
+    test('uses onSetProjectSaver on mount/unmount', () => {
+        const Component = () => <div />;
+        const WrappedComponent = projectSaverHOC(Component);
+        const setSaver = jest.fn();
+        const mounted = mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+                onSetProjectSaver={setSaver}
+            />
+        );
+        // Set project saver should be called on mount
+        expect(setSaver).toHaveBeenCalledTimes(1);
+
+        // And it should not pass that function on to wrapped element
+        expect(mounted.find(Component).props().onSetProjectSaver).toBeUndefined();
+
+        // Unmounting should call it again with null
+        mounted.unmount();
+        expect(setSaver).toHaveBeenCalledTimes(2);
+        expect(setSaver.mock.calls[1][0]).toBe(null);
+    });
 });

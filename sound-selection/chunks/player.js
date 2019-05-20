@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[5],{
 
-/***/ 1390:
+/***/ 1393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(111);
 /* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(133);
 /* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(103);
-/* harmony import */ var _lib_titled_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(286);
+/* harmony import */ var _lib_titled_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(287);
 /* harmony import */ var _reducers_mode__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(77);
 /* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(374);
 /* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_player_css__WEBPACK_IMPORTED_MODULE_12__);
@@ -96,7 +96,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 1391:
+/***/ 1394:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -119,7 +119,7 @@ exports.locals = {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1391);
+var content = __webpack_require__(1394);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -141,5 +141,5 @@ if(false) {}
 
 /***/ })
 
-},[[1390,0]]]);
+},[[1393,0]]]);
 //# sourceMappingURL=player.js.map

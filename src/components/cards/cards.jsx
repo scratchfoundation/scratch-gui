@@ -86,10 +86,6 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
 );
 
 class VideoStep extends React.Component {
-    // eslint-disable-next-line no-useless-constructor
-    constructor (props) {
-        super(props);
-    }
     componentDidMount () {
         const script = document.createElement('script');
         script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;

@@ -86,33 +86,35 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
     </div>
 );
 
-// Video step needs to know if the card is being dragged to cover the video
-// so that the mouseup is not swallowed by the iframe.
 class VideoStep extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor (props) {
         super(props);
     }
     componentDidMount () {
-        console.log('Video1 step did mount.');
         const script = document.createElement('script');
-
         script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
         script.async = true;
-    
         document.body.appendChild(script);
 
         const script2 = document.createElement('script');
-
+        script2.onload = () => {
+            window._wq = window._wq || [];
+            window._wq.push({
+                id: `${this.props.video}`,
+                onReady: function (video) {
+                    console.log('I got a handle to the video!', video);
+                }
+            });
+        };
         script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
         script2.async = true;
-    
         document.body.appendChild(script2);
     }
     render () {
         return (
-            // var video1 = Wistia.api("ir0j8ljsgm");
-            // ir0j8ljsgm
+            // Video step needs to know if the card is being dragged to cover the video
+            // so that the mouseup is not swallowed by the iframe.
             <div className={styles.stepVideo}>
                 {this.props.dragging ? (
                     <div className={styles.videoCover} />

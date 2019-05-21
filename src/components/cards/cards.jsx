@@ -88,75 +88,45 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
 
 // Video step needs to know if the card is being dragged to cover the video
 // so that the mouseup is not swallowed by the iframe.
-const VideoStep = ({video, dragging}) => (
-    <div className={styles.stepVideo}>
-        {dragging ? (
-            <div className={styles.videoCover} />
-        ) : null}
-        <iframe
-            allowFullScreen
-            allowTransparency="true"
-            frameBorder="0"
-            height="257"
-            scrolling="no"
-            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
-            title="📹"
-            width="466"
-        />
-        <script
-            async
-            src="https://fast.wistia.net/assets/external/E-v1.js"
-        />
-    </div>
-);
-
-/* class VideoStep extends React.Component {
+class VideoStep extends React.Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor (props) {
         super(props);
-        bindAll(this, [
-            'handleLoadIFrame'
-        ]);
     }
     componentDidMount () {
         console.log('Video1 step did mount.');
-    }
-    handleLoadIFrame () {
-        console.log('iframe loaded!!!');
-        // window._wq = window._wq || [];
-        window._wq.push({
-            id: 'ir0j8ljsgm',
-            onReady: function (video) {
-                console.log('I got a handle to the video!', video);
-            }
-        });
-        // console.log('Wistia', document.getElementsByTagName('iframe')[0].contentWindow.location.href);
+        const script = document.createElement('script');
+
+        script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
+        script.async = true;
+    
+        document.body.appendChild(script);
+
+        const script2 = document.createElement('script');
+
+        script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
+        script2.async = true;
+    
+        document.body.appendChild(script2);
     }
     render () {
         return (
+            // var video1 = Wistia.api("ir0j8ljsgm");
+            // ir0j8ljsgm
             <div className={styles.stepVideo}>
                 {this.props.dragging ? (
                     <div className={styles.videoCover} />
                 ) : null}
-                <iframe
-                    allowFullScreen
-                    allowTransparency="true"
-                    frameBorder="0"
-                    height="257"
-                    scrolling="no"
-                    src={`https://fast.wistia.net/embed/iframe/${this.props.video}?seo=false&videoFoam=true`}
-                    title="📹"
-                    width="466"
-                    onLoad={this.handleLoadIFrame}
-                />
-                <script
-                    async
-                    src="https://fast.wistia.net/assets/external/E-v1.js"
-                />
+                <div
+                    className={`wistia_embed wistia_async_${this.props.video}`}
+                    style={{height: `257px`, width: `466px`}}
+                >
+                    &nbsp;
+                </div>
             </div>
         );
-
     }
-} */
+}
 
 VideoStep.propTypes = {
     dragging: PropTypes.bool.isRequired,

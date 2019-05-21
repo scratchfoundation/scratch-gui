@@ -98,24 +98,16 @@ class VideoStep extends React.Component {
         document.body.appendChild(script);
 
         const script2 = document.createElement('script');
-        script2.onload = () => {
-            window._wq = window._wq || [];
-            window._wq.push({
-                id: `${this.props.video}`,
-                onReady: function (video) {
-                    console.log('I got a handle to the video!', video);
-                }
-            });
-        };
         script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
         script2.async = true;
         document.body.appendChild(script2);
     }
     componentDidUpdate () {
-        // if not expanded, pause video?
-        if (!this.props.expanded) {
-            // eslint-disable-next-line no-undef
-            const video = Wistia.api(`${this.props.video}`);
+        // eslint-disable-next-line no-undef
+        const video = Wistia.api(`${this.props.video}`);
+        if (this.props.expanded) {
+            video.play();
+        } else {
             video.pause();
         }
     }
@@ -355,6 +347,7 @@ const Cards = props => {
                                 steps[step].video ? (
                                     <VideoStep
                                         dragging={dragging}
+                                        expanded={expanded}
                                         video={translateVideo(steps[step].video, locale)}
                                     />
                                 ) : (

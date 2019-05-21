@@ -111,6 +111,14 @@ class VideoStep extends React.Component {
         script2.async = true;
         document.body.appendChild(script2);
     }
+    componentDidUpdate () {
+        // if not expanded, pause video?
+        if (!this.props.expanded) {
+            // eslint-disable-next-line no-undef
+            const video = Wistia.api(`${this.props.video}`);
+            video.pause();
+        }
+    }
     render () {
         return (
             // Video step needs to know if the card is being dragged to cover the video
@@ -132,6 +140,7 @@ class VideoStep extends React.Component {
 
 VideoStep.propTypes = {
     dragging: PropTypes.bool.isRequired,
+    expanded: PropTypes.bool.isRequired,
     video: PropTypes.string.isRequired
 };
 

@@ -98,8 +98,7 @@ class VideoStep extends React.Component {
         document.body.appendChild(script2);
     }
     componentDidUpdate () {
-        // eslint-disable-next-line no-undef
-        const video = Wistia.api(`${this.props.video}`);
+        const video = window.Wistia.api(`${this.props.video}`);
         if (this.props.expanded) {
             video.play();
         } else {

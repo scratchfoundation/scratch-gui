@@ -3,7 +3,6 @@ import React, {Fragment} from 'react';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Draggable from 'react-draggable';
-import bindAll from 'lodash.bindall';
 
 import styles from './card.css';
 

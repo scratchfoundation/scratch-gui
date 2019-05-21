@@ -3,6 +3,7 @@ import React, {Fragment} from 'react';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Draggable from 'react-draggable';
+import bindAll from 'lodash.bindall';
 
 import styles from './card.css';
 
@@ -108,6 +109,54 @@ const VideoStep = ({video, dragging}) => (
         />
     </div>
 );
+
+/* class VideoStep extends React.Component {
+    constructor (props) {
+        super(props);
+        bindAll(this, [
+            'handleLoadIFrame'
+        ]);
+    }
+    componentDidMount () {
+        console.log('Video1 step did mount.');
+    }
+    handleLoadIFrame () {
+        console.log('iframe loaded!!!');
+        // window._wq = window._wq || [];
+        window._wq.push({
+            id: 'ir0j8ljsgm',
+            onReady: function (video) {
+                console.log('I got a handle to the video!', video);
+            }
+        });
+        // console.log('Wistia', document.getElementsByTagName('iframe')[0].contentWindow.location.href);
+    }
+    render () {
+        return (
+            <div className={styles.stepVideo}>
+                {this.props.dragging ? (
+                    <div className={styles.videoCover} />
+                ) : null}
+                <iframe
+                    allowFullScreen
+                    allowTransparency="true"
+                    frameBorder="0"
+                    height="257"
+                    scrolling="no"
+                    src={`https://fast.wistia.net/embed/iframe/${this.props.video}?seo=false&videoFoam=true`}
+                    title="📹"
+                    width="466"
+                    onLoad={this.handleLoadIFrame}
+                />
+                <script
+                    async
+                    src="https://fast.wistia.net/assets/external/E-v1.js"
+                />
+            </div>
+        );
+
+    }
+} */
 
 VideoStep.propTypes = {
     dragging: PropTypes.bool.isRequired,

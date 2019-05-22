@@ -126,13 +126,7 @@ class SoundEditor extends React.Component {
         }
         return false; // Update failed
     }
-    handlePlay (playToEnd = false, stopIfPlaying = false) {
-        if (stopIfPlaying) {
-            if (this.state.playhead !== null) {
-                this.handleStopPlaying();
-                return;
-            }
-        }
+    handlePlay (playToEnd = false) {
         this.audioBufferPlayer.stop();
         this.audioBufferPlayer.play(
             this.state.trimStart || 0,
@@ -173,6 +167,7 @@ class SoundEditor extends React.Component {
     }
     handleUpdateTrim (trimStart, trimEnd) {
         this.setState({trimStart, trimEnd});
+        this.handleStopPlaying();
     }
     effectFactory (name) {
         return () => this.handleEffect(name);

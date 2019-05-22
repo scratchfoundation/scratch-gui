@@ -40,7 +40,6 @@ class AudioSelector extends React.Component {
         this.initialTrimEnd = (this.initialX - left) / width;
         this.initialTrimStart = this.initialTrimEnd;
         this.props.onSetTrim(this.initialTrimStart, this.initialTrimEnd);
-        // this.props.onStop();
 
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
@@ -93,13 +92,11 @@ class AudioSelector extends React.Component {
         window.removeEventListener('mouseup', this.handleTrimEndMouseUp);
         window.removeEventListener('touchmove', this.handleTrimEndMouseMove);
         window.removeEventListener('touchend', this.handleTrimEndMouseUp);
-        if (this.state.trimEnd - this.state.trimStart < MIN_LENGTH) {
-            this.props.onPlay(true, true);
-            this.clearSelection();
-        } else {
+        // if (this.state.trimEnd - this.state.trimStart < MIN_LENGTH) {
+        //     this.clearSelection();
+        // } else {
             this.props.onSetTrim(this.state.trimStart, this.state.trimEnd);
-            // this.props.onPlay();
-        }
+        // }
     }
     handleTrimStartMouseDown (e) {
         this.initialX = getEventXY(e).x;

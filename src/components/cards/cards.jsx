@@ -99,9 +99,7 @@ class VideoStep extends React.Component {
     }
     componentDidUpdate () {
         const video = window.Wistia.api(`${this.props.video}`);
-        if (this.props.expanded) {
-            video.play();
-        } else {
+        if (!this.props.expanded) {
             video.pause();
         }
     }

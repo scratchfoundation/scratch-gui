@@ -30,6 +30,10 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+const UNINITIALIZED_TOOLBOX_XML = `<xml style="display: none">
+    <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="#4C97FF" secondaryColour="#3373CC"></category>
+</xml>`;
+
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
     object[property] = function () {
@@ -83,16 +87,19 @@ class Blocks extends React.Component {
         };
         this.onTargetsUpdate = debounce(this.onTargetsUpdate, 100);
         this.toolboxUpdateQueue = [];
+        this.initializedWorkspace = false;
     }
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
+        const toolboxXML = UNINITIALIZED_TOOLBOX_XML;
+
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
-            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML}
+            {rtl: this.props.isRtl, toolbox: toolboxXML}
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
@@ -114,7 +121,7 @@ class Blocks extends React.Component {
         // Store the xml of the toolbox that is actually rendered.
         // This is used in componentDidUpdate instead of prevProps, because
         // the xml can change while e.g. on the costumes tab.
-        this._renderedToolboxXML = this.props.toolboxXML;
+        this._renderedToolboxXML = toolboxXML;
 
         // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
@@ -188,13 +195,19 @@ class Blocks extends React.Component {
     componentWillUnmount () {
         this.detachVM();
         this.workspace.dispose();
-        clearTimeout(this.toolboxUpdateTimeout);
+        if (this.toolboxUpdateTimeout) this.toolboxUpdateTimeout.cancel();
     }
     requestToolboxUpdate () {
-        clearTimeout(this.toolboxUpdateTimeout);
-        this.toolboxUpdateTimeout = setTimeout(() => {
-            this.updateToolbox();
-        }, 0);
+        if (this.toolboxUpdateTimeout) this.toolboxUpdateTimeout.cancel();
+        let running = true;
+        this.toolboxUpdateTimeout = Promise.resolve().then(() => {
+            if (running) {
+                this.updateToolbox();
+            }
+        });
+        this.toolboxUpdateTimeout.cancel = () => {
+            running = false;
+        };
     }
     setLocale () {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
@@ -214,8 +227,15 @@ class Blocks extends React.Component {
 
         const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
         const offset = this.workspace.toolbox_.getCategoryScrollOffset();
-        this.workspace.updateToolbox(this.props.toolboxXML);
-        this._renderedToolboxXML = this.props.toolboxXML;
+
+        let toolboxXML = this.props.toolboxXML;
+        if (!this.initializedWorkspace) {
+            toolboxXML = UNINITIALIZED_TOOLBOX_XML;
+        }
+        if (this._renderedToolboxXML !== toolboxXML) {
+            this.workspace.updateToolbox(toolboxXML);
+            this._renderedToolboxXML = toolboxXML;
+        }
 
         // In order to catch any changes that mutate the toolbox during "normal runtime"
         // (variable changes/etc), re-enable toolbox refresh.
@@ -351,6 +371,7 @@ class Blocks extends React.Component {
         // When we change sprites, update the toolbox to have the new sprite's blocks
         const toolboxXML = this.getToolboxXML();
         if (toolboxXML) {
+            this.initializedWorkspace = true;
             this.props.updateToolboxState(toolboxXML);
         }
 

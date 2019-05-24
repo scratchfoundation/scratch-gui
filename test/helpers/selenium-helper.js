@@ -31,11 +31,8 @@ class SeleniumHelper {
         ]);
     }
 
-    elementIsVisible (element, {
-        message = 'elementIsVisible timed out',
-        timeout = DEFAULT_TIMEOUT_MILLISECONDS
-    } = {}) {
-        return this.driver.wait(until.elementIsVisible(element), timeout, message);
+    elementIsVisible (element, timeoutMessage = 'elementIsVisible timed out') {
+        return this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     get scope () {
@@ -87,11 +84,8 @@ class SeleniumHelper {
         return this.driver;
     }
 
-    findByXpath (xpath, {
-        message = `findByXpath timed out for path: ${xpath}`,
-        timeout = DEFAULT_TIMEOUT_MILLISECONDS
-    } = {}) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath)), timeout, message);
+    findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     findByText (text, scope) {
@@ -131,11 +125,8 @@ class SeleniumHelper {
         return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
     }
 
-    waitUntilGone (element, {
-        message = 'waitUntilGone timed out',
-        timeout = DEFAULT_TIMEOUT_MILLISECONDS
-    } = {}) {
-        return this.driver.wait(until.stalenessOf(element), timeout, message);
+    waitUntilGone (element, timeoutMessage = 'waitUntilGone timed out') {
+        return this.driver.wait(until.stalenessOf(element), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     getLogs (whitelist) {

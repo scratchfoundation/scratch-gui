@@ -149,7 +149,7 @@
     overflow: hidden; /* Don't let long values escape container */
     text-overflow: ellipsis;
     user-select: text; /* Allow selecting list values for 2.0 compatibility, only relevant in player */
-    white-space: nowrap;
+    white-space: pre;
 }
 
 .list-input {

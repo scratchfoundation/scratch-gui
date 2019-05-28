@@ -26,6 +26,7 @@ class AudioSelector extends React.Component {
         };
     }
     componentWillReceiveProps (newProps) {
+        if (newProps.trimStart === this.props.trimStart) return;
         this.setState({
             trimStart: newProps.trimStart,
             trimEnd: newProps.trimEnd

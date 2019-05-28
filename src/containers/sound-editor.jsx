@@ -164,7 +164,7 @@ class SoundEditor extends React.Component {
         this.setState({
             trimStart: null,
             trimEnd: null
-        }, this.handlePlay);
+        });
     }
     handleUpdateTrim (trimStart, trimEnd) {
         this.setState({trimStart, trimEnd});

@@ -176,13 +176,6 @@ const SoundEditor = props => (
             </div>
             <IconButton
                 className={styles.effectButton}
-                disabled={props.trimStart === null}
-                img={deleteIcon}
-                title={'delete'}
-                onClick={props.onActivateTrim}
-            />
-            <IconButton
-                className={styles.effectButton}
                 img={copyIcon}
                 title={'copy'}
                 onClick={props.onCopy}
@@ -193,6 +186,13 @@ const SoundEditor = props => (
                 img={pasteIcon}
                 title={'paste'}
                 onClick={props.onPaste}
+            />
+            <IconButton
+                className={styles.effectButton}
+                disabled={props.trimStart === null}
+                img={deleteIcon}
+                title={'delete'}
+                onClick={props.onActivateTrim}
             />
         </div>
         <div className={styles.row}>

@@ -37,7 +37,8 @@ class SoundEditor extends React.Component {
             'handleRedo',
             'submitNewSamples',
             'handleCopy',
-            'handlePaste'
+            'handlePaste',
+            'paste'
         ]);
         this.state = {
             copyBuffer: null,
@@ -269,8 +270,21 @@ class SoundEditor extends React.Component {
             newSamples.set(firstPart, 0);
             newSamples.set(this.state.copyBuffer.samples, firstPart.length);
             newSamples.set(lastPart, firstPart.length + this.state.copyBuffer.samples.length);
+
+            const trimStartSeconds = trimStartSamples / this.props.sampleRate;
+            const trimEndSeconds = trimStartSeconds +
+                (this.state.copyBuffer.samples.length / this.state.copyBuffer.sampleRate);
+            const newDurationSeconds = newSamples.length / this.state.copyBuffer.sampleRate;
+            const adjustedTrimStart = trimStartSeconds / newDurationSeconds;
+            const adjustedTrimEnd = trimEndSeconds / newDurationSeconds;
+            this.setState({
+                trimStart: adjustedTrimStart,
+                trimEnd: adjustedTrimEnd
+            });
+
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
         }
+
         this.handlePlay();
     }
     handlePaste () {
@@ -281,8 +295,7 @@ class SoundEditor extends React.Component {
             this.resampleBufferToRate(this.state.copyBuffer, this.props.sampleRate).then(buffer => {
                 this.setState({
                     copyBuffer: buffer
-                });
-                this.paste();
+                }, this.paste);
             });
         }
     }

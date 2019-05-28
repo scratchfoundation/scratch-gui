@@ -158,7 +158,7 @@ class SoundEditor extends React.Component {
         const newLength = firstPart.length + secondPart.length;
         let newSamples;
         if (newLength === 0) {
-             newSamples = new Float32Array(1);
+            newSamples = new Float32Array(1);
         } else {
             newSamples = new Float32Array(newLength);
             newSamples.set(firstPart, 0);

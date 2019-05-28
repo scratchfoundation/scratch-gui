@@ -139,7 +139,6 @@ class AudioSelector extends React.Component {
 }
 
 AudioSelector.propTypes = {
-    onPlay: PropTypes.func,
     onSetTrim: PropTypes.func,
     playhead: PropTypes.number,
     trimEnd: PropTypes.number,

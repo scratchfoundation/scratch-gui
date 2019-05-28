@@ -264,24 +264,6 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
-                img={alienIcon}
-                title={<FormattedMessage {...messages.alien} />}
-                onClick={props.onAlien}
-            />
-            <IconButton
-                className={styles.effectButton}
-                img={magicIcon}
-                title={<FormattedMessage {...messages.magic} />}
-                onClick={props.onMagic}
-            />
-            <IconButton
-                className={styles.effectButton}
-                img={reverbIcon}
-                title={<FormattedMessage {...messages.reverb} />}
-                onClick={props.onReverb}
-            />
-            <IconButton
-                className={styles.effectButton}
                 img={louderIcon}
                 title={<FormattedMessage {...messages.louder} />}
                 onClick={props.onLouder}

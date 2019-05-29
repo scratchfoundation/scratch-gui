@@ -114,17 +114,12 @@ class VideoStep extends React.Component {
     }
     render () {
         return (
-            // Video step needs to know if the card is being dragged to cover the video
-            // so that the mouseup is not swallowed by the iframe.
             <div className={styles.stepVideo}>
                 <div
                     className={`wistia_embed wistia_async_${this.props.video}`}
+                    id="video-div"
                     style={{height: `257px`, width: `466px`}}
                 >
-                    {//this.props.dragging ? (
-                        //<div className={styles.videoCover} />
-                        //) : null
-                    }
                     &nbsp;
                 </div>
             </div>
@@ -133,7 +128,6 @@ class VideoStep extends React.Component {
 }
 
 VideoStep.propTypes = {
-    dragging: PropTypes.bool.isRequired,
     expanded: PropTypes.bool.isRequired,
     video: PropTypes.string.isRequired
 };
@@ -322,6 +316,7 @@ const Cards = props => {
         >
             <Draggable
                 bounds="parent"
+                cancel="#video-div" // disable dragging on video div
                 position={{x: x, y: y}}
                 onDrag={onDrag}
                 onStart={onStartDrag}

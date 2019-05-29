@@ -90,11 +90,13 @@ class VideoStep extends React.Component {
         const script = document.createElement('script');
         script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
         script.async = true;
+        script.setAttribute('id', 'wistia-video-content');
         document.body.appendChild(script);
 
         const script2 = document.createElement('script');
         script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
         script2.async = true;
+        script2.setAttribute('id', 'wistia-video-api');
         document.body.appendChild(script2);
     }
     componentDidUpdate () {
@@ -103,18 +105,26 @@ class VideoStep extends React.Component {
             video.pause();
         }
     }
+    componentWillUnmount () {
+        const script = document.getElementById('wistia-video-content');
+        script.parentNode.removeChild(script);
+
+        const script2 = document.getElementById('wistia-video-api');
+        script2.parentNode.removeChild(script2);
+    }
     render () {
         return (
             // Video step needs to know if the card is being dragged to cover the video
             // so that the mouseup is not swallowed by the iframe.
             <div className={styles.stepVideo}>
-                {this.props.dragging ? (
-                    <div className={styles.videoCover} />
-                ) : null}
                 <div
                     className={`wistia_embed wistia_async_${this.props.video}`}
                     style={{height: `257px`, width: `466px`}}
                 >
+                    {//this.props.dragging ? (
+                        //<div className={styles.videoCover} />
+                        //) : null
+                    }
                     &nbsp;
                 </div>
             </div>

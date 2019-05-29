@@ -324,8 +324,8 @@ class SoundEditor extends React.Component {
                 onFadeOut={this.effectFactory(effectTypes.FADEOUT)}
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
-                onMute={this.effectFactory(effectTypes.MUTE)}
                 onMagic={this.effectFactory(effectTypes.MAGIC)}
+                onMute={this.effectFactory(effectTypes.MUTE)}
                 onPaste={this.handlePaste}
                 onPlay={this.handlePlay}
                 onRedo={this.handleRedo}

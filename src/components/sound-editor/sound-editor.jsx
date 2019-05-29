@@ -26,6 +26,8 @@ import robotIcon from './icon--robot.svg';
 import reverseIcon from './icon--reverse.svg';
 import fadeOutIcon from './icon--fade-out.svg';
 import fadeInIcon from './icon--fade-in.svg';
+import muteIcon from './icon--mute.svg';
+
 import deleteIcon from './icon--delete.svg';
 import copyIcon from './icon--copy.svg';
 import pasteIcon from './icon--paste.svg';
@@ -127,9 +129,12 @@ const messages = defineMessages({
         id: 'gui.soundEditor.fadeIn',
         description: 'Title of the button to apply the fade in effect',
         defaultMessage: 'Fade in'
+    },
+    mute: {
+        id: 'gui.soundEditor.mute',
+        description: 'Title of the button to apply the mute effect',
+        defaultMessage: 'Mute'
     }
-
-
 });
 
 const SoundEditor = props => (
@@ -273,6 +278,12 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
+                img={muteIcon}
+                title={<FormattedMessage {...messages.mute} />}
+                onClick={props.onMute}
+            />
+            <IconButton
+                className={styles.effectButton}
                 img={reverseIcon}
                 title={<FormattedMessage {...messages.reverse} />}
                 onClick={props.onReverse}
@@ -310,6 +321,7 @@ SoundEditor.propTypes = {
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onMagic: PropTypes.func.isRequired,
+    onMute: PropTypes.func.isRequired,
     onPaste: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRedo: PropTypes.func.isRequired,

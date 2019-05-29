@@ -4,6 +4,7 @@ import VolumeEffect from './effects/volume-effect.js';
 import FlangerEffect from './effects/flanger-effect.js';
 import ReverbEffect from './effects/reverb-effect.js';
 import FadeEffect from './effects/fade-effect.js';
+import MuteEffect from './effects/mute-effect.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -17,7 +18,8 @@ const effectTypes = {
     REVERB: 'reverb',
     MAGIC: 'magic',
     FADEIN: 'fade in',
-    FADEOUT: 'fade out'
+    FADEOUT: 'fade out',
+    MUTE: 'mute'
 };
 
 class AudioEffects {
@@ -152,6 +154,10 @@ class AudioEffects {
             break;
         case effectTypes.FADEOUT:
             ({input, output} = new FadeEffect(this.audioContext, false,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.MUTE:
+            ({input, output} = new MuteEffect(this.audioContext,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }

@@ -176,24 +176,32 @@ const SoundEditor = props => (
                     </button>
                 </div>
             </div>
+            <div className={styles.inputGroup}>
+                <IconButton
+                    className={styles.toolButton}
+                    img={copyIcon}
+                    title={'Copy'}
+                    onClick={props.onCopy}
+                />
+                <IconButton
+                    className={styles.toolButton}
+                    disabled={props.canPaste === false}
+                    img={pasteIcon}
+                    title={'Paste'}
+                    onClick={props.onPaste}
+                />
+                <IconButton
+                    className={styles.toolButton}
+                    img={copyIcon}
+                    title={'Copy to New'}
+                    onClick={props.onCopyToNew}
+                />
+            </div>
             <IconButton
-                className={styles.effectButton}
-                img={copyIcon}
-                title={'copy'}
-                onClick={props.onCopy}
-            />
-            <IconButton
-                className={styles.effectButton}
-                disabled={props.canPaste === false}
-                img={pasteIcon}
-                title={'paste'}
-                onClick={props.onPaste}
-            />
-            <IconButton
-                className={styles.effectButton}
+                className={styles.toolButton}
                 disabled={props.trimStart === null}
                 img={deleteIcon}
-                title={'delete'}
+                title={'Delete'}
                 onClick={props.onActivateTrim}
             />
         </div>
@@ -315,6 +323,7 @@ SoundEditor.propTypes = {
     onAlien: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onCopy: PropTypes.func.isRequired,
+    onCopyToNew: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
     onFadeIn: PropTypes.func.isRequired,
     onFadeOut: PropTypes.func.isRequired,

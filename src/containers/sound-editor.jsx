@@ -24,7 +24,9 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'copy',
             'copyCurrentBuffer',
+            'handleCopyToNew',
             'handleStoppedPlaying',
             'handleChangeName',
             'handlePlay',
@@ -220,6 +222,9 @@ class SoundEditor extends React.Component {
         }
     }
     handleCopy () {
+        this.copy();
+    }
+    copy (callback) {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
 
@@ -231,6 +236,43 @@ class SoundEditor extends React.Component {
 
         this.setState({
             copyBuffer: newCopyBuffer
+        }, callback);
+    }
+    handleCopyToNew() {
+        this.copy(this.copyToNew);
+    }
+    copyToNew () {
+        // this is largely copied (haha) from the record-modal container handleSubmit function
+        WavEncoder.encode({
+            sampleRate: this.state.copyBuffer.sampleRate,
+            channelData: [this.state.copyBuffer.samples]
+        }).then(wavBuffer => {
+            const vmSound = {
+                format: '',
+                dataFormat: 'wav',
+                rate: this.state.copyBuffer.sampleRate,
+                sampleCount: this.state.copyBuffer.samples.length
+            };
+
+            // Create an asset from the encoded .wav and get resulting md5
+            const storage = this.props.vm.runtime.storage;
+            vmSound.asset = storage.createAsset(
+                storage.AssetType.Sound,
+                storage.DataFormat.WAV,
+                new Uint8Array(wavBuffer),
+                null,
+                true // generate md5
+            );
+            vmSound.assetId = vmSound.asset.assetId;
+
+            // update vmSound object with md5 property
+            vmSound.md5 = `${vmSound.assetId}.${vmSound.dataFormat}`;
+            // The VM will update the sound name to a fresh name
+            vmSound.name = this.props.name;
+
+            this.props.vm.addSound(vmSound).then(() => {
+                // switch to the new sound here?
+            });
         });
     }
     resampleBufferToRate (buffer, newRate) {
@@ -319,6 +361,7 @@ class SoundEditor extends React.Component {
                 onAlien={this.effectFactory(effectTypes.ALIEN)}
                 onChangeName={this.handleChangeName}
                 onCopy={this.handleCopy}
+                onCopyToNew={this.handleCopyToNew}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFadeIn={this.effectFactory(effectTypes.FADEIN)}
                 onFadeOut={this.effectFactory(effectTypes.FADEOUT)}

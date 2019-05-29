@@ -4,7 +4,6 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
-    findByText,
     findByXpath,
     getDriver,
     getLogs,

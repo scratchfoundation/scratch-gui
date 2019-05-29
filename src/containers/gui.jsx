@@ -91,10 +91,11 @@ class GUI extends React.Component {
         // This makes GUI container not a pure component. We don't want to use
         // state for this. That would possibly cause a full second render of GUI
         // after the first one.
-        const {fontsLoaded, fetchingProject, isLoading} = this.props;
-        this.isAfterGUI = this.isAfterGUI || (
-            fontsLoaded && !fetchingProject && !isLoading
-        );
+        // const {fontsLoaded, fetchingProject, isLoading} = this.props;
+        // this.isAfterGUI = this.isAfterGUI || (
+        //     fontsLoaded && !fetchingProject && !isLoading
+        // );
+        // console.log('isAfterGUI in gui container componentDidUpdate: ' + this.isAfterGUI);
     }
     setReduxTitle (newTitle) {
         if (newTitle === null || typeof newTitle === 'undefined') {
@@ -173,13 +174,31 @@ class GUI extends React.Component {
         }
 
         const GUIComponent = require('../components/gui/gui.jsx').default;
+
+        // Once the GUI component has been rendered, always render GUI and do
+        // not revert back to a Loader in this component.
+        //
+        // This makes GUI container not a pure component. We don't want to use
+        // state for this. That would possibly cause a full second render of GUI
+        // after the first one.
+        this.isAfterGUI = this.isAfterGUI || (
+            fontsLoaded && !fetchingProject && !isLoading
+        );
+        console.log('isAfterGUI in gui container render: ' + this.isAfterGUI);
+
+
+        console.log('rendering GUIComponent...');
+        console.log(this.isAfterGUI);
         return (
-            <GUIComponent
-                loading={fetchingProject || isLoading || loadingStateVisible}
-                {...componentProps}
-            >
-                {children}
-            </GUIComponent>
+            <React.Fragment>
+                <div id="guiIsLoadedIndicator" />
+                <GUIComponent
+                    loading={fetchingProject || isLoading || loadingStateVisible}
+                    {...componentProps}
+                >
+                    {children}
+                </GUIComponent>
+            </React.Fragment>
         );
     }
 }

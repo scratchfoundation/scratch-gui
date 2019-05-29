@@ -43,7 +43,9 @@ const StageWrapperComponent = function (props) {
             </Box>
             {loading ? (
                 <Loader isFullScreen={isFullScreen} />
-            ) : null}
+            ) : (
+                <div id="guiIsLoadedIndicator" />
+            )}
         </Box>
     );
 };

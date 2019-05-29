@@ -138,6 +138,7 @@ const GUIComponent = props => {
 
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
+        if (loading) {alert('LOADING IN GUI COMPONENT!!!!');}
 
         return isPlayerOnly ? (
             <StageWrapper

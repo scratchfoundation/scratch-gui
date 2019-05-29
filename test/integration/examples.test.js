@@ -4,7 +4,6 @@ import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
-    findByText,
     clickButton,
     clickText,
     clickXpath,

@@ -4,15 +4,13 @@ import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
-    findByText,
     clickButton,
     clickText,
     clickXpath,
     findByXpath,
     getDriver,
     getLogs,
-    loadUri,
-    waitUntilGone
+    loadUri
 } = new SeleniumHelper();
 
 let driver;
@@ -31,7 +29,6 @@ describe('player example', () => {
     test('Load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
-        await waitUntilGone(findByText('Loading'));
         await clickXpath('//img[@title="Go"]');
         await new Promise(resolve => setTimeout(resolve, 2000));
         await clickXpath('//img[@title="Stop"]');

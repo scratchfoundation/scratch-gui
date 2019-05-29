@@ -26,8 +26,7 @@ class SeleniumHelper {
             'getSauceDriver',
             'getLogs',
             'loadUri',
-            'rightClickText',
-            'waitUntilGone'
+            'rightClickText'
         ]);
     }
 
@@ -85,7 +84,11 @@ class SeleniumHelper {
     }
 
     findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage)
+            .then(el => (
+                this.driver.wait(el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS, `${xpath} is not visible`)
+                    .then(() => el)
+            ));
     }
 
     findByText (text, scope) {
@@ -123,10 +126,6 @@ class SeleniumHelper {
 
     clickButton (text) {
         return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
-    }
-
-    waitUntilGone (element, timeoutMessage = 'waitUntilGone timed out') {
-        return this.driver.wait(until.stalenessOf(element), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     getLogs (whitelist) {

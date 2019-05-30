@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import WavEncoder from 'wav-encoder';
+import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
@@ -238,7 +239,7 @@ class SoundEditor extends React.Component {
             copyBuffer: newCopyBuffer
         }, callback);
     }
-    handleCopyToNew() {
+    handleCopyToNew () {
         this.copy(this.copyToNew);
     }
     copyToNew () {
@@ -391,10 +392,7 @@ SoundEditor.propTypes = {
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
     soundIndex: PropTypes.number,
-    vm: PropTypes.shape({
-        updateSoundBuffer: PropTypes.func,
-        renameSound: PropTypes.func
-    })
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = (state, {soundIndex}) => {

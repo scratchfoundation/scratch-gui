@@ -46,6 +46,9 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+import inteCarIconURL from './inteCar/inteCar.png'
+import inteCarInsetIconURL from './inteCar/inteCar_icon.svg'
+
 export default [
     {
         name: (
@@ -76,8 +79,8 @@ export default [
             />
         ),
         extensionId: 'inteCar',
-        iconURL: musicIconURL,
-        insetIconURL: musicIconURL,
+        iconURL: inteCarIconURL,
+        insetIconURL: inteCarInsetIconURL,
         description: (
             <FormattedMessage
                 defaultMessage="Control Intelligent Car"

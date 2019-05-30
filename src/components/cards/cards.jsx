@@ -85,50 +85,32 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
     </div>
 );
 
-class VideoStep extends React.Component {
-    componentDidMount () {
-        const script = document.createElement('script');
-        script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
-        script.async = true;
-        script.setAttribute('id', 'wistia-video-content');
-        document.body.appendChild(script);
-
-        const script2 = document.createElement('script');
-        script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
-        script2.async = true;
-        script2.setAttribute('id', 'wistia-video-api');
-        document.body.appendChild(script2);
-    }
-    componentDidUpdate () {
-        const video = window.Wistia.api(`${this.props.video}`);
-        if (!this.props.expanded) {
-            video.pause();
-        }
-    }
-    componentWillUnmount () {
-        const script = document.getElementById('wistia-video-content');
-        script.parentNode.removeChild(script);
-
-        const script2 = document.getElementById('wistia-video-api');
-        script2.parentNode.removeChild(script2);
-    }
-    render () {
-        return (
-            <div className={styles.stepVideo}>
-                <div
-                    className={`wistia_embed wistia_async_${this.props.video}`}
-                    id="video-div"
-                    style={{height: `257px`, width: `466px`}}
-                >
-                    &nbsp;
-                </div>
-            </div>
-        );
-    }
-}
+// Video step needs to know if the card is being dragged to cover the video
+// so that the mouseup is not swallowed by the iframe.
+const VideoStep = ({video, dragging}) => (
+    <div className={styles.stepVideo}>
+        {dragging ? (
+            <div className={styles.videoCover} />
+        ) : null}
+        <iframe
+            allowFullScreen
+            allowTransparency="true"
+            frameBorder="0"
+            height="257"
+            scrolling="no"
+            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            title="📹"
+            width="466"
+        />
+        <script
+            async
+            src="https://fast.wistia.net/assets/external/E-v1.js"
+        />
+    </div>
+);
 
 VideoStep.propTypes = {
-    expanded: PropTypes.bool.isRequired,
+    dragging: PropTypes.bool.isRequired,
     video: PropTypes.string.isRequired
 };
 
@@ -316,7 +298,6 @@ const Cards = props => {
         >
             <Draggable
                 bounds="parent"
-                cancel="#video-div" // disable dragging on video div
                 position={{x: x, y: y}}
                 onDrag={onDrag}
                 onStart={onStartDrag}
@@ -344,7 +325,6 @@ const Cards = props => {
                                 steps[step].video ? (
                                     <VideoStep
                                         dragging={dragging}
-                                        expanded={expanded}
                                         video={translateVideo(steps[step].video, locale)}
                                     />
                                 ) : (

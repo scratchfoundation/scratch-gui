@@ -86,7 +86,7 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
 );
 
 class VideoStep extends React.Component {
-    // test comment
+
     componentDidMount () {
         const script = document.createElement('script');
         script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
@@ -100,12 +100,24 @@ class VideoStep extends React.Component {
         script2.setAttribute('id', 'wistia-video-api');
         document.body.appendChild(script2);
     }
-    componentDidUpdate () {
-        const video = window.Wistia.api(`${this.props.video}`);
+
+    // We use the Wistia API here to update or pause the video dynamically:
+    // https://wistia.com/support/developers/player-api
+    componentDidUpdate (prevProps) {
+        // Get a handle on the currently loaded video
+        const video = window.Wistia.api(prevProps.video);
+
+        // Reset the video source if a new video has been chosen from the library
+        if (prevProps.video !== this.props.video) {
+            video.replaceWith(this.props.video);
+        }
+
+        // Pause the video if the modal is being shrunken
         if (!this.props.expanded) {
             video.pause();
         }
     }
+
     componentWillUnmount () {
         const script = document.getElementById('wistia-video-content');
         script.parentNode.removeChild(script);
@@ -113,6 +125,7 @@ class VideoStep extends React.Component {
         const script2 = document.getElementById('wistia-video-api');
         script2.parentNode.removeChild(script2);
     }
+
     render () {
         return (
             <div className={styles.stepVideo}>

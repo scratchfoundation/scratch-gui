@@ -2,6 +2,7 @@
 // Should we move these into a new extension support module or something?
 import ArgumentType from 'scratch-vm/src/extension-support/argument-type';
 import BlockType from 'scratch-vm/src/extension-support/block-type';
+import log from './log.js';
 
 /**
  * Define a block using extension info which has the ability to dynamically determine (and update) its layout.
@@ -31,6 +32,46 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
         if (staticBlockInfo.blockIconURI || categoryInfo.blockIconURI) {
             blockJson.extensions = ['scratch_extension'];
         }
+
+        // Handle custom context menu options
+        // TODO this should probably not live here in the future, or at least
+        // we need some way of registering a context menu option only once for
+        // each block (see try catch below)
+        if (staticBlockInfo.info.customContextMenu) {
+            const customContextMenuForBlock = {
+                customContextMenu: function (options) {
+                    staticBlockInfo.info.customContextMenu.forEach(contextOption => {
+                        options.push({
+                            enabled: true,
+                            text: contextOption.name,
+                            callback: () => {
+                                if (contextOption.builtInCallback) {
+                                    switch (contextOption.builtInCallback) {
+                                    case 'EDIT_A_PROCEDURE':
+                                        // TODO FILL THIS IN
+                                        break;
+                                    case 'RENAME_A_VARIABLE':
+                                        // TODO FILL THIS IN
+                                        break;
+                                    }
+                                } else if (contextOption.callback) {
+                                    contextOption.callback();
+                                }
+                            }
+                        });
+                    });
+                }
+            };
+            const contextMenuName = `${blockJson.type}_context_menu`;
+            try {
+                ScratchBlocks.Extensions.registerMixin(contextMenuName, customContextMenuForBlock);
+            } catch (e) {
+                log.warn("Context menu callback was already registered, but we're going to ignore this for now");
+            }
+            blockJson.extensions = blockJson.extensions || [];
+            blockJson.extensions.push(contextMenuName);
+        }
+
         // initialize the basics of the block, to be overridden & extended later by `domToMutation`
         this.jsonInit(blockJson);
         // initialize the cached block info used to carry block info from `domToMutation` to `mutationToDom`

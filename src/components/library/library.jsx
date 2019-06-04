@@ -10,6 +10,7 @@ import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
 import storage from '../../lib/storage';
+import Spinner from '../spinner/spinner.jsx';
 
 import styles from './library.css';
 
@@ -70,11 +71,6 @@ const getItemImageSource = function (item) {
     }
 };
 
-const INITIAL_SHOW_COUNT = 50;
-const STEP_SHOW_COUNT_SIZE = 50;
-
-const STEP_SHOW_COUNT_TIMEOUT = 50; // ms
-
 class LibraryComponent extends React.Component {
     constructor (props) {
         super(props);
@@ -92,20 +88,13 @@ class LibraryComponent extends React.Component {
             selectedItem: null,
             filterQuery: '',
             selectedTag: ALL_TAG.tag,
-            showCount: INITIAL_SHOW_COUNT,
-            showStep: STEP_SHOW_COUNT_SIZE
+            loaded: false
         };
     }
     componentDidMount () {
-        this.showIntervalId = setInterval(() => {
-            if (this.state.showCount === this.props.data.length) {
-                clearInterval(this.showIntervalId);
-                return;
-            }
-            this.setState(state => ({
-                showCount: Math.min(state.showCount + state.showStep, this.props.data.length)
-            }));
-        }, STEP_SHOW_COUNT_TIMEOUT);
+        setTimeout(() => {
+            this.setState({loaded: true});
+        });
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -227,7 +216,7 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => {
+                    {this.state.loaded ? this.getFilteredData().map((dataItem, index) => {
                         const iconSource = getItemImageSource(dataItem);
                         const icons = dataItem.json && dataItem.json.costumes.map(getItemImageSource);
                         return (<LibraryItem
@@ -248,8 +237,18 @@ class LibraryComponent extends React.Component {
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
-                        />);
-                    })}
+                        />
+                        );
+                    }) : (
+                        <div className={styles.spinnerOuter}>
+                            <div className={styles.spinnerInner}>
+                                <Spinner
+                                    large
+                                    level="primary"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </Modal>
         );

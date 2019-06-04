@@ -5,6 +5,7 @@ import AudioSelectorComponent from '../components/audio-trimmer/audio-selector.j
 import {getEventXY} from '../lib/touch-utils';
 
 const MIN_LENGTH = 0.01; // Used to stop sounds being trimmed smaller than 1%
+const MIN_DURATION = 500;
 
 class AudioSelector extends React.Component {
     constructor (props) {
@@ -24,6 +25,8 @@ class AudioSelector extends React.Component {
             trimStart: props.trimStart,
             trimEnd: props.trimEnd
         };
+
+        this.clickStartTime = 0;
     }
     componentWillReceiveProps (newProps) {
         if (newProps.trimStart === this.props.trimStart) return;
@@ -41,6 +44,8 @@ class AudioSelector extends React.Component {
         this.initialTrimEnd = (this.initialX - left) / width;
         this.initialTrimStart = this.initialTrimEnd;
         this.props.onSetTrim(this.initialTrimStart, this.initialTrimEnd);
+
+        this.clickStartTime = Date.now();
 
         window.addEventListener('mousemove', this.handleTrimEndMouseMove);
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
@@ -93,7 +98,9 @@ class AudioSelector extends React.Component {
         window.removeEventListener('mouseup', this.handleTrimEndMouseUp);
         window.removeEventListener('touchmove', this.handleTrimEndMouseMove);
         window.removeEventListener('touchend', this.handleTrimEndMouseUp);
-        if (this.state.trimEnd - this.state.trimStart < MIN_LENGTH) {
+        const tooFast = (Date.now() - this.clickStartTime) < MIN_DURATION;
+        const tooShort = (this.state.trimEnd - this.state.trimStart) < MIN_LENGTH;
+        if (tooFast && tooShort) {
             this.clearSelection();
         } else {
             this.props.onSetTrim(this.state.trimStart, this.state.trimEnd);

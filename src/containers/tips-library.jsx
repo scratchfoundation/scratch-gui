@@ -62,10 +62,16 @@ class TipsLibrary extends React.PureComponent {
     }
     render () {
         const decksLibraryThumbnailData = Object.keys(decksLibraryContent)
-            .filter(id =>
+            .filter(id => {
+                if (notScratchDesktop()) return true; // Do not filter anything in online editor
+                const deck = decksLibraryContent[id];
                 // Scratch Desktop doesn't want tutorials with `requiredProjectId`
-                notScratchDesktop() || !decksLibraryContent[id].hasOwnProperty('requiredProjectId')
-            )
+                if (deck.hasOwnProperty('requiredProjectId')) return false;
+                // Scratch Desktop should not load tutorials that are _only_ videos
+                if (deck.steps.filter(s => s.title).length === 0) return false;
+                // Allow any other tutorials
+                return true;
+            })
             .map(id => ({
                 rawURL: decksLibraryContent[id].img,
                 id: id,

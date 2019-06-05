@@ -288,6 +288,7 @@ const Cards = props => {
         onShowAll,
         onNextStep,
         onPrevStep,
+        showVideos,
         step,
         expanded,
         ...posProps
@@ -356,11 +357,18 @@ const Cards = props => {
                                 />
                             ) : (
                                 steps[step].video ? (
-                                    <VideoStep
-                                        dragging={dragging}
-                                        expanded={expanded}
-                                        video={translateVideo(steps[step].video, locale)}
-                                    />
+                                    showVideos ? (
+                                        <VideoStep
+                                            dragging={dragging}
+                                            expanded={expanded}
+                                            video={translateVideo(steps[step].video, locale)}
+                                        />
+                                    ) : ( // Else show the deck image and title
+                                        <ImageStep
+                                            image={content[activeDeckId].img}
+                                            title={content[activeDeckId].name}
+                                        />
+                                    )
                                 ) : (
                                     <ImageStep
                                         image={translateImage(steps[step].image, locale)}
@@ -410,9 +418,19 @@ Cards.propTypes = {
     onShowAll: PropTypes.func,
     onShrinkExpandCards: PropTypes.func.isRequired,
     onStartDrag: PropTypes.func,
+    showVideos: PropTypes.bool,
     step: PropTypes.number.isRequired,
     x: PropTypes.number,
     y: PropTypes.number
 };
 
-export default Cards;
+Cards.defaultProps = {
+    showVideos: true
+};
+
+export {
+    Cards as default,
+    // Others exported for testability
+    ImageStep,
+    VideoStep
+};

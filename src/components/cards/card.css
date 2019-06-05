@@ -162,6 +162,7 @@
 }
 
 .step-body {
+    width: 100%;
     background: $ui-white;
     display: flex;
     flex-direction: column;
@@ -177,6 +178,8 @@
 
 .step-image {
     max-width: 450px;
+    max-height: 200px;
+    object-fit: contain;
     background: #F9F9F9;
     border: 1px solid #ddd;
     border-radius: 0.5rem;

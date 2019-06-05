@@ -84,11 +84,7 @@ class SeleniumHelper {
     }
 
     findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage)
-            .then(el => (
-                this.driver.wait(el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS, `${xpath} is not visible`)
-                    .then(() => el)
-            ));
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     findByText (text, scope) {

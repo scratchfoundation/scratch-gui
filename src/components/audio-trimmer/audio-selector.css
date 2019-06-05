@@ -18,6 +18,21 @@ $hover-scale: 2;
     transform: translateZ(0);
 }
 
+.time-display {
+    display: none;
+    position: absolute;
+    margin-left: 1rem;
+    background-color: white;
+    padding: 4px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.trim-handle:hover > .time-display {
+    display: block;
+}
+
 .trim-background {
     cursor: pointer;
     touch-action: none;

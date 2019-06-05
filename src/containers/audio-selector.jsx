@@ -134,6 +134,7 @@ class AudioSelector extends React.Component {
         return (
             <AudioSelectorComponent
                 containerRef={this.storeRef}
+                duration={this.props.duration}
                 playhead={this.props.playhead}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
@@ -146,6 +147,7 @@ class AudioSelector extends React.Component {
 }
 
 AudioSelector.propTypes = {
+    duration: PropTypes.number,
     onSetTrim: PropTypes.func,
     playhead: PropTypes.number,
     trimEnd: PropTypes.number,

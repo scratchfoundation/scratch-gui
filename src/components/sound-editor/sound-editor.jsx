@@ -213,6 +213,7 @@ const SoundEditor = props => (
                     width={600}
                 />
                 <AudioSelector
+                    duration={props.duration}
                     playhead={props.playhead}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
@@ -317,6 +318,7 @@ SoundEditor.propTypes = {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
+    duration: PropTypes.number,
     intl: intlShape,
     name: PropTypes.string.isRequired,
     onActivateTrim: PropTypes.func,

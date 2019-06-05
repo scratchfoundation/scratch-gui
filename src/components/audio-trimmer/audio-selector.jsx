@@ -28,9 +28,15 @@ const AudioSelector = props => (
                 >
                     <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
                         <img src={handleIcon} />
+                        <Box className={styles.timeDisplay}>
+                            {(props.trimStart * props.duration).toFixed(2)}
+                        </Box>
                     </Box>
                     <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.startTrimHandle)}>
                         <img src={handleIcon} />
+                        <Box className={styles.timeDisplay}>
+                            {(props.trimStart * props.duration).toFixed(2)}
+                        </Box>
                     </Box>
                 </Box>
                 <Box
@@ -40,9 +46,15 @@ const AudioSelector = props => (
                 >
                     <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
                         <img src={handleIcon} />
+                        <Box className={styles.timeDisplay}>
+                            {(props.trimEnd * props.duration).toFixed(2)}
+                        </Box>
                     </Box>
                     <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.endTrimHandle)}>
                         <img src={handleIcon} />
+                        <Box className={styles.timeDisplay}>
+                            {(props.trimEnd * props.duration).toFixed(2)}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
@@ -84,6 +96,7 @@ const AudioSelector = props => (
 
 AudioSelector.propTypes = {
     containerRef: PropTypes.func,
+    duration: PropTypes.number,
     onNewSelectionMouseDown: PropTypes.func.isRequired,
     onTrimEndMouseDown: PropTypes.func.isRequired,
     onTrimStartMouseDown: PropTypes.func.isRequired,

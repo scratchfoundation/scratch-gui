@@ -354,6 +354,7 @@ class SoundEditor extends React.Component {
                 canRedo={this.redoStack.length > 0}
                 canUndo={this.undoStack.length > 0}
                 chunkLevels={this.state.chunkLevels}
+                duration={this.props.samples.length / this.props.sampleRate}
                 name={this.props.name}
                 playhead={this.state.playhead}
                 trimEnd={this.state.trimEnd}

@@ -19,6 +19,7 @@ import {
 
 import CardsComponent from '../components/cards/cards.jsx';
 import {loadImageData} from '../lib/libraries/decks/translate-image.js';
+import {notScratchDesktop} from '../lib/isScratchDesktop';
 
 class Cards extends React.Component {
     componentDidMount () {
@@ -52,7 +53,8 @@ const mapStateToProps = state => ({
     y: state.scratchGui.cards.y,
     isRtl: state.locales.isRtl,
     locale: state.locales.locale,
-    dragging: state.scratchGui.cards.dragging
+    dragging: state.scratchGui.cards.dragging,
+    showVideos: notScratchDesktop()
 });
 
 const mapDispatchToProps = dispatch => ({

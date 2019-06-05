@@ -26,7 +26,7 @@ describe('player example', () => {
         await driver.quit();
     });
 
-    test('Load a project by ID', async () => {
+    test.skip('Player: load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
         await clickXpath('//img[@title="Go"]');
@@ -56,7 +56,7 @@ describe('blocks example', () => {
         await driver.quit();
     });
 
-    test('Load a project by ID', async () => {
+    test.skip('Blocks: load a project by ID', async () => {
         const projectId = '96708228';
         await loadUri(`${uri}#${projectId}`);
         await new Promise(resolve => setTimeout(resolve, 2000));

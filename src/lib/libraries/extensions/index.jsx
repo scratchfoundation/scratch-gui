@@ -73,7 +73,7 @@ export default [
     {
         name: (
             <FormattedMessage
-                defaultMessage="inteCar"
+                defaultMessage="飞象章鱼 智能车"
                 description="Name for the 'inteCar' extension"
                 id="gui.extension.inteCar.name"
             />
@@ -83,7 +83,7 @@ export default [
         insetIconURL: inteCarInsetIconURL,
         description: (
             <FormattedMessage
-                defaultMessage="Control Intelligent Car"
+                defaultMessage="飞象章鱼智能车 控制模块"
                 description="Description for the 'inteCar' extension"
                 id="gui.extension.inteCar.description"
             />

@@ -27,14 +27,14 @@ const SpinnerComponent = function (props) {
 };
 SpinnerComponent.propTypes = {
     className: PropTypes.string,
+    large: PropTypes.bool,
     level: PropTypes.string,
-    small: PropTypes.bool,
-    large: PropTypes.bool
+    small: PropTypes.bool
 };
 SpinnerComponent.defaultProps = {
     className: '',
+    large: false,
     level: 'info',
-    small: false,
-    large: false
+    small: false
 };
 export default SpinnerComponent;

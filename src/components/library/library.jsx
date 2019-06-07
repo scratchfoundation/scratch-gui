@@ -240,13 +240,11 @@ class LibraryComponent extends React.Component {
                         />
                         );
                     }) : (
-                        <div className={styles.spinnerOuter}>
-                            <div className={styles.spinnerInner}>
-                                <Spinner
-                                    large
-                                    level="primary"
-                                />
-                            </div>
+                        <div className={styles.spinnerWrapper}>
+                            <Spinner
+                                large
+                                level="primary"
+                            />
                         </div>
                     )}
                 </div>

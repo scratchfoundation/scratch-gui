@@ -30,29 +30,38 @@ Then go to [http://localhost:8601/](http://localhost:8601/) - the playground out
 
 ## Developing alongside other Scratch repositories
 
-### Linking this code to another project's `node_modules/scratch-gui`
+### Getting another repo to point to this code
+
+
+If you wish to develop `scratch-gui` alongside other scratch repositories that depend on it, you may wish
+to have the other repositories use your local `scratch-gui` build instead of fetching the current production
+version of the scratch-gui that is found by default using `npm install`.
+
+Here's how to link your local `scratch-gui` code to another project's `node_modules/scratch-gui`.
 
 #### Configuration
 
-If you wish to develop scratch-gui alongside other scratch repositories that depend on it, you may wish
-to have the other repositories use your local scratch-gui build instead of fetching the current production
-version of the scratch-gui that is found by default using `npm install`.
+1. In your local `scratch-gui` repository's top level:
+    1. Make sure you have run `npm install`
+    2. Build the `dist` directory by running `BUILD_MODE=dist npm run build`
+    3. Establish a link to this repository by running `npm link`
 
-To do this:
-1. Make sure you have run `npm install` from this (scratch-gui) repository's top level
-2. Make sure you have run `npm install` from the top level of each repository (such as scratch-www) that depends on scratch-gui
-3. From this (scratch-gui) repository's top level, build the `dist` directory by running `BUILD_MODE=dist npm run build`
-4. From this (scratch-gui) repository's top level, establish a link to this repository by running `npm link`
-5. From the top level of each repository that depends on scratch-gui, run `npm link scratch-gui`
-6. Build or run the repositories that depend on scratch-gui
+2. From the top level of each repository (such as `scratch-www`) that depends on `scratch-gui`:
+    1. Make sure you have run `npm install`
+    2. Run `npm link scratch-gui`
+    3. Build or run the repositoriy
 
-Instead of `BUILD_MODE=dist npm run build` you can also use `BUILD_MODE=dist npm run watch`, however this may be unreliable.
+#### Using `npm run watch`
+
+Instead of `BUILD_MODE=dist npm run build`, you can use `BUILD_MODE=dist npm run watch` instead. This will watch for changes to your `scratch-gui` code, and automatically rebuild when there are changes. Sometimes this has been unreliable; if you are having problems, try going back to `BUILD_MODE=dist npm run build` until you resolve them.
 
 #### Oh no! It didn't work!
-* Follow the recipe above step by step and don't change the order. It is especially important to run npm first because installing after the linking will reset the linking.
-* Make sure the repositories are siblings on your machine's file tree.
-* If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.
-* In the worst case unlink the repositories by running `npm unlink` in both, and start over.
+
+If you can't get linking to work right, try:
+* Follow the recipe above step by step and don't change the order. It is especially important to run `npm install` _before_ `npm link`, because installing after the linking will reset the linking.
+* Make sure the repositories are siblings on your machine's file tree, like `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-gui/` and `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-www/`.
+* Consistent node.js version: If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.
+* If nothing else works, unlink the repositories by running `npm unlink` in both, and start over.
 
 ## Testing
 ### Documentation
@@ -120,6 +129,66 @@ If you want to watch the browser as it runs the test, rather than running headle
 ```bash
 USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
 ```
+
+## Troubleshooting
+
+### Ignoring optional dependencies
+
+When running `npm install`, you can get warnings about optionsl dependencies:
+
+```
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.7
+```
+
+You can suppress them by adding the `no-optional` switch:
+
+```
+npm install --no-optional
+```
+
+Further reading: [Stack Overflow](https://stackoverflow.com/questions/36725181/not-compatible-with-your-operating-system-or-architecture-fsevents1-0-11)
+
+### Resolving dependencies
+
+When installing for the first time, you can get warnings which need to be resolved:
+
+```
+npm WARN eslint-config-scratch@5.0.0 requires a peer of babel-eslint@^8.0.1 but none was installed.
+npm WARN eslint-config-scratch@5.0.0 requires a peer of eslint@^4.0 but none was installed.
+npm WARN scratch-paint@0.2.0-prerelease.20190318170811 requires a peer of react-intl-redux@^0.7 but none was installed.
+npm WARN scratch-paint@0.2.0-prerelease.20190318170811 requires a peer of react-responsive@^4 but none was installed.
+```
+
+You can check which versions are available:
+
+```
+npm view react-intl-redux@0.* version
+```
+
+You will neet do install the required version:
+
+```
+npm install  --no-optional --save-dev react-intl-redux@^0.7
+```
+
+The dependency itself might have more missing dependencies, which will show up like this:
+
+```
+user@machine:~/sources/scratch/scratch-gui (491-translatable-library-objects)$ npm install  --no-optional --save-dev react-intl-redux@^0.7
+scratch-gui@0.1.0 /media/cuideigin/Linux/sources/scratch/scratch-gui
+├── react-intl-redux@0.7.0
+└── UNMET PEER DEPENDENCY react-responsive@5.0.0
+```
+
+You will need to install those as well:
+
+```
+npm install  --no-optional --save-dev react-responsive@^5.0.0
+```
+
+Further reading: [Stack Overflow](https://stackoverflow.com/questions/46602286/npm-requires-a-peer-of-but-all-peers-are-in-package-json-and-node-modules)
+
 
 ## Publishing to GitHub Pages
 You can publish the GUI to github.io so that others on the Internet can view it.

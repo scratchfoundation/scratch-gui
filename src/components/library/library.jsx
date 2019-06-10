@@ -92,6 +92,7 @@ class LibraryComponent extends React.Component {
         };
     }
     componentDidMount () {
+        // Allow the spinner to display before loading the content
         setTimeout(() => {
             this.setState({loaded: true});
         });

@@ -10,6 +10,7 @@ import sharedMessages from '../lib/shared-messages';
 import {
     LoadingStates,
     getIsLoadingUpload,
+    getIsShowingWithoutId,
     onLoadedProject,
     requestProjectUpload
 } from '../reducers/project-state';
@@ -91,6 +92,7 @@ class SBFileUploader extends React.Component {
     handleChange (e) {
         const {
             intl,
+            isShowingWithoutId,
             loadingState,
             projectChanged,
             userOwnsProject
@@ -104,7 +106,7 @@ class SBFileUploader extends React.Component {
             // we must confirm with the user that they really intend to replace it.
             // (If they don't own the project and haven't changed it, no need to confirm.)
             let uploadAllowed = true;
-            if (userOwnsProject || projectChanged) {
+            if (userOwnsProject || (projectChanged && isShowingWithoutId)) {
                 uploadAllowed = confirm( // eslint-disable-line no-alert
                     intl.formatMessage(sharedMessages.replaceProjectWarning)
                 );
@@ -172,6 +174,7 @@ SBFileUploader.propTypes = {
     closeFileMenu: PropTypes.func,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
+    isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
@@ -190,6 +193,7 @@ const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         isLoadingUpload: getIsLoadingUpload(loadingState),
+        isShowingWithoutId: getIsShowingWithoutId(loadingState),
         loadingState: loadingState,
         projectChanged: state.scratchGui.projectChanged,
         vm: state.scratchGui.vm

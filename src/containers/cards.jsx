@@ -5,6 +5,7 @@ import React from 'react';
 import {
     activateDeck,
     closeCards,
+    shrinkExpandCards,
     nextStep,
     prevStep,
     dragCard,
@@ -18,6 +19,7 @@ import {
 
 import CardsComponent from '../components/cards/cards.jsx';
 import {loadImageData} from '../lib/libraries/decks/translate-image.js';
+import {notScratchDesktop} from '../lib/isScratchDesktop';
 
 class Cards extends React.Component {
     componentDidMount () {
@@ -46,11 +48,13 @@ const mapStateToProps = state => ({
     content: state.scratchGui.cards.content,
     activeDeckId: state.scratchGui.cards.activeDeckId,
     step: state.scratchGui.cards.step,
+    expanded: state.scratchGui.cards.expanded,
     x: state.scratchGui.cards.x,
     y: state.scratchGui.cards.y,
     isRtl: state.locales.isRtl,
     locale: state.locales.locale,
-    dragging: state.scratchGui.cards.dragging
+    dragging: state.scratchGui.cards.dragging,
+    showVideos: notScratchDesktop()
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -60,6 +64,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(closeCards());
     },
     onCloseCards: () => dispatch(closeCards()),
+    onShrinkExpandCards: () => dispatch(shrinkExpandCards()),
     onNextStep: () => dispatch(nextStep()),
     onPrevStep: () => dispatch(prevStep()),
     onDrag: (e_, data) => dispatch(dragCard(data.x, data.y)),

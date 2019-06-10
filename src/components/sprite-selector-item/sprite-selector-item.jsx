@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CloseButton from '../close-button/close-button.jsx';
+import DeleteButton from '../delete-button/delete-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
 import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
@@ -48,9 +48,8 @@ const SpriteSelectorItem = props => (
             ) : null}
         </div>
         {(props.selected && props.onDeleteButtonClick) ? (
-            <CloseButton
+            <DeleteButton
                 className={styles.deleteButton}
-                size={CloseButton.SIZE_SMALL}
                 onClick={props.onDeleteButtonClick}
             />
         ) : null }

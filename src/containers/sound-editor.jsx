@@ -55,6 +55,12 @@ class SoundEditor extends React.Component {
         this.redoStack = [];
         this.undoStack = [];
 
+        this.ref = null;
+        this.setRef = element => {
+            this.ref = element;
+            console.log(this.ref);
+        }
+
         this.audioContext = new SharedAudioContext();
         const {effectTypes} = AudioEffects;
         this.impulseResponses = {};
@@ -431,6 +437,7 @@ class SoundEditor extends React.Component {
                 onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}
                 onUndo={this.handleUndo}
+                ref={this.setRef}
             />
         );
     }

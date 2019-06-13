@@ -43,7 +43,8 @@ class SoundEditor extends React.Component {
             'handlePaste',
             'paste',
             'handleKeyPress',
-            'handleContainerClick'
+            'handleContainerClick',
+            'setRef'
         ]);
         this.state = {
             copyBuffer: null,
@@ -398,6 +399,9 @@ class SoundEditor extends React.Component {
             });
         }
     }
+    setRef (element) {
+        this.ref = element;
+    }
     handleContainerClick (e) {
         // If the click is on the sound editor's div (and not any other element), delesect
         if (e.target === this.ref) {
@@ -415,6 +419,7 @@ class SoundEditor extends React.Component {
                 duration={this.props.samples.length / this.props.sampleRate}
                 name={this.props.name}
                 playhead={this.state.playhead}
+                setRef={this.setRef}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
                 onActivateTrim={this.handleActivateTrim}
@@ -441,7 +446,6 @@ class SoundEditor extends React.Component {
                 onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}
                 onUndo={this.handleUndo}
-                setRef={el => this.ref = el}
             />
         );
     }

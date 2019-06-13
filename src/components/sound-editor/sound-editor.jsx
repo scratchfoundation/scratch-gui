@@ -138,7 +138,11 @@ const messages = defineMessages({
 });
 
 const SoundEditor = props => (
-    <div className={styles.editorContainer}>
+    <div
+        className={styles.editorContainer}
+        ref={props.setRef}
+        onMouseDown={props.onContainerClick}
+    >
         <div className={styles.row}>
             <div className={styles.inputGroup}>
                 <Label text={props.intl.formatMessage(messages.sound)}>
@@ -324,6 +328,7 @@ SoundEditor.propTypes = {
     onActivateTrim: PropTypes.func,
     onAlien: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
+    onContainerClick: PropTypes.func.isRequired,
     onCopy: PropTypes.func.isRequired,
     onCopyToNew: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
@@ -345,6 +350,7 @@ SoundEditor.propTypes = {
     onStop: PropTypes.func.isRequired,
     onUndo: PropTypes.func.isRequired,
     playhead: PropTypes.number,
+    setRef: PropTypes.func,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number
 };

@@ -42,7 +42,8 @@ class SoundEditor extends React.Component {
             'handleCopy',
             'handlePaste',
             'paste',
-            'handleKeyPress'
+            'handleKeyPress',
+            'handleContainerClick'
         ]);
         this.state = {
             copyBuffer: null,
@@ -56,10 +57,6 @@ class SoundEditor extends React.Component {
         this.undoStack = [];
 
         this.ref = null;
-        this.setRef = element => {
-            this.ref = element;
-            console.log(this.ref);
-        }
 
         this.audioContext = new SharedAudioContext();
         const {effectTypes} = AudioEffects;
@@ -401,6 +398,12 @@ class SoundEditor extends React.Component {
             });
         }
     }
+    handleContainerClick (e) {
+        // If the click is on the sound editor's div (and not any other element), delesect
+        if (e.target === this.ref) {
+            this.handleUpdateTrim(null, null);
+        }
+    }
     render () {
         const {effectTypes} = AudioEffects;
         return (
@@ -417,6 +420,7 @@ class SoundEditor extends React.Component {
                 onActivateTrim={this.handleActivateTrim}
                 onAlien={this.effectFactory(effectTypes.ALIEN)}
                 onChangeName={this.handleChangeName}
+                onContainerClick={this.handleContainerClick}
                 onCopy={this.handleCopy}
                 onCopyToNew={this.handleCopyToNew}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
@@ -437,7 +441,7 @@ class SoundEditor extends React.Component {
                 onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}
                 onUndo={this.handleUndo}
-                ref={this.setRef}
+                setRef={el => this.ref = el}
             />
         );
     }

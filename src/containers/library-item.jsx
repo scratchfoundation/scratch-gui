@@ -15,6 +15,7 @@ class LibraryItem extends React.PureComponent {
             'handleKeyPress',
             'handleMouseEnter',
             'handleMouseLeave',
+            'handlePlay',
             'rotateIcon',
             'startRotatingIcons',
             'stopRotatingIcons'
@@ -62,6 +63,10 @@ class LibraryItem extends React.PureComponent {
             }, this.stopRotatingIcons);
         }
     }
+    handlePlay (e) {
+        e.stopPropagation(); // To prevent from bubbling back to handleClick
+        this.props.onMouseEnter(this.props.id);
+    }
     startRotatingIcons () {
         this.rotateIcon();
         this.intervalId = setInterval(this.rotateIcon, 300);
@@ -105,12 +110,14 @@ class LibraryItem extends React.PureComponent {
                 insetIconURL={this.props.insetIconURL}
                 internetConnectionRequired={this.props.internetConnectionRequired}
                 name={this.props.name}
+                showPlayButton={this.props.showPlayButton}
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
                 onFocus={this.handleFocus}
                 onKeyPress={this.handleKeyPress}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
+                onPlay={this.handlePlay}
             />
         );
     }
@@ -143,7 +150,8 @@ LibraryItem.propTypes = {
     ]),
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    showPlayButton: PropTypes.bool
 };
 
 export default injectIntl(LibraryItem);

@@ -187,6 +187,7 @@ class LibraryComponent extends React.Component {
                             internetConnectionRequired={dataItem.internetConnectionRequired}
                             key={typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL}
                             name={dataItem.name}
+                            showPlayButton={this.props.showPlayButton}
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
@@ -227,12 +228,14 @@ LibraryComponent.propTypes = {
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
+    showPlayButton: PropTypes.bool,
     tags: PropTypes.arrayOf(PropTypes.shape(TagButton.propTypes)),
     title: PropTypes.string.isRequired
 };
 
 LibraryComponent.defaultProps = {
-    filterable: true
+    filterable: true,
+    showPlayButton: false
 };
 
 export default injectIntl(LibraryComponent);

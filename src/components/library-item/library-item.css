@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-basis: 160px;
+    position: relative;
     height: 160px;
     max-width: 160px;
     margin: $space;
@@ -199,4 +200,46 @@
 
 [dir="rtl"] .coming-soon-text {
     transform: translate(calc(-2 * $space), calc(2 * $space));
+}
+
+.play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;  /* Mask the icon animation */
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: $motion-primary;
+    color: $ui-white;
+    border-radius: 50%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.play-button {
+    position: absolute;
+    position: absolute;
+    top: 0.125rem;
+    z-index: auto;
+}
+
+.play-button:focus {
+    outline: none;
+}
+
+.play-icon {
+  width: 50%;
+}
+
+[dir="ltr"] .play-button {
+    right: 0.125rem;
+    padding-left: .125rem;
+}
+
+[dir="rtl"] .play-button {
+    left: 0.125rem;
+    padding-right: .125rem;
 }

@@ -141,6 +141,7 @@ class SoundLibrary extends React.PureComponent {
 
         return (
             <LibraryComponent
+                showPlayButton
                 data={soundLibraryThumbnailData}
                 id="soundLibrary"
                 tags={soundTags}

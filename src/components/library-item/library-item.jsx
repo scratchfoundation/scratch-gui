@@ -8,6 +8,11 @@ import classNames from 'classnames';
 
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
+import playIcon from './icon--play.svg';
+
+const preventClick = e => {
+    e.stopPropagation();
+};
 
 /* eslint-disable react/prefer-stateless-function */
 class LibraryItemComponent extends React.PureComponent {
@@ -115,12 +120,16 @@ class LibraryItemComponent extends React.PureComponent {
                 onClick={this.props.onClick}
                 onFocus={this.props.onFocus}
                 onKeyPress={this.props.onKeyPress}
-                onMouseEnter={this.props.onMouseEnter}
-                onMouseLeave={this.props.onMouseLeave}
+                onMouseEnter={this.props.showPlayButton ? null : this.props.onMouseEnter}
+                onMouseLeave={this.props.showPlayButton ? null : this.props.onMouseLeave}
             >
                 {/* Layers of wrapping is to prevent layout thrashing on animation */}
                 <Box className={styles.libraryItemImageContainerWrapper}>
-                    <Box className={styles.libraryItemImageContainer}>
+                    <Box
+                        className={styles.libraryItemImageContainer}
+                        onMouseEnter={this.props.showPlayButton ? this.props.onMouseEnter : null}
+                        onMouseLeave={this.props.showPlayButton ? this.props.onMouseLeave : null}
+                    >
                         <img
                             className={styles.libraryItemImage}
                             src={this.props.iconURL}
@@ -128,6 +137,22 @@ class LibraryItemComponent extends React.PureComponent {
                     </Box>
                 </Box>
                 <span className={styles.libraryItemName}>{this.props.name}</span>
+                {this.props.showPlayButton ? (
+                    <div
+                        aria-label="Play"
+                        className={styles.playButton}
+                        role="button"
+                        tabIndex="0"
+                        onClick={preventClick}
+                        onMouseDown={this.props.onPlay}
+                    >
+                        <img
+                            className={styles.playIcon}
+                            draggable={false}
+                            src={playIcon}
+                        />
+                    </div>
+                ) : null}
             </Box>
         );
     }
@@ -158,11 +183,14 @@ LibraryItemComponent.propTypes = {
     onFocus: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired
+    onMouseLeave: PropTypes.func.isRequired,
+    onPlay: PropTypes.func.isRequired,
+    showPlayButton: PropTypes.bool
 };
 
 LibraryItemComponent.defaultProps = {
-    disabled: false
+    disabled: false,
+    showPlayButton: false
 };
 
 export default LibraryItemComponent;

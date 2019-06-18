@@ -54,22 +54,19 @@ const mixin = function (target, source) {
 };
 
 class MockBlock {
-    // mocks the Blockly.Block constructor
-    static create (blockInfo, extendedOpcode) {
-        // mock the Blockly.Block constructor
-        const block = new MockBlock();
+    constructor (blockInfo, extendedOpcode) {
+        // mimic Closure-style inheritance by mixing in `defineDynamicBlock` output as this instance's prototype
+        // see also the `Blockly.Block` constructor
         const prototype = defineDynamicBlock(MockScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
-        mixin(block, prototype);
-        block.init();
+        mixin(this, prototype);
+        this.init();
 
         // bootstrap the mutation<->DOM cycle
-        block.blockInfoText = JSON.stringify(blockInfo);
-        const xmlElement = block.mutationToDom();
+        this.blockInfoText = JSON.stringify(blockInfo);
+        const xmlElement = this.mutationToDom();
 
         // parse blockInfo from XML to fill dynamic properties
-        block.domToMutation(xmlElement);
-
-        return block;
+        this.domToMutation(xmlElement);
     }
 
     jsonInit (json) {
@@ -101,7 +98,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a command block with an icon', () => {
         const extendedOpcode = 'test.commandWithIcon';
-        const block = MockBlock.create(testBlockInfo.commandWithIcon, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.commandWithIcon, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             colour: categoryInfo.color1,
@@ -117,7 +114,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a command block without an icon', () => {
         const extendedOpcode = 'test.commandWithoutIcon';
-        const block = MockBlock.create(testBlockInfo.commandWithoutIcon, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.commandWithoutIcon, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             colour: categoryInfo.color1,
@@ -133,7 +130,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a terminal command', () => {
         const extendedOpcode = 'test.terminal';
-        const block = MockBlock.create(testBlockInfo.terminalCommand, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.terminalCommand, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             colour: categoryInfo.color1,
@@ -149,7 +146,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a reporter', () => {
         const extendedOpcode = 'test.reporter';
-        const block = MockBlock.create(testBlockInfo.reporter, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.reporter, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             checkboxInFlyout_: true,
@@ -167,7 +164,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a Boolean', () => {
         const extendedOpcode = 'test.boolean';
-        const block = MockBlock.create(testBlockInfo.boolean, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.boolean, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             // checkboxInFlyout_: undefined,
@@ -185,7 +182,7 @@ describe('defineDynamicBlock', () => {
     });
     test('can define a hat', () => {
         const extendedOpcode = 'test.hat';
-        const block = MockBlock.create(testBlockInfo.hat, extendedOpcode);
+        const block = new MockBlock(testBlockInfo.hat, extendedOpcode);
         expect(block.result).toEqual({
             category: categoryInfo.name,
             colour: categoryInfo.color1,

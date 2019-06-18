@@ -31,8 +31,11 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
         if (staticBlockInfo.blockIconURI || categoryInfo.blockIconURI) {
             blockJson.extensions = ['scratch_extension'];
         }
+        // initialize the basics of the block, to be overridden & extended later by `domToMutation`
         this.jsonInit(blockJson);
+        // initialize the cached block info used to carry block info from `domToMutation` to `mutationToDom`
         this.blockInfoText = '{}';
+        // we need a block info update (through `domToMutation`) before we have a completely initialized block
         this.needsBlockInfoUpdate = true;
     },
     mutationToDom: function () {

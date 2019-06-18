@@ -9,6 +9,7 @@ import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
+import Spinner from '../spinner/spinner.jsx';
 
 import styles from './library.css';
 
@@ -44,8 +45,15 @@ class LibraryComponent extends React.Component {
         this.state = {
             selectedItem: null,
             filterQuery: '',
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG.tag,
+            loaded: false
         };
+    }
+    componentDidMount () {
+        // Allow the spinner to display before loading the content
+        setTimeout(() => {
+            this.setState({loaded: true});
+        });
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -162,7 +170,7 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.getFilteredData().map((dataItem, index) => (
+                    {this.state.loaded ? this.getFilteredData().map((dataItem, index) => (
                         <LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
@@ -183,7 +191,14 @@ class LibraryComponent extends React.Component {
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
                         />
-                    ))}
+                    )) : (
+                        <div className={styles.spinnerWrapper}>
+                            <Spinner
+                                large
+                                level="primary"
+                            />
+                        </div>
+                    )}
                 </div>
             </Modal>
         );

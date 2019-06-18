@@ -76,6 +76,11 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
             break;
         }
 
+        if (blockInfo.color1 || blockInfo.color2 || blockInfo.color3) {
+            // `setColour` handles undefined parameters by adjusting defined colors
+            this.setColour(blockInfo.color1, blockInfo.color2, blockInfo.color3);
+        }
+
         // Layout block arguments
         // TODO handle E/C Blocks
         const blockText = blockInfo.text;

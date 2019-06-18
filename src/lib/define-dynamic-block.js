@@ -3,6 +3,16 @@
 import ArgumentType from 'scratch-vm/src/extension-support/argument-type';
 import BlockType from 'scratch-vm/src/extension-support/block-type';
 
+/**
+ * Define a block using extension info which has the ability to dynamically determine (and update) its layout.
+ * This functionality is used for extension blocks which can change its properties based on different state
+ * information. For example, the `control_stop` block changes its shape based on which menu item is selected
+ * and a variable block changes its text to reflect the variable name without using an editable field.
+ * @param {object} ScratchBlocks - The ScratchBlocks name space.
+ * @param {object} categoryInfo - Information about this block's extension category, including any menus and icons.
+ * @param {object} staticBlockInfo - The base block information before any dynamic changes.
+ * @param {string} extendedOpcode - The opcode for the block (including the extension ID).
+ */
 // TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
 const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => ({
     init: function () {

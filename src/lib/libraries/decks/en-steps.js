@@ -90,6 +90,86 @@ import videoPet from './steps/video-pet.en.gif';
 import videoAnimate from './steps/video-animate.en.gif';
 import videoPop from './steps/video-pop.en.gif';
 
+// Make it Fly
+import flyChooseBackdrop from './steps/fly-choose-backdrop.en.gif';
+import flyChooseCharacter from './steps/fly-choose-character.en.gif';
+import flySaySomething from './steps/fly-say-something.en.gif';
+import flyMoveArrows from './steps/fly-make-interactive.en.gif';
+import flyChooseObject from './steps/fly-object-to-collect.en.gif';
+import flyFlyingObject from './steps/fly-flying-heart.en.gif';
+import flySelectFlyingSprite from './steps/fly-select-flyer.en.jpg';
+import flyAddScore from './steps/fly-add-score.en.gif';
+import flyKeepScore from './steps/fly-keep-score.en.gif';
+import flyAddScenery from './steps/fly-choose-scenery.en.gif';
+import flyMoveScenery from './steps/fly-move-scenery.en.gif';
+import flySwitchLooks from './steps/fly-switch-costume.en.gif';
+
+// Pong
+import pongAddBackdrop from './steps/pong-add-backdrop.en.png';
+import pongAddBallSprite from './steps/pong-add-ball-sprite.en.png';
+import pongBounceAround from './steps/pong-bounce-around.en.gif';
+import pongAddPaddle from './steps/pong-add-a-paddle.en.gif';
+import pongMoveThePaddle from './steps/pong-move-the-paddle.en.gif';
+import pongSelectBallSprite from './steps/pong-select-ball.en.png';
+import pongAddMoreCodeToBall from './steps/pong-add-code-to-ball.en.png';
+import pongAddAScore from './steps/pong-add-score.en.gif';
+import pongChooseScoreFromMenu from './steps/pong-choose-score.en.png';
+import pongInsertChangeScoreBlock from './steps/pong-insert-change-score.en.png';
+import pongResetScore from './steps/pong-reset-score.en.png';
+import pongAddLineSprite from './steps/pong-add-line.en.gif';
+import pongGameOver from './steps/pong-game-over.en.png';
+
+// Imagine If
+import imagineTypeWhatYouWant from './steps/imagine-type-what-you-want.en.png';
+import imagineClickGreenFlag from './steps/imagine-click-green-flag.en.png';
+import imagineChooseBackdrop from './steps/imagine-choose-backdrop.en.png';
+import imagineChooseSprite from './steps/imagine-choose-any-sprite.en.png';
+import imagineFlyAround from './steps/imagine-fly-around.en.png';
+import imagineChooseAnotherSprite from './steps/imagine-choose-another-sprite.en.png';
+import imagineLeftRight from './steps/imagine-left-right.en.png';
+import imagineUpDown from './steps/imagine-up-down.en.png';
+import imagineChangeCostumes from './steps/imagine-change-costumes.en.png';
+import imagineGlideToPoint from './steps/imagine-glide-to-point.en.png';
+import imagineGrowShrink from './steps/imagine-grow-shrink.en.png';
+import imagineChooseAnotherBackdrop from './steps/imagine-choose-another-backdrop.en.png';
+import imagineSwitchBackdrops from './steps/imagine-switch-backdrops.en.gif';
+import imagineRecordASound from './steps/imagine-record-a-sound.en.gif';
+import imagineChooseSound from './steps/imagine-choose-sound.en.png';
+
+// Add a Backdrop
+import addBackdrop from './steps/add-backdrop.en.png';
+
+// Add Effectsf
+import addEffects from './steps/add-effects.en.png';
+
+// Hide and Show
+import hideAndShow from './steps/hide-show.en.png';
+
+// Switch Costumes
+import switchCostumes from './steps/switch-costumes.en.png';
+
+// Change Size
+import changeSize from './steps/change-size.en.png';
+
+// Spin
+import spinTurn from './steps/spin-turn.en.png';
+import spinPointInDirection from './steps/spin-point-in-direction.en.png';
+
+// Record a Sound
+import recordASoundSoundsTab from './steps/record-a-sound-sounds-tab.en.png';
+import recordASoundClickRecord from './steps/record-a-sound-click-record.en.png';
+import recordASoundPressRecordButton from './steps/record-a-sound-press-record-button.en.png';
+import recordASoundChooseSound from './steps/record-a-sound-choose-sound.en.png';
+import recordASoundPlayYourSound from './steps/record-a-sound-play-your-sound.en.png';
+
+// Use Arrow Keys
+import moveArrowKeysLeftRight from './steps/move-arrow-keys-left-right.en.png';
+import moveArrowKeysUpDown from './steps/move-arrow-keys-up-down.en.png';
+
+// Glide Around
+import glideAroundBackAndForth from './steps/glide-around-back-and-forth.en.png';
+import glideAroundPoint from './steps/glide-around-point.en.png';
+
 const enImages = {
     // Intro
     introMove: introMove,
@@ -181,8 +261,89 @@ const enImages = {
     videoAddExtension: videoAddExtension,
     videoPet: videoPet,
     videoAnimate: videoAnimate,
-    videoPop: videoPop
+    videoPop: videoPop,
 
+    // Make it Fly
+    flyChooseBackdrop: flyChooseBackdrop,
+    flyChooseCharacter: flyChooseCharacter,
+    flySaySomething: flySaySomething,
+    flyMoveArrows: flyMoveArrows,
+    flyChooseObject: flyChooseObject,
+    flyFlyingObject: flyFlyingObject,
+    flySelectFlyingSprite: flySelectFlyingSprite,
+    flyAddScore: flyAddScore,
+    flyKeepScore: flyKeepScore,
+    flyAddScenery: flyAddScenery,
+    flyMoveScenery: flyMoveScenery,
+    flySwitchLooks: flySwitchLooks,
+    
+    // Pong
+    pongAddBackdrop: pongAddBackdrop,
+    pongAddBallSprite: pongAddBallSprite,
+    pongBounceAround: pongBounceAround,
+    pongAddPaddle: pongAddPaddle,
+    pongMoveThePaddle: pongMoveThePaddle,
+    pongSelectBallSprite: pongSelectBallSprite,
+    pongAddMoreCodeToBall: pongAddMoreCodeToBall,
+    pongAddAScore: pongAddAScore,
+    pongChooseScoreFromMenu: pongChooseScoreFromMenu,
+    pongInsertChangeScoreBlock: pongInsertChangeScoreBlock,
+    pongResetScore: pongResetScore,
+    pongAddLineSprite: pongAddLineSprite,
+    pongGameOver: pongGameOver,
+    
+    // Imagine If
+    imagineTypeWhatYouWant: imagineTypeWhatYouWant,
+    imagineClickGreenFlag: imagineClickGreenFlag,
+    imagineChooseBackdrop: imagineChooseBackdrop,
+    imagineChooseSprite: imagineChooseSprite,
+    imagineFlyAround: imagineFlyAround,
+    imagineChooseAnotherSprite: imagineChooseAnotherSprite,
+    imagineLeftRight: imagineLeftRight,
+    imagineUpDown: imagineUpDown,
+    imagineChangeCostumes: imagineChangeCostumes,
+    imagineGlideToPoint: imagineGlideToPoint,
+    imagineGrowShrink: imagineGrowShrink,
+    imagineChooseAnotherBackdrop: imagineChooseAnotherBackdrop,
+    imagineSwitchBackdrops: imagineSwitchBackdrops,
+    imagineRecordASound: imagineRecordASound,
+    imagineChooseSound: imagineChooseSound,
+    
+    // Add a Backdrop
+    addBackdrop: addBackdrop,
+    
+    // Add Effects
+    addEffects: addEffects,
+    
+    // Hide and Show
+    hideAndShow: hideAndShow,
+    
+    // Switch Costumes
+    switchCostumes: switchCostumes,
+    
+    // Change Size
+    changeSize: changeSize,
+    
+    // Spin
+    spinTurn: spinTurn,
+    spinPointInDirection: spinPointInDirection,
+    
+    // Record a Sound
+    recordASoundSoundsTab: recordASoundSoundsTab,
+    recordASoundClickRecord: recordASoundClickRecord,
+    recordASoundPressRecordButton: recordASoundPressRecordButton,
+    recordASoundChooseSound: recordASoundChooseSound,
+    recordASoundPlayYourSound: recordASoundPlayYourSound,
+
+    // Use Arrow Keys
+    moveArrowKeysLeftRight: moveArrowKeysLeftRight,
+    moveArrowKeysUpDown: moveArrowKeysUpDown,
+
+    // Glide Around
+    glideAroundBackAndForth: glideAroundBackAndForth,
+    glideAroundPoint: glideAroundPoint
+    
 };
+
 
 export {enImages};

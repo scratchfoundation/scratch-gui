@@ -104,6 +104,9 @@ class VideoStep extends React.Component {
     // We use the Wistia API here to update or pause the video dynamically:
     // https://wistia.com/support/developers/player-api
     componentDidUpdate (prevProps) {
+        // Ensure the wistia API is loaded and available
+        if (!(window.Wistia && window.Wistia.api)) return;
+
         // Get a handle on the currently loaded video
         const video = window.Wistia.api(prevProps.video);
 

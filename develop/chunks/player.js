@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[5],{
 
-/***/ 1462:
+/***/ 1521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96,7 +96,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 1463:
+/***/ 1522:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -119,7 +119,7 @@ exports.locals = {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1463);
+var content = __webpack_require__(1522);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -141,5 +141,5 @@ if(false) {}
 
 /***/ })
 
-},[[1462,0]]]);
+},[[1521,0]]]);
 //# sourceMappingURL=player.js.map

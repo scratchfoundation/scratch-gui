@@ -25,6 +25,7 @@ const SpriteSelectorItem = props => (
         }}
         disable={props.dragging}
         id={`${props.name}-${contextMenuId}`}
+        ref={props.componentRef}
     >
         {typeof props.number === 'undefined' ? null : (
             <div className={styles.number}>{props.number}</div>

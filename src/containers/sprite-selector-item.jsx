@@ -19,6 +19,7 @@ class SpriteSelectorItem extends React.PureComponent {
         super(props);
         bindAll(this, [
             'getCostumeData',
+            'setRef',
             'handleClick',
             'handleDelete',
             'handleDuplicate',
@@ -27,14 +28,28 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseLeave',
             'handleMouseDown',
             'handleMouseMove',
-            'handleMouseUp'
+            'handleMouseUp',
+            'handleTouchEnd'
         ]);
+    }
+    componentDidMount () {
+        document.addEventListener('touchend', this.handleTouchEnd);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('touchend', this.handleTouchEnd);
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;
         if (!this.props.asset) return null;
 
         return getCostumeUrl(this.props.asset);
+    }
+    handleTouchEnd (e) {
+        const {x, y} = getEventXY(e);
+        const {top, left, bottom, right} = this.ref.getBoundingClientRect();
+        if (x >= left && x <= right && y >= top && y <= bottom) {
+            this.handleMouseEnter();
+        }
     }
     handleMouseUp () {
         this.initialOffset = null;
@@ -103,6 +118,10 @@ class SpriteSelectorItem extends React.PureComponent {
     handleMouseEnter () {
         this.props.dispatchSetHoveredSprite(this.props.id);
     }
+    setRef (component) {
+        // Access the DOM node using .elem because it is going through ContextMenuTrigger
+        this.ref = component && component.elem;
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -122,6 +141,7 @@ class SpriteSelectorItem extends React.PureComponent {
         } = this.props;
         return (
             <SpriteSelectorItemComponent
+                componentRef={this.setRef}
                 costumeURL={this.getCostumeData()}
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}

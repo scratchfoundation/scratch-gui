@@ -155,6 +155,7 @@ const ImageStep = ({title, image}) => (
             <img
                 className={styles.stepImage}
                 draggable={false}
+                key={image} /* Use src as key to prevent hanging around on slow connections */
                 src={image}
             />
         </div>

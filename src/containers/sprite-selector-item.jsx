@@ -6,13 +6,11 @@ import {connect} from 'react-redux';
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
 import storage from '../lib/storage';
-import {getEventXY} from '../lib/touch-utils';
 import VM from 'scratch-vm';
 import getCostumeUrl from '../lib/get-costume-url';
+import DragRecognizer from '../lib/drag-recognizer';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
-
-const dragThreshold = 3; // Same as the block drag threshold
 
 class SpriteSelectorItem extends React.PureComponent {
     constructor (props) {
@@ -26,9 +24,17 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseEnter',
             'handleMouseLeave',
             'handleMouseDown',
-            'handleMouseMove',
-            'handleMouseUp'
+            'handleDragEnd',
+            'handleDrag'
         ]);
+
+        this.dragRecognizer = new DragRecognizer({
+            onDrag: this.handleDrag,
+            onDragEnd: this.handleDragEnd
+        });
+    }
+    componentWillUnmount () {
+        this.dragRecognizer.reset();
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;
@@ -36,13 +42,7 @@ class SpriteSelectorItem extends React.PureComponent {
 
         return getCostumeUrl(this.props.asset);
     }
-    handleMouseUp () {
-        this.initialOffset = null;
-        this.gestureIsScroll = null;
-        window.removeEventListener('mouseup', this.handleMouseUp);
-        window.removeEventListener('mousemove', this.handleMouseMove);
-        window.removeEventListener('touchend', this.handleMouseUp);
-        window.removeEventListener('touchmove', this.handleMouseMove, {passive: false});
+    handleDragEnd () {
         if (this.props.dragging) {
             this.props.onDrag({
                 img: null,
@@ -56,55 +56,19 @@ class SpriteSelectorItem extends React.PureComponent {
             this.noClick = false;
         });
     }
-    handleMouseMove (e) {
-        const currentOffset = getEventXY(e);
-
-        let shouldStartDrag = false;
-        if (!this.props.dragging && !this.gestureIsScroll) {
-            const dx = currentOffset.x - this.initialOffset.x;
-            const dy = currentOffset.y - this.initialOffset.y;
-            const dragDistance = Math.sqrt((dx * dx) + (dy * dy));
-            shouldStartDrag = dragDistance > dragThreshold;
-
-            // For touch moves, additionally check if the angle suggests drag vs. scroll
-            if (shouldStartDrag && e.type === 'touchmove') {
-                const angleThreshold = 50;
-                // Direction goes from -180 to 180, with 0 toward the right.
-                let angle = Math.atan2(dy, dx) / Math.PI * 180;
-                // Fold over horizontal axis, range now 0 to 180
-                angle = Math.abs(angle);
-                // Fold over vertical axis, range now 0 to 90
-                if (angle > 90) angle = 180 - angle;
-                shouldStartDrag = shouldStartDrag && angle < angleThreshold;
-
-                // If the movement exceeds the distance threshold but is not a drag by angle
-                // stop checking by setting the gestureIsScroll flag. This prevents
-                // a scroll drag from "turning into" a tile drag by changing the angle.
-                if (!shouldStartDrag) {
-                    this.gestureIsScroll = true;
-                }
-            }
-        }
-
-        if (shouldStartDrag || this.props.dragging) {
-            this.props.onDrag({
-                img: this.getCostumeData(),
-                currentOffset: currentOffset,
-                dragging: true,
-                dragType: this.props.dragType,
-                index: this.props.index,
-                payload: this.props.dragPayload
-            });
-            this.noClick = true;
-            e.preventDefault();
-        }
+    handleDrag (currentOffset) {
+        this.props.onDrag({
+            img: this.getCostumeData(),
+            currentOffset: currentOffset,
+            dragging: true,
+            dragType: this.props.dragType,
+            index: this.props.index,
+            payload: this.props.dragPayload
+        });
+        this.noClick = true;
     }
     handleMouseDown (e) {
-        this.initialOffset = getEventXY(e);
-        window.addEventListener('mouseup', this.handleMouseUp);
-        window.addEventListener('mousemove', this.handleMouseMove);
-        window.addEventListener('touchend', this.handleMouseUp);
-        window.addEventListener('touchmove', this.handleMouseMove, {passive: false});
+        this.dragRecognizer.start(e);
     }
     handleClick (e) {
         e.preventDefault();

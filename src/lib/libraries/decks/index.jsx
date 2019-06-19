@@ -175,159 +175,159 @@ export default {
     },
     
     'imagine-if': {
-    name: (
-        <FormattedMessage
-            defaultMessage="Imagine If"
-            description="Name for the 'Imagine If' how-to"
-            id="gui.howtos.imagine-if"
-        />
-    ),
-    tags: ['imagine-if'],
-    img: libraryImagineIf,
-    steps: [
-       {
-        title: (
+        name: (
             <FormattedMessage
-                defaultMessage="Type What You Want to Say"
-                description="Step name for 'Type What You Want to Say' step"
-                id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
+                defaultMessage="Imagine If"
+                description="Name for the 'Imagine If' how-to"
+                id="gui.howtos.imagine-if"
             />
         ),
-        image: 'imagineTypeWhatYouWant'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Click the Green Flag to Start"
-                description="Step name for 'Click the Green Flag to Start' step"
-                id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
-            />
-        ),
-        image: 'imagineClickGreenFlag'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Any Backdrop"
-                description="Step name for 'Choose Any Backdrop' step"
-                id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
-            />
-        ),
-        image: 'imagineChooseBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Any Sprite"
-                description="Step name for 'Choose Any Sprite' step"
-                id="gui.howtos.imagine-if.step_imagineChooseSprite"
-            />
-        ),
-        image: 'imagineChooseSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Press the Space Key to Glide"
-                description="Step name for 'Press the Space Key to Glide' step"
-                id="gui.howtos.imagine-if.step_imagineFlyAround"
-            />
-        ),
-        image: 'imagineFlyAround'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Another Sprite"
-                description="Step name for 'Choose Another Sprite' step"
-                id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
-            />
-        ),
-        image: 'imagineChooseAnotherSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Move Left-Right"
-                description="Step name for 'Move Left-Right' step"
-                id="gui.howtos.imagine-if.step_imagineLeftRight"
-            />
-        ),
-        image: 'imagineLeftRight'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Move Up-Down"
-                description="Step name for 'Move Up-Down' step"
-                id="gui.howtos.imagine-if.step_imagineUpDown"
-            />
-        ),
-        image: 'imagineUpDown'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Change Costumes"
-                description="Step name for 'Change Costumes' step"
-                id="gui.howtos.imagine-if.step_imagineChangeCostumes"
-            />
-        ),
-        image: 'imagineChangeCostumes'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Glide to a Point"
-                description="Step name for 'Glide to a Point' step"
-                id="gui.howtos.imagine-if.step_imagineGlideToPoint"
-            />
-        ),
-        image: 'imagineGlideToPoint'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Grow and Shrink"
-                description="Step name for 'Grow and Shrink' step"
-                id="gui.howtos.imagine-if.step_imagineGrowShrink"
-            />
-        ),
-        image: 'imagineGrowShrink'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Another Backdrop"
-                description="Step name for 'Choose Another Backdrop' step"
-                id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
-            />
-        ),
-        image: 'imagineChooseAnotherBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Switch Backdrops"
-                description="Step name for 'Switch Backdrops' step"
-                id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
-            />
-        ),
-        image: 'imagineSwitchBackdrops'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add a Sound"
-                description="Step name for 'Add a Sound' step"
-                id="gui.howtos.imagine-if.step_imagineRecordASound"
-            />
-        ),
-        image: 'imagineRecordASound'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Your Sound"
-                description="Step name for 'Choose Your Sound' step"
-                id="gui.howtos.imagine-if.step_imagineChooseSound"
-            />
-        ),
-        image: 'imagineChooseSound'
-    }, {
-        deckIds: [
-            'hide-and-show',
-            'Chase-Game'
-        ]
-    }
-    ],
-    urlId: 'imagine-if'
+        tags: ['imagine-if'],
+        img: libraryImagineIf,
+        steps: [
+            {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Type What You Want to Say"
+                        description="Step name for 'Type What You Want to Say' step"
+                        id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
+                    />
+                ),
+                image: 'imagineTypeWhatYouWant'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Click the Green Flag to Start"
+                        description="Step name for 'Click the Green Flag to Start' step"
+                        id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
+                    />
+                ),
+                image: 'imagineClickGreenFlag'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose Any Backdrop"
+                        description="Step name for 'Choose Any Backdrop' step"
+                        id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
+                    />
+                ),
+                image: 'imagineChooseBackdrop'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose Any Sprite"
+                        description="Step name for 'Choose Any Sprite' step"
+                        id="gui.howtos.imagine-if.step_imagineChooseSprite"
+                    />
+                ),
+                image: 'imagineChooseSprite'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Press the Space Key to Glide"
+                        description="Step name for 'Press the Space Key to Glide' step"
+                        id="gui.howtos.imagine-if.step_imagineFlyAround"
+                    />
+                ),
+                image: 'imagineFlyAround'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose Another Sprite"
+                        description="Step name for 'Choose Another Sprite' step"
+                        id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
+                    />
+                ),
+                image: 'imagineChooseAnotherSprite'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Move Left-Right"
+                        description="Step name for 'Move Left-Right' step"
+                        id="gui.howtos.imagine-if.step_imagineLeftRight"
+                    />
+                ),
+                image: 'imagineLeftRight'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Move Up-Down"
+                        description="Step name for 'Move Up-Down' step"
+                        id="gui.howtos.imagine-if.step_imagineUpDown"
+                    />
+                ),
+                image: 'imagineUpDown'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Change Costumes"
+                        description="Step name for 'Change Costumes' step"
+                        id="gui.howtos.imagine-if.step_imagineChangeCostumes"
+                    />
+                ),
+                image: 'imagineChangeCostumes'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Glide to a Point"
+                        description="Step name for 'Glide to a Point' step"
+                        id="gui.howtos.imagine-if.step_imagineGlideToPoint"
+                    />
+                ),
+                image: 'imagineGlideToPoint'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Grow and Shrink"
+                        description="Step name for 'Grow and Shrink' step"
+                        id="gui.howtos.imagine-if.step_imagineGrowShrink"
+                    />
+                ),
+                image: 'imagineGrowShrink'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose Another Backdrop"
+                        description="Step name for 'Choose Another Backdrop' step"
+                        id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
+                    />
+                ),
+                image: 'imagineChooseAnotherBackdrop'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Switch Backdrops"
+                        description="Step name for 'Switch Backdrops' step"
+                        id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
+                    />
+                ),
+                image: 'imagineSwitchBackdrops'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Add a Sound"
+                        description="Step name for 'Add a Sound' step"
+                        id="gui.howtos.imagine-if.step_imagineRecordASound"
+                    />
+                ),
+                image: 'imagineRecordASound'
+            }, {
+                title: (
+                    <FormattedMessage
+                        defaultMessage="Choose Your Sound"
+                        description="Step name for 'Choose Your Sound' step"
+                        id="gui.howtos.imagine-if.step_imagineChooseSound"
+                    />
+                ),
+                image: 'imagineChooseSound'
+            }, {
+                deckIds: [
+                    'hide-and-show',
+                    'Chase-Game'
+                ]
+            }
+        ],
+        urlId: 'imagine-if'
     },
     
     'Make-Music': {
@@ -398,7 +398,7 @@ export default {
         }
         ],
         urlId: 'music'
-    },   
+    },
  
     'Tell-A-Story': {
         name: (
@@ -513,7 +513,7 @@ export default {
         urlId: 'tell-a-story'
     },
     
-     'Chase-Game': {
+    'Chase-Game': {
         name: (
             <FormattedMessage
                 defaultMessage="Make a Chase Game"
@@ -829,243 +829,243 @@ export default {
             ),
             image: 'flyChooseCharacter'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Say Something"
-                  description="Step name for 'Say Something' step"
-                  id="gui.howtos.fly.step_stepflySaySomething"
-              />
-          ),
-          image: 'flySaySomething'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.fly.step_stepflySaySomething"
+                />
+            ),
+            image: 'flySaySomething'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Move With Arrow Keys"
-                  description="Step name for 'Move With Arrow Keys' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyMoveArrows"
-              />
-          ),
-          image: 'flyMoveArrows'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move With Arrow Keys"
+                    description="Step name for 'Move With Arrow Keys' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyMoveArrows"
+                />
+            ),
+            image: 'flyMoveArrows'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Choose an Object to Collect"
-                  description="Step name for 'Choose an Object to Collect' step"
-                  id="gui.howtos.fly.step_stepflyChooseObject"
-              />
-          ),
-          image: 'flyChooseObject'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose an Object to Collect"
+                    description="Step name for 'Choose an Object to Collect' step"
+                    id="gui.howtos.fly.step_stepflyChooseObject"
+                />
+            ),
+            image: 'flyChooseObject'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Make the Object Move"
-                  description="Step name for 'Make the Object Move' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyFlyingObject"
-              />
-          ),
-          image: 'flyFlyingObject'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make the Object Move"
+                    description="Step name for 'Make the Object Move' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyFlyingObject"
+                />
+            ),
+            image: 'flyFlyingObject'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Select Your Character"
-                  description="Step name for 'Select Your Character' step"
-                  id="gui.howtos.add-a-move-block.step_stepflySelectFlyingSprite"
-              />
-          ),
-          image: 'flySelectFlyingSprite'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select Your Character"
+                    description="Step name for 'Select Your Character' step"
+                    id="gui.howtos.add-a-move-block.step_stepflySelectFlyingSprite"
+                />
+            ),
+            image: 'flySelectFlyingSprite'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Add a Score"
-                  description="Step name for 'Add a Score' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyAddScore"
-              />
-          ),
-          image: 'flyAddScore'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Score"
+                    description="Step name for 'Add a Score' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyAddScore"
+                />
+            ),
+            image: 'flyAddScore'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Keep Score"
-                  description="Step name for 'Keep Score' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyKeepScore"
-              />
-          ),
-          image: 'flyKeepScore'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Keep Score"
+                    description="Step name for 'Keep Score' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyKeepScore"
+                />
+            ),
+            image: 'flyKeepScore'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Add Scenery"
-                  description="Step name for 'Add Scenery' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyAddScenery"
-              />
-          ),
-          image: 'flyAddScenery'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Scenery"
+                    description="Step name for 'Add Scenery' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyAddScenery"
+                />
+            ),
+            image: 'flyAddScenery'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Move the Scenery"
-                  description="Step name for 'Move the Scenery' step"
-                  id="gui.howtos.add-a-move-block.step_stepflyMoveScenery"
-              />
-          ),
-          image: 'flyMoveScenery'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move the Scenery"
+                    description="Step name for 'Move the Scenery' step"
+                    id="gui.howtos.add-a-move-block.step_stepflyMoveScenery"
+                />
+            ),
+            image: 'flyMoveScenery'
         }, {
-          title: (
-              <FormattedMessage
-                  defaultMessage="Next Costume"
-                  description="Step name for 'Change the Scenery' step"
-                  id="gui.howtos.add-a-move-block.step_stepflySwitchLooks"
-              />
-          ),
-          image: 'flySwitchLooks'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Next Costume"
+                    description="Step name for 'Change the Scenery' step"
+                    id="gui.howtos.add-a-move-block.step_stepflySwitchLooks"
+                />
+            ),
+            image: 'flySwitchLooks'
         }, {
-          deckIds: [
-              'change-size',
-              'spin-video'
-          ]
-      }
-      ],
+            deckIds: [
+                'change-size',
+                'spin-video'
+            ]
+        }
+        ],
         urlId: 'make-it-fly'
     },
     
     'pong': {
-    name: (
-        <FormattedMessage
-            defaultMessage="Pong Game"
-            description="Name for the 'Pong Game' how-to"
-            id="gui.howtos.pong"
-        />
-    ),
-    tags: ['pong', 'game'],
-    img: libraryPong,
-    steps: [{
+        name: (
+            <FormattedMessage
+                defaultMessage="Pong Game"
+                description="Name for the 'Pong Game' how-to"
+                id="gui.howtos.pong"
+            />
+        ),
+        tags: ['pong', 'game'],
+        img: libraryPong,
+        steps: [{
             video: 'pong-game'
         },
-       {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add a Backdrop"
-                description="Step name for 'Add a Backdrop' step"
-                id="gui.howtos.pong.step_pongAddBackdrop"
-            />
-        ),
-        image: 'pongAddBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add a Ball Sprite"
-                description="Step name for 'Add a Ball Sprite' step"
-                id="gui.howtos.pong.step_pongAddBallSprite"
-            />
-        ),
-        image: 'pongAddBallSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Bounce Around"
-                description="Step name for 'Bounce Around' step"
-                id="gui.howtos.pong.step_pongBounceAround"
-            />
-        ),
-        image: 'pongBounceAround'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add a Paddle"
-                description="Step name for 'Add a Paddle' step"
-                id="gui.howtos.pong.step_pongAddPaddle"
-            />
-        ),
-        image: 'pongAddPaddle'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Move the Paddle"
-                description="Step name for 'Move the Paddle' step"
-                id="gui.howtos.pong.step_pongMoveThePaddle"
-            />
-        ),
-        image: 'pongMoveThePaddle'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Select the Ball Sprite"
-                description="Step name for 'Select the Ball Sprite' step"
-                id="gui.howtos.pong.step_pongSelectBallSprite"
-            />
-        ),
-        image: 'pongSelectBallSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add Code to Bounce the Ball Off the Paddle"
-                description="Step name for 'Add Code to Bounce the Ball Off the Paddle' step"
-                id="gui.howtos.pong.step_pongAddMoreCodeToBall"
-            />
-        ),
-        image: 'pongAddMoreCodeToBall'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add a Score"
-                description="Step name for 'Add a Score' step"
-                id="gui.howtos.pong.step_pongAddAScore"
-            />
-        ),
-        image: 'pongAddAScore'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose 'Score' from the Menu"
-                description="Step name for 'Choose 'Score' from the Menu' step"
-                id="gui.howtos.pong.step_pongChooseScoreFromMenu"
-            />
-        ),
-        image: 'pongChooseScoreFromMenu'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Insert the 'Change Score' Block"
-                description="Step name for 'Insert the 'Change Score' Block' step"
-                id="gui.howtos.pong.step_pongInsertChangeScoreBlock"
-            />
-        ),
-        image: 'pongInsertChangeScoreBlock'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Reset Score"
-                description="Step name for 'Reset Score' step"
-                id="gui.howtos.pong.step_pongResetScore"
-            />
-        ),
-        image: 'pongResetScore'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Add the Line Sprite"
-                description="Step name for 'Add the Line Sprite' step"
-                id="gui.howtos.pong.step_pongAddLineSprite"
-            />
-        ),
-        image: 'pongAddLineSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Game Over"
-                description="Step name for 'Game Over' step"
-                id="gui.howtos.pong.step_pongGameOver"
-            />
-        ),
-        image: 'pongGameOver'
-    }, {
-        deckIds: [
-            'add-effects',
-            'Video-Sensing'
-        ]
-    }
-    ],
-    urlId: 'pong'
+        {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Backdrop"
+                    description="Step name for 'Add a Backdrop' step"
+                    id="gui.howtos.pong.step_pongAddBackdrop"
+                />
+            ),
+            image: 'pongAddBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Ball Sprite"
+                    description="Step name for 'Add a Ball Sprite' step"
+                    id="gui.howtos.pong.step_pongAddBallSprite"
+                />
+            ),
+            image: 'pongAddBallSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Bounce Around"
+                    description="Step name for 'Bounce Around' step"
+                    id="gui.howtos.pong.step_pongBounceAround"
+                />
+            ),
+            image: 'pongBounceAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Paddle"
+                    description="Step name for 'Add a Paddle' step"
+                    id="gui.howtos.pong.step_pongAddPaddle"
+                />
+            ),
+            image: 'pongAddPaddle'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move the Paddle"
+                    description="Step name for 'Move the Paddle' step"
+                    id="gui.howtos.pong.step_pongMoveThePaddle"
+                />
+            ),
+            image: 'pongMoveThePaddle'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select the Ball Sprite"
+                    description="Step name for 'Select the Ball Sprite' step"
+                    id="gui.howtos.pong.step_pongSelectBallSprite"
+                />
+            ),
+            image: 'pongSelectBallSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Code to Bounce the Ball Off the Paddle"
+                    description="Step name for 'Add Code to Bounce the Ball Off the Paddle' step"
+                    id="gui.howtos.pong.step_pongAddMoreCodeToBall"
+                />
+            ),
+            image: 'pongAddMoreCodeToBall'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Score"
+                    description="Step name for 'Add a Score' step"
+                    id="gui.howtos.pong.step_pongAddAScore"
+                />
+            ),
+            image: 'pongAddAScore'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose 'Score' from the Menu"
+                    description="Step name for 'Choose 'Score' from the Menu' step"
+                    id="gui.howtos.pong.step_pongChooseScoreFromMenu"
+                />
+            ),
+            image: 'pongChooseScoreFromMenu'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Insert the 'Change Score' Block"
+                    description="Step name for 'Insert the 'Change Score' Block' step"
+                    id="gui.howtos.pong.step_pongInsertChangeScoreBlock"
+                />
+            ),
+            image: 'pongInsertChangeScoreBlock'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Reset Score"
+                    description="Step name for 'Reset Score' step"
+                    id="gui.howtos.pong.step_pongResetScore"
+                />
+            ),
+            image: 'pongResetScore'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add the Line Sprite"
+                    description="Step name for 'Add the Line Sprite' step"
+                    id="gui.howtos.pong.step_pongAddLineSprite"
+                />
+            ),
+            image: 'pongAddLineSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Game Over"
+                    description="Step name for 'Game Over' step"
+                    id="gui.howtos.pong.step_pongGameOver"
+                />
+            ),
+            image: 'pongGameOver'
+        }, {
+            deckIds: [
+                'add-effects',
+                'Video-Sensing'
+            ]
+        }
+        ],
+        urlId: 'pong'
     },
 
     'say-it-out-loud': {
@@ -1385,17 +1385,17 @@ export default {
         steps: [{
             video: 'add-a-backdrop'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a Backdrop"
-                        description="Step name for 'Add a Backdrop' step"
-                        id="gui.howtos.add-a-backdrop.step_addBackdrop"
-                    />
-                ),
-                image: 'addBackdrop'
-            },
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Backdrop"
+                    description="Step name for 'Add a Backdrop' step"
+                    id="gui.howtos.add-a-backdrop.step_addBackdrop"
+                />
+            ),
+            image: 'addBackdrop'
+        },
 
-                {
+        {
             deckIds: [
                 'change-size',
                 'switch-costume'
@@ -1417,14 +1417,14 @@ export default {
         steps: [{
             video: 'change-size'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Change Size"
-                        description="Step name for 'Change Size' step"
-                        id="gui.howtos.change-size.step_changeSize"
-                    />
-                ),
-                image: 'changeSize'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Size"
+                    description="Step name for 'Change Size' step"
+                    id="gui.howtos.change-size.step_changeSize"
+                />
+            ),
+            image: 'changeSize'
         }, {
             deckIds: [
                 'glide-around',
@@ -1447,23 +1447,23 @@ export default {
         steps: [{
             video: 'glide-around'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Glide Around"
-                        description="Step name for 'Glide Around' step"
-                        id="gui.howtos.change-size.step_glideAroundBackAndForth"
-                    />
-                ),
-                image: 'glideAroundBackAndForth'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for 'Glide Around' step"
+                    id="gui.howtos.change-size.step_glideAroundBackAndForth"
+                />
+            ),
+            image: 'glideAroundBackAndForth'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Glide to a Point"
-                        description="Step name for 'Glide to a Point' step"
-                        id="gui.howtos.change-size.step_glideAroundPoint"
-                    />
-                ),
-                image: 'glideAroundPoint'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide to a Point"
+                    description="Step name for 'Glide to a Point' step"
+                    id="gui.howtos.change-size.step_glideAroundPoint"
+                />
+            ),
+            image: 'glideAroundPoint'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -1486,50 +1486,50 @@ export default {
         steps: [{
             video: 'record-a-sound'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click on the 'Sounds' Tab"
-                        description="Step name for 'Click on the Sounds Tab' step"
-                        id="gui.howtos.change-size.step_recordASoundSoundsTab"
-                    />
-                ),
-                image: 'recordASoundSoundsTab'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click on the 'Sounds' Tab"
+                    description="Step name for 'Click on the Sounds Tab' step"
+                    id="gui.howtos.change-size.step_recordASoundSoundsTab"
+                />
+            ),
+            image: 'recordASoundSoundsTab'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click 'Record'"
-                        description="Step name for 'Click Record' step"
-                        id="gui.howtos.change-size.step_recordASoundClickRecord"
-                    />
-                ),
-                image: 'recordASoundClickRecord'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click 'Record'"
+                    description="Step name for 'Click Record' step"
+                    id="gui.howtos.change-size.step_recordASoundClickRecord"
+                />
+            ),
+            image: 'recordASoundClickRecord'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Press the Record Button"
-                        description="Step name for 'Press the Record Button' step"
-                        id="gui.howtos.change-size.step_recordASoundPressRecordButton"
-                    />
-                ),
-                image: 'recordASoundPressRecordButton'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Press the Record Button"
+                    description="Step name for 'Press the Record Button' step"
+                    id="gui.howtos.change-size.step_recordASoundPressRecordButton"
+                />
+            ),
+            image: 'recordASoundPressRecordButton'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Your Sound"
-                        description="Step name for 'Choose Your Sound' step"
-                        id="gui.howtos.change-size.step_recordASoundChooseSound"
-                    />
-                ),
-                image: 'recordASoundChooseSound'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Your Sound"
+                    description="Step name for 'Choose Your Sound' step"
+                    id="gui.howtos.change-size.step_recordASoundChooseSound"
+                />
+            ),
+            image: 'recordASoundChooseSound'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Play Your Sound"
-                        description="Step name for 'Play Your Sound' step"
-                        id="gui.howtos.change-size.step_recordASoundPlayYourSound"
-                    />
-                ),
-                image: 'recordASoundPlayYourSound'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Play Your Sound"
+                    description="Step name for 'Play Your Sound' step"
+                    id="gui.howtos.change-size.step_recordASoundPlayYourSound"
+                />
+            ),
+            image: 'recordASoundPlayYourSound'
         }, {
             deckIds: [
                 'Make-Music',
@@ -1552,23 +1552,23 @@ export default {
         steps: [{
             video: 'spin-video'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Turn"
-                        description="Step name for 'Turn' step"
-                        id="gui.howtos.change-size.step_spinTurn"
-                    />
-                ),
-                image: 'spinTurn'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Turn"
+                    description="Step name for 'Turn' step"
+                    id="gui.howtos.change-size.step_spinTurn"
+                />
+            ),
+            image: 'spinTurn'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Set Direction"
-                        description="Step name for 'Set Direction' step"
-                        id="gui.howtos.change-size.step_spinPointInDirection"
-                    />
-                ),
-                image: 'spinPointInDirection'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Set Direction"
+                    description="Step name for 'Set Direction' step"
+                    id="gui.howtos.change-size.step_spinPointInDirection"
+                />
+            ),
+            image: 'spinPointInDirection'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -1591,14 +1591,14 @@ export default {
         steps: [{
             video: 'hide-and-show'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Hide and Show"
-                        description="Step name for 'Hide and Show' step"
-                        id="gui.howtos.change-size.step_hideAndShow"
-                    />
-                ),
-                image: 'hideAndShow'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Hide and Show"
+                    description="Step name for 'Hide and Show' step"
+                    id="gui.howtos.change-size.step_hideAndShow"
+                />
+            ),
+            image: 'hideAndShow'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -1621,14 +1621,14 @@ export default {
         steps: [{
             video: 'switch-costume'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Animate a Sprite"
-                        description="Step name for 'Animate a Sprite' step"
-                        id="gui.howtos.change-size.step_switchCostumes"
-                    />
-                ),
-                image: 'switchCostumes'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate a Sprite"
+                    description="Step name for 'Animate a Sprite' step"
+                    id="gui.howtos.change-size.step_switchCostumes"
+                />
+            ),
+            image: 'switchCostumes'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -1651,23 +1651,23 @@ export default {
         steps: [{
             video: 'move-around-with-arrow-keys'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Move Left and Right"
-                        description="Step name for 'Move Left and Right' step"
-                        id="gui.howtos.add-a-backdrop.step_moveArrowKeysLeftRight"
-                    />
-                ),
-                image: 'moveArrowKeysLeftRight'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Left and Right"
+                    description="Step name for 'Move Left and Right' step"
+                    id="gui.howtos.add-a-backdrop.step_moveArrowKeysLeftRight"
+                />
+            ),
+            image: 'moveArrowKeysLeftRight'
         }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Move Up and Down"
-                        description="Step name for 'Move Up and Down' step"
-                        id="gui.howtos.add-a-backdrop.step_moveArrowKeysUpDown"
-                    />
-                ),
-                image: 'moveArrowKeysUpDown'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Up and Down"
+                    description="Step name for 'Move Up and Down' step"
+                    id="gui.howtos.add-a-backdrop.step_moveArrowKeysUpDown"
+                />
+            ),
+            image: 'moveArrowKeysUpDown'
         }, {
             deckIds: [
                 'add-a-backdrop',

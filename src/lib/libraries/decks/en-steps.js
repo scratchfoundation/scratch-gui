@@ -1,5 +1,3 @@
-// Pong branch
-
 // Intro
 import introMove from './steps/intro-move.en.gif';
 import introSayHello from './steps/intro-say-hello.en.gif';
@@ -107,15 +105,15 @@ import flyMoveScenery from './steps/fly-move-scenery.en.gif';
 import flySwitchLooks from './steps/fly-switch-costume.en.gif';
 
 // Pong
-import pongAddBackdrop  from './steps/pong-add-backdrop.en.png';
-import pongAddBallSprite  from './steps/pong-add-ball-sprite.en.png';
-import pongBounceAround  from './steps/pong-bounce-around.en.gif';
-import pongAddPaddle  from './steps/pong-add-a-paddle.en.gif';
-import pongMoveThePaddle  from './steps/pong-move-the-paddle.en.gif';
-import pongSelectBallSprite  from './steps/pong-select-ball.en.png';
-import pongAddMoreCodeToBall  from './steps/pong-add-code-to-ball.en.png';
-import pongAddAScore  from './steps/pong-add-score.en.gif';
-import pongChooseScoreFromMenu  from './steps/pong-choose-score.en.png';
+import pongAddBackdrop from './steps/pong-add-backdrop.en.png';
+import pongAddBallSprite from './steps/pong-add-ball-sprite.en.png';
+import pongBounceAround from './steps/pong-bounce-around.en.gif';
+import pongAddPaddle from './steps/pong-add-a-paddle.en.gif';
+import pongMoveThePaddle from './steps/pong-move-the-paddle.en.gif';
+import pongSelectBallSprite from './steps/pong-select-ball.en.png';
+import pongAddMoreCodeToBall from './steps/pong-add-code-to-ball.en.png';
+import pongAddAScore from './steps/pong-add-score.en.gif';
+import pongChooseScoreFromMenu from './steps/pong-choose-score.en.png';
 import pongInsertChangeScoreBlock from './steps/pong-insert-change-score.en.png';
 import pongResetScore from './steps/pong-reset-score.en.png';
 import pongAddLineSprite from './steps/pong-add-line.en.gif';
@@ -127,7 +125,7 @@ import imagineClickGreenFlag from './steps/imagine-click-green-flag.en.png';
 import imagineChooseBackdrop from './steps/imagine-choose-backdrop.en.png';
 import imagineChooseSprite from './steps/imagine-choose-any-sprite.en.png';
 import imagineFlyAround from './steps/imagine-fly-around.en.png';
-import imagineChooseAnotherSprite from './steps/imagine-choose-another-sprite.en.png'
+import imagineChooseAnotherSprite from './steps/imagine-choose-another-sprite.en.png';
 import imagineLeftRight from './steps/imagine-left-right.en.png';
 import imagineUpDown from './steps/imagine-up-down.en.png';
 import imagineChangeCostumes from './steps/imagine-change-costumes.en.png';
@@ -141,13 +139,13 @@ import imagineChooseSound from './steps/imagine-choose-sound.en.png';
 // Add a Backdrop
 import addBackdrop from './steps/add-backdrop.en.png';
 
-// Add Effects
+// Add Effectsf
 import addEffects from './steps/add-effects.en.png';
 
 // Hide and Show
 import hideAndShow from './steps/hide-show.en.png';
 
-// Switch Costumes 
+// Switch Costumes
 import switchCostumes from './steps/switch-costumes.en.png';
 
 // Change Size
@@ -157,14 +155,14 @@ import changeSize from './steps/change-size.en.png';
 import spinTurn from './steps/spin-turn.en.png';
 import spinPointInDirection from './steps/spin-point-in-direction.en.png';
 
-// Record a Sound 
+// Record a Sound
 import recordASoundSoundsTab from './steps/record-a-sound-sounds-tab.en.png';
 import recordASoundClickRecord from './steps/record-a-sound-click-record.en.png';
 import recordASoundPressRecordButton from './steps/record-a-sound-press-record-button.en.png';
 import recordASoundChooseSound from './steps/record-a-sound-choose-sound.en.png';
 import recordASoundPlayYourSound from './steps/record-a-sound-play-your-sound.en.png';
 
-// Use Arrow Keys 
+// Use Arrow Keys
 import moveArrowKeysLeftRight from './steps/move-arrow-keys-left-right.en.png';
 import moveArrowKeysUpDown from './steps/move-arrow-keys-up-down.en.png';
 
@@ -309,7 +307,7 @@ const enImages = {
     imagineChooseAnotherBackdrop: imagineChooseAnotherBackdrop,
     imagineSwitchBackdrops: imagineSwitchBackdrops,
     imagineRecordASound: imagineRecordASound,
-    imagineChooseSound: imagineChooseSound, 
+    imagineChooseSound: imagineChooseSound,
     
     // Add a Backdrop
     addBackdrop: addBackdrop,
@@ -320,24 +318,24 @@ const enImages = {
     // Hide and Show
     hideAndShow: hideAndShow,
     
-    // Switch Costumes 
+    // Switch Costumes
     switchCostumes: switchCostumes,
     
     // Change Size
     changeSize: changeSize,
     
     // Spin
-    spinTurn: spinTurn, 
+    spinTurn: spinTurn,
     spinPointInDirection: spinPointInDirection,
     
-    // Record a Sound 
+    // Record a Sound
     recordASoundSoundsTab: recordASoundSoundsTab,
     recordASoundClickRecord: recordASoundClickRecord,
     recordASoundPressRecordButton: recordASoundPressRecordButton,
     recordASoundChooseSound: recordASoundChooseSound,
     recordASoundPlayYourSound: recordASoundPlayYourSound,
 
-    // Use Arrow Keys 
+    // Use Arrow Keys
     moveArrowKeysLeftRight: moveArrowKeysLeftRight,
     moveArrowKeysUpDown: moveArrowKeysUpDown,
 

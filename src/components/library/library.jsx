@@ -185,7 +185,7 @@ class LibraryComponent extends React.Component {
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}
-                            key={`item_${index}`}
+                            key={typeof dataItem.name === 'string' ? dataItem.name :  dataItem.rawURL}
                             name={dataItem.name}
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}

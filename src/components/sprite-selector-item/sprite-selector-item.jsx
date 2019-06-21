@@ -90,6 +90,7 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
+    componentRef: PropTypes.func,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
     dragging: PropTypes.bool,

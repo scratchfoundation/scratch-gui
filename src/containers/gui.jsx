@@ -52,6 +52,7 @@ class GUI extends React.Component {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
+        this.props.onVmInit(this.props.vm);
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -92,6 +93,7 @@ class GUI extends React.Component {
             onStorageInit,
             onUpdateProjectId,
             onUpdateReduxProjectTitle,
+            onVmInit,
             projectHost,
             projectId,
             projectTitle,
@@ -131,6 +133,7 @@ GUI.propTypes = {
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
+    onVmInit: PropTypes.func,
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     projectTitle: PropTypes.string,
@@ -142,7 +145,8 @@ GUI.defaultProps = {
     isScratchDesktop: false,
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onProjectLoaded: () => {},
-    onUpdateProjectId: () => {}
+    onUpdateProjectId: () => {},
+    onVmInit: (/* vm */) => {}
 };
 
 const mapStateToProps = state => {

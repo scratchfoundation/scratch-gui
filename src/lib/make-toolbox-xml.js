@@ -716,13 +716,16 @@ const xmlClose = '</xml>';
 /**
  * @param {!boolean} isStage - Whether the toolbox is for a stage-type target.
  * @param {?string} targetId - The current editing target
- * @param {?string} categoriesXML - null for default toolbox, or an XML string with <category> elements.
+ * @param {?Array.<object>} categoriesXML - optional array of `{id,xml}` for categories. This can include both core
+ * and other extensions: core extensions will be placed in the normal Scratch order; others will go at the bottom.
+ * @property {string} id - the extension / category ID.
+ * @property {string} xml - the `<category>...</category>` XML for this extension / category.
  * @param {?string} costumeName - The name of the default selected costume dropdown.
  * @param {?string} backdropName - The name of the default selected backdrop dropdown.
  * @param {?string} soundName -  The name of the default selected sound dropdown.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
-const makeToolboxXML = function (isStage, targetId, categoriesXML,
+const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     costumeName = '', backdropName = '', soundName = '') {
     const gap = [categorySeparator];
 
@@ -730,21 +733,41 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML,
     backdropName = xmlEscape(backdropName);
     soundName = xmlEscape(soundName);
 
+    categoriesXML = categoriesXML.slice();
+    const moveCategory = categoryId => {
+        const index = categoriesXML.findIndex(categoryInfo => categoryInfo.id === categoryId);
+        if (index >= 0) {
+            // remove the category from categoriesXML and return its XML
+            const [categoryInfo] = categoriesXML.splice(index, 1);
+            return categoryInfo.xml;
+        }
+        // return `undefined`
+    };
+    const motionXML = moveCategory('motion') || motion(isStage, targetId);
+    const looksXML = moveCategory('looks') || looks(isStage, targetId, costumeName, backdropName);
+    const soundXML = moveCategory('sound') || sound(isStage, targetId, soundName);
+    const eventsXML = moveCategory('event') || events(isStage, targetId);
+    const controlXML = moveCategory('control') || control(isStage, targetId);
+    const sensingXML = moveCategory('sensing') || sensing(isStage, targetId);
+    const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
+    const variablesXML = moveCategory('data') || variables(isStage, targetId);
+    const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
+
     const everything = [
         xmlOpen,
-        motion(isStage, targetId), gap,
-        looks(isStage, targetId, costumeName, backdropName), gap,
-        sound(isStage, targetId, soundName), gap,
-        events(isStage, targetId), gap,
-        control(isStage, targetId), gap,
-        sensing(isStage, targetId), gap,
-        operators(isStage, targetId), gap,
-        variables(isStage, targetId), gap,
-        myBlocks(isStage, targetId)
+        motionXML, gap,
+        looksXML, gap,
+        soundXML, gap,
+        eventsXML, gap,
+        controlXML, gap,
+        sensingXML, gap,
+        operatorsXML, gap,
+        variablesXML, gap,
+        myBlocksXML
     ];
 
-    if (categoriesXML) {
-        everything.push(gap, categoriesXML);
+    for (const extensionCategory of categoriesXML) {
+        everything.push(gap, extensionCategory.xml);
     }
 
     everything.push(xmlClose);

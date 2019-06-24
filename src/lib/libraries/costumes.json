@@ -75,7 +75,7 @@
     },
     {
         "name": "Andie-a",
-        "md5": "419ff5a76adbb4b076c072f68267fdeb.svg",
+        "md5": "d2c433e02481b10584e34ccdcf5a046a.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -87,14 +87,33 @@
             "alex eben meyer"
         ],
         "info": [
-            86,
-            81,
+            80,
+            65,
             1
         ]
     },
     {
         "name": "Andie-b",
-        "md5": "a6a766912b4e43064ee3f389c72925b4.svg",
+        "md5": "045f92ad80d72521098ede6d7c80549a.svg",
+        "type": "costume",
+        "tags": [
+            "sports",
+            "basketball",
+            "people",
+            "wheelchair",
+            "handicap",
+            "handicapable",
+            "alex eben meyer"
+        ],
+        "info": [
+            40,
+            91,
+            1
+        ]
+    },
+    {
+        "name": "Andie-c",
+        "md5": "c9bad70ad371b8d6d97daed7ab9def98.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -107,32 +126,13 @@
         ],
         "info": [
             46,
-            106,
-            1
-        ]
-    },
-    {
-        "name": "Andie-c",
-        "md5": "fac1025857d2c28391cb31f39a80df54.svg",
-        "type": "costume",
-        "tags": [
-            "sports",
-            "basketball",
-            "people",
-            "wheelchair",
-            "handicap",
-            "handicapable",
-            "alex eben meyer"
-        ],
-        "info": [
-            52,
-            65,
+            49,
             1
         ]
     },
     {
         "name": "Andie-d",
-        "md5": "7af50835e05d43e5e07cd2d641e7401e.svg",
+        "md5": "7c9db638cd671898ff07771112faff0f.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -144,8 +144,8 @@
             "alex eben meyer"
         ],
         "info": [
-            87,
-            72,
+            71,
+            57,
             1
         ]
     },
@@ -1069,7 +1069,7 @@
     },
     {
         "name": "Ben-a",
-        "md5": "4386d05d5abd6e1aa0a93b7b447d1b39.svg",
+        "md5": "322e13bd17d02acfdc048a5ef2167be8.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1079,14 +1079,14 @@
             "alex eben meyer"
         ],
         "info": [
-            53,
+            54,
             69,
             1
         ]
     },
     {
         "name": "Ben-b",
-        "md5": "90db137cd0743204d02fdc9be1c8eb94.svg",
+        "md5": "59ba1e80ba75b1d06c37db4b9b4fde27.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1096,14 +1096,14 @@
             "alex eben meyer"
         ],
         "info": [
-            53,
-            67,
+            54,
+            69,
             1
         ]
     },
     {
         "name": "Ben-c",
-        "md5": "5f05d41ede773b3bb379286e86a5b869.svg",
+        "md5": "940ec2fa85d666dde95a51bcbccd266e.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1113,14 +1113,14 @@
             "alex eben meyer"
         ],
         "info": [
+            73,
             71,
-            72,
             1
         ]
     },
     {
         "name": "Ben-d",
-        "md5": "6f6e246567c0639c758ed4f6930be76f.svg",
+        "md5": "3043a50a91b9d484a8cd32eb82f2d88f.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -1130,8 +1130,8 @@
             "alex eben meyer"
         ],
         "info": [
-            42,
-            72,
+            44,
+            71,
             1
         ]
     },
@@ -3628,16 +3628,17 @@
     },
     {
         "name": "Earth",
-        "md5": "d9df2cf4f6eb2460d0de3e4f1e05f40b.svg",
+        "md5": "64220361b80d2812e9f27fc88ef39027.svg",
         "type": "costume",
         "tags": [
             "space",
             "planet",
-            "earth"
+            "earth",
+            "globe"
         ],
         "info": [
-            41,
-            40,
+            55,
+            55,
             1
         ]
     },
@@ -6178,7 +6179,7 @@
     },
     {
         "name": "Jordyn-a",
-        "md5": "8355df83cca2baa0fdf6269d1311f1ea.svg",
+        "md5": "2f59adebc2c0feb9ebfabd7ee9642f2b.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6189,13 +6190,13 @@
         ],
         "info": [
             51,
-            63,
+            62,
             1
         ]
     },
     {
         "name": "Jordyn-b",
-        "md5": "2e2c43bbd7b18524fb132f1426ca3134.svg",
+        "md5": "075f382883e60dba8094b3dc30918f60.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6212,7 +6213,7 @@
     },
     {
         "name": "Jordyn-c",
-        "md5": "5c0d24c53805e16358a2f6f6cc4a456e.svg",
+        "md5": "fbe81c40d4a880c8799c458359758629.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6223,13 +6224,13 @@
         ],
         "info": [
             68,
-            61,
+            62,
             1
         ]
     },
     {
         "name": "Jordyn-d",
-        "md5": "ebe2b20b99c1e1b373fd2b02be48aab9.svg",
+        "md5": "68a784d4d0340475a6e6feff3b28b470.svg",
         "type": "costume",
         "tags": [
             "sports",
@@ -6240,7 +6241,7 @@
         ],
         "info": [
             40,
-            61,
+            62,
             1
         ]
     },
@@ -9660,7 +9661,7 @@
     },
     {
         "name": "Sun",
-        "md5": "55c931c65456822c0c56a2b30e3e550d.svg",
+        "md5": "14b0508da0dc30e83b2bede13c1be1e9.svg",
         "type": "costume",
         "tags": [
             "space",
@@ -9671,8 +9672,8 @@
             "nuclear"
         ],
         "info": [
-            72,
-            72,
+            54,
+            54,
             1
         ]
     },
@@ -10579,6 +10580,24 @@
         "info": [
             65,
             140,
+            1
+        ]
+    },
+    {
+        "name": "Wizard Girl",
+        "md5": "dd40d3a2565990bcc24d2b36cd446394.svg",
+        "type": "costume",
+        "tags": [
+            "people",
+            "female",
+            "girl",
+            "wizard",
+            "magic",
+            "fantasy"
+        ],
+        "info": [
+            80,
+            91,
             1
         ]
     },

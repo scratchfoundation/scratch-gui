@@ -14,7 +14,7 @@ export default class MockAudioEffects {
         this.buffer = buffer;
         this.name = name;
         this.process = jest.fn(done => {
-            this._finishProcessing = renderedBuffer => done({renderedBuffer});
+            this._finishProcessing = renderedBuffer => done(renderedBuffer, 0, 1);
         });
         MockAudioEffects.instance = this;
     }

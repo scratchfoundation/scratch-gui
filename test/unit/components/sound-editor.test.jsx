@@ -6,6 +6,7 @@ describe('Sound Editor Component', () => {
     let props;
     beforeEach(() => {
         props = {
+            canPaste: false,
             canUndo: true,
             canRedo: false,
             chunkLevels: [1, 2, 3],
@@ -13,7 +14,14 @@ describe('Sound Editor Component', () => {
             playhead: 0.5,
             trimStart: 0.2,
             trimEnd: 0.8,
-            onActivateTrim: jest.fn(),
+            onContainerClick: jest.fn(),
+            onCopy: jest.fn(),
+            onCopyToNew: jest.fn(),
+            onFadeIn: jest.fn(),
+            onFadeOut: jest.fn(),
+            onMute: jest.fn(),
+            onPaste: jest.fn(),
+            onDelete: jest.fn(),
             onChangeName: jest.fn(),
             onPlay: jest.fn(),
             onRedo: jest.fn(),
@@ -36,7 +44,7 @@ describe('Sound Editor Component', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('trim button appears when trims are null', () => {
+    test('delete button is disabled when selection is null', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 {...props}
@@ -44,11 +52,11 @@ describe('Sound Editor Component', () => {
                 trimStart={null}
             />
         );
-        wrapper.find('[children="Trim"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
+        wrapper.find('[children="Delete"]').simulate('click');
+        expect(props.onDelete).not.toHaveBeenCalled();
     });
 
-    test('save button appears when trims are not null', () => {
+    test('delete button calls delete when selection is not null', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 {...props}
@@ -56,8 +64,8 @@ describe('Sound Editor Component', () => {
                 trimStart={0.25}
             />
         );
-        wrapper.find('[children="Save"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
+        wrapper.find('[children="Delete"]').simulate('click');
+        expect(props.onDelete).toHaveBeenCalled();
     });
 
     test('play button appears when playhead is null', () => {

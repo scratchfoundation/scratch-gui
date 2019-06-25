@@ -1,16 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>copy v2</title>
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Sound/General/Copy</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="copy-v2">
-            <g id="copy" transform="translate(3.000000, 2.000000)">
-                <polyline id="Path-3" stroke-opacity="0.5" stroke="#575E75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,2" points="0.503173828 3 0.503173828 15.5 13 15.5"></polyline>
-                <path d="M2,1.00684547 C2,0.450780073 2.45303631,0 2.99703014,0 L10,0 L10,2.34995317 C10,3.26124887 10.7336617,4 11.6500468,4 L14,4 L14,13.0046024 C14,13.5543453 13.544239,14 12.9975267,14 L3.00247329,14 C2.44882258,14 2,13.5500512 2,12.9931545 L2,1.00684547 Z" id="Rectangle-4" fill="#4C97FF"></path>
-                <path d="M11,0 L14,3 L11.9989566,3 C11.4472481,3 11,2.55733967 11,2.00104344 L11,0 Z" id="Rectangle-5" fill="#4C97FF"></path>
-                <path d="M9.8115942,9.1884058 L8.6884058,9.1884058 L8.6884058,10.3115942 C8.6884058,10.6859903 8.38647343,11 8,11 C7.61352657,11 7.3115942,10.6859903 7.3115942,10.3115942 L7.3115942,9.1884058 L6.1884058,9.1884058 C5.81400966,9.1884058 5.5,8.88647343 5.5,8.5 C5.5,8.11352657 5.81400966,7.8115942 6.1884058,7.8115942 L7.3115942,7.8115942 L7.3115942,6.6884058 C7.3115942,6.31280193 7.61352657,6 8,6 C8.38647343,6 8.6884058,6.31280193 8.6884058,6.6884058 L8.6884058,7.8115942 L9.8115942,7.8115942 C10.1859903,7.8115942 10.5,8.11352657 10.5,8.5 C10.5,8.88647343 10.1859903,9.1884058 9.8115942,9.1884058 Z" id="Fill-1" stroke="#FFFFFF" stroke-width="0.25" fill="#FFFFFF"></path>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="12"></rect>
+        <path d="M1.5,5.93699126 C0.637386394,5.71496986 0,4.93191971 0,4 C0,2.8954305 0.8954305,2 2,2 C3.1045695,2 4,2.8954305 4,4 C4,4.93191971 3.36261361,5.71496986 2.5,5.93699126 L2.5,14.0630087 C3.36261361,14.2850301 4,15.0680803 4,16 C4,17.1045695 3.1045695,18 2,18 C0.8954305,18 0,17.1045695 0,16 C0,15.0680803 0.637386394,14.2850301 1.5,14.0630087 L1.5,5.93699126 Z M17.5,14.0630087 L17.5,5.93699126 C16.6373864,5.71496986 16,4.93191971 16,4 C16,2.8954305 16.8954305,2 18,2 C19.1045695,2 20,2.8954305 20,4 C20,4.93191971 19.3626136,5.71496986 18.5,5.93699126 L18.5,14.0630087 C19.3626136,14.2850301 20,15.0680803 20,16 C20,17.1045695 19.1045695,18 18,18 C16.8954305,18 16,17.1045695 16,16 C16,15.0680803 16.6373864,14.2850301 17.5,14.0630087 Z M11,9 L12,9 C12.5522847,9 13,9.44771525 13,10 C13,10.5522847 12.5522847,11 12,11 L11,11 L11,12 C11,12.5522847 10.5522847,13 10,13 C9.44771525,13 9,12.5522847 9,12 L9,11 L8,11 C7.44771525,11 7,10.5522847 7,10 C7,9.44771525 7.44771525,9 8,9 L9,9 L9,8 C9,7.44771525 9.44771525,7 10,7 C10.5522847,7 11,7.44771525 11,8 L11,9 Z" id="path-3"></path>
+    </defs>
+    <g id="Sound/General/Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Secondary-Color" opacity="0.25" transform="translate(2.000000, 4.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="selection"></g>
+            <g id="Blue/1_Blue" mask="url(#mask-2)" fill="#4D97FF">
+                <g transform="translate(-2.000000, -4.000000)" id="Primary-Blue">
+                    <rect x="0" y="0" width="20" height="20"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Primary-Color">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <g id="handles-and-plus" fill-rule="nonzero"></g>
+            <g id="Blue/1_Blue" mask="url(#mask-4)" fill="#4D97FF">
+                <rect id="Primary-Blue" x="0" y="0" width="20" height="20"></rect>
             </g>
         </g>
     </g>

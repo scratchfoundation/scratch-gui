@@ -31,6 +31,7 @@ import muteIcon from './icon--mute.svg';
 import deleteIcon from './icon--delete.svg';
 import copyIcon from './icon--copy.svg';
 import pasteIcon from './icon--paste.svg';
+import copyToNewIcon from './icon--copy-to-new.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -196,7 +197,7 @@ const SoundEditor = props => (
                 />
                 <IconButton
                     className={styles.toolButton}
-                    img={copyIcon}
+                    img={copyToNewIcon}
                     title={'Copy to New'}
                     onClick={props.onCopyToNew}
                 />

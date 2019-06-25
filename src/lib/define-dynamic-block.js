@@ -2,6 +2,7 @@
 // Should we move these into a new extension support module or something?
 import ArgumentType from 'scratch-vm/src/extension-support/argument-type';
 import BlockType from 'scratch-vm/src/extension-support/block-type';
+import ContextMenuContext from 'scratch-vm/src/extension-support/context-menu-context';
 import log from './log.js';
 
 /**
@@ -41,9 +42,9 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
             const customContextMenuForBlock = {
                 customContextMenu: function (options) {
                     staticBlockInfo.info.customContextMenu.forEach(contextOption => {
-                        options.push({
+                        const option = {
                             enabled: true,
-                            text: contextOption.name,
+                            text: contextOption.text,
                             callback: () => {
                                 if (contextOption.builtInCallback) {
                                     switch (contextOption.builtInCallback) {
@@ -58,11 +59,26 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
                                     contextOption.callback();
                                 }
                             }
-                        });
+                        };
+
+                        // Decide whether to add this item to the context menu
+                        // based on the context that the block is in and the
+                        // provided `context` property of the item.
+                        switch (contextOption.context) {
+                        case ContextMenuContext.TOOLBOX_ONLY:
+                            if (this.isInFlyout) options.push(option);
+                            break;
+                        case ContextMenuContext.WORKSPACE_ONLY:
+                            if (!this.isInFlyout) options.push(option);
+                            break;
+                        case ContextMenuContext.ALL:
+                        default:
+                            options.push(option);
+                        }
                     });
                 }
             };
-            const contextMenuName = `${blockJson.type}_context_menu`;
+            const contextMenuName = `${extendedOpcode}_context_menu`;
             try {
                 ScratchBlocks.Extensions.registerMixin(contextMenuName, customContextMenuForBlock);
             } catch (e) {

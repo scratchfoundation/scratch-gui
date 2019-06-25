@@ -210,7 +210,7 @@
     overflow: hidden;  /* Mask the icon animation */
     width: 1.5rem;
     height: 1.5rem;
-    background-color: $motion-primary;
+    background-color: $sound-primary;
     color: $ui-white;
     border-radius: 50%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -221,8 +221,7 @@
 
 .play-button {
     position: absolute;
-    position: absolute;
-    top: 0.125rem;
+    top: .5rem;
     z-index: auto;
 }
 
@@ -235,11 +234,9 @@
 }
 
 [dir="ltr"] .play-button {
-    right: 0.125rem;
-    padding-left: .125rem;
+    left: .5rem;
 }
 
 [dir="rtl"] .play-button {
-    left: 0.125rem;
-    padding-right: .125rem;
+    right: .5rem;
 }

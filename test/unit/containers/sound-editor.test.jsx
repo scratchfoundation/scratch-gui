@@ -85,7 +85,7 @@ describe('Sound Editor Container', () => {
         expect(component.props().playhead).toEqual(null);
     });
 
-    test('it sets the component props for trimming and submits to the vm', () => {
+    test('it sets the component props for select and delete and submits to the vm', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 soundIndex={soundIndex}
@@ -94,13 +94,15 @@ describe('Sound Editor Container', () => {
         );
         let component = wrapper.find(SoundEditorComponent);
 
-        component.props().onActivateTrim();
+        component.props().onSetTrim(0.25, 0.75);
+
         wrapper.update();
+
         component = wrapper.find(SoundEditorComponent);
         expect(component.props().trimStart).not.toEqual(null);
         expect(component.props().trimEnd).not.toEqual(null);
 
-        component.props().onActivateTrim();
+        component.props().onDelete();
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
@@ -238,8 +240,8 @@ describe('Sound Editor Container', () => {
         expect(component.prop('canRedo')).toEqual(false);
 
         // Submitting new samples should make it possible to undo
-        component.props().onActivateTrim(); // Activate trimming
-        component.props().onActivateTrim(); // Submit new samples by calling again
+        component.props().onSetTrim(0.25, 0.75);
+        component.props().onDelete();
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(true);
@@ -264,9 +266,8 @@ describe('Sound Editor Container', () => {
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(true);
-        component.props().onActivateTrim(); // Activate trimming
-        component.props().onActivateTrim(); // Submit new samples by calling again
-
+        component.props().onSetTrim(0.25, 0.75);
+        component.props().onDelete();
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(false);
@@ -282,8 +283,8 @@ describe('Sound Editor Container', () => {
         let component = wrapper.find(SoundEditorComponent);
 
         // Set up an undoable state
-        component.props().onActivateTrim(); // Activate trimming
-        component.props().onActivateTrim(); // Submit new samples by calling again
+        component.props().onSetTrim(0.25, 0.75);
+        component.props().onDelete();
         wrapper.update();
         component = wrapper.find(SoundEditorComponent);
 
@@ -300,5 +301,38 @@ describe('Sound Editor Container', () => {
         component.props().onRedo();
         expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
+    });
+
+    test('undo and redo updates selection state', () => {
+        const wrapper = mountWithIntl(
+            <SoundEditor
+                soundIndex={soundIndex}
+                store={store}
+            />
+        );
+        let component = wrapper.find(SoundEditorComponent);
+
+        // Set up an undoable state
+        component.props().onSetTrim(0.25, 0.75);
+        component.props().onDelete();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
+
+        expect(component.props().trimStart).toEqual(null);
+        expect(component.props().trimEnd).toEqual(null);
+
+        component.props().onUndo();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
+
+        expect(component.props().trimStart).toEqual(0.25);
+        expect(component.props().trimEnd).toEqual(0.75);
+
+        component.props().onRedo();
+        wrapper.update();
+        component = wrapper.find(SoundEditorComponent);
+
+        expect(component.props().trimStart).toEqual(null);
+        expect(component.props().trimEnd).toEqual(null);
     });
 });

@@ -25,6 +25,7 @@ const SpriteSelectorItem = props => (
         }}
         disable={props.preventContextMenu}
         id={`${props.name}-${contextMenuId}`}
+        ref={props.componentRef}
     >
         {typeof props.number === 'undefined' ? null : (
             <div className={styles.number}>{props.number}</div>
@@ -89,6 +90,7 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
+    componentRef: PropTypes.func,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
     name: PropTypes.string.isRequired,

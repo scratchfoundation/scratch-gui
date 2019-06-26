@@ -15,6 +15,7 @@ import ThrottledPropertyHOC from '../lib/throttled-property-hoc.jsx';
 import {emptyCostume} from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
 import {fetchCode} from '../lib/backpack-api';
+import {getEventXY} from '../lib/touch-utils';
 
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
@@ -46,9 +47,24 @@ class StageSelector extends React.Component {
             'handleBackdropUpload',
             'handleMouseEnter',
             'handleMouseLeave',
+            'handleTouchEnd',
             'handleDrop',
-            'setFileInput'
+            'setFileInput',
+            'setRef'
         ]);
+    }
+    componentDidMount () {
+        document.addEventListener('touchend', this.handleTouchEnd);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('touchend', this.handleTouchEnd);
+    }
+    handleTouchEnd (e) {
+        const {x, y} = getEventXY(e);
+        const {top, left, bottom, right} = this.ref.getBoundingClientRect();
+        if (x >= left && x <= right && y >= top && y <= bottom) {
+            this.handleMouseEnter();
+        }
     }
     addBackdropFromLibraryItem (item, shouldActivateTab = true) {
         const vmBackdrop = {
@@ -137,12 +153,16 @@ class StageSelector extends React.Component {
     setFileInput (input) {
         this.fileInput = input;
     }
+    setRef (ref) {
+        this.ref = ref;
+    }
     render () {
         const componentProps = omit(this.props, [
             'asset', 'dispatchSetHoveredSprite', 'id', 'intl',
             'onActivateTab', 'onSelect', 'onShowImporting', 'onCloseImporting']);
         return (
             <DroppableThrottledStage
+                componentRef={this.setRef}
                 fileInputRef={this.setFileInput}
                 onBackdropFileUpload={this.handleBackdropUpload}
                 onBackdropFileUploadClick={this.handleFileUploadClick}

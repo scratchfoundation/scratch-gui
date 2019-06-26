@@ -9,6 +9,7 @@ import storage from '../lib/storage';
 import VM from 'scratch-vm';
 import getCostumeUrl from '../lib/get-costume-url';
 import DragRecognizer from '../lib/drag-recognizer';
+import {getEventXY} from '../lib/touch-utils';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
@@ -17,6 +18,7 @@ class SpriteSelectorItem extends React.PureComponent {
         super(props);
         bindAll(this, [
             'getCostumeData',
+            'setRef',
             'handleClick',
             'handleDelete',
             'handleDuplicate',
@@ -25,7 +27,8 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseLeave',
             'handleMouseDown',
             'handleDragEnd',
-            'handleDrag'
+            'handleDrag',
+            'handleTouchEnd'
         ]);
 
         this.dragRecognizer = new DragRecognizer({
@@ -33,7 +36,11 @@ class SpriteSelectorItem extends React.PureComponent {
             onDragEnd: this.handleDragEnd
         });
     }
+    componentDidMount () {
+        document.addEventListener('touchend', this.handleTouchEnd);
+    }
     componentWillUnmount () {
+        document.removeEventListener('touchend', this.handleTouchEnd);
         this.dragRecognizer.reset();
     }
     getCostumeData () {
@@ -67,6 +74,13 @@ class SpriteSelectorItem extends React.PureComponent {
         });
         this.noClick = true;
     }
+    handleTouchEnd (e) {
+        const {x, y} = getEventXY(e);
+        const {top, left, bottom, right} = this.ref.getBoundingClientRect();
+        if (x >= left && x <= right && y >= top && y <= bottom) {
+            this.handleMouseEnter();
+        }
+    }
     handleMouseDown (e) {
         this.dragRecognizer.start(e);
     }
@@ -94,6 +108,10 @@ class SpriteSelectorItem extends React.PureComponent {
     handleMouseEnter () {
         this.props.dispatchSetHoveredSprite(this.props.id);
     }
+    setRef (component) {
+        // Access the DOM node using .elem because it is going through ContextMenuTrigger
+        this.ref = component && component.elem;
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -113,6 +131,7 @@ class SpriteSelectorItem extends React.PureComponent {
         } = this.props;
         return (
             <SpriteSelectorItemComponent
+                componentRef={this.setRef}
                 costumeURL={this.getCostumeData()}
                 preventContextMenu={this.dragRecognizer.gestureInProgress()}
                 onClick={this.handleClick}

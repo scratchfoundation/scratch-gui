@@ -20,7 +20,6 @@
     cursor: pointer;
 
     user-select: none;
-    touch-action: none;
 }
 
 .sprite-selector-item.is-selected {

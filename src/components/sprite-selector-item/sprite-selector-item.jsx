@@ -23,7 +23,7 @@ const SpriteSelectorItem = props => (
             onMouseDown: props.onMouseDown,
             onTouchStart: props.onMouseDown
         }}
-        disable={props.dragging}
+        disable={props.preventContextMenu}
         id={`${props.name}-${contextMenuId}`}
         ref={props.componentRef}
     >
@@ -93,7 +93,6 @@ SpriteSelectorItem.propTypes = {
     componentRef: PropTypes.func,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
-    dragging: PropTypes.bool,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
@@ -103,6 +102,7 @@ SpriteSelectorItem.propTypes = {
     onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
+    preventContextMenu: PropTypes.bool,
     selected: PropTypes.bool.isRequired
 };
 

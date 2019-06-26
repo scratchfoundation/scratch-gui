@@ -9,6 +9,7 @@ import storage from '../lib/storage';
 import VM from 'scratch-vm';
 import getCostumeUrl from '../lib/get-costume-url';
 import DragRecognizer from '../lib/drag-recognizer';
+import {getEventXY} from '../lib/touch-utils';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
@@ -35,14 +36,12 @@ class SpriteSelectorItem extends React.PureComponent {
             onDragEnd: this.handleDragEnd
         });
     }
-    componentWillUnmount () {
-        this.dragRecognizer.reset();
-    }
     componentDidMount () {
         document.addEventListener('touchend', this.handleTouchEnd);
     }
     componentWillUnmount () {
         document.removeEventListener('touchend', this.handleTouchEnd);
+        this.dragRecognizer.reset();
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;

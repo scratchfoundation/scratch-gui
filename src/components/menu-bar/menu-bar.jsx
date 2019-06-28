@@ -327,7 +327,7 @@ class MenuBar extends React.Component {
                                     [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
                                 })}
                                 draggable={false}
-                                src={scratchLogo}
+                                src={this.props.logo ? this.props.logo : scratchLogo}
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
@@ -723,6 +723,7 @@ MenuBar.propTypes = {
     languageMenuOpen: PropTypes.bool,
     locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
+    logo: PropTypes.string,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,

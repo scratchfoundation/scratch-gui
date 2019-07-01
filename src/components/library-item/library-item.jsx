@@ -9,9 +9,11 @@ import classNames from 'classnames';
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
 import playIcon from './icon--play.svg';
+import stopIcon from './icon--stop.svg';
 
 const preventClick = e => {
     e.stopPropagation();
+    e.preventDefault();
 };
 
 /* eslint-disable react/prefer-stateless-function */
@@ -141,15 +143,14 @@ class LibraryItemComponent extends React.PureComponent {
                     <div
                         aria-label="Play"
                         className={styles.playButton}
-                        role="button"
-                        tabIndex="0"
                         onClick={preventClick}
-                        onMouseDown={this.props.onPlay}
+                        onMouseDown={this.props.isPlaying ? this.props.onStop : this.props.onPlay}
+                        onMouseLeave={this.props.isPlaying ? this.props.onStop : null}
                     >
                         <img
                             className={styles.playIcon}
                             draggable={false}
-                            src={playIcon}
+                            src={this.props.isPlaying ? stopIcon : playIcon}
                         />
                     </div>
                 ) : null}
@@ -174,6 +175,7 @@ LibraryItemComponent.propTypes = {
     iconURL: PropTypes.string,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
+    isPlaying: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -185,6 +187,7 @@ LibraryItemComponent.propTypes = {
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
+    onStop: PropTypes.func.isRequired,
     showPlayButton: PropTypes.bool
 };
 

@@ -16,6 +16,7 @@ class LibraryItem extends React.PureComponent {
             'handleMouseEnter',
             'handleMouseLeave',
             'handlePlay',
+            'handleStop',
             'rotateIcon',
             'startRotatingIcons',
             'stopRotatingIcons'
@@ -65,7 +66,13 @@ class LibraryItem extends React.PureComponent {
     }
     handlePlay (e) {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
+        e.preventDefault();
         this.props.onMouseEnter(this.props.id);
+    }
+    handleStop (e) {
+        e.stopPropagation(); // To prevent from bubbling back to handleClick
+        e.preventDefault();
+        this.props.onMouseLeave(this.props.id);
     }
     startRotatingIcons () {
         this.rotateIcon();
@@ -109,6 +116,7 @@ class LibraryItem extends React.PureComponent {
                 id={this.props.id}
                 insetIconURL={this.props.insetIconURL}
                 internetConnectionRequired={this.props.internetConnectionRequired}
+                isPlaying={this.props.isPlaying}
                 name={this.props.name}
                 showPlayButton={this.props.showPlayButton}
                 onBlur={this.handleBlur}
@@ -118,6 +126,7 @@ class LibraryItem extends React.PureComponent {
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onPlay={this.handlePlay}
+                onStop={this.handleStop}
             />
         );
     }
@@ -144,6 +153,7 @@ LibraryItem.propTypes = {
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
+    isPlaying: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node

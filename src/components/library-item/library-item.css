@@ -208,8 +208,8 @@
     justify-content: center;
 
     overflow: hidden;  /* Mask the icon animation */
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     background-color: $sound-primary;
     color: $ui-white;
     border-radius: 50%;

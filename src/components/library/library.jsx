@@ -43,7 +43,7 @@ class LibraryComponent extends React.Component {
             'setFilteredDataRef'
         ]);
         this.state = {
-            selectedItem: null,
+            playingItem: null,
             filterQuery: '',
             selectedTag: ALL_TAG.tag,
             loaded: false
@@ -75,10 +75,20 @@ class LibraryComponent extends React.Component {
         });
     }
     handleMouseEnter (id) {
-        if (this.props.onItemMouseEnter) this.props.onItemMouseEnter(this.getFilteredData()[id]);
+        console.log('Library MouseEnter id:', id, ', playingItem: ', this.state.playingItem);
+        // don't restart if mouse over already playing item
+        if (this.props.onItemMouseEnter && this.state.playingItem !== id) {
+            this.setState({
+                playingItem: id
+            }, this.props.onItemMouseEnter(this.getFilteredData()[id]));
+        }
     }
     handleMouseLeave (id) {
-        if (this.props.onItemMouseLeave) this.props.onItemMouseLeave(this.getFilteredData()[id]);
+        if (this.props.onItemMouseLeave) {
+            this.setState({
+                playingItem: null
+            }, this.props.onItemMouseLeave(this.getFilteredData()[id]));
+        }
     }
     handleFilterChange (event) {
         this.setState({
@@ -185,6 +195,7 @@ class LibraryComponent extends React.Component {
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}
+                            isPlaying={this.state.playingItem === index}
                             key={typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL}
                             name={dataItem.name}
                             showPlayButton={this.props.showPlayButton}

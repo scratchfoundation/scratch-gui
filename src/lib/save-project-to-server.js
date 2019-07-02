@@ -45,6 +45,7 @@ export default function (projectId, vmState, params) {
     return new Promise((resolve, reject) => {
         xhr(opts, (err, response) => {
             if (err) return reject(err);
+            if (response.statusCode !== 200) return reject(response.statusCode);
             let body;
             try {
                 // Since we didn't set json: true, we have to parse manually

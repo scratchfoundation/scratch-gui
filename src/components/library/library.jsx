@@ -38,6 +38,7 @@ class LibraryComponent extends React.Component {
             'handleFilterClear',
             'handleMouseEnter',
             'handleMouseLeave',
+            'handlePlayingEnd',
             'handleSelect',
             'handleTagClick',
             'setFilteredDataRef'
@@ -54,6 +55,7 @@ class LibraryComponent extends React.Component {
         setTimeout(() => {
             this.setState({loaded: true});
         });
+        if (this.props.setStopHandler) this.props.setStopHandler(this.handlePlayingEnd);
     }
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
@@ -75,7 +77,6 @@ class LibraryComponent extends React.Component {
         });
     }
     handleMouseEnter (id) {
-        console.log('Library MouseEnter id:', id, ', playingItem: ', this.state.playingItem);
         // don't restart if mouse over already playing item
         if (this.props.onItemMouseEnter && this.state.playingItem !== id) {
             this.setState({
@@ -88,6 +89,13 @@ class LibraryComponent extends React.Component {
             this.setState({
                 playingItem: null
             }, this.props.onItemMouseLeave(this.getFilteredData()[id]));
+        }
+    }
+    handlePlayingEnd () {
+        if (this.state.playingItem !== null) {
+            this.setState({
+                playingItem: null
+            });
         }
     }
     handleFilterChange (event) {
@@ -239,6 +247,7 @@ LibraryComponent.propTypes = {
     onItemMouseLeave: PropTypes.func,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
+    setStopHandler: PropTypes.func,
     showPlayButton: PropTypes.bool,
     tags: PropTypes.arrayOf(PropTypes.shape(TagButton.propTypes)),
     title: PropTypes.string.isRequired

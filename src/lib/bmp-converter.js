@@ -11,6 +11,8 @@ export default bmpImage => new Promise(resolve => {
     const image = document.createElement('img');
 
     image.addEventListener('load', () => {
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
         ctx.drawImage(image, 0, 0);
 
         const dataUrl = canvas.toDataURL('image/png');

@@ -24,7 +24,7 @@ const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) 
                                 break;
                             }
                         } else if (contextOption.callback) {
-                            contextOption.callback();
+                            contextOption.callback({blockInfo: JSON.parse(this.blockInfoText)});
                         }
                     }
                 };

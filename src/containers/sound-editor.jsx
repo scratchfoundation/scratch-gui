@@ -28,7 +28,7 @@ class SoundEditor extends React.Component {
             'handleEffect',
             'handleUndo',
             'handleRedo',
-            'submitNewSamples'
+            'submitNewSamples',
             'handleContainerClick',
             'setRef'
         ]);
@@ -153,11 +153,6 @@ class SoundEditor extends React.Component {
             trimEnd: null
         });
     }
-    handleUpdateTrimEnd (trimEnd) {
-        this.setState({trimEnd});
-    }
-    handleUpdateTrimStart (trimStart) {
-        this.setState({trimStart});
     handleUpdateTrim (trimStart, trimEnd) {
         this.setState({trimStart, trimEnd});
         this.handleStopPlaying();
@@ -195,6 +190,8 @@ class SoundEditor extends React.Component {
             this.undoStack.push(this.copyCurrentBuffer());
             this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
+        }
+    }
     setRef (element) {
         this.ref = element;
     }
@@ -216,6 +213,7 @@ class SoundEditor extends React.Component {
                 setRef={this.setRef}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
+                onActivateTrim={this.handleDelete}
                 onChangeName={this.handleChangeName}
                 onContainerClick={this.handleContainerClick}
                 onDelete={this.handleDelete}

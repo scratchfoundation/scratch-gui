@@ -15,6 +15,8 @@ import styles from './sound-editor.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
+import trimIcon from './icon--trim.svg';
+import trimConfirmIcon from './icon--trim-confirm.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';
@@ -251,6 +253,7 @@ SoundEditor.propTypes = {
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
     intl: intlShape,
     name: PropTypes.string.isRequired,
+    onActivateTrim: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onContainerClick: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@
 exports[`Sound Editor Component matches snapshot 1`] = `
 <div
   className={undefined}
-  onMouseDown={[Function]}
+  onMouseDown={undefined}
 >
   <div
     className={undefined}
@@ -60,59 +60,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className={undefined}
-    >
-      <div
-        className=""
-        onClick={[Function]}
-        role="button"
-      >
-        <img
-          className={undefined}
-          draggable={false}
-          src="test-file-stub"
-        />
-        <div
-          className={undefined}
-        >
-          Copy
-        </div>
-      </div>
-      <div
-        className=""
-        onClick={null}
-        role="button"
-      >
-        <img
-          className={undefined}
-          draggable={false}
-          src="test-file-stub"
-        />
-        <div
-          className={undefined}
-        >
-          Paste
-        </div>
-      </div>
-      <div
-        className=""
-        onClick={[Function]}
-        role="button"
-      >
-        <img
-          className={undefined}
-          draggable={false}
-          src="test-file-stub"
-        />
-        <div
-          className={undefined}
-        >
-          Copy to New
-        </div>
-      </div>
-    </div>
-    <div
-      className=""
+      className="undefined"
       onClick={[Function]}
       role="button"
     >
@@ -124,7 +72,9 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       <div
         className={undefined}
       >
-        Delete
+        <span>
+          Save
+        </span>
       </div>
     </div>
   </div>
@@ -239,26 +189,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               <img
                 src="test-file-stub"
               />
-              <div
-                className=""
-                style={
-                  Object {
-                    "alignContent": undefined,
-                    "alignItems": undefined,
-                    "alignSelf": undefined,
-                    "flexBasis": undefined,
-                    "flexDirection": undefined,
-                    "flexGrow": undefined,
-                    "flexShrink": undefined,
-                    "flexWrap": undefined,
-                    "height": undefined,
-                    "justifyContent": undefined,
-                    "width": undefined,
-                  }
-                }
-              >
-                NaN
-              </div>
             </div>
             <div
               className=""
@@ -281,26 +211,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               <img
                 src="test-file-stub"
               />
-              <div
-                className=""
-                style={
-                  Object {
-                    "alignContent": undefined,
-                    "alignItems": undefined,
-                    "alignSelf": undefined,
-                    "flexBasis": undefined,
-                    "flexDirection": undefined,
-                    "flexGrow": undefined,
-                    "flexShrink": undefined,
-                    "flexWrap": undefined,
-                    "height": undefined,
-                    "justifyContent": undefined,
-                    "width": undefined,
-                  }
-                }
-              >
-                NaN
-              </div>
             </div>
           </div>
           <div
@@ -344,26 +254,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               <img
                 src="test-file-stub"
               />
-              <div
-                className=""
-                style={
-                  Object {
-                    "alignContent": undefined,
-                    "alignItems": undefined,
-                    "alignSelf": undefined,
-                    "flexBasis": undefined,
-                    "flexDirection": undefined,
-                    "flexGrow": undefined,
-                    "flexShrink": undefined,
-                    "flexWrap": undefined,
-                    "height": undefined,
-                    "justifyContent": undefined,
-                    "width": undefined,
-                  }
-                }
-              >
-                NaN
-              </div>
             </div>
             <div
               className=""
@@ -386,26 +276,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               <img
                 src="test-file-stub"
               />
-              <div
-                className=""
-                style={
-                  Object {
-                    "alignContent": undefined,
-                    "alignItems": undefined,
-                    "alignSelf": undefined,
-                    "flexBasis": undefined,
-                    "flexDirection": undefined,
-                    "flexGrow": undefined,
-                    "flexShrink": undefined,
-                    "flexWrap": undefined,
-                    "height": undefined,
-                    "justifyContent": undefined,
-                    "width": undefined,
-                  }
-                }
-              >
-                NaN
-              </div>
             </div>
           </div>
         </div>
@@ -563,61 +433,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Mute
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
           Reverse
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
-          Fade out
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
-          Fade in
         </span>
       </div>
     </div>

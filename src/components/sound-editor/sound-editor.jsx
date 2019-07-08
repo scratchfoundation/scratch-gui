@@ -8,15 +8,13 @@ import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
-import AudioTrimmer from '../../containers/audio-trimmer.jsx';
+import AudioSelector from '../../containers/audio-selector.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './sound-editor.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
-import trimIcon from './icon--trim.svg';
-import trimConfirmIcon from './icon--trim-confirm.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';
@@ -103,7 +101,11 @@ const messages = defineMessages({
 });
 
 const SoundEditor = props => (
-    <div className={styles.editorContainer}>
+    <div
+        className={styles.editorContainer}
+        ref={props.setRef}
+        onMouseDown={props.onContainerClick}
+    >
         <div className={styles.row}>
             <div className={styles.inputGroup}>
                 <Label text={props.intl.formatMessage(messages.sound)}>
@@ -161,12 +163,13 @@ const SoundEditor = props => (
                     height={160}
                     width={600}
                 />
-                <AudioTrimmer
+                <AudioSelector
                     playhead={props.playhead}
                     trimEnd={props.trimEnd}
                     trimStart={props.trimStart}
-                    onSetTrimEnd={props.onSetTrimEnd}
-                    onSetTrimStart={props.onSetTrimStart}
+                    onPlay={props.onPlay}
+                    onSetTrim={props.onSetTrim}
+                    onStop={props.onStop}
                 />
             </div>
         </div>
@@ -248,8 +251,8 @@ SoundEditor.propTypes = {
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
     intl: intlShape,
     name: PropTypes.string.isRequired,
-    onActivateTrim: PropTypes.func,
     onChangeName: PropTypes.func.isRequired,
+    onContainerClick: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
@@ -257,13 +260,13 @@ SoundEditor.propTypes = {
     onRedo: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,
     onRobot: PropTypes.func.isRequired,
-    onSetTrimEnd: PropTypes.func,
-    onSetTrimStart: PropTypes.func,
+    onSetTrim: PropTypes.func,
     onSlower: PropTypes.func.isRequired,
     onSofter: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
     onUndo: PropTypes.func.isRequired,
     playhead: PropTypes.number,
+    setRef: PropTypes.func,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number
 };

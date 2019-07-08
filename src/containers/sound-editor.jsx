@@ -23,13 +23,14 @@ class SoundEditor extends React.Component {
             'handlePlay',
             'handleStopPlaying',
             'handleUpdatePlayhead',
-            'handleActivateTrim',
-            'handleUpdateTrimEnd',
-            'handleUpdateTrimStart',
+            'handleDelete',
+            'handleUpdateTrim',
             'handleEffect',
             'handleUndo',
             'handleRedo',
             'submitNewSamples'
+            'handleContainerClick',
+            'setRef'
         ]);
         this.state = {
             chunkLevels: computeChunkedRMS(this.props.samples),
@@ -40,6 +41,8 @@ class SoundEditor extends React.Component {
 
         this.redoStack = [];
         this.undoStack = [];
+
+        this.ref = null;
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
@@ -49,6 +52,10 @@ class SoundEditor extends React.Component {
             this.redoStack = [];
             this.undoStack = [];
             this.resetState(newProps.samples, newProps.sampleRate);
+            this.setState({
+                trimStart: null,
+                trimEnd: null
+            });
         }
     }
     componentWillUnmount () {
@@ -59,9 +66,7 @@ class SoundEditor extends React.Component {
         this.audioBufferPlayer = new AudioBufferPlayer(samples, sampleRate);
         this.setState({
             chunkLevels: computeChunkedRMS(samples),
-            playhead: null,
-            trimStart: null,
-            trimEnd: null
+            playhead: null
         });
     }
     submitNewSamples (samples, sampleRate, skipUndo) {
@@ -106,6 +111,7 @@ class SoundEditor extends React.Component {
         return false; // Update failed
     }
     handlePlay () {
+        this.audioBufferPlayer.stop();
         this.audioBufferPlayer.play(
             this.state.trimStart || 0,
             this.state.trimEnd || 1,
@@ -125,31 +131,36 @@ class SoundEditor extends React.Component {
     handleChangeName (name) {
         this.props.vm.renameSound(this.props.soundIndex, name);
     }
-    handleActivateTrim () {
-        if (this.state.trimStart === null && this.state.trimEnd === null) {
-            this.setState({trimEnd: 0.95, trimStart: 0.05});
+    handleDelete () {
+        const {samples, sampleRate} = this.copyCurrentBuffer();
+        const sampleCount = samples.length;
+        const startIndex = Math.floor(this.state.trimStart * sampleCount);
+        const endIndex = Math.floor(this.state.trimEnd * sampleCount);
+        const firstPart = samples.slice(0, startIndex);
+        const secondPart = samples.slice(endIndex, sampleCount);
+        const newLength = firstPart.length + secondPart.length;
+        let newSamples;
+        if (newLength === 0) {
+            newSamples = new Float32Array(1);
         } else {
-            const {samples, sampleRate} = this.copyCurrentBuffer();
-            const sampleCount = samples.length;
-            const startIndex = Math.floor(this.state.trimStart * sampleCount);
-            const endIndex = Math.floor(this.state.trimEnd * sampleCount);
-            if (endIndex > startIndex) { // Strictly greater to prevent 0 sample sounds
-                const clippedSamples = samples.slice(startIndex, endIndex);
-                this.submitNewSamples(clippedSamples, sampleRate);
-            } else {
-                // Just clear the trim state, it cannot be completed
-                this.setState({
-                    trimStart: null,
-                    trimEnd: null
-                });
-            }
+            newSamples = new Float32Array(newLength);
+            newSamples.set(firstPart, 0);
+            newSamples.set(secondPart, firstPart.length);
         }
+        this.submitNewSamples(newSamples, sampleRate);
+        this.setState({
+            trimStart: null,
+            trimEnd: null
+        });
     }
     handleUpdateTrimEnd (trimEnd) {
         this.setState({trimEnd});
     }
     handleUpdateTrimStart (trimStart) {
         this.setState({trimStart});
+    handleUpdateTrim (trimStart, trimEnd) {
+        this.setState({trimStart, trimEnd});
+        this.handleStopPlaying();
     }
     effectFactory (name) {
         return () => this.handleEffect(name);
@@ -184,6 +195,13 @@ class SoundEditor extends React.Component {
             this.undoStack.push(this.copyCurrentBuffer());
             this.submitNewSamples(samples, sampleRate, true);
             this.handlePlay();
+    setRef (element) {
+        this.ref = element;
+    }
+    handleContainerClick (e) {
+        // If the click is on the sound editor's div (and not any other element), delesect
+        if (e.target === this.ref) {
+            this.handleUpdateTrim(null, null);
         }
     }
     render () {
@@ -195,10 +213,12 @@ class SoundEditor extends React.Component {
                 chunkLevels={this.state.chunkLevels}
                 name={this.props.name}
                 playhead={this.state.playhead}
+                setRef={this.setRef}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
-                onActivateTrim={this.handleActivateTrim}
                 onChangeName={this.handleChangeName}
+                onContainerClick={this.handleContainerClick}
+                onDelete={this.handleDelete}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
@@ -206,8 +226,7 @@ class SoundEditor extends React.Component {
                 onRedo={this.handleRedo}
                 onReverse={this.effectFactory(effectTypes.REVERSE)}
                 onRobot={this.effectFactory(effectTypes.ROBOT)}
-                onSetTrimEnd={this.handleUpdateTrimEnd}
-                onSetTrimStart={this.handleUpdateTrimStart}
+                onSetTrim={this.handleUpdateTrim}
                 onSlower={this.effectFactory(effectTypes.SLOWER)}
                 onSofter={this.effectFactory(effectTypes.SOFTER)}
                 onStop={this.handleStopPlaying}

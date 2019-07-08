@@ -8,6 +8,13 @@ import log from './log.js';
 const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) => {
     // Handle custom context menu options
     const customContextMenuForBlock = {
+        /**
+         * Add any custom context menu options to the dynamic block being defined.
+         * See Blockly.Extensions.apply in scratch-blocks/core/extensions.js
+         * for how the block becomes `this` behind the scenes.
+         * @param {!Array} options List of menu options to add to.
+         * @this Blockly.Block
+         */
         customContextMenu: function (options) {
             contextMenuInfo.forEach(contextOption => {
                 const option = {

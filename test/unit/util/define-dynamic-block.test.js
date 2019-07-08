@@ -2,10 +2,19 @@ import defineDynamicBlock from '../../../src/lib/define-dynamic-block';
 
 import BlockType from 'scratch-vm/src/extension-support/block-type';
 
+let contextMenuName = '';
+let contextMenuDesc = null;
+
 const MockScratchBlocks = {
     OUTPUT_SHAPE_HEXAGONAL: 1,
     OUTPUT_SHAPE_ROUND: 2,
-    OUTPUT_SHAPE_SQUARE: 3
+    OUTPUT_SHAPE_SQUARE: 3,
+    Extensions: {
+        registerMixin: function (name, desc) {
+            contextMenuName = name;
+            contextMenuDesc = desc;
+        }
+    }
 };
 
 const categoryInfo = {
@@ -19,50 +28,73 @@ const penIconURI = 'data:image/svg+xml;base64,fake_pen_icon_svg_base64_data';
 
 const testBlockInfo = {
     commandWithIcon: {
-        blockType: BlockType.COMMAND,
         blockIconURI: penIconURI,
-        text: 'command with icon'
+        info: {
+            blockType: BlockType.COMMAND,
+            text: 'command with icon'
+        }
     },
     commandWithoutIcon: {
-        blockType: BlockType.COMMAND,
-        text: 'command without icon'
+        info: {
+            blockType: BlockType.COMMAND,
+            text: 'command without icon'
+        }
     },
     terminalCommand: {
-        blockType: BlockType.COMMAND,
-        isTerminal: true,
-        text: 'terminal command'
+        info: {
+            blockType: BlockType.COMMAND,
+            isTerminal: true,
+            text: 'terminal command'
+        }
     },
     reporter: {
-        blockType: BlockType.REPORTER,
-        text: 'reporter'
+        info: {
+            blockType: BlockType.REPORTER,
+            text: 'reporter'
+        }
     },
     boolean: {
-        blockType: BlockType.BOOLEAN,
-        text: 'Boolean'
+        info: {
+            blockType: BlockType.BOOLEAN,
+            text: 'Boolean'
+        }
     },
     hat: {
-        blockType: BlockType.HAT,
-        text: 'hat'
+        info: {
+            blockType: BlockType.HAT,
+            text: 'hat'
+        }
+    },
+    blockWithCustomContextMenu: {
+        info: {
+            blockType: BlockType.COMMAND,
+            text: 'block with custom context menu',
+            customContextMenu: [{
+                text: 'Context Menu Item',
+                callback: () => {}
+            }]
+        }
     }
 };
 
 // similar to goog.mixin from the Closure library
-const mixin = function (target, source) {
+const mixin = (target, source) => {
     for (const x in source) {
         target[x] = source[x];
     }
 };
 
 class MockBlock {
-    constructor (blockInfo, extendedOpcode) {
+    constructor (staticBlockInfo, extendedOpcode) {
         // mimic Closure-style inheritance by mixing in `defineDynamicBlock` output as this instance's prototype
         // see also the `Blockly.Block` constructor
-        const prototype = defineDynamicBlock(MockScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
+        const ddb = defineDynamicBlock.bind(this);
+        const prototype = ddb(MockScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode);
         mixin(this, prototype);
         this.init();
 
         // bootstrap the mutation<->DOM cycle
-        this.blockInfoText = JSON.stringify(blockInfo);
+        this.blockInfoText = JSON.stringify(staticBlockInfo.info);
         const xmlElement = this.mutationToDom();
 
         // parse blockInfo from XML to fill dynamic properties
@@ -195,5 +227,27 @@ describe('defineDynamicBlock', () => {
             // previousConnection: undefined, // hat
             type: extendedOpcode
         });
+    });
+    test('can define a block with a custom context menu', () => {
+        const extendedOpcode = 'test.blockWithCustomContextMenu';
+        const block = new MockBlock(testBlockInfo.blockWithCustomContextMenu, extendedOpcode);
+        expect(block.result).toEqual({
+            category: categoryInfo.name,
+            colour: categoryInfo.color1,
+            colourSecondary: categoryInfo.color2,
+            colourTertiary: categoryInfo.color3,
+            extensions: [`${extendedOpcode}_context_menu`], // custom context menus get extensions
+            inputsInline: true,
+            nextConnection: true,
+            outputShape_: MockScratchBlocks.OUTPUT_SHAPE_SQUARE,
+            previousConnection: true,
+            type: extendedOpcode
+        });
+        expect(contextMenuName).toEqual(`${extendedOpcode}_context_menu`);
+        const options = [];
+        contextMenuDesc.customContextMenu(options);
+        expect(options.length).toEqual(1);
+        expect(options[0].text).toEqual('Context Menu Item');
+        expect(typeof options[0].callback).toEqual('function');
     });
 });

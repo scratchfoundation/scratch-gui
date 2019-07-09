@@ -35,6 +35,7 @@ class SoundEditor extends React.Component {
             'handleCopy',
             'handlePaste',
             'paste',
+            'handleKeyPress',
             'handleContainerClick',
             'setRef'
         ]);
@@ -53,6 +54,8 @@ class SoundEditor extends React.Component {
     }
     componentDidMount () {
         this.audioBufferPlayer = new AudioBufferPlayer(this.props.samples, this.props.sampleRate);
+
+        document.addEventListener('keydown', this.handleKeyPress);
     }
     componentWillReceiveProps (newProps) {
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
@@ -67,6 +70,49 @@ class SoundEditor extends React.Component {
     }
     componentWillUnmount () {
         this.audioBufferPlayer.stop();
+
+        document.removeEventListener('keydown', this.handleKeyPress);
+    }
+    handleKeyPress (event) {
+        if (event.target instanceof HTMLInputElement) {
+            // Ignore keyboard shortcuts if a text input field is focused
+            return;
+        }
+        if (event.key === ' ') {
+            if (this.state.playhead) {
+                this.handleStopPlaying();
+            } else {
+                this.handlePlay();
+            }
+        }
+        if (event.key === 'Delete' || event.key === 'Backspace') {
+            if (event.shiftKey) {
+                this.handleDeleteInverse();
+            } else {
+                this.handleDelete();
+            }
+        }
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            this.handleUpdateTrim(null, null);
+        }
+        if (event.metaKey || event.ctrlKey) {
+            if (event.shiftKey && event.key.toLowerCase() === 'z') {
+                if (this.redoStack.length > 0) {
+                    this.handleRedo();
+                }
+            } else if (event.key === 'z') {
+                if (this.undoStack.length > 0) {
+                    this.handleUndo();
+                }
+            } else if (event.key === 'c') {
+                this.handleCopy();
+            } else if (event.key === 'v') {
+                this.handlePaste();
+            } else if (event.key === 'a') {
+                this.handleUpdateTrim(0, 1);
+            }
+        }
     }
     resetState (samples, sampleRate) {
         this.audioBufferPlayer.stop();
@@ -155,6 +201,21 @@ class SoundEditor extends React.Component {
             newSamples.set(secondPart, firstPart.length);
         }
         this.submitNewSamples(newSamples, sampleRate);
+        this.setState({
+            trimStart: null,
+            trimEnd: null
+        });
+    }
+    handleDeleteInverse () {
+        const {samples, sampleRate} = this.copyCurrentBuffer();
+        const sampleCount = samples.length;
+        const startIndex = Math.floor(this.state.trimStart * sampleCount);
+        const endIndex = Math.floor(this.state.trimEnd * sampleCount);
+        let clippedSamples = samples.slice(startIndex, endIndex);
+        if (clippedSamples.length === 0) {
+            clippedSamples = new Float32Array(1);
+        }
+        this.submitNewSamples(clippedSamples, sampleRate);
         this.setState({
             trimStart: null,
             trimEnd: null

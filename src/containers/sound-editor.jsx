@@ -98,7 +98,7 @@ class SoundEditor extends React.Component {
                 if (this.undoStack.length >= UNDO_STACK_SIZE) {
                     this.undoStack.shift(); // Drop the first element off the array
                 }
-                this.undoStack.push(this.copyCurrentBuffer());
+                this.undoStack.push(this.getUndoItem());
             }
             this.resetState(samples, sampleRate);
             this.props.vm.updateSoundBuffer(
@@ -185,20 +185,27 @@ class SoundEditor extends React.Component {
             }
         });
     }
+    getUndoItem () {
+        return {
+            ...this.copyCurrentBuffer(),
+            trimStart: this.state.trimStart,
+            trimEnd: this.state.trimEnd
+        };
+    }
     handleUndo () {
-        this.redoStack.push(this.copyCurrentBuffer());
-        const {samples, sampleRate} = this.undoStack.pop();
+        this.redoStack.push(this.getUndoItem());
+        const {samples, sampleRate, trimStart, trimEnd} = this.undoStack.pop();
         if (samples) {
             this.submitNewSamples(samples, sampleRate, true);
-            this.handlePlay();
+            this.setState({trimStart: trimStart, trimEnd: trimEnd}, this.handlePlay);
         }
     }
     handleRedo () {
-        const {samples, sampleRate} = this.redoStack.pop();
+        const {samples, sampleRate, trimStart, trimEnd} = this.redoStack.pop();
         if (samples) {
-            this.undoStack.push(this.copyCurrentBuffer());
+            this.undoStack.push(this.getUndoItem());
             this.submitNewSamples(samples, sampleRate, true);
-            this.handlePlay();
+            this.setState({trimStart: trimStart, trimEnd: trimEnd}, this.handlePlay);
         }
     }
     setRef (element) {

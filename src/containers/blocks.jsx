@@ -417,7 +417,7 @@ class Blocks extends React.Component {
                     // Anything else will be picked up from the XML attached to the block instance.
                     const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
                     const blockDefinition =
-                        defineDynamicBlock(this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
+                        defineDynamicBlock(this, this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
                     this.ScratchBlocks.Blocks[extendedOpcode] = blockDefinition;
                 });
             }

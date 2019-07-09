@@ -5,7 +5,7 @@ import BlockType from 'scratch-vm/src/extension-support/block-type';
 import ContextMenuContext from 'scratch-vm/src/extension-support/context-menu-context';
 import log from './log.js';
 
-const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) => {
+const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, extendedOpcode) => {
     // Handle custom context menu options
     const customContextMenuForBlock = {
         /**
@@ -25,9 +25,13 @@ const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) 
                             switch (contextOption.builtInCallback) {
                             case 'EDIT_A_PROCEDURE':
                                 // TODO FILL THIS IN
+                                // E.g. make use of guiContext here to bring up
+                                // the edit custom proc modal
                                 break;
                             case 'RENAME_A_VARIABLE':
                                 // TODO FILL THIS IN
+                                // E.g. make use of guiContext here to bring up
+                                // the rename variable modal
                                 break;
                             }
                         } else if (contextOption.callback) {
@@ -77,11 +81,11 @@ const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) 
  * @param {string} extendedOpcode - The opcode for the block (including the extension ID).
  */
 // TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
-const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => {
+const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => {
     // Set up context menus if any
     const contextMenuInfo = staticBlockInfo.info.customContextMenu;
     const contextMenuName = contextMenuInfo ?
-        setupCustomContextMenu(ScratchBlocks, staticBlockInfo.info.customContextMenu, extendedOpcode) : '';
+        setupCustomContextMenu(guiContext, ScratchBlocks, staticBlockInfo.info.customContextMenu, extendedOpcode) : '';
 
     return ({
         init: function () {

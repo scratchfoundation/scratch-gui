@@ -26,6 +26,9 @@ import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
 import reverseIcon from './icon--reverse.svg';
+import fadeOutIcon from './icon--fade-out.svg';
+import fadeInIcon from './icon--fade-in.svg';
+import muteIcon from './icon--mute.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
@@ -99,6 +102,21 @@ const messages = defineMessages({
         id: 'gui.soundEditor.reverse',
         description: 'Title of the button to apply the reverse effect',
         defaultMessage: 'Reverse'
+    },
+    fadeOut: {
+        id: 'gui.soundEditor.fadeOut',
+        description: 'Title of the button to apply the fade out effect',
+        defaultMessage: 'Fade out'
+    },
+    fadeIn: {
+        id: 'gui.soundEditor.fadeIn',
+        description: 'Title of the button to apply the fade in effect',
+        defaultMessage: 'Fade in'
+    },
+    mute: {
+        id: 'gui.soundEditor.mute',
+        description: 'Title of the button to apply the mute effect',
+        defaultMessage: 'Mute'
     }
 });
 
@@ -239,9 +257,27 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
+                img={muteIcon}
+                title={<FormattedMessage {...messages.mute} />}
+                onClick={props.onMute}
+            />
+            <IconButton
+                className={styles.effectButton}
                 img={reverseIcon}
                 title={<FormattedMessage {...messages.reverse} />}
                 onClick={props.onReverse}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={fadeOutIcon}
+                title={<FormattedMessage {...messages.fadeOut} />}
+                onClick={props.onFadeOut}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={fadeInIcon}
+                title={<FormattedMessage {...messages.fadeIn} />}
+                onClick={props.onFadeIn}
             />
         </div>
     </div>
@@ -257,8 +293,11 @@ SoundEditor.propTypes = {
     onChangeName: PropTypes.func.isRequired,
     onContainerClick: PropTypes.func.isRequired,
     onEcho: PropTypes.func.isRequired,
+    onFadeIn: PropTypes.func.isRequired,
+    onFadeOut: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
+    onMute: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRedo: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,

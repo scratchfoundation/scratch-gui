@@ -1,6 +1,8 @@
 import EchoEffect from './effects/echo-effect.js';
 import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
+import FadeEffect from './effects/fade-effect.js';
+import MuteEffect from './effects/mute-effect.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -9,7 +11,10 @@ const effectTypes = {
     SOFTER: 'lower',
     FASTER: 'faster',
     SLOWER: 'slower',
-    ECHO: 'echo'
+    ECHO: 'echo',
+    FADEIN: 'fade in',
+    FADEOUT: 'fade out',
+    MUTE: 'mute'
 };
 
 class AudioEffects {
@@ -115,6 +120,18 @@ class AudioEffects {
             break;
         case effectTypes.ROBOT:
             ({input, output} = new RobotEffect(this.audioContext,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.FADEIN:
+            ({input, output} = new FadeEffect(this.audioContext, true,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.FADEOUT:
+            ({input, output} = new FadeEffect(this.audioContext, false,
+                this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
+            break;
+        case effectTypes.MUTE:
+            ({input, output} = new MuteEffect(this.audioContext,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         }

@@ -168,12 +168,21 @@ class SoundEditor extends React.Component {
         };
     }
     handleEffect (name) {
-        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name);
-        effects.process(({renderedBuffer}) => {
+        const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
+        const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
+
+        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd);
+        effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
             const samples = renderedBuffer.getChannelData(0);
             const sampleRate = renderedBuffer.sampleRate;
             const success = this.submitNewSamples(samples, sampleRate);
-            if (success) this.handlePlay();
+            if (success) {
+                if (this.state.trimStart === null) {
+                    this.handlePlay();
+                } else {
+                    this.setState({trimStart: adjustedTrimStart, trimEnd: adjustedTrimEnd}, this.handlePlay);
+                }
+            }
         });
     }
     handleUndo () {

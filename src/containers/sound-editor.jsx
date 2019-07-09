@@ -6,7 +6,7 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
-import {computeChunkedRMS, SOUND_BYTE_LIMIT} from '../lib/audio/audio-util.js';
+import {computeChunkedRMS, encodeAndAddSoundToVM, SOUND_BYTE_LIMIT} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
@@ -299,37 +299,9 @@ class SoundEditor extends React.Component {
         }, callback);
     }
     handleCopyToNew () {
-        this.copy(this.copyToNew);
-    }
-    copyToNew () {
-        WavEncoder.encode({
-            sampleRate: this.state.copyBuffer.sampleRate,
-            channelData: [this.state.copyBuffer.samples]
-        }).then(wavBuffer => {
-            const vmSound = {
-                format: '',
-                dataFormat: 'wav',
-                rate: this.state.copyBuffer.sampleRate,
-                sampleCount: this.state.copyBuffer.samples.length
-            };
-
-            // Create an asset from the encoded .wav and get resulting md5
-            const storage = this.props.vm.runtime.storage;
-            vmSound.asset = storage.createAsset(
-                storage.AssetType.Sound,
-                storage.DataFormat.WAV,
-                new Uint8Array(wavBuffer),
-                null,
-                true // generate md5
-            );
-            vmSound.assetId = vmSound.asset.assetId;
-
-            // update vmSound object with md5 property
-            vmSound.md5 = `${vmSound.assetId}.${vmSound.dataFormat}`;
-            // The VM will update the sound name to a fresh name
-            vmSound.name = this.props.name;
-
-            this.props.vm.addSound(vmSound);
+        this.copy(() => {
+            encodeAndAddSoundToVM(this.props.vm, this.state.copyBuffer.samples,
+            this.state.copyBuffer.sampleRate, this.props.name)
         });
     }
     resampleBufferToRate (buffer, newRate) {

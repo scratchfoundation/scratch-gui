@@ -171,6 +171,11 @@ class SoundEditor extends React.Component {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
 
+        // Offline audio context needs at least 2 samples
+        if (this.audioBufferPlayer.buffer.length < 2) {
+            return;
+        }
+
         const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd);
         effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
             const samples = renderedBuffer.getChannelData(0);

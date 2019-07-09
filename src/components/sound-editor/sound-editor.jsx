@@ -15,8 +15,6 @@ import styles from './sound-editor.css';
 
 import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
-import trimIcon from './icon--trim.svg';
-import trimConfirmIcon from './icon--trim-confirm.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import echoIcon from './icon--echo.svg';

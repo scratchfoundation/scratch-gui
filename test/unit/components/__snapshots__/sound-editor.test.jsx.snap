@@ -60,7 +60,59 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="undefined"
+      className={undefined}
+    >
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Copy
+        </div>
+      </div>
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Paste
+        </div>
+      </div>
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Copy to New
+        </div>
+      </div>
+    </div>
+    <div
+      className=""
       onClick={[Function]}
       role="button"
     >
@@ -72,9 +124,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       <div
         className={undefined}
       >
-        <span>
-          Save
-        </span>
+        Delete
       </div>
     </div>
   </div>

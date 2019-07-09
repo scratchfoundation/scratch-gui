@@ -301,7 +301,7 @@ class SoundEditor extends React.Component {
     handleCopyToNew () {
         this.copy(() => {
             encodeAndAddSoundToVM(this.props.vm, this.state.copyBuffer.samples,
-            this.state.copyBuffer.sampleRate, this.props.name)
+                this.state.copyBuffer.sampleRate, this.props.name);
         });
     }
     resampleBufferToRate (buffer, newRate) {

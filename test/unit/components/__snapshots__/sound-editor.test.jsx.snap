@@ -421,6 +421,24 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Mute
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
       onClick={[Function]}
       role="button"
     >
@@ -434,6 +452,42 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       >
         <span>
           Reverse
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Fade out
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Fade in
         </span>
       </div>
     </div>

@@ -118,6 +118,7 @@ $border-radius: 0.25rem;
     color: $text-primary;
     font-size: 0.625rem;
     user-select: none;
+
 }
 
 [dir="ltr"] .trim-button {
@@ -130,7 +131,6 @@ $border-radius: 0.25rem;
 
 .trim-button > img {
     width: 1.25rem;
-    margin-bottom: -0.375rem;
 }
 
 .effect-button {
@@ -146,6 +146,23 @@ $border-radius: 0.25rem;
 
 .effect-button img {
     width: 1.25rem;
+    height: 1.25rem;
+    margin-bottom: -0.375rem;
+}
+
+.tool-button {
+    flex-basis: 60px;
+    color: $text-primary;
+    font-size: 0.625rem;
+    user-select: none;
+}
+
+.tool-button + .tool-button {
+    margin: 0;
+}
+
+.tool-button img {
+    width: 4rem;
     height: 1.25rem;
     margin-bottom: -0.375rem;
 }

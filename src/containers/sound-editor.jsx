@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import WavEncoder from 'wav-encoder';
+import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
@@ -17,7 +18,9 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'copy',
             'copyCurrentBuffer',
+            'handleCopyToNew',
             'handleStoppedPlaying',
             'handleChangeName',
             'handlePlay',
@@ -29,10 +32,14 @@ class SoundEditor extends React.Component {
             'handleUndo',
             'handleRedo',
             'submitNewSamples',
+            'handleCopy',
+            'handlePaste',
+            'paste',
             'handleContainerClick',
             'setRef'
         ]);
         this.state = {
+            copyBuffer: null,
             chunkLevels: computeChunkedRMS(this.props.samples),
             playhead: null, // null is not playing, [0 -> 1] is playing percent
             trimStart: null,
@@ -213,6 +220,127 @@ class SoundEditor extends React.Component {
             this.setState({trimStart: trimStart, trimEnd: trimEnd}, this.handlePlay);
         }
     }
+    handleCopy () {
+        this.copy();
+    }
+    copy (callback) {
+        const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
+        const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
+
+        const trimStartSamples = trimStart * this.props.samples.length;
+        const trimEndSamples = trimEnd * this.props.samples.length;
+
+        const newCopyBuffer = this.copyCurrentBuffer();
+        newCopyBuffer.samples = newCopyBuffer.samples.slice(trimStartSamples, trimEndSamples);
+
+        this.setState({
+            copyBuffer: newCopyBuffer
+        }, callback);
+    }
+    handleCopyToNew () {
+        this.copy(this.copyToNew);
+    }
+    copyToNew () {
+        WavEncoder.encode({
+            sampleRate: this.state.copyBuffer.sampleRate,
+            channelData: [this.state.copyBuffer.samples]
+        }).then(wavBuffer => {
+            const vmSound = {
+                format: '',
+                dataFormat: 'wav',
+                rate: this.state.copyBuffer.sampleRate,
+                sampleCount: this.state.copyBuffer.samples.length
+            };
+
+            // Create an asset from the encoded .wav and get resulting md5
+            const storage = this.props.vm.runtime.storage;
+            vmSound.asset = storage.createAsset(
+                storage.AssetType.Sound,
+                storage.DataFormat.WAV,
+                new Uint8Array(wavBuffer),
+                null,
+                true // generate md5
+            );
+            vmSound.assetId = vmSound.asset.assetId;
+
+            // update vmSound object with md5 property
+            vmSound.md5 = `${vmSound.assetId}.${vmSound.dataFormat}`;
+            // The VM will update the sound name to a fresh name
+            vmSound.name = this.props.name;
+
+            this.props.vm.addSound(vmSound);
+        });
+    }
+    resampleBufferToRate (buffer, newRate) {
+        return new Promise(resolve => {
+            if (window.OfflineAudioContext) {
+                const sampleRateRatio = newRate / buffer.sampleRate;
+                const newLength = sampleRateRatio * buffer.samples.length;
+                const offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
+                const source = offlineContext.createBufferSource();
+                const audioBuffer = this.audioContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
+                audioBuffer.getChannelData(0).set(buffer.samples);
+                source.buffer = audioBuffer;
+                source.connect(offlineContext.destination);
+                source.start();
+                offlineContext.startRendering();
+                offlineContext.oncomplete = ({renderedBuffer}) => {
+                    resolve({
+                        samples: renderedBuffer.getChannelData(0),
+                        sampleRate: newRate
+                    });
+                };
+            }
+        });
+    }
+    paste () {
+        // If there's no selection, paste at the end of the sound
+        if (this.state.trimStart === null) {
+            const newLength = this.props.samples.length + this.state.copyBuffer.samples.length;
+            const newSamples = new Float32Array(newLength);
+            newSamples.set(this.props.samples, 0);
+            newSamples.set(this.state.copyBuffer.samples, this.props.samples.length);
+            this.submitNewSamples(newSamples, this.props.sampleRate, false);
+        } else {
+            // else replace the selection with the pasted sound
+            const trimStartSamples = this.state.trimStart * this.props.samples.length;
+            const trimEndSamples = this.state.trimEnd * this.props.samples.length;
+            const firstPart = this.props.samples.slice(0, trimStartSamples);
+            const lastPart = this.props.samples.slice(trimEndSamples);
+            const newLength = firstPart.length + this.state.copyBuffer.samples.length + lastPart.length;
+            const newSamples = new Float32Array(newLength);
+            newSamples.set(firstPart, 0);
+            newSamples.set(this.state.copyBuffer.samples, firstPart.length);
+            newSamples.set(lastPart, firstPart.length + this.state.copyBuffer.samples.length);
+
+            const trimStartSeconds = trimStartSamples / this.props.sampleRate;
+            const trimEndSeconds = trimStartSeconds +
+                (this.state.copyBuffer.samples.length / this.state.copyBuffer.sampleRate);
+            const newDurationSeconds = newSamples.length / this.state.copyBuffer.sampleRate;
+            const adjustedTrimStart = trimStartSeconds / newDurationSeconds;
+            const adjustedTrimEnd = trimEndSeconds / newDurationSeconds;
+            this.setState({
+                trimStart: adjustedTrimStart,
+                trimEnd: adjustedTrimEnd
+            });
+
+            this.submitNewSamples(newSamples, this.props.sampleRate, false);
+        }
+
+        this.handlePlay();
+    }
+    handlePaste () {
+        if (!this.state.copyBuffer) return;
+        if (this.state.copyBuffer.sampleRate === this.props.sampleRate) {
+            this.paste();
+        } else {
+            this.resampleBufferToRate(this.state.copyBuffer, this.props.sampleRate).then(buffer => {
+                this.setState({
+                    copyBuffer: buffer
+                }, this.paste);
+            });
+        }
+    }
     setRef (element) {
         this.ref = element;
     }
@@ -226,6 +354,7 @@ class SoundEditor extends React.Component {
         const {effectTypes} = AudioEffects;
         return (
             <SoundEditorComponent
+                canPaste={this.state.copyBuffer !== null}
                 canRedo={this.redoStack.length > 0}
                 canUndo={this.undoStack.length > 0}
                 chunkLevels={this.state.chunkLevels}
@@ -237,6 +366,8 @@ class SoundEditor extends React.Component {
                 onActivateTrim={this.handleDelete}
                 onChangeName={this.handleChangeName}
                 onContainerClick={this.handleContainerClick}
+                onCopy={this.handleCopy}
+                onCopyToNew={this.handleCopyToNew}
                 onDelete={this.handleDelete}
                 onEcho={this.effectFactory(effectTypes.ECHO)}
                 onFadeIn={this.effectFactory(effectTypes.FADEIN)}
@@ -244,6 +375,7 @@ class SoundEditor extends React.Component {
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onMute={this.effectFactory(effectTypes.MUTE)}
+                onPaste={this.handlePaste}
                 onPlay={this.handlePlay}
                 onRedo={this.handleRedo}
                 onReverse={this.effectFactory(effectTypes.REVERSE)}
@@ -264,10 +396,7 @@ SoundEditor.propTypes = {
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
     soundIndex: PropTypes.number,
-    vm: PropTypes.shape({
-        updateSoundBuffer: PropTypes.func,
-        renameSound: PropTypes.func
-    })
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = (state, {soundIndex}) => {

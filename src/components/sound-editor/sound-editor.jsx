@@ -30,6 +30,11 @@ import fadeOutIcon from './icon--fade-out.svg';
 import fadeInIcon from './icon--fade-in.svg';
 import muteIcon from './icon--mute.svg';
 
+import deleteIcon from './icon--delete.svg';
+import copyIcon from './icon--copy.svg';
+import pasteIcon from './icon--paste.svg';
+import copyToNewIcon from './icon--copy-to-new.svg';
+
 const BufferedInput = BufferedInputHOC(Input);
 
 const messages = defineMessages({
@@ -163,17 +168,33 @@ const SoundEditor = props => (
                     </button>
                 </div>
             </div>
+            <div className={styles.inputGroup}>
+                <IconButton
+                    className={styles.toolButton}
+                    img={copyIcon}
+                    title={'Copy'}
+                    onClick={props.onCopy}
+                />
+                <IconButton
+                    className={styles.toolButton}
+                    disabled={props.canPaste === false}
+                    img={pasteIcon}
+                    title={'Paste'}
+                    onClick={props.onPaste}
+                />
+                <IconButton
+                    className={styles.toolButton}
+                    img={copyToNewIcon}
+                    title={'Copy to New'}
+                    onClick={props.onCopyToNew}
+                />
+            </div>
             <IconButton
-                className={classNames(styles.trimButton, {
-                    [styles.trimButtonActive]: props.trimStart !== null
-                })}
-                img={props.trimStart === null ? trimIcon : trimConfirmIcon}
-                title={props.trimStart === null ? (
-                    <FormattedMessage {...messages.trim} />
-                ) : (
-                    <FormattedMessage {...messages.save} />
-                )}
-                onClick={props.onActivateTrim}
+                className={styles.toolButton}
+                disabled={props.trimStart === null}
+                img={deleteIcon}
+                title={'Delete'}
+                onClick={props.onDelete}
             />
         </div>
         <div className={styles.row}>
@@ -284,6 +305,7 @@ const SoundEditor = props => (
 );
 
 SoundEditor.propTypes = {
+    canPaste: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
@@ -292,12 +314,16 @@ SoundEditor.propTypes = {
     onActivateTrim: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onContainerClick: PropTypes.func.isRequired,
+    onCopy: PropTypes.func.isRequired,
+    onCopyToNew: PropTypes.func.isRequired,
+    onDelete: PropTypes.func,
     onEcho: PropTypes.func.isRequired,
     onFadeIn: PropTypes.func.isRequired,
     onFadeOut: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onMute: PropTypes.func.isRequired,
+    onPaste: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onRedo: PropTypes.func.isRequired,
     onReverse: PropTypes.func.isRequired,

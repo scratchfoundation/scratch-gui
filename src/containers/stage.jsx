@@ -342,15 +342,23 @@ class Stage extends React.Component {
     }
     onStartDrag (x, y) {
         if (this.state.dragId) return;
-        const drawableId = this.renderer.pick(x, y);
+
+        // Because pick queries are expensive, only perform them for drawables that are currently draggable.
+        let draggableTargets = this.props.vm.runtime.targets;
+        if (!this.props.useEditorDragStyle) {
+            draggableTargets = draggableTargets.filter(
+                target => Number.isFinite(target.drawableID) && target.draggable
+            );
+        }
+        if (draggableTargets.length === 0) return;
+
+        const draggableIDs = draggableTargets.map(target => target.drawableID);
+        const drawableId = this.renderer.pick(x, y, 1, 1, draggableIDs);
         if (drawableId === null) return;
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
         const target = this.props.vm.runtime.getTargetById(targetId);
-
-        // Do not start drag unless in editor drag mode or target is draggable
-        if (!(this.props.useEditorDragStyle || target.draggable)) return;
 
         // Dragging always brings the target to the front
         target.goToFront();

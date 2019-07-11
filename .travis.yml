@@ -14,12 +14,18 @@ env:
 cache:
   directories:
   - node_modules
+before_install:
+# package-lock.json was introduced in npm@5
+- '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest' # skipped when using node 9
+- npm install -g greenkeeper-lockfile
 install:
 - npm --production=false install
 - npm --production=false update
+before_script: greenkeeper-lockfile-update
 script:
 - npm test
 - if [ "$TRAVIS_EVENT_TYPE" == "pull_request" ] && [ "$TRAVIS_BRANCH" == "master" ]; then  npm run test:smoke; fi
+after_script: greenkeeper-lockfile-upload
 before_deploy:
 - >
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then

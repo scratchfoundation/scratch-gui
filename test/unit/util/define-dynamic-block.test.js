@@ -249,4 +249,20 @@ describe('defineDynamicBlock', () => {
         expect(options[0].text).toEqual('Context Menu Item');
         expect(typeof options[0].callback).toEqual('function');
     });
+
+    test('setBlockInfo updates block info', () => {
+        const extendedOpcode = 'test.reporter';
+        const block = new MockBlock(testBlockInfo.reporter, extendedOpcode);
+        const blockInfo = JSON.parse(block.blockInfoText);
+        expect(blockInfo.text).toEqual('reporter');
+
+        const newBlockInfo = JSON.parse(JSON.stringify(blockInfo));
+        newBlockInfo.text = 'renamedReporter';
+
+        block.setBlockInfo(newBlockInfo);
+
+        const updatedBlockInfo = JSON.parse(block.blockInfoText);
+        expect(updatedBlockInfo.text).toEqual('renamedReporter');
+
+    });
 });

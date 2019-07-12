@@ -177,6 +177,12 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
                 return `%${++argCount}`;
             });
             this.interpolate_(scratchBlocksStyleText, args);
+        },
+        setBlockInfo: function (blockInfo) {
+            this.needsBlockInfoUpdate = true;
+            this.blockInfoText = JSON.stringify(blockInfo);
+            const mutation = this.mutationToDom();
+            this.domToMutation(mutation);
         }
     });
 };

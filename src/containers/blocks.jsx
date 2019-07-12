@@ -67,6 +67,7 @@ class Blocks extends React.Component {
             'onBlockGlowOff',
             'handleExtensionAdded',
             'handleBlocksInfoUpdate',
+            'handleBlockUpdate',
             'onTargetsUpdate',
             'onVisualReport',
             'onWorkspaceUpdate',

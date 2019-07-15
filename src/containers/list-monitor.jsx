@@ -132,7 +132,7 @@ class ListMonitor extends React.Component {
             const dx = newPosition.x - this.initialPosition.x;
             const dy = newPosition.y - this.initialPosition.y;
             this.setState({
-                width: Math.max(Math.min(this.initialWidth + dx, 480), 100),
+                width: Math.max(Math.min(this.initialWidth + dx, 640), 100),
                 height: Math.max(Math.min(this.initialHeight + dy, 360), 60)
             });
         };

@@ -55,7 +55,7 @@ const PlaybackStep = props => (
                     data={props.levels}
                     height={150}
                     level={0}
-                    width={480}
+                    width={640}
                 />
                 <AudioTrimmer
                     playhead={props.playhead}

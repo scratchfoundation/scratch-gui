@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import Box from '../box/box.jsx';
-import styles from './audio-selector.css';
+import styles from './audio-trimmer.css';
 import handleIcon from './icon--handle.svg';
 
 const AudioSelector = props => (
     <div
-        className={styles.absolute}
+        className={classNames(styles.absolute, styles.selector)}
         ref={props.containerRef}
         onMouseDown={props.onNewSelectionMouseDown}
         onTouchStart={props.onNewSelectionMouseDown}
@@ -20,9 +20,9 @@ const AudioSelector = props => (
                     width: `${100 * (props.trimEnd - props.trimStart)}%`
                 }}
             >
-                <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
+                <Box className={classNames(styles.absolute, styles.selectionBackground)} />
                 <Box
-                    className={classNames(styles.trimLine, styles.startTrimLine)}
+                    className={classNames(styles.trimLine, styles.startSelectionLine)}
                     onMouseDown={props.onTrimStartMouseDown}
                     onTouchStart={props.onTrimStartMouseDown}
                 >
@@ -34,7 +34,7 @@ const AudioSelector = props => (
                     </Box>
                 </Box>
                 <Box
-                    className={classNames(styles.trimLine, styles.endTrimLine)}
+                    className={classNames(styles.trimLine, styles.endSelectionLine)}
                     onMouseDown={props.onTrimEndMouseDown}
                     onTouchStart={props.onTrimEndMouseDown}
                 >

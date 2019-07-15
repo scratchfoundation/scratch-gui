@@ -17,6 +17,10 @@ $hover-scale: 2;
     transform: translateZ(0);
 }
 
+.selector {
+    cursor: pointer;
+}
+
 .trim-background {
     cursor: pointer;
     touch-action: none;
@@ -35,6 +39,12 @@ $hover-scale: 2;
     );
 }
 
+.selection-background {
+    border: 1px solid $motion-tertiary;
+    background: $motion-primary;
+    opacity: 0.5;
+}
+
 .start-trim-background .trim-background-mask {
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
@@ -51,6 +61,10 @@ $hover-scale: 2;
     width: 0px;
     height: 100%;
     border: 1px solid $red-tertiary;
+}
+
+.selector .trim-line {
+    border: 1px solid $motion-tertiary;
 }
 
 .playhead-container {
@@ -78,8 +92,16 @@ $hover-scale: 2;
     right: 0;
 }
 
+.start-selection-line {
+    left: 0;
+}
+
 .end-trim-line {
     left: 0;
+}
+
+.end-selection-line {
+    right: 0;
 }
 
 .trim-handle {
@@ -87,6 +109,10 @@ $hover-scale: 2;
     left: calc(-$trim-handle-width / 2);
     width: $trim-handle-width;
     height: $trim-handle-height;
+}
+
+.selector .trim-handle {
+    filter: hue-rotate(180deg);
 }
 
 .trim-handle img {

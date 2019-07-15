@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Box from '../box/box.jsx';
+import PlayButton from '../play-button/play-button.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';
 
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
-import playIcon from './icon--play.svg';
-import stopIcon from './icon--stop.svg';
-
-const preventClick = e => {
-    e.stopPropagation();
-    e.preventDefault();
-};
 
 /* eslint-disable react/prefer-stateless-function */
 class LibraryItemComponent extends React.PureComponent {
@@ -140,19 +134,11 @@ class LibraryItemComponent extends React.PureComponent {
                 </Box>
                 <span className={styles.libraryItemName}>{this.props.name}</span>
                 {this.props.showPlayButton ? (
-                    <div
-                        aria-label="Play"
-                        className={styles.playButton}
-                        onClick={preventClick}
-                        onMouseDown={this.props.isPlaying ? this.props.onStop : this.props.onPlay}
-                        onMouseLeave={this.props.isPlaying ? this.props.onStop : null}
-                    >
-                        <img
-                            className={styles.playIcon}
-                            draggable={false}
-                            src={this.props.isPlaying ? stopIcon : playIcon}
-                        />
-                    </div>
+                    <PlayButton
+                        isPlaying={this.props.isPlaying}
+                        onPlay={this.props.onPlay}
+                        onStop={this.props.onStop}
+                    />
                 ) : null}
             </Box>
         );

@@ -39,7 +39,9 @@ class LibraryItem extends React.PureComponent {
         e.preventDefault();
     }
     handleFocus (id) {
-        this.handleMouseEnter(id);
+        if (!this.props.showPlayButton) {
+            this.handleMouseEnter(id);
+        }
     }
     handleKeyPress (e) {
         if (e.key === ' ' || e.key === 'Enter') {
@@ -48,30 +50,32 @@ class LibraryItem extends React.PureComponent {
         }
     }
     handleMouseEnter () {
-        this.props.onMouseEnter(this.props.id);
-        if (this.props.icons && this.props.icons.length) {
-            this.stopRotatingIcons();
-            this.setState({
-                isRotatingIcon: true
-            }, this.startRotatingIcons);
+        // only show hover effects on the item if not showing a play button
+        if (!this.props.showPlayButton) {
+            this.props.onMouseEnter(this.props.id);
+            if (this.props.icons && this.props.icons.length) {
+                this.stopRotatingIcons();
+                this.setState({
+                    isRotatingIcon: true
+                }, this.startRotatingIcons);
+            }
         }
     }
     handleMouseLeave () {
-        this.props.onMouseLeave(this.props.id);
-        if (this.props.icons && this.props.icons.length) {
-            this.setState({
-                isRotatingIcon: false
-            }, this.stopRotatingIcons);
+        // only show hover effects on the item if not showing a play button
+        if (!this.props.showPlayButton) {
+            this.props.onMouseLeave(this.props.id);
+            if (this.props.icons && this.props.icons.length) {
+                this.setState({
+                    isRotatingIcon: false
+                }, this.stopRotatingIcons);
+            }
         }
     }
-    handlePlay (e) {
-        e.stopPropagation(); // To prevent from bubbling back to handleClick
-        e.preventDefault();
+    handlePlay () {
         this.props.onMouseEnter(this.props.id);
     }
-    handleStop (e) {
-        e.stopPropagation(); // To prevent from bubbling back to handleClick
-        e.preventDefault();
+    handleStop () {
         this.props.onMouseLeave(this.props.id);
     }
     startRotatingIcons () {

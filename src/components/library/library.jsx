@@ -71,10 +71,19 @@ class LibraryComponent extends React.Component {
         this.props.onRequestClose();
     }
     handleTagClick (tag) {
-        this.setState({
-            filterQuery: '',
-            selectedTag: tag.toLowerCase()
-        });
+        if (this.state.playingItem === null) {
+            this.setState({
+                ilterQuery: '',
+                selectedTag: tag.toLowerCase()
+            });
+        } else {
+            const playingId = this.state.playingItem;
+            this.setState({
+                filterQuery: '',
+                playingItem: null,
+                selectedTag: tag.toLowerCase()
+            }, this.props.onItemMouseLeave(this.getFilteredData()[[playingId]]));
+        }
     }
     handleMouseEnter (id) {
         // don't restart if mouse over already playing item
@@ -99,10 +108,19 @@ class LibraryComponent extends React.Component {
         }
     }
     handleFilterChange (event) {
-        this.setState({
-            filterQuery: event.target.value,
-            selectedTag: ALL_TAG.tag
-        });
+        if (this.state.playingItem === null) {
+            this.setState({
+                filterQuery: event.target.value,
+                selectedTag: ALL_TAG.tag
+            });
+        } else {
+            const playingId = this.state.playingItem;
+            this.setState({
+                filterQuery: event.target.value,
+                playingItem: null,
+                selectedTag: ALL_TAG.tag
+            }, this.props.onItemMouseLeave(this.getFilteredData()[[playingId]]));
+        }
     }
     handleFilterClear () {
         this.setState({filterQuery: ''});

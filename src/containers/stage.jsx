@@ -343,11 +343,16 @@ class Stage extends React.Component {
     onStartDrag (x, y) {
         if (this.state.dragId) return;
 
-        // Because pick queries are expensive, only perform them for drawables that are currently draggable.
-        let draggableTargets = this.props.vm.runtime.targets;
+        // Targets with no attached drawable cannot be dragged.
+        let draggableTargets = this.props.vm.runtime.targets.filter(
+            target => Number.isFinite(target.drawableID)
+        );
+
+        // Because pick queries can be expensive, only perform them for drawables that are currently draggable.
+        // If we're in the editor, we can drag all targets. Otherwise, filter.
         if (!this.props.useEditorDragStyle) {
             draggableTargets = draggableTargets.filter(
-                target => Number.isFinite(target.drawableID) && target.draggable
+                target => target.draggable
             );
         }
         if (draggableTargets.length === 0) return;

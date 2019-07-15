@@ -157,7 +157,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         </g>
       </svg>
       <div
-        className={undefined}
+        className=""
         onMouseDown={[Function]}
         onTouchStart={[Function]}
       >

@@ -51,10 +51,25 @@ const messages = defineMessages({
         description: 'Title of the button to stop the sound',
         defaultMessage: 'Stop'
     },
-    trim: {
-        id: 'gui.soundEditor.trim',
-        description: 'Title of the button to start trimminging the sound',
-        defaultMessage: 'Trim'
+    copy: {
+        id: 'gui.soundEditor.copy',
+        description: 'Title of the button to copy the sound',
+        defaultMessage: 'Copy'
+    },
+    paste: {
+        id: 'gui.soundEditor.paste',
+        description: 'Title of the button to paste the sound',
+        defaultMessage: 'Paste'
+    },
+    copyToNew: {
+        id: 'gui.soundEditor.copyToNew',
+        description: 'Title of the button to copy the selection into a new sound',
+        defaultMessage: 'Copy to New'
+    },
+    delete: {
+        id: 'gui.soundEditor.delete',
+        description: 'Title of the button to delete the sound',
+        defaultMessage: 'Delete'
     },
     save: {
         id: 'gui.soundEditor.save',
@@ -170,20 +185,20 @@ const SoundEditor = props => (
                 <IconButton
                     className={styles.toolButton}
                     img={copyIcon}
-                    title={'Copy'}
+                    title={props.intl.formatMessage(messages.copy)}
                     onClick={props.onCopy}
                 />
                 <IconButton
                     className={styles.toolButton}
                     disabled={props.canPaste === false}
                     img={pasteIcon}
-                    title={'Paste'}
+                    title={props.intl.formatMessage(messages.paste)}
                     onClick={props.onPaste}
                 />
                 <IconButton
                     className={styles.toolButton}
                     img={copyToNewIcon}
-                    title={'Copy to New'}
+                    title={props.intl.formatMessage(messages.copyToNew)}
                     onClick={props.onCopyToNew}
                 />
             </div>
@@ -191,7 +206,7 @@ const SoundEditor = props => (
                 className={styles.toolButton}
                 disabled={props.trimStart === null}
                 img={deleteIcon}
-                title={'Delete'}
+                title={props.intl.formatMessage(messages.delete)}
                 onClick={props.onDelete}
             />
         </div>

@@ -7,10 +7,8 @@ eventually be consolidated.
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages} from 'react-intl';
-
+import { defineMessages } from 'react-intl';
 import MenuBarMenu from './menu-bar-menu.jsx';
-
 import styles from './login-dropdown.css';
 
 // these are here as a hack to get them translated, so that equivalent messages will be translated
@@ -51,25 +49,26 @@ const LoginDropdown = ({
     onClose,
     renderLogin
 }) => (
-    <MenuBarMenu
-        className={className}
-        open={isOpen}
-        // note: the Rtl styles are switched here, because this menu is justified
-        // opposite all the others
-        place={isRtl ? 'right' : 'left'}
-        onRequestClose={onClose}
-    >
-        <div
-            className={classNames(
-                styles.login
-            )}
+
+        <MenuBarMenu
+            className={className}
+            open={isOpen}
+            // note: the Rtl styles are switched here, because this menu is justified
+            // opposite all the others
+            place={isRtl ? 'right' : 'left'}
+            onRequestClose={onClose}
         >
-            {renderLogin({
-                onClose: onClose
-            })}
-        </div>
-    </MenuBarMenu>
-);
+            <div
+                className={classNames(
+                    styles.login
+                )}
+            >
+                {renderLogin({
+                    onClose: onClose
+                })}
+            </div>
+        </MenuBarMenu>
+    );
 
 LoginDropdown.propTypes = {
     className: PropTypes.string,

@@ -54,41 +54,60 @@ const base = {
                     '@babel/plugin-proposal-object-rest-spread',
                     ['react-intl', {
                         messagesDir: './translations/messages/'
-                    }]],
+                    }],
+                    ["import", {"libraryName": "antd", "style": true}]],
                 presets: [
                     ['@babel/preset-env', {targets: {browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']}}],
                     '@babel/preset-react'
                 ]
             }
         },
-        {
-            test: /\.css$/,
-            use: [{
-                loader: 'style-loader'
-            }, {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                    importLoaders: 1,
-                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                    camelCase: true
-                }
-            }, {
-                loader: 'postcss-loader',
-                options: {
-                    ident: 'postcss',
-                    plugins: function () {
-                        return [
-                            postcssImport,
-                            postcssVars,
-                            autoprefixer({
-                                browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
-                            })
-                        ];
+            {
+                test: /\.css$/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        importLoaders: 1,
+                        localIdentName: '[name]_[local]_[hash:base64:5]',
+                        camelCase: true
                     }
-                }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        plugins: function () {
+                            return [
+                                postcssImport,
+                                postcssVars,
+                                autoprefixer({
+                                    browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
+                                })
+                            ];
+                        }
+                    }
+                }]
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader", // compiles Less to CSS,
+                    options:{
+                        modifyVars:{
+                            'primary-color': ' #1890ff',
+                            'link-color': ' #1890ff',
+                            // 'border-radius-base': '2px'
+                        },
+                        javascriptEnabled: true,
+                    }
+                }]
             }]
-        }]
     },
     optimization: {
         minimizer: [

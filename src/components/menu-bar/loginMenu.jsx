@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import {Form, Input, Modal,message} from "antd";
+import {Form, Input, Modal, message, Button} from 'antd';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {
-    loginMenuOpen,
-    closeLoginMenu
-} from '../../reducers/menus';
 import bindAll from "lodash.bindall";
-
+import './LoginMenu.less'
 const FormItem = Form.Item;
 
 class LoginMenu extends Component {
@@ -47,13 +43,13 @@ class LoginMenu extends Component {
         return (
             <div>
                 <Modal
-                    title="登录"
+
                     visible={this.props.visible}
                     width="480px"
-                    okText="登录"
-                    cancelText="取消"
-                    onOk={(e)=>this.submitLogin(e)}
                     onCancel={(e)=>this.cancelClick(e)}
+                    footer={null}
+                    closable={false}
+                    style={{top:'25%'}}
                 >
                     <Form layout="horizontal" {...formItemLayout} >
                         <FormItem label="用户名">
@@ -83,6 +79,13 @@ class LoginMenu extends Component {
                             }
                         </FormItem>
                     </Form>
+                    <Button
+                        type="primary"
+                        onClick={(e)=>this.submitLogin(e)}
+                        className="submit-btn"
+                    >
+                        登录
+                    </Button>
                 </Modal>
             </div>
         );

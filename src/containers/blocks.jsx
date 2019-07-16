@@ -135,6 +135,7 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -208,6 +209,7 @@ class Blocks extends React.Component {
                     this.workspace.getFlyout().setRecyclingEnabled(true);
                 });
             });
+
     }
 
     updateToolbox () {
@@ -339,11 +341,14 @@ class Blocks extends React.Component {
             const targetCostumes = target.getCostumes();
             const targetSounds = target.getSounds();
             const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
+
+
             return makeToolboxXML(target.isStage, target.id, dynamicBlocksXML,
                 targetCostumes[0].name,
                 stageCostumes[0].name,
                 targetSounds.length > 0 ? targetSounds[0].name : ''
             );
+
         } catch {
             return null;
         }
@@ -622,10 +627,11 @@ Blocks.defaultOptions = {
         length: 2,
         colour: '#ddd'
     },
+    //#E6A23C
     colours: {
         workspace: '#F9F9F9',
         flyout: '#F9F9F9',
-        toolbox: '#FFFFFF',
+        toolbox: '#FFFFFF',//
         toolboxSelected: '#E9EEF2',
         scrollbar: '#CECDCE',
         scrollbarHover: '#CECDCE',

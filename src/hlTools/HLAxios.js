@@ -67,7 +67,7 @@ export function getAB (url, params = {}) {
     }).then(response => {
         // 结束 loading
         // proxyUtil.endLoading()
-        return response.data
+        return response
     }).catch(error => {
         // 异常处理
         // proxyUtil.endLoading()

@@ -3,7 +3,7 @@ import ScratchBlocks from 'scratch-blocks';
 const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
-
+//运动代码块
 const motion = function (isStage, targetId) {
     const stageSelected = ScratchBlocks.ScratchMsgs.translate(
         'MOTION_STAGE_SELECTED',
@@ -21,6 +21,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+
         <block type="motion_turnright">
             <value name="DEGREES">
                 <shadow type="math_number">
@@ -28,6 +29,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+
         <block type="motion_turnleft">
             <value name="DEGREES">
                 <shadow type="math_number">
@@ -36,6 +38,7 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
         ${blockSeparator}
+
         <block type="motion_goto">
             <value name="TO">
                 <shadow type="motion_goto_menu">
@@ -141,15 +144,20 @@ const motion = function (isStage, targetId) {
 const xmlEscape = function (unsafe) {
     return unsafe.replace(/[<>&'"]/g, c => {
         switch (c) {
-        case '<': return '&lt;';
-        case '>': return '&gt;';
-        case '&': return '&amp;';
-        case '\'': return '&apos;';
-        case '"': return '&quot;';
+            case '<':
+                return '&lt;';
+            case '>':
+                return '&gt;';
+            case '&':
+                return '&amp;';
+            case '\'':
+                return '&apos;';
+            case '"':
+                return '&quot;';
         }
     });
 };
-
+//外观
 const looks = function (isStage, targetId, costumeName, backdropName) {
     const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
@@ -286,7 +294,7 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
     </category>
     `;
 };
-
+//声音
 const sound = function (isStage, targetId, soundName) {
     return `
     <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
@@ -341,7 +349,7 @@ const sound = function (isStage, targetId, soundName) {
     </category>
     `;
 };
-
+//事件
 const events = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">
@@ -380,7 +388,7 @@ const events = function (isStage) {
     </category>
     `;
 };
-
+//控制
 const control = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
@@ -427,7 +435,7 @@ const control = function (isStage) {
     </category>
     `;
 };
-
+//侦测
 const sensing = function (isStage) {
     const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
     return `
@@ -500,7 +508,7 @@ const sensing = function (isStage) {
     </category>
     `;
 };
-
+//运算
 const operators = function () {
     const apple = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_APPLE', 'apple');
     const banana = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_BANANA', 'banana');
@@ -685,7 +693,7 @@ const operators = function () {
     </category>
     `;
 };
-
+//变量
 const variables = function () {
     return `
     <category
@@ -697,7 +705,7 @@ const variables = function () {
     </category>
     `;
 };
-
+//自制
 const myBlocks = function () {
     return `
     <category
@@ -726,7 +734,7 @@ const xmlClose = '</xml>';
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
-    costumeName = '', backdropName = '', soundName = '') {
+                                 costumeName = '', backdropName = '', soundName = '') {
     const gap = [categorySeparator];
 
     costumeName = xmlEscape(costumeName);

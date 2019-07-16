@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c08ae9f-949b-4f77-ac48-0765d8b15e8b" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu-bar/loginMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu-bar/loginMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/blocks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/blocks.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hlTools/HLAxios.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hlTools/HLAxios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hlTools/autoLoadFile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hlTools/autoLoadFile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/make-toolbox-xml.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/make-toolbox-xml.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
@@ -24,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="107" column="26" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
+            <state relative-caret-position="401">
+              <caret line="503" column="68" selection-start-line="503" selection-start-column="57" selection-end-line="503" selection-end-column="68" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#713#756#0" expanded="true" />
@@ -35,60 +36,68 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/playground/index.css">
+        <entry file="file://$PROJECT_DIR$/src/containers/sb-file-uploader.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+            <state relative-caret-position="-303">
+              <caret line="178" column="21" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="21" />
               <folding>
-                <element signature="e#2712#3185#0" />
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/menu-bar/loginMenu.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="326" column="30" selection-start-line="326" selection-start-column="30" selection-end-line="326" selection-end-column="30" />
+            <state relative-caret-position="340">
+              <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
+        <entry file="file://$PROJECT_DIR$/src/hlTools/HLAxios.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-175">
-              <caret line="14521" column="7" selection-start-line="14521" selection-start-column="7" selection-end-line="14521" selection-end-column="7" />
+            <state relative-caret-position="368">
+              <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/src/hlTools/autoLoadFile.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2867">
-              <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+            <state relative-caret-position="219">
+              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/playground/index.jsx">
+        <entry file="file://$PROJECT_DIR$/src/reducers/modals.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-321" />
+            <state relative-caret-position="549">
+              <caret line="81" column="43" lean-forward="true" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/menu-bar/LoginMenu.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="11" lean-forward="true" selection-start-column="1" selection-end-column="11" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -97,6 +106,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>backpackVisible</find>
+      <find>motion</find>
+      <find>motionXML</find>
+      <find>toolbox</find>
+      <find>onLoadingStarted</find>
+      <find>openLoadingProject</find>
+      <find>onUpdateProjectTitle</find>
+      <find>fileToUpload</find>
+      <find>requestProjectUpload</find>
+      <find>defineMessages</find>
+      <find>onLoadingFinished</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,19 +125,28 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.babelrc" />
-        <option value="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" />
         <option value="$PROJECT_DIR$/src/playground/index.css" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/components/gui/gui.jsx" />
         <option value="$PROJECT_DIR$/package-lock.json" />
+        <option value="$PROJECT_DIR$/src/containers/blocks.jsx" />
+        <option value="$PROJECT_DIR$/src/lib/make-toolbox-xml.js" />
+        <option value="$PROJECT_DIR$/src/components/menu-bar/LoginMenu.less" />
+        <option value="$PROJECT_DIR$/src/components/menu-bar/loginMenu.jsx" />
+        <option value="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" />
+        <option value="$PROJECT_DIR$/src/hlTools/HLAxios.js" />
+        <option value="$PROJECT_DIR$/src/hlTools/autoLoadFile.jsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="238" />
-    <option name="y" value="39" />
+    <option name="x" value="215" />
+    <option name="y" value="63" />
     <option name="width" value="1639" />
-    <option name="height" value="878" />
+    <option name="height" value="936" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="添加" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -148,7 +176,13 @@
               <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="menu-bar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scratch-gui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hlTools" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scratch-gui" type="b2602c69:ProjectViewProjectNode" />
@@ -177,7 +211,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -201,15 +235,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563247225951</updated>
-      <workItem from="1563247228906" duration="3505000" />
+      <workItem from="1563247228906" duration="11670000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3505000" />
+    <option name="totallyTimeSpent" value="11670000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="238" y="39" width="1639" height="878" extended-state="0" />
+    <frame x="215" y="63" width="1639" height="936" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
@@ -218,7 +253,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" weight="0.32899868" />
       <window_info anchor="bottom" id="RNConsole" show_stripe_button="false" weight="0.32899868" />
-      <window_info active="true" anchor="bottom" id="Terminal" sideWeight="0.4996865" visible="true" weight="0.27308193" />
+      <window_info anchor="bottom" id="Terminal" sideWeight="0.4996865" weight="0.087061666" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.50031346" side_tool="true" weight="0.32769832" />
       <window_info anchor="bottom" id="调试" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -245,37 +280,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="107" column="26" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#713#756#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/playground/index.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-321" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/playground/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
-          <folding>
-            <element signature="e#2712#3185#0" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/drag-layer.jsx">
@@ -285,6 +292,20 @@
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="137" column="6" selection-start-line="137" selection-start-column="6" selection-end-line="137" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret line="14521" column="7" selection-start-line="14521" selection-start-column="7" selection-end-line="14521" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -298,17 +319,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-175">
-          <caret line="14521" column="7" selection-start-line="14521" selection-start-column="7" selection-end-line="14521" selection-end-column="7" />
+        <state relative-caret-position="167">
+          <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+          <folding>
+            <element signature="e#2712#3185#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/src/playground/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2867">
-          <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+        <state relative-caret-position="224">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/minilog/lib/common/minilog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/blocks.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/make-toolbox-xml.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7205">
+          <caret line="506" column="28" lean-forward="true" selection-start-line="506" selection-start-column="28" selection-end-line="506" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#xml#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/menu-bar/LoginMenu.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" lean-forward="true" selection-start-column="1" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hlTools/HLAxios.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="503" column="68" selection-start-line="503" selection-start-column="57" selection-end-line="503" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#713#756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/modals.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="81" column="43" lean-forward="true" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/sb-file-uploader.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303">
+          <caret line="178" column="21" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/menu-bar/loginMenu.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="80" column="27" lean-forward="true" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hlTools/autoLoadFile.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

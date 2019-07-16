@@ -369,7 +369,9 @@ class MenuBar extends React.Component {
             </Button>
         );
         const fileauto = (
-            <AutoLoadFile/>
+            <AutoLoadFile
+                onUpdateProjectTitle={this.props.onUpdateProjectTitle}
+            />
         );
         return (
             <Box

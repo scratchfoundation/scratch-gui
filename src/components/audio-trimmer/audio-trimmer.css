@@ -88,20 +88,20 @@ $hover-scale: 2;
     border-right: none;
 }
 
-.start-trim-line {
-    right: 0;
+.selector .left-handle {
+    left: 0
 }
 
-.start-selection-line {
-    left: 0;
+.selector .right-handle {
+    right: 0
 }
 
-.end-trim-line {
-    left: 0;
+.trimmer .left-handle {
+    right: 0
 }
 
-.end-selection-line {
-    right: 0;
+.trimmer .right-handle {
+    left: 0
 }
 
 .trim-handle {

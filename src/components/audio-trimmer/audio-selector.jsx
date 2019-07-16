@@ -3,7 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import styles from './audio-trimmer.css';
-import handleIcon from './icon--handle.svg';
+import SelectionHandle from './selection-handle.jsx';
+import Playhead from './playhead.jsx';
 
 const AudioSelector = props => (
     <div
@@ -21,41 +22,20 @@ const AudioSelector = props => (
                 }}
             >
                 <Box className={classNames(styles.absolute, styles.selectionBackground)} />
-                <Box
-                    className={classNames(styles.trimLine, styles.startSelectionLine)}
+                <SelectionHandle
+                    handleStyle={styles.leftHandle}
                     onMouseDown={props.onTrimStartMouseDown}
-                    onTouchStart={props.onTrimStartMouseDown}
-                >
-                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.startTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                </Box>
-                <Box
-                    className={classNames(styles.trimLine, styles.endSelectionLine)}
+                />
+                <SelectionHandle
+                    handleStyle={styles.rightHandle}
                     onMouseDown={props.onTrimEndMouseDown}
-                    onTouchStart={props.onTrimEndMouseDown}
-                >
-                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.endTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                </Box>
+                />
             </Box>
         )}
         {props.playhead ? (
-            <div className={styles.playheadContainer}>
-                <div
-                    className={classNames(styles.trimLine, styles.playhead)}
-                    style={{
-                        transform: `translateX(${100 * props.playhead}%)`
-                    }}
-                />
-            </div>
+            <Playhead
+                playbackPosition={props.playhead}
+            />
         ) : null}
     </div>
 );

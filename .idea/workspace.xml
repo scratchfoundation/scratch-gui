@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c08ae9f-949b-4f77-ac48-0765d8b15e8b" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/scratch-gui.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/gui/gui.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gui/gui.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu-bar/login-dropdown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu-bar/login-dropdown.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menu-bar/menu-bar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/playground/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/playground/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
@@ -55,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="167">
-              <caret line="97" column="72" lean-forward="true" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+              <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
               <folding>
                 <element signature="e#2712#3185#0" />
               </folding>
@@ -63,14 +55,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="325" column="37" selection-start-line="325" selection-start-column="37" selection-end-line="325" selection-end-column="37" />
+            <state relative-caret-position="319">
+              <caret line="326" column="30" selection-start-line="326" selection-start-column="30" selection-end-line="326" selection-end-column="30" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package-lock.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-175">
+              <caret line="14521" column="7" selection-start-line="14521" selection-start-column="7" selection-end-line="14521" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2867">
+              <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -100,6 +110,7 @@
         <option value="$PROJECT_DIR$/src/playground/index.css" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/components/gui/gui.jsx" />
+        <option value="$PROJECT_DIR$/package-lock.json" />
       </list>
     </option>
   </component>
@@ -190,29 +201,29 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563247225951</updated>
-      <workItem from="1563247228906" duration="3038000" />
+      <workItem from="1563247228906" duration="3505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3038000" />
+    <option name="totallyTimeSpent" value="3505000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="238" y="39" width="1639" height="878" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17304075" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17304075" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" weight="0.32899868" />
       <window_info anchor="bottom" id="RNConsole" show_stripe_button="false" weight="0.32899868" />
-      <window_info anchor="bottom" id="Terminal" sideWeight="0.4996865" visible="true" weight="0.07152145" />
+      <window_info active="true" anchor="bottom" id="Terminal" sideWeight="0.4996865" visible="true" weight="0.27308193" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.50031346" side_tool="true" weight="0.32769832" />
+      <window_info anchor="bottom" id="调试" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40182054" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -227,18 +238,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-428723" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-160">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.babelrc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -272,7 +271,7 @@
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
-          <caret line="97" column="72" lean-forward="true" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
+          <caret line="97" column="72" selection-start-line="97" selection-start-column="72" selection-end-line="97" selection-end-column="72" />
           <folding>
             <element signature="e#2712#3185#0" />
           </folding>
@@ -291,11 +290,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/gui/gui.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="325" column="37" selection-start-line="325" selection-start-column="37" selection-end-line="325" selection-end-column="37" />
+        <state relative-caret-position="319">
+          <caret line="326" column="30" selection-start-line="326" selection-start-column="30" selection-end-line="326" selection-end-column="30" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret line="14521" column="7" selection-start-line="14521" selection-start-column="7" selection-end-line="14521" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2867">
+          <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
         </state>
       </provider>
     </entry>

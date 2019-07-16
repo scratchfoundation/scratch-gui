@@ -15,7 +15,7 @@ const AudioSelector = props => (
     >
         {props.trimStart === null ? null : (
             <Box
-                className={classNames(styles.absolute, styles.trimBackground, styles.startTrimBackground)}
+                className={classNames(styles.absolute)}
                 style={{
                     left: `${props.trimStart * 100}%`,
                     width: `${100 * (props.trimEnd - props.trimStart)}%`

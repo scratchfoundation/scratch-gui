@@ -6,7 +6,7 @@ import styles from './audio-trimmer.css';
 const Playhead = props => (
     <div className={styles.playheadContainer}>
         <div
-            className={classNames(styles.trimLine, styles.playhead)}
+            className={classNames(styles.playhead)}
             style={{
                 transform: `translateX(${100 * props.playbackPosition}%)`
             }}

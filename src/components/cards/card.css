@@ -170,6 +170,9 @@
     align-items: center;
     position: relative;
     text-align: center;
+
+    /* Min height prevents layout changing when images change */
+    min-height: 256px;
 }
 
 .step-video {

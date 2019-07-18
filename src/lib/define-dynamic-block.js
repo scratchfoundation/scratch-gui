@@ -116,6 +116,8 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
             this.blockInfoText = '{}';
             // we need a block info update (through `domToMutation`) before we have a completely initialized block
             this.needsBlockInfoUpdate = true;
+            // Keep track of menu info for use in laying out the block and its menus
+            this.menus = categoryInfo.convertedMenuInfo;
         },
         mutationToDom: function () {
             const container = document.createElement('mutation');
@@ -172,7 +174,12 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 const arg = blockInfo.arguments[argName];
                 switch (arg.type) {
                 case ArgumentType.STRING:
-                    args.push({type: 'input_value', name: argName});
+                    if (arg.menu && !this.menus[arg.menu].acceptReporters) {
+                        const options = this.menus[arg.menu].items;
+                        args.push({type: 'field_dropdown', name: argName, options: options});
+                    } else {
+                        args.push({type: 'input_value', name: argName});
+                    }
                     break;
                 case ArgumentType.BOOLEAN:
                     args.push({type: 'input_value', name: argName, check: 'Boolean'});

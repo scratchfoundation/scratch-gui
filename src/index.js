@@ -1,5 +1,6 @@
 import GUI from './containers/gui.jsx';
 import AppStateHOC from './lib/app-state-hoc.jsx';
+import TitledHOC from './lib/titled-hoc.jsx';
 import GuiReducer, {guiInitialState, guiMiddleware, initEmbedded, initFullScreen, initPlayer} from './reducers/gui';
 import LocalesReducer, {localesInitialState, initLocale} from './reducers/locales';
 import {ScratchPaintReducer} from 'scratch-paint';
@@ -16,6 +17,7 @@ const guiReducers = {
 export {
     GUI as default,
     AppStateHOC,
+    TitledHOC,
     setAppElement,
     guiReducers,
     guiInitialState,

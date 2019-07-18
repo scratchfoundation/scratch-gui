@@ -131,8 +131,14 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 throw new Error('Attempted to update block info twice');
             }
             delete this.needsBlockInfoUpdate;
-            this.blockInfoText = blockInfoText;
+
+            // Parse blockInfoText, and add this block instance's id
+            // to the blockInfoText we save back to this block.
             const blockInfo = JSON.parse(blockInfoText);
+            blockInfo.id = this.id;
+            this.blockInfoText = JSON.stringify(blockInfo);
+
+            // Use the parsed blockInfo to layout the block
 
             switch (blockInfo.blockType) {
             case BlockType.COMMAND:

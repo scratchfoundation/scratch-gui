@@ -154,7 +154,7 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
-            'handleSaveToComputer',
+            'getSaveToComputerHandler',
             'restoreOptionMessage'
         ]);
     }
@@ -225,7 +225,7 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
-    handleSaveToComputer (downloadProjectCallback) {
+    getSaveToComputerHandler (downloadProjectCallback) {
         return () => {
             this.props.onRequestCloseFile();
             downloadProjectCallback();
@@ -327,7 +327,7 @@ class MenuBar extends React.Component {
                                     [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
                                 })}
                                 draggable={false}
-                                src={this.props.logo ? this.props.logo : scratchLogo}
+                                src={this.props.logo}
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
@@ -374,21 +374,21 @@ class MenuBar extends React.Component {
                                     </MenuSection>
                                     {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
                                         <MenuSection>
-                                            {this.props.canSave ? (
+                                            {this.props.canSave && (
                                                 <MenuItem onClick={this.handleClickSave}>
                                                     {saveNowMessage}
                                                 </MenuItem>
-                                            ) : []}
-                                            {this.props.canCreateCopy ? (
+                                            )}
+                                            {this.props.canCreateCopy && (
                                                 <MenuItem onClick={this.handleClickSaveAsCopy}>
                                                     {createCopyMessage}
                                                 </MenuItem>
-                                            ) : []}
-                                            {this.props.canRemix ? (
+                                            )}
+                                            {this.props.canRemix && (
                                                 <MenuItem onClick={this.handleClickRemix}>
                                                     {remixMessage}
                                                 </MenuItem>
-                                            ) : []}
+                                            )}
                                         </MenuSection>
                                     )}
                                     <MenuSection>
@@ -397,10 +397,10 @@ class MenuBar extends React.Component {
                                             userOwnsProject={this.props.userOwnsProject}
                                             onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                         >
-                                            {(className, renderFileInput, loadProject) => (
+                                            {(className, renderFileInput, handleLoadProject) => (
                                                 <MenuItem
                                                     className={className}
-                                                    onClick={loadProject}
+                                                    onClick={handleLoadProject}
                                                 >
                                                     {/* eslint-disable max-len */}
                                                     {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
@@ -412,7 +412,7 @@ class MenuBar extends React.Component {
                                         <SB3Downloader>{(className, downloadProjectCallback) => (
                                             <MenuItem
                                                 className={className}
-                                                onClick={this.handleSaveToComputer(downloadProjectCallback)}
+                                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
                                             >
                                                 <FormattedMessage
                                                     defaultMessage="Save to your computer"
@@ -758,6 +758,7 @@ MenuBar.propTypes = {
 };
 
 MenuBar.defaultProps = {
+    logo: scratchLogo,
     onShare: () => {}
 };
 

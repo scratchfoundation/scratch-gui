@@ -33,29 +33,33 @@ class AudioEffects {
         let sampleCount = buffer.length;
         const affectedSampleCount = Math.floor((this.trimEndSeconds - this.trimStartSeconds) *
             buffer.sampleRate);
+        let adjustedAffectedSampleCount = affectedSampleCount;
         const unaffectedSampleCount = sampleCount - affectedSampleCount;
 
         this.playbackRate = 1;
         switch (name) {
         case effectTypes.ECHO:
-            sampleCount = Math.max(sampleCount, Math.floor((this.trimEndSeconds + EchoEffect.TAIL_SECONDS) * buffer.sampleRate));
+            sampleCount = Math.max(sampleCount,
+                Math.floor((this.trimEndSeconds + EchoEffect.TAIL_SECONDS) * buffer.sampleRate));
             break;
         case effectTypes.FASTER:
             this.playbackRate = pitchRatio;
-            sampleCount = unaffectedSampleCount + Math.floor(affectedSampleCount / this.playbackRate);
-            this.adjustedTrimEndSeconds = this.trimStartSeconds +
-                ((affectedSampleCount / this.playbackRate) / buffer.sampleRate);
+            adjustedAffectedSampleCount =  Math.floor(affectedSampleCount / this.playbackRate);
+            sampleCount = unaffectedSampleCount + adjustedAffectedSampleCount;
+
             break;
         case effectTypes.SLOWER:
             this.playbackRate = 1 / pitchRatio;
-            sampleCount = unaffectedSampleCount + Math.floor(affectedSampleCount / this.playbackRate);
-            this.adjustedTrimEndSeconds = this.trimStartSeconds +
-                ((affectedSampleCount / this.playbackRate) / buffer.sampleRate);
+            adjustedAffectedSampleCount =  Math.floor(affectedSampleCount / this.playbackRate);
+            sampleCount = unaffectedSampleCount + adjustedAffectedSampleCount;
             break;
         }
 
-        this.adjustedTrimStart = this.adjustedTrimStartSeconds / (sampleCount / buffer.sampleRate);
-        this.adjustedTrimEnd = this.adjustedTrimEndSeconds / (sampleCount / buffer.sampleRate);
+        const durationSeconds = sampleCount / buffer.sampleRate;
+        this.adjustedTrimEndSeconds = this.trimStartSeconds +
+            (adjustedAffectedSampleCount / buffer.sampleRate);
+        this.adjustedTrimStart = this.adjustedTrimStartSeconds / durationSeconds;
+        this.adjustedTrimEnd = this.adjustedTrimEndSeconds / durationSeconds;
 
         if (window.OfflineAudioContext) {
             this.audioContext = new window.OfflineAudioContext(1, sampleCount, buffer.sampleRate);

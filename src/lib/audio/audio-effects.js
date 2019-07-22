@@ -44,13 +44,13 @@ class AudioEffects {
             break;
         case effectTypes.FASTER:
             this.playbackRate = pitchRatio;
-            adjustedAffectedSampleCount =  Math.floor(affectedSampleCount / this.playbackRate);
+            adjustedAffectedSampleCount = Math.floor(affectedSampleCount / this.playbackRate);
             sampleCount = unaffectedSampleCount + adjustedAffectedSampleCount;
 
             break;
         case effectTypes.SLOWER:
             this.playbackRate = 1 / pitchRatio;
-            adjustedAffectedSampleCount =  Math.floor(affectedSampleCount / this.playbackRate);
+            adjustedAffectedSampleCount = Math.floor(affectedSampleCount / this.playbackRate);
             sampleCount = unaffectedSampleCount + adjustedAffectedSampleCount;
             break;
         }

@@ -64,7 +64,7 @@ describe('Effects', () => {
         expect(robotEffect.input).toBeInstanceOf(AudioNode);
         expect(robotEffect.output).toBeInstanceOf(AudioNode);
 
-        const echoEffect = new EchoEffect(audioContext, 0.75, 0, 1);
+        const echoEffect = new EchoEffect(audioContext, 0, 1);
         expect(echoEffect.input).toBeInstanceOf(AudioNode);
         expect(echoEffect.output).toBeInstanceOf(AudioNode);
 

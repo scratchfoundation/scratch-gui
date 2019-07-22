@@ -17,11 +17,6 @@
 
 }
 
-/* .delete-button.large:hover {
-    transform: scale(1.1, 1.1);
-    box-shadow: 0 0 0 4px $ui-black-transparent;
-} */
-
 .delete-button-visible {
   display: flex;
   align-items: center;

@@ -13,7 +13,7 @@ const DeleteButton = props => (
             props.className
         )}
         role="button"
-        tabIndex="0"
+        tabIndex={props.tabIndex}
         onClick={props.onClick}
     >
         <div className={styles.deleteButtonVisible}>
@@ -28,7 +28,12 @@ const DeleteButton = props => (
 
 DeleteButton.propTypes = {
     className: PropTypes.string,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    tabIndex: PropTypes.number
+};
+
+DeleteButton.defaultProps = {
+    tabIndex: 0
 };
 
 export default DeleteButton;

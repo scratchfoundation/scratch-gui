@@ -396,7 +396,6 @@ class SoundEditor extends React.Component {
                 setRef={this.setRef}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
-                onActivateTrim={this.handleDelete}
                 onChangeName={this.handleChangeName}
                 onContainerClick={this.handleContainerClick}
                 onCopy={this.handleCopy}

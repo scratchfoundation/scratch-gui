@@ -324,7 +324,6 @@ SoundEditor.propTypes = {
     chunkLevels: PropTypes.arrayOf(PropTypes.number).isRequired,
     intl: intlShape,
     name: PropTypes.string.isRequired,
-    onActivateTrim: PropTypes.func.isRequired,
     onChangeName: PropTypes.func.isRequired,
     onContainerClick: PropTypes.func.isRequired,
     onCopy: PropTypes.func.isRequired,

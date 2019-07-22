@@ -122,9 +122,10 @@ module.exports = [
             rules: base.module.rules.concat([
                 {
                     test: /\.(svg|png|wav|gif|jpg)$/,
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
-                        outputPath: 'static/assets/'
+                        outputPath: 'static/assets/',
+                        limit: 8192
                     }
                 }
             ])
@@ -208,10 +209,11 @@ module.exports = [
                 rules: base.module.rules.concat([
                     {
                         test: /\.(svg|png|wav|gif|jpg)$/,
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
                             outputPath: 'static/assets/',
-                            publicPath: `${STATIC_PATH}/assets/`
+                            publicPath: `${STATIC_PATH}/assets/`,
+                            limit: 8192
                         }
                     }
                 ])

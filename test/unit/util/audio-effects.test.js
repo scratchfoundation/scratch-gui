@@ -31,6 +31,25 @@ describe('Audio Effects manager', () => {
     test.skip('process starts the offline rendering context and returns a promise', () => {
         // @todo haven't been able to get web audio test api to actually run render
     });
+
+    test('reverse effect strictly reverses the samples', () => {
+        const fakeSound = [1, 2, 3, 4, 5, 6, 7, 8];
+
+        const fakeBuffer = audioContext.createBuffer(1, 8, 44100);
+        const bufferData = fakeBuffer.getChannelData(0);
+        fakeSound.forEach((sample, index) => {
+            bufferData[index] = sample;
+        });
+
+        // Reverse the entire sound
+        const reverseAll = new AudioEffects(fakeBuffer, 'reverse', 0, 1);
+        expect(Array.from(reverseAll.buffer.getChannelData(0))).toEqual(fakeSound.reverse());
+
+        // Reverse part of the sound
+        const reverseSelection = new AudioEffects(fakeBuffer, 'reverse', 0.25, 0.75);
+        const selectionReversed = [1, 2, 6, 5, 4, 3, 7, 8];
+        expect(Array.from(reverseSelection.buffer.getChannelData(0))).toEqual(selectionReversed);
+    });
 });
 
 describe('Effects', () => {

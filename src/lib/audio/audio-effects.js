@@ -83,7 +83,7 @@ class AudioEffects {
             const endSamples = Math.floor(this.trimEndSeconds * buffer.sampleRate);
             let counter = 0;
             for (let i = 0; i < bufferLength; i++) {
-                if (i > startSamples && i < endSamples) {
+                if (i >= startSamples && i < endSamples) {
                     newBufferData[i] = originalBufferData[endSamples - counter - 1];
                     counter++;
                 } else {

@@ -38,7 +38,7 @@ class AudioEffects {
         this.playbackRate = 1;
         switch (name) {
         case effectTypes.ECHO:
-            sampleCount = Math.max(sampleCount, Math.floor((this.trimEndSeconds + 0.75) * buffer.sampleRate));
+            sampleCount = Math.max(sampleCount, Math.floor((this.trimEndSeconds + EchoEffect.TAIL_SECONDS) * buffer.sampleRate));
             break;
         case effectTypes.FASTER:
             this.playbackRate = pitchRatio;
@@ -115,7 +115,7 @@ class AudioEffects {
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ECHO:
-            ({input, output} = new EchoEffect(this.audioContext, 0.25,
+            ({input, output} = new EchoEffect(this.audioContext,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.ROBOT:

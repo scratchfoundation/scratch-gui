@@ -311,7 +311,7 @@ class SoundEditor extends React.Component {
                 const newLength = sampleRateRatio * buffer.samples.length;
                 const offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
                 const source = offlineContext.createBufferSource();
-                const audioBuffer = this.audioContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
+                const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
                 audioBuffer.getChannelData(0).set(buffer.samples);
                 source.buffer = audioBuffer;
                 source.connect(offlineContext.destination);

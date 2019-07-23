@@ -1,10 +1,11 @@
 @import "../../css/colors.css";
 
 $border-radius: 4px;
-$trim-handle-width: 12px;
-$trim-handle-height: 14px;
+$trim-handle-width: 30px;
+$trim-handle-height: 30px;
+$trim-handle-border: 3px;
 $stripe-size: 10px;
-$hover-scale: 2;
+$hover-scale: 1.25;
 
 .absolute {
     position: absolute;
@@ -88,6 +89,10 @@ $hover-scale: 2;
     border-right: none;
 }
 
+.right-handle {
+    transform: scaleX(-1);
+}
+
 .selector .left-handle {
     left: 0
 }
@@ -106,19 +111,19 @@ $hover-scale: 2;
 
 .trim-handle {
     position: absolute;
-    left: calc(-$trim-handle-width / 2);
     width: $trim-handle-width;
     height: $trim-handle-height;
 }
 
-.selector .trim-handle {
-    filter: hue-rotate(180deg);
+.trimmer .trim-handle {
+    filter: hue-rotate(150deg);
 }
 
 .trim-handle img {
     position: absolute;
     width: $trim-handle-width;
     height: $trim-handle-height;
+    left: calc(-$trim-handle-width + $trim-handle-border * 1.5);
 
     /* Make sure image dragging isn't triggered */
     user-select: none;
@@ -129,22 +134,13 @@ $hover-scale: 2;
 }
 
 .top-trim-handle {
-    top: -$trim-handle-height;
+    top: calc(-$trim-handle-height + $trim-handle-border);
 }
 
 .bottom-trim-handle {
-    bottom: -$trim-handle-height;
+    bottom: calc(-$trim-handle-height + $trim-handle-border);
 }
 
 .top-trim-handle img {
-    transform: rotate(180deg);
-}
-
-/* Increase handle size when anywhere on draggable area is hovered */
-.trim-background:hover img {
-    transform: scale($hover-scale);
-}
-
-.trim-background:hover .top-trim-handle img {
-    transform: rotate(180deg) scale($hover-scale);
+    transform: scaleY(-1);
 }

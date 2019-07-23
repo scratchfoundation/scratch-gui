@@ -19,6 +19,7 @@ const DeleteButton = props => (
         <div className={styles.deleteButtonVisible}>
             <img
                 className={styles.deleteIcon}
+                draggable={false}
                 src={deleteIcon}
             />
         </div>

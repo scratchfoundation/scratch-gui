@@ -17,7 +17,6 @@ import playIcon from '../record-modal/icon--play.svg';
 import stopIcon from '../record-modal/icon--stop-playback.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
-import echoIcon from './icon--echo.svg';
 import fasterIcon from './icon--faster.svg';
 import slowerIcon from './icon--slower.svg';
 import louderIcon from './icon--louder.svg';

@@ -188,6 +188,10 @@ $border-radius: 0.25rem;
     margin-right: 1rem;
 }
 
+.button-group {
+    display: flex;
+}
+
 .button-group .button {
     border-radius: 0;
 }

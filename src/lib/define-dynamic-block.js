@@ -187,6 +187,9 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                         args.push({type: 'input_value', name: argName});
                     }
                     break;
+                case ArgumentType.NUMBER:
+                    args.push({type: 'input_value', name: argName});
+                    break;
                 case ArgumentType.BOOLEAN:
                     args.push({type: 'input_value', name: argName, check: 'Boolean'});
                     break;

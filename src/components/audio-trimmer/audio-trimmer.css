@@ -113,6 +113,7 @@ $hover-scale: 1.25;
     position: absolute;
     width: $trim-handle-width;
     height: $trim-handle-height;
+    right: 0;
 }
 
 .trimmer .trim-handle {
@@ -123,7 +124,7 @@ $hover-scale: 1.25;
     position: absolute;
     width: $trim-handle-width;
     height: $trim-handle-height;
-    left: calc(-$trim-handle-width + $trim-handle-border * 1.5);
+    left: calc($trim-handle-border * 1.5);
 
     /* Make sure image dragging isn't triggered */
     user-select: none;

@@ -411,42 +411,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Echo
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
-          Robot
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
           Louder
         </span>
       </div>
@@ -489,7 +453,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={undefined}
       role="button"
     >
       <img
@@ -501,7 +465,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Reverse
+          Fade in
         </span>
       </div>
     </div>
@@ -525,7 +489,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
+      onClick={[Function]}
       role="button"
     >
       <img
@@ -537,7 +501,25 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Fade in
+          Reverse
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Robot
         </span>
       </div>
     </div>

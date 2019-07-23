@@ -55,7 +55,6 @@ describe('Working with sounds', () => {
         await clickText('Faster');
         await clickText('Slower');
         await clickText('Robot');
-        await clickText('Echo');
         await clickText('Reverse');
 
         const logs = await getLogs();

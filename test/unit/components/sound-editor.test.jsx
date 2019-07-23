@@ -88,9 +88,6 @@ describe('Sound Editor Component', () => {
         wrapper.find('[children="Reverse"]').simulate('click');
         expect(props.onReverse).toHaveBeenCalled();
 
-        wrapper.find('[children="Echo"]').simulate('click');
-        expect(props.onEcho).toHaveBeenCalled();
-
         wrapper.find('[children="Robot"]').simulate('click');
         expect(props.onRobot).toHaveBeenCalled();
 

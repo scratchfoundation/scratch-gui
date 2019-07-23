@@ -267,18 +267,6 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
-                img={echoIcon}
-                title={<FormattedMessage {...messages.echo} />}
-                onClick={props.onEcho}
-            />
-            <IconButton
-                className={styles.effectButton}
-                img={robotIcon}
-                title={<FormattedMessage {...messages.robot} />}
-                onClick={props.onRobot}
-            />
-            <IconButton
-                className={styles.effectButton}
                 img={louderIcon}
                 title={<FormattedMessage {...messages.louder} />}
                 onClick={props.onLouder}
@@ -297,9 +285,9 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
-                img={reverseIcon}
-                title={<FormattedMessage {...messages.reverse} />}
-                onClick={props.onReverse}
+                img={fadeInIcon}
+                title={<FormattedMessage {...messages.fadeIn} />}
+                onClick={props.onFadeIn}
             />
             <IconButton
                 className={styles.effectButton}
@@ -309,9 +297,15 @@ const SoundEditor = props => (
             />
             <IconButton
                 className={styles.effectButton}
-                img={fadeInIcon}
-                title={<FormattedMessage {...messages.fadeIn} />}
-                onClick={props.onFadeIn}
+                img={reverseIcon}
+                title={<FormattedMessage {...messages.reverse} />}
+                onClick={props.onReverse}
+            />
+            <IconButton
+                className={styles.effectButton}
+                img={robotIcon}
+                title={<FormattedMessage {...messages.robot} />}
+                onClick={props.onRobot}
             />
         </div>
     </div>

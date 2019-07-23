@@ -334,6 +334,7 @@ class SoundEditor extends React.Component {
             newSamples.set(this.props.samples, 0);
             newSamples.set(this.state.copyBuffer.samples, this.props.samples.length);
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
+            this.handlePlay();
         } else {
             // else replace the selection with the pasted sound
             const trimStartSamples = this.state.trimStart * this.props.samples.length;
@@ -352,15 +353,12 @@ class SoundEditor extends React.Component {
             const newDurationSeconds = newSamples.length / this.state.copyBuffer.sampleRate;
             const adjustedTrimStart = trimStartSeconds / newDurationSeconds;
             const adjustedTrimEnd = trimEndSeconds / newDurationSeconds;
+            this.submitNewSamples(newSamples, this.props.sampleRate, false);
             this.setState({
                 trimStart: adjustedTrimStart,
                 trimEnd: adjustedTrimEnd
-            });
-
-            this.submitNewSamples(newSamples, this.props.sampleRate, false);
+            }, this.handlePlay);
         }
-
-        this.handlePlay();
     }
     handlePaste () {
         if (!this.state.copyBuffer) return;

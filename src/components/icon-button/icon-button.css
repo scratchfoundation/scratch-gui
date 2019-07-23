@@ -17,6 +17,7 @@
 
 .title {
     margin-top: 0.5rem;
+    text-align: center;
 }
 
 .disabled {
@@ -25,5 +26,5 @@
 }
 
 .container:active {
-    background-color: $motion-transparent;
+    background-color: $motion-light-transparent;
 }

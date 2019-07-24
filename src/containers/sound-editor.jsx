@@ -79,6 +79,7 @@ class SoundEditor extends React.Component {
             return;
         }
         if (event.key === ' ') {
+            event.preventDefault();
             if (this.state.playhead) {
                 this.handleStopPlaying();
             } else {
@@ -86,6 +87,7 @@ class SoundEditor extends React.Component {
             }
         }
         if (event.key === 'Delete' || event.key === 'Backspace') {
+            event.preventDefault();
             if (event.shiftKey) {
                 this.handleDeleteInverse();
             } else {
@@ -98,18 +100,23 @@ class SoundEditor extends React.Component {
         }
         if (event.metaKey || event.ctrlKey) {
             if (event.shiftKey && event.key.toLowerCase() === 'z') {
+                event.preventDefault();
                 if (this.redoStack.length > 0) {
                     this.handleRedo();
                 }
             } else if (event.key === 'z') {
                 if (this.undoStack.length > 0) {
+                    event.preventDefault();
                     this.handleUndo();
                 }
             } else if (event.key === 'c') {
+                event.preventDefault();
                 this.handleCopy();
             } else if (event.key === 'v') {
+                event.preventDefault();
                 this.handlePaste();
             } else if (event.key === 'a') {
+                event.preventDefault();
                 this.handleUpdateTrim(0, 1);
             }
         }

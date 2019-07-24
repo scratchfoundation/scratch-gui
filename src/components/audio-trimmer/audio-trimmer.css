@@ -94,19 +94,19 @@ $hover-scale: 1.25;
 }
 
 .selector .left-handle {
-    left: 0
+    left: -1px
 }
 
 .selector .right-handle {
-    right: 0
+    right: -1px
 }
 
 .trimmer .left-handle {
-    right: 0
+    right: -1px
 }
 
 .trimmer .right-handle {
-    left: 0
+    left: -1px
 }
 
 .trim-handle {

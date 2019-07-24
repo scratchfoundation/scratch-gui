@@ -75,7 +75,8 @@ class AudioSelector extends React.Component {
             });
         } else {
             this.setState({
-                trimStart: newTrim
+                trimStart: newTrim,
+                trimEnd: this.initialTrimEnd
             });
         }
     }
@@ -89,6 +90,7 @@ class AudioSelector extends React.Component {
             });
         } else {
             this.setState({
+                trimStart: this.initialTrimStart,
                 trimEnd: newTrim
             });
         }

@@ -141,6 +141,7 @@ $border-radius: 0.25rem;
     color: $text-primary;
     font-size: 0.625rem;
     user-select: none;
+    padding: 0.25rem 0;
 }
 
 .effect-button + .effect-button {

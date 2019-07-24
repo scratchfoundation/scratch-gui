@@ -62,6 +62,8 @@ class AudioSelector extends React.Component {
 
         this.containerSize = width;
         this.trimEndDragRecognizer.start(e);
+
+        e.preventDefault();
     }
     handleTrimStartMouseMove (currentOffset, initialOffset) {
         const dx = (currentOffset.x - initialOffset.x) / this.containerSize;
@@ -113,6 +115,7 @@ class AudioSelector extends React.Component {
         this.initialTrimStart = this.props.trimStart;
         this.initialTrimEnd = this.props.trimEnd;
         e.stopPropagation();
+        e.preventDefault();
     }
     handleTrimEndMouseDown (e) {
         this.containerSize = this.containerElement.getBoundingClientRect().width;
@@ -120,6 +123,7 @@ class AudioSelector extends React.Component {
         this.initialTrimEnd = this.props.trimEnd;
         this.initialTrimStart = this.props.trimStart;
         e.stopPropagation();
+        e.preventDefault();
     }
     storeRef (el) {
         this.containerElement = el;

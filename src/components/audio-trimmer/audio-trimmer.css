@@ -114,6 +114,7 @@ $hover-scale: 1.25;
     width: $trim-handle-width;
     height: $trim-handle-height;
     right: 0;
+    user-select: none;
 }
 
 .trimmer .trim-handle {

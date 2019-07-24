@@ -295,10 +295,9 @@ class SoundEditor extends React.Component {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
 
-        const trimStartSamples = trimStart * this.props.samples.length;
-        const trimEndSamples = trimEnd * this.props.samples.length;
-
         const newCopyBuffer = this.copyCurrentBuffer();
+        const trimStartSamples = trimStart * newCopyBuffer.samples.length;
+        const trimEndSamples = trimEnd * newCopyBuffer.samples.length;
         newCopyBuffer.samples = newCopyBuffer.samples.slice(trimStartSamples, trimEndSamples);
 
         this.setState({
@@ -335,19 +334,20 @@ class SoundEditor extends React.Component {
     }
     paste () {
         // If there's no selection, paste at the end of the sound
+        const {samples} = this.copyCurrentBuffer();
         if (this.state.trimStart === null) {
-            const newLength = this.props.samples.length + this.state.copyBuffer.samples.length;
+            const newLength = samples.length + this.state.copyBuffer.samples.length;
             const newSamples = new Float32Array(newLength);
-            newSamples.set(this.props.samples, 0);
-            newSamples.set(this.state.copyBuffer.samples, this.props.samples.length);
+            newSamples.set(samples, 0);
+            newSamples.set(this.state.copyBuffer.samples, samples.length);
             this.submitNewSamples(newSamples, this.props.sampleRate, false);
             this.handlePlay();
         } else {
             // else replace the selection with the pasted sound
-            const trimStartSamples = this.state.trimStart * this.props.samples.length;
-            const trimEndSamples = this.state.trimEnd * this.props.samples.length;
-            const firstPart = this.props.samples.slice(0, trimStartSamples);
-            const lastPart = this.props.samples.slice(trimEndSamples);
+            const trimStartSamples = this.state.trimStart * samples.length;
+            const trimEndSamples = this.state.trimEnd * samples.length;
+            const firstPart = samples.slice(0, trimStartSamples);
+            const lastPart = samples.slice(trimEndSamples);
             const newLength = firstPart.length + this.state.copyBuffer.samples.length + lastPart.length;
             const newSamples = new Float32Array(newLength);
             newSamples.set(firstPart, 0);

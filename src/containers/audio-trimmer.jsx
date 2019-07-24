@@ -52,6 +52,7 @@ class AudioTrimmer extends React.Component {
         window.addEventListener('mouseup', this.handleTrimStartMouseUp);
         window.addEventListener('touchmove', this.handleTrimStartMouseMove);
         window.addEventListener('touchend', this.handleTrimStartMouseUp);
+        e.preventDefault();
     }
     handleTrimEndMouseDown (e) {
         this.initialX = getEventXY(e).x;
@@ -60,6 +61,7 @@ class AudioTrimmer extends React.Component {
         window.addEventListener('mouseup', this.handleTrimEndMouseUp);
         window.addEventListener('touchmove', this.handleTrimEndMouseMove);
         window.addEventListener('touchend', this.handleTrimEndMouseUp);
+        e.preventDefault();
     }
     storeRef (el) {
         this.containerElement = el;

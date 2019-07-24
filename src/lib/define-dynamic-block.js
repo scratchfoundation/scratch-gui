@@ -22,6 +22,10 @@ const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, exte
                     text: contextOption.text,
                     callback: () => {
                         const blockInfo = JSON.parse(this.blockInfoText);
+                        const contextOptionCallbackData = {
+                            blockInfo: blockInfo,
+                            blockId: this.id
+                        };
                         if (contextOption.builtInCallback) {
                             switch (contextOption.builtInCallback) {
                             case 'EDIT_A_PROCEDURE':
@@ -40,9 +44,13 @@ const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, exte
                                 // strings to come from scratch-vm instead
                                 const varType = blockInfo.opcode === 'variable' ? '' : 'list';
 
-                                const renameCallback = newName => contextOption.callback({
-                                    blockInfo: blockInfo, newName: newName, varType: varType
-                                });
+                                const renameCallback = newName => {
+                                    // Pass in additional information about the variable renaming to the
+                                    // extension callback
+                                    contextOptionCallbackData.newName = newName;
+                                    contextOptionCallbackData.varType = varType;
+                                    contextOption.callback(contextOptionCallbackData);
+                                };
 
                                 // Use scratch-blocks to open the variable rename modal
                                 // TODO change this to open the variable prompt directly
@@ -55,7 +63,7 @@ const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, exte
                             }
                             }
                         } else if (contextOption.callback) {
-                            contextOption.callback({blockInfo: blockInfo});
+                            contextOption.callback(contextOptionCallbackData);
                         }
                     }
                 };
@@ -151,15 +159,10 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 throw new Error('Attempted to update block info twice');
             }
             delete this.needsBlockInfoUpdate;
-
-            // Parse blockInfoText, and add this block instance's id
-            // to the blockInfoText we save back to this block.
+            this.blockInfoText = blockInfoText;
             const blockInfo = JSON.parse(blockInfoText);
-            blockInfo.id = this.id;
-            this.blockInfoText = JSON.stringify(blockInfo);
 
             // Use the parsed blockInfo to layout the block
-
             switch (blockInfo.blockType) {
             case BlockType.COMMAND:
             case BlockType.CONDITIONAL:

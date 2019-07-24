@@ -13,8 +13,8 @@ import IconButton from '../icon-button/icon-button.jsx';
 
 import styles from './sound-editor.css';
 
-import playIcon from '../record-modal/icon--play.svg';
-import stopIcon from '../record-modal/icon--stop-playback.svg';
+import playIcon from './icon--play.svg';
+import stopIcon from './icon--stop.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import fasterIcon from './icon--faster.svg';

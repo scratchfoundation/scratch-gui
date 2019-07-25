@@ -384,7 +384,7 @@ class SoundEditor extends React.Component {
     }
     handleContainerClick (e) {
         // If the click is on the sound editor's div (and not any other element), delesect
-        if (e.target === this.ref) {
+        if (e.target === this.ref && this.state.trimStart !== null) {
             this.handleUpdateTrim(null, null);
         }
     }

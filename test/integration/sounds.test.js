@@ -111,7 +111,7 @@ describe('Working with sounds', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple sounds at the same time', async () => {
+    test('Adding multiple sounds at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/movie.wav'),
             path.resolve(__dirname, '../fixtures/sneaker.wav')

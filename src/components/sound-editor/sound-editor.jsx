@@ -195,7 +195,7 @@ const SoundEditor = props => (
                     onClick={props.onPaste}
                 />
                 <IconButton
-                    className={styles.toolButton}
+                    className={classNames(styles.toolButton, styles.flipInRtl)}
                     img={copyToNewIcon}
                     title={props.intl.formatMessage(messages.copyToNew)}
                     onClick={props.onCopyToNew}
@@ -265,19 +265,19 @@ const SoundEditor = props => (
                 onClick={props.onSlower}
             />
             <IconButton
-                className={styles.effectButton}
+                className={classNames(styles.effectButton, styles.flipInRtl)}
                 img={louderIcon}
                 title={<FormattedMessage {...messages.louder} />}
                 onClick={props.onLouder}
             />
             <IconButton
-                className={styles.effectButton}
+                className={classNames(styles.effectButton, styles.flipInRtl)}
                 img={softerIcon}
                 title={<FormattedMessage {...messages.softer} />}
                 onClick={props.onSofter}
             />
             <IconButton
-                className={styles.effectButton}
+                className={classNames(styles.effectButton, styles.flipInRtl)}
                 img={muteIcon}
                 title={<FormattedMessage {...messages.mute} />}
                 onClick={props.onMute}

@@ -136,21 +136,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <svg
         className={undefined}
-        viewBox="-1 0 600 160"
+        viewBox="0 0 600 160"
       >
-        <line
-          className={undefined}
-          x1={-1}
-          x2={600}
-          y1={80}
-          y2={80}
-        />
         <g
           transform="scale(1, -1) translate(0, -80)"
         >
           <path
             className={undefined}
-            d="M0 0Q0 0 100 80 Q200 160 300 80 Q400 0 400 0 Q400 0 300 -80 Q200 -160 100 -80 Q0 0 0 0Z"
+            d="M0 0Q0 80 150 120 Q300 160 450 200 Q600 240 600 0 Q600 -240 450 -200 Q300 -160 150 -120 Q0 -80 0 0Z"
             strokeLinejoin="round"
             strokeWidth={1}
           />

@@ -131,4 +131,14 @@ describe('Working with sounds', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Copy to new button adds a new sound', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await clickText('Copy to New', scope.soundsTab);
+        await clickText('Meow2', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

@@ -1,27 +1,20 @@
 @import "../../css/colors.css";
 @import "../../css/units.css";
 
-/* the delete button has .25rem invisible 'slop' around the visible button
-   to make it easier to tap on a touch device */
+/* wrapper to allow for touch slop if we decide to add it */
 .delete-button {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    overflow: hidden;  /* Mask the icon animation */
-    width: 2rem;
-    height: 2rem;
     user-select: none;
     cursor: pointer;
     transition: all 0.15s ease-out;
-
 }
 
 .delete-button-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;  /* Mask the icon animation */
   width: 1.75rem;
   height: 1.75rem;

@@ -22,15 +22,18 @@ class Waveform extends React.PureComponent {
         const filteredData = takeEveryN === 1 ? data.slice(0) :
             data.filter((_, i) => i % takeEveryN === 0);
 
-        filteredData[0] = 0;
-        filteredData[filteredData.length - 1] = 0;
+        // Need at least two points to render waveform.
+        if (filteredData.length === 1) {
+            filteredData.push(filteredData[0]);
+        }
 
+        const maxIndex = filteredData.length - 1;
         const points = [
             ...filteredData.map((v, i) =>
-                [width * i / filteredData.length, height * v / 2]
+                [width * (i / maxIndex), height * v / 2]
             ),
             ...filteredData.reverse().map((v, i) =>
-                [width * (filteredData.length - i - 1) / filteredData.length, -height * v / 2]
+                [width * (1 - (i / maxIndex)), -height * v / 2]
             )
         ];
         const pathComponents = points.map(([x, y], i) => {
@@ -41,15 +44,8 @@ class Waveform extends React.PureComponent {
         return (
             <svg
                 className={styles.container}
-                viewBox={`-1 0 ${width} ${height}`}
+                viewBox={`0 0 ${width} ${height}`}
             >
-                <line
-                    className={styles.baseline}
-                    x1={-1}
-                    x2={width}
-                    y1={height / 2}
-                    y2={height / 2}
-                />
                 <g transform={`scale(1, -1) translate(0, -${height / 2})`}>
                     <path
                         className={styles.waveformPath}

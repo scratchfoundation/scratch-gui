@@ -88,7 +88,13 @@ class MockBlock {
     constructor (staticBlockInfo, extendedOpcode) {
         // mimic Closure-style inheritance by mixing in `defineDynamicBlock` output as this instance's prototype
         // see also the `Blockly.Block` constructor
-        const prototype = defineDynamicBlock(MockScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode);
+        const prototype = defineDynamicBlock(
+            null /* guiContext */,
+            MockScratchBlocks,
+            categoryInfo,
+            staticBlockInfo,
+            extendedOpcode
+        );
         mixin(this, prototype);
         this.init();
 

@@ -5,7 +5,7 @@ import BlockType from 'scratch-vm/src/extension-support/block-type';
 import ContextMenuContext from 'scratch-vm/src/extension-support/context-menu-context';
 import log from './log.js';
 
-const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) => {
+const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, extendedOpcode) => {
     // Handle custom context menu options
     const customContextMenuForBlock = {
         /**
@@ -21,17 +21,49 @@ const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) 
                     enabled: true,
                     text: contextOption.text,
                     callback: () => {
+                        const blockInfo = JSON.parse(this.blockInfoText);
+                        const contextOptionCallbackData = {
+                            blockInfo: blockInfo,
+                            blockId: this.id
+                        };
                         if (contextOption.builtInCallback) {
                             switch (contextOption.builtInCallback) {
                             case 'EDIT_A_PROCEDURE':
                                 // TODO FILL THIS IN
+                                // E.g. make use of guiContext here to bring up
+                                // the edit custom proc modal
                                 break;
-                            case 'RENAME_A_VARIABLE':
-                                // TODO FILL THIS IN
+                            case 'RENAME_A_VARIABLE': {
+                                // Extract variable info from this block
+                                const varName = blockInfo.text;
+                                // TODO it's not great that the following is hard coded...
+                                // We could use ScratchBlocks.SCALAR_VARIABLE_TYPE and
+                                // ScratchBlocks.LIST_VARIABLE_TYPE here instead, but
+                                // given that we eventually want to decouple this code from
+                                // using ScratchBlocks variables, we ultimately want these
+                                // strings to come from scratch-vm instead
+                                const varType = blockInfo.opcode === 'variable' ? '' : 'list';
+
+                                const renameCallback = newName => {
+                                    // Pass in additional information about the variable renaming to the
+                                    // extension callback
+                                    contextOptionCallbackData.newName = newName;
+                                    contextOptionCallbackData.varType = varType;
+                                    contextOption.callback(contextOptionCallbackData);
+                                };
+
+                                // Use scratch-blocks to open the variable rename modal
+                                // TODO change this to open the variable prompt directly
+                                // from GUI instead of going through scratch-blocks.
+                                // Will then need to handle name validation and throw up an alert, etc.
+                                const workspace = guiContext.workspace;
+                                const variable = workspace.getVariable(varName, varType);
+                                ScratchBlocks.Variables.renameVariable(workspace, variable, renameCallback);
                                 break;
                             }
+                            }
                         } else if (contextOption.callback) {
-                            contextOption.callback({blockInfo: JSON.parse(this.blockInfoText)});
+                            contextOption.callback(contextOptionCallbackData);
                         }
                     }
                 };
@@ -77,11 +109,11 @@ const setupCustomContextMenu = (ScratchBlocks, contextMenuInfo, extendedOpcode) 
  * @param {string} extendedOpcode - The opcode for the block (including the extension ID).
  */
 // TODO: grow this until it can fully replace `_convertForScratchBlocks` in the VM runtime
-const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => {
+const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlockInfo, extendedOpcode) => {
     // Set up context menus if any
     const contextMenuInfo = staticBlockInfo.info.customContextMenu;
     const contextMenuName = contextMenuInfo ?
-        setupCustomContextMenu(ScratchBlocks, staticBlockInfo.info.customContextMenu, extendedOpcode) : '';
+        setupCustomContextMenu(guiContext, ScratchBlocks, staticBlockInfo.info.customContextMenu, extendedOpcode) : '';
 
     return ({
         init: function () {
@@ -112,6 +144,8 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
             this.blockInfoText = '{}';
             // we need a block info update (through `domToMutation`) before we have a completely initialized block
             this.needsBlockInfoUpdate = true;
+            // Keep track of menu info for use in laying out the block and its menus
+            this.menus = categoryInfo.convertedMenuInfo;
         },
         mutationToDom: function () {
             const container = document.createElement('mutation');
@@ -128,6 +162,7 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
             this.blockInfoText = blockInfoText;
             const blockInfo = JSON.parse(blockInfoText);
 
+            // Use the parsed blockInfo to layout the block
             switch (blockInfo.blockType) {
             case BlockType.COMMAND:
             case BlockType.CONDITIONAL:
@@ -168,6 +203,14 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
                 const arg = blockInfo.arguments[argName];
                 switch (arg.type) {
                 case ArgumentType.STRING:
+                    if (arg.menu && !this.menus[arg.menu].acceptReporters) {
+                        const options = this.menus[arg.menu].items;
+                        args.push({type: 'field_dropdown', name: argName, options: options});
+                    } else {
+                        args.push({type: 'input_value', name: argName});
+                    }
+                    break;
+                case ArgumentType.NUMBER:
                     args.push({type: 'input_value', name: argName});
                     break;
                 case ArgumentType.BOOLEAN:
@@ -176,14 +219,64 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
                 }
                 return `%${++argCount}`;
             });
+            const wasRendered = this.rendered;
+            this.rendered = false;
+            const connectionMap = this.disconnectOldBlocks_();
+            this.removeAllInputs_();
+
             this.interpolate_(scratchBlocksStyleText, args);
+
+            // Interpolate takes care of laying out the base block,
+            // now we need to reconnect blocks into the inputs
+            // with the same name.
+            let inputIndex = -1;
+            args.forEach(arg => {
+                let type;
+                if (arg.type === 'input_value') {
+                    inputIndex++;
+                    if (arg.check && arg.check === 'boolean') {
+                        type = 'b';
+                    } else {
+                        type = 's';
+                    }
+                    if (inputIndex < this.inputList.length) {
+                        const input = this.inputList[inputIndex];
+                        this.populateArgument_(type, inputIndex, connectionMap, input.name, input);
+                    }
+                }
+            });
+
+            // Set values on any args that have selectedValue specified
+            args.forEach(arg => {
+                if (arg.type === 'field_dropdown' && blockInfo.arguments[arg.name].selectedValue) {
+                    const field = this.getField(arg.name);
+                    if (field) {
+                        field.setValue(blockInfo.arguments[arg.name].selectedValue);
+                    }
+
+                }
+            });
+
+            this.rendered = wasRendered;
+            if (wasRendered && !this.isInsertionMarker()) {
+                this.initSvg();
+                this.render();
+            }
         },
         setBlockInfo: function (blockInfo) {
             this.needsBlockInfoUpdate = true;
             this.blockInfoText = JSON.stringify(blockInfo);
             const mutation = this.mutationToDom();
             this.domToMutation(mutation);
-        }
+        },
+        // Extra functions for dynamically updating the layout of a block and reconnecting
+        // inputs and shadow blocks.
+        removeAllInputs_: ScratchBlocks.ScratchBlocks.ProcedureUtils.removeAllInputs_,
+        disconnectOldBlocks_: ScratchBlocks.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
+        deleteShadows_: ScratchBlocks.ScratchBlocks.ProcedureUtils.deleteShadows_,
+        populateArgument_: ScratchBlocks.ScratchBlocks.ProcedureUtils.populateArgumentOnCaller_,
+        attachShadow_: ScratchBlocks.ScratchBlocks.ProcedureUtils.attachShadow_,
+        buildShadowDom_: ScratchBlocks.ScratchBlocks.ProcedureUtils.buildShadowDom_
     });
 };
 

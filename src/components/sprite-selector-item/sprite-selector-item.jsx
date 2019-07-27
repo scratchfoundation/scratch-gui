@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CloseButton from '../close-button/close-button.jsx';
+import DeleteButton from '../delete-button/delete-button.jsx';
 import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
 import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
@@ -23,8 +23,9 @@ const SpriteSelectorItem = props => (
             onMouseDown: props.onMouseDown,
             onTouchStart: props.onMouseDown
         }}
-        disable={props.dragging}
+        disable={props.preventContextMenu}
         id={`${props.name}-${contextMenuId}`}
+        ref={props.componentRef}
     >
         {typeof props.number === 'undefined' ? null : (
             <div className={styles.number}>{props.number}</div>
@@ -47,9 +48,8 @@ const SpriteSelectorItem = props => (
             ) : null}
         </div>
         {(props.selected && props.onDeleteButtonClick) ? (
-            <CloseButton
+            <DeleteButton
                 className={styles.deleteButton}
-                size={CloseButton.SIZE_SMALL}
                 onClick={props.onDeleteButtonClick}
             />
         ) : null }
@@ -89,9 +89,9 @@ const SpriteSelectorItem = props => (
 
 SpriteSelectorItem.propTypes = {
     className: PropTypes.string,
+    componentRef: PropTypes.func,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
-    dragging: PropTypes.bool,
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
@@ -101,6 +101,7 @@ SpriteSelectorItem.propTypes = {
     onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
+    preventContextMenu: PropTypes.bool,
     selected: PropTypes.bool.isRequired
 };
 

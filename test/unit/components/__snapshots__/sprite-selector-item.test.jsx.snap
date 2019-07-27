@@ -46,16 +46,20 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
     </div>
   </div>
   <div
-    aria-label="Close"
+    aria-label="Delete"
     className=""
     onClick={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
   >
-    <img
-      className=""
-      src="test-file-stub"
-    />
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+    </div>
   </div>
   <nav
     className="react-contextmenu"
@@ -126,16 +130,20 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
     </div>
   </div>
   <div
-    aria-label="Close"
+    aria-label="Delete"
     className=""
     onClick={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
   >
-    <img
-      className=""
-      src="test-file-stub"
-    />
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+    </div>
   </div>
   <nav
     className="react-contextmenu"

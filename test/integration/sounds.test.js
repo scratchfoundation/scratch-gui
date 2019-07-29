@@ -141,4 +141,29 @@ describe('Working with sounds', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Copy and pasting within a sound changes its duration', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await findByText('0.85', scope.soundsTab); // Original meow sound duration
+        await clickText('Copy', scope.soundsTab);
+        await clickText('Paste', scope.soundsTab);
+        await findByText('1.70', scope.soundsTab); // Sound has doubled in duration
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Can copy a sound from a sprite and paste into a sound on the stage', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await clickText('Copy', scope.soundsTab); // Copy the meow sound
+        await clickXpath('//span[text()="Stage"]');
+        await findByText('0.02', scope.soundsTab); // Original pop sound duration
+        await clickText('Paste', scope.soundsTab);
+        await findByText('0.87', scope.soundsTab); // Duration of pop + meow sound
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
 });

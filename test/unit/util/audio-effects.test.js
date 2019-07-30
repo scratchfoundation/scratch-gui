@@ -28,6 +28,22 @@ describe('Audio Effects manager', () => {
         expect(audioEffects.audioContext._.length).toBeGreaterThan(400);
     });
 
+    test('updates the trim positions after an effect has changed the length of selection', () => {
+        const slowerEffect = new AudioEffects(audioBuffer, 'slower', 0.25, 0.75);
+        expect(slowerEffect.adjustedTrimStartSeconds).toEqual(slowerEffect.trimStartSeconds);
+        expect(slowerEffect.adjustedTrimEndSeconds).toBeGreaterThan(slowerEffect.trimEndSeconds);
+
+        const fasterEffect = new AudioEffects(audioBuffer, 'faster', 0.25, 0.75);
+        expect(fasterEffect.adjustedTrimStartSeconds).toEqual(fasterEffect.trimStartSeconds);
+        expect(fasterEffect.adjustedTrimEndSeconds).toBeLessThan(fasterEffect.trimEndSeconds);
+
+        // Some effects do not change the length of the selection
+        const fadeEffect = new AudioEffects(audioBuffer, 'fade in', 0.25, 0.75);
+        expect(fadeEffect.adjustedTrimStartSeconds).toEqual(fadeEffect.trimStartSeconds);
+        // Should be within one millisecond (flooring can change the duration by one sample)
+        expect(fadeEffect.adjustedTrimEndSeconds).toBeCloseTo(fadeEffect.trimEndSeconds, 3);
+    });
+
     test.skip('process starts the offline rendering context and returns a promise', () => {
         // @todo haven't been able to get web audio test api to actually run render
     });

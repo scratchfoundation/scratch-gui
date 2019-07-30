@@ -1,5 +1,6 @@
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
+import {Key} from 'selenium-webdriver';
 
 const {
     clickText,
@@ -162,6 +163,23 @@ describe('Working with sounds', () => {
         await findByText('0.02', scope.soundsTab); // Original pop sound duration
         await clickText('Paste', scope.soundsTab);
         await findByText('0.87', scope.soundsTab); // Duration of pop + meow sound
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test.only('Keyboard shortcuts', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
+        await el.sendKeys(Key.chord(Key.COMMAND, 'a')); // Select all
+        await findByText('0.85', scope.soundsTab); // Meow sound duration
+        await el.sendKeys(Key.DELETE);
+        await findByText('0.00', scope.soundsTab); // Sound is now empty
+        await el.sendKeys(Key.chord(Key.COMMAND, 'z')); // undo
+        await findByText('0.85', scope.soundsTab); // Meow sound is back
+        await el.sendKeys(Key.chord(Key.COMMAND, Key.SHIFT, 'z')); // redo
+        await findByText('0.00', scope.soundsTab); // Sound is empty again
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

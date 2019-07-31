@@ -168,7 +168,7 @@ describe('Working with sounds', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Keyboard shortcuts', async () => {
+    test('Keyboard shortcuts', async () => {
         await loadUri(uri);
         await clickText('Sounds');
         const el = await findByXpath('//button[@aria-label="Choose a Sound"]');

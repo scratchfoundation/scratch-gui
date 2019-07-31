@@ -34,9 +34,9 @@
 }
 
 [dir="ltr"] .play-button {
-    left: .5rem;
+    right: .5rem;
 }
 
 [dir="rtl"] .play-button {
-    right: .5rem;
+    left: .5rem;
 }

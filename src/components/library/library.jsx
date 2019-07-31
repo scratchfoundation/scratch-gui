@@ -73,7 +73,7 @@ class LibraryComponent extends React.Component {
     handleTagClick (tag) {
         if (this.state.playingItem === null) {
             this.setState({
-                ilterQuery: '',
+                filterQuery: '',
                 selectedTag: tag.toLowerCase()
             });
         } else {

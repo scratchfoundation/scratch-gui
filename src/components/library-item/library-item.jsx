@@ -107,8 +107,9 @@ class LibraryItemComponent extends React.PureComponent {
         ) : (
             <Box
                 className={classNames(
-                    styles.libraryItem,
-                    this.props.hidden ? styles.hidden : null
+                    styles.libraryItem, {
+                        [styles.hidden]: this.props.hidden
+                    }
                 )}
                 role="button"
                 tabIndex="0"

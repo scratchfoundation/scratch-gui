@@ -45,6 +45,7 @@ const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, exte
                                 const varType = blockInfo.opcode === 'variable' ? '' : 'list';
 
                                 const renameCallback = newName => {
+                                    if (!newName) return;
                                     // Pass in additional information about the variable renaming to the
                                     // extension callback
                                     contextOptionCallbackData.newName = newName;

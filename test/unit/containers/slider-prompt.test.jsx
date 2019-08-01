@@ -55,7 +55,7 @@ describe('Slider Prompt Container', () => {
         const componentProps = wrapper.find(SliderPromptComponent).props();
         componentProps.onChangeMin({target: {value: '1.0'}});
         componentProps.onOk();
-        expect(onOk).toBeCalledWith(1, 100, false);
+        expect(onOk).toHaveBeenCalledWith(1, 100, false);
     });
 
     test('Entering integers submits with isDiscrete=true', () => {
@@ -72,7 +72,7 @@ describe('Slider Prompt Container', () => {
         componentProps.onChangeMin({target: {value: '1'}});
         componentProps.onChangeMax({target: {value: '2'}});
         componentProps.onOk();
-        expect(onOk).toBeCalledWith(1, 2, true);
+        expect(onOk).toHaveBeenCalledWith(1, 2, true);
     });
 
     test('Enter button submits the form', () => {
@@ -89,7 +89,7 @@ describe('Slider Prompt Container', () => {
         componentProps.onChangeMin({target: {value: '1'}});
         componentProps.onChangeMax({target: {value: '2'}});
         componentProps.onKeyPress({key: 'Enter'});
-        expect(onOk).toBeCalledWith(1, 2, true);
+        expect(onOk).toHaveBeenCalledWith(1, 2, true);
     });
 
     test('Validates number-ness before submitting', () => {
@@ -105,7 +105,7 @@ describe('Slider Prompt Container', () => {
         const componentProps = wrapper.find(SliderPromptComponent).props();
         componentProps.onChangeMin({target: {value: 'hello'}});
         componentProps.onOk();
-        expect(onOk).not.toBeCalled();
-        expect(onCancel).toBeCalled();
+        expect(onOk).not.toHaveBeenCalled();
+        expect(onCancel).toHaveBeenCalled();
     });
 });

@@ -26,13 +26,14 @@ import {
 /**
  * SBFileUploader component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
- *     function (renderFileInput, loadProject) {}
+ *     function (renderFileInput, handleLoadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <SBFileUploader>{(renderFileInput, loadProject) => (
+ * <SBFileUploader>{(className, renderFileInput, handleLoadProject) => (
  *     <MyCoolComponent
- *         onClick={loadProject}
+ *         className={className}
+ *         onClick={handleLoadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>

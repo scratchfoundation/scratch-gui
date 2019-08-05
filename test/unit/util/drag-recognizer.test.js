@@ -18,25 +18,25 @@ describe('DragRecognizer', () => {
     test('start -> small drag', () => {
         dragRecognizer.start({clientX: 100, clientY: 100});
         window.dispatchEvent(new MouseEvent('mousemove', {clientX: 101, clientY: 101}));
-        expect(onDrag).not.toBeCalled();
+        expect(onDrag).not.toHaveBeenCalled();
     });
 
     test('start -> large vertical touch move -> scroll, not drag', () => {
         dragRecognizer.start({clientX: 100, clientY: 100});
         window.dispatchEvent(new MouseEvent('touchmove', {clientX: 106, clientY: 150}));
-        expect(onDrag).not.toBeCalled();
+        expect(onDrag).not.toHaveBeenCalled();
     });
 
     test('start -> large vertical mouse move -> mouse moves always drag)', () => {
         dragRecognizer.start({clientX: 100, clientY: 100});
         window.dispatchEvent(new MouseEvent('mousemove', {clientX: 100, clientY: 150}));
-        expect(onDrag).toBeCalled();
+        expect(onDrag).toHaveBeenCalled();
     });
 
     test('start -> large horizontal touch move -> drag', () => {
         dragRecognizer.start({clientX: 100, clientY: 100});
         window.dispatchEvent(new MouseEvent('touchmove', {clientX: 150, clientY: 106}));
-        expect(onDrag).toBeCalled();
+        expect(onDrag).toHaveBeenCalled();
     });
 
     test('after starting a scroll, it cannot become a drag', () => {
@@ -44,7 +44,7 @@ describe('DragRecognizer', () => {
         window.dispatchEvent(new MouseEvent('touchmove', {clientX: 100, clientY: 110}));
         window.dispatchEvent(new MouseEvent('touchmove', {clientX: 100, clientY: 100}));
         window.dispatchEvent(new MouseEvent('touchmove', {clientX: 110, clientY: 100}));
-        expect(onDrag).not.toBeCalled();
+        expect(onDrag).not.toHaveBeenCalled();
     });
 
     test('start -> end unbinds', () => {

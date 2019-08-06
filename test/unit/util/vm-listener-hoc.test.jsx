@@ -91,4 +91,46 @@ describe('VMListenerHOC', () => {
         const actions = store.getActions();
         expect(actions.length).toEqual(0);
     });
+
+    test('PROJECT_CHANGED does dispatch if the sound recorder is visible', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = vmListenerHOC(Component);
+        store = mockStore({
+            scratchGui: {
+                mode: {},
+                modals: {soundRecorder: true},
+                vm: vm
+            }
+        });
+        mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+            />
+        );
+        vm.emit('PROJECT_CHANGED');
+        const actions = store.getActions();
+        expect(actions.length).toEqual(1);
+    });
+
+    test('PROJECT_CHANGED does not dispatch if in fullscreen mode', () => {
+        const Component = () => (<div />);
+        const WrappedComponent = vmListenerHOC(Component);
+        store = mockStore({
+            scratchGui: {
+                mode: {isFullScreen: true},
+                modals: {soundRecorder: true},
+                vm: vm
+            }
+        });
+        mount(
+            <WrappedComponent
+                store={store}
+                vm={vm}
+            />
+        );
+        vm.emit('PROJECT_CHANGED');
+        const actions = store.getActions();
+        expect(actions.length).toEqual(0);
+    });
 });

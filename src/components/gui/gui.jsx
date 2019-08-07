@@ -100,6 +100,7 @@ const GUIComponent = props => {
         onActivateTab,
         onClickLogo,
         onExtensionButtonClick,
+        onNewSpriteClick,
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
@@ -343,6 +344,7 @@ const GUIComponent = props => {
                                 <TargetPane
                                     stageSize={stageSize}
                                     vm={vm}
+                                    onNewSpriteClick={onNewSpriteClick}
                                 />
                             </Box>
                         </Box>
@@ -395,6 +397,7 @@ GUIComponent.propTypes = {
     onCloseAccountNav: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onLogOut: PropTypes.func,
+    onNewSpriteClick: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,

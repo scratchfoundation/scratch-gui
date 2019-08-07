@@ -1,4 +1,5 @@
 import bindAll from 'lodash.bindall';
+import defaultsDeep from 'lodash.defaultsdeep';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -40,6 +41,7 @@ class StageSelector extends React.Component {
         bindAll(this, [
             'handleClick',
             'handleNewBackdrop',
+            'handleNewBackdropClick',
             'handleSurpriseBackdrop',
             'handleEmptyBackdrop',
             'addBackdropFromLibraryItem',
@@ -79,6 +81,13 @@ class StageSelector extends React.Component {
     }
     handleClick () {
         this.props.onSelect(this.props.id);
+    }
+    handleNewBackdropClick (e) {
+        console.log('handle', this.props.onNewBackdropClick);
+        e.stopPropagation();
+        this.props.onNewBackdropClick(jsonStr => {
+            this.handleNewBackdrop(JSON.parse(jsonStr), false);
+        });
     }
     handleNewBackdrop (backdrops_, shouldActivateTab = true) {
         const backdrops = Array.isArray(backdrops_) ? backdrops_ : [backdrops_];
@@ -158,7 +167,7 @@ class StageSelector extends React.Component {
     }
     render () {
         const componentProps = omit(this.props, [
-            'asset', 'dispatchSetHoveredSprite', 'id', 'intl',
+            'asset', 'dispatchSetHoveredSprite', 'id', 'intl', 'onNewBackdropClick',
             'onActivateTab', 'onSelect', 'onShowImporting', 'onCloseImporting']);
         return (
             <DroppableThrottledStage
@@ -172,6 +181,7 @@ class StageSelector extends React.Component {
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
                 onSurpriseBackdropClick={this.handleSurpriseBackdrop}
+                onNewBackdropClick={this.handleNewBackdropClick}
                 {...componentProps}
             />
         );
@@ -195,8 +205,7 @@ const mapStateToProps = (state, {asset, id}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onNewBackdropClick: e => {
-        e.stopPropagation();
+    onNewBackdropClick: () => {
         dispatch(openBackdropLibrary());
     },
     onActivateTab: tabIndex => {
@@ -209,7 +218,12 @@ const mapDispatchToProps = dispatch => ({
     onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => defaultsDeep(
+    {}, ownProps, stateProps, dispatchProps
+);
+
 export default injectIntl(connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
 )(StageSelector));

@@ -101,6 +101,8 @@ const GUIComponent = props => {
         onClickLogo,
         onExtensionButtonClick,
         onNewSpriteClick,
+        onNewLibraryCostumeClick,
+        onNewLibraryBackdropClick,
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
@@ -322,7 +324,11 @@ const GUIComponent = props => {
                                     </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
-                                    {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
+                                    {costumesTabVisible ? <CostumeTab
+                                        vm={vm}
+                                        onNewLibraryBackdropClick={onNewLibraryBackdropClick}
+                                        onNewLibraryCostumeClick={onNewLibraryCostumeClick}
+                                    /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
@@ -345,6 +351,7 @@ const GUIComponent = props => {
                                     stageSize={stageSize}
                                     vm={vm}
                                     onNewSpriteClick={onNewSpriteClick}
+                                    onNewBackdropClick={onNewLibraryBackdropClick}
                                 />
                             </Box>
                         </Box>

@@ -57,7 +57,6 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
     >
       <img
         className={undefined}
-        draggable={false}
         src="test-file-stub"
       />
     </div>
@@ -142,7 +141,6 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
     >
       <img
         className={undefined}
-        draggable={false}
         src="test-file-stub"
       />
     </div>

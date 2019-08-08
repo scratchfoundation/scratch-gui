@@ -1,7 +1,7 @@
 import React from 'react';
 import {mountWithIntl, shallowWithIntl, componentWithIntl} from '../../helpers/intl-helpers.jsx';
 import SpriteSelectorItemComponent from '../../../src/components/sprite-selector-item/sprite-selector-item';
-import DeleteButton from '../../../src/containers/delete-button.jsx';
+import DeleteButton from '../../../src/components/delete-button/delete-button';
 
 describe('SpriteSelectorItemComponent', () => {
     let className;

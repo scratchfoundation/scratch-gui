@@ -1,60 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import styles from './delete-button.css';
 import deleteIcon from './icon--delete.svg';
 
-const messages = defineMessages({
-    delete: {
-        id: 'gui.deleteButton.delete',
-        description: 'Title of the button to delete a sprite, costume or sound',
-        defaultMessage: 'Delete'
-    }
-});
-
-const DeleteButtonComponent = ({
-    className,
-    intl,
-    onClick,
-    setRef,
-    tabIndex,
-    ...props
-}) => (
+const DeleteButton = props => (
     <div
-        aria-label={intl.formatMessage(messages.delete)}
+        aria-label="Delete"
         className={classNames(
             styles.deleteButton,
-            className
+            props.className
         )}
-        ref={setRef}
         role="button"
-        tabIndex={tabIndex}
-        onClick={onClick}
-        {...props}
+        tabIndex={props.tabIndex}
+        onClick={props.onClick}
     >
         <div className={styles.deleteButtonVisible}>
             <img
                 className={styles.deleteIcon}
-                draggable={false}
                 src={deleteIcon}
             />
         </div>
     </div>
+
 );
 
-
-DeleteButtonComponent.propTypes = {
+DeleteButton.propTypes = {
     className: PropTypes.string,
-    intl: intlShape,
     onClick: PropTypes.func.isRequired,
-    setRef: PropTypes.func.isRequired,
     tabIndex: PropTypes.number
 };
 
-DeleteButtonComponent.defaultProps = {
+DeleteButton.defaultProps = {
     tabIndex: 0
 };
 
-export default injectIntl(DeleteButtonComponent);
+export default DeleteButton;

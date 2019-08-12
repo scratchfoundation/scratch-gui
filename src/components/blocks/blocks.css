@@ -79,8 +79,13 @@
     /*
         Fix an issue where the drag surface was preventing hover events for sharing blocks.
         This does not prevent user interaction on the blocks themselves.
+        This was previously pointer-events: none, but that allowed clicks to fall through
+        causing incorrect stack clicks on duplicate, and prevented the correct
+        cursor from showing when dragging over the toolbox to delete.
     */
-    pointer-events: none;
+    width: 1px;
+    height: 1px;
+    overflow: visible;
     z-index: $z-index-drag-layer; /* make blocks match gui drag layer */
 }
 

@@ -212,6 +212,21 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.SUCCESS
+    },
+    {
+        alertId: 'importingAssetError',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['importingAsset'],
+        closeButton: true,
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not import that file"
+                description="Message indicating importing a file failed"
+                id="gui.alerts.importingError"
+            />
+        ),
+        level: AlertLevels.WARN,
+        maxDisplaySecs: 5
     }
 ];
 

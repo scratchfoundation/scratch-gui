@@ -147,9 +147,9 @@ class TargetPane extends React.Component {
                             this.props.onCloseImporting();
                         }
                     })
-                    .catch(this.props.onCloseImporting);
-            }, this.props.onCloseImporting);
-        }, this.props.onCloseImporting);
+                    .catch(this.props.onShowImportError);
+            }, this.props.onShowImportError);
+        }, this.props.onShowImportError);
     }
     setFileInput (input) {
         this.fileInput = input;
@@ -209,6 +209,7 @@ class TargetPane extends React.Component {
             onHighlightTarget, // eslint-disable-line no-unused-vars
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             onShowImporting, // eslint-disable-line no-unused-vars
+            onShowImportError, // eslint-disable-line no-unused-vars
             onCloseImporting, // eslint-disable-line no-unused-vars
             ...componentProps
         } = this.props;
@@ -281,7 +282,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(highlightTarget(id));
     },
     onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
-    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+    onShowImportError: () => dispatch(showStandardAlert('importingAssetError'))
 });
 
 export default injectIntl(connect(

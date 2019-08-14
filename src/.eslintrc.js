@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
     root: true,
     extends: ['scratch', 'scratch/es6', 'scratch/react', 'plugin:import/errors'],
@@ -20,6 +21,11 @@ module.exports = {
     settings: {
         react: {
             version: '16.2' // Prevent 16.3 lifecycle method errors
+        },
+        'import/resolver': {
+            webpack: {
+                config: path.resolve(__dirname, '../webpack.config.js')
+            }
         }
     }
 };

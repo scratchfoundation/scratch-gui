@@ -109,8 +109,10 @@ class DragRecognizer {
     }
 
     _handleEnd () {
-        this._onDragEnd();
         this.reset();
+        // Call the callback after reset to make sure if gestureInProgress()
+        // is used in response, it get the correct value (i.e. no gesture in progress)
+        this._onDragEnd();
     }
 
     _isDrag () {

@@ -15,6 +15,10 @@
     height: calc(100% - $library-header-height);
 }
 
+.library-scroll-grid:focus {
+    outline: none; /* not focusable via interaction, so does not need visible state */
+}
+
 .library-scroll-grid.withFilterBar {
     height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
 }

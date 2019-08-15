@@ -156,6 +156,11 @@ class LibraryComponent extends React.Component {
     }
     setFilteredDataRef (ref) {
         this.filteredDataRef = ref;
+
+        if (this.filteredDataRef) {
+            // Focus on the scroll area so it can be navigated via keyboard without needing to click into it
+            this.filteredDataRef.focus();
+        }
     }
     render () {
         return (
@@ -207,6 +212,9 @@ class LibraryComponent extends React.Component {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
                     ref={this.setFilteredDataRef}
+                    // Allow the scroll area to be focusable via JS, but not by tabbing through the modal
+                    // because the grid has focusable elements, so container does not need to be focusable
+                    tabIndex="-1"
                 >
                     {this.state.loaded ? this.getFilteredData().map((dataItem, index) => (
                         <LibraryItem

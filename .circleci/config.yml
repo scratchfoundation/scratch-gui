@@ -7,6 +7,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.16-browsers
+    
+    environment:
+      NODE_ENV: production
 
     working_directory: ~/repo
 

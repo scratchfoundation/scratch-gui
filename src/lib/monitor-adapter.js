@@ -4,7 +4,7 @@ const isUndefined = a => typeof a === 'undefined';
 
 /**
  * Convert monitors from VM format to what the GUI needs to render.
- * - Convert opcode to a label and a category
+ * - Convert opcode to a label and monitor color
  * @param {string} block.id - The id of the monitor block
  * @param {string} block.spriteName - Present only if the monitor applies only to the sprite
  *     with given target ID. The name of the target sprite when the monitor was created
@@ -12,12 +12,12 @@ const isUndefined = a => typeof a === 'undefined';
  * @param {object} block.params - Extra params to the monitor block
  * @param {string|number|Array} block.value - The monitor value
  * @param {VirtualMachine} block.vm - the VM instance which owns the block
- * @return {object} The adapted monitor with label and category
+ * @return {object} The adapted monitor with label and color
  */
 export default function ({id, spriteName, opcode, params, value, vm}) {
     // Extension monitors get their labels from the Runtime through `getLabelForOpcode`.
     // Other monitors' labels are hard-coded in `OpcodeLabels`.
-    let {label, category, labelFn} = (vm && vm.runtime.getLabelForOpcode(opcode)) || OpcodeLabels.getLabel(opcode);
+    let {label, color, labelFn} = (vm && vm.runtime.getMonitorLabelForBlock(id)) || OpcodeLabels.getLabel(opcode);
 
     // Use labelFn if provided for dynamic labelling (e.g. variables)
     if (!isUndefined(labelFn)) label = labelFn(params);
@@ -42,5 +42,5 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
         value = value.map(item => item.toString());
     }
 
-    return {id, label, category, value};
+    return {id, label, color, value};
 }

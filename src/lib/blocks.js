@@ -305,6 +305,13 @@ export default function (vm) {
     };
 
     ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
+        if (vm.runtime.getPendingMonitor(blockId)) {
+            // If this block id is associated with a pending monitor,
+            // this block should have it's checkbox state set to true.
+            // The block will have the associated pending monitor removed
+            // inside the VM (when the block is created).
+            return true;
+        }
         const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
         return monitoredBlock ? monitoredBlock.isMonitored : false;
     };

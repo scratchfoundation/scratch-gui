@@ -13,15 +13,8 @@ import ListMonitor from '../../containers/list-monitor.jsx';
 
 import styles from './monitor.css';
 
-const categories = {
-    data: '#FF8C1A',
-    sensing: '#5CB1D6',
-    sound: '#CF63CF',
-    looks: '#9966FF',
-    motion: '#4C97FF',
-    list: '#FC662C',
-    extension: '#0FBD8C'
-};
+
+const extensionColor = '#0FBD8C';
 
 const modes = {
     default: DefaultMonitor,
@@ -49,7 +42,7 @@ const MonitorComponent = props => (
                 onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
             >
                 {React.createElement(modes[props.mode], {
-                    categoryColor: categories[props.category],
+                    categoryColor: props.color,
                     ...props
                 })}
             </Box>
@@ -114,12 +107,11 @@ const MonitorComponent = props => (
 
 );
 
-MonitorComponent.categories = categories;
 
 const monitorModes = Object.keys(modes);
 
 MonitorComponent.propTypes = {
-    category: PropTypes.oneOf(Object.keys(categories)),
+    color: PropTypes.string,
     componentRef: PropTypes.func.isRequired,
     draggable: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
@@ -135,7 +127,7 @@ MonitorComponent.propTypes = {
 };
 
 MonitorComponent.defaultProps = {
-    category: 'extension',
+    color: extensionColor,
     mode: 'default'
 };
 

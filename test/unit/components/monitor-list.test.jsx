@@ -14,7 +14,7 @@ describe('MonitorListComponent', () => {
         vm: {
             runtime: {
                 requestUpdateMonitor: () => {},
-                getLabelForOpcode: () => ''
+                getMonitorLabelForBlock: () => ''
             }
         }
     }});

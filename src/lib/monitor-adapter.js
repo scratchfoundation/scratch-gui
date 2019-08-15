@@ -15,7 +15,7 @@ const isUndefined = a => typeof a === 'undefined';
  * @return {object} The adapted monitor with label and color
  */
 export default function ({id, spriteName, opcode, params, value, vm}) {
-    // Extension monitors get their labels from the Runtime through `getLabelForOpcode`.
+    // Extension monitors get their labels from the Runtime through `getMonitorLabelForBlock`.
     // Other monitors' labels are hard-coded in `OpcodeLabels`.
     let {label, color, labelFn} = (vm && vm.runtime.getMonitorLabelForBlock(id)) || OpcodeLabels.getLabel(opcode);
 

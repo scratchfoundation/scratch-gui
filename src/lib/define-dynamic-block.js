@@ -246,14 +246,45 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 }
             });
 
+            // Add a validator function to each field_dropdown which is responsible
+            // for keeping the mutation and the field value in sync. Emit a change
+            // event for the mutation so that the VM can also stay in sync with
+            // these changes.
+            const fieldValidator = argName => (function (selectedItem) {
+                // Disabling this lint rule since this function will get attached to the
+                // field_dropdown prototype appropriately.
+                /* eslint-disable no-invalid-this */
+                const oldMutation = ScratchBlocks.Xml.domToText(this.sourceBlock_.mutationToDom());
+                const currBlockInfo = JSON.parse(this.sourceBlock_.blockInfoText);
+                currBlockInfo.arguments[argName].selectedValue = selectedItem;
+                this.sourceBlock_.blockInfoText = JSON.stringify(currBlockInfo);
+                const newMutation = ScratchBlocks.Xml.domToText(this.sourceBlock_.mutationToDom());
+                ScratchBlocks.Events.fire(new ScratchBlocks.Events.BlockChange(this.sourceBlock_,
+                    'mutation', null, oldMutation, newMutation));
+                this.setValue(selectedItem);
+                return null;
+                /* eslint-enable no-invalid-this */
+            });
+
             // Set values on any args that have selectedValue specified
             args.forEach(arg => {
-                if (arg.type === 'field_dropdown' && blockInfo.arguments[arg.name].selectedValue) {
+                if (arg.type === 'field_dropdown') {
                     const field = this.getField(arg.name);
-                    if (field) {
+                    if (!field) return;
+                    field.setValidator(fieldValidator(arg.name));
+                    if (blockInfo.arguments[arg.name].selectedValue) {
                         field.setValue(blockInfo.arguments[arg.name].selectedValue);
+                    } else {
+                        // Update the block info to keep track of the selected value for the
+                        // next time this block gets rendered without any external forces
+                        // changing it
+                        // See generic blockInfoText update below.
+                        // This prevents block arguments accidentally getting updated because
+                        // they don't have a selectedValue in their block info, and the
+                        // defaultValue is also dynamic and changed (e.g. a new variable is
+                        // added that is sorted first alphabetically)
+                        blockInfo.arguments[arg.name].selectedValue = field.getValue();
                     }
-
                 }
             });
 
@@ -262,6 +293,9 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 this.initSvg();
                 this.render();
             }
+
+            // Update the blockInfoText with any changes we may have made to the block for next time it gets rendered.
+            this.blockInfoText = JSON.stringify(blockInfo);
         },
         setBlockInfo: function (blockInfo) {
             this.needsBlockInfoUpdate = true;

@@ -184,148 +184,149 @@ export default {
         ),
         tags: ['imagine-if'],
         img: libraryImagineIf,
-        steps: [
-            {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Type What You Want to Say"
-                        description="Step name for 'Type What You Want to Say' step"
-                        id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
-                    />
-                ),
-                image: 'imagineTypeWhatYouWant'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Click the Green Flag to Start"
-                        description="Step name for 'Click the Green Flag to Start' step"
-                        id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
-                    />
-                ),
-                image: 'imagineClickGreenFlag'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Any Backdrop"
-                        description="Step name for 'Choose Any Backdrop' step"
-                        id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
-                    />
-                ),
-                image: 'imagineChooseBackdrop'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Any Sprite"
-                        description="Step name for 'Choose Any Sprite' step"
-                        id="gui.howtos.imagine-if.step_imagineChooseSprite"
-                    />
-                ),
-                image: 'imagineChooseSprite'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Press the Space Key to Glide"
-                        description="Step name for 'Press the Space Key to Glide' step"
-                        id="gui.howtos.imagine-if.step_imagineFlyAround"
-                    />
-                ),
-                image: 'imagineFlyAround'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Another Sprite"
-                        description="Step name for 'Choose Another Sprite' step"
-                        id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
-                    />
-                ),
-                image: 'imagineChooseAnotherSprite'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Move Left-Right"
-                        description="Step name for 'Move Left-Right' step"
-                        id="gui.howtos.imagine-if.step_imagineLeftRight"
-                    />
-                ),
-                image: 'imagineLeftRight'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Move Up-Down"
-                        description="Step name for 'Move Up-Down' step"
-                        id="gui.howtos.imagine-if.step_imagineUpDown"
-                    />
-                ),
-                image: 'imagineUpDown'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Change Costumes"
-                        description="Step name for 'Change Costumes' step"
-                        id="gui.howtos.imagine-if.step_imagineChangeCostumes"
-                    />
-                ),
-                image: 'imagineChangeCostumes'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Glide to a Point"
-                        description="Step name for 'Glide to a Point' step"
-                        id="gui.howtos.imagine-if.step_imagineGlideToPoint"
-                    />
-                ),
-                image: 'imagineGlideToPoint'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Grow and Shrink"
-                        description="Step name for 'Grow and Shrink' step"
-                        id="gui.howtos.imagine-if.step_imagineGrowShrink"
-                    />
-                ),
-                image: 'imagineGrowShrink'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Another Backdrop"
-                        description="Step name for 'Choose Another Backdrop' step"
-                        id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
-                    />
-                ),
-                image: 'imagineChooseAnotherBackdrop'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Switch Backdrops"
-                        description="Step name for 'Switch Backdrops' step"
-                        id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
-                    />
-                ),
-                image: 'imagineSwitchBackdrops'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Add a Sound"
-                        description="Step name for 'Add a Sound' step"
-                        id="gui.howtos.imagine-if.step_imagineRecordASound"
-                    />
-                ),
-                image: 'imagineRecordASound'
-            }, {
-                title: (
-                    <FormattedMessage
-                        defaultMessage="Choose Your Sound"
-                        description="Step name for 'Choose Your Sound' step"
-                        id="gui.howtos.imagine-if.step_imagineChooseSound"
-                    />
-                ),
-                image: 'imagineChooseSound'
-            }, {
-                deckIds: [
-                    'hide-and-show',
-                    'Chase-Game'
-                ]
-            }
+        steps: [{
+            video: 'imagine-if'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Type What You Want to Say"
+                    description="Step name for 'Type What You Want to Say' step"
+                    id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
+                />
+            ),
+            image: 'imagineTypeWhatYouWant'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click the Green Flag to Start"
+                    description="Step name for 'Click the Green Flag to Start' step"
+                    id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
+                />
+            ),
+            image: 'imagineClickGreenFlag'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Any Backdrop"
+                    description="Step name for 'Choose Any Backdrop' step"
+                    id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
+                />
+            ),
+            image: 'imagineChooseBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Any Sprite"
+                    description="Step name for 'Choose Any Sprite' step"
+                    id="gui.howtos.imagine-if.step_imagineChooseSprite"
+                />
+            ),
+            image: 'imagineChooseSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Press the Space Key to Glide"
+                    description="Step name for 'Press the Space Key to Glide' step"
+                    id="gui.howtos.imagine-if.step_imagineFlyAround"
+                />
+            ),
+            image: 'imagineFlyAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Sprite"
+                    description="Step name for 'Choose Another Sprite' step"
+                    id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
+                />
+            ),
+            image: 'imagineChooseAnotherSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Left-Right"
+                    description="Step name for 'Move Left-Right' step"
+                    id="gui.howtos.imagine-if.step_imagineLeftRight"
+                />
+            ),
+            image: 'imagineLeftRight'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Up-Down"
+                    description="Step name for 'Move Up-Down' step"
+                    id="gui.howtos.imagine-if.step_imagineUpDown"
+                />
+            ),
+            image: 'imagineUpDown'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Costumes"
+                    description="Step name for 'Change Costumes' step"
+                    id="gui.howtos.imagine-if.step_imagineChangeCostumes"
+                />
+            ),
+            image: 'imagineChangeCostumes'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide to a Point"
+                    description="Step name for 'Glide to a Point' step"
+                    id="gui.howtos.imagine-if.step_imagineGlideToPoint"
+                />
+            ),
+            image: 'imagineGlideToPoint'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Grow and Shrink"
+                    description="Step name for 'Grow and Shrink' step"
+                    id="gui.howtos.imagine-if.step_imagineGrowShrink"
+                />
+            ),
+            image: 'imagineGrowShrink'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Backdrop"
+                    description="Step name for 'Choose Another Backdrop' step"
+                    id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
+                />
+            ),
+            image: 'imagineChooseAnotherBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Switch Backdrops"
+                    description="Step name for 'Switch Backdrops' step"
+                    id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
+                />
+            ),
+            image: 'imagineSwitchBackdrops'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add a Sound"
+                    description="Step name for 'Add a Sound' step"
+                    id="gui.howtos.imagine-if.step_imagineRecordASound"
+                />
+            ),
+            image: 'imagineRecordASound'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Your Sound"
+                    description="Step name for 'Choose Your Sound' step"
+                    id="gui.howtos.imagine-if.step_imagineChooseSound"
+                />
+            ),
+            image: 'imagineChooseSound'
+        }, {
+            deckIds: [
+                'hide-and-show',
+                'Chase-Game'
+            ]
+        }
         ],
         urlId: 'imagine-if'
     },

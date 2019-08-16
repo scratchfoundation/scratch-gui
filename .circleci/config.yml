@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Lint
-          command: npm run test:lint -- --output-file test-results/eslint/results.xml --format junit
+          command: npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
 
       - store_test_results:
           path: test-results

@@ -33,6 +33,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run:
-          name: Run tests
-          command: npm test
+          name: Lint
+          command: npm run test:lint -- --output-file test-results/eslint/results.xml --format junit
+
+      - store_test_results:
+          path: test-results
       - run: greenkeeper-lockfile-upload

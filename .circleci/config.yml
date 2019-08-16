@@ -54,4 +54,6 @@ jobs:
 
       - store_test_results:
           path: test-results
+      - store_artifacts:
+          path: build
       - run: greenkeeper-lockfile-upload

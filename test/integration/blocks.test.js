@@ -214,10 +214,10 @@ describe('Working with the blocks', () => {
     test('Adding costumes DOES update the default costume name in the toolbox', async () => {
         await loadUri(uri);
 
-        // By default, costume1 is in the costume tab
+        // By default, costume2 is in the costume tab
         await clickText('Looks', scope.blocksTab);
         await driver.sleep(500); // Wait for scroll to finish
-        await clickText('costume1', scope.blocksTab);
+        await clickText('costume2', scope.blocksTab);
 
         // Also check that adding a new costume does update the list
         await clickText('Costumes');

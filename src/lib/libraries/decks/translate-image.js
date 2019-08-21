@@ -8,12 +8,12 @@ import {enImages as defaultImages} from './en-steps.js';
 let savedImages = {};
 let savedLocale = '';
 
-const loadSpanish = () =>
-    import(/* webpackChunkName: "es-steps" */ './es-steps.js')
-        .then(({esImages: imageData}) => imageData);
+// const loadSpanish = () =>
+//     import(/* webpackChunkName: "es-steps" */ './es-steps.js')
+//         .then(({esImages: imageData}) => imageData);
 
 const translations = {
-    es: () => loadSpanish()
+    // es: () => loadSpanish()
 };
 
 const loadImageData = locale => {

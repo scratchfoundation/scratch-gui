@@ -87,9 +87,9 @@ const vmListenerHOC = function (WrappedComponent) {
             // Don't capture keys intended for Blockly inputs.
             if (e.target !== document && e.target !== document.body) return;
 
+            const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
-                keyCode: e.keyCode,
-                key: e.key,
+                key: key,
                 isDown: true
             });
 
@@ -102,9 +102,9 @@ const vmListenerHOC = function (WrappedComponent) {
         handleKeyUp (e) {
             // Always capture up events,
             // even those that have switched to other targets.
+            const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
-                keyCode: e.keyCode,
-                key: e.key,
+                key: key,
                 isDown: false
             });
 

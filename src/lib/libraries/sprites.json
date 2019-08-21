@@ -9980,6 +9980,83 @@
         }
     },
     {
+        "name": "Marian",
+        "md5": "e9577a1eb098905dd386135bb38c0398.png",
+        "type": "sprite",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Marian",
+            "sounds": [
+                {
+                    "soundName": "Hand Clap",
+                    "soundID": -1,
+                    "md5": "9502142875e67f7b0292a117a27e9563.wav",
+                    "sampleCount": 2464,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "marian-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e9577a1eb098905dd386135bb38c0398.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 108.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3d2ecee35eab8c37d1c3eadfe50ce447.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 108.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "221e9999b20ecc21b37c68fcdf09ab02.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 70.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "64206b46c411e40926569cf3f5e587be.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 139,
+                    "rotationCenterY": 219
+                },
+                {
+                    "costumeName": "marian-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "16893c6136292ae36e13dc72cc55719b.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 69.5,
+                    "rotationCenterY": 211.5
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 143,
+            "scratchY": -71,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Max",
         "md5": "5cc168bddf4561e6e7f1d30845d6efbf.svg",
         "type": "sprite",

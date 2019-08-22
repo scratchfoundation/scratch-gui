@@ -240,7 +240,7 @@ describe('Working with the blocks', () => {
         await clickText('Code');
         await clickText('Sound', scope.blocksTab);
         await driver.sleep(500); // Wait for scroll to finish
-        await clickText('A Bass', scope.blocksTab);
+        await clickText('A\u00A0Bass', scope.blocksTab); // Need &nbsp; for block text
     });
 
     // Regression test for switching between editor/player causing toolbox to stop updating

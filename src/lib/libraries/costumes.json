@@ -6808,6 +6808,71 @@
         ]
     },
     {
+        "name": "Marian-a",
+        "md5": "e9577a1eb098905dd386135bb38c0398.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            217,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-b",
+        "md5": "3d2ecee35eab8c37d1c3eadfe50ce447.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            217,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-c",
+        "md5": "221e9999b20ecc21b37c68fcdf09ab02.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            141,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-d",
+        "md5": "64206b46c411e40926569cf3f5e587be.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            278,
+            438,
+            2
+        ]
+    },
+    {
+        "name": "Marian-e",
+        "md5": "16893c6136292ae36e13dc72cc55719b.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            139,
+            423,
+            2
+        ]
+    },
+    {
         "name": "Max-a",
         "md5": "5cc168bddf4561e6e7f1d30845d6efbf.svg",
         "type": "costume",

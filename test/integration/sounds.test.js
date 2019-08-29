@@ -1,5 +1,6 @@
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
+import {Key} from 'selenium-webdriver';
 
 const {
     clickText,
@@ -55,7 +56,6 @@ describe('Working with sounds', () => {
         await clickText('Faster');
         await clickText('Slower');
         await clickText('Robot');
-        await clickText('Echo');
         await clickText('Reverse');
 
         const logs = await getLogs();
@@ -112,7 +112,7 @@ describe('Working with sounds', () => {
         await expect(logs).toEqual([]);
     });
 
-    test.only('Adding multiple sounds at the same time', async () => {
+    test('Adding multiple sounds at the same time', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/movie.wav'),
             path.resolve(__dirname, '../fixtures/sneaker.wav')
@@ -128,6 +128,58 @@ describe('Working with sounds', () => {
 
         await findByText('movie', scope.soundsTab);
         await findByText('sneaker', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Copy to new button adds a new sound', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await clickText('Copy to New', scope.soundsTab);
+        await clickText('Meow2', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Copy and pasting within a sound changes its duration', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await findByText('0.85', scope.soundsTab); // Original meow sound duration
+        await clickText('Copy', scope.soundsTab);
+        await clickText('Paste', scope.soundsTab);
+        await findByText('1.70', scope.soundsTab); // Sound has doubled in duration
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Can copy a sound from a sprite and paste into a sound on the stage', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await clickText('Copy', scope.soundsTab); // Copy the meow sound
+        await clickXpath('//span[text()="Stage"]');
+        await findByText('0.02', scope.soundsTab); // Original pop sound duration
+        await clickText('Paste', scope.soundsTab);
+        await findByText('0.87', scope.soundsTab); // Duration of pop + meow sound
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Keyboard shortcuts', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        const el = await findByXpath('//button[@aria-label="Choose a Sound"]');
+        await el.sendKeys(Key.chord(Key.COMMAND, 'a')); // Select all
+        await findByText('0.85', scope.soundsTab); // Meow sound duration
+        await el.sendKeys(Key.DELETE);
+        await findByText('0.00', scope.soundsTab); // Sound is now empty
+        await el.sendKeys(Key.chord(Key.COMMAND, 'z')); // undo
+        await findByText('0.85', scope.soundsTab); // Meow sound is back
+        await el.sendKeys(Key.chord(Key.COMMAND, Key.SHIFT, 'z')); // redo
+        await findByText('0.00', scope.soundsTab); // Sound is empty again
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

@@ -423,7 +423,7 @@ describe('projectSaverHOC', () => {
         expect(mockedOnRemixing).toHaveBeenCalledWith(true);
     });
 
-    test('when starting to remix, onRemixing should be called with param true', () => {
+    test('when starting to remix, onRemixing should be called with param false', () => {
         const mockedOnRemixing = jest.fn();
         const mockedStoreProject = jest.fn(() => Promise.resolve());
         const Component = () => <div />;

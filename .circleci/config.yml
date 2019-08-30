@@ -62,11 +62,11 @@ jobs:
       - save_cache:
           paths:
             - build
-          key: v1-build-{{ .BuildNum }}
+          key: v1-build-{{ .Revision }}
       - save_cache:
           paths:
             - dist
-          key: v1-dist-{{ .BuildNum }}
+          key: v1-dist-{{ .Revision }}
       
       
       - run:
@@ -90,7 +90,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dist-{{ .BuildNum }}
+            - v1-dist-{{ .Revision }}
       - run: npm publish --dry-run
 workflows:
   version: 2

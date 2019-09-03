@@ -3,6 +3,7 @@ import RobotEffect from './effects/robot-effect.js';
 import VolumeEffect from './effects/volume-effect.js';
 import FadeEffect from './effects/fade-effect.js';
 import MuteEffect from './effects/mute-effect.js';
+import {computeChunkedRMS} from './audio-util.js';
 
 const effectTypes = {
     ROBOT: 'robot',
@@ -96,6 +97,21 @@ class AudioEffects {
             this.buffer = buffer;
         }
 
+        // If the sound is louder than an RMS limit, do not apply gain.
+        // This helps reduce distortion due to clipping.
+        this.louderGain = 1.25;
+        this.rmsLimit = 1.2;
+        if (name === effectTypes.LOUDER) {
+            const trimStartSamples = Math.floor(trimStart * buffer.length);
+            const trimEndSamples = Math.floor(trimEnd * buffer.length);
+            const slicedBuffer = buffer.getChannelData(0).slice(trimStartSamples, trimEndSamples);
+            const rmsChunks = computeChunkedRMS(slicedBuffer);
+            const maxRMS = Math.max(...rmsChunks);
+            if (maxRMS > this.rmsLimit) {
+                this.louderGain = 1;
+            }
+        }
+
         this.source = this.audioContext.createBufferSource();
         this.source.buffer = this.buffer;
         this.name = name;
@@ -111,7 +127,7 @@ class AudioEffects {
             this.source.playbackRate.setValueAtTime(1.0, this.adjustedTrimEndSeconds);
             break;
         case effectTypes.LOUDER:
-            ({input, output} = new VolumeEffect(this.audioContext, 1.25,
+            ({input, output} = new VolumeEffect(this.audioContext, this.louderGain,
                 this.adjustedTrimStartSeconds, this.adjustedTrimEndSeconds));
             break;
         case effectTypes.SOFTER:

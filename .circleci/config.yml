@@ -106,5 +106,4 @@ workflows:
                 - master
                 - develop
                 - smoke
-                - circle
                 - /^hotfix\/.*/

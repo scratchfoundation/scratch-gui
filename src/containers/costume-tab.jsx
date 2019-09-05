@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import defaultsDeep from 'lodash.defaultsdeep';
 import {defineMessages, intlShape, injectIntl} from 'react-intl';
 import VM from 'scratch-vm';
 
@@ -431,9 +430,13 @@ const mapDispatchToProps = dispatch => ({
     onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => defaultsDeep(
-    {}, ownProps, stateProps, dispatchProps
-);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    onNewLibraryCostumeClick: ownProps.onNewLibraryCostumeClick || dispatchProps.onNewLibraryCostumeClick,
+    onNewLibraryBackdropClick: ownProps.onNewLibraryBackdropClick || dispatchProps.onNewLibraryBackdropClick
+});
 
 export default errorBoundaryHOC('Costume Tab')(
     injectIntl(connect(

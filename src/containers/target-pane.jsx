@@ -1,5 +1,4 @@
 import bindAll from 'lodash.bindall';
-import defaultsDeep from 'lodash.defaultsdeep';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -291,9 +290,12 @@ const mapDispatchToProps = dispatch => ({
     onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => defaultsDeep(
-    {}, ownProps, stateProps, dispatchProps
-);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    onNewSpriteClick: ownProps.onNewSpriteClick || dispatchProps.onNewSpriteClick
+});
 
 export default injectIntl(connect(
     mapStateToProps,

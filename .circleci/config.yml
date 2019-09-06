@@ -92,18 +92,22 @@ jobs:
           keys:
             - v1-dist-{{ .Revision }}
       - run: npm publish --dry-run
+
+deploy-requirements: &deploy-requirements
+  requires:
+    - build
+  filters:
+    branches:
+      only:
+        - master
+        - develop
+        - smoke
+        - /^hotfix\/.*/
+      
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
       - deploy-npm:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - develop
-                - smoke
-                - /^hotfix\/.*/
+          <<: *deploy-requirements

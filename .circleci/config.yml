@@ -81,8 +81,9 @@ jobs:
   deploy-npm:
     docker:
       - image: circleci/node:8.16-browsers
-    working_directory: ~/repo  
+    working_directory: ~/repo
     steps:
+      - run: echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
       - restore_cache:
           keys:
             - v1-git-{{ .Revision }}
@@ -91,7 +92,10 @@ jobs:
       - restore_cache:
           keys:
             - v1-dist-{{ .Revision }}
+      - run: npm version --no-git-tag-version $RELEASE_VERSION
       - run: npm publish --dry-run
+      - run: echo git tag $RELEASE_VERSION
+      - run: echo git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
 
 deploy-requirements: &deploy-requirements
   requires:
@@ -102,6 +106,7 @@ deploy-requirements: &deploy-requirements
         - master
         - develop
         - smoke
+        - circle
         - /^hotfix\/.*/
       
 workflows:

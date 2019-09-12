@@ -9,7 +9,8 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {
     getIsError,
-    getIsShowingProject
+    getIsShowingProject,
+    getIsShowingWithoutId
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 import {
@@ -65,6 +66,9 @@ class GUI extends React.Component {
             // this only notifies container when a project changes from not yet loaded to loaded
             // At this time the project view in www doesn't need to know when a project is unloaded
             this.props.onProjectLoaded();
+        }
+        if (this.props.isShowingWithoutId && !prevProps.isShowingWithoutId) {
+            this.props.onUpdateProjectTitle(this.props.intl.formatMessage(messages.defaultProjectTitle));
         }
     }
     setReduxTitle (newTitle) {
@@ -126,6 +130,7 @@ GUI.propTypes = {
     isLoading: PropTypes.bool,
     isScratchDesktop: PropTypes.bool,
     isShowingProject: PropTypes.bool,
+    isShowingWithoutId: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onProjectLoaded: PropTypes.func,
     onSeeCommunity: PropTypes.func,
@@ -146,6 +151,7 @@ GUI.defaultProps = {
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onProjectLoaded: () => {},
     onUpdateProjectId: () => {},
+    onUpdateProjectTitle: () => {},
     onVmInit: (/* vm */) => {}
 };
 
@@ -166,6 +172,7 @@ const mapStateToProps = state => {
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),
+        isShowingWithoutId: getIsShowingWithoutId(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
         soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,

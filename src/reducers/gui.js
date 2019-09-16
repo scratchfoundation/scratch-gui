@@ -90,6 +90,7 @@ const initEmbedded = function (currentState) {
         {},
         currentState,
         {mode: {
+            isEmbed: true,
             showBranding: true,
             isFullScreen: true,
             isPlayerOnly: true,

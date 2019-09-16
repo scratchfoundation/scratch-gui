@@ -52,7 +52,10 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
+            return !!(
+                props.cloudHost && props.username && props.vm &&
+                props.projectId && props.hasCloudPermission && !props.isEmbed
+            );
         }
         shouldNotModifyCloudData (props) {
             return (props.hasEverEnteredEditor && !props.canSave);
@@ -107,6 +110,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                 username,
                 hasCloudPermission,
                 hasEverEnteredEditor,
+                isEmbed,
                 isShowingWithId,
                 onShowCloudInfo,
                 /* eslint-enable no-unused-vars */
@@ -128,6 +132,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         cloudHost: PropTypes.string,
         hasCloudPermission: PropTypes.bool,
         hasEverEnteredEditor: PropTypes.bool,
+        isEmbed: PropTypes.bool,
         isShowingWithId: PropTypes.bool,
         onShowCloudInfo: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -139,6 +144,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             hasEverEnteredEditor: state.scratchGui.mode.hasEverEnteredEditor,
+            isEmbed: state.scratchGui.mode.isEmbed,
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId
         };

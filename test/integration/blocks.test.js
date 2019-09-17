@@ -236,11 +236,11 @@ describe('Working with the blocks', () => {
         await loadUri(uri);
         await clickText('Sounds');
         await clickXpath('//button[@aria-label="Choose a Sound"]');
-        await clickText('A Bass', scope.modal); // Should close the modal
+        await clickText('Alert', scope.modal); // Should close the modal
         await clickText('Code');
         await clickText('Sound', scope.blocksTab);
         await driver.sleep(500); // Wait for scroll to finish
-        await clickText('A\u00A0Bass', scope.blocksTab); // Need &nbsp; for block text
+        await clickText('Alert', scope.blocksTab);
     });
 
     // Regression test for switching between editor/player causing toolbox to stop updating

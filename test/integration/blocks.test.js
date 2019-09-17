@@ -232,7 +232,7 @@ describe('Working with the blocks', () => {
         await clickText('costume3', scope.blocksTab);
     });
 
-    test('Adding a sound DOES update the default sound name in the toolbox', async () => {
+    test.only('Adding a sound DOES update the default sound name in the toolbox', async () => { // eslint-disable-line
         await loadUri(uri);
         await clickText('Sounds');
         await clickXpath('//button[@aria-label="Choose a Sound"]');
@@ -240,6 +240,10 @@ describe('Working with the blocks', () => {
         await clickText('Code');
         await clickText('Sound', scope.blocksTab);
         await driver.sleep(500); // Wait for scroll to finish
+        const html = await findByXpath('//body');
+        const str = await html.getAttribute('innerHTML');
+        console.log(str);
+        console.log(str.indexOf('Alert</text>'));
         await clickText('Alert', scope.blocksTab);
     });
 

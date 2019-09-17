@@ -115,6 +115,19 @@ const messages = defineMessages({
     }
 });
 
+// Moved from monitor component. Post-extensionification,
+// these values can just come from the block itself, and
+// this can be removed.
+const categoryColors = {
+    data: '#FF8C1A',
+    sensing: '#5CB1D6',
+    sound: '#CF63CF',
+    looks: '#9966FF',
+    motion: '#4C97FF',
+    list: '#FC662C',
+    extension: '#0FBD8C'
+};
+
 class OpcodeLabels {
     constructor () {
         /**
@@ -131,30 +144,30 @@ class OpcodeLabels {
          */
         this._opcodeMap = {
             // Motion
-            motion_direction: {category: 'motion'},
-            motion_xposition: {category: 'motion'},
-            motion_yposition: {category: 'motion'},
+            motion_direction: {color: categoryColors.motion},
+            motion_xposition: {color: categoryColors.motion},
+            motion_yposition: {color: categoryColors.motion},
 
             // Looks
-            looks_size: {category: 'looks'},
-            looks_costumenumbername: {category: 'looks'},
-            looks_backdropnumbername: {category: 'looks'},
-            looks_backdropname: {category: 'looks'},
+            looks_size: {color: categoryColors.looks},
+            looks_costumenumbername: {color: categoryColors.looks},
+            looks_backdropnumbername: {color: categoryColors.looks},
+            looks_backdropname: {color: categoryColors.looks},
 
             // Data
-            data_variable: {category: 'data'},
-            data_listcontents: {category: 'list'},
+            data_variable: {color: categoryColors.data},
+            data_listcontents: {color: categoryColors.list},
 
             // Sound
-            sound_volume: {category: 'sound'},
-            sound_tempo: {category: 'sound'},
+            sound_volume: {color: categoryColors.sound},
+            sound_tempo: {color: categoryColors.sound},
 
             // Sensing
-            sensing_answer: {category: 'sensing'},
-            sensing_loudness: {category: 'sensing'},
-            sensing_username: {category: 'sensing'},
-            sensing_current: {category: 'sensing'},
-            sensing_timer: {category: 'sensing'}
+            sensing_answer: {color: categoryColors.sensing},
+            sensing_loudness: {color: categoryColors.sensing},
+            sensing_username: {color: categoryColors.sensing},
+            sensing_current: {color: categoryColors.sensing},
+            sensing_timer: {color: categoryColors.sensing}
         };
 
         // Initialize opcodeMap with default strings
@@ -233,12 +246,12 @@ class OpcodeLabels {
     /**
      * Return the label for an opcode
      * @param {string} opcode the opcode you want a label for
-     * @return {object} object with  label and category
+     * @return {object} object with  label and color
      */
     getLabel (opcode) {
         if (opcode in this._opcodeMap) return this._opcodeMap[opcode];
         return {
-            category: 'extension',
+            color: categoryColors.extension,
             label: opcode
         };
     }

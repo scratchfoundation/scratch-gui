@@ -99,6 +99,32 @@ const setupCustomContextMenu = (guiContext, ScratchBlocks, contextMenuInfo, exte
 };
 
 /**
+ * Create a field validator function for dynamic block field dropdowns.
+ * This validator function is responsible for keeping the selected field
+ * value and the block mutation stay in sync. This validator function also
+ * emits a mutation change event so that the VM can stay
+ * in sync with these changes.
+ * @param {object} ScratchBlocks - The ScratchBlocks name space.
+ * @param {string} argName - The name of the field dropdown getting the validator function
+ * @returns {function} The validator function for the field
+ */
+const makeFieldValidator = (ScratchBlocks, argName) => function (selectedItem) {
+    // Disabling this lint rule since this function will get attached
+    // to the field_dropdown prototype appropriately.
+    /* eslint-disable no-invalid-this */
+    const oldMutation = ScratchBlocks.Xml.domToText(this.sourceBlock_.mutationToDom());
+    const currBlockInfo = JSON.parse(this.sourceBlock_.blockInfoText);
+    currBlockInfo.arguments[argName].selectedValue = selectedItem;
+    this.sourceBlock_.blockInfoText = JSON.stringify(currBlockInfo);
+    const newMutation = ScratchBlocks.Xml.domToText(this.sourceBlock_.mutationToDom());
+    ScratchBlocks.Events.fire(new ScratchBlocks.Events.BlockChange(this.sourceBlock_,
+        'mutation', null, oldMutation, newMutation));
+    this.setValue(selectedItem);
+    return null;
+    /* eslint-enable no-invalid-this */
+};
+
+/**
  * Define a block using extension info which has the ability to dynamically determine (and update) its layout.
  * This functionality is used for extension blocks which can change its properties based on different state
  * information. For example, the `control_stop` block changes its shape based on which menu item is selected
@@ -246,14 +272,31 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 }
             });
 
+            const fieldValidator = makeFieldValidator.bind(null, ScratchBlocks);
+
             // Set values on any args that have selectedValue specified
             args.forEach(arg => {
-                if (arg.type === 'field_dropdown' && blockInfo.arguments[arg.name].selectedValue) {
+                if (arg.type === 'field_dropdown') {
                     const field = this.getField(arg.name);
-                    if (field) {
+                    if (!field) return;
+                    // Add a validator function to each field_dropdown which is responsible
+                    // for keeping the mutation and the field value in sync. Emit a change
+                    // event for the mutation so that the VM can also stay in sync with
+                    // these changes.
+                    field.setValidator(fieldValidator(arg.name));
+                    if (blockInfo.arguments[arg.name].selectedValue) {
                         field.setValue(blockInfo.arguments[arg.name].selectedValue);
+                    } else {
+                        // Update the block info to keep track of the selected value for the
+                        // next time this block gets rendered without any external forces
+                        // changing it (e.g. switching sprites or switching between editor tabs)
+                        // See generic blockInfoText update below.
+                        // This prevents block arguments accidentally getting updated because
+                        // they don't have a selectedValue in their block info, and the
+                        // defaultValue is also dynamic and changed (e.g. a new variable is
+                        // added that is sorted first alphabetically)
+                        blockInfo.arguments[arg.name].selectedValue = field.getValue();
                     }
-
                 }
             });
 
@@ -262,6 +305,9 @@ const defineDynamicBlock = (guiContext, ScratchBlocks, categoryInfo, staticBlock
                 this.initSvg();
                 this.render();
             }
+
+            // Update the blockInfoText with any changes we may have made to the block for next time it gets rendered.
+            this.blockInfoText = JSON.stringify(blockInfo);
         },
         setBlockInfo: function (blockInfo) {
             this.needsBlockInfoUpdate = true;

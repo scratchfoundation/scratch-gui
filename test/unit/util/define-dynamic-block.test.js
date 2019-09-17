@@ -14,6 +14,16 @@ const MockScratchBlocks = {
             contextMenuName = name;
             contextMenuDesc = desc;
         }
+    },
+    ScratchBlocks: {
+        ProcedureUtils: {
+            removeAllInputs_: () => {},
+            disconnectOldBlocks_: () => {},
+            deleteShadows_: () => {},
+            populateArgument_: () => {},
+            attachShadow_: () => {},
+            buildShadowDom_: () => {}
+        }
     }
 };
 

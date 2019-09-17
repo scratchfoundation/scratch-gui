@@ -3845,7 +3845,7 @@
                 {
                     "costumeName": "dinosaur1-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "a2bb28d5ba55ba997bec63772437cecf.svg",
+                    "baseLayerMD5": "78f7e20f0e187fdca81195e4cc134175.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 81,
                     "rotationCenterY": 91
@@ -15612,7 +15612,7 @@
     },
     {
         "name": "Watermelon",
-        "md5": "26fecef75cf3b6e0d98bff5c06475036.svg",
+        "md5": "21d1340478e32a942914a7afd12b9f1a.svg",
         "type": "sprite",
         "tags": [
             "food",
@@ -15643,7 +15643,7 @@
                 {
                     "costumeName": "watermelon-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "26fecef75cf3b6e0d98bff5c06475036.svg",
+                    "baseLayerMD5": "21d1340478e32a942914a7afd12b9f1a.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 40,
                     "rotationCenterY": 27
@@ -15651,7 +15651,7 @@
                 {
                     "costumeName": "watermelon-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fbdaf4d1d349edd3ddf3a1c4528aa9ec.svg",
+                    "baseLayerMD5": "1ed1c8b78eae2ee7422074d7f883031d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 27
@@ -15659,7 +15659,7 @@
                 {
                     "costumeName": "watermelon-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5976c10412306fc093c1d1930fa05119.svg",
+                    "baseLayerMD5": "677738282686d2dcce35d731c3ddc043.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 21,
                     "rotationCenterY": 15

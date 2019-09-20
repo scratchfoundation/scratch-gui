@@ -101,11 +101,11 @@ jobs:
           keys:
             - v1-dist-{{ .Revision }}
       - run: npm version --no-git-tag-version $RELEASE_VERSION
-      - run: echo git tag $RELEASE_VERSION
-      - run: echo git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
       - run: |
           npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           npm publish --dry-run
+      - run: git tag $RELEASE_VERSION
+      - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
 
 deploy-requirements: &deploy-requirements
   requires:

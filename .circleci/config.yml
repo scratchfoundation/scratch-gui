@@ -82,6 +82,8 @@ jobs:
     docker:
       - image: circleci/node:8.16-browsers
     working_directory: ~/repo
+    environment:
+      NODE_OPTIONS: --max-old-space-size=4000
     steps:
       - run: |
           echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV

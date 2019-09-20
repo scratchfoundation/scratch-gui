@@ -83,7 +83,15 @@ jobs:
       - image: circleci/node:8.16-browsers
     working_directory: ~/repo
     steps:
-      - run: echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
+      - run: |
+          echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
+          echo export NPM_TAG=latest >> $BASH_ENV
+          if [ "$CIRCLE_BRANCH" == "master" ]
+            then echo export NPM_TAG=circlestable >> $BASH_ENV
+          fi
+          if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
+            then echo export NPM_TAG=circlehotfix >> $BASH_ENV
+          fi
       - restore_cache:
           keys:
             - v1-git-{{ .Revision }}
@@ -93,9 +101,11 @@ jobs:
           keys:
             - v1-dist-{{ .Revision }}
       - run: npm version --no-git-tag-version $RELEASE_VERSION
-      - run: npm publish --dry-run
       - run: echo git tag $RELEASE_VERSION
       - run: echo git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
+      - run: |
+          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm publish --dry-run
 
 deploy-requirements: &deploy-requirements
   requires:

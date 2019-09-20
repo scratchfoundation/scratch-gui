@@ -103,7 +103,7 @@ jobs:
       - run: npm version --no-git-tag-version $RELEASE_VERSION
       - run: |
           npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish --dry-run
+          npm publish
       - run: git tag $RELEASE_VERSION
       - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
 

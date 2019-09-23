@@ -42,17 +42,6 @@ aliases:
     docker:
       - image: circleci/node:8.16-browsers
     working_directory: ~/repo
-  - &config_deploy_requirements
-    requires:
-      - build
-    filters:
-      branches:
-        only:
-          - master
-          - develop
-          - smoke
-          - circle
-          - /^hotfix\/.*/
 
 jobs:
   build:
@@ -139,6 +128,15 @@ workflows:
     jobs:
       - build
       - deploy-npm:
-          <<: *config_deploy_requirements
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - circle
+                - /^hotfix\/.*/
       - deploy-gh-pages:
-          <<: *config_deploy_requirements
+          requires:
+            - build

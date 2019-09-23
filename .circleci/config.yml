@@ -1,76 +1,47 @@
 version: 2.1
 aliases:
-  - &step_restore_git_cache
-    restore_cache:
-      keys:
-        - v1-git-{{ .Revision }}
-        - v1-git-
-  - &step_save_git_cache
-    save_cache:
-      paths:
-        - .git
-      key: v1-git-{{ .Revision }}
-  - &step_restore_dependency_cache
-    restore_cache:
-      keys:
-        - v1-dependencies-{{ checksum "package-lock.json" }}
-        - v1-dependencies-
-  - &step_save_dependency_cache
-    save_cache:
-      paths:
-        - node_modules
-      key: v1-dependencies-{{ checksum "package-lock.json" }}
-  - &step_save_build_cache
-    save_cache:
-      paths:
-        - build
-      key: v1-build-{{ .Revision }}
-  - &step_restore_build_cache
-    restore_cache:
-      keys:
-        - v1-build-{{ .Revision }}
-  - &step_save_dist_cache
-    save_cache:
-      paths:
-        - dist
-      key: v1-dist-{{ .Revision }}
-  - &step_restore_dist_cache
-    restore_cache:
-      keys:
-        - v1-dist-{{ .Revision }}
-  - &config_job_environment
+  - &persist
+    persist_to_workspace:
+        root: .
+        paths: .
+  - &restore
+    attach_workspace:
+        at: ~/repo
+  - &defaults
     docker:
       - image: circleci/node:8.16-browsers
     working_directory: ~/repo
 
 jobs:
   setup:
-    <<: *config_job_environment
+    <<: *defaults
     steps:
-      - *step_restore_git_cache
+      - restore_cache:
+          keys:
+            - v1-git-{{ .Revision }}
+            - v1-git-
       - checkout
-      - *step_save_git_cache
+      - save_cache:
+          paths:
+            - .git
+          key: v1-git-{{ .Revision }}
       - run: npm ci
-      - *step_save_dependency_cache
+      - *persist
   lint:
-    <<: *config_job_environment
+    <<: *defaults
     steps:
-      - *step_restore_git_cache
-      - checkout
-      - *step_restore_dependency_cache
+      - *restore
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
       - store_test_results:
           path: test-results
   unit:
-    <<: *config_job_environment
+    <<: *defaults
     environment:
       JEST_JUNIT_OUTPUT_NAME: results.xml
     steps:
-      - *step_restore_git_cache
-      - checkout
-      - *step_restore_dependency_cache
+      - *restore
       - run:
           name: Unit
           environment:
@@ -81,32 +52,34 @@ jobs:
       - store_test_results:
           path: test-results
   build:
-    <<: *config_job_environment
+    <<: *defaults
     environment:
       NODE_ENV: production
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
-      - *step_restore_git_cache
-      - checkout
-      - *step_restore_dependency_cache
+      - *restore
       - run:
           name: Build
           command: npm run build
+      - *persist
+  store_build:
+    <<: *defaults
+    steps:
+      - *restore
       - store_artifacts:
           path: build
+  store_dist:
+    <<: *defaults
+    steps:
+      - *restore
       - store_artifacts:
           path: dist
-      - *step_save_build_cache
-      - *step_save_dist_cache
   integration:
-    <<: *config_job_environment
+    <<: *defaults
     environment:
       JEST_JUNIT_OUTPUT_NAME: results.txt
     steps:
-      - *step_restore_git_cache
-      - checkout
-      - *step_restore_dependency_cache
-      - *step_restore_build_cache
+      - *restore
       - run:
           name: Integration
           environment:
@@ -116,10 +89,11 @@ jobs:
           path: test-results
 
   deploy-npm:
-    <<: *config_job_environment
+    <<: *defaults
     environment:
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
+      - *restore
       - run: |
           echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
           echo export NPM_TAG=circlelatest >> $BASH_ENV
@@ -129,9 +103,6 @@ jobs:
           if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
             then echo export NPM_TAG=circlehotfix >> $BASH_ENV
           fi
-      - *step_restore_git_cache
-      - checkout
-      - *step_restore_dist_cache
       - run: npm version --no-git-tag-version $RELEASE_VERSION
       - run: |
           npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
@@ -140,15 +111,12 @@ jobs:
       - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
 
   deploy-gh-pages:
-    <<: *config_job_environment
+    <<: *defaults
     steps:
-      - *step_restore_git_cache
-      - checkout
+      - *restore
       - run: |
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)
-      - *step_restore_build_cache
-      - *step_restore_dependency_cache
       - run: npm run deploy -- -e $CIRCLE_BRANCH
       
 workflows:
@@ -166,6 +134,12 @@ workflows:
           requires:
             - setup
       - integration:
+          requires:
+            - build
+      - store_build:
+          requires:
+            - build
+      - store_dist:
           requires:
             - build
       - deploy-npm:

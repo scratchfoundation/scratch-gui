@@ -242,8 +242,8 @@ describe('Working with the blocks', () => {
         await driver.sleep(500); // Wait for scroll to finish
         const html = await findByXpath('//body');
         const str = await html.getAttribute('innerHTML');
-        console.log(str);
-        console.log(str.indexOf('Alert</text>'));
+        console.log(str); // eslint-disable-line
+        console.log(str.indexOf('Alert</text>')); // eslint-disable-line
         await clickText('Alert', scope.blocksTab);
     });
 

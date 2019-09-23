@@ -265,6 +265,7 @@ const SoundEditor = props => (
                 onClick={props.onSlower}
             />
             <IconButton
+                disabled={props.tooLoud}
                 className={classNames(styles.effectButton, styles.flipInRtl)}
                 img={louderIcon}
                 title={<FormattedMessage {...messages.louder} />}
@@ -340,6 +341,7 @@ SoundEditor.propTypes = {
     onUndo: PropTypes.func.isRequired,
     playhead: PropTypes.number,
     setRef: PropTypes.func,
+    tooLoud: PropTypes.bool.isRequired,
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number
 };

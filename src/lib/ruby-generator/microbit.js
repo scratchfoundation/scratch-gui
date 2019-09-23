@@ -32,7 +32,7 @@ export default function (Generator) {
         return `microbit.display_text(${text})\n`;
     };
 
-    Generator.microbit_displayClear = function (block) {
+    Generator.microbit_displayClear = function () {
         return `microbit.clear_display\n`;
     };
 
@@ -86,7 +86,7 @@ export default function (Generator) {
     Generator.matrix = function (block) {
         let matrix = Generator.getFieldValue(block, 'MATRIX') || '0000000000000000000000000';
         matrix = matrix.replace(/0/g, ' ');
-        matrix = matrix.match(/.{5}/g).map(s => Generator.quote_(s + ':'));
+        matrix = matrix.match(/.{5}/g).map(s => Generator.quote_(`${s}:`));
         return [matrix.join('\n'), Generator.ORDER_ATOMIC];
     };
 

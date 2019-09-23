@@ -109,6 +109,27 @@ jobs:
       - run: git tag $RELEASE_VERSION
       - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
 
+  deploy-gh-pages:
+    docker:
+      - image: circleci/node:8.16-browsers
+    working_directory: ~/repo
+    steps:
+      - restore_cache:
+          keys:
+            - v1-git-{{ .Revision }}
+            - v1-git-
+      - checkout
+      - run: |
+          git config --global user.email $(git log --pretty=format:"%ae" -n1)
+          git config --global user.name $(git log --pretty=format:"%an" -n1)
+      - restore_cache:
+          keys:
+            - v1-build-{{ .Revision }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run: npm run deploy -- -e $CIRCLE_BRANCH
+
 deploy-requirements: &deploy-requirements
   requires:
     - build
@@ -127,4 +148,6 @@ workflows:
     jobs:
       - build
       - deploy-npm:
+          <<: *deploy-requirements
+      - deploy-gh-pages:
           <<: *deploy-requirements

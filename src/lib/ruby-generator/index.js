@@ -21,6 +21,7 @@ import PenBlocks from './pen.js';
 import VideoBlocks from './video.js';
 import Text2SpeechBlocks from './text2speech.js';
 import TranslateBlocks from './translate.js';
+import MicrobitBlocks from './microbit.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -444,5 +445,6 @@ PenBlocks(RubyGenerator);
 VideoBlocks(RubyGenerator);
 Text2SpeechBlocks(RubyGenerator);
 TranslateBlocks(RubyGenerator);
+MicrobitBlocks(RubyGenerator);
 
 export default RubyGenerator;

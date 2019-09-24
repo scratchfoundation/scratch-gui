@@ -57,8 +57,8 @@ jobs:
     <<: *defaults
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
@@ -70,8 +70,8 @@ jobs:
       JEST_JUNIT_OUTPUT_NAME: results.xml
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run:
           name: Unit
           environment:
@@ -88,8 +88,8 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run:
           name: Build
           command: npm run build
@@ -113,8 +113,8 @@ jobs:
       JEST_JUNIT_OUTPUT_NAME: results.txt
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run:
           name: Integration
           environment:
@@ -151,8 +151,8 @@ jobs:
     <<: *defaults
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run: |
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)

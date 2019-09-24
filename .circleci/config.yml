@@ -48,8 +48,8 @@ jobs:
     <<: *defaults
     steps:
       - *restore_git_cache
-      - *restore_npm_cache
       - checkout
+      - *restore_npm_cache
       - run: npm install
       - *save_git_cache
       - *save_npm_cache

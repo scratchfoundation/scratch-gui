@@ -37,6 +37,7 @@ aliases:
     restore_cache:
       keys:
         - v1-npm-{{ checksum "package-lock.json" }}
+        - v1-npm-
   - &defaults
     docker:
       - image: circleci/node:8.16-browsers
@@ -47,9 +48,10 @@ jobs:
     <<: *defaults
     steps:
       - *restore_git_cache
+      - *restore_npm_cache
       - checkout
+      - run: npm install
       - *save_git_cache
-      - run: npm ci
       - *save_npm_cache
   lint:
     <<: *defaults

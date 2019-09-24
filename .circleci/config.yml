@@ -157,6 +157,7 @@ jobs:
       - *restore_git_cache
       - checkout
       - *restore_npm_cache
+      - *restore_build_cache
       - run: |
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)

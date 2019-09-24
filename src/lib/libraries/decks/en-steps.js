@@ -170,6 +170,24 @@ import moveArrowKeysUpDown from './steps/move-arrow-keys-up-down.en.png';
 import glideAroundBackAndForth from './steps/glide-around-back-and-forth.en.png';
 import glideAroundPoint from './steps/glide-around-point.en.png';
 
+// Talking Tales
+import talesAddExtension from './steps/talking-1-add-extension.en.gif';
+import talesChooseSprite from './steps/talking-2-choose-sprite.en.png';
+import talesSaySomething from './steps/talking-3-say-something.en.gif';
+import talesAskAnswer from './steps/talking-4-ask-and-answer.en.gif';
+import talesChooseBackdrop from './steps/talking-5-choose-backdrop.en.png';
+import talesSwitchBackdrop from './steps/talking-6-switch-backdrop.en.gif';
+import talesChooseAnotherSprite from './steps/talking-7-choose-another-sprite.en.png';
+import talesIntroduceNewCharacter from './steps/talking-8-introduce-another-character.en.png';
+import talesMoveAround from './steps/talking-9-move-around.en.gif';
+import talesChooseAnotherBackdrop from './steps/talking-10-choose-another-backdrop.en.png';
+import talesAnimateTalking from './steps/talking-11-animate.en.gif';
+import talesChooseThirdBackdrop from './steps/talking-12-choose-third-backdrop.en.png';
+import talesChooseSound from './steps/talking-13-choose-sound.en.gif';
+import talesDanceMoves from './steps/talking-14-dance-moves.en.gif';
+import talesInsertEqualsBlock from './steps/talking-15-respond-to-answer.en.gif';
+import talesGrowShrink from './steps/talking-16-grow-and-shrink.en.gif';
+
 const enImages = {
     // Intro
     introMove: introMove,
@@ -341,7 +359,25 @@ const enImages = {
 
     // Glide Around
     glideAroundBackAndForth: glideAroundBackAndForth,
-    glideAroundPoint: glideAroundPoint
+    glideAroundPoint: glideAroundPoint,
+    
+    // Talking Tales
+    talesAddExtension: talesAddExtension,
+    talesChooseSprite: talesChooseSprite,
+    talesSaySomething: talesSaySomething,
+    talesAskAnswer: talesAskAnswer,
+    talesChooseBackdrop: talesChooseBackdrop,
+    talesSwitchBackdrop: talesSwitchBackdrop,
+    talesChooseAnotherSprite: talesChooseAnotherSprite,
+    talesIntroduceNewCharacter: talesIntroduceNewCharacter,
+    talesMoveAround: talesMoveAround,
+    talesChooseAnotherBackdrop: talesChooseAnotherBackdrop,
+    talesAnimateTalking: talesAnimateTalking,
+    talesChooseThirdBackdrop: talesChooseThirdBackdrop,
+    talesChooseSound: talesChooseSound,
+    talesDanceMoves: talesDanceMoves,
+    talesInsertEqualsBlock: talesInsertEqualsBlock,
+    talesGrowShrink: talesGrowShrink
     
 };
 

@@ -53,6 +53,7 @@ class GUI extends React.Component {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
+        this.props.onVmInit(this.props.vm);
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -60,6 +61,11 @@ class GUI extends React.Component {
         }
         if (this.props.projectTitle !== prevProps.projectTitle) {
             this.setReduxTitle(this.props.projectTitle);
+        }
+        if (this.props.isShowingProject && !prevProps.isShowingProject) {
+            // this only notifies container when a project changes from not yet loaded to loaded
+            // At this time the project view in www doesn't need to know when a project is unloaded
+            this.props.onProjectLoaded();
         }
     }
     setReduxTitle (newTitle) {
@@ -84,9 +90,11 @@ class GUI extends React.Component {
             isError,
             isScratchDesktop,
             isShowingProject,
+            onProjectLoaded,
             onStorageInit,
             onUpdateProjectId,
             onUpdateReduxProjectTitle,
+            onVmInit,
             projectHost,
             projectId,
             projectTitle,
@@ -114,18 +122,19 @@ GUI.propTypes = {
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     fetchingProject: PropTypes.bool,
-    importInfoVisible: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
     isLoading: PropTypes.bool,
     isScratchDesktop: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
+    onProjectLoaded: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onStorageInit: PropTypes.func,
     onUpdateProjectId: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
     onUpdateReduxProjectTitle: PropTypes.func,
+    onVmInit: PropTypes.func,
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     projectTitle: PropTypes.string,
@@ -136,7 +145,9 @@ GUI.propTypes = {
 GUI.defaultProps = {
     isScratchDesktop: false,
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
-    onUpdateProjectId: () => {}
+    onProjectLoaded: () => {},
+    onUpdateProjectId: () => {},
+    onVmInit: (/* vm */) => {}
 };
 
 const mapStateToProps = state => {
@@ -151,8 +162,8 @@ const mapStateToProps = state => {
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
         costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
         error: state.scratchGui.projectState.error,
-        importInfoVisible: state.scratchGui.modals.importInfo,
         isError: getIsError(loadingState),
+        isFullScreen: state.scratchGui.mode.isFullScreen,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),

@@ -1,3 +1,5 @@
+@import "../../css/colors.css";
+
 .stop-all {
     width: 2rem;
     height: 2rem;
@@ -5,15 +7,14 @@
     border-radius: 0.25rem;
     user-select: none;
     cursor: pointer;
-    transition: 0.2s ease-out;
+}
+
+.stop-all:hover {
+    background-color: $motion-light-transparent;
 }
 
 .stop-all {
     opacity: 0.5;
-}
-
-.stop-all:hover {
-    transform: scale(1.2);
 }
 
 .stop-all.is-active {

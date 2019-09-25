@@ -1,9 +1,12 @@
 import classNames from 'classnames';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
+import bowser from 'bowser';
 import React from 'react';
+
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
@@ -26,6 +29,7 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import RubyDownloader from '../../containers/ruby-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
+import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -56,11 +60,12 @@ import {
     loginMenuOpen
 } from '../../reducers/menus';
 
+import collectMetadata from '../../lib/collect-metadata';
+
 import styles from './menu-bar.css';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
-import feedbackIcon from './icon--feedback.svg';
 import profileIcon from './profile-hatti.png';
 import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
@@ -70,13 +75,8 @@ import smalrubyLogo from './hatti.svg';
 
 import {updateRubyCodeTarget} from '../../reducers/ruby-code';
 
-const messages = defineMessages({
-    confirmNav: {
-        id: 'gui.menuBar.confirmNewWithoutSaving',
-        defaultMessage: 'Replace contents of the current project?',
-        description: 'message for prompting user to confirm that they want to create new project without saving'
-    }
-});
+import sharedMessages from '../../lib/shared-messages';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -155,24 +155,28 @@ class MenuBar extends React.Component {
             'handleClickGenerateRubyFromCode',
             'handleClickSeeCommunity',
             'handleClickShare',
-            'handleCloseFileMenuAndThen',
+            'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'getSaveToComputerHandler',
             'restoreOptionMessage'
         ]);
     }
+    componentDidMount () {
+        document.addEventListener('keydown', this.handleKeyPress);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('keydown', this.handleKeyPress);
+    }
     handleClickNew () {
-        let readyToReplaceProject = true;
         // if the project is dirty, and user owns the project, we will autosave.
         // but if they are not logged in and can't save, user should consider
         // downloading or logging in first.
         // Note that if user is logged in and editing someone else's project,
         // they'll lose their work.
-        if (this.props.projectChanged && !this.props.canCreateNew) {
-            readyToReplaceProject = confirm( // eslint-disable-line no-alert
-                this.props.intl.formatMessage(messages.confirmNav)
-            );
-        }
+        const readyToReplaceProject = this.props.confirmReadyToReplaceProject(
+            this.props.intl.formatMessage(sharedMessages.replaceProjectWarning)
+        );
         this.props.onRequestCloseFile();
         if (readyToReplaceProject) {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
@@ -196,8 +200,8 @@ class MenuBar extends React.Component {
         this.props.onRequestCloseEdit();
     }
     handleClickSeeCommunity (waitForUpdate) {
-        if (this.props.canSave) { // save before transitioning to project page
-            this.props.autoUpdateProject();
+        if (this.props.shouldSaveBeforeTransition()) {
+            this.props.autoUpdateProject(); // save before transitioning to project page
             waitForUpdate(true); // queue the transition to project page
         } else {
             waitForUpdate(false); // immediately transition to project page
@@ -222,10 +226,31 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseEdit();
         };
     }
-    handleCloseFileMenuAndThen (fn) {
+    handleKeyPress (event) {
+        const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
+        if (modifier && event.key === 's') {
+            this.props.onClickSave();
+            event.preventDefault();
+        }
+    }
+    getSaveToComputerHandler (downloadProjectCallback) {
         return () => {
             this.props.onRequestCloseFile();
-            fn();
+            downloadProjectCallback();
+            if (this.props.onProjectTelemetryEvent) {
+                const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
+                this.props.onProjectTelemetryEvent('projectDidSave', metadata);
+            }
+        };
+    }
+    getSaveRubyToComputerHandler (downloadProjectCallback) {
+        return () => {
+            this.props.onRequestCloseFile();
+            downloadProjectCallback();
+            if (this.props.onProjectTelemetryEvent) {
+                const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
+                this.props.onProjectTelemetryEvent('projectDidSave', metadata);
+            }
         };
     }
     handleLanguageMouseUp (e) {
@@ -327,11 +352,11 @@ class MenuBar extends React.Component {
                                     [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
                                 })}
                                 draggable={false}
-                                src={smalrubyLogo}
+                                src={this.props.logo}
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
-                        <div
+                        {(this.props.canChangeLanguage) && (<div
                             className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                         >
                             <div>
@@ -345,98 +370,100 @@ class MenuBar extends React.Component {
                                 />
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
-                        </div>
-                        <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.fileMenuOpen
-                            })}
-                            onMouseUp={this.props.onClickFile}
-                        >
-                            <FormattedMessage
-                                defaultMessage="File"
-                                description="Text for file dropdown menu"
-                                id="gui.menuBar.file"
-                            />
-                            <MenuBarMenu
-                                className={classNames(styles.menuBarMenu)}
-                                open={this.props.fileMenuOpen}
-                                place={this.props.isRtl ? 'left' : 'right'}
-                                onRequestClose={this.props.onRequestCloseFile}
+                        </div>)}
+                        {(this.props.canManageFiles) && (
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable, {
+                                    [styles.active]: this.props.fileMenuOpen
+                                })}
+                                onMouseUp={this.props.onClickFile}
                             >
-                                <MenuSection>
-                                    <MenuItem
-                                        isRtl={this.props.isRtl}
-                                        onClick={this.handleClickNew}
-                                    >
-                                        {newProjectMessage}
-                                    </MenuItem>
-                                </MenuSection>
-                                {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+                                <FormattedMessage
+                                    defaultMessage="File"
+                                    description="Text for file dropdown menu"
+                                    id="gui.menuBar.file"
+                                />
+                                <MenuBarMenu
+                                    className={classNames(styles.menuBarMenu)}
+                                    open={this.props.fileMenuOpen}
+                                    place={this.props.isRtl ? 'left' : 'right'}
+                                    onRequestClose={this.props.onRequestCloseFile}
+                                >
                                     <MenuSection>
-                                        {this.props.canSave ? (
-                                            <MenuItem onClick={this.handleClickSave}>
-                                                {saveNowMessage}
-                                            </MenuItem>
-                                        ) : []}
-                                        {this.props.canCreateCopy ? (
-                                            <MenuItem onClick={this.handleClickSaveAsCopy}>
-                                                {createCopyMessage}
-                                            </MenuItem>
-                                        ) : []}
-                                        {this.props.canRemix ? (
-                                            <MenuItem onClick={this.handleClickRemix}>
-                                                {remixMessage}
-                                            </MenuItem>
-                                        ) : []}
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleClickNew}
+                                        >
+                                            {newProjectMessage}
+                                        </MenuItem>
                                     </MenuSection>
-                                )}
-                                <MenuSection>
-                                    <SBFileUploader onUpdateProjectTitle={this.props.onUpdateProjectTitle}>
-                                        {(className, renderFileInput, loadProject) => (
+                                    {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+                                        <MenuSection>
+                                            {this.props.canSave && (
+                                                <MenuItem onClick={this.handleClickSave}>
+                                                    {saveNowMessage}
+                                                </MenuItem>
+                                            )}
+                                            {this.props.canCreateCopy && (
+                                                <MenuItem onClick={this.handleClickSaveAsCopy}>
+                                                    {createCopyMessage}
+                                                </MenuItem>
+                                            )}
+                                            {this.props.canRemix && (
+                                                <MenuItem onClick={this.handleClickRemix}>
+                                                    {remixMessage}
+                                                </MenuItem>
+                                            )}
+                                        </MenuSection>
+                                    )}
+                                    <MenuSection>
+                                        <SBFileUploader
+                                            canSave={this.props.canSave}
+                                            userOwnsProject={this.props.userOwnsProject}
+                                            onUpdateProjectTitle={this.props.onUpdateProjectTitle}
+                                        >
+                                            {(className, renderFileInput, handleLoadProject) => (
+                                                <MenuItem
+                                                    className={className}
+                                                    onClick={handleLoadProject}
+                                                >
+                                                    {/* eslint-disable max-len */}
+                                                    {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
+                                                    {/* eslint-enable max-len */}
+                                                    {renderFileInput()}
+                                                </MenuItem>
+                                            )}
+                                        </SBFileUploader>
+                                        <SB3Downloader>{(className, downloadProjectCallback) => (
                                             <MenuItem
                                                 className={className}
-                                                onClick={loadProject}
+                                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
                                             >
                                                 <FormattedMessage
-                                                    defaultMessage="Load from your computer"
-                                                    description={
-                                                        'Menu bar item for uploading a project from your computer'
-                                                    }
-                                                    id="gui.menuBar.uploadFromComputer"
+                                                    defaultMessage="Save to your computer"
+                                                    description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                    id="gui.menuBar.downloadToComputer"
                                                 />
-                                                {renderFileInput()}
                                             </MenuItem>
-                                        )}
-                                    </SBFileUploader>
-                                    <SB3Downloader>{(className, downloadProject) => (
-                                        <MenuItem
-                                            className={className}
-                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="Save to your computer"
-                                                description="Menu bar item for downloading a project to your computer"
-                                                id="gui.menuBar.downloadToComputer"
-                                            />
-                                        </MenuItem>
-                                    )}</SB3Downloader>
-                                </MenuSection>
-                                <MenuSection>
-                                    <RubyDownloader>{(className, downloadProject) => (
-                                        <MenuItem
-                                            className={className}
-                                            onClick={this.handleCloseFileMenuAndThen(downloadProject)}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="Save Ruby to your computer"
-                                                description="Menu bar item for downloading Ruby code to your computer"
-                                                id="gui.smalruby3.menuBar.downloadRubyCodeToComputer"
-                                            />
-                                        </MenuItem>
-                                    )}</RubyDownloader>
-                                </MenuSection>
-                            </MenuBarMenu>
-                        </div>
+                                        )}</SB3Downloader>
+                                    </MenuSection>
+                                    <MenuSection>
+                                        <RubyDownloader>{(className, downloadProjectCallback) => (
+                                            <MenuItem
+                                                className={className}
+                                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="Save Ruby to your computer"
+                                                    description="Menu bar item for downloading Ruby code to your computer" // eslint-disable-line max-len
+                                                    id="gui.smalruby3.menuBar.downloadRubyCodeToComputer"
+                                                />
+                                            </MenuItem>
+                                        )}</RubyDownloader>
+                                    </MenuSection>
+                                </MenuBarMenu>
+                            </div>
+                        )}
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
@@ -666,25 +693,6 @@ class MenuBar extends React.Component {
                     ) : (
                         // ******** no login session is available, so don't show login stuff
                         <React.Fragment>
-                            <div className={classNames(styles.menuBarItem, styles.feedbackButtonWrapper)}>
-                                <a
-                                    className={styles.feedbackLink}
-                                    href="https://github.com/smalruby/smalruby3-gui/issues"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    <Button
-                                        className={styles.feedbackButton}
-                                        iconSrc={feedbackIcon}
-                                    >
-                                        <FormattedMessage
-                                            defaultMessage="Give Feedback"
-                                            description="Label for feedback form modal button"
-                                            id="gui.menuBar.giveFeedback"
-                                        />
-                                    </Button>
-                                </a>
-                            </div>
                             {this.props.showComingSoon ? (
                                 <React.Fragment>
                                     <MenuBarItemTooltip id="mystuff">
@@ -741,13 +749,16 @@ MenuBar.propTypes = {
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     autoUpdateProject: PropTypes.func,
+    canChangeLanguage: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
+    canManageFiles: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
     className: PropTypes.string,
+    confirmReadyToReplaceProject: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
@@ -757,7 +768,9 @@ MenuBar.propTypes = {
     isShowingProject: PropTypes.bool,
     isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
+    locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
+    logo: PropTypes.string,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
@@ -771,6 +784,7 @@ MenuBar.propTypes = {
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
+    onProjectTelemetryEvent: PropTypes.func,
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
@@ -780,21 +794,23 @@ MenuBar.propTypes = {
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    projectChanged: PropTypes.bool,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
     updateRubyCodeTargetState: PropTypes.func,
+    userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
-    vm: PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 MenuBar.defaultProps = {
+    logo: smalrubyLogo,
     onShare: () => {}
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     const loadingState = state.scratchGui.projectState.loadingState;
     const user = state.session && state.session.session && state.session.session.user;
     return {
@@ -805,11 +821,13 @@ const mapStateToProps = state => {
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
+        locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
-        projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null,
+        userOwnsProject: ownProps.authorUsername && user &&
+            (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm
     };
 };
@@ -835,7 +853,11 @@ const mapDispatchToProps = dispatch => ({
     updateRubyCodeTargetState: target => dispatch(updateRubyCodeTarget(target))
 });
 
-export default injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MenuBar));
+export default compose(
+    injectIntl,
+    MenuBarHOC,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(MenuBar);

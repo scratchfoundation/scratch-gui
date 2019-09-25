@@ -24,9 +24,10 @@ describe('Localization', () => {
         await driver.quit();
     });
 
-    test('Localization', async () => {
+    test('Switching languages', async () => {
+        await driver.quit();
+        driver = getDriver();
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Add a sprite to make sure it stays when switching languages
         await clickText('Costumes');
@@ -49,6 +50,19 @@ describe('Localization', () => {
         // After switching languages, make sure Apple sprite still exists
         await rightClickText('Apple', scope.spriteTile); // Make sure it is there
 
+        // Remounting re-attaches the beforeunload callback. Make sure to remove it
+        driver.executeScript('window.onbeforeunload = undefined;');
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    // Regression test for #4476, blocks in wrong language when loaded with locale
+    test('Loading with locale shows correct blocks', async () => {
+        await loadUri(`${uri}?locale=de`);
+        await clickText('Fühlen'); // Sensing category in German
+        await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks to scroll
+        await clickText('Antwort'); // Find the "answer" block in German
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

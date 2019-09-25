@@ -30,7 +30,7 @@ describe('RubyToBlocksConverter/Sound', () => {
             methodName: 'play'
         }
     ].forEach(info => {
-        describe(info.opcode, () => {
+        describe(`${info.opcode}`, () => {
             test('normal', () => {
                 code = `${info.methodName}("Meow")`;
                 expected = [
@@ -121,7 +121,7 @@ describe('RubyToBlocksConverter/Sound', () => {
             value: 100
         }
     ].forEach(info => {
-        describe(info.opcode, () => {
+        describe(`${info.opcode}`, () => {
             test('normal', () => {
                 code = `${info.methodName}("PITCH", ${info.value})`;
                 expected = [

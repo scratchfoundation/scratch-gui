@@ -1,18 +1,22 @@
 language: node_js
 sudo: required
-dist: trusty
+dist: xenial
 addons:
     chrome: stable
 node_js:
 - 10
 env:
   global:
+  - CHROMEDRIVER_VERSION=LATEST
   - NODE_ENV=production
-  - SMOKE_URL=http://smalruby.jp/smalruby3-gui/
+  - NODE_OPTIONS=--max-old-space-size=7250
   - NPM_TAG=latest
 cache:
   directories:
   - node_modules
+before_install:
+# package-lock.json was introduced in npm@5
+- '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest' # skipped when using node 9
 install:
 - npm --production=false install
 - npm --production=false update
@@ -27,4 +31,4 @@ deploy:
     branch:
     - develop
   skip_cleanup: true
-  script: npm run deploy -- -x -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git

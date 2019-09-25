@@ -29,7 +29,6 @@ describe('Working with the blocks', () => {
 
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Operators', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -41,7 +40,6 @@ describe('Working with the blocks', () => {
 
     test('Switching sprites updates the block menus', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Sound', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         // "Meow" sound block should be visible
@@ -58,7 +56,6 @@ describe('Working with the blocks', () => {
 
     test('Creating variables', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -85,6 +82,15 @@ describe('Working with the blocks', () => {
         // And there should be a monitor visible
         await rightClickText('score', scope.monitors);
         await clickText('slider');
+        await findByXpath("//input[@step='1']");
+
+        // Changing the slider to a decimal should make it have a step size of 0.01
+        await rightClickText('score', scope.monitors);
+        await clickText('change slider range');
+        el = await findByXpath("//input[@name='Maximum value']");
+        await el.sendKeys('.1');
+        await clickButton('OK');
+        await findByXpath("//input[@step='0.01'][@max='100.1']");
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -92,7 +98,6 @@ describe('Working with the blocks', () => {
 
     test('Creating a list', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Variables', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
@@ -127,7 +132,6 @@ describe('Working with the blocks', () => {
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('My Blocks');
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Make a Block');
@@ -146,7 +150,6 @@ describe('Working with the blocks', () => {
 
     test('Adding an extension', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath('//button[@title="Add Extension"]');
 
         await clickText('Pen');
@@ -160,14 +163,115 @@ describe('Working with the blocks', () => {
 
     test('Record option from sound block menu opens sound recorder', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Code');
         await clickText('Sound', scope.blocksTab);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickText('Meow', scope.blocksTab); // Click "play sound <Meow> until done" block
         await clickText('record'); // Click "record..." option in the block's sound menu
+        // Access has been force denied, so close the alert that comes up
+        await driver.sleep(1000); // getUserMedia requests are very slow to fail for some reason
+        await driver.switchTo().alert()
+            .accept();
         await findByText('Record Sound'); // Sound recorder is open
         const logs = await getLogs();
         await expect(logs).toEqual([]);
+    });
+
+    test('Renaming costume changes the default costume name in the toolbox', async () => {
+        await loadUri(uri);
+
+        // Rename the costume
+        await clickText('Costumes');
+        await clickText('costume1', scope.costumesTab);
+        const el = await findByXpath("//input[@value='costume1']");
+        await el.sendKeys('newname');
+
+        // Make sure it is updated in the block menu
+        await clickText('Code');
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('newname', scope.blocksTab);
+    });
+
+    test('Renaming costume with a special character should not break toolbox', async () => {
+        await loadUri(uri);
+
+        // Rename the costume
+        await clickText('Costumes');
+        await clickText('costume1', scope.costumesTab);
+        const el = await findByXpath("//input[@value='costume1']");
+        await el.sendKeys('<NewCostume>');
+
+        // Make sure it is updated in the block menu
+        await clickText('Code');
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('<NewCostume>', scope.blocksTab);
+
+        await clickText('Sound', scope.blocksTab);
+    });
+
+    test('Adding costumes DOES update the default costume name in the toolbox', async () => {
+        await loadUri(uri);
+
+        // By default, costume1 is in the costume tab
+        await clickText('Looks', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('costume1', scope.blocksTab);
+
+        // Also check that adding a new costume does update the list
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath('//button[@aria-label="Paint"]');
+        await clickText('costume2', scope.costumesTab);
+        // Check that the menu has been updated
+        await clickText('Code');
+        await clickText('costume2', scope.blocksTab);
+    });
+
+    // Skipped because it was flakey on travis, but seems to run locally ok
+    test.skip('Adding a sound DOES update the default sound name in the toolbox', async () => {
+        await loadUri(uri);
+        await clickText('Sounds');
+        await clickXpath('//button[@aria-label="Choose a Sound"]');
+        await clickText('A Bass', scope.modal); // Should close the modal
+        await clickText('Code');
+        await clickText('Sound', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('A\u00A0Bass', scope.blocksTab); // Need &nbsp; for block text
+    });
+
+    // Regression test for switching between editor/player causing toolbox to stop updating
+    test('"See inside" after being on project page re-initializing variables', async () => {
+        const playerUri = path.resolve(__dirname, '../../build/player.html');
+        await loadUri(playerUri);
+        await clickText('See inside');
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
+
+        await clickText('See Project Page');
+        await clickText('See inside');
+
+        await clickText('Variables');
+        await driver.sleep(500); // Wait for scroll to finish
+        await clickText('my\u00A0variable');
+    });
+
+    // Regression test for switching editor tabs causing toolbox to stop updating
+    test('Creating variables after adding extensions updates the toolbox', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        await clickText('Code');
+        await clickText('Variables', scope.blocksTab);
+        await driver.sleep(500); // Wait for scroll
+        await clickText('Make a List');
+        const el = await findByXpath("//input[@name='New list name:']");
+        await el.sendKeys('list1');
+        await clickButton('OK');
+        await clickText('list1', scope.blocksTab);
     });
 });

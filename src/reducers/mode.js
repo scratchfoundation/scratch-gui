@@ -13,13 +13,10 @@ const reducer = function (state, action) {
     switch (action.type) {
     case SET_FULL_SCREEN:
         return Object.assign({}, state, {
-            isFullScreen: action.isFullScreen,
-            isPlayerOnly: state.isPlayerOnly,
-            hasEverEnteredEditor: false
+            isFullScreen: action.isFullScreen
         });
     case SET_PLAYER:
         return Object.assign({}, state, {
-            isFullScreen: state.isFullScreen,
             isPlayerOnly: action.isPlayerOnly,
             hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly
         });

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {detectTutorialId} from './tutorial-from-url';
 
 import {activateDeck} from '../reducers/cards';
-import {openTipsLibrary, closePreviewInfo} from '../reducers/modals';
+import {openTipsLibrary} from '../reducers/modals';
 
 /* Higher Order Component to get parameters from the URL query string and initialize redux state
  * @param {React.Component} WrappedComponent: component to render
@@ -52,11 +52,9 @@ const QueryParserHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         onOpenTipsLibrary: () => {
             dispatch(openTipsLibrary());
-            dispatch(closePreviewInfo());
         },
         onUpdateReduxDeck: tutorialId => {
             dispatch(activateDeck(tutorialId));
-            dispatch(closePreviewInfo());
         }
     });
     return connect(

@@ -57,7 +57,7 @@
     width: 100%;
     height: 100%;
     opacity: 0.75;
-    background-color: #8cbcff;
+    background-color: $drop-highlight;
     transition: all 0.25s ease;
 }
 
@@ -69,9 +69,18 @@
 }
 
 .backpack-item {
-    min-width: 4rem;
-    max-width: 6rem;
+    width: 4rem;
+    height: 4.5rem;
     margin: 0 0.25rem;
+    flex-shrink: 0;
+
+    /* Need to hide overflow because of background setting below */
+    overflow: hidden;
+}
+
+.backpack-item > div {
+    /* Need to set the background to get blend-mode below to work */
+    background: $ui-primary;
 }
 
 .backpack-item img {

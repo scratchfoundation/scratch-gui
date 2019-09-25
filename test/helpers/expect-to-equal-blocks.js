@@ -204,6 +204,7 @@ const expectToEqualBlock = function (context, parent, actualBlock, expectedBlock
 
 const expectToEqualBlocks = function (converter, expectedBlocksInfo) {
     const blocks = new Blocks();
+    blocks.forceNoGlow = true;
     Object.keys(converter.blocks).forEach(blockId => {
         blocks.createBlock(converter.blocks[blockId]);
     });
@@ -384,6 +385,7 @@ const rubyToExpected = function (converter, target, code) {
     expect(converter.errors).toHaveLength(0);
 
     const blocks = new Blocks();
+    blocks.forceNoGlow = true;
     Object.keys(converter.blocks).forEach(blockId => {
         blocks.createBlock(converter.blocks[blockId]);
     });
@@ -436,7 +438,7 @@ const expectNoArgsMethod = function (opcode, methodName, blockType = 'statement'
         expected = null;
     });
 
-    describe(opcode, () => {
+    describe(`${opcode}`, () => {
         test('normal', () => {
             code = methodName;
             expected = [

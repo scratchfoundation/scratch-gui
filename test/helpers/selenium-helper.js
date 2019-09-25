@@ -1,4 +1,4 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
+jest.setTimeout(30000); // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
@@ -8,6 +8,11 @@ const fs = require('fs');
 const {By, until, Button} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
+
+// The main reason for this timeout is so that we can control the timeout message and report details;
+// if we hit the Jasmine default timeout then we get a terse message that we can't control.
+// The Jasmine default timeout is 30 seconds so make sure this is lower.
+const DEFAULT_TIMEOUT_MILLISECONDS = 20 * 1000;
 
 class SeleniumHelper {
     constructor () {
@@ -27,8 +32,8 @@ class SeleniumHelper {
         ]);
     }
 
-    elementIsVisible (element) {
-        return this.driver.wait(until.elementIsVisible(element));
+    elementIsVisible (element, timeoutMessage = 'elementIsVisible timed out') {
+        return this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
     }
 
     get scope () {
@@ -50,6 +55,10 @@ class SeleniumHelper {
         if (USE_HEADLESS) {
             args.push('--headless');
         }
+
+        // Stub getUserMedia to always not allow access
+        args.push('--use-fake-ui-for-media-stream=deny');
+
         chromeCapabilities.set('chromeOptions', {args});
         chromeCapabilities.setLoggingPrefs({
             performance: 'ALL'
@@ -76,8 +85,12 @@ class SeleniumHelper {
         return this.driver;
     }
 
-    findByXpath (xpath) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath), 5 * 1000));
+    findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
+        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage)
+            .then(el => (
+                this.driver.wait(el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS, `${xpath} is not visible`)
+                    .then(() => el)
+            ));
     }
 
     findByText (text, scope) {
@@ -88,13 +101,15 @@ class SeleniumHelper {
         const WINDOW_WIDTH = 1024;
         const WINDOW_HEIGHT = 768;
 
-        const locale = 'locale=en';
-        if (uri.indexOf('?') >= 0) {
-            uri = uri.replace('?', `?${locale}&`);
-        } else if (uri.indexOf('#') >= 0) {
-            uri = uri.replace('#', `?${locale}#`);
-        } else {
-            uri = `${uri}?${locale}`;
+        if (uri.indexOf('locale=') < 0) {
+            const locale = 'locale=en';
+            if (uri.indexOf('?') >= 0) {
+                uri = uri.replace('?', `?${locale}&`);
+            } else if (uri.indexOf('#') >= 0) {
+                uri = uri.replace('#', `?${locale}#`);
+            } else {
+                uri = `${uri}?${locale}`;
+            }
         }
 
         return this.driver

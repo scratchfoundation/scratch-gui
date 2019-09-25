@@ -6,6 +6,7 @@ const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 const SHOW_EXTENSION_ALERT = 'scratch-gui/alerts/SHOW_EXTENSION_ALERT';
 const CLOSE_ALERT = 'scratch-gui/alerts/CLOSE_ALERT';
 const CLOSE_ALERTS_WITH_ID = 'scratch-gui/alerts/CLOSE_ALERTS_WITH_ID';
+const CLOSE_ALERT_WITH_ID = 'scratch-gui/alerts/CLOSE_ALERT_WITH_ID';
 
 /**
  * Initial state of alerts reducer
@@ -86,7 +87,7 @@ const reducer = function (state, action) {
                     closeButton: true,
                     extensionId: extensionId,
                     extensionName: extension.name,
-                    iconURL: extension.smallPeripheralImage,
+                    iconURL: extension.connectionSmallIconURL,
                     level: AlertLevels.WARN,
                     showReconnect: true
                 };
@@ -99,7 +100,12 @@ const reducer = function (state, action) {
         }
         return state; // if alert not found, show nothing
     }
+    case CLOSE_ALERT_WITH_ID:
     case CLOSE_ALERT: {
+        if (action.alertId) {
+            action.index = state.alertsList.findIndex(a => a.alertId === action.alertId);
+            if (action.index === -1) return state;
+        }
         const newList = state.alertsList.slice();
         newList.splice(action.index, 1);
         return Object.assign({}, state, {
@@ -140,6 +146,19 @@ const closeAlert = function (index) {
 const closeAlertsWithId = function (alertId) {
     return {
         type: CLOSE_ALERTS_WITH_ID,
+        alertId
+    };
+};
+
+/**
+ * Action creator to close a single alert with a given ID.
+ *
+ * @param {string} alertId - id string of the alert to close
+ * @return {object} - an object to be passed to the reducer.
+ */
+const closeAlertWithId = function (alertId) {
+    return {
+        type: CLOSE_ALERT_WITH_ID,
         alertId
     };
 };
@@ -195,6 +214,7 @@ export {
     reducer as default,
     initialState as alertsInitialState,
     closeAlert,
+    closeAlertWithId,
     filterInlineAlerts,
     filterPopupAlerts,
     showAlertWithTimeout,

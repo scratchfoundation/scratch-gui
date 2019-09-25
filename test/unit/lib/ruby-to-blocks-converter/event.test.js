@@ -193,7 +193,7 @@ describe('RubyToBlocksConverter/Event', () => {
             isStage: true
         }
     ].forEach(info => {
-        describe(info.opcode, () => {
+        describe(`${info.opcode}`, () => {
             beforeEach(() => {
                 target = {
                     isStage: info.isStage
@@ -661,7 +661,7 @@ describe('RubyToBlocksConverter/Event', () => {
             methodName: 'broadcast_and_wait'
         }
     ].forEach(info => {
-        describe(info.opcode, () => {
+        describe(`${info.opcode}`, () => {
             test('normal', () => {
                 code = `${info.methodName}("message1")`;
                 expected = [

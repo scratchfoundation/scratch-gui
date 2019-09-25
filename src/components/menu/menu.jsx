@@ -39,7 +39,11 @@ const MenuItem = ({
     onClick
 }) => (
     <li
-        className={classNames(styles.menuItem, className)}
+        className={classNames(
+            styles.menuItem,
+            styles.hoverable,
+            className
+        )}
         onClick={onClick}
     >
         {children}
@@ -54,7 +58,7 @@ MenuItem.propTypes = {
 
 
 const addDividerClassToFirstChild = (child, id) => (
-    React.cloneElement(child, {
+    child && React.cloneElement(child, {
         className: classNames(
             child.className,
             {[styles.menuSection]: id === 0}

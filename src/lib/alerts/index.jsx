@@ -18,6 +18,20 @@ const AlertLevels = {
 
 const alerts = [
     {
+        alertId: 'convertRubyToBlocksError',
+        clearList: ['convertRubyToBlocksError'],
+        closeButton: true,
+        content: (
+            <FormattedMessage
+                defaultMessage="Could not convert Ruby to Code. Please fix Ruby!"
+                description="Message indicating that project could not be converted Ruby to Blocks"
+                id="gui.smalruby3.alerts.convertRubyToBlocksError"
+            />
+        ),
+        level: AlertLevels.WARN,
+        maxDisplaySecs: 5
+    },
+    {
         alertId: 'createSuccess',
         alertType: AlertTypes.STANDARD,
         clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
@@ -200,18 +214,18 @@ const alerts = [
         maxDisplaySecs: 15
     },
     {
-        alertId: 'convertRubyToBlocksError',
-        clearList: ['convertRubyToBlocksError'],
-        closeButton: true,
+        alertId: 'importingAsset',
+        alertType: AlertTypes.STANDARD,
+        clearList: [],
         content: (
             <FormattedMessage
-                defaultMessage="Could not convert Ruby to Code. Please fix Ruby!"
-                description="Message indicating that project could not be converted Ruby to Blocks"
-                id="gui.smalruby3.alerts.convertRubyToBlocksError"
+                defaultMessage="Importing…"
+                description="Message indicating that project is in process of importing"
+                id="gui.alerts.importing"
             />
         ),
-        level: AlertLevels.WARN,
-        maxDisplaySecs: 5
+        iconSpinner: true,
+        level: AlertLevels.SUCCESS
     }
 ];
 

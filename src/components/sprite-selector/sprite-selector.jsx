@@ -100,20 +100,18 @@ const SpriteSelectorComponent = function (props) {
                 onChangeY={onChangeSpriteY}
             />
 
-            <Box className={styles.scrollWrapper}>
-                <SpriteList
-                    editingTarget={editingTarget}
-                    hoveredTarget={hoveredTarget}
-                    items={Object.keys(sprites).map(id => sprites[id])}
-                    raised={raised}
-                    selectedId={selectedId}
-                    onDeleteSprite={onDeleteSprite}
-                    onDrop={onDrop}
-                    onDuplicateSprite={onDuplicateSprite}
-                    onExportSprite={onExportSprite}
-                    onSelectSprite={onSelectSprite}
-                />
-            </Box>
+            <SpriteList
+                editingTarget={editingTarget}
+                hoveredTarget={hoveredTarget}
+                items={Object.keys(sprites).map(id => sprites[id])}
+                raised={raised}
+                selectedId={selectedId}
+                onDeleteSprite={onDeleteSprite}
+                onDrop={onDrop}
+                onDuplicateSprite={onDuplicateSprite}
+                onExportSprite={onExportSprite}
+                onSelectSprite={onSelectSprite}
+            />
             <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}
@@ -122,9 +120,10 @@ const SpriteSelectorComponent = function (props) {
                         title: intl.formatMessage(messages.addSpriteFromFile),
                         img: fileUploadIcon,
                         onClick: onFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2, .sprite3',
+                        fileAccept: '.svg, .png, .jpg, .jpeg, .sprite2, .sprite3, .gif',
                         fileChange: onSpriteUpload,
-                        fileInput: spriteFileInput
+                        fileInput: spriteFileInput,
+                        fileMultiple: true
                     }, {
                         title: intl.formatMessage(messages.addSpriteFromSurprise),
                         img: surpriseIcon,

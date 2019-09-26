@@ -188,7 +188,7 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'scratch-gui': './src/index.js'
+                'smalruby3-gui': './src/index.js'
             },
             output: {
                 libraryTarget: 'umd',

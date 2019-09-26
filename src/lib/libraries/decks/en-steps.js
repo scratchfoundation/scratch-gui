@@ -170,6 +170,19 @@ import moveArrowKeysUpDown from './steps/move-arrow-keys-up-down.en.png';
 import glideAroundBackAndForth from './steps/glide-around-back-and-forth.en.png';
 import glideAroundPoint from './steps/glide-around-point.en.png';
 
+// Code a Cartoon
+import codeCartoonSaySomething from './steps/code-cartoon-01-say-something.jpg';
+import codeCartoonAnimate from './steps/code-cartoon-02-animate.gif';
+import codeCartoonSelectDifferentCharacter from './steps/code-cartoon-03-select-different-character.gif';
+import codeCartoonUseMinusSign from './steps/code-cartoon-04-use-minus-sign.gif';
+import codeCartoonGrowShrink from './steps/code-cartoon-05-grow-shrink.gif';
+import codeCartoonSelectAnotherDifferentCharacter from './steps/code-cartoon-06-select-another-different-character.gif';
+import codeCartoonJump from './steps/code-cartoon-07-jump.gif';
+import codeCartoonChangeScenes from './steps/code-cartoon-08-change-scenes.gif';
+import codeCartoonGlideAround from './steps/code-cartoon-09-glide-around.gif';
+import codeCartoonChangeCostumes from './steps/code-cartoon-10-change-costumes.gif';
+import codeCartoonChooseMoreCharacters from './steps/code-cartoon-11-choose-more-characters.jpg';
+
 const enImages = {
     // Intro
     introMove: introMove,
@@ -341,7 +354,20 @@ const enImages = {
 
     // Glide Around
     glideAroundBackAndForth: glideAroundBackAndForth,
-    glideAroundPoint: glideAroundPoint
+    glideAroundPoint: glideAroundPoint,
+    
+    // Code a Cartoon
+    codeCartoonSaySomething: codeCartoonSaySomething,
+    codeCartoonAnimate: codeCartoonAnimate,
+    codeCartoonSelectDifferentCharacter: codeCartoonSelectDifferentCharacter,
+    codeCartoonUseMinusSign: codeCartoonUseMinusSign,
+    codeCartoonGrowShrink: codeCartoonGrowShrink,
+    codeCartoonSelectAnotherDifferentCharacter: codeCartoonSelectAnotherDifferentCharacter,
+    codeCartoonJump: codeCartoonJump,
+    codeCartoonChangeScenes: codeCartoonChangeScenes,
+    codeCartoonGlideAround: codeCartoonGlideAround,
+    codeCartoonChangeCostumes: codeCartoonChangeCostumes,
+    codeCartoonChooseMoreCharacters: codeCartoonChooseMoreCharacters
     
 };
 

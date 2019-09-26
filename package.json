@@ -18,7 +18,7 @@
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --progress --colors --watch"
   },
-  "author": "Massachusetts Institute of Technology",
+  "author": "Ruby Programming Shounendan",
   "license": "BSD-3-Clause",
   "homepage": "https://github.com/smalruby/smalruby3-gui#readme",
   "repository": {

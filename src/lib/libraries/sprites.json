@@ -15612,7 +15612,7 @@
     },
     {
         "name": "Watermelon",
-        "md5": "21d1340478e32a942914a7afd12b9f1a.svg",
+        "md5": "8736ecc2524895733534c888cd91fa1f.svg",
         "type": "sprite",
         "tags": [
             "food",
@@ -15643,7 +15643,7 @@
                 {
                     "costumeName": "watermelon-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "21d1340478e32a942914a7afd12b9f1a.svg",
+                    "baseLayerMD5": "8736ecc2524895733534c888cd91fa1f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 40,
                     "rotationCenterY": 27

@@ -14,6 +14,8 @@ import log from '../lib/log.js';
 
 const UNDO_STACK_SIZE = 99;
 
+const MAX_RMS = 1.2;
+
 class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
@@ -265,6 +267,15 @@ class SoundEditor extends React.Component {
             }
         });
     }
+    tooLoud () {
+        const numChunks = this.state.chunkLevels.length;
+        const startIndex = this.state.trimStart === null ?
+            0 : Math.floor(this.state.trimStart * numChunks);
+        const endIndex = this.state.trimEnd === null ?
+            numChunks - 1 : Math.ceil(this.state.trimEnd * numChunks);
+        const trimChunks = this.state.chunkLevels.slice(startIndex, endIndex);
+        return Math.max(...trimChunks) > MAX_RMS;
+    }
     getUndoItem () {
         return {
             ...this.copyCurrentBuffer(),
@@ -399,6 +410,7 @@ class SoundEditor extends React.Component {
                 name={this.props.name}
                 playhead={this.state.playhead}
                 setRef={this.setRef}
+                tooLoud={this.tooLoud()}
                 trimEnd={this.state.trimEnd}
                 trimStart={this.state.trimStart}
                 onChangeName={this.handleChangeName}

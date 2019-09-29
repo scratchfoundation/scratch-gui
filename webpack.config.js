@@ -100,10 +100,10 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'lib.min': ['react', 'react-dom'],
-            'gui': './src/playground/index.jsx',
-            'blocksonly': './src/playground/blocks-only.jsx',
-            'compatibilitytesting': './src/playground/compatibility-testing.jsx',
-            'player': './src/playground/player.jsx'
+            'gui': path.resolve(__dirname, 'src/playground/index.jsx'),
+            'blocksonly': path.resolve(__dirname, 'src/playground/blocks-only.jsx'),
+            'compatibilitytesting': path.resolve(__dirname, 'src/playground/compatibility-testing.jsx'),
+            'player': path.resolve(__dirname, 'src/playground/player.jsx')
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -188,7 +188,7 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'smalruby3-gui': './src/index.js'
+                'smalruby3-gui': path.resolve(__dirname, 'src/index.js')
             },
             output: {
                 libraryTarget: 'umd',

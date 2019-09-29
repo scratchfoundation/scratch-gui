@@ -4,7 +4,7 @@
   "description": "GraphicaL User Interface for creating and running Smalruby 3.0 projects",
   "main": "./dist/smalruby3-gui.js",
   "scripts": {
-    "setup-opal": "if [ ! -e ./static/javascripts/setup-opal.js ]; then mkdir -p ./static/javascripts && (cd opal && cat opal.min.js config-opal.js opal-parser.min.js config-opal-parser.js > ../static/javascripts/setup-opal.js); fi",
+    "setup-opal": "node ./scripts/make-setup-opal.js",
     "build": "npm run clean && npm run setup-opal && webpack --progress --colors --bail",
     "clean": "rimraf ./static/javascripts/setup-opal.js && rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
@@ -119,6 +119,7 @@
     "scratch-svg-renderer": "0.2.0-prerelease.20190822202608",
     "scratch-vm": "0.2.0-prerelease.20190918022946",
     "selenium-webdriver": "3.6.0",
+    "shelljs": "^0.8.3",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
     "svg-to-image": "1.1.3",

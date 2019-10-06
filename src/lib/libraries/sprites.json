@@ -3845,7 +3845,7 @@
                 {
                     "costumeName": "dinosaur1-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "a2bb28d5ba55ba997bec63772437cecf.svg",
+                    "baseLayerMD5": "78f7e20f0e187fdca81195e4cc134175.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 81,
                     "rotationCenterY": 91
@@ -9980,6 +9980,83 @@
         }
     },
     {
+        "name": "Marian",
+        "md5": "e9577a1eb098905dd386135bb38c0398.png",
+        "type": "sprite",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "objName": "Marian",
+            "sounds": [
+                {
+                    "soundName": "Hand Clap",
+                    "soundID": -1,
+                    "md5": "9502142875e67f7b0292a117a27e9563.wav",
+                    "sampleCount": 2464,
+                    "rate": 22050,
+                    "format": ""
+                }
+            ],
+            "costumes": [
+                {
+                    "costumeName": "marian-a",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "e9577a1eb098905dd386135bb38c0398.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 108.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-b",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "3d2ecee35eab8c37d1c3eadfe50ce447.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 108.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-c",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "221e9999b20ecc21b37c68fcdf09ab02.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 70.5,
+                    "rotationCenterY": 226
+                },
+                {
+                    "costumeName": "marian-d",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "64206b46c411e40926569cf3f5e587be.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 139,
+                    "rotationCenterY": 219
+                },
+                {
+                    "costumeName": "marian-e",
+                    "baseLayerID": -1,
+                    "baseLayerMD5": "16893c6136292ae36e13dc72cc55719b.png",
+                    "bitmapResolution": 2,
+                    "rotationCenterX": 69.5,
+                    "rotationCenterY": 211.5
+                }
+            ],
+            "currentCostumeIndex": 0,
+            "scratchX": 143,
+            "scratchY": -71,
+            "scale": 1,
+            "direction": 90,
+            "rotationStyle": "normal",
+            "isDraggable": false,
+            "visible": true,
+            "spriteInfo": {}
+        }
+    },
+    {
         "name": "Max",
         "md5": "5cc168bddf4561e6e7f1d30845d6efbf.svg",
         "type": "sprite",
@@ -15535,7 +15612,7 @@
     },
     {
         "name": "Watermelon",
-        "md5": "26fecef75cf3b6e0d98bff5c06475036.svg",
+        "md5": "8736ecc2524895733534c888cd91fa1f.svg",
         "type": "sprite",
         "tags": [
             "food",
@@ -15566,7 +15643,7 @@
                 {
                     "costumeName": "watermelon-a",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "26fecef75cf3b6e0d98bff5c06475036.svg",
+                    "baseLayerMD5": "8736ecc2524895733534c888cd91fa1f.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 40,
                     "rotationCenterY": 27
@@ -15574,7 +15651,7 @@
                 {
                     "costumeName": "watermelon-b",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "fbdaf4d1d349edd3ddf3a1c4528aa9ec.svg",
+                    "baseLayerMD5": "1ed1c8b78eae2ee7422074d7f883031d.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 22,
                     "rotationCenterY": 27
@@ -15582,7 +15659,7 @@
                 {
                     "costumeName": "watermelon-c",
                     "baseLayerID": -1,
-                    "baseLayerMD5": "5976c10412306fc093c1d1930fa05119.svg",
+                    "baseLayerMD5": "677738282686d2dcce35d731c3ddc043.svg",
                     "bitmapResolution": 1,
                     "rotationCenterX": 21,
                     "rotationCenterY": 15

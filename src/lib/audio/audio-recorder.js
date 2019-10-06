@@ -1,12 +1,12 @@
 import 'get-float-time-domain-data';
 import getUserMedia from 'get-user-media-promise';
 import SharedAudioContext from './shared-audio-context.js';
-import {computeRMS} from './audio-util.js';
+import {computeRMS, computeChunkedRMS} from './audio-util.js';
 
 class AudioRecorder {
     constructor () {
         this.audioContext = new SharedAudioContext();
-        this.bufferLength = 1024;
+        this.bufferLength = 8192;
 
         this.userMediaStream = null;
         this.mediaStreamSource = null;
@@ -51,7 +51,7 @@ class AudioRecorder {
         this.userMediaStream = userMediaStream;
         this.mediaStreamSource = this.audioContext.createMediaStreamSource(userMediaStream);
         this.sourceNode = this.audioContext.createGain();
-        this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 2, 2);
+        this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.bufferLength, 1, 1);
 
         this.scriptProcessorNode.onaudioprocess = processEvent => {
             if (this.recording && !this.disposed) {
@@ -68,9 +68,9 @@ class AudioRecorder {
 
         const update = () => {
             if (this.disposed) return;
-            requestAnimationFrame(update);
             this.analyserNode.getFloatTimeDomainData(dataArray);
             onUpdate(computeRMS(dataArray));
+            requestAnimationFrame(update);
         };
 
         requestAnimationFrame(update);
@@ -83,7 +83,16 @@ class AudioRecorder {
     }
 
     stop () {
-        const chunkLevels = this.buffers.map(buffer => computeRMS(buffer));
+        const buffer = new Float32Array(this.buffers.length * this.bufferLength);
+
+        let offset = 0;
+        for (let i = 0; i < this.buffers.length; i++) {
+            const bufferChunk = this.buffers[i];
+            buffer.set(bufferChunk, offset);
+            offset += bufferChunk.length;
+        }
+
+        const chunkLevels = computeChunkedRMS(buffer);
         const maxRMS = Math.max.apply(null, chunkLevels);
         const threshold = maxRMS / 8;
 
@@ -103,15 +112,6 @@ class AudioRecorder {
         if (trimStart >= trimEnd) {
             trimStart = 0;
             trimEnd = 1;
-        }
-
-        const buffer = new Float32Array(this.buffers.length * this.bufferLength);
-
-        let offset = 0;
-        for (let i = 0; i < this.buffers.length; i++) {
-            const bufferChunk = this.buffers[i];
-            buffer.set(bufferChunk, offset);
-            offset += bufferChunk.length;
         }
 
         return {

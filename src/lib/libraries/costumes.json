@@ -2563,7 +2563,7 @@
     },
     {
         "name": "Dinosaur1-c",
-        "md5": "a2bb28d5ba55ba997bec63772437cecf.svg",
+        "md5": "78f7e20f0e187fdca81195e4cc134175.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -6808,6 +6808,71 @@
         ]
     },
     {
+        "name": "Marian-a",
+        "md5": "e9577a1eb098905dd386135bb38c0398.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            217,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-b",
+        "md5": "3d2ecee35eab8c37d1c3eadfe50ce447.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            217,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-c",
+        "md5": "221e9999b20ecc21b37c68fcdf09ab02.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            141,
+            452,
+            2
+        ]
+    },
+    {
+        "name": "Marian-d",
+        "md5": "64206b46c411e40926569cf3f5e587be.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            278,
+            438,
+            2
+        ]
+    },
+    {
+        "name": "Marian-e",
+        "md5": "16893c6136292ae36e13dc72cc55719b.png",
+        "type": "costume",
+        "tags": [
+            "people"
+        ],
+        "info": [
+            139,
+            423,
+            2
+        ]
+    },
+    {
         "name": "Max-a",
         "md5": "5cc168bddf4561e6e7f1d30845d6efbf.svg",
         "type": "costume",
@@ -10428,7 +10493,7 @@
     },
     {
         "name": "Watermelon-a",
-        "md5": "26fecef75cf3b6e0d98bff5c06475036.svg",
+        "md5": "8736ecc2524895733534c888cd91fa1f.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -10446,7 +10511,7 @@
     },
     {
         "name": "Watermelon-b",
-        "md5": "fbdaf4d1d349edd3ddf3a1c4528aa9ec.svg",
+        "md5": "1ed1c8b78eae2ee7422074d7f883031d.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -10463,7 +10528,7 @@
     },
     {
         "name": "Watermelon-c",
-        "md5": "5976c10412306fc093c1d1930fa05119.svg",
+        "md5": "677738282686d2dcce35d731c3ddc043.svg",
         "type": "costume",
         "tags": [
             "food",

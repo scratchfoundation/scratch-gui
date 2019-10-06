@@ -1,16 +1,18 @@
 language: node_js
 sudo: required
-dist: trusty
+dist: xenial
 addons:
     chrome: stable
 node_js:
 - 8
 env:
   global:
+  - CHROMEDRIVER_VERSION=LATEST
   - NODE_ENV=production
-  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
+  - NODE_OPTIONS=--max-old-space-size=7250
   - NPM_TAG=latest
   - RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')"
+  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
 cache:
   directories:
   - node_modules
@@ -74,6 +76,7 @@ deploy:
   on:
     all_branches: true
     condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^greenkeeper/
+    tags: false # Don't push tags to gh-pages
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script

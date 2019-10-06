@@ -3,6 +3,7 @@
 exports[`Sound Editor Component matches snapshot 1`] = `
 <div
   className={undefined}
+  onMouseDown={undefined}
 >
   <div
     className={undefined}
@@ -59,7 +60,59 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="undefined"
+      className={undefined}
+    >
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Copy
+        </div>
+      </div>
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Paste
+        </div>
+      </div>
+      <div
+        className=""
+        onClick={undefined}
+        role="button"
+      >
+        <img
+          className={undefined}
+          draggable={false}
+          src="test-file-stub"
+        />
+        <div
+          className={undefined}
+        >
+          Copy to New
+        </div>
+      </div>
+    </div>
+    <div
+      className=""
       onClick={[Function]}
       role="button"
     >
@@ -71,9 +124,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       <div
         className={undefined}
       >
-        <span>
-          Save
-        </span>
+        Delete
       </div>
     </div>
   </div>
@@ -85,33 +136,26 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <svg
         className={undefined}
-        viewBox="-1 0 600 160"
+        viewBox="0 0 600 160"
       >
-        <line
-          className={undefined}
-          x1={-1}
-          x2={600}
-          y1={80}
-          y2={80}
-        />
         <g
           transform="scale(1, -1) translate(0, -80)"
         >
           <path
             className={undefined}
-            d="M0 0Q0 0 60 40 Q120 80 180 120 Q240 160 300 200 Q360 240 420 120 Q480 0 480 0 Q480 0 420 -120 Q360 -240 300 -200 Q240 -160 180 -120 Q120 -80 60 -40 Q0 0 0 0Z"
+            d="M0 0Q0 80 150 120 Q300 160 450 200 Q600 240 600 0 Q600 -240 450 -200 Q300 -160 150 -120 Q0 -80 0 0Z"
             strokeLinejoin="round"
             strokeWidth={1}
           />
         </g>
       </svg>
       <div
-        className={undefined}
+        className=""
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
       >
         <div
           className=""
-          onMouseDown={[Function]}
-          onTouchStart={[Function]}
           style={
             Object {
               "alignContent": undefined,
@@ -124,7 +168,8 @@ exports[`Sound Editor Component matches snapshot 1`] = `
               "flexWrap": undefined,
               "height": undefined,
               "justifyContent": undefined,
-              "width": "20%",
+              "left": "20%",
+              "width": "60.00000000000001%",
             }
           }
         >
@@ -148,6 +193,73 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           />
           <div
             className=""
+            onMouseDown={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "alignContent": undefined,
+                "alignItems": undefined,
+                "alignSelf": undefined,
+                "flexBasis": undefined,
+                "flexDirection": undefined,
+                "flexGrow": undefined,
+                "flexShrink": undefined,
+                "flexWrap": undefined,
+                "height": undefined,
+                "justifyContent": undefined,
+                "width": undefined,
+              }
+            }
+          >
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+            <div
+              className=""
+              style={
+                Object {
+                  "alignContent": undefined,
+                  "alignItems": undefined,
+                  "alignSelf": undefined,
+                  "flexBasis": undefined,
+                  "flexDirection": undefined,
+                  "flexGrow": undefined,
+                  "flexShrink": undefined,
+                  "flexWrap": undefined,
+                  "height": undefined,
+                  "justifyContent": undefined,
+                  "width": undefined,
+                }
+              }
+            >
+              <img
+                src="test-file-stub"
+              />
+            </div>
+          </div>
+          <div
+            className=""
+            onMouseDown={[Function]}
+            onTouchStart={[Function]}
             style={
               Object {
                 "alignContent": undefined,
@@ -222,109 +334,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             }
           />
         </div>
-        <div
-          className=""
-          onMouseDown={[Function]}
-          onTouchStart={[Function]}
-          style={
-            Object {
-              "alignContent": undefined,
-              "alignItems": undefined,
-              "alignSelf": undefined,
-              "flexBasis": undefined,
-              "flexDirection": undefined,
-              "flexGrow": undefined,
-              "flexShrink": undefined,
-              "flexWrap": undefined,
-              "height": undefined,
-              "justifyContent": undefined,
-              "left": "80%",
-              "width": "20%",
-            }
-          }
-        >
-          <div
-            className=""
-            style={
-              Object {
-                "alignContent": undefined,
-                "alignItems": undefined,
-                "alignSelf": undefined,
-                "flexBasis": undefined,
-                "flexDirection": undefined,
-                "flexGrow": undefined,
-                "flexShrink": undefined,
-                "flexWrap": undefined,
-                "height": undefined,
-                "justifyContent": undefined,
-                "width": undefined,
-              }
-            }
-          />
-          <div
-            className=""
-            style={
-              Object {
-                "alignContent": undefined,
-                "alignItems": undefined,
-                "alignSelf": undefined,
-                "flexBasis": undefined,
-                "flexDirection": undefined,
-                "flexGrow": undefined,
-                "flexShrink": undefined,
-                "flexWrap": undefined,
-                "height": undefined,
-                "justifyContent": undefined,
-                "width": undefined,
-              }
-            }
-          >
-            <div
-              className=""
-              style={
-                Object {
-                  "alignContent": undefined,
-                  "alignItems": undefined,
-                  "alignSelf": undefined,
-                  "flexBasis": undefined,
-                  "flexDirection": undefined,
-                  "flexGrow": undefined,
-                  "flexShrink": undefined,
-                  "flexWrap": undefined,
-                  "height": undefined,
-                  "justifyContent": undefined,
-                  "width": undefined,
-                }
-              }
-            >
-              <img
-                src="test-file-stub"
-              />
-            </div>
-            <div
-              className=""
-              style={
-                Object {
-                  "alignContent": undefined,
-                  "alignItems": undefined,
-                  "alignSelf": undefined,
-                  "flexBasis": undefined,
-                  "flexDirection": undefined,
-                  "flexGrow": undefined,
-                  "flexShrink": undefined,
-                  "flexWrap": undefined,
-                  "height": undefined,
-                  "justifyContent": undefined,
-                  "width": undefined,
-                }
-              }
-            >
-              <img
-                src="test-file-stub"
-              />
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -395,42 +404,6 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         className={undefined}
       >
         <span>
-          Echo
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
-          Robot
-        </span>
-      </div>
-    </div>
-    <div
-      className=""
-      onClick={[Function]}
-      role="button"
-    >
-      <img
-        className={undefined}
-        draggable={false}
-        src="test-file-stub"
-      />
-      <div
-        className={undefined}
-      >
-        <span>
           Louder
         </span>
       </div>
@@ -455,6 +428,60 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Mute
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Fade in
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={undefined}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Fade out
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
       onClick={[Function]}
       role="button"
     >
@@ -468,6 +495,24 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       >
         <span>
           Reverse
+        </span>
+      </div>
+    </div>
+    <div
+      className=""
+      onClick={[Function]}
+      role="button"
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="test-file-stub"
+      />
+      <div
+        className={undefined}
+      >
+        <span>
+          Robot
         </span>
       </div>
     </div>

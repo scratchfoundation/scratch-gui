@@ -8,6 +8,7 @@
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: $motion-primary;
+    border-radius: 0.5rem;
 }
 
 .container + .container {
@@ -16,4 +17,14 @@
 
 .title {
     margin-top: 0.5rem;
+    text-align: center;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.container:active {
+    background-color: $motion-light-transparent;
 }

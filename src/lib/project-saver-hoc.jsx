@@ -72,9 +72,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
             if (!this.props.isLoading && prevProps.isLoading) {
                 this.reportTelemetryEvent('projectDidLoad');
-                if (this.props.saveThumbnailOnLoad && this.props.reduxProjectId !== null) {
-                    this.storeProjectThumbnail(this.props.reduxProjectId);
-                }
+            }
+
+            if (this.props.isShowingWithId && !this.props.isLoading &&
+                prevProps.isLoading && this.props.saveThumbnailOnLoad) {
+                this.storeProjectThumbnail(this.props.reduxProjectId);
             }
 
             if (this.props.projectChanged && !prevProps.projectChanged) {

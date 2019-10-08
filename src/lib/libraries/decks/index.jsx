@@ -42,8 +42,8 @@ import libraryMakeFly from './thumbnails/make-it-fly.jpg';
 // Pong
 import libraryPong from './thumbnails/pong.jpg';
 
-// Imagine If
-import libraryImagineIf from './thumbnails/imagine-if.jpg';
+// Imagine a World
+import libraryImagine from './thumbnails/imagine.jpg';
 
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
@@ -174,24 +174,24 @@ export default {
         urlId: 'name'
     },
     
-    'imagine-if': {
+    'imagine': {
         name: (
             <FormattedMessage
-                defaultMessage="Imagine If"
-                description="Name for the 'Imagine If' how-to"
-                id="gui.howtos.imagine-if"
+                defaultMessage="Imagine a World"
+                description="Name for the 'Imagine a World' how-to"
+                id="gui.howtos.imagine"
             />
         ),
-        tags: ['imagine-if'],
-        img: libraryImagineIf,
+        tags: ['imagine'],
+        img: libraryImagine,
         steps: [{
-            video: 'imagine-if'
+            video: 'imagine'
         }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Type What You Want to Say"
                     description="Step name for 'Type What You Want to Say' step"
-                    id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
+                    id="gui.howtos.imagine.step_imagineTypeWhatYouWant"
                 />
             ),
             image: 'imagineTypeWhatYouWant'
@@ -200,7 +200,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Click the Green Flag to Start"
                     description="Step name for 'Click the Green Flag to Start' step"
-                    id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
+                    id="gui.howtos.imagine.step_imagineClickGreenFlag"
                 />
             ),
             image: 'imagineClickGreenFlag'
@@ -209,7 +209,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Any Backdrop"
                     description="Step name for 'Choose Any Backdrop' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
+                    id="gui.howtos.imagine.step_imagineChooseBackdrop"
                 />
             ),
             image: 'imagineChooseBackdrop'
@@ -218,7 +218,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Any Sprite"
                     description="Step name for 'Choose Any Sprite' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseSprite"
+                    id="gui.howtos.imagine.step_imagineChooseSprite"
                 />
             ),
             image: 'imagineChooseSprite'
@@ -227,7 +227,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Press the Space Key to Glide"
                     description="Step name for 'Press the Space Key to Glide' step"
-                    id="gui.howtos.imagine-if.step_imagineFlyAround"
+                    id="gui.howtos.imagine.step_imagineFlyAround"
                 />
             ),
             image: 'imagineFlyAround'
@@ -236,7 +236,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Another Sprite"
                     description="Step name for 'Choose Another Sprite' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
+                    id="gui.howtos.imagine.step_imagineChooseAnotherSprite"
                 />
             ),
             image: 'imagineChooseAnotherSprite'
@@ -245,7 +245,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Move Left-Right"
                     description="Step name for 'Move Left-Right' step"
-                    id="gui.howtos.imagine-if.step_imagineLeftRight"
+                    id="gui.howtos.imagine.step_imagineLeftRight"
                 />
             ),
             image: 'imagineLeftRight'
@@ -254,7 +254,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Move Up-Down"
                     description="Step name for 'Move Up-Down' step"
-                    id="gui.howtos.imagine-if.step_imagineUpDown"
+                    id="gui.howtos.imagine.step_imagineUpDown"
                 />
             ),
             image: 'imagineUpDown'
@@ -263,7 +263,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Change Costumes"
                     description="Step name for 'Change Costumes' step"
-                    id="gui.howtos.imagine-if.step_imagineChangeCostumes"
+                    id="gui.howtos.imagine.step_imagineChangeCostumes"
                 />
             ),
             image: 'imagineChangeCostumes'
@@ -272,7 +272,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Glide to a Point"
                     description="Step name for 'Glide to a Point' step"
-                    id="gui.howtos.imagine-if.step_imagineGlideToPoint"
+                    id="gui.howtos.imagine.step_imagineGlideToPoint"
                 />
             ),
             image: 'imagineGlideToPoint'
@@ -281,7 +281,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Grow and Shrink"
                     description="Step name for 'Grow and Shrink' step"
-                    id="gui.howtos.imagine-if.step_imagineGrowShrink"
+                    id="gui.howtos.imagine.step_imagineGrowShrink"
                 />
             ),
             image: 'imagineGrowShrink'
@@ -290,7 +290,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Another Backdrop"
                     description="Step name for 'Choose Another Backdrop' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
+                    id="gui.howtos.imagine.step_imagineChooseAnotherBackdrop"
                 />
             ),
             image: 'imagineChooseAnotherBackdrop'
@@ -299,7 +299,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Switch Backdrops"
                     description="Step name for 'Switch Backdrops' step"
-                    id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
+                    id="gui.howtos.imagine.step_imagineSwitchBackdrops"
                 />
             ),
             image: 'imagineSwitchBackdrops'
@@ -308,7 +308,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Add a Sound"
                     description="Step name for 'Add a Sound' step"
-                    id="gui.howtos.imagine-if.step_imagineRecordASound"
+                    id="gui.howtos.imagine.step_imagineRecordASound"
                 />
             ),
             image: 'imagineRecordASound'
@@ -317,7 +317,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Your Sound"
                     description="Step name for 'Choose Your Sound' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseSound"
+                    id="gui.howtos.imagine.step_imagineChooseSound"
                 />
             ),
             image: 'imagineChooseSound'
@@ -328,7 +328,7 @@ export default {
             ]
         }
         ],
-        urlId: 'imagine-if'
+        urlId: 'imagine'
     },
     
     'Make-Music': {

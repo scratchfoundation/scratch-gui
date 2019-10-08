@@ -83,7 +83,6 @@ class StageSelector extends React.Component {
         this.props.onSelect(this.props.id);
     }
     handleNewBackdropClick (e) {
-        console.log('handle', this.props.onNewBackdropClick);
         e.stopPropagation();
         this.props.onNewBackdropClick(jsonStr => {
             this.handleNewBackdrop(JSON.parse(jsonStr), false);

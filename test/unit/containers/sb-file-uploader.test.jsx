@@ -11,7 +11,6 @@ describe('SBFileUploader Container', () => {
     const mockStore = configureStore();
     let onLoadingFinished;
     let onLoadingStarted;
-    let onUpdateProjectTitle;
     let store;
 
     // Wrap this in a function so it gets test specific states and can be reused.
@@ -20,7 +19,6 @@ describe('SBFileUploader Container', () => {
             <SBFileUploader
                 onLoadingFinished={onLoadingFinished}
                 onLoadingStarted={onLoadingStarted}
-                onUpdateProjectTitle={onUpdateProjectTitle}
             >
                 {(renderFileInput, loadProject) => (
                     <div
@@ -40,7 +38,6 @@ describe('SBFileUploader Container', () => {
                 vm: {}
             }
         });
-        onUpdateProjectTitle = jest.fn();
         onLoadingFinished = jest.fn();
         onLoadingStarted = jest.fn();
     });

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
@@ -21,23 +20,18 @@ const messages = defineMessages({
  */
 const TitledHOC = function (WrappedComponent) {
     class TitledComponent extends React.Component {
-        constructor (props) {
-            super(props);
-            bindAll(this, [
-                'handleUpdateProjectTitle'
-            ]);
-        }
         componentDidMount () {
-            this.setReduxTitle(this.props.projectTitle);
+            this.props.updateReduxProjectTitle(this.titleWithDefault(this.props.projectTitle));
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
-                this.setReduxTitle(this.props.projectTitle);
+                this.props.updateReduxProjectTitle(this.titleWithDefault(this.props.projectTitle));
             }
-            if (this.props.isShowingWithoutId && !prevProps.isShowingWithoutId) {
-                const defaultProjectTitle = this.titleWithDefault();
-                this.setReduxTitle(defaultProjectTitle);
-                this.props.onUpdateProjectTitle(defaultProjectTitle);
+            // if the projectTitle hasn't changed, but the reduxProjectTitle
+            // HAS changed, we need to report that change to the projectTitle's owner
+            if (this.props.reduxProjectTitle !== prevProps.reduxProjectTitle &&
+                this.props.reduxProjectTitle !== this.props.projectTitle) {
+                this.props.onUpdateProjectTitle(this.props.reduxProjectTitle);
             }
         }
         titleWithDefault (title) {
@@ -46,19 +40,6 @@ const TitledHOC = function (WrappedComponent) {
             }
             return title;
         }
-        setReduxTitle (newTitle) {
-            if (newTitle === null || typeof newTitle === 'undefined') {
-                this.props.onUpdateReduxProjectTitle(
-                    this.props.intl.formatMessage(messages.defaultProjectTitle)
-                );
-            } else {
-                this.props.onUpdateReduxProjectTitle(newTitle);
-            }
-        }
-        handleUpdateProjectTitle (newTitle) {
-            this.setReduxTitle(newTitle);
-            this.props.onUpdateProjectTitle(newTitle);
-        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -66,16 +47,16 @@ const TitledHOC = function (WrappedComponent) {
                 isShowingWithoutId,
                 // for children, we replace onUpdateProjectTitle with our own
                 onUpdateProjectTitle,
-                onUpdateReduxProjectTitle,
                 // we don't pass projectTitle prop to children -- they must use
                 // redux value
                 projectTitle,
+                reduxProjectTitle,
+                updateReduxProjectTitle,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
             return (
                 <WrappedComponent
-                    onUpdateProjectTitle={this.handleUpdateProjectTitle}
                     {...componentProps}
                 />
             );
@@ -86,8 +67,9 @@ const TitledHOC = function (WrappedComponent) {
         intl: intlShape,
         isShowingWithoutId: PropTypes.bool,
         onUpdateProjectTitle: PropTypes.func,
-        onUpdateReduxProjectTitle: PropTypes.func,
-        projectTitle: PropTypes.string
+        projectTitle: PropTypes.string,
+        reduxProjectTitle: PropTypes.string,
+        updateReduxProjectTitle: PropTypes.func
     };
 
     TitledComponent.defaultProps = {
@@ -97,12 +79,13 @@ const TitledHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
-            isShowingWithoutId: getIsShowingWithoutId(loadingState)
+            isShowingWithoutId: getIsShowingWithoutId(loadingState),
+            reduxProjectTitle: state.scratchGui.projectTitle
         };
     };
 
     const mapDispatchToProps = dispatch => ({
-        onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
+        updateReduxProjectTitle: title => dispatch(setProjectTitle(title))
     });
 
     return injectIntl(connect(

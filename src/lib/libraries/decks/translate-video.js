@@ -121,7 +121,7 @@ const videos = {
     'pong-game': {
         en: '8m48dv0ens'
     },
-    'imagine-if': {
+    'imagine': {
         en: '1ndh08yiso'
     }
 };

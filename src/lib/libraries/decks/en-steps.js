@@ -119,7 +119,7 @@ import pongResetScore from './steps/pong-reset-score.en.png';
 import pongAddLineSprite from './steps/pong-add-line.en.gif';
 import pongGameOver from './steps/pong-game-over.en.png';
 
-// Imagine If
+// Imagine a World
 import imagineTypeWhatYouWant from './steps/imagine-type-what-you-want.en.png';
 import imagineClickGreenFlag from './steps/imagine-click-green-flag.en.png';
 import imagineChooseBackdrop from './steps/imagine-choose-backdrop.en.png';
@@ -292,7 +292,7 @@ const enImages = {
     pongAddLineSprite: pongAddLineSprite,
     pongGameOver: pongGameOver,
     
-    // Imagine If
+    // Imagine a World
     imagineTypeWhatYouWant: imagineTypeWhatYouWant,
     imagineClickGreenFlag: imagineClickGreenFlag,
     imagineChooseBackdrop: imagineChooseBackdrop,

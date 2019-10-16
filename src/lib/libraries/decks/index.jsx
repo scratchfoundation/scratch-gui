@@ -111,12 +111,13 @@ export default {
     ),
     tags: ['talking'],
     img: libraryTalking,
-    steps: [
-       {
+    steps: [{
+            video: 'talking'
+    }, {
         title: (
             <FormattedMessage
-                defaultMessage="Add the Text-to-Speech Blocks"
-                description="Step name for 'Add the Text-to-Speech Blocks' step"
+                defaultMessage="Click to Add the Text-to-Speech Blocks"
+                description="Step name for 'Click to Add the Text-to-Speech Blocks' step"
                 id="gui.howtos.talking.step_talesAddExtension"
             />
         ),
@@ -133,8 +134,8 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Talk"
-                description="Step name for 'Talk' step"
+                defaultMessage="Make a Character Speak"
+                description="Step name for 'Make a Character Speak' step"
                 id="gui.howtos.talking.step_talesSaySomething"
             />
         ),
@@ -142,17 +143,8 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Ask and Answer"
-                description="Step name for 'Ask and Answer' step"
-                id="gui.howtos.talking.step_talesAskAnswer"
-            />
-        ),
-        image: 'talesAskAnswer'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Backdrop"
-                description="Step name for 'Choose Backdrop' step"
+                defaultMessage="Choose a Backdrop"
+                description="Step name for 'Choose a Backdrop' step"
                 id="gui.howtos.talking.step_talesChooseBackdrop"
             />
         ),
@@ -160,8 +152,8 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Switch Scenes"
-                description="Step name for 'Switch Scenes' step"
+                defaultMessage="Click a Character to Go to the Next Backdrop"
+                description="Step name for 'Click a Character to Go to the Next Backdrop' step"
                 id="gui.howtos.talking.step_talesSwitchBackdrop"
             />
         ),
@@ -175,15 +167,6 @@ export default {
             />
         ),
         image: 'talesChooseAnotherSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Introduce the New Character"
-                description="Step name for 'Introduce the New Character' step"
-                id="gui.howtos.talking.step_talesIntroduceNewCharacter"
-            />
-        ),
-        image: 'talesIntroduceNewCharacter'
     }, {
         title: (
             <FormattedMessage
@@ -214,8 +197,8 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Choose a Third Backdrop"
-                description="Step name for 'Choose a Third Backdrop' step"
+                defaultMessage="Choose Another Backdrop"
+                description="Step name for 'Choose Another Backdrop' step"
                 id="gui.howtos.talking.step_talesChooseThirdBackdrop"
             />
         ),
@@ -223,8 +206,8 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Choose a Sound"
-                description="Step name for 'Choose a Sound' step"
+                defaultMessage="Choose a Song to Dance To"
+                description="Step name for 'Choose a Song to Dance To' step"
                 id="gui.howtos.talking.step_talesChooseSound"
             />
         ),
@@ -241,21 +224,12 @@ export default {
     }, {
         title: (
             <FormattedMessage
-                defaultMessage="Respond to a Certain Answer"
-                description="Step name for 'Respond to a Certain Answer' step"
-                id="gui.howtos.talking.step_talesInsertEqualsBlock"
+                defaultMessage="Get the Ask and Answer Blocks from the Sensing Category"
+                description="Step name for 'Get the Ask and Answer Blocks from the Sensing Category' step"
+                id="gui.howtos.talking.step_talesAskAnswer"
             />
         ),
-        image: 'talesInsertEqualsBlock'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Grow and Shrink"
-                description="Step name for 'Grow and Shrink' step"
-                id="gui.howtos.talking.step_talesGrowShrink"
-            />
-        ),
-        image: 'talesGrowShrink'
+        image: 'talesAskAnswer'
     }, {
         deckIds: [
             'Tell-A-Story',

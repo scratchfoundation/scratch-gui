@@ -123,6 +123,9 @@ const videos = {
     },
     'imagine': {
         en: '1ndh08yiso'
+    },
+    'code-cartoon': {
+        en: 'fpfuky3x6g'
     }
 };
 

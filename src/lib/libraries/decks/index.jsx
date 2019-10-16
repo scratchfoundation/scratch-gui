@@ -112,8 +112,9 @@ export default {
     tags: ['code-cartoon'],
 //    requiredProjectId: '331474033',
     img: libraryCodeCartoon,
-    steps: [
-       {
+    steps: [{
+            video: 'code-cartoon'
+        }, {
         title: (
             <FormattedMessage
                 defaultMessage="Say Something When You Click the Green Flag"

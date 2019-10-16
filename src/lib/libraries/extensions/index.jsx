@@ -152,6 +152,28 @@ export default [
         internetConnectionRequired: true
     },
     {
+        name: (
+            <FormattedMessage
+                defaultMessage="Data Tools"
+                description= "Name for the Data tools extension"
+                id="gui.extension.datatools.name"
+            />
+        ),
+        extensionId: 'datatools',
+        collaborator: 'KSU senior design',
+        iconURL: translateIconURL,
+        insertIconURL: translateInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Interact with outside Data."
+                description="Description for the Data Tools extension."
+                id="gui.extension.datatools.description"
+            />
+        ),
+        featured: true,
+
+    },
+    {
         name: 'Makey Makey',
         extensionId: 'makeymakey',
         collaborator: 'JoyLabz',

@@ -132,7 +132,7 @@ class SBFileUploader extends React.Component {
                     // This is necessary in case the user wants to reload a project
                     if (filename) {
                         const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
-                        this.props.updateReduxProjectTitle(uploadedProjectTitle);
+                        this.props.onReceivedProjectTitle(uploadedProjectTitle);
                     }
                     this.resetFileInput();
                 })
@@ -182,7 +182,7 @@ SBFileUploader.propTypes = {
     onLoadingStarted: PropTypes.func,
     projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
-    updateReduxProjectTitle: PropTypes.func,
+    onReceivedProjectTitle: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -211,7 +211,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),
     onLoadingStarted: () => dispatch(openLoadingProject()),
-    updateReduxProjectTitle: title => dispatch(setProjectTitle(title))
+    onReceivedProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
 // Allow incoming props to override redux-provided props. Used to mock in tests.

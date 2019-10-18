@@ -21,8 +21,8 @@ const messages = defineMessages({
 
 const ProjectTitleInput = ({
     className,
-    handleUpdateReduxProjectTitle,
     intl,
+    onSubmit,
     projectTitle
 }) => (
     <BufferedInput
@@ -32,14 +32,14 @@ const ProjectTitleInput = ({
         tabIndex="0"
         type="text"
         value={projectTitle}
-        onSubmit={handleUpdateReduxProjectTitle}
+        onSubmit={onSubmit}
     />
 );
 
 ProjectTitleInput.propTypes = {
     className: PropTypes.string,
-    handleUpdateReduxProjectTitle: PropTypes.func,
     intl: intlShape.isRequired,
+    onSubmit: PropTypes.func,
     projectTitle: PropTypes.string
 };
 
@@ -48,7 +48,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
+    onSubmit: title => dispatch(setProjectTitle(title))
 });
 
 export default injectIntl(connect(

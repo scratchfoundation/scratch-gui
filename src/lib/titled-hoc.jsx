@@ -21,11 +21,11 @@ const messages = defineMessages({
 const TitledHOC = function (WrappedComponent) {
     class TitledComponent extends React.Component {
         componentDidMount () {
-            this.updateReduxProjectTitleWithDefault(this.props.projectTitle);
+            this.handleReceivedProjectTitle(this.props.projectTitle);
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
-                this.updateReduxProjectTitleWithDefault(this.props.projectTitle);
+                this.handleReceivedProjectTitle(this.props.projectTitle);
             }
             // if the projectTitle hasn't changed, but the reduxProjectTitle
             // HAS changed, we need to report that change to the projectTitle's owner
@@ -34,25 +34,25 @@ const TitledHOC = function (WrappedComponent) {
                 this.props.onUpdateProjectTitle(this.props.reduxProjectTitle);
             }
         }
-        updateReduxProjectTitleWithDefault (requestedTitle) {
+        handleReceivedProjectTitle (requestedTitle) {
             let newTitle = requestedTitle;
             if (newTitle === null || typeof newTitle === 'undefined') {
                 newTitle = this.props.intl.formatMessage(messages.defaultProjectTitle);
             }
-            this.props.updateReduxProjectTitle(newTitle);
+            this.props.onChangedProjectTitle(newTitle);
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 intl,
                 isShowingWithoutId,
+                onChangedProjectTitle,
                 // for children, we replace onUpdateProjectTitle with our own
                 onUpdateProjectTitle,
                 // we don't pass projectTitle prop to children -- they must use
                 // redux value
                 projectTitle,
                 reduxProjectTitle,
-                updateReduxProjectTitle,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -67,10 +67,10 @@ const TitledHOC = function (WrappedComponent) {
     TitledComponent.propTypes = {
         intl: intlShape,
         isShowingWithoutId: PropTypes.bool,
+        onChangedProjectTitle: PropTypes.func,
         onUpdateProjectTitle: PropTypes.func,
         projectTitle: PropTypes.string,
-        reduxProjectTitle: PropTypes.string,
-        updateReduxProjectTitle: PropTypes.func
+        reduxProjectTitle: PropTypes.string
     };
 
     TitledComponent.defaultProps = {
@@ -86,7 +86,7 @@ const TitledHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        updateReduxProjectTitle: title => dispatch(setProjectTitle(title))
+        onChangedProjectTitle: title => dispatch(setProjectTitle(title))
     });
 
     return injectIntl(connect(

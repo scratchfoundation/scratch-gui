@@ -21,11 +21,11 @@ const messages = defineMessages({
 const TitledHOC = function (WrappedComponent) {
     class TitledComponent extends React.Component {
         componentDidMount () {
-            this.props.updateReduxProjectTitle(this.titleWithDefault(this.props.projectTitle));
+            this.updateReduxProjectTitleWithDefault(this.props.projectTitle);
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
-                this.props.updateReduxProjectTitle(this.titleWithDefault(this.props.projectTitle));
+                this.updateReduxProjectTitleWithDefault(this.props.projectTitle);
             }
             // if the projectTitle hasn't changed, but the reduxProjectTitle
             // HAS changed, we need to report that change to the projectTitle's owner
@@ -34,11 +34,12 @@ const TitledHOC = function (WrappedComponent) {
                 this.props.onUpdateProjectTitle(this.props.reduxProjectTitle);
             }
         }
-        titleWithDefault (title) {
-            if (title === null || typeof title === 'undefined') {
-                return this.props.intl.formatMessage(messages.defaultProjectTitle);
+        updateReduxProjectTitleWithDefault (requestedTitle) {
+            let newTitle = requestedTitle;
+            if (newTitle === null || typeof newTitle === 'undefined') {
+                newTitle = this.props.intl.formatMessage(messages.defaultProjectTitle);
             }
-            return title;
+            this.props.updateReduxProjectTitle(newTitle);
         }
         render () {
             const {

@@ -176,7 +176,7 @@ import codeCartoonAnimate from './steps/code-cartoon-02-animate.en.gif';
 import codeCartoonSelectDifferentCharacter from './steps/code-cartoon-03-select-different-character.en.gif';
 import codeCartoonUseMinusSign from './steps/code-cartoon-04-use-minus-sign.en.gif';
 import codeCartoonGrowShrink from './steps/code-cartoon-05-grow-shrink.en.gif';
-import codeCartoonSelectAnotherDifferentCharacter from './steps/code-cartoon-06-select-another-different-character.en.gif';
+import codeCartoonSelectDifferentCharacter2 from './steps/code-cartoon-06-select-another-different-character.en.gif';
 import codeCartoonJump from './steps/code-cartoon-07-jump.en.gif';
 import codeCartoonChangeScenes from './steps/code-cartoon-08-change-scenes.en.gif';
 import codeCartoonGlideAround from './steps/code-cartoon-09-glide-around.en.gif';
@@ -362,7 +362,7 @@ const enImages = {
     codeCartoonSelectDifferentCharacter: codeCartoonSelectDifferentCharacter,
     codeCartoonUseMinusSign: codeCartoonUseMinusSign,
     codeCartoonGrowShrink: codeCartoonGrowShrink,
-    codeCartoonSelectAnotherDifferentCharacter: codeCartoonSelectAnotherDifferentCharacter,
+    codeCartoonSelectDifferentCharacter2: codeCartoonSelectDifferentCharacter2,
     codeCartoonJump: codeCartoonJump,
     codeCartoonChangeScenes: codeCartoonChangeScenes,
     codeCartoonGlideAround: codeCartoonGlideAround,

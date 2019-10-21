@@ -1135,10 +1135,10 @@ export default {
                 <FormattedMessage
                     defaultMessage="Select a Different Character"
                     description="Step name for 'Select a Different Character' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonSelectAnotherDifferentCharacter"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSelectDifferentCharacter2"
                 />
             ),
-            image: 'codeCartoonSelectAnotherDifferentCharacter'
+            image: 'codeCartoonSelectDifferentCharacter2'
         }, {
             title: (
                 <FormattedMessage

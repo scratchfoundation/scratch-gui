@@ -44,9 +44,12 @@ import libraryPong from './thumbnails/pong.jpg';
 
 // Imagine a World
 import libraryImagine from './thumbnails/imagine.jpg';
+<<<<<<< HEAD
 
 // Code a Cartoon
 import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg';
+=======
+>>>>>>> 395b55868bbab8c3ef1e66c7dd1d1fa9d1eeca1a
 
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';

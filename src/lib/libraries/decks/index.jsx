@@ -42,11 +42,11 @@ import libraryMakeFly from './thumbnails/make-it-fly.jpg';
 // Pong
 import libraryPong from './thumbnails/pong.jpg';
 
-// Imagine If
-import libraryImagineIf from './thumbnails/imagine-if.jpg';
+// Imagine a World
+import libraryImagine from './thumbnails/imagine.jpg';
 
 // Code a Cartoon
-import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg'
+import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg';
 
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
@@ -102,125 +102,125 @@ export default {
     },
     
     'code-cartoon': {
-    name: (
-        <FormattedMessage
-            defaultMessage="Code a Cartoon"
-            description="Name for the 'Code a Cartoon' how-to"
-            id="gui.howtos.code-cartoon"
-        />
-    ),
-    tags: ['code-cartoon'],
-//    requiredProjectId: '331474033',
-    img: libraryCodeCartoon,
-    steps: [{
+        name: (
+            <FormattedMessage
+                defaultMessage="Code a Cartoon"
+                description="Name for the 'Code a Cartoon' how-to"
+                id="gui.howtos.code-cartoon"
+            />
+        ),
+        tags: ['code-cartoon'],
+        requiredProjectId: '331474033',
+        img: libraryCodeCartoon,
+        steps: [{
             video: 'code-cartoon'
         }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Say Something When You Click the Green Flag"
-                description="Step name for 'Say Something When You Click the Green Flag' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonSaySomething"
-            />
-        ),
-        image: 'codeCartoonSaySomething'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Animate a Character When You Click It"
-                description="Step name for 'Animate a Character When You Click It' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonAnimate"
-            />
-        ),
-        image: 'codeCartoonAnimate'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Select a Different Character"
-                description="Step name for 'Select a Different Character' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonSelectDifferentCharacter"
-            />
-        ),
-        image: 'codeCartoonSelectDifferentCharacter'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Use a Minus Sign to Get Smaller"
-                description="Step name for 'Use a Minus Sign to Get Smaller' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonUseMinusSign"
-            />
-        ),
-        image: 'codeCartoonUseMinusSign'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Make a Character Grow and Shrink"
-                description="Step name for 'Make a Character Grow and Shrink' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonGrowShrink"
-            />
-        ),
-        image: 'codeCartoonGrowShrink'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Select a Different Character"
-                description="Step name for 'Select a Different Character' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonSelectAnotherDifferentCharacter"
-            />
-        ),
-        image: 'codeCartoonSelectAnotherDifferentCharacter'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Jump Up and Down"
-                description="Step name for 'Jump Up and Down' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonJump"
-            />
-        ),
-        image: 'codeCartoonJump'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Click a Character to Change Scenes"
-                description="Step name for 'Click a Character to Change Scenes' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonChangeScenes"
-            />
-        ),
-        image: 'codeCartoonChangeScenes'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Glide Around"
-                description="Step name for 'Glide Around' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonGlideAround"
-            />
-        ),
-        image: 'codeCartoonGlideAround'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Change Costumes"
-                description="Step name for 'Change Costumes' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonChangeCostumes"
-            />
-        ),
-        image: 'codeCartoonChangeCostumes'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose More Characters to Add to Your Cartoon"
-                description="Step name for 'Choose More Characters to Add to Your Cartoon' step"
-                id="gui.howtos.code-cartoon.step_codeCartoonChooseMoreCharacters"
-            />
-        ),
-        image: 'codeCartoonChooseMoreCharacters'
-    }, {
-        deckIds: [
-            'Chase-Game',
-            'Tell-A-Story'
-        ]
-    }
-    ],
-    urlId: 'code-cartoon'
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something When You Click the Green Flag"
+                    description="Step name for 'Say Something When You Click the Green Flag' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSaySomething"
+                />
+            ),
+            image: 'codeCartoonSaySomething'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate a Character When You Click It"
+                    description="Step name for 'Animate a Character When You Click It' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonAnimate"
+                />
+            ),
+            image: 'codeCartoonAnimate'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select a Different Character"
+                    description="Step name for 'Select a Different Character' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSelectDifferentCharacter"
+                />
+            ),
+            image: 'codeCartoonSelectDifferentCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Use a Minus Sign to Get Smaller"
+                    description="Step name for 'Use a Minus Sign to Get Smaller' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonUseMinusSign"
+                />
+            ),
+            image: 'codeCartoonUseMinusSign'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Character Grow and Shrink"
+                    description="Step name for 'Make a Character Grow and Shrink' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonGrowShrink"
+                />
+            ),
+            image: 'codeCartoonGrowShrink'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select a Different Character"
+                    description="Step name for 'Select a Different Character' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSelectAnotherDifferentCharacter"
+                />
+            ),
+            image: 'codeCartoonSelectAnotherDifferentCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Jump Up and Down"
+                    description="Step name for 'Jump Up and Down' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonJump"
+                />
+            ),
+            image: 'codeCartoonJump'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click a Character to Change Scenes"
+                    description="Step name for 'Click a Character to Change Scenes' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChangeScenes"
+                />
+            ),
+            image: 'codeCartoonChangeScenes'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for 'Glide Around' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonGlideAround"
+                />
+            ),
+            image: 'codeCartoonGlideAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Costumes"
+                    description="Step name for 'Change Costumes' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChangeCostumes"
+                />
+            ),
+            image: 'codeCartoonChangeCostumes'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose More Characters to Add to Your Cartoon"
+                    description="Step name for 'Choose More Characters to Add to Your Cartoon' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChooseMoreCharacters"
+                />
+            ),
+            image: 'codeCartoonChooseMoreCharacters'
+        }, {
+            deckIds: [
+                'Chase-Game',
+                'Tell-A-Story'
+            ]
+        }
+        ],
+        urlId: 'code-cartoon'
     },
     
     'animate-a-name': {
@@ -299,24 +299,24 @@ export default {
         urlId: 'name'
     },
     
-    'imagine-if': {
+    'imagine': {
         name: (
             <FormattedMessage
-                defaultMessage="Imagine If"
-                description="Name for the 'Imagine If' how-to"
-                id="gui.howtos.imagine-if"
+                defaultMessage="Imagine a World"
+                description="Name for the 'Imagine a World' how-to"
+                id="gui.howtos.imagine"
             />
         ),
-        tags: ['imagine-if'],
-        img: libraryImagineIf,
+        tags: ['imagine'],
+        img: libraryImagine,
         steps: [{
-            video: 'imagine-if'
+            video: 'imagine'
         }, {
             title: (
                 <FormattedMessage
                     defaultMessage="Type What You Want to Say"
                     description="Step name for 'Type What You Want to Say' step"
-                    id="gui.howtos.imagine-if.step_imagineTypeWhatYouWant"
+                    id="gui.howtos.imagine.step_imagineTypeWhatYouWant"
                 />
             ),
             image: 'imagineTypeWhatYouWant'
@@ -325,7 +325,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Click the Green Flag to Start"
                     description="Step name for 'Click the Green Flag to Start' step"
-                    id="gui.howtos.imagine-if.step_imagineClickGreenFlag"
+                    id="gui.howtos.imagine.step_imagineClickGreenFlag"
                 />
             ),
             image: 'imagineClickGreenFlag'
@@ -334,7 +334,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Any Backdrop"
                     description="Step name for 'Choose Any Backdrop' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseBackdrop"
+                    id="gui.howtos.imagine.step_imagineChooseBackdrop"
                 />
             ),
             image: 'imagineChooseBackdrop'
@@ -343,7 +343,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Any Sprite"
                     description="Step name for 'Choose Any Sprite' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseSprite"
+                    id="gui.howtos.imagine.step_imagineChooseSprite"
                 />
             ),
             image: 'imagineChooseSprite'
@@ -352,7 +352,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Press the Space Key to Glide"
                     description="Step name for 'Press the Space Key to Glide' step"
-                    id="gui.howtos.imagine-if.step_imagineFlyAround"
+                    id="gui.howtos.imagine.step_imagineFlyAround"
                 />
             ),
             image: 'imagineFlyAround'
@@ -361,7 +361,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Another Sprite"
                     description="Step name for 'Choose Another Sprite' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseAnotherSprite"
+                    id="gui.howtos.imagine.step_imagineChooseAnotherSprite"
                 />
             ),
             image: 'imagineChooseAnotherSprite'
@@ -370,7 +370,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Move Left-Right"
                     description="Step name for 'Move Left-Right' step"
-                    id="gui.howtos.imagine-if.step_imagineLeftRight"
+                    id="gui.howtos.imagine.step_imagineLeftRight"
                 />
             ),
             image: 'imagineLeftRight'
@@ -379,7 +379,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Move Up-Down"
                     description="Step name for 'Move Up-Down' step"
-                    id="gui.howtos.imagine-if.step_imagineUpDown"
+                    id="gui.howtos.imagine.step_imagineUpDown"
                 />
             ),
             image: 'imagineUpDown'
@@ -388,7 +388,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Change Costumes"
                     description="Step name for 'Change Costumes' step"
-                    id="gui.howtos.imagine-if.step_imagineChangeCostumes"
+                    id="gui.howtos.imagine.step_imagineChangeCostumes"
                 />
             ),
             image: 'imagineChangeCostumes'
@@ -397,7 +397,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Glide to a Point"
                     description="Step name for 'Glide to a Point' step"
-                    id="gui.howtos.imagine-if.step_imagineGlideToPoint"
+                    id="gui.howtos.imagine.step_imagineGlideToPoint"
                 />
             ),
             image: 'imagineGlideToPoint'
@@ -406,7 +406,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Grow and Shrink"
                     description="Step name for 'Grow and Shrink' step"
-                    id="gui.howtos.imagine-if.step_imagineGrowShrink"
+                    id="gui.howtos.imagine.step_imagineGrowShrink"
                 />
             ),
             image: 'imagineGrowShrink'
@@ -415,7 +415,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Another Backdrop"
                     description="Step name for 'Choose Another Backdrop' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseAnotherBackdrop"
+                    id="gui.howtos.imagine.step_imagineChooseAnotherBackdrop"
                 />
             ),
             image: 'imagineChooseAnotherBackdrop'
@@ -424,7 +424,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Switch Backdrops"
                     description="Step name for 'Switch Backdrops' step"
-                    id="gui.howtos.imagine-if.step_imagineSwitchBackdrops"
+                    id="gui.howtos.imagine.step_imagineSwitchBackdrops"
                 />
             ),
             image: 'imagineSwitchBackdrops'
@@ -433,7 +433,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Add a Sound"
                     description="Step name for 'Add a Sound' step"
-                    id="gui.howtos.imagine-if.step_imagineRecordASound"
+                    id="gui.howtos.imagine.step_imagineRecordASound"
                 />
             ),
             image: 'imagineRecordASound'
@@ -442,7 +442,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Choose Your Sound"
                     description="Step name for 'Choose Your Sound' step"
-                    id="gui.howtos.imagine-if.step_imagineChooseSound"
+                    id="gui.howtos.imagine.step_imagineChooseSound"
                 />
             ),
             image: 'imagineChooseSound'
@@ -453,7 +453,7 @@ export default {
             ]
         }
         ],
-        urlId: 'imagine-if'
+        urlId: 'imagine'
     },
     
     'Make-Music': {

@@ -100,129 +100,7 @@ export default {
         ],
         urlId: 'getStarted'
     },
-    
-    'code-cartoon': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Code a Cartoon"
-                description="Name for the 'Code a Cartoon' how-to"
-                id="gui.howtos.code-cartoon"
-            />
-        ),
-        tags: ['code-cartoon'],
-        requiredProjectId: '331474033',
-        img: libraryCodeCartoon,
-        steps: [{
-            video: 'code-cartoon'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Say Something When You Click the Green Flag"
-                    description="Step name for 'Say Something When You Click the Green Flag' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonSaySomething"
-                />
-            ),
-            image: 'codeCartoonSaySomething'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Animate a Character When You Click It"
-                    description="Step name for 'Animate a Character When You Click It' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonAnimate"
-                />
-            ),
-            image: 'codeCartoonAnimate'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Select a Different Character"
-                    description="Step name for 'Select a Different Character' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonSelectDifferentCharacter"
-                />
-            ),
-            image: 'codeCartoonSelectDifferentCharacter'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Use a Minus Sign to Get Smaller"
-                    description="Step name for 'Use a Minus Sign to Get Smaller' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonUseMinusSign"
-                />
-            ),
-            image: 'codeCartoonUseMinusSign'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Make a Character Grow and Shrink"
-                    description="Step name for 'Make a Character Grow and Shrink' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonGrowShrink"
-                />
-            ),
-            image: 'codeCartoonGrowShrink'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Select a Different Character"
-                    description="Step name for 'Select a Different Character' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonSelectAnotherDifferentCharacter"
-                />
-            ),
-            image: 'codeCartoonSelectAnotherDifferentCharacter'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Jump Up and Down"
-                    description="Step name for 'Jump Up and Down' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonJump"
-                />
-            ),
-            image: 'codeCartoonJump'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Click a Character to Change Scenes"
-                    description="Step name for 'Click a Character to Change Scenes' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonChangeScenes"
-                />
-            ),
-            image: 'codeCartoonChangeScenes'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Glide Around"
-                    description="Step name for 'Glide Around' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonGlideAround"
-                />
-            ),
-            image: 'codeCartoonGlideAround'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Change Costumes"
-                    description="Step name for 'Change Costumes' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonChangeCostumes"
-                />
-            ),
-            image: 'codeCartoonChangeCostumes'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Choose More Characters to Add to Your Cartoon"
-                    description="Step name for 'Choose More Characters to Add to Your Cartoon' step"
-                    id="gui.howtos.code-cartoon.step_codeCartoonChooseMoreCharacters"
-                />
-            ),
-            image: 'codeCartoonChooseMoreCharacters'
-        }, {
-            deckIds: [
-                'Chase-Game',
-                'Tell-A-Story'
-            ]
-        }
-        ],
-        urlId: 'code-cartoon'
-    },
-    
+
     'animate-a-name': {
         name: (
             <FormattedMessage
@@ -1194,6 +1072,287 @@ export default {
         urlId: 'pong'
     },
 
+    'code-cartoon': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Code a Cartoon"
+                description="Name for the 'Code a Cartoon' how-to"
+                id="gui.howtos.code-cartoon"
+            />
+        ),
+        tags: ['code-cartoon'],
+        requiredProjectId: '331474033',
+        img: libraryCodeCartoon,
+        steps: [{
+            video: 'code-cartoon'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something When You Click the Green Flag"
+                    description="Step name for 'Say Something When You Click the Green Flag' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSaySomething"
+                />
+            ),
+            image: 'codeCartoonSaySomething'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate a Character When You Click It"
+                    description="Step name for 'Animate a Character When You Click It' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonAnimate"
+                />
+            ),
+            image: 'codeCartoonAnimate'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select a Different Character"
+                    description="Step name for 'Select a Different Character' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSelectDifferentCharacter"
+                />
+            ),
+            image: 'codeCartoonSelectDifferentCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Use a Minus Sign to Get Smaller"
+                    description="Step name for 'Use a Minus Sign to Get Smaller' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonUseMinusSign"
+                />
+            ),
+            image: 'codeCartoonUseMinusSign'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Character Grow and Shrink"
+                    description="Step name for 'Make a Character Grow and Shrink' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonGrowShrink"
+                />
+            ),
+            image: 'codeCartoonGrowShrink'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Select a Different Character"
+                    description="Step name for 'Select a Different Character' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonSelectAnotherDifferentCharacter"
+                />
+            ),
+            image: 'codeCartoonSelectAnotherDifferentCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Jump Up and Down"
+                    description="Step name for 'Jump Up and Down' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonJump"
+                />
+            ),
+            image: 'codeCartoonJump'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click a Character to Change Scenes"
+                    description="Step name for 'Click a Character to Change Scenes' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChangeScenes"
+                />
+            ),
+            image: 'codeCartoonChangeScenes'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for 'Glide Around' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonGlideAround"
+                />
+            ),
+            image: 'codeCartoonGlideAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Change Costumes"
+                    description="Step name for 'Change Costumes' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChangeCostumes"
+                />
+            ),
+            image: 'codeCartoonChangeCostumes'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose More Characters to Add to Your Cartoon"
+                    description="Step name for 'Choose More Characters to Add to Your Cartoon' step"
+                    id="gui.howtos.code-cartoon.step_codeCartoonChooseMoreCharacters"
+                />
+            ),
+            image: 'codeCartoonChooseMoreCharacters'
+        }, {
+            deckIds: [
+                'Chase-Game',
+                'Tell-A-Story'
+            ]
+        }
+        ],
+        urlId: 'code-cartoon'
+    },
+        
+    'cartoon-network': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Animate an Adventure Game"
+                description="Animate an Adventure Game' how-to"
+                id="gui.howtos.cartoon-network"
+            />
+        ),
+        requiredProjectId: '249143200',
+        img: libraryCartoonNetwork,
+        steps: [{
+            video: 'uz5oz5h9yg',
+            trackingPixel: (
+                <img src="https://code.org/api/hour/begin_scratch_adventure.png" />
+            )
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Character to Show"
+                    description="Step name for 'Choose a Character to Show' step"
+                    id="gui.howtos.cartoon-network.step_CNcharacter"
+                />
+            ),
+            image: 'cnShowCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.cartoon-network.step_CNsay"
+                />
+            ),
+            image: 'cnSay'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for 'Glide Around' step"
+                    id="gui.howtos.cartoon-network.step_CNglide"
+                />
+            ),
+            image: 'cnGlide'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage=" Choose an Object to Chase "
+                    description="Step name for 'Choose an Object to Chase' step"
+                    id="gui.howtos.cartoon-network.step_CNpicksprite"
+                />
+            ),
+            image: 'cnPickSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Collect Objects"
+                    description="Step name for 'Collect Objects' step"
+                    id="gui.howtos.cartoon-network.step_CNcollect"
+                />
+            ),
+            image: 'cnCollect'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Score Variable"
+                    description="Step name for 'Make a Score Variable' step"
+                    id="gui.howtos.cartoon-network.step_CNvariable"
+                />
+            ),
+            image: 'cnVariable'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Keep Score"
+                    description="Step name for 'Keep Score' step"
+                    id="gui.howtos.cartoon-network.step_CNscore"
+                />
+            ),
+            image: 'cnScore'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Level Up: Change Backdrop"
+                    description="Step name for 'Level Up: Change Backdrop' step"
+                    id="gui.howtos.cartoon-network.step_CNbackdrop"
+                />
+            ),
+            image: 'cnBackdrop'
+        },
+        {
+            video: '6o76f5ivo1'
+        },
+        {
+            deckIds: [
+                'switch-costume',
+                'add-effects'
+            ]
+        }
+        ],
+        urlId: 'animate-an-adventure-game'
+    },
+
+    'Video-Sensing': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Video Sensing"
+                description="Name for the 'Video Sensing' how-to"
+                id="gui.howtos.videosens.name"
+            />
+        ),
+        img: libraryVideoSens,
+        steps: [{
+            video: '3pd1z110d6'
+        },
+        {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Add Extension"
+                    description="Step name for 'Add Extension' step"
+                    id="gui.howtos.videosens.step_addextension"
+                />
+            ),
+            image: 'videoAddExtension'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Pet the Cat"
+                    description="Step name for 'Pet the Cat' step"
+                    id="gui.howtos.videosens.step_pet"
+                />
+            ),
+            image: 'videoPet'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate"
+                    description="Step name for 'Animate' step"
+                    id="gui.howtos.videosens.step_animate"
+                />
+            ),
+            image: 'videoAnimate'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Pop a Balloon"
+                    description="Step name for 'Pop a Balloon' step"
+                    id="gui.howtos.videosens.step_pop"
+                />
+            ),
+            image: 'videoPop'
+        }, {
+            deckIds: [
+                'Make-Music',
+                'add-effects'
+            ]
+        }
+        ],
+        urlId: 'video-sensing'
+    },
+
     'say-it-out-loud': {
         name: (
             <FormattedMessage
@@ -1307,166 +1466,7 @@ export default {
         ],
         urlId: 'animations-that-talk'
     },
-
-    'Video-Sensing': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Video Sensing"
-                description="Name for the 'Video Sensing' how-to"
-                id="gui.howtos.videosens.name"
-            />
-        ),
-        img: libraryVideoSens,
-        steps: [{
-            video: '3pd1z110d6'
-        },
-        {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Add Extension"
-                    description="Step name for 'Add Extension' step"
-                    id="gui.howtos.videosens.step_addextension"
-                />
-            ),
-            image: 'videoAddExtension'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Pet the Cat"
-                    description="Step name for 'Pet the Cat' step"
-                    id="gui.howtos.videosens.step_pet"
-                />
-            ),
-            image: 'videoPet'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Animate"
-                    description="Step name for 'Animate' step"
-                    id="gui.howtos.videosens.step_animate"
-                />
-            ),
-            image: 'videoAnimate'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Pop a Balloon"
-                    description="Step name for 'Pop a Balloon' step"
-                    id="gui.howtos.videosens.step_pop"
-                />
-            ),
-            image: 'videoPop'
-        }, {
-            deckIds: [
-                'Make-Music',
-                'add-effects'
-            ]
-        }
-        ],
-        urlId: 'video-sensing'
-    },
     
-    'cartoon-network': {
-        name: (
-            <FormattedMessage
-                defaultMessage="Animate an Adventure Game"
-                description="Animate an Adventure Game' how-to"
-                id="gui.howtos.cartoon-network"
-            />
-        ),
-        requiredProjectId: '249143200',
-        img: libraryCartoonNetwork,
-        steps: [{
-            video: 'uz5oz5h9yg',
-            trackingPixel: (
-                <img src="https://code.org/api/hour/begin_scratch_adventure.png" />
-            )
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Choose a Character to Show"
-                    description="Step name for 'Choose a Character to Show' step"
-                    id="gui.howtos.cartoon-network.step_CNcharacter"
-                />
-            ),
-            image: 'cnShowCharacter'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Say Something"
-                    description="Step name for 'Say Something' step"
-                    id="gui.howtos.cartoon-network.step_CNsay"
-                />
-            ),
-            image: 'cnSay'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Glide Around"
-                    description="Step name for 'Glide Around' step"
-                    id="gui.howtos.cartoon-network.step_CNglide"
-                />
-            ),
-            image: 'cnGlide'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage=" Choose an Object to Chase "
-                    description="Step name for 'Choose an Object to Chase' step"
-                    id="gui.howtos.cartoon-network.step_CNpicksprite"
-                />
-            ),
-            image: 'cnPickSprite'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Collect Objects"
-                    description="Step name for 'Collect Objects' step"
-                    id="gui.howtos.cartoon-network.step_CNcollect"
-                />
-            ),
-            image: 'cnCollect'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Make a Score Variable"
-                    description="Step name for 'Make a Score Variable' step"
-                    id="gui.howtos.cartoon-network.step_CNvariable"
-                />
-            ),
-            image: 'cnVariable'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Keep Score"
-                    description="Step name for 'Keep Score' step"
-                    id="gui.howtos.cartoon-network.step_CNscore"
-                />
-            ),
-            image: 'cnScore'
-        }, {
-            title: (
-                <FormattedMessage
-                    defaultMessage="Level Up: Change Backdrop"
-                    description="Step name for 'Level Up: Change Backdrop' step"
-                    id="gui.howtos.cartoon-network.step_CNbackdrop"
-                />
-            ),
-            image: 'cnBackdrop'
-        },
-        {
-            video: '6o76f5ivo1'
-        },
-        {
-            deckIds: [
-                'switch-costume',
-                'add-effects'
-            ]
-        }
-        ],
-        urlId: 'animate-an-adventure-game'
-    },
-
     'add-sprite': {
         name: (
             <FormattedMessage

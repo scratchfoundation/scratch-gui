@@ -126,6 +126,9 @@ const videos = {
     },
     'code-cartoon': {
         en: 'fpfuky3x6g'
+    },
+    'talking': {
+        en: 'j0208mq4qi'
     }
 };
 

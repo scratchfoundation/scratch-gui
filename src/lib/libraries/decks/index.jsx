@@ -48,6 +48,9 @@ import libraryImagine from './thumbnails/imagine.jpg';
 // Code a Cartoon
 import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg';
 
+// Talking Tales
+import libraryTalking from './thumbnails/talking.png'
+
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
 import glideAroundThumb from './thumbnails/glide-around.jpg';
@@ -176,7 +179,7 @@ export default {
         ],
         urlId: 'name'
     },
-    
+
     'imagine': {
         name: (
             <FormattedMessage
@@ -333,7 +336,7 @@ export default {
         ],
         urlId: 'imagine'
     },
-    
+
     'Make-Music': {
         name: (
             <FormattedMessage
@@ -403,7 +406,7 @@ export default {
         ],
         urlId: 'music'
     },
- 
+
     'Tell-A-Story': {
         name: (
             <FormattedMessage
@@ -516,7 +519,7 @@ export default {
         ],
         urlId: 'tell-a-story'
     },
-    
+
     'Chase-Game': {
         name: (
             <FormattedMessage
@@ -714,7 +717,7 @@ export default {
         ],
         urlId: 'animate-a-character'
     },
-       
+
     'Make-A-Game': {
         name: (
             <FormattedMessage
@@ -801,7 +804,7 @@ export default {
         ],
         urlId: 'clicker-game'
     },
-    
+
     'make-it-fly': {
         name: (
             <FormattedMessage
@@ -931,7 +934,7 @@ export default {
         ],
         urlId: 'make-it-fly'
     },
-    
+
     'pong': {
         name: (
             <FormattedMessage
@@ -1193,7 +1196,106 @@ export default {
         ],
         urlId: 'code-cartoon'
     },
-        
+
+    'cartoon-network': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Animate an Adventure Game"
+                description="Animate an Adventure Game' how-to"
+                id="gui.howtos.cartoon-network"
+            />
+        ),
+        requiredProjectId: '249143200',
+        img: libraryCartoonNetwork,
+        steps: [{
+            video: 'uz5oz5h9yg',
+            trackingPixel: (
+                <img src="https://code.org/api/hour/begin_scratch_adventure.png" />
+            )
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Character to Show"
+                    description="Step name for 'Choose a Character to Show' step"
+                    id="gui.howtos.cartoon-network.step_CNcharacter"
+                />
+            ),
+            image: 'cnShowCharacter'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Say Something"
+                    description="Step name for 'Say Something' step"
+                    id="gui.howtos.cartoon-network.step_CNsay"
+                />
+            ),
+            image: 'cnSay'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Glide Around"
+                    description="Step name for 'Glide Around' step"
+                    id="gui.howtos.cartoon-network.step_CNglide"
+                />
+            ),
+            image: 'cnGlide'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage=" Choose an Object to Chase "
+                    description="Step name for 'Choose an Object to Chase' step"
+                    id="gui.howtos.cartoon-network.step_CNpicksprite"
+                />
+            ),
+            image: 'cnPickSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Collect Objects"
+                    description="Step name for 'Collect Objects' step"
+                    id="gui.howtos.cartoon-network.step_CNcollect"
+                />
+            ),
+            image: 'cnCollect'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Score Variable"
+                    description="Step name for 'Make a Score Variable' step"
+                    id="gui.howtos.cartoon-network.step_CNvariable"
+                />
+            ),
+            image: 'cnVariable'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Keep Score"
+                    description="Step name for 'Keep Score' step"
+                    id="gui.howtos.cartoon-network.step_CNscore"
+                />
+            ),
+            image: 'cnScore'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Level Up: Change Backdrop"
+                    description="Step name for 'Level Up: Change Backdrop' step"
+                    id="gui.howtos.cartoon-network.step_CNbackdrop"
+                />
+            ),
+            image: 'cnBackdrop'
+        },
+        {
+            video: '6o76f5ivo1'
+        },
+        {
+            deckIds: [
+                'switch-costume',
+                'add-effects'
+            ]
+        }
+    ],
+
     'cartoon-network': {
         name: (
             <FormattedMessage
@@ -1466,7 +1568,146 @@ export default {
         ],
         urlId: 'animations-that-talk'
     },
-    
+
+    'talking': {
+    name: (
+        <FormattedMessage
+            defaultMessage="Talking Tales"
+            description="Name for the 'Talking Tales' how-to"
+            id="gui.howtos.talking"
+        />
+    ),
+    tags: ['talking'],
+    img: libraryTalking,
+    steps: [{
+            video: 'talking'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click to Add the Text-to-Speech Blocks"
+                    description="Step name for 'Click to Add the Text-to-Speech Blocks' step"
+                    id="gui.howtos.talking.step_talesAddExtension"
+                />
+            ),
+            image: 'talesAddExtension'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Sprite"
+                    description="Step name for 'Choose a Sprite' step"
+                    id="gui.howtos.talking.step_talesChooseSprite"
+                />
+            ),
+            image: 'talesChooseSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Character Speak"
+                    description="Step name for 'Make a Character Speak' step"
+                    id="gui.howtos.talking.step_talesSaySomething"
+                />
+            ),
+            image: 'talesSaySomething'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Backdrop"
+                    description="Step name for 'Choose a Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseBackdrop"
+                />
+            ),
+            image: 'talesChooseBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click a Character to Go to the Next Backdrop"
+                    description="Step name for 'Click a Character to Go to the Next Backdrop' step"
+                    id="gui.howtos.talking.step_talesSwitchBackdrop"
+                />
+            ),
+            image: 'talesSwitchBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Sprite"
+                    description="Step name for 'Choose Another Sprite' step"
+                    id="gui.howtos.talking.step_talesChooseAnotherSprite"
+                />
+            ),
+            image: 'talesChooseAnotherSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Around"
+                    description="Step name for 'Move Around' step"
+                    id="gui.howtos.talking.step_talesMoveAround"
+                />
+            ),
+            image: 'talesMoveAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Backdrop"
+                    description="Step name for 'Choose Another Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseAnotherBackdrop"
+                />
+            ),
+            image: 'talesChooseAnotherBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate Talking"
+                    description="Step name for 'Animate Talking' step"
+                    id="gui.howtos.talking.step_talesAnimateTalking"
+                />
+            ),
+            image: 'talesAnimateTalking'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Backdrop"
+                    description="Step name for 'Choose Another Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseThirdBackdrop"
+                />
+            ),
+            image: 'talesChooseThirdBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Song to Dance To"
+                    description="Step name for 'Choose a Song to Dance To' step"
+                    id="gui.howtos.talking.step_talesChooseSound"
+                />
+            ),
+            image: 'talesChooseSound'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Dance Moves"
+                    description="Step name for 'Dance Moves' step"
+                    id="gui.howtos.talking.step_talesDanceMoves"
+                />
+            ),
+            image: 'talesDanceMoves'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Get the Ask and Answer Blocks from the Sensing Category"
+                    description="Step name for 'Get the Ask and Answer Blocks from the Sensing Category' step"
+                    id="gui.howtos.talking.step_talesAskAnswer"
+                />
+            ),
+            image: 'talesAskAnswer'
+        }, {
+            deckIds: [
+                'Tell-A-Story',
+                'Animate-A-Character'
+            ]
+        }
+        ],
+        urlId: 'talking'
+    },
+
     'add-sprite': {
         name: (
             <FormattedMessage
@@ -1497,7 +1738,7 @@ export default {
         ],
         urlId: 'add-a-sprite'
     },
-    
+
     'add-a-backdrop': {
         name: (
             <FormattedMessage
@@ -1529,7 +1770,7 @@ export default {
         }],
         urlId: 'add-a-backdrop'
     },
-    
+
     'change-size': {
         name: (
             <FormattedMessage
@@ -1559,7 +1800,7 @@ export default {
         }],
         urlId: 'change-size'
     },
-    
+
     'glide-around': {
         name: (
             <FormattedMessage
@@ -1664,7 +1905,7 @@ export default {
         }],
         urlId: 'record-a-sound'
     },
-    
+
     'spin-video': {
         name: (
             <FormattedMessage
@@ -1703,7 +1944,7 @@ export default {
         }],
         urlId: 'make-it-spin'
     },
-    
+
     'hide-and-show': {
         name: (
             <FormattedMessage
@@ -1802,7 +2043,7 @@ export default {
         }],
         urlId: 'arrow-keys'
     },
-    
+
     'add-effects': {
         name: (
             <FormattedMessage
@@ -1833,7 +2074,7 @@ export default {
         }],
         urlId: 'add-effects'
     },
-    
+
     'wedo2-getting-started': {
         steps: [{
             video: '4im7iizv47'
@@ -1841,7 +2082,7 @@ export default {
         urlId: 'wedo',
         hidden: true
     },
-    
+
     'ev3-getting-started': {
         steps: [{
             video: 'qgu78c5y7d'
@@ -1849,7 +2090,7 @@ export default {
         urlId: 'ev3',
         hidden: true
     },
-    
+
     'whats-new': {
         steps: [{
             video: 'mtqymxg0qq'

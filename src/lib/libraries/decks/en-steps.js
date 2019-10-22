@@ -371,7 +371,7 @@ const enImages = {
     talesAnimateTalking: talesAnimateTalking,
     talesChooseThirdBackdrop: talesChooseThirdBackdrop,
     talesChooseSound: talesChooseSound,
-    talesDanceMoves: talesDanceMoves,
+    talesDanceMoves: talesDanceMoves
     
 };
 

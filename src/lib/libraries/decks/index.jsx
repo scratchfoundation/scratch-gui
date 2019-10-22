@@ -46,7 +46,7 @@ import libraryPong from './thumbnails/pong.jpg';
 import libraryImagine from './thumbnails/imagine.jpg';
 
 // Talking Tales
-import libraryTalking from './thumbnails/talking.png'
+import libraryTalking from './thumbnails/talking.png';
 
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
@@ -1346,142 +1346,142 @@ export default {
     },
     
     'talking': {
-    name: (
-        <FormattedMessage
-            defaultMessage="Talking Tales"
-            description="Name for the 'Talking Tales' how-to"
-            id="gui.howtos.talking"
-        />
-    ),
-    tags: ['talking'],
-    img: libraryTalking,
-    steps: [{
+        name: (
+            <FormattedMessage
+                defaultMessage="Talking Tales"
+                description="Name for the 'Talking Tales' how-to"
+                id="gui.howtos.talking"
+            />
+        ),
+        tags: ['talking'],
+        img: libraryTalking,
+        steps: [{
             video: 'talking'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Click to Add the Text-to-Speech Blocks"
-                description="Step name for 'Click to Add the Text-to-Speech Blocks' step"
-                id="gui.howtos.talking.step_talesAddExtension"
-            />
-        ),
-        image: 'talesAddExtension'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose a Sprite"
-                description="Step name for 'Choose a Sprite' step"
-                id="gui.howtos.talking.step_talesChooseSprite"
-            />
-        ),
-        image: 'talesChooseSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Make a Character Speak"
-                description="Step name for 'Make a Character Speak' step"
-                id="gui.howtos.talking.step_talesSaySomething"
-            />
-        ),
-        image: 'talesSaySomething'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose a Backdrop"
-                description="Step name for 'Choose a Backdrop' step"
-                id="gui.howtos.talking.step_talesChooseBackdrop"
-            />
-        ),
-        image: 'talesChooseBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Click a Character to Go to the Next Backdrop"
-                description="Step name for 'Click a Character to Go to the Next Backdrop' step"
-                id="gui.howtos.talking.step_talesSwitchBackdrop"
-            />
-        ),
-        image: 'talesSwitchBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Another Sprite"
-                description="Step name for 'Choose Another Sprite' step"
-                id="gui.howtos.talking.step_talesChooseAnotherSprite"
-            />
-        ),
-        image: 'talesChooseAnotherSprite'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Move Around"
-                description="Step name for 'Move Around' step"
-                id="gui.howtos.talking.step_talesMoveAround"
-            />
-        ),
-        image: 'talesMoveAround'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Another Backdrop"
-                description="Step name for 'Choose Another Backdrop' step"
-                id="gui.howtos.talking.step_talesChooseAnotherBackdrop"
-            />
-        ),
-        image: 'talesChooseAnotherBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Animate Talking"
-                description="Step name for 'Animate Talking' step"
-                id="gui.howtos.talking.step_talesAnimateTalking"
-            />
-        ),
-        image: 'talesAnimateTalking'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose Another Backdrop"
-                description="Step name for 'Choose Another Backdrop' step"
-                id="gui.howtos.talking.step_talesChooseThirdBackdrop"
-            />
-        ),
-        image: 'talesChooseThirdBackdrop'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Choose a Song to Dance To"
-                description="Step name for 'Choose a Song to Dance To' step"
-                id="gui.howtos.talking.step_talesChooseSound"
-            />
-        ),
-        image: 'talesChooseSound'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Dance Moves"
-                description="Step name for 'Dance Moves' step"
-                id="gui.howtos.talking.step_talesDanceMoves"
-            />
-        ),
-        image: 'talesDanceMoves'
-    }, {
-        title: (
-            <FormattedMessage
-                defaultMessage="Get the Ask and Answer Blocks from the Sensing Category"
-                description="Step name for 'Get the Ask and Answer Blocks from the Sensing Category' step"
-                id="gui.howtos.talking.step_talesAskAnswer"
-            />
-        ),
-        image: 'talesAskAnswer'
-    }, {
-        deckIds: [
-            'Tell-A-Story',
-            'Animate-A-Character'
-        ]
-    }
-    ],
-    urlId: 'talking'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click to Add the Text-to-Speech Blocks"
+                    description="Step name for 'Click to Add the Text-to-Speech Blocks' step"
+                    id="gui.howtos.talking.step_talesAddExtension"
+                />
+            ),
+            image: 'talesAddExtension'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Sprite"
+                    description="Step name for 'Choose a Sprite' step"
+                    id="gui.howtos.talking.step_talesChooseSprite"
+                />
+            ),
+            image: 'talesChooseSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Make a Character Speak"
+                    description="Step name for 'Make a Character Speak' step"
+                    id="gui.howtos.talking.step_talesSaySomething"
+                />
+            ),
+            image: 'talesSaySomething'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Backdrop"
+                    description="Step name for 'Choose a Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseBackdrop"
+                />
+            ),
+            image: 'talesChooseBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click a Character to Go to the Next Backdrop"
+                    description="Step name for 'Click a Character to Go to the Next Backdrop' step"
+                    id="gui.howtos.talking.step_talesSwitchBackdrop"
+                />
+            ),
+            image: 'talesSwitchBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Sprite"
+                    description="Step name for 'Choose Another Sprite' step"
+                    id="gui.howtos.talking.step_talesChooseAnotherSprite"
+                />
+            ),
+            image: 'talesChooseAnotherSprite'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Move Around"
+                    description="Step name for 'Move Around' step"
+                    id="gui.howtos.talking.step_talesMoveAround"
+                />
+            ),
+            image: 'talesMoveAround'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Backdrop"
+                    description="Step name for 'Choose Another Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseAnotherBackdrop"
+                />
+            ),
+            image: 'talesChooseAnotherBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Animate Talking"
+                    description="Step name for 'Animate Talking' step"
+                    id="gui.howtos.talking.step_talesAnimateTalking"
+                />
+            ),
+            image: 'talesAnimateTalking'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose Another Backdrop"
+                    description="Step name for 'Choose Another Backdrop' step"
+                    id="gui.howtos.talking.step_talesChooseThirdBackdrop"
+                />
+            ),
+            image: 'talesChooseThirdBackdrop'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Choose a Song to Dance To"
+                    description="Step name for 'Choose a Song to Dance To' step"
+                    id="gui.howtos.talking.step_talesChooseSound"
+                />
+            ),
+            image: 'talesChooseSound'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Dance Moves"
+                    description="Step name for 'Dance Moves' step"
+                    id="gui.howtos.talking.step_talesDanceMoves"
+                />
+            ),
+            image: 'talesDanceMoves'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Get the Ask and Answer Blocks from the Sensing Category"
+                    description="Step name for 'Get the Ask and Answer Blocks from the Sensing Category' step"
+                    id="gui.howtos.talking.step_talesAskAnswer"
+                />
+            ),
+            image: 'talesAskAnswer'
+        }, {
+            deckIds: [
+                'Tell-A-Story',
+                'Animate-A-Character'
+            ]
+        }
+        ],
+        urlId: 'talking'
     },
 
     'add-sprite': {

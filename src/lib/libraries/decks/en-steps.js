@@ -400,5 +400,4 @@ const enImages = {
     talesDanceMoves: talesDanceMoves
 };
 
-
 export {enImages};

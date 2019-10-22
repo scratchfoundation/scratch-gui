@@ -49,7 +49,7 @@ import libraryImagine from './thumbnails/imagine.jpg';
 import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg';
 
 // Talking Tales
-import libraryTalking from './thumbnails/talking.png'
+import libraryTalking from './thumbnails/talking.png';
 
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
@@ -1570,16 +1570,16 @@ export default {
     },
 
     'talking': {
-    name: (
-        <FormattedMessage
-            defaultMessage="Talking Tales"
-            description="Name for the 'Talking Tales' how-to"
-            id="gui.howtos.talking"
-        />
-    ),
-    tags: ['talking'],
-    img: libraryTalking,
-    steps: [{
+        name: (
+            <FormattedMessage
+                defaultMessage="Talking Tales"
+                description="Name for the 'Talking Tales' how-to"
+                id="gui.howtos.talking"
+            />
+        ),
+        tags: ['talking'],
+        img: libraryTalking,
+        steps: [{
             video: 'talking'
         }, {
             title: (

@@ -17,7 +17,7 @@ import translateIconURL from './translate/translate.png';
 import translateInsetIconURL from './translate/translate-small.png';
 
 import dataToolsIconURL from './datatools/background.png';
-import dataToolsInsetIconURL from './datatools/translate-small0.png';
+import dataToolsInsetIconURL from './datatools/translate-small.png';
 
 import makeymakeyIconURL from './makeymakey/makeymakey.png';
 import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';

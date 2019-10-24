@@ -23,7 +23,7 @@ before_install:
 install:
 - npm --production=false install
 - npm --production=false update
-- mv closure-library/ ../closure-library
+- mv closure-library/ node_modules/closure-library
 - cd node_modules/scratch-blocks && npm --production=false install && npm run prepublish && cd -
 before_script: greenkeeper-lockfile-update
 script:

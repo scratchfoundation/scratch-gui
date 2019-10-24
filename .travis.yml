@@ -23,7 +23,7 @@ before_install:
 install:
 - npm --production=false install
 - npm --production=false update
-- cd node_modules/scratch-paint && npm --production=false install && npm run build && cd -
+- cd node_modules/scratch-blocks && npm --production=false install && npm run prepublish && cd -
 before_script: greenkeeper-lockfile-update
 script:
 - npm test

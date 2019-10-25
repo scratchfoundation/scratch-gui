@@ -6,7 +6,6 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 
-import analytics from '../lib/analytics';
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/action-menu/icon--sprite.svg';
 
@@ -46,18 +45,6 @@ class ExtensionLibrary extends React.PureComponent {
                 });
             }
         }
-        let gaLabel = '';
-        if (typeof (item.name) === 'string') {
-            gaLabel = item.name;
-        } else {
-            // Name is localized, get the default message for the gaLabel
-            gaLabel = item.name.props.defaultMessage;
-        }
-        analytics.event({
-            category: 'library',
-            action: 'Select Extension',
-            label: gaLabel
-        });
     }
     render () {
         const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({

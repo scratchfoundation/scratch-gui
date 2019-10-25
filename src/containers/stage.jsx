@@ -112,7 +112,9 @@ class Stage extends React.Component {
     }
     startColorPickingLoop () {
         this.intervalId = setInterval(() => {
-            this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+            if (typeof this.pickX === 'number') {
+                this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+            }
         }, 30);
     }
     stopColorPickingLoop () {
@@ -175,9 +177,11 @@ class Stage extends React.Component {
         const {x, y} = getEventXY(e);
         const mousePosition = [x - this.rect.left, y - this.rect.top];
 
-        // Set the pickX/Y for the color picker loop to pick up
-        this.pickX = mousePosition[0];
-        this.pickY = mousePosition[1];
+        if (this.props.isColorPicking) {
+            // Set the pickX/Y for the color picker loop to pick up
+            this.pickX = mousePosition[0];
+            this.pickY = mousePosition[1];
+        }
 
         if (this.state.mouseDown && !this.state.isDragging) {
             const distanceFromMouseDown = Math.sqrt(
@@ -231,38 +235,11 @@ class Stage extends React.Component {
             this.onStopDrag(mousePosition[0], mousePosition[1]);
         }
         this.props.vm.postIOData('mouse', data);
-    }
-    onMouseDown (e) {
-        this.updateRect();
-        const {x, y} = getEventXY(e);
-        const mousePosition = [x - this.rect.left, y - this.rect.top];
-        if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
-            this.setState({
-                mouseDown: true,
-                mouseDownPosition: mousePosition,
-                mouseDownTimeoutId: setTimeout(
-                    this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
-                    400
-                )
-            });
-        }
-        const data = {
-            isDown: true,
-            x: mousePosition[0],
-            y: mousePosition[1],
-            canvasWidth: this.rect.width,
-            canvasHeight: this.rect.height
-        };
-        this.props.vm.postIOData('mouse', data);
-        if (e.preventDefault) {
-            // Prevent default to prevent touch from dragging page
-            e.preventDefault();
-            // But we do want any active input to be blurred
-            if (document.activeElement && document.activeElement.blur) {
-                document.activeElement.blur();
-            }
-        }
-        if (this.props.isColorPicking) {
+
+        if (this.props.isColorPicking &&
+            mousePosition[0] > 0 && mousePosition[0] < this.rect.width &&
+            mousePosition[1] > 0 && mousePosition[1] < this.rect.height
+        ) {
             const {r, g, b} = this.state.colorInfo.color;
             const componentToString = c => {
                 const hex = c.toString(16);
@@ -271,6 +248,47 @@ class Stage extends React.Component {
             const colorString = `#${componentToString(r)}${componentToString(g)}${componentToString(b)}`;
             this.props.onDeactivateColorPicker(colorString);
             this.setState({colorInfo: null});
+            this.pickX = null;
+            this.pickY = null;
+        }
+    }
+    onMouseDown (e) {
+        this.updateRect();
+        const {x, y} = getEventXY(e);
+        const mousePosition = [x - this.rect.left, y - this.rect.top];
+        if (this.props.isColorPicking) {
+            // Set the pickX/Y for the color picker loop to pick up
+            this.pickX = mousePosition[0];
+            this.pickY = mousePosition[1];
+            // Immediately update the color picker info
+            this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
+        } else {
+            if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
+                this.setState({
+                    mouseDown: true,
+                    mouseDownPosition: mousePosition,
+                    mouseDownTimeoutId: setTimeout(
+                        this.onStartDrag.bind(this, mousePosition[0], mousePosition[1]),
+                        400
+                    )
+                });
+            }
+            const data = {
+                isDown: true,
+                x: mousePosition[0],
+                y: mousePosition[1],
+                canvasWidth: this.rect.width,
+                canvasHeight: this.rect.height
+            };
+            this.props.vm.postIOData('mouse', data);
+            if (e.preventDefault) {
+                // Prevent default to prevent touch from dragging page
+                e.preventDefault();
+                // But we do want any active input to be blurred
+                if (document.activeElement && document.activeElement.blur) {
+                    document.activeElement.blur();
+                }
+            }
         }
     }
     onWheel (e) {
@@ -320,7 +338,6 @@ class Stage extends React.Component {
         if (this.state.dragId) return;
         const drawableId = this.renderer.pick(x, y);
         if (drawableId === null) return;
-        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
         const targetId = this.props.vm.getTargetIdForDrawableId(drawableId);
         if (targetId === null) return;
 
@@ -331,6 +348,9 @@ class Stage extends React.Component {
 
         // Dragging always brings the target to the front
         target.goToFront();
+
+        // Extract the drawable art
+        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
 
         this.props.vm.startDrag(targetId);
         this.setState({
@@ -403,6 +423,7 @@ class Stage extends React.Component {
 Stage.propTypes = {
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,

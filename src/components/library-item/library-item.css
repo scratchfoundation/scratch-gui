@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-basis: 160px;
+    position: relative;
     height: 160px;
     max-width: 160px;
     margin: $space;
@@ -176,6 +177,10 @@
     height: 100%;
     padding-top: 0.4rem;
     font-weight: bold;
+}
+
+.featured-extension-metadata-detail img{
+    margin-right: 0.25rem;
 }
 
 .coming-soon-text {

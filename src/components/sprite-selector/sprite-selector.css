@@ -68,6 +68,8 @@
     padding-left: calc($space / 2);
     padding-right: calc($space / 2);
     padding-bottom: $space;
+
+    overflow-x: hidden;
 }
 
 .add-button {

@@ -105,7 +105,10 @@ class TargetPane extends React.Component {
         }
     }
     handleSurpriseSpriteClick () {
-        const item = spriteLibraryContent[Math.floor(Math.random() * spriteLibraryContent.length)];
+        const surpriseSprites = spriteLibraryContent.filter(sprite =>
+            (sprite.tags.indexOf('letters') === -1) && (sprite.tags.indexOf('numbers') === -1)
+        );
+        const item = surpriseSprites[Math.floor(Math.random() * surpriseSprites.length)];
         randomizeSpritePosition(item);
         this.props.vm.addSprite(JSON.stringify(item.json))
             .then(this.handleActivateBlocksTab);
@@ -138,11 +141,13 @@ class TargetPane extends React.Component {
         this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             spriteUpload(buffer, fileType, fileName, storage, newSprite => {
-                this.handleNewSprite(newSprite).then(() => {
-                    if (fileIndex === fileCount - 1) {
-                        this.props.onCloseImporting();
-                    }
-                });
+                this.handleNewSprite(newSprite)
+                    .then(() => {
+                        if (fileIndex === fileCount - 1) {
+                            this.props.onCloseImporting();
+                        }
+                    })
+                    .catch(this.props.onCloseImporting);
             }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }

@@ -250,7 +250,7 @@ test('requestProjectUpload when showing project with id should load', () => {
     };
     const action = requestProjectUpload(initialState.loadingState);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.UPDATING_BEFORE_FILE_UPLOAD);
+    expect(resultState.loadingState).toBe(LoadingState.LOADING_VM_FILE_UPLOAD);
 });
 
 test('requestProjectUpload when showing project without id should load', () => {

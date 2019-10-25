@@ -87,7 +87,7 @@ const reducer = function (state, action) {
                     closeButton: true,
                     extensionId: extensionId,
                     extensionName: extension.name,
-                    iconURL: extension.smallPeripheralImage,
+                    iconURL: extension.connectionSmallIconURL,
                     level: AlertLevels.WARN,
                     showReconnect: true
                 };

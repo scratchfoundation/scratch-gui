@@ -1,0 +1,42 @@
+<svg width="93px" height="106px" viewBox="0 0 93 106" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <g>
+    <title>costume2.1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="cotsume2" transform="translate(-16.000000, -10.000000)">
+        <g id="costume2.1" transform="translate(16.250000, 9.500000)">
+          <g id="tail" transform="translate(0.000000, 53.000000)">
+            <path d="M12,14.8 C8.9,7 10.6,0 6.3,0.4 C1.9,0.8 -3.2,12.5 6.4,21.1 C15.3,29 24.4,26.1 28,24 C31.5,21.8 28.8,20.6 28.2,19.8 C27.6,19 16.4,26.1 12,14.8 Z" stroke="#001026" stroke-width="1.2" fill="#FFAB19" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.8,0.9 C4.3,0.5 2.1,4.1 1.6,7.6 C1.4,11.2 2,13.3 2.7,15 C2.8,14.3 3.7,11.9 6.6,11.4 C9,11 10.6,13 10.6,13 C10.6,13 9.6,10 9.1,5.6 C8.7,2.9 8.8,1.3 6.8,0.9 Z" id="detail" fill="#FFFFFF"/>
+          </g>
+          <path d="M32.9,83.2 C32.2,84.1 30.2,87.6 25.4,90.6 C22.1,92.7 13.6,89.2 13.6,89.2 C14.5,98.4 7,98.2 5.6,95.2 C4.5,92.8 4.7,82.5 6.9,81.7 C10.3,80.5 14.9,82.5 19,82.5 C20.2,82.5 21.5,79.9 24.3,77.1 C26.3,75.1 28.9,71.4 33.1,74 C36.7,76.3 34.8,80.5 32.9,83.2 Z" id="leg" stroke="#001026" stroke-width="1.2" fill="#FFAB19" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M50.1,62 C50.4,64.2 50.6,72.6 53,73.9 C55.3,75.1 62.3,73.1 62.7,78 C63.1,82.8 56.6,82.9 51.2,81.4 C44.2,79.5 41,68.8 45,62.2 C46.5,59.9 49.8,59.7 50.1,62 Z" id="arm" stroke="#001026" stroke-width="1.2" fill="#FFAB19" stroke-linecap="round" stroke-linejoin="round"/>
+          <g id="body-and-leg" transform="translate(24.000000, 57.000000)">
+            <path d="M18.2,21.3 C19.4,20.4 21.2,18 22.8,15.6 C24.1,13.7 25.5,10 25.5,10 C26.4,7.5 27,2.7 23.7,2.8 C21.5,2.9 19.5,2.6 16.1,2.1 C10.1,0.9 8.9,-0.3 6.5,4.2 C2,12.5 -4,18.4 4.2,23.2 C6.2,24.4 9.4,26.4 12.2,28.4 C14.2,30.3 11.2,34.4 9.1,36.8 C8.2,37.9 8.2,39.5 9.3,40.6 C16.6,47.7 18.8,50.2 21.6,47.1 C25.4,42.9 19.4,38.8 19.4,38.8 C19.4,38.8 24.2,31.3 23.6,28 C22.9,24.8 18.2,21.3 18.2,21.3 Z" id="body" stroke="#001026" stroke-width="1.2" fill="#FFAB19" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22.7284271,14.6028611 C22.7284271,14.6028611 24.6284271,12.1028611 20.3284271,9.40286109 C15.8284271,6.50286109 14.1284271,9.70286109 12.3284271,12.1028611 C10.3284271,15.2028611 12.3284271,16.7028611 14.3284271,18.5028611 C15.9284271,20.0028611 17.4284271,21.2028611 17.4284271,21.2028611 C17.4284271,21.2028611 20.5284271,19.1028611 22.7284271,14.6028611 Z" id="tummy" fill="#FFFFFF"/>
+          </g>
+          <path d="M32.3,65.2 C30.1,66.2 26,64.4 24.9,64.6 C24.6,64.7 22.8,69.9 21.7,73 C20.2,77.4 13.4,76.1 13,71.5 C12.7,67.2 16.6,58.9 17.9,57.4 C20.8,53.9 30.6591797,56.7082962 37.2463379,58.456543" id="arm" stroke="#001026" stroke-width="1.2" fill="#FFAB19" stroke-linecap="round" stroke-linejoin="round"/>
+          <g id="head" transform="translate(10.750000, 0.500000)">
+            <path d="M39.1,9 C36.8,8.6 34.4,8.4 31.6,8.6 C26.9,8.8 22.4,10.5 22.4,10.5 L10.3,2.6 C9.9,2.4 9.4,2.7 9.5,3.1 L11.6,21 C12.2,20.2 1,33.8 8.1,45.2 C15.2,56.6 30.3,61.7 49.1,58 C67.9,54.3 72.3,43.5 71.1,37.8 C69.9,32.1 62.8,30 62.8,30 C62.8,30 62.7,25.5 59.5,20 C57.6,16.7 51.2,12 51.2,12 L48.6,1.3 C48.5,0.9 48,0.8 47.7,1 L39.1,9 Z" stroke="#001026" stroke-width="1.2" fill="#FFAB19"/>
+            <path d="M62.5,30.4 C62.5,30.4 69.4,32.2 70.6,37.9 C71.8,43.6 67,53.9 48.4,57.5 C24.2,62.5 12.7,48.1 19.4,37.5 C26.1,26.8 37.6,35.9 46,35.3 C53.2,34.8 54,28.5 62.5,30.4 Z" id="face" fill="#FFFFFF"/>
+            <path d="M31,41.1 C31,40.7 31.4,40.4 31.8,40.5 C33.7,41.2 39.1,42.8 45.1,43.2 C50.5,43.5 53.7,43.2 55.2,42.9 C55.7,42.8 56.1,43.3 55.9,43.8 C55,46.5 51.2,54 40.7,53.4 C31.6,52.4 30.7,46 31,41.1 Z" id="mouth" stroke="#001026" stroke-width="1.2" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M69,35.4 C69,35.4 76.2,35.3 80.9,31.5" id="whisker" stroke="#001026" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M69.4,41.3 C69.4,41.3 73.3,43.2 79.6,42.7" id="whisker" stroke="#001026" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M45.6,32.7 C47.7,32.7 49.9,32.9 50,33.6 C50.1,35 48.6,37.8 47,37.9 C45.2,38.1 41,35.6 41,34 C40.9,32.8 43.6,32.7 45.6,32.7 Z" id="nose" stroke="#001026" stroke-width="1.2" fill="#001026" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.6,31.2 C0.6,31.2 9.2,34 12.7,37.1" id="whisker" stroke="#001026" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1.3,41.2 C1.3,41.2 8.7,42.3 13,40.6" id="whisker" stroke="#001026" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <g id="eye" transform="translate(44.000000, 15.000000)">
+              <path d="M13.4,6 C16.3,10.5 16.4,15.6 13.6,17.4 C10.8,19.2 6.2,17.1 3.2,12.6 C0.3,8.1 0.2,3 3,1.2 C5.8,-0.7 10.5,1.5 13.4,6 Z" id="pupil" stroke="#001026" stroke-width="1.2" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13,11.7 C13,12.8 12.2,13.7 11.2,13.7 C10.2,13.7 9.4,12.8 9.4,11.7 C9.4,10.6 10.2,9.7 11.2,9.7 C12.2,9.7 13,10.6 13,11.7" id="pupil" fill="#001026"/>
+            </g>
+            <g id="eye" transform="translate(19.000000, 18.000000)">
+              <path d="M13.6,5.8 C16.6,10.2 16.4,15.6 13.7,17.5 C10.4,19.4 6,18 3,13.6 C-0.1,9.2 -0.3,3.5 2.8,1.3 C5.9,-1 10.6,1.4 13.6,5.8 Z" stroke="#001026" stroke-width="1.2" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13,11.6 C13,12.7 12.2,13.6 11.2,13.6 C10.2,13.6 9.4,12.7 9.4,11.6 C9.4,10.5 10.2,9.6 11.2,9.6 C12.2,9.7 13,10.5 13,11.6" id="pupil" fill="#001026"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

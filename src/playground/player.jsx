@@ -9,7 +9,6 @@ import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
-import TitledHOC from '../lib/titled-hoc.jsx';
 
 import {setPlayer} from '../reducers/mode';
 
@@ -24,6 +23,7 @@ const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
         <GUI
+            canEditTitle
             enableCommunity
             isPlayerOnly={isPlayerOnly}
             projectId={projectId}
@@ -55,8 +55,7 @@ const ConnectedPlayer = connect(
 // ability to compose reducers.
 const WrappedPlayer = compose(
     AppStateHOC,
-    HashParserHOC,
-    TitledHOC
+    HashParserHOC
 )(ConnectedPlayer);
 
 const appTarget = document.createElement('div');

@@ -94,7 +94,6 @@ const GUIComponent = props => {
         onLogOut,
         onOpenRegistration,
         onToggleLoginOpen,
-        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
@@ -231,7 +230,6 @@ const GUIComponent = props => {
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
-                    onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
@@ -416,7 +414,6 @@ GUIComponent.propTypes = {
     onTelemetryModalOptIn: PropTypes.func,
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
@@ -443,7 +440,6 @@ GUIComponent.defaultProps = {
     isCreating: false,
     isShared: false,
     loading: false,
-    onUpdateProjectTitle: () => {},
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };

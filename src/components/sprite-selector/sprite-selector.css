@@ -85,6 +85,19 @@
     left: 1rem;
 }
 
+.file-button {
+    position: absolute;
+    bottom: 0.75rem;
+}
+
+[dir="ltr"] .file-button {
+    right: 6rem;
+}
+
+[dir="rtl"] .file-button {
+    left: 6rem;
+}
+
 .raised {
     background-color: $drop-highlight;
     transition: all 0.25s ease;

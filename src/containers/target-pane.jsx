@@ -16,6 +16,7 @@ import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
+import {handleDataFileUpload, handleWebFileUpload } from '../lib/data-file-uploader.js';
 import sharedMessages from '../lib/shared-messages';
 import {emptySprite} from '../lib/empty-assets';
 import {highlightTarget} from '../reducers/targets';
@@ -46,7 +47,12 @@ class TargetPane extends React.Component {
             'handlePaintSpriteClick',
             'handleFileUploadClick',
             'handleSpriteUpload',
-            'setFileInput'
+            'handleDataFileUpload',
+            'handleDataFileUploadClick',
+            'handleDataFileRemove',
+            'handleWebFileUpload',
+            'setFileInput',
+            'setDataFileInput'
         ]);
     }
     componentDidMount () {
@@ -151,6 +157,29 @@ class TargetPane extends React.Component {
             }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }
+    handleDataFileUpload(e) {
+        handleDataFileUpload(e.target, this.props.vm.addDataFile, (msg) => alert("Error uploading file: " + msg));
+    }
+    setDataFileInput(input) {
+        this.dataFileInput = input;
+    }
+    handleDataFileUploadClick() {
+        this.dataFileInput.click();
+    }
+    handleDataFileRemove() {
+        let fileName = prompt("Enter the name of the file: ");
+        if(fileName === null || fileName === "") return;
+
+        if(!this.props.vm.removeDataFile(fileName)) {
+            alert("File does not exist");
+        }
+    }
+    handleWebFileUpload() {
+        let url = prompt("Enter URL: ");
+        if(url === null || url === "") return;
+
+        handleWebFileUpload(url, this.props.vm.addDataFile, (msg) => alert("Error uploading file: " + msg));
+    }
     setFileInput (input) {
         this.fileInput = input;
     }
@@ -216,6 +245,7 @@ class TargetPane extends React.Component {
             <TargetPaneComponent
                 {...componentProps}
                 fileInputRef={this.setFileInput}
+                dataFileInputRef={this.setDataFileInput}
                 onActivateBlocksTab={this.handleActivateBlocksTab}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
@@ -229,9 +259,13 @@ class TargetPane extends React.Component {
                 onDuplicateSprite={this.handleDuplicateSprite}
                 onExportSprite={this.handleExportSprite}
                 onFileUploadClick={this.handleFileUploadClick}
+                onDataFileUploadClick={this.handleDataFileUploadClick}
                 onPaintSpriteClick={this.handlePaintSpriteClick}
                 onSelectSprite={this.handleSelectSprite}
                 onSpriteUpload={this.handleSpriteUpload}
+                onDataFileUpload={this.handleDataFileUpload}
+                onDataFileRemove={this.handleDataFileRemove}
+                onWebFileUpload={this.handleWebFileUpload}
                 onSurpriseSpriteClick={this.handleSurpriseSpriteClick}
             />
         );

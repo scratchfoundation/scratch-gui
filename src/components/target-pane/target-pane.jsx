@@ -19,6 +19,7 @@ import styles from './target-pane.css';
 const TargetPane = ({
     editingTarget,
     fileInputRef,
+    dataFileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
     onActivateBlocksTab,
@@ -34,11 +35,15 @@ const TargetPane = ({
     onDuplicateSprite,
     onExportSprite,
     onFileUploadClick,
+    onDataFileUploadClick,
     onNewSpriteClick,
     onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
     onSelectSprite,
     onSpriteUpload,
+    onDataFileUpload,
+    onDataFileRemove,
+    onWebFileUpload,
     onSurpriseSpriteClick,
     raiseSprites,
     stage,
@@ -58,6 +63,7 @@ const TargetPane = ({
             raised={raiseSprites}
             selectedId={editingTarget}
             spriteFileInput={fileInputRef}
+            dataFileInput={dataFileInputRef}
             sprites={sprites}
             stageSize={stageSize}
             onChangeSpriteDirection={onChangeSpriteDirection}
@@ -72,10 +78,14 @@ const TargetPane = ({
             onDuplicateSprite={onDuplicateSprite}
             onExportSprite={onExportSprite}
             onFileUploadClick={onFileUploadClick}
+            onDataFileUploadClick={onDataFileUploadClick}
             onNewSpriteClick={onNewSpriteClick}
             onPaintSpriteClick={onPaintSpriteClick}
             onSelectSprite={onSelectSprite}
             onSpriteUpload={onSpriteUpload}
+            onDataFileUpload={onDataFileUpload}
+            onDataFileRemove={onDataFileRemove}
+            onWebFileUpload={onWebFileUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
         <div className={styles.stageSelectorWrapper}>
@@ -126,6 +136,7 @@ TargetPane.propTypes = {
     editingTarget: PropTypes.string,
     extensionLibraryVisible: PropTypes.bool,
     fileInputRef: PropTypes.func,
+    dataFileInputRef: PropTypes.func,
     hoveredTarget: PropTypes.shape({
         hoveredSprite: PropTypes.string,
         receivedBlocks: PropTypes.bool
@@ -149,6 +160,10 @@ TargetPane.propTypes = {
     onRequestCloseSpriteLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
     onSpriteUpload: PropTypes.func,
+    onDataFileUpload: PropTypes.func,
+    onDataFileUploadClick: PropTypes.func,
+    onDataFileRemove: PropTypes.func,
+    onWebFileUpload: PropTypes.func,
     onSurpriseSpriteClick: PropTypes.func,
     raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,

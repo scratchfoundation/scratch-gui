@@ -30,7 +30,9 @@ const TitledHOC = function (WrappedComponent) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
                 this.handleReceivedProjectTitle(this.props.projectTitle);
             }
+            // if project is a new default project, and has loaded,
             if (this.props.isShowingWithoutId && prevProps.isAnyCreatingNewState) {
+                // reset title to default
                 const defaultProjectTitle = this.handleReceivedProjectTitle();
                 this.props.onUpdateProjectTitle(defaultProjectTitle);
             }

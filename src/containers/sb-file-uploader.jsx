@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {setProjectTitle} from '../reducers/project-title';
 
 import log from '../lib/log';
 import sharedMessages from '../lib/shared-messages';
@@ -131,7 +132,7 @@ class SBFileUploader extends React.Component {
                     // This is necessary in case the user wants to reload a project
                     if (filename) {
                         const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
-                        this.props.onUpdateProjectTitle(uploadedProjectTitle);
+                        this.props.onReceivedProjectTitle(uploadedProjectTitle);
                     }
                     this.resetFileInput();
                 })
@@ -179,9 +180,9 @@ SBFileUploader.propTypes = {
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
     projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
+    onReceivedProjectTitle: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -209,7 +210,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(closeFileMenu());
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),
-    onLoadingStarted: () => dispatch(openLoadingProject())
+    onLoadingStarted: () => dispatch(openLoadingProject()),
+    onReceivedProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
 // Allow incoming props to override redux-provided props. Used to mock in tests.

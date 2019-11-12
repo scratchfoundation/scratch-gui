@@ -395,7 +395,6 @@ class MenuBar extends React.Component {
                                         <SBFileUploader
                                             canSave={this.props.canSave}
                                             userOwnsProject={this.props.userOwnsProject}
-                                            onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                         >
                                             {(className, renderFileInput, handleLoadProject) => (
                                                 <MenuItem
@@ -495,7 +494,6 @@ class MenuBar extends React.Component {
                             >
                                 <ProjectTitleInput
                                     className={classNames(styles.titleFieldGrowable)}
-                                    onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                                 />
                             </MenuBarItemTooltip>
                         </div>
@@ -746,7 +744,6 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,

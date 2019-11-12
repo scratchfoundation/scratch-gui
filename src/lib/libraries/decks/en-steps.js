@@ -170,6 +170,34 @@ import moveArrowKeysUpDown from './steps/move-arrow-keys-up-down.en.png';
 import glideAroundBackAndForth from './steps/glide-around-back-and-forth.en.png';
 import glideAroundPoint from './steps/glide-around-point.en.png';
 
+// Code a Cartoon
+import codeCartoonSaySomething from './steps/code-cartoon-01-say-something.en.png';
+import codeCartoonAnimate from './steps/code-cartoon-02-animate.en.gif';
+import codeCartoonSelectDifferentCharacter from './steps/code-cartoon-03-select-different-character.en.gif';
+import codeCartoonUseMinusSign from './steps/code-cartoon-04-use-minus-sign.en.gif';
+import codeCartoonGrowShrink from './steps/code-cartoon-05-grow-shrink.en.gif';
+import codeCartoonSelectDifferentCharacter2 from './steps/code-cartoon-06-select-another-different-character.en.gif';
+import codeCartoonJump from './steps/code-cartoon-07-jump.en.gif';
+import codeCartoonChangeScenes from './steps/code-cartoon-08-change-scenes.en.gif';
+import codeCartoonGlideAround from './steps/code-cartoon-09-glide-around.en.gif';
+import codeCartoonChangeCostumes from './steps/code-cartoon-10-change-costumes.en.gif';
+import codeCartoonChooseMoreCharacters from './steps/code-cartoon-11-choose-more-characters.en.jpg';
+
+// Talking Tales
+import talesAddExtension from './steps/talking-1-add-extension.en.gif';
+import talesChooseSprite from './steps/talking-2-choose-sprite.en.png';
+import talesSaySomething from './steps/talking-3-say-something.en.gif';
+import talesChooseBackdrop from './steps/talking-4-choose-backdrop.en.png';
+import talesSwitchBackdrop from './steps/talking-5-switch-backdrop.en.gif';
+import talesChooseAnotherSprite from './steps/talking-6-choose-another-sprite.en.png';
+import talesMoveAround from './steps/talking-7-move-around.en.gif';
+import talesChooseAnotherBackdrop from './steps/talking-8-choose-another-backdrop.en.png';
+import talesAnimateTalking from './steps/talking-9-animate.en.gif';
+import talesChooseThirdBackdrop from './steps/talking-10-choose-third-backdrop.en.png';
+import talesChooseSound from './steps/talking-11-choose-sound.en.gif';
+import talesDanceMoves from './steps/talking-12-dance-moves.en.gif';
+import talesAskAnswer from './steps/talking-13-ask-and-answer.en.gif';
+
 const enImages = {
     // Intro
     introMove: introMove,
@@ -276,7 +304,7 @@ const enImages = {
     flyAddScenery: flyAddScenery,
     flyMoveScenery: flyMoveScenery,
     flySwitchLooks: flySwitchLooks,
-    
+
     // Pong
     pongAddBackdrop: pongAddBackdrop,
     pongAddBallSprite: pongAddBallSprite,
@@ -291,7 +319,7 @@ const enImages = {
     pongResetScore: pongResetScore,
     pongAddLineSprite: pongAddLineSprite,
     pongGameOver: pongGameOver,
-    
+
     // Imagine a World
     imagineTypeWhatYouWant: imagineTypeWhatYouWant,
     imagineClickGreenFlag: imagineClickGreenFlag,
@@ -308,26 +336,26 @@ const enImages = {
     imagineSwitchBackdrops: imagineSwitchBackdrops,
     imagineRecordASound: imagineRecordASound,
     imagineChooseSound: imagineChooseSound,
-    
+
     // Add a Backdrop
     addBackdrop: addBackdrop,
-    
+
     // Add Effects
     addEffects: addEffects,
-    
+
     // Hide and Show
     hideAndShow: hideAndShow,
-    
+
     // Switch Costumes
     switchCostumes: switchCostumes,
-    
+
     // Change Size
     changeSize: changeSize,
-    
+
     // Spin
     spinTurn: spinTurn,
     spinPointInDirection: spinPointInDirection,
-    
+
     // Record a Sound
     recordASoundSoundsTab: recordASoundSoundsTab,
     recordASoundClickRecord: recordASoundClickRecord,
@@ -341,9 +369,35 @@ const enImages = {
 
     // Glide Around
     glideAroundBackAndForth: glideAroundBackAndForth,
-    glideAroundPoint: glideAroundPoint
-    
-};
+    glideAroundPoint: glideAroundPoint,
 
+    // Code a Cartoon
+    codeCartoonSaySomething: codeCartoonSaySomething,
+    codeCartoonAnimate: codeCartoonAnimate,
+    codeCartoonSelectDifferentCharacter: codeCartoonSelectDifferentCharacter,
+    codeCartoonUseMinusSign: codeCartoonUseMinusSign,
+    codeCartoonGrowShrink: codeCartoonGrowShrink,
+    codeCartoonSelectDifferentCharacter2: codeCartoonSelectDifferentCharacter2,
+    codeCartoonJump: codeCartoonJump,
+    codeCartoonChangeScenes: codeCartoonChangeScenes,
+    codeCartoonGlideAround: codeCartoonGlideAround,
+    codeCartoonChangeCostumes: codeCartoonChangeCostumes,
+    codeCartoonChooseMoreCharacters: codeCartoonChooseMoreCharacters,
+
+    // Talking Tales
+    talesAddExtension: talesAddExtension,
+    talesChooseSprite: talesChooseSprite,
+    talesSaySomething: talesSaySomething,
+    talesAskAnswer: talesAskAnswer,
+    talesChooseBackdrop: talesChooseBackdrop,
+    talesSwitchBackdrop: talesSwitchBackdrop,
+    talesChooseAnotherSprite: talesChooseAnotherSprite,
+    talesMoveAround: talesMoveAround,
+    talesChooseAnotherBackdrop: talesChooseAnotherBackdrop,
+    talesAnimateTalking: talesAnimateTalking,
+    talesChooseThirdBackdrop: talesChooseThirdBackdrop,
+    talesChooseSound: talesChooseSound,
+    talesDanceMoves: talesDanceMoves
+};
 
 export {enImages};

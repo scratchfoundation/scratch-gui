@@ -27,6 +27,10 @@ const TitledHOC = function (WrappedComponent) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
                 this.handleReceivedProjectTitle(this.props.projectTitle);
             }
+            if (this.props.isShowingWithoutId && !prevProps.isShowingWithoutId) {
+                const defaultProjectTitle = this.handleReceivedProjectTitle();
+                this.props.onUpdateProjectTitle(defaultProjectTitle);
+            }
             // if the projectTitle hasn't changed, but the reduxProjectTitle
             // HAS changed, we need to report that change to the projectTitle's owner
             if (this.props.reduxProjectTitle !== prevProps.reduxProjectTitle &&
@@ -40,6 +44,7 @@ const TitledHOC = function (WrappedComponent) {
                 newTitle = this.props.intl.formatMessage(messages.defaultProjectTitle);
             }
             this.props.onChangedProjectTitle(newTitle);
+            return newTitle;
         }
         render () {
             const {

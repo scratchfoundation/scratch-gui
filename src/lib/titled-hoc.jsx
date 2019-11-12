@@ -3,7 +3,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import {getIsShowingWithoutId} from '../reducers/project-state';
+import {
+    getIsAnyCreatingNewState,
+    getIsShowingWithoutId
+} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 
 const messages = defineMessages({
@@ -27,7 +30,7 @@ const TitledHOC = function (WrappedComponent) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
                 this.handleReceivedProjectTitle(this.props.projectTitle);
             }
-            if (this.props.isShowingWithoutId && !prevProps.isShowingWithoutId) {
+            if (this.props.isShowingWithoutId && prevProps.isAnyCreatingNewState) {
                 const defaultProjectTitle = this.handleReceivedProjectTitle();
                 this.props.onUpdateProjectTitle(defaultProjectTitle);
             }
@@ -50,6 +53,7 @@ const TitledHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 intl,
+                isAnyCreatingNewState,
                 isShowingWithoutId,
                 onChangedProjectTitle,
                 // for children, we replace onUpdateProjectTitle with our own
@@ -71,6 +75,7 @@ const TitledHOC = function (WrappedComponent) {
 
     TitledComponent.propTypes = {
         intl: intlShape,
+        isAnyCreatingNewState: PropTypes.bool,
         isShowingWithoutId: PropTypes.bool,
         onChangedProjectTitle: PropTypes.func,
         onUpdateProjectTitle: PropTypes.func,
@@ -85,6 +90,7 @@ const TitledHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            isAnyCreatingNewState: getIsAnyCreatingNewState(loadingState),
             isShowingWithoutId: getIsShowingWithoutId(loadingState),
             reduxProjectTitle: state.scratchGui.projectTitle
         };

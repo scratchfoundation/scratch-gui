@@ -155,13 +155,7 @@ export default [
         internetConnectionRequired: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Data Tools"
-                description= "Name for the Data tools extension"
-                id="gui.extension.datatools.name"
-            />
-        ),
+        name: "Data Tools",
         extensionId: 'datatools',
         collaborator: 'KSU senior design',
         iconURL: dataToolsIconURL,
@@ -174,7 +168,19 @@ export default [
             />
         ),
         featured: true,
-
+        bluetoothRequired: true,
+        internetConnectionRequired: true,
+        launchFileSelection: true,
+        useAutoScan: false,
+        connectionIconURL: microbitConnectionIconURL,
+        connectionSmallIconURL: microbitConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their micro:bit."
+                id="gui.extension.microbit.connectingMessage"
+            />
+        )
     },
     {
         name: 'Makey Makey',

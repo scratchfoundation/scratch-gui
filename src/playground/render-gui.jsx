@@ -7,6 +7,8 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import TitledHOC from '../lib/titled-hoc.jsx';
 import log from '../lib/log.js';
+import { handleFileUpload } from '../lib/file-uploader.js';
+import { handleDataFileUpload, handleWebFileUpload } from '../lib/data-file-uploader.js';
 
 const onClickLogo = () => {
     window.location = 'https://scratch.mit.edu';

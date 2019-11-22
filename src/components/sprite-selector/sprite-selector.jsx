@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {connect} from 'react-redux';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
@@ -57,6 +58,11 @@ const messages = defineMessages({
         description: 'Button to remove an uploaded file',
         defaultMessage: 'Remove File'
     },
+    viewFiles: {
+        id: 'gui.spriteSelector.viewFiles',
+        description: 'Button to show the file viewer',
+        defaultMessage: 'View Files'
+    }
 });
 
 const SpriteSelectorComponent = function (props) {
@@ -77,6 +83,7 @@ const SpriteSelectorComponent = function (props) {
         onExportSprite,
         onFileUploadClick,
         onNewSpriteClick,
+        onViewFilesClick,
         onPaintSpriteClick,
         onSelectSprite,
         onSpriteUpload,
@@ -91,6 +98,7 @@ const SpriteSelectorComponent = function (props) {
         dataFileInput,
         sprites,
         stageSize,
+        showDataFileMenu,
         ...componentProps
     } = props;
     let selectedSprite = sprites[selectedId];
@@ -141,7 +149,7 @@ const SpriteSelectorComponent = function (props) {
                 onSelectSprite={onSelectSprite}
             />
 
-            {hasDataTools && <ActionMenu
+            {showDataFileMenu && <ActionMenu
                 className={styles.fileButton}
                 img={fileUploadIcon}
                 moreButtons={[
@@ -160,6 +168,11 @@ const SpriteSelectorComponent = function (props) {
                         fileInput: dataFileInput,
                         fileMultiple: true,
                         largeImg: true
+                    },
+                    {
+                        title: intl.formatMessage(messages.viewFiles),
+                        img: searchIcon,
+                        onClick: onViewFilesClick
                     },
                     {
                         title: intl.formatMessage(messages.uploadLocalFile),
@@ -230,6 +243,7 @@ SpriteSelectorComponent.propTypes = {
     onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onViewFilesClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onSelectSprite: PropTypes.func,
     onSpriteUpload: PropTypes.func,
@@ -256,4 +270,15 @@ SpriteSelectorComponent.propTypes = {
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired
 };
 
-export default injectIntl(SpriteSelectorComponent);
+const mapStateToProps = state => ({
+    // This is the button's mode, as opposed to the actual current state
+    showDataFileMenu: state.scratchGui.modals.dataFileMenu
+});
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default injectIntl(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SpriteSelectorComponent));

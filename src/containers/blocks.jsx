@@ -22,7 +22,7 @@ import defineDynamicBlock from '../lib/define-dynamic-block';
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
-import {closeExtensionLibrary, openSoundRecorder, openConnectionModal, openFileModal} from '../reducers/modals';
+import {closeExtensionLibrary, openSoundRecorder, openConnectionModal, openFileModal, openDataFileMenu} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
@@ -472,6 +472,7 @@ class Blocks extends React.Component {
         this.props.onOpenConnectionModal(extensionId);
     }
     handleFileModalStart (extensionId) {
+        this.props.onOpenDataFileMenu();
         this.props.onOpenFileModal(extensionId);
     }
     handleStatusButtonUpdate () {
@@ -526,6 +527,7 @@ class Blocks extends React.Component {
             onActivateColorPicker,
             onOpenConnectionModal,
             onOpenFileModal,
+            onOpenDataFileMenu,
             onOpenSoundRecorder,
             updateToolboxState,
             onActivateCustomProcedures,
@@ -588,6 +590,7 @@ Blocks.propTypes = {
     onActivateCustomProcedures: PropTypes.func,
     onOpenConnectionModal: PropTypes.func,
     onOpenFileModal: PropTypes.func,
+    onOpenDataFileMenu: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
@@ -675,6 +678,9 @@ const mapDispatchToProps = dispatch => ({
     onOpenFileModal: id => {
       //  dispatch(setFileModalExtensionId(id));// written in the reduce for the modal
         dispatch(openFileModal());
+    },
+    onOpenDataFileMenu: () => {
+        dispatch(openDataFileMenu());
     },
     onOpenSoundRecorder: () => {
         dispatch(activateTab(SOUNDS_TAB_INDEX));

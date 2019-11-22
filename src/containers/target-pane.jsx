@@ -6,7 +6,9 @@ import {intlShape, injectIntl} from 'react-intl';
 
 import {
     openSpriteLibrary,
-    closeSpriteLibrary
+    closeSpriteLibrary,
+    openFileLibrary,
+    closeFileLibrary
 } from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
@@ -291,7 +293,8 @@ const mapStateToProps = state => ({
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     raiseSprites: state.scratchGui.blockDrag,
-    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary
+    spriteLibraryVisible: state.scratchGui.modals.spriteLibrary,
+    fileLibraryVisible: state.scratchGui.modals.fileLibrary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -299,8 +302,15 @@ const mapDispatchToProps = dispatch => ({
         e.preventDefault();
         dispatch(openSpriteLibrary());
     },
+    onViewFilesClick: e => {
+        e.preventDefault();
+        dispatch(openFileLibrary())
+    },
     onRequestCloseSpriteLibrary: () => {
         dispatch(closeSpriteLibrary());
+    },
+    onRequestCloseFileLibrary: () => {
+        dispatch(closeFileLibrary());
     },
     onActivateTab: tabIndex => {
         dispatch(activateTab(tabIndex));

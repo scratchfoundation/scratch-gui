@@ -4,6 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
+import FileLibrary from '../../containers/file-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
@@ -22,6 +23,7 @@ const TargetPane = ({
     dataFileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
+    fileLibraryVisible,
     onActivateBlocksTab,
     onChangeSpriteDirection,
     onChangeSpriteName,
@@ -37,8 +39,10 @@ const TargetPane = ({
     onFileUploadClick,
     onDataFileUploadClick,
     onNewSpriteClick,
+    onViewFilesClick,
     onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
+    onRequestCloseFileLibrary,
     onSelectSprite,
     onSpriteUpload,
     onDataFileUpload,
@@ -80,6 +84,7 @@ const TargetPane = ({
             onFileUploadClick={onFileUploadClick}
             onDataFileUploadClick={onDataFileUploadClick}
             onNewSpriteClick={onNewSpriteClick}
+            onViewFilesClick={onViewFilesClick}
             onPaintSpriteClick={onPaintSpriteClick}
             onSelectSprite={onSelectSprite}
             onSpriteUpload={onSpriteUpload}
@@ -105,6 +110,15 @@ const TargetPane = ({
                         vm={vm}
                         onActivateBlocksTab={onActivateBlocksTab}
                         onRequestClose={onRequestCloseSpriteLibrary}
+                    />
+                ) : null}
+            </div>
+            <div>
+                {fileLibraryVisible ? (
+                    <FileLibrary
+                        vm={vm}
+                        onActivateBlocksTab={onActivateBlocksTab}
+                        onRequestClose={onRequestCloseFileLibrary}
                     />
                 ) : null}
             </div>
@@ -155,9 +169,11 @@ TargetPane.propTypes = {
     onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
+    onViewFilesClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     onRequestCloseSpriteLibrary: PropTypes.func,
+    onRequestCloseFileLibrary: PropTypes.func,
     onSelectSprite: PropTypes.func,
     onSpriteUpload: PropTypes.func,
     onDataFileUpload: PropTypes.func,
@@ -167,6 +183,7 @@ TargetPane.propTypes = {
     onSurpriseSpriteClick: PropTypes.func,
     raiseSprites: PropTypes.bool,
     spriteLibraryVisible: PropTypes.bool,
+    fileLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,

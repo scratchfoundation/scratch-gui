@@ -56,7 +56,9 @@ import {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    fileInputOpen,
+    closeFileInput
 } from '../../reducers/menus';
 
 import collectMetadata from '../../lib/collect-metadata';
@@ -155,7 +157,8 @@ class MenuBar extends React.Component {
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickMenuItem'
         ]);
     }
     componentDidMount () {
@@ -269,6 +272,10 @@ class MenuBar extends React.Component {
         }
         }
     }
+    handleClickMenuItem (opener) {
+        this.props.onCloseFileInput();
+        opener();
+    }
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -351,7 +358,9 @@ class MenuBar extends React.Component {
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.fileMenuOpen
                                 })}
-                                onMouseUp={this.props.onClickFile}
+                                /* eslint-disable react/jsx-no-bind */
+                                onMouseUp={() => this.handleClickMenuItem(this.props.onClickFile)}
+                                /* eslint-enable react/jsx-no-bind */
                             >
                                 <FormattedMessage
                                     defaultMessage="File"
@@ -360,6 +369,7 @@ class MenuBar extends React.Component {
                                 />
                                 <MenuBarMenu
                                     className={classNames(styles.menuBarMenu)}
+                                    ignoreClickEvent={this.props.isUploadingFile}
                                     open={this.props.fileMenuOpen}
                                     place={this.props.isRtl ? 'left' : 'right'}
                                     onRequestClose={this.props.onRequestCloseFile}
@@ -428,7 +438,9 @@ class MenuBar extends React.Component {
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
                             })}
-                            onMouseUp={this.props.onClickEdit}
+                            /* eslint-disable react/jsx-no-bind */
+                            onMouseUp={() => this.handleClickMenuItem(this.props.onClickEdit)}
+                            /* eslint-enable react/jsx-no-bind */
                         >
                             <div className={classNames(styles.editMenu)}>
                                 <FormattedMessage
@@ -718,10 +730,12 @@ MenuBar.propTypes = {
     isShared: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     isUpdating: PropTypes.bool,
+    isUploadingFile: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
+    onCloseFileInput: PropTypes.func,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
@@ -768,6 +782,7 @@ const mapStateToProps = (state, ownProps) => {
         editMenuOpen: editMenuOpen(state),
         isRtl: state.locales.isRtl,
         isUpdating: getIsUpdating(loadingState),
+        isUploadingFile: fileInputOpen(state),
         isShowingProject: getIsShowingProject(loadingState),
         languageMenuOpen: languageMenuOpen(state),
         locale: state.locales.locale,
@@ -798,7 +813,8 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onCloseFileInput: () => dispatch(closeFileInput())
 });
 
 export default compose(

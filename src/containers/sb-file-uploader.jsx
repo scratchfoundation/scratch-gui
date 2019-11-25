@@ -21,7 +21,9 @@ import {
     closeLoadingProject
 } from '../reducers/modals';
 import {
-    closeFileMenu
+    closeFileMenu,
+    openFileInput,
+    closeFileInput
 } from '../reducers/menus';
 
 /**
@@ -101,6 +103,7 @@ class SBFileUploader extends React.Component {
         } = this.props;
 
         const thisFileInput = e.target;
+        this.props.closeFileInput();
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];
 
@@ -146,8 +149,10 @@ class SBFileUploader extends React.Component {
                 });
         }
     }
-    handleClick () {
+    handleClick (e) {
         // open filesystem browsing window
+        e.stopPropagation();
+        this.props.openFileInput();
         this.fileInput.click();
     }
     setFileInput (input) {
@@ -174,12 +179,14 @@ SBFileUploader.propTypes = {
     children: PropTypes.func,
     className: PropTypes.string,
     closeFileMenu: PropTypes.func,
+    closeFileInput: PropTypes.func,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
     isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
+    openFileInput: PropTypes.func,
     projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
     onReceivedProjectTitle: PropTypes.func,
@@ -204,6 +211,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     closeFileMenu: () => dispatch(closeFileMenu()),
+    closeFileInput: () => dispatch(closeFileInput()),
+    openFileInput: () => dispatch(openFileInput()),
     onLoadingFinished: (loadingState, success) => {
         dispatch(onLoadedProject(loadingState, ownProps.canSave, success));
         dispatch(closeLoadingProject());

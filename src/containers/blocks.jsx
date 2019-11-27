@@ -54,6 +54,7 @@ class Blocks extends React.Component {
             'getToolboxXML',
             'handleCategorySelected',
             'handleConnectionModalStart',
+            'handleStatusButtonClick',
             'handleFileModalStart',
             'handleDrop',
             'handleStatusButtonUpdate',
@@ -76,7 +77,7 @@ class Blocks extends React.Component {
             'setLocale'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
-        this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
+        this.ScratchBlocks.statusButtonCallback = this.handleStatusButtonClick;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
         this.state = {
@@ -471,6 +472,16 @@ class Blocks extends React.Component {
     handleConnectionModalStart (extensionId) {
         this.props.onOpenConnectionModal(extensionId);
     }
+
+    handleStatusButtonClick (extensionId) {
+        if(extensionId === 'datatools'){
+            this.props.onOpenFileModal(extensionId);
+        }
+        else{
+            this.props.openConnectionModal(extensionId);
+        }
+    }
+
     handleFileModalStart (extensionId) {
         this.props.onOpenDataFileMenu();
         this.props.onOpenFileModal(extensionId);

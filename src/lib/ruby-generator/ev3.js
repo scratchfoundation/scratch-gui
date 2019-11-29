@@ -5,6 +5,7 @@
  */
 export default function (Generator) {
     const Ev3SensorMenu = ['1', '2', '3', '4'];
+    const Ev3MotorMenu = ['A', 'B', 'C', 'D'];
 
     Generator.ev3_menu_sensorPorts = function (block) {
         const index = Generator.getFieldValue(block, 'sensorPorts') || 0;
@@ -16,6 +17,19 @@ export default function (Generator) {
         block.isStatement = true;
         const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
         return `${Generator.spriteName()}.when(:ev3_button_pressed, ${port}) do\n`;
+    };
+
+    Generator.ev3_menu_motorPorts = function (block) {
+        const index = Generator.getFieldValue(block, 'motorPorts') || 0;
+        const port = Generator.quote_(Ev3MotorMenu[index]);
+        return [port, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.ev3_motorSetPower = function (block) {
+        block.isStatement = true;
+        const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
+        const power = Generator.valueToCode(block, 'POWER', Generator.ORDER_NONE) || null;
+        return `${Generator.spriteName()}.ev3_motor_set_power (${port} ${power})\n`;
     };
 
     return Generator;

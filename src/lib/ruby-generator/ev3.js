@@ -43,5 +43,10 @@ export default function (Generator) {
         return `ev3_motor_turn_that_way_for(${port}, ${time})\n`;
     };
 
+    Generator.ev3_getMotorPosition = function (block) {
+        const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
+        return `ev3_motor_position(${port})\n`;
+    };
+
     return Generator;
 }

@@ -26,10 +26,15 @@ export default function (Generator) {
     };
 
     Generator.ev3_motorSetPower = function (block) {
-        block.isStatement = true;
         const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
         const power = Generator.valueToCode(block, 'POWER', Generator.ORDER_NONE) || null;
-        return `${Generator.spriteName()}.ev3_motor_set_power (${port} ${power})\n`;
+        return `ev3_motor_set_power(${port}, ${power})\n`;
+    };
+
+    Generator.ev3_motorTurnClockwise = function (block) {
+        const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
+        const time = Generator.valueToCode(block, 'TIME', Generator.ORDER_NONE) || null;
+        return `ev3_motor_turn_this_way_for(${port}, ${time})\n`;
     };
 
     return Generator;

@@ -16,8 +16,8 @@ import text2speechInsetIconURL from './text2speech/text2speech-small.svg';
 import translateIconURL from './translate/translate.png';
 import translateInsetIconURL from './translate/translate-small.png';
 
-import dataToolsIconURL from './datatools/background.png';
-import dataToolsInsetIconURL from './datatools/translate-small.png';
+import dataToolsIconURL from './datatools/Scratch-02.svg';
+import dataToolsInsetIconURL from './datatools/Scratch-01.svg';
 
 import makeymakeyIconURL from './makeymakey/makeymakey.png';
 import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';
@@ -168,8 +168,8 @@ export default [
             />
         ),
         featured: true,
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
         launchFileSelection: true,
         useAutoScan: false,
         connectionIconURL: microbitConnectionIconURL,

@@ -26,7 +26,7 @@
     overflow: hidden;
 }
 .fileInput {
-    visibility: hidden;
+    display: none;
 }
 .illustration {
     width: 100%;

@@ -52,34 +52,51 @@ class FileModal extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleCancel',
             'handleLocalFile',
             'handleWebFile',
             'handleFileUpload',
-            'handleCancelButton'
+            'handleClose',
+            'handleCancel',
+            'setFileInputRef'
         ]);
+
         this.state = {
-            uploadOption: null
+            uploadingWeb: false,
         }
+
+        this.fileInput = null;
     }
 
-    handleCancelButton () {
-        this.setState({uploadOption: "back"});
+    setFileInputRef(input) {
+        this.fileInput = input;
     }
+
     handleLocalFile () {
-        this.setState({uploadOption: "local"});
+        this.fileInput.click();
     }
+
     handleWebFile () {
-        this.setState({uploadOption: "web"});
+        if(this.state.uploadingWeb)
+        {
+            this.setState({uploadingWeb: false});
+        }
+        else{
+            this.setState({ uploadingWeb: true });
+        }
     }
 
     handleFileUpload(e) {
         handleDataFileUpload(e.target, this.props.vm.addDataFile, (msg) => alert("Error uploading file: " + msg));
+        this.handleClose();
+    }
+
+    handleClose() {
+        this.setState({ uploadingWeb: false });
         this.props.onRequestClose();
     }
 
     handleCancel () {
-        this.props.onRequestClose();
+        this.handleClose();
         if (this.props.onCancel) {
             this.props.onCancel();
         }
@@ -87,85 +104,73 @@ class FileModal extends React.PureComponent {
 
     render () {
         var content = "";
-        switch(this.state.uploadOption) {
-            case "local":
-                content = (
-                    <Box className={styles.buttonRow}>
-                    <input type="file" accept=".csv,.xml,.json" onChange={this.handleFileUpload}/>
+        if(this.state.uploadingWeb) {
+            alert("This is not implemented yet...");
+            content = (
+                <Box className={styles.buttonRow}>
                     <button
                         className={styles.optIn}
                         title={this.props.intl.formatMessage(messages.noTooltip)}
-                        onClick={this.handleCancelButton}
+                        onClick={this.handleLocalFile}
                     >
-                    <FormattedMessage {...messages.cancelButton} />
+                        <FormattedMessage {...messages.noButton} />
                     </button>
-                    </Box>);
-                break;
-            case "web":
-                alert("This is not implemented yet...");
-                content = (
-                    <Box className={styles.buttonRow}>
-                        <button
-                            className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.noTooltip)}
-                            onClick={this.handleLocalFile}
-                        >
-                            <FormattedMessage {...messages.noButton} />
-                        </button>
-                        <button
-                            className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.yesTooltip)}
-                            onClick={this.handleWebFile}
-                        >
-                            <FormattedMessage {...messages.yesButton} />
-                        </button>
-                    </Box>
-                );//this will change to be what we need for the web file upload
-
-                break;
-            default: 
-                content = (
-                    <Box className={styles.buttonRow}>
-                        <button
-                            className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.noTooltip)}
-                            onClick={this.handleLocalFile}
-                        >
-                            <FormattedMessage {...messages.noButton} />
-                        </button>
-                        <button
-                            className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.yesTooltip)}
-                            onClick={this.handleWebFile}
-                        >
-                            <FormattedMessage {...messages.yesButton} />
-                        </button>
-                    </Box>
-                );
-                break;
+                    <button
+                        className={styles.optIn}
+                        title={this.props.intl.formatMessage(messages.yesTooltip)}
+                        onClick={this.handleWebFile}
+                    >
+                        <FormattedMessage {...messages.yesButton} />
+                    </button>
+                </Box>
+            );//this will change to be what we need for the web file upload
+            this.handleWebFile();
+        }
+        else {
+            content = (
+                <Box className={styles.buttonRow}>
+                    <button
+                        className={styles.optIn}
+                        title={this.props.intl.formatMessage(messages.noTooltip)}
+                        onClick={this.handleLocalFile}
+                    >
+                        <FormattedMessage {...messages.noButton} />
+                    </button>
+                    <button
+                        className={styles.optIn}
+                        title={this.props.intl.formatMessage(messages.yesTooltip)}
+                        onClick={this.handleWebFile}
+                    >
+                        <FormattedMessage {...messages.yesButton} />
+                    </button>
+                </Box>
+            );
         }
     
-        return (<ReactModal
-            isOpen
-            className={styles.modalContent}
-            contentLabel={this.props.intl.formatMessage(messages.label)}
-            overlayClassName={styles.modalOverlay}
-            onRequestClose={this.handleCancel}
-        >
-            <div dir={this.props.isRtl ? 'rtl' : 'ltr'} >
-                <Box className={styles.illustration} >
-                <CloseButton
-                            className={styles.closeButton}
-                            size={CloseButton.SIZE_LARGE}
-                            onClick={this.handleCancel}
-                        />
-                </Box>
-                <Box className={styles.body}>
-                    <p><FormattedMessage {...messages.bodyText1} /></p>
-                    {content}
-                </Box>
-            </div>
-        </ReactModal>);
+        return (
+            <ReactModal
+                isOpen
+                className={styles.modalContent}
+                contentLabel={this.props.intl.formatMessage(messages.label)}
+                overlayClassName={styles.modalOverlay}
+                onRequestClose={this.handleCancel}
+            >
+                <div dir={this.props.isRtl ? 'rtl' : 'ltr'} >
+                    <Box className={styles.illustration} >
+                    <CloseButton
+                                className={styles.closeButton}
+                                size={CloseButton.SIZE_LARGE}
+                                onClick={this.handleCancel}
+                            />
+                    </Box>
+                    <Box className={styles.body}>
+                        <input ref={this.setFileInputRef} className={styles.fileInput} type="file" accept=".csv,.xml,.json" onChange={this.handleFileUpload} multiple />
+                        <p><FormattedMessage {...messages.bodyText1} /></p>
+                        {content}
+                    </Box>
+                </div>
+            </ReactModal>
+        );
     }
 }
 

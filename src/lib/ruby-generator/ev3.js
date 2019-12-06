@@ -65,6 +65,14 @@ export default function (Generator) {
         return `ev3_button_pressed(${port})\n`;
     };
 
+    Generator.ev3_getDistance = function () {
+        return ['ev3_distance', Generator.ORDER_ATOMIC];
+    };
+
+    Generator.ev3_getBrightness = function () {
+        return ['ev3_brightness', Generator.ORDER_ATOMIC];
+    };
+
     Generator.ev3_beep = function (block) {
         const note = Generator.valueToCode(block, 'NOTE', Generator.ORDER_NONE) || null;
         const time = Generator.valueToCode(block, 'TIME', Generator.ORDER_NONE) || null;

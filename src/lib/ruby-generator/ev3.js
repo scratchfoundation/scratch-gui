@@ -54,5 +54,11 @@ export default function (Generator) {
         return `${Generator.spriteName()}.when(:ev3_distance_<, ${distance}) do\n`;
     };
 
+    Generator.ev3_whenBrightnessLessThan = function (block) {
+        block.isStatement = true;
+        const distance = Generator.valueToCode(block, 'DISTANCE', Generator.ORDER_NONE) || null;
+        return `${Generator.spriteName()}.when(:ev3_brightness_<, ${distance}) do\n`;
+    };
+
     return Generator;
 }

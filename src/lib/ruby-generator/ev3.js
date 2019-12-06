@@ -44,25 +44,27 @@ export default function (Generator) {
     };
 
     Generator.ev3_getMotorPosition = function (block) {
+        const order = Generator.ORDER_FUNCTION_CALL;
         const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
-        return `ev3_motor_position(${port})\n`;
+        return [`ev3_motor_position(${port})`, order];
     };
 
     Generator.ev3_whenDistanceLessThan = function (block) {
         block.isStatement = true;
         const distance = Generator.valueToCode(block, 'DISTANCE', Generator.ORDER_NONE) || null;
-        return `${Generator.spriteName()}.when(:ev3_distance_<, ${distance}) do\n`;
+        return `${Generator.spriteName()}.when(:ev3_distance_gt, ${distance}) do\n`;
     };
 
     Generator.ev3_whenBrightnessLessThan = function (block) {
         block.isStatement = true;
         const distance = Generator.valueToCode(block, 'DISTANCE', Generator.ORDER_NONE) || null;
-        return `${Generator.spriteName()}.when(:ev3_brightness_<, ${distance}) do\n`;
+        return `${Generator.spriteName()}.when(:ev3_brightness_gt, ${distance}) do\n`;
     };
 
     Generator.ev3_buttonPressed = function (block) {
-        const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
-        return `ev3_button_pressed(${port})\n`;
+        const order = Generator.ORDER_FUNCTION_CALL;
+        const port = Generator.valueToCode(block, 'PORT', order) || null;
+        return [`ev3_button_pressed?(${port})`, order];
     };
 
     Generator.ev3_getDistance = function () {

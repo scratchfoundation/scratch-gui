@@ -60,5 +60,10 @@ export default function (Generator) {
         return `${Generator.spriteName()}.when(:ev3_brightness_<, ${distance}) do\n`;
     };
 
+    Generator.ev3_buttonPressed = function (block) {
+        const port = Generator.valueToCode(block, 'PORT', Generator.ORDER_NONE) || null;
+        return `ev3_button_pressed(${port})\n`;
+    };
+
     return Generator;
 }

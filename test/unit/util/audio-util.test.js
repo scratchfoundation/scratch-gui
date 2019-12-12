@@ -66,16 +66,8 @@ describe('downsampleIfNeeded', () => {
         expect(resampler).toHaveBeenCalledWith({samples, sampleRate}, 22050);
         expect(res).toEqual('TEST');
     });
-    test('downsamples to 11025 if that puts it under the limit', async () => {
-        samples.length = 44100 * 7 * 60;
-        const resampler = jest.fn(() => 'TEST');
-        const res = await downsampleIfNeeded(samples, sampleRate, resampler);
-        expect(resampler).toHaveBeenCalledWith({samples, sampleRate}, 11025);
-        expect(res).toEqual('TEST');
-    });
-
     test('fails if resampling would not put it under the limit', async () => {
-        samples.length = 44100 * 8 * 60;
+        samples.length = 44100 * 4 * 60;
         try {
             await downsampleIfNeeded(samples, sampleRate, null);
         } catch (e) {

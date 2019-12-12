@@ -70,11 +70,8 @@ const downsampleIfNeeded = (samples, sampleRate, resampler) => {
     if (duration * 22050 * 2 < SOUND_BYTE_LIMIT) {
         return resampler({samples, sampleRate}, 22050);
     }
-    // If encodeable at 11khz, resample and call submitNewSamples again
-    if (duration * 11025 * 2 < SOUND_BYTE_LIMIT) {
-        return resampler({samples, sampleRate}, 11025);
-    }
-    // Cannot save this sound even at 11khz, refuse to edit
+    // Cannot save this sound at 22khz, refuse to edit
+    // In the future we could introduce further compression here
     return Promise.reject('Sound too large to save, refusing to edit');
 };
 

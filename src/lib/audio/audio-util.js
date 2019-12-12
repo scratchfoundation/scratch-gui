@@ -59,9 +59,28 @@ const encodeAndAddSoundToVM = function (vm, samples, sampleRate, name, callback)
     });
 };
 
+const downsampleIfNeeded = (samples, sampleRate, resampler) => {
+    const duration = samples.length / sampleRate;
+    const encodedByteLength = samples.length * 2; /* bitDepth 16 bit */
+    // Resolve immediately if already within byte limit
+    if (encodedByteLength < SOUND_BYTE_LIMIT) {
+        return Promise.resolve({samples, sampleRate});
+    }
+    // If encodeable at 22khz, resample and call submitNewSamples again
+    if (duration * 22050 * 2 < SOUND_BYTE_LIMIT) {
+        return resampler({samples, sampleRate}, 22050);
+    }
+    // If encodeable at 11khz, resample and call submitNewSamples again
+    if (duration * 11025 * 2 < SOUND_BYTE_LIMIT) {
+        return resampler({samples, sampleRate}, 11025);
+    }
+    // Cannot save this sound even at 11khz, refuse to edit
+    return Promise.reject('Sound too large to save, refusing to edit');
+};
+
 export {
     computeRMS,
     computeChunkedRMS,
     encodeAndAddSoundToVM,
-    SOUND_BYTE_LIMIT
+    downsampleIfNeeded
 };

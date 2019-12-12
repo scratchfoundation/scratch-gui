@@ -1,4 +1,4 @@
-import {computeRMS, computeChunkedRMS} from '../../../src/lib/audio/audio-util';
+import {computeRMS, computeChunkedRMS, downsampleIfNeeded} from '../../../src/lib/audio/audio-util';
 
 describe('computeRMS', () => {
     test('returns 0 when given no samples', () => {
@@ -47,5 +47,39 @@ describe('computeChunkedRMS', () => {
         // rms scaled with default unity of 0.55
         expect(chunkedLevels.length).toEqual(2);
         expect(chunkedLevels).toEqual([Math.sqrt(1 / 0.55), Math.sqrt(1 / 0.55)]);
+    });
+});
+
+describe('downsampleIfNeeded', () => {
+    const samples = {length: 1};
+    const sampleRate = 44100;
+    test('returns given data when no downsampling needed', async () => {
+        samples.length = 1;
+        const res = await downsampleIfNeeded(samples, sampleRate, null);
+        expect(res.samples).toEqual(samples);
+        expect(res.sampleRate).toEqual(sampleRate);
+    });
+    test('downsamples to 22050 if that puts it under the limit', async () => {
+        samples.length = 44100 * 3 * 60;
+        const resampler = jest.fn(() => 'TEST');
+        const res = await downsampleIfNeeded(samples, sampleRate, resampler);
+        expect(resampler).toHaveBeenCalledWith({samples, sampleRate}, 22050);
+        expect(res).toEqual('TEST');
+    });
+    test('downsamples to 11025 if that puts it under the limit', async () => {
+        samples.length = 44100 * 7 * 60;
+        const resampler = jest.fn(() => 'TEST');
+        const res = await downsampleIfNeeded(samples, sampleRate, resampler);
+        expect(resampler).toHaveBeenCalledWith({samples, sampleRate}, 11025);
+        expect(res).toEqual('TEST');
+    });
+
+    test('fails if resampling would not put it under the limit', async () => {
+        samples.length = 44100 * 8 * 60;
+        try {
+            await downsampleIfNeeded(samples, sampleRate, null);
+        } catch (e) {
+            expect(e).toEqual('Sound too large to save, refusing to edit');
+        }
     });
 });

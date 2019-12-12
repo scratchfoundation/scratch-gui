@@ -6,7 +6,11 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
-import {computeChunkedRMS, encodeAndAddSoundToVM, SOUND_BYTE_LIMIT} from '../lib/audio/audio-util.js';
+import {
+    computeChunkedRMS,
+    encodeAndAddSoundToVM,
+    downsampleIfNeeded
+} from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
@@ -132,29 +136,27 @@ class SoundEditor extends React.Component {
         });
     }
     submitNewSamples (samples, sampleRate, skipUndo) {
-        return WavEncoder.encode({
-            sampleRate: sampleRate,
-            channelData: [samples]
-        })
-            .then(wavBuffer => {
-                if (wavBuffer.byteLength > SOUND_BYTE_LIMIT) {
-                    log.error(`Refusing to encode sound larger than ${SOUND_BYTE_LIMIT} bytes`);
-                    return Promise.reject();
-                }
-                if (!skipUndo) {
-                    this.redoStack = [];
-                    if (this.undoStack.length >= UNDO_STACK_SIZE) {
-                        this.undoStack.shift(); // Drop the first element off the array
+        return downsampleIfNeeded(samples, sampleRate, this.resampleBufferToRate)
+            .then(({samples: newSamples, sampleRate: newSampleRate}) =>
+                WavEncoder.encode({
+                    sampleRate: newSampleRate,
+                    channelData: [newSamples]
+                }).then(wavBuffer => {
+                    if (!skipUndo) {
+                        this.redoStack = [];
+                        if (this.undoStack.length >= UNDO_STACK_SIZE) {
+                            this.undoStack.shift(); // Drop the first element off the array
+                        }
+                        this.undoStack.push(this.getUndoItem());
                     }
-                    this.undoStack.push(this.getUndoItem());
-                }
-                this.resetState(samples, sampleRate);
-                this.props.vm.updateSoundBuffer(
-                    this.props.soundIndex,
-                    this.audioBufferPlayer.buffer,
-                    new Uint8Array(wavBuffer));
-                return true; // Edit was successful
-            })
+                    this.resetState(newSamples, newSampleRate);
+                    this.props.vm.updateSoundBuffer(
+                        this.props.soundIndex,
+                        this.audioBufferPlayer.buffer,
+                        new Uint8Array(wavBuffer));
+                    return true; // Edit was successful
+                })
+            )
             .catch(e => {
                 // Encoding failed, or the sound was too large to save so edit is rejected
                 log.error(`Encountered error while trying to encode sound update: ${e}`);

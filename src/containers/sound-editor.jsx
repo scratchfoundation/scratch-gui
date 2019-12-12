@@ -325,25 +325,30 @@ class SoundEditor extends React.Component {
         });
     }
     resampleBufferToRate (buffer, newRate) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
+            const sampleRateRatio = newRate / buffer.sampleRate;
+            const newLength = sampleRateRatio * buffer.samples.length;
+            let offlineContext;
             if (window.OfflineAudioContext) {
-                const sampleRateRatio = newRate / buffer.sampleRate;
-                const newLength = sampleRateRatio * buffer.samples.length;
-                const offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
-                const source = offlineContext.createBufferSource();
-                const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
-                audioBuffer.getChannelData(0).set(buffer.samples);
-                source.buffer = audioBuffer;
-                source.connect(offlineContext.destination);
-                source.start();
-                offlineContext.startRendering();
-                offlineContext.oncomplete = ({renderedBuffer}) => {
-                    resolve({
-                        samples: renderedBuffer.getChannelData(0),
-                        sampleRate: newRate
-                    });
-                };
+                offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
+            } else if (window.webkitOfflineAudioContext) {
+                offlineContext = new window.webkitOfflineAudioContext(1, newLength, newRate);
+            } else {
+                return reject('No offline audio context');
             }
+            const source = offlineContext.createBufferSource();
+            const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
+            audioBuffer.getChannelData(0).set(buffer.samples);
+            source.buffer = audioBuffer;
+            source.connect(offlineContext.destination);
+            source.start();
+            offlineContext.startRendering();
+            offlineContext.oncomplete = ({renderedBuffer}) => {
+                resolve({
+                    samples: renderedBuffer.getChannelData(0),
+                    sampleRate: newRate
+                });
+            };
         });
     }
     paste () {

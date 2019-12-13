@@ -15,5 +15,16 @@ export default function (Generator) {
         return `${Generator.spriteName()}.when(:makey_key_pressed, ${key}) do\n`;
     };
 
+    Generator.makeymakey_menu_SEQUENCE = function (block) {
+        const sequence = Generator.quote_(Generator.getFieldValue(block, 'SEQUENCE') || 'LEFT UP RIGHT');
+        return [sequence, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.makeymakey_whenCodePressed = function (block) {
+        block.isStatement = true;
+        const sequence = Generator.valueToCode(block, 'SEQUENCE', Generator.ORDER_NONE) || null;
+        return `${Generator.spriteName()}.when(:makey_pressed_in_oder, ${sequence}) do\n`;
+    };
+
     return Generator;
 }

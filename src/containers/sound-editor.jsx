@@ -24,6 +24,7 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'backupDownSampler',
             'copy',
             'copyCurrentBuffer',
             'handleCopyToNew',
@@ -43,7 +44,8 @@ class SoundEditor extends React.Component {
             'paste',
             'handleKeyPress',
             'handleContainerClick',
-            'setRef'
+            'setRef',
+            'resampleBufferToRate'
         ]);
         this.state = {
             copyBuffer: null,
@@ -332,7 +334,14 @@ class SoundEditor extends React.Component {
             if (window.OfflineAudioContext) {
                 offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
             } else if (window.webkitOfflineAudioContext) {
-                offlineContext = new window.webkitOfflineAudioContext(1, newLength, newRate);
+                try {
+                    offlineContext = new window.webkitOfflineAudioContext(1, newLength, newRate);
+                } catch {
+                    if (newRate === (buffer.sampleRate / 2)) {
+                        return resolve(this.backupDownSampler(buffer, newRate));
+                    }
+                    return reject('Could not resample');
+                }
             } else {
                 return reject('No offline audio context');
             }
@@ -350,6 +359,16 @@ class SoundEditor extends React.Component {
                 });
             };
         });
+    }
+    backupDownSampler (buffer, newRate) {
+        log.warn(`Using backup down sampler for conversion from ${buffer.sampleRate} to ${newRate}`);
+        const newSamples = buffer.samples.filter((element, index) =>
+            index % 2 === 0
+        );
+        return {
+            samples: newSamples,
+            sampleRate: newRate
+        };
     }
     paste () {
         // If there's no selection, paste at the end of the sound

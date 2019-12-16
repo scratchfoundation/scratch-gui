@@ -362,9 +362,11 @@ class SoundEditor extends React.Component {
     }
     backupDownSampler (buffer, newRate) {
         log.warn(`Using backup down sampler for conversion from ${buffer.sampleRate} to ${newRate}`);
-        const newSamples = buffer.samples.filter((element, index) =>
-            index % 2 === 0
-        );
+        const newLength = Math.floor(buffer.samples.length / 2);
+        const newSamples = new Float32Array(newLength);
+        for (let i = 0; i < newLength; i++) {
+            newSamples[i] = buffer.samples[i * 2];
+        }
         return {
             samples: newSamples,
             sampleRate: newRate

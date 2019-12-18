@@ -1,4 +1,9 @@
-import {computeRMS, computeChunkedRMS, downsampleIfNeeded} from '../../../src/lib/audio/audio-util';
+import {
+    computeRMS,
+    computeChunkedRMS,
+    downsampleIfNeeded,
+    backupDownSampler
+} from '../../../src/lib/audio/audio-util';
 
 describe('computeRMS', () => {
     test('returns 0 when given no samples', () => {
@@ -73,5 +78,20 @@ describe('downsampleIfNeeded', () => {
         } catch (e) {
             expect(e).toEqual('Sound too large to save, refusing to edit');
         }
+    });
+});
+
+describe('backupDownSampler', () => {
+    const buffer = {
+        samples: [1, 0, 1, 0, 1, 0, 1],
+        sampleRate: 2
+    };
+    test('result is half the length', () => {
+        const {samples} = backupDownSampler(buffer, 1);
+        expect(samples.length).toEqual(Math.floor(buffer.samples.length / 2));
+    });
+    test('result contains only even-index items', () => {
+        const {samples} = backupDownSampler(buffer, 1);
+        expect(samples.every(v => v === 1)).toBe(true);
     });
 });

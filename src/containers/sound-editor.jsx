@@ -9,7 +9,8 @@ import {connect} from 'react-redux';
 import {
     computeChunkedRMS,
     encodeAndAddSoundToVM,
-    downsampleIfNeeded
+    downsampleIfNeeded,
+    backupDownSampler
 } from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
@@ -24,7 +25,6 @@ class SoundEditor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'backupDownSampler',
             'copy',
             'copyCurrentBuffer',
             'handleCopyToNew',
@@ -338,7 +338,7 @@ class SoundEditor extends React.Component {
                     offlineContext = new window.webkitOfflineAudioContext(1, newLength, newRate);
                 } catch {
                     if (newRate === (buffer.sampleRate / 2)) {
-                        return resolve(this.backupDownSampler(buffer, newRate));
+                        return resolve(backupDownSampler(buffer, newRate));
                     }
                     return reject('Could not resample');
                 }
@@ -359,18 +359,6 @@ class SoundEditor extends React.Component {
                 });
             };
         });
-    }
-    backupDownSampler (buffer, newRate) {
-        log.warn(`Using backup down sampler for conversion from ${buffer.sampleRate} to ${newRate}`);
-        const newLength = Math.floor(buffer.samples.length / 2);
-        const newSamples = new Float32Array(newLength);
-        for (let i = 0; i < newLength; i++) {
-            newSamples[i] = buffer.samples[i * 2];
-        }
-        return {
-            samples: newSamples,
-            sampleRate: newRate
-        };
     }
     paste () {
         // If there's no selection, paste at the end of the sound

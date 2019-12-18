@@ -1,4 +1,5 @@
 import WavEncoder from 'wav-encoder';
+import log from '../log.js';
 
 const SOUND_BYTE_LIMIT = 10 * 1000 * 1000; // 10mb
 
@@ -75,9 +76,23 @@ const downsampleIfNeeded = (samples, sampleRate, resampler) => {
     return Promise.reject('Sound too large to save, refusing to edit');
 };
 
+const backupDownSampler = (buffer, newRate) => {
+    log.warn(`Using backup down sampler for conversion from ${buffer.sampleRate} to ${newRate}`);
+    const newLength = Math.floor(buffer.samples.length / 2);
+    const newSamples = new Float32Array(newLength);
+    for (let i = 0; i < newLength; i++) {
+        newSamples[i] = buffer.samples[i * 2];
+    }
+    return {
+        samples: newSamples,
+        sampleRate: newRate
+    };
+};
+
 export {
     computeRMS,
     computeChunkedRMS,
     encodeAndAddSoundToVM,
-    downsampleIfNeeded
+    downsampleIfNeeded,
+    backupDownSampler
 };

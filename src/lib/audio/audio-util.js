@@ -1,5 +1,4 @@
 import WavEncoder from 'wav-encoder';
-import log from '../log.js';
 
 const SOUND_BYTE_LIMIT = 10 * 1000 * 1000; // 10mb
 
@@ -60,7 +59,21 @@ const encodeAndAddSoundToVM = function (vm, samples, sampleRate, name, callback)
     });
 };
 
-const downsampleIfNeeded = (samples, sampleRate, resampler) => {
+/**
+ @typedef SoundBuffer
+ @type {Object}
+ @property {Float32Array} samples Array of audio samples
+ @property {number} sampleRate Audio sample rate
+ */
+
+/**
+ * Downsample the given buffer to try to reduce file size below SOUND_BYTE_LIMIT
+ * @param {SoundBuffer} buffer - Buffer to resample
+ * @param {function(SoundBuffer):Promise<SoundBuffer>} resampler - resampler function
+ * @returns {SoundBuffer} Downsampled buffer with half the sample rate
+ */
+const downsampleIfNeeded = (buffer, resampler) => {
+    const {samples, sampleRate} = buffer;
     const duration = samples.length / sampleRate;
     const encodedByteLength = samples.length * 2; /* bitDepth 16 bit */
     // Resolve immediately if already within byte limit
@@ -76,8 +89,12 @@ const downsampleIfNeeded = (samples, sampleRate, resampler) => {
     return Promise.reject('Sound too large to save, refusing to edit');
 };
 
-const backupDownSampler = (buffer, newRate) => {
-    log.warn(`Using backup down sampler for conversion from ${buffer.sampleRate} to ${newRate}`);
+/**
+ * Drop every other sample of an audio buffer as a last-resort way of downsampling.
+ * @param {SoundBuffer} buffer - Buffer to resample
+ * @returns {SoundBuffer} Downsampled buffer with half the sample rate
+ */
+const dropEveryOtherSample = buffer => {
     const newLength = Math.floor(buffer.samples.length / 2);
     const newSamples = new Float32Array(newLength);
     for (let i = 0; i < newLength; i++) {
@@ -85,7 +102,7 @@ const backupDownSampler = (buffer, newRate) => {
     }
     return {
         samples: newSamples,
-        sampleRate: newRate
+        sampleRate: buffer.rate / 2
     };
 };
 
@@ -94,5 +111,5 @@ export {
     computeChunkedRMS,
     encodeAndAddSoundToVM,
     downsampleIfNeeded,
-    backupDownSampler
+    dropEveryOtherSample
 };

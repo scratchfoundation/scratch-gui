@@ -10,7 +10,7 @@ import {
     computeChunkedRMS,
     encodeAndAddSoundToVM,
     downsampleIfNeeded,
-    backupDownSampler
+    dropEveryOtherSample
 } from '../lib/audio/audio-util.js';
 import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
@@ -138,7 +138,7 @@ class SoundEditor extends React.Component {
         });
     }
     submitNewSamples (samples, sampleRate, skipUndo) {
-        return downsampleIfNeeded(samples, sampleRate, this.resampleBufferToRate)
+        return downsampleIfNeeded({samples, sampleRate}, this.resampleBufferToRate)
             .then(({samples: newSamples, sampleRate: newSampleRate}) =>
                 WavEncoder.encode({
                     sampleRate: newSampleRate,
@@ -208,9 +208,9 @@ class SoundEditor extends React.Component {
                 trimEnd: null
             });
         });
-
     }
     handleDeleteInverse () {
+        // Delete everything outside of the trimmers
         const {samples, sampleRate} = this.copyCurrentBuffer();
         const sampleCount = samples.length;
         const startIndex = Math.floor(this.state.trimStart * sampleCount);
@@ -331,19 +331,21 @@ class SoundEditor extends React.Component {
             const sampleRateRatio = newRate / buffer.sampleRate;
             const newLength = sampleRateRatio * buffer.samples.length;
             let offlineContext;
-            if (window.OfflineAudioContext) {
-                offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
-            } else if (window.webkitOfflineAudioContext) {
-                try {
+            // Try to use either OfflineAudioContext or webkitOfflineAudioContext to resample
+            // The constructors will throw if trying to resample at an unsupported rate
+            // (e.g. Safari/webkitOAC does not support lower than 44khz).
+            try {
+                if (window.OfflineAudioContext) {
+                    offlineContext = new window.OfflineAudioContext(1, newLength, newRate);
+                } else if (window.webkitOfflineAudioContext) {
                     offlineContext = new window.webkitOfflineAudioContext(1, newLength, newRate);
-                } catch {
-                    if (newRate === (buffer.sampleRate / 2)) {
-                        return resolve(backupDownSampler(buffer, newRate));
-                    }
-                    return reject('Could not resample');
                 }
-            } else {
-                return reject('No offline audio context');
+            } catch {
+                // If no OAC available and downsampling by 2, downsample by dropping every other sample.
+                if (newRate === buffer.sampleRate / 2) {
+                    return resolve(dropEveryOtherSample(buffer));
+                }
+                return reject('Could not resample');
             }
             const source = offlineContext.createBufferSource();
             const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);

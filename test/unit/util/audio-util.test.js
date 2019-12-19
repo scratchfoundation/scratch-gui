@@ -2,7 +2,7 @@ import {
     computeRMS,
     computeChunkedRMS,
     downsampleIfNeeded,
-    backupDownSampler
+    dropEveryOtherSample
 } from '../../../src/lib/audio/audio-util';
 
 describe('computeRMS', () => {
@@ -60,38 +60,38 @@ describe('downsampleIfNeeded', () => {
     const sampleRate = 44100;
     test('returns given data when no downsampling needed', async () => {
         samples.length = 1;
-        const res = await downsampleIfNeeded(samples, sampleRate, null);
+        const res = await downsampleIfNeeded({samples, sampleRate}, null);
         expect(res.samples).toEqual(samples);
         expect(res.sampleRate).toEqual(sampleRate);
     });
     test('downsamples to 22050 if that puts it under the limit', async () => {
         samples.length = 44100 * 3 * 60;
         const resampler = jest.fn(() => 'TEST');
-        const res = await downsampleIfNeeded(samples, sampleRate, resampler);
+        const res = await downsampleIfNeeded({samples, sampleRate}, resampler);
         expect(resampler).toHaveBeenCalledWith({samples, sampleRate}, 22050);
         expect(res).toEqual('TEST');
     });
     test('fails if resampling would not put it under the limit', async () => {
         samples.length = 44100 * 4 * 60;
         try {
-            await downsampleIfNeeded(samples, sampleRate, null);
+            await downsampleIfNeeded({samples, sampleRate}, null);
         } catch (e) {
             expect(e).toEqual('Sound too large to save, refusing to edit');
         }
     });
 });
 
-describe('backupDownSampler', () => {
+describe('dropEveryOtherSample', () => {
     const buffer = {
-        samples: [1, 0, 1, 0, 1, 0, 1],
+        samples: [1, 0, 2, 0, 3, 0],
         sampleRate: 2
     };
     test('result is half the length', () => {
-        const {samples} = backupDownSampler(buffer, 1);
+        const {samples} = dropEveryOtherSample(buffer, 1);
         expect(samples.length).toEqual(Math.floor(buffer.samples.length / 2));
     });
     test('result contains only even-index items', () => {
-        const {samples} = backupDownSampler(buffer, 1);
-        expect(samples.every(v => v === 1)).toBe(true);
+        const {samples} = dropEveryOtherSample(buffer, 1);
+        expect(samples).toEqual(new Float32Array([1, 2, 3]));
     });
 });

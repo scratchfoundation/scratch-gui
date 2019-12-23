@@ -57,6 +57,10 @@ class SeleniumHelper {
         // Stub getUserMedia to always not allow access
         args.push('--use-fake-ui-for-media-stream=deny');
 
+        // Suppress complaints about AudioContext starting before a user gesture
+        // This is especially important on Windows, where Selenium directs JS console messages to stdout
+        args.push('--autoplay-policy=no-user-gesture-required');
+
         chromeCapabilities.set('chromeOptions', {args});
         chromeCapabilities.setLoggingPrefs({
             performance: 'ALL'

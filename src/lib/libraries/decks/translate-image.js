@@ -13,7 +13,8 @@ const loadSpanish = () =>
         .then(({esImages: imageData}) => imageData);
 
 const translations = {
-    es: () => loadSpanish()
+    'es': () => loadSpanish(),
+    'es-419': () => loadSpanish()
 };
 
 const loadImageData = locale => {

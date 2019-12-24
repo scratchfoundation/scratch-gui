@@ -7,6 +7,8 @@ import {getEventXY} from '../lib/touch-utils';
 import {getVariableValue, setVariableValue} from '../lib/variable-utils';
 import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
 import {Map} from 'immutable';
+import standardStageSize from '../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
 
 class ListMonitor extends React.Component {
     constructor (props) {
@@ -132,8 +134,8 @@ class ListMonitor extends React.Component {
             const dx = newPosition.x - this.initialPosition.x;
             const dy = newPosition.y - this.initialPosition.y;
             this.setState({
-                width: Math.max(Math.min(this.initialWidth + dx, 640), 100),
-                height: Math.max(Math.min(this.initialHeight + dy, 360), 60)
+                width: Math.max(Math.min(this.initialWidth + dx, standardStageWidth), 100),
+                height: Math.max(Math.min(this.initialHeight + dy, standardStageHeight), 60)
             });
         };
 

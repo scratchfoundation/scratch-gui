@@ -1,8 +1,11 @@
 import VM from 'scratch-vm';
 import storage from '../lib/storage';
 
+import standardStageSize from '../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 const SET_VM = 'scratch-gui/vm/SET_VM';
-const defaultVM = new VM();
+const defaultVM = new VM(standardStageWidth, standardStageHeight);
 defaultVM.attachStorage(storage);
 const initialState = defaultVM;
 

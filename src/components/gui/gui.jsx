@@ -31,8 +31,9 @@ import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
-import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import layout, {STAGE_SIZE_MODES, STAGE_DISPLAY_SCALES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
+const {standardStageWidth} = layout
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -330,7 +331,7 @@ const GUIComponent = props => {
                             ) : null}
                         </Box>
 
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])} style={{maxWidth: `calc(${STAGE_DISPLAY_SCALES[stageSize] * standardStageWidth}px + 1rem)`}}>
                             <StageWrapper
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}

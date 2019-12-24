@@ -14,6 +14,9 @@
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;
+
+    /* Force the sprite selector to squish if the stage is not wide enough. */
+    width: 0;
 }
 
 .sprite-wrapper {

@@ -29,6 +29,8 @@
     font-weight: bold;
     background-color: $motion-primary;
     color: $ui-white;
+
+    overflow: hidden;
 }
 
 .main-menu {

@@ -55,12 +55,12 @@ const getStageDimensions = (stageSize, isFullScreen) => {
             STAGE_DIMENSION_DEFAULTS.menuHeightAdjustment -
             STAGE_DIMENSION_DEFAULTS.fullScreenSpacingBorderAdjustment;
 
-        stageDimensions.width = stageDimensions.height * 16 / 9;
+        stageDimensions.width = stageDimensions.height * layout.standardStageWidth / layout.standardStageHeight;
 
         if (stageDimensions.width > window.innerWidth) {
             stageDimensions.width = window.innerWidth -
               STAGE_DIMENSION_DEFAULTS.fullScreenSpacingBorderAdjustment;
-            stageDimensions.height = stageDimensions.width * .5625;
+            stageDimensions.height = stageDimensions.width * layout.standardStageHeight / layout.standardStageWidth;
         }
 
         stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;

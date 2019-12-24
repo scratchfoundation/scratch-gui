@@ -6,6 +6,9 @@ import PaintEditor from 'scratch-paint';
 
 import {connect} from 'react-redux';
 
+import standardStageSize from '../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 class PaintEditorWrapper extends React.Component {
     constructor (props) {
         super(props);
@@ -52,6 +55,8 @@ class PaintEditorWrapper extends React.Component {
                 image={vm.getCostume(selectedCostumeIndex)}
                 onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
+                artBoardWidth={standardStageWidth}
+                artBoardHeight={standardStageHeight}
             />
         );
     }

@@ -1,6 +1,9 @@
 import {requestVideoStream, requestDisableVideo} from './camera.js';
 import log from '../log.js';
 
+import standardStageSize from '../layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 /**
  * Video Manager for video extensions.
  */
@@ -50,7 +53,7 @@ class VideoProvider {
      * @type {Array.<number>}
      */
     static get DIMENSIONS () {
-        return [640, 360];
+        return [standardStageWidth, standardStageHeight];
     }
 
     /**
@@ -206,8 +209,8 @@ class VideoProvider {
         }
 
         this._singleSetup = requestVideoStream({
-            width: {min: 480, ideal: 640},
-            height: {min: 270, ideal: 360}
+            width: {min: 480, ideal: standardStageWidth},
+            height: {min: standardStageHeight * 480 / standardStageWidth, ideal: standardStageHeight}
         })
             .then(stream => {
                 this._video = document.createElement('video');

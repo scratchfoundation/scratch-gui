@@ -13,6 +13,9 @@ import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 
 import StageComponent from '../components/stage/stage.jsx';
 
+import standardStageSize from '../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 import {
     activateColorPicker,
     deactivateColorPicker
@@ -57,7 +60,7 @@ class Stage extends React.Component {
             this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
-            this.renderer = new Renderer(this.canvas, -320, 320);
+            this.renderer = new Renderer(this.canvas, -standardStageWidth / 2, standardStageWidth / 2, -standardStageHeight / 2, standardStageHeight / 2);
             this.props.vm.attachRenderer(this.renderer);
 
             // Only attach a video provider once because it is stateful

@@ -24,7 +24,7 @@
         b) for combined stage menu + stage + sprite/stage selectors
     */
     flex-direction: row;
-    height: 100%;
+    min-height: 100%;
 
     /*
         Stop scrollbar popping in and out from scratch-blocks border issue
@@ -34,7 +34,6 @@
 }
 
 .editor-wrapper {
-    flex-basis: 600px;
     flex-grow: 1;
     flex-shrink: 0;
     position: relative;
@@ -197,21 +196,6 @@
     /* pad entire wrapper to the left and right; allow children to fill width */
     padding-left: $space;
     padding-right: $space;
-}
-
-.stage-and-target-wrapper.large {
-    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(640px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.large-constrained {
-    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(544px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.small {
-    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(320px + calc($space * 2));
 }
 
 .target-wrapper {

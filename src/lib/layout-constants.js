@@ -42,9 +42,18 @@ STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size
 
+let width = 640;
+let height = 360;
+if (window.location.search.indexOf('width=') !== -1) {
+    width = +window.location.search.match(/width=(\d+)/)[1];
+}
+if (window.location.search.indexOf('height=') !== -1) {
+    height = +window.location.search.match(/height=(\d+)/)[1];
+}
+
 export default {
-    standardStageWidth: 640,
-    standardStageHeight: 360,
+    standardStageWidth: width,
+    standardStageHeight: height,
     fullSizeMinWidth: 1096,
     fullSizePaintMinWidth: 1250
 };

@@ -11,6 +11,9 @@ import backIcon from './icon--back.svg';
 import stopIcon from './icon--stop-playback.svg';
 import playIcon from './icon--play.svg';
 
+import standardStageSize from '../../lib/layout-constants.js';
+const {standardStageWidth} = standardStageSize;
+
 const messages = defineMessages({
     stopMsg: {
         defaultMessage: 'Stop',
@@ -55,7 +58,7 @@ const PlaybackStep = props => (
                     data={props.levels}
                     height={150}
                     level={0}
-                    width={640}
+                    width={standardStageWidth}
                 />
                 <AudioTrimmer
                     playhead={props.playhead}

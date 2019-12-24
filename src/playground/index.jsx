@@ -14,11 +14,15 @@ import supportedBrowser from '../lib/supported-browser';
 
 import styles from './index.css';
 
+import standardStageSize from '../lib/layout-constants.js';
+const {standardStageHeight} = standardStageSize;
+
 // Register "base" page view
 analytics.pageview('/');
 
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;
+appTarget.style.minHeight = (standardStageHeight + 280) + 'px';
 document.body.appendChild(appTarget);
 
 if (supportedBrowser()) {

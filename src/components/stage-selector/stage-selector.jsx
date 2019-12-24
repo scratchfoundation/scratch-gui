@@ -14,6 +14,9 @@ import paintIcon from '../action-menu/icon--paint.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
 import searchIcon from '../action-menu/icon--search.svg';
 
+import standardStageSize from '../../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 const messages = defineMessages({
     addBackdropFromLibrary: {
         id: 'gui.spriteSelector.addBackdropFromLibrary',
@@ -84,6 +87,7 @@ const StageSelector = props => {
                 <img
                     className={styles.costumeCanvas}
                     src={url}
+                    style={{maxHeight: standardStageHeight * 64 / standardStageWidth + 'px'}}
                 />
             ) : null}
             <div className={styles.label}>

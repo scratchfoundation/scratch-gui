@@ -19,6 +19,11 @@ $motion-tertiary: hsla(215, 60%, 50%, 1); /* #3373CC */
 $motion-transparent: hsla(215, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
 $motion-light-transparent: hsla(215, 100%, 65%, 0.15); /* 15% transparent version of motion-primary */
 
+$looks-primary: hsla(260, 100%, 70%, 1); /* #9966FF */
+$looks-tertiary: hsla(260, 55%, 55%, 1); /* #774DCB */
+$looks-transparent: hsla(260, 100%, 70%, 0.35); /* 35% transparent version of looks-primary */
+$looks-light-transparent: hsla(260, 100%, 70%, 0.15); /* 15% transparent version of looks-primary */
+
 $red-primary: hsla(20, 100%, 55%, 1); /* #FF661A */
 $red-tertiary: hsla(20, 100%, 45%, 1); /* #E64D00 */
 

@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $motion-primary;
+    background-color: $looks-transparent;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: white;

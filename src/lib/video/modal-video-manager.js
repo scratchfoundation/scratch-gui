@@ -1,4 +1,8 @@
 import VideoProvider from './video-provider.js';
+
+import standardStageSize from '../layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 /**
  * Video Manager for Camera Modal
  */
@@ -11,8 +15,8 @@ class ModalVideoManager {
         this._canvas = canvas;
         // These values are double the stage dimensions so that the resulting
         // image does not have to get sized down to accomodate double resolution
-        this._canvasWidth = 960; // Double Stage Width
-        this._canvasHeight = 720; // Double Stage Height
+        this._canvasWidth = standardStageWidth * 2; // Double Stage Width
+        this._canvasHeight = standardStageHeight * 2; // Double Stage Height
 
     }
 

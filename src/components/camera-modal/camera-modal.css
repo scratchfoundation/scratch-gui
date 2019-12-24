@@ -25,16 +25,16 @@ $main-button-size: 2.75rem;
     border-radius: 4px;
     padding: 3px;
 
-    width: 640px;
-    height: 360px;
+    width: 480px;
+    height: 270px;
     position: relative;
     overflow: hidden;
 }
 
 .canvas {
     position: absolute;
-    width: 640px;
-    height: 360px;
+    width: 480px;
+    height: 270px;
 }
 
 .loading-text {
@@ -115,7 +115,7 @@ $main-button-size: 2.75rem;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    width: 640px;
+    width: 480px;
 }
 
 .button-row button {

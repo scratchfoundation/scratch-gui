@@ -2,6 +2,8 @@ import {BitmapAdapter} from 'scratch-svg-renderer';
 import log from './log.js';
 import randomizeSpritePosition from './randomize-sprite-position.js';
 import gifDecoder from './gif-decoder';
+import standardStageSize from './layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
 
 /**
  * Extract the file name given a string of the form fileName + ext
@@ -133,7 +135,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
         return;
     }
 
-    const bitmapAdapter = new BitmapAdapter();
+    const bitmapAdapter = new BitmapAdapter(standardStageWidth, standardStageHeight);
     const addCostumeFromBuffer = function (dataBuffer) {
         const vmCostume = createVMAsset(
             storage,

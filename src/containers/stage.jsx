@@ -73,7 +73,7 @@ class Stage extends React.Component {
             this.props.vm.renderer.draw();
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
-        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
+        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter(standardStageWidth, standardStageHeight));
     }
     componentDidMount () {
         this.attachRectEvents();

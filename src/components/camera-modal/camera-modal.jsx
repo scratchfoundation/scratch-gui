@@ -7,6 +7,9 @@ import styles from './camera-modal.css';
 import backIcon from './icon--back.svg';
 import cameraIcon from '../action-menu/icon--camera.svg';
 
+import standardStageSize from '../../lib/layout-constants.js';
+const {standardStageWidth, standardStageHeight} = standardStageSize;
+
 const messages = defineMessages({
     cameraModalTitle: {
         defaultMessage: 'Take a Photo',
@@ -57,18 +60,19 @@ const CameraModal = ({intl, ...props}) => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            <Box className={styles.cameraFeedContainer}>
+            <Box className={styles.cameraFeedContainer} style={{height: standardStageHeight * 480 / standardStageWidth}}>
                 <div className={styles.loadingText}>
                     {props.access ? intl.formatMessage(messages.loadingCameraMessage) :
                         `↖️ \u00A0${intl.formatMessage(messages.permissionRequest)}`}
                 </div>
                 <canvas
                     className={styles.canvas}
+                    style={{height: standardStageHeight * 480 / standardStageWidth}}
                     // height and (below) width of the actual image
                     // double stage dimensions to avoid the need for
                     // resizing the captured image when importing costume
                     // to accommodate double resolution bitmaps
-                    height="720"
+                    height={standardStageHeight * 960 / standardStageWidth}
                     ref={props.canvasRef}
                     width="960"
                 />

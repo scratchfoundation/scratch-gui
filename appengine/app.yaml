@@ -1,0 +1,17 @@
+runtime: go113
+
+handlers:
+- url: /$
+  static_files: static/index.html
+  upload: static/index.html
+  secure: always
+
+- url: /(.*)
+  static_files: static/\1
+  upload: static/.*
+  secure: always
+
+- url: /(.+\.(css|ico|gif|png|jpg|js|js.map|json|woff|woff2|svg|mp3))
+  static_files: static/\1
+  upload: static/(.+)
+  secure: always

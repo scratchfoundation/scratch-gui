@@ -46,6 +46,9 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+import newLovotBlocksImage from './lovot.jpg';
+import newLovotBlocksInsetImage from './lovot.jpg';
+
 export default [
     {
         name: (
@@ -150,6 +153,15 @@ export default [
         ),
         featured: true,
         internetConnectionRequired: true
+    },
+    {
+        name: "New LOVOT Block",
+        extensionId: 'newlovotblock',
+        collaborator: 'GROOVEX',
+        iconURL: newLovotBlocksImage,
+        insetIconURL: newLovotBlocksInsetImage,
+        description: "Description for the new LOVOT extension",
+        featured: true
     },
     {
         name: 'Makey Makey',

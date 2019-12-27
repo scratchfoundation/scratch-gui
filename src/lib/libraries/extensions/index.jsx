@@ -1,6 +1,9 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import customImage from './custom/custom.png';
+import customInsetImage from './custom/custom-small.svg';
+
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
@@ -12,6 +15,9 @@ import videoSensingInsetIconURL from './videoSensing/video-sensing-small.svg';
 
 import text2speechIconURL from './text2speech/text2speech.png';
 import text2speechInsetIconURL from './text2speech/text2speech-small.svg';
+
+import speech2textIconURL from './speech2text/speech2text.png';
+import speech2textInsetIconURL from './speech2text/speech2text-small.svg';
 
 import translateIconURL from './translate/translate.png';
 import translateInsetIconURL from './translate/translate-small.png';
@@ -47,6 +53,25 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 export default [
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Choose an extension"
+                description="Name for the custom extension selector"
+                id="gui.extension.custom.name"
+            />
+        ),
+        iconURL: customImage,
+        insetIconURL: customInsetImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="For developers"
+                description="Description for the custom extension selector"
+                id="gui.extension.custom.description"
+            />
+        ),
+        featured: true
+    },
     {
         name: (
             <FormattedMessage
@@ -124,6 +149,28 @@ export default [
                 defaultMessage="Make your projects talk."
                 description="Description for the Text to speech extension"
                 id="gui.extension.text2speech.description"
+            />
+        ),
+        featured: true,
+        internetConnectionRequired: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Speech to Text"
+                description="Name for the Speech to Text extension"
+                id="gui.extension.speech2text.name"
+            />
+        ),
+        extensionId: 'speech2text',
+        collaborator: 'Google',
+        iconURL: speech2textIconURL,
+        insetIconURL: speech2textInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Talk to your projects."
+                description="Description for the Speech to Text extension"
+                id="gui.extension.speech2text.description"
             />
         ),
         featured: true,

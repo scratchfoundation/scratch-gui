@@ -28,6 +28,10 @@ const vmManagerHOC = function (WrappedComponent) {
             ]);
         }
         componentDidMount () {
+            if (window.location.search.indexOf('url=') !== -1) {
+                const extensionURL = window.location.search.match(/url=(https?:\/\/[\w.\/-]+)/)[1];
+                this.props.vm.extensionManager.loadExtensionURL(extensionURL);
+            }
             if (!this.props.vm.initialized) {
                 this.audioEngine = new AudioEngine();
                 this.props.vm.attachAudioEngine(this.audioEngine);

@@ -1,4 +1,25 @@
-# scratch-gui
+# E羊icques&mdash;An unofficial Scratch mod
+
+It's called E羊icques for two reasons:
+
+- To see how people deal with radical names like these
+
+- To comply with the Scratch license, which forbids the usage of their name to promote derived products like this mod (because it might seem like the mod is official when it's not)
+
+The mod is available at https://sheeptester.github.io/scratch-gui/. Load extensions dynamically by adding the URL parameter `url=extension_url_here` (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). For a custom stage size, add `width` and `height` parameters. For example, https://sheeptester.github.io/scratch-gui/?url=http://sheeptester.github.io/javascripts/utilities.js&width=360&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
+
+I also made the backpack sync to localStorage instead of being completely useless (because we can't access Scratch's backpack servers outside of Scratch).
+
+Here's how I made the mod:
+
+- Load an extension from the URL: [gui](https://github.com/SheepTester/scratch-gui/commit/b4024c6e6c2fc8202d6301920b9a2fce54ff079e), [vm](https://github.com/SheepTester/scratch-vm/commit/06765ebebdcf9eba6ab1ededf9b2c91a55bcc016)
+
+- 16:9 (640 by 360): [gui 1](https://github.com/SheepTester/scratch-gui/commit/2bf3d72600e53aa1a0463d3c17043ea3c384a02b), [gui 2](https://github.com/SheepTester/scratch-gui/commit/bf67203e58bfb2a11b89f6e3e4c09b80d339390e), [vm](https://github.com/SheepTester/scratch-vm/commit/429201f1c9eca248f5248b9ff3ac2a74da1c0366), [paint 1](https://github.com/SheepTester/scratch-paint/commit/70e4d4c13e993fe1cd21878fa9633cebb68de511), [paint 2](https://github.com/SheepTester/scratch-paint/commit/0debd0feaaf907107a3403025da38c52fb231ad6) (There was an issue with loading costumes that wasn't fixed until the next step...)
+
+- Support all stage sizes: [gui](https://github.com/SheepTester/scratch-gui/commit/752afdc8108ef15eb1c7094397b8a65c7376f91d), [vm](https://github.com/SheepTester/scratch-vm/commit/bc253cf3d006695d6713cee40af191cc09b47a0e), [paint 1](https://github.com/SheepTester/scratch-paint/commit/59c8d78aad50e03f85572c4369867ac8b4c07fb9), [paint 2](https://github.com/SheepTester/scratch-paint/commit/1a036a098d8c86b4c0ae39b13fd8187c470c0123), [svg-renderer](https://github.com/SheepTester/scratch-svg-renderer/commit/e39ae12301911c48672289fb27a143ed8fdafed1)
+
+---
+
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
 [![Build Status](https://travis-ci.com/LLK/scratch-gui.svg?token=Yfq2ryN1BwaxDME69Lnc&branch=master)](https://travis-ci.com/LLK/scratch-gui)

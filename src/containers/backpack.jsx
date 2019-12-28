@@ -6,6 +6,7 @@ import {
     getBackpackContents,
     saveBackpackObject,
     deleteBackpackObject,
+    getBackpackObjectById,
     soundPayload,
     costumePayload,
     spritePayload,
@@ -69,7 +70,8 @@ class Backpack extends React.Component {
         this.props.vm.removeListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
     }
     getBackpackAssetURL (asset) {
-        return `${this.props.host}/${asset.assetId}.${asset.dataFormat}`;
+        const {mime, body} = getBackpackObjectById(asset.assetId);
+        return `data:${mime};base64,${body}`;
     }
     handleToggle () {
         const newState = !this.state.expanded;
@@ -108,7 +110,8 @@ class Backpack extends React.Component {
                 .then(payload => {
                     // Force the asset to save to the asset server before storing in backpack
                     // Ensures any asset present in the backpack is also on the asset server
-                    if (presaveAsset && !presaveAsset.clean) {
+                    // Except this mod is not official, so there's no need to save!
+                    if (false && presaveAsset && !presaveAsset.clean) {
                         return storage.store(
                             presaveAsset.assetType,
                             presaveAsset.dataFormat,
@@ -251,12 +254,11 @@ const getTokenAndUsername = state => {
         };
     }
     // Otherwise try to pull testing params out of the URL, or return nulls
-    // TODO a hack for testing the backpack
-    const tokenMatches = window.location.href.match(/[?&]token=([^&]*)&?/);
-    const usernameMatches = window.location.href.match(/[?&]username=([^&]*)&?/);
+    // TODO a hack for enabling the backpack; vanilla Scratch gets it from
+    // URL parameters ?token=abc&username=xyz
     return {
-        token: tokenMatches ? tokenMatches[1] : null,
-        username: usernameMatches ? usernameMatches[1] : null
+        token: 'yes',
+        username: 'indeed'
     };
 };
 

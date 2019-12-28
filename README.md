@@ -1,12 +1,14 @@
 # E羊icques&mdash;An unofficial Scratch mod
 
+gui (you're here) &middot; [vm](https://github.com/SheepTester/scratch-vm/) &middot; [paint](https://github.com/SheepTester/scratch-paint/) &middot; [svg-renderer](https://github.com/SheepTester/scratch-svg-renderer/)
+
 It's called E羊icques for two reasons:
 
 - To see how people deal with radical names like these
 
 - To comply with the Scratch license, which forbids the usage of their name to promote derived products like this mod (because it might seem like the mod is official when it's not)
 
-The mod is available at https://sheeptester.github.io/scratch-gui/. Load extensions dynamically by adding the URL parameter `url=extension_url_here` (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). For a custom stage size, add `width` and `height` parameters. For example, https://sheeptester.github.io/scratch-gui/?url=http://sheeptester.github.io/javascripts/utilities.js&width=360&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
+The mod is available at https://sheeptester.github.io/scratch-gui/. Load extensions dynamically by adding the URL parameter `url=extension_url_here` (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). For a custom stage size, add `width` and `height` parameters. For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 
 I also made the backpack sync to localStorage instead of being completely useless (because we can't access Scratch's backpack servers outside of Scratch).
 

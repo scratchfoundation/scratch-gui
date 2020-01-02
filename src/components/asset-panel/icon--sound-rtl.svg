@@ -11,7 +11,7 @@
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
-            <use id="sound" fill="#4C97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            <use id="sound" fill="#FF8E69" fill-rule="evenodd" xlink:href="#path-1"></use>
             <g id="Color/Gray" mask="url(#mask-2)" fill="#575E75" fill-rule="evenodd">
                 <rect id="Color" x="0" y="0" width="100" height="100"></rect>
             </g>

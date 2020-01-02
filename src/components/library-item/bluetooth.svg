@@ -10,7 +10,7 @@
         <mask id="mask-2" fill="white">
             <use xlink:href="#path-1"></use>
         </mask>
-        <use id="bluetooth" fill="#4D97FF" xlink:href="#path-1"></use>
+        <use id="bluetooth" fill="#FF8E69" xlink:href="#path-1"></use>
         <g id="Color/1_Blue" mask="url(#mask-2)" fill="#575E75">
             <g id="Color/Gray">
                 <g id="Color">

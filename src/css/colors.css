@@ -79,3 +79,6 @@ $pen-transparent: hsla(0, 0%, 10%, 0.25); /* #0FBD8C */
 $drop-highlight: hsla(15, 100%, 77%, 1); /* lighter than motion-primary */
 
 $menu-bar-item-hover-color: hsla(0, 0%, 100%, 0.15);
+
+$sound-primary: $lovot-brand-color;
+$sound-tertiary: hsla(0, 0%, 10%, 1); /* #BD42BD */

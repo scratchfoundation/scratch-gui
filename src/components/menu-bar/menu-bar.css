@@ -83,7 +83,7 @@
 
 .menu-bar-item.active,
 .menu-bar-item.hoverable:hover {
-    background-color: $ui-black-transparent;
+    background-color: $menu-bar-item-hover-color;
 }
 
 .menu-bar-item.growable {

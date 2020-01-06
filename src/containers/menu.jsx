@@ -30,8 +30,18 @@ class Menu extends React.Component {
     removeListeners () {
         document.removeEventListener('mouseup', this.handleClick);
     }
+    elementIsModal (element) {
+        const modalPortals = document.getElementsByClassName('ReactModalPortal');
+        for (let i = 0; i < modalPortals.length; i++) {
+            if (modalPortals[i].contains(element)) return true;
+        }
+        return false;
+    }
     handleClick (e) {
-        if (this.props.open && !this.menu.contains(e.target)) {
+        // request close, if menu is open, click was not inside menu, and click
+        // was not inside modal. This prevents menu from closing when it is in
+        // background.
+        if (this.props.open && !this.menu.contains(e.target) && !this.elementIsModal(e.target)) {
             this.props.onRequestClose();
         }
     }

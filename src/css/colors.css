@@ -42,3 +42,43 @@ $extensions-transparent: hsla(163, 85%, 40%, 0.35); /* 35% transparent version o
 $extensions-light: hsla(163, 57%, 85%, 1); /* opaque version of extensions-transparent, on white bg */
 
 $drop-highlight: hsla(215, 100%, 77%); /* lighter than motion-primary */
+
+/* lovot color */
+$lovot-brand-color: hsla(15, 100%, 71%, 1); /* #FF8E69 */
+$groovex-white: hsla(0, 0%, 100%, 1); /* #FFFFFF */
+$groovex-black: hsla(0, 0%, 0%, 1); /* #000000 */
+
+$lovot-subcolor-blue: hsla(205, 47%, 57%, 1); /* #5F9BC6 */
+$lovot-subcolor-yellow: hsla(42, 80%, 61%, 1); /* #EBBC4E */
+$lovot-subcolor-green: 	hsla(108, 16%, 50%, 1); /* #74956C */
+$lovot-subcolor-pink: hsla(2, 76%, 75%, 1); /* #F09491 */
+$lovot-subcolor-violet: hsla(259, 22%, 59%, 1); /* #8E7FAE */
+$lovot-subcolor-brown: hsla(14, 10%, 34%, 1); /* #5E514D */
+
+/* overwrite color */
+$ui-primary: hsla(0, 0%, 95%, 1);
+$ui-secondary: hsla(0, 0%, 95%, 1);
+$ui-tertiary: hsla(0, 0%, 90%, 1);
+$ui-modal-overlay: hsla(15, 100%, 71%, 0.9); /* 90% transparent version of motion-primary */
+
+$motion-primary: $lovot-brand-color;
+$motion-tertiary: hsla(15, 100%, 60%, 1);
+$motion-transparent: hsla(15, 100%, 71%, 0.35); /* 35% transparent version of motion-primary */
+$motion-light-transparent: hsla(15, 100%, 71%, 0.15); /* 15% transparent version of motion-primary */
+
+$data-primary: $groovex-black; /* #FF8C1A */
+
+$extensions-primary: $groovex-black; /* #0FBD8C */
+$extensions-tertiary: hsla(0, 0%, 30%, 1); /* #0B8E69 */
+$extensions-transparent: hsla(0, 0%, 40%, 0.35); /* 35% transparent version of extensions-primary */
+$extensions-light: hsla(0, 0%, 85%, 1); /* opaque version of extensions-transparent, on white bg */
+
+$pen-primary: hsla(0, 0%, 0%, 1); /* #0FBD8C */
+$pen-transparent: hsla(0, 0%, 10%, 0.25); /* #0FBD8C */
+
+$drop-highlight: hsla(15, 100%, 77%, 1); /* lighter than motion-primary */
+
+$menu-bar-item-hover-color: hsla(0, 0%, 100%, 0.15);
+
+$sound-primary: $lovot-brand-color;
+$sound-tertiary: hsla(0, 0%, 10%, 1); /* #BD42BD */

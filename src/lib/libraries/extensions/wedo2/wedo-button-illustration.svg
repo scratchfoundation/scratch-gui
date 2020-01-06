@@ -68,7 +68,7 @@
         </g>
         <g id="arrow">
             <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-            <use stroke="#4280D7" stroke-width="1" fill="#4C97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            <use stroke="#4280D7" stroke-width="1" fill="#FF8E69" fill-rule="evenodd" xlink:href="#path-1"></use>
         </g>
     </g>
 </svg>

@@ -74,22 +74,22 @@ const projectData = translateFunction => {
                 currentCostume: 0,
                 costumes: [
                     {
-                        assetId: 'b7853f557e4426412e64bb3da6531a99',
+                        assetId: 'bc8f26b2539363709c775f0b03445fcf',
                         name: translator(messages.costume, {index: 1}),
                         bitmapResolution: 1,
-                        md5ext: 'b7853f557e4426412e64bb3da6531a99.svg',
+                        md5ext: 'bc8f26b2539363709c775f0b03445fcf.svg',
                         dataFormat: 'svg',
-                        rotationCenterX: 48,
-                        rotationCenterY: 50
+                        rotationCenterX: 95,
+                        rotationCenterY: 150
                     },
                     {
-                        assetId: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f',
+                        assetId: '755a272f517d132e526a29f418a2db1d',
                         name: translator(messages.costume, {index: 2}),
                         bitmapResolution: 1,
-                        md5ext: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg',
+                        md5ext: '755a272f517d132e526a29f418a2db1d.svg',
                         dataFormat: 'svg',
-                        rotationCenterX: 46,
-                        rotationCenterY: 53
+                        rotationCenterX: 100,
+                        rotationCenterY: 150
                     }
                 ],
                 sounds: [
@@ -107,7 +107,7 @@ const projectData = translateFunction => {
                 visible: true,
                 x: 0,
                 y: 0,
-                size: 100,
+                size: 50,
                 direction: 90,
                 draggable: false,
                 rotationStyle: 'all around'

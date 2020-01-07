@@ -20,6 +20,8 @@ Here's how I made the mod:
 
 - Support all stage sizes: [gui](https://github.com/SheepTester/scratch-gui/commit/752afdc8108ef15eb1c7094397b8a65c7376f91d), [vm](https://github.com/SheepTester/scratch-vm/commit/bc253cf3d006695d6713cee40af191cc09b47a0e), [paint 1](https://github.com/SheepTester/scratch-paint/commit/59c8d78aad50e03f85572c4369867ac8b4c07fb9), [paint 2](https://github.com/SheepTester/scratch-paint/commit/1a036a098d8c86b4c0ae39b13fd8187c470c0123), [svg-renderer](https://github.com/SheepTester/scratch-svg-renderer/commit/e39ae12301911c48672289fb27a143ed8fdafed1)
 
+- Detect modifier keys [vm](https://github.com/SheepTester/scratch-vm/commit/7d7993a6acd0c3a5d6062311f50069cb8b9ae74f)
+
 ---
 
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects

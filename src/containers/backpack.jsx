@@ -70,8 +70,8 @@ class Backpack extends React.Component {
         this.props.vm.removeListener('BLOCK_DRAG_UPDATE', this.handleBlockDragUpdate);
     }
     getBackpackAssetURL (asset) {
-        const {mime, body} = getBackpackObjectById(asset.assetId);
-        return `data:${mime};base64,${body}`;
+        const backpackObj = getBackpackObjectById(asset.assetId);
+        return backpackObj ? `data:${backpackObj.mime};base64,${backpackObj.body}` : false;
     }
     handleToggle () {
         const newState = !this.state.expanded;

@@ -87,11 +87,15 @@ describe('dropEveryOtherSample', () => {
         sampleRate: 2
     };
     test('result is half the length', () => {
-        const {samples} = dropEveryOtherSample(buffer, 1);
+        const {samples} = dropEveryOtherSample(buffer);
         expect(samples.length).toEqual(Math.floor(buffer.samples.length / 2));
     });
     test('result contains only even-index items', () => {
-        const {samples} = dropEveryOtherSample(buffer, 1);
+        const {samples} = dropEveryOtherSample(buffer);
         expect(samples).toEqual(new Float32Array([1, 2, 3]));
+    });
+    test('result sampleRate is given sampleRate / 2', () => {
+        const {sampleRate} = dropEveryOtherSample(buffer);
+        expect(sampleRate).toEqual(buffer.sampleRate / 2);
     });
 });

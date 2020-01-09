@@ -102,7 +102,7 @@ const dropEveryOtherSample = buffer => {
     }
     return {
         samples: newSamples,
-        sampleRate: buffer.rate / 2
+        sampleRate: buffer.sampleRate / 2
     };
 };
 

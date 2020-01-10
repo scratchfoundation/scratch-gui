@@ -17,6 +17,7 @@ import SensingConverter from './sensing';
 import OperatorsConverter from './operators';
 import VariablesConverter from './variables';
 import MyBlocksConverter from './my-blocks';
+import MusicConverter from './music';
 
 /**
  * Class for a block converter that translates ruby code into the blocks.
@@ -33,7 +34,8 @@ class RubyToBlocksConverter {
             SensingConverter,
             OperatorsConverter,
             VariablesConverter,
-            MyBlocksConverter
+            MyBlocksConverter,
+			MusicConverter
         ];
         this.reset();
     }

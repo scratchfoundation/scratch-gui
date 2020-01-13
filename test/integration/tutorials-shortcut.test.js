@@ -27,6 +27,10 @@ describe('Working with shortcut to Tutorials library', () => {
         // make sure there is a tutorial visible that doesn't have a shortcut
         await clickText('Make It Spin');
         await findByXpath('//div[contains(@class, "step-video")]');
+
+        // Make sure the background is still interactable
+        await clickText('Costumes');
+        await clickText('Code');
     });
 
     test('can open hidden tutorials', async () => {

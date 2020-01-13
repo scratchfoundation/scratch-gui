@@ -34,6 +34,7 @@ const TargetPane = ({
     onDuplicateSprite,
     onExportSprite,
     onFileUploadClick,
+    onNewBackdropClick,
     onNewSpriteClick,
     onPaintSpriteClick,
     onRequestCloseSpriteLibrary,
@@ -88,6 +89,7 @@ const TargetPane = ({
                 id={stage.id}
                 selected={stage.id === editingTarget}
                 onSelect={onSelectSprite}
+                onNewBackdropClick={onNewBackdropClick}
             />}
             <div>
                 {spriteLibraryVisible ? (
@@ -143,6 +145,7 @@ TargetPane.propTypes = {
     onDuplicateSprite: PropTypes.func,
     onExportSprite: PropTypes.func,
     onFileUploadClick: PropTypes.func,
+    onNewBackdropClick: PropTypes.func,
     onNewSpriteClick: PropTypes.func,
     onPaintSpriteClick: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,

@@ -9,6 +9,7 @@ import Modal from '../../containers/modal.jsx';
 import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
+import storage from '../../lib/storage';
 import Spinner from '../spinner/spinner.jsx';
 
 import styles from './library.css';
@@ -28,6 +29,47 @@ const messages = defineMessages({
 
 const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
 const tagListPrefix = [ALL_TAG];
+
+/**
+ * Find the AssetType which corresponds to a particular file extension. For example, 'png' => AssetType.ImageBitmap.
+ * @param {string} fileExtension - the file extension to look up.
+ * @returns {AssetType} - the AssetType corresponding to the extension, if any.
+ */
+const getAssetTypeForFileExtension = function (fileExtension) {
+    const compareOptions = {
+        sensitivity: 'accent',
+        usage: 'search'
+    };
+    for (const assetTypeId in storage.AssetType) {
+        const assetType = storage.AssetType[assetTypeId];
+        if (fileExtension.localeCompare(assetType.runtimeFormat, compareOptions) === 0) {
+            return assetType;
+        }
+    }
+};
+
+/**
+ * Figure out an `imageSource` (URI or asset ID & type) for a library item's icon.
+ * @param {object} item - either a library item or one of a library item's costumes.
+ * @returns {object} - an `imageSource` ready to be passed to a `ScratchImage`.
+ */
+const getItemImageSource = function (item) {
+    if (item.rawURL) {
+        return {
+            uri: item.rawURL
+        };
+    }
+
+    // TODO: adjust libraries to be more storage-friendly; don't use split() here.
+    const md5 = item.md5 || item.baseLayerMD5;
+    if (md5) {
+        const [assetId, fileExtension] = md5.split('.');
+        return {
+            assetId: assetId,
+            assetType: getAssetTypeForFileExtension(fileExtension)
+        };
+    }
+};
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -129,7 +171,12 @@ class LibraryComponent extends React.Component {
     }
     getFilteredData () {
         if (this.state.selectedTag === 'all') {
-            if (!this.state.filterQuery) return this.props.data;
+            if (!this.state.filterQuery) {
+                if (this.state.showCount !== this.props.data.length) {
+                    return this.props.data.slice(0, this.state.showCount);
+                }
+                return this.props.data;
+            }
             return this.props.data.filter(dataItem => (
                 (dataItem.tags || [])
                     // Second argument to map sets `this`
@@ -208,8 +255,10 @@ class LibraryComponent extends React.Component {
                     })}
                     ref={this.setFilteredDataRef}
                 >
-                    {this.state.loaded ? this.getFilteredData().map((dataItem, index) => (
-                        <LibraryItem
+                    {this.state.loaded ? this.getFilteredData().map((dataItem, index) => {
+                        const iconSource = getItemImageSource(dataItem);
+                        const icons = dataItem.json && dataItem.json.costumes.map(getItemImageSource);
+                        return (<LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
                             description={dataItem.description}
@@ -217,9 +266,8 @@ class LibraryComponent extends React.Component {
                             extensionId={dataItem.extensionId}
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
-                            iconMd5={dataItem.md5}
-                            iconRawURL={dataItem.rawURL}
-                            icons={dataItem.json && dataItem.json.costumes}
+                            iconSource={iconSource}
+                            icons={icons}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}
                             internetConnectionRequired={dataItem.internetConnectionRequired}
@@ -231,7 +279,8 @@ class LibraryComponent extends React.Component {
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
                         />
-                    )) : (
+                        );
+                    }) : (
                         <div className={styles.spinnerWrapper}>
                             <Spinner
                                 large

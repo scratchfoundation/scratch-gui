@@ -3,7 +3,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import {getIsShowingWithoutId} from '../reducers/project-state';
+import {
+    getIsAnyCreatingNewState,
+    getIsShowingWithoutId
+} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 
 const messages = defineMessages({
@@ -27,6 +30,12 @@ const TitledHOC = function (WrappedComponent) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
                 this.handleReceivedProjectTitle(this.props.projectTitle);
             }
+            // if project is a new default project, and has loaded,
+            if (this.props.isShowingWithoutId && prevProps.isAnyCreatingNewState) {
+                // reset title to default
+                const defaultProjectTitle = this.handleReceivedProjectTitle();
+                this.props.onUpdateProjectTitle(defaultProjectTitle);
+            }
             // if the projectTitle hasn't changed, but the reduxProjectTitle
             // HAS changed, we need to report that change to the projectTitle's owner
             if (this.props.reduxProjectTitle !== prevProps.reduxProjectTitle &&
@@ -40,11 +49,13 @@ const TitledHOC = function (WrappedComponent) {
                 newTitle = this.props.intl.formatMessage(messages.defaultProjectTitle);
             }
             this.props.onChangedProjectTitle(newTitle);
+            return newTitle;
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 intl,
+                isAnyCreatingNewState,
                 isShowingWithoutId,
                 onChangedProjectTitle,
                 // for children, we replace onUpdateProjectTitle with our own
@@ -66,6 +77,7 @@ const TitledHOC = function (WrappedComponent) {
 
     TitledComponent.propTypes = {
         intl: intlShape,
+        isAnyCreatingNewState: PropTypes.bool,
         isShowingWithoutId: PropTypes.bool,
         onChangedProjectTitle: PropTypes.func,
         onUpdateProjectTitle: PropTypes.func,
@@ -80,6 +92,7 @@ const TitledHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            isAnyCreatingNewState: getIsAnyCreatingNewState(loadingState),
             isShowingWithoutId: getIsShowingWithoutId(loadingState),
             reduxProjectTitle: state.scratchGui.projectTitle
         };

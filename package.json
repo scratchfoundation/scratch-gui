@@ -25,7 +25,19 @@
     "type": "git",
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "scratch-storage": "git://github.com/groklearning/scratch-storage.git#DEV-179-scratch-storage-helper"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^9.0.1",
     "base64-loader": "1.0.0",
@@ -66,7 +78,7 @@
     "react-modal": "3.9.1",
     "react-popover": "0.5.10",
     "react-redux": "5.0.7",
-    "react-responsive": "5.0.0",
+    "react-responsive": "^4.1.0",
     "react-style-proptype": "3.2.2",
     "react-tabs": "2.3.0",
     "react-tooltip": "3.8.0",
@@ -144,5 +156,8 @@
       "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js",
       "editor-msgs(\\.js)?$": "<rootDir>/test/__mocks__/editor-msgs-mock.js"
     }
+  },
+  "dependencies": {
+    "react-intl-redux": "^0.7.0"
   }
 }

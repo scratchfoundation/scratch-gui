@@ -138,14 +138,18 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         scheduleAutoSave () {
-            if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
+            if (this.props.autoSaveTimeoutId === null) {
+            // Grok wants autosave to happen regardless of whether saving is enabled
+            // if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
                 const timeoutId = setTimeout(this.tryToAutoSave,
                     this.props.autoSaveIntervalSecs * 1000);
                 this.props.setAutoSaveTimeoutId(timeoutId);
             }
         }
         tryToAutoSave () {
-            if (this.props.projectChanged && this.props.isShowingSaveable) {
+            if (this.props.projectChanged) {
+            // Grok wants autosave to happen regardless
+            // if (this.props.projectChanged && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
             }
         }
@@ -244,7 +248,15 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     })
                 )
             )
-                .then(() => this.props.onUpdateProjectData(projectId, savedVMState, requestParams))
+                .then(() => {
+                    const assetType = storage.AssetType.Project;
+                    const dataFormat = storage.DataFormat.JSON;
+                    return storage.store(assetType, dataFormat, savedVMState, projectId);
+
+                    // TODO: originally this used save-project-to-server
+                    // We have implemented our own store and would prefer it to use that
+                    // this.props.onUpdateProjectData(projectId, savedVMState, requestParams);
+                })
                 .then(response => {
                     this.props.onSetProjectUnchanged();
                     const id = response.id.toString();

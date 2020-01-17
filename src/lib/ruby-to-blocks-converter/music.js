@@ -8,8 +8,6 @@ const MusicConverter = {
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
-            console.log(name);
-            console.log(args);
             switch (name) {
             case 'play_drum':
                 if (args.length === 1 && this._isHash(args[0]) && args[0].size === 2) {

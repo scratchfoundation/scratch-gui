@@ -75,6 +75,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
 
                 // Clear timeout after loading a project
                 this.clearAutoSaveTimeout();
+                this.scheduleAutoSave();
             }
 
             if (this.props.projectChanged && !prevProps.projectChanged) {

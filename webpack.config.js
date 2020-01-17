@@ -65,10 +65,11 @@ const base = {
             }, {
                 loader: 'css-loader',
                 options: {
-                    modules: true,
                     importLoaders: 1,
-                    localIdentName: '[name]_[local]_[hash:base64:5]',
-                    camelCase: true
+                    localsConvention: 'camelCase',
+                    modules: {
+                        localIdentName: '[name]_[local]_[hash:base64:5]'
+                    }
                 }
             }, {
                 loader: 'postcss-loader',

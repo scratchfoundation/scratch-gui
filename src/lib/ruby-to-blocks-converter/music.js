@@ -36,7 +36,7 @@ const MusicConverter = {
                     const beats = args[0].get('sym:beats');
                     if (this._isNumberOrBlock(note) && this._isNumberOrBlock(beats)) {
                         block = this._createBlock('music_playNoteForBeats', 'statement');
-                        this._addNumberInput(block, 'NOTE', 'math_number', note, 60);
+                        this._addNoteInput(block, 'NOTE', note, 60);
                         this._addNumberInput(block, 'BEATS', 'math_number', beats, 0.25);
                     }
                 }

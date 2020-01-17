@@ -72,12 +72,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
             if (!this.props.isLoading && prevProps.isLoading) {
                 this.reportTelemetryEvent('projectDidLoad');
+
+                // Clear timeout after loading a project
                 this.clearAutoSaveTimeout();
-                this.scheduleAutoSave();
             }
 
             if (this.props.projectChanged && !prevProps.projectChanged) {
-                this.clearAutoSaveTimeout();
                 this.scheduleAutoSave();
             }
             if (this.props.isUpdating && !prevProps.isUpdating) {
@@ -150,6 +150,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
         tryToAutoSave () {
             if (this.props.projectChanged && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
+            } else {
+                // If we fail to autosave we should clear the timeout
+                // So it doesn't get stuck forever
+                this.clearAutoSaveTimeout();
             }
         }
         isShowingCreatable (props) {

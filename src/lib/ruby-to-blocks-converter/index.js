@@ -18,6 +18,7 @@ import OperatorsConverter from './operators';
 import VariablesConverter from './variables';
 import MyBlocksConverter from './my-blocks';
 import MusicConverter from './music';
+import EV3Converter from './ev3';
 
 /**
  * Class for a block converter that translates ruby code into the blocks.
@@ -35,7 +36,8 @@ class RubyToBlocksConverter {
             OperatorsConverter,
             VariablesConverter,
             MyBlocksConverter,
-			MusicConverter
+			MusicConverter,
+            EV3Converter
         ];
         this.reset();
     }
@@ -460,6 +462,22 @@ class RubyToBlocksConverter {
             shadowBlock = this._createNumberBlock(opcode, shadowValue);
         }
         this._addInput(block, name, this._createNumberBlock(opcode, inputValue), shadowBlock);
+    }
+
+    _addNoteInput (block, name, inputValue, shadowValue) {
+        let shadowBlock;
+        let opcode = 'note';
+        if (!this._isNumber(inputValue)) {
+            shadowBlock = this._createNoteBlock(opcode, shadowValue);
+        }
+        this._addInput(block, name, this._createNoteBlock(opcode, inputValue), shadowBlock);
+    }
+
+    _createNoteBlock (opcode, value) {
+        if (this._isNumber(value) || value === '') {
+            return this._createFieldBlock(opcode, 'NOTE', value.toString());
+        }
+        return value;
     }
 
     _addTextInput (block, name, inputValue, shadowValue) {

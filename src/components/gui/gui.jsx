@@ -206,7 +206,8 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                {/* Grok wants to hide the menubar - would be nice if this was configurable in future
+                {/* Grok: We want the menubar hidden for our interface
+                    TODO: Should be configurable so it can merge upstream
                     <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}

@@ -72,9 +72,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
             if (!this.props.isLoading && prevProps.isLoading) {
                 this.reportTelemetryEvent('projectDidLoad');
+                this.clearAutoSaveTimeout();
+                this.scheduleAutoSave();
             }
 
             if (this.props.projectChanged && !prevProps.projectChanged) {
+                this.clearAutoSaveTimeout();
                 this.scheduleAutoSave();
             }
             if (this.props.isUpdating && !prevProps.isUpdating) {
@@ -138,18 +141,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         scheduleAutoSave () {
-            if (this.props.autoSaveTimeoutId === null) {
-            // Grok wants autosave to happen regardless of whether saving is enabled
-            // if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
+            if (this.props.isShowingSaveable && this.props.autoSaveTimeoutId === null) {
                 const timeoutId = setTimeout(this.tryToAutoSave,
                     this.props.autoSaveIntervalSecs * 1000);
                 this.props.setAutoSaveTimeoutId(timeoutId);
             }
         }
         tryToAutoSave () {
-            if (this.props.projectChanged) {
-            // Grok wants autosave to happen regardless
-            // if (this.props.projectChanged && this.props.isShowingSaveable) {
+            if (this.props.projectChanged && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
             }
         }
@@ -253,8 +252,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     const dataFormat = storage.DataFormat.JSON;
                     return storage.store(assetType, dataFormat, savedVMState, projectId);
 
-                    // TODO: originally this used save-project-to-server
-                    // We have implemented our own store and would prefer it to use that
+                    // Grok: originally this used save-project-to-server.js
+                    // Which appears to have a bunch of custom saving specific to Scratch
+                    // We've instead used the standard storage system so our
+                    // iframe storage system can hook in here.
+                    // TODO: Figure out a way to do Scratch's custom saving for projects
+                    // using their standard storage system.
+                    //
                     // this.props.onUpdateProjectData(projectId, savedVMState, requestParams);
                 })
                 .then(response => {

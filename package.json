@@ -28,7 +28,7 @@
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "scratch-storage": "git://github.com/groklearning/scratch-storage.git#DEV-179-scratch-storage-helper"
+    "scratch-storage": "git://github.com/groklearning/scratch-storage.git#grok-release-17-01-2020"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -157,7 +157,5 @@
       "editor-msgs(\\.js)?$": "<rootDir>/test/__mocks__/editor-msgs-mock.js"
     }
   },
-  "dependencies": {
-    "react-intl-redux": "^0.7.0"
-  }
+  "dependencies": {}
 }

@@ -23,6 +23,8 @@ import Text2SpeechBlocks from './text2speech.js';
 import TranslateBlocks from './translate.js';
 import MakeyMakeyBlocks from './makeymakey.js';
 import MicrobitBlocks from './microbit.js';
+import BoostBlocks from './boost.js';
+import EV3Blocks from './ev3.js'
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -448,5 +450,7 @@ Text2SpeechBlocks(RubyGenerator);
 TranslateBlocks(RubyGenerator);
 MakeyMakeyBlocks(RubyGenerator);
 MicrobitBlocks(RubyGenerator);
+BoostBlocks(RubyGenerator);
+EV3Blocks(RubyGenerator);
 
 export default RubyGenerator;

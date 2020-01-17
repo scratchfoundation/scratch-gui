@@ -19,6 +19,7 @@ import VariablesConverter from './variables';
 import MyBlocksConverter from './my-blocks';
 import MusicConverter from './music';
 import EV3Converter from './ev3';
+import Wedo2Converter from './wedo2';
 
 /**
  * Class for a block converter that translates ruby code into the blocks.
@@ -37,7 +38,8 @@ class RubyToBlocksConverter {
             VariablesConverter,
             MyBlocksConverter,
 			MusicConverter,
-            EV3Converter
+            EV3Converter,
+            Wedo2Converter
         ];
         this.reset();
     }

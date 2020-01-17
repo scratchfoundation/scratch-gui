@@ -464,6 +464,22 @@ class RubyToBlocksConverter {
         this._addInput(block, name, this._createNumberBlock(opcode, inputValue), shadowBlock);
     }
 
+    _addNoteInput (block, name, inputValue, shadowValue) {
+        let shadowBlock;
+        let opcode = 'note';
+        if (!this._isNumber(inputValue)) {
+            shadowBlock = this._createNoteBlock(opcode, shadowValue);
+        }
+        this._addInput(block, name, this._createNoteBlock(opcode, inputValue), shadowBlock);
+    }
+
+    _createNoteBlock (opcode, value) {
+        if (this._isNumber(value) || value === '') {
+            return this._createFieldBlock(opcode, 'NOTE', value.toString());
+        }
+        return value;
+    }
+
     _addTextInput (block, name, inputValue, shadowValue) {
         let shadowBlock;
         if (!this._isString(inputValue)) {

@@ -21,14 +21,14 @@ const EV3Converter = {
             case 'ev3_beep_note':
                 if (args.length === 2 && this._isNumberOrBlock(args[0]) && this._isNumberOrBlock(args[1])) {
                     block = this._createBlock('ev3_beep', 'statement');
-                    this._addNumberInput(block, 'NOTE', 'math_number', args[0], 60);
+                    this._addNoteInput(block, 'NOTE', args[0], 60);
                     this._addNumberInput(block, 'TIME', 'math_number', args[1], 0.5);
                 }
                 break;
             }
         }
         return block;
-    },
+    }
 };
 
 export default EV3Converter;

@@ -21,6 +21,7 @@ import MicroBitConverter from './microbit';
 import MusicConverter from './music';
 import EV3Converter from './ev3';
 import Wedo2Converter from './wedo2';
+import GdxForConverter from './gdx_for';
 
 /**
  * Class for a block converter that translates ruby code into the blocks.
@@ -41,7 +42,8 @@ class RubyToBlocksConverter {
             MicroBitConverter,
             MusicConverter,
             EV3Converter,
-            Wedo2Converter
+            Wedo2Converter,
+            GdxForConverter
         ];
         this.reset();
     }

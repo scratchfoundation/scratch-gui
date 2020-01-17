@@ -6,7 +6,8 @@
 npm-*
 
 # Double copies of all the static assets and tutorial gifs
-/src
+# Grok: We don't want to ignore the src folder so we can build it ourselves
+# /src
 
 # Testing
 /.nyc_output

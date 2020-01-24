@@ -36,6 +36,7 @@ class RubyToBlocksConverter {
             OperatorsConverter,
             VariablesConverter,
             MyBlocksConverter,
+            MicroBitConverter,
 			MusicConverter,
             EV3Converter
         ];

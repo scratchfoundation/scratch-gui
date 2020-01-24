@@ -2,7 +2,7 @@
 import _ from 'lodash';
 
 /**
- * Music converter
+ * MicroBit converter
  */
 const MicroBitConverter = {
 };

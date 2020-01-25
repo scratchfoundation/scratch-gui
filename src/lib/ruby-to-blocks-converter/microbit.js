@@ -16,6 +16,16 @@ const MicroBitConverter = {
             rubyBlockArgs && rubyBlockArgs.length === 0 &&
             rubyBlock) {
             switch (args[0].value) {
+            case 'microbit_button_pressed':
+                if (args.length === 2 && this._isString(args[1])) {
+                    block = this._createBlock('microbit_whenButtonPressed', 'hat');
+                    this._addFieldInput(
+                        block, 'BTN', 'microbit_menu_buttons', 'buttons',
+                        args[1], 'A'
+                    )
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         } else if (this._isSelf(receiver) || receiver === Opal.nil) {
             switch (name) {

@@ -17,6 +17,7 @@ import SensingConverter from './sensing';
 import OperatorsConverter from './operators';
 import VariablesConverter from './variables';
 import MyBlocksConverter from './my-blocks';
+import MicroBitConverter from './microbit';
 import MusicConverter from './music';
 import EV3Converter from './ev3';
 import Wedo2Converter from './wedo2';
@@ -37,7 +38,8 @@ class RubyToBlocksConverter {
             OperatorsConverter,
             VariablesConverter,
             MyBlocksConverter,
-			MusicConverter,
+            MicroBitConverter,
+            MusicConverter,
             EV3Converter,
             Wedo2Converter
         ];

@@ -26,6 +26,16 @@ const MicroBitConverter = {
                     this._setParent(rubyBlock, block);
                 }
                 break;
+            case 'microbit_gesture':
+                if (args.length === 2 && this._isString(args[1])) {
+                    block = this._createBlock('microbit_whenGesture', 'hat');
+                    this._addFieldInput(
+                        block, 'GESTURE', 'microbit_menu_gestures', 'gestures',
+                        args[1], 'moved'
+                    )
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         } else if (this._isSelf(receiver) || receiver === Opal.nil) {
             switch (name) {

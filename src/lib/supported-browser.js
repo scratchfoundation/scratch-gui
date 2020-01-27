@@ -26,7 +26,9 @@ const supportedBrowser = () => {
  *   always returns false
  */
 
-const recommendedBrowser = () => !bowser.isUnsupportedBrowser(minVersions, true);
+const recommendedBrowser = () =>
+    !bowser.isUnsupportedBrowser(minVersions, true) ||
+    window.navigator.userAgent.toLowerCase().indexOf('googlebot') !== -1;
 
 export {
     supportedBrowser as default,

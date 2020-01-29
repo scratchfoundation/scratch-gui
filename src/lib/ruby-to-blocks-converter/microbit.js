@@ -85,6 +85,18 @@ const MicroBitConverter = {
                     delete receiver.inputs.EXPRESSION;
                 }
                 break;
+            case 'tilted?':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._changeBlock(receiver, 'microbit_isTilted', 'value_boolean');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addFieldInput(
+                        block, 'DIRECTION', 'microbit_menu_tiltDirectionAny', 'tiltDirectionAny',
+                        args[0], 'any'
+                    )
+                }
+                break;
             }
         }
         return block;

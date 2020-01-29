@@ -36,6 +36,16 @@ const MicroBitConverter = {
                     this._setParent(rubyBlock, block);
                 }
                 break;
+            case 'microbit_tilted':
+                if (args.length === 2 && this._isString(args[1])) {
+                    block = this._createBlock('microbit_whenTilted', 'hat');
+                    this._addFieldInput(
+                        block, 'DIRECTION', 'microbit_menu_tiltDirectionAny', 'tiltDirectionAny',
+                        args[1], 'any'
+                    )
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         } else if (this._isSelf(receiver) || receiver === Opal.nil) {
             switch (name) {

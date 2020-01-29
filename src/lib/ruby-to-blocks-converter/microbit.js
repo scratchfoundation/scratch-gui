@@ -59,6 +59,15 @@ const MicroBitConverter = {
                     );
                 }
                 break;
+            case 'display_text':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._changeBlock(receiver, 'microbit_displayText', 'sentence');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addTextInput(block, 'TEXT', args[0], 'Hello!');
+                }
+                break;
             }
         }
         return block;

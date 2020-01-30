@@ -92,49 +92,16 @@ test('onFetchedProjectData new loads project data into vm', () => {
     expect(resultState.projectData).toBe('1010101');
 });
 
-// onLoadedProject: LOADING_VM_WITH_ID
-
-test('onLoadedProject (LOADING_VM_WITH_ID, true, true) shows with id', () => {
+test('onLoadedProject upload, with canSave false, shows without id', () => {
     const initialState = {
-        loadingState: LoadingState.LOADING_VM_WITH_ID
+        loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
-    const action = onLoadedProject(initialState.loadingState, true, true);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-});
-
-test('onLoadedProject (LOADING_VM_WITH_ID, false, true) shows with id', () => {
-    const initialState = {
-        loadingState: LoadingState.LOADING_VM_WITH_ID
-    };
-    const action = onLoadedProject(initialState.loadingState, true, true);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-});
-
-test('onLoadedProject (LOADING_VM_WITH_ID, false, false), with project id, shows with id', () => {
-    const initialState = {
-        loadingState: LoadingState.LOADING_VM_WITH_ID,
-        projectId: '12345'
-    };
-    const action = onLoadedProject(initialState.loadingState, false, false);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-});
-
-test('onLoadedProject (LOADING_VM_WITH_ID, false, false), with no project id, shows without id', () => {
-    const initialState = {
-        loadingState: LoadingState.LOADING_VM_WITH_ID,
-        projectId: null
-    };
-    const action = onLoadedProject(initialState.loadingState, false, false);
+    const action = onLoadedProject(initialState.loadingState, false, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-// onLoadedProject: LOADING_VM_FILE_UPLOAD
-
-test('onLoadedProject(LOADING_VM_FILE_UPLOAD, true, true) prepares to save', () => {
+test('onLoadedProject upload, with canSave true, prepares to save', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
     };
@@ -143,38 +110,25 @@ test('onLoadedProject(LOADING_VM_FILE_UPLOAD, true, true) prepares to save', () 
     expect(resultState.loadingState).toBe(LoadingState.AUTO_UPDATING);
 });
 
-test('onLoadedProject (LOADING_VM_FILE_UPLOAD, false, true) shows without id', () => {
+test('onLoadedProject with id shows with id', () => {
     const initialState = {
-        loadingState: LoadingState.LOADING_VM_FILE_UPLOAD
+        loadingState: LoadingState.LOADING_VM_WITH_ID
+    };
+    const action = onLoadedProject(initialState.loadingState, true, true);
+    const resultState = projectStateReducer(initialState, action);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
+});
+
+test('onLoadedProject new shows without id', () => {
+    const initialState = {
+        loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
     const action = onLoadedProject(initialState.loadingState, false, true);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject (LOADING_VM_FILE_UPLOAD, false, false), with project id, shows with id', () => {
-    const initialState = {
-        loadingState: LoadingState.LOADING_VM_FILE_UPLOAD,
-        projectId: '12345'
-    };
-    const action = onLoadedProject(initialState.loadingState, false, false);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
-});
-
-test('onLoadedProject (LOADING_VM_FILE_UPLOAD, false, false), with no project id, shows without id', () => {
-    const initialState = {
-        loadingState: LoadingState.LOADING_VM_FILE_UPLOAD,
-        projectId: null
-    };
-    const action = onLoadedProject(initialState.loadingState, false, false);
-    const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
-});
-
-// onLoadedProject: LOADING_VM_NEW_DEFAULT
-
-test('onLoadedProject (LOADING_VM_NEW_DEFAULT, true, true) shows without id', () => {
+test('onLoadedProject new, to save shows without id', () => {
     const initialState = {
         loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
     };
@@ -183,25 +137,25 @@ test('onLoadedProject (LOADING_VM_NEW_DEFAULT, true, true) shows without id', ()
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject (LOADING_VM_NEW_DEFAULT, false, true) shows without id', () => {
+test('onLoadedProject with success false, no project id, shows without id', () => {
     const initialState = {
-        loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
+        loadingState: LoadingState.LOADING_VM_WITH_ID,
+        projectId: null
     };
-    const action = onLoadedProject(initialState.loadingState, false, true);
+    const action = onLoadedProject(initialState.loadingState, false, false);
     const resultState = projectStateReducer(initialState, action);
     expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITHOUT_ID);
 });
 
-test('onLoadedProject (LOADING_VM_NEW_DEFAULT, false, false) shows error', () => {
+test('onLoadedProject with success false, valid project id, shows with id', () => {
     const initialState = {
-        loadingState: LoadingState.LOADING_VM_NEW_DEFAULT
+        loadingState: LoadingState.LOADING_VM_WITH_ID,
+        projectId: '12345'
     };
     const action = onLoadedProject(initialState.loadingState, false, false);
     const resultState = projectStateReducer(initialState, action);
-    expect(resultState.loadingState).toBe(LoadingState.ERROR);
+    expect(resultState.loadingState).toBe(LoadingState.SHOWING_WITH_ID);
 });
-
-// doneUpdatingProject
 
 test('doneUpdatingProject with id shows with id', () => {
     const initialState = {

@@ -56,7 +56,7 @@ describe('projectSaverHOC', () => {
         expect(mockedUpdateProject).toHaveBeenCalled();
     });
 
-    test('if canSave is already true and we show a project with an id, project will NOT be saved', () => {
+    test('if canSave is alreatdy true and we show a project with an id, project will NOT be saved', () => {
         const mockedSaveProject = jest.fn();
         const Component = () => <div />;
         const WrappedComponent = projectSaverHOC(Component);

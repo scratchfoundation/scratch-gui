@@ -819,7 +819,10 @@
         "sampleCount": 11648,
         "rate": 44100,
         "format": "",
-        "tags": []
+        "tags": [
+            "effects",
+            "human"
+        ]
     },
     {
         "name": "Chord",
@@ -938,22 +941,6 @@
             "effects",
             "electronic"
         ]
-    },
-    {
-        "name": "Computer Beeps1",
-        "md5": "1da43f6d52d0615da8a250e28100a80d.wav",
-        "sampleCount": 76800,
-        "rate": 44100,
-        "format": "",
-        "tags": []
-    },
-    {
-        "name": "Computer Beeps2",
-        "md5": "28c76b6bebd04be1383fe9ba4933d263.wav",
-        "sampleCount": 38144,
-        "rate": 44100,
-        "format": "",
-        "tags": []
     },
     {
         "name": "Connect",
@@ -1264,14 +1251,6 @@
             "loops",
             "electronic"
         ]
-    },
-    {
-        "name": "Dance Celebrate2",
-        "md5": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
-        "sampleCount": 176785,
-        "rate": 22050,
-        "format": "adpcm",
-        "tags": []
     },
     {
         "name": "Dance Chill Out",
@@ -2287,7 +2266,10 @@
         "sampleCount": 4928,
         "rate": 44100,
         "format": "",
-        "tags": []
+        "tags": [
+            "human",
+            "percussion"
+        ]
     },
     {
         "name": "Head Shake",
@@ -3854,11 +3836,13 @@
     },
     {
         "name": "Water Drop",
-        "md5": "aa488de9e2c871e9d4faecd246ed737a.wav",
-        "sampleCount": 8129,
+        "md5": "e133e625fd367d269e76964d4b722fc2.wav",
+        "sampleCount": 15241,
         "rate": 22050,
         "format": "adpcm",
-        "tags": []
+        "tags": [
+            "effects"
+        ]
     },
     {
         "name": "Whinny",

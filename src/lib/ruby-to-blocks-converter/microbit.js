@@ -46,6 +46,16 @@ const MicroBitConverter = {
                     this._setParent(rubyBlock, block);
                 }
                 break;
+            case 'microbit_pin_connected':
+                if (args.length === 2 && this._isNumber(args[1])) {
+                    block = this._createBlock('microbit_whenPinConnected', 'hat');
+                    this._addFieldInput(
+                        block, 'PIN', 'microbit_menu_touchPins', 'touchPins',
+                        args[1], '0'
+                    )
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         } else if (this._isSelf(receiver) || receiver === Opal.nil) {
             switch (name) {

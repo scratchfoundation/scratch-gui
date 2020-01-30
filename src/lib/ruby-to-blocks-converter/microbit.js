@@ -9,7 +9,6 @@ const MicroBitConverter = {
     // eslint-disable-next-line no-unused-vars
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
-        console.log(arguments);
         if ((this._isSelf(receiver) || receiver === Opal.nil) &&
             name === 'when' &&
             args.length >= 1 && args[0].type === 'sym' &&

@@ -79,6 +79,30 @@ const MicroBitConverter = {
                     );
                 }
                 break;
+            case 'display':
+                make_display_block:
+                if (args.length === 5) {
+                    for (const arg of args) {
+                        if (!this._isString(arg)) {
+                            break make_display_block;
+                        }
+                    } 
+
+                    block = this._changeBlock(receiver, 'microbit_displaySymbol', 'statement');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    var matrix = '';
+                    for (const arg of args) {
+                        matrix += arg; 
+                    } 
+                    matrix = matrix.replace(/\./g, '0');
+                    this._addFieldInput(
+                        block, 'MATRIX', 'matrix', 'MATRIX',
+                        matrix, null 
+                    );
+                }
+                break;
             case 'display_text':
                 if (args.length === 1 && this._isString(args[0])) {
                     block = this._changeBlock(receiver, 'microbit_displayText', 'statement');

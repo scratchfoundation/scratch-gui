@@ -21,7 +21,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'BTN', 'microbit_menu_buttons', 'buttons',
                         args[1], 'A'
-                    )
+                    );
                     this._setParent(rubyBlock, block);
                 }
                 break;
@@ -41,7 +41,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'DIRECTION', 'microbit_menu_tiltDirectionAny', 'tiltDirectionAny',
                         args[1], 'any'
-                    )
+                    );
                     this._setParent(rubyBlock, block);
                 }
                 break;
@@ -51,7 +51,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'PIN', 'microbit_menu_touchPins', 'touchPins',
                         args[1], '0'
-                    )
+                    );
                     this._setParent(rubyBlock, block);
                 }
                 break;
@@ -79,14 +79,7 @@ const MicroBitConverter = {
                 }
                 break;
             case 'display':
-                make_display_block:
-                if (args.length === 5) {
-                    for (const arg of args) {
-                        if (!this._isString(arg)) {
-                            break make_display_block;
-                        }
-                    } 
-
+                if (args.length === 5 && args.every((i) => { return this._isString(i); })) {
                     block = this._changeBlock(receiver, 'microbit_displaySymbol', 'statement');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
@@ -95,7 +88,7 @@ const MicroBitConverter = {
                     for (const arg of args) {
                         matrix += arg; 
                     } 
-                    matrix = matrix.replace(/\./g, '0');
+                    matrix = matrix.replace(/[1-9]/g, '1').replace(/[^1-9]/g, '0');
                     this._addFieldInput(
                         block, 'MATRIX', 'matrix', 'MATRIX',
                         matrix, null 
@@ -127,7 +120,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'DIRECTION', 'microbit_menu_tiltDirectionAny', 'tiltDirectionAny',
                         args[0], 'any'
-                    )
+                    );
                 }
                 break;
             case 'tilt_angle':
@@ -139,7 +132,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'DIRECTION', 'microbit_menu_tiltDirection', 'tiltDirection',
                         args[0], 'front'
-                    )
+                    );
                 }
                 break;
             }

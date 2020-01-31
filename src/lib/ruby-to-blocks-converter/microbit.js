@@ -31,7 +31,7 @@ const MicroBitConverter = {
                     this._addFieldInput(
                         block, 'GESTURE', 'microbit_menu_gestures', 'gestures',
                         args[1], 'moved'
-                    )
+                    );
                     this._setParent(rubyBlock, block);
                 }
                 break;

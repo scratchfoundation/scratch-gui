@@ -68,6 +68,7 @@ import profileIcon from './icon--profile.png';
 import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
+import aboutIcon from './icon--about.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
@@ -310,6 +311,17 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
+        const handleClickAbout = this.props.onClickAbout;
+        // Show the About button only if we have a handler for it (like in the desktop app)
+        const aboutButton = handleClickAbout ? (
+            <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                <img
+                    className={styles.aboutIcon}
+                    onClick={handleClickAbout}
+                    src={aboutIcon}
+                />
+            </div>
+        ) : null;
         return (
             <Box
                 className={classNames(
@@ -677,6 +689,8 @@ class MenuBar extends React.Component {
                         </React.Fragment>
                     )}
                 </div>
+
+                {aboutButton}
             </Box>
         );
     }
@@ -710,6 +724,7 @@ MenuBar.propTypes = {
     locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
+    onClickAbout: PropTypes.func,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,

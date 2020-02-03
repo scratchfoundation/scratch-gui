@@ -12,6 +12,7 @@
 *.svg binary
 
 # Prefer LF for most file types
+*.css text eol=lf
 *.frag text eol=lf
 *.htm text eol=lf
 *.html text eol=lf

@@ -157,7 +157,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                     })
                     .catch(error => {
                         log.warn(error);
-                        this.props.intl.formatMessage(messages.loadError); // eslint-disable-line no-alert
+                        this.props.intl.formatMessage(messages.loadError);
                         this.props.onLoadingFinished(this.props.loadingState, false);
                     })
                     .then(() => {
@@ -233,7 +233,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             projectChanged: state.scratchGui.projectChanged,
             userOwnsProject: ownProps.authorUsername && user &&
                 (ownProps.authorUsername === user.username),
-            vm: state.scratchGui.vm // NOTE: double check this belongs here
+            vm: state.scratchGui.vm
         };
     };
     const mapDispatchToProps = (dispatch, ownProps) => ({

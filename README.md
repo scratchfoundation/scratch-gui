@@ -229,6 +229,12 @@ As this diagram of the project state machine shows, various transition actions c
 
 ![Project state diagram](docs/project_state_diagram.svg)
 
+_Note: for clarity, the diagram above excludes states and transitions relating to error handling._
+
+#### Example
+
+![Project state example](docs/project_state_example.png)
+
 For example, suppose the project state machine is currently in the `FETCHING_WITH_ID` state.
 
 If the project state machine is given the `DONE_FETCHING_WITH_ID` action, the state will transition to the `LOADING_VM_WITH_ID` state. As part of that transition, it will store the `projectData` that it fetched while in the `FETCHING_WITH_ID` state.

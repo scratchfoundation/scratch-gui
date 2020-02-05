@@ -233,13 +233,21 @@ _Note: for clarity, the diagram above excludes states and transitions relating t
 
 #### Example
 
+Here's an example of how states transition.
+
+Suppose a user clicks on a project, and the page starts to load with url https://scratch.mit.edu/projects/123456 .
+
+Here's what will happen in the project state machine:
+
 ![Project state example](docs/project_state_example.png)
 
-For example, suppose the project state machine is currently in the `FETCHING_WITH_ID` state.
-
-If the project state machine is given the `DONE_FETCHING_WITH_ID` action, the state will transition to the `LOADING_VM_WITH_ID` state. As part of that transition, it will store the `projectData` that it fetched while in the `FETCHING_WITH_ID` state.
-
-Once in the `LOADING_VM_WITH_ID` state, the `projectData` object is loaded into Scratch's virtual machine (the "vm"). Next, the `DONE_LOADING_VM_WITH_ID` action transitions the state from `LOADING_VM_WITH_ID` to `SHOWING_WITH_ID`. In this state, the project appears playable to the user.
+1. When the app first mounts, the project state is `NOT_LOADED`.
+2. The `SET_PROJECT_ID` redux action is dispatched (from src/lib/project-fetcher-hoc.jsx), with `projectId` set to `123456`. This transitions the state from `NOT_LOADED` to `FETCHING_WITH_ID`.
+3. The `FETCHING_WITH_ID` state. In src/lib/project-fetcher-hoc.jsx, the `projectId` value `123456` is used to request the data for that project from the server.
+4. When the server responds with the data, src/lib/project-fetcher-hoc.jsx dispatches the `DONE_FETCHING_WITH_ID` action, with `projectData` set. This transitions the state from `FETCHING_WITH_ID` to `LOADING_VM_WITH_ID`.
+5. The `LOADING_VM_WITH_ID` state. In src/lib/vm-manager-hoc.jsx, we load the `projectData` into Scratch's virtual machine ("the vm").
+6. When loading is done, src/lib/vm-manager-hoc.jsx dispatches the `DONE_LOADING_VM_WITH_ID` action. This transitions the state from `LOADING_VM_WITH_ID` to `SHOWING_WITH_ID`
+7. The `SHOWING_WITH_ID` state. Now the project appears normally and is playable and editable.
 
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!

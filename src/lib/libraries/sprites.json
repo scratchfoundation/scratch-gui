@@ -847,7 +847,7 @@
             "broadcasts": {},
             "blocks": {},
             "comments": {},
-            "currentCostume": 3,
+            "currentCostume": 0,
             "costumes": [
                 {
                     "assetId": "3525966db57e6b3fe88ee7c76c9d81bc",
@@ -859,31 +859,31 @@
                     "rotationCenterY": 75
                 },
                 {
-                    "assetId": "7d52bc58acf7d29a4807ab8270d9c262",
+                    "assetId": "605ad62c87a35fb50271ed93b89d9fcf",
                     "name": "ballerina-b",
                     "bitmapResolution": 1,
-                    "md5ext": "7d52bc58acf7d29a4807ab8270d9c262.svg",
+                    "md5ext": "605ad62c87a35fb50271ed93b89d9fcf.svg",
                     "dataFormat": "svg",
-                    "rotationCenterX": 75,
-                    "rotationCenterY": 75
+                    "rotationCenterX": 29.496243552524447,
+                    "rotationCenterY": 23.769347672058046
                 },
                 {
-                    "assetId": "2b6c5d8c5193f8c78c8b7e929a6128a4",
+                    "assetId": "4acedfe3b301fe89729ad8e7939f1df6",
                     "name": "ballerina-c",
                     "bitmapResolution": 1,
-                    "md5ext": "2b6c5d8c5193f8c78c8b7e929a6128a4.svg",
+                    "md5ext": "4acedfe3b301fe89729ad8e7939f1df6.svg",
                     "dataFormat": "svg",
-                    "rotationCenterX": 75,
-                    "rotationCenterY": 75
+                    "rotationCenterX": 59.50259204017422,
+                    "rotationCenterY": 59.18498926037006
                 },
                 {
-                    "assetId": "79d1a9ee514fa4b952eddf9f4990eca8",
+                    "assetId": "ec51725c50440636d4830ff1a8ec20ab",
                     "name": "ballerina-d",
                     "bitmapResolution": 1,
-                    "md5ext": "79d1a9ee514fa4b952eddf9f4990eca8.svg",
+                    "md5ext": "ec51725c50440636d4830ff1a8ec20ab.svg",
                     "dataFormat": "svg",
-                    "rotationCenterX": 75,
-                    "rotationCenterY": 75
+                    "rotationCenterX": 36.40098960393442,
+                    "rotationCenterY": 77.9515998142805
                 }
             ],
             "sounds": [

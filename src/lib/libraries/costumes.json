@@ -594,40 +594,40 @@
     },
     {
         "name": "Ballerina-b",
-        "md5": "7d52bc58acf7d29a4807ab8270d9c262.svg",
+        "md5": "605ad62c87a35fb50271ed93b89d9fcf.svg",
         "type": "costume",
         "tags": [
             "dance"
         ],
         "info": [
-            75,
-            75,
+            29,
+            23,
             1
         ]
     },
     {
         "name": "Ballerina-c",
-        "md5": "2b6c5d8c5193f8c78c8b7e929a6128a4.svg",
+        "md5": "4acedfe3b301fe89729ad8e7939f1df6.svg",
         "type": "costume",
         "tags": [
             "dance"
         ],
         "info": [
-            75,
-            75,
+            59,
+            59,
             1
         ]
     },
     {
         "name": "Ballerina-d",
-        "md5": "79d1a9ee514fa4b952eddf9f4990eca8.svg",
+        "md5": "ec51725c50440636d4830ff1a8ec20ab.svg",
         "type": "costume",
         "tags": [
             "dance"
         ],
         "info": [
-            75,
-            75,
+            36,
+            77,
             1
         ]
     },

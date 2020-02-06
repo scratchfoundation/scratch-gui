@@ -17,6 +17,7 @@ import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import SaveStatus from './save-status.jsx';
+import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
@@ -391,11 +392,22 @@ class MenuBar extends React.Component {
                                         </MenuSection>
                                     )}
                                     <MenuSection>
-                                        <MenuItem
-                                            onClick={this.props.onStartSelectingFileUpload}
+                                        <SBFileUploader
+                                            canSave={this.props.canSave}
+                                            userOwnsProject={this.props.userOwnsProject}
                                         >
-                                            {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
-                                        </MenuItem>
+                                            {(className, renderFileInput, handleLoadProject) => (
+                                                <MenuItem
+                                                    className={className}
+                                                    onClick={handleLoadProject}
+                                                >
+                                                    {/* eslint-disable max-len */}
+                                                    {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
+                                                    {/* eslint-enable max-len */}
+                                                    {renderFileInput()}
+                                                </MenuItem>
+                                            )}
+                                        </SBFileUploader>
                                         <SB3Downloader>{(className, downloadProjectCallback) => (
                                             <MenuItem
                                                 className={className}
@@ -731,7 +743,6 @@ MenuBar.propTypes = {
     onRequestCloseLogin: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
-    onStartSelectingFileUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,

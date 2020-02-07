@@ -346,6 +346,7 @@ class MenuBar extends React.Component {
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>)}
+                        {/* start: 文件管理 */}
                         {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -353,6 +354,7 @@ class MenuBar extends React.Component {
                                 })}
                                 onMouseUp={this.props.onClickFile}
                             >
+                                {/* 标题 */}
                                 <FormattedMessage
                                     defaultMessage="File"
                                     description="Text for file dropdown menu"
@@ -364,6 +366,7 @@ class MenuBar extends React.Component {
                                     place={this.props.isRtl ? 'left' : 'right'}
                                     onRequestClose={this.props.onRequestCloseFile}
                                 >
+                                    {/* start: 新作品 */}
                                     <MenuSection>
                                         <MenuItem
                                             isRtl={this.props.isRtl}
@@ -372,8 +375,10 @@ class MenuBar extends React.Component {
                                             {newProjectMessage}
                                         </MenuItem>
                                     </MenuSection>
+                                    {/* end: 新作品 */}
                                     {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
                                         <MenuSection>
+                                            {/* 保存 */}
                                             {this.props.canSave && (
                                                 <MenuItem onClick={this.handleClickSave}>
                                                     {saveNowMessage}
@@ -392,6 +397,7 @@ class MenuBar extends React.Component {
                                         </MenuSection>
                                     )}
                                     <MenuSection>
+                                        {/* 上传 */}
                                         <SBFileUploader
                                             canSave={this.props.canSave}
                                             userOwnsProject={this.props.userOwnsProject}
@@ -408,6 +414,7 @@ class MenuBar extends React.Component {
                                                 </MenuItem>
                                             )}
                                         </SBFileUploader>
+                                        {/* 下载至本地 */}
                                         <SB3Downloader>{(className, downloadProjectCallback) => (
                                             <MenuItem
                                                 className={className}
@@ -424,6 +431,7 @@ class MenuBar extends React.Component {
                                 </MenuBarMenu>
                             </div>
                         )}
+                        {/* end: 文件管理 */}
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen

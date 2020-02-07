@@ -11,11 +11,13 @@ import {
     LoadingStates,
     getIsLoadingWithId,
     onLoadedProject,
-    projectError
+    projectError,
+    getIsLoading
 } from '../reducers/project-state';
 
 /*
  * Higher Order Component to manage events emitted by the VM
+ * 用于管理VM触发的事件的HOC
  * @param {React.Component} WrappedComponent component to manage VM events for
  * @returns {React.Component} connected component with vm events bound to redux
  */
@@ -42,16 +44,20 @@ const vmManagerHOC = function (WrappedComponent) {
         componentDidUpdate (prevProps) {
             // if project is in loading state, AND fonts are loaded,
             // and they weren't both that way until now... load project!
-            if (this.props.isLoadingWithId && this.props.fontsLoaded &&
+            // 如果现在项目正在加载，字体也已经被加载，并且直到刚才这两个条件任意一个都为否的条件下，那就载入项目。
+            // console.log(this.props.isLoading, this.props.isLoadingWithId, this.props.fontsLoaded);
+            if (this.props.isLoadingWithId && this.props.fontsLoaded && this.props.isLoading &&
                 (!prevProps.isLoadingWithId || !prevProps.fontsLoaded)) {
                 this.loadProject();
             }
             // Start the VM if entering editor mode with an unstarted vm
+            // 如果使用未启动的 VM 进入编辑模式，则启动 VM
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
             }
         }
         loadProject () {
+            // this.props.loadingState: 'LOADING_VM_NEW_DEFAULT'
             return this.props.vm.loadProject(this.props.projectData)
                 .then(() => {
                     this.props.onLoadedProject(this.props.loadingState, this.props.canSave);
@@ -64,6 +70,10 @@ const vmManagerHOC = function (WrappedComponent) {
                     // which closely matches the 2.0 behavior, except for monitors–
                     // 2.0 runs monitors and shows updates (e.g. timer monitor)
                     // before the VM starts running other hat blocks.
+
+                    // 如果VM没有运行，则需要手动调用渲染
+                    // 这将绘制已加载项目的状态，其中没有任何与2.0行为非常匹配的blocks
+                    // 除了 monitors-2.0 运行 monitors，并在 VM 开始运行其他 hat blocks 之前显示更新。
                     if (!this.props.isStarted) {
                         // Wrap in a setTimeout because skin loading in
                         // the renderer can be async.
@@ -117,7 +127,8 @@ const vmManagerHOC = function (WrappedComponent) {
         projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
-        vm: PropTypes.instanceOf(VM).isRequired
+        vm: PropTypes.instanceOf(VM).isRequired,
+        isLoading: PropTypes.bool
     };
 
     const mapStateToProps = state => {
@@ -131,7 +142,8 @@ const vmManagerHOC = function (WrappedComponent) {
             projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState,
             isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-            isStarted: state.scratchGui.vmStatus.started
+            isStarted: state.scratchGui.vmStatus.started,
+            isLoading: getIsLoading(loadingState)
         };
     };
 

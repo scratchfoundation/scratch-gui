@@ -22,6 +22,7 @@ import {
 
 import log from './log';
 import storage from './storage';
+import {PROJECT_HOST, ASSET_HOST} from './constants';
 
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
@@ -42,6 +43,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             // or it may be set by an even higher HOC, and passed to us.
             // Either way, we now know what the initial projectId should be, so
             // set it in the redux store.
+            
+            // props.projectId可能没有被设置，这种情况下我们使用默认值；
+            // 或者可能由更高级的HOC设置并传递给我们。
+            // 无论哪一种方式，我们现在应该知道初始的projectId应该是什么，所以在redux的store中设置它。
             if (
                 props.projectId !== '' &&
                 props.projectId !== null &&
@@ -57,7 +62,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             if (prevProps.assetHost !== this.props.assetHost) {
                 storage.setAssetHost(this.props.assetHost);
             }
-            if (this.props.isFetchingWithId && !prevProps.isFetchingWithId) {
+            if (this.props.isFetchingWithId && !prevProps.isFetchingWithId && !this.props.isDIY) {
                 this.fetchProject(this.props.reduxProjectId, this.props.loadingState);
             }
             if (this.props.isShowingProject && !prevProps.isShowingProject) {
@@ -101,6 +106,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 isFetchingWithId: isFetchingWithIdProp,
+                // eslint-disable-next-line no-unused-vars
+                isDIY,
                 ...componentProps
             } = this.props;
             return (
@@ -119,6 +126,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         isFetchingWithId: PropTypes.bool,
         isLoadingProject: PropTypes.bool,
         isShowingProject: PropTypes.bool,
+        isDIY: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onActivateTab: PropTypes.func,
         onError: PropTypes.func,
@@ -130,8 +138,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         setProjectId: PropTypes.func
     };
     ProjectFetcherComponent.defaultProps = {
-        assetHost: 'https://assets.scratch.mit.edu',
-        projectHost: 'https://projects.scratch.mit.edu'
+        assetHost: ASSET_HOST,
+        projectHost: PROJECT_HOST
     };
 
     const mapStateToProps = state => ({
@@ -140,7 +148,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         isLoadingProject: getIsLoading(state.scratchGui.projectState.loadingState),
         isShowingProject: getIsShowingProject(state.scratchGui.projectState.loadingState),
         loadingState: state.scratchGui.projectState.loadingState,
-        reduxProjectId: state.scratchGui.projectState.projectId
+        reduxProjectId: state.scratchGui.projectState.projectId,
+        isDIY: state.scratchGui.projectState.isDIY
     });
     const mapDispatchToProps = dispatch => ({
         onActivateTab: tab => dispatch(activateTab(tab)),

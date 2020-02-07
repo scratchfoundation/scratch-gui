@@ -8,8 +8,11 @@ import {injectIntl, intlShape} from 'react-intl';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {
+    LoadingStates,
+    setIsFetchingDIY,
     getIsError,
-    getIsShowingProject
+    getIsShowingProject,
+    onFetchedProjectData
 } from '../reducers/project-state';
 import {
     activateTab,
@@ -38,20 +41,69 @@ import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
+import {IS_DIY_FIRST} from '../lib/constants';
 
 class GUI extends React.Component {
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
+        // const url = 'https://steam.nosdn.127.net/885318eb-ad83-44c4-afe3-d3bea0a0d2ab.sb3';
+        // const url = window.projectUrl;
+        const url = parent.projectUrl;
+        if (!IS_DIY_FIRST) return;
+        if (url && url !== null) {
+            this.props.setFetchingDIY();
+            fetch(url, {
+                method: 'GET'
+            })
+                .then(res => res.blob())
+                .then(blob => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        // setTimeout(() => {
+                        //     this.props.vm.loadProject(reader.result)
+                        //         .then(() => {
+                        //             // eslint-disable-next-line no-undef
+                        //             // analytics.event({
+                        //             //     category: 'project',
+                        //             //     action: 'Import Project File',
+                        //             //     nonInteraction: true
+                        //             // });
+                        //             if (!this.props.isVMStarted) {
+                        //                 setTimeout(() => this.props.vm.renderer.draw());
+                        //             }
+                        //         });
+                        // }, 2000);
+                        if (reader.result) {
+                            setTimeout(() => {
+                                this.props.onFetchedProjectData(reader.result, this.props.loadingState);
+                            });
+                        } else {
+                            throw new Error('Could not find project');
+                        }
+                    };
+                    reader.readAsArrayBuffer(blob);
+                })
+                .catch(err => {
+                    // eslint-disable-next-line no-alert
+                    alert(`项目加载失败${err}`);
+                });
+        }
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
-            this.props.onUpdateProjectId(this.props.projectId);
+            if (!IS_DIY_FIRST && this.props.isDIY) {
+                this.props.onUpdateProjectId(this.props.projectId);
+            } else if (!this.props.isDIY) {
+                this.props.onUpdateProjectId(this.props.projectId);
+            }
         }
         if (this.props.isShowingProject && !prevProps.isShowingProject) {
             // this only notifies container when a project changes from not yet loaded to loaded
             // At this time the project view in www doesn't need to know when a project is unloaded
+            // 仅当项目从尚未加载变为加载时才通知容器
+            // 在这时页面中的项目视图不需要知道项目什么时候被卸载
             this.props.onProjectLoaded();
         }
     }
@@ -61,6 +113,8 @@ class GUI extends React.Component {
                 `Error in Scratch GUI [location=${window.location}]: ${this.props.error}`);
         }
         const {
+            // eslint-disable-next-line no-unused-vars
+            isVMStarted,
             /* eslint-disable no-unused-vars */
             assetHost,
             cloudHost,
@@ -68,6 +122,8 @@ class GUI extends React.Component {
             isError,
             isScratchDesktop,
             isShowingProject,
+            // eslint-disable-next-line no-unused-vars
+            isDIY,
             onProjectLoaded,
             onStorageInit,
             onUpdateProjectId,
@@ -79,6 +135,12 @@ class GUI extends React.Component {
             fetchingProject,
             isLoading,
             loadingStateVisible,
+            // eslint-disable-next-line no-unused-vars
+            loadingState,
+            // eslint-disable-next-line no-unused-vars
+            onFetchedProjectData: onFetchedProjectDataProp,
+            // eslint-disable-next-line no-unused-vars
+            setFetchingDIY,
             ...componentProps
         } = this.props;
         return (
@@ -103,6 +165,7 @@ GUI.propTypes = {
     isLoading: PropTypes.bool,
     isScratchDesktop: PropTypes.bool,
     isShowingProject: PropTypes.bool,
+    isDIY: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onProjectLoaded: PropTypes.func,
     onSeeCommunity: PropTypes.func,
@@ -112,7 +175,11 @@ GUI.propTypes = {
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     telemetryModalVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    isVMStarted: PropTypes.bool,
+    onFetchedProjectData: PropTypes.func,
+    loadingState: PropTypes.oneOf(LoadingStates),
+    setFetchingDIY: PropTypes.func
 };
 
 GUI.defaultProps = {
@@ -149,7 +216,10 @@ const mapStateToProps = state => {
         ),
         telemetryModalVisible: state.scratchGui.modals.telemetryModal,
         tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        isVMStarted: state.scratchGui.vmStatus.started,
+        isDIY: state.scratchGui.projectState.isDIY,
+        loadingState: state.scratchGui.projectState.loadingState
     };
 };
 
@@ -160,7 +230,10 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
+    onFetchedProjectData: (projectData, loadingState) =>
+        dispatch(onFetchedProjectData(projectData, loadingState)),
+    setFetchingDIY: () => dispatch(setIsFetchingDIY())
 });
 
 const ConnectedGUI = injectIntl(connect(
@@ -176,7 +249,7 @@ const WrappedGui = compose(
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
     QueryParserHOC,
-    ProjectFetcherHOC,
+    ProjectFetcherHOC, // 加载项目hoc
     TitledHOC,
     ProjectSaverHOC,
     vmListenerHOC,

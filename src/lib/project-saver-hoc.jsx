@@ -57,12 +57,17 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (typeof window === 'object') {
                 // Note: it might be better to use a listener instead of assigning onbeforeunload;
                 // but then it'd be hard to turn this listening off in our tests
+                // 注意：最好是使用监听器代替 onbeforeunload
+                // 但是很难在我们的测试中关掉监听器
                 window.onbeforeunload = e => this.leavePageConfirm(e);
             }
 
             // Allow the GUI consumer to pass in a function to receive a trigger
             // for triggering thumbnail or whole project saves.
             // These functions are called with null on unmount to prevent stale references.
+            
+            // 允许 GUI 用户传入一个方法用于接收触发缩略图或保存项目的触发器。
+            // 在卸载时这些方法会被 null 调用，用来防止过时的引用。
             this.props.onSetProjectThumbnailer(this.getProjectThumbnail);
             this.props.onSetProjectSaver(this.tryToAutoSave);
         }
@@ -94,15 +99,19 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
 
             // see if we should "create" the current project on the server
+            // 看一下是否应该在服务器上“创建”当前项目。
             //
             // don't try to create or save immediately after trying to create
+            // 不要在尝试创建后立即尝试去创建或保存。
             if (prevProps.isCreatingNew) return;
             // if we're newly able to create this project, create it!
+            // 如果我们最近可以创建这个项目，那就创建。
             if (this.isShowingCreatable(this.props) && !this.isShowingCreatable(prevProps)) {
                 this.props.onCreateProject();
             }
 
             // see if we should save/update the current project on the server
+            // 看一下是否应该在服务器上 save/update 当前项目
             //
             // don't try to save immediately after trying to save
             if (prevProps.isUpdating) return;
@@ -120,16 +129,24 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // which happens when going from project to editor view.
             // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
             // Remove project thumbnailer function since the components are unmounting
+
+            // 不能取消设置 beforeunload 因为它可能不在属于这个组件
+            // 即，如果该组件的另一个已在该组件卸载前被挂载，那么在项目到编辑器的过程中会发生这种情况。
+
+            // 删除项目缩略图，因为组件正在被卸载
             this.props.onSetProjectThumbnailer(null);
             this.props.onSetProjectSaver(null);
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
                 // both methods of returning a value may be necessary for browser compatibility
+                // 这两种有返回值的方法对于处理浏览器兼容性来说都是十分必要的。
                 (e || window.event).returnValue = true;
                 return true;
             }
             return; // Returning undefined prevents the prompt from coming up
+            // 返回 undefined 可以防止接下来出现提示。
+
         }
         clearAutoSaveTimeout () {
             if (this.props.autoSaveTimeoutId !== null) {
@@ -158,12 +175,14 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 .then(() => {
                     // there's an http response object available here, but we don't need to examine
                     // it, because there are no values contained in it that we care about
+                    // 这里有一个 http 响应对象，但是我们不需要检查它，因为没有需要我们关心的值。
                     this.props.onUpdatedProject(this.props.loadingState);
                     this.props.onShowSaveSuccessAlert();
                 })
                 .catch(err => {
                     // Always show the savingError alert because it gives the
                     // user the chance to download or retry the save manually.
+                    // 始终显示 savingError 提示框，因为它给用户提供了手动下载和重新保存的机会。
                     this.props.onShowAlert('savingError');
                     this.props.onProjectError(err);
                 });
@@ -225,7 +244,11 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // while in the process of saving a project (e.g. the
             // serialized project refers to a newer asset than what
             // we just finished saving).
+
+            // 现在开始序列化 VM，之后会异步地将资源存储到服务器。
+            // 这是为了确保在保存项目的过程中资源不会被更新（例如：序列化的项目指的是比我们刚刚保存的资源更新的资源）。
             const savedVMState = this.props.vm.toJSON();
+            console.log(this.props.vm);
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -236,8 +259,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         asset.assetId
                     ).then(response => {
                         // Asset servers respond with {status: ok} for successful POSTs
+                        // 成功的 POST，资源服务器会返回 {status: ok}
                         if (response.status !== 'ok') {
                             // Errors include a `code` property, e.g. "Forbidden"
+                            // 错误包含‘code’属性，比如：’Forbidden‘
                             return Promise.reject(response.code);
                         }
                         asset.clean = true;

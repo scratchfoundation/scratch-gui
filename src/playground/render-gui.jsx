@@ -6,9 +6,12 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
+import {LOGO_ADDRESS, IS_SHOW_BAGGAGE} from '../lib/constants';
 
 const onClickLogo = () => {
-    window.location = 'https://scratch.mit.edu';
+    if (LOGO_ADDRESS) {
+        window.location = LOGO_ADDRESS;
+    }
 };
 
 const handleTelemetryModalCancel = () => {
@@ -34,6 +37,9 @@ export default appTarget => {
     // note that redux's 'compose' function is just being used as a general utility to make
     // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
     // ability to compose reducers.
+
+    // redux的”compose“功能仅用作一个通用工具，以使HOC的构造函数调用的层次结构更加清晰；
+    // 它与redux组成的reducers功能无关。
     const WrappedGui = compose(
         AppStateHOC,
         HashParserHOC
@@ -58,11 +64,13 @@ export default appTarget => {
 
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
+        // 在离开之前警告
         window.onbeforeunload = () => true;
     }
 
     ReactDOM.render(
         // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
+        // 重要的：这是在检查”simulateScratchDesktop“是否是真实的，而不仅仅是定义！
         simulateScratchDesktop ?
             <WrappedGui
                 canEditTitle
@@ -75,7 +83,7 @@ export default appTarget => {
             /> :
             <WrappedGui
                 canEditTitle
-                backpackVisible
+                backpackVisible={IS_SHOW_BAGGAGE}
                 showComingSoon
                 backpackHost={backpackHost}
                 canSave={false}

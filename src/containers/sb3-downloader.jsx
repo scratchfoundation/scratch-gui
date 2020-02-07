@@ -11,6 +11,11 @@ import downloadBlob from '../lib/download-blob';
  * The component can then be used to attach project saving functionality
  * to any other component:
  *
+ * 项目保存组件通过 downloadProject 方法传递给它的子组件。
+ * 它期望子组件是一个带有签名的方法
+ *
+ * 这个组件可以将项目保存功能附加到其它任何组件。
+ *
  * <SB3Downloader>{(downloadProject, props) => (
  *     <MyCoolComponent
  *         onClick={downloadProject}

@@ -1,5 +1,7 @@
 import keyMirror from 'keymirror';
 
+import {DEFAULT_PROJECT_ID} from '../lib/constants';
+
 const DONE_CREATING_COPY = 'scratch-gui/project-state/DONE_CREATING_COPY';
 const DONE_CREATING_NEW = 'scratch-gui/project-state/DONE_CREATING_NEW';
 const DONE_FETCHING_DEFAULT = 'scratch-gui/project-state/DONE_FETCHING_DEFAULT';
@@ -22,8 +24,9 @@ const START_MANUAL_UPDATING = 'scratch-gui/project-state/START_MANUAL_UPDATING';
 const START_REMIXING = 'scratch-gui/project-state/START_REMIXING';
 const START_UPDATING_BEFORE_CREATING_COPY = 'scratch-gui/project-state/START_UPDATING_BEFORE_CREATING_COPY';
 const START_UPDATING_BEFORE_CREATING_NEW = 'scratch-gui/project-state/START_UPDATING_BEFORE_CREATING_NEW';
+const START_FETCHING_DIY = 'scratch-gui/project-state/START_FETCHING_DIY';
 
-const defaultProjectId = '0'; // hardcoded id of default project
+const defaultProjectId = DEFAULT_PROJECT_ID; // hardcoded id of default project
 
 const LoadingState = keyMirror({
     NOT_LOADED: null,
@@ -108,7 +111,8 @@ const initialState = {
     error: null,
     projectData: null,
     projectId: null,
-    loadingState: LoadingState.NOT_LOADED
+    loadingState: LoadingState.NOT_LOADED,
+    isDIY: false // 自定义的导入方式
 };
 
 const reducer = function (state, action) {
@@ -364,6 +368,10 @@ const reducer = function (state, action) {
             });
         }
         return state;
+    case START_FETCHING_DIY:
+        return Object.assign({}, state, {
+            isDIY: true
+        });
     default:
         return state;
     }
@@ -471,6 +479,10 @@ const setProjectId = id => ({
     projectId: id
 });
 
+const setIsFetchingDIY = () => ({
+    type: START_FETCHING_DIY
+});
+
 const requestNewProject = needSave => {
     if (needSave) return {type: START_UPDATING_BEFORE_CREATING_NEW};
     return {type: START_FETCHING_NEW};
@@ -538,5 +550,6 @@ export {
     requestNewProject,
     requestProjectUpload,
     saveProjectAsCopy,
-    setProjectId
+    setProjectId,
+    setIsFetchingDIY
 };

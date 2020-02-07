@@ -4,6 +4,7 @@ import defaultProject from './default-project';
 
 /**
  * Wrapper for ScratchStorage which adds default web sources.
+ * ScratchStorage的包装器，可添加默认的web资源。
  * @todo make this more configurable
  */
 class Storage extends ScratchStorage {

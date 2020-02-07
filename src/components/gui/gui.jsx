@@ -33,6 +33,7 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
+import {IS_SHOW_HEADER} from '../../lib/constants';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -199,35 +200,39 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
-                    accountNavOpen={accountNavOpen}
-                    authorId={authorId}
-                    authorThumbnailUrl={authorThumbnailUrl}
-                    authorUsername={authorUsername}
-                    canChangeLanguage={canChangeLanguage}
-                    canCreateCopy={canCreateCopy}
-                    canCreateNew={canCreateNew}
-                    canEditTitle={canEditTitle}
-                    canManageFiles={canManageFiles}
-                    canRemix={canRemix}
-                    canSave={canSave}
-                    canShare={canShare}
-                    className={styles.menuBarPosition}
-                    enableCommunity={enableCommunity}
-                    isShared={isShared}
-                    logo={logo}
-                    renderLogin={renderLogin}
-                    showComingSoon={showComingSoon}
-                    onClickAccountNav={onClickAccountNav}
-                    onClickLogo={onClickLogo}
-                    onCloseAccountNav={onCloseAccountNav}
-                    onLogOut={onLogOut}
-                    onOpenRegistration={onOpenRegistration}
-                    onProjectTelemetryEvent={onProjectTelemetryEvent}
-                    onSeeCommunity={onSeeCommunity}
-                    onShare={onShare}
-                    onToggleLoginOpen={onToggleLoginOpen}
-                />
+                {
+                    IS_SHOW_HEADER ? (
+                        <MenuBar
+                            accountNavOpen={accountNavOpen}
+                            authorId={authorId}
+                            authorThumbnailUrl={authorThumbnailUrl}
+                            authorUsername={authorUsername}
+                            canChangeLanguage={canChangeLanguage}
+                            canCreateCopy={canCreateCopy}
+                            canCreateNew={canCreateNew}
+                            canEditTitle={canEditTitle}
+                            canManageFiles={canManageFiles}
+                            canRemix={canRemix}
+                            canSave={canSave}
+                            canShare={canShare}
+                            className={styles.menuBarPosition}
+                            enableCommunity={enableCommunity}
+                            isShared={isShared}
+                            logo={logo}
+                            renderLogin={renderLogin}
+                            showComingSoon={showComingSoon}
+                            onClickAccountNav={onClickAccountNav}
+                            onClickLogo={onClickLogo}
+                            onCloseAccountNav={onCloseAccountNav}
+                            onLogOut={onLogOut}
+                            onOpenRegistration={onOpenRegistration}
+                            onProjectTelemetryEvent={onProjectTelemetryEvent}
+                            onSeeCommunity={onSeeCommunity}
+                            onShare={onShare}
+                            onToggleLoginOpen={onToggleLoginOpen}
+                        />
+                    ) : ''
+                }
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>

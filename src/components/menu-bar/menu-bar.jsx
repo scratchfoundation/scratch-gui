@@ -141,6 +141,19 @@ MenuItemTooltip.propTypes = {
     isRtl: PropTypes.bool
 };
 
+const AboutButton = props => (
+    <Button
+        className={classNames(styles.menuBarItem, styles.hoverable)}
+        iconClassName={styles.aboutIcon}
+        iconSrc={aboutIcon}
+        onClick={props.onClick}
+    />
+);
+
+AboutButton.propTypes = {
+    onClick: PropTypes.func.isRequired
+};
+
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
@@ -311,17 +324,8 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
-        const handleClickAbout = this.props.onClickAbout;
         // Show the About button only if we have a handler for it (like in the desktop app)
-        const aboutButton = handleClickAbout ? (
-            <div className={classNames(styles.menuBarItem, styles.hoverable)}>
-                <img
-                    className={styles.aboutIcon}
-                    onClick={handleClickAbout}
-                    src={aboutIcon}
-                />
-            </div>
-        ) : null;
+        const aboutButton = this.props.onClickAbout ? <AboutButton onClick={this.props.onClickAbout} /> : null;
         return (
             <Box
                 className={classNames(

@@ -23,7 +23,7 @@ describe('Project state', () => {
         await driver.quit();
     });
 
-    test('File->New resets project title', async () => {
+    test.skip('File->New resets project title', async () => {
         const defaultProjectTitle = 'Scratch Project';
         await loadUri(uri);
         const inputEl = await findByXpath(`//input[@value="${defaultProjectTitle}"]`);

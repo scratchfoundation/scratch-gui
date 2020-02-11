@@ -25,18 +25,16 @@ class CostumeLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelected (item) {
-        const split = item.md5.split('.');
-        const type = split.length > 1 ? split[1] : null;
-        const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
-        const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
+        const rotationCenterX = item.dataFormat === 'svg' ? item.rotationCenterX : item.rotationCenterX / 2;
+        const rotationCenterY = item.dataFormat === 'svg' ? item.rotationCenterY : item.rotationCenterY / 2;
         const vmCostume = {
             name: item.name,
             rotationCenterX,
             rotationCenterY,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
-        this.props.vm.addCostumeFromLibrary(item.md5, vmCostume);
+        this.props.vm.addCostumeFromLibrary(item.md5ext, vmCostume);
     }
     render () {
         return (

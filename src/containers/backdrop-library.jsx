@@ -27,13 +27,13 @@ class BackdropLibrary extends React.Component {
     handleItemSelect (item) {
         const vmBackdrop = {
             name: item.name,
-            rotationCenterX: item.info[0] && item.info[0] / 2,
-            rotationCenterY: item.info[1] && item.info[1] / 2,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         // Do not switch to stage, just add the backdrop
-        this.props.vm.addBackdrop(item.md5, vmBackdrop);
+        this.props.vm.addBackdrop(item.md5ext, vmBackdrop);
     }
     render () {
         return (

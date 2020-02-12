@@ -581,20 +581,20 @@
     },
     {
         "name": "Ballerina-a",
-        "md5": "3525966db57e6b3fe88ee7c76c9d81bc.svg",
+        "md5": "5197d3778baf55da6b81b3ada1e10021.svg",
         "type": "costume",
         "tags": [
             "dance"
         ],
         "info": [
-            75,
-            75,
+            31,
+            49,
             1
         ]
     },
     {
         "name": "Ballerina-b",
-        "md5": "605ad62c87a35fb50271ed93b89d9fcf.svg",
+        "md5": "4ccb1752a43f48aafe490c9c08e58c27.svg",
         "type": "costume",
         "tags": [
             "dance"
@@ -607,7 +607,7 @@
     },
     {
         "name": "Ballerina-c",
-        "md5": "4acedfe3b301fe89729ad8e7939f1df6.svg",
+        "md5": "fc02bf591dd3d91eeeb50c7424d08274.svg",
         "type": "costume",
         "tags": [
             "dance"
@@ -620,7 +620,7 @@
     },
     {
         "name": "Ballerina-d",
-        "md5": "ec51725c50440636d4830ff1a8ec20ab.svg",
+        "md5": "5aae21aee33c3f1ae943af5ea11254bf.svg",
         "type": "costume",
         "tags": [
             "dance"
@@ -902,7 +902,7 @@
     },
     {
         "name": "Bear-b",
-        "md5": "cad7a4a674a6b4b960c5b256a26c87e9.svg",
+        "md5": "6f303e972f33fcb7ef36d0d8012d0975.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -911,7 +911,7 @@
         ],
         "info": [
             94,
-            191,
+            190,
             1
         ]
     },
@@ -3099,7 +3099,7 @@
     },
     {
         "name": "Donut",
-        "md5": "3abfc584e9e6c3e0ec5112fa25b73b1d.svg",
+        "md5": "316a67c9e966fd015b4538f54be456db.svg",
         "type": "costume",
         "tags": [
             "food",
@@ -3112,8 +3112,8 @@
             "sprankles"
         ],
         "info": [
-            73,
-            15,
+            72,
+            14,
             1
         ]
     },
@@ -3215,7 +3215,7 @@
     },
     {
         "name": "Dot-c",
-        "md5": "4dc87d7a4a6050da4d4b6539492ad257.svg",
+        "md5": "9e5a6cc6970ce4932a09affba70a45b0.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -3224,14 +3224,14 @@
             "wren mcdonald"
         ],
         "info": [
-            51,
-            69,
+            50,
+            68,
             1
         ]
     },
     {
         "name": "Dot-d",
-        "md5": "ae7032906a6aab9caa74374b50037912.svg",
+        "md5": "fb047c94113ee4c6664305a338525e6a.svg",
         "type": "costume",
         "tags": [
             "animals",
@@ -3240,8 +3240,8 @@
             "wren mcdonald"
         ],
         "info": [
-            57,
-            67,
+            56,
+            66,
             1
         ]
     },
@@ -3277,7 +3277,7 @@
     },
     {
         "name": "Dragon-a",
-        "md5": "a166d123597ed8896cfb7c397a9fc9c4.svg",
+        "md5": "12ead885460d96a19132e5970839d36d.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -3286,14 +3286,14 @@
             "flying"
         ],
         "info": [
-            210,
-            150,
+            124,
+            106,
             1
         ]
     },
     {
         "name": "Dragon-b",
-        "md5": "235f7a2f17fce30bd3c9cb7360c87994.svg",
+        "md5": "3f672475ad4ca5d1f9331cffd4223140.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -3302,14 +3302,14 @@
             "flying"
         ],
         "info": [
-            210,
-            150,
+            152,
+            99,
             1
         ]
     },
     {
         "name": "Dragon-c",
-        "md5": "3a6ff36986f85e6d005cfc65d9eb4978.svg",
+        "md5": "e0aa0083fa0b97da97600d4dbb2055e5.svg",
         "type": "costume",
         "tags": [
             "fantasy",
@@ -3318,8 +3318,8 @@
             "flying"
         ],
         "info": [
-            210,
-            150,
+            124,
+            105,
             1
         ]
     },

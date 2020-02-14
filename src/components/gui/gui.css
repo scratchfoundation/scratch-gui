@@ -7,7 +7,9 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
+    /* GROK: Hide menu bar 
+    height: calc(100% - $menu-bar-height); */
+    height: 100%;
     background-color: $ui-primary;
 }
 

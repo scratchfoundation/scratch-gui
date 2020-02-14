@@ -1,7 +1,6 @@
 [
     {
         "name": "Arctic",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "cold",
@@ -20,7 +19,6 @@
     },
     {
         "name": "Baseball 1",
-        "type": "backdrop",
         "tags": [
             "baseball",
             "sports",
@@ -36,7 +34,6 @@
     },
     {
         "name": "Baseball 2",
-        "type": "backdrop",
         "tags": [
             "baseball",
             "sports",
@@ -52,7 +49,6 @@
     },
     {
         "name": "Basketball 1",
-        "type": "backdrop",
         "tags": [
             "sports",
             "outdoors",
@@ -68,7 +64,6 @@
     },
     {
         "name": "Basketball 2",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "sports",
@@ -83,7 +78,6 @@
     },
     {
         "name": "Beach Malibu",
-        "type": "backdrop",
         "tags": [
             "outdoors"
         ],
@@ -96,7 +90,6 @@
     },
     {
         "name": "Beach Rio",
-        "type": "backdrop",
         "tags": [
             "outdoors"
         ],
@@ -109,7 +102,6 @@
     },
     {
         "name": "Bedroom 1",
-        "type": "backdrop",
         "tags": [
             "bedroom",
             "indoors"
@@ -123,7 +115,6 @@
     },
     {
         "name": "Bedroom 2",
-        "type": "backdrop",
         "tags": [
             "indoors"
         ],
@@ -136,7 +127,6 @@
     },
     {
         "name": "Bedroom 3",
-        "type": "backdrop",
         "tags": [
             "indoors"
         ],
@@ -149,7 +139,6 @@
     },
     {
         "name": "Bench With View",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "hill",
@@ -164,7 +153,6 @@
     },
     {
         "name": "Blue Sky",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "flying"
@@ -178,7 +166,6 @@
     },
     {
         "name": "Blue Sky 2 ",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "flying"
@@ -192,7 +179,6 @@
     },
     {
         "name": "Boardwalk",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "ocean"
@@ -206,7 +192,6 @@
     },
     {
         "name": "Canyon",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature"
@@ -220,7 +205,6 @@
     },
     {
         "name": "Castle 1",
-        "type": "backdrop",
         "tags": [
             "fantasy"
         ],
@@ -233,7 +217,6 @@
     },
     {
         "name": "Castle 2",
-        "type": "backdrop",
         "tags": [
             "fantasy"
         ],
@@ -246,7 +229,6 @@
     },
     {
         "name": "Castle 3",
-        "type": "backdrop",
         "tags": [
             "fantasy"
         ],
@@ -259,7 +241,6 @@
     },
     {
         "name": "Castle 4",
-        "type": "backdrop",
         "tags": [
             "fantasy"
         ],
@@ -272,7 +253,6 @@
     },
     {
         "name": "Chalkboard",
-        "type": "backdrop",
         "tags": [
             "indoors",
             "school"
@@ -286,7 +266,6 @@
     },
     {
         "name": "Circles",
-        "type": "backdrop",
         "tags": [
             "patterns"
         ],
@@ -299,7 +278,6 @@
     },
     {
         "name": "City With Water",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "boston"
@@ -313,7 +291,6 @@
     },
     {
         "name": "Colorful City",
-        "type": "backdrop",
         "tags": [
             "city",
             "town",
@@ -330,7 +307,6 @@
     },
     {
         "name": "Concert",
-        "type": "backdrop",
         "tags": [
             "indoors",
             "music",
@@ -345,7 +321,6 @@
     },
     {
         "name": "Desert",
-        "type": "backdrop",
         "tags": [
             "desert",
             " landscape",
@@ -361,7 +336,6 @@
     },
     {
         "name": "Farm",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "chicken",
@@ -378,7 +352,6 @@
     },
     {
         "name": "Field At Mit",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "architecture"
@@ -392,7 +365,6 @@
     },
     {
         "name": "Flowers",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature"
@@ -406,7 +378,6 @@
     },
     {
         "name": "Forest",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "forest"
@@ -420,7 +391,6 @@
     },
     {
         "name": "Galaxy",
-        "type": "backdrop",
         "tags": [
             "space",
             "stars",
@@ -435,7 +405,6 @@
     },
     {
         "name": "Garden-rock",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             " garden",
@@ -450,7 +419,6 @@
     },
     {
         "name": "Greek Theater",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "theatre"
@@ -464,7 +432,6 @@
     },
     {
         "name": "Hall",
-        "type": "backdrop",
         "tags": [
             "indoors"
         ],
@@ -477,7 +444,6 @@
     },
     {
         "name": "Hay Field",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "farm"
@@ -491,7 +457,6 @@
     },
     {
         "name": "Hearts",
-        "type": "backdrop",
         "tags": [
             "patterns"
         ],
@@ -504,7 +469,6 @@
     },
     {
         "name": "Hill",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature"
@@ -518,7 +482,6 @@
     },
     {
         "name": "Jungle",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "forest",
@@ -533,7 +496,6 @@
     },
     {
         "name": "Jurassic",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "dinosaur",
@@ -548,7 +510,6 @@
     },
     {
         "name": "Light",
-        "type": "backdrop",
         "tags": [
             "patterns"
         ],
@@ -561,7 +522,6 @@
     },
     {
         "name": "Metro",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "city",
@@ -576,7 +536,6 @@
     },
     {
         "name": "Moon",
-        "type": "backdrop",
         "tags": [
             "space",
             "nasa",
@@ -591,7 +550,6 @@
     },
     {
         "name": "Mountain",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "snow",
@@ -607,7 +565,6 @@
     },
     {
         "name": "Mural",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "mural",
@@ -624,7 +581,6 @@
     },
     {
         "name": "Nebula",
-        "type": "backdrop",
         "tags": [
             "space",
             "nasa",
@@ -640,7 +596,6 @@
     },
     {
         "name": "Neon Tunnel",
-        "type": "backdrop",
         "tags": [
             "games",
             "game",
@@ -655,7 +610,6 @@
     },
     {
         "name": "Night City",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "urban",
@@ -671,7 +625,6 @@
     },
     {
         "name": "Night City With Street",
-        "type": "backdrop",
         "tags": [
             "urban",
             "city",
@@ -687,7 +640,6 @@
     },
     {
         "name": "Party",
-        "type": "backdrop",
         "tags": [
             "indoors",
             "inflatable"
@@ -701,7 +653,6 @@
     },
     {
         "name": "Pathway",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "garden"
@@ -715,7 +666,6 @@
     },
     {
         "name": "Playground",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "play"
@@ -729,7 +679,6 @@
     },
     {
         "name": "Playing Field",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "sports"
@@ -743,7 +692,6 @@
     },
     {
         "name": "Pool",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "sports",
@@ -759,7 +707,6 @@
     },
     {
         "name": "Rays",
-        "type": "backdrop",
         "tags": [
             "patterns",
             "raimondious"
@@ -773,7 +720,6 @@
     },
     {
         "name": "Refrigerator",
-        "type": "backdrop",
         "tags": [
             "food",
             "indoors",
@@ -788,7 +734,6 @@
     },
     {
         "name": "Room 1",
-        "type": "backdrop",
         "tags": [
             "indoors",
             "books",
@@ -803,7 +748,6 @@
     },
     {
         "name": "Room 2",
-        "type": "backdrop",
         "tags": [
             "indoors"
         ],
@@ -816,7 +760,6 @@
     },
     {
         "name": "Savanna",
-        "type": "backdrop",
         "tags": [
             "africa",
             "savanna",
@@ -833,7 +776,6 @@
     },
     {
         "name": "School",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "building",
@@ -849,7 +791,6 @@
     },
     {
         "name": "Slopes",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "winter",
@@ -867,7 +808,6 @@
     },
     {
         "name": "Soccer",
-        "type": "backdrop",
         "tags": [
             "soccer",
             "football",
@@ -883,7 +823,6 @@
     },
     {
         "name": "Soccer 2",
-        "type": "backdrop",
         "tags": [
             "soccer",
             "football",
@@ -899,7 +838,6 @@
     },
     {
         "name": "Space",
-        "type": "backdrop",
         "tags": [
             "space",
             "moon",
@@ -916,7 +854,6 @@
     },
     {
         "name": "Space City 1",
-        "type": "backdrop",
         "tags": [
             "space",
             "moon",
@@ -933,7 +870,6 @@
     },
     {
         "name": "Space City 2",
-        "type": "backdrop",
         "tags": [
             "space",
             "moon",
@@ -950,7 +886,6 @@
     },
     {
         "name": "Spaceship",
-        "type": "backdrop",
         "tags": [
             "space",
             "moon",
@@ -967,7 +902,6 @@
     },
     {
         "name": "Spotlight",
-        "type": "backdrop",
         "tags": [
             "music",
             "dance"
@@ -981,7 +915,6 @@
     },
     {
         "name": "Stars",
-        "type": "backdrop",
         "tags": [
             "space",
             "nasa"
@@ -995,7 +928,6 @@
     },
     {
         "name": "Stripes",
-        "type": "backdrop",
         "tags": [
             "patterns"
         ],
@@ -1008,7 +940,6 @@
     },
     {
         "name": "Theater",
-        "type": "backdrop",
         "tags": [
             "indoors",
             "music",
@@ -1023,7 +954,6 @@
     },
     {
         "name": "Theater 2",
-        "type": "backdrop",
         "tags": [
             "music"
         ],
@@ -1036,7 +966,6 @@
     },
     {
         "name": "Tree",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature"
@@ -1050,7 +979,6 @@
     },
     {
         "name": "Underwater 1",
-        "type": "backdrop",
         "tags": [
             "ocean",
             "outdoors",
@@ -1066,7 +994,6 @@
     },
     {
         "name": "Underwater 2",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature",
@@ -1081,7 +1008,6 @@
     },
     {
         "name": "Urban",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "city",
@@ -1097,7 +1023,6 @@
     },
     {
         "name": "Wall 1",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "brick"
@@ -1111,7 +1036,6 @@
     },
     {
         "name": "Wall 2",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "brick"
@@ -1125,7 +1049,6 @@
     },
     {
         "name": "Water And Rocks",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "nature",
@@ -1142,7 +1065,6 @@
     },
     {
         "name": "Wetland",
-        "type": "backdrop",
         "tags": [
             "outdoor",
             "nature",
@@ -1159,7 +1081,6 @@
     },
     {
         "name": "Winter",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "trees",
@@ -1175,7 +1096,6 @@
     },
     {
         "name": "Witch House",
-        "type": "backdrop",
         "tags": [
             "fantasy",
             "indoors",
@@ -1190,7 +1110,6 @@
     },
     {
         "name": "Woods",
-        "type": "backdrop",
         "tags": [
             "fantasy",
             "spooky",
@@ -1209,7 +1128,6 @@
     },
     {
         "name": "Woods And Bench",
-        "type": "backdrop",
         "tags": [
             "outdoors",
             "park"
@@ -1223,7 +1141,6 @@
     },
     {
         "name": "Xy-grid",
-        "type": "backdrop",
         "tags": [
             "grid",
             "xy",
@@ -1238,7 +1155,6 @@
     },
     {
         "name": "Xy-grid-20px",
-        "type": "backdrop",
         "tags": [
             "grid",
             "xy",
@@ -1253,7 +1169,6 @@
     },
     {
         "name": "Xy-grid-30px",
-        "type": "backdrop",
         "tags": [
             "grid",
             "xy",

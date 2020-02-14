@@ -1,7 +1,6 @@
 [
     {
         "name": "abby-a",
-        "type": "costume",
         "tags": [
             "people",
             "person",
@@ -16,7 +15,6 @@
     },
     {
         "name": "abby-b",
-        "type": "costume",
         "tags": [
             "people",
             "person",
@@ -31,7 +29,6 @@
     },
     {
         "name": "abby-c",
-        "type": "costume",
         "tags": [
             "people",
             "person",
@@ -46,7 +43,6 @@
     },
     {
         "name": "abby-d",
-        "type": "costume",
         "tags": [
             "people",
             "person",
@@ -61,7 +57,6 @@
     },
     {
         "name": "amon",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -75,7 +70,6 @@
     },
     {
         "name": "andie-a",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -94,7 +88,6 @@
     },
     {
         "name": "andie-b",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -113,7 +106,6 @@
     },
     {
         "name": "andie-c",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -132,7 +124,6 @@
     },
     {
         "name": "andie-d",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -151,7 +142,6 @@
     },
     {
         "name": "anina pop down",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -165,7 +155,6 @@
     },
     {
         "name": "anina pop front",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -179,7 +168,6 @@
     },
     {
         "name": "anina pop l arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -193,7 +181,6 @@
     },
     {
         "name": "anina pop left",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -207,7 +194,6 @@
     },
     {
         "name": "anina pop r arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -221,7 +207,6 @@
     },
     {
         "name": "anina pop right",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -235,7 +220,6 @@
     },
     {
         "name": "anina pop stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -249,7 +233,6 @@
     },
     {
         "name": "anina r cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -263,7 +246,6 @@
     },
     {
         "name": "anina stance",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -277,7 +259,6 @@
     },
     {
         "name": "anina top freeze",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -291,7 +272,6 @@
     },
     {
         "name": "anina top l step",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -305,7 +285,6 @@
     },
     {
         "name": "anina top r step",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -319,7 +298,6 @@
     },
     {
         "name": "anina top stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -333,7 +311,6 @@
     },
     {
         "name": "apple",
-        "type": "costume",
         "tags": [
             "food",
             "red",
@@ -349,7 +326,6 @@
     },
     {
         "name": "arrow1-a",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -364,7 +340,6 @@
     },
     {
         "name": "arrow1-b",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -379,7 +354,6 @@
     },
     {
         "name": "arrow1-c",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -394,7 +368,6 @@
     },
     {
         "name": "arrow1-d",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -409,7 +382,6 @@
     },
     {
         "name": "avery walking-a",
-        "type": "costume",
         "tags": [
             "people",
             "walking"
@@ -423,7 +395,6 @@
     },
     {
         "name": "avery walking-b",
-        "type": "costume",
         "tags": [
             "people",
             "walking"
@@ -437,7 +408,6 @@
     },
     {
         "name": "avery walking-c",
-        "type": "costume",
         "tags": [
             "people",
             "walking"
@@ -451,7 +421,6 @@
     },
     {
         "name": "avery walking-d",
-        "type": "costume",
         "tags": [
             "people",
             "walking"
@@ -465,7 +434,6 @@
     },
     {
         "name": "avery-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -478,7 +446,6 @@
     },
     {
         "name": "avery-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -491,7 +458,6 @@
     },
     {
         "name": "ball-a",
-        "type": "costume",
         "tags": [
             "round",
             "game",
@@ -509,7 +475,6 @@
     },
     {
         "name": "ball-b",
-        "type": "costume",
         "tags": [
             "round",
             "game",
@@ -527,7 +492,6 @@
     },
     {
         "name": "ball-c",
-        "type": "costume",
         "tags": [
             "round",
             "game",
@@ -545,7 +509,6 @@
     },
     {
         "name": "ball-d",
-        "type": "costume",
         "tags": [
             "round",
             "game",
@@ -563,7 +526,6 @@
     },
     {
         "name": "ball-e",
-        "type": "costume",
         "tags": [
             "round",
             "game",
@@ -581,59 +543,54 @@
     },
     {
         "name": "ballerina-a",
-        "type": "costume",
         "tags": [
             "dance"
         ],
-        "assetId": "3525966db57e6b3fe88ee7c76c9d81bc",
+        "assetId": "5197d3778baf55da6b81b3ada1e10021",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "3525966db57e6b3fe88ee7c76c9d81bc.svg",
-        "rotationCenterX": 75,
-        "rotationCenterY": 75
+        "md5ext": "5197d3778baf55da6b81b3ada1e10021.svg",
+        "rotationCenterX": 31.00008984350052,
+        "rotationCenterY": 49
     },
     {
         "name": "ballerina-b",
-        "type": "costume",
         "tags": [
             "dance"
         ],
-        "assetId": "605ad62c87a35fb50271ed93b89d9fcf",
+        "assetId": "4ccb1752a43f48aafe490c9c08e58c27",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "605ad62c87a35fb50271ed93b89d9fcf.svg",
-        "rotationCenterX": 29.496243552524447,
-        "rotationCenterY": 23.769347672058046
+        "md5ext": "4ccb1752a43f48aafe490c9c08e58c27.svg",
+        "rotationCenterX": 29.496239121982484,
+        "rotationCenterY": 23.769351839794098
     },
     {
         "name": "ballerina-c",
-        "type": "costume",
         "tags": [
             "dance"
         ],
-        "assetId": "4acedfe3b301fe89729ad8e7939f1df6",
+        "assetId": "fc02bf591dd3d91eeeb50c7424d08274",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "4acedfe3b301fe89729ad8e7939f1df6.svg",
-        "rotationCenterX": 59.50259204017422,
-        "rotationCenterY": 59.18498926037006
+        "md5ext": "fc02bf591dd3d91eeeb50c7424d08274.svg",
+        "rotationCenterX": 59.502591601941845,
+        "rotationCenterY": 59.184989331170854
     },
     {
         "name": "ballerina-d",
-        "type": "costume",
         "tags": [
             "dance"
         ],
-        "assetId": "ec51725c50440636d4830ff1a8ec20ab",
+        "assetId": "5aae21aee33c3f1ae943af5ea11254bf",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "ec51725c50440636d4830ff1a8ec20ab.svg",
-        "rotationCenterX": 36.40098960393442,
-        "rotationCenterY": 77.9515998142805
+        "md5ext": "5aae21aee33c3f1ae943af5ea11254bf.svg",
+        "rotationCenterX": 36.40099014292747,
+        "rotationCenterY": 77.95160112758442
     },
     {
         "name": "balloon1-a",
-        "type": "costume",
         "tags": [
             "party",
             "pop",
@@ -651,7 +608,6 @@
     },
     {
         "name": "balloon1-b",
-        "type": "costume",
         "tags": [
             "party",
             "pop",
@@ -669,7 +625,6 @@
     },
     {
         "name": "balloon1-c",
-        "type": "costume",
         "tags": [
             "party",
             "pop",
@@ -687,7 +642,6 @@
     },
     {
         "name": "bananas",
-        "type": "costume",
         "tags": [
             "food",
             "yellow",
@@ -704,7 +658,6 @@
     },
     {
         "name": "baseball",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -720,7 +673,6 @@
     },
     {
         "name": "basketball",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -735,7 +687,6 @@
     },
     {
         "name": "bat-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -753,7 +704,6 @@
     },
     {
         "name": "bat-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -771,7 +721,6 @@
     },
     {
         "name": "bat-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -789,7 +738,6 @@
     },
     {
         "name": "bat-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -807,7 +755,6 @@
     },
     {
         "name": "batter-a",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -823,7 +770,6 @@
     },
     {
         "name": "batter-b",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -839,7 +785,6 @@
     },
     {
         "name": "batter-c",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -855,7 +800,6 @@
     },
     {
         "name": "batter-d",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -871,7 +815,6 @@
     },
     {
         "name": "beachball",
-        "type": "costume",
         "tags": [
             "round",
             "sports",
@@ -887,7 +830,6 @@
     },
     {
         "name": "bear-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -902,22 +844,20 @@
     },
     {
         "name": "bear-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
             "walking"
         ],
-        "assetId": "cad7a4a674a6b4b960c5b256a26c87e9",
+        "assetId": "6f303e972f33fcb7ef36d0d8012d0975",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "cad7a4a674a6b4b960c5b256a26c87e9.svg",
+        "md5ext": "6f303e972f33fcb7ef36d0d8012d0975.svg",
         "rotationCenterX": 94,
-        "rotationCenterY": 191
+        "rotationCenterY": 190.66666666666666
     },
     {
         "name": "bear-walk-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -932,7 +872,6 @@
     },
     {
         "name": "bear-walk-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -947,7 +886,6 @@
     },
     {
         "name": "bear-walk-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -962,7 +900,6 @@
     },
     {
         "name": "bear-walk-d",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -977,7 +914,6 @@
     },
     {
         "name": "bear-walk-e",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -992,7 +928,6 @@
     },
     {
         "name": "bear-walk-f",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -1007,7 +942,6 @@
     },
     {
         "name": "bear-walk-g",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -1022,7 +956,6 @@
     },
     {
         "name": "bear-walk-h",
-        "type": "costume",
         "tags": [
             "animals",
             "ipzy",
@@ -1037,7 +970,6 @@
     },
     {
         "name": "beetle",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -1053,7 +985,6 @@
     },
     {
         "name": "bell1",
-        "type": "costume",
         "tags": [
             "music",
             "holiday",
@@ -1069,7 +1000,6 @@
     },
     {
         "name": "ben-a",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -1086,7 +1016,6 @@
     },
     {
         "name": "ben-b",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -1103,7 +1032,6 @@
     },
     {
         "name": "ben-c",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -1120,7 +1048,6 @@
     },
     {
         "name": "ben-d",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -1137,7 +1064,6 @@
     },
     {
         "name": "bowl-a",
-        "type": "costume",
         "tags": [
             "thing",
             "food"
@@ -1151,7 +1077,6 @@
     },
     {
         "name": "bowtie",
-        "type": "costume",
         "tags": [
             "fashion"
         ],
@@ -1164,7 +1089,6 @@
     },
     {
         "name": "bread",
-        "type": "costume",
         "tags": [
             "food",
             "ipzy"
@@ -1178,7 +1102,6 @@
     },
     {
         "name": "broom",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -1194,7 +1117,6 @@
     },
     {
         "name": "building-a",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1210,7 +1132,6 @@
     },
     {
         "name": "building-b",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1226,7 +1147,6 @@
     },
     {
         "name": "building-c",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1242,7 +1162,6 @@
     },
     {
         "name": "building-d",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1258,7 +1177,6 @@
     },
     {
         "name": "building-e",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1274,7 +1192,6 @@
     },
     {
         "name": "building-f",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1290,7 +1207,6 @@
     },
     {
         "name": "building-g",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1306,7 +1222,6 @@
     },
     {
         "name": "building-h",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1322,7 +1237,6 @@
     },
     {
         "name": "building-i",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1338,7 +1252,6 @@
     },
     {
         "name": "building-j",
-        "type": "costume",
         "tags": [
             "things",
             "city",
@@ -1354,7 +1267,6 @@
     },
     {
         "name": "butterfly1-a",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -1371,7 +1283,6 @@
     },
     {
         "name": "butterfly1-b",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -1388,7 +1299,6 @@
     },
     {
         "name": "butterfly1-c",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -1405,7 +1315,6 @@
     },
     {
         "name": "butterfly2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "drawing",
@@ -1423,7 +1332,6 @@
     },
     {
         "name": "butterfly2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "drawing",
@@ -1441,7 +1349,6 @@
     },
     {
         "name": "button1",
-        "type": "costume",
         "tags": [
             "icons",
             "round",
@@ -1457,7 +1364,6 @@
     },
     {
         "name": "button2-a",
-        "type": "costume",
         "tags": [
             "icons",
             "blue",
@@ -1472,7 +1378,6 @@
     },
     {
         "name": "button2-b",
-        "type": "costume",
         "tags": [
             "icons",
             "orange",
@@ -1487,7 +1392,6 @@
     },
     {
         "name": "button3-a",
-        "type": "costume",
         "tags": [
             "icons",
             "gray",
@@ -1502,7 +1406,6 @@
     },
     {
         "name": "button3-b",
-        "type": "costume",
         "tags": [
             "icons",
             "blue",
@@ -1517,7 +1420,6 @@
     },
     {
         "name": "button4-a",
-        "type": "costume",
         "tags": [
             "icons",
             "checkmark"
@@ -1531,7 +1433,6 @@
     },
     {
         "name": "button4-b",
-        "type": "costume",
         "tags": [
             "icons",
             "checkmark"
@@ -1545,7 +1446,6 @@
     },
     {
         "name": "button5-a",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -1561,7 +1461,6 @@
     },
     {
         "name": "button5-b",
-        "type": "costume",
         "tags": [
             "icons",
             "symbols",
@@ -1577,7 +1476,6 @@
     },
     {
         "name": "cake-a",
-        "type": "costume",
         "tags": [
             "food",
             "bakery",
@@ -1596,7 +1494,6 @@
     },
     {
         "name": "cake-b",
-        "type": "costume",
         "tags": [
             "food",
             "bakery",
@@ -1616,7 +1513,6 @@
     },
     {
         "name": "calvrett jumping",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -1629,7 +1525,6 @@
     },
     {
         "name": "calvrett thinking",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -1642,7 +1537,6 @@
     },
     {
         "name": "casey-a",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -1658,7 +1552,6 @@
     },
     {
         "name": "casey-b",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -1674,7 +1567,6 @@
     },
     {
         "name": "casey-c",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -1690,7 +1582,6 @@
     },
     {
         "name": "casey-d",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -1706,7 +1597,6 @@
     },
     {
         "name": "cassy-a",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -1720,7 +1610,6 @@
     },
     {
         "name": "cassy-b",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -1734,7 +1623,6 @@
     },
     {
         "name": "cassy-c",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -1748,7 +1636,6 @@
     },
     {
         "name": "cassy-d",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -1762,7 +1649,6 @@
     },
     {
         "name": "cat 2",
-        "type": "costume",
         "tags": [
             "kitty",
             "kitten",
@@ -1778,7 +1664,6 @@
     },
     {
         "name": "cat flying-a",
-        "type": "costume",
         "tags": [
             "animals",
             "cat",
@@ -1794,7 +1679,6 @@
     },
     {
         "name": "cat flying-b",
-        "type": "costume",
         "tags": [
             "animals",
             "cat",
@@ -1810,7 +1694,6 @@
     },
     {
         "name": "cat-a",
-        "type": "costume",
         "tags": [
             "animals",
             "cat",
@@ -1829,7 +1712,6 @@
     },
     {
         "name": "cat-b",
-        "type": "costume",
         "tags": [
             "animals",
             "cat",
@@ -1848,7 +1730,6 @@
     },
     {
         "name": "catcher-a",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -1864,7 +1745,6 @@
     },
     {
         "name": "catcher-b",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -1880,7 +1760,6 @@
     },
     {
         "name": "catcher-c",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -1896,7 +1775,6 @@
     },
     {
         "name": "catcher-d",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -1912,7 +1790,6 @@
     },
     {
         "name": "centaur-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -1928,7 +1805,6 @@
     },
     {
         "name": "centaur-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -1944,7 +1820,6 @@
     },
     {
         "name": "centaur-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -1960,7 +1835,6 @@
     },
     {
         "name": "centaur-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -1976,7 +1850,6 @@
     },
     {
         "name": "champ99-a",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -1990,7 +1863,6 @@
     },
     {
         "name": "champ99-b",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2004,7 +1876,6 @@
     },
     {
         "name": "champ99-c",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2018,7 +1889,6 @@
     },
     {
         "name": "champ99-d",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2032,7 +1902,6 @@
     },
     {
         "name": "champ99-e",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2046,7 +1915,6 @@
     },
     {
         "name": "champ99-f",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2060,7 +1928,6 @@
     },
     {
         "name": "champ99-g",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2074,7 +1941,6 @@
     },
     {
         "name": "cheesy puffs",
-        "type": "costume",
         "tags": [
             "food"
         ],
@@ -2087,7 +1953,6 @@
     },
     {
         "name": "chick-a",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -2103,7 +1968,6 @@
     },
     {
         "name": "chick-b",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -2119,7 +1983,6 @@
     },
     {
         "name": "chick-c",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -2135,7 +1998,6 @@
     },
     {
         "name": "city bus-a",
-        "type": "costume",
         "tags": [
             "city",
             "bus",
@@ -2151,7 +2013,6 @@
     },
     {
         "name": "city bus-b",
-        "type": "costume",
         "tags": [
             "city",
             "bus",
@@ -2167,7 +2028,6 @@
     },
     {
         "name": "cloud",
-        "type": "costume",
         "tags": [
             "thing",
             "weather",
@@ -2182,7 +2042,6 @@
     },
     {
         "name": "cloud-a",
-        "type": "costume",
         "tags": [
             "flying",
             "weather",
@@ -2198,7 +2057,6 @@
     },
     {
         "name": "cloud-b",
-        "type": "costume",
         "tags": [
             "flying",
             "weather",
@@ -2214,7 +2072,6 @@
     },
     {
         "name": "cloud-c",
-        "type": "costume",
         "tags": [
             "flying",
             "weather",
@@ -2230,7 +2087,6 @@
     },
     {
         "name": "cloud-d",
-        "type": "costume",
         "tags": [
             "flying",
             "weather",
@@ -2246,7 +2102,6 @@
     },
     {
         "name": "convertible",
-        "type": "costume",
         "tags": [
             "car",
             "transportation"
@@ -2260,7 +2115,6 @@
     },
     {
         "name": "convertible 3",
-        "type": "costume",
         "tags": [
             "transportation",
             "car",
@@ -2275,7 +2129,6 @@
     },
     {
         "name": "crab-a",
-        "type": "costume",
         "tags": [
             "animals",
             "crustacean",
@@ -2297,7 +2150,6 @@
     },
     {
         "name": "crab-b",
-        "type": "costume",
         "tags": [
             "animals",
             "crustacean",
@@ -2319,7 +2171,6 @@
     },
     {
         "name": "crystal-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -2334,7 +2185,6 @@
     },
     {
         "name": "crystal-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -2349,7 +2199,6 @@
     },
     {
         "name": "dan-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2362,7 +2211,6 @@
     },
     {
         "name": "dan-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2375,7 +2223,6 @@
     },
     {
         "name": "dani-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2388,7 +2235,6 @@
     },
     {
         "name": "dani-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2401,7 +2247,6 @@
     },
     {
         "name": "dani-c",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2414,7 +2259,6 @@
     },
     {
         "name": "dee-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2427,7 +2271,6 @@
     },
     {
         "name": "dee-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2440,7 +2283,6 @@
     },
     {
         "name": "dee-c",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2453,7 +2295,6 @@
     },
     {
         "name": "dee-d",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2466,7 +2307,6 @@
     },
     {
         "name": "dee-e",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2479,7 +2319,6 @@
     },
     {
         "name": "devin-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2492,7 +2331,6 @@
     },
     {
         "name": "devin-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2505,7 +2343,6 @@
     },
     {
         "name": "devin-c",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2518,7 +2355,6 @@
     },
     {
         "name": "devin-d",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -2531,7 +2367,6 @@
     },
     {
         "name": "dinosaur1-a",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2547,7 +2382,6 @@
     },
     {
         "name": "dinosaur1-b",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2563,7 +2397,6 @@
     },
     {
         "name": "dinosaur1-c",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2579,7 +2412,6 @@
     },
     {
         "name": "dinosaur1-d",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2595,7 +2427,6 @@
     },
     {
         "name": "dinosaur2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2611,7 +2442,6 @@
     },
     {
         "name": "dinosaur2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2627,7 +2457,6 @@
     },
     {
         "name": "dinosaur2-c",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2643,7 +2472,6 @@
     },
     {
         "name": "dinosaur2-d",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2659,7 +2487,6 @@
     },
     {
         "name": "dinosaur3-a",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2676,7 +2503,6 @@
     },
     {
         "name": "dinosaur3-b",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2693,7 +2519,6 @@
     },
     {
         "name": "dinosaur3-c",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2710,7 +2535,6 @@
     },
     {
         "name": "dinosaur3-d",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2727,7 +2551,6 @@
     },
     {
         "name": "dinosaur3-e",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2743,7 +2566,6 @@
     },
     {
         "name": "dinosaur4-a",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2761,7 +2583,6 @@
     },
     {
         "name": "dinosaur4-b",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2779,7 +2600,6 @@
     },
     {
         "name": "dinosaur4-c",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2797,7 +2617,6 @@
     },
     {
         "name": "dinosaur4-d",
-        "type": "costume",
         "tags": [
             "animals",
             "dinosaur",
@@ -2815,7 +2634,6 @@
     },
     {
         "name": "diver1",
-        "type": "costume",
         "tags": [
             "people",
             "underwater",
@@ -2833,7 +2651,6 @@
     },
     {
         "name": "diver2",
-        "type": "costume",
         "tags": [
             "people",
             "underwater",
@@ -2851,7 +2668,6 @@
     },
     {
         "name": "dm freeze",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2865,7 +2681,6 @@
     },
     {
         "name": "dm pop down",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2879,7 +2694,6 @@
     },
     {
         "name": "dm pop front",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2893,7 +2707,6 @@
     },
     {
         "name": "dm pop l arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2907,7 +2720,6 @@
     },
     {
         "name": "dm pop left",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2921,7 +2733,6 @@
     },
     {
         "name": "dm pop r arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2935,7 +2746,6 @@
     },
     {
         "name": "dm pop right",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2949,7 +2759,6 @@
     },
     {
         "name": "dm pop stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2963,7 +2772,6 @@
     },
     {
         "name": "dm stance",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2977,7 +2785,6 @@
     },
     {
         "name": "dm top l leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -2991,7 +2798,6 @@
     },
     {
         "name": "dm top r leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -3005,7 +2811,6 @@
     },
     {
         "name": "dm top stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -3019,7 +2824,6 @@
     },
     {
         "name": "dog1-a",
-        "type": "costume",
         "tags": [
             "animals",
             "puppy",
@@ -3035,7 +2839,6 @@
     },
     {
         "name": "dog1-b",
-        "type": "costume",
         "tags": [
             "animals",
             "puppy",
@@ -3051,7 +2854,6 @@
     },
     {
         "name": "dog2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "puppy",
@@ -3067,7 +2869,6 @@
     },
     {
         "name": "dog2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "puppy",
@@ -3083,7 +2884,6 @@
     },
     {
         "name": "dog2-c",
-        "type": "costume",
         "tags": [
             "animals",
             "puppy",
@@ -3099,7 +2899,6 @@
     },
     {
         "name": "donut",
-        "type": "costume",
         "tags": [
             "food",
             "sweets",
@@ -3110,16 +2909,15 @@
             "sprinkles",
             "sprankles"
         ],
-        "assetId": "3abfc584e9e6c3e0ec5112fa25b73b1d",
+        "assetId": "316a67c9e966fd015b4538f54be456db",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "3abfc584e9e6c3e0ec5112fa25b73b1d.svg",
-        "rotationCenterX": 73,
-        "rotationCenterY": 15
+        "md5ext": "316a67c9e966fd015b4538f54be456db.svg",
+        "rotationCenterX": 72.11747235252724,
+        "rotationCenterY": 14.658782444689848
     },
     {
         "name": "dorian-a",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -3135,7 +2933,6 @@
     },
     {
         "name": "dorian-b",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -3151,7 +2948,6 @@
     },
     {
         "name": "dorian-c",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -3167,7 +2963,6 @@
     },
     {
         "name": "dorian-d",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -3183,7 +2978,6 @@
     },
     {
         "name": "dot-a",
-        "type": "costume",
         "tags": [
             "animals",
             "space",
@@ -3199,7 +2993,6 @@
     },
     {
         "name": "dot-b",
-        "type": "costume",
         "tags": [
             "animals",
             "space",
@@ -3215,39 +3008,36 @@
     },
     {
         "name": "dot-c",
-        "type": "costume",
         "tags": [
             "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
-        "assetId": "4dc87d7a4a6050da4d4b6539492ad257",
+        "assetId": "9e5a6cc6970ce4932a09affba70a45b0",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "4dc87d7a4a6050da4d4b6539492ad257.svg",
-        "rotationCenterX": 51,
-        "rotationCenterY": 69
+        "md5ext": "9e5a6cc6970ce4932a09affba70a45b0.svg",
+        "rotationCenterX": 50.53907324990831,
+        "rotationCenterY": 68.96764494984302
     },
     {
         "name": "dot-d",
-        "type": "costume",
         "tags": [
             "animals",
             "space",
             "dog",
             "wren mcdonald"
         ],
-        "assetId": "ae7032906a6aab9caa74374b50037912",
+        "assetId": "fb047c94113ee4c6664305a338525e6a",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "ae7032906a6aab9caa74374b50037912.svg",
-        "rotationCenterX": 57,
-        "rotationCenterY": 67
+        "md5ext": "fb047c94113ee4c6664305a338525e6a.svg",
+        "rotationCenterX": 56.58074394930321,
+        "rotationCenterY": 66.76919584395038
     },
     {
         "name": "dove-a",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -3262,7 +3052,6 @@
     },
     {
         "name": "dove-b",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -3277,55 +3066,51 @@
     },
     {
         "name": "dragon-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
             "ipzy",
             "flying"
         ],
-        "assetId": "a166d123597ed8896cfb7c397a9fc9c4",
+        "assetId": "12ead885460d96a19132e5970839d36d",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "a166d123597ed8896cfb7c397a9fc9c4.svg",
-        "rotationCenterX": 210,
-        "rotationCenterY": 150
+        "md5ext": "12ead885460d96a19132e5970839d36d.svg",
+        "rotationCenterX": 124.12215277545062,
+        "rotationCenterY": 106.25815347723332
     },
     {
         "name": "dragon-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
             "ipzy",
             "flying"
         ],
-        "assetId": "235f7a2f17fce30bd3c9cb7360c87994",
+        "assetId": "3f672475ad4ca5d1f9331cffd4223140",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "235f7a2f17fce30bd3c9cb7360c87994.svg",
-        "rotationCenterX": 210,
-        "rotationCenterY": 150
+        "md5ext": "3f672475ad4ca5d1f9331cffd4223140.svg",
+        "rotationCenterX": 152.5,
+        "rotationCenterY": 99
     },
     {
         "name": "dragon-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
             "ipzy",
             "flying"
         ],
-        "assetId": "3a6ff36986f85e6d005cfc65d9eb4978",
+        "assetId": "e0aa0083fa0b97da97600d4dbb2055e5",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "3a6ff36986f85e6d005cfc65d9eb4978.svg",
-        "rotationCenterX": 210,
-        "rotationCenterY": 150
+        "md5ext": "e0aa0083fa0b97da97600d4dbb2055e5.svg",
+        "rotationCenterX": 124.4550776985194,
+        "rotationCenterY": 105.92484014389998
     },
     {
         "name": "dragon1-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "reptile",
@@ -3341,7 +3126,6 @@
     },
     {
         "name": "dragon1-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "reptile",
@@ -3357,7 +3141,6 @@
     },
     {
         "name": "dragonfly-a",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -3374,7 +3157,6 @@
     },
     {
         "name": "dragonfly-b",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -3391,7 +3173,6 @@
     },
     {
         "name": "dress-a",
-        "type": "costume",
         "tags": [
             "fashion"
         ],
@@ -3404,7 +3185,6 @@
     },
     {
         "name": "dress-b",
-        "type": "costume",
         "tags": [
             "fashion"
         ],
@@ -3417,7 +3197,6 @@
     },
     {
         "name": "dress-c",
-        "type": "costume",
         "tags": [
             "fashion"
         ],
@@ -3430,7 +3209,6 @@
     },
     {
         "name": "drum-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3444,7 +3222,6 @@
     },
     {
         "name": "drum-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3458,7 +3235,6 @@
     },
     {
         "name": "drum-cymbal-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3472,7 +3248,6 @@
     },
     {
         "name": "drum-cymbal-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3486,7 +3261,6 @@
     },
     {
         "name": "drum-highhat-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3500,7 +3274,6 @@
     },
     {
         "name": "drum-highhat-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3514,7 +3287,6 @@
     },
     {
         "name": "drum-kit",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3528,7 +3300,6 @@
     },
     {
         "name": "drum-kit-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3542,7 +3313,6 @@
     },
     {
         "name": "drum-snare-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3556,7 +3326,6 @@
     },
     {
         "name": "drum-snare-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -3570,7 +3339,6 @@
     },
     {
         "name": "drums conga-a",
-        "type": "costume",
         "tags": [
             "drums",
             " music",
@@ -3585,7 +3353,6 @@
     },
     {
         "name": "drums conga-b",
-        "type": "costume",
         "tags": [
             "drums",
             " music",
@@ -3600,7 +3367,6 @@
     },
     {
         "name": "duck",
-        "type": "costume",
         "tags": [
             "animals",
             "chrisg",
@@ -3617,7 +3383,6 @@
     },
     {
         "name": "earth",
-        "type": "costume",
         "tags": [
             "space",
             "planet",
@@ -3633,7 +3398,6 @@
     },
     {
         "name": "easel-a",
-        "type": "costume",
         "tags": [
             "bedroom",
             "art",
@@ -3648,7 +3412,6 @@
     },
     {
         "name": "easel-b",
-        "type": "costume",
         "tags": [
             "bedroom",
             "art",
@@ -3663,7 +3426,6 @@
     },
     {
         "name": "easel-c",
-        "type": "costume",
         "tags": [
             "bedroom",
             "art",
@@ -3678,7 +3440,6 @@
     },
     {
         "name": "egg-a",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3693,7 +3454,6 @@
     },
     {
         "name": "egg-b",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3708,7 +3468,6 @@
     },
     {
         "name": "egg-c",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3723,7 +3482,6 @@
     },
     {
         "name": "egg-d",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3738,7 +3496,6 @@
     },
     {
         "name": "egg-e",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3753,7 +3510,6 @@
     },
     {
         "name": "egg-f",
-        "type": "costume",
         "tags": [
             "food",
             "breakfast",
@@ -3768,7 +3524,6 @@
     },
     {
         "name": "elephant-a",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -3783,7 +3538,6 @@
     },
     {
         "name": "elephant-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -3798,7 +3552,6 @@
     },
     {
         "name": "elf-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3814,7 +3567,6 @@
     },
     {
         "name": "elf-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3830,7 +3582,6 @@
     },
     {
         "name": "elf-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3846,7 +3597,6 @@
     },
     {
         "name": "elf-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3862,7 +3612,6 @@
     },
     {
         "name": "elf-e",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3878,7 +3627,6 @@
     },
     {
         "name": "fairy-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3894,7 +3642,6 @@
     },
     {
         "name": "fairy-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3910,7 +3657,6 @@
     },
     {
         "name": "fairy-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3926,7 +3672,6 @@
     },
     {
         "name": "fairy-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3942,7 +3687,6 @@
     },
     {
         "name": "fairy-e",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -3958,7 +3702,6 @@
     },
     {
         "name": "fish-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -3975,7 +3718,6 @@
     },
     {
         "name": "fish-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -3992,7 +3734,6 @@
     },
     {
         "name": "fish-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -4009,7 +3750,6 @@
     },
     {
         "name": "fish-d",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -4026,7 +3766,6 @@
     },
     {
         "name": "fishbowl-a",
-        "type": "costume",
         "tags": [
             "fishbowl",
             "fish",
@@ -4042,7 +3781,6 @@
     },
     {
         "name": "fishbowl-b",
-        "type": "costume",
         "tags": [
             "fishbowl",
             "fish",
@@ -4058,7 +3796,6 @@
     },
     {
         "name": "food truck-a",
-        "type": "costume",
         "tags": [
             "city",
             "truck",
@@ -4075,7 +3812,6 @@
     },
     {
         "name": "food truck-b",
-        "type": "costume",
         "tags": [
             "city",
             "truck",
@@ -4092,7 +3828,6 @@
     },
     {
         "name": "food truck-c",
-        "type": "costume",
         "tags": [
             "city",
             "truck",
@@ -4109,7 +3844,6 @@
     },
     {
         "name": "football running",
-        "type": "costume",
         "tags": [
             "people",
             "sports"
@@ -4123,7 +3857,6 @@
     },
     {
         "name": "football standing",
-        "type": "costume",
         "tags": [
             "people",
             "sports"
@@ -4137,7 +3870,6 @@
     },
     {
         "name": "fortune cookie",
-        "type": "costume",
         "tags": [
             "food"
         ],
@@ -4150,7 +3882,6 @@
     },
     {
         "name": "fox-a",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -4165,7 +3896,6 @@
     },
     {
         "name": "fox-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -4180,7 +3910,6 @@
     },
     {
         "name": "fox-c",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -4195,7 +3924,6 @@
     },
     {
         "name": "frank-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -4214,7 +3942,6 @@
     },
     {
         "name": "frank-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4233,7 +3960,6 @@
     },
     {
         "name": "frank-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4252,7 +3978,6 @@
     },
     {
         "name": "frank-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4271,7 +3996,6 @@
     },
     {
         "name": "frog",
-        "type": "costume",
         "tags": [
             "animals",
             "amphibian",
@@ -4289,7 +4013,6 @@
     },
     {
         "name": "frog 2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "frog",
@@ -4305,7 +4028,6 @@
     },
     {
         "name": "frog 2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "frog",
@@ -4321,7 +4043,6 @@
     },
     {
         "name": "frog 2-c",
-        "type": "costume",
         "tags": [
             "animals",
             "frog",
@@ -4337,7 +4058,6 @@
     },
     {
         "name": "fruit platter",
-        "type": "costume",
         "tags": [
             "food"
         ],
@@ -4350,7 +4070,6 @@
     },
     {
         "name": "fruitsalad",
-        "type": "costume",
         "tags": [
             "food",
             "fruit"
@@ -4364,7 +4083,6 @@
     },
     {
         "name": "ghost-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4382,7 +4100,6 @@
     },
     {
         "name": "ghost-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4400,7 +4117,6 @@
     },
     {
         "name": "ghost-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4418,7 +4134,6 @@
     },
     {
         "name": "ghost-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -4436,7 +4151,6 @@
     },
     {
         "name": "gift-a",
-        "type": "costume",
         "tags": [
             "thing",
             "holiday"
@@ -4450,7 +4164,6 @@
     },
     {
         "name": "gift-b",
-        "type": "costume",
         "tags": [
             "thing",
             "holiday"
@@ -4464,7 +4177,6 @@
     },
     {
         "name": "giga walk1",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -4478,7 +4190,6 @@
     },
     {
         "name": "giga walk2",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -4492,7 +4203,6 @@
     },
     {
         "name": "giga walk3",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -4506,7 +4216,6 @@
     },
     {
         "name": "giga-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4521,7 +4230,6 @@
     },
     {
         "name": "giga-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4536,7 +4244,6 @@
     },
     {
         "name": "giga-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4551,7 +4258,6 @@
     },
     {
         "name": "giga-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4566,7 +4272,6 @@
     },
     {
         "name": "giraffe-a",
-        "type": "costume",
         "tags": [
             "animals",
             "savanna",
@@ -4581,7 +4286,6 @@
     },
     {
         "name": "giraffe-b",
-        "type": "costume",
         "tags": [
             "animals",
             "savanna",
@@ -4596,7 +4300,6 @@
     },
     {
         "name": "giraffe-c",
-        "type": "costume",
         "tags": [
             "animals",
             "savanna",
@@ -4611,7 +4314,6 @@
     },
     {
         "name": "glass water-a",
-        "type": "costume",
         "tags": [
             "food",
             "things",
@@ -4626,7 +4328,6 @@
     },
     {
         "name": "glass water-b",
-        "type": "costume",
         "tags": [
             "food",
             "things",
@@ -4642,7 +4343,6 @@
     },
     {
         "name": "glasses-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "glasses"
@@ -4656,7 +4356,6 @@
     },
     {
         "name": "glasses-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "glasses"
@@ -4670,7 +4369,6 @@
     },
     {
         "name": "glasses-c",
-        "type": "costume",
         "tags": [
             "fashion",
             "glasses"
@@ -4684,7 +4382,6 @@
     },
     {
         "name": "glasses-e",
-        "type": "costume",
         "tags": [
             "fashion",
             "glasses"
@@ -4698,7 +4395,6 @@
     },
     {
         "name": "goalie-a",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -4714,7 +4410,6 @@
     },
     {
         "name": "goalie-b",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -4730,7 +4425,6 @@
     },
     {
         "name": "goalie-c",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -4746,7 +4440,6 @@
     },
     {
         "name": "goalie-d",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -4762,7 +4455,6 @@
     },
     {
         "name": "goalie-e",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -4778,7 +4470,6 @@
     },
     {
         "name": "goblin-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -4793,7 +4484,6 @@
     },
     {
         "name": "goblin-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -4808,7 +4498,6 @@
     },
     {
         "name": "goblin-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -4823,7 +4512,6 @@
     },
     {
         "name": "goblin-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -4838,7 +4526,6 @@
     },
     {
         "name": "gobo-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4854,7 +4541,6 @@
     },
     {
         "name": "gobo-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4870,7 +4556,6 @@
     },
     {
         "name": "gobo-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -4886,7 +4571,6 @@
     },
     {
         "name": "grasshopper-a",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4903,7 +4587,6 @@
     },
     {
         "name": "grasshopper-b",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4920,7 +4603,6 @@
     },
     {
         "name": "grasshopper-c",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4937,7 +4619,6 @@
     },
     {
         "name": "grasshopper-d",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4954,7 +4635,6 @@
     },
     {
         "name": "grasshopper-e",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4971,7 +4651,6 @@
     },
     {
         "name": "grasshopper-f",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -4988,7 +4667,6 @@
     },
     {
         "name": "green flag",
-        "type": "costume",
         "tags": [
             "thing"
         ],
@@ -5001,7 +4679,6 @@
     },
     {
         "name": "griffin-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -5017,7 +4694,6 @@
     },
     {
         "name": "griffin-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -5033,7 +4709,6 @@
     },
     {
         "name": "griffin-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -5049,7 +4724,6 @@
     },
     {
         "name": "griffin-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -5065,7 +4739,6 @@
     },
     {
         "name": "guitar-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5079,7 +4752,6 @@
     },
     {
         "name": "guitar-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5093,7 +4765,6 @@
     },
     {
         "name": "guitar-electric1-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5107,7 +4778,6 @@
     },
     {
         "name": "guitar-electric1-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5121,7 +4791,6 @@
     },
     {
         "name": "guitar-electric2-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5135,7 +4804,6 @@
     },
     {
         "name": "guitar-electric2-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -5149,7 +4817,6 @@
     },
     {
         "name": "hannah-a",
-        "type": "costume",
         "tags": [
             "people",
             "run",
@@ -5166,7 +4833,6 @@
     },
     {
         "name": "hannah-b",
-        "type": "costume",
         "tags": [
             "people",
             "sports"
@@ -5180,7 +4846,6 @@
     },
     {
         "name": "hannah-c",
-        "type": "costume",
         "tags": [
             "people",
             "sports"
@@ -5194,7 +4859,6 @@
     },
     {
         "name": "hare-a",
-        "type": "costume",
         "tags": [
             "animals",
             "rabbit",
@@ -5215,7 +4879,6 @@
     },
     {
         "name": "hare-b",
-        "type": "costume",
         "tags": [
             "animals",
             "rabbit",
@@ -5236,7 +4899,6 @@
     },
     {
         "name": "hare-c",
-        "type": "costume",
         "tags": [
             "animals",
             "rabbit",
@@ -5257,7 +4919,6 @@
     },
     {
         "name": "harper-a",
-        "type": "costume",
         "tags": [
             "people",
             "fashion"
@@ -5271,7 +4932,6 @@
     },
     {
         "name": "harper-b",
-        "type": "costume",
         "tags": [
             "people",
             "fashion"
@@ -5285,7 +4945,6 @@
     },
     {
         "name": "harper-c",
-        "type": "costume",
         "tags": [
             "people",
             "fashion"
@@ -5299,7 +4958,6 @@
     },
     {
         "name": "hat-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "hat"
@@ -5313,7 +4971,6 @@
     },
     {
         "name": "hat-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "hat"
@@ -5327,7 +4984,6 @@
     },
     {
         "name": "hat-c",
-        "type": "costume",
         "tags": [
             "fashion",
             "hat"
@@ -5341,7 +4997,6 @@
     },
     {
         "name": "hat-d",
-        "type": "costume",
         "tags": [
             "fashion",
             "hat"
@@ -5355,7 +5010,6 @@
     },
     {
         "name": "hatchling-a",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5371,7 +5025,6 @@
     },
     {
         "name": "hatchling-b",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5387,7 +5040,6 @@
     },
     {
         "name": "hatchling-c",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5403,7 +5055,6 @@
     },
     {
         "name": "heart code",
-        "type": "costume",
         "tags": [
             "food",
             "sweethearts"
@@ -5417,7 +5068,6 @@
     },
     {
         "name": "heart face",
-        "type": "costume",
         "tags": [
             "emotions"
         ],
@@ -5430,7 +5080,6 @@
     },
     {
         "name": "heart love",
-        "type": "costume",
         "tags": [
             "food",
             "sweethearts"
@@ -5444,7 +5093,6 @@
     },
     {
         "name": "heart purple",
-        "type": "costume",
         "tags": [
             "holiday",
             "purple",
@@ -5461,7 +5109,6 @@
     },
     {
         "name": "heart red",
-        "type": "costume",
         "tags": [
             "holiday",
             "red",
@@ -5478,7 +5125,6 @@
     },
     {
         "name": "heart smile",
-        "type": "costume",
         "tags": [
             "food",
             "sweethearts"
@@ -5492,7 +5138,6 @@
     },
     {
         "name": "heart sweet",
-        "type": "costume",
         "tags": [
             "food",
             "sweethearts"
@@ -5506,7 +5151,6 @@
     },
     {
         "name": "hedgehog-a",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -5522,7 +5166,6 @@
     },
     {
         "name": "hedgehog-b",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -5538,7 +5181,6 @@
     },
     {
         "name": "hedgehog-c",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -5554,7 +5196,6 @@
     },
     {
         "name": "hedgehog-d",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -5570,7 +5211,6 @@
     },
     {
         "name": "hedgehog-e",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -5586,7 +5226,6 @@
     },
     {
         "name": "hen-a",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5602,7 +5241,6 @@
     },
     {
         "name": "hen-b",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5618,7 +5256,6 @@
     },
     {
         "name": "hen-c",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5634,7 +5271,6 @@
     },
     {
         "name": "hen-d",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -5650,7 +5286,6 @@
     },
     {
         "name": "hippo1-a",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -5668,7 +5303,6 @@
     },
     {
         "name": "hippo1-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -5686,7 +5320,6 @@
     },
     {
         "name": "home button",
-        "type": "costume",
         "tags": [
             "ui",
             "thing"
@@ -5700,7 +5333,6 @@
     },
     {
         "name": "horse-a",
-        "type": "costume",
         "tags": [
             "animals",
             "hoof",
@@ -5718,7 +5350,6 @@
     },
     {
         "name": "horse-b",
-        "type": "costume",
         "tags": [
             "animals",
             "hoof",
@@ -5736,7 +5367,6 @@
     },
     {
         "name": "jaime walking-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5749,7 +5379,6 @@
     },
     {
         "name": "jaime walking-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5762,7 +5391,6 @@
     },
     {
         "name": "jaime walking-c",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5775,7 +5403,6 @@
     },
     {
         "name": "jaime walking-d",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5788,7 +5415,6 @@
     },
     {
         "name": "jaime walking-e",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5801,7 +5427,6 @@
     },
     {
         "name": "jaime-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5814,7 +5439,6 @@
     },
     {
         "name": "jaime-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -5827,7 +5451,6 @@
     },
     {
         "name": "jamal-a",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -5843,7 +5466,6 @@
     },
     {
         "name": "jamal-b",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -5859,7 +5481,6 @@
     },
     {
         "name": "jamal-c",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -5875,7 +5496,6 @@
     },
     {
         "name": "jamal-d",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -5891,7 +5511,6 @@
     },
     {
         "name": "jar-a",
-        "type": "costume",
         "tags": [
             "food",
             "ipzy",
@@ -5907,7 +5526,6 @@
     },
     {
         "name": "jar-b",
-        "type": "costume",
         "tags": [
             "food",
             "ipzy",
@@ -5922,7 +5540,6 @@
     },
     {
         "name": "jellyfish-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -5938,7 +5555,6 @@
     },
     {
         "name": "jellyfish-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -5954,7 +5570,6 @@
     },
     {
         "name": "jellyfish-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -5970,7 +5585,6 @@
     },
     {
         "name": "jellyfish-d",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -5986,7 +5600,6 @@
     },
     {
         "name": "jo pop down",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6000,7 +5613,6 @@
     },
     {
         "name": "jo pop front",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6014,7 +5626,6 @@
     },
     {
         "name": "jo pop l arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6028,7 +5639,6 @@
     },
     {
         "name": "jo pop left",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6042,7 +5652,6 @@
     },
     {
         "name": "jo pop r arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6056,7 +5665,6 @@
     },
     {
         "name": "jo pop right",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6070,7 +5678,6 @@
     },
     {
         "name": "jo pop stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6084,7 +5691,6 @@
     },
     {
         "name": "jo stance",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6098,7 +5704,6 @@
     },
     {
         "name": "jo top l cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6112,7 +5717,6 @@
     },
     {
         "name": "jo top l leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6126,7 +5730,6 @@
     },
     {
         "name": "jo top r cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6140,7 +5743,6 @@
     },
     {
         "name": "jo top r leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6154,7 +5756,6 @@
     },
     {
         "name": "jo top stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6168,7 +5769,6 @@
     },
     {
         "name": "jordyn-a",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -6185,7 +5785,6 @@
     },
     {
         "name": "jordyn-b",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -6202,7 +5801,6 @@
     },
     {
         "name": "jordyn-c",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -6219,7 +5817,6 @@
     },
     {
         "name": "jordyn-d",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -6236,7 +5833,6 @@
     },
     {
         "name": "kai-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6249,7 +5845,6 @@
     },
     {
         "name": "kai-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6262,7 +5857,6 @@
     },
     {
         "name": "key",
-        "type": "costume",
         "tags": [
             "fantasy",
             "thing"
@@ -6276,7 +5870,6 @@
     },
     {
         "name": "keyboard-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -6290,7 +5883,6 @@
     },
     {
         "name": "keyboard-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -6304,7 +5896,6 @@
     },
     {
         "name": "kiran-a",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6319,7 +5910,6 @@
     },
     {
         "name": "kiran-b",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6334,7 +5924,6 @@
     },
     {
         "name": "kiran-c",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6349,7 +5938,6 @@
     },
     {
         "name": "kiran-d",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6364,7 +5952,6 @@
     },
     {
         "name": "kiran-e",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6379,7 +5966,6 @@
     },
     {
         "name": "kiran-f",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -6394,7 +5980,6 @@
     },
     {
         "name": "knight",
-        "type": "costume",
         "tags": [
             "people",
             "castle",
@@ -6409,7 +5994,6 @@
     },
     {
         "name": "ladybug2",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -6425,7 +6009,6 @@
     },
     {
         "name": "ladybug2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -6442,7 +6025,6 @@
     },
     {
         "name": "ladybug2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "insect",
@@ -6459,7 +6041,6 @@
     },
     {
         "name": "laptop",
-        "type": "costume",
         "tags": [
             "things",
             "computers"
@@ -6473,7 +6054,6 @@
     },
     {
         "name": "lb pop down",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6487,7 +6067,6 @@
     },
     {
         "name": "lb pop front",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6501,7 +6080,6 @@
     },
     {
         "name": "lb pop l arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6515,7 +6093,6 @@
     },
     {
         "name": "lb pop left",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6529,7 +6106,6 @@
     },
     {
         "name": "lb pop r arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6543,7 +6119,6 @@
     },
     {
         "name": "lb pop right",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6557,7 +6132,6 @@
     },
     {
         "name": "lb pop stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6571,7 +6145,6 @@
     },
     {
         "name": "lb stance",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6585,7 +6158,6 @@
     },
     {
         "name": "lb top l cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6599,7 +6171,6 @@
     },
     {
         "name": "lb top l leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6613,7 +6184,6 @@
     },
     {
         "name": "lb top r cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6627,7 +6197,6 @@
     },
     {
         "name": "lb top r leg",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6641,7 +6210,6 @@
     },
     {
         "name": "lb top stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -6655,7 +6223,6 @@
     },
     {
         "name": "lightning",
-        "type": "costume",
         "tags": [
             "weather",
             "whether",
@@ -6672,7 +6239,6 @@
     },
     {
         "name": "line",
-        "type": "costume",
         "tags": [
             "lava",
             "shape",
@@ -6687,7 +6253,6 @@
     },
     {
         "name": "lion-a",
-        "type": "costume",
         "tags": [
             "cat",
             "animals",
@@ -6704,7 +6269,6 @@
     },
     {
         "name": "lion-b",
-        "type": "costume",
         "tags": [
             "cat",
             "animals",
@@ -6721,7 +6285,6 @@
     },
     {
         "name": "lion-c",
-        "type": "costume",
         "tags": [
             "cat",
             "animals",
@@ -6738,7 +6301,6 @@
     },
     {
         "name": "llama",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -6753,7 +6315,6 @@
     },
     {
         "name": "llama-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -6768,7 +6329,6 @@
     },
     {
         "name": "llama-c",
-        "type": "costume",
         "tags": [
             "animals",
             "mammal",
@@ -6783,7 +6343,6 @@
     },
     {
         "name": "magicwand",
-        "type": "costume",
         "tags": [
             "fantasy",
             "things",
@@ -6798,7 +6357,6 @@
     },
     {
         "name": "marian-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6811,7 +6369,6 @@
     },
     {
         "name": "marian-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6824,7 +6381,6 @@
     },
     {
         "name": "marian-c",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6837,7 +6393,6 @@
     },
     {
         "name": "marian-d",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6850,7 +6405,6 @@
     },
     {
         "name": "marian-e",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -6863,7 +6417,6 @@
     },
     {
         "name": "max-a",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -6879,7 +6432,6 @@
     },
     {
         "name": "max-b",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -6895,7 +6447,6 @@
     },
     {
         "name": "max-c",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -6911,7 +6462,6 @@
     },
     {
         "name": "max-d",
-        "type": "costume",
         "tags": [
             "sports",
             "basketball",
@@ -6927,7 +6477,6 @@
     },
     {
         "name": "mermaid-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -6943,7 +6492,6 @@
     },
     {
         "name": "mermaid-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -6959,7 +6507,6 @@
     },
     {
         "name": "mermaid-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -6975,7 +6522,6 @@
     },
     {
         "name": "mermaid-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -6991,7 +6537,6 @@
     },
     {
         "name": "microphone-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -7005,7 +6550,6 @@
     },
     {
         "name": "microphone-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -7019,7 +6563,6 @@
     },
     {
         "name": "milk-a",
-        "type": "costume",
         "tags": [
             "food",
             "drink",
@@ -7034,7 +6577,6 @@
     },
     {
         "name": "milk-b",
-        "type": "costume",
         "tags": [
             "food",
             "drink",
@@ -7049,7 +6591,6 @@
     },
     {
         "name": "milk-c",
-        "type": "costume",
         "tags": [
             "food",
             "drink",
@@ -7064,7 +6605,6 @@
     },
     {
         "name": "milk-d",
-        "type": "costume",
         "tags": [
             "food",
             "drink",
@@ -7079,7 +6619,6 @@
     },
     {
         "name": "milk-e",
-        "type": "costume",
         "tags": [
             "food",
             "drink",
@@ -7094,7 +6633,6 @@
     },
     {
         "name": "monet-a",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -7109,7 +6647,6 @@
     },
     {
         "name": "monet-b",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -7124,7 +6661,6 @@
     },
     {
         "name": "monet-c",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -7139,7 +6675,6 @@
     },
     {
         "name": "monet-d",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -7154,7 +6689,6 @@
     },
     {
         "name": "monet-e",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -7169,7 +6703,6 @@
     },
     {
         "name": "monkey-a",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -7185,7 +6718,6 @@
     },
     {
         "name": "monkey-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -7201,7 +6733,6 @@
     },
     {
         "name": "monkey-c",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -7217,7 +6748,6 @@
     },
     {
         "name": "motorcycle-a",
-        "type": "costume",
         "tags": [
             "city",
             "bike",
@@ -7233,7 +6763,6 @@
     },
     {
         "name": "motorcycle-b",
-        "type": "costume",
         "tags": [
             "city",
             "vehicle",
@@ -7249,7 +6778,6 @@
     },
     {
         "name": "motorcycle-c",
-        "type": "costume",
         "tags": [
             "city",
             "vehicle",
@@ -7265,7 +6793,6 @@
     },
     {
         "name": "motorcycle-d",
-        "type": "costume",
         "tags": [
             "city",
             "vehicle",
@@ -7281,7 +6808,6 @@
     },
     {
         "name": "mouse1-a",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -7296,7 +6822,6 @@
     },
     {
         "name": "mouse1-b",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -7311,7 +6836,6 @@
     },
     {
         "name": "muffin-a",
-        "type": "costume",
         "tags": [
             "food"
         ],
@@ -7324,7 +6848,6 @@
     },
     {
         "name": "muffin-b",
-        "type": "costume",
         "tags": [
             "food",
             "eaten"
@@ -7338,7 +6861,6 @@
     },
     {
         "name": "nano-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing"
@@ -7352,7 +6874,6 @@
     },
     {
         "name": "nano-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -7367,7 +6888,6 @@
     },
     {
         "name": "nano-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -7382,7 +6902,6 @@
     },
     {
         "name": "nano-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -7397,7 +6916,6 @@
     },
     {
         "name": "neigh pony",
-        "type": "costume",
         "tags": [
             "animals",
             "fantasy"
@@ -7411,7 +6929,6 @@
     },
     {
         "name": "octopus-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -7427,7 +6944,6 @@
     },
     {
         "name": "octopus-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -7443,7 +6959,6 @@
     },
     {
         "name": "octopus-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -7460,7 +6975,6 @@
     },
     {
         "name": "octopus-d",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -7477,7 +6991,6 @@
     },
     {
         "name": "octopus-e",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -7494,7 +7007,6 @@
     },
     {
         "name": "orange",
-        "type": "costume",
         "tags": [
             "food",
             "fruit"
@@ -7508,7 +7020,6 @@
     },
     {
         "name": "orange2-a",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -7523,7 +7034,6 @@
     },
     {
         "name": "orange2-b",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -7538,7 +7048,6 @@
     },
     {
         "name": "outfielder-a",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -7554,7 +7063,6 @@
     },
     {
         "name": "outfielder-b",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -7570,7 +7078,6 @@
     },
     {
         "name": "outfielder-c",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -7586,7 +7093,6 @@
     },
     {
         "name": "outfielder-d",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -7602,7 +7108,6 @@
     },
     {
         "name": "owl-a",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7617,7 +7122,6 @@
     },
     {
         "name": "owl-b",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7632,7 +7136,6 @@
     },
     {
         "name": "owl-c",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7647,7 +7150,6 @@
     },
     {
         "name": "paddle",
-        "type": "costume",
         "tags": [
             "thing"
         ],
@@ -7660,7 +7162,6 @@
     },
     {
         "name": "panther-a",
-        "type": "costume",
         "tags": [
             "animals",
             "tiger",
@@ -7676,7 +7177,6 @@
     },
     {
         "name": "panther-b",
-        "type": "costume",
         "tags": [
             "animals",
             "tiger",
@@ -7692,7 +7192,6 @@
     },
     {
         "name": "panther-c",
-        "type": "costume",
         "tags": [
             "animals",
             "tiger",
@@ -7708,7 +7207,6 @@
     },
     {
         "name": "pants-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "pants"
@@ -7722,7 +7220,6 @@
     },
     {
         "name": "pants-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "pants"
@@ -7736,7 +7233,6 @@
     },
     {
         "name": "parrot-a",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7754,7 +7250,6 @@
     },
     {
         "name": "parrot-b",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7772,7 +7267,6 @@
     },
     {
         "name": "party hat-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "winter"
@@ -7786,7 +7280,6 @@
     },
     {
         "name": "party hat-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "winter"
@@ -7800,7 +7293,6 @@
     },
     {
         "name": "party hat-e",
-        "type": "costume",
         "tags": [
             "fashion",
             "winter"
@@ -7814,7 +7306,6 @@
     },
     {
         "name": "pencil-a",
-        "type": "costume",
         "tags": [
             "thing",
             "yellow"
@@ -7828,7 +7319,6 @@
     },
     {
         "name": "pencil-b",
-        "type": "costume",
         "tags": [
             "thing",
             "yellow"
@@ -7842,7 +7332,6 @@
     },
     {
         "name": "penguin-a",
-        "type": "costume",
         "tags": [
             "penguin",
             "animals",
@@ -7864,7 +7353,6 @@
     },
     {
         "name": "penguin-b",
-        "type": "costume",
         "tags": [
             "animals",
             "penguin",
@@ -7886,7 +7374,6 @@
     },
     {
         "name": "penguin-c",
-        "type": "costume",
         "tags": [
             "animals",
             "penguin",
@@ -7908,7 +7395,6 @@
     },
     {
         "name": "penguin2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7924,7 +7410,6 @@
     },
     {
         "name": "penguin2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7940,7 +7425,6 @@
     },
     {
         "name": "penguin2-c",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7956,7 +7440,6 @@
     },
     {
         "name": "penguin2-d",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -7972,7 +7455,6 @@
     },
     {
         "name": "pico walk1",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -7986,7 +7468,6 @@
     },
     {
         "name": "pico walk2",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -8000,7 +7481,6 @@
     },
     {
         "name": "pico walk3",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -8014,7 +7494,6 @@
     },
     {
         "name": "pico walk4",
-        "type": "costume",
         "tags": [
             "fantasy",
             "walking"
@@ -8028,7 +7507,6 @@
     },
     {
         "name": "pico-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing"
@@ -8042,7 +7520,6 @@
     },
     {
         "name": "pico-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -8057,7 +7534,6 @@
     },
     {
         "name": "pico-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -8072,7 +7548,6 @@
     },
     {
         "name": "pico-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -8087,7 +7562,6 @@
     },
     {
         "name": "pitcher-a",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -8103,7 +7577,6 @@
     },
     {
         "name": "pitcher-b",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -8119,7 +7592,6 @@
     },
     {
         "name": "pitcher-c",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -8135,7 +7607,6 @@
     },
     {
         "name": "pitcher-d",
-        "type": "costume",
         "tags": [
             "baseball",
             "sports",
@@ -8151,7 +7622,6 @@
     },
     {
         "name": "planet2",
-        "type": "costume",
         "tags": [
             "space"
         ],
@@ -8164,7 +7634,6 @@
     },
     {
         "name": "polar bear-a",
-        "type": "costume",
         "tags": [
             "bear",
             "animals",
@@ -8185,7 +7654,6 @@
     },
     {
         "name": "polar bear-b",
-        "type": "costume",
         "tags": [
             "bear",
             "animals",
@@ -8206,7 +7674,6 @@
     },
     {
         "name": "polar bear-c",
-        "type": "costume",
         "tags": [
             "bear",
             "animals",
@@ -8227,7 +7694,6 @@
     },
     {
         "name": "potion-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -8242,7 +7708,6 @@
     },
     {
         "name": "potion-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -8257,7 +7722,6 @@
     },
     {
         "name": "potion-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -8272,7 +7736,6 @@
     },
     {
         "name": "prince",
-        "type": "costume",
         "tags": [
             "people",
             "☥",
@@ -8287,7 +7750,6 @@
     },
     {
         "name": "princess-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -8304,7 +7766,6 @@
     },
     {
         "name": "princess-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -8321,7 +7782,6 @@
     },
     {
         "name": "princess-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -8338,7 +7798,6 @@
     },
     {
         "name": "princess-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -8355,7 +7814,6 @@
     },
     {
         "name": "princess-e",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -8372,7 +7830,6 @@
     },
     {
         "name": "pufferfish-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -8388,7 +7845,6 @@
     },
     {
         "name": "pufferfish-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -8404,7 +7860,6 @@
     },
     {
         "name": "pufferfish-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -8420,7 +7875,6 @@
     },
     {
         "name": "pufferfish-d",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -8436,7 +7890,6 @@
     },
     {
         "name": "puppy back",
-        "type": "costume",
         "tags": [
             "animals",
             "dog",
@@ -8451,7 +7904,6 @@
     },
     {
         "name": "puppy right",
-        "type": "costume",
         "tags": [
             "animals",
             "dog",
@@ -8466,7 +7918,6 @@
     },
     {
         "name": "puppy side",
-        "type": "costume",
         "tags": [
             "animals",
             "dog",
@@ -8481,7 +7932,6 @@
     },
     {
         "name": "puppy sit",
-        "type": "costume",
         "tags": [
             "animals",
             "dog",
@@ -8496,7 +7946,6 @@
     },
     {
         "name": "rabbit-a",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -8514,7 +7963,6 @@
     },
     {
         "name": "rabbit-b",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -8532,7 +7980,6 @@
     },
     {
         "name": "rabbit-c",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -8550,7 +7997,6 @@
     },
     {
         "name": "rabbit-d",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -8568,7 +8014,6 @@
     },
     {
         "name": "rabbit-e",
-        "type": "costume",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -8586,7 +8031,6 @@
     },
     {
         "name": "radio-a",
-        "type": "costume",
         "tags": [
             "radio",
             "music",
@@ -8601,7 +8045,6 @@
     },
     {
         "name": "radio-b",
-        "type": "costume",
         "tags": [
             "radio",
             "music",
@@ -8616,7 +8059,6 @@
     },
     {
         "name": "rainbow",
-        "type": "costume",
         "tags": [
             "things",
             "flying",
@@ -8632,7 +8074,6 @@
     },
     {
         "name": "referee-a",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -8648,7 +8089,6 @@
     },
     {
         "name": "referee-b",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -8664,7 +8104,6 @@
     },
     {
         "name": "referee-c",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -8680,7 +8119,6 @@
     },
     {
         "name": "referee-d",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -8696,7 +8134,6 @@
     },
     {
         "name": "reindeer",
-        "type": "costume",
         "tags": [
             "animals",
             "mammals",
@@ -8711,7 +8148,6 @@
     },
     {
         "name": "retro robot a",
-        "type": "costume",
         "tags": [
             "robot"
         ],
@@ -8724,7 +8160,6 @@
     },
     {
         "name": "retro robot b",
-        "type": "costume",
         "tags": [
             "robot"
         ],
@@ -8737,7 +8172,6 @@
     },
     {
         "name": "retro robot c",
-        "type": "costume",
         "tags": [
             "robot"
         ],
@@ -8750,7 +8184,6 @@
     },
     {
         "name": "ripley-a",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8765,7 +8198,6 @@
     },
     {
         "name": "ripley-b",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8780,7 +8212,6 @@
     },
     {
         "name": "ripley-c",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8795,7 +8226,6 @@
     },
     {
         "name": "ripley-d",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8810,7 +8240,6 @@
     },
     {
         "name": "ripley-e",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8825,7 +8254,6 @@
     },
     {
         "name": "ripley-f",
-        "type": "costume",
         "tags": [
             "space",
             "people",
@@ -8840,7 +8268,6 @@
     },
     {
         "name": "robot-a",
-        "type": "costume",
         "tags": [
             "space",
             "robot",
@@ -8855,7 +8282,6 @@
     },
     {
         "name": "robot-b",
-        "type": "costume",
         "tags": [
             "space",
             "robot",
@@ -8870,7 +8296,6 @@
     },
     {
         "name": "robot-c",
-        "type": "costume",
         "tags": [
             "space",
             "robot",
@@ -8885,7 +8310,6 @@
     },
     {
         "name": "robot-d",
-        "type": "costume",
         "tags": [
             "space",
             "robot",
@@ -8900,7 +8324,6 @@
     },
     {
         "name": "rocketship-a",
-        "type": "costume",
         "tags": [
             "space",
             "spaceship",
@@ -8915,7 +8338,6 @@
     },
     {
         "name": "rocketship-b",
-        "type": "costume",
         "tags": [
             "space",
             "spaceship",
@@ -8930,7 +8352,6 @@
     },
     {
         "name": "rocketship-c",
-        "type": "costume",
         "tags": [
             "space",
             "spaceship",
@@ -8945,7 +8366,6 @@
     },
     {
         "name": "rocketship-d",
-        "type": "costume",
         "tags": [
             "space",
             "spaceship",
@@ -8960,7 +8380,6 @@
     },
     {
         "name": "rocketship-e",
-        "type": "costume",
         "tags": [
             "space",
             "spaceship",
@@ -8975,7 +8394,6 @@
     },
     {
         "name": "rocks",
-        "type": "costume",
         "tags": [
             "things",
             "potassium"
@@ -8989,7 +8407,6 @@
     },
     {
         "name": "rooster-a",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -9005,7 +8422,6 @@
     },
     {
         "name": "rooster-b",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -9021,7 +8437,6 @@
     },
     {
         "name": "rooster-c",
-        "type": "costume",
         "tags": [
             "animals",
             "chicken",
@@ -9037,7 +8452,6 @@
     },
     {
         "name": "ruby-a",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -9050,7 +8464,6 @@
     },
     {
         "name": "ruby-b",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -9063,7 +8476,6 @@
     },
     {
         "name": "sailboat",
-        "type": "costume",
         "tags": [
             "boat",
             "transportation"
@@ -9077,7 +8489,6 @@
     },
     {
         "name": "sam",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -9090,7 +8501,6 @@
     },
     {
         "name": "saxophone-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -9104,7 +8514,6 @@
     },
     {
         "name": "saxophone-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -9118,7 +8527,6 @@
     },
     {
         "name": "scarf-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "clothing",
@@ -9134,7 +8542,6 @@
     },
     {
         "name": "scarf-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "clothing",
@@ -9150,7 +8557,6 @@
     },
     {
         "name": "scarf-c",
-        "type": "costume",
         "tags": [
             "fashionclothing",
             "scarf",
@@ -9165,7 +8571,6 @@
     },
     {
         "name": "shark-a",
-        "type": "costume",
         "tags": [
             "animals",
             "underwater",
@@ -9181,7 +8586,6 @@
     },
     {
         "name": "shark-b",
-        "type": "costume",
         "tags": [
             "animals",
             "underwater",
@@ -9197,7 +8601,6 @@
     },
     {
         "name": "shark2-a",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -9216,7 +8619,6 @@
     },
     {
         "name": "shark2-b",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -9235,7 +8637,6 @@
     },
     {
         "name": "shark2-c",
-        "type": "costume",
         "tags": [
             "animals",
             "ocean",
@@ -9254,7 +8655,6 @@
     },
     {
         "name": "shirt-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "shirt"
@@ -9268,7 +8668,6 @@
     },
     {
         "name": "shoes-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "shoes"
@@ -9282,7 +8681,6 @@
     },
     {
         "name": "shoes-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "shoes"
@@ -9296,7 +8694,6 @@
     },
     {
         "name": "shoes-c",
-        "type": "costume",
         "tags": [
             "fashion",
             "shoes"
@@ -9310,7 +8707,6 @@
     },
     {
         "name": "shoes-d",
-        "type": "costume",
         "tags": [
             "fashion",
             "shoes"
@@ -9324,7 +8720,6 @@
     },
     {
         "name": "shorts-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "pants",
@@ -9340,7 +8735,6 @@
     },
     {
         "name": "shorts-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "pants",
@@ -9356,7 +8750,6 @@
     },
     {
         "name": "shorts-c",
-        "type": "costume",
         "tags": [
             "fashion",
             "pants",
@@ -9372,7 +8765,6 @@
     },
     {
         "name": "singer1",
-        "type": "costume",
         "tags": [
             "people",
             "music"
@@ -9386,7 +8778,6 @@
     },
     {
         "name": "skeleton-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -9404,7 +8795,6 @@
     },
     {
         "name": "skeleton-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -9422,7 +8812,6 @@
     },
     {
         "name": "skeleton-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -9440,7 +8829,6 @@
     },
     {
         "name": "skeleton-e",
-        "type": "costume",
         "tags": [
             "fantasy",
             "spooky",
@@ -9458,7 +8846,6 @@
     },
     {
         "name": "snake-a",
-        "type": "costume",
         "tags": [
             "animals",
             "reptile",
@@ -9473,7 +8860,6 @@
     },
     {
         "name": "snake-b",
-        "type": "costume",
         "tags": [
             "animals",
             "reptile",
@@ -9488,7 +8874,6 @@
     },
     {
         "name": "snake-c",
-        "type": "costume",
         "tags": [
             "animals",
             "reptile",
@@ -9503,7 +8888,6 @@
     },
     {
         "name": "snowflake",
-        "type": "costume",
         "tags": [
             "winter"
         ],
@@ -9516,7 +8900,6 @@
     },
     {
         "name": "snowman",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -9531,7 +8914,6 @@
     },
     {
         "name": "soccer ball",
-        "type": "costume",
         "tags": [
             "sports",
             "soccer",
@@ -9547,7 +8929,6 @@
     },
     {
         "name": "speaker",
-        "type": "costume",
         "tags": [
             "music",
             "things",
@@ -9564,7 +8945,6 @@
     },
     {
         "name": "squirrel",
-        "type": "costume",
         "tags": [
             "animals",
             "scoob"
@@ -9578,7 +8958,6 @@
     },
     {
         "name": "star",
-        "type": "costume",
         "tags": [
             "shapes",
             "space"
@@ -9592,7 +8971,6 @@
     },
     {
         "name": "starfish-a",
-        "type": "costume",
         "tags": [
             "animals",
             "echinodermata",
@@ -9609,7 +8987,6 @@
     },
     {
         "name": "starfish-b ",
-        "type": "costume",
         "tags": [
             "animals",
             "echinodermata",
@@ -9626,7 +9003,6 @@
     },
     {
         "name": "stop",
-        "type": "costume",
         "tags": [
             "shapes",
             "things"
@@ -9640,7 +9016,6 @@
     },
     {
         "name": "strawberry-a",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -9655,7 +9030,6 @@
     },
     {
         "name": "strawberry-b",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -9670,7 +9044,6 @@
     },
     {
         "name": "strawberry-c",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -9685,7 +9058,6 @@
     },
     {
         "name": "strawberry-d",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -9700,7 +9072,6 @@
     },
     {
         "name": "strawberry-e",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -9715,7 +9086,6 @@
     },
     {
         "name": "sun",
-        "type": "costume",
         "tags": [
             "space",
             "star",
@@ -9733,7 +9103,6 @@
     },
     {
         "name": "sunglasses-a",
-        "type": "costume",
         "tags": [
             "fashion",
             "cool"
@@ -9747,7 +9116,6 @@
     },
     {
         "name": "sunglasses-b",
-        "type": "costume",
         "tags": [
             "fashion",
             "cool"
@@ -9761,7 +9129,6 @@
     },
     {
         "name": "tabla-a",
-        "type": "costume",
         "tags": [
             "drums",
             " music",
@@ -9776,7 +9143,6 @@
     },
     {
         "name": "tabla-b",
-        "type": "costume",
         "tags": [
             "drums",
             " music",
@@ -9791,7 +9157,6 @@
     },
     {
         "name": "taco",
-        "type": "costume",
         "tags": [
             "food",
             "designerd"
@@ -9805,7 +9170,6 @@
     },
     {
         "name": "taco-wizard",
-        "type": "costume",
         "tags": [
             "food",
             "fantasy",
@@ -9822,7 +9186,6 @@
     },
     {
         "name": "takeout-a",
-        "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
@@ -9836,7 +9199,6 @@
     },
     {
         "name": "takeout-b",
-        "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
@@ -9850,7 +9212,6 @@
     },
     {
         "name": "takeout-c",
-        "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
@@ -9864,7 +9225,6 @@
     },
     {
         "name": "takeout-d",
-        "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
@@ -9878,7 +9238,6 @@
     },
     {
         "name": "takeout-e",
-        "type": "costume",
         "tags": [
             "food",
             "alex eben meyer"
@@ -9892,7 +9251,6 @@
     },
     {
         "name": "ten80 pop down",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9906,7 +9264,6 @@
     },
     {
         "name": "ten80 pop front",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9920,7 +9277,6 @@
     },
     {
         "name": "ten80 pop l arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9934,7 +9290,6 @@
     },
     {
         "name": "ten80 pop left",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9948,7 +9303,6 @@
     },
     {
         "name": "ten80 pop r arm",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9962,7 +9316,6 @@
     },
     {
         "name": "ten80 pop right",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9976,7 +9329,6 @@
     },
     {
         "name": "ten80 pop stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -9990,7 +9342,6 @@
     },
     {
         "name": "ten80 stance",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10004,7 +9355,6 @@
     },
     {
         "name": "ten80 top freeze",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10018,7 +9368,6 @@
     },
     {
         "name": "ten80 top l step",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10032,7 +9381,6 @@
     },
     {
         "name": "ten80 top r cross",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10046,7 +9394,6 @@
     },
     {
         "name": "ten80 top r step",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10060,7 +9407,6 @@
     },
     {
         "name": "ten80 top stand",
-        "type": "costume",
         "tags": [
             "people",
             "dance"
@@ -10074,7 +9420,6 @@
     },
     {
         "name": "tennisball",
-        "type": "costume",
         "tags": [
             "ball",
             "sports"
@@ -10088,7 +9433,6 @@
     },
     {
         "name": "tera-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing"
@@ -10102,7 +9446,6 @@
     },
     {
         "name": "tera-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -10117,7 +9460,6 @@
     },
     {
         "name": "tera-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -10132,7 +9474,6 @@
     },
     {
         "name": "tera-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "drawing",
@@ -10147,7 +9488,6 @@
     },
     {
         "name": "toucan-a",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -10162,7 +9502,6 @@
     },
     {
         "name": "toucan-b",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -10177,7 +9516,6 @@
     },
     {
         "name": "toucan-c",
-        "type": "costume",
         "tags": [
             "animals",
             "bird",
@@ -10192,7 +9530,6 @@
     },
     {
         "name": "trampoline",
-        "type": "costume",
         "tags": [
             "sports"
         ],
@@ -10205,7 +9542,6 @@
     },
     {
         "name": "tree1",
-        "type": "costume",
         "tags": [
             "plants",
             "wood",
@@ -10220,7 +9556,6 @@
     },
     {
         "name": "trees-a",
-        "type": "costume",
         "tags": [
             "plants",
             "wood",
@@ -10235,7 +9570,6 @@
     },
     {
         "name": "trees-b",
-        "type": "costume",
         "tags": [
             "plants",
             "wood",
@@ -10250,7 +9584,6 @@
     },
     {
         "name": "truck-a",
-        "type": "costume",
         "tags": [
             "truck",
             "city",
@@ -10266,7 +9599,6 @@
     },
     {
         "name": "truck-b",
-        "type": "costume",
         "tags": [
             "truck",
             "city",
@@ -10282,7 +9614,6 @@
     },
     {
         "name": "truck-c",
-        "type": "costume",
         "tags": [
             "truck",
             "city",
@@ -10298,7 +9629,6 @@
     },
     {
         "name": "trumpet-a",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -10312,7 +9642,6 @@
     },
     {
         "name": "trumpet-b",
-        "type": "costume",
         "tags": [
             "music",
             "andrew rae"
@@ -10326,7 +9655,6 @@
     },
     {
         "name": "unicorn",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10341,7 +9669,6 @@
     },
     {
         "name": "unicorn 2",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10358,7 +9685,6 @@
     },
     {
         "name": "unicorn running-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10374,7 +9700,6 @@
     },
     {
         "name": "unicorn running-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10390,7 +9715,6 @@
     },
     {
         "name": "unicorn running-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10406,7 +9730,6 @@
     },
     {
         "name": "unicorn running-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10422,7 +9745,6 @@
     },
     {
         "name": "unicorn running-e",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10438,7 +9760,6 @@
     },
     {
         "name": "unicorn running-f",
-        "type": "costume",
         "tags": [
             "fantasy",
             "animals",
@@ -10454,7 +9775,6 @@
     },
     {
         "name": "wand",
-        "type": "costume",
         "tags": [
             "fantasy",
             "ipzy",
@@ -10469,7 +9789,6 @@
     },
     {
         "name": "wanda",
-        "type": "costume",
         "tags": [
             "people"
         ],
@@ -10482,7 +9801,6 @@
     },
     {
         "name": "watermelon-a",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -10500,7 +9818,6 @@
     },
     {
         "name": "watermelon-b",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -10517,7 +9834,6 @@
     },
     {
         "name": "watermelon-c",
-        "type": "costume",
         "tags": [
             "food",
             "fruit",
@@ -10534,7 +9850,6 @@
     },
     {
         "name": "winter hat",
-        "type": "costume",
         "tags": [
             "fashion",
             "winter",
@@ -10549,7 +9864,6 @@
     },
     {
         "name": "witch",
-        "type": "costume",
         "tags": [
             "fantasy",
             "broom",
@@ -10567,7 +9881,6 @@
     },
     {
         "name": "witch-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10585,7 +9898,6 @@
     },
     {
         "name": "witch-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10603,7 +9915,6 @@
     },
     {
         "name": "witch-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10621,7 +9932,6 @@
     },
     {
         "name": "witch-d",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10639,7 +9949,6 @@
     },
     {
         "name": "wizard girl",
-        "type": "costume",
         "tags": [
             "people",
             "female",
@@ -10657,7 +9966,6 @@
     },
     {
         "name": "wizard hat",
-        "type": "costume",
         "tags": [
             "fashion",
             "fantasy",
@@ -10672,7 +9980,6 @@
     },
     {
         "name": "wizard-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10690,7 +9997,6 @@
     },
     {
         "name": "wizard-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10708,7 +10014,6 @@
     },
     {
         "name": "wizard-c",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10726,7 +10031,6 @@
     },
     {
         "name": "wizard-toad-a",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10746,7 +10050,6 @@
     },
     {
         "name": "wizard-toad-b",
-        "type": "costume",
         "tags": [
             "fantasy",
             "people",
@@ -10765,7 +10068,6 @@
     },
     {
         "name": "zebra-a",
-        "type": "costume",
         "tags": [
             "animals",
             "savanna",
@@ -10781,7 +10083,6 @@
     },
     {
         "name": "zebra-b",
-        "type": "costume",
         "tags": [
             "animals",
             "savanna",
@@ -10796,8 +10097,7 @@
         "rotationCenterY": 56
     },
     {
-        "name": "ωblock-a",
-        "type": "costume",
+        "name": "block-a",
         "tags": [
             "alphabet",
             "letters"
@@ -10810,8 +10110,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωblock-b",
-        "type": "costume",
+        "name": "block-b",
         "tags": [
             "alphabet",
             "letters"
@@ -10824,8 +10123,7 @@
         "rotationCenterY": 42
     },
     {
-        "name": "ωblock-c",
-        "type": "costume",
+        "name": "block-c",
         "tags": [
             "alphabet",
             "letters"
@@ -10838,8 +10136,7 @@
         "rotationCenterY": 43
     },
     {
-        "name": "ωblock-d",
-        "type": "costume",
+        "name": "block-d",
         "tags": [
             "alphabet",
             "letters"
@@ -10852,8 +10149,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωblock-e",
-        "type": "costume",
+        "name": "block-e",
         "tags": [
             "alphabet",
             "letters"
@@ -10866,8 +10162,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωblock-f",
-        "type": "costume",
+        "name": "block-f",
         "tags": [
             "alphabet",
             "letters"
@@ -10880,8 +10175,7 @@
         "rotationCenterY": 40
     },
     {
-        "name": "ωblock-g",
-        "type": "costume",
+        "name": "block-g",
         "tags": [
             "alphabet",
             "letters"
@@ -10894,8 +10188,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωblock-h",
-        "type": "costume",
+        "name": "block-h",
         "tags": [
             "alphabet",
             "letters"
@@ -10908,8 +10201,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωblock-i",
-        "type": "costume",
+        "name": "block-i",
         "tags": [
             "alphabet",
             "letters"
@@ -10922,8 +10214,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωblock-j",
-        "type": "costume",
+        "name": "block-j",
         "tags": [
             "alphabet",
             "letters"
@@ -10936,8 +10227,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωblock-k",
-        "type": "costume",
+        "name": "block-k",
         "tags": [
             "alphabet",
             "letters"
@@ -10950,8 +10240,7 @@
         "rotationCenterY": 40
     },
     {
-        "name": "ωblock-l",
-        "type": "costume",
+        "name": "block-l",
         "tags": [
             "alphabet",
             "letters"
@@ -10964,8 +10253,7 @@
         "rotationCenterY": 40
     },
     {
-        "name": "ωblock-m",
-        "type": "costume",
+        "name": "block-m",
         "tags": [
             "alphabet",
             "letters"
@@ -10978,8 +10266,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωblock-n",
-        "type": "costume",
+        "name": "block-n",
         "tags": [
             "alphabet",
             "letters"
@@ -10992,8 +10279,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωblock-o",
-        "type": "costume",
+        "name": "block-o",
         "tags": [
             "alphabet",
             "letters"
@@ -11006,8 +10292,7 @@
         "rotationCenterY": 40
     },
     {
-        "name": "ωblock-p",
-        "type": "costume",
+        "name": "block-p",
         "tags": [
             "alphabet",
             "letters"
@@ -11020,8 +10305,7 @@
         "rotationCenterY": 33
     },
     {
-        "name": "ωblock-q",
-        "type": "costume",
+        "name": "block-q",
         "tags": [
             "alphabet",
             "letters"
@@ -11034,8 +10318,7 @@
         "rotationCenterY": 33
     },
     {
-        "name": "ωblock-r",
-        "type": "costume",
+        "name": "block-r",
         "tags": [
             "alphabet",
             "letters"
@@ -11048,8 +10331,7 @@
         "rotationCenterY": 33
     },
     {
-        "name": "ωblock-s",
-        "type": "costume",
+        "name": "block-s",
         "tags": [
             "alphabet",
             "letters"
@@ -11062,8 +10344,7 @@
         "rotationCenterY": 30
     },
     {
-        "name": "ωblock-t",
-        "type": "costume",
+        "name": "block-t",
         "tags": [
             "alphabet",
             "letters"
@@ -11076,8 +10357,7 @@
         "rotationCenterY": 33
     },
     {
-        "name": "ωblock-u",
-        "type": "costume",
+        "name": "block-u",
         "tags": [
             "alphabet",
             "letters"
@@ -11090,8 +10370,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωblock-v",
-        "type": "costume",
+        "name": "block-v",
         "tags": [
             "alphabet",
             "letters"
@@ -11104,8 +10383,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωblock-w",
-        "type": "costume",
+        "name": "block-w",
         "tags": [
             "alphabet",
             "letters"
@@ -11118,8 +10396,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωblock-x",
-        "type": "costume",
+        "name": "block-x",
         "tags": [
             "alphabet",
             "letters"
@@ -11132,8 +10409,7 @@
         "rotationCenterY": 32
     },
     {
-        "name": "ωblock-y",
-        "type": "costume",
+        "name": "block-y",
         "tags": [
             "alphabet",
             "letters"
@@ -11146,8 +10422,7 @@
         "rotationCenterY": 33
     },
     {
-        "name": "ωblock-z",
-        "type": "costume",
+        "name": "block-z",
         "tags": [
             "alphabet",
             "letters"
@@ -11160,8 +10435,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-0",
-        "type": "costume",
+        "name": "glow-0",
         "tags": [
             "numbers",
             "digits"
@@ -11174,8 +10448,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-1",
-        "type": "costume",
+        "name": "glow-1",
         "tags": [
             "numbers",
             "digits"
@@ -11188,8 +10461,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-2",
-        "type": "costume",
+        "name": "glow-2",
         "tags": [
             "numbers",
             "digits"
@@ -11202,8 +10474,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωglow-3",
-        "type": "costume",
+        "name": "glow-3",
         "tags": [
             "numbers",
             "digits"
@@ -11216,8 +10487,7 @@
         "rotationCenterY": 42
     },
     {
-        "name": "ωglow-4",
-        "type": "costume",
+        "name": "glow-4",
         "tags": [
             "numbers",
             "digits"
@@ -11230,8 +10500,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-5",
-        "type": "costume",
+        "name": "glow-5",
         "tags": [
             "numbers",
             "digits"
@@ -11244,8 +10513,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-6",
-        "type": "costume",
+        "name": "glow-6",
         "tags": [
             "numbers",
             "digits"
@@ -11258,8 +10526,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωglow-7",
-        "type": "costume",
+        "name": "glow-7",
         "tags": [
             "numbers",
             "digits"
@@ -11272,8 +10539,7 @@
         "rotationCenterY": 42
     },
     {
-        "name": "ωglow-8",
-        "type": "costume",
+        "name": "glow-8",
         "tags": [
             "numbers",
             "digits"
@@ -11286,8 +10552,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωglow-9",
-        "type": "costume",
+        "name": "glow-9",
         "tags": [
             "numbers",
             "digits"
@@ -11300,8 +10565,7 @@
         "rotationCenterY": 36
     },
     {
-        "name": "ωglow-a",
-        "type": "costume",
+        "name": "glow-a",
         "tags": [
             "alphabet",
             "letters"
@@ -11314,8 +10578,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωglow-b",
-        "type": "costume",
+        "name": "glow-b",
         "tags": [
             "alphabet",
             "letters"
@@ -11328,8 +10591,7 @@
         "rotationCenterY": 35
     },
     {
-        "name": "ωglow-c",
-        "type": "costume",
+        "name": "glow-c",
         "tags": [
             "alphabet",
             "letters"
@@ -11342,8 +10604,7 @@
         "rotationCenterY": 35
     },
     {
-        "name": "ωglow-d",
-        "type": "costume",
+        "name": "glow-d",
         "tags": [
             "alphabet",
             "letters"
@@ -11356,8 +10617,7 @@
         "rotationCenterY": 35
     },
     {
-        "name": "ωglow-e",
-        "type": "costume",
+        "name": "glow-e",
         "tags": [
             "alphabet",
             "letters"
@@ -11370,8 +10630,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-f",
-        "type": "costume",
+        "name": "glow-f",
         "tags": [
             "alphabet",
             "letters"
@@ -11384,8 +10643,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωglow-g",
-        "type": "costume",
+        "name": "glow-g",
         "tags": [
             "alphabet",
             "letters"
@@ -11398,8 +10656,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-h",
-        "type": "costume",
+        "name": "glow-h",
         "tags": [
             "alphabet",
             "letters"
@@ -11412,8 +10669,7 @@
         "rotationCenterY": 46
     },
     {
-        "name": "ωglow-i",
-        "type": "costume",
+        "name": "glow-i",
         "tags": [
             "alphabet",
             "letters"
@@ -11426,8 +10682,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-j",
-        "type": "costume",
+        "name": "glow-j",
         "tags": [
             "alphabet",
             "letters"
@@ -11440,8 +10695,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-k",
-        "type": "costume",
+        "name": "glow-k",
         "tags": [
             "alphabet",
             "letters"
@@ -11454,8 +10708,7 @@
         "rotationCenterY": 36
     },
     {
-        "name": "ωglow-l",
-        "type": "costume",
+        "name": "glow-l",
         "tags": [
             "alphabet",
             "letters"
@@ -11468,8 +10721,7 @@
         "rotationCenterY": 35
     },
     {
-        "name": "ωglow-m",
-        "type": "costume",
+        "name": "glow-m",
         "tags": [
             "alphabet",
             "letters"
@@ -11482,8 +10734,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-n",
-        "type": "costume",
+        "name": "glow-n",
         "tags": [
             "alphabet",
             "letters"
@@ -11496,8 +10747,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-o",
-        "type": "costume",
+        "name": "glow-o",
         "tags": [
             "alphabet",
             "letters"
@@ -11510,8 +10760,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-p",
-        "type": "costume",
+        "name": "glow-p",
         "tags": [
             "alphabet",
             "letters"
@@ -11524,8 +10773,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-q",
-        "type": "costume",
+        "name": "glow-q",
         "tags": [
             "alphabet",
             "letters"
@@ -11538,8 +10786,7 @@
         "rotationCenterY": 43
     },
     {
-        "name": "ωglow-r",
-        "type": "costume",
+        "name": "glow-r",
         "tags": [
             "alphabet",
             "letters"
@@ -11552,8 +10799,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-s",
-        "type": "costume",
+        "name": "glow-s",
         "tags": [
             "alphabet",
             "letters"
@@ -11566,8 +10812,7 @@
         "rotationCenterY": 40
     },
     {
-        "name": "ωglow-t",
-        "type": "costume",
+        "name": "glow-t",
         "tags": [
             "alphabet",
             "letters"
@@ -11580,8 +10825,7 @@
         "rotationCenterY": 38
     },
     {
-        "name": "ωglow-u",
-        "type": "costume",
+        "name": "glow-u",
         "tags": [
             "alphabet",
             "letters"
@@ -11594,8 +10838,7 @@
         "rotationCenterY": 37
     },
     {
-        "name": "ωglow-v",
-        "type": "costume",
+        "name": "glow-v",
         "tags": [
             "alphabet",
             "letters"
@@ -11608,8 +10851,7 @@
         "rotationCenterY": 42
     },
     {
-        "name": "ωglow-w",
-        "type": "costume",
+        "name": "glow-w",
         "tags": [
             "alphabet",
             "letters"
@@ -11622,8 +10864,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωglow-x",
-        "type": "costume",
+        "name": "glow-x",
         "tags": [
             "alphabet",
             "letters"
@@ -11636,8 +10877,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωglow-y",
-        "type": "costume",
+        "name": "glow-y",
         "tags": [
             "alphabet",
             "letters"
@@ -11650,8 +10890,7 @@
         "rotationCenterY": 41
     },
     {
-        "name": "ωglow-z",
-        "type": "costume",
+        "name": "glow-z",
         "tags": [
             "alphabet",
             "letters"
@@ -11664,8 +10903,7 @@
         "rotationCenterY": 39
     },
     {
-        "name": "ωstory-a-1",
-        "type": "costume",
+        "name": "story-a-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11678,8 +10916,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-a-2",
-        "type": "costume",
+        "name": "story-a-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11692,8 +10929,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-a-3",
-        "type": "costume",
+        "name": "story-a-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11706,8 +10942,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-b-1",
-        "type": "costume",
+        "name": "story-b-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11720,8 +10955,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-b-2",
-        "type": "costume",
+        "name": "story-b-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11734,8 +10968,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-b-3",
-        "type": "costume",
+        "name": "story-b-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11748,8 +10981,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-c-1",
-        "type": "costume",
+        "name": "story-c-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11762,8 +10994,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-c-2",
-        "type": "costume",
+        "name": "story-c-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11776,8 +11007,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-c-3",
-        "type": "costume",
+        "name": "story-c-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11790,8 +11020,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-d-1",
-        "type": "costume",
+        "name": "story-d-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11804,8 +11033,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-d-2",
-        "type": "costume",
+        "name": "story-d-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11818,8 +11046,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-d-3",
-        "type": "costume",
+        "name": "story-d-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11832,8 +11059,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-e-1",
-        "type": "costume",
+        "name": "story-e-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11846,8 +11072,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-e-2",
-        "type": "costume",
+        "name": "story-e-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11860,8 +11085,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-e-3",
-        "type": "costume",
+        "name": "story-e-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11874,8 +11098,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-f-1",
-        "type": "costume",
+        "name": "story-f-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11888,8 +11111,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-f-2",
-        "type": "costume",
+        "name": "story-f-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11902,8 +11124,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-f-3",
-        "type": "costume",
+        "name": "story-f-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11916,8 +11137,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-g-1",
-        "type": "costume",
+        "name": "story-g-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11930,8 +11150,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-g-2",
-        "type": "costume",
+        "name": "story-g-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11944,8 +11163,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-g-3",
-        "type": "costume",
+        "name": "story-g-3",
         "tags": [
             "alphabet",
             "letters"
@@ -11958,8 +11176,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-h-1",
-        "type": "costume",
+        "name": "story-h-1",
         "tags": [
             "alphabet",
             "letters"
@@ -11972,8 +11189,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-h-2",
-        "type": "costume",
+        "name": "story-h-2",
         "tags": [
             "alphabet",
             "letters"
@@ -11986,8 +11202,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-h-3",
-        "type": "costume",
+        "name": "story-h-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12000,8 +11215,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-i-1",
-        "type": "costume",
+        "name": "story-i-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12014,8 +11228,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-i-2",
-        "type": "costume",
+        "name": "story-i-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12028,8 +11241,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-i-3",
-        "type": "costume",
+        "name": "story-i-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12042,8 +11254,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-j-1",
-        "type": "costume",
+        "name": "story-j-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12056,8 +11267,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-j-2",
-        "type": "costume",
+        "name": "story-j-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12070,8 +11280,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-j-3",
-        "type": "costume",
+        "name": "story-j-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12084,8 +11293,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-k-1",
-        "type": "costume",
+        "name": "story-k-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12098,8 +11306,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-k-2",
-        "type": "costume",
+        "name": "story-k-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12112,8 +11319,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-k-3",
-        "type": "costume",
+        "name": "story-k-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12126,8 +11332,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-l-1",
-        "type": "costume",
+        "name": "story-l-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12140,8 +11345,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-l-2",
-        "type": "costume",
+        "name": "story-l-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12154,8 +11358,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-l-3",
-        "type": "costume",
+        "name": "story-l-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12168,8 +11371,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-m-1",
-        "type": "costume",
+        "name": "story-m-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12182,8 +11384,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-m-2",
-        "type": "costume",
+        "name": "story-m-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12196,8 +11397,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-m-3",
-        "type": "costume",
+        "name": "story-m-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12210,8 +11410,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-n-1",
-        "type": "costume",
+        "name": "story-n-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12224,8 +11423,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-n-2",
-        "type": "costume",
+        "name": "story-n-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12238,8 +11436,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-n-3",
-        "type": "costume",
+        "name": "story-n-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12252,8 +11449,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-o-1",
-        "type": "costume",
+        "name": "story-o-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12266,8 +11462,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-o-2",
-        "type": "costume",
+        "name": "story-o-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12280,8 +11475,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-o-3",
-        "type": "costume",
+        "name": "story-o-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12294,8 +11488,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-p-1",
-        "type": "costume",
+        "name": "story-p-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12308,8 +11501,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-p-2",
-        "type": "costume",
+        "name": "story-p-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12322,8 +11514,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-p-3",
-        "type": "costume",
+        "name": "story-p-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12336,8 +11527,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-q-1",
-        "type": "costume",
+        "name": "story-q-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12350,8 +11540,7 @@
         "rotationCenterY": 30
     },
     {
-        "name": "ωstory-q-2",
-        "type": "costume",
+        "name": "story-q-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12364,8 +11553,7 @@
         "rotationCenterY": 30
     },
     {
-        "name": "ωstory-q-3",
-        "type": "costume",
+        "name": "story-q-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12378,8 +11566,7 @@
         "rotationCenterY": 29
     },
     {
-        "name": "ωstory-r-1",
-        "type": "costume",
+        "name": "story-r-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12392,8 +11579,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-r-2",
-        "type": "costume",
+        "name": "story-r-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12406,8 +11592,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-r-3",
-        "type": "costume",
+        "name": "story-r-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12420,8 +11605,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-s-1",
-        "type": "costume",
+        "name": "story-s-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12434,8 +11618,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-s-2",
-        "type": "costume",
+        "name": "story-s-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12448,8 +11631,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-s-3",
-        "type": "costume",
+        "name": "story-s-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12462,8 +11644,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-t-1",
-        "type": "costume",
+        "name": "story-t-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12476,8 +11657,7 @@
         "rotationCenterY": 27
     },
     {
-        "name": "ωstory-t-2",
-        "type": "costume",
+        "name": "story-t-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12490,8 +11670,7 @@
         "rotationCenterY": 27
     },
     {
-        "name": "ωstory-t-3",
-        "type": "costume",
+        "name": "story-t-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12504,8 +11683,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-u-1",
-        "type": "costume",
+        "name": "story-u-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12518,8 +11696,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-u-2",
-        "type": "costume",
+        "name": "story-u-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12532,8 +11709,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-u-3",
-        "type": "costume",
+        "name": "story-u-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12546,8 +11722,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-v-1",
-        "type": "costume",
+        "name": "story-v-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12560,8 +11735,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-v-2",
-        "type": "costume",
+        "name": "story-v-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12574,8 +11748,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-v-3",
-        "type": "costume",
+        "name": "story-v-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12588,8 +11761,7 @@
         "rotationCenterY": 23
     },
     {
-        "name": "ωstory-w-1",
-        "type": "costume",
+        "name": "story-w-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12602,8 +11774,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-w-2",
-        "type": "costume",
+        "name": "story-w-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12616,8 +11787,7 @@
         "rotationCenterY": 25
     },
     {
-        "name": "ωstory-w-3",
-        "type": "costume",
+        "name": "story-w-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12630,8 +11800,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-x-1",
-        "type": "costume",
+        "name": "story-x-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12644,8 +11813,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-x-2",
-        "type": "costume",
+        "name": "story-x-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12658,8 +11826,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-x-3",
-        "type": "costume",
+        "name": "story-x-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12672,8 +11839,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-y-1",
-        "type": "costume",
+        "name": "story-y-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12686,8 +11852,7 @@
         "rotationCenterY": 27
     },
     {
-        "name": "ωstory-y-2",
-        "type": "costume",
+        "name": "story-y-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12700,8 +11865,7 @@
         "rotationCenterY": 27
     },
     {
-        "name": "ωstory-y-3",
-        "type": "costume",
+        "name": "story-y-3",
         "tags": [
             "alphabet",
             "letters"
@@ -12714,8 +11878,7 @@
         "rotationCenterY": 24
     },
     {
-        "name": "ωstory-z-1",
-        "type": "costume",
+        "name": "story-z-1",
         "tags": [
             "alphabet",
             "letters"
@@ -12728,8 +11891,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-z-2",
-        "type": "costume",
+        "name": "story-z-2",
         "tags": [
             "alphabet",
             "letters"
@@ -12742,8 +11904,7 @@
         "rotationCenterY": 26
     },
     {
-        "name": "ωstory-z-3",
-        "type": "costume",
+        "name": "story-z-3",
         "tags": [
             "alphabet",
             "letters"

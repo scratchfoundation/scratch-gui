@@ -1,7 +1,6 @@
 [
     {
         "name": "Abby",
-        "type": "sprite",
         "tags": [
             "people",
             "person",
@@ -62,7 +61,6 @@
     },
     {
         "name": "Amon",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -95,7 +93,6 @@
     },
     {
         "name": "Andie",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -160,7 +157,6 @@
     },
     {
         "name": "Anina Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -310,7 +306,6 @@
     },
     {
         "name": "Apple",
-        "type": "sprite",
         "tags": [
             "food",
             "red",
@@ -345,7 +340,6 @@
     },
     {
         "name": "Arrow1",
-        "type": "sprite",
         "tags": [
             "icons",
             "symbols",
@@ -407,7 +401,6 @@
     },
     {
         "name": "Avery",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -448,7 +441,6 @@
     },
     {
         "name": "Avery Walking",
-        "type": "sprite",
         "tags": [
             "people",
             "walking"
@@ -508,7 +500,6 @@
     },
     {
         "name": "Ball",
-        "type": "sprite",
         "tags": [
             "round",
             "game",
@@ -594,7 +585,6 @@
     },
     {
         "name": "Ballerina",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -603,40 +593,40 @@
         "variables": {},
         "costumes": [
             {
-                "assetId": "3525966db57e6b3fe88ee7c76c9d81bc",
+                "assetId": "5197d3778baf55da6b81b3ada1e10021",
                 "name": "ballerina-a",
                 "bitmapResolution": 1,
-                "md5ext": "3525966db57e6b3fe88ee7c76c9d81bc.svg",
+                "md5ext": "5197d3778baf55da6b81b3ada1e10021.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 75,
-                "rotationCenterY": 75
+                "rotationCenterX": 31.00008984350052,
+                "rotationCenterY": 49
             },
             {
-                "assetId": "605ad62c87a35fb50271ed93b89d9fcf",
+                "assetId": "4ccb1752a43f48aafe490c9c08e58c27",
                 "name": "ballerina-b",
                 "bitmapResolution": 1,
-                "md5ext": "605ad62c87a35fb50271ed93b89d9fcf.svg",
+                "md5ext": "4ccb1752a43f48aafe490c9c08e58c27.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 29.496243552524447,
-                "rotationCenterY": 23.769347672058046
+                "rotationCenterX": 29.496239121982484,
+                "rotationCenterY": 23.769351839794098
             },
             {
-                "assetId": "4acedfe3b301fe89729ad8e7939f1df6",
+                "assetId": "fc02bf591dd3d91eeeb50c7424d08274",
                 "name": "ballerina-c",
                 "bitmapResolution": 1,
-                "md5ext": "4acedfe3b301fe89729ad8e7939f1df6.svg",
+                "md5ext": "fc02bf591dd3d91eeeb50c7424d08274.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 59.50259204017422,
-                "rotationCenterY": 59.18498926037006
+                "rotationCenterX": 59.502591601941845,
+                "rotationCenterY": 59.184989331170854
             },
             {
-                "assetId": "ec51725c50440636d4830ff1a8ec20ab",
+                "assetId": "5aae21aee33c3f1ae943af5ea11254bf",
                 "name": "ballerina-d",
                 "bitmapResolution": 1,
-                "md5ext": "ec51725c50440636d4830ff1a8ec20ab.svg",
+                "md5ext": "5aae21aee33c3f1ae943af5ea11254bf.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 36.40098960393442,
-                "rotationCenterY": 77.9515998142805
+                "rotationCenterX": 36.40099014292747,
+                "rotationCenterY": 77.95160112758442
             }
         ],
         "sounds": [
@@ -654,7 +644,6 @@
     },
     {
         "name": "Balloon1",
-        "type": "sprite",
         "tags": [
             "party",
             "pop",
@@ -711,7 +700,6 @@
     },
     {
         "name": "Bananas",
-        "type": "sprite",
         "tags": [
             "food",
             "yellow",
@@ -756,7 +744,6 @@
     },
     {
         "name": "Baseball",
-        "type": "sprite",
         "tags": [
             "baseball",
             "sports",
@@ -791,7 +778,6 @@
     },
     {
         "name": "Basketball",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -834,7 +820,6 @@
     },
     {
         "name": "Bat",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "spooky",
@@ -898,7 +883,6 @@
     },
     {
         "name": "Batter",
-        "type": "sprite",
         "tags": [
             "baseball",
             "sports",
@@ -960,7 +944,6 @@
     },
     {
         "name": "Beachball",
-        "type": "sprite",
         "tags": [
             "round",
             "sports",
@@ -1004,7 +987,6 @@
     },
     {
         "name": "Bear",
-        "type": "sprite",
         "tags": [
             "animals",
             "ipzy",
@@ -1023,13 +1005,13 @@
                 "rotationCenterY": 90
             },
             {
-                "assetId": "cad7a4a674a6b4b960c5b256a26c87e9",
+                "assetId": "6f303e972f33fcb7ef36d0d8012d0975",
                 "name": "bear-b",
                 "bitmapResolution": 1,
-                "md5ext": "cad7a4a674a6b4b960c5b256a26c87e9.svg",
+                "md5ext": "6f303e972f33fcb7ef36d0d8012d0975.svg",
                 "dataFormat": "svg",
                 "rotationCenterX": 94,
-                "rotationCenterY": 191
+                "rotationCenterY": 190.66666666666666
             }
         ],
         "sounds": [
@@ -1047,7 +1029,6 @@
     },
     {
         "name": "Bear-walking",
-        "type": "sprite",
         "tags": [
             "animals",
             "ipzy",
@@ -1144,7 +1125,6 @@
     },
     {
         "name": "Beetle",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -1179,7 +1159,6 @@
     },
     {
         "name": "Bell",
-        "type": "sprite",
         "tags": [
             "music",
             "holiday",
@@ -1223,7 +1202,6 @@
     },
     {
         "name": "Ben",
-        "type": "sprite",
         "tags": [
             "sports",
             "soccer",
@@ -1295,7 +1273,6 @@
     },
     {
         "name": "Bowl",
-        "type": "sprite",
         "tags": [
             "thing",
             "food"
@@ -1328,7 +1305,6 @@
     },
     {
         "name": "Bowtie",
-        "type": "sprite",
         "tags": [
             "fashion",
             "clothing",
@@ -1362,7 +1338,6 @@
     },
     {
         "name": "Bread",
-        "type": "sprite",
         "tags": [
             "food",
             "ipzy"
@@ -1395,7 +1370,6 @@
     },
     {
         "name": "Broom",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "ipzy",
@@ -1430,7 +1404,6 @@
     },
     {
         "name": "Buildings",
-        "type": "sprite",
         "tags": [
             "things",
             "city",
@@ -1546,7 +1519,6 @@
     },
     {
         "name": "Butterfly 1",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -1600,7 +1572,6 @@
     },
     {
         "name": "Butterfly 2",
-        "type": "sprite",
         "tags": [
             "animals",
             "drawing",
@@ -1647,7 +1618,6 @@
     },
     {
         "name": "Button1",
-        "type": "sprite",
         "tags": [
             "icons",
             "round",
@@ -1682,7 +1652,6 @@
     },
     {
         "name": "Button2",
-        "type": "sprite",
         "tags": [
             "icons",
             "blue",
@@ -1725,7 +1694,6 @@
     },
     {
         "name": "Button3",
-        "type": "sprite",
         "tags": [
             "icons",
             "gray",
@@ -1769,7 +1737,6 @@
     },
     {
         "name": "Button4",
-        "type": "sprite",
         "tags": [
             "icons",
             "checkmark"
@@ -1811,7 +1778,6 @@
     },
     {
         "name": "Button5",
-        "type": "sprite",
         "tags": [
             "icons",
             "symbols",
@@ -1856,7 +1822,6 @@
     },
     {
         "name": "Cake",
-        "type": "sprite",
         "tags": [
             "food",
             "bakery",
@@ -1904,7 +1869,6 @@
     },
     {
         "name": "Calvrett",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -1945,7 +1909,6 @@
     },
     {
         "name": "Casey",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -2007,7 +1970,6 @@
     },
     {
         "name": "Cassy Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -2067,7 +2029,6 @@
     },
     {
         "name": "Cat",
-        "type": "sprite",
         "tags": [
             "animals",
             "cat",
@@ -2114,7 +2075,6 @@
     },
     {
         "name": "Cat 2",
-        "type": "sprite",
         "tags": [
             "cat",
             "kitty",
@@ -2150,7 +2110,6 @@
     },
     {
         "name": "Cat Flying",
-        "type": "sprite",
         "tags": [
             "animals",
             "cat",
@@ -2194,7 +2153,6 @@
     },
     {
         "name": "Catcher",
-        "type": "sprite",
         "tags": [
             "baseball",
             "sports",
@@ -2256,7 +2214,6 @@
     },
     {
         "name": "Centaur",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -2327,7 +2284,6 @@
     },
     {
         "name": "Champ99",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -2414,7 +2370,6 @@
     },
     {
         "name": "Cheesy Puffs",
-        "type": "sprite",
         "tags": [
             "food"
         ],
@@ -2446,7 +2401,6 @@
     },
     {
         "name": "Chick",
-        "type": "sprite",
         "tags": [
             "animals",
             "chicken",
@@ -2499,7 +2453,6 @@
     },
     {
         "name": "City Bus",
-        "type": "sprite",
         "tags": [
             "city",
             "bus",
@@ -2552,7 +2505,6 @@
     },
     {
         "name": "Cloud",
-        "type": "sprite",
         "tags": [
             "thing",
             "weather",
@@ -2586,7 +2538,6 @@
     },
     {
         "name": "Clouds",
-        "type": "sprite",
         "tags": [
             "flying",
             "weather",
@@ -2648,7 +2599,6 @@
     },
     {
         "name": "Convertible",
-        "type": "sprite",
         "tags": [
             "car",
             "transportation"
@@ -2681,7 +2631,6 @@
     },
     {
         "name": "Convertible 2",
-        "type": "sprite",
         "tags": [
             "transportation",
             "car",
@@ -2715,7 +2664,6 @@
     },
     {
         "name": "Crab",
-        "type": "sprite",
         "tags": [
             "animals",
             "crustacean",
@@ -2765,7 +2713,6 @@
     },
     {
         "name": "Crystal",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "ipzy",
@@ -2817,7 +2764,6 @@
     },
     {
         "name": "D-Money Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -2949,7 +2895,6 @@
     },
     {
         "name": "Dan",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -2990,7 +2935,6 @@
     },
     {
         "name": "Dani",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -3040,7 +2984,6 @@
     },
     {
         "name": "Dee",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -3108,7 +3051,6 @@
     },
     {
         "name": "Devin",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -3167,7 +3109,6 @@
     },
     {
         "name": "Dinosaur1",
-        "type": "sprite",
         "tags": [
             "animals",
             "dinosaur",
@@ -3228,7 +3169,6 @@
     },
     {
         "name": "Dinosaur2",
-        "type": "sprite",
         "tags": [
             "animals",
             "dinosaur",
@@ -3290,7 +3230,6 @@
     },
     {
         "name": "Dinosaur3",
-        "type": "sprite",
         "tags": [
             "animals",
             "dinosaur",
@@ -3362,7 +3301,6 @@
     },
     {
         "name": "Dinosaur4",
-        "type": "sprite",
         "tags": [
             "animals",
             "dinosaur",
@@ -3426,7 +3364,6 @@
     },
     {
         "name": "Dinosaur5",
-        "type": "sprite",
         "tags": [
             "animals",
             "dinosaur",
@@ -3532,7 +3469,6 @@
     },
     {
         "name": "Diver1",
-        "type": "sprite",
         "tags": [
             "people",
             "underwater",
@@ -3569,7 +3505,6 @@
     },
     {
         "name": "Diver2",
-        "type": "sprite",
         "tags": [
             "people",
             "underwater",
@@ -3606,7 +3541,6 @@
     },
     {
         "name": "Dog1",
-        "type": "sprite",
         "tags": [
             "animals",
             "puppy",
@@ -3650,7 +3584,6 @@
     },
     {
         "name": "Dog2",
-        "type": "sprite",
         "tags": [
             "animals",
             "puppy",
@@ -3703,7 +3636,6 @@
     },
     {
         "name": "Donut",
-        "type": "sprite",
         "tags": [
             "food",
             "sweets",
@@ -3718,13 +3650,13 @@
         "variables": {},
         "costumes": [
             {
-                "assetId": "3abfc584e9e6c3e0ec5112fa25b73b1d",
+                "assetId": "316a67c9e966fd015b4538f54be456db",
                 "name": "donut",
                 "bitmapResolution": 1,
-                "md5ext": "3abfc584e9e6c3e0ec5112fa25b73b1d.svg",
+                "md5ext": "316a67c9e966fd015b4538f54be456db.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 73,
-                "rotationCenterY": 15
+                "rotationCenterX": 72.11747235252724,
+                "rotationCenterY": 14.658782444689848
             }
         ],
         "sounds": [
@@ -3751,7 +3683,6 @@
     },
     {
         "name": "Dorian",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -3813,7 +3744,6 @@
     },
     {
         "name": "Dot",
-        "type": "sprite",
         "tags": [
             "space",
             "dog",
@@ -3842,22 +3772,22 @@
                 "rotationCenterY": 67
             },
             {
-                "assetId": "4dc87d7a4a6050da4d4b6539492ad257",
+                "assetId": "9e5a6cc6970ce4932a09affba70a45b0",
                 "name": "dot-c",
                 "bitmapResolution": 1,
-                "md5ext": "4dc87d7a4a6050da4d4b6539492ad257.svg",
+                "md5ext": "9e5a6cc6970ce4932a09affba70a45b0.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 51,
-                "rotationCenterY": 69
+                "rotationCenterX": 50.53907324990831,
+                "rotationCenterY": 68.96764494984302
             },
             {
-                "assetId": "ae7032906a6aab9caa74374b50037912",
+                "assetId": "fb047c94113ee4c6664305a338525e6a",
                 "name": "dot-d",
                 "bitmapResolution": 1,
-                "md5ext": "ae7032906a6aab9caa74374b50037912.svg",
+                "md5ext": "fb047c94113ee4c6664305a338525e6a.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 57,
-                "rotationCenterY": 67
+                "rotationCenterX": 56.58074394930321,
+                "rotationCenterY": 66.76919584395038
             }
         ],
         "sounds": [
@@ -3875,7 +3805,6 @@
     },
     {
         "name": "Dove",
-        "type": "sprite",
         "tags": [
             "animals",
             "bird",
@@ -3918,7 +3847,6 @@
     },
     {
         "name": "Dragon",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -3929,31 +3857,31 @@
         "variables": {},
         "costumes": [
             {
-                "assetId": "a166d123597ed8896cfb7c397a9fc9c4",
+                "assetId": "12ead885460d96a19132e5970839d36d",
                 "name": "dragon-a",
                 "bitmapResolution": 1,
-                "md5ext": "a166d123597ed8896cfb7c397a9fc9c4.svg",
+                "md5ext": "12ead885460d96a19132e5970839d36d.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 210,
-                "rotationCenterY": 150
+                "rotationCenterX": 124.12215277545062,
+                "rotationCenterY": 106.25815347723332
             },
             {
-                "assetId": "235f7a2f17fce30bd3c9cb7360c87994",
+                "assetId": "3f672475ad4ca5d1f9331cffd4223140",
                 "name": "dragon-b",
                 "bitmapResolution": 1,
-                "md5ext": "235f7a2f17fce30bd3c9cb7360c87994.svg",
+                "md5ext": "3f672475ad4ca5d1f9331cffd4223140.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 210,
-                "rotationCenterY": 150
+                "rotationCenterX": 152.5,
+                "rotationCenterY": 99
             },
             {
-                "assetId": "3a6ff36986f85e6d005cfc65d9eb4978",
+                "assetId": "e0aa0083fa0b97da97600d4dbb2055e5",
                 "name": "dragon-c",
                 "bitmapResolution": 1,
-                "md5ext": "3a6ff36986f85e6d005cfc65d9eb4978.svg",
+                "md5ext": "e0aa0083fa0b97da97600d4dbb2055e5.svg",
                 "dataFormat": "svg",
-                "rotationCenterX": 210,
-                "rotationCenterY": 150
+                "rotationCenterX": 124.4550776985194,
+                "rotationCenterY": 105.92484014389998
             }
         ],
         "sounds": [
@@ -3971,7 +3899,6 @@
     },
     {
         "name": "Dragonfly",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -4016,7 +3943,6 @@
     },
     {
         "name": "Dress",
-        "type": "sprite",
         "tags": [
             "fashion",
             "dress",
@@ -4068,7 +3994,6 @@
     },
     {
         "name": "Drum",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -4119,7 +4044,6 @@
     },
     {
         "name": "Drum Kit",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -4197,7 +4121,6 @@
     },
     {
         "name": "Drum-cymbal",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -4266,7 +4189,6 @@
     },
     {
         "name": "Drum-highhat",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -4308,7 +4230,6 @@
     },
     {
         "name": "Drum-snare",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -4368,7 +4289,6 @@
     },
     {
         "name": "Drums Conga",
-        "type": "sprite",
         "tags": [
             "drums",
             "drum",
@@ -4440,7 +4360,6 @@
     },
     {
         "name": "Drums Tabla",
-        "type": "sprite",
         "tags": [
             "drums",
             "drum",
@@ -4512,7 +4431,6 @@
     },
     {
         "name": "Duck",
-        "type": "sprite",
         "tags": [
             "animals",
             "chrisg",
@@ -4548,7 +4466,6 @@
     },
     {
         "name": "Earth",
-        "type": "sprite",
         "tags": [
             "space",
             "planet",
@@ -4583,7 +4500,6 @@
     },
     {
         "name": "Easel",
-        "type": "sprite",
         "tags": [
             "bedroom",
             "art",
@@ -4635,7 +4551,6 @@
     },
     {
         "name": "Egg",
-        "type": "sprite",
         "tags": [
             "food",
             "breakfast",
@@ -4714,7 +4629,6 @@
     },
     {
         "name": "Elephant",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammals",
@@ -4757,7 +4671,6 @@
     },
     {
         "name": "Elf",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -4828,7 +4741,6 @@
     },
     {
         "name": "Fairy",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -4899,7 +4811,6 @@
     },
     {
         "name": "Fish",
-        "type": "sprite",
         "tags": [
             "animals",
             "ocean",
@@ -4971,7 +4882,6 @@
     },
     {
         "name": "Fishbowl",
-        "type": "sprite",
         "tags": [
             "fishbowl",
             "fish",
@@ -5015,7 +4925,6 @@
     },
     {
         "name": "Food Truck",
-        "type": "sprite",
         "tags": [
             "city",
             "truck",
@@ -5087,7 +4996,6 @@
     },
     {
         "name": "Football",
-        "type": "sprite",
         "tags": [
             "people",
             "sports"
@@ -5129,7 +5037,6 @@
     },
     {
         "name": "Fortune Cookie",
-        "type": "sprite",
         "tags": [
             "food"
         ],
@@ -5161,7 +5068,6 @@
     },
     {
         "name": "Fox",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammal",
@@ -5213,7 +5119,6 @@
     },
     {
         "name": "Frank",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "spooky",
@@ -5278,7 +5183,6 @@
     },
     {
         "name": "Frog",
-        "type": "sprite",
         "tags": [
             "animals",
             "amphibian",
@@ -5315,7 +5219,6 @@
     },
     {
         "name": "Frog 2 ",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -5369,7 +5272,6 @@
     },
     {
         "name": "Fruit Platter",
-        "type": "sprite",
         "tags": [
             "food"
         ],
@@ -5401,7 +5303,6 @@
     },
     {
         "name": "Fruit Salad",
-        "type": "sprite",
         "tags": [
             "food",
             "fruit"
@@ -5434,7 +5335,6 @@
     },
     {
         "name": "Ghost",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "spooky",
@@ -5498,7 +5398,6 @@
     },
     {
         "name": "Gift",
-        "type": "sprite",
         "tags": [
             "thing",
             "holiday"
@@ -5540,7 +5439,6 @@
     },
     {
         "name": "Giga",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing"
@@ -5600,7 +5498,6 @@
     },
     {
         "name": "Giga Walking",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "walking"
@@ -5651,7 +5548,6 @@
     },
     {
         "name": "Giraffe",
-        "type": "sprite",
         "tags": [
             "animals",
             "savanna",
@@ -5703,7 +5599,6 @@
     },
     {
         "name": "Glass Water",
-        "type": "sprite",
         "tags": [
             "food",
             "things",
@@ -5746,7 +5641,6 @@
     },
     {
         "name": "Glasses",
-        "type": "sprite",
         "tags": [
             "fashion",
             "glasses",
@@ -5807,7 +5701,6 @@
     },
     {
         "name": "Goalie",
-        "type": "sprite",
         "tags": [
             "sports",
             "soccer",
@@ -5878,7 +5771,6 @@
     },
     {
         "name": "Goblin",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "ipzy",
@@ -5939,7 +5831,6 @@
     },
     {
         "name": "Gobo",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing",
@@ -5992,7 +5883,6 @@
     },
     {
         "name": "Grasshopper",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -6073,7 +5963,6 @@
     },
     {
         "name": "Green Flag",
-        "type": "sprite",
         "tags": [
             "thing"
         ],
@@ -6105,7 +5994,6 @@
     },
     {
         "name": "Griffin",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -6167,7 +6055,6 @@
     },
     {
         "name": "Guitar",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -6272,7 +6159,6 @@
     },
     {
         "name": "Guitar-electric1",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -6377,7 +6263,6 @@
     },
     {
         "name": "Guitar-electric2",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -6482,7 +6367,6 @@
     },
     {
         "name": "Hannah",
-        "type": "sprite",
         "tags": [
             "people",
             "sports"
@@ -6533,7 +6417,6 @@
     },
     {
         "name": "Hare",
-        "type": "sprite",
         "tags": [
             "animals",
             "rabbit",
@@ -6591,7 +6474,6 @@
     },
     {
         "name": "Harper",
-        "type": "sprite",
         "tags": [
             "people",
             "fashion",
@@ -6643,7 +6525,6 @@
     },
     {
         "name": "Hat1 ",
-        "type": "sprite",
         "tags": [
             "fashion",
             "hat",
@@ -6704,7 +6585,6 @@
     },
     {
         "name": "Hatchling",
-        "type": "sprite",
         "tags": [
             "animals",
             "chicken",
@@ -6757,7 +6637,6 @@
     },
     {
         "name": "Heart",
-        "type": "sprite",
         "tags": [
             "holiday",
             "red",
@@ -6802,7 +6681,6 @@
     },
     {
         "name": "Heart Candy",
-        "type": "sprite",
         "tags": [
             "food",
             "sweethearts"
@@ -6862,7 +6740,6 @@
     },
     {
         "name": "Heart Face",
-        "type": "sprite",
         "tags": [
             "emotions"
         ],
@@ -6894,7 +6771,6 @@
     },
     {
         "name": "Hedgehog",
-        "type": "sprite",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -6965,7 +6841,6 @@
     },
     {
         "name": "Hen",
-        "type": "sprite",
         "tags": [
             "animals",
             "chicken",
@@ -7027,7 +6902,6 @@
     },
     {
         "name": "Hippo1",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammals",
@@ -7075,7 +6949,6 @@
     },
     {
         "name": "Home Button",
-        "type": "sprite",
         "tags": [
             "ui",
             "thing"
@@ -7108,7 +6981,6 @@
     },
     {
         "name": "Horse",
-        "type": "sprite",
         "tags": [
             "animals",
             "hoof",
@@ -7163,7 +7035,6 @@
     },
     {
         "name": "Jaime",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -7249,7 +7120,6 @@
     },
     {
         "name": "Jamal",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -7320,7 +7190,6 @@
     },
     {
         "name": "Jar",
-        "type": "sprite",
         "tags": [
             "food",
             "ipzy",
@@ -7363,7 +7232,6 @@
     },
     {
         "name": "Jellyfish",
-        "type": "sprite",
         "tags": [
             "animals",
             "ocean",
@@ -7436,7 +7304,6 @@
     },
     {
         "name": "Jordyn",
-        "type": "sprite",
         "tags": [
             "sports",
             "soccer",
@@ -7508,7 +7375,6 @@
     },
     {
         "name": "Jouvi Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -7649,7 +7515,6 @@
     },
     {
         "name": "Kai",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -7690,7 +7555,6 @@
     },
     {
         "name": "Key",
-        "type": "sprite",
         "tags": [
             "thing",
             "fantasy"
@@ -7723,7 +7587,6 @@
     },
     {
         "name": "Keyboard",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -7828,7 +7691,6 @@
     },
     {
         "name": "Kiran",
-        "type": "sprite",
         "tags": [
             "space",
             "people",
@@ -7907,7 +7769,6 @@
     },
     {
         "name": "Knight",
-        "type": "sprite",
         "tags": [
             "people",
             "castle",
@@ -7941,7 +7802,6 @@
     },
     {
         "name": "LB Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -8082,7 +7942,6 @@
     },
     {
         "name": "Ladybug1",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -8117,7 +7976,6 @@
     },
     {
         "name": "Ladybug2",
-        "type": "sprite",
         "tags": [
             "animals",
             "insect",
@@ -8162,7 +8020,6 @@
     },
     {
         "name": "Laptop",
-        "type": "sprite",
         "tags": [
             "things",
             "computers"
@@ -8195,7 +8052,6 @@
     },
     {
         "name": "Lightning",
-        "type": "sprite",
         "tags": [
             "weather",
             "whether",
@@ -8231,7 +8087,6 @@
     },
     {
         "name": "Line",
-        "type": "sprite",
         "tags": [
             "lava",
             "shape",
@@ -8265,7 +8120,6 @@
     },
     {
         "name": "Lion",
-        "type": "sprite",
         "tags": [
             "cat",
             "animals",
@@ -8328,7 +8182,6 @@
     },
     {
         "name": "Llama",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammal",
@@ -8380,7 +8233,6 @@
     },
     {
         "name": "Magic Wand",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "things",
@@ -8414,7 +8266,6 @@
     },
     {
         "name": "Marian",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -8482,7 +8333,6 @@
     },
     {
         "name": "Max",
-        "type": "sprite",
         "tags": [
             "sports",
             "basketball",
@@ -8544,7 +8394,6 @@
     },
     {
         "name": "Mermaid",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -8606,7 +8455,6 @@
     },
     {
         "name": "Microphone",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -8720,7 +8568,6 @@
     },
     {
         "name": "Milk",
-        "type": "sprite",
         "tags": [
             "food",
             "drink",
@@ -8790,7 +8637,6 @@
     },
     {
         "name": "Monet",
-        "type": "sprite",
         "tags": [
             "space",
             "people",
@@ -8860,7 +8706,6 @@
     },
     {
         "name": "Monkey",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammals",
@@ -8922,7 +8767,6 @@
     },
     {
         "name": "Motorcycle",
-        "type": "sprite",
         "tags": [
             "city",
             "vehicle",
@@ -8993,7 +8837,6 @@
     },
     {
         "name": "Mouse1",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammals",
@@ -9036,7 +8879,6 @@
     },
     {
         "name": "Muffin",
-        "type": "sprite",
         "tags": [
             "food"
         ],
@@ -9077,7 +8919,6 @@
     },
     {
         "name": "Nano",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing"
@@ -9137,7 +8978,6 @@
     },
     {
         "name": "Neigh Pony",
-        "type": "sprite",
         "tags": [
             "animals",
             "fantasy"
@@ -9170,7 +9010,6 @@
     },
     {
         "name": "Octopus",
-        "type": "sprite",
         "tags": [
             "animals",
             "ocean",
@@ -9251,7 +9090,6 @@
     },
     {
         "name": "Orange",
-        "type": "sprite",
         "tags": [
             "food",
             "fruit"
@@ -9284,7 +9122,6 @@
     },
     {
         "name": "Orange2",
-        "type": "sprite",
         "tags": [
             "food",
             "fruit",
@@ -9327,7 +9164,6 @@
     },
     {
         "name": "Outfielder",
-        "type": "sprite",
         "tags": [
             "baseball",
             "sports",
@@ -9389,7 +9225,6 @@
     },
     {
         "name": "Owl",
-        "type": "sprite",
         "tags": [
             "animals",
             "bird",
@@ -9441,7 +9276,6 @@
     },
     {
         "name": "Paddle",
-        "type": "sprite",
         "tags": [
             "thing"
         ],
@@ -9473,7 +9307,6 @@
     },
     {
         "name": "Panther",
-        "type": "sprite",
         "tags": [
             "animals",
             "tiger",
@@ -9526,7 +9359,6 @@
     },
     {
         "name": "Pants",
-        "type": "sprite",
         "tags": [
             "fashion",
             "pants",
@@ -9569,7 +9401,6 @@
     },
     {
         "name": "Parrot",
-        "type": "sprite",
         "tags": [
             "animals",
             "bird",
@@ -9616,7 +9447,6 @@
     },
     {
         "name": "Party Hats",
-        "type": "sprite",
         "tags": [
             "fashion",
             "holiday"
@@ -9667,7 +9497,6 @@
     },
     {
         "name": "Pencil",
-        "type": "sprite",
         "tags": [
             "thing",
             "yellow"
@@ -9709,7 +9538,6 @@
     },
     {
         "name": "Penguin",
-        "type": "sprite",
         "tags": [
             "animals",
             "penguin",
@@ -9767,7 +9595,6 @@
     },
     {
         "name": "Penguin 2",
-        "type": "sprite",
         "tags": [
             "animals",
             "bird",
@@ -9829,7 +9656,6 @@
     },
     {
         "name": "Pico",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing"
@@ -9889,7 +9715,6 @@
     },
     {
         "name": "Pico Walking",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "walking"
@@ -9949,7 +9774,6 @@
     },
     {
         "name": "Pitcher",
-        "type": "sprite",
         "tags": [
             "baseball",
             "sports",
@@ -10011,7 +9835,6 @@
     },
     {
         "name": "Planet2",
-        "type": "sprite",
         "tags": [
             "space"
         ],
@@ -10043,7 +9866,6 @@
     },
     {
         "name": "Polar Bear",
-        "type": "sprite",
         "tags": [
             "animals",
             "bear",
@@ -10102,7 +9924,6 @@
     },
     {
         "name": "Potion",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "ipzy",
@@ -10154,7 +9975,6 @@
     },
     {
         "name": "Prince",
-        "type": "sprite",
         "tags": [
             "people",
             "☥",
@@ -10188,7 +10008,6 @@
     },
     {
         "name": "Princess",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -10260,7 +10079,6 @@
     },
     {
         "name": "Pufferfish",
-        "type": "sprite",
         "tags": [
             "animals",
             "ocean",
@@ -10323,7 +10141,6 @@
     },
     {
         "name": "Puppy",
-        "type": "sprite",
         "tags": [
             "animals",
             "dog",
@@ -10384,7 +10201,6 @@
     },
     {
         "name": "Rabbit",
-        "type": "sprite",
         "tags": [
             "animals",
             "daria skrybchencko",
@@ -10457,7 +10273,6 @@
     },
     {
         "name": "Radio",
-        "type": "sprite",
         "tags": [
             "radio",
             "music",
@@ -10528,7 +10343,6 @@
     },
     {
         "name": "Rainbow",
-        "type": "sprite",
         "tags": [
             "things",
             "flying",
@@ -10563,7 +10377,6 @@
     },
     {
         "name": "Referee",
-        "type": "sprite",
         "tags": [
             "sports",
             "soccer",
@@ -10625,7 +10438,6 @@
     },
     {
         "name": "Reindeer",
-        "type": "sprite",
         "tags": [
             "animals",
             "mammals",
@@ -10659,7 +10471,6 @@
     },
     {
         "name": "Retro Robot",
-        "type": "sprite",
         "tags": [
             "robot"
         ],
@@ -10718,7 +10529,6 @@
     },
     {
         "name": "Ripley",
-        "type": "sprite",
         "tags": [
             "space",
             "people",
@@ -10797,7 +10607,6 @@
     },
     {
         "name": "Robot",
-        "type": "sprite",
         "tags": [
             "space",
             "robot",
@@ -10876,7 +10685,6 @@
     },
     {
         "name": "Rocketship",
-        "type": "sprite",
         "tags": [
             "space",
             "spaceship",
@@ -10964,7 +10772,6 @@
     },
     {
         "name": "Rocks",
-        "type": "sprite",
         "tags": [
             "things",
             "potassium"
@@ -10997,7 +10804,6 @@
     },
     {
         "name": "Rooster",
-        "type": "sprite",
         "tags": [
             "animals",
             "chicken",
@@ -11059,7 +10865,6 @@
     },
     {
         "name": "Ruby",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -11100,7 +10905,6 @@
     },
     {
         "name": "Sailboat",
-        "type": "sprite",
         "tags": [
             "boat",
             "transportation"
@@ -11133,7 +10937,6 @@
     },
     {
         "name": "Sam",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -11165,7 +10968,6 @@
     },
     {
         "name": "Saxophone",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -11270,7 +11072,6 @@
     },
     {
         "name": "Scarf",
-        "type": "sprite",
         "tags": [
             "fashion",
             "red"
@@ -11321,7 +11122,6 @@
     },
     {
         "name": "Shark",
-        "type": "sprite",
         "tags": [
             "animals",
             "underwater",
@@ -11365,7 +11165,6 @@
     },
     {
         "name": "Shark 2",
-        "type": "sprite",
         "tags": [
             "animals",
             "ocean",
@@ -11439,7 +11238,6 @@
     },
     {
         "name": "Shirt",
-        "type": "sprite",
         "tags": [
             "fashion",
             "shirt"
@@ -11472,7 +11270,6 @@
     },
     {
         "name": "Shoes",
-        "type": "sprite",
         "tags": [
             "fashion",
             "shoes",
@@ -11534,7 +11331,6 @@
     },
     {
         "name": "Shorts",
-        "type": "sprite",
         "tags": [
             "fashion",
             "pants",
@@ -11587,7 +11383,6 @@
     },
     {
         "name": "Singer1",
-        "type": "sprite",
         "tags": [
             "people",
             "music"
@@ -11620,7 +11415,6 @@
     },
     {
         "name": "Skeleton",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "spooky",
@@ -11684,7 +11478,6 @@
     },
     {
         "name": "Snake",
-        "type": "sprite",
         "tags": [
             "animals",
             "reptile",
@@ -11736,7 +11529,6 @@
     },
     {
         "name": "Snowflake",
-        "type": "sprite",
         "tags": [
             "winter"
         ],
@@ -11768,7 +11560,6 @@
     },
     {
         "name": "Snowman",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing",
@@ -11802,7 +11593,6 @@
     },
     {
         "name": "Soccer Ball",
-        "type": "sprite",
         "tags": [
             "sports",
             "soccer",
@@ -11837,7 +11627,6 @@
     },
     {
         "name": "Speaker",
-        "type": "sprite",
         "tags": [
             "music",
             "things",
@@ -11927,7 +11716,6 @@
     },
     {
         "name": "Squirrel",
-        "type": "sprite",
         "tags": [
             "animals"
         ],
@@ -11959,7 +11747,6 @@
     },
     {
         "name": "Star",
-        "type": "sprite",
         "tags": [
             "shapes",
             "space"
@@ -11992,7 +11779,6 @@
     },
     {
         "name": "Starfish",
-        "type": "sprite",
         "tags": [
             "animals",
             "echinodermata",
@@ -12037,7 +11823,6 @@
     },
     {
         "name": "Stop",
-        "type": "sprite",
         "tags": [
             "shapes",
             "things"
@@ -12070,7 +11855,6 @@
     },
     {
         "name": "Strawberry",
-        "type": "sprite",
         "tags": [
             "food",
             "fruit",
@@ -12140,7 +11924,6 @@
     },
     {
         "name": "Sun",
-        "type": "sprite",
         "tags": [
             "space",
             "star",
@@ -12177,7 +11960,6 @@
     },
     {
         "name": "Sunglasses1",
-        "type": "sprite",
         "tags": [
             "fashion",
             "cool"
@@ -12219,7 +12001,6 @@
     },
     {
         "name": "Taco",
-        "type": "sprite",
         "tags": [
             "food",
             "designerd"
@@ -12261,7 +12042,6 @@
     },
     {
         "name": "Takeout",
-        "type": "sprite",
         "tags": [
             "food",
             "alex eben meyer"
@@ -12330,7 +12110,6 @@
     },
     {
         "name": "Ten80 Dance",
-        "type": "sprite",
         "tags": [
             "people",
             "dance"
@@ -12471,7 +12250,6 @@
     },
     {
         "name": "Tennis Ball",
-        "type": "sprite",
         "tags": [
             "ball",
             "sports"
@@ -12504,7 +12282,6 @@
     },
     {
         "name": "Tera",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "drawing"
@@ -12564,7 +12341,6 @@
     },
     {
         "name": "Toucan",
-        "type": "sprite",
         "tags": [
             "animals",
             "bird",
@@ -12616,7 +12392,6 @@
     },
     {
         "name": "Trampoline",
-        "type": "sprite",
         "tags": [
             "sports"
         ],
@@ -12648,7 +12423,6 @@
     },
     {
         "name": "Tree1",
-        "type": "sprite",
         "tags": [
             "plants",
             "wood",
@@ -12682,7 +12456,6 @@
     },
     {
         "name": "Trees",
-        "type": "sprite",
         "tags": [
             "plants",
             "wood",
@@ -12725,7 +12498,6 @@
     },
     {
         "name": "Truck",
-        "type": "sprite",
         "tags": [
             "truck",
             "city",
@@ -12778,7 +12550,6 @@
     },
     {
         "name": "Trumpet",
-        "type": "sprite",
         "tags": [
             "music",
             "andrew rae"
@@ -12883,7 +12654,6 @@
     },
     {
         "name": "Unicorn",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -12917,7 +12687,6 @@
     },
     {
         "name": "Unicorn 2",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -12953,7 +12722,6 @@
     },
     {
         "name": "Unicorn Running",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -13033,7 +12801,6 @@
     },
     {
         "name": "Wand",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "ipzy",
@@ -13067,7 +12834,6 @@
     },
     {
         "name": "Wanda",
-        "type": "sprite",
         "tags": [
             "people"
         ],
@@ -13099,7 +12865,6 @@
     },
     {
         "name": "Watermelon",
-        "type": "sprite",
         "tags": [
             "food",
             "fruit",
@@ -13154,7 +12919,6 @@
     },
     {
         "name": "Winter Hat",
-        "type": "sprite",
         "tags": [
             "fashion",
             " clothing",
@@ -13189,7 +12953,6 @@
     },
     {
         "name": "Witch",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -13253,7 +13016,6 @@
     },
     {
         "name": "Wizard",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "people",
@@ -13308,7 +13070,6 @@
     },
     {
         "name": "Wizard Girl",
-        "type": "sprite",
         "tags": [
             "people",
             "female",
@@ -13345,7 +13106,6 @@
     },
     {
         "name": "Wizard Hat",
-        "type": "sprite",
         "tags": [
             "fashion",
             "fantasy",
@@ -13379,7 +13139,6 @@
     },
     {
         "name": "Wizard-toad",
-        "type": "sprite",
         "tags": [
             "fantasy",
             "animals",
@@ -13435,7 +13194,6 @@
     },
     {
         "name": "Zebra",
-        "type": "sprite",
         "tags": [
             "animals",
             "zebra",
@@ -13479,7 +13237,6 @@
     },
     {
         "name": "Block-A",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13512,7 +13269,6 @@
     },
     {
         "name": "Block-B",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13545,7 +13301,6 @@
     },
     {
         "name": "Block-C",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13578,7 +13333,6 @@
     },
     {
         "name": "Block-D",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13611,7 +13365,6 @@
     },
     {
         "name": "Block-E",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13644,7 +13397,6 @@
     },
     {
         "name": "Block-F",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13677,7 +13429,6 @@
     },
     {
         "name": "Block-G",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13710,7 +13461,6 @@
     },
     {
         "name": "Block-H",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13743,7 +13493,6 @@
     },
     {
         "name": "Block-I",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13776,7 +13525,6 @@
     },
     {
         "name": "Block-J",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13809,7 +13557,6 @@
     },
     {
         "name": "Block-K",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13842,7 +13589,6 @@
     },
     {
         "name": "Block-L",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13875,7 +13621,6 @@
     },
     {
         "name": "Block-M",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13908,7 +13653,6 @@
     },
     {
         "name": "Block-N",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13941,7 +13685,6 @@
     },
     {
         "name": "Block-O",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -13974,7 +13717,6 @@
     },
     {
         "name": "Block-P",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14007,7 +13749,6 @@
     },
     {
         "name": "Block-Q",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14040,7 +13781,6 @@
     },
     {
         "name": "Block-R",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14073,7 +13813,6 @@
     },
     {
         "name": "Block-S",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14106,7 +13845,6 @@
     },
     {
         "name": "Block-T",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14139,7 +13877,6 @@
     },
     {
         "name": "Block-U",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14172,7 +13909,6 @@
     },
     {
         "name": "Block-V",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14205,7 +13941,6 @@
     },
     {
         "name": "Block-W",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14238,7 +13973,6 @@
     },
     {
         "name": "Block-X",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14271,7 +14005,6 @@
     },
     {
         "name": "Block-Y",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14304,7 +14037,6 @@
     },
     {
         "name": "Block-Z",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14337,7 +14069,6 @@
     },
     {
         "name": "Glow-0",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14370,7 +14101,6 @@
     },
     {
         "name": "Glow-1",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14403,7 +14133,6 @@
     },
     {
         "name": "Glow-2",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14436,7 +14165,6 @@
     },
     {
         "name": "Glow-3",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14469,7 +14197,6 @@
     },
     {
         "name": "Glow-4",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14502,7 +14229,6 @@
     },
     {
         "name": "Glow-5",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14535,7 +14261,6 @@
     },
     {
         "name": "Glow-6",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14568,7 +14293,6 @@
     },
     {
         "name": "Glow-7",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14601,7 +14325,6 @@
     },
     {
         "name": "Glow-8",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14634,7 +14357,6 @@
     },
     {
         "name": "Glow-9",
-        "type": "sprite",
         "tags": [
             "numbers",
             "digits"
@@ -14667,7 +14389,6 @@
     },
     {
         "name": "Glow-A",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14700,7 +14421,6 @@
     },
     {
         "name": "Glow-B",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14733,7 +14453,6 @@
     },
     {
         "name": "Glow-C",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14766,7 +14485,6 @@
     },
     {
         "name": "Glow-D",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14799,7 +14517,6 @@
     },
     {
         "name": "Glow-E",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14832,7 +14549,6 @@
     },
     {
         "name": "Glow-F",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14865,7 +14581,6 @@
     },
     {
         "name": "Glow-G",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14898,7 +14613,6 @@
     },
     {
         "name": "Glow-H",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14931,7 +14645,6 @@
     },
     {
         "name": "Glow-I",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14964,7 +14677,6 @@
     },
     {
         "name": "Glow-J",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -14997,7 +14709,6 @@
     },
     {
         "name": "Glow-K",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15030,7 +14741,6 @@
     },
     {
         "name": "Glow-L",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15063,7 +14773,6 @@
     },
     {
         "name": "Glow-M",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15096,7 +14805,6 @@
     },
     {
         "name": "Glow-N",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15129,7 +14837,6 @@
     },
     {
         "name": "Glow-O",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15162,7 +14869,6 @@
     },
     {
         "name": "Glow-P",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15195,7 +14901,6 @@
     },
     {
         "name": "Glow-Q",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15228,7 +14933,6 @@
     },
     {
         "name": "Glow-R",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15261,7 +14965,6 @@
     },
     {
         "name": "Glow-S",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15294,7 +14997,6 @@
     },
     {
         "name": "Glow-T",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15327,7 +15029,6 @@
     },
     {
         "name": "Glow-U",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15360,7 +15061,6 @@
     },
     {
         "name": "Glow-V",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15393,7 +15093,6 @@
     },
     {
         "name": "Glow-W",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15426,7 +15125,6 @@
     },
     {
         "name": "Glow-X",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15459,7 +15157,6 @@
     },
     {
         "name": "Glow-Y",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15492,7 +15189,6 @@
     },
     {
         "name": "Glow-Z",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15525,7 +15221,6 @@
     },
     {
         "name": "Story-A",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15576,7 +15271,6 @@
     },
     {
         "name": "Story-B",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15627,7 +15321,6 @@
     },
     {
         "name": "Story-C",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15678,7 +15371,6 @@
     },
     {
         "name": "Story-D",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15729,7 +15421,6 @@
     },
     {
         "name": "Story-E",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15780,7 +15471,6 @@
     },
     {
         "name": "Story-F",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15831,7 +15521,6 @@
     },
     {
         "name": "Story-G",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15882,7 +15571,6 @@
     },
     {
         "name": "Story-H",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15933,7 +15621,6 @@
     },
     {
         "name": "Story-I",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -15984,7 +15671,6 @@
     },
     {
         "name": "Story-J",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16035,7 +15721,6 @@
     },
     {
         "name": "Story-K",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16086,7 +15771,6 @@
     },
     {
         "name": "Story-L",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16137,7 +15821,6 @@
     },
     {
         "name": "Story-M",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16188,7 +15871,6 @@
     },
     {
         "name": "Story-N",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16239,7 +15921,6 @@
     },
     {
         "name": "Story-O",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16290,7 +15971,6 @@
     },
     {
         "name": "Story-P",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16341,7 +16021,6 @@
     },
     {
         "name": "Story-Q",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16392,7 +16071,6 @@
     },
     {
         "name": "Story-R",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16443,7 +16121,6 @@
     },
     {
         "name": "Story-S",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16494,7 +16171,6 @@
     },
     {
         "name": "Story-T",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16545,7 +16221,6 @@
     },
     {
         "name": "Story-U",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16596,7 +16271,6 @@
     },
     {
         "name": "Story-V",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16647,7 +16321,6 @@
     },
     {
         "name": "Story-W",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16698,7 +16371,6 @@
     },
     {
         "name": "Story-X",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16749,7 +16421,6 @@
     },
     {
         "name": "Story-Y",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"
@@ -16800,7 +16471,6 @@
     },
     {
         "name": "Story-Z",
-        "type": "sprite",
         "tags": [
             "alphabet",
             "letters"

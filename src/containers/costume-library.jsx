@@ -25,12 +25,10 @@ class CostumeLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelected (item) {
-        const rotationCenterX = item.dataFormat === 'svg' ? item.rotationCenterX : item.rotationCenterX / 2;
-        const rotationCenterY = item.dataFormat === 'svg' ? item.rotationCenterY : item.rotationCenterY / 2;
         const vmCostume = {
             name: item.name,
-            rotationCenterX,
-            rotationCenterY,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
             bitmapResolution: item.bitmapResolution,
             skinId: null
         };

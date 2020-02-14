@@ -179,13 +179,11 @@ class CostumeTab extends React.Component {
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
-        const rotationCenterX = item.dataFormat === 'svg' ? item.rotationCenterX : item.rotationCenterX / 2;
-        const rotationCenterY = item.dataFormat === 'svg' ? item.rotationCenterY : item.rotationCenterY / 2;
         const vmCostume = {
             name: item.name,
             md5: item.md5ext,
-            rotationCenterX: rotationCenterX,
-            rotationCenterY: rotationCenterY,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
             bitmapResolution: item.bitmapResolution,
             skinId: null
         };

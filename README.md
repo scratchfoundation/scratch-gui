@@ -18,6 +18,8 @@ cd scratch-gui
 npm install
 ```
 
+**You may want to add `--depth=1` to the `git clone` command because there are some [large files in the git repository history](https://github.com/LLK/scratch-gui/issues/5140).**
+
 ## Getting started
 Running the project requires Node.js to be installed.
 

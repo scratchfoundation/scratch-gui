@@ -54,13 +54,10 @@ const cloudManagerHOC = function (WrappedComponent) {
         canUseCloud (props) {
             return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
         }
-        shouldNotModifyCloudData (props) {
-            return (props.hasEverEnteredEditor && !props.canSave);
-        }
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
                 props.isShowingWithId && props.vm.runtime.hasCloudData() &&
-                !this.shouldNotModifyCloudData(props);
+                props.canModifyCloudData;
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
@@ -70,7 +67,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                     (props.projectId !== prevProps.projectId) ||
                     (props.username !== prevProps.username) ||
                     // Editing someone else's project
-                    this.shouldNotModifyCloudData(props)
+                    !props.canModifyCloudData
                 );
         }
         isConnected () {
@@ -102,11 +99,11 @@ const cloudManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                canModifyCloudData,
                 cloudHost,
                 projectId,
                 username,
                 hasCloudPermission,
-                hasEverEnteredEditor,
                 isShowingWithId,
                 onShowCloudInfo,
                 /* eslint-enable no-unused-vars */
@@ -124,23 +121,30 @@ const cloudManagerHOC = function (WrappedComponent) {
     }
 
     CloudManager.propTypes = {
-        canSave: PropTypes.bool.isRequired,
+        canModifyCloudData: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
         hasCloudPermission: PropTypes.bool,
-        hasEverEnteredEditor: PropTypes.bool,
-        isShowingWithId: PropTypes.bool,
+        isShowingWithId: PropTypes.bool.isRequired,
         onShowCloudInfo: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
 
-    const mapStateToProps = state => {
+    CloudManager.defaultProps = {
+        cloudHost: null,
+        hasCloudPermission: false,
+        onShowCloudInfo: () => {},
+        username: null
+    };
+
+    const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
-            hasEverEnteredEditor: state.scratchGui.mode.hasEverEnteredEditor,
             isShowingWithId: getIsShowingWithId(loadingState),
-            projectId: state.scratchGui.projectState.projectId
+            projectId: state.scratchGui.projectState.projectId,
+            // if you're editing someone else's project, you can't modify cloud data
+            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
         };
     };
 

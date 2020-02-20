@@ -115,6 +115,7 @@ const GUIComponent = props => {
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
         showComingSoon,
+        hideMenuBar,
         soundsTabVisible,
         stageSizeMode,
         targetIsStage,
@@ -210,38 +211,36 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <div style={{display: 'none'}}>
-                    {/* GROK: Hide the menu bar */}
-                    <MenuBar
-                        accountNavOpen={accountNavOpen}
-                        authorId={authorId}
-                        authorThumbnailUrl={authorThumbnailUrl}
-                        authorUsername={authorUsername}
-                        canChangeLanguage={canChangeLanguage}
-                        canCreateCopy={canCreateCopy}
-                        canCreateNew={canCreateNew}
-                        canEditTitle={canEditTitle}
-                        canManageFiles={canManageFiles}
-                        canRemix={canRemix}
-                        canSave={canSave}
-                        canShare={canShare}
-                        className={styles.menuBarPosition}
-                        enableCommunity={enableCommunity}
-                        isShared={isShared}
-                        logo={logo}
-                        renderLogin={renderLogin}
-                        showComingSoon={showComingSoon}
-                        onClickAccountNav={onClickAccountNav}
-                        onClickLogo={onClickLogo}
-                        onCloseAccountNav={onCloseAccountNav}
-                        onLogOut={onLogOut}
-                        onOpenRegistration={onOpenRegistration}
-                        onProjectTelemetryEvent={onProjectTelemetryEvent}
-                        onSeeCommunity={onSeeCommunity}
-                        onShare={onShare}
-                        onToggleLoginOpen={onToggleLoginOpen}
-                    />
-                </div>
+                <MenuBar
+                    accountNavOpen={accountNavOpen}
+                    authorId={authorId}
+                    authorThumbnailUrl={authorThumbnailUrl}
+                    authorUsername={authorUsername}
+                    canChangeLanguage={canChangeLanguage}
+                    canCreateCopy={canCreateCopy}
+                    canCreateNew={canCreateNew}
+                    canEditTitle={canEditTitle}
+                    canManageFiles={canManageFiles}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canShare={canShare}
+                    className={styles.menuBarPosition}
+                    enableCommunity={enableCommunity}
+                    isShared={isShared}
+                    logo={logo}
+                    renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
+                    hideMenuBar={hideMenuBar}
+                    onClickAccountNav={onClickAccountNav}
+                    onClickLogo={onClickLogo}
+                    onCloseAccountNav={onCloseAccountNav}
+                    onLogOut={onLogOut}
+                    onOpenRegistration={onOpenRegistration}
+                    onProjectTelemetryEvent={onProjectTelemetryEvent}
+                    onSeeCommunity={onSeeCommunity}
+                    onShare={onShare}
+                    onToggleLoginOpen={onToggleLoginOpen}
+                />
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>

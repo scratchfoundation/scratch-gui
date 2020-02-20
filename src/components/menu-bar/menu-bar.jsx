@@ -383,7 +383,7 @@ class MenuBar extends React.Component {
             <Box
                 className={classNames(
                     this.props.className,
-                    styles.menuBar
+                    this.props.hideMenuBar ? styles.hiddenMenu : styles.menuBar
                 )}
             >
                 <div className={styles.mainMenu}>
@@ -821,6 +821,7 @@ MenuBar.propTypes = {
     sessionExists: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
+    hideMenuBar: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired

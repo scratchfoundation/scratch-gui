@@ -31,6 +31,10 @@
     color: $ui-white;
 }
 
+.hidden-menu {
+    display: none;
+}
+
 .main-menu {
     display: flex;
     flex-direction: row;

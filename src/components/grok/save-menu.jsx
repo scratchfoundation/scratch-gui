@@ -43,19 +43,9 @@ const SaveMenuComponent = function (props) {
     </div>);
 };
 
-const mapStateToProps = state => ({
-  // TODO: If necessary
-});
-
 SaveMenuComponent.propTypes = {
     grokShouldHideLoad: PropTypes.bool.isRequired,
     grokShouldHideSave: PropTypes.bool.isRequired
 };
 
-SaveMenuComponent.defaultProps = {
-  // TODO: If necessary
-};
-
-export default connect(
-    mapStateToProps
-)(SaveMenuComponent);
+export default connect(() => {})(SaveMenuComponent);

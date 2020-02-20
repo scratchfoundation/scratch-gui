@@ -241,7 +241,12 @@ const GUIComponent = props => {
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
                 />
-                <Box className={styles.bodyWrapper}>
+                <Box
+                    className={classNames(
+                        styles.bodyWrapper,
+                        {[styles.bodyWrapperHiddenMenu]: hideMenuBar}
+                    )}
+                >
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
                             <Tabs

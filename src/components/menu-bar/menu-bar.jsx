@@ -383,7 +383,8 @@ class MenuBar extends React.Component {
             <Box
                 className={classNames(
                     this.props.className,
-                    this.props.hideMenuBar ? styles.hiddenMenu : styles.menuBar
+                    styles.menuBar,
+                    {[styles.hiddenMenu]: this.props.hideMenuBar}
                 )}
             >
                 <div className={styles.mainMenu}>

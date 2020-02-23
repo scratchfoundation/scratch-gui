@@ -31,4 +31,4 @@ deploy:
     branch:
     - develop
   skip_cleanup: true
-  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+  script: npm run deploy -- -x -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git

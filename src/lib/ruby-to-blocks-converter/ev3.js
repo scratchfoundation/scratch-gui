@@ -1,14 +1,6 @@
 /* global Opal */
 import _ from 'lodash';
 
-const RotationStyle = [
-    'left-right',
-    'don\'t rotate',
-    'all around'
-];
-
-const Ev3MotorMenu = ['A', 'B', 'C', 'D']; 
-
 /**
  * EV3 converter
  */

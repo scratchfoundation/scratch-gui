@@ -1,12 +1,6 @@
 /* global Opal */
 import _ from 'lodash';
 
-const RotationStyle = [
-    'left-right',
-    'don\'t rotate',
-    'all around'
-];
-
 /**
  * Wedo2 converter
  */

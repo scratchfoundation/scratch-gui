@@ -470,7 +470,7 @@ class RubyToBlocksConverter {
 
     _addNoteInput (block, name, inputValue, shadowValue) {
         let shadowBlock;
-        let opcode = 'note';
+        const opcode = 'note';
         if (!this._isNumber(inputValue)) {
             shadowBlock = this._createNoteBlock(opcode, shadowValue);
         }

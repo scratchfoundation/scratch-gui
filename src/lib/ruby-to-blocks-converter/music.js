@@ -71,7 +71,6 @@ const MusicConverter = {
     onOpAsgn: function (lh, operator, rh) {
         let block;
         if (this._isBlock(lh) && operator === '+' && this._isNumberOrBlock(rh)) {
-            let xy;
             switch (lh.opcode) {
             case 'music_getTempo':
                 block = this._changeBlock(lh, 'music_changeTempo', 'statement');

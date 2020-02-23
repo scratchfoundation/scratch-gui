@@ -381,6 +381,18 @@ class RubyToBlocksConverter {
         return /_variable$/.test(this._getBlockType(block));
     }
 
+    _isRubyExpression (block) {
+        return this._isBlock(block) && block.opcode === 'ruby_expression';
+    }
+
+    _getRubyExpression (block) {
+        if (this._isRubyExpression(block)) {
+            const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
+            return textBlock.fields.TEXT.value;
+        }
+        return null;
+    }
+
     _isRubyStatement (block) {
         return this._isBlock(block) && block.opcode === 'ruby_statement';
     }

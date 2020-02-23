@@ -14,12 +14,11 @@ const spriteCall = function (name) {
     return `sprite("${name.toString()}")`;
 };
 const SpriteCallRe = /^sprite\("(.*)"\)$/;
-const getSpriteName = function (block) {
-    if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
-        return null;
+const getSpriteName = function (code) {
+    if (code !== null) {
+        return SpriteCallRe.exec(code)[1];
     }
-    const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
-    return SpriteCallRe.exec(textBlock.fields.TEXT.value)[1];
+    return null;
 };
 
 const Stage = 'stage';
@@ -242,7 +241,7 @@ const SensingConverter = {
                     break;
                 }
                 if (property) {
-                    const spriteName = getSpriteName.call(this, receiver);
+                    const spriteName = getSpriteName(this._getRubyExpression(receiver));
 
                     block = this._changeBlock(receiver, 'sensing_of', 'value');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
@@ -252,7 +251,7 @@ const SensingConverter = {
                     this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', spriteName);
                 }
             } else if (args.length === 1 && name === 'variable' && this._isString(args[0])) {
-                const spriteName = getSpriteName.call(this, receiver);
+                const spriteName = getSpriteName(this._getRubyExpression(receiver));
 
                 block = this._changeBlock(receiver, 'sensing_of', 'value');
                 delete this._context.blocks[receiver.inputs.EXPRESSION.block];

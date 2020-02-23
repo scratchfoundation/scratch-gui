@@ -121,8 +121,14 @@ const videos = {
     'pong-game': {
         en: '8m48dv0ens'
     },
-    'imagine-if': {
+    'imagine': {
         en: '1ndh08yiso'
+    },
+    'code-cartoon': {
+        en: 'fpfuky3x6g'
+    },
+    'talking': {
+        en: 'j0208mq4qi'
     }
 };
 

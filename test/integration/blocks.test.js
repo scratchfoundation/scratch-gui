@@ -193,7 +193,7 @@ describe('Working with the blocks', () => {
         await clickText('newname', scope.blocksTab);
     });
 
-    test('Renaming costume with a special character should not break toolbox', async () => {
+    test.skip('Renaming costume with a special character should not break toolbox', async () => {
         await loadUri(uri);
 
         // Rename the costume

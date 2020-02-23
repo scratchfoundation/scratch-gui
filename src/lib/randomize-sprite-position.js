@@ -4,8 +4,8 @@ const randomizeSpritePosition = spriteObject => {
     const randomY = Math.floor((100 * Math.random()) - 50);
     if (spriteObject.hasOwnProperty('json')) {
         // Library sprite object
-        spriteObject.json.scratchX = randomX;
-        spriteObject.json.scratchY = randomY;
+        spriteObject.json.x = randomX;
+        spriteObject.json.y = randomY;
     } else if (spriteObject.hasOwnProperty('x') && spriteObject.hasOwnProperty('y')) {
         // Scratch 3 sprite object
         spriteObject.x = randomX;

@@ -2,9 +2,6 @@
 import _ from 'lodash';
 import {KeyOptions} from './constants';
 
-/* eslint-disable no-invalid-this */
-const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
-
 const DragMode = [
     'draggable',
     'not draggable'
@@ -17,12 +14,11 @@ const spriteCall = function (name) {
     return `sprite("${name.toString()}")`;
 };
 const SpriteCallRe = /^sprite\("(.*)"\)$/;
-const getSpriteName = function (block) {
-    if (!this._isBlock(block) || block.opcode !== 'ruby_expression') {
-        return null;
+const getSpriteName = function (code) {
+    if (code !== null) {
+        return SpriteCallRe.exec(code)[1];
     }
-    const textBlock = this._context.blocks[block.inputs.EXPRESSION.block];
-    return SpriteCallRe.exec(textBlock.fields.TEXT.value)[1];
+    return null;
 };
 
 const Stage = 'stage';
@@ -47,16 +43,13 @@ const SensingConverter = {
                 }
                 break;
             case 'touching_color?':
-                if (args.length === 1 &&
-                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString())))) {
+                if (args.length === 1 && this._isColorOrBlock(args[0])) {
                     block = this._createBlock('sensing_touchingcolor', 'value_boolean');
                     this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#43066f');
                 }
                 break;
             case 'color_is_touching_color?':
-                if (args.length === 2 &&
-                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString()))) &&
-                    (this._isBlock(args[1]) || (this._isString(args[1]) && ColorRegexp.test(args[1].toString())))) {
+                if (args.length === 2 && this._isColorOrBlock(args[0]) && this._isColorOrBlock(args[1])) {
                     block = this._createBlock('sensing_coloristouchingcolor', 'value_boolean');
                     this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#aad315');
                     this._addFieldInput(block, 'COLOR2', 'colour_picker', 'COLOUR', args[1], '#fca3bf');
@@ -248,7 +241,7 @@ const SensingConverter = {
                     break;
                 }
                 if (property) {
-                    const spriteName = getSpriteName.call(this, receiver);
+                    const spriteName = getSpriteName(this._getRubyExpression(receiver));
 
                     block = this._changeBlock(receiver, 'sensing_of', 'value');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
@@ -258,7 +251,7 @@ const SensingConverter = {
                     this._addFieldInput(block, 'OBJECT', 'sensing_of_object_menu', 'OBJECT', spriteName);
                 }
             } else if (args.length === 1 && name === 'variable' && this._isString(args[0])) {
-                const spriteName = getSpriteName.call(this, receiver);
+                const spriteName = getSpriteName(this._getRubyExpression(receiver));
 
                 block = this._changeBlock(receiver, 'sensing_of', 'value');
                 delete this._context.blocks[receiver.inputs.EXPRESSION.block];

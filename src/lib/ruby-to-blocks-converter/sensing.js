@@ -2,9 +2,6 @@
 import _ from 'lodash';
 import {KeyOptions} from './constants';
 
-/* eslint-disable no-invalid-this */
-const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
-
 const DragMode = [
     'draggable',
     'not draggable'
@@ -47,16 +44,13 @@ const SensingConverter = {
                 }
                 break;
             case 'touching_color?':
-                if (args.length === 1 &&
-                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString())))) {
+                if (args.length === 1 && this._isColorOrBlock(args[0])) {
                     block = this._createBlock('sensing_touchingcolor', 'value_boolean');
                     this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#43066f');
                 }
                 break;
             case 'color_is_touching_color?':
-                if (args.length === 2 &&
-                    (this._isBlock(args[0]) || (this._isString(args[0]) && ColorRegexp.test(args[0].toString()))) &&
-                    (this._isBlock(args[1]) || (this._isString(args[1]) && ColorRegexp.test(args[1].toString())))) {
+                if (args.length === 2 && this._isColorOrBlock(args[0]) && this._isColorOrBlock(args[1])) {
                     block = this._createBlock('sensing_coloristouchingcolor', 'value_boolean');
                     this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#aad315');
                     this._addFieldInput(block, 'COLOR2', 'colour_picker', 'COLOUR', args[1], '#fca3bf');

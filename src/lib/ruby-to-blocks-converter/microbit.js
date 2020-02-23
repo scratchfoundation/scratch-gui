@@ -2,6 +2,7 @@
 import _ from 'lodash';
 
 const MicroBit = 'microbit';
+
 /**
  * MicroBit converter
  */
@@ -79,19 +80,19 @@ const MicroBitConverter = {
                 }
                 break;
             case 'display':
-                if (args.length === 5 && args.every((i) => { return this._isString(i); })) {
+                if (args.length === 5 && args.every(i => this._isString(i))) {
                     block = this._changeBlock(receiver, 'microbit_displaySymbol', 'statement');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
-                    var matrix = '';
+                    let matrix = '';
                     for (const arg of args) {
-                        matrix += arg; 
-                    } 
+                        matrix += arg;
+                    }
                     matrix = matrix.replace(/[1-9]/g, '1').replace(/[^1-9]/g, '0');
                     this._addFieldInput(
                         block, 'MATRIX', 'matrix', 'MATRIX',
-                        matrix, null 
+                        matrix, null
                     );
                 }
                 break;

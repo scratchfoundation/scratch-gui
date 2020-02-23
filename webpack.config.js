@@ -223,6 +223,12 @@ module.exports = [
                 new CopyWebpackPlugin([{
                     from: 'extension-worker.{js,js.map}',
                     context: 'node_modules/scratch-vm/dist/web'
+                }]),
+                // Include library JSON files for scratch-desktop to use for downloading
+                new CopyWebpackPlugin([{
+                    from: 'src/lib/libraries/*.json',
+                    to: 'libraries',
+                    flatten: true
                 }])
             ])
         })) : []

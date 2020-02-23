@@ -24,7 +24,7 @@ import TranslateBlocks from './translate.js';
 import MakeyMakeyBlocks from './makeymakey.js';
 import MicrobitBlocks from './microbit.js';
 import BoostBlocks from './boost.js';
-import EV3Blocks from './ev3.js'
+import EV3Blocks from './ev3.js';
 import WeDo2Blocks from './wedo2.js';
 
 const SCALAR_TYPE = '';

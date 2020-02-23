@@ -1,0 +1,207 @@
+version: 2.1
+aliases:
+  - &save_git_cache
+    save_cache:
+      paths:
+        - .git
+      key: v1-git-{{ .Revision }}
+  - &restore_git_cache
+    restore_cache:
+      keys:
+        - v1-git-{{ .Revision }}
+        - v1-git-
+  - &save_build_cache
+    save_cache:
+      paths:
+        - build
+      key: v1-build-{{ .Revision }}
+  - &restore_build_cache
+    restore_cache:
+      keys:
+        - v1-build-{{ .Revision }}
+  - &save_dist_cache
+    save_cache:
+      paths:
+        - dist
+      key: v1-dist-{{ .Revision }}
+  - &restore_dist_cache
+    restore_cache:
+      keys:
+        - v1-dist-{{ .Revision }}
+  - &save_npm_cache
+    save_cache:
+      paths:
+        - node_modules
+      key: v1-npm-{{ checksum "package-lock.json" }}
+  - &restore_npm_cache
+    restore_cache:
+      keys:
+        - v1-npm-{{ checksum "package-lock.json" }}
+        - v1-npm-
+  - &defaults
+    docker:
+      - image: circleci/node:8.16-browsers
+    working_directory: ~/repo
+
+jobs:
+  setup:
+    <<: *defaults
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - run: npm install
+      - *save_git_cache
+      - *save_npm_cache
+  lint:
+    <<: *defaults
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - run:
+          name: Lint
+          command: npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
+      - store_test_results:
+          path: test-results
+  unit:
+    <<: *defaults
+    environment:
+      JEST_JUNIT_OUTPUT_NAME: results.xml
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - run:
+          name: Unit
+          environment:
+              JEST_JUNIT_OUTPUT_DIR: test-results/unit
+          command: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov
+      - store_artifacts:
+          path: coverage
+      - store_test_results:
+          path: test-results
+  build:
+    <<: *defaults
+    environment:
+      NODE_ENV: production
+      NODE_OPTIONS: --max-old-space-size=4000
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - run:
+          name: Build
+          command: npm run build
+      - *save_build_cache
+      - *save_dist_cache
+  store_build:
+    <<: *defaults
+    steps:
+      - *restore_build_cache
+      - store_artifacts:
+          path: build
+  store_dist:
+    <<: *defaults
+    steps:
+      - *restore_dist_cache
+      - store_artifacts:
+          path: dist
+  integration:
+    <<: *defaults
+    parallelism: 2
+    environment:
+      JEST_JUNIT_OUTPUT_NAME: results.txt
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - *restore_build_cache
+      - run:
+          name: Integration
+          environment:
+              JEST_JUNIT_OUTPUT_DIR: test-results/integration
+          command: |
+            export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
+            $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit"
+      - store_test_results:
+          path: test-results
+
+  deploy-npm:
+    <<: *defaults
+    environment:
+      NODE_OPTIONS: --max-old-space-size=4000
+    steps:
+      - *restore_git_cache
+      - *restore_dist_cache
+      - checkout
+      - run: |
+          echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
+          echo export NPM_TAG=circlelatest >> $BASH_ENV
+          if [ "$CIRCLE_BRANCH" == "master" ]
+            then echo export NPM_TAG=circlestable >> $BASH_ENV
+          fi
+          if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
+            then echo export NPM_TAG=circlehotfix >> $BASH_ENV
+          fi
+      - run: npm version --no-git-tag-version $RELEASE_VERSION
+      - run: |
+          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm publish --tag $NPM_TAG
+      - run: git tag $RELEASE_VERSION
+      - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
+
+  deploy-gh-pages:
+    <<: *defaults
+    steps:
+      - *restore_git_cache
+      - checkout
+      - *restore_npm_cache
+      - *restore_build_cache
+      - run: |
+          git config --global user.email $(git log --pretty=format:"%ae" -n1)
+          git config --global user.name $(git log --pretty=format:"%an" -n1)
+      - run: npm run deploy -- -e $CIRCLE_BRANCH
+      
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - unit:
+          requires:
+            - setup
+      - build:
+          requires:
+            - setup
+      - integration:
+          requires:
+            - build
+      - store_build:
+          requires:
+            - build
+      - store_dist:
+          requires:
+            - build
+      # Disable deployment while running in parallel with Travis
+      # - deploy-npm:
+      #     requires:
+      #       - lint
+      #       - unit
+      #       - integration
+      #       - build
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - develop
+      #           - /^hotfix\/.*/
+      # - deploy-gh-pages:
+      #     requires:
+      #       - lint
+      #       - unit
+      #       - integration
+      #       - build

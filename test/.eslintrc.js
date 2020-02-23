@@ -10,6 +10,7 @@ module.exports = {
         'no-warning-comments': [0, {
             terms: ['todo'],
             location: 'start'
-        }]
+        }],
+        'jest/valid-describe': 0
     }
 };

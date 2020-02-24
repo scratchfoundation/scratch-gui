@@ -13,6 +13,7 @@ import {
     onLoadedProject,
     requestProjectUpload
 } from '../reducers/project-state';
+import {setProjectTitle} from '../reducers/project-title';
 import {
     openLoadingProject,
     closeLoadingProject
@@ -147,20 +148,21 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             if (this.fileReader) {
                 this.props.onLoadingStarted();
                 const filename = this.fileToUpload && this.fileToUpload.name;
+                let loadingSuccess = false;
                 this.props.vm.loadProject(this.fileReader.result)
                     .then(() => {
-                        this.props.onLoadingFinished(this.props.loadingState, true);
                         if (filename) {
                             const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
-                            this.props.onUpdateProjectTitle(uploadedProjectTitle);
+                            this.props.onSetProjectTitle(uploadedProjectTitle);
                         }
+                        loadingSuccess = true;
                     })
                     .catch(error => {
                         log.warn(error);
-                        this.props.intl.formatMessage(messages.loadError);
-                        this.props.onLoadingFinished(this.props.loadingState, false);
+                        alert(this.props.intl.formatMessage(messages.loadError)); // eslint-disable-line no-alert
                     })
                     .then(() => {
+                        this.props.onLoadingFinished(this.props.loadingState, loadingSuccess);
                         // go back to step 7: whether project loading succeeded
                         // or failed, reset file objects
                         this.removeFileObjects();
@@ -188,6 +190,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 loadingState,
                 onLoadingFinished,
                 onLoadingStarted,
+                onSetProjectTitle,
                 projectChanged,
                 requestProjectUpload: requestProjectUploadProp,
                 userOwnsProject,
@@ -215,7 +218,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         loadingState: PropTypes.oneOf(LoadingStates),
         onLoadingFinished: PropTypes.func,
         onLoadingStarted: PropTypes.func,
-        onUpdateProjectTitle: PropTypes.func,
+        onSetProjectTitle: PropTypes.func,
         projectChanged: PropTypes.bool,
         requestProjectUpload: PropTypes.func,
         userOwnsProject: PropTypes.bool,
@@ -248,6 +251,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         },
         // show project loading screen
         onLoadingStarted: () => dispatch(openLoadingProject()),
+        onSetProjectTitle: title => dispatch(setProjectTitle(title)),
         // step 4: transition the project state so we're ready to handle the new
         // project data. When this is done, the project state transition will be
         // noticed by componentDidUpdate()

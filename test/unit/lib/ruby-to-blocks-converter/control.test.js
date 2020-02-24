@@ -649,6 +649,122 @@ describe('RubyToBlocksConverter/Control', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
         });
 
+        test('unless', () => {
+            code = `
+                unless touching?("_edge_")
+                  bounce_if_on_edge
+                else
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0],
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                unless touching?("_edge_")
+                  bounce_if_on_edge
+                  bounce_if_on_edge
+                else
+                  move(10)
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10); move(10)')[0],
+                        rubyToExpected(converter, target, 'bounce_if_on_edge; bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                unless touching?("_edge_")
+                else
+                  move(10)
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        rubyToExpected(converter, target, 'move(10)')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                unless touching?("_edge_")
+                  bounce_if_on_edge
+                else
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: [
+                        null,
+                        rubyToExpected(converter, target, 'bounce_if_on_edge')[0]
+                    ]
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+
+            code = `
+                unless touching?("_edge_")
+                else
+                end
+            `;
+            expected = [
+                {
+                    opcode: 'control_if_else',
+                    inputs: [
+                        {
+                            name: 'CONDITION',
+                            block: rubyToExpected(converter, target, 'touching?("_edge_")')[0]
+                        }
+                    ],
+                    branches: []
+                }
+            ];
+            convertAndExpectToEqualBlocks(converter, target, code, expected);
+        });
+
         test('error', () => {
             code = `
                 if move(10)

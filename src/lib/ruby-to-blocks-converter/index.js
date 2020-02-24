@@ -1001,7 +1001,7 @@ class RubyToBlocksConverter {
         const cond = this._processCondition(node.children[0]);
         const statement = this._processStatement(node.children[1]);
         let elseStatement;
-        if (node.$loc().$else() !== Opal.nil) {
+        if (node.children[2] !== Opal.nil || node.$loc().$else() !== Opal.nil) {
             elseStatement = this._processStatement(node.children[2]);
         }
 

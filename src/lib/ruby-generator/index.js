@@ -26,6 +26,7 @@ import MicrobitBlocks from './microbit.js';
 import BoostBlocks from './boost.js';
 import EV3Blocks from './ev3.js';
 import WeDo2Blocks from './wedo2.js';
+import GdxForBlocks from './gdx_for.js';
 
 const SCALAR_TYPE = '';
 const LIST_TYPE = 'list';
@@ -454,5 +455,6 @@ MicrobitBlocks(RubyGenerator);
 BoostBlocks(RubyGenerator);
 EV3Blocks(RubyGenerator);
 WeDo2Blocks(RubyGenerator);
+GdxForBlocks(RubyGenerator);
 
 export default RubyGenerator;

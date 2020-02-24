@@ -44,12 +44,12 @@ export default function (Generator) {
 
     Generator.microbit_isTilted = function (block) {
         const direction = Generator.valueToCode(block, 'DIRECTION', Generator.ORDER_NONE) || null;
-        return `microbit.tilted?(${direction})\n`;
+        return [`microbit.tilted?(${direction})`, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbit_getTiltAngle = function (block) {
         const direction = Generator.valueToCode(block, 'DIRECTION', Generator.ORDER_NONE) || null;
-        return `microbit.tilt_angle(${direction})\n`;
+        return [`microbit.tilt_angle(${direction})`, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbit_whenPinConnected = function (block) {

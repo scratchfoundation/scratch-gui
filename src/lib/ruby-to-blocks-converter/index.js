@@ -109,12 +109,6 @@ class RubyToBlocksConverter {
             }
             blocks.forEach(block => {
                 if (this._isBlock(block)) {
-                    if (this._isRubyBlock(block)) {
-                        throw new RubyToBlocksConverterError(
-                            block.node,
-                            `could not convert ${block.opcode}: ${this._getSource(block.node)}`
-                        );
-                    }
                     block.topLevel = true;
                 } else if (block instanceof Primitive) {
                     throw new RubyToBlocksConverterError(
@@ -123,6 +117,15 @@ class RubyToBlocksConverter {
                     );
                 } else {
                     throw new Error(`invalid block: ${block}`);
+                }
+            });
+            Object.keys(this._context.blocks).forEach(blockId => {
+                const block = this._context.blocks[blockId];
+                if (this._isRubyBlock(block)) {
+                    throw new RubyToBlocksConverterError(
+                        block.node,
+                        `could not convert ${block.opcode}: ${this._getSource(block.node)}`
+                    );
                 }
             });
             return true;

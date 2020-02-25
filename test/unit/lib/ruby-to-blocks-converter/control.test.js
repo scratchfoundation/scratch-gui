@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
@@ -78,7 +78,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 'sleep("abc")',
                 'sleep(1, 2)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -165,7 +165,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 '10.times',
                 '10.times(1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
 
             [
@@ -174,12 +174,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 '10.times { |i| wait }',
                 '"10".times { wait }'
             ].forEach(c => {
-                const res = converter.targetCodeToBlocks(target, c);
-                expect(converter.errors).toHaveLength(0);
-                const scriptIds = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel);
-                expect(scriptIds).toHaveLength(1);
-                expect(converter.blocks[scriptIds[0]]).toHaveProperty('opcode', 'ruby_statement_with_block');
-                expect(res).toBeTruthy();
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -265,19 +260,14 @@ describe('RubyToBlocksConverter/Control', () => {
                     'repeat(10)',
                     'repeat(10, 1)'
                 ].forEach(c => {
-                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                    convertAndExpectRubyBlockError(converter, target, c);
                 });
 
                 [
                     'repeat(10) { |i| }',
                     'repeat("10") { }'
                 ].forEach(c => {
-                    const res = converter.targetCodeToBlocks(target, c);
-                    expect(converter.errors).toHaveLength(0);
-                    const scriptIds = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel);
-                    expect(scriptIds).toHaveLength(1);
-                    expect(converter.blocks[scriptIds[0]]).toHaveProperty('opcode', 'ruby_statement_with_block');
-                    expect(res).toBeTruthy();
+                    convertAndExpectRubyBlockError(converter, target, c);
                 });
             });
         });
@@ -367,15 +357,7 @@ describe('RubyToBlocksConverter/Control', () => {
             convertAndExpectToEqualBlocks(converter, target, code, expected);
 
             code = 'forever { wait }';
-            expected = [
-                {
-                    opcode: 'control_forever',
-                    branches: [
-                        rubyToExpected(converter, target, 'wait')[0]
-                    ]
-                }
-            ];
-            convertAndExpectToEqualBlocks(converter, target, code, expected);
+            convertAndExpectRubyBlockError(converter, target, code);
         });
 
         test('invalid', () => {
@@ -385,7 +367,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 'forever()',
                 'forever(1)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
 
             [
@@ -395,9 +377,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 'forever(1) { bounce_if_on_edge }',
                 'forever(1) { |a| bounce_if_on_edge }'
             ].forEach(s => {
-                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
     });
@@ -994,7 +974,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 'stop("invalid option")',
                 'stop("all", 1)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
     });
@@ -1033,7 +1013,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 'create_clone(move(10))',
                 'create_clone("_myself_", 1)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
     });
@@ -1062,7 +1042,7 @@ describe('RubyToBlocksConverter/Control', () => {
                 '12.delete_this_clone',
                 'delete_this_clone(1)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
     });
@@ -1113,15 +1093,13 @@ describe('RubyToBlocksConverter/Control', () => {
                 'self.when(:start_as_a_clone)',
                 'self.when(:start_as_a_clone, 1)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
 
             [
                 '12.when(:start_as_a_clone) {}'
             ].forEach(s => {
-                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
     });

@@ -4,14 +4,11 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
-    findByText,
     findByXpath,
     notExistsByXpath,
     getDriver,
     getLogs,
-    loadUri,
-    rightClickText,
-    scope
+    loadUri
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -45,7 +42,7 @@ describe('Removed trademarks (ex: Scratch Cat)', () => {
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         const searchElement = await findByXpath("//input[@placeholder='Search']");
 
-        for (let name of trademarkNames) {
+        for (const name of trademarkNames) {
             searchElement.clear();
             await searchElement.sendKeys(name);
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -62,7 +59,7 @@ describe('Removed trademarks (ex: Scratch Cat)', () => {
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         const searchElement = await findByXpath("//input[@placeholder='Search']");
 
-        for (let name of trademarkNames) {
+        for (const name of trademarkNames) {
             searchElement.clear();
             const costumePrefix = `${name}-`;
             await searchElement.sendKeys(costumePrefix);

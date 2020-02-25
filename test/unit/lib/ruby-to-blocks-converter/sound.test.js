@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo,
     expectNoArgsMethod
@@ -101,7 +101,7 @@ describe('RubyToBlocksConverter/Sound', () => {
                     `${info.methodName}(1)`,
                     `${info.methodName}("Meow", 1)`
                 ].forEach(c => {
-                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                    convertAndExpectRubyBlockError(converter, target, c);
                 });
             });
         });
@@ -188,7 +188,7 @@ describe('RubyToBlocksConverter/Sound', () => {
                     `${info.methodName}("invalid", ${info.value})`,
                     `${info.methodName}("PITCH", ${info.value}, 1)`
                 ].forEach(c => {
-                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                    convertAndExpectRubyBlockError(converter, target, c);
                 });
             });
         });
@@ -248,7 +248,7 @@ describe('RubyToBlocksConverter/Sound', () => {
                 'self.volume += :symbol',
                 'self.volume += abc'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -305,7 +305,7 @@ describe('RubyToBlocksConverter/Sound', () => {
                 'self.volume = :symbol',
                 'self.volume = abc'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });

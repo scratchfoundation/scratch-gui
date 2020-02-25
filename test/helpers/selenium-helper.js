@@ -106,7 +106,7 @@ class SeleniumHelper {
 
     notExistsByXpath (xpath) {
         return this.driver.findElements(By.xpath(xpath))
-            .then(elements => elements.length == 0 || elements.every(i => !i.isDisplayed()));
+            .then(elements => elements.length === 0 || elements.every(i => !i.isDisplayed()));
     }
 
     loadUri (uri) {

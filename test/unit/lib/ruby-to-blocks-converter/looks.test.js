@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo,
     expectNoArgsMethod
@@ -105,7 +105,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'say(false, 2)',
                 'say("Hello!", false)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -163,7 +163,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'say(true)',
                 'say(1, 2, 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -253,7 +253,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'think(false, 2)',
                 'think("Hello!", false)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -311,7 +311,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'think(true)',
                 'think(1, 2, 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -351,7 +351,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'switch_costume(x)',
                 'switch_costume("costume2", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -393,7 +393,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'switch_backdrop(x)',
                 'switch_backdrop("backdrop2", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -438,7 +438,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'self.size += :symbol',
                 'self.size += abc'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -481,7 +481,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'self.size = :symbol',
                 'self.size = abc'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -562,7 +562,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'change_effect_by(1, 25)',
                 'change_effect_by("color", 25, 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -643,7 +643,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'set_effect(1, 25)',
                 'set_effect("color", 25, 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -692,7 +692,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'go_to_layer(25)',
                 'go_to_layer(x)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -773,7 +773,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'go_layers(false, "forward")',
                 'go_layers(true, "forward")'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -814,7 +814,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'costume_number(1)',
                 'costume_name(1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -855,7 +855,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'backdrop_number(1)',
                 'backdrop_name(1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -895,7 +895,7 @@ describe('RubyToBlocksConverter/Looks', () => {
                 'switch_backdrop_and_wait(x)',
                 'switch_backdrop_and_wait("backdrop2", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });

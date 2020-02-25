@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
@@ -168,7 +168,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '2 - "1"',
             '"2" - 1'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -239,7 +239,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '1 * "2"',
             '"1" * 2'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -310,7 +310,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '2 / "1"',
             '"2" / 1'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -381,7 +381,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             'random(1..10, 23)',
             'random("1..10")'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -925,7 +925,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '1 % "2"',
             '"1" % 2'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -963,7 +963,7 @@ describe('RubyToBlocksConverter/Operators', () => {
             '"2".round',
             '"2".round(1)'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, s);
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 

@@ -1,9 +1,6 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
-    convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
-    rubyToExpected,
-    expectedInfo
+    convertAndExpectRubyBlockError
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Ruby', () => {
@@ -17,42 +14,12 @@ describe('RubyToBlocksConverter/Ruby', () => {
 
     test('ruby_range', () => {
         const code = '1..10';
-        const expected = [
-            {
-                opcode: 'ruby_range',
-                inputs: [
-                    {
-                        name: 'FROM',
-                        block: expectedInfo.makeNumber(1)
-                    },
-                    {
-                        name: 'TO',
-                        block: expectedInfo.makeNumber(10)
-                    }
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+        convertAndExpectRubyBlockError(converter, target, code);
     });
 
     test('ruby_exclude_range', () => {
         const code = '1...10';
-        const expected = [
-            {
-                opcode: 'ruby_exclude_range',
-                inputs: [
-                    {
-                        name: 'FROM',
-                        block: expectedInfo.makeNumber(1)
-                    },
-                    {
-                        name: 'TO',
-                        block: expectedInfo.makeNumber(10)
-                    }
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+        convertAndExpectRubyBlockError(converter, target, code);
     });
 
     test('ruby_statement(wait)', () => {
@@ -62,7 +29,7 @@ describe('RubyToBlocksConverter/Ruby', () => {
             'wait(  )',
             'wait(\n)'
         ].forEach(s => {
-            convertAndExpectToEqualRubyStatement(converter, target, s, 'wait');
+            convertAndExpectRubyBlockError(converter, target, s);
         });
     });
 
@@ -74,42 +41,6 @@ describe('RubyToBlocksConverter/Ruby', () => {
               move(10)
             end
         `;
-        const expected = [
-            {
-                opcode: 'ruby_statement_with_block',
-                inputs: [
-                    {
-                        name: 'STATEMENT',
-                        block: expectedInfo.makeText('method_call(1)')
-                    },
-                    {
-                        name: 'ARGS',
-                        block: expectedInfo.makeText('|arg1, arg2|')
-                    }
-                ],
-                branches: [
-                    {
-                        opcode: 'ruby_statement',
-                        inputs: [
-                            {
-                                name: 'STATEMENT',
-                                block: expectedInfo.makeText('move(arg1)')
-                            }
-                        ],
-                        next: {
-                            opcode: 'ruby_statement',
-                            inputs: [
-                                {
-                                    name: 'STATEMENT',
-                                    block: expectedInfo.makeText('move(arg2)')
-                                }
-                            ],
-                            next: rubyToExpected(converter, target, 'move(10)')[0]
-                        }
-                    }
-                ]
-            }
-        ];
-        convertAndExpectToEqualBlocks(converter, target, code, expected);
+        convertAndExpectRubyBlockError(converter, target, code);
     });
 });

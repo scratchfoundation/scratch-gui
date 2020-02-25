@@ -710,72 +710,6 @@ const myBlocks = function () {
     `;
 };
 
-ScratchBlocks.Msg.CATEGORY_RUBY = 'Ruby';
-ScratchBlocks.ScratchMsgs.locales.en.CATEGORY_RUBY = 'Ruby';
-ScratchBlocks.ScratchMsgs.locales.ja.CATEGORY_RUBY = 'ルビー';
-ScratchBlocks.ScratchMsgs.locales['ja-Hira'].CATEGORY_RUBY = 'ルビー';
-
-const ruby = function () {
-    return `
-    <category
-        name="%{BKY_CATEGORY_RUBY}"
-        id="ruby"
-        colour="#CC0043"
-        secondaryColour="#FF4D6A">
-        <block type="ruby_statement">
-            <value name="STATEMENT">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-        </block>
-        <block type="ruby_statement_with_block">
-            <value name="STATEMENT">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-            <value name="ARGS">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-        </block>
-        <block type="ruby_expression">
-            <value name="EXPRESSION">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-        </block>
-        <block type="ruby_range">
-            <value name="FROM">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="ruby_exclude_range">
-            <value name="FROM">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-    `;
-};
-
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -818,7 +752,6 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
-    const rubyXML = moveCategory('ruby') || ruby(isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -830,8 +763,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        myBlocksXML, gap,
-        rubyXML
+        myBlocksXML
     ];
 
     for (const extensionCategory of categoriesXML) {

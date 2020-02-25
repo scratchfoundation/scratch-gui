@@ -23,6 +23,7 @@ class SeleniumHelper {
             'elementIsVisible',
             'findByText',
             'findByXpath',
+            'notExistsByXpath',
             'getDriver',
             'getSauceDriver',
             'getLogs',
@@ -101,6 +102,11 @@ class SeleniumHelper {
 
     findByText (text, scope) {
         return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+    }
+
+    notExistsByXpath (xpath) {
+        return this.driver.findElements(By.xpath(xpath))
+            .then(elements => elements.length === 0 || elements.every(i => !i.isDisplayed()));
     }
 
     loadUri (uri) {

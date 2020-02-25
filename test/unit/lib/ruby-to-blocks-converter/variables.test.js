@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
@@ -140,7 +140,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                     `${varName} /= 1`,
                     `${varName} %= 1`
                 ].forEach(s => {
-                    convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                    convertAndExpectRubyBlockError(converter, target, s);
                 });
             });
 
@@ -164,7 +164,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                     'show_variable(1)',
                     `show_variable("&${variable.name}")`
                 ].forEach(s => {
-                    convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                    convertAndExpectRubyBlockError(converter, target, s);
                 });
             });
 
@@ -188,7 +188,7 @@ describe('RubyToBlocksConverter/Variables', () => {
                     'hide_variable(1)',
                     `hide_variable("&${variable.name}")`
                 ].forEach(s => {
-                    convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                    convertAndExpectRubyBlockError(converter, target, s);
                 });
             });
 

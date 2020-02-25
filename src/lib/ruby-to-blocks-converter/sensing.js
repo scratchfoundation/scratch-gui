@@ -29,7 +29,7 @@ const Stage = 'stage';
  */
 const SensingConverter = {
     // eslint-disable-next-line no-unused-vars
-    onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
+    onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock, node) {
         let block;
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
@@ -109,12 +109,12 @@ const SensingConverter = {
                 break;
             case 'sprite':
                 if (args.length === 1 && this._isString(args[0])) {
-                    block = this._createRubyExpressionBlock(spriteCall(args[0]));
+                    block = this._createRubyExpressionBlock(spriteCall(args[0]), node);
                 }
                 break;
             case 'stage':
                 if (args.length === 0) {
-                    block = this._createRubyExpressionBlock(Stage);
+                    block = this._createRubyExpressionBlock(Stage, node);
                 }
                 break;
             }
@@ -168,7 +168,7 @@ const SensingConverter = {
                 break;
             case '::Time':
                 if (name === 'now' && args.length === 0) {
-                    block = this._createRubyExpressionBlock(TimeNow);
+                    block = this._createRubyExpressionBlock(TimeNow, node);
                 }
                 break;
             }

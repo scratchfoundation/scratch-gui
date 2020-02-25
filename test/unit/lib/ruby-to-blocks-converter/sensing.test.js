@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo,
     expectNoArgsMethod
@@ -90,7 +90,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'touching?(1)',
                 'touching?("_edge_", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -182,7 +182,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'touching_color?("#43066f0")',
                 'touching_color?("#43066f", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -304,7 +304,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'color_is_touching_color?("#aad315", "#fca3bf0")',
                 'color_is_touching_color?("#aad315", "#fca3bf", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -391,7 +391,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'distance(1)',
                 'distance("_mouse_", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -460,7 +460,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'ask(1)',
                 'ask("What\'s your name?", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -539,7 +539,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'Keyboard.pressed?("invalid")',
                 'Keyboard.pressed?("space", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -642,7 +642,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'self.drag_mode = "invalid"',
                 'self.drag_mode = 1'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -772,7 +772,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'stage(1).x',
                 'stage.x(1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -851,7 +851,7 @@ describe('RubyToBlocksConverter/Sensing', () => {
                 'Time.now.year(1)',
                 'Time.now.invalid'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 

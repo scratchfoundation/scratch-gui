@@ -231,6 +231,12 @@ const convertAndExpectToEqualBlocks = function (converter, target, code, expecte
     expect(res).toBeTruthy();
 };
 
+const convertAndExpectRubyBlockError = function (converter, target, code) {
+    converter.targetCodeToBlocks(target, code);
+    expect(converter.errors).toHaveLength(1);
+    expect(converter.errors[0].text).toMatch(/ could not convert ruby_/);
+};
+
 const expectToEqualRubyStatement = function (converter, expectedStatement) {
     const expected = [
         {
@@ -495,7 +501,7 @@ const expectNoArgsMethod = function (opcode, methodName, blockType = 'statement'
                 `${methodName}("backdrop2")`,
                 `${methodName}(x)`
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
     });
@@ -505,6 +511,7 @@ export {
     toJson,
     expectToEqualBlocks,
     convertAndExpectToEqualBlocks,
+    convertAndExpectRubyBlockError,
     expectToEqualRubyStatement,
     convertAndExpectToEqualRubyStatement,
     rubyToExpected,

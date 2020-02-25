@@ -1,7 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectToEqualRubyStatement,
+    convertAndExpectRubyBlockError,
     rubyToExpected,
     expectedInfo
 } from '../../../helpers/expect-to-equal-blocks';
@@ -63,16 +63,14 @@ describe('RubyToBlocksConverter/Event', () => {
             [
                 'self.when(:flag_clicked)'
             ].forEach(s => {
-                convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                convertAndExpectRubyBlockError(converter, target, s);
             });
 
             [
                 'self.when(:flag_clicked, 1) { bounce_if_on_edge }',
                 'self.when(:flag_click) { bounce_if_on_edge }'
             ].forEach(s => {
-                expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, s);
             });
         });
 
@@ -155,7 +153,7 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when(:key_pressed, "space", 1)',
                 'self.when(:key_pressed, "invalid key")'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
 
             [
@@ -163,9 +161,7 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when(:key_pressed, "space", 1) { bounce_if_on_edge }',
                 'self.when(:key_pressed, "invalid key") { bounce_if_on_edge }'
             ].forEach(c => {
-                expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -251,16 +247,14 @@ describe('RubyToBlocksConverter/Event', () => {
                 [
                     'self.when(:clicked)'
                 ].forEach(s => {
-                    convertAndExpectToEqualRubyStatement(converter, target, s, s);
+                    convertAndExpectRubyBlockError(converter, target, s);
                 });
 
                 [
                     'self.when(:clicked, 1) { bounce_if_on_edge }',
                     'self.when(:click) { bounce_if_on_edge }'
                 ].forEach(s => {
-                    expect(converter.targetCodeToBlocks(target, s)).toBeTruthy();
-                    const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                    expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                    convertAndExpectRubyBlockError(converter, target, s);
                 });
             });
 
@@ -343,16 +337,14 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when("backdrop1")',
                 'self.when(:backdrop_switches, "backdrop1", 1)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
 
             [
                 'self.when(:backdrop_switches) { bounce_if_on_edge }',
                 'self.when(:backdrop_switches, "backdrop1", 1) { bounce_if_on_edge }'
             ].forEach(c => {
-                expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -517,7 +509,7 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when(:greater_than, "loudness")',
                 'self.when(:greater_than, "loudness", 10, 11)'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
 
             [
@@ -526,9 +518,7 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when(:greater_than, "invalid", 10) { bounce_if_on_edge }',
                 'self.when(:greater_than, "loudness", 10, 11) { bounce_if_on_edge }'
             ].forEach(c => {
-                expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -624,16 +614,14 @@ describe('RubyToBlocksConverter/Event', () => {
                 'self.when("message1")',
                 'self.when(:receive, "message1")'
             ].forEach(c => {
-                convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                convertAndExpectRubyBlockError(converter, target, c);
             });
 
             [
                 'self.when(:receive) { bounce_if_on_edge }',
                 'self.when(:receive, "message1", 1) { bounce_if_on_edge }'
             ].forEach(c => {
-                expect(converter.targetCodeToBlocks(target, c)).toBeTruthy();
-                const blockId = Object.keys(converter.blocks).filter(id => converter.blocks[id].topLevel)[0];
-                expect(converter.blocks[blockId].opcode).toEqual('ruby_statement_with_block');
+                convertAndExpectRubyBlockError(converter, target, c);
             });
         });
 
@@ -732,7 +720,7 @@ describe('RubyToBlocksConverter/Event', () => {
                     `${info.methodName}(1)`,
                     `${info.methodName}("message1", 1)`
                 ].forEach(c => {
-                    convertAndExpectToEqualRubyStatement(converter, target, c, c);
+                    convertAndExpectRubyBlockError(converter, target, c);
                 });
             });
         });

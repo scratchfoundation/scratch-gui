@@ -46,7 +46,28 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+import vizblocksIconURL from './vizblocks/vizblocks.png';
+import vizblocksInsetIconURL from './vizblocks/vizblocks-small.png';
+
 export default [
+    {
+        name: 'VizBlocks',
+        extensionId: 'vizblocks',
+        collaborator: 'Heng Yeow',
+        iconURL: vizblocksIconURL,
+        insetIconURL: vizblocksInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Viz Blocks"
+                description="Blocks used to create visualizations."
+                id="gui.extension.vizblocks.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false
+    },
     {
         name: (
             <FormattedMessage

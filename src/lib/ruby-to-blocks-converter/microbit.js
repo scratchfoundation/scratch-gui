@@ -8,7 +8,7 @@ const MicroBit = 'microbit';
  */
 const MicroBitConverter = {
     // eslint-disable-next-line no-unused-vars
-    onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
+    onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock, node) {
         let block;
         if ((this._isSelf(receiver) || receiver === Opal.nil) &&
             name === 'when' &&
@@ -61,7 +61,7 @@ const MicroBitConverter = {
             switch (name) {
             case 'microbit':
                 if (args.length === 0) {
-                    block = this._createRubyExpressionBlock(MicroBit);
+                    block = this._createRubyExpressionBlock(MicroBit, node);
                 }
                 break;
             }

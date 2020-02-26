@@ -141,8 +141,8 @@ npm install  --no-optional --save-dev react-intl-redux@^0.7
 The dependency itself might have more missing dependencies, which will show up like this:
 
 ```
-user@machine:~/sources/scratch/scratch-gui (491-translatable-library-objects)$ npm install  --no-optional --save-dev react-intl-redux@^0.7
-scratch-gui@0.1.0 /media/cuideigin/Linux/sources/scratch/scratch-gui
+user@machine:/path/to/smalruby3-gui$ npm install  --no-optional --save-dev react-intl-redux@^0.7
+smalruby-gui@0.9.0 /path/to/smalruby3-gui
 ├── react-intl-redux@0.7.0
 └── UNMET PEER DEPENDENCY react-responsive@5.0.0
 ```

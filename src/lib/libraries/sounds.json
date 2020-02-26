@@ -1351,11 +1351,7 @@
     },
     {
         "name": "Dance Celebrate",
-        "tags": [
-            "music",
-            "loops",
-            "electronic"
-        ],
+        "tags": [],
         "assetId": "0edb8fb88af19e6e17d0f8cf64c1d136",
         "dataFormat": "adpcm",
         "md5ext": "0edb8fb88af19e6e17d0f8cf64c1d136.wav",
@@ -2941,10 +2937,7 @@
     },
     {
         "name": "Meow",
-        "tags": [
-            "animals",
-            "cat"
-        ],
+        "tags": [],
         "assetId": "83c36d806dc92327b9e7049a565c6bff",
         "dataFormat": "",
         "md5ext": "83c36d806dc92327b9e7049a565c6bff.wav",

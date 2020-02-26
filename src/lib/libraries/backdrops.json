@@ -157,10 +157,10 @@
             "outdoors",
             "flying"
         ],
-        "assetId": "11b62fc61d191b1bae0800f78c2f8c60",
+        "assetId": "e7c147730f19d284bcd7b3f00af19bb6",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "11b62fc61d191b1bae0800f78c2f8c60.svg",
+        "md5ext": "e7c147730f19d284bcd7b3f00af19bb6.svg",
         "rotationCenterX": 240,
         "rotationCenterY": 180
     },
@@ -513,10 +513,10 @@
         "tags": [
             "patterns"
         ],
-        "assetId": "a7eb02ece0a521a6dfb5361ce0bdd7cc",
+        "assetId": "4b98c07876ed8997c3762e75790507b4",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "a7eb02ece0a521a6dfb5361ce0bdd7cc.svg",
+        "md5ext": "4b98c07876ed8997c3762e75790507b4.svg",
         "rotationCenterX": 240,
         "rotationCenterY": 180
     },
@@ -644,10 +644,10 @@
             "indoors",
             "inflatable"
         ],
-        "assetId": "d26e9e304872fccd5d84a70b94daf8e2",
+        "assetId": "108160d0e44d1c340182e31c9dc0758a",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "d26e9e304872fccd5d84a70b94daf8e2.svg",
+        "md5ext": "108160d0e44d1c340182e31c9dc0758a.svg",
         "rotationCenterX": 240,
         "rotationCenterY": 180
     },
@@ -931,12 +931,12 @@
         "tags": [
             "patterns"
         ],
-        "assetId": "c71bd957a3381eba291494a0decbf890",
+        "assetId": "a6a21f5c08d586e8daaebde37c97fb6f",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "c71bd957a3381eba291494a0decbf890.svg",
-        "rotationCenterX": 246.36842626802064,
-        "rotationCenterY": 183.54785750789802
+        "md5ext": "a6a21f5c08d586e8daaebde37c97fb6f.svg",
+        "rotationCenterX": 240,
+        "rotationCenterY": 180
     },
     {
         "name": "Theater",

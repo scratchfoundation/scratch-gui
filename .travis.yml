@@ -19,7 +19,6 @@ before_install:
 - '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest' # skipped when using node 9
 install:
 - npm --production=false install
-- npm --production=false update
 script:
 - npm run test:lint
 - npm run test:unit

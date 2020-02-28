@@ -1,5 +1,7 @@
 import GoogleAnalytics from 'react-ga';
 
+import log from './log';
+
 const GA_ID = (process.env.GA_ID || window.GA_ID);
 if (GA_ID) {
     GoogleAnalytics.initialize(GA_ID, {
@@ -9,6 +11,7 @@ if (GA_ID) {
         forceSSL: true
     });
 } else {
+    log.info('Disabling GA because GA_ID is not set.');
     window.ga = () => {
         // The `react-ga` module calls this function to implement all Google Analytics calls. Providing an empty
         // function effectively disables `react-ga`. This is similar to the `testModeAPI` feature of `react-ga` except

@@ -1,8 +1,5 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
-import VM from 'scratch-vm';
 
 import Button from '../button/button.jsx';
 import SBFileUploader from '../../containers/sb-file-uploader.jsx';
@@ -27,7 +24,10 @@ const SaveMenuComponent = function (props) {
             </Button>
         )}</SB3Downloader>
 
-        <SBFileUploader>
+        <SBFileUploader
+            canSave
+            userOwnsProject
+        >
             {(className, renderFileInput, handleLoadProject) => (
                 <Button
                     className={styles.menuButton}
@@ -48,4 +48,4 @@ SaveMenuComponent.propTypes = {
     grokShouldHideSave: PropTypes.bool.isRequired
 };
 
-export default connect(() => {})(SaveMenuComponent);
+export default SaveMenuComponent;

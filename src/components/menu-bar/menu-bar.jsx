@@ -31,6 +31,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
+import {toggleMysteryMode} from '../../reducers/mystery-mode';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -526,6 +527,21 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
+                                    <MenuItem onClick={this.props.onClickToggleMysteryMode}>
+                                        {this.props.mysteryMode ? (
+                                            <FormattedMessage
+                                                defaultMessage="Turn off Mystery Mode"
+                                                description="Menu bar item for turning off dark mode"
+                                                id="gui.menuBar.mysteryModeOff"
+                                            />
+                                        ) : (
+                                            <FormattedMessage
+                                                defaultMessage="Turn on Mystery Mode"
+                                                description="Menu bar item for turning on dark mode"
+                                                id="gui.menuBar.mysteryModeOn"
+                                            />
+                                        )}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -782,6 +798,7 @@ MenuBar.propTypes = {
     locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
+    mysteryMode: PropTypes.bool,
     onClickAbout: PropTypes.oneOfType([
         PropTypes.func, // button mode: call this callback when the About button is clicked
         PropTypes.arrayOf( // menu mode: list of items in the About menu
@@ -801,6 +818,7 @@ MenuBar.propTypes = {
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
+    onClickToggleMysteryMode: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -845,6 +863,7 @@ const mapStateToProps = (state, ownProps) => {
         languageMenuOpen: languageMenuOpen(state),
         locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
+        mysteryMode: state.scratchGui.mysteryMode,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null,
@@ -873,6 +892,7 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
+    onClickToggleMysteryMode: () => dispatch(toggleMysteryMode()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

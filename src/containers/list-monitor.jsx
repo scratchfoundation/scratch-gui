@@ -4,7 +4,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
-import {getVariableValue, setVariableValue} from '../lib/variable-utils';
+import {getVariableValue, setVariableValue, canSetVariableValue} from '../lib/variable-utils';
 import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
 import {Map} from 'immutable';
 
@@ -86,12 +86,14 @@ class ListMonitor extends React.Component {
             const newListValue = listValue.slice(0, previouslyActiveIndex + newValueOffset)
                 .concat([newListItemValue])
                 .concat(listValue.slice(previouslyActiveIndex + newValueOffset));
-            setVariableValue(vm, targetId, variableId, newListValue);
-            const newIndex = this.wrapListIndex(previouslyActiveIndex + newValueOffset, newListValue.length);
-            this.setState({
-                activeIndex: newIndex,
-                activeValue: newListItemValue
-            });
+            if (canSetVariableValue(vm, targetId, variableId, newListValue)) {
+                setVariableValue(vm, targetId, variableId, newListValue);
+                const newIndex = this.wrapListIndex(previouslyActiveIndex + newValueOffset, newListValue.length);
+                this.setState({
+                    activeIndex: newIndex,
+                    activeValue: newListItemValue
+                });
+            }
         }
     }
 
@@ -118,6 +120,7 @@ class ListMonitor extends React.Component {
         // Add button appends a blank value and switches to it
         const {vm, targetId, id: variableId} = this.props;
         const newListValue = getVariableValue(vm, targetId, variableId).concat(['']);
+        if (!canSetVariableValue(vm, targetId, variableId, newListValue)) return;
         setVariableValue(vm, targetId, variableId, newListValue);
         this.setState({activeIndex: newListValue.length - 1, activeValue: ''});
     }

@@ -6,7 +6,7 @@ import {injectIntl, intlShape, defineMessages} from 'react-intl';
 import monitorAdapter from '../lib/monitor-adapter.js';
 import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx';
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
-import {getVariable, setVariableValue} from '../lib/variable-utils';
+import {getVariable, setVariableValue, LIST_ITEM_LIMIT} from '../lib/variable-utils';
 import importCSV from '../lib/import-csv';
 import downloadBlob from '../lib/download-blob';
 import SliderPrompt from './slider-prompt.jsx';
@@ -171,7 +171,8 @@ class Monitor extends React.Component {
                 columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
             }
             const newListValue = rows.map(row => row[columnNumber - 1])
-                .filter(item => typeof item === 'string'); // CSV importer can leave undefineds
+                .filter(item => typeof item === 'string') // CSV importer can leave undefineds
+                .splice(0, LIST_ITEM_LIMIT);
             const {vm, targetId, id: variableId} = this.props;
             setVariableValue(vm, targetId, variableId, newListValue);
         });

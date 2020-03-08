@@ -27,6 +27,32 @@ import GdxForConverter from './gdx_for';
 /* eslint-disable no-invalid-this */
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
 
+// from scratch-vm/src/serialization/sb3.js
+const CORE_EXTENSIONS = [
+    'argument',
+    'colour',
+    'control',
+    'data',
+    'event',
+    'looks',
+    'math',
+    'motion',
+    'operator',
+    'procedures',
+    'sensing',
+    'sound'
+];
+
+// from scratch-vm/src/serialization/sb3.js
+const getExtensionIdForOpcode = function (opcode) {
+    const index = opcode.indexOf('_');
+    const prefix = opcode.substring(0, index);
+    if (CORE_EXTENSIONS.indexOf(prefix) === -1) {
+        if (prefix !== '') return prefix;
+    }
+    return null;
+};
+
 /**
  * Class for a block converter that translates ruby code into the blocks.
  */
@@ -80,6 +106,7 @@ class RubyToBlocksConverter {
             errors: [],
             argumentBlocks: {},
             procedureCallBlocks: {},
+            extensionIDs: new Set(),
 
             blocks: {},
             blockTypes: {},
@@ -126,6 +153,11 @@ class RubyToBlocksConverter {
                         block.node,
                         `could not convert ${block.opcode}: ${this._getSource(block.node)}`
                     );
+                }
+
+                const extensionID = getExtensionIdForOpcode(block.opcode);
+                if (extensionID) {
+                    this._context.extensionIDs.add(extensionID);
                 }
             });
             return true;
@@ -182,11 +214,21 @@ class RubyToBlocksConverter {
         Object.keys(target.blocks._blocks).forEach(blockId => {
             target.blocks.deleteBlock(blockId);
         });
-        Object.keys(this._context.blocks).forEach(blockId => {
-            target.blocks.createBlock(this._context.blocks[blockId]);
+
+        const extensionPromises = [];
+        this._context.extensionIDs.forEach(extensionID => {
+            if (!this.vm.extensionManager.isExtensionLoaded(extensionID)) {
+                extensionPromises.push(this.vm.extensionManager.loadExtensionURL(extensionID));
+            }
         });
 
-        this.vm.emitWorkspaceUpdate();
+        Promise.all(extensionPromises).then(() => {
+            Object.keys(this._context.blocks).forEach(blockId => {
+                target.blocks.createBlock(this._context.blocks[blockId]);
+            });
+
+            this.vm.emitWorkspaceUpdate();
+        });
     }
 
     _callConvertersHandler (handlerName) {

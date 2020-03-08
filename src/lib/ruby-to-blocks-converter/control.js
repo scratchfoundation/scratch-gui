@@ -34,28 +34,16 @@ const ControlConverter = {
             case 'repeat':
                 if (args.length === 1 && this._isNumberOrBlock(args[0]) &&
                     rubyBlockArgs && rubyBlockArgs.length === 0) {
+                    rubyBlock = this._removeWaitBlocks(rubyBlock);
                     block = createControlRepeatBlock.call(this, args[0], rubyBlock);
                 }
                 break;
             case 'loop':
             case 'forever':
                 if (args.length === 0 && rubyBlockArgs && rubyBlockArgs.length === 0 && rubyBlock) {
-                    let found;
-                    if (name === 'loop') {
-                        const b = this._popWaitBlock(rubyBlock);
-                        if (b) {
-                            if (b.id === rubyBlock.id) {
-                                rubyBlock = null;
-                            }
-                            found = true;
-                        }
-                    } else {
-                        found = true;
-                    }
-                    if (found) {
-                        block = this._createBlock('control_forever', 'terminate');
-                        this._addSubstack(block, rubyBlock);
-                    }
+                    rubyBlock = this._removeWaitBlocks(rubyBlock);
+                    block = this._createBlock('control_forever', 'terminate');
+                    this._addSubstack(block, rubyBlock);
                 }
                 break;
             case 'stop':
@@ -97,13 +85,8 @@ const ControlConverter = {
             case 'times':
                 if (args.length === 0 &&
                     rubyBlockArgs && rubyBlockArgs.length === 0 && rubyBlock) {
-                    const b = this._popWaitBlock(rubyBlock);
-                    if (b) {
-                        if (b.id === rubyBlock.id) {
-                            rubyBlock = null;
-                        }
-                        block = createControlRepeatBlock.call(this, receiver, rubyBlock);
-                    }
+                    rubyBlock = this._removeWaitBlocks(rubyBlock);
+                    block = createControlRepeatBlock.call(this, receiver, rubyBlock);
                 }
                 break;
             }
@@ -125,14 +108,10 @@ const ControlConverter = {
     },
 
     onUntil: function (cond, statement) {
-        const b = this._popWaitBlock(statement);
-        if (!b) {
-            return null;
-        }
+        statement = this._removeWaitBlocks(statement);
 
         let opcode;
-        if (b.id === statement.id) {
-            statement = null;
+        if (statement === null) {
             opcode = 'control_wait_until';
         } else {
             opcode = 'control_repeat_until';

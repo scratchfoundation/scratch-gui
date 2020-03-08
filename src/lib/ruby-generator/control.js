@@ -12,12 +12,12 @@ export default function (Generator) {
     Generator.control_repeat = function (block) {
         const times = Generator.valueToCode(block, 'TIMES', Generator.ORDER_ATOMIC) || 0;
         const branch = Generator.statementToCode(block, 'SUBSTACK') || '';
-        return `${times}.times do\n${branch}${Generator.INDENT}wait\nend\n`;
+        return `${times}.times do\n${branch}end\n`;
     };
 
     Generator.control_forever = function (block) {
         const branch = Generator.statementToCode(block, 'SUBSTACK') || '';
-        return `loop do\n${branch}${Generator.INDENT}wait\nend\n`;
+        return `loop do\n${branch}end\n`;
     };
 
     Generator.control_if = function (block) {
@@ -41,7 +41,7 @@ export default function (Generator) {
     Generator.control_repeat_until = function (block) {
         const operator = Generator.valueToCode(block, 'CONDITION', Generator.ORDER_NONE) || false;
         const branch = Generator.statementToCode(block, 'SUBSTACK') || '';
-        return `until ${operator}\n${branch}  wait\nend\n`;
+        return `until ${operator}\n${branch}end\n`;
     };
 
     Generator.control_stop = function (block) {

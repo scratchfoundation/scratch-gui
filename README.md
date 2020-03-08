@@ -142,7 +142,7 @@ The dependency itself might have more missing dependencies, which will show up l
 
 ```
 user@machine:/path/to/smalruby3-gui$ npm install  --no-optional --save-dev react-intl-redux@^0.7
-smalruby-gui@0.9.0 /path/to/smalruby3-gui
+smalruby-gui@0.9.1 /path/to/smalruby3-gui
 ├── react-intl-redux@0.7.0
 └── UNMET PEER DEPENDENCY react-responsive@5.0.0
 ```

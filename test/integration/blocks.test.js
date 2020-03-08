@@ -238,7 +238,7 @@ describe('Working with the blocks', () => {
         // wait until the new costume appears in costume item list panel
         await findByXpath("//div[contains(@class,'sprite-selector-item_is-selected_')]" +
             "//div[contains(text(), 'costume2')]");
-        await clickText('costume2', scope.costumesTab);
+        await clickText('costume1', scope.costumesTab);
         // Check that the menu has been updated
         await clickText('Code');
         await clickText('costume2', scope.blocksTab);

@@ -120,6 +120,7 @@ class TargetPane extends React.Component {
             formatMessage(sharedMessages.pop),
             formatMessage(sharedMessages.costume, {index: 1})
         );
+        randomizeSpritePosition(emptyItem);
         this.props.vm.addSprite(JSON.stringify(emptyItem)).then(() => {
             setTimeout(() => { // Wait for targets update to propagate before tab switching
                 this.props.onActivateTab(COSTUMES_TAB_INDEX);

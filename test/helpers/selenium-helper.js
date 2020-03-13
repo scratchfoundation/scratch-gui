@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
-const {By, until, Button} = webdriver;
+const {By, until, Button, error} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
 
@@ -91,10 +91,12 @@ class SeleniumHelper {
 
     findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
         return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage)
-            .then(el => (
-                this.driver.wait(el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS, `${xpath} is not visible`)
-                    .then(() => el)
-            ));
+            .catch(err => {
+                // driver.wait(until.elementLocated(...)) seems to throw a StaleElementReferenceError if the element is
+                // removed while waiting. Not sure why this happens. If it does, just try again.
+                if (err instanceof error.StaleElementReferenceError) return this.findByXpath(xpath, timeoutMessage);
+                throw err;
+            });
     }
 
     findByText (text, scope) {

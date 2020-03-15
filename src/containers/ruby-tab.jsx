@@ -32,8 +32,24 @@ class RubyTab extends React.Component {
                   this.props.vm.editingTarget && this.props.rubyCode.target &&
                   this.props.vm.editingTarget.id !== targetId;
             if (changedTarget || this.props.blocksTabVisible) {
-                if (this.props.targetCodeToBlocks()) {
-                    modified = false;
+                const converter = this.props.targetCodeToBlocks();
+                if (converter.result) {
+                    converter.apply().then(() => {
+                        modified = false;
+
+                        if (!modified) {
+                            if ((this.props.isVisible && !prevProps.isVisible) ||
+                                (this.props.editingTarget && this.props.editingTarget !== prevProps.editingTarget)) {
+                                this.props.updateRubyCodeTargetState(this.props.vm.editingTarget);
+                            }
+                        }
+
+                        if (this.props.isVisible && !prevProps.isVisible) {
+                            this.aceEditorRef.editor.renderer.updateFull();
+                            this.aceEditorRef.editor.focus();
+                        }
+                    });
+                    return;
                 } else {
                     this.aceEditorRef.editor.focus();
                 }

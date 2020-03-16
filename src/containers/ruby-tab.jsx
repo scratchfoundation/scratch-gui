@@ -50,9 +50,8 @@ class RubyTab extends React.Component {
                         }
                     });
                     return;
-                } else {
-                    this.aceEditorRef.editor.focus();
                 }
+                this.aceEditorRef.editor.focus();
             }
         }
 

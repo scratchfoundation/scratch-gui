@@ -1229,18 +1229,14 @@ class RubyToBlocksConverter {
 const NullRubyToBlocksConverter = {
     result: true,
     errors: [],
-    apply: () => {
-        return Promise.resolve();
-    }
+    apply: () => Promise.resolve()
 };
 
 const targetCodeToBlocks = function (vm, target, code) {
     const converter = new RubyToBlocksConverter(vm);
     converter.result = converter.targetCodeToBlocks(target, code);
     if (converter.result) {
-        converter.apply = () => {
-            return converter.applyTargetBlocks(target);
-        };
+        converter.apply = () => converter.applyTargetBlocks(target);
     }
     return converter;
 };

@@ -45,7 +45,11 @@ const RubyToBlocksConverterHOC = function (WrappedComponent) {
          */
         targetCodeToBlocks () {
             if (this.props.rubyCode.modified) {
-                const converter = targetCodeToBlocks(this.props.vm, this.props.rubyCode.target, this.props.rubyCode.code);
+                const converter = targetCodeToBlocks(
+                    this.props.vm,
+                    this.props.rubyCode.target,
+                    this.props.rubyCode.code
+                );
                 if (!converter.result) {
                     this.props.vm.setEditingTarget(this.props.rubyCode.target.id);
                     if (!this.props.rubyCode.target.isStage) {

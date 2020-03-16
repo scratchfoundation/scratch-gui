@@ -211,10 +211,6 @@ class RubyToBlocksConverter {
             }
         });
 
-        Object.keys(target.blocks._blocks).forEach(blockId => {
-            target.blocks.deleteBlock(blockId);
-        });
-
         const extensionPromises = [];
         this._context.extensionIDs.forEach(extensionID => {
             if (!this.vm.extensionManager.isExtensionLoaded(extensionID)) {
@@ -222,7 +218,11 @@ class RubyToBlocksConverter {
             }
         });
 
-        Promise.all(extensionPromises).then(() => {
+        return Promise.all(extensionPromises).then(() => {
+            Object.keys(target.blocks._blocks).forEach(blockId => {
+                target.blocks.deleteBlock(blockId);
+            });
+
             Object.keys(this._context.blocks).forEach(blockId => {
                 target.blocks.createBlock(this._context.blocks[blockId]);
             });
@@ -1223,17 +1223,26 @@ class RubyToBlocksConverter {
     }
 }
 
-const targetCodeToBlocks = function (vm, target, code, errors = []) {
+/**
+ * Null of RubyToBlocksConverter
+ */
+const NullRubyToBlocksConverter = {
+    result: true,
+    errors: [],
+    apply: () => Promise.resolve()
+};
+
+const targetCodeToBlocks = function (vm, target, code) {
     const converter = new RubyToBlocksConverter(vm);
-    if (converter.targetCodeToBlocks(target, code)) {
-        converter.applyTargetBlocks(target);
-        return true;
+    converter.result = converter.targetCodeToBlocks(target, code);
+    if (converter.result) {
+        converter.apply = () => converter.applyTargetBlocks(target);
     }
-    converter.errors.forEach(e => errors.push(e));
-    return false;
+    return converter;
 };
 
 export {
     RubyToBlocksConverter as default,
+    NullRubyToBlocksConverter,
     targetCodeToBlocks
 };

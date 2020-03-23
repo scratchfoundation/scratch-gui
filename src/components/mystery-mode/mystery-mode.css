@@ -2,7 +2,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 90%;
+    opacity: 0.9;
     background: transparent url('./mystery.png') center center;
     z-index: 50;
     pointer-events: none;

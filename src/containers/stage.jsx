@@ -84,13 +84,19 @@ class Stage extends React.Component {
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
-            this.props.isStarted !== nextProps.isStarted;
+            this.props.isStarted !== nextProps.isStarted ||
+            this.props.mysteryMode !== nextProps.mysteryMode;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
             this.startColorPickingLoop();
         } else if (!this.props.isColorPicking && prevProps.isColorPicking) {
             this.stopColorPickingLoop();
+        }
+        if (this.props.mysteryMode && !prevProps.mysteryMode) {
+            this.renderer.setMysteryMode(true);
+        } else if (!this.props.mysteryMode && prevProps.mysteryMode) {
+            this.renderer.setMysteryMode(false);
         }
         this.updateRect();
         this.renderer.resize(this.rect.width, this.rect.height);
@@ -435,7 +441,8 @@ Stage.propTypes = {
     onDeactivateColorPicker: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    mysteryMode: PropTypes.bool
 };
 
 Stage.defaultProps = {
@@ -448,7 +455,8 @@ const mapStateToProps = state => ({
     isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.
-    useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
+    useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly),
+    mysteryMode: state.scratchGui.mysteryMode
 });
 
 const mapDispatchToProps = dispatch => ({

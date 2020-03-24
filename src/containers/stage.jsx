@@ -76,6 +76,13 @@ class Stage extends React.Component {
         this.attachMouseEvents(this.canvas);
         this.updateRect();
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
+
+        // The GUI component seems to be recreated when entering/exiting editor mode.
+        // If we only update mystery mode in componentDidUpdate, it won't
+        // update when switching between editor and player mode.
+        if (this.props.mysteryMode !== this.renderer._mystery.modeActive) {
+            this.renderer.setMysteryMode(this.props.mysteryMode);
+        }
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
@@ -93,10 +100,8 @@ class Stage extends React.Component {
         } else if (!this.props.isColorPicking && prevProps.isColorPicking) {
             this.stopColorPickingLoop();
         }
-        if (this.props.mysteryMode && !prevProps.mysteryMode) {
-            this.renderer.setMysteryMode(true);
-        } else if (!this.props.mysteryMode && prevProps.mysteryMode) {
-            this.renderer.setMysteryMode(false);
+        if (this.props.mysteryMode !== prevProps.mysteryMode) {
+            this.renderer.setMysteryMode(this.props.mysteryMode);
         }
         this.updateRect();
         this.renderer.resize(this.rect.width, this.rect.height);
@@ -456,7 +461,8 @@ const mapStateToProps = state => ({
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly),
-    mysteryMode: state.scratchGui.mysteryMode
+    mysteryMode: state.scratchGui.mysteryMode && !(
+        state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
 });
 
 const mapDispatchToProps = dispatch => ({

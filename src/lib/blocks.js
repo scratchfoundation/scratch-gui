@@ -245,13 +245,13 @@ export default function (vm) {
                     // The block was in the flyout so look up future block info there.
                     lookupBlocks = vm.runtime.flyoutBlocks;
                 }
-                const sort = function (options) {
-                    options.sort(ScratchBlocks.scratchBlocksUtils.compareStrings);
-                };
+                const sort = options => {
+                    options.sort((var1, var2) => ScratchBlocks.scratchBlocksUtils.compareStrings(var1.name, var2.name));
+                }
                 // Get all the stage variables (no lists) so we can add them to menu when the stage is selected.
-                const stageVariableOptions = vm.runtime.getTargetForStage().getAllVariableNamesInScopeByType('');
+                const stageVariableOptions = Object.values(vm.runtime.getTargetForStage().variables);
                 sort(stageVariableOptions);
-                const stageVariableMenuItems = stageVariableOptions.map(variable => [variable, variable]);
+                const stageVariableMenuItems = stageVariableOptions.map(variable => [variable.name, variable.id]);
                 if (sensingOfBlock.inputs.OBJECT.shadow !== sensingOfBlock.inputs.OBJECT.block) {
                     // There's a block dropped on top of the menu. It'd be nice to evaluate it and
                     // return the correct list, but that is tricky. Scratch2 just returns stage options
@@ -268,10 +268,10 @@ export default function (vm) {
                 let spriteVariableOptions = [];
                 // The target should exist, but there are ways for it not to (e.g. #4203).
                 if (target) {
-                    spriteVariableOptions = target.getAllVariableNamesInScopeByType('', true);
+                    spriteVariableOptions = Object.values(target.variables);
                     sort(spriteVariableOptions);
                 }
-                const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable, variable]);
+                const spriteVariableMenuItems = spriteVariableOptions.map(variable => [variable.name, variable.id]);
                 return spriteOptions.concat(spriteVariableMenuItems);
             }
             return [['', '']];

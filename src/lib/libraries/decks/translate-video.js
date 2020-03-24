@@ -129,6 +129,9 @@ const videos = {
     },
     'talking': {
         en: 'j0208mq4qi'
+    },
+    'sprite-mystery': {
+        en: 's69h0y6cs4'
     }
 };
 

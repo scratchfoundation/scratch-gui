@@ -94,7 +94,7 @@ class ScratchImage extends React.PureComponent {
     }
     render () {
         const {
-            src: _src,
+            src: _src, // eslint-disable-line react/prop-types
             imageSource: _imageSource,
             ...imgProps
         } = this.props;

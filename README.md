@@ -4,12 +4,14 @@ The mod is available at https://sheeptester.github.io/scratch-gui/.
 
 ## URL parameters
 
+The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent).
+
 | URL parameter | Description |
 | ------------- | ----------- |
-| `url=[URL]` | Load an extension dynamically (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). |
-| `width=[NUMBER]` | Custom stage width (default 480) |
-| `height=[NUMBER]` | Custom stage width (default 360) |
-| `project=[URL]` | Load an .sb3 file from a URL. The URL should be [URI encoded](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) |
+| `extension=[URL]` or `url=[URL]` | Load an extension dynamically (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). |
+| `width=[NUMBER]` | Custom stage width (default 480). |
+| `height=[NUMBER]` | Custom stage width (default 360). |
+| `project=[URL]` | Load an .sb3 file from a URL. |
 
 For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 

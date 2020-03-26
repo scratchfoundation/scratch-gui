@@ -59,6 +59,9 @@ export default appTarget => {
     const projectFileMatches = window.location.href.match(/[?&]project=([^&]*)&?/);
     const projectFile = projectFileMatches ? decodeURIComponent(projectFileMatches[1]) : null;
 
+    const extensionURLMatches = window.location.href.match(/[?&](?:extension|url)=([^&]*)&?/);
+    const extensionURL = extensionURLMatches ? decodeURIComponent(extensionURLMatches[1]) : null;
+
     const onVmInit = vm => {
         if (projectFile) {
             fetch(projectFile)
@@ -66,6 +69,9 @@ export default appTarget => {
                 .then(arrayBuffer => {
                     vm.loadProject(arrayBuffer);
                 });
+        }
+        if (extensionURL) {
+          vm.extensionManager.loadExtensionURL(extensionURL);
         }
     };
 
@@ -85,7 +91,6 @@ export default appTarget => {
                 onTelemetryModalCancel={handleTelemetryModalCancel}
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
-                onVmInit={onVmInit}
             /> :
             <WrappedGui
                 canEditTitle

@@ -8,7 +8,7 @@ import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
 const onClickLogo = () => {
-    window.location = 'https://scratch.mit.edu';
+    window.location = 'https://sheeptester.github.io/';
 };
 
 const handleTelemetryModalCancel = () => {
@@ -56,6 +56,19 @@ export default appTarget => {
         }
     }
 
+    const projectFileMatches = window.location.href.match(/[?&]project=([^&]*)&?/);
+    const projectFile = projectFileMatches ? decodeURIComponent(projectFileMatches[1]) : null;
+
+    const onVmInit = vm => {
+        if (projectFile) {
+            fetch(projectFile)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                    vm.loadProject(arrayBuffer);
+                });
+        }
+    };
+
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
         window.onbeforeunload = () => true;
@@ -72,6 +85,7 @@ export default appTarget => {
                 onTelemetryModalCancel={handleTelemetryModalCancel}
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
+                onVmInit={onVmInit}
             /> :
             <WrappedGui
                 canEditTitle
@@ -79,6 +93,7 @@ export default appTarget => {
                 backpackHost={backpackHost}
                 canSave={false}
                 onClickLogo={onClickLogo}
+                onVmInit={onVmInit}
             />,
         appTarget);
 };

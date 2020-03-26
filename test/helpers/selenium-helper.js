@@ -28,6 +28,8 @@ class SeleniumHelper {
             'loadUri',
             'rightClickText'
         ]);
+
+        this.Key = webdriver.Key; // map Key constants, for sending special keys
     }
 
     elementIsVisible (element, timeoutMessage = 'elementIsVisible timed out') {

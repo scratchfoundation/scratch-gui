@@ -161,7 +161,7 @@ const StageComponent = props => {
                     // Give the canvases two different keys to prevent React from recycling the same canvas
                     // across two different context types (2D and WebGL)
                     wobblyDragging ? <canvas
-                        className={styles.draggingSprite}
+                        className={classNames(styles.draggingSprite, styles.wobbly)}
                         height={0}
                         ref={wobblyDragRef}
                         width={0}

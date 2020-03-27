@@ -203,8 +203,9 @@ class RubberCanvas {
         }
 
         this._lastTimestamp = performance.now();
-        this._canvas.style.left = `${-grabX}px`;
-        this._canvas.style.top = `${-grabY}px`;
+        const {x: parentX, y: parentY} = this._canvas.parentElement.getBoundingClientRect();
+        this._canvas.style.left = `${-grabX + parentX}px`;
+        this._canvas.style.top = `${-grabY + parentY}px`;
         this._canvas.style.display = 'block';
         this.step();
     }

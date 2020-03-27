@@ -56,7 +56,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         }
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
-                props.isShowingWithId && props.vm.runtime.hasCloudData() &&
+                props.vm.runtime.hasCloudData() &&
                 props.canModifyCloudData;
         }
         shouldDisconnect (props, prevProps) {
@@ -143,8 +143,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         return {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
-            // if you're editing someone else's project, you can't modify cloud data
-            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
+            canModifyCloudData: true
         };
     };
 

@@ -69,11 +69,20 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 reducers = {
                     locales: localesReducer,
                     scratchGui: guiReducer,
-                    scratchPaint: ScratchPaintReducer
+                    scratchPaint: ScratchPaintReducer,
+                    session: state => state || initialState.session
                 };
                 initialState = {
                     locales: initializedLocales,
-                    scratchGui: initializedGui
+                    scratchGui: initializedGui,
+                    session: {
+                        session: {
+                            user: {
+                                username: props.username,
+                                token: props.username
+                            }
+                        }
+                    }
                 };
                 enhancer = composeEnhancers(guiMiddleware);
             }
@@ -114,7 +123,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
-        showTelemetryModal: PropTypes.bool
+        showTelemetryModal: PropTypes.bool,
+        username: PropTypes.string
     };
     return AppStateWrapper;
 };

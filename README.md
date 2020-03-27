@@ -12,6 +12,8 @@ The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org
 | `width=[NUMBER]` | Custom stage width (default 480). |
 | `height=[NUMBER]` | Custom stage width (default 360). |
 | `project=[URL]` | Load an .sb3 file from a URL. |
+| `username=[STRING]` | Set a custom username (default "username") |
+| `cloud_host=[URL]` | Use a custom cloud host instead of the default behaviour, which is to save cloud variables to localStorage. |
 
 For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 

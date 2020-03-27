@@ -31,7 +31,7 @@ const vmManagerHOC = function (WrappedComponent) {
             if (!this.props.vm.initialized) {
                 this.audioEngine = new AudioEngine();
                 this.props.vm.attachAudioEngine(this.audioEngine);
-                this.props.vm.setCompatibilityMode(true);
+                this.props.vm.setCompatibilityMode(this.props.compatibilityMode);
                 this.props.vm.initialized = true;
                 this.props.vm.setLocale(this.props.locale, this.props.messages);
             }
@@ -86,6 +86,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 onLoadedProject: onLoadedProjectProp,
                 onSetProjectUnchanged,
                 projectData,
+                compatibilityMode,
                 /* eslint-enable no-unused-vars */
                 isLoadingWithId: isLoadingWithIdProp,
                 vm,
@@ -104,6 +105,7 @@ const vmManagerHOC = function (WrappedComponent) {
     VMManager.propTypes = {
         canSave: PropTypes.bool,
         cloudHost: PropTypes.string,
+        compatibilityMode: PropTypes.bool,
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,

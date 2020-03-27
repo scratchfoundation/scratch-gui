@@ -1,6 +1,7 @@
 import log from './log.js';
 import throttle from 'lodash.throttle';
 
+const localStorageHost = 'localStorage'
 
 class CloudProvider {
     /**
@@ -29,7 +30,8 @@ class CloudProvider {
 
         // Send a message to the cloud server at a rate of no more
         // than 10 messages/sec.
-        this.sendCloudData = throttle(this._sendCloudData, 100);
+        // this.sendCloudData = throttle(this._sendCloudData, 100);
+        this.sendCloudData = this._sendCloudData;
     }
 
     /**
@@ -40,7 +42,32 @@ class CloudProvider {
         this.connectionAttempts += 1;
 
         try {
-            this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost);
+            if (this.cloudHost === localStorageHost) {
+                this.connection = {
+                    readyState: WebSocket.OPEN,
+                    _onstorage: e => {
+                        if (e.storageArea === localStorage && e.key.slice(0, 5) === '[s3] ') {
+                            if (this.connection.onmessage) {
+                                this.connection.onmessage({
+                                    data: JSON.stringify({
+                                        method: 'set',
+                                        name: e.key.slice(5),
+                                        value: e.newValue
+                                    })
+                                });
+                            }
+                        }
+                    }
+                };
+                window.addEventListener('storage', this.connection._onstorage);
+                Promise.resolve().then(() => {
+                    if (this.connection.onopen) {
+                        this.connection.onopen();
+                    }
+                });
+            } else {
+                this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost);
+            }
         } catch (e) {
             log.warn('Websocket support is not available in this browser', e);
             this.connection = null;
@@ -154,7 +181,28 @@ class CloudProvider {
      * @param {string} data The formatted message to send.
      */
     _sendCloudData (data) {
-        this.connection.send(`${data}\n`);
+        if (this.cloudHost === localStorageHost) {
+            const message = JSON.parse(data);
+            switch (message.method) {
+            case 'create':
+            case 'set': {
+                localStorage.setItem('[s3] ' + message.name, message.value);
+                break;
+            }
+            case 'rename': {
+                const value = localStorage.getItem('[s3] ' + message.name);
+                localStorage.removeItem('[s3] ' + message.name);
+                localStorage.setItem('[s3] ' + message.new_name, value);
+                break;
+            }
+            case 'delete': {
+                localStorage.removeItem('[s3] ' + message.name);
+                break;
+            }
+            }
+        } else {
+            this.connection.send(`${data}\n`);
+        }
     }
 
     /**
@@ -205,10 +253,14 @@ class CloudProvider {
             this.connection.readyState !== WebSocket.CLOSING &&
             this.connection.readyState !== WebSocket.CLOSED) {
             log.info('Request close cloud connection without reconnecting');
-            // Remove listeners, after this point we do not want to react to connection updates
-            this.connection.onclose = () => {};
-            this.connection.onerror = () => {};
-            this.connection.close();
+            if (this.cloudHost === localStorageHost) {
+                window.removeEventListener('storage', this.connection._onstorage);
+            } else {
+                // Remove listeners, after this point we do not want to react to connection updates
+                this.connection.onclose = () => {};
+                this.connection.onerror = () => {};
+                this.connection.close();
+            }
         }
         this.clear();
     }

@@ -256,9 +256,11 @@ const getTokenAndUsername = state => {
     // Otherwise try to pull testing params out of the URL, or return nulls
     // TODO a hack for enabling the backpack; vanilla Scratch gets it from
     // URL parameters ?token=abc&username=xyz
+    const tokenMatches = window.location.href.match(/[?&]token=([^&]*)&?/);
+    const usernameMatches = window.location.href.match(/[?&]username=([^&]*)&?/);
     return {
-        token: 'yes',
-        username: 'indeed'
+        token: tokenMatches ? tokenMatches[1] : null,
+        username: usernameMatches ? usernameMatches[1] : null
     };
 };
 

@@ -39,9 +39,16 @@ export default appTarget => {
         HashParserHOC
     )(GUI);
 
-    // TODO a hack for enabling the backpack; on the vanilla version it lets you
-    // set the host using ?backpack_host in the URL
-    const backpackHost = 'yep';
+    // TODO a hack for testing the backpack, allow backpack host to be set by url param
+    // (Currently ignored; it'll always use localStorage)
+    const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
+    const backpackHost = backpackHostMatches ? backpackHostMatches[1] : 'localStorage';
+
+    const cloudHostMatches = window.location.href.match(/[?&]cloud_host=([^&]*)&?/);
+    const cloudHost = cloudHostMatches ? decodeURIComponent(cloudHostMatches[1]) : 'localStorage';
+
+    const usernameMatches = window.location.href.match(/[?&]username=([^&]*)&?/);
+    const username = usernameMatches ? usernameMatches[1] : 'username';
 
     const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
     let simulateScratchDesktop;
@@ -53,6 +60,19 @@ export default appTarget => {
             // it's not JSON so just use the string
             // note that a typo like "falsy" will be treated as true
             simulateScratchDesktop = scratchDesktopMatches[1];
+        }
+    }
+
+    const compatibilityModeMatches = window.location.href.match(/[?&]compatibility_mode=([^&]+)/);
+    let compatibilityMode = true;
+    if (compatibilityModeMatches) {
+        try {
+            // parse 'true' into `true`, 'false' into `false`, etc.
+            compatibilityMode = JSON.parse(compatibilityModeMatches[1]);
+        } catch {
+            // it's not JSON so just use the string
+            // note that a typo like "falsy" will be treated as true
+            compatibilityMode = compatibilityModeMatches[1];
         }
     }
 
@@ -96,9 +116,13 @@ export default appTarget => {
                 canEditTitle
                 backpackVisible
                 backpackHost={backpackHost}
+                cloudHost={cloudHost}
+                compatibilityMode={compatibilityMode}
+                hasCloudPermission={true}
                 canSave={false}
                 onClickLogo={onClickLogo}
                 onVmInit={onVmInit}
+                username={username}
             />,
         appTarget);
 };

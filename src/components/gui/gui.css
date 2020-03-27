@@ -33,6 +33,15 @@
     overflow-y: hidden;
 }
 
+.flex-wrapper.wobbly {
+    /*
+        Prevent horizontal scrollbar when drag canvas goes over the right edge of the screen
+        This is particularly apparent in "wobbly mode" because the canvas has some "slack space"
+        This may be a permanent fix, but for now gate it behind "wobbly mode" in case there are issues with it
+    */
+    overflow-x: hidden;
+}
+
 .editor-wrapper {
     /*
         This is carefully balanced--  the minimum width at which the GUI will be displayed is 1024px.

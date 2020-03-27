@@ -9,6 +9,7 @@ import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter, BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
+import RubberCanvas from '../lib/rubber-canvas';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -38,9 +39,11 @@ class Stage extends React.Component {
             'updateRect',
             'questionListener',
             'setDragCanvas',
+            'setWobblyDragCanvas',
             'clearDragCanvas',
             'drawDragCanvas',
-            'positionDragCanvas'
+            'positionDragCanvas',
+            '_updateWobblyCanvas'
         ]);
         this.state = {
             mouseDownTimeoutId: null,
@@ -92,7 +95,8 @@ class Stage extends React.Component {
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
             this.props.isStarted !== nextProps.isStarted ||
-            this.props.mysteryMode !== nextProps.mysteryMode;
+            this.props.mysteryMode !== nextProps.mysteryMode ||
+            this.props.wobblyDragging !== nextProps.wobblyDragging;
     }
     componentDidUpdate (prevProps) {
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
@@ -207,7 +211,11 @@ class Stage extends React.Component {
             // Editor drag style only updates the drag canvas, does full update at the end of drag
             // Non-editor drag style just updates the sprite continuously.
             if (this.props.useEditorDragStyle) {
-                this.positionDragCanvas(mousePosition[0], mousePosition[1]);
+                if (this.props.wobblyDragging) {
+                    this.wobblyDragCanvas.updateMousePosition(mousePosition);
+                } else {
+                    this.positionDragCanvas(mousePosition[0], mousePosition[1]);
+                }
             } else {
                 const spritePosition = this.getScratchCoords(mousePosition[0], mousePosition[1]);
                 this.props.vm.postSpriteInfo({
@@ -342,13 +350,18 @@ class Stage extends React.Component {
         this.dragCanvas.style.display = 'block';
     }
     clearDragCanvas () {
-        this.dragCanvas.width = this.dragCanvas.height = 0;
-        this.dragCanvas.style.display = 'none';
+        const dragCanvas = this.props.wobblyDragging ? this.wobblyDragCanvas._canvas : this.dragCanvas;
+        dragCanvas.width = dragCanvas.height = 0;
+        dragCanvas.style.display = 'none';
     }
     positionDragCanvas (mouseX, mouseY) {
         // mouseX/Y are relative to stage top/left, and dragCanvas is already
         // positioned so that the pick location is at (0,0).
         this.dragCanvas.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    }
+    _updateWobblyCanvas (timestamp) {
+        this.wobblyDragCanvas.step(timestamp);
+        if (this.state.isDragging) window.requestAnimationFrame(this._updateWobblyCanvas);
     }
     onStartDrag (x, y) {
         if (this.state.dragId) return;
@@ -368,18 +381,30 @@ class Stage extends React.Component {
         const [scratchMouseX, scratchMouseY] = this.getScratchCoords(x, y);
         const offsetX = target.x - scratchMouseX;
         const offsetY = -(target.y + scratchMouseY);
+        
+        // Ensure drag canvas' bounds are tight by forcing renderer to generate tight bounds
+        this.renderer.getBounds(drawableId);
+        // Extract the drawable art
+        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
 
         this.props.vm.startDrag(targetId);
         this.setState({
             isDragging: true,
             dragId: targetId,
             dragOffset: [offsetX, offsetY]
+        }, () => {
+            if (this.props.wobblyDragging && this.props.useEditorDragStyle) this._updateWobblyCanvas(performance.now());
         });
+        
         if (this.props.useEditorDragStyle) {
-            // Extract the drawable art
-            const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
-            this.drawDragCanvas(drawableData, x, y);
-            this.positionDragCanvas(x, y);
+            if (this.props.wobblyDragging) {
+                this.wobblyDragCanvas.reinit(drawableData, x, y);
+            } else {
+                // Extract the drawable art
+                const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
+                this.drawDragCanvas(drawableData, x, y);
+                this.positionDragCanvas(x, y);
+            }
             this.props.vm.postSpriteInfo({visible: false});
             this.props.vm.renderer.draw();
         }
@@ -417,6 +442,13 @@ class Stage extends React.Component {
     setDragCanvas (canvas) {
         this.dragCanvas = canvas;
     }
+    setWobblyDragCanvas (canvas) {
+        if (this.wobblyDragCanvas) {
+            this.wobblyDragCanvas.destroy();
+            this.wobblyDragCanvas = null;
+        }
+        if (canvas) this.wobblyDragCanvas = new RubberCanvas(canvas);
+    }
     render () {
         const {
             vm, // eslint-disable-line no-unused-vars
@@ -431,6 +463,7 @@ class Stage extends React.Component {
                 question={this.state.question}
                 onDoubleClick={this.handleDoubleClick}
                 onQuestionAnswered={this.handleQuestionAnswered}
+                wobblyDragRef={this.setWobblyDragCanvas}
                 {...props}
             />
         );
@@ -447,7 +480,8 @@ Stage.propTypes = {
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
-    mysteryMode: PropTypes.bool
+    mysteryMode: PropTypes.bool,
+    wobblyDragging: PropTypes.bool
 };
 
 Stage.defaultProps = {
@@ -462,7 +496,8 @@ const mapStateToProps = state => ({
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly),
     mysteryMode: state.scratchGui.mysteryMode && !(
-        state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
+        state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly),
+    wobblyDragging: state.scratchGui.wobblyDragging
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -32,6 +32,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {toggleMysteryMode} from '../../reducers/mystery-mode';
+import {toggleWobblyDragging} from '../../reducers/wobbly-dragging';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -542,6 +543,21 @@ class MenuBar extends React.Component {
                                             />
                                         )}
                                     </MenuItem>
+                                    <MenuItem onClick={this.props.onClickToggleWobblyDragging}>
+                                        {this.props.wobblyDragging ? (
+                                            <FormattedMessage
+                                                defaultMessage="Turn off wobbly sprite dragging"
+                                                description="Menu bar item for turning off wobbly sprite dragging"
+                                                id="gui.menuBar.wobblyDraggingOff"
+                                            />
+                                        ) : (
+                                            <FormattedMessage
+                                                defaultMessage="Turn on wobbly sprite dragging"
+                                                description="Menu bar item for turning on wobbly sprite dragging"
+                                                id="gui.menuBar.wobblyDraggingOn"
+                                            />
+                                        )}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -819,6 +835,7 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onClickToggleMysteryMode: PropTypes.func,
+    onClickToggleWobblyDragging: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -841,7 +858,8 @@ MenuBar.propTypes = {
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    wobblyDragging: PropTypes.bool
 };
 
 MenuBar.defaultProps = {
@@ -869,7 +887,8 @@ const mapStateToProps = (state, ownProps) => {
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        wobblyDragging: state.scratchGui.wobblyDragging
     };
 };
 
@@ -893,6 +912,7 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onClickToggleMysteryMode: () => dispatch(toggleMysteryMode()),
+    onClickToggleWobblyDragging: () => dispatch(toggleWobblyDragging()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

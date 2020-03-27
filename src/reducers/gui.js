@@ -15,6 +15,7 @@ import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
 import mysteryModeReducer, {mysteryModeInitialState} from './mystery-mode';
+import wobblyDragReducer, {wobblyDragInitialState} from './wobbly-dragging';
 import projectChangedReducer, {projectChangedInitialState} from './project-changed';
 import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
@@ -61,6 +62,7 @@ const guiInitialState = {
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
+    wobblyDragging: wobblyDragInitialState,
     workspaceMetrics: workspaceMetricsInitialState
 };
 
@@ -161,6 +163,7 @@ const guiReducer = combineReducers({
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,
+    wobblyDragging: wobblyDragReducer,
     workspaceMetrics: workspaceMetricsReducer
 });
 

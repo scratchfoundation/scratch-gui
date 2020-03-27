@@ -116,6 +116,7 @@ const GUIComponent = props => {
         telemetryModalVisible,
         tipsLibraryVisible,
         vm,
+        wobblyDragging,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -231,7 +232,7 @@ const GUIComponent = props => {
                     onToggleLoginOpen={onToggleLoginOpen}
                 />
                 <Box className={styles.bodyWrapper}>
-                    <Box className={styles.flexWrapper}>
+                    <Box className={classNames(styles.flexWrapper, {[styles.wobbly]: wobblyDragging})}>
                         <Box className={styles.editorWrapper}>
                             <Tabs
                                 forceRenderTabPanel
@@ -413,7 +414,8 @@ GUIComponent.propTypes = {
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    wobblyDragging: PropTypes.bool
 };
 GUIComponent.defaultProps = {
     backpackHost: null,
@@ -438,7 +440,8 @@ GUIComponent.defaultProps = {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    wobblyDragging: state.scratchGui.wobblyDragging
 });
 
 export default injectIntl(connect(

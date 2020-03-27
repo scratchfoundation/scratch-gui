@@ -2,8 +2,10 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {injectIntl} from 'react-intl';
+import {connect} from 'react-redux';
 
 import LibraryItemComponent from '../components/library-item/library-item.jsx';
+import meower from '../lib/meow';
 
 class LibraryItem extends React.PureComponent {
     constructor (props) {
@@ -19,7 +21,8 @@ class LibraryItem extends React.PureComponent {
             'handleStop',
             'rotateIcon',
             'startRotatingIcons',
-            'stopRotatingIcons'
+            'stopRotatingIcons',
+            'getName'
         ]);
         this.state = {
             iconIndex: 0,
@@ -103,6 +106,10 @@ class LibraryItem extends React.PureComponent {
         }
         return iconMd5Prop;
     }
+    getName () {
+        if (!(typeof this.props.name === 'string' && this.props.meow)) return this.props.name;
+        return meower(Math.ceil(this.props.name.length / 5));
+    }
     render () {
         const iconMd5 = this.curIconMd5();
         const iconURL = iconMd5 ?
@@ -123,7 +130,7 @@ class LibraryItem extends React.PureComponent {
                 insetIconURL={this.props.insetIconURL}
                 internetConnectionRequired={this.props.internetConnectionRequired}
                 isPlaying={this.props.isPlaying}
-                name={this.props.name}
+                name={this.getName()}
                 showPlayButton={this.props.showPlayButton}
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
@@ -165,10 +172,15 @@ LibraryItem.propTypes = {
         PropTypes.string,
         PropTypes.node
     ]),
+    meow: PropTypes.bool,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     showPlayButton: PropTypes.bool
 };
 
-export default injectIntl(LibraryItem);
+const mapStateToProps = state => ({
+    meow: state.locales.meow
+});
+
+export default injectIntl(connect(mapStateToProps)(LibraryItem));

@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {selectLocale} from '../reducers/locales';
+import {selectLocale, meowLocale} from '../reducers/locales';
 import {closeLanguageMenu} from '../reducers/menus';
 
 import LanguageSelectorComponent from '../components/language-selector/language-selector.jsx';
@@ -17,7 +17,10 @@ class LanguageSelector extends React.Component {
     }
     handleChange (e) {
         const newLocale = e.target.value;
-        if (this.props.messagesByLocale[newLocale]) {
+        if (newLocale === 'meow') {
+            this.props.onMeow();
+            document.documentElement.lang = 'en';
+        } else if (this.props.messagesByLocale[newLocale]) {
             this.props.onChangeLanguage(newLocale);
             document.documentElement.lang = newLocale;
         }
@@ -45,7 +48,8 @@ LanguageSelector.propTypes = {
     currentLocale: PropTypes.string.isRequired,
     // Only checking key presence for messagesByLocale, no need to be more specific than object
     messagesByLocale: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    onChangeLanguage: PropTypes.func.isRequired
+    onChangeLanguage: PropTypes.func.isRequired,
+    onMeow: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -56,6 +60,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onChangeLanguage: locale => {
         dispatch(selectLocale(locale));
+        dispatch(closeLanguageMenu());
+    },
+    onMeow: () => {
+        dispatch(meowLocale());
         dispatch(closeLanguageMenu());
     }
 });

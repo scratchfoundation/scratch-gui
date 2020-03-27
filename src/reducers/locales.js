@@ -4,16 +4,28 @@ import {localeData} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 import {isRtl} from 'scratch-l10n';
 
+import meower from '../lib/meow';
+
 addLocaleData(localeData);
 
 const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';
 const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
+const MEOW = 'scratch-gui/locales/MEOW';
+
+const meowingMessages = Object.fromEntries(Object.keys(editorMessages.en).map(
+    key => ((typeof editorMessages.en[key] === 'string' &&
+            !editorMessages.en[key].includes('{') &&
+            !editorMessages.en[key].includes('%') &&
+            !editorMessages.en[key].includes('[')
+    ) ? [key, meower(Math.ceil(editorMessages.en[key].length) / 5)] : [key, editorMessages.en[key]])
+));
 
 const initialState = {
     isRtl: false,
     locale: 'en',
     messagesByLocale: editorMessages,
-    messages: editorMessages.en
+    messages: editorMessages.en,
+    meow: false
 };
 
 const reducer = function (state, action) {
@@ -24,14 +36,24 @@ const reducer = function (state, action) {
             isRtl: isRtl(action.locale),
             locale: action.locale,
             messagesByLocale: state.messagesByLocale,
-            messages: state.messagesByLocale[action.locale]
+            messages: state.messagesByLocale[action.locale],
+            meow: false
         });
     case UPDATE_LOCALES:
         return Object.assign({}, state, {
             isRtl: state.isRtl,
             locale: state.locale,
             messagesByLocale: action.messagesByLocale,
-            messages: action.messagesByLocale[state.locale]
+            messages: action.messagesByLocale[state.locale],
+            meow: false
+        });
+    case MEOW:
+        return Object.assign({}, state, {
+            isRtl: false,
+            locale: 'en',
+            messagesByLocale: editorMessages,
+            messages: meowingMessages,
+            meow: true
         });
     default:
         return state;
@@ -51,6 +73,13 @@ const setLocales = function (localesMessages) {
         messagesByLocale: localesMessages
     };
 };
+
+const meowLocale = function () {
+    return {
+        type: MEOW
+    };
+};
+
 const initLocale = function (currentState, locale) {
     if (currentState.messagesByLocale.hasOwnProperty(locale)) {
         return Object.assign(
@@ -60,7 +89,8 @@ const initLocale = function (currentState, locale) {
                 isRtl: isRtl(locale),
                 locale: locale,
                 messagesByLocale: currentState.messagesByLocale,
-                messages: currentState.messagesByLocale[locale]
+                messages: currentState.messagesByLocale[locale],
+                meow: false
             }
         );
     }
@@ -72,5 +102,6 @@ export {
     initialState as localesInitialState,
     initLocale,
     selectLocale,
-    setLocales
+    setLocales,
+    meowLocale
 };

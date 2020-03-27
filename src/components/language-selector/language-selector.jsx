@@ -26,6 +26,12 @@ const LanguageSelector = ({currentLocale, label, onChange}) => (
                     </option>
                 ))
         }
+        <option
+            key="meow"
+            value="meow"
+        >
+            {'Meow'}
+        </option>
     </select>
 );
 

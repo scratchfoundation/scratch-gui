@@ -3,6 +3,7 @@ import {addLocaleData} from 'react-intl';
 import {localeData} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 import {isRtl} from 'scratch-l10n';
+import fromEntries from 'object.fromentries';
 
 import meower from '../lib/meow';
 
@@ -12,7 +13,7 @@ const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';
 const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
 const MEOW = 'scratch-gui/locales/MEOW';
 
-const meowingMessages = Object.fromEntries(Object.keys(editorMessages.en).map(
+const meowingMessages = fromEntries(Object.keys(editorMessages.en).map(
     key => ((typeof editorMessages.en[key] === 'string' &&
             !editorMessages.en[key].includes('{') &&
             !editorMessages.en[key].includes('%') &&

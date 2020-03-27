@@ -3,29 +3,13 @@ import {addLocaleData} from 'react-intl';
 import {localeData} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 import {isRtl} from 'scratch-l10n';
-
-import supportedBrowser from '../lib/supported-browser';
-
-import meower from '../lib/meow';
+import meowingMessages from '../lib/meowing.json';
 
 addLocaleData(localeData);
 
 const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';
 const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
 const MEOW = 'scratch-gui/locales/MEOW';
-
-let meowingMessages = editorMessages.en;
-
-if (supportedBrowser()) {
-    const fromEntries = require('object.fromentries');
-    meowingMessages = fromEntries(Object.keys(editorMessages.en).map(
-        key => ((typeof editorMessages.en[key] === 'string' &&
-                !editorMessages.en[key].includes('{') &&
-                !editorMessages.en[key].includes('%') &&
-                !editorMessages.en[key].includes('[')
-        ) ? [key, meower(Math.ceil(editorMessages.en[key].length) / 5)] : [key, editorMessages.en[key]])
-    ));
-}
 
 const initialState = {
     isRtl: false,

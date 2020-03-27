@@ -29,6 +29,8 @@ const StageComponent = props => {
         onDeactivateColorPicker,
         onDoubleClick,
         onQuestionAnswered,
+        wobblyDragging,
+        wobblyDragRef,
         ...boxProps
     } = props;
 
@@ -118,12 +120,23 @@ const StageComponent = props => {
                         </div>
                     )}
                 </div>
-                <canvas
-                    className={styles.draggingSprite}
-                    height={0}
-                    ref={dragRef}
-                    width={0}
-                />
+                {
+                    // Give the canvases two different keys to prevent React from recycling the same canvas
+                    // across two different context types (2D and WebGL)
+                    wobblyDragging ? <canvas
+                        className={styles.draggingSprite}
+                        height={0}
+                        ref={wobblyDragRef}
+                        width={0}
+                        key="non-wobbly"
+                    /> : <canvas
+                        className={styles.draggingSprite}
+                        height={0}
+                        ref={dragRef}
+                        width={0}
+                        key="wobbly"
+                    />
+                }
             </Box>
             {isColorPicking ? (
                 <Box
@@ -147,7 +160,9 @@ StageComponent.propTypes = {
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    useEditorDragStyle: PropTypes.bool
+    useEditorDragStyle: PropTypes.bool,
+    wobblyDragging: PropTypes.bool,
+    wobblyDragRef: PropTypes.func
 };
 StageComponent.defaultProps = {
     dragRef: () => {}

@@ -170,6 +170,8 @@ class RubberCanvas {
 
         // This will be correct if https://github.com/LLK/scratch-render/pull/556 goes in in time
         gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+
+        gl.clearColor(0, 0, 0, 0);
     }
 
     reinit (drawableData, x, y) {
@@ -334,6 +336,7 @@ class RubberCanvas {
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         gl.bindTexture(gl.TEXTURE_2D, this._texture);
 
+        gl.clear(gl.COLOR_BUFFER_BIT);
         gl.viewport(0, 0, width, height);
         gl.drawElements(gl.TRIANGLES, this._vertexIndices.length, gl.UNSIGNED_SHORT, 0);
 

@@ -14,6 +14,7 @@ The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org
 | `project=[URL]` | Load an .sb3 file from a URL. |
 | `username=[STRING]` | Set a custom username (default "username") |
 | `cloud_host=[URL]` | Use a custom cloud host instead of the default behaviour, which is to save cloud variables to localStorage. Note that for some reason, Scratch doesn't want you to include the protocol (ie, omit `ws://` or `wss://`). |
+| `compatibility_mode=false` | Disables compatibility mode, which forces projects to run at 30 fps. |
 
 For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 

@@ -11,10 +11,11 @@ The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org
 | `extension=[URL]` or `url=[URL]` | Load an extension dynamically (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). |
 | `width=[NUMBER]` | Custom stage width (default 480). |
 | `height=[NUMBER]` | Custom stage width (default 360). |
-| `project=[URL]` | Load an .sb3 file from a URL. |
 | `username=[STRING]` | Set a custom username (default "username") |
 | `cloud_host=[URL]` | Use a custom cloud host instead of the default behaviour, which is to save cloud variables to localStorage. Note that for some reason, Scratch doesn't want you to include the protocol (ie, omit `ws://` or `wss://`). |
 | `compatibility_mode=false` | Disables compatibility mode, which forces projects to run at 30 fps. |
+
+In addition, you can finish the URL with a hash followed by a project ID to load a project from the Scratch website or a URI encoded URL to a project file.
 
 For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 

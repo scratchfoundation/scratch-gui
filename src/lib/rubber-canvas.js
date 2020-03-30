@@ -203,7 +203,7 @@ class RubberCanvas {
         }
 
         this._lastTimestamp = performance.now();
-        const {x: parentX, y: parentY} = this._canvas.parentElement.getBoundingClientRect();
+        const {left: parentX, top: parentY} = this._canvas.parentElement.getBoundingClientRect();
         this._canvas.style.left = `${-grabX + parentX}px`;
         this._canvas.style.top = `${-grabY + parentY}px`;
         this._canvas.style.display = 'block';

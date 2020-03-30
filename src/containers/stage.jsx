@@ -95,6 +95,10 @@ class Stage extends React.Component {
         }
         this.updateRect();
         this.renderer.resize(this.rect.width, this.rect.height);
+        if (this.props.isFullScreen !== prevProps.isFullScreen) {
+            // Re-draw the stage so that it fits the screen LLK/scratch-www#2721
+            this.props.vm.renderer.draw();
+        }
     }
     componentWillUnmount () {
         this.detachMouseEvents(this.canvas);

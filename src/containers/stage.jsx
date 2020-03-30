@@ -95,9 +95,7 @@ class Stage extends React.Component {
         }
         this.updateRect();
         this.renderer.resize(this.rect.width, this.rect.height);
-        if (this.props.isFullScreen !== prevProps.isFullScreen ||
-            this.props.stageSize !== prevProps.stageSize ||
-            this.props.isPlayerOnly !== prevProps.isPlayerOnly) {
+        if (this.props.isFullScreen !== prevProps.isFullScreen) {
             // Re-draw the stage so that it fits the screen LLK/scratch-www#2721
             this.renderer.draw();
         }
@@ -429,7 +427,6 @@ class Stage extends React.Component {
 Stage.propTypes = {
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
-    isPlayerOnly: PropTypes.bool,
     isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
@@ -446,7 +443,6 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     isFullScreen: state.scratchGui.mode.isFullScreen,
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.

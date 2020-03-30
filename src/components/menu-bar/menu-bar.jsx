@@ -79,6 +79,8 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
+const isEdge = bowser.msedge;
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -543,21 +545,23 @@ class MenuBar extends React.Component {
                                             />
                                         )}
                                     </MenuItem>
-                                    <MenuItem onClick={this.props.onClickToggleWobblyDragging}>
-                                        {this.props.wobblyDragging ? (
-                                            <FormattedMessage
-                                                defaultMessage="Turn off wobbly sprite dragging"
-                                                description="Menu bar item for turning off wobbly sprite dragging"
-                                                id="gui.menuBar.wobblyDraggingOff"
-                                            />
-                                        ) : (
-                                            <FormattedMessage
-                                                defaultMessage="Turn on wobbly sprite dragging"
-                                                description="Menu bar item for turning on wobbly sprite dragging"
-                                                id="gui.menuBar.wobblyDraggingOn"
-                                            />
-                                        )}
-                                    </MenuItem>
+                                    {isEdge ? null : (
+                                        <MenuItem onClick={this.props.onClickToggleWobblyDragging}>
+                                            {this.props.wobblyDragging ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off wobbly sprite dragging"
+                                                    description="Menu bar item for turning off wobbly sprite dragging"
+                                                    id="gui.menuBar.wobblyDraggingOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on wobbly sprite dragging"
+                                                    description="Menu bar item for turning on wobbly sprite dragging"
+                                                    id="gui.menuBar.wobblyDraggingOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

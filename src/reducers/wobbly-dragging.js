@@ -1,6 +1,6 @@
 const TOGGLE_WOBBLE = 'scratch-gui/mystery-mode/TOGGLE_WOBBLE';
 
-const initialState = true;
+const initialState = false;
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;

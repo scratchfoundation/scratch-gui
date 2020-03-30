@@ -15,6 +15,7 @@ import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
 import mysteryModeReducer, {mysteryModeInitialState} from './mystery-mode';
+import wobblyDragReducer, {wobblyDragInitialState} from './wobbly-dragging';
 import projectChangedReducer, {projectChangedInitialState} from './project-changed';
 import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
@@ -59,7 +60,8 @@ const guiInitialState = {
     timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
-    vmStatus: vmStatusInitialState
+    vmStatus: vmStatusInitialState,
+    wobblyDragging: wobblyDragInitialState
 };
 
 const initPlayer = function (currentState) {
@@ -158,7 +160,8 @@ const guiReducer = combineReducers({
     timeout: timeoutReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,
-    vmStatus: vmStatusReducer
+    vmStatus: vmStatusReducer,
+    wobblyDragging: wobblyDragReducer
 });
 
 export {

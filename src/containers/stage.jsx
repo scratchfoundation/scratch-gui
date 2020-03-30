@@ -11,6 +11,7 @@ import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
 import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 import RubberCanvas from '../lib/rubber-canvas';
+import {toggleWobblyDragging} from '../reducers/wobbly-dragging';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -438,7 +439,17 @@ class Stage extends React.Component {
             this.wobblyDragCanvas.destroy();
             this.wobblyDragCanvas = null;
         }
-        if (canvas) this.wobblyDragCanvas = new RubberCanvas(canvas);
+
+        // Where could these errors come from?
+        // Where would these errors go?
+        // When will this catch block run?
+        // Nobody knows.
+        try {
+            if (canvas) this.wobblyDragCanvas = new RubberCanvas(canvas);
+        } catch (err) {
+            this.props.onToggleWobblyDragging();
+        }
+
     }
     render () {
         const {
@@ -468,6 +479,7 @@ Stage.propTypes = {
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,
+    onToggleWobblyDragging: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
@@ -493,7 +505,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: () => dispatch(activateColorPicker()),
-    onDeactivateColorPicker: color => dispatch(deactivateColorPicker(color))
+    onDeactivateColorPicker: color => dispatch(deactivateColorPicker(color)),
+    onToggleWobblyDragging: () => dispatch(toggleWobblyDragging())
 });
 
 export default connect(

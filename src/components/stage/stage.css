@@ -108,7 +108,12 @@ to adjust for the border using a different method */
     left: 0;
     z-index: $z-index-dragging-sprite;
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
- }
+}
+
+.dragging-sprite.wobbly {
+    /* prevent overflow (when canvas crosses the right edge of the page) from causing a scrollbar to appear */
+    position: fixed;
+}
 
 .stage-bottom-wrapper {
     position: absolute;

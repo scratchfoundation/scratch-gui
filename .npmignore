@@ -5,8 +5,11 @@
 /node_modules
 npm-*
 
-# Double copies of all the static assets and tutorial gifs
-/src
+# TO REVERT: the scratch-desktop branch wants to build scratch-gui from source.
+# To support that we need to un-ignore the /src directory.
+# Once we merge the scratch-desktop branch into develop we should re-ignore /src here.
+# We can also do that by omitting or reverting this commit during the merge.
+# /src
 
 # Testing
 /.nyc_output

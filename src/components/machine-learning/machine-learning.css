@@ -1,0 +1,98 @@
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.machine-container {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: $ui-modal-overlay;
+	z-index: $z-index-modal;
+}
+
+.machine-boxer {
+	width: 1200px;
+	height: 90%;
+	position: relative;
+	border-radius: 6px;
+	background: $machine-modal-bg;
+	overflow-y: auto;
+}
+
+.machine-boxer-masker {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	background: rgba(100, 100, 100, .8);
+	z-index: 99;
+}
+
+.machine-header {
+	padding: 1.4286rem 0 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.machine-close {
+	position: absolute;
+	right: 3rem;
+}
+
+.machine-bg {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: $ui-modal-overlay;
+	z-index: 66;
+}
+
+.container {
+	width: 1200px;
+	height: 90%;
+	margin: 0 auto;
+	position: fixed;
+	top: 6%;
+	left: 0;
+	right: 0;
+	border-radius: 6px;
+	background: $machine-modal-bg;
+	overflow-y: auto;
+	z-index: 67;
+}
+
+.container-mini {
+	width: 300px;
+	height: auto;
+	border: 3px solid;
+}
+
+.header {
+	padding: 1.4286rem 0 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-mini {
+	padding-top: .8rem;
+}
+
+.close-small {
+	width: 1.2rem;
+	height: 1.2rem;
+}

@@ -1,3 +1,4 @@
+const fs = require('fs');
 const defaultsDeep = require('lodash.defaultsdeep');
 var path = require('path');
 var webpack = require('webpack');
@@ -20,7 +21,12 @@ const base = {
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         host: '0.0.0.0',
+        // host: 'localhost',
         port: process.env.PORT || 8601
+        // https: {
+        //     key: fs.readFileSync('./cert/ext.localhostserver.key'),
+        //     cert: fs.readFileSync('./cert/ext.localhostserver.crt')
+        // }
     },
     output: {
         library: 'GUI',

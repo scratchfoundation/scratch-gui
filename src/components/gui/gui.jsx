@@ -233,7 +233,7 @@ const GUIComponent = props => {
                         />
                     ) : ''
                 }
-                <Box className={styles.bodyWrapper}>
+                <Box className={classNames(styles.bodyWrapper, 'extern-scratch-bodyWrapper')}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
                             <Tabs

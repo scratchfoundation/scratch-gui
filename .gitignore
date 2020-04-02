@@ -17,3 +17,5 @@ npm-*
 # Generated translation files
 /translations
 /locale
+
+/cert

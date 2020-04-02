@@ -13,6 +13,7 @@ import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
 import extensionData from '../lib/libraries/extensions/index.jsx';
 import CustomProcedures from './custom-procedures.jsx';
+import MachineLearning from './machine-learning.jsx';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
@@ -24,7 +25,12 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
+import {closeMachine, closeMachineModal, activateMachine, activeMachineMini} from '../reducers/machine-learning';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
+
+import {MACHINE_VAR_NAME_PRE} from '../lib/constants';
+import {setVariableValue} from '../lib/variable-utils';
+import MAHCINE_GLOBAL from '../components/machine-learning/config';
 
 import {
     activateTab,
@@ -61,6 +67,7 @@ class Blocks extends React.Component {
             'handlePromptCallback',
             'handlePromptClose',
             'handleCustomProceduresClose',
+            'handleMachineClose',
             'onScriptGlowOn',
             'onScriptGlowOff',
             'onBlockGlowOn',
@@ -72,7 +79,8 @@ class Blocks extends React.Component {
             'onWorkspaceUpdate',
             'onWorkspaceMetricsChange',
             'setBlocks',
-            'setLocale'
+            'setLocale',
+            'setMachineValue'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
@@ -88,6 +96,7 @@ class Blocks extends React.Component {
     componentDidMount () {
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
+        this.ScratchBlocks.Machine.machineOpenModalCallback = this.props.onActiveMachine;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
         const workspaceConfig = defaultsDeep({},
@@ -99,6 +108,7 @@ class Blocks extends React.Component {
 
         // Register buttons under new callback keys for creating variables,
         // lists, and procedures from extensions.
+        // 用 callback keys 注册按钮，用于在拓展中创建 variables、lists 和 procedures。
 
         const toolboxWorkspace = this.workspace.getFlyout().getWorkspace();
 
@@ -107,7 +117,6 @@ class Blocks extends React.Component {
         const procButtonCallback = () => {
             this.ScratchBlocks.Procedures.createProcedureDefCallback_(this.workspace);
         };
-
         toolboxWorkspace.registerButtonCallback('MAKE_A_VARIABLE', varListButtonCallback(''));
         toolboxWorkspace.registerButtonCallback('MAKE_A_LIST', varListButtonCallback('list'));
         toolboxWorkspace.registerButtonCallback('MAKE_A_PROCEDURE', procButtonCallback);
@@ -135,6 +144,8 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+
+        window.SMACHINE = this.setMachineValue;
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -143,6 +154,9 @@ class Blocks extends React.Component {
             this._renderedToolboxXML !== nextProps.toolboxXML ||
             this.props.extensionLibraryVisible !== nextProps.extensionLibraryVisible ||
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
+            this.props.machineLearningVisible !== nextProps.machineLearningVisible ||
+            this.props.machineLearningHidden !== nextProps.machineLearningHidden ||
+            this.props.machineLearningMini !== nextProps.machineLearningMini ||
             this.props.locale !== nextProps.locale ||
             this.props.anyModalVisible !== nextProps.anyModalVisible ||
             this.props.stageSize !== nextProps.stageSize
@@ -191,6 +205,26 @@ class Blocks extends React.Component {
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
     }
+
+    setMachineValue (index, value) {
+        if (!String(value)) return;
+        const variableList = this.props.vm.runtime.getTargetForStage().variables;
+        if (index === 'result') {
+            for (const item in variableList) {
+                if (variableList[item].type === 'machine_var_type_res') {
+                    setVariableValue(this.props.vm, null, variableList[item].id, value);
+                }
+            }
+        } else {
+            for (const item in variableList) {
+                if (variableList[item].type === 'machine_var_type' && (variableList[item].name === `${MACHINE_VAR_NAME_PRE}${index + 1}`)) {
+                    setVariableValue(this.props.vm, null, variableList[item].id, value);
+                    break;
+                }
+            }
+        }
+    }
+
     requestToolboxUpdate () {
         clearTimeout(this.toolboxUpdateTimeout);
         this.toolboxUpdateTimeout = setTimeout(() => {
@@ -338,6 +372,14 @@ class Blocks extends React.Component {
             const stageCostumes = stage.getCostumes();
             const targetCostumes = target.getCostumes();
             const targetSounds = target.getSounds();
+            /**
+             *
+             * dynamicBlocksXML = [{
+             *     id: 'machineLeanring',
+             *     xml: '<category id="machineLeanring"></category>'
+             * }]
+             *
+             */
             const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
             return makeToolboxXML(target.isStage, target.id, dynamicBlocksXML,
                 targetCostumes[targetCostumes.length - 1].name,
@@ -350,6 +392,7 @@ class Blocks extends React.Component {
     }
     onWorkspaceUpdate (data) {
         // When we change sprites, update the toolbox to have the new sprite's blocks
+        // 当修改 blocks 时更新 toolbox
         const toolboxXML = this.getToolboxXML();
         if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
@@ -413,6 +456,10 @@ class Blocks extends React.Component {
                     // This is creating the block factory / constructor -- NOT a specific instance of the block.
                     // The factory should only know static info about the block: the category info and the opcode.
                     // Anything else will be picked up from the XML attached to the block instance.
+
+                    // 这是创建块的 factory/constructor 方法 -- 不是块的特定实例。
+                    // 这个工厂应该只知道块的静态信息：种类信息和 opcode。
+                    // 其它任何内容都将从附加到块实例的 XML 中获取。
                     const extendedOpcode = `${categoryInfo.id}_${blockInfo.info.opcode}`;
                     const blockDefinition =
                         defineDynamicBlock(this.ScratchBlocks, categoryInfo, blockInfo, extendedOpcode);
@@ -423,6 +470,7 @@ class Blocks extends React.Component {
 
         // scratch-blocks implements a menu or custom field as a special kind of block ("shadow" block)
         // these actually define blocks and MUST run regardless of the UI state
+        // scratch-blocks 将菜单或自定义字段实现做为一种特殊的块（ shadow 块），这些块实际上定义了块，并且无论 UI 的状态如何都必须运行。
         defineBlocks(
             Object.getOwnPropertyNames(categoryInfo.customFieldTypes)
                 .map(fieldTypeName => categoryInfo.customFieldTypes[fieldTypeName].scratchBlocksDefinition));
@@ -430,6 +478,7 @@ class Blocks extends React.Component {
         defineBlocks(categoryInfo.blocks);
 
         // Update the toolbox with new blocks if possible
+        // 如果可能，用新生成的块更新 toolbox。
         const toolboxXML = this.getToolboxXML();
         if (toolboxXML) {
             this.props.updateToolboxState(toolboxXML);
@@ -479,6 +528,8 @@ class Blocks extends React.Component {
      * Pass along information about proposed name and variable options (scope and isCloud)
      * and additional potentially conflicting variable names from the VM
      * to the variable validation prompt callback used in scratch-blocks.
+     *
+     * 将变量名、变量选项（scope 和 isCloud）和其它可能冲突的变量名的信息从 VM 传递到用于 scratch-blocks 的变量验证 prompt 回调
      */
     handlePromptCallback (input, variableOptions) {
         this.state.prompt.callback(
@@ -496,6 +547,30 @@ class Blocks extends React.Component {
         ws.refreshToolboxSelection_();
         ws.toolbox_.scrollToCategoryById('myBlocks');
     }
+    handleMachineClose (data) {
+        // 点击生成模型 btn，并且有数据
+        if (data && data.classes) {
+            this.ScratchBlocks.Machine.createVariable(this.workspace, window.DMACHINE);
+            this.props.onActiveMachineMini();
+        } else if (MAHCINE_GLOBAL.webcamClassifier && MAHCINE_GLOBAL.webcamClassifier.images) {
+            // 点击 btn(关闭)
+            const res = Object.keys(MAHCINE_GLOBAL.webcamClassifier.images).find(item =>
+                !MAHCINE_GLOBAL.webcamClassifier.images[item].hasimages);
+            if (res) { // 没有做任何操作
+                this.props.onRequestCloseMachine();
+                if (MAHCINE_GLOBAL.webcamClassifier.stream.active) {
+                    MAHCINE_GLOBAL.webcamClassifier.stream.getTracks().forEach(item => item.stop());
+                }
+            } else if (this.props.machineLearningMini) { // 隐藏窗口
+                this.props.onRequestCloseMachineModel();
+            } else { // 关闭
+                this.props.onActiveMachineMini();
+            }
+        }
+        const ws = this.workspace;
+        ws.refreshToolboxSelection_();
+        ws.toolbox_.scrollToCategoryById('MACHINE');
+    }
     handleDrop (dragInfo) {
         fetch(dragInfo.payload.bodyUrl)
             .then(response => response.json())
@@ -512,6 +587,9 @@ class Blocks extends React.Component {
             canUseCloud,
             customProceduresVisible,
             extensionLibraryVisible,
+            machineLearningVisible,
+            machineLearningHidden,
+            machineLearningMini,
             options,
             stageSize,
             vm,
@@ -522,8 +600,12 @@ class Blocks extends React.Component {
             onOpenSoundRecorder,
             updateToolboxState,
             onActivateCustomProcedures,
+            onActiveMachine,
+            onActiveMachineMini,
             onRequestCloseExtensionLibrary,
             onRequestCloseCustomProcedures,
+            onRequestCloseMachine,
+            onRequestCloseMachineModel,
             toolboxXML,
             ...props
         } = this.props;
@@ -548,6 +630,7 @@ class Blocks extends React.Component {
                         onOk={this.handlePromptCallback}
                     />
                 ) : null}
+                {/* start: 拓展库 */}
                 {extensionLibraryVisible ? (
                     <ExtensionLibrary
                         vm={vm}
@@ -555,6 +638,8 @@ class Blocks extends React.Component {
                         onRequestClose={onRequestCloseExtensionLibrary}
                     />
                 ) : null}
+                {/* end: 拓展库 */}
+                {/* start: 自制积木 */}
                 {customProceduresVisible ? (
                     <CustomProcedures
                         options={{
@@ -563,6 +648,20 @@ class Blocks extends React.Component {
                         onRequestClose={this.handleCustomProceduresClose}
                     />
                 ) : null}
+                {/* end: 自制积木 */}
+                {/* start: 机器学习 */}
+                {machineLearningVisible ? (
+                    <div>
+                        <MachineLearning
+                            isOpen
+                            isHidden={machineLearningHidden}
+                            isMini={machineLearningMini}
+                            onRequestClose={this.handleMachineClose}
+                        />
+                    </div>
+                ) : null}
+
+                {/* end: 机器学习 */}
             </React.Fragment>
         );
     }
@@ -573,16 +672,23 @@ Blocks.propTypes = {
     canUseCloud: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
     extensionLibraryVisible: PropTypes.bool,
+    machineLearningVisible: PropTypes.bool,
+    machineLearningHidden: PropTypes.bool,
+    machineLearningMini: PropTypes.bool,
     isRtl: PropTypes.bool,
     isVisible: PropTypes.bool,
     locale: PropTypes.string.isRequired,
     messages: PropTypes.objectOf(PropTypes.string),
     onActivateColorPicker: PropTypes.func,
     onActivateCustomProcedures: PropTypes.func,
+    onActiveMachine: PropTypes.func,
+    onActiveMachineMini: PropTypes.func,
     onOpenConnectionModal: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
+    onRequestCloseMachine: PropTypes.func,
+    onRequestCloseMachineModel: PropTypes.func,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({
@@ -654,12 +760,17 @@ const mapStateToProps = state => ({
     locale: state.locales.locale,
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
-    customProceduresVisible: state.scratchGui.customProcedures.active
+    customProceduresVisible: state.scratchGui.customProcedures.active,
+    machineLearningVisible: state.scratchGui.machineLearning.active,
+    machineLearningHidden: state.scratchGui.machineLearning.hidden,
+    machineLearningMini: state.scratchGui.machineLearning.isMini
 });
 
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
+    onActiveMachine: () => dispatch(activateMachine()),
+    onActiveMachineMini: () => dispatch(activeMachineMini()),
     onOpenConnectionModal: id => {
         dispatch(setConnectionModalExtensionId(id));
         dispatch(openConnectionModal());
@@ -673,6 +784,12 @@ const mapDispatchToProps = dispatch => ({
     },
     onRequestCloseCustomProcedures: data => {
         dispatch(deactivateCustomProcedures(data));
+    },
+    onRequestCloseMachine: () => {
+        dispatch(closeMachine());
+    },
+    onRequestCloseMachineModel: () => {
+        dispatch(closeMachineModal());
     },
     updateToolboxState: toolboxXML => {
         dispatch(updateToolbox(toolboxXML));

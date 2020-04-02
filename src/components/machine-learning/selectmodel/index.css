@@ -1,0 +1,36 @@
+#mask{
+    display:block;
+    background:rgba(0,0,0,0.3);
+    width:calc(100vw);
+    height:calc(100vh);
+    position:fixed;
+    z-index:5
+}
+#newmodel_modal{
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background:white;
+    width:400px;
+    height:250px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-200px;
+    margin-top:-125px;
+    z-index:6
+}
+#newmodel_modal #close_newmodel{
+    position:absolute;
+    left:350px;
+    top:10px;
+    font-size:20px;
+    font-weight: bold;
+    width:20px;
+    height:20px;
+    /* background:skyblue; */
+    cursor:pointer;
+    text-align: center;
+    line-height: 20px;
+}

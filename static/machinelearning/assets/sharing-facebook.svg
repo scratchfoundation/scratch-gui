@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="32px" viewBox="0 0 20 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Fill 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="-20 37.4008 82.288 37.4008 82.288 -5.0002 -20 -5.0002"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Fill-1" fill="#0066A8" points="-13.909 31.3098 22.401 31.3098 22.401 -5.0002 -13.909 -5.0002"></polygon>
+        <polygon id="Fill-3" fill="#004A75" points="-13.9088 31.3096 -19.9998 37.4006 16.3082 37.4006 22.4012 31.3096"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Clip-7"></g>
+        <path d="M5.3813,31.3093 L5.3813,17.6933 L0.8423,17.6933 L0.8423,12.0203 L5.3813,12.0203 L5.3813,7.4813 C5.3813,2.7913 8.3503,0.4843 12.5333,0.4843 C14.5373,0.4843 16.2603,0.6333 16.7623,0.7003 L16.7623,5.6013 L13.8603,5.6023 C11.5843,5.6023 11.0543,6.6833 11.0543,8.2703 L11.0543,12.0203 L16.7283,12.0203 L15.5933,17.6933 L11.0543,17.6933 L11.1443,31.3093 L5.3813,31.3093 Z" id="Fill-4" fill="#FFFFFF" mask="url(#mask-2)"></path>
+    </g>
+</svg>

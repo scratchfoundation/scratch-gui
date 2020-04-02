@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="26px" viewBox="0 0 27 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>youtube-search-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="youtube-search-icon" fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M18.92,16.77 L17.78,16.77 L17.38,16.38 C20.6472823,12.5751883 20.3222238,6.86814371 16.6440492,3.45892724 C12.9658745,0.0497107644 7.25060818,0.158115574 3.70436188,3.70436188 C0.158115574,7.25060818 0.0497107644,12.9658745 3.45892724,16.6440492 C6.86814371,20.3222238 12.5751883,20.6472823 16.38,17.38 L16.77,17.78 L16.77,18.91 L23.94,26.06 L26.08,23.92 L18.92,16.77 Z M10.32,16.77 C6.75776336,16.77 3.87,13.8822366 3.87,10.32 C3.87,6.75776336 6.75776336,3.87 10.32,3.87 C13.8822366,3.87 16.77,6.75776336 16.77,10.32 C16.7726596,12.0314603 16.0939621,13.6735888 14.8837754,14.8837754 C13.6735888,16.0939621 12.0314603,16.7726596 10.32,16.77 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

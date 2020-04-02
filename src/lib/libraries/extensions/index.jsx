@@ -318,4 +318,34 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
     }
+    // {
+    //     name: 'Hello World',
+    //     extensionId: 'helloworld',
+    //     collaborator: 'jxn',
+    //     iconURL: text2speechIconURL,
+    //     insetIconURL: text2speechInsetIconURL,
+    //     description: 'My name is Hello World',
+    //     featured: true,
+    //     internetConnectionRequired: false
+    // },
+    // {
+    //     name: '机器学习-demo',
+    //     extensionId: 'cxknn',
+    //     collaborator: 'jxn',
+    //     iconURL: text2speechIconURL,
+    //     insetIconURL: text2speechInsetIconURL,
+    //     description: 'My name is machine study',
+    //     featured: true,
+    //     internetConnectionRequired: false
+    // },
+    // {
+    //     name: '机器学习',
+    //     extensionId: 'MACHINE',
+    //     collaborator: 'jxn',
+    //     iconURL: text2speechIconURL,
+    //     insetIconURL: text2speechInsetIconURL,
+    //     description: 'Its about machine learning',
+    //     featured: true,
+    //     internetConnectionRequired: false
+    // }
 ];

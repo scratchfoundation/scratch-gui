@@ -710,6 +710,18 @@ const myBlocks = function () {
     `;
 };
 
+const MACHINE = function () {
+    return `
+        <category
+            name="机器学习"
+            id="MACHINE"
+            colour="#ff0000"
+            secondaryColour="#ffcccc"
+            custom="MACHINE">
+        </category>
+    `;
+};
+
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -738,6 +750,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         const index = categoriesXML.findIndex(categoryInfo => categoryInfo.id === categoryId);
         if (index >= 0) {
             // remove the category from categoriesXML and return its XML
+            // 删除 categoriesXML 中的 category，并返回它的 XML
             const [categoryInfo] = categoriesXML.splice(index, 1);
             return categoryInfo.xml;
         }
@@ -752,6 +765,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
+    const machineXML = moveCategory('MACHINE') || MACHINE(isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -763,7 +777,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        myBlocksXML
+        myBlocksXML, gap,
+        machineXML
     ];
 
     for (const extensionCategory of categoriesXML) {

@@ -144,6 +144,7 @@ class CloudProvider {
         } else if (msg.method === 'create' || msg.method === 'delete' || msg.method === 'rename') {
             // Save data for sending when connection is open, iff the data
             // is a create, rename, or  delete
+            // 当数据是 create、rename、delete 时保存数据，在链接建立时发送数据。
             this.queuedData.push(dataToWrite);
         }
 

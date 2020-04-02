@@ -1,0 +1,25 @@
+.section {
+    max-width: 510px;
+    margin: 0 auto;
+    width: 100%;
+}
+.section--disabled{
+    pointer-events: none
+}
+.input {
+    max-width: 300px;
+}
+.section--input {
+    position: relative;
+    width: 300px
+}
+.section__title{
+    font-size: 14px;
+    text-transform: uppercase;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    top: -35px;
+    width: 100%;
+    margin: 0 auto;
+}

@@ -44,8 +44,10 @@ class CustomProcedures extends React.Component {
         ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
 
         // Create the procedure declaration block for editing the mutation.
+        // 创建用于编辑 mutation 的 procedure 声明块。
         this.mutationRoot = this.workspace.newBlock('procedures_declaration');
         // Make the declaration immovable, undeletable and have no context menu
+        // 使声明不可移动、不可删除且没有上下文菜单。
         this.mutationRoot.setMovable(false);
         this.mutationRoot.setDeletable(false);
         this.mutationRoot.contextMenu = false;
@@ -67,6 +69,10 @@ class CustomProcedures extends React.Component {
                 // Calculate a new left postion based on new width
                 // Convert current x position into LTR (mirror) x position (uses original offset)
                 // Use the difference between ltrX and mirrorX as the amount to move
+
+                // 这是暂时的，直到我们能够弄清楚 RTL 工作区中的宽度块的位置发生了怎样的改变。
+                // 工作空间的坐标原点始终是左上方，随着 x 的向右递增，要计算偏移量并将其保存，其他所有的移动都必须要考虑原始偏移。
+                // 将当前 x 位置（使用原始偏移量）转换为 LTR（镜像）的 x 位置，使用 ltrX 和 mirrorX 的差值做为移动量。
                 const ltrX = ((metrics.viewWidth / 2) - (this.mutationRoot.width / 2) + 25);
                 const mirrorX = x - ((x - this.state.rtlOffset) * 2);
                 if (mirrorX === ltrX) {
@@ -105,6 +111,7 @@ class CustomProcedures extends React.Component {
         this.mutationRoot.render();
         this.setState({warp: this.mutationRoot.getWarp()});
         // Allow the initial events to run to position this block, then focus.
+        // 允许初始化事件运行以用来定位这个块，然后聚焦块。
         setTimeout(() => {
             this.mutationRoot.focusLastEditor_();
         });

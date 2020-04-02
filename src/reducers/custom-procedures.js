@@ -20,6 +20,7 @@ const reducer = function (state, action) {
     case DEACTIVATE_CUSTOM_PROCEDURES:
         // Can be called without a mutator to deactivate without new procedure
         // i.e. when clicking on the modal background
+        // 无需 mutator 即可调用，无需新的 procedure 即可停用
         if (action.mutator) {
             state.callback(action.mutator);
         }
@@ -50,6 +51,7 @@ const activateCustomProcedures = (mutator, callback) => ({
 
 /**
  * Action creator to close the custom procedures modal.
+ * 关闭自制积木 modal
  * @param {?Element} mutator The new mutator, or null if the callback should not be called.
  * @returns {object} An action object with type ACTIVATE_CUSTOM_PROCEDURES.
  */

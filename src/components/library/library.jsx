@@ -60,8 +60,15 @@ const getItemImageSource = function (item) {
         };
     }
 
-    // TODO: adjust libraries to be more storage-friendly; don't use split() here.
-    const md5ext = item.md5 || item.baseLayerMD5;
+    if (item.assetId && item.dataFormat) {
+        return {
+            assetId: item.assetId,
+            assetType: getAssetTypeForFileExtension(item.dataFormat)
+        };
+    }
+
+    // legacy
+    const md5ext = item.md5ext || item.md5 || item.baseLayerMD5;
     if (md5ext) {
         const [assetId, fileExtension] = md5ext.split('.');
         return {

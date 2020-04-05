@@ -30,22 +30,19 @@ const PenConverter = {
                 }
                 break;
             case 'pen_color=':
-                if (args.length === 1 && this._isColorOrBlock(args[0])) {
-                    block = this._createBlock('pen_setPenColorToColor', 'statement');
-                    this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#43066f');
-                }
-                break;
-            case 'color=':
-            case 'saturation=':
-            case 'brightness=':
-            case 'transparency=':
+            case 'pen_saturation=':
+            case 'pen_brightness=':
+            case 'pen_transparency=':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('pen_setPenColorParamTo', 'statement');
                     this._addFieldInput(
                         block, 'COLOR_PARAM', 'pen_menu_colorParam', 'colorParam',
-                        name.replace('=', ''), 'color'
+                        name.replace('pen_', '').replace('=', ''), 'color'
                     );
                     this._addNumberInput(block, 'VALUE', 'math_number', args[0], 50);
+                } else if (name == 'pen_color=' && args.length === 1 && this._isColorOrBlock(args[0])) {
+                    block = this._createBlock('pen_setPenColorToColor', 'statement');
+                    this._addFieldInput(block, 'COLOR', 'colour_picker', 'COLOUR', args[0], '#43066f');
                 }
                 break;
             case 'pen_size=':
@@ -67,16 +64,22 @@ const PenConverter = {
             switch (code) {
             case 'self.pen_size':
                 block = this._changeBlock(lh, 'pen_changePenSizeBy', 'statement');
+                delete this._context.blocks[block.inputs.STATEMENT.block];
+                delete block.inputs.STATEMENT;
+
                 this._addNumberInput(block, 'SIZE', 'math_number', rh, 1);
                 break;
-            case 'self.color':
-            case 'self.saturation':
-            case 'self.brightness':
-            case 'self.transparency':
+            case 'self.pen_color':
+            case 'self.pen_saturation':
+            case 'self.pen_brightness':
+            case 'self.pen_transparency':
                 block = this._changeBlock(lh, 'pen_changePenColorParamBy', 'statement');
+                delete this._context.blocks[block.inputs.STATEMENT.block];
+                delete block.inputs.STATEMENT;
+
                 this._addFieldInput(
                     block, 'COLOR_PARAM', 'pen_menu_colorParam', 'colorParam',
-                    code.replace('self.', ''), 'color'
+                    code.replace('self.pen_', ''), 'color'
                 );
                 this._addNumberInput(block, 'VALUE', 'math_number', rh, 10);
                 break;

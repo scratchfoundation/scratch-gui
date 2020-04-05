@@ -28,13 +28,13 @@ export default function (Generator) {
     Generator.pen_changePenColorParamBy = function (block) {
         const colorParam = Generator.valueToCode(block, 'COLOR_PARAM', Generator.ORDER_NONE) || null;
         const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || 0;
-        return `self.${colorParam} += ${value}\n`;
+        return `self.pen_${colorParam} += ${value}\n`;
     };
 
     Generator.pen_setPenColorParamTo = function (block) {
         const colorParam = Generator.valueToCode(block, 'COLOR_PARAM', Generator.ORDER_NONE) || null;
         const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || 0;
-        return `self.${colorParam} = ${value}\n`;
+        return `self.pen_${colorParam} = ${value}\n`;
     };
 
     Generator.pen_menu_colorParam = function (block) {

@@ -46,6 +46,9 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+import meshIconURL from './mesh/mesh.png';
+import meshInsetIconURL from './mesh/mesh-small.png';
+
 export default [
     {
         name: (
@@ -317,5 +320,25 @@ export default [
             />
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Mesh"
+                description="Name for the 'Mesh' extension"
+                id="gui.smalruby3.extension.mesh.name"
+            />
+        ),
+        extensionId: 'mesh',
+        iconURL: meshIconURL,
+        insetIconURL: meshInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Allowing users to interact over a computer network."
+                description="Description for the 'Mesh' extension"
+                id="gui.smalruby3.extension.mesh.description"
+            />
+        ),
+        featured: true
     }
 ];

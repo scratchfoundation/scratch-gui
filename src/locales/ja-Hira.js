@@ -21,5 +21,5 @@ export default {
     'gui.smalruby3.extension.mesh.name': 'メッシュ',
     'gui.smalruby3.extension.mesh.description': 'ネットワークじょうでユーザーかんのやりとりをおこなう。',
     'mesh.categoryName': 'メッシュ',
-    'mesh.sensorValue': 'センサーのあたい'
+    'mesh.sensorValue': '[NAME] センサーのあたい'
 };

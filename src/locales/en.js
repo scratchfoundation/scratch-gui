@@ -19,5 +19,5 @@ export default {
     'gui.smalruby3.extension.mesh.name': 'Mesh',
     'gui.smalruby3.extension.mesh.description': 'Allowing users to interact over a computer network.',
     'mesh.categoryName': 'Mesh',
-    'mesh.sensorValue': 'sensor value'
+    'mesh.sensorValue': '[NAME] sensor value'
 };

@@ -38,7 +38,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "arraybuffer-loader": "^1.0.6",
-    "autoprefixer": "^9.0.1",
+    "autoprefixer": "^9.7.6",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",

@@ -44,6 +44,7 @@ const ConnectionModalComponent = props => (
 );
 
 ConnectionModalComponent.propTypes = {
+    connectedMessage: PropTypes.string,
     connectingMessage: PropTypes.node.isRequired,
     connectionSmallIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,

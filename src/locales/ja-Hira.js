@@ -24,5 +24,7 @@ export default {
     'mesh.sensorValue': '[NAME] センサーのあたい',
     'mesh.hostPeripheralName': 'メッシュのホストになる',
     'mesh.clientPeripheralName': 'メッシュにさんかする',
+    'mesh.registeredHost': 'ホストとしてメッシュにとうろくしました [[ID]]',
+    'mesh.joinedMesh': 'メッシュにさんかしました [[ID]]',
     'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークにせつぞくしています'
 };

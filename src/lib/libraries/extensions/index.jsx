@@ -354,6 +354,7 @@ export default [
                 description="Message to help people connect to Mesh network."
                 id="gui.smalruby3.extension.mesh.connectingMessage"
             />
-        )
+        ),
+        helpLink: 'https://github.com/smalruby/smalruby3-gui/wiki/Mesh'
     }
 ];

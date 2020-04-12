@@ -24,5 +24,7 @@ export default {
     'mesh.sensorValue': '[NAME] センサーの値',
     'mesh.hostPeripheralName': 'メッシュのホストになる',
     'mesh.clientPeripheralName': 'メッシュに参加する',
+    'mesh.registeredHost': 'ホストとしてメッシュに登録しました [[ID]]',
+    'mesh.joinedMesh': 'メッシュに参加しました [[ID]]',
     'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークに接続しています'
 };

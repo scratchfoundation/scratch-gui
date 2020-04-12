@@ -22,5 +22,7 @@ export default {
     'mesh.sensorValue': '[NAME] sensor value',
     'mesh.hostPeripheralName': 'Mesh Host',
     'mesh.clientPeripheralName': 'Join Host',
+    'mesh.registeredHost': 'Registered Host Mesh [[ID]]',
+    'mesh.joinedMesh': 'Joined Mesh [[ID]]',
     'gui.smalruby3.extension.mesh.connectingMessage': 'Connecting'
 };

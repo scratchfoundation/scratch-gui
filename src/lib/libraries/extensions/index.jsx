@@ -48,6 +48,8 @@ import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 import meshIconURL from './mesh/mesh.png';
 import meshInsetIconURL from './mesh/mesh-small.png';
+import meshConnectionIconURL from './mesh/mesh-illustration.png';
+import meshConnectionSmallIconURL from './mesh/mesh-small.png';
 
 export default [
     {
@@ -339,6 +341,19 @@ export default [
                 id="gui.smalruby3.extension.mesh.description"
             />
         ),
-        featured: true
+        featured: true,
+        bluetoothRequired: false,
+        internetConnectionRequired: true,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: meshConnectionIconURL,
+        connectionSmallIconURL: meshConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to Mesh network."
+                id="gui.smalruby3.extension.mesh.connectingMessage"
+            />
+        )
     }
 ];

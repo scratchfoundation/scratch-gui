@@ -21,5 +21,8 @@ export default {
     'gui.smalruby3.extension.mesh.name': 'メッシュ',
     'gui.smalruby3.extension.mesh.description': 'ネットワーク上でユーザー間のやりとりを行う。',
     'mesh.categoryName': 'メッシュ',
-    'mesh.sensorValue': '[NAME] センサーの値'
+    'mesh.sensorValue': '[NAME] センサーの値',
+    'mesh.hostPeripheralName': 'メッシュのホストになる',
+    'mesh.clientPeripheralName': 'メッシュに参加する',
+    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークに接続しています'
 };

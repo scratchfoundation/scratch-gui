@@ -48,6 +48,7 @@ ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
     connectionSmallIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,
+    extensionId: PropTypes.string.isRequired,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,

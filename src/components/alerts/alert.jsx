@@ -58,7 +58,7 @@ const AlertComponent = ({
                     id="gui.alerts.lostPeripheralConnection"
                     values={{
                         extensionName: (
-                            `${extensionName}`
+                            extensionName
                         )
                     }}
                 />
@@ -120,7 +120,7 @@ const AlertComponent = ({
 AlertComponent.propTypes = {
     closeButton: PropTypes.bool,
     content: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-    extensionName: PropTypes.string,
+    extensionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     level: PropTypes.string,

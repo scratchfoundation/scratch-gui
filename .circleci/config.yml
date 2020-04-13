@@ -109,7 +109,6 @@ jobs:
           path: dist
   integration:
     <<: *defaults
-    parallelism: 2
     environment:
       JEST_JUNIT_OUTPUT_NAME: results.txt
     steps:
@@ -121,9 +120,7 @@ jobs:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_DIR: test-results/integration
-          command: |
-            export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
-            $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit"
+          command: $(npm bin)/jest test/integration/*.test.js --reporters="default" --reporters="jest-junit"
       - store_test_results:
           path: test-results
 

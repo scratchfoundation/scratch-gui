@@ -64,9 +64,9 @@ const LoginDropdown = ({
                 styles.login
             )}
         >
-            {renderLogin({
+            {renderLogin ? renderLogin({
                 onClose: onClose
-            })}
+            }) : ''}
         </div>
     </MenuBarMenu>
 );

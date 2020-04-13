@@ -19,6 +19,7 @@ import {
     activateTab,
     BLOCKS_TAB_INDEX
 } from '../reducers/editor-tab';
+import {updateSession, deleteSession} from '../reducers/session';
 
 import log from './log';
 import storage from './storage';
@@ -54,6 +55,20 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             ) {
                 this.props.setProjectId(props.projectId.toString());
             }
+        }
+        componentDidMount () {
+            const sa = window.scratchApi ? window.scratchApi : {};
+            sa.Login = t => {
+                sa.session = t;
+                this.props.onSessionUpdate(t);
+            };
+            sa.Logout = () => {
+                sa.session = null;
+                this.props.onSessionDelete();
+            };
+            // eslint-disable-next-line no-unused-expressions
+            window.parent && window.parent.scratchApi &&
+            window.parent.scratchApi.OnLoad && window.parent.scratchApi.OnLoad(sa);
         }
         componentDidUpdate (prevProps) {
             if (prevProps.projectHost !== this.props.projectHost) {
@@ -100,6 +115,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 onError: onErrorProp,
                 onFetchedProjectData: onFetchedProjectDataProp,
                 onProjectUnchanged,
+                onSessionUpdate,
+                onSessionDelete,
                 projectHost,
                 projectId,
                 reduxProjectId,
@@ -135,7 +152,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        setProjectId: PropTypes.func
+        setProjectId: PropTypes.func,
+        onSessionDelete: PropTypes.func,
+        onSessionUpdate: PropTypes.func
     };
     ProjectFetcherComponent.defaultProps = {
         assetHost: ASSET_HOST,
@@ -157,7 +176,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
         setProjectId: projectId => dispatch(setProjectId(projectId)),
-        onProjectUnchanged: () => dispatch(setProjectUnchanged())
+        onProjectUnchanged: () => dispatch(setProjectUnchanged()),
+        onSessionUpdate: t => dispatch(updateSession(t)),
+        onSessionDelete: () => dispatch(deleteSession())
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(

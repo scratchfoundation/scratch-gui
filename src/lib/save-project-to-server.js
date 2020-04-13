@@ -32,6 +32,7 @@ export default function (projectId, vmState, params) {
     if (params.hasOwnProperty('isCopy')) queryParams.is_copy = params.isCopy;
     if (params.hasOwnProperty('isRemix')) queryParams.is_remix = params.isRemix;
     if (params.hasOwnProperty('title')) queryParams.title = params.title;
+    if (window.scratchApi && window.scratchApi.session) queryParams.userid = window.scratchApi.session.user.userid;
     let qs = queryString.stringify(queryParams);
     if (qs) qs = `?${qs}`;
     if (creatingProject) {

@@ -70,7 +70,8 @@ import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 
-import scratchLogo from './scratch-logo.svg';
+// import scratchLogo from './scratch-logo.svg';
+import scratchLogo from './logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
@@ -112,7 +113,6 @@ const MenuBarItemTooltip = ({
         </ComingSoonTooltip>
     );
 };
-
 
 MenuBarItemTooltip.propTypes = {
     children: PropTypes.node,
@@ -160,9 +160,36 @@ class MenuBar extends React.Component {
     }
     componentDidMount () {
         document.addEventListener('keydown', this.handleKeyPress);
+        this.initBridge();
     }
     componentWillUnmount () {
         document.removeEventListener('keydown', this.handleKeyPress);
+    }
+    initBridge () {
+        window.scratchApi = window.scratchApi ? window.scratchApi : {};
+        window.scratchApi.Create = () => (this.handleClickNew());
+        window.scratchApi.Save = () => {
+            this.handleClickSave();
+        };
+        window.scratchApi.Load = id => {
+            try {
+                window.location.href = window.location.href.split('#')[0].concat('#', id);
+            } catch (e) {
+                window.location.href = '/';
+            }
+        };
+        window.scratchApi.Hide = () => {
+            document.getElementsByClassName('extern-scratch-menuBar')[0].style.display = 'none';
+            document.getElementsByClassName('extern-scratch-bodyWrapper')[0].style.height = '100%';
+        };
+        window.scratchApi.Show = () => {
+            document.getElementsByClassName('extern-scratch-menuBar')[0].style.display = '';
+            document.getElementsByClassName('extern-scratch-bodyWrapper')[0].style.height = '';
+        };
+        window.scratchApi.Hide();
+        // eslint-disable-next-line no-unused-expressions
+        window.parent && window.parent.scratchApi &&
+            window.parent.scratchApi.OnLoad && window.parent.scratchApi.OnLoad(window.scratchApi);
     }
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
@@ -170,6 +197,12 @@ class MenuBar extends React.Component {
         // downloading or logging in first.
         // Note that if user is logged in and editing someone else's project,
         // they'll lose their work.
+
+        // 如果用户拥有这个项目并且修改了它，我们会自动保存。
+        // 但是如果他们没有登录并且不能保存，用户应该要先考虑下载或选择登录。
+
+        // 注意如果用户登录之后修改了某人的作品，那么该用户将会丢失他们所做的工作。
+
         const readyToReplaceProject = this.props.confirmReadyToReplaceProject(
             this.props.intl.formatMessage(sharedMessages.replaceProjectWarning)
         );
@@ -315,7 +348,8 @@ class MenuBar extends React.Component {
             <Box
                 className={classNames(
                     this.props.className,
-                    styles.menuBar
+                    styles.menuBar,
+                    'extern-scratch-menuBar'
                 )}
             >
                 <div className={styles.mainMenu}>
@@ -534,11 +568,12 @@ class MenuBar extends React.Component {
                                 </ProjectWatcher>
                             )
                         ) : (
-                            this.props.showComingSoon ? (
-                                <MenuBarItemTooltip id="share-button">
-                                    <ShareButton className={styles.menuBarButton} />
-                                </MenuBarItemTooltip>
-                            ) : []
+                            // this.props.showComingSoon ? (
+                            //     <MenuBarItemTooltip id="share-button">
+                            //         <ShareButton className={styles.menuBarButton} />
+                            //     </MenuBarItemTooltip>
+                            // ) : []
+                            ''
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
@@ -560,11 +595,14 @@ class MenuBar extends React.Component {
                                     }
                                 </ProjectWatcher>
                             )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : [])}
+                        ) : (
+                            // this.props.showComingSoon ? (
+                            //     <MenuBarItemTooltip id="community-button">
+                            //         <CommunityButton className={styles.menuBarButton} />
+                            //     </MenuBarItemTooltip>
+                            // ) : []
+                            ''
+                        )}
                     </div>
                 </div>
 
@@ -612,7 +650,8 @@ class MenuBar extends React.Component {
                             // ********* user not logged in, but a session exists
                             // ********* so they can choose to log in
                             <React.Fragment>
-                                <div
+                                {/* 注册 */}
+                                {/* <div
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable
@@ -625,8 +664,9 @@ class MenuBar extends React.Component {
                                         description="Link for creating a Scratch account"
                                         id="gui.menuBar.joinScratch"
                                     />
-                                </div>
-                                <div
+                                </div> */}
+                                {/* 登录 */}
+                                {/* <div
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable
@@ -646,7 +686,7 @@ class MenuBar extends React.Component {
                                         renderLogin={this.props.renderLogin}
                                         onClose={this.props.onRequestCloseLogin}
                                     />
-                                </div>
+                                </div> */}
                             </React.Fragment>
                         )
                     ) : (

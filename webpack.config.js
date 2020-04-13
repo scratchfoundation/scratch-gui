@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const defaultsDeep = require('lodash.defaultsdeep');
 var path = require('path');
 var webpack = require('webpack');
@@ -22,11 +22,19 @@ const base = {
         contentBase: path.resolve(__dirname, 'build'),
         host: '0.0.0.0',
         // host: 'localhost',
-        port: process.env.PORT || 8601
+        port: process.env.PORT || 8601,
         // https: {
         //     key: fs.readFileSync('./cert/ext.localhostserver.key'),
         //     cert: fs.readFileSync('./cert/ext.localhostserver.crt')
         // }
+        proxy: {
+            '/serv': {
+                // target: 'http://192.168.101.53',
+                target: 'https://www.like-coding.com',
+                changOrigin: true,
+                secure: false
+            }
+        }
     },
     output: {
         library: 'GUI',

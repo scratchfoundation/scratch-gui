@@ -120,6 +120,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             const becameShared = this.props.isShared && !prevProps.isShared;
             if (this.props.isShowingSaveable && (becameAbleToSave || becameShared)) {
                 this.props.onAutoUpdateProject();
+                window.scratchApi = window.scratchApi || {};
+                window.scratchApi.Id = () => (this.props.reduxProjectId || this.props.projectId);
             }
         }
         componentWillUnmount () {
@@ -248,7 +250,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // 现在开始序列化 VM，之后会异步地将资源存储到服务器。
             // 这是为了确保在保存项目的过程中资源不会被更新（例如：序列化的项目指的是比我们刚刚保存的资源更新的资源）。
             const savedVMState = this.props.vm.toJSON();
-            console.log(this.props.vm);
+
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -260,11 +262,12 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     ).then(response => {
                         // Asset servers respond with {status: ok} for successful POSTs
                         // 成功的 POST，资源服务器会返回 {status: ok}
-                        if (response.status !== 'ok') {
-                            // Errors include a `code` property, e.g. "Forbidden"
-                            // 错误包含‘code’属性，比如：’Forbidden‘
-                            return Promise.reject(response.code);
-                        }
+                        // TODO 放开
+                        // if (response.status !== 'ok') {
+                        //     // Errors include a `code` property, e.g. "Forbidden"
+                        //     // 错误包含‘code’属性，比如：’Forbidden‘
+                        //     return Promise.reject(response.code);
+                        // }
                         asset.clean = true;
                     })
                 )
@@ -272,7 +275,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 .then(() => this.props.onUpdateProjectData(projectId, savedVMState, requestParams))
                 .then(response => {
                     this.props.onSetProjectUnchanged();
-                    const id = response.id.toString();
+                    // const id = response.id.toString();  // TODO 还原
+                    const id = response['content-name'].toString();
                     if (id && this.props.onUpdateProjectThumbnail) {
                         this.storeProjectThumbnail(id);
                     }
@@ -360,6 +364,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 reduxProjectId,
                 reduxProjectTitle,
                 setAutoSaveTimeoutId: setAutoSaveTimeoutIdProp,
+                projectId,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -413,7 +418,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectTitle: PropTypes.string,
         setAutoSaveTimeoutId: PropTypes.func.isRequired,
-        vm: PropTypes.instanceOf(VM).isRequired
+        vm: PropTypes.instanceOf(VM).isRequired,
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
     ProjectSaverComponent.defaultProps = {
         autoSaveIntervalSecs: 120,
@@ -442,7 +448,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             projectChanged: state.scratchGui.projectChanged,
             reduxProjectId: state.scratchGui.projectState.projectId,
             reduxProjectTitle: state.scratchGui.projectTitle,
-            vm: state.scratchGui.vm
+            vm: state.scratchGui.vm,
+            projectId: state.scratchGui.projectState.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({

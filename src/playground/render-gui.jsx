@@ -14,6 +14,15 @@ const onClickLogo = () => {
     }
 };
 
+const onUpdateProjectThumbnail = (id, blob) => {
+    window.scratchApi = window.scratchApi || {};
+    window.scratchApi.id = id;
+    window.scratchApi.cover = blob;
+    if (window.scratchApi.onSaved) {
+        window.scratchApi.onSaved(id, blob);
+    }
+};
+
 const handleTelemetryModalCancel = () => {
     log('User canceled telemetry modal');
 };
@@ -88,6 +97,7 @@ export default appTarget => {
                 backpackHost={backpackHost}
                 canSave={false}
                 onClickLogo={onClickLogo}
+                onUpdateProjectThumbnail={onUpdateProjectThumbnail}
             />,
         appTarget);
 };

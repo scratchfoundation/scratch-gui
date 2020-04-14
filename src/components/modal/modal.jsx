@@ -19,7 +19,7 @@ const ModalComponent = props => (
         className={classNames(styles.modalContent, props.className, {
             [styles.fullScreen]: props.fullScreen
         })}
-        contentLabel={props.contentLabel}
+        contentLabel={props.contentLabel.toString()}
         overlayClassName={styles.modalOverlay}
         onRequestClose={props.onRequestClose}
     >

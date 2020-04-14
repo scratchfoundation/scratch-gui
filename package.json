@@ -119,7 +119,6 @@
     "scratch-render": "0.1.0-prerelease.20200228152431",
     "scratch-storage": "1.3.2",
     "scratch-svg-renderer": "0.2.0-prerelease.20200205003400",
-    "scratch-vm": "0.2.0-prerelease.20200227204654",
     "selenium-webdriver": "3.6.0",
     "shelljs": "^0.8.3",
     "startaudiocontext": "1.2.1",
@@ -150,6 +149,7 @@
     }
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0"
+    "lodash.camelcase": "^4.3.0",
+    "scratch-vm": "github:smalruby/scratch-vm#mesh_extension"
   }
 }

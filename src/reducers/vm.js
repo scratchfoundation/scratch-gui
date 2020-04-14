@@ -1,8 +1,5 @@
 import VM from 'scratch-vm';
 import storage from '../lib/storage';
-import applyScratchVMPatch from '../lib/apply-scratch-vm-patch';
-
-applyScratchVMPatch();
 
 const SET_VM = 'scratch-gui/vm/SET_VM';
 const defaultVM = new VM();

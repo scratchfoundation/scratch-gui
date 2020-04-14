@@ -15,5 +15,14 @@ export default {
     "gui.smalruby3.telemetryOptIn.body1": "The Smalruby Team is always looking to better understand how Smalruby is used around the world. To help support this effort, you can allow Smalruby to automatically send usage information to the Smalruby Team.",
     "gui.smalruby3.telemetryOptIn.body2": "The information we collect includes language selection, blocks usage, and some events like saving, loading, and uploading a project. We DO NOT collect any personal information.",
     "gui.telemetryOptIn.buttonTextNo": "No, thanks",
-    "gui.smalruby3.telemetryOptIn.buttonTextYes": "Yes, I'd like to help improve Smalruby"
+    "gui.smalruby3.telemetryOptIn.buttonTextYes": "Yes, I'd like to help improve Smalruby",
+    'gui.smalruby3.extension.mesh.name': 'Mesh',
+    'gui.smalruby3.extension.mesh.description': 'Allowing users to interact over a computer network.',
+    'mesh.categoryName': 'Mesh',
+    'mesh.sensorValue': '[NAME] sensor value',
+    'mesh.hostPeripheralName': 'Mesh Host [{ MESH_ID }]',
+    'mesh.clientPeripheralName': 'Join Host [{ MESH_ID }]',
+    'mesh.registeredHost': 'Registered Host Mesh [{ MESH_ID }]',
+    'mesh.joinedMesh': 'Joined Mesh [{ MESH_ID }]',
+    'gui.smalruby3.extension.mesh.connectingMessage': 'Connecting'
 };

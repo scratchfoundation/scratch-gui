@@ -17,20 +17,24 @@ const ConnectedStep = props => (
                         className={styles.peripheralActivityIcon}
                         src={props.connectionIconURL}
                     />
-                    <img
-                        className={styles.bluetoothConnectedIcon}
-                        src={bluetoothIcon}
-                    />
+                    {props.extensionId !== 'mesh' && (
+                        <img
+                            className={styles.bluetoothConnectedIcon}
+                            src={bluetoothIcon}
+                        />
+                    )}
                 </div>
             </Box>
         </Box>
         <Box className={styles.bottomArea}>
             <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
-                <FormattedMessage
-                    defaultMessage="Connected"
-                    description="Message indicating that a device was connected"
-                    id="gui.connection.connected"
-                />
+                {props.connectedMessage || (
+                    <FormattedMessage
+                        defaultMessage="Connected"
+                        description="Message indicating that a device was connected"
+                        id="gui.connection.connected"
+                    />
+                )}
             </Box>
             <Dots
                 success
@@ -64,7 +68,9 @@ const ConnectedStep = props => (
 );
 
 ConnectedStep.propTypes = {
+    connectedMessage: PropTypes.string,
     connectionIconURL: PropTypes.string.isRequired,
+    extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func,
     onDisconnect: PropTypes.func
 };

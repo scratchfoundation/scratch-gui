@@ -77,7 +77,7 @@ Alert.propTypes = {
     closeButton: PropTypes.bool,
     content: PropTypes.element,
     extensionId: PropTypes.string,
-    extensionName: PropTypes.string,
+    extensionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     index: PropTypes.number,

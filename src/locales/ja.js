@@ -17,5 +17,14 @@ export default {
     'gui.smalruby3.telemetryOptIn.body1': 'スモウルビーの開発者は世界中でスモウルビーがどのように使われているのかを理解したいと考えています。その手助けのために、みなさんのスモウルビーの利用状況をスモウルビーの開発者に提供していただけないでしょうか。',
     'gui.smalruby3.telemetryOptIn.body2': '提供していただく情報にはどの言語を選択したか、どのブロックを使ったか、保存・読み込み・プロジェクトのアップロードなどのイベントを含みます。ただし、ユーザ名などの個人的な情報は一切含みません。',
     'gui.telemetryOptIn.buttonTextNo': 'いいえ、結構です。',
-    'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーの改善に協力します。'
+    'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーの改善に協力します。',
+    'gui.smalruby3.extension.mesh.name': 'メッシュ',
+    'gui.smalruby3.extension.mesh.description': 'ネットワーク上でユーザー間のやりとりを行う。',
+    'mesh.categoryName': 'メッシュ',
+    'mesh.sensorValue': '[NAME] センサーの値',
+    'mesh.hostPeripheralName': 'メッシュのホストになる [{ MESH_ID }]',
+    'mesh.clientPeripheralName': 'メッシュに参加する [{ MESH_ID }]',
+    'mesh.registeredHost': 'ホストとしてメッシュに登録しました [{ MESH_ID }]',
+    'mesh.joinedMesh': 'メッシュに参加しました [{ MESH_ID }]',
+    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークに接続しています'
 };

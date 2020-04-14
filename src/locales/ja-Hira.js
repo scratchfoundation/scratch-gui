@@ -17,5 +17,14 @@ export default {
     'gui.smalruby3.telemetryOptIn.body1': 'スモウルビーのかいはつしゃはせかいじゅうでスモウルビーがどのようにつかわれているのかをりかいしたいとかんがえています。そのてだすけのために、みなさんのスモウルビーのりようじょうきょうをスモウルビーのかいはつしゃにていきょうしていただけないでしょうか。',
     'gui.smalruby3.telemetryOptIn.body2': 'ていきょうしていただくじょうほうにはどのげんごをせんたくしたか、どのブロックをつかったか、ほぞん・よみこみ・プロジェクトのアップロードなどのイベントをふくみます。ただし、ユーザめいなどのこじんてきなじょうほうはいっさいふくみません。',
     'gui.telemetryOptIn.buttonTextNo': 'いいえ、けっこうです。',
-    'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーのかいぜんにきょうりょくします。'
+    'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーのかいぜんにきょうりょくします。',
+    'gui.smalruby3.extension.mesh.name': 'メッシュ',
+    'gui.smalruby3.extension.mesh.description': 'ネットワークじょうでユーザーかんのやりとりをおこなう。',
+    'mesh.categoryName': 'メッシュ',
+    'mesh.sensorValue': '[NAME] センサーのあたい',
+    'mesh.hostPeripheralName': 'メッシュのホストになる [{ MESH_ID }]',
+    'mesh.clientPeripheralName': 'メッシュにさんかする [{ MESH_ID }]',
+    'mesh.registeredHost': 'ホストとしてメッシュにとうろくしました [{ MESH_ID }]',
+    'mesh.joinedMesh': 'メッシュにさんかしました [{ MESH_ID }]',
+    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークにせつぞくしています'
 };

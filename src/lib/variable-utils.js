@@ -1,9 +1,14 @@
 // Utility functions for updating variables in the VM
 // TODO (VM#1145) these should be moved to top-level VM API
-const getVariable = (vm, targetId, variableId) => {
+const getTarget = (vm, targetId) => {
     const target = targetId ?
         vm.runtime.getTargetById(targetId) :
         vm.runtime.getTargetForStage();
+    return target;
+};
+
+const getVariable = (vm, targetId, variableId) => {
+    const target = getTarget(vm, targetId);
     return target.variables[variableId];
 };
 
@@ -15,7 +20,8 @@ const getVariableValue = (vm, targetId, variableId) => {
 };
 
 const setVariableValue = (vm, targetId, variableId, value) => {
-    getVariable(vm, targetId, variableId).value = value;
+    const target = getTarget(vm, targetId);
+    target.setVariableValue(variableId, value);
 };
 
 export {

@@ -20,10 +20,12 @@ const ConnectingStep = props => (
                         className={styles.peripheralActivityIcon}
                         src={props.connectionIconURL}
                     />
-                    <img
-                        className={styles.bluetoothConnectingIcon}
-                        src={bluetoothIcon}
-                    />
+                    {props.extensionId !== 'mesh' && (
+                        <img
+                            className={styles.bluetoothConnectingIcon}
+                            src={bluetoothIcon}
+                        />
+                    )}
                 </div>
             </Box>
         </Box>
@@ -64,6 +66,7 @@ const ConnectingStep = props => (
 ConnectingStep.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
     connectionIconURL: PropTypes.string.isRequired,
+    extensionId: PropTypes.string.isRequired,
     onDisconnect: PropTypes.func
 };
 

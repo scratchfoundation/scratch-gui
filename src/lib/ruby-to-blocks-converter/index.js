@@ -23,6 +23,7 @@ import MicroBitConverter from './microbit';
 import EV3Converter from './ev3';
 import Wedo2Converter from './wedo2';
 import GdxForConverter from './gdx_for';
+import MeshConverter from './mesh';
 
 /* eslint-disable no-invalid-this */
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
@@ -66,6 +67,7 @@ class RubyToBlocksConverter {
             EV3Converter,
             Wedo2Converter,
             GdxForConverter,
+            MeshConverter,
 
             MotionConverter,
             LooksConverter,

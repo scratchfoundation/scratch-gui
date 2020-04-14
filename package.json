@@ -150,6 +150,7 @@
     }
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0"
+    "lodash.camelcase": "^4.3.0",
+    "scratch-vm": "github:smalruby/scratch-vm#mesh_extension"
   }
 }

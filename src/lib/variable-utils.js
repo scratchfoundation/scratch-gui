@@ -2,8 +2,8 @@
 // TODO (VM#1145) these should be moved to top-level VM API
 const getTarget = (vm, targetId) => {
     const target = targetId ?
-          vm.runtime.getTargetById(targetId) :
-          vm.runtime.getTargetForStage();
+        vm.runtime.getTargetById(targetId) :
+        vm.runtime.getTargetForStage();
     return target;
 };
 

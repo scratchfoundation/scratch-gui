@@ -1,9 +1,7 @@
 import RubyToBlocksConverter from '../../../../src/lib/ruby-to-blocks-converter';
 import {
     convertAndExpectToEqualBlocks,
-    convertAndExpectRubyBlockError,
-    rubyToExpected,
-    expectedInfo
+    convertAndExpectRubyBlockError
 } from '../../../helpers/expect-to-equal-blocks';
 
 describe('RubyToBlocksConverter/Mesh', () => {

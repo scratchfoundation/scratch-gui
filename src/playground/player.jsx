@@ -10,7 +10,7 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 
-import {setPlayer} from '../reducers/mode';
+import {setFullScreen} from '../reducers/mode';
 
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     // Warn before navigating away
@@ -19,21 +19,35 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
-    <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
-        {isPlayerOnly && <button onClick={onSeeInside}>{'See inside'}</button>}
-        <GUI
-            canEditTitle
-            enableCommunity
-            isPlayerOnly={isPlayerOnly}
-            projectId={projectId}
-        />
-    </Box>
-);
+class Player extends React.Component {
+
+    componentDidMount () {
+        this.props.onSetFullScreen();
+    }
+    
+    render () {
+        const {
+            // eslint-disable-next-line no-unused-vars
+            isPlayerOnly,
+            // eslint-disable-next-line no-unused-vars
+            projectId
+        } = this.props;
+        return (
+            <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
+                <GUI
+                    canEditTitle
+                    enableCommunity
+                    isPlayerOnly={isPlayerOnly}
+                    projectId={projectId}
+                />
+            </Box>
+        );
+    }
+}
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
-    onSeeInside: PropTypes.func,
+    onSetFullScreen: PropTypes.func,
     projectId: PropTypes.string
 };
 
@@ -42,7 +56,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSeeInside: () => dispatch(setPlayer(false))
+    onSetFullScreen: () => dispatch(setFullScreen(true))
 });
 
 const ConnectedPlayer = connect(

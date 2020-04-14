@@ -22,9 +22,9 @@ export default {
     'gui.smalruby3.extension.mesh.description': 'ネットワークじょうでユーザーかんのやりとりをおこなう。',
     'mesh.categoryName': 'メッシュ',
     'mesh.sensorValue': '[NAME] センサーのあたい',
-    'mesh.hostPeripheralName': 'メッシュのホストになる',
-    'mesh.clientPeripheralName': 'メッシュにさんかする',
-    'mesh.registeredHost': 'ホストとしてメッシュにとうろくしました [[MESH_ID]]',
-    'mesh.joinedMesh': 'メッシュにさんかしました [[MESH_ID]]',
+    'mesh.hostPeripheralName': 'メッシュのホストになる [{ MESH_ID }]',
+    'mesh.clientPeripheralName': 'メッシュにさんかする [{ MESH_ID }]',
+    'mesh.registeredHost': 'ホストとしてメッシュにとうろくしました [{ MESH_ID }]',
+    'mesh.joinedMesh': 'メッシュにさんかしました [{ MESH_ID }]',
     'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークにせつぞくしています'
 };

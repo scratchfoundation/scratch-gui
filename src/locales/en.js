@@ -20,9 +20,9 @@ export default {
     'gui.smalruby3.extension.mesh.description': 'Allowing users to interact over a computer network.',
     'mesh.categoryName': 'Mesh',
     'mesh.sensorValue': '[NAME] sensor value',
-    'mesh.hostPeripheralName': 'Mesh Host',
-    'mesh.clientPeripheralName': 'Join Host',
-    'mesh.registeredHost': 'Registered Host Mesh [[MESH_ID]]',
-    'mesh.joinedMesh': 'Joined Mesh [[MESH_ID]]',
+    'mesh.hostPeripheralName': 'Mesh Host [{ MESH_ID }]',
+    'mesh.clientPeripheralName': 'Join Host [{ MESH_ID }]',
+    'mesh.registeredHost': 'Registered Host Mesh [{ MESH_ID }]',
+    'mesh.joinedMesh': 'Joined Mesh [{ MESH_ID }]',
     'gui.smalruby3.extension.mesh.connectingMessage': 'Connecting'
 };

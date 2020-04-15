@@ -18,6 +18,7 @@ before_install:
 # package-lock.json was introduced in npm@5
 - '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest' # skipped when using node 9
 install:
+- rm -rf node_modules/scratch-vm
 - npm --production=false install
 - (cd node_modules/scratch-vm && npm --production=false install && $(npm bin)/webpack --colors --bail --silent)
 script:

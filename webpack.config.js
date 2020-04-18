@@ -20,6 +20,7 @@ const base = {
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         host: '0.0.0.0',
+        disableHostCheck: true,
         port: process.env.PORT || 8601
     },
     output: {

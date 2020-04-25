@@ -33,7 +33,6 @@ deploy:
     - develop
   skip_cleanup: true
   script: npm run deploy -- -x -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-deploy:
 - provider: script
   on:
     branch:

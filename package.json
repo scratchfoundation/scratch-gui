@@ -8,7 +8,7 @@
     "build": "npm run clean && npm run setup-opal && webpack --progress --colors --bail",
     "clean": "rimraf ./static/javascripts/setup-opal.js && rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1) [skip ci]\"",
-    "deploy:smalruby.app": "echo \"smalruby.app\" > build/CNAME && touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1) [skip ci]\"",
+    "deploy:smalruby.app": "rimraf node_modules/gh-pages/.cache && echo \"smalruby.app\" > build/CNAME && touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1) [skip ci]\"",
     "prune": "./prune-gh-pages.sh",
     "i18n:push": "tx-push-src scratch-editor interface translations/en.json",
     "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/ && npm run i18n:push",

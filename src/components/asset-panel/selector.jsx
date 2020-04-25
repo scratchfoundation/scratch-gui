@@ -102,6 +102,7 @@ Selector.propTypes = {
     draggingType: PropTypes.oneOf(Object.keys(DragConstants)),
     isRtl: PropTypes.bool,
     items: PropTypes.arrayOf(PropTypes.shape({
+        dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
         url: PropTypes.string,
         name: PropTypes.string.isRequired
     })),

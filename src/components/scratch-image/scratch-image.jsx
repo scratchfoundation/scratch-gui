@@ -94,7 +94,6 @@ class ScratchImage extends React.PureComponent {
     }
     render () {
         const {
-            src: _src,
             imageSource: _imageSource,
             ...imgProps
         } = this.props;
@@ -109,8 +108,8 @@ class ScratchImage extends React.PureComponent {
                         ScratchImage.loadPendingImages();
                         return (
                             <img
-                                src={this.state.imageURI}
-                                {...imgProps}
+                                {...imgProps} // do this first in case it contains `src`
+                                src={this.state.imageURI} // overrides imgProps.src if present
                             />
                         );
                     }

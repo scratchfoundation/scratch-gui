@@ -49,11 +49,19 @@ const getAssetTypeForFileExtension = function (fileExtension) {
 };
 
 /**
- * Figure out an `imageSource` (URI or asset ID & type) for a library item's icon.
+ * Figure out one or more icon(s) for a library item.
+ * If it's an animated thumbnail, this will return an array of `imageSource`.
+ * Otherwise it'll return just one `imageSource`.
  * @param {object} item - either a library item or one of a library item's costumes.
- * @returns {object} - an `imageSource` ready to be passed to a `ScratchImage`.
+ *   The latter is used internally as part of processing an animated thumbnail.
+ * @returns {LibraryItem.PropTypes.icons} - an `imageSource` or array of them, ready for `LibraryItem` & `ScratchImage`
  */
-const getItemImageSource = function (item) {
+const getItemIcons = function (item) {
+    const costumes = (item.json && item.json.costumes) || item.costumes;
+    if (costumes) {
+        return costumes.map(getItemIcons);
+    }
+
     if (item.rawURL) {
         return {
             uri: item.rawURL
@@ -67,7 +75,6 @@ const getItemImageSource = function (item) {
         };
     }
 
-    // legacy
     const md5ext = item.md5ext || item.md5 || item.baseLayerMD5;
     if (md5ext) {
         const [assetId, fileExtension] = md5ext.split('.');
@@ -258,8 +265,7 @@ class LibraryComponent extends React.Component {
                     ref={this.setFilteredDataRef}
                 >
                     {this.state.loaded ? this.getFilteredData().map((dataItem, index) => {
-                        const iconSource = getItemImageSource(dataItem);
-                        const icons = dataItem.json && dataItem.json.costumes.map(getItemImageSource);
+                        const icons = getItemIcons(dataItem);
                         return (<LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
@@ -268,7 +274,6 @@ class LibraryComponent extends React.Component {
                             extensionId={dataItem.extensionId}
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
-                            iconSource={iconSource}
                             icons={icons}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}

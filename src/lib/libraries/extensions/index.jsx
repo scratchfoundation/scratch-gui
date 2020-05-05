@@ -51,6 +51,11 @@ import meshInsetIconURL from './mesh/mesh-small.png';
 import meshConnectionIconURL from './mesh/mesh-illustration.png';
 import meshConnectionSmallIconURL from './mesh/mesh-small.png';
 
+import smalrubotS1IconURL from './smalrubot-s1/smalrubot-s1.png';
+import smalrubotS1InsetIconURL from './smalrubot-s1/smalrubot-s1-small.png';
+import smalrubotS1ConnectionIconURL from './smalrubot-s1/smalrubot-s1-illustration.png';
+import smalrubotS1ConnectionSmallIconURL from './smalrubot-s1/smalrubot-s1-small.png';
+
 export default [
     {
         name: (
@@ -356,5 +361,40 @@ export default [
             />
         ),
         helpLink: 'https://github.com/smalruby/smalruby3-gui/wiki/Mesh'
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Smalrubot S1"
+                description="Name for the 'Smalrubot S1' extension"
+                id="gui.smalruby3.extension.smalrubotS1.name"
+            />
+        ),
+        extensionId: 'smalrubotS1',
+        iconURL: smalrubotS1IconURL,
+        insetIconURL: smalrubotS1InsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Control the Smalrubot S1."
+                description="Description for the 'Smalrubot S1' extension"
+                id="gui.smalruby3.extension.smalrubotS1.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: true,
+        connectionIconURL: smalrubotS1ConnectionIconURL,
+        connectionSmallIconURL: smalrubotS1ConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their Smalrubot S1."
+                id="gui.smalruby3.extension.smalrubotS1.connectingMessage"
+            />
+        ),
+        helpLink: 'https://github.com/smalruby/smalruby3-gui/wiki/SmalrubotS1'
     }
 ];

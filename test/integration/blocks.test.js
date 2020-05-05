@@ -3,6 +3,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 
 const {
     clickText,
+    clickBlocksCategory,
     clickButton,
     clickXpath,
     findByText,
@@ -31,8 +32,7 @@ describe('Working with the blocks', () => {
     test('Blocks report when clicked in the toolbox', async () => {
         await loadUri(uri);
         await clickText('Code');
-        await clickText('Operators', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Operators');
         await clickText('join', scope.blocksTab); // Click "join <hello> <world>" block
         await findByText('apple banana', scope.reportedValue); // Tooltip with result
         const logs = await getLogs();
@@ -41,14 +41,13 @@ describe('Working with the blocks', () => {
 
     test('Switching sprites updates the block menus', async () => {
         await loadUri(uri);
-        await clickText('Sound', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Sound');
         // "Meow" sound block should be visible
         await findByText('Meow', scope.blocksTab);
         await clickText('Backdrops'); // Switch to the backdrop
         // Now "pop" sound block should be visible and motion blocks hidden
         await findByText('pop', scope.blocksTab);
-        await clickText('Motion', scope.blocksTab);
+        await clickBlocksCategory('Motion');
         await findByText('Stage selected: no motion blocks');
 
         const logs = await getLogs();
@@ -58,8 +57,7 @@ describe('Working with the blocks', () => {
     test('Creating variables', async () => {
         await loadUri(uri);
         await clickText('Code');
-        await clickText('Variables', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Variables');
 
         // Expect a default variable "my variable" to be visible
         await clickText('my\u00A0variable', scope.blocksTab);
@@ -75,8 +73,7 @@ describe('Working with the blocks', () => {
         await clickButton('OK');
 
         // Make sure reporting works on a new variable
-        await clickText('Variables', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Variables');
         await clickText('score', scope.blocksTab);
         await findByText('0', scope.reportedValue); // Tooltip with result
 
@@ -100,8 +97,7 @@ describe('Working with the blocks', () => {
     test('Creating a list', async () => {
         await loadUri(uri);
         await clickText('Code');
-        await clickText('Variables', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Variables');
 
         await clickText('Make a List');
         let el = await findByXpath("//input[@name='New list name:']");
@@ -133,8 +129,7 @@ describe('Working with the blocks', () => {
 
     test('Custom procedures', async () => {
         await loadUri(uri);
-        await clickText('My Blocks');
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('My Blocks');
         await clickText('Make a Block');
         // Click on the "add an input" buttons
         await clickText('number or text', scope.modal);
@@ -165,8 +160,7 @@ describe('Working with the blocks', () => {
     test('Record option from sound block menu opens sound recorder', async () => {
         await loadUri(uri);
         await clickText('Code');
-        await clickText('Sound', scope.blocksTab);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
+        await clickBlocksCategory('Sound');
         await clickText('Meow', scope.blocksTab); // Click "play sound <Meow> until done" block
         await clickText('record'); // Click "record..." option in the block's sound menu
         // Access has been force denied, so close the alert that comes up
@@ -193,8 +187,7 @@ describe('Working with the blocks', () => {
 
         // Make sure it is updated in the block menu
         await clickText('Code');
-        await clickText('Looks', scope.blocksTab);
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Looks');
         await clickText('newname', scope.blocksTab);
     });
 
@@ -213,19 +206,17 @@ describe('Working with the blocks', () => {
 
         // Make sure it is updated in the block menu
         await clickText('Code');
-        await clickText('Looks', scope.blocksTab);
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Looks');
         await clickText('<NewCostume>', scope.blocksTab);
 
-        await clickText('Sound', scope.blocksTab);
+        await clickBlocksCategory('Sound');
     });
 
     test('Adding costumes DOES update the default costume name in the toolbox', async () => {
         await loadUri(uri);
 
         // By default, costume2 is in the costume tab
-        await clickText('Looks', scope.blocksTab);
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Looks');
         await clickText('costume2', scope.blocksTab);
 
         // Also check that adding a new costume does update the list
@@ -254,8 +245,7 @@ describe('Working with the blocks', () => {
         await findByXpath("//div[contains(@class,'sprite-selector-item_is-selected_')]" +
             "//div[contains(text(), 'A Bass')]");
         await clickText('Code');
-        await clickText('Sound', scope.blocksTab);
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Sound');
         await clickText('A\u00A0Bass', scope.blocksTab); // Need &nbsp; for block text
     });
 
@@ -264,15 +254,13 @@ describe('Working with the blocks', () => {
         const playerUri = path.resolve(__dirname, '../../build/player.html');
         await loadUri(playerUri);
         await clickText('See inside');
-        await clickText('Variables');
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Variables');
         await clickText('my\u00A0variable');
 
         await clickText('See Project Page');
         await clickText('See inside');
 
-        await clickText('Variables');
-        await driver.sleep(500); // Wait for scroll to finish
+        await clickBlocksCategory('Variables');
         await clickText('my\u00A0variable');
     });
 
@@ -281,8 +269,7 @@ describe('Working with the blocks', () => {
         await loadUri(uri);
         await clickText('Costumes');
         await clickText('Code');
-        await clickText('Variables', scope.blocksTab);
-        await driver.sleep(500); // Wait for scroll
+        await clickBlocksCategory('Variables');
         await clickText('Make a List');
         const el = await findByXpath("//input[@name='New list name:']");
         await el.sendKeys('list1');

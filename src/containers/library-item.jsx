@@ -21,7 +21,6 @@ class LibraryItem extends React.PureComponent {
             'startRotatingIcons',
             'stopRotatingIcons'
         ]);
-        // TODO: is there a better "is it an array?" check to use here?
         this.hasIconsArray = Array.isArray(props.icons);
         this.state = {
             iconIndex: 0,

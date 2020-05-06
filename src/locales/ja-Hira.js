@@ -26,5 +26,12 @@ export default {
     'mesh.clientPeripheralName': 'メッシュにさんかする 【{ MESH_ID }】',
     'mesh.registeredHost': 'ホストとしてメッシュにとうろくしました 【{ MESH_ID }】',
     'mesh.joinedMesh': 'メッシュにさんかしました 【{ MESH_ID }】',
-    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークにせつぞくしています'
+    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークにせつぞくしています',
+    'gui.smalruby3.extension.smalrubotS1.name': 'スモウルボットS1 (エス1)',
+    'gui.smalruby3.extension.smalrubotS1.description': 'スモウルボットS1 (エス1) をせいぎょする。',
+    'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'スモウルボットS1 (エス1) にせつぞくしています。',
+    'smalrubotS1.turnLedOn': '[POSITION] のLED (エル・イー・ディー) をオンにする',
+    'smalrubotS1.turnLedOff': '[POSITION] のLED (エル・イー・ディー) をオフにする',
+    'smalrubotS1.positionsMenu.left': 'ひだり',
+    'smalrubotS1.positionsMenu.right': 'みぎ'
 };

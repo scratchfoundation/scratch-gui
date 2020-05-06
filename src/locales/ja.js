@@ -26,5 +26,12 @@ export default {
     'mesh.clientPeripheralName': 'メッシュに参加する 【{ MESH_ID }】',
     'mesh.registeredHost': 'ホストとしてメッシュに登録しました 【{ MESH_ID }】',
     'mesh.joinedMesh': 'メッシュに参加しました 【{ MESH_ID }】',
-    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークに接続しています'
+    'gui.smalruby3.extension.mesh.connectingMessage': 'メッシュのネットワークに接続しています',
+    'gui.smalruby3.extension.smalrubotS1.name': 'スモウルボットS1',
+    'gui.smalruby3.extension.smalrubotS1.description': 'スモウルボットS1を制御する。',
+    'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'スモウルボットS1に接続しています。',
+    'smalrubotS1.turnLedOn': '[POSITION] のLEDをオンにする',
+    'smalrubotS1.turnLedOff': '[POSITION] のLEDをオフにする',
+    'smalrubotS1.positionsMenu.left': '左',
+    'smalrubotS1.positionsMenu.right': '右'
 };

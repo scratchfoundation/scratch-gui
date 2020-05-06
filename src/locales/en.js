@@ -30,6 +30,9 @@ export default {
     'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'Connecting the Smalrubot S1.',
     'smalrubotS1.turnLedOn': 'turn [POSITION] LED on',
     'smalrubotS1.turnLedOff': 'turn [POSITION] LED off',
+    'smalrubotS1.getSensorValue': '[POSITION] sensor value',
     'smalrubotS1.positionsMenu.left': 'left',
-    'smalrubotS1.positionsMenu.right': 'right'
+    'smalrubotS1.positionsMenu.right': 'right',
+    'smalrubotS1.positionsMenu.touch': 'touch',
+    'smalrubotS1.positionsMenu.light': 'light'
 };

@@ -32,6 +32,9 @@ export default {
     'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'スモウルボットS1 (エス1) にせつぞくしています。',
     'smalrubotS1.turnLedOn': '[POSITION] のLED (エル・イー・ディー) をオンにする',
     'smalrubotS1.turnLedOff': '[POSITION] のLED (エル・イー・ディー) をオフにする',
+    'smalrubotS1.getSensorValue': '[POSITION] センサーのあたい',
     'smalrubotS1.positionsMenu.left': 'ひだり',
-    'smalrubotS1.positionsMenu.right': 'みぎ'
+    'smalrubotS1.positionsMenu.right': 'みぎ',
+    'smalrubotS1.positionsMenu.touch': 'タッチ',
+    'smalrubotS1.positionsMenu.light': 'ひかり'
 };

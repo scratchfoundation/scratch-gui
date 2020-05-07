@@ -3425,6 +3425,319 @@
         }
     },
     {
+        "name": "Characters 1",
+        "md5": "59099ad030544d62c83da44cfddc315e.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            13,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Characters 1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "59099ad030544d62c83da44cfddc315e",
+                    "name": "character1-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "59099ad030544d62c83da44cfddc315e.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 49.88988096908443,
+                    "rotationCenterY": 124.76094157062226
+                },
+                {
+                    "assetId": "f66b563dce524bb3fda48be103ca8d80",
+                    "name": "character1-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "f66b563dce524bb3fda48be103ca8d80.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.60290410943077,
+                    "rotationCenterY": 122.98040831057327
+                },
+                {
+                    "assetId": "ea732fbba05e4bec94c4a4aa52052bad",
+                    "name": "character1-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "ea732fbba05e4bec94c4a4aa52052bad.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.602913664146115,
+                    "rotationCenterY": 126.850574568819
+                },
+                {
+                    "assetId": "83b50532d56248ef3b2bdaecc5185d68",
+                    "name": "character1-d",
+                    "bitmapResolution": 1,
+                    "md5ext": "83b50532d56248ef3b2bdaecc5185d68.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.602919554715385,
+                    "rotationCenterY": 123.849975
+                },
+                {
+                    "assetId": "8dd2fcd80fbde3b52e5febb45b8838c0",
+                    "name": "character1-e",
+                    "bitmapResolution": 1,
+                    "md5ext": "8dd2fcd80fbde3b52e5febb45b8838c0.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 65.725,
+                    "rotationCenterY": 120.67007376370918
+                },
+                {
+                    "assetId": "53cb0d80fb9779a2a19cb18624652751",
+                    "name": "character1-f",
+                    "bitmapResolution": 1,
+                    "md5ext": "53cb0d80fb9779a2a19cb18624652751.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.602919554715385,
+                    "rotationCenterY": 126.76430174297604
+                },
+                {
+                    "assetId": "516cf32e3b2c075ce8840a2de4dea2a8",
+                    "name": "character1-g",
+                    "bitmapResolution": 1,
+                    "md5ext": "516cf32e3b2c075ce8840a2de4dea2a8.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.6029191094307,
+                    "rotationCenterY": 125.34993499999999
+                },
+                {
+                    "assetId": "f956efed7324f41c1285929638ce1ece",
+                    "name": "character1-h",
+                    "bitmapResolution": 1,
+                    "md5ext": "f956efed7324f41c1285929638ce1ece.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 54.60291777357679,
+                    "rotationCenterY": 126.34999389648436
+                },
+                {
+                    "assetId": "12fb84b82b5936563b6d2362c8fb0b5f",
+                    "name": "character1-i",
+                    "bitmapResolution": 1,
+                    "md5ext": "12fb84b82b5936563b6d2362c8fb0b5f.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 59.66234494348598,
+                    "rotationCenterY": 124.64990500000002
+                },
+                {
+                    "assetId": "64877bcd128338ceea1c9ef51be00d12",
+                    "name": "character1-j",
+                    "bitmapResolution": 1,
+                    "md5ext": "64877bcd128338ceea1c9ef51be00d12.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 57.80000000000001,
+                    "rotationCenterY": 127.90642627364258
+                },
+                {
+                    "assetId": "ccf5350e4c3a4e8895d965e218140a24",
+                    "name": "character1-k",
+                    "bitmapResolution": 1,
+                    "md5ext": "ccf5350e4c3a4e8895d965e218140a24.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 55.00291910943085,
+                    "rotationCenterY": 122.9651747614069
+                },
+                {
+                    "assetId": "53d55c10dabd4e365fa2072850a9934d",
+                    "name": "character1-l",
+                    "bitmapResolution": 1,
+                    "md5ext": "53d55c10dabd4e365fa2072850a9934d.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 56,
+                    "rotationCenterY": 124.849995
+                },
+                {
+                    "assetId": "22cb07f8c1f2bd48440448832f1d3350",
+                    "name": "character1-m",
+                    "bitmapResolution": 1,
+                    "md5ext": "22cb07f8c1f2bd48440448832f1d3350.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 56,
+                    "rotationCenterY": 126.73041545130786
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 6,
+            "visible": true,
+            "x": -118.70588235294116,
+            "y": -7.529411764705884,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Characters 1"
+        }
+    },
+    {
+        "name": "Characters 2",
+        "md5": "938b5d559d6764f99ba531a2170f2c4b.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            10,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Characters 2",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "938b5d559d6764f99ba531a2170f2c4b",
+                    "name": "character2-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "938b5d559d6764f99ba531a2170f2c4b.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 47.99057299868497,
+                    "rotationCenterY": 127.80503783089968
+                },
+                {
+                    "assetId": "365d15670d7886d45390852a01baec87",
+                    "name": "character2-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "365d15670d7886d45390852a01baec87.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 44.99552075655663,
+                    "rotationCenterY": 125.14875889583388
+                },
+                {
+                    "assetId": "b2f28601266b25b9e678c93ff652de38",
+                    "name": "character2-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "b2f28601266b25b9e678c93ff652de38.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 47.95809000000074,
+                    "rotationCenterY": 123.53879999999998
+                },
+                {
+                    "assetId": "c9bddcd26c42d6be0192773ad49faeee",
+                    "name": "character2-d",
+                    "bitmapResolution": 1,
+                    "md5ext": "c9bddcd26c42d6be0192773ad49faeee.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 44.995541513113324,
+                    "rotationCenterY": 128.206147731907
+                },
+                {
+                    "assetId": "1311abfc157e4d4d164190c7ddb48996",
+                    "name": "character2-e",
+                    "bitmapResolution": 1,
+                    "md5ext": "1311abfc157e4d4d164190c7ddb48996.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.00809000000001,
+                    "rotationCenterY": 122.45
+                },
+                {
+                    "assetId": "7fc4525fc41d151b0e18a28622f79250",
+                    "name": "character2-f",
+                    "bitmapResolution": 1,
+                    "md5ext": "7fc4525fc41d151b0e18a28622f79250.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.53553850541957,
+                    "rotationCenterY": 126.89993965793039
+                },
+                {
+                    "assetId": "0349ea10c08f9b027232f9e327cac2ee",
+                    "name": "character2-g",
+                    "bitmapResolution": 1,
+                    "md5ext": "0349ea10c08f9b027232f9e327cac2ee.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 47.533090000000044,
+                    "rotationCenterY": 125.43368923277541
+                },
+                {
+                    "assetId": "f287b627ed66fcf4ab6483a770d5d41f",
+                    "name": "character2-h",
+                    "bitmapResolution": 1,
+                    "md5ext": "f287b627ed66fcf4ab6483a770d5d41f.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 44.953869835236844,
+                    "rotationCenterY": 128.08851566499382
+                },
+                {
+                    "assetId": "d9dd55934a940f47a6e949adafa3cb43",
+                    "name": "character2-i",
+                    "bitmapResolution": 1,
+                    "md5ext": "d9dd55934a940f47a6e949adafa3cb43.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.00809000000001,
+                    "rotationCenterY": 126.87082000000001
+                },
+                {
+                    "assetId": "f7d41cfbcbeca7ed83ab8c93853e5256",
+                    "name": "character2-j",
+                    "bitmapResolution": 1,
+                    "md5ext": "f7d41cfbcbeca7ed83ab8c93853e5256.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.64271853726632,
+                    "rotationCenterY": 128.03860364267808
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 5,
+            "visible": true,
+            "x": -189.11764705882354,
+            "y": -10.11764705882355,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Characters 2"
+        }
+    },
+    {
         "name": "Cheesy Puffs",
         "md5": "82772a61ec74974e84c686c61ea0b7d5.png",
         "type": "sprite",
@@ -10978,6 +11291,86 @@
         }
     },
     {
+        "name": "Kia",
+        "md5": "e56e480c994572323d88355b8733e1a3.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Kia",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "e56e480c994572323d88355b8733e1a3",
+                    "name": "Kia-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "e56e480c994572323d88355b8733e1a3.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 38.99436950683594,
+                    "rotationCenterY": 133.91017150878906
+                },
+                {
+                    "assetId": "b3d0a248adbc26b0d0826e042a81670a",
+                    "name": "Kia-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "b3d0a248adbc26b0d0826e042a81670a.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 33.86018625895264,
+                    "rotationCenterY": 133.81014001838557
+                },
+                {
+                    "assetId": "d3fafd57ad19579cdc6fee5ad59c51d8",
+                    "name": "Kia-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "d3fafd57ad19579cdc6fee5ad59c51d8.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 55.53386355663628,
+                    "rotationCenterY": 133.73607526218365
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "Pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 200,
+            "y": 1,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Kia"
+        }
+    },
+    {
         "name": "Kiran",
         "md5": "7c0bedab5404830a5147cc4a2d46e997.svg",
         "type": "sprite",
@@ -11757,6 +12150,86 @@
             "draggable": false,
             "rotationStyle": "all around",
             "objName": "Llama"
+        }
+    },
+    {
+        "name": "Luca",
+        "md5": "1fdd15590d4ffe6180b81755d91ea6b4.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Luca",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "1fdd15590d4ffe6180b81755d91ea6b4",
+                    "name": "Luca-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "1fdd15590d4ffe6180b81755d91ea6b4.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 44.518943786621094,
+                    "rotationCenterY": 130.28488159179688
+                },
+                {
+                    "assetId": "58dcf132bb06e7f2ba63fe509b8a9aab",
+                    "name": "Luca-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "58dcf132bb06e7f2ba63fe509b8a9aab.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 41.801766195480866,
+                    "rotationCenterY": 130.26428128213
+                },
+                {
+                    "assetId": "963cb82687acaf5de53a22b287192723",
+                    "name": "Luca-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "963cb82687acaf5de53a22b287192723.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 50.565256229860694,
+                    "rotationCenterY": 130.02168173555543
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "Pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 2,
+            "visible": true,
+            "x": 162,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Luca"
         }
     },
     {
@@ -12846,6 +13319,86 @@
             "draggable": false,
             "rotationStyle": "all around",
             "objName": "Neigh Pony"
+        }
+    },
+    {
+        "name": "Noor",
+        "md5": "1938a8bcd196710df53149fcdc36ee4d.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Noor",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "1938a8bcd196710df53149fcdc36ee4d",
+                    "name": "Noor-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "1938a8bcd196710df53149fcdc36ee4d.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 38.4758779691426,
+                    "rotationCenterY": 130.22760078036825
+                },
+                {
+                    "assetId": "ee7920ac906b908345866565c9bab899",
+                    "name": "Noor-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "ee7920ac906b908345866565c9bab899.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 41.73210898803782,
+                    "rotationCenterY": 130.22733147861044
+                },
+                {
+                    "assetId": "b1137cc497258a08602c7514f8f4af37",
+                    "name": "Noor-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "b1137cc497258a08602c7514f8f4af37.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 50.67362341252675,
+                    "rotationCenterY": 130.25804084929516
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "Pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 3,
+            "visible": true,
+            "x": 131,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Noor"
         }
     },
     {
@@ -15695,6 +16248,86 @@
         }
     },
     {
+        "name": "Sasha",
+        "md5": "e26bf53469cafd730ca150e745ceeafc.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            3,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Sasha",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "e26bf53469cafd730ca150e745ceeafc",
+                    "name": "Sasha-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "e26bf53469cafd730ca150e745ceeafc.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.12538146972656,
+                    "rotationCenterY": 132.3017578125
+                },
+                {
+                    "assetId": "a0b8890ce458aebed5e7002e1897508e",
+                    "name": "Sasha-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "a0b8890ce458aebed5e7002e1897508e.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 40.4882598059082,
+                    "rotationCenterY": 132.05174255371094
+                },
+                {
+                    "assetId": "89bb25e1465eb9481d267e4f9df592af",
+                    "name": "Sasha-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "89bb25e1465eb9481d267e4f9df592af.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 56.06647351528716,
+                    "rotationCenterY": 131.95398475097656
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "Pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 4,
+            "visible": true,
+            "x": 100,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Sasha"
+        }
+    },
+    {
         "name": "Saxophone",
         "md5": "4414c51bdd03f60f40a1210e1d55cf57.svg",
         "type": "sprite",
@@ -17406,6 +18039,184 @@
         }
     },
     {
+        "name": "Tatiana",
+        "md5": "df1728c1cf98f862206ff5b019368a25.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Tatiana",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "df1728c1cf98f862206ff5b019368a25",
+                    "name": "Tatiana-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "df1728c1cf98f862206ff5b019368a25.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 60.66618859786567,
+                    "rotationCenterY": 53.97647211651231
+                },
+                {
+                    "assetId": "7f95d10441ad91648db07a488373f215",
+                    "name": "Tatiana-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "7f95d10441ad91648db07a488373f215.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 49.745375793596935,
+                    "rotationCenterY": 61.254896231367184
+                },
+                {
+                    "assetId": "a64761aa41f9e63e3f735f1a8f9a662d",
+                    "name": "Tatiana-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "a64761aa41f9e63e3f735f1a8f9a662d.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 60.66620857137468,
+                    "rotationCenterY": 53.865366905092486
+                },
+                {
+                    "assetId": "d5c5f018340bbba41adc9d6791190881",
+                    "name": "Tatiana-d",
+                    "bitmapResolution": 1,
+                    "md5ext": "d5c5f018340bbba41adc9d6791190881.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 49.8565329893282,
+                    "rotationCenterY": 55.721251124908804
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "c893b0a9b3e2e0594f1f921a12aa66be",
+                    "name": "Footsteps",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 235520,
+                    "md5ext": "c893b0a9b3e2e0594f1f921a12aa66be.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 7,
+            "visible": true,
+            "x": -22.058823529411775,
+            "y": 68.52941176470588,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Tatiana"
+        }
+    },
+    {
+        "name": "Taylor",
+        "md5": "832c0460b1010c48da0c676d64084cea.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Taylor",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "832c0460b1010c48da0c676d64084cea",
+                    "name": "Taylor-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "832c0460b1010c48da0c676d64084cea.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 59.066061145351995,
+                    "rotationCenterY": 52.19126
+                },
+                {
+                    "assetId": "13b13235464ef650ecb6048f097473cb",
+                    "name": "Taylor-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "13b13235464ef650ecb6048f097473cb.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.6123194645823,
+                    "rotationCenterY": 53.01630115465963
+                },
+                {
+                    "assetId": "832c0460b1010c48da0c676d64084cea",
+                    "name": "Taylor-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "832c0460b1010c48da0c676d64084cea.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 59.066061145351995,
+                    "rotationCenterY": 52.19126
+                },
+                {
+                    "assetId": "ff3e03303edcda43e23f93b10cd7edd9",
+                    "name": "Taylor-d",
+                    "bitmapResolution": 1,
+                    "md5ext": "ff3e03303edcda43e23f93b10cd7edd9.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 48.94564951898167,
+                    "rotationCenterY": 50.352570404659616
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "c893b0a9b3e2e0594f1f921a12aa66be",
+                    "name": "Footsteps",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 235520,
+                    "md5ext": "c893b0a9b3e2e0594f1f921a12aa66be.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 9,
+            "visible": true,
+            "x": -15.52941176470589,
+            "y": -80.29411764705884,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Taylor"
+        }
+    },
+    {
         "name": "Ten80 Dance",
         "md5": "f60f99278455c843b7833fb7615428dd.png",
         "type": "sprite",
@@ -17959,6 +18770,95 @@
             "draggable": false,
             "rotationStyle": "all around",
             "objName": "Trees"
+        }
+    },
+    {
+        "name": "Trisha",
+        "md5": "ba1b317d9f10759dcbae6f4097e2e9d5.svg",
+        "type": "sprite",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "info": [
+            0,
+            4,
+            1
+        ],
+        "json": {
+            "isStage": false,
+            "name": "Trisha",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "ba1b317d9f10759dcbae6f4097e2e9d5",
+                    "name": "Trisha-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "ba1b317d9f10759dcbae6f4097e2e9d5.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 81.34455778988652,
+                    "rotationCenterY": 57.02459255690913
+                },
+                {
+                    "assetId": "9b9dae6b995951c10a6446b0f08d1fce",
+                    "name": "Trisha-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "9b9dae6b995951c10a6446b0f08d1fce.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 63.26014512435765,
+                    "rotationCenterY": 60.86251166255646
+                },
+                {
+                    "assetId": "a488fa578c474d96078f7ddb10d39294",
+                    "name": "Trisha-c",
+                    "bitmapResolution": 1,
+                    "md5ext": "a488fa578c474d96078f7ddb10d39294.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 81.34456621172049,
+                    "rotationCenterY": 57.02459511381822
+                },
+                {
+                    "assetId": "8f31eb123e0fddc0501c9305bf16e891",
+                    "name": "Trisha-d",
+                    "bitmapResolution": 1,
+                    "md5ext": "8f31eb123e0fddc0501c9305bf16e891.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 63.275043565706056,
+                    "rotationCenterY": 55.525379923594514
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "c893b0a9b3e2e0594f1f921a12aa66be",
+                    "name": "Footsteps",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 235520,
+                    "md5ext": "c893b0a9b3e2e0594f1f921a12aa66be.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 8,
+            "visible": true,
+            "x": -8.588235294117636,
+            "y": -5.294117647058812,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "objName": "Trisha"
         }
     },
     {

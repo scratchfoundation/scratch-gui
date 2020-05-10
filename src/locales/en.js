@@ -31,6 +31,7 @@ export default {
     'smalrubotS1.categoryName': 'Smalrubot S1',
     'smalrubotS1.action': '[ACTION]',
     'smalrubotS1.actionAndStopAfter': '[ACTION] for [SEC] seconds',
+    'smalrubotS1.bendArm': 'bend arm [DEGREE] degrees in [SECS] seconds',
     'smalrubotS1.getSensorValue': '[POSITION] sensor value',
     'smalrubotS1.turnLedOn': 'turn [POSITION] LED on',
     'smalrubotS1.turnLedOff': 'turn [POSITION] LED off',
@@ -42,6 +43,5 @@ export default {
     'smalrubotS1.actionMenu.turnRight': 'turn right',
     'smalrubotS1.positionsMenu.left': 'left',
     'smalrubotS1.positionsMenu.right': 'right',
-    'smalrubotS1.positionsMenu.touch': 'touch',
-    'smalrubotS1.positionsMenu.light': 'light'
+    'smalrubotS1.positionsMenu.touch': 'touch'
 };

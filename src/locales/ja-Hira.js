@@ -33,6 +33,7 @@ export default {
     'smalrubotS1.categoryName': 'スモウルボットS1 (エス1)',
     'smalrubotS1.action': '[ACTION]',
     'smalrubotS1.actionAndStopAfter': '[SEC] びょう [ACTION]',
+    'smalrubotS1.bendArm': '[SECS] びょうでアームを [DEGREE] どにまげる',
     'smalrubotS1.getSensorValue': '[POSITION] のセンサー',
     'smalrubotS1.turnLedOn': '[POSITION] のLED (エルイーディー) をオンにする',
     'smalrubotS1.turnLedOff': '[POSITION] のLED (エルイーディー) をオフにする',
@@ -44,6 +45,5 @@ export default {
     'smalrubotS1.actionMenu.turnRight': 'みぎにまげる',
     'smalrubotS1.positionsMenu.left': 'ひだり',
     'smalrubotS1.positionsMenu.right': 'みぎ',
-    'smalrubotS1.positionsMenu.touch': 'タッチ',
-    'smalrubotS1.positionsMenu.light': 'ひかり'
+    'smalrubotS1.positionsMenu.touch': 'タッチ'
 };

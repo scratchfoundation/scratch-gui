@@ -33,6 +33,7 @@ export default {
     'smalrubotS1.categoryName': 'スモウルボットS1',
     'smalrubotS1.action': '[ACTION]',
     'smalrubotS1.actionAndStopAfter': '[SEC] 秒 [ACTION]',
+    'smalrubotS1.bendArm': '[SECS] 秒でアームを [DEGREE] 度に曲げる',
     'smalrubotS1.getSensorValue': '[POSITION] のセンサー',
     'smalrubotS1.turnLedOn': '[POSITION] のLEDをオンにする',
     'smalrubotS1.turnLedOff': '[POSITION] のLEDをオフにする',
@@ -45,6 +46,5 @@ export default {
     'smalrubotS1.actionMenu.stop': '止める',
     'smalrubotS1.positionsMenu.left': '左',
     'smalrubotS1.positionsMenu.right': '右',
-    'smalrubotS1.positionsMenu.touch': 'タッチ',
-    'smalrubotS1.positionsMenu.light': '光'
+    'smalrubotS1.positionsMenu.touch': 'タッチ'
 };

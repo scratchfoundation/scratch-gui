@@ -11,7 +11,7 @@ export default function (Generator) {
 
     Generator.mesh_getSensorValue = function (block) {
         const name = Generator.valueToCode(block, 'NAME', Generator.ORDER_NONE) || '" "';
-        return `mesh_sensor_value(${name})\n`;
+        return [`mesh_sensor_value(${name})`, Generator.ORDER_ATOMIC];
     };
 
     return Generator;

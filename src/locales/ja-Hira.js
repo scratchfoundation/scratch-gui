@@ -32,7 +32,7 @@ export default {
     'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'スモウルボットS1 (エス1) にせつぞくしています。',
     'smalrubotS1.categoryName': 'スモウルボットS1 (エス1)',
     'smalrubotS1.action': '[ACTION]',
-    'smalrubotS1.actionAndStopAfter': '[SEC] びょう [ACTION]',
+    'smalrubotS1.actionAndStopAfter': '[SECS] びょう [ACTION]',
     'smalrubotS1.bendArm': '[SECS] びょうでアームを [DEGREE] どにまげる',
     'smalrubotS1.getSensorValue': '[POSITION] のセンサー',
     'smalrubotS1.turnLedOn': '[POSITION] のLED (エルイーディー) をオンにする',

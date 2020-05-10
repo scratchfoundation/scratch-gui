@@ -30,7 +30,7 @@ export default {
     'gui.smalruby3.extension.smalrubotS1.connectingMessage': 'Connecting the Smalrubot S1',
     'smalrubotS1.categoryName': 'Smalrubot S1',
     'smalrubotS1.action': '[ACTION]',
-    'smalrubotS1.actionAndStopAfter': '[ACTION] for [SEC] seconds',
+    'smalrubotS1.actionAndStopAfter': '[ACTION] for [SECS] seconds',
     'smalrubotS1.bendArm': 'bend arm [DEGREE] degrees in [SECS] seconds',
     'smalrubotS1.getSensorValue': '[POSITION] sensor value',
     'smalrubotS1.turnLedOn': 'turn [POSITION] LED on',

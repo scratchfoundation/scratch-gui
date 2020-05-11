@@ -66,8 +66,10 @@ const GUIComponent = props => {
         backpackVisible,
         blocksTabVisible,
         cardsVisible,
+        canChangeLanguage,
         canCreateNew,
         canEditTitle,
+        canManageFiles,
         canRemix,
         canSave,
         canCreateCopy,
@@ -85,13 +87,13 @@ const GUIComponent = props => {
         isRtl,
         isShared,
         loading,
+        logo,
         renderLogin,
         onClickAccountNav,
         onCloseAccountNav,
         onLogOut,
         onOpenRegistration,
         onToggleLoginOpen,
-        onUpdateProjectTitle,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
@@ -202,15 +204,18 @@ const GUIComponent = props => {
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
+                    canChangeLanguage={canChangeLanguage}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canEditTitle={canEditTitle}
+                    canManageFiles={canManageFiles}
                     canRemix={canRemix}
                     canSave={canSave}
                     canShare={canShare}
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     isShared={isShared}
+                    logo={logo}
                     renderLogin={renderLogin}
                     showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
@@ -222,7 +227,6 @@ const GUIComponent = props => {
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
-                    onUpdateProjectTitle={onUpdateProjectTitle}
                 />
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
@@ -359,9 +363,11 @@ GUIComponent.propTypes = {
     backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    canChangeLanguage: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
+    canManageFiles: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
@@ -378,6 +384,7 @@ GUIComponent.propTypes = {
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
+    logo: PropTypes.string,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
@@ -397,7 +404,6 @@ GUIComponent.propTypes = {
     onTelemetryModalOptIn: PropTypes.func,
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
@@ -411,8 +417,10 @@ GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
+    canChangeLanguage: true,
     canCreateNew: false,
     canEditTitle: false,
+    canManageFiles: true,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,
@@ -422,7 +430,6 @@ GUIComponent.defaultProps = {
     isCreating: false,
     isShared: false,
     loading: false,
-    onUpdateProjectTitle: () => {},
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };

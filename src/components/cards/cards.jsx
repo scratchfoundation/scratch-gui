@@ -85,32 +85,67 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
     </div>
 );
 
-// Video step needs to know if the card is being dragged to cover the video
-// so that the mouseup is not swallowed by the iframe.
-const VideoStep = ({video, dragging}) => (
-    <div className={styles.stepVideo}>
-        {dragging ? (
-            <div className={styles.videoCover} />
-        ) : null}
-        <iframe
-            allowFullScreen
-            allowTransparency="true"
-            frameBorder="0"
-            height="257"
-            scrolling="no"
-            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
-            title="📹"
-            width="466"
-        />
-        <script
-            async
-            src="https://fast.wistia.net/assets/external/E-v1.js"
-        />
-    </div>
-);
+class VideoStep extends React.Component {
+
+    componentDidMount () {
+        const script = document.createElement('script');
+        script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
+        script.async = true;
+        script.setAttribute('id', 'wistia-video-content');
+        document.body.appendChild(script);
+
+        const script2 = document.createElement('script');
+        script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
+        script2.async = true;
+        script2.setAttribute('id', 'wistia-video-api');
+        document.body.appendChild(script2);
+    }
+
+    // We use the Wistia API here to update or pause the video dynamically:
+    // https://wistia.com/support/developers/player-api
+    componentDidUpdate (prevProps) {
+        // Ensure the wistia API is loaded and available
+        if (!(window.Wistia && window.Wistia.api)) return;
+
+        // Get a handle on the currently loaded video
+        const video = window.Wistia.api(prevProps.video);
+
+        // Reset the video source if a new video has been chosen from the library
+        if (prevProps.video !== this.props.video) {
+            video.replaceWith(this.props.video);
+        }
+
+        // Pause the video if the modal is being shrunken
+        if (!this.props.expanded) {
+            video.pause();
+        }
+    }
+
+    componentWillUnmount () {
+        const script = document.getElementById('wistia-video-content');
+        script.parentNode.removeChild(script);
+
+        const script2 = document.getElementById('wistia-video-api');
+        script2.parentNode.removeChild(script2);
+    }
+
+    render () {
+        return (
+            <div className={styles.stepVideo}>
+                <div
+                    className={`wistia_embed wistia_async_${this.props.video}`}
+                    id="video-div"
+                    style={{height: `257px`, width: `466px`}}
+                >
+                    &nbsp;
+                </div>
+            </div>
+        );
+    }
+}
 
 VideoStep.propTypes = {
-    dragging: PropTypes.bool.isRequired,
+    expanded: PropTypes.bool.isRequired,
     video: PropTypes.string.isRequired
 };
 
@@ -123,6 +158,7 @@ const ImageStep = ({title, image}) => (
             <img
                 className={styles.stepImage}
                 draggable={false}
+                key={image} /* Use src as key to prevent hanging around on slow connections */
                 src={image}
             />
         </div>
@@ -256,6 +292,7 @@ const Cards = props => {
         onShowAll,
         onNextStep,
         onPrevStep,
+        showVideos,
         step,
         expanded,
         ...posProps
@@ -298,6 +335,7 @@ const Cards = props => {
         >
             <Draggable
                 bounds="parent"
+                cancel="#video-div" // disable dragging on video div
                 position={{x: x, y: y}}
                 onDrag={onDrag}
                 onStart={onStartDrag}
@@ -323,10 +361,18 @@ const Cards = props => {
                                 />
                             ) : (
                                 steps[step].video ? (
-                                    <VideoStep
-                                        dragging={dragging}
-                                        video={translateVideo(steps[step].video, locale)}
-                                    />
+                                    showVideos ? (
+                                        <VideoStep
+                                            dragging={dragging}
+                                            expanded={expanded}
+                                            video={translateVideo(steps[step].video, locale)}
+                                        />
+                                    ) : ( // Else show the deck image and title
+                                        <ImageStep
+                                            image={content[activeDeckId].img}
+                                            title={content[activeDeckId].name}
+                                        />
+                                    )
                                 ) : (
                                     <ImageStep
                                         image={translateImage(steps[step].image, locale)}
@@ -376,9 +422,19 @@ Cards.propTypes = {
     onShowAll: PropTypes.func,
     onShrinkExpandCards: PropTypes.func.isRequired,
     onStartDrag: PropTypes.func,
+    showVideos: PropTypes.bool,
     step: PropTypes.number.isRequired,
     x: PropTypes.number,
     y: PropTypes.number
 };
 
-export default Cards;
+Cards.defaultProps = {
+    showVideos: true
+};
+
+export {
+    Cards as default,
+    // Others exported for testability
+    ImageStep,
+    VideoStep
+};

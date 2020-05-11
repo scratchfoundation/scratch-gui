@@ -55,10 +55,7 @@ const base = {
                     ['react-intl', {
                         messagesDir: './translations/messages/'
                     }]],
-                presets: [
-                    ['@babel/preset-env', {targets: {browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']}}],
-                    '@babel/preset-react'
-                ]
+                presets: ['@babel/preset-env', '@babel/preset-react']
             }
         },
         {
@@ -81,9 +78,7 @@ const base = {
                         return [
                             postcssImport,
                             postcssVars,
-                            autoprefixer({
-                                browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
-                            })
+                            autoprefixer
                         ];
                     }
                 }
@@ -224,6 +219,12 @@ module.exports = [
                 new CopyWebpackPlugin([{
                     from: 'extension-worker.{js,js.map}',
                     context: 'node_modules/scratch-vm/dist/web'
+                }]),
+                // Include library JSON files for scratch-desktop to use for downloading
+                new CopyWebpackPlugin([{
+                    from: 'src/lib/libraries/*.json',
+                    to: 'libraries',
+                    flatten: true
                 }])
             ])
         })) : []

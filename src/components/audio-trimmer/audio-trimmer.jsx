@@ -3,11 +3,12 @@ import React from 'react';
 import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import styles from './audio-trimmer.css';
-import handleIcon from './icon--handle.svg';
+import SelectionHandle from './selection-handle.jsx';
+import Playhead from './playhead.jsx';
 
 const AudioTrimmer = props => (
     <div
-        className={styles.absolute}
+        className={classNames(styles.absolute, styles.trimmer)}
         ref={props.containerRef}
     >
         {props.trimStart === null ? null : (
@@ -20,28 +21,16 @@ const AudioTrimmer = props => (
                 onTouchStart={props.onTrimStartMouseDown}
             >
                 <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
-                <Box className={classNames(styles.trimLine, styles.startTrimLine)}>
-                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.startTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.startTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                </Box>
+                <SelectionHandle
+                    handleStyle={styles.leftHandle}
+                />
             </Box>
         )}
-
         {props.playhead ? (
-            <div className={styles.playheadContainer}>
-                <div
-                    className={classNames(styles.trimLine, styles.playhead)}
-                    style={{
-                        transform: `translateX(${100 * props.playhead}%)`
-                    }}
-                />
-            </div>
+            <Playhead
+                playbackPosition={props.playhead}
+            />
         ) : null}
-
         {props.trimEnd === null ? null : (
             <Box
                 className={classNames(styles.absolute, styles.trimBackground, styles.endTrimBackground)}
@@ -53,14 +42,9 @@ const AudioTrimmer = props => (
                 onTouchStart={props.onTrimEndMouseDown}
             >
                 <Box className={classNames(styles.absolute, styles.trimBackgroundMask)} />
-                <Box className={classNames(styles.trimLine, styles.endTrimLine)}>
-                    <Box className={classNames(styles.trimHandle, styles.topTrimHandle, styles.endTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                    <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle, styles.endTrimHandle)}>
-                        <img src={handleIcon} />
-                    </Box>
-                </Box>
+                <SelectionHandle
+                    handleStyle={styles.rightHandle}
+                />
             </Box>
         )}
     </div>

@@ -15,6 +15,8 @@ class LibraryItem extends React.PureComponent {
             'handleKeyPress',
             'handleMouseEnter',
             'handleMouseLeave',
+            'handlePlay',
+            'handleStop',
             'rotateIcon',
             'startRotatingIcons',
             'stopRotatingIcons'
@@ -37,7 +39,9 @@ class LibraryItem extends React.PureComponent {
         e.preventDefault();
     }
     handleFocus (id) {
-        this.handleMouseEnter(id);
+        if (!this.props.showPlayButton) {
+            this.handleMouseEnter(id);
+        }
     }
     handleKeyPress (e) {
         if (e.key === ' ' || e.key === 'Enter') {
@@ -46,21 +50,33 @@ class LibraryItem extends React.PureComponent {
         }
     }
     handleMouseEnter () {
-        this.props.onMouseEnter(this.props.id);
-        if (this.props.icons && this.props.icons.length) {
-            this.stopRotatingIcons();
-            this.setState({
-                isRotatingIcon: true
-            }, this.startRotatingIcons);
+        // only show hover effects on the item if not showing a play button
+        if (!this.props.showPlayButton) {
+            this.props.onMouseEnter(this.props.id);
+            if (this.props.icons && this.props.icons.length) {
+                this.stopRotatingIcons();
+                this.setState({
+                    isRotatingIcon: true
+                }, this.startRotatingIcons);
+            }
         }
     }
     handleMouseLeave () {
-        this.props.onMouseLeave(this.props.id);
-        if (this.props.icons && this.props.icons.length) {
-            this.setState({
-                isRotatingIcon: false
-            }, this.stopRotatingIcons);
+        // only show hover effects on the item if not showing a play button
+        if (!this.props.showPlayButton) {
+            this.props.onMouseLeave(this.props.id);
+            if (this.props.icons && this.props.icons.length) {
+                this.setState({
+                    isRotatingIcon: false
+                }, this.stopRotatingIcons);
+            }
         }
+    }
+    handlePlay () {
+        this.props.onMouseEnter(this.props.id);
+    }
+    handleStop () {
+        this.props.onMouseLeave(this.props.id);
     }
     startRotatingIcons () {
         this.rotateIcon();
@@ -76,14 +92,16 @@ class LibraryItem extends React.PureComponent {
         this.setState({iconIndex: nextIconIndex});
     }
     curIconMd5 () {
+        const iconMd5Prop = this.props.iconMd5;
         if (this.props.icons &&
             this.state.isRotatingIcon &&
-            this.state.iconIndex < this.props.icons.length &&
-            this.props.icons[this.state.iconIndex] &&
-            this.props.icons[this.state.iconIndex].baseLayerMD5) {
-            return this.props.icons[this.state.iconIndex].baseLayerMD5;
+            this.state.iconIndex < this.props.icons.length) {
+            const icon = this.props.icons[this.state.iconIndex] || {};
+            return icon.md5ext || // 3.0 library format
+                icon.baseLayerMD5 || // 2.0 library format, TODO GH-5084
+                iconMd5Prop;
         }
-        return this.props.iconMd5;
+        return iconMd5Prop;
     }
     render () {
         const iconMd5 = this.curIconMd5();
@@ -104,13 +122,17 @@ class LibraryItem extends React.PureComponent {
                 id={this.props.id}
                 insetIconURL={this.props.insetIconURL}
                 internetConnectionRequired={this.props.internetConnectionRequired}
+                isPlaying={this.props.isPlaying}
                 name={this.props.name}
+                showPlayButton={this.props.showPlayButton}
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
                 onFocus={this.handleFocus}
                 onKeyPress={this.handleKeyPress}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
+                onPlay={this.handlePlay}
+                onStop={this.handleStop}
             />
         );
     }
@@ -131,19 +153,22 @@ LibraryItem.propTypes = {
     iconRawURL: PropTypes.string,
     icons: PropTypes.arrayOf(
         PropTypes.shape({
-            baseLayerMD5: PropTypes.string
+            baseLayerMD5: PropTypes.string, // 2.0 library format, TODO GH-5084
+            md5ext: PropTypes.string // 3.0 library format
         })
     ),
     id: PropTypes.number.isRequired,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
+    isPlaying: PropTypes.bool,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
     ]),
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    showPlayButton: PropTypes.bool
 };
 
 export default injectIntl(LibraryItem);

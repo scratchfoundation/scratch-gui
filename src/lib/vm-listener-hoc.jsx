@@ -60,9 +60,9 @@ const vmListenerHOC = function (WrappedComponent) {
                 this.props.vm.postIOData('userData', {username: this.props.username});
             }
 
-            // Re-request a targets update when the shouldEmitUpdate state changes to true
+            // Re-request a targets update when the shouldUpdateTargets state changes to true
             // i.e. when the editor transitions out of fullscreen/player only modes
-            if (this.props.shouldEmitUpdates && !prevProps.shouldEmitUpdates) {
+            if (this.props.shouldUpdateTargets && !prevProps.shouldUpdateTargets) {
                 this.props.vm.emitTargetsUpdate(false /* Emit the event, but do not trigger project change */);
             }
         }
@@ -74,12 +74,12 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleProjectChanged () {
-            if (this.props.shouldEmitUpdates && !this.props.projectChanged) {
+            if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {
                 this.props.onProjectChanged();
             }
         }
         handleTargetsUpdate (data) {
-            if (this.props.shouldEmitUpdates) {
+            if (this.props.shouldUpdateTargets) {
                 this.props.onTargetsUpdate(data);
             }
         }
@@ -87,9 +87,9 @@ const vmListenerHOC = function (WrappedComponent) {
             // Don't capture keys intended for Blockly inputs.
             if (e.target !== document && e.target !== document.body) return;
 
+            const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
-                keyCode: e.keyCode,
-                key: e.key,
+                key: key,
                 isDown: true
             });
 
@@ -102,9 +102,9 @@ const vmListenerHOC = function (WrappedComponent) {
         handleKeyUp (e) {
             // Always capture up events,
             // even those that have switched to other targets.
+            const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
-                keyCode: e.keyCode,
-                key: e.key,
+                key: key,
                 isDown: false
             });
 
@@ -118,7 +118,8 @@ const vmListenerHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
                 projectChanged,
-                shouldEmitUpdates,
+                shouldUpdateTargets,
+                shouldUpdateProjectChanged,
                 onBlockDragUpdate,
                 onGreenFlag,
                 onKeyDown,
@@ -158,7 +159,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
         projectChanged: PropTypes.bool,
-        shouldEmitUpdates: PropTypes.bool,
+        shouldUpdateTargets: PropTypes.bool,
+        shouldUpdateProjectChanged: PropTypes.bool,
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM).isRequired
     };
@@ -170,8 +172,10 @@ const vmListenerHOC = function (WrappedComponent) {
         projectChanged: state.scratchGui.projectChanged,
         // Do not emit target or project updates in fullscreen or player only mode
         // or when recording sounds (it leads to garbled recordings on low-power machines)
-        shouldEmitUpdates: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly &&
+        shouldUpdateTargets: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly &&
             !state.scratchGui.modals.soundRecorder,
+        // Do not update the projectChanged state in fullscreen or player only mode
+        shouldUpdateProjectChanged: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly,
         vm: state.scratchGui.vm,
         username: state.session && state.session.session && state.session.session.user ?
             state.session.session.user.username : ''

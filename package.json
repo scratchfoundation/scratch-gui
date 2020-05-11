@@ -151,6 +151,6 @@
   },
   "dependencies": {
     "lodash.camelcase": "^4.3.0",
-    "scratch-vm": "github:smalruby/scratch-vm#smalrubot-s1-extension"
+    "scratch-vm": "github:smalruby/scratch-vm#develop"
   }
 }

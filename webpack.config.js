@@ -143,7 +143,14 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
                 template: 'src/playground/index.ejs',
-                title: 'Smalruby 3.0 GUI',
+                title: 'Smalruby',
+                sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib.min', 'gui'],
+                template: 'src/playground/index.ejs',
+                filename: 'ja.html',
+                title: 'スモウルビー',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({

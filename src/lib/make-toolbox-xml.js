@@ -752,14 +752,34 @@ const martyMoves = function(){
     `;
 };
 
+const martySense = function(){
+    return `
+    <category
+        name="Marty Sense"
+        id="mv2sense"
+        colour="#37abc8"
+        secondaryColour="#FFDA61"
+        iconURI="static/marty_icon.svg">
+        <block type="mv2_demo_sensor" />
+    </category>
+    `;
+}
+
 const martyDebug = function(){
     return `
     <category
         name="Marty Debug"
-        id="mv2"
+        id="mv2debug"
         colour="#37abc8"
         secondaryColour="#FFDA61"
         iconURI="static/marty_icon.svg">
+        <block type="mv2_set_demo_sensor" >
+            <value name="SENSORVAL">
+                <shadow type="math_number">
+                    <field name="NUM">42</field>
+                </shadow>
+            </value>
+        </block>
         <block type="mv2_set_ip" >
             <value name="IP">
                 <shadow type="text">
@@ -814,6 +834,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
     const martyMovesXML = moveCategory('mv2') || martyMoves(isStage, targetId);
+    const martySenseXML = moveCategory('mv2') || martySense(isStage, targetId);
     const martyDebugXML = moveCategory('mv2') || martyDebug(isStage, targetId);
 
     const everything = [
@@ -827,6 +848,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         operatorsXML, gap,
         variablesXML, gap,
         martyMovesXML, gap,
+        martySenseXML, gap,
         martyDebugXML, gap,
         myBlocksXML
     ];

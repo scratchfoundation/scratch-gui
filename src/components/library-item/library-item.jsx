@@ -176,7 +176,7 @@ LibraryItemComponent.propTypes = {
     onKeyPress: PropTypes.func.isRequired,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    wifiConnectionRequired: PropTypes.bool
+    wifiConnectionRequired: PropTypes.bool,
     onPlay: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
     showPlayButton: PropTypes.bool

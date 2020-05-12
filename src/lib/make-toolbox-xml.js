@@ -710,6 +710,67 @@ const myBlocks = function () {
     `;
 };
 
+const martyMoves = function(){  
+    // "%1 %2 Walk %3 steps, step length %4, step time %5, turn %6 \%",
+    return `
+    <category
+        name="Marty Moves"
+        id="mv2"
+        colour="#37abc8"
+        secondaryColour="#FFDA61"
+        iconURI="static/marty_icon.svg">
+        <block type="mv2_walk" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">20</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1.5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="mv2_wiggle" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+};
+
+const martyDebug = function(){
+    return `
+    <category
+        name="Marty Debug"
+        id="mv2"
+        colour="#37abc8"
+        secondaryColour="#FFDA61"
+        iconURI="static/marty_icon.svg">
+        <block type="mv2_set_ip" >
+            <value name="IP">
+                <shadow type="text">
+                    <field name="TEXT">192.168.0.27</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+}
+
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -752,6 +813,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
+    const martyMovesXML = moveCategory('mv2') || martyMoves(isStage, targetId);
+    const martyDebugXML = moveCategory('mv2') || martyDebug(isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -763,6 +826,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
+        martyMovesXML, gap,
+        martyDebugXML, gap,
         myBlocksXML
     ];
 

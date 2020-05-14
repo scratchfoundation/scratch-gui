@@ -44,6 +44,11 @@ class GUI extends React.Component {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
+
+        // added by joe
+        if(window.scratchConfig && 'handleVmInitialized' in window.scratchConfig){
+            window.scratchConfig.handleVmInitialized(this.props.vm)
+        }
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -53,6 +58,12 @@ class GUI extends React.Component {
             // this only notifies container when a project changes from not yet loaded to loaded
             // At this time the project view in www doesn't need to know when a project is unloaded
             this.props.onProjectLoaded();
+
+            //added by joe 加载项目回调
+            if(window.scratchConfig && 'handleProjectLoaded' in window.scratchConfig){
+                console.log("项目加载成功")
+                window.scratchConfig.handleProjectLoaded(this.props.vm)
+            }
         }
     }
     render () {

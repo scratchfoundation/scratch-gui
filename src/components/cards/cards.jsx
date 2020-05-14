@@ -88,17 +88,17 @@ const CardHeader = ({onCloseCards, onShrinkExpandCards, onShowAll, totalSteps, s
 class VideoStep extends React.Component {
 
     componentDidMount () {
-        const script = document.createElement('script');
-        script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
-        script.async = true;
-        script.setAttribute('id', 'wistia-video-content');
-        document.body.appendChild(script);
+        // const script = document.createElement('script');
+        // script.src = `https://fast.wistia.com/embed/medias/${this.props.video}.jsonp`;
+        // script.async = true;
+        // script.setAttribute('id', 'wistia-video-content');
+        // document.body.appendChild(script);
 
-        const script2 = document.createElement('script');
-        script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
-        script2.async = true;
-        script2.setAttribute('id', 'wistia-video-api');
-        document.body.appendChild(script2);
+        // const script2 = document.createElement('script');
+        // script2.src = 'https://fast.wistia.com/assets/external/E-v1.js';
+        // script2.async = true;
+        // script2.setAttribute('id', 'wistia-video-api');
+        // document.body.appendChild(script2);
     }
 
     // We use the Wistia API here to update or pause the video dynamically:

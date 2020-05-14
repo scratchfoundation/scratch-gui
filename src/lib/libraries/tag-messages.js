@@ -6,6 +6,21 @@ export default defineMessages({
         description: 'Tag for filtering a library for everything',
         id: 'gui.libraryTags.all'
     },
+    minecraft: {
+        defaultMessage: '我的世界',
+        description: 'Tag for filtering a library for plants vs zombie',
+        id: 'gui.libraryTags.minecraft'
+    },
+    pvz: {
+        defaultMessage: '植物大战僵尸',
+        description: 'Tag for filtering a library for plants vs zombie',
+        id: 'gui.libraryTags.pvz'
+    },
+    jzcode: {
+        defaultMessage: '桔子',
+        description: 'Tag for filtering a library for juzi',
+        id: 'gui.libraryTags.jzcode'
+    },
     animals: {
         defaultMessage: 'Animals',
         description: 'Tag for filtering a library for animals',

@@ -1,5 +1,6 @@
 import messages from './tag-messages.js';
 export default [
+    {tag: 'jzcode', intlLabel: messages.jzcode},
     {tag: 'animals', intlLabel: messages.animals},
     {tag: 'effects', intlLabel: messages.effects},
     {tag: 'loops', intlLabel: messages.loops},

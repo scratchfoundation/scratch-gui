@@ -74,24 +74,24 @@ const projectData = translateFunction => {
                 currentCostume: 0,
                 costumes: [
                     {
-                        assetId: '01ae57fd339529445cb890978ef8a054',
+                        assetId: '7499cf6ec438d0c7af6f896bc6adc294',
                         name: translator(messages.costume, {index: 1}),
                         bitmapResolution: 1,
-                        md5ext: '01ae57fd339529445cb890978ef8a054.svg',
+                        md5ext: '7499cf6ec438d0c7af6f896bc6adc294.svg',
                         dataFormat: 'svg',
-                        rotationCenterX: 46,
-                        rotationCenterY: 53
+                        rotationCenterX: 87,
+                        rotationCenterY: 39
                     }
                 ],
                 sounds: [
                     {
-                        assetId: '83c36d806dc92327b9e7049a565c6bff',
+                        assetId: 'cf51a0c4088942d95bcc20af13202710',
                         name: translator(messages.meow),
                         dataFormat: 'wav',
                         format: '',
-                        rate: 22050,
-                        sampleCount: 18688,
-                        md5ext: '83c36d806dc92327b9e7049a565c6bff.wav'
+                        rate: 44100,
+                        sampleCount: 26048,
+                        md5ext: 'cf51a0c4088942d95bcc20af13202710.wav'
                     }
                 ],
                 volume: 100,

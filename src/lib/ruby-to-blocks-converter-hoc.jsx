@@ -60,6 +60,7 @@ const RubyToBlocksConverterHOC = function (WrappedComponent) {
                     this.props.updateRubyCodeErrorsState(converter.errors);
                     return converter;
                 }
+                this.props.updateRubyCodeErrorsState(converter.errors);
                 this.props.convertedRubyCodeState();
                 return converter;
             }

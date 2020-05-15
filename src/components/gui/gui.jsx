@@ -105,6 +105,7 @@ const GUIComponent = props => {
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
+        onShowPrivacyPolicy,
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
@@ -162,6 +163,7 @@ const GUIComponent = props => {
                         onOptIn={onTelemetryModalOptIn}
                         onOptOut={onTelemetryModalOptOut}
                         onRequestClose={onRequestCloseTelemetryModal}
+                        onShowPrivacyPolicy={onShowPrivacyPolicy}
                     />
                 ) : null}
                 {loading ? (
@@ -399,6 +401,7 @@ GUIComponent.propTypes = {
     onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
+    onShowPrivacyPolicy: PropTypes.func,
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,

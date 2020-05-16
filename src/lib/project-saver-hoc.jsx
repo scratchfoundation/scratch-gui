@@ -12,7 +12,8 @@ import saveProjectToServer from '../lib/save-project-to-server';
 
 import {
     showAlertWithTimeout,
-    showStandardAlert
+    showStandardAlert,
+    showAssetAlert
 } from '../reducers/alerts';
 import {setAutoSaveTimeoutId} from '../reducers/timeout';
 import {setProjectUnchanged} from '../reducers/project-changed';
@@ -50,7 +51,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             bindAll(this, [
                 'getProjectThumbnail',
                 'leavePageConfirm',
-                'tryToAutoSave'
+                'tryToAutoSave',
+                'getAssetNameUsageFromAsset'
             ]);
         }
         componentWillMount () {
@@ -123,6 +125,88 @@ const ProjectSaverHOC = function (WrappedComponent) {
             this.props.onSetProjectThumbnailer(null);
             this.props.onSetProjectSaver(null);
         }
+        getAssetNameUsageFromAsset (asset) {
+            if (asset.assetType === storage.AssetType.Sound) {
+                const sound = this.props.vm.runtime.targets.reduce(
+                    (acc, cur) => [...acc, ...cur.sprite.sounds], []
+                ).find(s => s.asset === asset);
+                return ({
+                    type: 'sound',
+                    assetName: sound.name || ''
+                });
+            }
+            const backdrop = this.props.vm.runtime.getTargetForStage().sprite.costumes.find(c => c.asset === asset);
+            if (backdrop) {
+                return ({
+                    type: 'backdrop',
+                    assetName: backdrop.name || ''
+                });
+            }
+            const costume = this.props.vm.runtime.targets.reduce(
+                (acc, cur) => [...acc, ...cur.sprite.costumes], []
+            ).find(s => s.asset === asset);
+            return ({
+                type: 'costume',
+                assetName: costume.name || ''
+            });
+        }
+        getErrorNameFromCode (err) {
+            /*
+              Any error raised during the saving process will go through this function.
+              This should return the error code (alert name) specific to the problem,
+              or 'savingError' if there is no appropriate one.
+
+              List of Errors this should handle:
+
+              Number - raised by FetchTool (in scratch-storage) or save-project-to-server L48
+              This is for HTTP status code.
+              - 401, 403: Unauthorized. This usually happens with invalid session; this may also
+              happen if the user gets banned while editing the project. However this is not the usual case
+              so just use savingErrorInvalidSession.
+              You cannot retry nor close the alert; the user must download the project and re-login.
+              @todo prompt user to log into Scratch inside the editor
+
+              - 413: Payload Too Large. This happens when the asset or the JSON is too large to save.
+              However, this function only returns temporary message savingErrorTooLarge. updateProjectToStorage
+              should call getAssetNameUsageFromAsset when this gets returned, and use correct message.
+              For JSON, storeProject should handle the error.
+              You cannot retry, but you can close the alert.
+
+              - 500, 503: Server is down. You can retry, but cannot close the alert.
+
+
+              String - not sure where it would come from, but just in case.
+              'savingErrorJSONTooLarge' is an exception - this should be passed if the JSON is too big,
+              because 413 returns the message for the asset.
+
+              Error and subclass - There are many cases:
+              - starts with JSON.parse: From save-project-to-server L54
+              The server should return JSON, so if it didn't it's the server's fault, so
+              this is handled like 50x errors.
+
+              - starts with NetworkError: From fetch
+              This usually happens when the user is disconnected from Internet.
+              You can retry, and the alert cannot be closed.
+            */
+
+            if (err instanceof Error) {
+                // save-project-to-server may raise error if the returned JSON is invalid
+                if (err.message.startsWith('JSON.parse')) return 'savingErrorServerProblems';
+                // raised by fetch e.g. Internet disconnected
+                if (err.message.startsWith('NetworkError')) return 'savingErrorNetworkProblems';
+            }
+            switch (err) {
+            case 413: return 'savingErrorTooLarge'; // asset
+            case 'savingErrorJSONTooLarge': return err; // JSON
+            case 'Forbidden':
+            case 'Unauthorized':
+            case 403:
+            case 401: return 'savingErrorInvalidSession';
+            case 500:
+            case 503: return 'savingErrorServerProblems';
+            default: return 'savingError';
+            }
+        }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
                 // both methods of returning a value may be necessary for browser compatibility
@@ -162,9 +246,19 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     this.props.onShowSaveSuccessAlert();
                 })
                 .catch(err => {
-                    // Always show the savingError alert because it gives the
-                    // user the chance to download or retry the save manually.
-                    this.props.onShowAlert('savingError');
+                    if (err.error === 'savingErrorTooLarge') {
+                        const {type, assetName} = this.getAssetNameUsageFromAsset(err.asset);
+                        let message = '';
+                        switch (type) {
+                        case 'costume': message = 'savingErrorCostumeTooLarge'; break;
+                        case 'backdrop': message = 'savingErrorBackdropTooLarge'; break;
+                        case 'sound': message = 'savingErrorSoundTooLarge'; break;
+                        default: message = 'savingError';
+                        }
+                        this.props.onShowAssetAlert(message, assetName);
+                    } else {
+                        this.props.onShowAlert(err.error || 'savingError');
+                    }
                     this.props.onProjectError(err);
                 });
         }
@@ -234,17 +328,29 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         asset.dataFormat,
                         asset.data,
                         asset.assetId
-                    ).then(response => {
-                        // Asset servers respond with {status: ok} for successful POSTs
-                        if (response.status !== 'ok') {
-                            // Errors include a `code` property, e.g. "Forbidden"
-                            return Promise.reject(response.code);
-                        }
+                    ).then(() => {
                         asset.clean = true;
                     })
+                        .catch(err => Promise.reject({
+                            asset,
+                            error: this.getErrorNameFromCode(err)
+                        }))
                 )
             )
                 .then(() => this.props.onUpdateProjectData(projectId, savedVMState, requestParams))
+                .catch(err => {
+                    if (typeof err !== 'object' || err instanceof Error) {
+                        if (err === 413) {
+                            return Promise.reject({
+                                error: 'savingErrorJSONTooLarge'
+                            });
+                        }
+                        return Promise.reject({
+                            error: this.getErrorNameFromCode(err)
+                        });
+                    }
+                    return Promise.reject(err);
+                })
                 .then(response => {
                     this.props.onSetProjectUnchanged();
                     const id = response.id.toString();
@@ -382,6 +488,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onSetProjectThumbnailer: PropTypes.func.isRequired,
         onSetProjectUnchanged: PropTypes.func.isRequired,
         onShowAlert: PropTypes.func,
+        onShowAssetAlert: PropTypes.func,
         onShowCopySuccessAlert: PropTypes.func,
         onShowCreatingCopyAlert: PropTypes.func,
         onShowCreatingRemixAlert: PropTypes.func,
@@ -434,6 +541,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         onProjectError: error => dispatch(projectError(error)),
         onSetProjectUnchanged: () => dispatch(setProjectUnchanged()),
         onShowAlert: alertType => dispatch(showStandardAlert(alertType)),
+        onShowAssetAlert: (alertType, assetName) => dispatch(showAssetAlert(alertType, assetName)),
         onShowCopySuccessAlert: () => showAlertWithTimeout(dispatch, 'createCopySuccess'),
         onShowRemixSuccessAlert: () => showAlertWithTimeout(dispatch, 'createRemixSuccess'),
         onShowCreatingCopyAlert: () => showAlertWithTimeout(dispatch, 'creatingCopy'),

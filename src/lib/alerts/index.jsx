@@ -2,6 +2,8 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import keyMirror from 'keymirror';
 
+import alertMessages from './alert-messages';
+
 import successImage from '../assets/icon--success.svg';
 
 const AlertTypes = keyMirror({
@@ -16,12 +18,37 @@ const AlertLevels = {
     WARN: 'warn'
 };
 
+const SAVING_INFO = [
+    'createSuccess',
+    'creating',
+    'createCopySuccess',
+    'creatingCopy',
+    'createRemixSuccess',
+    'creatingRemix',
+    'saveSuccess',
+    'saving'
+];
+
+const SAVING = [
+    'saving',
+    'saveSuccess',
+    'savingError',
+    'savingErrorCostumeTooLarge',
+    'savingErrorBackdropTooLarge',
+    'savingErrorSoundTooLarge',
+    'savingErrorJSONTooLarge',
+    'savingErrorNetworkProblems',
+    'savingErrorServerProblems',
+    'savingErrorInvalidSession'
+];
+
+/* eslint-disable max-len */
+
 const alerts = [
     {
         alertId: 'createSuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="New project created."
@@ -36,8 +63,7 @@ const alerts = [
     {
         alertId: 'createCopySuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="Project saved as a copy."
@@ -52,8 +78,7 @@ const alerts = [
     {
         alertId: 'createRemixSuccess',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="Project saved as a remix."
@@ -68,8 +93,7 @@ const alerts = [
     {
         alertId: 'creating',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="Creating new…"
@@ -83,8 +107,7 @@ const alerts = [
     {
         alertId: 'creatingCopy',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="Copying project…"
@@ -98,8 +121,7 @@ const alerts = [
     {
         alertId: 'creatingRemix',
         alertType: AlertTypes.STANDARD,
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         content: (
             <FormattedMessage
                 defaultMessage="Remixing project…"
@@ -112,8 +134,7 @@ const alerts = [
     },
     {
         alertId: 'creatingError',
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         closeButton: true,
         content: (
             <FormattedMessage
@@ -126,8 +147,7 @@ const alerts = [
     },
     {
         alertId: 'savingError',
-        clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
-            'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
+        clearList: SAVING_INFO,
         showDownload: true,
         showSaveNow: true,
         closeButton: false,
@@ -141,9 +161,92 @@ const alerts = [
         level: AlertLevels.WARN
     },
     {
+        alertId: 'savingErrorCostumeTooLarge',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        closeButton: true,
+        content: (formatMessage, assetName) => formatMessage(alertMessages.savingErrorCostumeTooLarge, {assetName}),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorBackdropTooLarge',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        closeButton: true,
+        content: (formatMessage, assetName) => formatMessage(alertMessages.savingErrorBackdropTooLarge, {assetName}),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorSoundTooLarge',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        closeButton: true,
+        content: (formatMessage, assetName) => formatMessage(alertMessages.savingErrorSoundTooLarge, {assetName}),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorJSONTooLarge',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        closeButton: true,
+        content: (
+            <FormattedMessage
+                defaultMessage="Project could not be saved because it is too large. Remove unused code or reduce list sizes and try again."
+                description="Message indicating that project could not be saved because it is too large"
+                id="gui.alerts.savingErrorJSONTooLarge"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorNetworkProblems',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        showSaveNow: true,
+        closeButton: false,
+        content: (
+            <FormattedMessage
+                defaultMessage="Project could not be saved due to network problems. Check your Internet connection. You can also download the project."
+                description="Message indicating that project could not be saved due to network problems"
+                id="gui.alerts.savingErrorNetworkProblems"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorServerProblems',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        showSaveNow: true,
+        closeButton: false,
+        content: (
+            <FormattedMessage
+                defaultMessage="It looks like our server has some problems. Download the project and try again later."
+                description="Message indicating that project could not be saved due to server problems"
+                id="gui.alerts.savingErrorServerProblems"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'savingErrorInvalidSession',
+        clearList: SAVING_INFO,
+        showDownload: true,
+        showSaveNow: false,
+        closeButton: false,
+        content: (
+            <FormattedMessage
+                defaultMessage="It looks like you are logged out of Scratch. Download the project, log in and try again."
+                description="Message indicating that project could not be saved because the user is logged out"
+                id="gui.alerts.savingErrorInvalidSession"
+            />
+        ),
+        level: AlertLevels.WARN
+    },
+    {
         alertId: 'saveSuccess',
         alertType: AlertTypes.INLINE,
-        clearList: ['saveSuccess', 'saving', 'savingError'],
+        clearList: SAVING,
         content: (
             <FormattedMessage
                 defaultMessage="Project saved."
@@ -158,7 +261,7 @@ const alerts = [
     {
         alertId: 'saving',
         alertType: AlertTypes.INLINE,
-        clearList: ['saveSuccess', 'saving', 'savingError'],
+        clearList: SAVING,
         content: (
             <FormattedMessage
                 defaultMessage="Saving project…"
@@ -214,6 +317,8 @@ const alerts = [
         level: AlertLevels.SUCCESS
     }
 ];
+
+/* eslint-enable max-len */
 
 export {
     alerts as default,

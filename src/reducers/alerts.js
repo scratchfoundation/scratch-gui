@@ -67,6 +67,7 @@ const reducer = function (state, action) {
                 newAlert.level = alertData.level;
                 newAlert.showDownload = alertData.showDownload;
                 newAlert.showSaveNow = alertData.showSaveNow;
+                newAlert.assetName = alertData.assetName;
 
                 newList.push(newAlert);
                 return Object.assign({}, state, {
@@ -177,6 +178,21 @@ const showStandardAlert = function (alertId) {
 };
 
 /**
+ * Action creator to show an alert with the asset name.
+ *
+ * @param {string} alertId - id string of the alert to show
+ * @param {string} assetName - asset name associated with the alert
+ * @return {object} - an object to be passed to the reducer.
+ */
+const showAssetAlert = function (alertId, assetName) {
+    return {
+        type: SHOW_ALERT,
+        alertId,
+        assetName
+    };
+};
+
+/**
  * Action creator to show an alert with the given input data.
  *
  * @param {object} data - data for the alert
@@ -219,5 +235,6 @@ export {
     filterPopupAlerts,
     showAlertWithTimeout,
     showExtensionAlert,
-    showStandardAlert
+    showStandardAlert,
+    showAssetAlert
 };

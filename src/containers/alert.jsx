@@ -2,6 +2,7 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {intlShape, injectIntl} from 'react-intl';
 import SB3Downloader from './sb3-downloader.jsx';
 import AlertComponent from '../components/alerts/alert.jsx';
 import {openConnectionModal} from '../reducers/modals';
@@ -25,6 +26,7 @@ class Alert extends React.Component {
     }
     render () {
         const {
+            assetName,
             closeButton,
             content,
             extensionName,
@@ -38,11 +40,13 @@ class Alert extends React.Component {
             showReconnect,
             showSaveNow
         } = this.props;
+        let realContent = content;
+        if (typeof content === 'function') realContent = content(this.props.intl.formatMessage, assetName);
         return (
             <SB3Downloader>{(_, downloadProject) => (
                 <AlertComponent
                     closeButton={closeButton}
-                    content={content}
+                    content={realContent}
                     extensionName={extensionName}
                     iconSpinner={iconSpinner}
                     iconURL={iconURL}
@@ -74,13 +78,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Alert.propTypes = {
+    assetName: PropTypes.string,
     closeButton: PropTypes.bool,
-    content: PropTypes.element,
+    content: PropTypes.oneOf(PropTypes.element, PropTypes.func),
     extensionId: PropTypes.string,
     extensionName: PropTypes.string,
     iconSpinner: PropTypes.bool,
     iconURL: PropTypes.string,
     index: PropTypes.number,
+    intl: intlShape,
     level: PropTypes.string.isRequired,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
@@ -91,7 +97,7 @@ Alert.propTypes = {
     showSaveNow: PropTypes.bool
 };
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Alert);
+)(Alert));

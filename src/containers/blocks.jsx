@@ -355,7 +355,11 @@ class Blocks extends React.Component {
             this.props.updateToolboxState(toolboxXML);
         }
 
-        if (this.props.vm.editingTarget && !this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
+        // For some reason, calling clearWorkspaceAndLoadFromXml sets this.state.workspaceMetrics... synchronously?
+        // Ensure that we're retaining the old metrics *before* reloading the workspace.
+        const oldMetrics = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
+
+        if (this.props.vm.editingTarget && !oldMetrics) {
             this.onWorkspaceMetricsChange();
         }
 
@@ -381,8 +385,8 @@ class Blocks extends React.Component {
         }
         this.workspace.addChangeListener(this.props.vm.blockListener);
 
-        if (this.props.vm.editingTarget && this.state.workspaceMetrics[this.props.vm.editingTarget.id]) {
-            const {scrollX, scrollY, scale} = this.state.workspaceMetrics[this.props.vm.editingTarget.id];
+        if (this.props.vm.editingTarget && oldMetrics) {
+            const {scrollX, scrollY, scale} = oldMetrics;
             this.workspace.scrollX = scrollX;
             this.workspace.scrollY = scrollY;
             this.workspace.scale = scale;

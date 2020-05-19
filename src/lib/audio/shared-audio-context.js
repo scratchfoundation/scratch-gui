@@ -1,5 +1,5 @@
-import StartAudioContext from "startaudiocontext";
-import bowser from "bowser";
+import StartAudioContext from 'startaudiocontext';
+import bowser from 'bowser';
 
 let AUDIO_CONTEXT;
 
@@ -8,9 +8,9 @@ if (!bowser.msie) {
      * AudioContext can be initialized only when user interaction event happens
      */
     const event =
-        typeof document.ontouchstart === "undefined"
-            ? "mousedown"
-            : "touchstart";
+        typeof document.ontouchstart === 'undefined' ?
+            'mousedown' :
+            'touchstart';
     const initAudioContext = () => {
         document.removeEventListener(event, initAudioContext);
         AUDIO_CONTEXT = new (window.AudioContext ||

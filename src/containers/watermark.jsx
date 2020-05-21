@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ThrottledPropertyHOC from '../lib/throttled-property-hoc.jsx';
+import DebouncedPropertyHOC from '../lib/debounced-property-hoc.jsx';
 
 import VM from 'scratch-vm';
 import storage from '../lib/storage';
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
 const ConnectedComponent = connect(
     mapStateToProps
 )(
-    ThrottledPropertyHOC('asset', 500)(Watermark)
+    DebouncedPropertyHOC('asset', 500)(Watermark)
 );
 
 export default ConnectedComponent;

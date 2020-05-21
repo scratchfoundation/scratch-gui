@@ -40,11 +40,12 @@ const DebouncedPropertyHOC = function (propName, throttleTime) {
                 if (!this._timeout) {
                     // We are not throttled.
                     this._timeout = setTimeout(() => {
-                        this._timeout = null;
                         this._useInstead = null;
                         // This will re-render when we receive.
                         this.setState({
                             propValue: this.props[propName]
+                        }, () => {
+                            this._timeout = null;
                         });
                     }, throttleTime);
                     this._useInstead = this.props[propName];

@@ -7,6 +7,7 @@ const {
     clickXpath,
     findByText,
     findByXpath,
+    textExists,
     getDriver,
     getLogs,
     Key,
@@ -93,6 +94,13 @@ describe('Working with the blocks', () => {
         await clickButton('OK');
         await findByXpath("//input[@step='0.01'][@max='100.1']");
 
+        // Hiding the monitor via context menu should work
+        await rightClickText('score', scope.monitors);
+        await clickText('hide', scope.contextMenu);
+        await driver.sleep(100);
+        const monitorExists = await textExists('score', scope.monitors);
+        await expect(monitorExists).toBeFalsy();
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
@@ -126,6 +134,13 @@ describe('Working with the blocks', () => {
         // Check that the list value has been propagated.
         await clickText('list1', scope.blocksTab);
         await findByText('thing thing thing thing2', scope.reportedValue); // Tooltip with result
+
+        // Hiding the monitor via context menu should work
+        await rightClickText('list1', scope.monitors);
+        await clickText('hide', scope.contextMenu);
+        await driver.sleep(100);
+        const monitorExists = await textExists('list1', scope.monitors);
+        await expect(monitorExists).toBeFalsy();
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

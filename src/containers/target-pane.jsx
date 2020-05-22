@@ -195,10 +195,8 @@ class TargetPane extends React.Component {
                 }, targetId);
             } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
                 fetchCode(dragInfo.payload.bodyUrl)
-                    .then(blocks => {
-                        this.props.vm.shareBlocksToTarget(blocks, targetId);
-                        this.props.vm.refreshWorkspace();
-                    });
+                    .then(blocks => this.props.vm.shareBlocksToTarget(blocks, targetId))
+                    .then(() => this.props.vm.refreshWorkspace());
             }
         }
     }

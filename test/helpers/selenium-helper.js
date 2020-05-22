@@ -21,7 +21,9 @@ class SeleniumHelper {
             'clickXpath',
             'elementIsVisible',
             'findByText',
+            'textToXpath',
             'findByXpath',
+            'textExists',
             'getDriver',
             'getSauceDriver',
             'getLogs',
@@ -97,8 +99,17 @@ class SeleniumHelper {
             ));
     }
 
+    textToXpath (text, scope) {
+        return `//body//${scope || '*'}//*[contains(text(), '${text}')]`;
+    }
+
     findByText (text, scope) {
-        return this.findByXpath(`//body//${scope || '*'}//*[contains(text(), '${text}')]`);
+        return this.findByXpath(this.textToXpath(text, scope));
+    }
+
+    textExists (text, scope) {
+        return this.driver.findElements(By.xpath(this.textToXpath(text, scope)))
+            .then(elements => elements.length > 0);
     }
 
     loadUri (uri) {

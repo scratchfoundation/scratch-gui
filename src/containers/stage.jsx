@@ -314,8 +314,8 @@ class Stage extends React.Component {
     positionDragCanvas (mouseX, mouseY) {
         // mouseX/Y are relative to stage top/left, but dragCanvas is
         // positioned at top left of the whole viewport, so account for this.
-        const x = this.rect.x + mouseX;
-        const y = this.rect.y + mouseY;
+        const x = this.rect.left + mouseX;
+        const y = this.rect.top + mouseY;
         this.dragCanvas.style.transform = `translate(${x}px, ${y}px)`;
     }
     onStartDrag (x, y) {

@@ -18,6 +18,8 @@ export default {
     'gui.smalruby3.telemetryOptIn.body2': 'ていきょうしていただくじょうほうにはどのげんごをせんたくしたか、どのブロックをつかったか、ほぞん・よみこみ・プロジェクトのアップロードなどのイベントをふくみます。ただし、ユーザめいなどのこじんてきなじょうほうはいっさいふくみません。',
     'gui.telemetryOptIn.buttonTextNo': 'いいえ、けっこうです。',
     'gui.smalruby3.telemetryOptIn.buttonTextYes': 'はい、スモウルビーのかいぜんにきょうりょくします。',
+    'gui.smalruby3.rubyToBlocksConverter.couldNotConvertPremitive': '「{ SOURCE }」はブロックにへんかんできません。',
+    'gui.smalruby3.rubyToBlocksConverter.wrongInstruction': '「{ SOURCE }」はめいれいがまちがっています。',
     'gui.smalruby3.extension.mesh.name': 'メッシュ',
     'gui.smalruby3.extension.mesh.description': 'ネットワークじょうでユーザーかんのやりとりをおこなう。',
     'mesh.categoryName': 'メッシュ',

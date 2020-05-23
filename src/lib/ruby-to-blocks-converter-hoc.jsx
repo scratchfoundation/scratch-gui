@@ -39,16 +39,13 @@ const RubyToBlocksConverterHOC = function (WrappedComponent) {
             ]);
         }
 
-        /**
-         * targetCodeToBlocks:
-         * @return {RubyToBlocksConverter} - a block converter that translates ruby code into the blocks
-         */
-        targetCodeToBlocks () {
+        targetCodeToBlocks (intl) {
             if (this.props.rubyCode.modified) {
                 const converter = targetCodeToBlocks(
                     this.props.vm,
                     this.props.rubyCode.target,
-                    this.props.rubyCode.code
+                    this.props.rubyCode.code,
+                    intl
                 );
                 if (!converter.result) {
                     this.props.vm.setEditingTarget(this.props.rubyCode.target.id);

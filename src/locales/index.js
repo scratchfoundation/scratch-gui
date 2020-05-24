@@ -4,9 +4,9 @@ import ja from './ja';
 import jaHira from './ja-Hira';
 
 const langs = {
-    en: en,
-    ja: ja,
-    'ja-Hira': jaHira
+    "en": en,
+    "ja": ja,
+    "ja-Hira": jaHira
 };
 
 Object.keys(langs).forEach(lang => {

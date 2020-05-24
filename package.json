@@ -114,12 +114,12 @@
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20190925183642",
-    "scratch-blocks": "0.1.0-prerelease.1583243431",
-    "scratch-l10n": "3.7.20200303213115",
-    "scratch-paint": "0.2.0-prerelease.20200213174123",
-    "scratch-render": "0.1.0-prerelease.20200228152431",
-    "scratch-storage": "1.3.2",
-    "scratch-svg-renderer": "0.2.0-prerelease.20200205003400",
+    "scratch-blocks": "0.1.0-prerelease.20200520151625",
+    "scratch-l10n": "3.9.20200519213537",
+    "scratch-paint": "0.2.0-prerelease.20200519194740",
+    "scratch-render": "0.1.0-prerelease.20200512203149",
+    "scratch-storage": "1.3.3",
+    "scratch-svg-renderer": "0.2.0-prerelease.20200507183648",
     "selenium-webdriver": "3.6.0",
     "shelljs": "^0.8.3",
     "startaudiocontext": "1.2.1",
@@ -146,7 +146,8 @@
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
+      "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js",
+      "editor-msgs(\\.js)?$": "<rootDir>/test/__mocks__/editor-msgs-mock.js"
     }
   },
   "dependencies": {

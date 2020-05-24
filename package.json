@@ -1,6 +1,6 @@
 {
   "name": "smalruby3-gui",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "GraphicaL User Interface for creating and running Smalruby 3.0 projects",
   "main": "./dist/smalruby3-gui.js",
   "scripts": {

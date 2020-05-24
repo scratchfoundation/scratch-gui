@@ -92,8 +92,8 @@ const updateRubyCodeErrors = function (errors) {
         startCol: x.column,
         endRow: x.row,
         endCol: (x.source ? x.column + x.source.length : 9999),
-        type: "text",
-        className: "ruby-error"
+        type: 'text',
+        className: 'ruby-error'
     }));
     return {
         type: UPDATE_RUBYCODE_ERRORS,

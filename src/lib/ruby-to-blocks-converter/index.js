@@ -200,7 +200,9 @@ class RubyToBlocksConverter {
                 error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.message, this._getSource(e.node));
             } else if (this._context.currentNode) {
                 const loc = this._context.currentNode.$loc();
-                error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.message, this._getSource(this._context.currentNode));
+                error = this._toErrorAnnotation(
+                    loc.$line(), loc.$column(), e.message, this._getSource(this._context.currentNode)
+                );
             } else {
                 error = this._toErrorAnnotation(1, 0, e.message);
             }

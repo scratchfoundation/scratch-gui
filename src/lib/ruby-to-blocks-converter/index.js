@@ -1,4 +1,5 @@
 /* global Opal */
+import {defineMessages} from 'react-intl';
 import _ from 'lodash';
 import log from '../log';
 import Blockly from 'scratch-blocks';
@@ -25,6 +26,19 @@ import Wedo2Converter from './wedo2';
 import GdxForConverter from './gdx_for';
 import MeshConverter from './mesh';
 import SmalrubotS1Converter from './smalrubot_s1';
+
+const messages = defineMessages({
+    couldNotConvertPremitive: {
+        defaultMessage: '"{ SOURCE }" could not be converted the block.',
+        description: 'Error message for converting ruby to block when find the premitive',
+        id: 'gui.smalruby3.rubyToBlocksConverter.couldNotConvertPremitive'
+    },
+    wrongInstruction: {
+        defaultMessage: '"{ SOURCE }" is the wrong instruction.',
+        description: 'Error message for converting ruby to block when find the wrong instruction',
+        id: 'gui.smalruby3.rubyToBlocksConverter.wrongInstruction'
+    }
+});
 
 /* eslint-disable no-invalid-this */
 const ColorRegexp = /^#[0-9a-fA-F]{6}$/;
@@ -61,6 +75,7 @@ const getExtensionIdForOpcode = function (opcode) {
 class RubyToBlocksConverter {
     constructor (vm) {
         this.vm = vm;
+        this._translator = message => message.defaultMessage;
         this._converters = [
             MusicConverter,
             PenConverter,
@@ -104,6 +119,10 @@ class RubyToBlocksConverter {
         return this._context.broadcastMsgs;
     }
 
+    setTranslatorFunction (translator) {
+        this._translator = translator;
+    }
+
     reset () {
         this._context = {
             currentNode: null,
@@ -144,7 +163,10 @@ class RubyToBlocksConverter {
                 } else if (block instanceof Primitive) {
                     throw new RubyToBlocksConverterError(
                         block.node,
-                        `could not convert primitive: ${this._getSource(block.node)}`
+                        this._translator(
+                            messages.couldNotConvertPremitive,
+                            {SOURCE: this._getSource(block.node)}
+                        )
                     );
                 } else {
                     throw new Error(`invalid block: ${block}`);
@@ -155,7 +177,10 @@ class RubyToBlocksConverter {
                 if (this._isRubyBlock(block)) {
                     throw new RubyToBlocksConverterError(
                         block.node,
-                        `could not convert ${block.opcode}: ${this._getSource(block.node)}`
+                        this._translator(
+                            messages.wrongInstruction,
+                            {SOURCE: this._getSource(block.node)}
+                        )
                     );
                 }
 
@@ -172,10 +197,12 @@ class RubyToBlocksConverter {
                 error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.$message());
             } else if (e instanceof RubyToBlocksConverterError) {
                 const loc = e.node.$loc();
-                error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.message);
+                error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.message, this._getSource(e.node));
             } else if (this._context.currentNode) {
                 const loc = this._context.currentNode.$loc();
-                error = this._toErrorAnnotation(loc.$line(), loc.$column(), e.message);
+                error = this._toErrorAnnotation(
+                    loc.$line(), loc.$column(), e.message, this._getSource(this._context.currentNode)
+                );
             } else {
                 error = this._toErrorAnnotation(1, 0, e.message);
             }
@@ -319,23 +346,21 @@ class RubyToBlocksConverter {
         });
     }
 
-    _toErrorAnnotation (row, column, message) {
+    _toErrorAnnotation (row, column, message, source) {
         if (row === Opal.nil) {
             row = 0;
         } else {
             row -= 1;
         }
-        let columnText = '';
         if (column === Opal.nil) {
             column = 0;
-        } else {
-            columnText = `${column}: `;
         }
         return {
             row: row,
             column: column,
             type: 'error',
-            text: `${columnText}${message}`
+            text: message,
+            source: source
         };
     }
 
@@ -1249,8 +1274,11 @@ const NullRubyToBlocksConverter = {
     apply: () => Promise.resolve()
 };
 
-const targetCodeToBlocks = function (vm, target, code) {
+const targetCodeToBlocks = function (vm, target, code, intl) {
     const converter = new RubyToBlocksConverter(vm);
+    if (intl) {
+        converter.setTranslatorFunction(intl.formatMessage);
+    }
     converter.result = converter.targetCodeToBlocks(target, code);
     if (converter.result) {
         converter.apply = () => converter.applyTargetBlocks(target);

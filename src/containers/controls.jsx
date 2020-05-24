@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
+import {injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 
 import ControlsComponent from '../components/controls/controls.jsx';
@@ -19,7 +20,7 @@ class Controls extends React.Component {
     handleGreenFlagClick (e) {
         e.preventDefault();
 
-        const converter = this.props.targetCodeToBlocks();
+        const converter = this.props.targetCodeToBlocks(this.props.intl.formatMessage);
         if (!converter.result) {
             return;
         }
@@ -62,6 +63,7 @@ class Controls extends React.Component {
 }
 
 Controls.propTypes = {
+    intl: intlShape.isRequired,
     isStarted: PropTypes.bool.isRequired,
     projectRunning: PropTypes.bool.isRequired,
     targetCodeToBlocks: PropTypes.func,
@@ -77,4 +79,7 @@ const mapStateToProps = state => ({
 // no-op function to prevent dispatch prop being passed to component
 const mapDispatchToProps = () => ({});
 
-export default RubyToBlocksConverterHOC(connect(mapStateToProps, mapDispatchToProps)(Controls));
+export default RubyToBlocksConverterHOC(injectIntl(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Controls)));

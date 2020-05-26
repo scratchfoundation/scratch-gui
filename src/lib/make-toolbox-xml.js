@@ -14,6 +14,35 @@ const motion = function (isStage, targetId) {
         ${isStage ? `
         <label text="${stageSelected}"></label>
         ` : `
+        <block type="mv2_walk" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">20</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1.5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="mv2_wiggle" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -433,6 +462,7 @@ const sensing = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
+            <block type="mv2_demo_sensor" />
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
                     <shadow type="sensing_touchingobjectmenu"/>
@@ -710,7 +740,7 @@ const myBlocks = function () {
     `;
 };
 
-const martyMoves = function(){  
+const martyMoves = function(){
     // "%1 %2 Walk %3 steps, step length %4, step time %5, turn %6 \%",
     return `
     <category
@@ -839,6 +869,9 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
 
     const everything = [
         xmlOpen,
+        martyMovesXML, gap,
+        martySenseXML, gap,
+        martyDebugXML, gap,
         motionXML, gap,
         looksXML, gap,
         soundXML, gap,
@@ -847,9 +880,6 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        martyMovesXML, gap,
-        martySenseXML, gap,
-        martyDebugXML, gap,
         myBlocksXML
     ];
 

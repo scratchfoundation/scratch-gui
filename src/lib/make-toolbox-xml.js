@@ -749,6 +749,13 @@ const martyMoves = function(){
         colour="#37abc8"
         secondaryColour="#FFDA61"
         iconURI="static/marty_icon.svg">
+        <block type="mv2_stand_straight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
         <block type="mv2_walk" >
             <value name="STEPS">
                 <shadow type="math_number">

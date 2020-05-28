@@ -36,6 +36,69 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+
+        <block type="mv2_step" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_kick" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1.5</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT">"right"</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_sidestep" >
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT">"left"</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_sidefall" >
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT">"left"</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
         <block type="mv2_wiggle" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -43,6 +106,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -749,13 +813,6 @@ const martyMoves = function(){
         colour="#37abc8"
         secondaryColour="#FFDA61"
         iconURI="static/marty_icon.svg">
-        <block type="mv2_stand_straight" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
         <block type="mv2_walk" >
             <value name="STEPS">
                 <shadow type="math_number">

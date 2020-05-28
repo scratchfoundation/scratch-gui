@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>lounder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="lounder">
+            <g id="louder" transform="translate(2.000000, 4.000000)">
+                <path d="M6.7041,2.1221 L6.7041,10.5361 C6.7041,10.8851 6.4221,11.1671 6.0741,11.1671 L4.8971,11.1671 C4.6251,11.1671 4.3831,10.9921 4.2981,10.7321 C3.8181,9.2681 2.4521,8.2781 0.9111,8.2781 L0.6311,8.2781 C0.2841,8.2781 0.0001,7.9941 0.0001,7.6471 L0.0001,5.0111 C0.0001,4.6641 0.2841,4.3801 0.6311,4.3801 L0.9111,4.3801 C2.4521,4.3801 3.8181,3.3901 4.2981,1.9261 C4.3831,1.6661 4.6251,1.4911 4.8971,1.4911 L6.0741,1.4911 C6.4221,1.4911 6.7041,1.7731 6.7041,2.1221" id="Fill-1" fill="#CF63CF"></path>
+                <path d="M9.1172,5.2129 C9.7292,5.8259 9.7292,6.8319 9.1172,7.4449" id="Stroke-3" stroke="#CF63CF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M11.3486,2.9815 C13.1966,4.8295 13.1966,7.8295 11.3486,9.6765" id="Stroke-5" stroke="#CF63CF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M13.58,0.7501 C16.663,3.8321 16.663,8.8261 13.58,11.9081" id="Stroke-7" stroke="#CF63CF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

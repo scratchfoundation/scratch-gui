@@ -113,21 +113,28 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          display: 'flex'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
-        isPlayerOnly: true,
-        isFullScreen: false
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
-        allowFullScreen: true,
-        allowTransparency: true,
-        frameBorder: "0",
-        height: "402",
-        src: "https://scratch.mit.edu/projects/embed/".concat(this.state.projectId, "/?autostart=true"),
-        width: "485"
-      }));
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            display: 'flex'
+          }
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+          isPlayerOnly: true,
+          isFullScreen: false
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+          allowFullScreen: true,
+          allowTransparency: true,
+          frameBorder: "0",
+          height: "402",
+          src: "https://scratch.mit.edu/projects/embed/".concat(this.state.projectId, "/?autostart=true"),
+          width: "485"
+        }))
+      );
     }
   }]);
 
@@ -136,7 +143,9 @@ function (_React$Component) {
 
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Player, null), appTarget);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Player, null), appTarget);
 
 /***/ })
 

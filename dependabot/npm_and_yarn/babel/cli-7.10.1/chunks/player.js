@@ -50,16 +50,23 @@ var Player = function Player(_ref) {
   var isPlayerOnly = _ref.isPlayerOnly,
       onSeeInside = _ref.onSeeInside,
       projectId = _ref.projectId;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(isPlayerOnly ? _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.stageOnly : _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.editor)
-  }, isPlayerOnly && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
-    onClick: onSeeInside
-  }, 'See inside'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"], {
-    canEditTitle: true,
-    enableCommunity: true,
-    isPlayerOnly: isPlayerOnly,
-    projectId: projectId
-  }));
+  return (
+    /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"], {
+      className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(isPlayerOnly ? _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.stageOnly : _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.editor)
+    }, isPlayerOnly &&
+    /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
+      onClick: onSeeInside
+    }, 'See inside'),
+    /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"], {
+      canEditTitle: true,
+      enableCommunity: true,
+      isPlayerOnly: isPlayerOnly,
+      projectId: projectId
+    }))
+  );
 };
 
 Player.propTypes = {
@@ -89,7 +96,9 @@ var ConnectedPlayer = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__[/* connect
 var WrappedPlayer = Object(redux__WEBPACK_IMPORTED_MODULE_5__[/* compose */ "d"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"], _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(ConnectedPlayer);
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(WrappedPlayer, {
+react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render(
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(WrappedPlayer, {
   isPlayerOnly: true
 }), appTarget);
 

@@ -255,6 +255,30 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
+        <block type="mv2_waveLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_waveRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_standStraight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -630,6 +654,13 @@ const events = function (isStage) {
 const control = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
+        <block type="mv2_set_ip" >
+            <value name="IP">
+                <shadow type="text">
+                    <field name="TEXT">192.168.0.27</field>
+                </shadow>
+            </value>
+        </block>
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -680,6 +711,13 @@ const sensing = function (isStage) {
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
             <block type="mv2_demo_sensor" />
+            <block type="mv2_set_demo_sensor" >
+                <value name="SENSORVAL">
+                    <shadow type="math_number">
+                        <field name="NUM">42</field>
+                    </shadow>
+                </value>
+            </block>
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
                     <shadow type="sensing_touchingobjectmenu"/>
@@ -957,87 +995,6 @@ const myBlocks = function () {
     `;
 };
 
-const martyMoves = function () {
-    // "%1 %2 Walk %3 steps, step length %4, step time %5, turn %6 \%",
-    return `
-    <category
-        name="Marty Moves"
-        id="mv2"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_walk" >
-            <value name="STEPS">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
-            </value>
-            <value name="STEPLENGTH">
-                <shadow type="math_number">
-                    <field name="NUM">20</field>
-                </shadow>
-            </value>
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1.5</field>
-                </shadow>
-            </value>
-            <value name="TURN">
-                <shadow type="math_number">
-                    <field name="NUM">0</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="mv2_wiggle" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-    `;
-};
-
-const martySense = function () {
-    return `
-    <category
-        name="Marty Sense"
-        id="mv2sense"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_demo_sensor" />
-    </category>
-    `;
-}
-
-const martyDebug = function () {
-    return `
-    <category
-        name="Marty Debug"
-        id="mv2debug"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_set_demo_sensor" >
-            <value name="SENSORVAL">
-                <shadow type="math_number">
-                    <field name="NUM">42</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="mv2_set_ip" >
-            <value name="IP">
-                <shadow type="text">
-                    <field name="TEXT">192.168.0.27</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-    `;
-}
-
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -1080,15 +1037,9 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
-    const martyMovesXML = moveCategory('mv2') || martyMoves(isStage, targetId);
-    const martySenseXML = moveCategory('mv2') || martySense(isStage, targetId);
-    const martyDebugXML = moveCategory('mv2') || martyDebug(isStage, targetId);
 
     const everything = [
         xmlOpen,
-        martyMovesXML, gap,
-        martySenseXML, gap,
-        martyDebugXML, gap,
         motionXML, gap,
         looksXML, gap,
         soundXML, gap,

@@ -1,6 +1,6 @@
 import WavEncoder from 'wav-encoder';
 
-const SOUND_BYTE_LIMIT = 10 * 1000 * 1000; // 10mb
+const SOUND_BYTE_LIMIT = Infinity; // Was 10mb
 
 const computeRMS = function (samples, scaling = 0.55) {
     if (samples.length === 0) return 0;

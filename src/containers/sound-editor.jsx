@@ -19,7 +19,7 @@ import log from '../lib/log.js';
 
 const UNDO_STACK_SIZE = 99;
 
-const MAX_RMS = 1.2;
+const MAX_RMS = Infinity;
 
 class SoundEditor extends React.Component {
     constructor (props) {

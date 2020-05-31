@@ -293,6 +293,7 @@ $fade-out-distance: 15px;
     z-index: $z-index-alerts;
     position: absolute;
     margin-top: 53px;
+    pointer-events: none;
 }
 
 /*

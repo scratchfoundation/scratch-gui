@@ -14,6 +14,7 @@ The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org
 | `username=[STRING]` | Set a custom username (default "username") |
 | `cloud_host=[URL]` | Use a custom cloud host instead of the default behaviour, which is to save cloud variables to localStorage. Note that for some reason, Scratch doesn't want you to include the protocol (ie, omit `ws://` or `wss://`). |
 | `compatibility_mode=false` | Disables compatibility mode, which forces projects to run at 30 fps. |
+| `limits=false` | Removes many limits, such as for clones and lists. Note that a few limits, like the number of cloud variables, are removed by default in this mod. |
 
 In addition, you can finish the URL with a hash followed by a project ID to load a project from the Scratch website or a URI encoded URL to a project file.
 

@@ -23,6 +23,27 @@ const handleTelemetryModalOptOut = () => {
     log('User opted out of telemetry');
 };
 
+function urlOptionValue (name, defaultValue) {
+    const matches = window.location.href.match(new RegExp(`[?&]${name}=([^&]*)&?`));
+    return matches ? matches[1] : defaultValue;
+}
+
+function urlFlag (name, defaultValue = false) {
+    const matches = window.location.href.match(new RegExp(`[?&]${name}=([^&]+)`));
+    let yes = defaultValue;
+    if (matches) {
+        try {
+            // parse 'true' into `true`, 'false' into `false`, etc.
+            yes = JSON.parse(matches[1]);
+        } catch {
+            // it's not JSON so just use the string
+            // note that a typo like "falsy" will be treated as true
+            yes = matches[1];
+        }
+    }
+    return yes;
+}
+
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash
@@ -41,47 +62,26 @@ export default appTarget => {
 
     // TODO a hack for testing the backpack, allow backpack host to be set by url param
     // (Currently ignored; it'll always use localStorage)
-    const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
-    const backpackHost = backpackHostMatches ? backpackHostMatches[1] : 'localStorage';
+    const backpackHost = decodeURIComponent(urlOptionValue('backpack_host', 'localStorage'));
 
-    const cloudHostMatches = window.location.href.match(/[?&]cloud_host=([^&]*)&?/);
-    const cloudHost = cloudHostMatches ? decodeURIComponent(cloudHostMatches[1]) : 'localStorage';
+    const cloudHost = decodeURIComponent(urlOptionValue('cloud_host', 'localStorage'));
 
-    const usernameMatches = window.location.href.match(/[?&]username=([^&]*)&?/);
-    const username = usernameMatches ? usernameMatches[1] : 'username';
+    const username = urlOptionValue('username', 'username');
 
-    const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
-    let simulateScratchDesktop;
-    if (scratchDesktopMatches) {
-        try {
-            // parse 'true' into `true`, 'false' into `false`, etc.
-            simulateScratchDesktop = JSON.parse(scratchDesktopMatches[1]);
-        } catch {
-            // it's not JSON so just use the string
-            // note that a typo like "falsy" will be treated as true
-            simulateScratchDesktop = scratchDesktopMatches[1];
-        }
-    }
+    const simulateScratchDesktop = urlFlag('isScratchDesktop', false);
 
-    const compatibilityModeMatches = window.location.href.match(/[?&]compatibility_mode=([^&]+)/);
-    let compatibilityMode = true;
-    if (compatibilityModeMatches) {
-        try {
-            // parse 'true' into `true`, 'false' into `false`, etc.
-            compatibilityMode = JSON.parse(compatibilityModeMatches[1]);
-        } catch {
-            // it's not JSON so just use the string
-            // note that a typo like "falsy" will be treated as true
-            compatibilityMode = compatibilityModeMatches[1];
-        }
-    }
+    const compatibilityMode = urlFlag('compatibility_mode', true);
 
-    const extensionURLMatches = window.location.href.match(/[?&](?:extension|url)=([^&]*)&?/);
-    const extensionURL = extensionURLMatches ? decodeURIComponent(extensionURLMatches[1]) : null;
+    const extensionURL = decodeURIComponent(urlOptionValue('(?:extension|url)', null));
+
+    const imposeLimits = urlFlag('limits', true);
 
     const onVmInit = vm => {
         if (extensionURL) {
             vm.extensionManager.loadExtensionURL(extensionURL);
+        }
+        if (!imposeLimits) {
+            vm.requireLimits(imposeLimits);
         }
     };
 

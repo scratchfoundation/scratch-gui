@@ -60,6 +60,26 @@ export default appTarget => {
         HashParserHOC
     )(GUI);
 
+    const loadGriffpatch = urlFlag('load_griffpatch', false);
+    if (loadGriffpatch) {
+        // From https://github.com/griffpatch/Scratch3-Dev-Tools/blob/master/inject.user.js
+        // Ideally, I'd just load inject.user.js directly, but jsdelivr seems to omit it.
+        document.head.appendChild(Object.assign(document.createElement('script'), {
+            src: 'https://cdn.jsdelivr.net/gh/griffpatch/Scratch3-Dev-Tools/inject3.js'
+        }));
+        document.head.appendChild(Object.assign(document.createElement('link'), {
+            href: 'https://cdn.jsdelivr.net/gh/griffpatch/Scratch3-Dev-Tools/inject.css',
+            rel: 'stylesheet'
+        }));
+    }
+
+    const loadPlugin = urlOptionValue('load_plugin', null);
+    if (loadPlugin) {
+        document.head.appendChild(Object.assign(document.createElement('script'), {
+            src: decodeURIComponent(loadPlugin)
+        }));
+    }
+
     // TODO a hack for testing the backpack, allow backpack host to be set by url param
     // (Currently ignored; it'll always use localStorage)
     const backpackHost = decodeURIComponent(urlOptionValue('backpack_host', 'localStorage'));
@@ -72,17 +92,18 @@ export default appTarget => {
 
     const compatibilityMode = urlFlag('compatibility_mode', true);
 
-    const extensionURL = decodeURIComponent(urlOptionValue('(?:extension|url)', null));
+    const extensionURL = urlOptionValue('(?:extension|url)', null);
 
     const imposeLimits = urlFlag('limits', true);
 
     const onVmInit = vm => {
         if (extensionURL) {
-            vm.extensionManager.loadExtensionURL(extensionURL);
+            vm.extensionManager.loadExtensionURL(decodeURIComponent(extensionURL));
         }
         if (!imposeLimits) {
             vm.requireLimits(imposeLimits);
         }
+        window.vm = vm;
     };
 
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {

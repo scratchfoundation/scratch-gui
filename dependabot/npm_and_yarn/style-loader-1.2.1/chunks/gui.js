@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(113);
 /* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(135);
 /* harmony import */ var _lib_log_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(26);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
 
@@ -95,7 +95,7 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
   }
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
-  simulateScratchDesktop ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+  simulateScratchDesktop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     canEditTitle: true,
     isScratchDesktop: true,
     showTelemetryModal: true,
@@ -103,7 +103,7 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
     onTelemetryModalCancel: handleTelemetryModalCancel,
     onTelemetryModalOptIn: handleTelemetryModalOptIn,
     onTelemetryModalOptOut: handleTelemetryModalOptOut
-  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     canEditTitle: true,
     backpackVisible: true,
     showComingSoon: true,
@@ -195,7 +195,7 @@ if (Object(_lib_supported_browser__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"
   var handleBack = function handleBack() {}; // eslint-disable-next-line react/jsx-no-bind
 
 
-  react_dom__WEBPACK_IMPORTED_MODULE_5___default.a.render(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedBrowserModalComponent, {
+  react_dom__WEBPACK_IMPORTED_MODULE_5___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedBrowserModalComponent, {
     onBack: handleBack
   }), appTarget);
 }

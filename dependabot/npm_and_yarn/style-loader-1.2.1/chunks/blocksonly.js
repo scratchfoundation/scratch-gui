@@ -38,12 +38,12 @@ var VMBlocks = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"
 var VMControls = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"])(mapStateToProps)(_containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
 
 var BlocksOnly = function BlocksOnly(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"], props, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMBlocks, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"], props, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMBlocks, {
     grow: 1,
     options: {
       media: "static/blocks-media/"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMControls, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMControls, {
     className: _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default.a.controls
   }));
 };
@@ -51,7 +51,7 @@ var BlocksOnly = function BlocksOnly(props) {
 var App = Object(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(Object(_lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(BlocksOnly));
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), appTarget);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), appTarget);
 
 /***/ }),
 

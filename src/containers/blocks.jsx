@@ -398,7 +398,8 @@ class Blocks extends React.Component {
     }
     handleMonitorsUpdate (monitors) {
         // Update the checkboxes of the relevant monitors.
-        // TODO: What about monitors that have fields? (See todo in scratch-vm blocks.js changeBlock.)
+        // TODO: What about monitors that have fields? See todo in scratch-vm blocks.js changeBlock:
+        // https://github.com/LLK/scratch-vm/blob/2373f9483edaf705f11d62662f7bb2a57fbb5e28/src/engine/blocks.js#L569-L576
         const flyout = this.workspace.getFlyout();
         for (const monitor of monitors.values()) {
             const blockId = monitor.get('id');

@@ -15,11 +15,9 @@ const motion = function (isStage, targetId) {
         <label text="${stageSelected}"></label>
         ` : `
 
-        // Marty motion
+        <!-- MARTY MOTION BLOCKS -->
 
         <block type="mv2_getReady" />
-
-        <!--<block type="mv2_stop" />-->
 
         <block type="mv2_walk_fw" >
             <value name="STEPS">
@@ -70,14 +68,6 @@ const motion = function (isStage, targetId) {
                 <field name="SIDE">left</field>
             </value>
         </block>
-
-        <!--<block type="mv2_standStraight" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>-->
 
         <block type="mv2_wiggle" />
 
@@ -131,21 +121,24 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_sidefall" >
-            <value name="SIDE">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
+        <block type="mv2_moveLeg" >
+            <value>
+                <field name="SIDE" >left</field>
             </value>
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
+            <value>
+                <field name="DIRECTION" >left</field>
             </value>
-            <value name="STEPLEN">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
+        </block>
+
+        <block type="mv2_liftFoot" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_lowerFoot" >
+            <value>
+                <field name="SIDE">left</field>
             </value>
         </block>
 
@@ -170,8 +163,11 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
+        <block type="mv2_dance" />
 
-        <block type="mv2_stepLeft" >
+        <!-- OLD MARTY MOTION BLOCKS -->
+
+        <!--<block type="mv2_stepLeft" >
             <value name="MOVETIME">
                 <shadow type="math_number">
                     <field name="NUM">5</field>
@@ -290,6 +286,38 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
         </block>
+-->
+        <!--<block type="mv2_stop" />-->
+
+        <!--<block type="mv2_standStraight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>-->
+
+        <!--<block type="mv2_sidefall" >
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>-->
+
+        ${blockSeparator}
+
+        <!-- SCRATCH DEFAULT BLOCKS-->
 
         <block type="motion_movesteps">
             <value name="STEPS">
@@ -575,13 +603,15 @@ const sound = function (isStage, targetId, soundName) {
 
         <!--Marty blocks-->
 
-        <block type="mv2_playsound" >
+        <block type="mv2_playSound" >
             <value name="FILENAME">
                 <shadow type="text">
                     <field name="TEXT"></field>
                 </shadow>
             </value>
         </block>
+
+        ${blockSeparator}
 
         <!--Default blocks-->
 
@@ -735,7 +765,19 @@ const sensing = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
+
+            <block type="mv2_position" />
+
+            <block type="mv2_current" />
+
+            <block type="mv2_accelerometer" />
+
+            <block type="mv2_proximity" />
+
+            <block type="mv2_batteryLevel" />
+
             <block type="mv2_demo_sensor" />
+
             <block type="mv2_set_demo_sensor" >
                 <value name="SENSORVAL">
                     <shadow type="math_number">
@@ -743,6 +785,11 @@ const sensing = function (isStage) {
                     </shadow>
                 </value>
             </block>
+
+            ${blockSeparator}
+
+            <!-- SCRATCH DEFAULT BLOCKS -->
+
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
                     <shadow type="sensing_touchingobjectmenu"/>

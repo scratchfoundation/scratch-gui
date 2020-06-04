@@ -14,72 +14,106 @@ const motion = function (isStage, targetId) {
         ${isStage ? `
         <label text="${stageSelected}"></label>
         ` : `
-        <block type="mv2_walk" >
+
+        // Marty motion
+
+        <block type="mv2_getReady" />
+
+        <!--<block type="mv2_stop" />-->
+
+        <block type="mv2_walk_fw" >
             <value name="STEPS">
                 <shadow type="math_number">
                     <field name="NUM">2</field>
                 </shadow>
             </value>
-            <value name="STEPLENGTH">
+        </block>
+
+        <block type="mv2_walk_bw" >
+            <value name="STEPS">
                 <shadow type="math_number">
-                    <field name="NUM">20</field>
-                </shadow>
-            </value>
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1.5</field>
-                </shadow>
-            </value>
-            <value name="TURN">
-                <shadow type="math_number">
-                    <field name="NUM">0</field>
+                    <field name="NUM">2</field>
                 </shadow>
             </value>
         </block>
 
-        <block type="mv2_step" >
-            <value name="MOVETIME">
+        <block type="mv2_walk" >
+            <value name="STEPS">
                 <shadow type="math_number">
                     <field name="NUM">1</field>
                 </shadow>
             </value>
             <value name ="STEPLEN">
                 <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
                     <field name="NUM">1</field>
                 </shadow>
             </value>
             <value name ="TURN">
                 <shadow type="math_number">
-                    <field name="NUM">50</field>
+                    <field name="NUM">1</field>
                 </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_turn" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <!--<block type="mv2_standStraight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>-->
+
+        <block type="mv2_wiggle" />
+
+        <block type="mv2_circle" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                    <field>left</field>
             </value>
         </block>
 
         <block type="mv2_kick" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1.5</field>
-                </shadow>
-            </value>
-            <value name="SIDE">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-            <value name="TURN">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
+            <value>
+                <field name="SIDE">left</field>
             </value>
         </block>
 
-        <block type="mv2_sidestep" >
-            <value name="SIDE">
-                <shadow type="text">
-                    <field name="TEXT"></field>
+        <block type="mv2_lean" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
                 </shadow>
             </value>
-            <value name="MOVETIME">
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+        </block>
+
+        <block type="mv2_slide" >
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+            <value name="STEPS">
                 <shadow type="math_number">
                     <field name="NUM">1</field>
                 </shadow>
@@ -88,6 +122,12 @@ const motion = function (isStage, targetId) {
                 <shadow type="math_number">
                     <field name="NUM">2</field>
                 </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_eyes" >
+            <value>
+                <field name="COMMAND">excited</field>
             </value>
         </block>
 
@@ -105,14 +145,6 @@ const motion = function (isStage, targetId) {
             <value name="STEPLEN">
                 <shadow type="math_number">
                     <field name="NUM">2</field>
-                </shadow>
-            </value>
-        </block>
-
-        <block type="mv2_wiggle" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
                 </shadow>
             </value>
         </block>
@@ -138,18 +170,6 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_circle" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
-                </shadow>
-            </value>
-            <value name="SIDE">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
-            </value>
-        </block>
 
         <block type="mv2_stepLeft" >
             <value name="MOVETIME">
@@ -264,14 +284,6 @@ const motion = function (isStage, targetId) {
         </block>
 
         <block type="mv2_waveRight" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
-                </shadow>
-            </value>
-        </block>
-
-        <block type="mv2_standStraight" >
             <value name="MOVETIME">
                 <shadow type="math_number">
                     <field name="NUM">5</field>
@@ -406,16 +418,16 @@ const motion = function (isStage, targetId) {
 const xmlEscape = function (unsafe) {
     return unsafe.replace(/[<>&'"]/g, c => {
         switch (c) {
-            case '<':
-                return '&lt;';
-            case '>':
-                return '&gt;';
-            case '&':
-                return '&amp;';
-            case '\'':
-                return '&apos;';
-            case '"':
-                return '&quot;';
+        case '<':
+            return '&lt;';
+        case '>':
+            return '&gt;';
+        case '&':
+            return '&amp;';
+        case '\'':
+            return '&apos;';
+        case '"':
+            return '&quot;';
         }
     });
 };
@@ -560,6 +572,19 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
 const sound = function (isStage, targetId, soundName) {
     return `
     <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
+
+        <!--Marty blocks-->
+
+        <block type="mv2_playsound" >
+            <value name="FILENAME">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+        <!--Default blocks-->
+
         <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu">
@@ -1011,7 +1036,7 @@ const xmlClose = '</xml>';
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
-                                 costumeName = '', backdropName = '', soundName = '') {
+    costumeName = '', backdropName = '', soundName = '') {
     const gap = [categorySeparator];
 
     costumeName = xmlEscape(costumeName);

@@ -66,6 +66,7 @@
 .slider {
     width: 100%;
     transform: translateZ(0); /* Fixes flickering in Safari */
+    direction: ltr;
 }
 
 .list-monitor {

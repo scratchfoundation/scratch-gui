@@ -1,0 +1,16 @@
+{
+  "Serial": [
+    {
+      "origin": "smalruby.app",
+      "matchSubdomains": false,
+      "token": "Ag4uU2UqNmz2w+wQo7XPv6qzdHfjiLvzm//3JYQ8M7I+ro48rcE1BNq4uob+ayhLKF2VKjT6bsgToleYnAwWPwcAAABMeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmFwcDo0NDMiLCJmZWF0dXJlIjoiU2VyaWFsIiwiZXhwaXJ5IjoxNTk1MDMxMzQ3fQ==",
+      "expiry": "2020-07-18"
+    },
+    {
+      "origin": "smalruby.jp",
+      "matchSubdomains": true,
+      "token": "Ah/64l5f1XAfQJLzQwQPDxTe4V6zf3rVx8F8xmX+aEjOo+nmNJxmDygIzWvePkLHGzUefEyqFnFgZDckvn6LnQ0AAABeeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmpwOjQ0MyIsImZlYXR1cmUiOiJTZXJpYWwiLCJleHBpcnkiOjE1OTUwMzEyODUsImlzU3ViZG9tYWluIjp0cnVlfQ==",
+      "expiry": "2020-07-18"
+    }
+  ]
+}

@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" value="notranslate">
-    <!-- https://.*smalruby.jp/ -->
-    <meta http-equiv="origin-trial" content="AiLqvoNHKjujJ7wzrguiMyoRK9czxpxcOC39/sQAsoa+g0HomeeA5lhDHAnaXIBOY2huQnm0sYdH3I9GtTnRFAcAAABeeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmpwOjQ0MyIsImZlYXR1cmUiOiJTZXJpYWwiLCJleHBpcnkiOjE1OTE4MDg3NDQsImlzU3ViZG9tYWluIjp0cnVlfQ==">
-    <!-- https://smalruby.app/ -->
-    <meta http-equiv="origin-trial" content="ApPFZ7Y7tWtarih9JqeOUfGqbTka9l9KnJPLxUmuLSHJ44Y2FbZ2IXeZgV0KLFMRtBUqdgUWtSNV3jAMaFnZ0wIAAABMeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmFwcDo0NDMiLCJmZWF0dXJlIjoiU2VyaWFsIiwiZXhwaXJ5IjoxNTkxODA4ODIxfQ==">
+    <%
+        const originTrials = htmlWebpackPlugin.options.originTrials;
+        if (originTrials) {
+    %>
+    <!-- Chrome Origin Trials: https://developers.chrome.com/origintrials -->
+    <%
+            Object.keys(originTrials).forEach(apiName => {
+    %>
+    <!-- <%= apiName %> API -->
+    <%
+                for (const info of originTrials[apiName]) {
+    %>
+    <!-- https://<%= info['matchSubdomains'] ? '.*' : '' %><%= info['origin'] %> -->
+    <meta http-equiv="origin-trial" content="<%= info['token'] %>">
+    <%
+                }
+            });
+        }
+    %>
     <link rel="shortcut icon" href="static/title.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <% if (htmlWebpackPlugin.options.sentryConfig) { %>

@@ -130,11 +130,12 @@ class SoundTab extends React.Component {
 
     handleSoundUpload (e) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             soundUpload(buffer, fileType, storage, newSound => {
                 newSound.name = fileName;
-                this.props.vm.addSound(newSound).then(() => {
+                this.props.vm.addSound(newSound, targetId).then(() => {
                     this.handleNewSound();
                     if (fileIndex === fileCount - 1) {
                         this.props.onCloseImporting();

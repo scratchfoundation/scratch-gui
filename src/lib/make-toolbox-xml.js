@@ -121,14 +121,14 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_moveLeg" >
+        <!--<block type="mv2_moveLeg" >
             <value>
                 <field name="SIDE" >left</field>
             </value>
             <value>
-                <field name="DIRECTION" >left</field>
+                <field name="DIRECTION" >forward</field>
             </value>
-        </block>
+        </block>-->
 
         <block type="mv2_liftFoot" >
             <value>
@@ -142,6 +142,22 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
+        <block type="mv2_moveJoint" >
+            <value>
+                <field name="SERVOCHOICE">left hip</field>
+            </value>
+            <value name="ANGLE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
         <block type="mv2_wave" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -151,14 +167,6 @@ const motion = function (isStage, targetId) {
             <value name="SIDE">
                 <shadow type="text">
                     <field name="TEXT"></field>
-                </shadow>
-            </value>
-        </block>
-
-        <block type="mv2_waggleEyes" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
                 </shadow>
             </value>
         </block>
@@ -766,15 +774,19 @@ const sensing = function (isStage) {
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
 
-            <block type="mv2_position" />
-
-            <block type="mv2_current" />
-
-            <block type="mv2_accelerometer" />
-
-            <block type="mv2_proximity" />
-
             <block type="mv2_batteryLevel" />
+
+            <block type="mv2_position" >
+                <value>
+                    <field name="SERVOCHOICE">left hip</field>
+                </value>
+            </block>
+
+            <!--<block type="mv2_current" />-->
+
+            <!--<block type="mv2_accelerometer" />-->
+
+            <!--<block type="mv2_proximity" />-->
 
             <block type="mv2_demo_sensor" />
 

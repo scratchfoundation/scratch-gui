@@ -17,7 +17,100 @@ const motion = function (isStage, targetId) {
 
         <!-- MARTY MOTION BLOCKS -->
 
+        <block type="mv2_circle" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+        </block>
+
+        <block type="mv2_dance" />
+
+        <block type="mv2_eyes" >
+            <value>
+                <field name="COMMAND"></field>
+            </value>
+        </block>
+
         <block type="mv2_getReady" />
+
+        <block type="mv2_kick" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_lean" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM"></field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                    <field></field>
+            </value>
+        </block>
+
+        <block type="mv2_liftFoot" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_lowerFoot" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_moveJoint" >
+            <value>
+                <field name="SERVOCHOICE">left hip</field>
+            </value>
+            <value name="ANGLE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <!-- moveleg if it would load -->
+
+        <block type="mv2_slide" >
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_turn" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                <field name="SIDE">left</field>
+            </value>
+        </block>
 
         <block type="mv2_walk_fw" >
             <value name="STEPS">
@@ -58,106 +151,6 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_turn" >
-            <value name="STEPS">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="SIDE">
-                <field name="SIDE">left</field>
-            </value>
-        </block>
-
-        <block type="mv2_wiggle" />
-
-        <block type="mv2_circle" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="SIDE">
-                    <field>left</field>
-            </value>
-        </block>
-
-        <block type="mv2_kick" >
-            <value>
-                <field name="SIDE">left</field>
-            </value>
-        </block>
-
-        <block type="mv2_lean" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="SIDE">
-                    <field>left</field>
-            </value>
-        </block>
-
-        <block type="mv2_slide" >
-            <value name="SIDE">
-                    <field>left</field>
-            </value>
-            <value name="STEPS">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="STEPLEN">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
-            </value>
-        </block>
-
-        <block type="mv2_eyes" >
-            <value>
-                <field name="COMMAND">excited</field>
-            </value>
-        </block>
-
-        <!--<block type="mv2_moveLeg" >
-            <value>
-                <field name="SIDE">left</field>
-            </value>
-            <value>
-                <field name="DIRECTION">forward</field>
-            </value>
-        </block>-->
-
-        <block type="mv2_liftFoot" >
-            <value>
-                <field name="SIDE">left</field>
-            </value>
-        </block>
-
-        <block type="mv2_lowerFoot" >
-            <value>
-                <field name="SIDE">left</field>
-            </value>
-        </block>
-
-        <block type="mv2_moveJoint" >
-            <value>
-                <field name="SERVOCHOICE">left hip</field>
-            </value>
-            <value name="ANGLE">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>
-
         <block type="mv2_wave" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -171,9 +164,18 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_dance" />
+        <block type="mv2_wiggle" />
 
         <!-- OLD MARTY MOTION BLOCKS -->
+
+<!--               <block type="mv2_moveLeg">
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+            <value>
+                <field name="DIRECTION"></field>
+            </value>
+        </block>-->
 
         <!--<block type="mv2_stepLeft" >
             <value name="MOVETIME">

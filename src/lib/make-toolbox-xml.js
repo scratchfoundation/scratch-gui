@@ -123,10 +123,10 @@ const motion = function (isStage, targetId) {
 
         <!--<block type="mv2_moveLeg" >
             <value>
-                <field name="SIDE" >left</field>
+                <field name="SIDE">left</field>
             </value>
             <value>
-                <field name="DIRECTION" >forward</field>
+                <field name="DIRECTION">forward</field>
             </value>
         </block>-->
 
@@ -774,11 +774,19 @@ const sensing = function (isStage) {
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
 
+            <block type="mv2_accelerometer" />
+
             <block type="mv2_batteryLevel" />
+
+            <block type="mv2_current" >
+                <value>
+                    <field name="SERVOCHOICE"></field>
+                </value>
+            </block>>
 
             <block type="mv2_position" >
                 <value>
-                    <field name="SERVOCHOICE">left hip</field>
+                    <field name="SERVOCHOICE"></field>
                 </value>
             </block>
 
@@ -788,15 +796,15 @@ const sensing = function (isStage) {
 
             <!--<block type="mv2_proximity" />-->
 
-            <block type="mv2_demo_sensor" />
+            <!--<block type="mv2_demo_sensor" />-->
 
-            <block type="mv2_set_demo_sensor" >
+            <!--<block type="mv2_set_demo_sensor" >
                 <value name="SENSORVAL">
                     <shadow type="math_number">
                         <field name="NUM">42</field>
                     </shadow>
                 </value>
-            </block>
+            </block>-->
 
             ${blockSeparator}
 

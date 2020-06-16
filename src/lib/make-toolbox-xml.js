@@ -14,6 +14,321 @@ const motion = function (isStage, targetId) {
         ${isStage ? `
         <label text="${stageSelected}"></label>
         ` : `
+
+        <!-- MARTY MOTION BLOCKS -->
+
+        <block type="mv2_circle" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+        </block>
+
+        <block type="mv2_dance" />
+
+        <block type="mv2_eyes" >
+            <value>
+                <field name="COMMAND"></field>
+            </value>
+        </block>
+
+        <block type="mv2_getReady" />
+
+        <block type="mv2_kick" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_lean" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                    <field></field>
+            </value>
+        </block>
+
+        <block type="mv2_liftFoot" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_lowerFoot" >
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_moveJoint" >
+            <value>
+                <field name="SERVOCHOICE">left hip</field>
+            </value>
+            <value name="ANGLE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <!-- moveleg if it would load -->
+
+        <block type="mv2_slide" >
+            <value name="SIDE">
+                    <field>left</field>
+            </value>
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_turn" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                <field name="SIDE">left</field>
+            </value>
+        </block>
+
+        <block type="mv2_walk_fw" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_walk_bw" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_walk" >
+            <value name="STEPS">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name ="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name ="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_wave" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_wiggle" />
+
+        <!-- OLD MARTY MOTION BLOCKS -->
+
+<!--               <block type="mv2_moveLeg">
+            <value>
+                <field name="SIDE">left</field>
+            </value>
+            <value>
+                <field name="DIRECTION"></field>
+            </value>
+        </block>-->
+
+        <!--<block type="mv2_stepLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_stepRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_kickLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_kickRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="TURN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_sidestepLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_sidestepRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+            <value name="STEPLENGTH">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_circleLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_circleRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_waveLeft" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_waveRight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">5</field>
+                </shadow>
+            </value>
+        </block>
+-->
+        <!--<block type="mv2_stop" />-->
+
+        <!--<block type="mv2_standStraight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>-->
+
+        <!--<block type="mv2_sidefall" >
+            <value name="SIDE">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="STEPLEN">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>-->
+
+        ${blockSeparator}
+
+        <!-- SCRATCH DEFAULT BLOCKS-->
+
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
@@ -141,11 +456,16 @@ const motion = function (isStage, targetId) {
 const xmlEscape = function (unsafe) {
     return unsafe.replace(/[<>&'"]/g, c => {
         switch (c) {
-        case '<': return '&lt;';
-        case '>': return '&gt;';
-        case '&': return '&amp;';
-        case '\'': return '&apos;';
-        case '"': return '&quot;';
+        case '<':
+            return '&lt;';
+        case '>':
+            return '&gt;';
+        case '&':
+            return '&amp;';
+        case '\'':
+            return '&apos;';
+        case '"':
+            return '&quot;';
         }
     });
 };
@@ -290,6 +610,21 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
 const sound = function (isStage, targetId, soundName) {
     return `
     <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
+
+        <!--Marty blocks-->
+
+        <block type="mv2_playSound" >
+            <value name="FILENAME">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+        ${blockSeparator}
+
+        <!--Default blocks-->
+
         <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu">
@@ -384,6 +719,13 @@ const events = function (isStage) {
 const control = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
+        <block type="mv2_set_ip" >
+            <value name="IP">
+                <shadow type="text">
+                    <field name="TEXT">192.168.0.27</field>
+                </shadow>
+            </value>
+        </block>
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -433,6 +775,43 @@ const sensing = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
+
+            <block type="mv2_accelerometer" />
+
+            <block type="mv2_batteryLevel" />
+
+            <block type="mv2_current" >
+                <value>
+                    <field name="SERVOCHOICE"></field>
+                </value>
+            </block>>
+
+            <block type="mv2_position" >
+                <value>
+                    <field name="SERVOCHOICE"></field>
+                </value>
+            </block>
+
+            <!--<block type="mv2_current" />-->
+
+            <!--<block type="mv2_accelerometer" />-->
+
+            <!--<block type="mv2_proximity" />-->
+
+            <!--<block type="mv2_demo_sensor" />-->
+
+            <!--<block type="mv2_set_demo_sensor" >
+                <value name="SENSORVAL">
+                    <shadow type="math_number">
+                        <field name="NUM">42</field>
+                    </shadow>
+                </value>
+            </block>-->
+
+            ${blockSeparator}
+
+            <!-- SCRATCH DEFAULT BLOCKS -->
+
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
                     <shadow type="sensing_touchingobjectmenu"/>
@@ -710,87 +1089,6 @@ const myBlocks = function () {
     `;
 };
 
-const martyMoves = function(){  
-    // "%1 %2 Walk %3 steps, step length %4, step time %5, turn %6 \%",
-    return `
-    <category
-        name="Marty Moves"
-        id="mv2"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_walk" >
-            <value name="STEPS">
-                <shadow type="math_number">
-                    <field name="NUM">2</field>
-                </shadow>
-            </value>
-            <value name="STEPLENGTH">
-                <shadow type="math_number">
-                    <field name="NUM">20</field>
-                </shadow>
-            </value>
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1.5</field>
-                </shadow>
-            </value>
-            <value name="TURN">
-                <shadow type="math_number">
-                    <field name="NUM">0</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="mv2_wiggle" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">5</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-    `;
-};
-
-const martySense = function(){
-    return `
-    <category
-        name="Marty Sense"
-        id="mv2sense"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_demo_sensor" />
-    </category>
-    `;
-}
-
-const martyDebug = function(){
-    return `
-    <category
-        name="Marty Debug"
-        id="mv2debug"
-        colour="#37abc8"
-        secondaryColour="#FFDA61"
-        iconURI="static/marty_icon.svg">
-        <block type="mv2_set_demo_sensor" >
-            <value name="SENSORVAL">
-                <shadow type="math_number">
-                    <field name="NUM">42</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="mv2_set_ip" >
-            <value name="IP">
-                <shadow type="text">
-                    <field name="TEXT">192.168.0.27</field>
-                </shadow>
-            </value>
-        </block>
-    </category>
-    `;
-}
-
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -833,9 +1131,6 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
-    const martyMovesXML = moveCategory('mv2') || martyMoves(isStage, targetId);
-    const martySenseXML = moveCategory('mv2') || martySense(isStage, targetId);
-    const martyDebugXML = moveCategory('mv2') || martyDebug(isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -847,9 +1142,6 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        martyMovesXML, gap,
-        martySenseXML, gap,
-        martyDebugXML, gap,
         myBlocksXML
     ];
 

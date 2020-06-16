@@ -1,6 +1,9 @@
 # Mac OS
 .DS_Store
 
+# Jetbrains
+.idea/
+
 # NPM
 /node_modules
 npm-*

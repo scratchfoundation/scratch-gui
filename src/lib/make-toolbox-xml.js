@@ -20,7 +20,7 @@ const motion = function (isStage, targetId) {
         <block type="mv2_circle" >
             <value name="MOVETIME">
                 <shadow type="math_number">
-                    <field name="NUM">1</field>
+                    <field name="NUM">2</field>
                 </shadow>
             </value>
             <value name="SIDE">
@@ -47,7 +47,7 @@ const motion = function (isStage, targetId) {
         <block type="mv2_lean" >
             <value name="MOVETIME">
                 <shadow type="math_number">
-                    <field name="NUM"></field>
+                    <field name="NUM">1</field>
                 </shadow>
             </value>
             <value name="SIDE">

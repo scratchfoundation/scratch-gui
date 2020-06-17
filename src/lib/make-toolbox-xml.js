@@ -44,6 +44,14 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
+        <block type="mv2_hold" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
         <block type="mv2_lean" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -97,6 +105,14 @@ const motion = function (isStage, targetId) {
             <value name="STEPLEN">
                 <shadow type="math_number">
                     <field name="NUM">2</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_standStraight" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
                 </shadow>
             </value>
         </block>
@@ -298,14 +314,6 @@ const motion = function (isStage, targetId) {
         </block>
 -->
         <!--<block type="mv2_stop" />-->
-
-        <!--<block type="mv2_standStraight" >
-            <value name="MOVETIME">
-                <shadow type="math_number">
-                    <field name="NUM">1</field>
-                </shadow>
-            </value>
-        </block>-->
 
         <!--<block type="mv2_sidefall" >
             <value name="SIDE">

@@ -197,21 +197,9 @@
     /* pad entire wrapper to the left and right; allow children to fill width */
     padding-left: $space;
     padding-right: $space;
-}
 
-.stage-and-target-wrapper.large {
-    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(480px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.large-constrained {
-    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(408px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.small {
-    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(240px + calc($space * 2));
+    /* this will only ever be as wide as the stage */
+    flex-basis: 0;
 }
 
 .target-wrapper {

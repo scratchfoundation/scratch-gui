@@ -362,6 +362,7 @@ class Stage extends React.Component {
             this.drawDragCanvas(drawableData);
             this.positionDragCanvas(x, y);
             this.props.vm.postSpriteInfo({visible: false});
+            this.props.vm.renderer.draw();
         }
     }
     onStopDrag (mouseX, mouseY) {
@@ -387,12 +388,9 @@ class Stage extends React.Component {
             }
             this.props.vm.postSpriteInfo(spriteInfo);
             // Then clear the dragging canvas and stop drag (potentially slow if selecting sprite)
-            setTimeout(() => {
-                this.clearDragCanvas();
-                setTimeout(() => {
-                    commonStopDragActions();
-                }, 30);
-            }, 30);
+            this.clearDragCanvas();
+            commonStopDragActions();
+            this.props.vm.renderer.draw();
         } else {
             commonStopDragActions();
         }

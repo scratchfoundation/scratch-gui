@@ -35,7 +35,7 @@ const StageComponent = props => {
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
 
     return (
-        <div>
+        <React.Fragment>
             <Box
                 className={classNames(
                     styles.stageWrapper,
@@ -129,7 +129,7 @@ const StageComponent = props => {
                     onClick={onDeactivateColorPicker}
                 />
             ) : null}
-        </div>
+        </React.Fragment>
     );
 };
 StageComponent.propTypes = {

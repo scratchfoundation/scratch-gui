@@ -40,7 +40,7 @@ aliases:
         - v1-npm-
   - &defaults
     docker:
-      - image: circleci/node:8.16-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/repo
 
 jobs:
@@ -67,6 +67,7 @@ jobs:
   unit:
     <<: *defaults
     environment:
+      NODE_OPTIONS: --max-old-space-size=7250
       JEST_JUNIT_OUTPUT_NAME: results.xml
     steps:
       - *restore_git_cache
@@ -85,7 +86,7 @@ jobs:
     <<: *defaults
     environment:
       NODE_ENV: production
-      NODE_OPTIONS: --max-old-space-size=4000
+      NODE_OPTIONS: --max-old-space-size=7250
     steps:
       - *restore_git_cache
       - checkout
@@ -130,7 +131,7 @@ jobs:
   deploy-npm:
     <<: *defaults
     environment:
-      NODE_OPTIONS: --max-old-space-size=4000
+        NODE_OPTIONS: --max-old-space-size=7250
     steps:
       - *restore_git_cache
       - *restore_dist_cache
@@ -162,7 +163,7 @@ jobs:
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)
       - run: npm run deploy -- -e $CIRCLE_BRANCH
-      
+
 workflows:
   version: 2
   build-test-deploy:

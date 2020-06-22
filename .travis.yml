@@ -54,7 +54,7 @@ deploy:
 - provider: script
   on:
     all_branches: true
-    condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^greenkeeper/
+    condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^dependabot/
     tags: false # Don't push tags to gh-pages
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git

@@ -41,4 +41,4 @@ $extensions-tertiary: hsla(163, 85%, 30%, 1); /* #0B8E69 */
 $extensions-transparent: hsla(163, 85%, 40%, 0.35); /* 35% transparent version of extensions-primary */
 $extensions-light: hsla(163, 57%, 85%, 1); /* opaque version of extensions-transparent, on white bg */
 
-$drop-highlight: hsla(215, 100%, 77%); /* lighter than motion-primary */
+$drop-highlight: hsla(215, 100%, 77%, 1); /* lighter than motion-primary */

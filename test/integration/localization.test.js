@@ -26,16 +26,12 @@ describe('Localization', () => {
     });
 
     test('Switching languages', async () => {
-        await driver.quit();
-        driver = getDriver();
         await loadUri(uri);
 
         // Add a sprite to make sure it stays when switching languages
-        await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         await clickText('Apple', scope.modal); // Closes modal
 
-        await clickText('Code');
         await clickXpath('//*[@aria-label="language selector"]');
         await clickText('Deutsch');
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks refresh

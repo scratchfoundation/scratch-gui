@@ -24,7 +24,7 @@ const motion = function (isStage, targetId) {
                 </shadow>
             </value>
             <value name="SIDE">
-                    <field>left</field>
+                    <field></field>
             </value>
         </block>
 
@@ -784,7 +784,11 @@ const sensing = function (isStage) {
     <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
         ${isStage ? '' : `
 
-            <block type="mv2_accelerometer" />
+            <block type="mv2_accelerometerX" />
+
+            <block type="mv2_accelerometerY" />
+
+            <block type="mv2_accelerometerZ" />
 
             <block type="mv2_batteryLevel" />
 

@@ -4,7 +4,8 @@ const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
-const motion = function (_, isStage, targetId) {
+/* eslint-disable no-unused-vars */
+const motion = function (isInitialSetup, isStage, targetId) {
     const stageSelected = ScratchBlocks.ScratchMsgs.translate(
         'MOTION_STAGE_SELECTED',
         'Stage selected: no motion blocks'
@@ -150,7 +151,7 @@ const xmlEscape = function (unsafe) {
     });
 };
 
-const looks = function (_, isStage, targetId, costumeName, backdropName) {
+const looks = function (isInitialSetup, isStage, targetId, costumeName, backdropName) {
     const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
@@ -287,7 +288,7 @@ const looks = function (_, isStage, targetId, costumeName, backdropName) {
     `;
 };
 
-const sound = function (_, isStage, targetId, soundName) {
+const sound = function (isInitialSetup, isStage, targetId, soundName) {
     return `
     <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
         <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
@@ -342,7 +343,7 @@ const sound = function (_, isStage, targetId, soundName) {
     `;
 };
 
-const events = function (_, isStage) {
+const events = function (isInitialSetup, isStage) {
     return `
     <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">
         <block type="event_whenflagclicked"/>
@@ -381,7 +382,7 @@ const events = function (_, isStage) {
     `;
 };
 
-const control = function (_, isStage) {
+const control = function (isInitialSetup, isStage) {
     return `
     <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
         <block type="control_wait">
@@ -713,6 +714,7 @@ const myBlocks = function () {
     </category>
     `;
 };
+/* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';

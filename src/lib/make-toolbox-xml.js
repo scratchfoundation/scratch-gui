@@ -622,10 +622,8 @@ const sound = function (isStage, targetId, soundName) {
         <!--Marty blocks-->
 
         <block type="mv2_playSound" >
-            <value name="FILENAME">
-                <shadow type="text">
-                    <field name="TEXT"></field>
-                </shadow>
+            <value name="SOUND">
+                    <field name="SOUND"></field>
             </value>
         </block>
 

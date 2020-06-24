@@ -68,6 +68,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
 }
 
 .monitor-wrapper,
+.frame-wrapper,
 .green-flag-overlay-wrapper {
     position: absolute;
     top: 0;

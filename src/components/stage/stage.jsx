@@ -66,7 +66,13 @@ const StageComponent = props => {
                             stageSize={stageDimensions}
                         />
                     </Box>
-
+                    <Box className={styles.frameWrapper}>
+                        <TargetHighlight
+                            className={styles.frame}
+                            stageHeight={stageDimensions.height}
+                            stageWidth={stageDimensions.width}
+                        />
+                    </Box>
                     {isColorPicking && colorInfo ? (
                         <Loupe colorInfo={colorInfo} />
                     ) : null}
@@ -79,11 +85,6 @@ const StageComponent = props => {
                         {[styles.fullScreen]: isFullScreen}
                     )}
                 >
-                    <TargetHighlight
-                        className={styles.frame}
-                        stageHeight={stageDimensions.height}
-                        stageWidth={stageDimensions.width}
-                    />
                     <div
                         className={styles.stageBottomWrapper}
                         style={{

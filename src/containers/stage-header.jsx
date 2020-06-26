@@ -25,7 +25,7 @@ class StageHeader extends React.Component {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
     handleKeyPress (event) {
-        if (event.key === 'Escape' && this.props.isFullScreen) {
+        if (event.key === 'Escape' && this.props.isFullScreen && !this.props.showBranding) {
             this.props.onSetStageUnFull(false);
         }
     }

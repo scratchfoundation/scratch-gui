@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
+import {Set} from 'immutable';
 import styles from './monitor.css';
 import ListMonitorScroller from './list-monitor-scroller.jsx';
 
@@ -57,6 +58,8 @@ ListMonitor.propTypes = {
     categoryColor: PropTypes.string.isRequired,
     draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
+    highlightItem: PropTypes.number,
+    highlightItems: PropTypes.instanceOf(Set),
     label: PropTypes.string.isRequired,
     onActivate: PropTypes.func,
     onAdd: PropTypes.func,
@@ -74,7 +77,8 @@ ListMonitor.propTypes = {
 
 ListMonitor.defaultProps = {
     width: 110,
-    height: 200
+    height: 200,
+    highlightItem: null
 };
 
 export default ListMonitor;

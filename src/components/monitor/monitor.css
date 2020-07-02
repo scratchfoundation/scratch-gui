@@ -187,3 +187,7 @@
 .footer-length {
     text-align: center;
 }
+
+.highlight-index {
+    color: $control-primary;
+}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
 import {FormattedMessage} from 'react-intl';
-
+import {Set} from 'immutable';
 import styles from './monitor.css';
 import {List} from 'react-virtualized';
 
@@ -31,13 +31,21 @@ class ListMonitorScroller extends React.Component {
         );
     }
     rowRenderer ({index, key, style}) {
+        const isHighlighted = this.props.highlightItems.has(index);
         return (
             <div
                 className={styles.listRow}
                 key={key}
                 style={style}
             >
-                <div className={styles.listIndex}>{index + 1 /* one indexed */}</div>
+                <div
+                    className={classNames(
+                        styles.listIndex,
+                        {
+                            [styles.highlightIndex]: isHighlighted
+                        }
+                    )}
+                >{index + 1 /* one indexed */}</div>
                 <div
                     className={styles.listValue}
                     dataIndex={index}
@@ -74,14 +82,17 @@ class ListMonitorScroller extends React.Component {
         );
     }
     render () {
-        const {height, values, width, activeIndex, activeValue} = this.props;
+        const {height, values, width, activeIndex, activeValue, highlightItem} = this.props;
         // Keep the active index in view if defined, else must be undefined for List component
-        const scrollToIndex = activeIndex === null ? undefined : activeIndex; /* eslint-disable-line no-undefined */
+        const highlightIndex = highlightItem === null ? undefined : highlightItem; // eslint-disable-line no-undefined
+        const scrollToIndex = activeIndex === null ? highlightIndex : activeIndex; // eslint-disable-line no-undefined
         return (
             <List
                 activeIndex={activeIndex}
                 activeValue={activeValue}
                 height={(height) - 44 /* Header/footer size, approx */}
+                highlightItems={this.props.highlightItems.toString()
+                /* note that this is not an actual prop - it's just there to re-render whenever the list updates */}
                 noRowsRenderer={this.noRowsRenderer}
                 rowCount={values.length}
                 rowHeight={24 /* Row size is same for all rows */}
@@ -100,6 +111,8 @@ ListMonitorScroller.propTypes = {
     categoryColor: PropTypes.string,
     draggable: PropTypes.bool,
     height: PropTypes.number,
+    highlightItem: PropTypes.number,
+    highlightItems: PropTypes.instanceOf(Set),
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,
     onFocus: PropTypes.func,

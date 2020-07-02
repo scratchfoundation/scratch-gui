@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
 import {getVariableValue, setVariableValue} from '../lib/variable-utils';
 import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
-import {Map} from 'immutable';
+import {Map as ImmutableMap, Set} from 'immutable'; // to avoid conflict with built-in Map
 
 class ListMonitor extends React.Component {
     constructor (props) {
@@ -19,15 +19,43 @@ class ListMonitor extends React.Component {
             'handleKeyPress',
             'handleFocus',
             'handleAdd',
-            'handleResizeMouseDown'
+            'handleResizeMouseDown',
+            'unhighlight'
         ]);
 
         this.state = {
             activeIndex: null,
             activeValue: null,
             width: props.width || 100,
-            height: props.height || 200
+            height: props.height || 200,
+            highlightItems: Set()
         };
+
+        this.highlightMap = new Map();
+    }
+
+    componentWillReceiveProps (nextProps) {
+        const newHighlightItem = nextProps.highlightItem;
+        if (newHighlightItem === this.props.highlightItem) return;
+        if (newHighlightItem === null) return;
+        if (this.highlightMap.has(newHighlightItem)) {
+            clearTimeout(this.highlightMap.get(newHighlightItem));
+        }
+        this.highlightMap.set(newHighlightItem, setTimeout(() => this.unhighlight(newHighlightItem), 500));
+        this.setState({
+            highlightItems: Set(Array.from(this.highlightMap.keys()))
+        });
+    }
+
+    componentWillUnmount () {
+        this.highlightMap.forEach(val => clearTimeout(val));
+    }
+
+    unhighlight (item) {
+        this.highlightMap.delete(item);
+        this.setState({
+            highlightItems: Set(Array.from(this.highlightMap.keys()))
+        });
     }
 
     handleActivate (index) {
@@ -141,7 +169,7 @@ class ListMonitor extends React.Component {
             onMouseMove(ev); // Make sure width/height are up-to-date
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('mouseup', onMouseUp);
-            this.props.vm.runtime.requestUpdateMonitor(Map({
+            this.props.vm.runtime.requestUpdateMonitor(ImmutableMap({
                 id: this.props.id,
                 height: this.state.height,
                 width: this.state.width
@@ -168,6 +196,7 @@ class ListMonitor extends React.Component {
                 activeIndex={this.state.activeIndex}
                 activeValue={this.state.activeValue}
                 height={this.state.height}
+                highlightItems={this.state.highlightItems}
                 width={this.state.width}
                 onActivate={this.handleActivate}
                 onAdd={this.handleAdd}
@@ -184,6 +213,7 @@ class ListMonitor extends React.Component {
 
 ListMonitor.propTypes = {
     height: PropTypes.number,
+    highlightItem: PropTypes.number,
     id: PropTypes.string,
     targetId: PropTypes.string,
     value: PropTypes.oneOfType([

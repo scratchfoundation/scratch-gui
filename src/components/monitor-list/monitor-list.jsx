@@ -26,6 +26,7 @@ const MonitorList = props => (
                     <Monitor
                         draggable={props.draggable}
                         height={monitorData.height}
+                        highlightItem={monitorData.highlightItem}
                         id={monitorData.id}
                         isDiscrete={monitorData.isDiscrete}
                         key={monitorData.id}

@@ -106,9 +106,15 @@ const TitledHOC = function (WrappedComponent) {
         onChangedProjectTitle: title => dispatch(setProjectTitle(title))
     });
 
+    // Allow incoming props to override redux-provided props. Used to mock in tests.
+    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
+        {}, stateProps, dispatchProps, ownProps
+    );
+
     return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps,
+        mergeProps
     )(TitledComponent));
 };
 

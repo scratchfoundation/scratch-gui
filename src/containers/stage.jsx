@@ -304,6 +304,12 @@ class Stage extends React.Component {
         }
         this.setState({mouseDownTimeoutId: null});
     }
+    /**
+     * Initialize the position of the "dragged sprite" canvas
+     * @param {DrawableExtraction} drawableData The data returned from renderer.extractDrawableScreenSpace
+     * @param {number} x The x position of the initial drag event
+     * @param {number} y The y position of the initial drag event
+     */
     drawDragCanvas (drawableData, x, y) {
         const {
             imageData,
@@ -349,9 +355,6 @@ class Stage extends React.Component {
         // Dragging always brings the target to the front
         target.goToFront();
 
-        // Extract the drawable art
-        const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
-
         const [scratchMouseX, scratchMouseY] = this.getScratchCoords(x, y);
         const offsetX = target.x - scratchMouseX;
         const offsetY = -(target.y + scratchMouseY);
@@ -363,6 +366,8 @@ class Stage extends React.Component {
             dragOffset: [offsetX, offsetY]
         });
         if (this.props.useEditorDragStyle) {
+            // Extract the drawable art
+            const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
             this.drawDragCanvas(drawableData, x, y);
             this.positionDragCanvas(x, y);
             this.props.vm.postSpriteInfo({visible: false});

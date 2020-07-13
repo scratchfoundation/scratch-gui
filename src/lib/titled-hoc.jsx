@@ -42,7 +42,8 @@ const TitledHOC = function (WrappedComponent) {
             const reduxTitleHasChanged =
                 (this.props.reduxProjectTitle !== prevProps.reduxProjectTitle &&
                 this.props.reduxProjectTitle !== this.props.projectTitle);
-            const titlePropIsSet = !!this.props.projectTitle;
+            const titlePropIsSet = ((this.props.projectTitle !== null) &&
+                (typeof this.props.projectTitle !== 'undefined'));
             if (titlePropIsSet && reduxTitleHasChanged) {
                 this.props.onUpdateProjectTitle(this.props.reduxProjectTitle);
             }

@@ -191,6 +191,13 @@ npm install  --no-optional --save-dev react-responsive@^5.0.0
 
 Further reading: [Stack Overflow](https://stackoverflow.com/questions/46602286/npm-requires-a-peer-of-but-all-peers-are-in-package-json-and-node-modules)
 
+## Troubleshooting
+
+If you run into npm install errors, try these steps:
+1. run `npm cache clean --force`
+2. Delete the node_modules directory
+3. Delete package-lock.json
+4. run `npm install` again
 
 ## Publishing to GitHub Pages
 You can publish the GUI to github.io so that others on the Internet can view it.

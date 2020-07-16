@@ -1,3 +1,6 @@
-last 3 versions
-Safari >= 8
-iOS >= 8
+chrome >= 70
+chromeandroid >= 70
+ios >= 12
+safari >= 12
+edge >= 17
+firefox >= 68

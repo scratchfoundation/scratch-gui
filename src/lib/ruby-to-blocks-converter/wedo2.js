@@ -10,6 +10,10 @@ const Wedo2Converter = {
         let block;
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
+            case 'wedo2_trun_motor_on':
+                block = this._createBlock('wedo2_motorOn', 'statement');
+                this._addInput(block, 'MOTOR_ID', this._createFieldBlock('wedo2_menu_MOTOR_ID', 'MOTOR_ID', args[0]))
+                break;
             case 'wedo2_set_light_color':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('wedo2_setLightHue', 'statement');

@@ -4,8 +4,8 @@ import projectData from './project-data';
 import popWav from '!arraybuffer-loader!./83a9787d4cb6f3b7632b4ddfebf74367.wav';
 import meowWav from '!arraybuffer-loader!./83c36d806dc92327b9e7049a565c6bff.wav';
 import backdrop from '!raw-loader!./cd21514d0531fdffb22204e0ec5ed84a.svg';
-import costume1 from '!raw-loader!./09dc888b0b7df19f70d81588ae73420e.svg';
-import costume2 from '!raw-loader!./3696356a03a8d938318876a593572843.svg';
+import costume1 from '!raw-loader!./b7853f557e4426412e64bb3da6531a99.svg';
+import costume2 from '!raw-loader!./e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg';
 /* eslint-enable import/no-unresolved */
 
 const defaultProject = translator => {
@@ -40,12 +40,12 @@ const defaultProject = translator => {
         dataFormat: 'SVG',
         data: encoder.encode(backdrop)
     }, {
-        id: '09dc888b0b7df19f70d81588ae73420e',
+        id: 'b7853f557e4426412e64bb3da6531a99',
         assetType: 'ImageVector',
         dataFormat: 'SVG',
         data: encoder.encode(costume1)
     }, {
-        id: '3696356a03a8d938318876a593572843',
+        id: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f',
         assetType: 'ImageVector',
         dataFormat: 'SVG',
         data: encoder.encode(costume2)

@@ -6,19 +6,19 @@ import {connect} from 'react-redux';
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
 import storage from '../lib/storage';
-import {getEventXY} from '../lib/touch-utils';
 import VM from 'scratch-vm';
 import getCostumeUrl from '../lib/get-costume-url';
+import DragRecognizer from '../lib/drag-recognizer';
+import {getEventXY} from '../lib/touch-utils';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
-
-const dragThreshold = 3; // Same as the block drag threshold
 
 class SpriteSelectorItem extends React.PureComponent {
     constructor (props) {
         super(props);
         bindAll(this, [
             'getCostumeData',
+            'setRef',
             'handleClick',
             'handleDelete',
             'handleDuplicate',
@@ -26,9 +26,22 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseEnter',
             'handleMouseLeave',
             'handleMouseDown',
-            'handleMouseMove',
-            'handleMouseUp'
+            'handleDragEnd',
+            'handleDrag',
+            'handleTouchEnd'
         ]);
+
+        this.dragRecognizer = new DragRecognizer({
+            onDrag: this.handleDrag,
+            onDragEnd: this.handleDragEnd
+        });
+    }
+    componentDidMount () {
+        document.addEventListener('touchend', this.handleTouchEnd);
+    }
+    componentWillUnmount () {
+        document.removeEventListener('touchend', this.handleTouchEnd);
+        this.dragRecognizer.reset();
     }
     getCostumeData () {
         if (this.props.costumeURL) return this.props.costumeURL;
@@ -36,12 +49,7 @@ class SpriteSelectorItem extends React.PureComponent {
 
         return getCostumeUrl(this.props.asset);
     }
-    handleMouseUp () {
-        this.initialOffset = null;
-        window.removeEventListener('mouseup', this.handleMouseUp);
-        window.removeEventListener('mousemove', this.handleMouseMove);
-        window.removeEventListener('touchend', this.handleMouseUp);
-        window.removeEventListener('touchmove', this.handleMouseMove);
+    handleDragEnd () {
         if (this.props.dragging) {
             this.props.onDrag({
                 img: null,
@@ -55,29 +63,26 @@ class SpriteSelectorItem extends React.PureComponent {
             this.noClick = false;
         });
     }
-    handleMouseMove (e) {
-        const currentOffset = getEventXY(e);
-        const dx = currentOffset.x - this.initialOffset.x;
-        const dy = currentOffset.y - this.initialOffset.y;
-        if (Math.sqrt((dx * dx) + (dy * dy)) > dragThreshold) {
-            this.props.onDrag({
-                img: this.getCostumeData(),
-                currentOffset: currentOffset,
-                dragging: true,
-                dragType: this.props.dragType,
-                index: this.props.index,
-                payload: this.props.dragPayload
-            });
-            this.noClick = true;
+    handleDrag (currentOffset) {
+        this.props.onDrag({
+            img: this.getCostumeData(),
+            currentOffset: currentOffset,
+            dragging: true,
+            dragType: this.props.dragType,
+            index: this.props.index,
+            payload: this.props.dragPayload
+        });
+        this.noClick = true;
+    }
+    handleTouchEnd (e) {
+        const {x, y} = getEventXY(e);
+        const {top, left, bottom, right} = this.ref.getBoundingClientRect();
+        if (x >= left && x <= right && y >= top && y <= bottom) {
+            this.handleMouseEnter();
         }
-        e.preventDefault();
     }
     handleMouseDown (e) {
-        this.initialOffset = getEventXY(e);
-        window.addEventListener('mouseup', this.handleMouseUp);
-        window.addEventListener('mousemove', this.handleMouseMove);
-        window.addEventListener('touchend', this.handleMouseUp);
-        window.addEventListener('touchmove', this.handleMouseMove);
+        this.dragRecognizer.start(e);
     }
     handleClick (e) {
         e.preventDefault();
@@ -103,6 +108,10 @@ class SpriteSelectorItem extends React.PureComponent {
     handleMouseEnter () {
         this.props.dispatchSetHoveredSprite(this.props.id);
     }
+    setRef (component) {
+        // Access the DOM node using .elem because it is going through ContextMenuTrigger
+        this.ref = component && component.elem;
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -122,7 +131,9 @@ class SpriteSelectorItem extends React.PureComponent {
         } = this.props;
         return (
             <SpriteSelectorItemComponent
+                componentRef={this.setRef}
                 costumeURL={this.getCostumeData()}
+                preventContextMenu={this.dragRecognizer.gestureInProgress()}
                 onClick={this.handleClick}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}

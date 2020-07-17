@@ -75,7 +75,7 @@ describe('Working with sprites', () => {
     test('Deleting by x button on sprite tile', async () => {
         await loadUri(uri);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
-        await clickXpath('//*[@aria-label="Close"]'); // Only visible close button is on the sprite
+        await clickXpath('//*[@aria-label="Delete"]'); // Only visible close button is on the sprite
         // Confirm that the stage has been switched to
         await findByText('Stage selected: no motion blocks');
         const logs = await getLogs();

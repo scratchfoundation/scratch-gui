@@ -37,6 +37,10 @@
     background-color: $ui-black-transparent;
 }
 
+.menu-item.hoverable {
+    cursor: pointer;
+}
+
 .menu-section {
     border-top: 1px solid $ui-black-transparent;
 }

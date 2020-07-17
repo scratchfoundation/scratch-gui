@@ -19,11 +19,16 @@ describe('VMManagerHOC', () => {
                 projectState: {},
                 mode: {},
                 vmStatus: {}
+            },
+            locales: {
+                locale: '',
+                messages: {}
             }
         });
         vm = new VM();
         vm.attachAudioEngine = jest.fn();
         vm.setCompatibilityMode = jest.fn();
+        vm.setLocale = jest.fn();
         vm.start = jest.fn();
     });
     test('when it mounts in player mode, the vm is initialized but not started', () => {
@@ -39,6 +44,7 @@ describe('VMManagerHOC', () => {
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
+        expect(vm.setLocale.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
 
         // But vm should not be started automatically
@@ -57,6 +63,7 @@ describe('VMManagerHOC', () => {
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
+        expect(vm.setLocale.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
 
         expect(vm.start).toHaveBeenCalled();
@@ -75,6 +82,7 @@ describe('VMManagerHOC', () => {
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(0);
         expect(vm.setCompatibilityMode.mock.calls.length).toBe(0);
+        expect(vm.setLocale.mock.calls.length).toBe(0);
         expect(vm.initialized).toBe(true);
 
         expect(vm.start).toHaveBeenCalled();

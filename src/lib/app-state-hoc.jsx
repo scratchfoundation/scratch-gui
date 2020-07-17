@@ -113,7 +113,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     }
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
-        isPlayerOnly: PropTypes.bool
+        isPlayerOnly: PropTypes.bool,
+        showTelemetryModal: PropTypes.bool
     };
     return AppStateWrapper;
 };

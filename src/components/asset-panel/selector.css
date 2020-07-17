@@ -50,8 +50,16 @@ $fade-out-distance: 100px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+}
+
+.list-area:after {
     /* Make sure there is room to scroll beyond the last tile */
-    padding-bottom: 70px;
+    content: '';
+    display: block;
+    height: 70px;
+    width: 100%;
+    flex-shrink: 0;
+    order: 99999999;
 }
 
 .list-item {

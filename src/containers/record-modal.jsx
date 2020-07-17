@@ -2,8 +2,8 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
-import WavEncoder from 'wav-encoder';
 import {connect} from 'react-redux';
+import {encodeAndAddSoundToVM} from '../lib/audio/audio-util.js';
 
 import RecordModalComponent from '../components/record-modal/record-modal.jsx';
 
@@ -71,39 +71,12 @@ class RecordModal extends React.Component {
             const startIndex = Math.floor(this.state.trimStart * sampleCount);
             const endIndex = Math.floor(this.state.trimEnd * sampleCount);
             const clippedSamples = this.state.samples.slice(startIndex, endIndex);
-            WavEncoder.encode({
-                sampleRate: this.state.sampleRate,
-                channelData: [clippedSamples]
-            }).then(wavBuffer => {
-                const vmSound = {
-                    format: '',
-                    dataFormat: 'wav',
-                    rate: this.state.sampleRate,
-                    sampleCount: clippedSamples.length
-                };
 
-                // Create an asset from the encoded .wav and get resulting md5
-                const storage = this.props.vm.runtime.storage;
-                vmSound.asset = storage.createAsset(
-                    storage.AssetType.Sound,
-                    storage.DataFormat.WAV,
-                    new Uint8Array(wavBuffer),
-                    null,
-                    true // generate md5
-                );
-                vmSound.assetId = vmSound.asset.assetId;
-
-                // update vmSound object with md5 property
-                vmSound.md5 = `${vmSound.assetId}.${vmSound.dataFormat}`;
-                // The VM will update the sound name to a fresh name
-                // if the following is already taken
-                vmSound.name = 'recording1';
-
-                this.props.vm.addSound(vmSound).then(() => {
+            encodeAndAddSoundToVM(this.props.vm, clippedSamples, this.state.sampleRate, 'recording1',
+                () => {
                     this.props.onClose();
                     this.props.onNewSound();
                 });
-            });
         });
     }
     handleCancel () {

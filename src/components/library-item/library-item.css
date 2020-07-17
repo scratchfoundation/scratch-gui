@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-basis: 160px;
+    position: relative;
     height: 160px;
     max-width: 160px;
     margin: $space;
@@ -138,7 +139,9 @@
 .featured-description {
     display: block;
     font-weight: normal;
-    line-height: 2;
+    line-height: 1.375rem;
+    padding-top: .3125rem;
+    padding-bottom: .25rem;
 }
 
 .featured-extension-metadata {
@@ -176,6 +179,10 @@
     height: 100%;
     padding-top: 0.4rem;
     font-weight: bold;
+}
+
+.featured-extension-metadata-detail img{
+    margin-right: 0.25rem;
 }
 
 .coming-soon-text {

@@ -43,6 +43,7 @@
     margin: 0 5px;
     border-radius: calc($space / 2);
     padding: 0 2px;
+    white-space: pre-wrap;
     transform: translateZ(0); /* Fixes flickering in Safari */
 }
 
@@ -53,6 +54,7 @@
     text-align: center;
     color: white;
     font-size: 1rem;
+    white-space: pre-wrap;
     transform: translateZ(0); /* Fixes flickering in Safari */
 }
 
@@ -149,7 +151,7 @@
     overflow: hidden; /* Don't let long values escape container */
     text-overflow: ellipsis;
     user-select: text; /* Allow selecting list values for 2.0 compatibility, only relevant in player */
-    white-space: nowrap;
+    white-space: pre;
 }
 
 .list-input {

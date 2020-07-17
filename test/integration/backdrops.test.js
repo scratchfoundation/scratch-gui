@@ -25,7 +25,7 @@ describe('Working with backdrops', () => {
         await driver.quit();
     });
 
-    test('Adding a backdrop from the library', async () => {
+    test('Adding a backdrop from the library should not switch to stage', async () => {
         await loadUri(uri);
 
         // Start on the sounds tab of sprite1 to test switching behavior
@@ -37,12 +37,11 @@ describe('Working with backdrops', () => {
         await el.sendKeys('blue');
         await clickText('Blue Sky'); // Adds the backdrop
 
-        // Make sure the stage is selected and the sound tab remains selected.
-        // This is different from Scratch2 which selected backdrop tab automatically
-        // See issue #3500
-        await clickText('pop', scope.soundsTab);
+        // Make sure the sprite is still selected, and that the tab has not changed
+        await clickText('Meow', scope.soundsTab);
 
         // Make sure the backdrop was actually added by going to the backdrops tab
+        await clickXpath('//span[text()="Stage"]');
         await clickText('Backdrops');
         await clickText('Blue Sky', scope.costumesTab);
 
@@ -50,7 +49,48 @@ describe('Working with backdrops', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Adding multiple backdrops at the same time', async () => {
+    test('Adding backdrop via paint should switch to stage', async () => {
+        await loadUri(uri);
+
+        const buttonXpath = '//button[@aria-label="Choose a Backdrop"]';
+        const paintXpath = `${buttonXpath}/following-sibling::div//button[@aria-label="Paint"]`;
+
+        const el = await findByXpath(buttonXpath);
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath(paintXpath);
+
+        // Stage should become selected and costume tab activated
+        await findByText('backdrop2', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding backdrop via surprise should not switch to stage', async () => {
+        await loadUri(uri);
+
+        // Start on the sounds tab of sprite1 to test switching behavior
+        await clickText('Sounds');
+
+        const buttonXpath = '//button[@aria-label="Choose a Backdrop"]';
+        const surpriseXpath = `${buttonXpath}/following-sibling::div//button[@aria-label="Surprise"]`;
+
+        const el = await findByXpath(buttonXpath);
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        await clickXpath(surpriseXpath);
+
+        // Make sure the sprite is still selected, and that the tab has not changed
+        await clickText('Meow', scope.soundsTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding multiple backdrops from file should switch to stage', async () => {
         const files = [
             path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
             path.resolve(__dirname, '../fixtures/100-100.svg')
@@ -67,7 +107,7 @@ describe('Working with backdrops', () => {
         const input = await findByXpath(fileXpath);
         await input.sendKeys(files.join('\n'));
 
-        await clickXpath('//span[text()="Stage"]');
+        // Should have been switched to stage/costume tab already
         await findByText('gh-3582-png', scope.costumesTab);
         await findByText('100-100', scope.costumesTab);
 

@@ -1,9 +1,20 @@
 class RobotEffect {
-    constructor (audioContext) {
+    constructor (audioContext, startTime, endTime) {
         this.audioContext = audioContext;
 
         this.input = this.audioContext.createGain();
         this.output = this.audioContext.createGain();
+        this.passthrough = this.audioContext.createGain();
+        this.effectInput = this.audioContext.createGain();
+
+        this.passthrough.gain.value = 1;
+        this.effectInput.gain.value = 0;
+
+        this.passthrough.gain.setValueAtTime(0, startTime);
+        this.passthrough.gain.setValueAtTime(1, endTime);
+
+        this.effectInput.gain.setValueAtTime(1, startTime);
+        this.effectInput.gain.setValueAtTime(0, endTime);
 
         // Ring modulator inspired by BBC Dalek voice
         // http://recherche.ircam.fr/pub/dafx11/Papers/66_e.pdf
@@ -70,8 +81,13 @@ class RobotEffect {
         biquadFilter.frequency.value = 1000;
         biquadFilter.gain.value = 1.25;
 
-        this.input.connect(vcInverter1);
-        this.input.connect(vcDiode4);
+        this.input.connect(this.effectInput);
+        this.input.connect(this.passthrough);
+
+        this.passthrough.connect(this.output);
+
+        this.effectInput.connect(vcInverter1);
+        this.effectInput.connect(vcDiode4);
 
         vcInverter1.connect(vcDiode3);
 
@@ -91,7 +107,7 @@ class RobotEffect {
         vcDiode3.connect(compressor);
         vcDiode4.connect(compressor);
 
-        this.input.connect(biquadFilter);
+        this.effectInput.connect(biquadFilter);
         biquadFilter.connect(compressor);
 
         compressor.connect(this.output);

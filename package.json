@@ -68,7 +68,7 @@
     "intl": "1.2.5",
     "jest": "^21.0.0",
     "jest-junit": "^7.0.0",
-    "js-base64": "2.4.9",
+    "js-base64": "3.2.3",
     "keymirror": "0.1.1",
     "lodash.bindall": "4.4.0",
     "lodash.debounce": "4.0.8",

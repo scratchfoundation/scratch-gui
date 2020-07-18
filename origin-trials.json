@@ -3,14 +3,14 @@
     {
       "origin": "smalruby.app",
       "matchSubdomains": false,
-      "token": "Ag4uU2UqNmz2w+wQo7XPv6qzdHfjiLvzm//3JYQ8M7I+ro48rcE1BNq4uob+ayhLKF2VKjT6bsgToleYnAwWPwcAAABMeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmFwcDo0NDMiLCJmZWF0dXJlIjoiU2VyaWFsIiwiZXhwaXJ5IjoxNTk1MDMxMzQ3fQ==",
-      "expiry": "2020-07-18"
+      "token": "AqsQ3Yx/AeFCPVmA1yO1FV8zVR+CsrIHa2APT/WABNJQH+E3JMWucDbKSeCfOLx/B5msAxOqgzudY8vLe04FOw8AAABMeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmFwcDo0NDMiLCJmZWF0dXJlIjoiU2VyaWFsIiwiZXhwaXJ5IjoxNTk4NzA1MTQwfQ==",
+      "expiry": "2020-08-29"
     },
     {
       "origin": "smalruby.jp",
       "matchSubdomains": true,
-      "token": "Ah/64l5f1XAfQJLzQwQPDxTe4V6zf3rVx8F8xmX+aEjOo+nmNJxmDygIzWvePkLHGzUefEyqFnFgZDckvn6LnQ0AAABeeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmpwOjQ0MyIsImZlYXR1cmUiOiJTZXJpYWwiLCJleHBpcnkiOjE1OTUwMzEyODUsImlzU3ViZG9tYWluIjp0cnVlfQ==",
-      "expiry": "2020-07-18"
+      "token": "Av0DNgbfYIR0uMmbC2rPMRQXg/HpE1XIqHELJ+RnKDlNF86lcpGXC6/RijQtcIKi3t0msg/r6X8XN1mCcrT91QkAAABeeyJvcmlnaW4iOiJodHRwczovL3NtYWxydWJ5LmpwOjQ0MyIsImZlYXR1cmUiOiJTZXJpYWwiLCJleHBpcnkiOjE1OTg3MDUxODYsImlzU3ViZG9tYWluIjp0cnVlfQ==",
+      "expiry": "2020-08-29"
     }
   ]
 }

@@ -245,6 +245,17 @@ const GUIComponent = props => {
                                     <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
+                                            src={saveIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Save / Load"
+                                            description="Button to toggle save/load tab"
+                                            id="gui.gui.toggleSpriteTab"
+                                        />
+                                    </Tab>
+                                    <Tab className={tabClassNames.tab}>
+                                        <img
+                                            draggable={false}
                                             src={codeIcon}
                                         />
                                         <FormattedMessage

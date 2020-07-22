@@ -17,7 +17,7 @@
         simplifies by all of this by removing padding from the equation.
     */
     box-sizing: border-box;
-    height: $menu-bar-height;
+    height: 35px;
 
     /*
         @todo: This adds ~20px in Chrome, when scrolling to the right,
@@ -27,7 +27,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $motion-primary;
+    background-color: lightgray;
     color: $ui-white;
 }
 

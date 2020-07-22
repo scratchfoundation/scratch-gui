@@ -17,10 +17,12 @@ import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
-import MenuBar from '../menu-bar/menu-bar.jsx';
+// import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
-import Watermark from '../../containers/watermark.jsx';
+// import Watermark from '../../containers/watermark.jsx';
+
+import LanguageStandalone from '../language-standalone/language-standalone.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
@@ -199,7 +201,7 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
+                {/* <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
@@ -227,7 +229,7 @@ const GUIComponent = props => {
                     onSeeCommunity={onSeeCommunity}
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
-                />
+                />*/}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
@@ -314,8 +316,10 @@ const GUIComponent = props => {
                                             />
                                         </button>
                                     </Box>
+                                    {/* below box is perfect for sensor display */}
                                     <Box className={styles.watermark}>
-                                        <Watermark />
+                                        <LanguageStandalone canChangeLanguage={canChangeLanguage} />
+                                        {/* <Watermark /> */}
                                     </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
@@ -325,11 +329,10 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
-                            {backpackVisible ? (
+                            {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
-                            ) : null}
+                            ) : null}*/}
                         </Box>
-
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
                                 isRendererSupported={isRendererSupported}

@@ -283,7 +283,7 @@ $fade-out-distance: 15px;
 .watermark {
     position: absolute;
     top: 1.25rem;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 [dir="ltr"] .watermark {

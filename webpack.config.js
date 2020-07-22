@@ -95,6 +95,10 @@ const base = {
     plugins: []
 };
 
+if (!process.env.CI) {
+    base.plugins.push(new webpack.ProgressPlugin());
+}
+
 module.exports = [
     // to run editor examples
     defaultsDeep({}, base, {

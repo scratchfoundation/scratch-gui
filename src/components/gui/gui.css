@@ -34,7 +34,17 @@
 }
 
 .editor-wrapper {
-    flex-basis: 600px;
+    /*
+        This is carefully balanced--  the minimum width at which the GUI will be displayed is 1024px.
+        At that size, the stage pane is 408px wide, with $space of padding to each side.
+        However, we must also add the border width to the stage pane. All-in-all, the stage pane's final width is
+        408px + ($space + $stage-standard-border-width * 2) (one border & padding per left/right side).
+
+        @todo This is in place to prevent "doubling up" of horizontal scrollbars in narrow windows, but there are likely
+        much better ways to solve that (e.g. undo #2124, remove this flex-basis entirely). However, they run their own
+        risks of breaking things, so let's just leave this as-is for the time being.
+    */
+    flex-basis: calc(1024px - 408px - (($space + $stage-standard-border-width) * 2));
     flex-grow: 1;
     flex-shrink: 0;
     position: relative;
@@ -197,21 +207,9 @@
     /* pad entire wrapper to the left and right; allow children to fill width */
     padding-left: $space;
     padding-right: $space;
-}
 
-.stage-and-target-wrapper.large {
-    /* Fix the max width to max large stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(480px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.large-constrained {
-    /* Fix the max width to max largeConstrained stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(408px + calc($space * 2));
-}
-
-.stage-and-target-wrapper.small {
-    /* Fix the max width to max small stage size (defined in layout_constants.js) + gutter size */
-    max-width: calc(240px + calc($space * 2));
+    /* this will only ever be as wide as the stage */
+    flex-basis: 0;
 }
 
 .target-wrapper {

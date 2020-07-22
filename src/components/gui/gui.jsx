@@ -41,6 +41,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import saveIcon from './icon--save.svg';
 
 const messages = defineMessages({
     addExtension: {
@@ -245,17 +246,6 @@ const GUIComponent = props => {
                                     <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
-                                            src={saveIcon}
-                                        />
-                                        <FormattedMessage
-                                            defaultMessage="Save / Load"
-                                            description="Button to toggle save/load tab"
-                                            id="gui.gui.toggleSpriteTab"
-                                        />
-                                    </Tab>
-                                    <Tab className={tabClassNames.tab}>
-                                        <img
-                                            draggable={false}
                                             src={codeIcon}
                                         />
                                         <FormattedMessage
@@ -298,6 +288,17 @@ const GUIComponent = props => {
                                             defaultMessage="Sounds"
                                             description="Button to get to the sounds panel"
                                             id="gui.gui.soundsTab"
+                                        />
+                                    </Tab>
+                                    <Tab className={tabClassNames.tab}>
+                                        <img
+                                            draggable={false}
+                                            src={saveIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Save / Load"
+                                            description="Button to toggle save/load tab"
+                                            id="gui.gui.toggleSpriteTab"
                                         />
                                     </Tab>
                                 </TabList>

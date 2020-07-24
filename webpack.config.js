@@ -87,9 +87,7 @@ const base = {
     },
     optimization: {
         minimizer: [
-            new TerserPlugin({
-                include: /\.min\.js$/
-            })
+            new TerserPlugin()
         ]
     },
     plugins: []

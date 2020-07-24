@@ -40,6 +40,21 @@ const Wedo2Converter = {
                     this._addNumberInput(block, 'POWER', 'math_number', args[1], 100);
                     break;
                 }
+            case 'wedo2_set_motor_direction':
+                if (args.length === 2 && this._isString(args[0]) && this._isString(args[1])){
+                    block = this._createBlock('wedo2_setMotorDirection', 'statement');
+                    this._addInput(
+                        block,
+                        'MOTOR_ID',
+                        this._createFieldBlock('wedo2_menu_MOTOR_ID', 'MOTOR_ID', args[0])
+                    );
+                    this._addInput(
+                        block,
+                        'MOTOR_DIRECTION',
+                        this._createFieldBlock('wedo2_menu_MOTOR_DIRECTION', 'MOTOR_DIRECTION', args[1])
+                    );
+                }
+                break;
             case 'wedo2_set_light_color':
                 if (args.length === 1 && this._isNumberOrBlock(args[0])) {
                     block = this._createBlock('wedo2_setLightHue', 'statement');

@@ -53,12 +53,14 @@ Controls.propTypes = {
     isStarted: PropTypes.bool.isRequired,
     projectRunning: PropTypes.bool.isRequired,
     turbo: PropTypes.bool.isRequired,
+    compatibility: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
     isStarted: state.scratchGui.vmStatus.running,
     projectRunning: state.scratchGui.vmStatus.running,
+    compatibility: state.scratchGui.vmStatus.compatibility,
     turbo: state.scratchGui.vmStatus.turbo
 });
 // no-op function to prevent dispatch prop being passed to component

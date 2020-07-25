@@ -6,6 +6,7 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import GreenFlag from '../green-flag/green-flag.jsx';
 import StopAll from '../stop-all/stop-all.jsx';
 import TurboMode from '../turbo-mode/turbo-mode.jsx';
+import SixtyFPS from '../tw-60-fps/tw-60-fps.jsx';
 
 import styles from './controls.css';
 
@@ -30,6 +31,7 @@ const Controls = function (props) {
         onGreenFlagClick,
         onStopAllClick,
         turbo,
+        compatibility,
         ...componentProps
     } = props;
     return (
@@ -50,6 +52,9 @@ const Controls = function (props) {
             {turbo ? (
                 <TurboMode />
             ) : null}
+            {!compatibility ? (
+                <SixtyFPS />
+            ) : null}
         </div>
     );
 };
@@ -60,6 +65,7 @@ Controls.propTypes = {
     intl: intlShape.isRequired,
     onGreenFlagClick: PropTypes.func.isRequired,
     onStopAllClick: PropTypes.func.isRequired,
+    compatibility: PropTypes.bool,
     turbo: PropTypes.bool
 };
 

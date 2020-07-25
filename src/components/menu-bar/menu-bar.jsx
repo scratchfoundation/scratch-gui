@@ -29,6 +29,7 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -51,6 +52,9 @@ import {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
+    openSettingsMenu,
+    closeSettingMenu,
+    settingsMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,
@@ -488,6 +492,46 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable, {
+                                [styles.active]: this.props.settingsMenuOpen
+                            })}
+                            onMouseUp={this.props.onClickSettings}
+                        >
+                            <div className={classNames(styles.settingsMenu)}>
+                                <FormattedMessage
+                                    defaultMessage="TurboWarp Settings"
+                                    description="Text for TurboWarp settings dropdown menu"
+                                    id="tw.settings"
+                                />
+                            </div>
+                            <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
+                                open={this.props.settingsMenuOpen}
+                                place={this.props.isRtl ? 'left' : 'right'}
+                                onRequestClose={this.props.onRequestCloseSettings}
+                            >
+                                <MenuSection>
+                                    <CompatibilityMode>{(toggleCompatibilityMode, {compatibilityMode}) => (
+                                        <MenuItem onClick={toggleCompatibilityMode}>
+                                            {compatibilityMode ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on 60 FPS mode"
+                                                    description="Menu bar item for turning on compatibility mode"
+                                                    id="tw.compatibilityModeOn"
+                                                />
+                                                ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off 60 FPS mode"
+                                                    description="Menu bar item for turning off compatibility mode"
+                                                    id="tw.compatibilityModeOff"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</CompatibilityMode>
+                                </MenuSection>
+                            </MenuBarMenu>
+                        </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
@@ -624,6 +668,7 @@ MenuBar.propTypes = {
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
+    settingsMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
@@ -651,6 +696,7 @@ const mapStateToProps = (state, ownProps) => {
         loginMenuOpen: loginMenuOpen(state),
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
+        settingsMenuOpen: settingsMenuOpen(state),
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
@@ -671,6 +717,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
+    onClickSettings: () => dispatch(openSettingsMenu()),
+    onRequestCloseSettings: () => dispatch(closeSettingMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),

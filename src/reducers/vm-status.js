@@ -2,9 +2,11 @@ const SET_RUNNING_STATE = 'scratch-gui/vm-status/SET_RUNNING_STATE';
 const SET_TURBO_STATE = 'scratch-gui/vm-status/SET_TURBO_STATE';
 const SET_STARTED_STATE = 'scratch-gui/vm-status/SET_STARTED_STATE';
 const SET_COMPATIBILITY_STATE = 'scratch-gui/vm-status/SET_COMPATIBILITY_STATE';
+const SET_COMPILER_STATE = 'scratch-gui/vm-status/SET_COMPILER_STATE';
 
 const initialState = {
     compatibility: true,
+    compiler: true,
     running: false,
     started: false,
     turbo: false
@@ -28,6 +30,10 @@ const reducer = function (state, action) {
     case SET_COMPATIBILITY_STATE:
         return Object.assign({}, state, {
             compatibility: action.compatibility
+        });
+    case SET_COMPILER_STATE:
+        return Object.assign({}, state, {
+            compiler: action.compiler
         });
     default:
         return state;
@@ -63,10 +69,18 @@ const setCompatibilityState = function (compatibility) {
     };
 };
 
+const setCompilerState = function (compiler) {
+    return {
+        type: SET_COMPILER_STATE,
+        compiler: compiler
+    };
+};
+
 export {
     reducer as default,
     initialState as vmStatusInitialState,
     setCompatibilityState,
+    setCompilerState,
     setRunningState,
     setStartedState,
     setTurboState

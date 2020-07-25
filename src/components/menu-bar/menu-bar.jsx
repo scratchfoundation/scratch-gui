@@ -30,6 +30,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
+import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -529,6 +530,23 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled}) => (
+                                        <MenuItem onClick={toggleCompiler}>
+                                            {compilerEnabled ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Disable Compiler"
+                                                    description="Menu bar item for disabling the compiler"
+                                                    id="tw.compilerDisable"
+                                                />
+                                                ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Enable Compiler"
+                                                    description="Menu bar item for enabling the compiler"
+                                                    id="tw.compilerEnable"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</ToggleCompiler>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

@@ -9,7 +9,7 @@ import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 import {setProjectChanged, setProjectUnchanged} from '../reducers/project-changed';
-import {setRunningState, setTurboState, setStartedState, setCompatibilityState} from '../reducers/vm-status';
+import {setRunningState, setTurboState, setStartedState, setCompatibilityState, setCompilerState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
 
@@ -48,6 +48,8 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
             this.props.vm.on('COMPATIBILITY_MODE_ON', this.props.onCompatibilityModeOn);
             this.props.vm.on('COMPATIBILITY_MODE_OFF', this.props.onCompatibilityModeOff);
+            this.props.vm.on('COMPILER_ENABLED', this.props.onCompilerEnabled);
+            this.props.vm.on('COMPILER_DISABLED', this.props.onCompilerDisabled);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
         }
@@ -163,6 +165,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOn: PropTypes.func.isRequired,
         onCompatibilityModeOff: PropTypes.func.isRequired,
         onCompatibilityModeOn: PropTypes.func.isRequired,
+        onCompilerEnabled: PropTypes.func.isRequired,
+        onCompilerDisabled: PropTypes.func.isRequired,
         projectChanged: PropTypes.bool,
         shouldUpdateTargets: PropTypes.bool,
         shouldUpdateProjectChanged: PropTypes.bool,
@@ -204,6 +208,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onCompatibilityModeOn: () => dispatch(setCompatibilityState(true)),
         onCompatibilityModeOff: () => dispatch(setCompatibilityState(false)),
+        onCompilerEnabled: () => dispatch(setCompilerState(true)),
+        onCompilerDisabled: () => dispatch(setCompilerState(false)),
         onShowExtensionAlert: data => {
             dispatch(showExtensionAlert(data));
         },

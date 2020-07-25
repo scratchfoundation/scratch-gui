@@ -530,8 +530,11 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled}) => (
-                                        <MenuItem onClick={toggleCompiler}>
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, running}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: running})}
+                                            onClick={toggleCompiler}
+                                        >
                                             {compilerEnabled ? (
                                                 <FormattedMessage
                                                     defaultMessage="Disable Compiler"

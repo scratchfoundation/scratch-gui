@@ -11,7 +11,12 @@ class ToggleCompiler extends React.Component {
         ]);
     }
     toggleCompiler () {
-        this.props.vm.setCompilerEnabled(!this.props.compilerEnabled);
+        if (this.props.running) {
+            // temporary
+            alert('Stop the project first');
+        } else {
+            this.props.vm.setCompilerEnabled(!this.props.compilerEnabled);
+        }
     }
     render () {
         const {
@@ -28,6 +33,7 @@ class ToggleCompiler extends React.Component {
 ToggleCompiler.propTypes = {
     children: PropTypes.func,
     compilerEnabled: PropTypes.bool,
+    running: PropTypes.bool,
     vm: PropTypes.shape({
         setCompilerEnabled: PropTypes.func
     })
@@ -35,7 +41,8 @@ ToggleCompiler.propTypes = {
 
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
-    compilerEnabled: state.scratchGui.vmStatus.compiler
+    compilerEnabled: state.scratchGui.vmStatus.compiler,
+    running: state.scratchGui.vmStatus.running
 });
 
 export default connect(

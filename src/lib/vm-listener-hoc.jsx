@@ -9,9 +9,10 @@ import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
 import {setProjectChanged, setProjectUnchanged} from '../reducers/project-changed';
-import {setRunningState, setTurboState, setStartedState, setCompatibilityState, setCompilerState} from '../reducers/vm-status';
+import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
+import {setCompatibilityState, setCompilerState} from '../reducers/tw';
 
 /*
  * Higher Order Component to manage events emitted by the VM

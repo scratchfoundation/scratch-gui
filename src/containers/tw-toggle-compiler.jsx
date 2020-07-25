@@ -41,7 +41,7 @@ ToggleCompiler.propTypes = {
 
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
-    compilerEnabled: state.scratchGui.vmStatus.compiler,
+    compilerEnabled: state.scratchGui.tw.compiler,
     running: state.scratchGui.vmStatus.running
 });
 

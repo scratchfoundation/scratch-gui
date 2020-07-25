@@ -35,7 +35,7 @@ CompatibilityMode.propTypes = {
 
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
-    compatibilityMode: state.scratchGui.vmStatus.compatibility
+    compatibilityMode: state.scratchGui.tw.compatibility
 });
 
 export default connect(

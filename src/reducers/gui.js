@@ -23,6 +23,7 @@ import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
 import timeoutReducer, {timeoutInitialState} from './timeout';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
+import twReducer, {twInitialState} from './tw';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
 import throttle from 'redux-throttle';
@@ -56,6 +57,7 @@ const guiInitialState = {
     targets: targetsInitialState,
     timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
+    tw: twInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState
 };
@@ -154,6 +156,7 @@ const guiReducer = combineReducers({
     targets: targetReducer,
     timeout: timeoutReducer,
     toolbox: toolboxReducer,
+    tw: twReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer
 });

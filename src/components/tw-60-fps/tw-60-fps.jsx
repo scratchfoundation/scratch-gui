@@ -9,7 +9,7 @@ const SixtyFPS = () => (
             <FormattedMessage
                 defaultMessage="60 FPS"
                 description="Label indicating project is running at 60 FPS"
-                id="tw.compatibilityMode"
+                id="tw.60fps"
             />
         </div>
     </div>

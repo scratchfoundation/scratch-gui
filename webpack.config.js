@@ -85,11 +85,6 @@ const base = {
             }]
         }]
     },
-    optimization: {
-        minimizer: [
-            new TerserPlugin()
-        ]
-    },
     plugins: []
 };
 

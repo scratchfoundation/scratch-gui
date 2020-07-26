@@ -65,7 +65,8 @@ const cloudManagerHOC = function (WrappedComponent) {
                     !this.canUseCloud(props) ||
                     !props.vm.runtime.hasCloudData() ||
                     (props.projectId !== prevProps.projectId) ||
-                    (props.username !== prevProps.username) ||
+                    // tw: username changes are normal
+                    // (props.username !== prevProps.username) ||
                     // Editing someone else's project
                     !props.canModifyCloudData
                 );
@@ -133,7 +134,8 @@ const cloudManagerHOC = function (WrappedComponent) {
 
     CloudManager.defaultProps = {
         cloudHost: null,
-        hasCloudPermission: false,
+        hasCloudPermission: true, // tw: always allow variables to change
+        canModifyCloudData: true, // tw: always allow variables to change
         onShowCloudInfo: () => {},
         username: null
     };
@@ -143,8 +145,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         return {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
-            // if you're editing someone else's project, you can't modify cloud data
-            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
+            username: state.scratchGui.tw.username
         };
     };
 

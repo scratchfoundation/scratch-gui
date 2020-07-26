@@ -34,7 +34,7 @@ ChangeUsername.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username,
+    username: state.scratchGui.tw.username
 });
 
 const mapDispatchToProps = dispatch => ({

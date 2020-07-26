@@ -1,3 +1,13 @@
+scratch-gui modified for use in [TurboWarp](https://turbowarp.github.io/)
+
+## Setup
+
+See https://github.com/TurboWarp/scratch-gui/wiki/Getting-Started to setup the complete TurboWarp environment.
+
+If you just want to play with the GUI then it's the same process as upstream scratch-gui.
+
+<!--
+
 # scratch-gui
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
@@ -260,3 +270,5 @@ Here's what will happen in the project state machine:
 
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
+
+-->

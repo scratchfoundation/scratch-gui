@@ -144,8 +144,8 @@ const cloudManagerHOC = function (WrappedComponent) {
         return {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
-            hasCloudPermission: state.scratchGui.tw.cloud,
-            username: state.scratchGui.tw.username
+            hasCloudPermission: state.scratchGui.tw ? state.scratchGui.tw.cloud : false,
+            username: state.scratchGui.tw ? state.scratchGui.tw.username : ''
         };
     };
 

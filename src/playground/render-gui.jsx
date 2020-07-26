@@ -39,46 +39,17 @@ export default appTarget => {
         HashParserHOC
     )(GUI);
 
-    // TODO a hack for testing the backpack, allow backpack host to be set by url param
-    const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
-    const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
-
-    const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
-    let simulateScratchDesktop;
-    if (scratchDesktopMatches) {
-        try {
-            // parse 'true' into `true`, 'false' into `false`, etc.
-            simulateScratchDesktop = JSON.parse(scratchDesktopMatches[1]);
-        } catch {
-            // it's not JSON so just use the string
-            // note that a typo like "falsy" will be treated as true
-            simulateScratchDesktop = scratchDesktopMatches[1];
-        }
-    }
-
     if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
         // Warn before navigating away
         window.onbeforeunload = () => true;
     }
 
     ReactDOM.render(
-        // important: this is checking whether `simulateScratchDesktop` is truthy, not just defined!
-        simulateScratchDesktop ?
-            <WrappedGui
-                canEditTitle
-                isScratchDesktop
-                showTelemetryModal
-                canSave={false}
-                onTelemetryModalCancel={handleTelemetryModalCancel}
-                onTelemetryModalOptIn={handleTelemetryModalOptIn}
-                onTelemetryModalOptOut={handleTelemetryModalOptOut}
-            /> :
-            <WrappedGui
-                backpackHost={backpackHost}
-                canEditTitle
-                canSave={false}
-                cloudHost={'cirrus.garbomuffin.com'}
-                onClickLogo={onClickLogo}
-            />,
+        <WrappedGui
+            canEditTitle
+            canSave={false}
+            cloudHost={'cirrus.garbomuffin.com'}
+            onClickLogo={onClickLogo}
+        />,
         appTarget);
 };

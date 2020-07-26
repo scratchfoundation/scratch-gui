@@ -76,6 +76,7 @@ export default appTarget => {
             <WrappedGui
                 canEditTitle
                 canSave={false}
+                cloudHost={"cirrus.garbomuffin.com"}
                 onClickLogo={onClickLogo}
             />,
         appTarget);

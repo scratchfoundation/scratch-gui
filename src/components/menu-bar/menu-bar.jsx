@@ -16,15 +16,12 @@ import ShareButton from './share-button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import SaveStatus from './save-status.jsx';
 import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AuthorInfo from './author-info.jsx';
-import AccountNav from '../../containers/account-nav.jsx';
-import LoginDropdown from './login-dropdown.jsx';
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
@@ -523,7 +520,7 @@ class MenuBar extends React.Component {
                                                     description="Menu bar item for turning on compatibility mode"
                                                     id="tw.compatibilityModeOn"
                                                 />
-                                                ) : (
+                                            ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Turn off 60 FPS mode"
                                                     description="Menu bar item for turning off compatibility mode"
@@ -543,7 +540,7 @@ class MenuBar extends React.Component {
                                                     description="Menu bar item for disabling the compiler"
                                                     id="tw.compilerDisable"
                                                 />
-                                                ) : (
+                                            ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Enable Compiler"
                                                     description="Menu bar item for enabling the compiler"
@@ -569,7 +566,7 @@ class MenuBar extends React.Component {
                                                     description="Menu bar item for disabling cloud variables"
                                                     id="tw.disableCloud"
                                                 />
-                                                ) : (
+                                            ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Enable cloud variables (BETA)"
                                                     description="Menu bar item for enabling cloud variables"
@@ -702,6 +699,8 @@ MenuBar.propTypes = {
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
+    onClickSettings: PropTypes.func,
+    onRequestCloseSettings: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,

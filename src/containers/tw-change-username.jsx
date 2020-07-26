@@ -11,14 +11,13 @@ class ChangeUsername extends React.Component {
             'changeUsername'
         ]);
     }
-    changeUsername() {
+    changeUsername () {
         this.props.onUsernameChange(prompt('New username:', this.props.username) || '');
     }
     render () {
         const {
             /* eslint-disable no-unused-vars */
             children,
-            vm,
             onUsernameChange,
             /* eslint-enable no-unused-vars */
             ...props

@@ -74,9 +74,10 @@ export default appTarget => {
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
             /> :
             <WrappedGui
+                backpackHost={backpackHost}
                 canEditTitle
                 canSave={false}
-                cloudHost={"cirrus.garbomuffin.com"}
+                cloudHost={'cirrus.garbomuffin.com'}
                 onClickLogo={onClickLogo}
             />,
         appTarget);

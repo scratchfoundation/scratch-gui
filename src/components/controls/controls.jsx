@@ -52,9 +52,9 @@ const Controls = function (props) {
             {turbo ? (
                 <TurboMode />
             ) : null}
-            {!compatibility ? (
+            {compatibility ? null :
                 <SixtyFPS />
-            ) : null}
+            }
         </div>
     );
 };

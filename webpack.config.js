@@ -5,7 +5,6 @@ var webpack = require('webpack');
 // Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var TerserPlugin = require('terser-webpack-plugin');
 
 // PostCss
 var autoprefixer = require('autoprefixer');

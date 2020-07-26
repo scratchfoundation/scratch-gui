@@ -23,7 +23,6 @@ class CloudVariablesToggler extends React.Component {
         const {
             /* eslint-disable no-unused-vars */
             children,
-            vm,
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
@@ -35,7 +34,7 @@ CloudVariablesToggler.propTypes = {
     children: PropTypes.func,
     cloud: PropTypes.bool,
     username: PropTypes.string,
-    onCloudChange: PropTypes.func,
+    onCloudChange: PropTypes.func
 };
 
 const mapStateToProps = state => ({

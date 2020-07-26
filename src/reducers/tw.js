@@ -1,9 +1,11 @@
 const SET_COMPATIBILITY_STATE = 'tw/SET_COMPATIBILITY_STATE';
 const SET_COMPILER_STATE = 'tw/SET_COMPILER_STATE';
+const SET_USERNAME = 'tw/SET_USERNAME';
 
 const initialState = {
     compatibility: true,
     compiler: true,
+    username: ''
 };
 
 const reducer = function (state, action) {
@@ -16,6 +18,10 @@ const reducer = function (state, action) {
     case SET_COMPILER_STATE:
         return Object.assign({}, state, {
             compiler: action.compiler
+        });
+    case SET_USERNAME:
+        return Object.assign({}, state, {
+            username: action.username
         });
     default:
         return state;
@@ -36,9 +42,17 @@ const setCompilerState = function (compiler) {
     };
 };
 
+const setUsername = function (username) {
+    return {
+        type: SET_USERNAME,
+        username: username
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
     setCompatibilityState,
     setCompilerState,
+    setUsername
 };

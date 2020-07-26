@@ -31,6 +31,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
 import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
+import ChangeUsername from '../../containers/tw-change-username.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -550,6 +551,15 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</ToggleCompiler>
+                                    <ChangeUsername>{(changeUsername) => (
+                                        <MenuItem onClick={changeUsername}>
+                                            <FormattedMessage
+                                                defaultMessage="Change Username"
+                                                description="Menu bar item for changing the username"
+                                                id="tw.changeUsername"
+                                            />
+                                        </MenuItem>
+                                    )}</ChangeUsername>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

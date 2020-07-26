@@ -1,10 +1,12 @@
 const SET_COMPATIBILITY_STATE = 'tw/SET_COMPATIBILITY_STATE';
 const SET_COMPILER_STATE = 'tw/SET_COMPILER_STATE';
 const SET_USERNAME = 'tw/SET_USERNAME';
+const SET_CLOUD = 'tw/SET_CLOUD';
 
 const initialState = {
     compatibility: true,
     compiler: true,
+    cloud: false,
     username: ''
 };
 
@@ -22,6 +24,10 @@ const reducer = function (state, action) {
     case SET_USERNAME:
         return Object.assign({}, state, {
             username: action.username
+        });
+    case SET_CLOUD:
+        return Object.assign({}, state, {
+            cloud: action.cloud
         });
     default:
         return state;
@@ -49,10 +55,18 @@ const setUsername = function (username) {
     };
 };
 
+const setCloud = function (cloud) {
+    return {
+        type: SET_CLOUD,
+        cloud: cloud
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
     setCompatibilityState,
     setCompilerState,
-    setUsername
+    setUsername,
+    setCloud
 };

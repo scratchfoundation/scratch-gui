@@ -32,6 +32,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
 import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
+import CloudVariablesToggler from '../../containers/tw-cloud.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -560,6 +561,23 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}</ChangeUsername>
+                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud}) => (
+                                        <MenuItem onClick={toggleCloudVariables}>
+                                            {cloud ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Disable cloud variables"
+                                                    description="Menu bar item for disabling cloud variables"
+                                                    id="tw.disableCloud"
+                                                />
+                                                ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Enable cloud variables (BETA)"
+                                                    description="Menu bar item for enabling cloud variables"
+                                                    id="tw.enableCloud"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</CloudVariablesToggler>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

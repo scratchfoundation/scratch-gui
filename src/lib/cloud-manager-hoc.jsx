@@ -134,8 +134,7 @@ const cloudManagerHOC = function (WrappedComponent) {
 
     CloudManager.defaultProps = {
         cloudHost: null,
-        hasCloudPermission: true, // tw: always allow variables to change
-        canModifyCloudData: true, // tw: always allow variables to change
+        canModifyCloudData: true, // tw: always grant permission
         onShowCloudInfo: () => {},
         username: null
     };
@@ -145,6 +144,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         return {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
+            hasCloudPermission: state.scratchGui.tw.cloud,
             username: state.scratchGui.tw.username
         };
     };

@@ -26,6 +26,8 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 
+import EditorLock from './tw-edit-lock.jsx';
+
 import {
     activateTab,
     SOUNDS_TAB_INDEX

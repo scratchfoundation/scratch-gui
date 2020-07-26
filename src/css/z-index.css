@@ -28,5 +28,7 @@ $z-index-stage-with-color-picker: 2010;
 $z-index-stage-header: 5000;
 $z-index-stage-wrapper-overlay: 5000;
 
+$z-index-tw-edit-lock: 50;
+
 /* in most interfaces, the context menu is always on top */
 $z-index-context-menu: 10000;

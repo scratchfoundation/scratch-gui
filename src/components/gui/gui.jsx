@@ -237,7 +237,7 @@ const GUIComponent = props => {
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
-                            <EditorLock />
+                            {/* <EditorLock /> */}
                             <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}

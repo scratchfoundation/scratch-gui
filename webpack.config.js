@@ -99,7 +99,6 @@ module.exports = [
             'lib.min': ['react', 'react-dom'],
             'gui': './src/playground/index.jsx',
             'blocksonly': './src/playground/blocks-only.jsx',
-            'compatibilitytesting': './src/playground/compatibility-testing.jsx',
             'player': './src/playground/player.jsx'
         },
         output: {
@@ -147,12 +146,6 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 filename: 'blocks-only.html',
                 title: 'TurboWarp: Blocks Only Example'
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'compatibilitytesting'],
-                template: 'src/playground/index.ejs',
-                filename: 'compatibility-testing.html',
-                title: 'TurboWarp: Compatibility Testing'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'player'],

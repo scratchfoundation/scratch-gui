@@ -2,59 +2,53 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import debounce from 'lodash.debounce';
+import bindAll from 'lodash.bindall';
 
 import styles from './project-input.css';
 
-const loadProject = debounce((id) => {
-    location.hash = id;
-}, 500);
-
-const onInputChange = (e) => {
-    const value = e.target.value;
-    const numberMatch = value.match(/\d+/);
-    const projectId = numberMatch ? numberMatch[0] : '';
-    e.target.value = `https://scratch.mit.edu/projects/${projectId}`;
-    loadProject(numberMatch);
-};
-
 class ProjectInput extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
+        bindAll(this, [
+            'onKeyDown',
+        ]);
     }
-    componentDidMount() {
+    componentDidMount () {
         this.input.focus();
         this.input.selectionStart = this.input.value.length;
     }
+    loadProject (projectId) {
+        location.hash = projectId;
+        this.input.blur();
+    }
+    onKeyDown (e) {
+        const value = e.target.value;
+        const numberMatch = value.match(/\d+/);
+        const projectId = numberMatch ? numberMatch[0] : '';
+        if (e.key === 'Enter') {
+            this.loadProject(projectId);
+        } else {
+            this.input.value = `https://scratch.mit.edu/projects/${projectId}`;
+        }
+    }
     render () {
-        const {
-            projectId,
-            ...props
-        } = this.props;
         return <input
             ref={elem => this.input = elem}
             type="text"
-            defaultValue="https://scratch.mit.edu/projects/"
+            defaultValue={"https://scratch.mit.edu/projects/"}
             autoFocus
             className={classNames(styles.input)}
-            onChange={onInputChange}
+            onKeyDown={this.onKeyDown}
         ></input>
     }
 }
 
 ProjectInput.propTypes = {
     projectId: PropTypes.string,
+    onChangeProject: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-    projectId: state.scratchGui.projectState.projectId
-});
-
-const mapDispatchToProps = dispatch => ({
-    
-});
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    () => ({}),
+    () => ({})
 )(ProjectInput);

@@ -11,18 +11,6 @@ const onClickLogo = () => {
     window.location = 'https://turbowarp.github.io';
 };
 
-const handleTelemetryModalCancel = () => {
-    log('User canceled telemetry modal');
-};
-
-const handleTelemetryModalOptIn = () => {
-    log('User opted into telemetry');
-};
-
-const handleTelemetryModalOptOut = () => {
-    log('User opted out of telemetry');
-};
-
 /*
  * Render the GUI playground. This is a separate function because importing anything
  * that instantiates the VM causes unsupported browsers to crash

@@ -25,3 +25,7 @@ p {
 .stage-only * {
     box-sizing: border-box;
 }
+
+.see-inside {
+    float: right;
+}

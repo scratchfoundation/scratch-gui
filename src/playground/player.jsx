@@ -10,8 +10,6 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 
-import {setPlayer} from '../reducers/mode';
-
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     // Warn before navigating away
     window.onbeforeunload = () => true;
@@ -20,15 +18,15 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 import styles from './player.css';
 
 import ProjectInput from './project-input/project-input.jsx';
+import SeeInside from './see-inside/see-inside.jsx';
 
 const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
-            <React.Fragment>
+            <Box>
                 <h1>TurboWarp</h1>
                 <p>TurboWarp compiles Scratch projects to JavaScript to make them run faster. Try it out by entering a project ID or URL below.</p>
-                <button onClick={onSeeInside}>{'See inside'}</button>
-            </React.Fragment>
+            </Box>
         ) : null}
         <GUI
             canEditTitle
@@ -37,14 +35,16 @@ const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
             projectId={projectId}
         />
         {isPlayerOnly ? (
-            <ProjectInput></ProjectInput>
+            <Box>
+                <ProjectInput></ProjectInput>
+                <SeeInside className={classNames(styles.seeInside)}></SeeInside>
+            </Box>
         ) : null}
     </Box>
 );
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
-    onSeeInside: PropTypes.func,
     projectId: PropTypes.string
 };
 
@@ -53,7 +53,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSeeInside: () => dispatch(setPlayer(false))
+
 });
 
 const ConnectedPlayer = connect(

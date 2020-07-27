@@ -55,6 +55,9 @@ import {
     openSettingsMenu,
     closeSettingMenu,
     settingsMenuOpen,
+    openLinksMenu,
+    closeLinksMenu,
+    linksMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,
@@ -91,6 +94,9 @@ const ariaMessages = defineMessages({
         description: 'accessibility text for the tutorials button'
     }
 });
+
+const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
+const openReportBugsLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -578,6 +584,31 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable, {
+                                [styles.active]: this.props.linksMenuOpen
+                            })}
+                            onMouseUp={this.props.onClickLinks}
+                        >
+                            <div className={classNames(styles.linksMenu)}>
+                                <FormattedMessage
+                                    defaultMessage="Links"
+                                    description="Text for TurboWarp Links dropdown menu"
+                                    id="tw.links"
+                                />
+                            </div>
+                            <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
+                                open={this.props.linksMenuOpen}
+                                place={this.props.isRtl ? 'left' : 'right'}
+                                onRequestClose={this.props.onRequestCloseLinks}
+                            >
+                                <MenuSection>
+                                    <MenuItem onClick={openSourceCodeLink}>Source Code</MenuItem>
+                                    <MenuItem onClick={openReportBugsLink}>Report Bugs</MenuItem>
+                                </MenuSection>
+                            </MenuBarMenu>
+                        </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
@@ -701,6 +732,8 @@ MenuBar.propTypes = {
     onClickSaveAsCopy: PropTypes.func,
     onClickSettings: PropTypes.func,
     onRequestCloseSettings: PropTypes.func,
+    onClickLinks: PropTypes.func,
+    onRequestCloseLinks: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -717,6 +750,7 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     settingsMenuOpen: PropTypes.bool,
+    linksMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
@@ -745,6 +779,7 @@ const mapStateToProps = (state, ownProps) => {
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         settingsMenuOpen: settingsMenuOpen(state),
+        linksMenuOpen: linksMenuOpen(state),
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
@@ -767,6 +802,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onClickSettings: () => dispatch(openSettingsMenu()),
     onRequestCloseSettings: () => dispatch(closeSettingMenu()),
+    onClickLinks: () => dispatch(openLinksMenu()),
+    onRequestCloseLinks: () => dispatch(closeLinksMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),

@@ -18,14 +18,16 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 import styles from './player.css';
 
 import ProjectInput from './project-input/project-input.jsx';
+import About from '../components/tw-home/about/about.jsx';
+import Title from '../components/tw-home/title/title.jsx';
 import SeeInside from './see-inside/see-inside.jsx';
 
 const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
             <Box>
-                <h1>TurboWarp</h1>
-                <p>TurboWarp compiles Scratch projects to JavaScript to make them run faster. Try it out by entering a project ID or URL below.</p>
+                <Title />
+                <About />
             </Box>
         ) : null}
         <GUI

@@ -162,6 +162,7 @@ jobs:
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)
       - run: npm run deploy -- -e $CIRCLE_BRANCH
+
 workflows:
   version: 2
   build-test-deploy:

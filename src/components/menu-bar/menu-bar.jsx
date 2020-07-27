@@ -498,6 +498,9 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
+                    <div className={styles.fileGroup}>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.settingsMenuOpen

@@ -6,7 +6,7 @@ const SET_CLOUD = 'tw/SET_CLOUD';
 const initialState = {
     compatibility: true,
     compiler: true,
-    cloud: false,
+    cloud: true,
     username: ''
 };
 

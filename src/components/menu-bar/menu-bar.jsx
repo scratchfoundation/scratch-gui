@@ -568,7 +568,7 @@ class MenuBar extends React.Component {
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Enable cloud variables (BETA)"
+                                                    defaultMessage="Enable cloud variables"
                                                     description="Menu bar item for enabling cloud variables"
                                                     id="tw.enableCloud"
                                                 />

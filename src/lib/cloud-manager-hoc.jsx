@@ -134,7 +134,6 @@ const cloudManagerHOC = function (WrappedComponent) {
 
     CloudManager.defaultProps = {
         cloudHost: null,
-        canModifyCloudData: true, // tw: always grant permission
         onShowCloudInfo: () => {},
         username: null
     };
@@ -145,7 +144,10 @@ const cloudManagerHOC = function (WrappedComponent) {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
             hasCloudPermission: state.scratchGui.tw ? state.scratchGui.tw.cloud : false,
-            username: state.scratchGui.tw ? state.scratchGui.tw.username : ''
+            username: state.scratchGui.tw ? state.scratchGui.tw.username : '',
+            // once the new player becomes the default, switch to this
+            // canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
+            canModifyCloudData: true
         };
     };
 

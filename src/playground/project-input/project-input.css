@@ -1,0 +1,12 @@
+.input {
+    margin-top: 5px;
+    border: none;
+    width: 100%;
+    font-size: 23px;
+    line-height: 32px;
+    opacity: 0.5;
+}
+
+.input:focus {
+    opacity: 1;
+}

@@ -1,5 +1,17 @@
+h1 {
+    font-size: 54px;
+    line-height: 72px;
+    margin: 0;
+    font-weight: normal;
+}
+
+p {
+    margin: 0 0 16px;
+}
+
 .stage-only {
-    width: calc(480px + 1rem);
+    width: 480px;
+    margin: 24px auto 0;
 }
 
 .editor {

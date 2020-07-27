@@ -12,9 +12,10 @@ class ProjectInput extends React.Component {
         bindAll(this, [
             'onKeyDown',
             'onChange',
+            'onFocus'
         ]);
         this.state = {
-            projectId: '',
+            projectId: ''
         };
     }
     componentDidMount () {
@@ -26,10 +27,6 @@ class ProjectInput extends React.Component {
             this.setState({ projectId: this.props.projectId || '' });
         }
     }
-    loadProject (projectId) {
-        location.hash = projectId;
-        this.input.blur();
-    }
     readProjectId (e) {
         const value = e.target.value;
         const numberMatch = value.match(/\d+/);
@@ -40,13 +37,16 @@ class ProjectInput extends React.Component {
     }
     onKeyDown (e) {
         if (e.key === 'Enter') {
-            this.loadProject(this.state.projectId);
+            location.hash = this.state.projectId;
+            this.input.blur();
+        }
+    }
+    onFocus (e) {
+        if (this.readProjectId(e)) {
+            e.target.select();
         }
     }
     render () {
-        const {
-            projectId,
-        } = this.props;
         return <input
             ref={elem => this.input = elem}
             type="text"
@@ -55,6 +55,7 @@ class ProjectInput extends React.Component {
             className={classNames(styles.input)}
             onKeyDown={this.onKeyDown}
             onChange={this.onChange}
+            onFocus={this.onFocus}
         ></input>
     }
 }

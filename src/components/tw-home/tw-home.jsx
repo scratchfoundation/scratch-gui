@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 
 import styles from './tw-home.css';
 
-import ProjectInput from '../../playground/project-input/project-input.jsx';
+import ProjectInput from '../tw-project-input/project-input.jsx';
 import About from './about/about.jsx';
 import Title from './title/title.jsx';
 

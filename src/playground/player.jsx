@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './player.css';
 
-import ProjectInput from './project-input/project-input.jsx';
+import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
 import SeeInside from './see-inside/see-inside.jsx';

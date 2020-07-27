@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {setPlayer} from '../../reducers/mode';
-import classNames from 'classnames';
 
 import styles from './see-inside.css';
 
@@ -17,6 +16,7 @@ class SeeInside extends React.Component {
         } = this.props;
         return <button
             onClick={onSeeInside}
+            className={styles.seeInside}
             {...props}
         >See inside</button>;
     }

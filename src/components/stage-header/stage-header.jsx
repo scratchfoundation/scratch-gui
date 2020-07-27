@@ -195,6 +195,7 @@ StageHeaderComponent.propTypes = {
 };
 
 StageHeaderComponent.defaultProps = {
+    showBranding: false, // tw: never show branding, this should be passed up from container but for some reason it's not. This is a quick and dirty fix.
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

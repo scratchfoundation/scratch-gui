@@ -97,6 +97,7 @@ const ariaMessages = defineMessages({
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
 const openReportBugsLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
+const goHome = () => location.hash = '';
 
 const MenuBarItemTooltip = ({
     children,
@@ -527,13 +528,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Turn on 60 FPS mode"
                                                     description="Menu bar item for turning on compatibility mode"
-                                                    id="tw.compatibilityModeOn"
+                                                    id="tw.settings.compatOn"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Turn off 60 FPS mode"
                                                     description="Menu bar item for turning off compatibility mode"
-                                                    id="tw.compatibilityModeOff"
+                                                    id="tw.settings.compatOff"
                                                 />
                                             )}
                                         </MenuItem>
@@ -547,13 +548,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Disable Compiler"
                                                     description="Menu bar item for disabling the compiler"
-                                                    id="tw.compilerDisable"
+                                                    id="tw.settings.compilerOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Enable Compiler"
                                                     description="Menu bar item for enabling the compiler"
-                                                    id="tw.compilerEnable"
+                                                    id="tw.settings.compilerOn"
                                                 />
                                             )}
                                         </MenuItem>
@@ -563,7 +564,7 @@ class MenuBar extends React.Component {
                                             <FormattedMessage
                                                 defaultMessage="Change Username"
                                                 description="Menu bar item for changing the username"
-                                                id="tw.changeUsername"
+                                                id="tw.settings.changeUsername"
                                             />
                                         </MenuItem>
                                     )}</ChangeUsername>
@@ -573,13 +574,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Disable cloud variables"
                                                     description="Menu bar item for disabling cloud variables"
-                                                    id="tw.disableCloud"
+                                                    id="tw.settings.cloudOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Enable cloud variables"
                                                     description="Menu bar item for enabling cloud variables"
-                                                    id="tw.enableCloud"
+                                                    id="tw.settings.cloudOn"
                                                 />
                                             )}
                                         </MenuItem>
@@ -607,8 +608,27 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseLinks}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={openSourceCodeLink}>Source Code</MenuItem>
-                                    <MenuItem onClick={openReportBugsLink}>Report Bugs</MenuItem>
+                                    <MenuItem onClick={goHome}>
+                                        <FormattedMessage
+                                            defaultMessage="Back to home"
+                                            description="Text for returning to home in the Links dropdown"
+                                            id="tw.links.home"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={openSourceCodeLink}>
+                                        <FormattedMessage
+                                            defaultMessage="Source Code"
+                                            description="Text for Source Code in the Links dropdown"
+                                            id="tw.links.code"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={openReportBugsLink}>
+                                        <FormattedMessage
+                                            defaultMessage="Report Bugs"
+                                            description="Text for Report Bugs in the Links dropdown"
+                                            id="tw.links.bugs"
+                                        />
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

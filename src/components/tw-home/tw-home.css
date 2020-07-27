@@ -22,12 +22,12 @@
     position: relative;
     background: rgba(255, 255, 255, 1);
     box-sizing: border-box;
-    max-width: 640px;
+    min-width: 480px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 30px;
+    padding: 15px;
 }
 
 .new-project {
@@ -37,4 +37,16 @@
 }
 .new-project:hover {
     text-decoration: underline;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtitles {
+    text-align: right;
 }

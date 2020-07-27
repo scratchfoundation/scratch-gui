@@ -14,6 +14,7 @@ $ui-black-transparent: hsla(0, 0%, 0%, 0.15); /* 15% transparent version of blac
 $text-primary: hsla(225, 15%, 40%, 1); /* #575E75 */
 $text-primary-transparent: hsla(225, 15%, 40%, 0.75);
 
+/* tw: we change this to a red, even though motion isn't red. This is intentional. */
 $motion-primary: hsla(0, 100%, 65%, 1);
 $motion-tertiary: hsla(0, 60%, 50%, 1);
 $motion-transparent: hsla(0, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
@@ -36,6 +37,7 @@ $error-primary: hsla(30, 100%, 55%, 1); /* #FF8C1A */
 $error-light: hsla(30, 100%, 70%, 1); /* #FFB366 */
 $error-transparent: hsla(30, 100%, 55%, 0.25); /* #FF8C1A */
 
+/* tw: we change this to an orange, even though extensions aren't orange. This is intentional. */
 $extensions-primary: hsla(10, 85%, 65%, 1);
 $extensions-tertiary: hsla(10, 85%, 40%, 1);
 $extensions-transparent: hsla(10, 85%, 65%, 0.35); /* 35% transparent version of extensions-primary */

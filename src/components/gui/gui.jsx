@@ -20,11 +20,11 @@ import Box from '../box/box.jsx';
 // import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
-// import Watermark from '../../containers/watermark.jsx';
+import Watermark from '../../containers/watermark.jsx';
 
 import LanguageStandalone from '../language-standalone/language-standalone.jsx';
 
-import Backpack from '../../containers/backpack.jsx';
+// import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
@@ -301,6 +301,7 @@ const GUIComponent = props => {
                                             id="gui.gui.toggleSpriteTab"
                                         />
                                     </Tab>
+                                    <LanguageStandalone canChangeLanguage={canChangeLanguage} />
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -330,8 +331,7 @@ const GUIComponent = props => {
                                     </Box>
                                     {/* below box is perfect for sensor display */}
                                     <Box className={styles.watermark}>
-                                        <LanguageStandalone canChangeLanguage={canChangeLanguage} />
-                                        {/* <Watermark /> */}
+                                        <Watermark />
                                     </Box>
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>

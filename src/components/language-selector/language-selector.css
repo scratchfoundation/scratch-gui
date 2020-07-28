@@ -10,7 +10,7 @@
     user-select: none;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: .875rem;
-    color: $text-primary;
+    color: #000000;
     background: $ui-white;
 }
 

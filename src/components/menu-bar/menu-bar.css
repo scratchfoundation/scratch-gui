@@ -27,11 +27,12 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: lightgray;
+    background-color: #e5f0ff;
     color: $ui-white;
 }
 
 .main-menu {
+    float: right;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -65,12 +66,13 @@
 }
 
 .menu-bar-item {
+    float: right;
     display: flex;
     padding: 0 0.25rem;
     text-decoration: none;
     color: $ui-white;
     user-select: none;
-    align-self: center;
+    align-self: right;
     position: relative;
     align-items: center;
     white-space: nowrap;

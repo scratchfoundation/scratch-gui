@@ -1,0 +1,5 @@
+/* this class must contain "see-inside-button" somewhere for the s3 dev tools to be able to reinject itself */
+/* https://github.com/griffpatch/Scratch3-Dev-Tools/blob/0.2.4/inject3.js#L1804-L1807 */
+.see-inside-button {
+    
+}

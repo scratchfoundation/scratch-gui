@@ -1,5 +1,5 @@
 // must be first for progress bar to work
-import "./hacky-progress-bar";
+import "./tw-hacky-progress-bar";
 
 // Polyfills
 import 'es6-object-assign/auto';

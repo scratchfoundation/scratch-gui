@@ -20,7 +20,7 @@ import styles from './player.css';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
-import SeeInside from './see-inside/see-inside.jsx';
+import SeeInside from './tw-see-inside/see-inside.jsx';
 
 document.body.classList.add('tw-loaded');
 
@@ -41,7 +41,9 @@ const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
         {isPlayerOnly ? (
             <Box>
                 <ProjectInput></ProjectInput>
-                <SeeInside className={classNames(styles.seeInside)}></SeeInside>
+                <div className={styles.seeInside}>
+                    <SeeInside></SeeInside>
+                </div>
             </Box>
         ) : null}
     </Box>

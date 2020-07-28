@@ -12,13 +12,13 @@ class SeeInside extends React.Component {
     render () {
         const {
             onSeeInside,
-            ...props
         } = this.props;
         return <button
             onClick={onSeeInside}
-            className={styles.seeInside}
-            {...props}
-        >See inside</button>;
+            className={styles.seeInsideButton}
+        >
+            See inside
+        </button>;
     }
 }
 

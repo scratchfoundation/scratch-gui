@@ -10,6 +10,8 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import styles from './blocks-only.css';
 
+document.body.classList.add('tw-loaded');
+
 const mapStateToProps = state => ({vm: state.scratchGui.vm});
 
 const VMBlocks = connect(mapStateToProps)(Blocks);

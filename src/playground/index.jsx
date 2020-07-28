@@ -17,6 +17,8 @@ import supportedBrowser from '../lib/supported-browser';
 
 import styles from './index.css';
 
+document.body.classList.add('tw-loaded');
+
 // Register "base" page view
 analytics.pageview('/');
 

@@ -22,6 +22,8 @@ import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
 import SeeInside from './see-inside/see-inside.jsx';
 
+document.body.classList.add('tw-loaded');
+
 const Player = ({isPlayerOnly, onSeeInside, projectId}) => (
     <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (

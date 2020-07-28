@@ -150,7 +150,7 @@ module.exports = [
                 chunks: ['lib.min', 'player'],
                 template: 'src/playground/index.ejs',
                 filename: 'player.html',
-                title: 'TurboWarp: Player Example'
+                title: 'TurboWarp Player'
             }),
             new CopyWebpackPlugin([{
                 from: 'static',

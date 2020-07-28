@@ -9,6 +9,17 @@
     <link rel="shortcut icon" href="static/favicon.ico">
     <link rel="canonical" href="https://turbowarp.github.io/">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      #splash {
+        pointer-events: none; user-select: none;
+        background-color: hsla(0, 100%, 65%, 1); color: white; font-family: sans-serif;
+        position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: center; text-align: center;
+      }
+      #splash h1 { font-size: 2rem; font-weight: bold; }
+      /* tw-loaded is added by GUI in mount */
+      .tw-loaded #splash { display: none; }
+    </style>
     <% if (htmlWebpackPlugin.options.sentryConfig) { %>
         <!-- Sentry error logging to help with finding bugs -->
         <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
@@ -19,5 +30,6 @@
     <% } %>
   </head>
   <body>
+    <div id="splash" aria-hidden="true"><div><h1>Downloading TurboWarp</h1><p>This may take a while...</p></div></div>
   </body>
 </html>

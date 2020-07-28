@@ -96,8 +96,7 @@ const ariaMessages = defineMessages({
 });
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
-const openReportBugsLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
-const goHome = () => location.hash = '';
+const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -608,13 +607,6 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseLinks}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={goHome}>
-                                        <FormattedMessage
-                                            defaultMessage="Back to home"
-                                            description="Text for returning to home in the Links dropdown"
-                                            id="tw.links.home"
-                                        />
-                                    </MenuItem>
                                     <MenuItem onClick={openSourceCodeLink}>
                                         <FormattedMessage
                                             defaultMessage="Source Code"
@@ -622,11 +614,11 @@ class MenuBar extends React.Component {
                                             id="tw.links.code"
                                         />
                                     </MenuItem>
-                                    <MenuItem onClick={openReportBugsLink}>
+                                    <MenuItem onClick={openFeedbackLink}>
                                         <FormattedMessage
-                                            defaultMessage="Report Bugs"
-                                            description="Text for Report Bugs in the Links dropdown"
-                                            id="tw.links.bugs"
+                                            defaultMessage="Feedback"
+                                            description="Text for feedback in the Links dropdown"
+                                            id="tw.links.feedback"
                                         />
                                     </MenuItem>
                                 </MenuSection>

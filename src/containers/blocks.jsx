@@ -31,6 +31,8 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import s3devtoolsloader from './tw-s3-dev-tools-loader';
+
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
     object[property] = function () {
@@ -135,6 +137,8 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+
+        s3devtoolsloader.load();
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (

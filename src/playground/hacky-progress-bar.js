@@ -15,6 +15,11 @@ progressEl.style.transition = 'all .2s';
 progressEl.title = 'Progress Bar'; // todo: translate
 document.body.appendChild(progressEl);
 
+// if the progress bar breaks, the user can click on it to hide it
+progressEl.addEventListener('click', (e) => {
+    hideProgress();
+});
+
 window.addEventListener('hashchange', (e) => {
     if (location.hash) {
         total = 0;

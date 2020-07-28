@@ -23,6 +23,16 @@ const About = () => {
                             id="tw.home.code"
                         />
                     </a>
+                    &nbsp;-&nbsp;
+                    <a href="/privacy.html">
+                        <FormattedMessage
+                            defaultMessage="Privacy Policy"
+                            description="Text for privacy policy link on the home page"
+                            id="tw.home.privacy"
+                        />
+                    </a>
+                </div>
+                <div>
                 </div>
             </span>
         </div>

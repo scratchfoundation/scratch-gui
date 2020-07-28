@@ -152,6 +152,11 @@ module.exports = [
                 filename: 'player.html',
                 title: 'TurboWarp Player'
             }),
+            new HtmlWebpackPlugin({ // turbowarp privacy policy
+                chunks: [],
+                template: 'src/playground/privacy.html',
+                filename: 'privacy.html'
+            }),
             new CopyWebpackPlugin([{
                 from: 'static',
                 to: 'static'

@@ -51,21 +51,41 @@ const handlePostMessage = (e) => {
     }
 };
 
-setProgress(0);
+const isProjectDataRequest = (url, opts) => {
+    return typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET';
+};
 
 // Alternative implementation below, disables worker so everything happens on the main thread.
 // It does provide a more accurate progress bar but loading things off the main thread is probably more important.
-// const originalFetch = window.fetch;
-// window.fetch = (url, opts) => {
-//     total++;
-//     return originalFetch(url, opts)
-//         .then((r) => {
-//             complete++;
-//             updateProgressBar();
-//             return r;
-//         });
-// };
-// window.Worker = null;
+const originalFetch = window.fetch;
+window.fetch = (url, opts) => {
+    if (isProjectDataRequest(url, opts)) {
+        // `url` is known to be a string now
+
+        showProgress();
+        setProgress(0);
+
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = () => {
+                resolve(new Response(xhr.response, {
+                    status: xhr.status,
+                    statusText: xhr.statusText,
+                }));
+            };
+            xhr.onerror = () => reject(new Error('(tw-hacky-progress-bar) xhr failed'));
+            xhr.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    setProgress(e.loaded / e.total);
+                }
+            };
+            xhr.open('GET', url);
+            xhr.send();
+        });
+    }
+    return originalFetch(url, opts);
+};
 
 // We override the global Worker object to monitor when messages are passed around.
 // Is this terrible? Absolutely.
@@ -75,10 +95,15 @@ window.Worker = class Worker extends window.Worker {
         super(url, options);
         this.addEventListener('message', handlePostMessage);
     }
-    
+
     postMessage(message) {
         super.postMessage(message);
-        showProgress();
-        total++;
+        // check that this is the right object
+        if (message && typeof message == 'object') {
+            if ('url' in message && 'id' in message && 'options' in message) {
+                showProgress();
+                total++;
+            }
+        }
     }
 };

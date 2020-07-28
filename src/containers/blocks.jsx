@@ -137,8 +137,6 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
-
-        s3devtoolsloader.load();
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -163,6 +161,11 @@ class Blocks extends React.Component {
         // Do not check against prevProps.toolboxXML because that may not have been rendered.
         if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
             this.requestToolboxUpdate();
+        }
+
+        // load dev tools when editor is visible
+        if (this.props.isVisible) {
+            s3devtoolsloader.load();
         }
 
         if (this.props.isVisible === prevProps.isVisible) {

@@ -26,7 +26,7 @@ const About = () => {
                     &nbsp;-&nbsp;
                     <a href="/privacy.html">
                         <FormattedMessage
-                            defaultMessage="Privacy Policy"
+                            defaultMessage="Privacy"
                             description="Text for privacy policy link on the home page"
                             id="tw.home.privacy"
                         />

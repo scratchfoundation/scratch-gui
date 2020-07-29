@@ -17,6 +17,8 @@ const motion = function (isStage, targetId) {
 
         <!-- MARTY MOTION BLOCKS -->
 
+        <block type="mv2_getReady" />
+
         <block type="mv2_circle" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -35,8 +37,6 @@ const motion = function (isStage, targetId) {
                 <field name="COMMAND"></field>
             </value>
         </block>
-
-        <block type="mv2_getReady" />
 
         <block type="mv2_kick" >
             <value>

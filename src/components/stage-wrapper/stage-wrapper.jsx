@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
@@ -22,7 +23,10 @@ const StageWrapperComponent = function (props) {
 
     return (
         <Box
-            className={styles.stageWrapper}
+            className={classNames(
+                styles.stageWrapper,
+                {[styles.fullScreen]: isFullScreen}
+            )}
             dir={isRtl ? 'rtl' : 'ltr'}
         >
             <Box className={styles.stageMenuWrapper}>

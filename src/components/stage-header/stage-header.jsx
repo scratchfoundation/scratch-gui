@@ -149,7 +149,6 @@ const StageHeaderComponent = function (props) {
         header = (
             <Box className={styles.stageHeaderWrapper}>
                 <Box className={styles.stageMenuWrapper}>
-                    <Controls vm={vm} />
                     <div className={styles.stageSizeRow}>
                         {stageControls}
                         <div>

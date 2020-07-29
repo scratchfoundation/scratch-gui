@@ -42,6 +42,7 @@ import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import saveIcon from './icon--save.svg';
+import Controls from '../../containers/controls.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -302,6 +303,7 @@ const GUIComponent = props => {
                                         />
                                     </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
+                                    <Controls vm={vm} />
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>

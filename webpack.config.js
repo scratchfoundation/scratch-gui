@@ -96,7 +96,7 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'lib.min': ['react', 'react-dom'],
-            'gui': './src/playground/index.jsx',
+            'editor': './src/playground/editor.jsx',
             'blocksonly': './src/playground/blocks-only.jsx',
             'player': './src/playground/player.jsx'
         },
@@ -135,7 +135,7 @@ module.exports = [
                 'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'gui'],
+                chunks: ['lib.min', 'editor'],
                 template: 'src/playground/index.ejs',
                 title: 'TurboWarp - Run Scratch projects faster',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null

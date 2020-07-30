@@ -37,6 +37,7 @@ describe('Loading scratch gui', () => {
         test.skip('Load a project by ID directly through url', async () => {
             await driver.quit(); // Reset driver to test hitting # url directly
             driver = getDriver();
+            // A comment to see if circle runs
 
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);

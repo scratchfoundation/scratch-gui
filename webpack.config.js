@@ -23,8 +23,8 @@ const base = {
     },
     output: {
         library: 'GUI',
-        filename: '[name].js',
-        chunkFilename: 'chunks/[name].js'
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[name].js'
     },
     externals: {
         React: 'react',
@@ -95,7 +95,6 @@ module.exports = [
     // to run editor examples
     defaultsDeep({}, base, {
         entry: {
-            'lib.min': ['react', 'react-dom'],
             'editor': './src/playground/editor.jsx',
             'blocksonly': './src/playground/blocks-only.jsx',
             'player': './src/playground/player.jsx'
@@ -121,11 +120,10 @@ module.exports = [
         },
         optimization: {
             splitChunks: {
-                chunks: 'all',
-                name: 'lib.min'
+                chunks: 'all'
             },
             runtimeChunk: {
-                name: 'lib.min'
+                name: 'runtime'
             }
         },
         plugins: base.plugins.concat([
@@ -135,19 +133,19 @@ module.exports = [
                 'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'editor'],
+                chunks: ['editor'],
                 template: 'src/playground/index.ejs',
                 title: 'TurboWarp - Run Scratch projects faster',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'blocksonly'],
+                chunks: ['blocksonly'],
                 template: 'src/playground/index.ejs',
                 filename: 'blocks-only.html',
                 title: 'TurboWarp: Blocks Only Example'
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'player'],
+                chunks: ['player'],
                 template: 'src/playground/index.ejs',
                 filename: 'player.html',
                 title: 'TurboWarp Player'

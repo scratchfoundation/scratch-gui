@@ -1,3 +1,6 @@
+// must be first for progress bar to work
+import "./tw-hacky-progress-bar";
+
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';

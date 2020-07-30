@@ -13,7 +13,7 @@ if (isSupported()) {
     progressEl.style.position = 'absolute';
     progressEl.style.top = '0';
     progressEl.style.left = '0';
-    progressEl.style.height = '4px';
+    progressEl.style.height = '5px';
     progressEl.style.backgroundColor = 'white';
     progressEl.style.zIndex = '99999999';
     progressEl.style.width = '0';

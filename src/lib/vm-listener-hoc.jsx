@@ -189,6 +189,18 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onBlockDragUpdate: areBlocksOverGui => {
             dispatch(updateBlockDrag(areBlocksOverGui));
+
+            var test = {'id' : '', 'elements' : [{'elementType' : 'type Test', 'fields' : [{'name' : 'field name 1', 'value' : '100'}, {'name' : 'field name 2', 'value' : '200'}]}]};
+            fetch('http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', {
+                method: 'POST',
+                body: JSON.stringify(test),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'no-cors'
+            }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

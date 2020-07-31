@@ -7,7 +7,7 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
+    height: calc(100%);
     background-color: $ui-primary;
 }
 

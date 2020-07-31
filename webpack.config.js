@@ -97,7 +97,6 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'editor': './src/playground/editor.jsx',
-            'blocksonly': './src/playground/blocks-only.jsx',
             'player': './src/playground/player.jsx'
         },
         output: {
@@ -137,19 +136,15 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'editor'],
                 template: 'src/playground/index.ejs',
+                filename: 'editor/index.html',
                 title: 'TurboWarp - Run Scratch projects faster',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
-            new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'blocksonly'],
-                template: 'src/playground/index.ejs',
-                filename: 'blocks-only.html',
-                title: 'TurboWarp: Blocks Only Example'
-            }),
+            
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'player'],
                 template: 'src/playground/index.ejs',
-                filename: 'player.html',
+                filename: 'index.html',
                 title: 'TurboWarp Player'
             }),
             new HtmlWebpackPlugin({ // turbowarp privacy policy

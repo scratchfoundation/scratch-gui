@@ -32,6 +32,14 @@ const setFullScreen = function (isFullScreen) {
     };
 };
 const setPlayer = function (isPlayerOnly) {
+    // tw: This is a dirty hack to put "editor" in the URL when in the editor, and hide it otherwise.
+    if (location.pathname === '/' || location.pathname === '/editor') {
+        if (isPlayerOnly) {
+            history.replaceState('', '', `/${location.search}${location.hash}`);
+        } else {
+            history.replaceState('', '', `/editor${location.search}${location.hash}`);
+        }
+    }
     return {
         type: SET_PLAYER,
         isPlayerOnly: isPlayerOnly

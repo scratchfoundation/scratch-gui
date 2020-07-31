@@ -11,19 +11,21 @@ class SeeInside extends React.Component {
     }
     render () {
         const {
-            onSeeInside,
+            onSeeInside
         } = this.props;
-        return <button
-            onClick={onSeeInside}
-            className={styles.seeInsideButton}
-        >
-            See inside
-        </button>;
+        return (
+            <button
+                onClick={onSeeInside}
+                className={styles.seeInsideButton}
+            >
+                See inside
+            </button>
+        );
     }
 }
 
 SeeInside.propTypes = {
-    onSeeInside: PropTypes.func,
+    onSeeInside: PropTypes.func
 };
 
 const mapStateToProps = state => ({

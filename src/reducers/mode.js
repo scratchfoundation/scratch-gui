@@ -16,6 +16,14 @@ const reducer = function (state, action) {
             isFullScreen: action.isFullScreen
         });
     case SET_PLAYER:
+        // tw: This is a dirty hack to change the URL to match when the editor is open or closed
+        if (location.pathname === '/' || location.pathname === '/editor.html') {
+            if (action.isPlayerOnly) {
+                history.replaceState('', '', `/${location.search}${location.hash}`);
+            } else {
+                history.replaceState('', '', `/editor.html${location.search}${location.hash}`);
+            }
+        }
         return Object.assign({}, state, {
             isPlayerOnly: action.isPlayerOnly,
             hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly
@@ -32,14 +40,6 @@ const setFullScreen = function (isFullScreen) {
     };
 };
 const setPlayer = function (isPlayerOnly) {
-    // tw: This is a dirty hack to put "editor" in the URL when in the editor, and hide it otherwise.
-    if (location.pathname === '/' || location.pathname === '/editor') {
-        if (isPlayerOnly) {
-            history.replaceState('', '', `/${location.search}${location.hash}`);
-        } else {
-            history.replaceState('', '', `/editor${location.search}${location.hash}`);
-        }
-    }
     return {
         type: SET_PLAYER,
         isPlayerOnly: isPlayerOnly

@@ -136,8 +136,8 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'editor'],
                 template: 'src/playground/index.ejs',
-                filename: 'editor/index.html',
-                title: 'TurboWarp - Run Scratch projects faster',
+                filename: 'editor.html',
+                title: 'TurboWarp Editor',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             
@@ -145,7 +145,7 @@ module.exports = [
                 chunks: ['lib.min', 'player'],
                 template: 'src/playground/index.ejs',
                 filename: 'index.html',
-                title: 'TurboWarp Player'
+                title: 'TurboWarp - Run Scratch projects faster'
             }),
             new HtmlWebpackPlugin({ // turbowarp privacy policy
                 chunks: [],

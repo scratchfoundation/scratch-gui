@@ -106,11 +106,6 @@ if (isSupported()) {
         }
     };
 
-    // if the progress bar breaks, the user can click on it to hide it
-    progressEl.addEventListener('click', () => {
-        hideProgress();
-    });
-
     window.addEventListener('hashchange', () => {
         if (location.hash) {
             total = 0;

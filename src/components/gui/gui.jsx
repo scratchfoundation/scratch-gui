@@ -43,6 +43,7 @@ import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import saveIcon from './icon--save.svg';
 import Controls from '../../containers/controls.jsx';
+import StageHeader from '../../containers/editor-stagesize-header.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -303,7 +304,13 @@ const GUIComponent = props => {
                                         />
                                     </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
-                                    <Controls vm={vm} />
+                                    <Box className={styles.controlsWrapper}>
+                                        <Controls vm={vm} />
+                                        <StageHeader
+                                            stageSize={stageSize}
+                                            vm={vm}
+                                        />
+                                    </Box>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -347,20 +354,22 @@ const GUIComponent = props => {
                                 <Backpack host={backpackHost} />
                             ) : null}*/}
                         </Box>
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
-                            <StageWrapper
-                                isRendererSupported={isRendererSupported}
-                                isRtl={isRtl}
-                                stageSize={stageSize}
-                                vm={vm}
-                            />
-                            <Box className={styles.targetWrapper}>
-                                <TargetPane
+                        { stageSize === STAGE_SIZE_MODES.small ? (
+                            <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                                <StageWrapper
+                                    isRendererSupported={isRendererSupported}
+                                    isRtl={isRtl}
                                     stageSize={stageSize}
                                     vm={vm}
                                 />
+                                <Box className={styles.targetWrapper}>
+                                    <TargetPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
+                        ) : null }
                     </Box>
                 </Box>
                 <DragLayer />

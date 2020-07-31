@@ -36,6 +36,13 @@ class TargetHighlight extends React.Component {
             vm.runtime.getTargetById(highlightedTargetId))) return null;
 
         const target = vm.runtime.getTargetById(highlightedTargetId);
+        // test if target has actually been rendered, return if not
+        try {
+            vm.renderer.getBounds(target.drawableID);
+        } catch (e){
+            console.log(e);
+            return null;
+        }
         const bounds = vm.renderer.getBounds(target.drawableID);
         const [left, top] = this.getPageCoords(bounds.left, bounds.top);
         const [right, bottom] = this.getPageCoords(bounds.right, bounds.bottom);

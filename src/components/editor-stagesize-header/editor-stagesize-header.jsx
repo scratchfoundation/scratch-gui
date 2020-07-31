@@ -1,4 +1,4 @@
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,8 +12,8 @@ import {getStageDimensions} from '../../lib/screen-utils';
 import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 
 import fullScreenIcon from './icon--fullscreen.svg';
-// import largeStageIcon from './icon--large-stage.svg';
-// import smallStageIcon from './icon--small-stage.svg';
+import largeStageIcon from './icon--large-stage.svg';
+import smallStageIcon from './icon--small-stage.svg';
 import unFullScreenIcon from './icon--unfullscreen.svg';
 
 import scratchLogo from '../menu-bar/scratch-logo.svg';
@@ -52,12 +52,12 @@ const StageHeaderComponent = function (props) {
         isFullScreen,
         isPlayerOnly,
         onKeyPress,
-        // onSetStageLarge,
-        // onSetStageSmall,
-        onSetStageFull,
+        onSetStageLarge,
+        onSetStageSmall,
+        // onSetStageFull,
         onSetStageUnFull,
         showBranding,
-        // stageSizeMode,
+        stageSizeMode,
         vm
     } = props;
 
@@ -109,27 +109,48 @@ const StageHeaderComponent = function (props) {
             isPlayerOnly ? (
                 []
             ) : (
-                <div className={styles.stageSizeToggleGroup} />
+                <div className={styles.stageSizeToggleGroup}>
+                    <div>
+                        <Button
+                            className={classNames(
+                                styles.stageButton,
+                                styles.stageButtonFirst,
+                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonToggledOff
+                            )}
+                            onClick={onSetStageSmall}
+                        >
+                            <img
+                                alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
+                                className={styles.stageButtonIcon}
+                                draggable={false}
+                                src={smallStageIcon}
+                            />
+                        </Button>
+                    </div>
+                    <div>
+                        <Button
+                            className={classNames(
+                                styles.stageButton,
+                                styles.stageButtonLast,
+                                (stageSizeMode === STAGE_SIZE_MODES.large) ? null : styles.stageButtonToggledOff
+                            )}
+                            onClick={onSetStageLarge}
+                        >
+                            <img
+                                alt={props.intl.formatMessage(messages.largeStageSizeMessage)}
+                                className={styles.stageButtonIcon}
+                                draggable={false}
+                                src={largeStageIcon}
+                            />
+                        </Button>
+                    </div>
+                </div>
             );
         header = (
             <Box className={styles.stageHeaderWrapper}>
                 <Box className={styles.stageMenuWrapper}>
                     <div className={styles.stageSizeRow}>
                         {stageControls}
-                        <div>
-                            <Button
-                                className={styles.stageButton}
-                                onClick={onSetStageFull}
-                            >
-                                <img
-                                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
-                                    className={styles.stageButtonIcon}
-                                    draggable={false}
-                                    src={fullScreenIcon}
-                                    title={props.intl.formatMessage(messages.fullscreenControl)}
-                                />
-                            </Button>
-                        </div>
                     </div>
                 </Box>
             </Box>

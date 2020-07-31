@@ -39,6 +39,7 @@ describe('Loading scratch gui', () => {
             driver = getDriver();
             // A comment to see if circle runs
             // More comments. Run run run. Please.
+            // la la la. just writing stuff.
 
             const projectId = '96708228';
             await loadUri(`${uri}#${projectId}`);

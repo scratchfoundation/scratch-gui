@@ -12,7 +12,11 @@ class CloudVariablesToggler extends React.Component {
         ]);
     }
     toggleCloudVariables () {
-        if (!this.props.username || this.props.username.length < 3) {
+        if (!this.props.canUseCloudVariables) {
+            alert('Cannot use cloud variables, most likely because you opened the editor.');
+            return;
+        }
+        if (!this.props.cloud && (!this.props.username || this.props.username.length < 3)) {
             // temporary
             alert('Username is missing or too short.');
             return;
@@ -34,12 +38,14 @@ CloudVariablesToggler.propTypes = {
     children: PropTypes.func,
     cloud: PropTypes.bool,
     username: PropTypes.string,
-    onCloudChange: PropTypes.func
+    onCloudChange: PropTypes.func,
+    canUseCloudVariables: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     username: state.scratchGui.tw.username,
-    cloud: state.scratchGui.tw.cloud
+    cloud: state.scratchGui.tw.cloud,
+    canUseCloudVariables: !state.scratchGui.mode.hasEverEnteredEditor
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -21,37 +21,43 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 
 import styles from './gui.css';
 
+import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
 import SeeInside from './tw-see-inside/see-inside.jsx';
 
 const Player = ({isPlayerOnly, projectId}) => (
-    <Box className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
+    <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
-            <Box>
+            <MenuBar
+                onClickLogo={onClickLogo}
+            />
+        ) : null}
+        <div className={styles.center}>
+            {isPlayerOnly ? (
                 <Title />
-                <About />
-            </Box>
-        ) : null}
-        <GUI
-            onClickLogo={onClickLogo}
-            cloudHost={'cirrus.garbomuffin.com'}
-            canSave={false}
-            canEditTitle
-            enableCommunity
-            isPlayerOnly={isPlayerOnly}
-            projectId={projectId}
-        />
-        {isPlayerOnly ? (
-            <Box>
-                <ProjectInput />
-                <div className={styles.seeInside}>
-                    <SeeInside />
+            ) : null}
+            <GUI
+                onClickLogo={onClickLogo}
+                cloudHost={'cirrus.garbomuffin.com'}
+                canSave={false}
+                canEditTitle
+                enableCommunity
+                isPlayerOnly={isPlayerOnly}
+                projectId={projectId}
+            />
+            {isPlayerOnly ? (
+                <div className="about">
+                    <ProjectInput />
+                    <div className={styles.seeInside}>
+                        <SeeInside />
+                    </div>
+                    <About />
                 </div>
-            </Box>
-        ) : null}
-    </Box>
+            ) : null}
+        </div>
+    </div>
 );
 
 Player.propTypes = {

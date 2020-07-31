@@ -12,7 +12,7 @@ class ChangeUsername extends React.Component {
         ]);
     }
     changeUsername () {
-        this.props.onUsernameChange(prompt('New username:', this.props.username) || '');
+        this.props.onUsernameChange(prompt('New username:', this.props.username) || this.props.username || '');
     }
     render () {
         const {

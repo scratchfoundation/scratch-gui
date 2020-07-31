@@ -145,9 +145,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             projectId: state.scratchGui.projectState.projectId,
             hasCloudPermission: state.scratchGui.tw ? state.scratchGui.tw.cloud : false,
             username: state.scratchGui.tw ? state.scratchGui.tw.username : '',
-            // once the new player becomes the default, switch to this
-            // canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
-            canModifyCloudData: true
+            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
         };
     };
 

@@ -3,8 +3,10 @@ p {
 }
 
 .stage-only {
-    width: 480px;
-    margin: 24px auto 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .editor {
@@ -19,7 +21,17 @@ p {
     box-sizing: border-box;
 }
 
+.center {
+    width: 100%;
+    height: 100%;
+}
+
+.stage-only .center {
+    width: 480px;
+    margin: auto;
+}
+
 /* make sure this isn't "see-inside-button" or anything because that might cause the dev tools to wrongly reinject */
 .see-inside {
-    float: right;
+    text-align: right;
 }

@@ -10,6 +10,5 @@ const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 document.body.classList.add('tw-loaded');
 ReactDOM.render(<Player
-    isPlayerOnly
     canSeeInside
 />, appTarget);

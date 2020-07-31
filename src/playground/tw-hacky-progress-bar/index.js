@@ -1,12 +1,14 @@
-const isSupported = () => {
+const isSupported = () =>
     // These are the features we override to make the progress bar work.
-    // If these don't exist Scratch 3 can still load projects but we won't see it, so don't even try to make it.
-    return !!window.Worker && !!window.fetch;
-};
+    // If these don't exist Scratch 3 can still load projects but we won't be able to monitor it.
+    !!window.Worker && !!window.fetch;
+
+const HIDE_AFTER = 5000;
 
 if (isSupported()) {
     let total = 0;
     let complete = 0;
+    let hideTimeout;
 
     const progressEl = document.createElement('div');
     progressEl.id = 'hacky-progress-el';
@@ -22,35 +24,26 @@ if (isSupported()) {
     progressEl.title = 'Progress Bar'; // todo: translate
     document.body.appendChild(progressEl);
 
-    // if the progress bar breaks, the user can click on it to hide it
-    progressEl.addEventListener('click', (e) => {
-        hideProgress();
-    });
-
-    window.addEventListener('hashchange', (e) => {
-        if (location.hash) {
-            total = 0;
-            complete = 0;
-            setProgress(0);
-        }
-    });
-
     const hideProgress = () => {
         progressEl.style.opacity = '0';
+        clearTimeout(hideTimeout);
     };
 
     const showProgress = () => {
         progressEl.style.opacity = '1';
+        clearTimeout(hideTimeout);
     };
 
-    const setProgress = (progress) => {
-        progressEl.style.width = 10 + progress * 90 + '%';
+    const setProgress = progress => {
+        progressEl.style.width = `${10 + (progress * 90)}%`;
         if (progress >= 1) {
             hideProgress();
         }
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(hideProgress, HIDE_AFTER);
     };
 
-    const handlePostMessage = (e) => {
+    const handlePostMessage = e => {
         const data = e.data;
         if (Array.isArray(data)) {
             complete += data.length;
@@ -58,9 +51,7 @@ if (isSupported()) {
         }
     };
 
-    const isProjectDataRequest = (url, opts) => {
-        return typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET';
-    };
+    const isProjectDataRequest = (url, opts) => typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET';
 
     // Alternative implementation below, disables worker so everything happens on the main thread.
     // It does provide a more accurate progress bar but loading things off the main thread is probably more important.
@@ -78,11 +69,11 @@ if (isSupported()) {
                 xhr.onload = () => {
                     resolve(new Response(xhr.response, {
                         status: xhr.status,
-                        statusText: xhr.statusText,
+                        statusText: xhr.statusText
                     }));
                 };
                 xhr.onerror = () => reject(new Error('(tw-hacky-progress-bar) xhr failed'));
-                xhr.onprogress = (e) => {
+                xhr.onprogress = e => {
                     if (e.lengthComputable) {
                         setProgress(e.loaded / e.total);
                     }
@@ -98,15 +89,15 @@ if (isSupported()) {
     // Is this terrible? Absolutely.
     // Never do this. Please.
     window.Worker = class Worker extends window.Worker {
-        constructor(url, options) {
+        constructor (url, options) {
             super(url, options);
             this.addEventListener('message', handlePostMessage);
         }
 
-        postMessage(message) {
+        postMessage (message) {
             super.postMessage(message);
             // check that this is the right object
-            if (message && typeof message == 'object') {
+            if (message && typeof message === 'object') {
                 if ('url' in message && 'id' in message && 'options' in message) {
                     showProgress();
                     total++;
@@ -114,4 +105,17 @@ if (isSupported()) {
             }
         }
     };
+
+    // if the progress bar breaks, the user can click on it to hide it
+    progressEl.addEventListener('click', () => {
+        hideProgress();
+    });
+
+    window.addEventListener('hashchange', () => {
+        if (location.hash) {
+            total = 0;
+            complete = 0;
+            setProgress(0);
+        }
+    });
 }

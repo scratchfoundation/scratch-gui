@@ -4,7 +4,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 
-import Box from '../components/box/box.jsx';
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
@@ -27,7 +26,7 @@ import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
 import SeeInside from './tw-see-inside/see-inside.jsx';
 
-const Player = ({isPlayerOnly, projectId}) => (
+const Player = ({isPlayerOnly, projectId, canSeeInside}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
             <MenuBar
@@ -50,9 +49,11 @@ const Player = ({isPlayerOnly, projectId}) => (
             {isPlayerOnly ? (
                 <div className="about">
                     <ProjectInput />
-                    <div className={styles.seeInside}>
-                        <SeeInside />
-                    </div>
+                    {canSeeInside ? (
+                        <div className={styles.seeInside}>
+                            <SeeInside />
+                        </div>
+                    ) : null}
                     <About />
                 </div>
             ) : null}
@@ -62,6 +63,7 @@ const Player = ({isPlayerOnly, projectId}) => (
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
+    canSeeInside: PropTypes.bool,
     projectId: PropTypes.string
 };
 

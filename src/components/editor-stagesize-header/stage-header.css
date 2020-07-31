@@ -3,7 +3,7 @@
 @import "../../css/z-index.css";
 
 .stage-header-wrapper {
-    position: relative;
+    display: inline-block;
 }
 
 .stage-header-wrapper-overlay {

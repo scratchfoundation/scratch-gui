@@ -1,3 +1,4 @@
 .controls-container {
-    display: flex;
+    display: inline-block;
+    vertical-align: bottom;
 }

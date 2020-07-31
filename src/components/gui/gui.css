@@ -15,6 +15,11 @@
     box-sizing: border-box;
 }
 
+.controls-Wrapper {
+    position: absolute;
+    right: 10px;
+}
+
 .flex-wrapper {
     display: flex;
 

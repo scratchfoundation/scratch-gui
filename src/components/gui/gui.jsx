@@ -304,11 +304,13 @@ const GUIComponent = props => {
                                         />
                                     </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
-                                    <Controls vm={vm} />
-                                    <StageHeader
-                                        stageSize={stageSize}
-                                        vm={vm}
-                                    />
+                                    <Box className={styles.controlsWrapper}>
+                                        <Controls vm={vm} />
+                                        <StageHeader
+                                            stageSize={stageSize}
+                                            vm={vm}
+                                        />
+                                    </Box>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>

@@ -49,6 +49,7 @@ class ProjectInput extends React.Component {
     render () {
         return <input
             ref={elem => this.input = elem}
+            spellCheck="false"
             type="text"
             value={"https://scratch.mit.edu/projects/" + this.state.projectId}
             autoFocus

@@ -538,9 +538,9 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, running}) => (
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
                                         <MenuItem
-                                            className={classNames({[styles.disabled]: running})}
+                                            className={classNames({[styles.disabled]: isProjectRunning})}
                                             onClick={toggleCompiler}
                                         >
                                             {compilerEnabled ? (
@@ -558,8 +558,11 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</ToggleCompiler>
-                                    <ChangeUsername>{(changeUsername) => (
-                                        <MenuItem onClick={changeUsername}>
+                                    <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: isProjectRunning})}
+                                            onClick={changeUsername}
+                                        >
                                             <FormattedMessage
                                                 defaultMessage="Change Username"
                                                 description="Menu bar item for changing the username"

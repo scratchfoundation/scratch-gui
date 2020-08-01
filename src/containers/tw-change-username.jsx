@@ -12,7 +12,12 @@ class ChangeUsername extends React.Component {
         ]);
     }
     changeUsername () {
-        this.props.onUsernameChange(prompt('New username:', this.props.username) || this.props.username || '');
+        // todo: translate
+        if (this.props.isProjectRunning) {
+            alert('Cannot change username when project is running.');
+        } else {
+            this.props.onUsernameChange(prompt('New username:', this.props.username) || this.props.username || '');
+        }
     }
     render () {
         const {
@@ -29,11 +34,13 @@ class ChangeUsername extends React.Component {
 ChangeUsername.propTypes = {
     children: PropTypes.func,
     username: PropTypes.string,
+    isProjectRunning: PropTypes.bool,
     onUsernameChange: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username
+    username: state.scratchGui.tw.username,
+    isProjectRunning: state.scratchGui.vmStatus.running
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -32,7 +32,6 @@ const Player = ({isPlayerOnly, projectId, canSeeInside}) => (
             <MenuBar
                 onClickLogo={onClickLogo}
                 canChangeLanguage
-                canManageFiles
             />
         ) : null}
         <div className={styles.center}>

@@ -1,0 +1,85 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.wrapper {
+    width: 150px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: $ui-tertiary;
+}
+
+.new-buttons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.75rem 0;
+    color: $motion-primary;
+    text-align: center;
+    background: none;
+}
+
+$fade-out-distance: 100px;
+
+.new-buttons:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
+    background: linear-gradient(rgba(232,237,241, 0),rgba(232,237,241, 1));
+    height: $fade-out-distance;
+    width: 100%;
+    pointer-events: none;
+}
+
+.new-buttons > button + button {
+    margin-top: 0.75rem;
+}
+
+.list-area {
+    /* Must have some height (recalculated by flex-grow) in order to scroll */
+    height: 0;
+    flex-grow: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-area:after {
+    /* Make sure there is room to scroll beyond the last tile */
+    content: '';
+    display: block;
+    height: 70px;
+    width: 100%;
+    flex-shrink: 0;
+    order: 99999999;
+}
+
+.list-item {
+    width: 5rem;
+    height: 5rem;
+    margin: 0.5rem auto;
+}
+
+@media only screen and (max-width: $full-size-paint) {
+    .wrapper {
+        width: 80px;
+    }
+
+    .list-item {
+        width: 4rem;
+    }
+}
+
+
+.list-item.placeholder {
+    background: white;
+    filter: opacity(15%) brightness(0%);
+}

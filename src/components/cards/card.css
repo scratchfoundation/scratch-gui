@@ -1,0 +1,306 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.card-container-overlay {
+    position: fixed;
+    pointer-events: none;
+    z-index: $z-index-card;
+}
+
+.card-container {
+    position:absolute;
+    pointer-events: auto;
+    z-index: $z-index-card;
+    margin: 0.5rem 2rem;
+    min-width: 468px;
+}
+
+.left-card, .right-card {
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    background: $ui-white;
+    border: 1px solid $ui-tertiary;
+    width: .75rem;
+    z-index: 10;
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+.left-card {
+    left: -.75rem;
+    border-right: 0;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.right-card {
+    right: -.75rem;
+    border-left: 0;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+}
+
+.left-card::after, .right-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2.5rem;
+    width: 100%;
+    background: $extensions-primary;
+}
+
+.left-button, .right-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    z-index: 20;
+    user-select: none;
+    cursor: pointer;
+    background: $extensions-primary;
+    box-shadow: 0 0 0 4px $extensions-transparent;
+    height: 44px;
+    width: 44px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s ease;
+}
+
+.left-button:hover, .right-button:hover {
+    box-shadow: 0 0 0 6px $extensions-transparent;
+    transform: scale(1.125);
+}
+
+.left-button img, .right-button img{
+    width: 1.75rem;
+}
+
+.left-button {
+    left: -27px;
+}
+
+.right-button {
+    right: -27px;
+}
+
+.card {
+    border: 1px solid $ui-tertiary;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    cursor: move;
+    z-index: 20;
+    overflow: hidden;
+    box-shadow: 0px 5px 25px 5px $ui-black-transparent;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.header-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: $extensions-primary;
+    border-bottom: 1px solid $extensions-tertiary;
+    font-size: 0.625rem;
+    font-weight: bold;
+}
+
+.header-buttons-hidden {
+    border-bottom: 0px;
+}
+
+.header-buttons-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-buttons img {
+    margin-bottom: 2px;
+}
+
+.shrink-expand-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+}
+
+.shrink-expand-button:hover, .all-button:hover {
+    background-color: $ui-black-transparent;
+}
+
+.remove-button, .all-button {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+}
+
+.remove-button:hover, .all-button:hover {
+    background-color: $ui-black-transparent;
+}
+
+.step-title {
+    font-size: 0.9rem;
+    margin: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.step-body {
+    width: 100%;
+    background: $ui-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+
+    /* Min height prevents layout changing when images change */
+    min-height: 256px;
+}
+
+.step-video {
+    height: 256px;
+}
+
+.step-image {
+    max-width: 450px;
+    max-height: 200px;
+    object-fit: contain;
+    background: #F9F9F9;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: 0 0.5rem 0.5rem;
+}
+
+.decks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 1rem 0.5rem;
+}
+
+.deck {
+    display: flex;
+    flex-direction: column;
+    margin: 0 8px 8px;
+    cursor: pointer;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.deck-image {
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.deck-name {
+    color: $motion-primary;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin: .625rem 0px;
+    text-align: center;
+    font-weight: bold;
+    text-align: center;
+    max-width: 200px;
+}
+
+.help-icon {
+    height: 1.25rem;
+}
+
+.close-icon {
+    height: 1.25rem;
+    margin: .125rem 0; /* To offset the .25rem difference in icon size */
+}
+
+[dir="ltr"] .help-icon {
+    margin-right: 0.25rem;
+}
+
+[dir="rtl"] .help-icon {
+    margin-left: 0.25rem;
+}
+
+[dir="ltr"] .close-icon {
+    margin-left: 0.25rem;
+}
+
+[dir="rtl"] .close-icon {
+    margin-right: 0.25rem;
+}
+
+.see-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.see-all-button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: $motion-primary;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    color: $ui-white;
+    font-size: .75rem;
+    font-weight: bold;
+    line-height: 1rem;
+    text-align: center;
+}
+
+[dir="ltr"] .see-all-button img {
+    margin-left: 0.5rem;
+}
+
+[dir="rtl"] .see-all-button img {
+    margin-right: 0.5rem;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.active-step-pip, .inactiveStepPip {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 0.25rem;
+    border-radius: 100%;
+    background: $ui-white-transparent;
+}
+
+.active-step-pip {
+    background: $ui-white;
+    box-shadow: 0px 0px 0px 2px $ui-black-transparent;
+}
+
+.hidden {
+    display: none;
+}

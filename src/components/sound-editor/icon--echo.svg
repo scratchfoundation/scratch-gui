@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>icon--echo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="echo" stroke="#CF63CF">
+            <g transform="translate(3.250000, 2.000000)">
+                <path d="M3.31871875,6.99144875 C3.90534375,7.57969875 3.90534375,8.53194875 3.31871875,9.12019875 C2.73209375,9.70682375 1.77821875,9.70682375 1.18996875,9.12019875 C0.60334375,8.53194875 0.60334375,7.57969875 1.18996875,6.99144875 C1.77821875,6.40482375 2.73209375,6.40482375 3.31871875,6.99144875 Z" id="Stroke-1" stroke-width="1.5" fill="#CF63CF"></path>
+                <path d="M5.25,4.86659875 C7.02125,6.62159875 7.02125,9.46534875 5.25,11.2365988" id="Stroke-3" stroke-width="1.75"></path>
+                <path d="M7.5,2.73866125 C10.44125,5.67991125 10.44125,10.4232862 7.5,13.3661612" id="Stroke-5" stroke-width="1.75"></path>
+                <path d="M9.75,0.60893625 C13.86125,4.72018625 13.86125,11.3664362 9.75,15.4939362" id="Stroke-7" stroke-width="1.75"></path>
+            </g>
+        </g>
+    </g>
+</svg>

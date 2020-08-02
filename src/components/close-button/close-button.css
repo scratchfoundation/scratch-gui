@@ -1,0 +1,81 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;  /* Mask the icon animation */
+    background-color: $ui-black-transparent;
+    border-radius: 50%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.close-button.large:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 0 4px $ui-black-transparent;
+}
+
+.close-button.large.orange:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0px 0px 0px 4px hsla(29, 100%, 54%, 0.2);
+}
+
+.small {
+    width: 0.825rem;
+    height: 0.825rem;
+    background-color: $motion-primary;
+    color: $ui-white;
+}
+
+.large {
+    width: 1.75rem;
+    height: 1.75rem;
+    box-shadow: 0 0 0 2px $ui-black-transparent;
+}
+
+ .large.orange {
+    background-color: hsla(29, 100%, 54%, 0.2);
+    box-shadow: 0px 0px 0px 2px hsla(29, 100%, 54%, 0.2);
+}
+
+.close-icon {
+    position: relative;
+    margin: 0.25rem;
+    user-select: none;
+    transform-origin: 50%;
+    transform: rotate(45deg);
+}
+
+.close-icon.orange {
+    transform: rotate(45deg);
+    transform: scale(1.4);
+}
+
+.small .close-icon {
+    width: 50%;
+}
+
+.large .close-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+.back-icon {
+  position: relative;
+  margin: 0.25rem;
+  user-select: none;
+}
+
+.small .back-icon {
+    width: 50%;
+}
+
+.large .back-icon {
+    width: 2rem;
+    height: 2rem;
+}

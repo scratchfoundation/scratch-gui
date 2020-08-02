@@ -1,0 +1,38 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+@import "../../css/z-index.css";
+
+.context-menu {
+    min-width: 130px;
+    padding: 5px 0; /* The white strip at the top and bottom of the menu */
+    margin: 2px 0 0; /* To keep the menu below the cursor comfortably */
+    font-size: 0.85rem;
+    text-align: left;
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    border-radius: calc($space / 2);
+    box-shadow: 0px 0px 5px 1px $ui-black-transparent;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: $z-index-context-menu;
+}
+
+.menu-item {
+    padding: 8px 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.menu-item:hover {
+    background: $motion-primary;
+    color: white;
+}
+
+.menu-item-bordered {
+    border-top: 1px solid $ui-black-transparent;
+}
+
+.menu-item-danger:hover {
+    background: $error-primary;
+}

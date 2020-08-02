@@ -1,0 +1,15 @@
+.stage-only {
+    width: calc(480px + 1rem);
+}
+
+.editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.stage-only * {
+    box-sizing: border-box;
+}

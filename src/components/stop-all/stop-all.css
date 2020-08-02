@@ -1,0 +1,22 @@
+@import "../../css/colors.css";
+
+.stop-all {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.375rem;
+    border-radius: 0.25rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.stop-all:hover {
+    background-color: $motion-light-transparent;
+}
+
+.stop-all {
+    opacity: 0.5;
+}
+
+.stop-all.is-active {
+    opacity: 1;
+}

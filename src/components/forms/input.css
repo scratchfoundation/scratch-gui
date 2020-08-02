@@ -1,0 +1,48 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.input-form {
+    height: 2rem;
+    padding: 0 0.75rem;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: $text-primary;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: $ui-black-transparent;
+    border-radius: 2rem;
+
+    outline: none;
+    cursor: text;
+    transition: 0.25s ease-out; /* @todo: standardize with var */
+    box-shadow: none;
+
+    /*
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+        @todo: move this out into a mixin or a helper component
+    */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.input-form:hover {
+    border-color: $motion-primary;
+}
+
+.input-form:focus {
+    border-color: $motion-primary;
+    box-shadow: 0 0 0 0.25rem $motion-transparent;
+}
+
+.input-small {
+    width: 3rem;
+    padding: 0 0.5rem;
+    text-overflow: clip;
+    text-align: center;
+}

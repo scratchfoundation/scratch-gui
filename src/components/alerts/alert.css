@@ -1,0 +1,104 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.alert {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: flex-start;
+    border-radius: $space;
+    padding-top: .875rem;
+    padding-bottom: .875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 7px;
+    min-height: 1.5rem;
+    pointer-events: all;
+}
+
+.alert.warn {
+    background: #FFF0DF;
+    border: 1px solid #FF8C1A;
+    box-shadow: 0px 0px 0px 2px rgba(255, 140, 26, 0.25);
+}
+
+.alert.success {
+    background: $extensions-light;
+    border: 1px solid $extensions-tertiary;
+    box-shadow: 0px 0px 0px 2px $extensions-light;
+}
+
+.alert-spinner {
+    self-align: center;
+}
+
+.icon-section {
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+    display: flex;
+    padding-right: 1rem;
+}
+
+.alert-icon {
+    vertical-align: middle;
+}
+
+.alert-message {
+    color: #555;
+    font-weight: bold;
+    font-size: .8125rem;
+    line-height: .875rem;
+    display: flex;
+    align-items: center;
+    padding-right: .5rem;
+}
+
+.alert-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.alert-close-button {
+    outline-style:none;
+}
+
+.alert-close-button-container {
+    outline-style: none;
+    width: 30px;
+    height: 30px;
+    align-self: center;
+}
+
+.alert-connection-button {
+    min-height: 2rem;
+    width: 6.5rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.35rem;
+    background: #FF8C1A;
+    color: white;
+    font-weight: 700;
+    font-size: 0.77rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    outline-style:none;
+}
+
+[dir="ltr"] .alert-connection-button {
+    margin-right: 13px;
+}
+
+[dir="rtl"] .alert-connection-button {
+    margin-left: 13px;
+}
+
+/* prevent last button in list from too much margin to edge of alert */
+.alert-buttons > :last-child {
+    margin-left: 0;
+    margin-right: 0;
+}

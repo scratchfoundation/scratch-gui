@@ -1,0 +1,205 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.library-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-basis: 160px;
+    position: relative;
+    height: 160px;
+    max-width: 160px;
+    margin: $space;
+    padding: 1rem 1rem 0 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary;
+    background: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $ui-black-transparent;
+    border-radius: $space;
+    text-align: center;
+    cursor: pointer;
+}
+
+.library-item-extension {
+    align-self: stretch;
+}
+
+.library-item:hover {
+    border-width: 2px;
+    border-color: $motion-primary;
+}
+
+.hidden {
+    display: none;
+}
+
+.disabled {
+    opacity: .5;
+    cursor: auto;
+}
+
+.disabled:hover {
+    border-color: $ui-black-transparent;
+}
+
+.library-item-image-container-wrapper {
+    height: 100px;
+    width: 100%;
+    position: relative;
+}
+
+.library-item-image-container {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+}
+
+.library-item-inset-image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2.5rem;
+    align-self: flex-start;
+    background-color: $pen-primary;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    border: 0.25rem solid $ui-white;
+}
+
+[dir="ltr"] .library-item-inset-image-container {
+    margin-left: 1rem;
+}
+
+[dir="rtl"] .library-item-inset-image-container {
+    margin-right: 1rem;
+}
+
+.library-item-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.library-item-inset-image {
+    width: 2.5rem;
+}
+
+.library-item-name {
+    width: 80%;
+    margin: 0.25rem 0;
+    text-align: center;
+
+    /*
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+    */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.featured-item {
+    flex-basis: 300px;
+    max-width: 300px;
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+}
+
+.featured-image-container {
+    position: relative;
+}
+
+.featured-image {
+    width: 100%;
+}
+
+.featured-text {
+    font-weight: bold;
+    padding: 10px;
+    /* height: 140px; */
+    width: 300px;
+}
+
+[dir="ltr"] .featured-extension-text {
+    text-align: left;
+    padding-left: 1.25rem;
+}
+
+[dir="rtl"] .featured-extension-text {
+    text-align: right;
+    padding-right: 1.25rem;
+}
+
+.featured-description {
+    display: block;
+    font-weight: normal;
+    line-height: 1.375rem;
+    padding-top: .3125rem;
+    padding-bottom: .25rem;
+}
+
+.featured-extension-metadata {
+    width: 100%;
+    padding: 0 1.25rem 1rem 1.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 12px;
+    color: $text-primary;
+    opacity: 0.75;
+}
+
+[dir="ltr"] .featured-extension-metadata {
+    text-align: left;
+}
+
+[dir="rtl"] .featured-extension-metadata {
+    text-align: right;
+}
+
+.featured-extension-requirement {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-extension-collaboration {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-extension-metadata-detail {
+    height: 100%;
+    padding-top: 0.4rem;
+    font-weight: bold;
+}
+
+.featured-extension-metadata-detail img{
+    margin-right: 0.25rem;
+}
+
+.coming-soon-text {
+    position: absolute;
+    background-color: $data-primary;
+    border-radius: 1rem;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25);
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    font-weight: bold;
+    color: $ui-white;
+}
+
+[dir="ltr"] .coming-soon-text {
+    transform: translate(calc(2 * $space), calc(2 * $space));
+}
+
+[dir="rtl"] .coming-soon-text {
+    transform: translate(calc(-2 * $space), calc(2 * $space));
+}

@@ -1,0 +1,19 @@
+@import "../../css/colors.css";
+
+.green-flag {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.375rem;
+    border-radius: 0.25rem;
+    user-select: none;
+    user-drag: none;
+    cursor: pointer;
+}
+
+.green-flag:hover {
+    background-color: $motion-light-transparent;
+}
+
+.green-flag.is-active {
+    background-color: $motion-transparent;
+}

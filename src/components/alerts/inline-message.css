@@ -1,0 +1,27 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.inline-message {
+    color: $ui-white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: .8125rem;
+}
+
+.success {
+    color: $ui-white-dim;
+}
+
+.info {
+    color: $ui-white;
+}
+
+.warn {
+    color: $error-light;
+}
+
+.spinner {
+    margin-right: $space;
+}

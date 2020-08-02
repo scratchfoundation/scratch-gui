@@ -1,0 +1,10 @@
+@keyframes popIn {
+    from {transform: scale(0.5)}
+    to {transform: scale(1)}
+}
+
+.mic-img {
+    margin: 10px;
+    transform-origin: center;
+    animation: popIn 0.1s ease-in-out;
+}

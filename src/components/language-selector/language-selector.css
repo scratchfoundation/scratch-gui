@@ -1,0 +1,31 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+/* Position the language select over the language icon, and make it transparent */
+.language-select {
+    position: absolute;
+    width: $language-selector-width;
+    height: $menu-bar-height;
+    opacity: 0;
+    user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .875rem;
+    color: $text-primary;
+    background: $ui-white;
+}
+
+[dir="ltr"] .language-select {
+    right: 0;
+}
+
+[dir="rtl"] .language-select {
+    left: 0;
+}
+
+.language-select option {
+    opacity: 1;
+}
+
+.language-select:focus {
+    border: 1px solid white;
+}

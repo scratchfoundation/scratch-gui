@@ -1,0 +1,170 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+@import "../../css/z-index.css";
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index-modal;
+    background-color: $ui-modal-overlay;
+}
+
+.modal-content * {
+    box-sizing: border-box;
+}
+
+.modal-content {
+    margin: 100px auto;
+    outline: none;
+    border: 4px solid $ui-white-transparent;
+    padding: 0;
+    border-radius: $space;
+    user-select: none;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $text-primary;
+    overflow: hidden;
+}
+
+.modal-content.full-screen {
+    position: absolute;
+
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: 'touch';
+    user-select: none;
+
+    background-color: $ui-secondary;
+
+    /* Default modal resets */
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+
+/*
+    Modal header has 3 items:
+    |filter     title       x|
+
+    Use the same width for both side item containers,
+    so that title remains centered
+*/
+$sides: 20rem;
+
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: $library-header-height;
+
+    box-sizing: border-box;
+    width: 100%;
+    background-color: $motion-primary;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    color: $ui-white;
+    user-select: none;
+}
+
+[dir="ltr"] .header-image {
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .header-image {
+    margin-left: 0.5rem;
+}
+
+.header-item-filter {
+    display: flex;
+    flex-basis: $sides;
+    justify-content: flex-start;
+}
+
+.header-item-title {
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    user-select: none;
+    letter-spacing: 0.4px;
+    cursor: default;
+}
+
+[dir="ltr"] .header-item-title {
+    margin: 0 -$sides 0 0;
+}
+
+[dir="rtl"] .header-item-title {
+    margin: 0 0 0 -$sides;
+}
+
+.full-screen [dir="ltr"] .header-item-title {
+    margin: 0 0 0 -$sides;
+}
+
+.full-screen [dir="rtl"] .header-item-title {
+    margin: 0 -$sides 0 0;
+}
+
+.header-item-close {
+    flex-basis: $sides;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+.full-screen .header-item-close {
+    order: -1;
+    justify-content: flex-start;
+}
+
+.back-button {
+    font-weight: normal;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+[dir="rtl"] .back-button img {
+    transform: scaleX(-1);
+}
+
+.header-item-help {
+    padding: 0;
+    z-index: 1;
+}
+
+[dir="ltr"] .header-item-help {
+    margin-right: -4.75rem;
+}
+
+[dir="rtl"] .header-item-help {
+    margin-left: -4.75rem;
+}
+
+.help-button {
+    font-weight: normal;
+    font-size: 0.75rem;
+}
+
+[dir="ltr"] .help-button {
+    padding-right: 0;
+}
+
+[dir="rtl"] .help-button {
+    padding-left: 0;
+}

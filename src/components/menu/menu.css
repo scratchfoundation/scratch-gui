@@ -1,0 +1,46 @@
+@import "../../css/colors.css";
+
+.menu {
+    position: absolute;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0 0 8px 8px;
+    background-color: $motion-primary;
+    padding: 0;
+    margin: 0;
+    min-width: 186px;
+    max-width: 260px;
+    overflow: visible;
+    color: $ui-white;
+    box-shadow: 0 8px 8px 0 $ui-black-transparent;
+}
+
+.menu.left {
+    right: 0;
+}
+
+.menu.right {
+    left: 0;
+}
+
+.menu-item {
+    display: block;
+    line-height: 34px;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-size: .75rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background-color: $ui-black-transparent;
+}
+
+.menu-item.hoverable {
+    cursor: pointer;
+}
+
+.menu-section {
+    border-top: 1px solid $ui-black-transparent;
+}

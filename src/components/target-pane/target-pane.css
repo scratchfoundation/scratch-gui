@@ -1,0 +1,22 @@
+@import "../../css/units.css";
+
+.target-pane {
+    /* Makes columns for the sprite library selector + and the stage selector */
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.stage-selector-wrapper {
+    display: flex;
+    flex-basis: 72px;
+    flex-shrink: 0;
+}
+
+[dir="ltr"] .stage-selector-wrapper {
+    margin-left: calc($space / 2);
+}
+
+[dir="rtl"] .stage-selector-wrapper {
+    margin-right: calc($space / 2);
+}

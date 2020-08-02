@@ -1,0 +1,30 @@
+@import "../../css/colors.css";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: $motion-primary;
+    border-radius: 0.5rem;
+}
+
+.container + .container {
+    margin-top: 1.25rem;
+}
+
+.title {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.container:active {
+    background-color: $motion-light-transparent;
+}

@@ -1,0 +1,99 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.blocks {
+    height: 100%;
+}
+
+.drag-over:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    background-color: $drop-highlight;
+    transition: all 0.25s ease;
+}
+
+.blocks :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid $ui-black-transparent;
+    border-top-right-radius: $space;
+    border-bottom-right-radius: $space;
+}
+
+[dir="rtl"] .blocks :global(.injectionDiv) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: $space;
+    border-bottom-left-radius: $space;
+}
+
+.blocks :global(.blocklyMainBackground) {
+    stroke: none;
+}
+
+.blocks :global(.blocklyToolboxDiv) {
+    border-right: 1px solid $ui-black-transparent;
+    border-bottom: 1px solid $ui-black-transparent;
+    box-sizing: content-box;
+    height: calc(100% - 3.25rem) !important;
+
+    /*
+        For now, the layout cannot support scrollbars in the category menu.
+        The line below works for Edge, the `::-webkit-scrollbar` line
+        below that is for webkit browsers. It isn't possible to do the
+        same for Firefox, so a different solution may be needed for them.
+    */
+    -ms-overflow-style: none;
+}
+
+[dir="rtl"] .blocks :global(.blocklyToolboxDiv) {
+    border-right: none;
+    border-left: 1px solid $ui-black-transparent;
+}
+
+.blocks :global(.blocklyToolboxDiv::-webkit-scrollbar) {
+    display: none;
+}
+
+.blocks :global(.blocklyFlyout) {
+    border-right: 1px solid $ui-black-transparent;
+    box-sizing: content-box;
+}
+
+[dir="rtl"] .blocks :global(.blocklyFlyout) {
+    border-right: none;
+    border-left: 1px solid $ui-black-transparent;
+}
+
+
+.blocks :global(.blocklyBlockDragSurface) {
+    /*
+        Fix an issue where the drag surface was preventing hover events for sharing blocks.
+        This does not prevent user interaction on the blocks themselves.
+    */
+    pointer-events: none;
+    z-index: $z-index-drag-layer; /* make blocks match gui drag layer */
+}
+
+/*
+    Shrink category font to fit "My Blocks" for now.
+    Probably will need different solutions for language support later, so
+    make the change here instead of in scratch-blocks.
+*/
+.blocks :global(.scratchCategoryMenuItemLabel) {
+    font-size: 0.65rem;
+}
+
+.blocks :global(.blocklyMinimalBody) {
+    min-width: auto;
+    min-height: auto;
+}

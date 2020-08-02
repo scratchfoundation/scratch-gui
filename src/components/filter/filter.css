@@ -1,0 +1,138 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+
+    background: $ui-white;
+    border-radius: 10rem;
+    user-select: none;
+    height: $library-filter-bar-height;
+
+    position: relative;
+}
+
+.filter-icon {
+    position: absolute;
+    top: 0;
+
+    height: 1rem;
+    width: 1rem;
+}
+
+[dir="ltr"] .filter-icon {
+    left: 0;
+    margin: 0.75rem 0.75rem 0.75rem 1rem;
+}
+
+[dir="rtl"] .filter-icon {
+    right: 0;
+    margin: 0.75rem 1rem 0.75rem 0.75rem;
+    transform: scaleX(-1);
+}
+
+.filter:focus-within {
+    box-shadow: 0 0 0 .25rem $motion-transparent;
+}
+
+/*
+    Hidden state
+*/
+.x-icon-wrapper {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;  /* Mask the icon animation */
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0.625rem;
+
+    border-radius: 50%;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 0.05s linear;
+}
+
+[dir="ltr"] .x-icon-wrapper {
+    right: 0;
+}
+
+[dir="rtl"] .x-icon-wrapper {
+    left: 0;
+}
+
+/*
+    Shown state
+*/
+.filter.is-active .x-icon-wrapper {
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.05s linear;
+}
+
+.filter.is-active .x-icon-wrapper:hover {
+    transform: scale(1.2, 1.2);
+}
+
+/*
+    Hidden state
+*/
+.x-icon {
+    position: relative;
+    margin: 0.25rem;
+    user-select: none;
+    transform: translateX(0.5rem);
+    transition: transform 0.085s cubic-bezier(0.78, 1, 1, 1);
+}
+
+/*
+    Shown state
+*/
+.filter.is-active .x-icon-wrapper .x-icon {
+    transform: translateX(0);
+}
+
+.filter-input {
+    flex-grow: 1;
+    height: $library-filter-bar-height;
+    background-color: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    color: $text-primary;
+    font-size: 0.75rem;
+    letter-spacing: 0.15px;
+    cursor: text;
+}
+
+[dir="ltr"] .filter-input {
+    padding: .625rem 2rem .625rem 3rem;
+}
+
+[dir="rtl"] .filter-input {
+    padding: .625rem 3rem .625rem 2rem;
+}
+
+.filter-input::placeholder {
+    opacity: .5;
+    color: $text-primary;
+    font-size: 0.875rem;
+    letter-spacing: 0.15px;
+}
+
+[dir="ltr"] .filter-input::placeholder {
+    padding: 0 0 0 0.25rem;
+}
+
+[dir="rtl"] .filter-input::placeholder {
+    padding: 0 0.25rem 0 0;
+}

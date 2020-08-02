@@ -1,0 +1,39 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.author-info {
+    color: $ui-white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: default;
+}
+
+.avatar {
+    margin-right: .5625rem;
+}
+
+.project-title {
+    max-width: $menu-bar-item-max-width;
+    display: block;
+    overflow: hidden;
+    font-size: $menu-bar-large-font-size;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.username-line {
+    max-width: $menu-bar-item-max-width;
+    font-size: $menu-bar-standard-font-size;
+    display: block;
+    overflow: hidden;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.username {
+    font-weight: bold;
+}

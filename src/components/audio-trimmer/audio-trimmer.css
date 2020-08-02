@@ -1,0 +1,148 @@
+@import "../../css/colors.css";
+
+$border-radius: 4px;
+$trim-handle-width: 30px;
+$trim-handle-height: 30px;
+$trim-handle-border: 3px;
+$stripe-size: 10px;
+$hover-scale: 1.25;
+
+.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Force the browser to paint separately to avoid composite cost with waveform */
+    transform: translateZ(0);
+}
+
+.selector {
+    cursor: pointer;
+}
+
+.trim-background {
+    cursor: pointer;
+    touch-action: none;
+}
+
+.trim-background-mask {
+    border: 1px solid $red-tertiary;
+    opacity: 0.5;
+
+    background: repeating-linear-gradient(
+        45deg,
+        $red-primary,
+        $red-primary $stripe-size,
+        $red-tertiary $stripe-size,
+        $red-tertiary calc(2 * $stripe-size)
+    );
+}
+
+.selection-background {
+    background: $motion-primary;
+    opacity: 0.5;
+}
+
+.start-trim-background .trim-background-mask {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+}
+
+.end-trim-background .trim-background-mask {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.trim-line {
+    position: absolute;
+    top: 0;
+    width: 0px;
+    height: 100%;
+    border: 1px solid $red-tertiary;
+}
+
+.selector .trim-line {
+    border: 1px solid $motion-tertiary;
+}
+
+.playhead-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.playhead {
+    /*
+        Even though playhead is just a line, it is 100% width (the width of the waveform)
+        so that we can use transform: translateX() using percentages.
+    */
+    width: 100%;
+    height: 100%;
+    border-left: 1px solid $motion-primary;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+.right-handle {
+    transform: scaleX(-1);
+}
+
+.selector .left-handle {
+    left: -1px
+}
+
+.selector .right-handle {
+    right: -1px
+}
+
+.trimmer .left-handle {
+    right: -1px
+}
+
+.trimmer .right-handle {
+    left: -1px
+}
+
+.trim-handle {
+    position: absolute;
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+    right: 0;
+    user-select: none;
+}
+
+.trimmer .trim-handle {
+    filter: hue-rotate(150deg);
+}
+
+.trim-handle img {
+    position: absolute;
+    width: $trim-handle-width;
+    height: $trim-handle-height;
+    left: calc($trim-handle-border * 1.5);
+
+    /* Make sure image dragging isn't triggered */
+    user-select: none;
+    user-drag: none;
+    -webkit-user-drag: none; /* Autoprefixer doesn't seem to work for this */
+
+    transition: 0.2s;
+}
+
+.top-trim-handle {
+    top: calc(-$trim-handle-height + $trim-handle-border);
+}
+
+.bottom-trim-handle {
+    bottom: calc(-$trim-handle-height + $trim-handle-border);
+}
+
+.top-trim-handle img {
+    transform: scaleY(-1);
+}

@@ -1,0 +1,200 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+@import "../../css/z-index.css";
+
+$main-button-size: 2.75rem;
+$more-button-size: 2.25rem;
+
+.menu-container {
+    display: flex;
+    flex-direction: column-reverse;
+    transition: 0.2s;
+    position: relative;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: $motion-primary;
+    outline: none;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.button:hover {
+    background: $extensions-primary;
+}
+
+.button:active {
+    padding: inherit;
+}
+
+.button.coming-soon:hover {
+    background: $data-primary;
+}
+
+.main-button {
+    border-radius: 100%;
+    width: $main-button-size;
+    height: $main-button-size;
+    box-shadow: 0 0 0 4px $motion-transparent;
+    z-index: $z-index-add-button;
+    transition: transform, box-shadow 0.5s;
+}
+
+.main-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px $motion-transparent;
+}
+
+.main-icon {
+    width: calc($main-button-size - 1rem);
+    height: calc($main-button-size - 1rem);
+}
+
+[dir="rtl"] .main-icon {
+    transform: scaleX(-1);
+}
+
+.more-buttons-outer {
+    /*
+        Need to use two divs to set different overflow x/y
+        which is needed to get animation to look right while
+        allowing the tooltips to be visible.
+    */
+    overflow-y: hidden;
+
+    background: $motion-tertiary;
+    border-top-left-radius: $more-button-size;
+    border-top-right-radius: $more-button-size;
+    width: $more-button-size;
+    margin-left: calc(($main-button-size - $more-button-size) / 2);
+    margin-right: calc(($main-button-size - $more-button-size) / 2);
+
+    position: absolute;
+    bottom: calc($main-button-size);
+
+    margin-bottom: calc($main-button-size / -2);
+    padding-bottom: calc($main-button-size / 2);
+}
+
+.more-buttons {
+    max-height: 0;
+    transition: max-height 1s;
+    overflow-x: visible;
+    display: flex;
+    flex-direction: column;
+    z-index: 10; /* @todo justify */
+}
+
+.file-input {
+    display: none;
+}
+
+.expanded .more-buttons {
+    max-height: 1000px; /* Arbitrary, needs to be a value in order for animation to run */
+}
+
+.force-hidden .more-buttons {
+    display: none; /* This property does not animate */
+}
+
+.more-buttons:first-child { /* Round off top button */
+    border-top-right-radius: $more-button-size;
+    border-top-left-radius: $more-button-size;
+}
+
+.more-button {
+    width: $more-button-size;
+    height: $more-button-size;
+    background: $motion-tertiary;
+}
+
+.more-icon {
+    width: calc($more-button-size - 1rem);
+    height: calc($more-button-size - 1rem);
+}
+
+.coming-soon .more-icon {
+    opacity: 0.5;
+}
+
+/*
+    @todo needs to be refactored with coming soon tooltip overrides.
+    The "!important"s are for the same reason as with coming soon, the library
+    is not very easy to style.
+*/
+.tooltip {
+    background-color: $extensions-primary !important;
+    opacity: 1 !important;
+    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.tooltip:after {
+    background-color: $extensions-primary;
+}
+
+.coming-soon-tooltip {
+    background-color: $data-primary !important;
+}
+
+.coming-soon-tooltip:after {
+    background-color: $data-primary !important;
+}
+
+.tooltip {
+    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-radius: $form-radius !important;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    z-index: $z-index-tooltip !important;
+}
+
+$arrow-size: 0.5rem;
+$arrow-inset: -0.25rem;
+$arrow-rounding: 0.125rem;
+
+.tooltip:after {
+    content: "";
+    border-top: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-left: 0 !important;
+    border-bottom: 0 !important;
+    border-right: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-radius: $arrow-rounding;
+    height: $arrow-size !important;
+    width: $arrow-size !important;
+}
+
+.tooltip:global(.place-left):after {
+    margin-top: $arrow-inset !important;
+    right: $arrow-inset !important;
+    transform: rotate(45deg) !important;
+}
+
+.tooltip:global(.place-right):after {
+    margin-top: $arrow-inset !important;
+    left: $arrow-inset !important;
+    transform: rotate(-135deg) !important;
+}
+
+.tooltip:global(.place-top):after {
+    margin-right: $arrow-inset !important;
+    bottom: $arrow-inset !important;
+    transform: rotate(135deg) !important;
+}
+
+.tooltip:global(.place-bottom):after {
+    margin-left: $arrow-inset !important;
+    top: $arrow-inset !important;
+    transform: rotate(-45deg) !important;
+}

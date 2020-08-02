@@ -1,0 +1,10 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.user-thumbnail {
+    width: $menu-bar-button-size;
+    height: $menu-bar-button-size;
+    border-radius: $form-radius;
+    vertical-align: middle;
+    box-shadow: 0 0 0 1px $ui-black-transparent;
+}

@@ -1,0 +1,32 @@
+/*
+    Contains constants for the z-index values of elements that are part of the global stack context.
+    In other words, z-index values that are "inside" a component are not added here.
+    This prevents conflicts between identical z-index values in different components.
+*/
+
+/* Toolbox z-index: 40; set in scratch-blocks */
+$z-index-extension-button: 42;
+$z-index-stage-indicator: 45;
+$z-index-add-button: 46;
+$z-index-tooltip: 47; /* tooltips should go over add buttons if they overlap */
+$z-index-monitor: 48; /* monitors go over add buttons */
+$z-index-stage-question: 49; /* "ask" block text input goes above monitors */
+
+$z-index-card: 480;
+$z-index-alerts: 490;
+$z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorials */
+$z-index-loader: 500;
+$z-index-modal: 510;
+
+$z-index-drag-layer: 1000;
+/* Block drag z-index: 1000; default 50 is overriden in blocks.css */
+$z-index-monitor-dragging: 1010;
+$z-index-dragging-sprite: 1020; /* so it is draggable into other panes */
+
+$z-index-stage-color-picker-background: 2000;
+$z-index-stage-with-color-picker: 2010;
+$z-index-stage-header: 5000;
+$z-index-stage-wrapper-overlay: 5000;
+
+/* in most interfaces, the context menu is always on top */
+$z-index-context-menu: 10000;

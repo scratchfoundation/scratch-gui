@@ -1,0 +1,319 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.page-wrapper {
+    height: 100%;
+}
+
+.body-wrapper {
+    height: calc(100% - $menu-bar-height);
+    background-color: $ui-primary;
+}
+
+.body-wrapper * {
+    box-sizing: border-box;
+}
+
+.flex-wrapper {
+    display: flex;
+
+    /*
+        Make 2 columns:
+        a) for the blocks + workspace panes, and
+        b) for combined stage menu + stage + sprite/stage selectors
+    */
+    flex-direction: row;
+    height: 100%;
+
+    /*
+        Stop scrollbar popping in and out from scratch-blocks border issue
+        https://github.com/LLK/scratch-gui/issues/318
+    */
+    overflow-y: hidden;
+}
+
+.editor-wrapper {
+    /*
+        This is carefully balanced--  the minimum width at which the GUI will be displayed is 1024px.
+        At that size, the stage pane is 408px wide, with $space of padding to each side.
+        However, we must also add the border width to the stage pane. All-in-all, the stage pane's final width is
+        408px + ($space + $stage-standard-border-width * 2) (one border & padding per left/right side).
+
+        @todo This is in place to prevent "doubling up" of horizontal scrollbars in narrow windows, but there are likely
+        much better ways to solve that (e.g. undo #2124, remove this flex-basis entirely). However, they run their own
+        risks of breaking things, so let's just leave this as-is for the time being.
+    */
+    flex-basis: calc(1024px - 408px - (($space + $stage-standard-border-width) * 2));
+    flex-grow: 1;
+    flex-shrink: 0;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-list {
+    height: $stage-menu-height;
+    width: 250px; /* Match width of the toolbox */
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.80rem;
+
+    /* Overrides for react-tabs styling */
+    margin: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.tab {
+    flex-grow: 1;
+    height: 80%;
+    margin-bottom: 0;
+
+    border-radius: 1rem 1rem 0 0;
+    border: 1px solid $ui-black-transparent;
+
+    padding: 0.125rem 1.25rem 0;
+    font-size: 0.75rem;
+
+    background-color: $ui-tertiary;
+    color: $text-primary-transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+    white-space: nowrap;
+}
+
+[dir="ltr"] .tab {
+    margin-left: -0.5rem;
+}
+
+[dir="rtl"] .tab {
+    margin-right: -0.5rem;
+}
+
+[dir="ltr"] .tab:nth-of-type(1) {
+    margin-left: 0;
+}
+
+[dir="rtl"] .tab:nth-of-type(1) {
+    margin-right: 0;
+}
+
+/* Use z-indices to force left-on-top for tabs */
+.tab:nth-of-type(1) {
+    z-index: 3;
+}
+.tab:nth-of-type(2) {
+    z-index: 2;
+}
+.tab:nth-of-type(3) {
+    z-index: 1;
+}
+
+.tab:hover {
+  background-color: $ui-primary;
+}
+
+.tab.is-selected {
+    height: 90%;
+    color: $motion-primary;
+    background-color: $ui-white;
+    z-index: 4; /* Make sure selected is always above */
+}
+
+.tab img {
+    width: 1.375rem;
+    filter: grayscale(100%);
+}
+
+[dir="ltr"] .tab img {
+    margin-right: 0.125rem;
+}
+
+[dir="rtl"] .tab img {
+    margin-left: 0.125rem;
+}
+
+/* mirror blocks and sound tab icons */
+[dir="rtl"] .tab:nth-of-type(1) img {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .tab:nth-of-type(3) img {
+    transform: scaleX(-1);
+}
+
+.tab.is-selected img {
+    filter: none;
+}
+
+/* Tab style overrides from react-tabs */
+.tab.is-selected:after {
+    display: none;
+}
+
+.tab.is-selected:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: $ui-black-transparent;
+}
+
+.tab.is-selected:focus:after {
+    display: none;
+}
+
+/* Body of the tabs */
+.tabs {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-panel {
+    position: relative;
+    flex-grow: 1;
+    display: none;
+}
+
+.tab-panel.is-selected {
+    display: flex;
+}
+
+.blocks-wrapper {
+    flex-grow: 1;
+    position: relative;
+}
+
+.stage-and-target-wrapper {
+    /*
+        Makes rows for children:
+          1) stage menu
+          2) stage
+          3) sprite/stage selectors
+        Only reason we need this, is so .targetWrapper, which holds the selectors,
+        goes to full vertical height of the window
+    */
+    display: flex;
+    flex-direction: column;
+    /* pad entire wrapper to the left and right; allow children to fill width */
+    padding-left: $space;
+    padding-right: $space;
+
+    /* this will only ever be as wide as the stage */
+    flex-basis: 0;
+}
+
+.target-wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+
+    padding-top: $space;
+    min-height: 0; /* this makes it work in Firefox */
+
+    /*
+        For making the sprite-selector a scrollable pane
+        @todo: Not working in Safari
+    */
+    /* TODO this also breaks the thermometer menu */
+    /* overflow: hidden; */
+}
+
+.extension-button-container {
+    width: 3.75rem;
+    height: 3.25rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-extension-button;
+    background: $motion-primary;
+
+    border: 1px solid $motion-primary;
+    box-sizing: content-box; /* To match scratch-block vertical toolbox borders */
+}
+
+$fade-out-distance: 15px;
+
+.extension-button-container:before {
+    content: "";
+    position: absolute;
+    top: calc(calc(-1 * $fade-out-distance) - 1px);
+    left: -1px;
+    background: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15));
+    height: $fade-out-distance;
+    width: calc(100% + 0.5px);
+}
+
+
+.extension-button {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.extension-button-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+[dir="rtl"] .extension-button-icon {
+    transform: scaleX(-1);
+}
+
+.extension-button > div {
+    margin-top: 0;
+}
+
+/* Sprite Selection Watermark */
+.watermark {
+    position: absolute;
+    top: 1.25rem;
+    pointer-events: none;
+}
+
+[dir="ltr"] .watermark {
+    right: 1.25rem;
+}
+
+[dir="rtl"] .watermark {
+    left: 1.25rem;
+}
+
+/* Menu */
+
+.menu-bar-position {
+    position: relative;
+    z-index: $z-index-menu-bar;
+}
+/* Alerts */
+
+.alerts-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: $z-index-alerts;
+    position: absolute;
+    margin-top: 53px;
+    pointer-events: none;
+}
+
+/*
+    Make the (background) page not scrollable when modals are open
+    This CSS class is automatically added to the body when react-modal is open
+*/
+:global(.ReactModal__Body--open) {
+    overflow: hidden;
+}

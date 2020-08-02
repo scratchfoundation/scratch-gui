@@ -1,0 +1,6 @@
+.controls {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 15px;
+}

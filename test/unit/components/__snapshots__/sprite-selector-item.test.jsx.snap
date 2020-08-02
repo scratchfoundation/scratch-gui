@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpriteSelectorItemComponent matches snapshot when given a number and details to show 1`] = `
+<div
+  className="react-contextmenu-wrapper ponies undefined"
+  onClick={[Function]}
+  onContextMenu={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={undefined}
+  onMouseLeave={undefined}
+  onMouseOut={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className={undefined}
+  >
+    5
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      Pony sprite
+    </div>
+    <div
+      className={undefined}
+    >
+      480 x 360
+    </div>
+  </div>
+  <div
+    aria-label="Delete"
+    className=""
+    onClick={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+    </div>
+  </div>
+  <nav
+    className="react-contextmenu"
+    onContextMenu={[Function]}
+    onMouseLeave={[Function]}
+    role="menu"
+    style={
+      Object {
+        "opacity": 0,
+        "pointerEvents": "none",
+        "position": "fixed",
+      }
+    }
+    tabIndex="-1"
+  >
+    <div
+      aria-disabled="false"
+      aria-orientation={null}
+      className="react-contextmenu-item"
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      onTouchEnd={[Function]}
+      role="menuitem"
+      tabIndex="-1"
+    >
+      <span>
+        delete
+      </span>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
+<div
+  className="react-contextmenu-wrapper ponies undefined"
+  onClick={[Function]}
+  onContextMenu={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={undefined}
+  onMouseLeave={undefined}
+  onMouseOut={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
+  <div
+    className={undefined}
+  >
+    <div
+      className={undefined}
+    >
+      Pony sprite
+    </div>
+  </div>
+  <div
+    aria-label="Delete"
+    className=""
+    onClick={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
+    </div>
+  </div>
+  <nav
+    className="react-contextmenu"
+    onContextMenu={[Function]}
+    onMouseLeave={[Function]}
+    role="menu"
+    style={
+      Object {
+        "opacity": 0,
+        "pointerEvents": "none",
+        "position": "fixed",
+      }
+    }
+    tabIndex="-1"
+  >
+    <div
+      aria-disabled="false"
+      aria-orientation={null}
+      className="react-contextmenu-item"
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      onTouchEnd={[Function]}
+      role="menuitem"
+      tabIndex="-1"
+    >
+      <span>
+        delete
+      </span>
+    </div>
+  </nav>
+</div>
+`;

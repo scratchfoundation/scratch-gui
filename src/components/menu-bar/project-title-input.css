@@ -1,0 +1,46 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+@import "../../css/z-index.css";
+
+/*
+If project-title-input.jsx is part of a menu bar say menu-bar.jsx, it can have additional css classes that
+can set a width for example or what it should do in a flex box (eg. grow).
+*/
+
+.title-field {
+    border: 1px dashed $ui-black-transparent;
+    border-radius: $form-radius;
+    -webkit-border-radius: $form-radius;
+    -moz-border-radius: $form-radius;
+    background-color: $ui-white-transparent;
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    height: auto;
+    padding: .5rem;
+}
+
+.title-field {
+    color: $ui-white;
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+.title-field::placeholder {
+    color: $ui-white;
+    font-weight: normal;
+    font-size: .8rem;
+    font-style: italic;
+}
+
+.title-field:hover {
+    background-color: hsla(0, 100%, 100%, 0.5);
+}
+
+.title-field:focus {
+    outline:none;
+    border: 1px solid $ui-transparent;
+    -webkit-box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
+    box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
+    background-color: $ui-white;
+    color: $text-primary;
+}

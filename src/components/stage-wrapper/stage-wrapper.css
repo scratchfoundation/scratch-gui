@@ -1,0 +1,30 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.stage-wrapper * {
+    box-sizing: border-box;
+}
+
+.stage-canvas-wrapper {
+    /* Hides negative space between edge of rounded corners + container, when selected */
+    user-select: none;
+}
+
+.stage-wrapper.full-screen {
+    position: fixed;
+    top: $stage-menu-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index-stage-wrapper-overlay;
+    background-color: $ui-white;
+    /* spacing between stage and control bar (on the top), or between
+    stage and window edges (on left/right/bottom) */
+    padding: $stage-full-screen-stage-padding;
+
+    /* this centers the stage */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,123 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+/* @todo: refactor this class name, and component: `sprite-selector` to `sprite` */
+.sprite-selector-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    color: $text-primary;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $ui-black-transparent;
+    border-radius: $space;
+
+    text-align: center;
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.sprite-selector-item.is-selected {
+    box-shadow: 0px 0px 0px 4px $motion-transparent;
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+}
+
+.sprite-selector-item:hover {
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+}
+
+.sprite-selector-item:hover .sprite-image, .is-selected .sprite-image {
+    filter: drop-shadow(0px 0px 2px  $ui-black-transparent);
+}
+
+/* Outer/Inner chicanery is to prevent layouts when sprite image changes */
+.sprite-image-outer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0);
+}
+
+.sprite-image-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sprite-image {
+    user-select: none;
+    pointer-events: none;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.sprite-info {
+    padding: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+
+    font-size: 0.625rem;
+    color: $text-primary;
+    user-select: none;
+}
+
+.sprite-name, .sprite-details {
+    /*
+        For truncating overflowing text gracefully
+        Min-width is for a bug: https://css-tricks.com/flexbox-truncated-text
+    */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.sprite-details {
+    margin-top: 0.125rem;
+    font-size: 0.5rem;
+}
+
+.is-selected .sprite-info {
+    background: $motion-primary;
+    color: $ui-white;
+}
+
+.delete-button {
+    position: absolute;
+    top: -.625rem;
+    z-index: auto;
+}
+
+[dir="ltr"] .delete-button {
+    right: -.625rem;
+}
+
+[dir="rtl"] .delete-button {
+    left: -.625rem;
+}
+
+.number {
+    position: absolute;
+    top: 0.15rem;
+    font-size: 0.625rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+[dir="ltr"] .number {
+    left: 0.15rem;
+}
+
+[dir="rtl"] .number {
+    right: 0.15rem;
+}

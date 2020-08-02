@@ -1,0 +1,126 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 600px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.visualization-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.meter-container, .waveform-container {
+    background: $ui-primary;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 5px;
+    padding: 3px;
+    /* Force these to be on their own render layer because they update often */
+    transform: translateZ(0);
+}
+
+.meter-container {
+    margin-right: 5px;
+    height: 180px;
+}
+
+.waveform-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 180px;
+    position: relative;
+}
+
+.help-text {
+    margin: 10px auto 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(167, 170, 181);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.playing-text {
+    color: $motion-primary;
+}
+
+.recording-text {
+    color: $red-primary;
+}
+
+.main-button-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.main-button-row button {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    background: transparent;
+    border: none;
+}
+
+.main-button-row button:disabled {
+    opacity: 0.25;
+}
+
+.main-button-row button:active, .main-button-row button:focus {
+    outline: none;
+}
+
+.button-row {
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-row button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    background: white;
+    border: 1px solid $ui-black-transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: $motion-primary;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+}
+
+.button-row button + button {
+    margin-left: 0.5rem;
+}
+
+.main-button {
+    text-align: center;
+}
+
+.record-button {
+    overflow: visible;
+}
+
+.record-button-circle {
+    fill: $red-primary;
+    stroke: $red-tertiary;
+}
+
+.record-button-circle-outline {
+    fill: $red-primary;
+    opacity: 0.2;
+    transition: 0.1s;
+}
+
+[dir="rtl"] .rerecord-button img {
+    transform: scaleX(-1);
+}

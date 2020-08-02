@@ -27,6 +27,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
+import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud.jsx';
@@ -598,6 +599,23 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
+                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
+                                        <MenuItem onClick={toggleHighQualityPen}>
+                                            {highQualityPen ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off high quality pen"
+                                                    description="Menu bar item for turning off high quality pen"
+                                                    id="tw.settings.hrpOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on high quality pen (BETA)"
+                                                    description="Menu bar item for turning on high quality pen"
+                                                    id="tw.settings.hrpOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</HighQualityPen>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

@@ -2,6 +2,7 @@ const SET_COMPATIBILITY_STATE = 'tw/SET_COMPATIBILITY_STATE';
 const SET_COMPILER_STATE = 'tw/SET_COMPILER_STATE';
 const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
+const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 
 const USERNAME_KEY = 'tw:username';
 
@@ -20,7 +21,8 @@ const initialState = {
     compatibility: true,
     compiler: true,
     cloud: true,
-    username: initialUsername
+    username: initialUsername,
+    highQualityPen: false
 };
 
 const reducer = function (state, action) {
@@ -44,6 +46,10 @@ const reducer = function (state, action) {
     case SET_CLOUD:
         return Object.assign({}, state, {
             cloud: action.cloud
+        });
+    case SET_HIGH_QUALITY_PEN:
+        return Object.assign({}, state, {
+            highQualityPen: action.highQualityPen
         });
     default:
         return state;
@@ -78,11 +84,19 @@ const setCloud = function (cloud) {
     };
 };
 
+const setHighQualityPen = function (highQualityPen) {
+    return {
+        type: SET_HIGH_QUALITY_PEN,
+        highQualityPen: highQualityPen
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
     setCompatibilityState,
     setCompilerState,
     setUsername,
-    setCloud
+    setCloud,
+    setHighQualityPen
 };

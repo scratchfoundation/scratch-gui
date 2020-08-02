@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[scratch-editor.interface]
-file_filter = translations/<lang>.json
-source_file = translations/en.json
-source_lang = en
-type = CHROME

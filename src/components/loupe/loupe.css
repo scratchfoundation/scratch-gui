@@ -1,7 +1,0 @@
-@import "../../css/colors.css";
-
-.color-picker {
-    position: absolute;
-    border-radius: 100%;
-    border: 4px solid $ui-black-transparent;
-}

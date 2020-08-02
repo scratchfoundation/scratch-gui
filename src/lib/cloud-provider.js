@@ -29,7 +29,8 @@ class CloudProvider {
 
         // Send a message to the cloud server at a rate of no more
         // than 10 messages/sec.
-        this.sendCloudData = throttle(this._sendCloudData, 100);
+        // tw: we let cloud variables change at a greater rate
+        this.sendCloudData = throttle(this._sendCloudData, 50);
     }
 
     /**

@@ -1,5 +1,4 @@
-// must be first for progress bar to work
-import './tw-hacky-progress-bar';
+import './tw-imports';
 
 import ReactDOM from 'react-dom';
 import React from 'react';

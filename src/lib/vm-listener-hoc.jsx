@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -192,12 +193,12 @@ const vmListenerHOC = function (WrappedComponent) {
         onMonitorsUpdate: monitorList => {
             dispatch(updateMonitors(monitorList));
         },
-        onBlockDragUpdate: areBlocksOverGui => {
+        onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onBlockArtieUpdate: () => {
-            sendBlockArtie();
-            dispatch(updateArtieBlock(true));
+        onBlockArtieUpdate: (blocks, areBlocksOverGui) => {
+            sendBlockArtie(blocks);
+            dispatch(updateArtieBlock(areBlocksOverGui));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

@@ -40,6 +40,13 @@ const cloudManagerHOC = function (WrappedComponent) {
             // when loading a new project e.g. via file upload
             // (and eventually move it out of the vm.clear function)
 
+            // tw: handle cases where we should explicitly close and reconnect() in the same update
+            if (this.shouldReconnect(this.props, prevProps)) {
+                this.disconnectFromCloud();
+                this.connectToCloud();
+                return;
+            }
+
             if (this.shouldConnect(this.props) && !this.shouldConnect(prevProps)) {
                 this.connectToCloud();
             }
@@ -65,11 +72,16 @@ const cloudManagerHOC = function (WrappedComponent) {
                     !this.canUseCloud(props) ||
                     !props.vm.runtime.hasCloudData() ||
                     (props.projectId !== prevProps.projectId) ||
-                    // tw: username changes are normal
+                    // tw: username changes are handled in "reconnect"
                     // (props.username !== prevProps.username) ||
                     // Editing someone else's project
                     !props.canModifyCloudData
                 );
+        }
+        // tw: handle cases where we should explicitly close and reconnect() in the same update
+        shouldReconnect (props, prevProps) {
+            // reconnect when username changes
+            return this.isConnected() && props.username !== prevProps.username;
         }
         isConnected () {
             return this.cloudProvider && !!this.cloudProvider.connection;

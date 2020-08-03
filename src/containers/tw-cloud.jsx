@@ -16,11 +16,6 @@ class CloudVariablesToggler extends React.Component {
             alert('Cannot use cloud variables, most likely because you opened the editor.');
             return;
         }
-        if (!this.props.cloud && (!this.props.username || this.props.username.length < 3)) {
-            // temporary
-            alert('Username is missing or too short.');
-            return;
-        }
         this.props.onCloudChange(!this.props.cloud);
     }
     render () {

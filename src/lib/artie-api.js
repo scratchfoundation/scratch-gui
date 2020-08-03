@@ -22,7 +22,7 @@ const getInputNameFromInputId = (parent, inputId) => {
     return inputName;
 }
 
-const createArtieBlockFromTempBlock = (tempBlock) => ({id: '', elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs});
+const createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs});
 
 const generateArtieNextBlock = (parent, nextId, blocks) => {
 
@@ -106,7 +106,6 @@ const sendBlockArtie = (blocks) => new Promise((resolve, reject) => {
 
         artieBlocks.push(createArtieBlockFromTempBlock(root));
     });
-
 
     xhr({
         method: 'POST',

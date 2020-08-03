@@ -16,7 +16,9 @@ class ChangeUsername extends React.Component {
         if (this.props.isProjectRunning) {
             alert('Cannot change username when project is running.');
         } else {
-            this.props.onUsernameChange(prompt('New username:', this.props.username) || this.props.username || '');
+            let newUsername = prompt('New username:', this.props.username);
+            if (newUsername === null) newUsername = this.props.username;
+            this.props.onUsernameChange(newUsername);
         }
     }
     render () {

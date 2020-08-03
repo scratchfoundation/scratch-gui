@@ -13,7 +13,7 @@ class HighQualityPen extends React.Component {
     toggleHighQualityPen () {
         if (!this.props.highQualityPen) {
             // todo: temporary until the mentioned bugs are fixed
-            if (!confirm("This is an experimental option that makes pen render at a higher resolution. Keep in mind:\n- the pen layer is CLEARED any time it is resized\n- please start the project at least once before enabling this, otherwise it may scale wrong\n- this may reduce performance\nI'll try to get these fixed eventually.")) {
+            if (!confirm("This is an experimental option that automatically resizes the pen layer to make it look smoother. Keep in mind:\n- the pen layer is CLEARED any time it is resized\n- please start the project at least once before enabling this, otherwise it may scale wrong\n- this may reduce performance\nI'll try to get most of these fixed eventually.")) {
                 return;
             }
         }

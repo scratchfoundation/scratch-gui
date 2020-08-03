@@ -539,26 +539,6 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
-                                        <MenuItem
-                                            className={classNames({[styles.disabled]: isProjectRunning})}
-                                            onClick={toggleCompiler}
-                                        >
-                                            {compilerEnabled ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Disable Compiler"
-                                                    description="Menu bar item for disabling the compiler"
-                                                    id="tw.settings.compilerOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Enable Compiler"
-                                                    description="Menu bar item for enabling the compiler"
-                                                    id="tw.settings.compilerOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</ToggleCompiler>
                                     <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
                                         <MenuItem
                                             className={classNames({[styles.disabled]: isProjectRunning})}
@@ -599,6 +579,26 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: isProjectRunning})}
+                                            onClick={toggleCompiler}
+                                        >
+                                            {compilerEnabled ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Disable Compiler"
+                                                    description="Menu bar item for disabling the compiler"
+                                                    id="tw.settings.compilerOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Enable Compiler"
+                                                    description="Menu bar item for enabling the compiler"
+                                                    id="tw.settings.compilerOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</ToggleCompiler>
                                     <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (

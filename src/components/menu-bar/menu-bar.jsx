@@ -97,7 +97,6 @@ const ariaMessages = defineMessages({
 });
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
-const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -501,6 +500,7 @@ class MenuBar extends React.Component {
                         </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
+                    {/* tw: add our custom menu bar groups */}
                     <div className={styles.fileGroup}>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -605,13 +605,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Turn off high quality pen"
                                                     description="Menu bar item for turning off high quality pen"
-                                                    id="tw.settings.hrpOff"
+                                                    id="tw.settings.hqpOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Turn on high quality pen (BETA)"
                                                     description="Menu bar item for turning on high quality pen"
-                                                    id="tw.settings.hrpOn"
+                                                    id="tw.settings.hqpOn"
                                                 />
                                             )}
                                         </MenuItem>
@@ -644,13 +644,6 @@ class MenuBar extends React.Component {
                                             defaultMessage="Source Code"
                                             description="Text for Source Code in the Links dropdown"
                                             id="tw.links.code"
-                                        />
-                                    </MenuItem>
-                                    <MenuItem onClick={openFeedbackLink}>
-                                        <FormattedMessage
-                                            defaultMessage="Feedback"
-                                            description="Text for feedback in the Links dropdown"
-                                            id="tw.links.feedback"
                                         />
                                     </MenuItem>
                                 </MenuSection>
@@ -729,6 +722,24 @@ class MenuBar extends React.Component {
                                 <CommunityButton className={styles.menuBarButton} />
                             </MenuBarItemTooltip>
                         ) : [])}
+                    </div>
+                    {/* tw: add a feedback button */}
+                    <div className={styles.menuBarItem}>
+                        <a
+                            className={styles.feedbackLink}
+                            href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            {/* todo: icon */}
+                            <Button className={styles.feedbackButton}>
+                                <FormattedMessage
+                                    defaultMessage="Give Feedback"
+                                    description="Text for the giving feedback button"
+                                    id="tw.giveFeedback"
+                                />
+                            </Button>
+                        </a>
                     </div>
                 </div>
 

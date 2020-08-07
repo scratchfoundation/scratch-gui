@@ -338,8 +338,8 @@ class Blocks extends React.Component {
             const stageCostumes = stage.getCostumes();
             const targetCostumes = target.getCostumes();
             const targetSounds = target.getSounds();
-            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML();
-            return makeToolboxXML(target.isStage, target.id, dynamicBlocksXML,
+            const dynamicBlocksXML = this.props.vm.runtime.getBlocksXML(target);
+            return makeToolboxXML(false, target.isStage, target.id, dynamicBlocksXML,
                 targetCostumes[targetCostumes.length - 1].name,
                 stageCostumes[stageCostumes.length - 1].name,
                 targetSounds.length > 0 ? targetSounds[targetSounds.length - 1].name : ''

@@ -698,6 +698,18 @@ const variables = function () {
     `;
 };
 
+const lists = function () {
+    return `
+    <category
+        name="%{BKY_CATEGORY_LISTS}"
+        id="lists"
+        colour="#FF661A"
+        secondaryColour="#FF5500"
+        custom="LIST">
+    </category>
+    `;
+};
+
 const myBlocks = function () {
     return `
     <category
@@ -750,7 +762,8 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
     const controlXML = moveCategory('control') || control(isStage, targetId);
     const sensingXML = moveCategory('sensing') || sensing(isStage, targetId);
     const operatorsXML = moveCategory('operators') || operators(isStage, targetId);
-    const variablesXML = moveCategory('data') || variables(isStage, targetId);
+    const variablesXML = moveCategory('variables') || variables(isStage, targetId);
+    const listsXML = moveCategory('lists') || lists(isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isStage, targetId);
 
     const everything = [
@@ -763,6 +776,7 @@ const makeToolboxXML = function (isStage, targetId, categoriesXML = [],
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
+        listsXML, gap,
         myBlocksXML
     ];
 

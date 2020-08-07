@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
-import MonitorList from '../../containers/monitor-list.jsx';
 import TargetHighlight from '../../containers/target-highlight.jsx';
 import GreenFlagOverlay from '../../containers/green-flag-overlay.jsx';
 import Question from '../../containers/question.jsx';
@@ -25,7 +24,6 @@ const StageComponent = props => {
         micIndicator,
         question,
         stageSize,
-        useEditorDragStyle,
         onDeactivateColorPicker,
         onDoubleClick,
         onQuestionAnswered,
@@ -65,12 +63,6 @@ const StageComponent = props => {
                             width: stageDimensions.width
                         }}
                         {...boxProps}
-                    />
-                </Box>
-                <Box className={styles.monitorWrapper}>
-                    <MonitorList
-                        draggable={useEditorDragStyle}
-                        stageSize={stageDimensions}
                     />
                 </Box>
                 <Box className={styles.frameWrapper}>

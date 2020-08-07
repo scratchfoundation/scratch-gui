@@ -11,7 +11,7 @@ const Watermark = props => (
 );
 
 Watermark.propTypes = {
-    costumeURL: PropTypes.string
+    costumeURL: PropTypes.string,
 };
 
 export default Watermark;

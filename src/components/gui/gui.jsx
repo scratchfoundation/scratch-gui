@@ -34,7 +34,7 @@ import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
-import {resolveStageSize} from '../../lib/screen-utils';
+import {getStageDimensions, resolveStageSize} from '../../lib/screen-utils';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -44,6 +44,7 @@ import soundsIcon from './icon--sounds.svg';
 import saveIcon from './icon--save.svg';
 import Controls from '../../containers/controls.jsx';
 import StageHeader from '../../containers/editor-stagesize-header.jsx';
+import MonitorList from '../../containers/monitor-list.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -115,16 +116,20 @@ const GUIComponent = props => {
         onTelemetryModalOptOut,
         showComingSoon,
         soundsTabVisible,
+        stageSizeForSensors,
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
         tipsLibraryVisible,
+        useEditorDragStyle,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
+
+    const stageDimensions = getStageDimensions(stageSizeForSensors, isFullScreen);
 
     const tabClassNames = {
         tabs: styles.tabs,
@@ -339,6 +344,12 @@ const GUIComponent = props => {
                                         </button>
                                     </Box>
                                     {/* below box is perfect for sensor display */}
+                                    <Box className={styles.monitorWrapper}>
+                                        <MonitorList
+                                            draggable
+                                            stageSize={stageDimensions}
+                                        />
+                                    </Box>
                                     <Box className={styles.watermark}>
                                         <Watermark />
                                     </Box>
@@ -437,6 +448,7 @@ GUIComponent.propTypes = {
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
+    useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

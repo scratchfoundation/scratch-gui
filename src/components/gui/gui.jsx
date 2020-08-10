@@ -346,7 +346,7 @@ const GUIComponent = props => {
                                     {/* below box is perfect for sensor display */}
                                     <Box className={styles.monitorWrapper}>
                                         <MonitorList
-                                            draggable
+                                            draggable={false}
                                             stageSize={stageDimensions}
                                         />
                                     </Box>

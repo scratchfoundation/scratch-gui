@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import 'regenerator-runtime/runtime.js';
 
-
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -49,7 +48,7 @@ class SB3Downloader extends React.Component {
                 const blobAsJsonString = JSON.stringify({blob: b64});
                 // eslint-disable-next-line no-undef
                 mv2.savedProjectStates[slot] = blobAsJsonString;
-                mv2.send_REST(`save${  JSON.stringify(mv2.savedProjectStates)}`);
+                mv2.send_REST(`save${JSON.stringify(mv2.savedProjectStates)}`);
             })();
 
             // eslint-disable-next-line no-alert

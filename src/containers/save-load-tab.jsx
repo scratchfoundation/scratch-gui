@@ -199,7 +199,7 @@ class SaveLoadTab extends React.Component {
                     <SB3Downloader>{(className, downloadProjectCallback) => (
                         <MenuItem
                             className={className}
-                            onClick={this.getSaveToComputerHandler(downloadProjectCallback,'1')}
+                            onClick={this.getSaveToComputerHandler(downloadProjectCallback, '1')}
                         >
                             Save Slot 1
                         </MenuItem>
@@ -271,8 +271,7 @@ class SaveLoadTab extends React.Component {
                 </div>
 
                 {/* LOAD BUTTONS */}
-                {/*TODO: Refactor loading into a function*/}
-
+                {/* TODO: Refactor loading into a function*/}
 
                 <div>
                     <button
@@ -282,10 +281,11 @@ class SaveLoadTab extends React.Component {
                                     const parsed = JSON.parse(mv2.savedProjectStates['0']);
                                     const blob = await fetch(parsed.blob).then(res => res.blob());
                                     blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
+                                        vm.loadProject(buffer).then(() => {
+                                            vm.loadProject(buffer);
+                                        });
                                     });
+
                                 })();
                             }
                         }

@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import bindAll from 'lodash.bindall';
-import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
+import {injectIntl} from 'react-intl';
 import VM from 'scratch-vm';
 
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
-// import DragConstants from '../lib/drag-constants';
+
 
 import {connect} from 'react-redux';
 
@@ -30,20 +29,6 @@ class SaveLoadTab extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor (props) {
         super(props);
-        /* bindAll(this, [
-            'handleSelectSound',
-            'handleDeleteSound',
-            'handleDuplicateSound',
-            'handleExportSound',
-            'handleNewSound',
-            'handleSurpriseSound',
-            'handleFileUploadClick',
-            'handleSoundUpload',
-            'handleDrop',
-            'setFileInput',
-            'downloadProject'
-        ]);
-        this.state = {selectedSoundIndex: 0};*/
     }
 
     componentWillReceiveProps (nextProps) {
@@ -66,30 +51,6 @@ class SaveLoadTab extends React.Component {
         }
     }
 
-    /* handleSelectSound (soundIndex) {
-        this.setState({selectedSoundIndex: soundIndex});
-    }*/
-
-    /* handleDeleteSound (soundIndex) {
-        const restoreFun = this.props.vm.deleteSound(soundIndex);
-        if (soundIndex >= this.state.selectedSoundIndex) {
-            this.setState({selectedSoundIndex: Math.max(0, soundIndex - 1)});
-        }
-        this.props.dispatchUpdateRestore({restoreFun, deletedItem: 'Sound'});
-    }*/
-
-    /* handleExportSound (soundIndex) {
-        const item = this.props.vm.editingTarget.sprite.sounds[soundIndex];
-        const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
-        downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
-    }*/
-
-    /* handleDuplicateSound (soundIndex) {
-        this.props.vm.duplicateSound(soundIndex).then(() => {
-            this.setState({selectedSoundIndex: soundIndex + 1});
-        });
-    }*/
-
     getSaveToComputerHandler (downloadProjectCallback, slot) {
         return () => {
             // this.props.onRequestCloseFile();
@@ -101,80 +62,8 @@ class SaveLoadTab extends React.Component {
         };
     }
 
-    /* handleNewSound () {
-        if (!this.props.vm.editingTarget) {
-            return null;
-        }
-        const sprite = this.props.vm.editingTarget.sprite;
-        const sounds = sprite.sounds ? sprite.sounds : [];
-        this.setState({selectedSoundIndex: Math.max(sounds.length - 1, 0)});
-    }*/
-
-    /* handleSurpriseSound () {
-        const soundItem = soundLibraryContent[Math.floor(Math.random() * soundLibraryContent.length)];
-        const vmSound = {
-            format: soundItem.format,
-            md5: soundItem.md5,
-            rate: soundItem.rate,
-            sampleCount: soundItem.sampleCount,
-            name: soundItem.name
-        };
-        this.props.vm.addSound(vmSound).then(() => {
-            this.handleNewSound();
-        });
-    }*/
-
-    /* handleFileUploadClick () {
-        this.fileInput.click();
-    }*/
-
-    /* handleSoundUpload (e) {
-        const storage = this.props.vm.runtime.storage;
-        this.props.onShowImporting();
-        handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
-            soundUpload(buffer, fileType, storage, newSound => {
-                newSound.name = fileName;
-                this.props.vm.addSound(newSound).then(() => {
-                    this.handleNewSound();
-                    if (fileIndex === fileCount - 1) {
-                        this.props.onCloseImporting();
-                    }
-                });
-            });
-        }, this.props.onCloseImporting);
-    }*/
-
-    /* handleDrop (dropInfo) {
-        if (dropInfo.dragType === DragConstants.SOUND) {
-            const sprite = this.props.vm.editingTarget.sprite;
-            const activeSound = sprite.sounds[this.state.selectedSoundIndex];
-
-            this.props.vm.reorderSound(this.props.vm.editingTarget.id,
-                dropInfo.index, dropInfo.newIndex);
-
-            this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.onActivateCostumesTab();
-            this.props.vm.addCostume(dropInfo.payload.body, {
-                name: dropInfo.payload.name
-            });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.vm.addSound({
-                md5: dropInfo.payload.body,
-                name: dropInfo.payload.name
-            }).then(this.handleNewSound);
-        }
-    }*/
-
-    /* setFileInput (input) {
-        this.fileInput = input;
-    }*/
-
     render () {
         const {
-            dispatchUpdateRestore,
-            intl,
-            isRtl,
             vm
         } = this.props;
 
@@ -452,15 +341,9 @@ class SaveLoadTab extends React.Component {
 }
 
 SaveLoadTab.propTypes = {
-    dispatchUpdateRestore: PropTypes.func,
     editingTarget: PropTypes.string,
-    isRtl: PropTypes.bool,
     locale: PropTypes.string.isRequired,
-    onActivateCostumesTab: PropTypes.func.isRequired,
-    onCloseImporting: PropTypes.func.isRequired,
     onProjectTelemetryEvent: PropTypes.func,
-    onRequestCloseFile: PropTypes.func,
-    onShowImporting: PropTypes.func.isRequired,
     projectTitle: PropTypes.string,
     sprites: PropTypes.shape({
         id: PropTypes.shape({

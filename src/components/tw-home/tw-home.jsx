@@ -32,15 +32,6 @@ class Home extends React.Component {
                 <div className={styles.inner}>
                     <Title />
                     <About />
-                    <p>
-                        <b>
-                            <FormattedMessage
-                                defaultMessage="Note: In contrast to Scratch, scripts may not update in realtime as they are changed. You may have to restart scripts for changes to be applied."
-                                description="Warning about script restarting in the editor"
-                                id="tw.home.editorNote"
-                            />
-                        </b>
-                    </p>
                     <ProjectInput />
                     <button
                         className={styles.newProject}

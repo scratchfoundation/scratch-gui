@@ -13,7 +13,6 @@
     justify-content: center;
     cursor: pointer;
     user-select: none;
-    background-color: rgba(255, 255, 255, 0.5);
     opacity: 0.8;
 }
 
@@ -29,7 +28,7 @@
 
 .projects {
     position: relative;
-    height: 150px;
+    height: 100px;
     transition: height .2s;
 }
 

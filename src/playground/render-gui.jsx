@@ -24,15 +24,15 @@ import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
-import SeeInside from './tw-see-inside/see-inside.jsx';
 
-const Player = ({isPlayerOnly, projectId, canSeeInside}) => (
+const Player = ({isPlayerOnly, projectId}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
             <MenuBar
                 onClickLogo={onClickLogo}
                 canManageFiles
                 canChangeLanguage
+                enableSeeInside
             />
         ) : null}
         <div className={styles.center}>
@@ -51,11 +51,11 @@ const Player = ({isPlayerOnly, projectId, canSeeInside}) => (
             {isPlayerOnly ? (
                 <div className="about">
                     <ProjectInput />
-                    {canSeeInside ? (
+                    {/* {canSeeInside ? (
                         <div className={styles.seeInside}>
                             <SeeInside />
                         </div>
-                    ) : null}
+                    ) : null} */}
                     <About />
                 </div>
             ) : null}
@@ -65,7 +65,6 @@ const Player = ({isPlayerOnly, projectId, canSeeInside}) => (
 
 Player.propTypes = {
     isPlayerOnly: PropTypes.bool,
-    canSeeInside: PropTypes.bool,
     projectId: PropTypes.string
 };
 

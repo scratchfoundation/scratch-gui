@@ -97,8 +97,7 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'editor': './src/playground/editor.jsx',
-            'player': './src/playground/player.jsx',
-            'playeronly': './src/playground/playeronly.jsx'
+            'player': './src/playground/player.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -146,12 +145,6 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 filename: 'index.html',
                 title: 'TurboWarp - Run Scratch projects faster'
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'playeronly'],
-                template: 'src/playground/index.ejs',
-                filename: 'player.html',
-                title: 'TurboWarp Player Only'
             }),
             new HtmlWebpackPlugin({ // turbowarp privacy policy
                 chunks: [],

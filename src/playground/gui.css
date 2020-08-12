@@ -32,8 +32,3 @@ p {
     width: 482px;
     margin: auto;
 }
-
-/* make sure this isn't "see-inside-button" or anything because that might cause the dev tools to wrongly reinject */
-.see-inside {
-    text-align: right;
-}

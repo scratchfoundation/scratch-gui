@@ -83,6 +83,8 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
+import SeeInsideButton from './tw-see-inside.jsx';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -169,6 +171,7 @@ class MenuBar extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleClickSeeInside',
             'handleClickNew',
             'handleClickRemix',
             'handleClickSave',
@@ -292,6 +295,9 @@ class MenuBar extends React.Component {
             />);
         }
         }
+    }
+    handleClickSeeInside () {
+        this.props.onClickSeeInside();
     }
     render () {
         const saveNowMessage = (
@@ -721,7 +727,12 @@ class MenuBar extends React.Component {
                             <MenuBarItemTooltip id="community-button">
                                 <CommunityButton className={styles.menuBarButton} />
                             </MenuBarItemTooltip>
-                        ) : [])}
+                        ) : (this.props.enableSeeInside ? (
+                            <SeeInsideButton
+                                className={styles.menuBarButton}
+                                onClick={this.handleClickSeeInside}
+                            />
+                        ) : []))}
                     </div>
                     {/* tw: add a feedback button */}
                     <div className={styles.menuBarItem}>
@@ -750,6 +761,8 @@ class MenuBar extends React.Component {
 }
 
 MenuBar.propTypes = {
+    enableSeeInside: PropTypes.bool,
+    onClickSeeInside: PropTypes.func,
     accountMenuOpen: PropTypes.bool,
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     authorThumbnailUrl: PropTypes.string,
@@ -846,6 +859,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    onClickSeeInside: () => dispatch(setPlayer(false)),
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),

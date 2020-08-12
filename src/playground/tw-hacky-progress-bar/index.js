@@ -20,17 +20,16 @@ if (isSupported()) {
     progressEl.style.width = '0';
     progressEl.style.opacity = '0';
     progressEl.style.transition = 'all .2s';
+    progressEl.style.pointerEvents = 'none';
     document.body.appendChild(progressEl);
 
     const hideProgress = () => {
         progressEl.style.opacity = '0';
-        progressEl.style.pointerEvents = 'none';
         clearTimeout(hideTimeout);
     };
 
     const showProgress = () => {
         progressEl.style.opacity = '1';
-        progressEl.style.pointerEvents = 'auto';
         clearTimeout(hideTimeout);
     };
 

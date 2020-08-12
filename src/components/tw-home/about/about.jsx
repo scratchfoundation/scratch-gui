@@ -5,7 +5,7 @@ const About = () => {
     return (
         <p>
             <FormattedMessage
-                defaultMessage="TurboWarp compiles your Scratch projects to JavaScript to make them run faster. Try it out by inputting a project ID or URL and pressing enter. Visit {studioLink} for some examples."
+                defaultMessage="TurboWarp compiles Scratch projects to JavaScript to make them run faster. Try it out by inputting a project ID or URL and pressing enter. Visit {studioLink} for some examples."
                 description="Description of TurboWarp"
                 id="tw.home.description"
                 values={{

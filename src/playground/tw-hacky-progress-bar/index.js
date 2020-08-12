@@ -11,7 +11,6 @@ if (isSupported()) {
     let hideTimeout;
 
     const progressEl = document.createElement('div');
-    progressEl.id = 'hacky-progress-el';
     progressEl.style.position = 'absolute';
     progressEl.style.top = '0';
     progressEl.style.left = '0';
@@ -21,7 +20,6 @@ if (isSupported()) {
     progressEl.style.width = '0';
     progressEl.style.opacity = '0';
     progressEl.style.transition = 'all .2s';
-    progressEl.title = 'Progress Bar'; // todo: translate
     document.body.appendChild(progressEl);
 
     const hideProgress = () => {

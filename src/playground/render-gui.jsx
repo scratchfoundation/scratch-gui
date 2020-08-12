@@ -57,6 +57,8 @@ const Player = ({isPlayerOnly, projectId}) => (
                         </div>
                     ) : null} */}
                     <About />
+                    {/* fixme: remove this in a few days */}
+                    <p>The See Inside button is in the menu bar now.</p>
                 </div>
             ) : null}
         </div>

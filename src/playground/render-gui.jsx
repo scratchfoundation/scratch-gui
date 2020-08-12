@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-
 import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
+
+import MenuBar from '../components/menu-bar/menu-bar.jsx';
+import ProjectInput from '../components/tw-project-input/project-input.jsx';
+import About from '../components/tw-home/about.jsx';
+import Title from '../components/tw-home/title.jsx';
+
+import styles from './gui.css';
 
 const onClickLogo = () => {
     // close any project if loaded
@@ -17,13 +23,6 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     // Warn before navigating away
     window.onbeforeunload = () => true;
 }
-
-import styles from './gui.css';
-
-import MenuBar from '../components/menu-bar/menu-bar.jsx';
-import ProjectInput from '../components/tw-project-input/project-input.jsx';
-import About from '../components/tw-home/about/about.jsx';
-import Title from '../components/tw-home/title/title.jsx';
 
 const Player = ({isPlayerOnly, projectId}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>

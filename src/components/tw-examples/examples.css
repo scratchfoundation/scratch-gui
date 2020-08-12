@@ -28,12 +28,21 @@
 
 .projects {
     position: relative;
-    height: 100px;
+    height: 154px;
     transition: height .2s;
 }
 
 .opened .projects {
     height: 310px;
+}
+
+@media only screen and (max-height: 800px) {
+    .responsive .projects {
+        height: 60px;
+    }
+    .responsive.opened .projects {
+        height: 155px;
+    }
 }
 
 .footer {

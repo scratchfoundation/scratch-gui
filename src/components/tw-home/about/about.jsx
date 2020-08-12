@@ -1,6 +1,5 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import Examples from '../../tw-examples/examples.jsx';
 
 const About = () => {
     return (
@@ -12,7 +11,6 @@ const About = () => {
                     id="tw.home.description"
                 />
             </p>
-            <Examples />
         </div>
     );
 };

@@ -36,7 +36,8 @@ class Examples extends React.Component {
                 className={classNames(
                     styles.container,
                     {
-                        [styles.opened]: opened
+                        [styles.opened]: opened,
+                        [styles.responsive]: this.props.responsive
                     }
                 )}
             >
@@ -78,6 +79,10 @@ class Examples extends React.Component {
         );
     }
 }
+
+Examples.propTypes = {
+    responsive: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm,

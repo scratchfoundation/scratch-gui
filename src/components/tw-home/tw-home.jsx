@@ -7,6 +7,7 @@ import styles from './tw-home.css';
 import ProjectInput from '../tw-project-input/project-input.jsx';
 import About from './about/about.jsx';
 import Title from './title/title.jsx';
+import Examples from '../tw-examples/examples.jsx';
 
 class Home extends React.Component {
     constructor (props) {
@@ -32,6 +33,9 @@ class Home extends React.Component {
                 <div className={styles.inner}>
                     <Title />
                     <About />
+                    <Examples
+                        responsive
+                    />
                     <ProjectInput />
                     <button
                         className={styles.newProject}

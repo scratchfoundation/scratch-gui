@@ -24,6 +24,7 @@ import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about/about.jsx';
 import Title from '../components/tw-home/title/title.jsx';
+import Examples from '../components/tw-examples/examples.jsx';
 
 const Player = ({isPlayerOnly, projectId}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
@@ -51,14 +52,10 @@ const Player = ({isPlayerOnly, projectId}) => (
             {isPlayerOnly ? (
                 <div className="about">
                     <ProjectInput />
-                    {/* {canSeeInside ? (
-                        <div className={styles.seeInside}>
-                            <SeeInside />
-                        </div>
-                    ) : null} */}
                     <About />
                     {/* fixme: remove this in a few days */}
                     <p>The See Inside button is in the menu bar now.</p>
+                    <Examples />
                 </div>
             ) : null}
         </div>

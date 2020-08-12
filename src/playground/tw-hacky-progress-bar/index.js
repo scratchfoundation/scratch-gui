@@ -11,7 +11,6 @@ if (isSupported()) {
     let hideTimeout;
 
     const progressEl = document.createElement('div');
-    progressEl.id = 'hacky-progress-el';
     progressEl.style.position = 'absolute';
     progressEl.style.top = '0';
     progressEl.style.left = '0';
@@ -21,16 +20,17 @@ if (isSupported()) {
     progressEl.style.width = '0';
     progressEl.style.opacity = '0';
     progressEl.style.transition = 'all .2s';
-    progressEl.title = 'Progress Bar'; // todo: translate
     document.body.appendChild(progressEl);
 
     const hideProgress = () => {
         progressEl.style.opacity = '0';
+        progressEl.style.pointerEvents = 'none';
         clearTimeout(hideTimeout);
     };
 
     const showProgress = () => {
         progressEl.style.opacity = '1';
+        progressEl.style.pointerEvents = 'auto';
         clearTimeout(hideTimeout);
     };
 
@@ -53,8 +53,7 @@ if (isSupported()) {
 
     const isProjectDataRequest = (url, opts) => typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET';
 
-    // Alternative implementation below, disables worker so everything happens on the main thread.
-    // It does provide a more accurate progress bar but loading things off the main thread is probably more important.
+    // Scratch uses fetch() to download the project JSON, so we override the global fetch() method to monitor when the project is being downloaded.
     const originalFetch = window.fetch;
     window.fetch = (url, opts) => {
         if (isProjectDataRequest(url, opts)) {
@@ -64,6 +63,7 @@ if (isSupported()) {
             setProgress(0);
 
             return new Promise((resolve, reject) => {
+                // fetch() does not support progress, so we use XMLHttpRequest
                 const xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
                 xhr.onload = () => {
@@ -85,7 +85,7 @@ if (isSupported()) {
         return originalFetch(url, opts);
     };
 
-    // We override the global Worker object to monitor when messages are passed around.
+    // Scratch uses a worker to download assets, so we override the global Worker object to monitor when objects are passed around.
     // Is this terrible? Absolutely.
     // Never do this. Please.
     window.Worker = class Worker extends window.Worker {

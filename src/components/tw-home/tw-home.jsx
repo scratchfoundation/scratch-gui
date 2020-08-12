@@ -5,31 +5,37 @@ import bindAll from 'lodash.bindall';
 import styles from './tw-home.css';
 
 import ProjectInput from '../tw-project-input/project-input.jsx';
-import About from './about/about.jsx';
-import Title from './title/title.jsx';
+import About from './about.jsx';
+import Title from './title.jsx';
 import Examples from '../tw-examples/examples.jsx';
 
 class Home extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'clickClose'
+            'handleClickClose'
         ]);
-        this.state = { closed: false };
+        this.state = {
+            closed: false
+        };
     }
-    clickClose () {
-        this.setState({ closed: true });
+    handleClickClose () {
+        this.setState({
+            closed: true
+        });
     }
     render () {
         if (this.state.closed) {
-            return <div></div>
+            return <div />;
         }
         return (
             <div className={styles.overlay}>
                 <a
                     className={styles.close}
-                    onClick={this.clickClose}
-                >&times;</a>
+                    onClick={this.handleClickClose}
+                >
+                    &times;
+                </a>
                 <div className={styles.inner}>
                     <Title />
                     <About />
@@ -39,7 +45,7 @@ class Home extends React.Component {
                     <ProjectInput />
                     <button
                         className={styles.newProject}
-                        onClick={this.clickClose}
+                        onClick={this.handleClickClose}
                     >
                         <FormattedMessage
                             defaultMessage="I want to make a new project"

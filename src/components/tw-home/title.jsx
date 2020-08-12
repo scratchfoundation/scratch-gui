@@ -32,8 +32,6 @@ const About = () => {
                         />
                     </a>
                 </div>
-                <div>
-                </div>
             </span>
         </div>
     );

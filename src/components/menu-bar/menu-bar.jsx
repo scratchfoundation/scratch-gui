@@ -26,11 +26,13 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
 import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud.jsx';
+import ToggleStuck from '../../containers/tw-toggle-stuck.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -585,26 +587,6 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
-                                        <MenuItem
-                                            className={classNames({[styles.disabled]: isProjectRunning})}
-                                            onClick={toggleCompiler}
-                                        >
-                                            {compilerEnabled ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Disable Compiler"
-                                                    description="Menu bar item for disabling the compiler"
-                                                    id="tw.settings.compilerOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Enable Compiler"
-                                                    description="Menu bar item for enabling the compiler"
-                                                    id="tw.settings.compilerOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</ToggleCompiler>
                                     <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (
@@ -622,6 +604,47 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</HighQualityPen>
+                                    {this.props.vm.runtime.compilerOptions.enabled ? (
+                                        <React.Fragment>
+                                            <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
+                                                <MenuItem
+                                                    className={classNames({[styles.disabled]: isProjectRunning})}
+                                                    onClick={toggleCompiler}
+                                                >
+                                                    {compilerEnabled ? (
+                                                        <FormattedMessage
+                                                            defaultMessage="Disable Compiler"
+                                                            description="Menu bar item for disabling the compiler"
+                                                            id="tw.settings.compilerOff"
+                                                        />
+                                                    ) : (
+                                                        <FormattedMessage
+                                                            defaultMessage="Enable Compiler"
+                                                            description="Menu bar item for enabling the compiler"
+                                                            id="tw.settings.compilerOn"
+                                                        />
+                                                    )}
+                                                </MenuItem>
+                                            )}</ToggleCompiler>
+                                            <ToggleStuck>{(toggleStuck, stuck) => (
+                                                <MenuItem onClick={toggleStuck}>
+                                                    {stuck ? (
+                                                        <FormattedMessage
+                                                            defaultMessage="Turn off stuck checking"
+                                                            description="Menu bar item for turning off stuck checking"
+                                                            id="tw.settings.stuckOff"
+                                                        />
+                                                    ) : (
+                                                        <FormattedMessage
+                                                            defaultMessage="Turn on stuck checking"
+                                                            description="Menu bar item for turning on stuck checking"
+                                                            id="tw.settings.stuckOn"
+                                                        />
+                                                    )}
+                                                </MenuItem>
+                                            )}</ToggleStuck>
+                                        </React.Fragment>
+                                    ) : null}
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

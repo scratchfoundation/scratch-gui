@@ -715,6 +715,29 @@ const myBlocks = function () {
     </category>
     `;
 };
+
+// tw: add custom category
+const turbowarp = function () {
+    // todo: translate name
+    return `
+    <category name="TurboWarp" id="turbowarp" colour="#FF4D4D" secondaryColour="#FF3D3D">
+        <block type="control_if">
+            <value name="CONDITION">
+                <block type="argument_reporter_boolean">
+                    <field name="VALUE">is compiled?</field>
+                </block>
+            </value>
+        </block>
+        <block type="control_if_else">
+            <value name="CONDITION">
+                <block type="argument_reporter_boolean">
+                    <field name="VALUE">is compiled?</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    `;
+};
 /* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';
@@ -763,6 +786,8 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId);
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId);
+    // tw: add custom category
+    const turbowarpXML = moveCategory('turbowarp') || turbowarp(isInitialSetup, isStage, targetId);
 
     const everything = [
         xmlOpen,
@@ -774,7 +799,9 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        myBlocksXML
+        // tw: add custom category
+        myBlocksXML, gap,
+        turbowarpXML
     ];
 
     for (const extensionCategory of categoriesXML) {

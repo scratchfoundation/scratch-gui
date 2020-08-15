@@ -7,20 +7,9 @@ const About = () => (
     <React.Fragment>
         <p>
             <FormattedMessage
-                defaultMessage="TurboWarp compiles Scratch projects to JavaScript to make them run faster. Try it out by inputting a project ID or URL and pressing enter. Visit {studioLink} for some examples."
+                defaultMessage="TurboWarp compiles Scratch projects to JavaScript to make them run faster. Try it out by inputting a project ID or URL and pressing enter or choosing an example project below."
                 description="Description of TurboWarp"
                 id="tw.home.description"
-                values={{
-                    studioLink: (
-                        <a href="https://scratch.mit.edu/studios/27205657/">
-                            <FormattedMessage
-                                defaultMessage="this studio"
-                                description="link to turbowarp examples studio"
-                                id="tw.home.description.studioLink"
-                            />
-                        </a>
-                    )
-                }}
             />
         </p>
         <p>

@@ -1,4 +1,4 @@
-scratch-gui modified for use in [TurboWarp](https://turbowarp.github.io/)
+scratch-gui modified for use in [TurboWarp](https://turbowarp.xyz/)
 
 ## Setup
 

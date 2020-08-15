@@ -96,7 +96,6 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'editor': './src/playground/editor.jsx',
-            'blocksonly': './src/playground/blocks-only.jsx',
             'player': './src/playground/player.jsx'
         },
         output: {
@@ -135,20 +134,15 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['editor'],
                 template: 'src/playground/index.ejs',
-                title: 'TurboWarp - Run Scratch projects faster',
+                filename: 'editor.html',
+                title: 'TurboWarp Editor',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['blocksonly'],
-                template: 'src/playground/index.ejs',
-                filename: 'blocks-only.html',
-                title: 'TurboWarp: Blocks Only Example'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['player'],
                 template: 'src/playground/index.ejs',
-                filename: 'player.html',
-                title: 'TurboWarp Player'
+                filename: 'index.html',
+                title: 'TurboWarp - Run Scratch projects faster'
             }),
             new HtmlWebpackPlugin({ // turbowarp privacy policy
                 chunks: [],

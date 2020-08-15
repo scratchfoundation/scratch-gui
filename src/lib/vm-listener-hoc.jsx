@@ -47,12 +47,12 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-            this.props.vm.on('COMPATIBILITY_MODE_ON', this.props.onCompatibilityModeOn);
-            this.props.vm.on('COMPATIBILITY_MODE_OFF', this.props.onCompatibilityModeOff);
             this.props.vm.on('COMPILER_ENABLED', this.props.onCompilerEnabled);
             this.props.vm.on('COMPILER_DISABLED', this.props.onCompilerDisabled);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-
+            // tw: add handlers for our events
+            this.props.vm.on('COMPATIBILITY_MODE_ON', this.props.onCompatibilityModeOn);
+            this.props.vm.on('COMPATIBILITY_MODE_OFF', this.props.onCompatibilityModeOff);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {

@@ -2,6 +2,11 @@
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
+/* tw: this changes the loading screen to be contained to the stage */
+.stage-wrapper {
+    position: relative;
+}
+
 .stage-wrapper * {
     box-sizing: border-box;
 }

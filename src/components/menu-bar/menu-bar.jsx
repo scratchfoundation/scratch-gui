@@ -26,10 +26,13 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
+import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud.jsx';
+import ToggleStuck from '../../containers/tw-toggle-stuck.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -82,6 +85,8 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
+import SeeInsideButton from './tw-see-inside.jsx';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -96,7 +101,6 @@ const ariaMessages = defineMessages({
 });
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
-const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -169,6 +173,7 @@ class MenuBar extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleClickSeeInside',
             'handleClickNew',
             'handleClickRemix',
             'handleClickSave',
@@ -292,6 +297,9 @@ class MenuBar extends React.Component {
             />);
         }
         }
+    }
+    handleClickSeeInside () {
+        this.props.onClickSeeInside();
     }
     render () {
         const saveNowMessage = (
@@ -500,6 +508,7 @@ class MenuBar extends React.Component {
                         </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
+                    {/* tw: add our custom menu bar groups */}
                     <div className={styles.fileGroup}>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -538,9 +547,66 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, running}) => (
+                                    <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
                                         <MenuItem
-                                            className={classNames({[styles.disabled]: running})}
+                                            className={classNames({[styles.disabled]: isProjectRunning})}
+                                            onClick={changeUsername}
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="Change Username"
+                                                description="Menu bar item for changing the username"
+                                                id="tw.settings.changeUsername"
+                                            />
+                                        </MenuItem>
+                                    )}</ChangeUsername>
+                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud, canUseCloudVariables}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: !canUseCloudVariables})}
+                                            onClick={toggleCloudVariables}
+                                        >
+                                            {canUseCloudVariables ? (
+                                                cloud ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Disable cloud variables"
+                                                        description="Menu bar item for disabling cloud variables"
+                                                        id="tw.settings.cloudOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Enable cloud variables"
+                                                        description="Menu bar item for enabling cloud variables"
+                                                        id="tw.settings.cloudOn"
+                                                    />
+                                                )
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Cloud variables not available"
+                                                    description="Menu bar item for when cloud variables are not available"
+                                                    id="tw.settings.cloudUnavailable"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</CloudVariablesToggler>
+                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
+                                        <MenuItem onClick={toggleHighQualityPen}>
+                                            {highQualityPen ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off high quality pen"
+                                                    description="Menu bar item for turning off high quality pen"
+                                                    id="tw.settings.hqpOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on high quality pen (BETA)"
+                                                    description="Menu bar item for turning on high quality pen"
+                                                    id="tw.settings.hqpOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</HighQualityPen>
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: isProjectRunning})}
                                             onClick={toggleCompiler}
                                         >
                                             {compilerEnabled ? (
@@ -558,32 +624,23 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</ToggleCompiler>
-                                    <ChangeUsername>{(changeUsername) => (
-                                        <MenuItem onClick={changeUsername}>
-                                            <FormattedMessage
-                                                defaultMessage="Change Username"
-                                                description="Menu bar item for changing the username"
-                                                id="tw.settings.changeUsername"
-                                            />
-                                        </MenuItem>
-                                    )}</ChangeUsername>
-                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud}) => (
-                                        <MenuItem onClick={toggleCloudVariables}>
-                                            {cloud ? (
+                                    <ToggleStuck>{(toggleStuck, stuck) => (
+                                        <MenuItem onClick={toggleStuck}>
+                                            {stuck ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Disable cloud variables"
-                                                    description="Menu bar item for disabling cloud variables"
-                                                    id="tw.settings.cloudOff"
+                                                    defaultMessage="Turn off stuck checking"
+                                                    description="Menu bar item for turning off stuck checking"
+                                                    id="tw.settings.stuckOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Enable cloud variables"
-                                                    description="Menu bar item for enabling cloud variables"
-                                                    id="tw.settings.cloudOn"
+                                                    defaultMessage="Turn on stuck checking"
+                                                    description="Menu bar item for turning on stuck checking"
+                                                    id="tw.settings.stuckOn"
                                                 />
                                             )}
                                         </MenuItem>
-                                    )}</CloudVariablesToggler>
+                                    )}</ToggleStuck>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -612,13 +669,6 @@ class MenuBar extends React.Component {
                                             defaultMessage="Source Code"
                                             description="Text for Source Code in the Links dropdown"
                                             id="tw.links.code"
-                                        />
-                                    </MenuItem>
-                                    <MenuItem onClick={openFeedbackLink}>
-                                        <FormattedMessage
-                                            defaultMessage="Feedback"
-                                            description="Text for feedback in the Links dropdown"
-                                            id="tw.links.feedback"
                                         />
                                     </MenuItem>
                                 </MenuSection>
@@ -696,7 +746,30 @@ class MenuBar extends React.Component {
                             <MenuBarItemTooltip id="community-button">
                                 <CommunityButton className={styles.menuBarButton} />
                             </MenuBarItemTooltip>
-                        ) : [])}
+                        ) : (this.props.enableSeeInside ? (
+                            <SeeInsideButton
+                                className={styles.menuBarButton}
+                                onClick={this.handleClickSeeInside}
+                            />
+                        ) : []))}
+                    </div>
+                    {/* tw: add a feedback button */}
+                    <div className={styles.menuBarItem}>
+                        <a
+                            className={styles.feedbackLink}
+                            href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            {/* todo: icon */}
+                            <Button className={styles.feedbackButton}>
+                                <FormattedMessage
+                                    defaultMessage="Give Feedback"
+                                    description="Text for the giving feedback button"
+                                    id="tw.giveFeedback"
+                                />
+                            </Button>
+                        </a>
                     </div>
                 </div>
 
@@ -707,6 +780,8 @@ class MenuBar extends React.Component {
 }
 
 MenuBar.propTypes = {
+    enableSeeInside: PropTypes.bool,
+    onClickSeeInside: PropTypes.func,
     accountMenuOpen: PropTypes.bool,
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     authorThumbnailUrl: PropTypes.string,
@@ -803,6 +878,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    onClickSeeInside: () => dispatch(setPlayer(false)),
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),

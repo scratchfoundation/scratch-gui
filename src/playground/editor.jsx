@@ -1,34 +1,13 @@
-// must be first for progress bar to work
-import "./tw-hacky-progress-bar";
+import './tw-imports';
 
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
 
-import analytics from '../lib/analytics';
-import AppStateHOC from '../lib/app-state-hoc.jsx';
-import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
-import supportedBrowser from '../lib/supported-browser';
-
-import styles from './editor.css';
-
-document.body.classList.add('tw-loaded');
-
-// Register "base" page view
-analytics.pageview('/');
+import Player from './render-gui.jsx';
 
 const appTarget = document.createElement('div');
-appTarget.className = styles.app;
 document.body.appendChild(appTarget);
-
-if (supportedBrowser()) {
-    // require needed here to avoid importing unsupported browser-crashing code
-    // at the top level
-    require('./render-gui.jsx').default(appTarget);
-
-} else {
-    BrowserModalComponent.setAppElement(appTarget);
-    const WrappedBrowserModalComponent = AppStateHOC(BrowserModalComponent, true /* localesOnly */);
-    const handleBack = () => {};
-    // eslint-disable-next-line react/jsx-no-bind
-    ReactDOM.render(<WrappedBrowserModalComponent onBack={handleBack} />, appTarget);
-}
+document.body.classList.add('tw-loaded');
+ReactDOM.render(<Player
+    canSeeInside
+/>, appTarget);

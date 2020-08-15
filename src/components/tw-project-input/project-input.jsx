@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
 
+import {defaultProjectId} from '../../reducers/project-state';
 import styles from './project-input.css';
 
 class ProjectInput extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'onKeyDown',
-            'onChange',
-            'onFocus'
+            'handleKeyDown',
+            'handleChange',
+            'handleFocus'
         ]);
         this.state = {
             projectId: ''
@@ -24,7 +24,9 @@ class ProjectInput extends React.Component {
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId) {
-            this.setState({ projectId: this.props.projectId || '' });
+            this.setState({
+                projectId: this.props.projectId || ''
+            });
         }
     }
     readProjectId (e) {
@@ -32,38 +34,42 @@ class ProjectInput extends React.Component {
         const numberMatch = value.match(/\d+/);
         return numberMatch ? numberMatch[0] : '';
     }
-    onChange (e) {
-        this.setState({ projectId: this.readProjectId(e) });
+    handleChange (e) {
+        this.setState({
+            projectId: this.readProjectId(e)
+        });
     }
-    onKeyDown (e) {
+    handleKeyDown (e) {
         if (e.key === 'Enter') {
             location.hash = this.state.projectId;
             this.input.blur();
         }
     }
-    onFocus (e) {
+    handleFocus (e) {
         if (this.readProjectId(e)) {
             e.target.select();
         }
     }
     render () {
-        return <input
-            ref={elem => this.input = elem}
-            type="text"
-            value={"https://scratch.mit.edu/projects/" + this.state.projectId}
-            autoFocus
-            className={classNames(styles.input)}
-            onKeyDown={this.onKeyDown}
-            onChange={this.onChange}
-            onFocus={this.onFocus}
-        ></input>
+        const projectId = this.state.projectId === defaultProjectId ? '' : this.state.projectId;
+        return (
+            <input
+                ref={elem => this.input = elem}
+                spellCheck="false"
+                type="text"
+                value={`https://scratch.mit.edu/projects/${projectId}`}
+                autoFocus
+                className={styles.input}
+                onKeyDown={this.handleKeyDown}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+            />
+        );
     }
 }
 
 ProjectInput.propTypes = {
-    projectId: PropTypes.string,
-    lastProjectId: PropTypes.string,
-    onChangeProject: PropTypes.func,
+    projectId: PropTypes.string
 };
 
 const mapStateToProps = state => ({

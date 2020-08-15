@@ -18,6 +18,8 @@ import {
     deactivateColorPicker
 } from '../reducers/color-picker';
 
+import {setHighQualityPen} from '../reducers/tw';
+
 const colorPickerRadius = 20;
 const dragThreshold = 3; // Same as the block drag threshold
 
@@ -68,6 +70,9 @@ class Stage extends React.Component {
             // possible to use CSS to style the canvas to have a different
             // default color
             this.props.vm.renderer.draw();
+
+            // tw: add handlers for our events
+            this.props.vm.renderer.on('UseHighQualityPenChanged', this.props.onHighQualityPenChanged);
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
@@ -428,6 +433,8 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
+    // tw: handler for syncing high quality pen option changes
+    onHighQualityPenChanged: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     isStarted: PropTypes.bool,
@@ -453,6 +460,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    // tw: handler for syncing high quality pen option changes
+    onHighQualityPenChanged: enabled => dispatch(setHighQualityPen(enabled)),
     onActivateColorPicker: () => dispatch(activateColorPicker()),
     onDeactivateColorPicker: color => dispatch(deactivateColorPicker(color))
 });

@@ -16,6 +16,14 @@ const reducer = function (state, action) {
             isFullScreen: action.isFullScreen
         });
     case SET_PLAYER:
+        // tw: This is a dirty hack to change the URL to match when the editor is open or closed
+        if (location.pathname === '/' || location.pathname === '/editor.html') {
+            if (action.isPlayerOnly) {
+                history.replaceState('', '', `/${location.search}${location.hash}`);
+            } else {
+                history.replaceState('', '', `/editor.html${location.search}${location.hash}`);
+            }
+        }
         return Object.assign({}, state, {
             isPlayerOnly: action.isPlayerOnly,
             hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly

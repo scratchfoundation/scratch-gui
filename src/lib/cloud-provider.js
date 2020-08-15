@@ -29,7 +29,8 @@ class CloudProvider {
 
         // Send a message to the cloud server at a rate of no more
         // than 10 messages/sec.
-        this.sendCloudData = throttle(this._sendCloudData, 100);
+        // tw: we let cloud variables change at a greater rate
+        this.sendCloudData = throttle(this._sendCloudData, 50);
     }
 
     /**
@@ -85,7 +86,14 @@ class CloudProvider {
         this.queuedData = [];
     }
 
-    onClose () {
+    onClose (e) {
+        // tw: code 4002 is "Username Error". show a warning and don't try to reconnect
+        if (e.code === 4002) {
+            log.info('Cloud username is invalid. Not reconnecting.');
+            // todo: translate
+            alert(`Cannot connect to cloud server because your username is invalid. Check that it is not too short, too long, or contains unsupported characters. (Current username: ${this.username})`);
+            return;
+        }
         log.info(`Closed connection to websocket`);
         const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
         this.setTimeout(this.openConnection.bind(this), randomizedTimeout);

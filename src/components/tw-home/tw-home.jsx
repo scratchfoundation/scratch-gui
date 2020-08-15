@@ -7,6 +7,7 @@ import styles from './tw-home.css';
 import ProjectInput from '../tw-project-input/project-input.jsx';
 import About from './about.jsx';
 import Title from './title.jsx';
+import Examples from '../tw-examples/examples.jsx';
 
 class Home extends React.Component {
     constructor (props) {
@@ -38,15 +39,9 @@ class Home extends React.Component {
                 <div className={styles.inner}>
                     <Title />
                     <About />
-                    <p>
-                        <b>
-                            <FormattedMessage
-                                defaultMessage="Note: In contrast to Scratch, scripts may not update in realtime as they are changed. You may have to restart scripts for changes to be applied."
-                                description="Warning about script restarting in the editor"
-                                id="tw.home.editorNote"
-                            />
-                        </b>
-                    </p>
+                    <Examples
+                        responsive
+                    />
                     <ProjectInput />
                     <button
                         className={styles.newProject}

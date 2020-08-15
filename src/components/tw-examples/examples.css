@@ -1,0 +1,51 @@
+.container {
+
+}
+
+.opener-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.8;
+}
+
+.opener-container:hover {
+    opacity: 1;
+}
+
+.opener-content {
+    background-color: white;
+    padding: 4px;
+    border: 1px solid black;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.projects {
+    position: relative;
+    height: 154px;
+    transition: height .2s;
+}
+
+.opened .projects {
+    height: 310px;
+}
+
+@media only screen and (max-height: 800px) {
+    .responsive .projects {
+        height: 60px;
+    }
+    .responsive.opened .projects {
+        height: 155px;
+    }
+}
+
+.footer {
+    
+}

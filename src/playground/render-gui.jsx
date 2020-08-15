@@ -11,6 +11,7 @@ import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about.jsx';
 import Title from '../components/tw-home/title.jsx';
+import Examples from '../components/tw-examples/examples.jsx';
 
 import styles from './gui.css';
 
@@ -50,12 +51,8 @@ const Player = ({isPlayerOnly, projectId}) => (
             {isPlayerOnly ? (
                 <div className="about">
                     <ProjectInput />
-                    {/* {canSeeInside ? (
-                        <div className={styles.seeInside}>
-                            <SeeInside />
-                        </div>
-                    ) : null} */}
                     <About />
+                    <Examples />
                 </div>
             ) : null}
         </div>

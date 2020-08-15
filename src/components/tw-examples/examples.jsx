@@ -6,6 +6,7 @@ import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './examples.css';
+import {getIsLoading} from '../../reducers/project-state';
 
 const studioId = '27205657';
 
@@ -59,6 +60,7 @@ class Examples extends React.Component {
                     <StudioView
                         id={studioId}
                         onSelect={this.handleSelect}
+                        disabled={this.props.loading}
                         placeholder={!opened}
                     />
                 </div>
@@ -81,12 +83,12 @@ class Examples extends React.Component {
 }
 
 Examples.propTypes = {
-    responsive: PropTypes.bool
+    responsive: PropTypes.bool,
+    loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    vm: state.scratchGui.vm,
-    compatibilityMode: state.scratchGui.tw.compatibility
+    loading: getIsLoading(state.scratchGui.projectState.loadingState)
 });
 
 const mapDispatchToProps = () => ({});

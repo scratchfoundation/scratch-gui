@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
+import classNames from 'classnames';
 
 import StudioView from './studioview';
 import styles from './studioview.css';
@@ -33,7 +34,12 @@ class StudioViewComponent extends React.Component {
     render () {
         return (
             <div
-                className={styles.wrapper}
+                className={classNames(
+                    styles.wrapper,
+                    {
+                        [styles.disabled]: this.props.disabled
+                    }
+                )}
                 ref={el => this.el = el}
             />
         );
@@ -42,6 +48,7 @@ class StudioViewComponent extends React.Component {
 
 StudioViewComponent.propTypes = {
     id: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
     placeholder: PropTypes.bool,
     onSelect: PropTypes.func.isRequired
 };

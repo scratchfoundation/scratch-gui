@@ -121,26 +121,11 @@ module.exports = [
             splitChunks: {
                 chunks: 'all',
                 cacheGroups: {
-                    // Dependencies
                     vendors: {
                         name: 'vendors',
                         test: /[\\/]node_modules[\\/]/,
                         priority: -10
                     },
-                    // Large translations
-                    messages: {
-                        name: 'messages',
-                        test: /scratch-l10n|scratch_msgs/,
-                        priority: 0
-                    },
-                    // Specific large dependencies that rarely change.
-                    // fixme: for some reason scratch-gui has 2 copies of scratch-render-fonts and text-encoding in the bundle
-                    constVendors: {
-                        name: 'const-vendors',
-                        test: /scratch-render-fonts|text-encoding/,
-                        priority: 0
-                    },
-                    // Everything else (GUI code)
                     default: {
                         name: 'gui',
                         minChunks: 2,

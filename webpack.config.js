@@ -179,7 +179,9 @@ module.exports = [
             output: {
                 libraryTarget: 'umd',
                 path: path.resolve('dist'),
-                publicPath: `${STATIC_PATH}/`
+                publicPath: `${STATIC_PATH}/`,
+                filename: 'js/[name].[contenthash].js',
+                chunkFilename: 'js/[name].[contenthash].js'
             },
             externals: {
                 React: 'react',

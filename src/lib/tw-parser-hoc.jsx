@@ -21,8 +21,10 @@ const getRoot = () => {
     return `/${path.join('/')}`;
 };
 
+const getUseRouting = () => ['turbowarp.xyz', 'localhost'].includes(location.hostname);
+
 const root = getRoot();
-const useRouting = root === '/';
+const useRouting = getUseRouting();
 
 const TWParserHoc = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
@@ -34,21 +36,9 @@ const TWParserHoc = function (WrappedComponent) {
         }
         componentDidMount () {
             window.addEventListener('hashchange', this.handleHashChange);
+            window.addEventListener('popstate', this.handleSearchChange);
             this.handleHashChange();
-
-            // Read URL parameters and apply them.
-            const searchParams = new URLSearchParams(location.search);
-            if (searchParams.get('fps') === '60') {
-                // todo: support for other framerates
-                this.props.setCompatibility(false);
-            }
-            if (searchParams.get('username') !== null) {
-                this.props.setUsername(searchParams.get('username'));
-            }
-            // Disabled for now until some high quality pen bugs get ironed out.
-            // if (searchParams.get('hqp') !== null) {
-            //     this.props.setHighQualityPen(true);
-            // }
+            this.handleSearchChange();
         }
         shouldComponentUpdate (nextProps) {
             return (
@@ -110,6 +100,16 @@ const TWParserHoc = function (WrappedComponent) {
             const hashMatch = window.location.hash.match(/#(\d+)/);
             const hashProjectId = hashMatch === null ? defaultProjectId : hashMatch[1];
             this.props.setProjectId(hashProjectId.toString());
+        }
+        handleSearchChange () {
+            const searchParams = new URLSearchParams(location.search);
+            if (searchParams.get('fps') === '60') {
+                // todo: support for other framerates
+                this.props.setCompatibility(false);
+            }
+            if (searchParams.get('username') !== null) {
+                this.props.setUsername(searchParams.get('username'));
+            }
         }
         render () {
             return (

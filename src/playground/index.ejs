@@ -20,9 +20,9 @@
     </style>
     <% if (htmlWebpackPlugin.options.sentryConfig) { %>
         <!-- Sentry error logging to help with finding bugs -->
-        <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
+        <script src="https://browser.sentry-cdn.com/5.21.1/bundle.min.js" integrity="sha384-uFON5MXfE3NkWO60hM8JaXAYAV0fqTCQbdy282z8YfelqBoXx+F7JFzX6+WfFIML" crossorigin="anonymous"></script>
         <script>
-            Raven.config(<%= htmlWebpackPlugin.options.sentryConfig %>).install();
+            Sentry.init({ dsn: "<%= htmlWebpackPlugin.options.sentryConfig %>" });
         </script>
         <!-- /Sentry -->
     <% } %>

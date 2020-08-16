@@ -17,7 +17,7 @@ if (!initialUsername) {
     } catch (e) { /* ignore */ }
 }
 
-const initialState = {
+export const initialState = {
     compatibility: true,
     compiler: true,
     cloud: true,
@@ -37,9 +37,11 @@ const reducer = function (state, action) {
             compiler: action.compiler
         });
     case SET_USERNAME:
-        try {
-            localStorage.setItem(USERNAME_KEY, action.username);
-        } catch (e) { /* ignore */ }
+        if (action.persistent) {
+            try {
+                localStorage.setItem(USERNAME_KEY, action.username);
+            } catch (e) { /* ignore */ }
+        }
         return Object.assign({}, state, {
             username: action.username
         });
@@ -70,10 +72,11 @@ const setCompilerState = function (compiler) {
     };
 };
 
-const setUsername = function (username) {
+const setUsername = function (username, persistent) {
     return {
         type: SET_USERNAME,
-        username: username
+        username: username,
+        persistent: persistent
     };
 };
 

@@ -6,7 +6,7 @@ import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './examples.css';
-import {getIsLoading} from '../../reducers/project-state';
+import {getIsLoading, setProjectId} from '../../reducers/project-state';
 
 const studioId = '27205657';
 
@@ -22,8 +22,7 @@ class Examples extends React.Component {
         };
     }
     handleSelect (id) {
-        // this is terrible
-        location.hash = '#' + id;
+        this.props.setProjectId(id);
     }
     handleOpenProjects () {
         this.setState({
@@ -84,14 +83,17 @@ class Examples extends React.Component {
 
 Examples.propTypes = {
     responsive: PropTypes.bool,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    setProjectId: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     loading: getIsLoading(state.scratchGui.projectState.loadingState)
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+    setProjectId: projectId => dispatch(setProjectId(projectId))
+});
 
 export default connect(
     mapStateToProps,

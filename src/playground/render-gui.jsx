@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import GUI from '../containers/gui.jsx';
-import HashParserHOC from '../lib/hash-parser-hoc.jsx';
+import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -88,7 +88,7 @@ const ConnectedPlayer = connect(
 // ability to compose reducers.
 const WrappedPlayer = compose(
     AppStateHOC,
-    HashParserHOC
+    TWParserHOC
 )(ConnectedPlayer);
 
 export default WrappedPlayer;

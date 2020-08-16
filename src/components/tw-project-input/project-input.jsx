@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
 
-import {defaultProjectId} from '../../reducers/project-state';
+import {defaultProjectId, setProjectId} from '../../reducers/project-state';
 import styles from './project-input.css';
 
 class ProjectInput extends React.Component {
@@ -41,7 +41,7 @@ class ProjectInput extends React.Component {
     }
     handleKeyDown (e) {
         if (e.key === 'Enter') {
-            location.hash = this.state.projectId;
+            this.props.setProjectId(this.state.projectId);
             this.input.blur();
         }
     }
@@ -69,7 +69,8 @@ class ProjectInput extends React.Component {
 }
 
 ProjectInput.propTypes = {
-    projectId: PropTypes.string
+    projectId: PropTypes.string,
+    setProjectId: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -77,7 +78,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+    setProjectId: projectId => dispatch(setProjectId(projectId))
 });
 
 export default connect(

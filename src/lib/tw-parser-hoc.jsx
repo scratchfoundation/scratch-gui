@@ -15,6 +15,15 @@ import {
     setProjectId
 } from '../reducers/project-state';
 
+const getRoot = () => {
+    const path = location.pathname.split('/');
+    path.pop();
+    return `/${path.join('/')}`;
+};
+
+const root = getRoot();
+const useRouting = root === '/';
+
 const TWParserHoc = function (WrappedComponent) {
     class HashParserComponent extends React.Component {
         constructor (props) {
@@ -44,16 +53,35 @@ const TWParserHoc = function (WrappedComponent) {
         shouldComponentUpdate (nextProps) {
             return (
                 this.props.isFetchingWithoutId !== nextProps.isFetchingWithoutId ||
+                this.props.isPlayerOnly !== nextProps.isPlayerOnly ||
+                this.props.compatibility !== nextProps.compatibility ||
+                this.props.highQualityPen !== nextProps.highQualityPen ||
                 this.props.projectId !== nextProps.projectId ||
-                this.props.compatibility !== nextProps.compatibility
+                this.props.username !== nextProps.username
             );
         }
         componentDidUpdate (prevProps) {
+            let newPathname = location.pathname;
+            let newSearch = location.search;
+            let newHash = location.hash;
+            let push = false;
+
             // Reflect project ID changes in the URL.
             if (this.props.isFetchingWithoutId && !prevProps.isFetchingWithoutId) {
-                history.pushState('', '', location.pathname + location.search);
+                newHash = '';
+                push = true;
             } else if (this.props.projectId !== prevProps.projectId) {
-                history.pushState('', '', location.pathname + location.search + '#' + this.props.projectId);
+                newHash = `#${this.props.projectId}`;
+                push = true;
+            }
+
+            // Editor or not editor in URL
+            if (useRouting && this.props.isPlayerOnly !== prevProps.isPlayerOnly) {
+                if (this.props.isPlayerOnly) {
+                    newPathname = root;
+                } else {
+                    newPathname = `${root}editor.html`;
+                }
             }
 
             // Reflect option changes in the URL
@@ -64,9 +92,15 @@ const TWParserHoc = function (WrappedComponent) {
             if (this.props.username) {
                 searchParams.set('username', this.props.username);
             }
-            const params = `?${searchParams}`;
-            if (location.search !== params) {
-                history.replaceState('', '', location.pathname + params + location.hash);
+            newSearch = `?${searchParams}`;
+            if (newSearch === '?') newSearch = '';
+
+            if (newHash !== location.hash || newSearch !== location.search || newPathname !== location.pathname) {
+                if (push) {
+                    history.pushState('', '', `${newPathname}${newSearch}${newHash}`);
+                } else {
+                    history.replaceState('', '', `${newPathname}${newSearch}${newHash}`);
+                }
             }
         }
         componentWillUnmount () {
@@ -87,6 +121,7 @@ const TWParserHoc = function (WrappedComponent) {
     }
     HashParserComponent.propTypes = {
         isFetchingWithoutId: PropTypes.bool,
+        isPlayerOnly: PropTypes.bool,
         compatibility: PropTypes.bool,
         setCompatibility: PropTypes.func,
         highQualityPen: PropTypes.bool,
@@ -100,6 +135,7 @@ const TWParserHoc = function (WrappedComponent) {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
+            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
             compatibility: state.scratchGui.tw.compatibility,
             setHighQualityPen: state.scratchGui.tw.highQualityPen,
             projectId: state.scratchGui.projectState.projectId,

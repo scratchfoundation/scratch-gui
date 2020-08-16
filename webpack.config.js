@@ -5,6 +5,7 @@ var webpack = require('webpack');
 // Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var TerserPlugin = require('terser-webpack-plugin');
 
 // PostCss
 var autoprefixer = require('autoprefixer');
@@ -15,7 +16,7 @@ const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    devtool: 'cheap-module-source-map',
+    devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
         host: '0.0.0.0',
@@ -83,6 +84,13 @@ const base = {
                 }
             }]
         }]
+    },
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                sourceMap: true
+            })
+        ]
     },
     plugins: []
 };

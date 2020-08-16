@@ -518,7 +518,7 @@ class MenuBar extends React.Component {
                         >
                             <div className={classNames(styles.settingsMenu)}>
                                 <FormattedMessage
-                                    defaultMessage="TurboWarp Settings"
+                                    defaultMessage="Settings"
                                     description="Text for TurboWarp settings dropdown menu"
                                     id="tw.settings"
                                 />

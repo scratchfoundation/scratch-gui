@@ -101,6 +101,7 @@ const ariaMessages = defineMessages({
 });
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
+const openPrivacyLink = () => window.open('/privacy.html', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -503,33 +504,6 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
-                                </MenuSection>
-                            </MenuBarMenu>
-                        </div>
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
-                    {/* tw: add our custom menu bar groups */}
-                    <div className={styles.fileGroup}>
-                        <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.settingsMenuOpen
-                            })}
-                            onMouseUp={this.props.onClickSettings}
-                        >
-                            <div className={classNames(styles.settingsMenu)}>
-                                <FormattedMessage
-                                    defaultMessage="Settings"
-                                    description="Text for TurboWarp settings dropdown menu"
-                                    id="tw.settings"
-                                />
-                            </div>
-                            <MenuBarMenu
-                                className={classNames(styles.menuBarMenu)}
-                                open={this.props.settingsMenuOpen}
-                                place={this.props.isRtl ? 'left' : 'right'}
-                                onRequestClose={this.props.onRequestCloseSettings}
-                            >
-                                <MenuSection>
                                     <CompatibilityMode>{(toggleCompatibilityMode, {compatibilityMode}) => (
                                         <MenuItem onClick={toggleCompatibilityMode}>
                                             {compatibilityMode ? (
@@ -587,6 +561,31 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
+                                </MenuSection>
+                            </MenuBarMenu>
+                        </div>
+                    </div>
+                    <div className={styles.fileGroup}>
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable, {
+                                [styles.active]: this.props.settingsMenuOpen
+                            })}
+                            onMouseUp={this.props.onClickSettings}
+                        >
+                            <div className={classNames(styles.settingsMenu)}>
+                                <FormattedMessage
+                                    defaultMessage="Advanced"
+                                    description="Text for advanced settings dropdown menu"
+                                    id="tw.settings.advanced"
+                                />
+                            </div>
+                            <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
+                                open={this.props.settingsMenuOpen}
+                                place={this.props.isRtl ? 'left' : 'right'}
+                                onRequestClose={this.props.onRequestCloseSettings}
+                            >
+                                <MenuSection>
                                     <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (
@@ -669,6 +668,13 @@ class MenuBar extends React.Component {
                                             defaultMessage="Source Code"
                                             description="Text for Source Code in the Links dropdown"
                                             id="tw.links.code"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={openPrivacyLink}>
+                                        <FormattedMessage
+                                            defaultMessage="Privacy"
+                                            description="Text for privacy policy in the Links dropdown"
+                                            id="tw.links.privacy"
                                         />
                                     </MenuItem>
                                 </MenuSection>

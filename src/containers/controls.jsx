@@ -16,8 +16,15 @@ class Controls extends React.Component {
     }
     handleGreenFlagClick (e) {
         e.preventDefault();
-        if (e.shiftKey) {
-            this.props.vm.setTurboMode(!this.props.turbo);
+        // tw: implement alt click to toggle compatibility mode
+        // this control flow lets shift+alt click do both turbo and compatibility mode in one click
+        if (e.shiftKey || e.altKey) {
+            if (e.shiftKey) {
+                this.props.vm.setTurboMode(!this.props.turbo);
+            }
+            if (e.altKey) {
+                this.props.vm.setCompatibilityMode(!this.props.compatibility);
+            }
         } else {
             if (!this.props.isStarted) {
                 this.props.vm.start();
@@ -53,6 +60,7 @@ Controls.propTypes = {
     isStarted: PropTypes.bool.isRequired,
     projectRunning: PropTypes.bool.isRequired,
     turbo: PropTypes.bool.isRequired,
+    // tw: need to know if compatibility mode is enabled
     compatibility: PropTypes.bool.isRequired,
     vm: PropTypes.instanceOf(VM)
 };
@@ -60,6 +68,7 @@ Controls.propTypes = {
 const mapStateToProps = state => ({
     isStarted: state.scratchGui.vmStatus.running,
     projectRunning: state.scratchGui.vmStatus.running,
+    // tw: need to know if compatibility mode is enabled
     compatibility: state.scratchGui.tw.compatibility,
     turbo: state.scratchGui.vmStatus.turbo
 });

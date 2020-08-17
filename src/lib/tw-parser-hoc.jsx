@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
-    setCompatibilityState,
-    setHighQualityPen,
-    setUsername
-} from '../reducers/tw';
-
-import {
     defaultProjectId,
     getIsFetchingWithoutId,
     setProjectId
@@ -49,10 +43,7 @@ const TWParserHoc = function (WrappedComponent) {
             return (
                 this.props.isFetchingWithoutId !== nextProps.isFetchingWithoutId ||
                 this.props.isPlayerOnly !== nextProps.isPlayerOnly ||
-                this.props.compatibility !== nextProps.compatibility ||
-                this.props.highQualityPen !== nextProps.highQualityPen ||
-                this.props.projectId !== nextProps.projectId ||
-                this.props.username !== nextProps.username
+                this.props.projectId !== nextProps.projectId
             );
         }
         componentDidUpdate (prevProps) {
@@ -113,32 +104,20 @@ const TWParserHoc = function (WrappedComponent) {
         isFetchingWithoutId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
         setIsPlayerOnly: PropTypes.func,
-        compatibility: PropTypes.bool,
-        setCompatibility: PropTypes.func,
-        highQualityPen: PropTypes.bool,
-        setHighQualityPen: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        setProjectId: PropTypes.func,
-        username: PropTypes.string,
-        setUsername: PropTypes.func
+        setProjectId: PropTypes.func
     };
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
             isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-            compatibility: state.scratchGui.tw.compatibility,
-            setHighQualityPen: state.scratchGui.tw.highQualityPen,
-            projectId: state.scratchGui.projectState.projectId,
-            username: state.scratchGui.tw.username
+            projectId: state.scratchGui.projectState.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
         setIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
-        setCompatibility: compatibility => dispatch(setCompatibilityState(compatibility)),
-        setHighQualityPen: highQualityPen => dispatch(setHighQualityPen(highQualityPen)),
-        setProjectId: projectId => dispatch(setProjectId(projectId)),
-        setUsername: username => dispatch(setUsername(username, false))
+        setProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return connect(
         mapStateToProps,

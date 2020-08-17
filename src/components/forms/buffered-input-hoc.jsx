@@ -59,6 +59,7 @@ export default function (Input) {
 
     BufferedInput.propTypes = {
         onSubmit: PropTypes.func.isRequired,
+        validateInput: PropTypes.func,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
 

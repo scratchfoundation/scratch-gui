@@ -6,22 +6,35 @@ const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 
 const USERNAME_KEY = 'tw:username';
 
-let initialUsername;
-try {
-    initialUsername = localStorage.getItem(USERNAME_KEY);
-} catch (e) { /* ignore */ }
-if (!initialUsername) {
-    initialUsername = `player${Math.random().toString().substr(2, 6)}`;
+const searchParams = new URLSearchParams(location.search);
+
+const getInitialCompatibility = () => {
+    if (searchParams.has('60fps')) {
+        return false;
+    }
+    return true;
+};
+
+const getInitialUsername = () => {
+    if (searchParams.has('username')) {
+        return searchParams.get('username');
+    }
     try {
-        localStorage.setItem(USERNAME_KEY, initialUsername);
+        return localStorage.getItem(USERNAME_KEY);
     } catch (e) { /* ignore */ }
-}
+    const randomId = Math.random().toString().substr(2, 6);
+    const username = `player${randomId}`;
+    try {
+        localStorage.setItem(USERNAME_KEY, username);
+    } catch (e) { /* ignore */ }
+    return username;
+};
 
 export const initialState = {
-    compatibility: true,
+    compatibility: getInitialCompatibility(),
     compiler: true,
     cloud: true,
-    username: initialUsername,
+    username: getInitialUsername(),
     highQualityPen: false
 };
 
@@ -93,7 +106,6 @@ const setHighQualityPen = function (highQualityPen) {
 
 export {
     reducer as default,
-    initialState as twInitialState,
     setCompatibilityState,
     setCompilerState,
     setUsername,

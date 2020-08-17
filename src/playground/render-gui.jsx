@@ -16,8 +16,8 @@ import Examples from '../components/tw-examples/examples.jsx';
 import styles from './gui.css';
 
 const onClickLogo = () => {
-    // close any project if loaded
-    location.hash = '';
+    // remove the hash to load the default project
+    history.pushState('', '', `${location.pathname}${location.search}`);
 };
 
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {

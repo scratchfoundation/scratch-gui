@@ -15,6 +15,10 @@ import {
     setProjectId
 } from '../reducers/project-state';
 
+import {
+    setPlayer
+} from '../reducers/mode';
+
 const getRoot = () => {
     const path = location.pathname.split('/');
     path.pop();
@@ -23,7 +27,8 @@ const getRoot = () => {
 
 const getUseRouting = () => ['turbowarp.xyz', 'localhost'].includes(location.hostname);
 
-const root = getRoot();
+const playerPath = getRoot();
+const editorPath = `${playerPath}editor.html`;
 const useRouting = getUseRouting();
 
 const TWParserHoc = function (WrappedComponent) {
@@ -31,7 +36,8 @@ const TWParserHoc = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleHashChange'
+                'handleHashChange',
+                'handleSearchChange'
             ]);
         }
         componentDidMount () {
@@ -52,49 +58,31 @@ const TWParserHoc = function (WrappedComponent) {
         }
         componentDidUpdate (prevProps) {
             let newPathname = location.pathname;
-            let newSearch = location.search;
             let newHash = location.hash;
-            let push = false;
 
-            // Reflect project ID changes in the URL.
+            // Store project ID in the URL.
             if (this.props.isFetchingWithoutId && !prevProps.isFetchingWithoutId) {
                 newHash = '';
-                push = true;
             } else if (this.props.projectId !== prevProps.projectId) {
                 newHash = `#${this.props.projectId}`;
-                push = true;
             }
 
-            // Editor or not editor in URL
+            // Store whether the editor is active.
             if (useRouting && this.props.isPlayerOnly !== prevProps.isPlayerOnly) {
                 if (this.props.isPlayerOnly) {
-                    newPathname = root;
+                    newPathname = playerPath;
                 } else {
-                    newPathname = `${root}editor.html`;
+                    newPathname = editorPath;
                 }
             }
 
-            // Reflect option changes in the URL
-            const searchParams = new URLSearchParams();
-            if (!this.props.compatibility) {
-                searchParams.set('fps', '60');
-            }
-            if (this.props.username) {
-                searchParams.set('username', this.props.username);
-            }
-            newSearch = `?${searchParams}`;
-            if (newSearch === '?') newSearch = '';
-
-            if (newHash !== location.hash || newSearch !== location.search || newPathname !== location.pathname) {
-                if (push) {
-                    history.pushState('', '', `${newPathname}${newSearch}${newHash}`);
-                } else {
-                    history.replaceState('', '', `${newPathname}${newSearch}${newHash}`);
-                }
+            if (newHash !== location.hash || newPathname !== location.pathname) {
+                history.pushState('', '', `${newPathname}${location.search}${newHash}`);
             }
         }
         componentWillUnmount () {
             window.removeEventListener('hashchange', this.handleHashChange);
+            window.removeEventListener('popstate', this.handleSearchChange);
         }
         handleHashChange () {
             const hashMatch = window.location.hash.match(/#(\d+)/);
@@ -102,13 +90,12 @@ const TWParserHoc = function (WrappedComponent) {
             this.props.setProjectId(hashProjectId.toString());
         }
         handleSearchChange () {
-            const searchParams = new URLSearchParams(location.search);
-            if (searchParams.get('fps') === '60') {
-                // todo: support for other framerates
-                this.props.setCompatibility(false);
-            }
-            if (searchParams.get('username') !== null) {
-                this.props.setUsername(searchParams.get('username'));
+            if (useRouting) {
+                if (location.pathname === editorPath) {
+                    this.props.setIsPlayerOnly(false);
+                } else if (location.pathname === playerPath) {
+                    this.props.setIsPlayerOnly(true);
+                }
             }
         }
         render () {
@@ -122,6 +109,7 @@ const TWParserHoc = function (WrappedComponent) {
     HashParserComponent.propTypes = {
         isFetchingWithoutId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
+        setIsPlayerOnly: PropTypes.func,
         compatibility: PropTypes.bool,
         setCompatibility: PropTypes.func,
         highQualityPen: PropTypes.bool,
@@ -143,6 +131,7 @@ const TWParserHoc = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
+        setIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
         setCompatibility: compatibility => dispatch(setCompatibilityState(compatibility)),
         setHighQualityPen: highQualityPen => dispatch(setHighQualityPen(highQualityPen)),
         setProjectId: projectId => dispatch(setProjectId(projectId)),

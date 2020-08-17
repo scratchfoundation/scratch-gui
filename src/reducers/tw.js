@@ -37,11 +37,9 @@ const reducer = function (state, action) {
             compiler: action.compiler
         });
     case SET_USERNAME:
-        if (action.persistent) {
-            try {
-                localStorage.setItem(USERNAME_KEY, action.username);
-            } catch (e) { /* ignore */ }
-        }
+        try {
+            localStorage.setItem(USERNAME_KEY, action.username);
+        } catch (e) { /* ignore */ }
         return Object.assign({}, state, {
             username: action.username
         });
@@ -72,11 +70,10 @@ const setCompilerState = function (compiler) {
     };
 };
 
-const setUsername = function (username, persistent) {
+const setUsername = function (username) {
     return {
         type: SET_USERNAME,
-        username: username,
-        persistent: persistent
+        username: username
     };
 };
 

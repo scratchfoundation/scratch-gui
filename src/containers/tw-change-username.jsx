@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onUsernameChange: username => {
-        dispatch(setUsername(username, true));
+        dispatch(setUsername(username));
     }
 });
 

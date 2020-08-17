@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
+import Box from '../components/box/box.jsx';
 import greenFlag from '../components/green-flag/icon--green-flag.svg';
 
 class GreenFlagOverlay extends React.Component {
@@ -20,30 +21,30 @@ class GreenFlagOverlay extends React.Component {
     }
 
     render () {
-        if (this.props.isStarted) return null;
-
         return (
-            <div
-                className={this.props.className}
+            <Box
+                className={this.props.wrapperClass}
                 onClick={this.handleClick}
             >
-                <img
-                    draggable={false}
-                    src={greenFlag}
-                />
-            </div>
+                <div className={this.props.className}>
+                    <img
+                        draggable={false}
+                        src={greenFlag}
+                    />
+                </div>
+            </Box>
+
         );
     }
 }
 
 GreenFlagOverlay.propTypes = {
     className: PropTypes.string,
-    isStarted: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM),
+    wrapperClass: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-    isStarted: state.scratchGui.vmStatus.started,
     vm: state.scratchGui.vm
 });
 

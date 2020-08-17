@@ -5,6 +5,7 @@ import {AlertTypes, AlertLevels} from '../../../src/lib/alerts/index.jsx';
 import alertsReducer from '../../../src/reducers/alerts';
 import {
     closeAlert,
+    closeAlertWithId,
     filterInlineAlerts,
     filterPopupAlerts,
     showStandardAlert
@@ -83,6 +84,35 @@ test('can close alerts by index', () => {
     resultState = alertsReducer(initialState, closeAction);
     expect(resultState.alertsList.length).toBe(0);
     resultState = alertsReducer(resultState, createAction);
+});
+
+test('can close a single alert by id', () => {
+    const initialState = {
+        visible: true,
+        alertsList: [
+            {alertId: 'saving'},
+            {alertId: 'creating'},
+            {alertId: 'saving'},
+            {alertId: 'saving'}
+        ]
+    };
+    const closeAction = closeAlertWithId('saving');
+    let resultState = alertsReducer(initialState, closeAction);
+    expect(resultState.alertsList.map(a => a.alertId)).toEqual([
+        'creating', 'saving', 'saving'
+    ]);
+    resultState = alertsReducer(resultState, closeAction);
+    expect(resultState.alertsList.map(a => a.alertId)).toEqual([
+        'creating', 'saving'
+    ]);
+    resultState = alertsReducer(resultState, closeAction);
+    expect(resultState.alertsList.map(a => a.alertId)).toEqual([
+        'creating'
+    ]);
+    resultState = alertsReducer(resultState, closeAction);
+    expect(resultState.alertsList.map(a => a.alertId)).toEqual([
+        'creating'
+    ]);
 });
 
 test('related alerts can clear each other', () => {

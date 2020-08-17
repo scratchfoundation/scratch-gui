@@ -5,6 +5,9 @@
 /node_modules
 npm-*
 
+# Double copies of all the static assets and tutorial gifs
+/src
+
 # Testing
 /.nyc_output
 /coverage

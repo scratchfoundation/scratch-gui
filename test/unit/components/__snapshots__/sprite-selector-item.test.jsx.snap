@@ -14,27 +14,23 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
   onTouchStart={[Function]}
 >
   <div
-    aria-label="Close"
-    className=""
-    onClick={[Function]}
-    role="button"
-    tabIndex="0"
-  >
-    <img
-      className=""
-      src="test-file-stub"
-    />
-  </div>
-  <div
     className={undefined}
   >
     5
   </div>
-  <img
+  <div
     className={undefined}
-    draggable={false}
-    src="https://scratch.mit.edu/foo/bar/pony"
-  />
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
   <div
     className={undefined}
   >
@@ -47,6 +43,22 @@ exports[`SpriteSelectorItemComponent matches snapshot when given a number and de
       className={undefined}
     >
       480 x 360
+    </div>
+  </div>
+  <div
+    aria-label="Delete"
+    className=""
+    onClick={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
     </div>
   </div>
   <nav
@@ -96,22 +108,18 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
   onTouchStart={[Function]}
 >
   <div
-    aria-label="Close"
-    className=""
-    onClick={[Function]}
-    role="button"
-    tabIndex="0"
-  >
-    <img
-      className=""
-      src="test-file-stub"
-    />
-  </div>
-  <img
     className={undefined}
-    draggable={false}
-    src="https://scratch.mit.edu/foo/bar/pony"
-  />
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        draggable={false}
+        src="https://scratch.mit.edu/foo/bar/pony"
+      />
+    </div>
+  </div>
   <div
     className={undefined}
   >
@@ -119,6 +127,22 @@ exports[`SpriteSelectorItemComponent matches snapshot when selected 1`] = `
       className={undefined}
     >
       Pony sprite
+    </div>
+  </div>
+  <div
+    aria-label="Delete"
+    className=""
+    onClick={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div
+      className={undefined}
+    >
+      <img
+        className={undefined}
+        src="test-file-stub"
+      />
     </div>
   </div>
   <nav

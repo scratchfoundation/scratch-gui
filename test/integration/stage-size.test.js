@@ -26,7 +26,6 @@ describe('Loading scratch gui', () => {
 
     test('Switching small/large stage after highlighting and deleting sprite', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
 
         // Highlight the sprite
         await clickText('Sprite1', scope.spriteTile);

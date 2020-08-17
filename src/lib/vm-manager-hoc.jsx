@@ -33,6 +33,7 @@ const vmManagerHOC = function (WrappedComponent) {
                 this.props.vm.attachAudioEngine(this.audioEngine);
                 this.props.vm.setCompatibilityMode(true);
                 this.props.vm.initialized = true;
+                this.props.vm.setLocale(this.props.locale, this.props.messages);
             }
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
@@ -78,6 +79,8 @@ const vmManagerHOC = function (WrappedComponent) {
                 /* eslint-disable no-unused-vars */
                 fontsLoaded,
                 loadingState,
+                locale,
+                messages,
                 isStarted,
                 onError: onErrorProp,
                 onLoadedProject: onLoadedProjectProp,
@@ -104,7 +107,10 @@ const vmManagerHOC = function (WrappedComponent) {
         fontsLoaded: PropTypes.bool,
         isLoadingWithId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
+        isStarted: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
+        locale: PropTypes.string,
+        messages: PropTypes.objectOf(PropTypes.string),
         onError: PropTypes.func,
         onLoadedProject: PropTypes.func,
         onSetProjectUnchanged: PropTypes.func,
@@ -119,6 +125,8 @@ const vmManagerHOC = function (WrappedComponent) {
         return {
             fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
+            locale: state.locales.locale,
+            messages: state.locales.messages,
             projectData: state.scratchGui.projectState.projectData,
             projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState,

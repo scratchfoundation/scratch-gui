@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './monitor.css';
 
-const SliderMonitor = ({categoryColor, label, min, max, value, onSliderUpdate}) => (
+const SliderMonitor = ({categoryColor, isDiscrete, label, min, max, value, onSliderUpdate}) => (
     <div className={styles.defaultMonitor}>
         <div className={styles.row}>
             <div className={styles.label}>
@@ -22,6 +22,7 @@ const SliderMonitor = ({categoryColor, label, min, max, value, onSliderUpdate}) 
                 className={classNames(styles.slider, 'no-drag')} // Class used on parent Draggable to prevent drags
                 max={max}
                 min={min}
+                step={isDiscrete ? 1 : 0.01}
                 type="range"
                 value={value}
                 onChange={onSliderUpdate}
@@ -33,6 +34,7 @@ const SliderMonitor = ({categoryColor, label, min, max, value, onSliderUpdate}) 
 
 SliderMonitor.propTypes = {
     categoryColor: PropTypes.string.isRequired,
+    isDiscrete: PropTypes.bool,
     label: PropTypes.string.isRequired,
     max: PropTypes.number,
     min: PropTypes.number,
@@ -44,6 +46,7 @@ SliderMonitor.propTypes = {
 };
 
 SliderMonitor.defaultProps = {
+    isDiscrete: true,
     min: 0,
     max: 100
 };

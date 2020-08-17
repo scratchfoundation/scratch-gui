@@ -5,20 +5,21 @@
 */
 
 /* Toolbox z-index: 40; set in scratch-blocks */
-$z-index-menu-bar: 41;
 $z-index-extension-button: 42;
 $z-index-stage-indicator: 45;
 $z-index-add-button: 46;
 $z-index-tooltip: 47; /* tooltips should go over add buttons if they overlap */
 $z-index-monitor: 48; /* monitors go over add buttons */
-/* Block drag z-index: 50; set in scratch-blocks */
+$z-index-stage-question: 49; /* "ask" block text input goes above monitors */
 
 $z-index-card: 480;
 $z-index-alerts: 490;
+$z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorials */
 $z-index-loader: 500;
 $z-index-modal: 510;
 
 $z-index-drag-layer: 1000;
+/* Block drag z-index: 1000; default 50 is overriden in blocks.css */
 $z-index-monitor-dragging: 1010;
 $z-index-dragging-sprite: 1020; /* so it is draggable into other panes */
 

@@ -41,13 +41,13 @@ class RecordingStep extends React.Component {
         this.setState({listening: true});
     }
     handleRecordingError () {
-        alert(this.props.intl.formatMessage(messages.extensionUrl)); // eslint-disable-line no-alert
+        alert(this.props.intl.formatMessage(messages.alertMsg)); // eslint-disable-line no-alert
     }
     handleLevelUpdate (level) {
-        this.setState({level});
-        if (this.props.recording) {
-            this.setState({levels: (this.state.levels || []).concat([level])});
-        }
+        this.setState({
+            level: level,
+            levels: this.props.recording ? (this.state.levels || []).concat([level]) : this.state.levels
+        });
     }
     handleRecord () {
         this.audioRecorder.startRecording();

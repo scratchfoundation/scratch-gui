@@ -20,8 +20,10 @@
     border: 1px solid $ui-black-transparent;
     border-radius: 5px;
     padding: 3px;
-
+    /* Force these to be on their own render layer because they update often */
+    transform: translateZ(0);
 }
+
 .meter-container {
     margin-right: 5px;
     height: 180px;

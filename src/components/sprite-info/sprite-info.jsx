@@ -43,14 +43,15 @@ class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
         return (
             this.props.rotationStyle !== nextProps.rotationStyle ||
-            this.props.direction !== nextProps.direction ||
             this.props.disabled !== nextProps.disabled ||
             this.props.name !== nextProps.name ||
-            this.props.size !== nextProps.size ||
             this.props.stageSize !== nextProps.stageSize ||
             this.props.visible !== nextProps.visible ||
-            this.props.x !== nextProps.x ||
-            this.props.y !== nextProps.y
+            // Only update these if rounded value has changed
+            Math.round(this.props.direction) !== Math.round(nextProps.direction) ||
+            Math.round(this.props.size) !== Math.round(nextProps.size) ||
+            Math.round(this.props.x) !== Math.round(nextProps.x) ||
+            Math.round(this.props.y) !== Math.round(nextProps.y)
         );
     }
     render () {
@@ -120,7 +121,7 @@ class SpriteInfo extends React.Component {
                         tabIndex="0"
                         type="text"
                         validateInput={this.isNum}
-                        value={this.props.disabled ? '' : this.props.x}
+                        value={this.props.disabled ? '' : Math.round(this.props.x)}
                         onSubmit={this.props.onChangeX}
                     />
                 </Label>
@@ -148,7 +149,7 @@ class SpriteInfo extends React.Component {
                         tabIndex="0"
                         type="text"
                         validateInput={this.isNum}
-                        value={this.props.disabled ? '' : this.props.y}
+                        value={this.props.disabled ? '' : Math.round(this.props.y)}
                         onSubmit={this.props.onChangeY}
                     />
                 </Label>
@@ -249,14 +250,14 @@ class SpriteInfo extends React.Component {
                                 tabIndex="0"
                                 type="text"
                                 validateInput={this.isNonNegNum}
-                                value={this.props.disabled ? '' : this.props.size}
+                                value={this.props.disabled ? '' : Math.round(this.props.size)}
                                 onSubmit={this.props.onChangeSize}
                             />
                         </Label>
                     </div>
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <DirectionPicker
-                            direction={this.props.direction}
+                            direction={Math.round(this.props.direction)}
                             disabled={this.props.disabled}
                             labelAbove={labelAbove}
                             rotationStyle={this.props.rotationStyle}

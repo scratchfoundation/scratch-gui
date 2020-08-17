@@ -39,10 +39,7 @@ const updateTargets = function (targetList, editingTarget) {
     return {
         type: UPDATE_TARGET_LIST,
         targets: targetList,
-        editingTarget: editingTarget,
-        meta: {
-            throttle: 30
-        }
+        editingTarget: editingTarget
     };
 };
 const highlightTarget = function (targetId) {

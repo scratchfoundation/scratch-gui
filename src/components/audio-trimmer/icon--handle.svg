@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="8px" height="10px" viewBox="0 0 8 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>handle</title>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="1 1 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Bottom Left Handle</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Desktop---1280x720" transform="translate(-461.000000, -329.000000)" stroke="#E64D00" fill="#FF661A">
-            <g id="Step-5---Confirming-Trim" transform="translate(0.000000, 42.000000)">
-                <g id="Sound-Sketches" transform="translate(427.000000, 167.000000)">
-                    <g id="start-playhead" transform="translate(35.000000, 0.000000)">
-                        <path d="M0,122.213854 C0,121.658366 0.45097518,121.208054 0.990777969,121.208054 L5.00922203,121.208054 C5.55641359,121.208054 6,121.659838 6,122.213854 L6,126.298963 L3,129.208054 L0,126.298963 L0,122.213854 Z" id="handle" transform="translate(3.000000, 125.208054) scale(1, -1) translate(-3.000000, -125.208054) "></path>
-                    </g>
-                </g>
-            </g>
+    <defs>
+        <path d="M17,5 C23.627417,5 29,10.372583 29,17 L29,29 L17,29 C10.372583,29 5,23.627417 5,17 C5,10.372583 10.372583,5 17,5 Z" id="path-1"></path>
+    </defs>
+    <g id="Bottom-Left-Handle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bottom-Left" transform="translate(17.000000, 17.000000) scale(1, -1) translate(-17.000000, -17.000000) ">
+            <use stroke="#4D97FF33" stroke-width="8" xlink:href="#path-1"></use>
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use stroke="#3D73CC" stroke-width="1" fill="#4D97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
         </g>
     </g>
 </svg>

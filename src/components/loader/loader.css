@@ -2,7 +2,7 @@
 @import "../../css/z-index.css";
 
 .background {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -15,6 +15,13 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: white;
+}
+
+.fullscreen {
+    /* Break out of the layout using position: fixed to cover the whole screen */
+    position: fixed;
+    /* Use the fullscreen stage z-index to allow covering full-screen mode */
+    z-index: $z-index-stage-wrapper-overlay;
 }
 
 .block-animation {

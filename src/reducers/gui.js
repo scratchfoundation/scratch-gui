@@ -107,22 +107,11 @@ const initTutorialCard = function (currentState, deckId) {
                 visible: true,
                 content: decks,
                 activeDeckId: deckId,
+                expanded: true,
                 step: 0,
                 x: 0,
                 y: 0,
                 dragging: false
-            }
-        }
-    );
-};
-
-const initPreviewInfo = function (currentState) {
-    return Object.assign(
-        {},
-        currentState,
-        {
-            modals: {
-                previewInfo: true // this key must match `MODAL_PREVIEW_INFO` in modals.js
             }
         }
     );
@@ -176,7 +165,6 @@ export {
     initEmbedded,
     initFullScreen,
     initPlayer,
-    initPreviewInfo,
     initTelemetryModal,
     initTutorialCard
 };

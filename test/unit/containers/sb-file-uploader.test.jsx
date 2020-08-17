@@ -11,7 +11,6 @@ describe('SBFileUploader Container', () => {
     const mockStore = configureStore();
     let onLoadingFinished;
     let onLoadingStarted;
-    let onUpdateProjectTitle;
     let store;
 
     // Wrap this in a function so it gets test specific states and can be reused.
@@ -20,7 +19,6 @@ describe('SBFileUploader Container', () => {
             <SBFileUploader
                 onLoadingFinished={onLoadingFinished}
                 onLoadingStarted={onLoadingStarted}
-                onUpdateProjectTitle={onUpdateProjectTitle}
             >
                 {(renderFileInput, loadProject) => (
                     <div
@@ -40,7 +38,6 @@ describe('SBFileUploader Container', () => {
                 vm: {}
             }
         });
-        onUpdateProjectTitle = jest.fn();
         onLoadingFinished = jest.fn();
         onLoadingStarted = jest.fn();
     });
@@ -65,14 +62,14 @@ describe('SBFileUploader Container', () => {
         expect(projectName).toBe('my project is great');
     });
 
-    test('sets blank title with .sb filename', () => {
+    test('correctly sets title with .sb filename', () => {
         const wrapper = shallowWithIntl(getContainer(), {context: {store}});
         const instance = wrapper
             .dive() // unwrap redux Connect(InjectIntl(SBFileUploader))
             .dive() // unwrap InjectIntl(SBFileUploader)
             .instance(); // SBFileUploader
         const projectName = instance.getProjectTitleFromFilename('my project is great.sb');
-        expect(projectName).toBe('');
+        expect(projectName).toBe('my project is great');
     });
 
     test('sets blank title with filename with no extension', () => {

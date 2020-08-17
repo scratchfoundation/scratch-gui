@@ -9,8 +9,6 @@ import {
     setProjectId
 } from '../reducers/project-state';
 
-import {closePreviewInfo} from '../reducers/modals';
-
 /* Higher Order Component to get the project id from location.hash
  * @param {React.Component} WrappedComponent: component to render
  * @returns {React.Component} component with hash parsing behavior
@@ -74,9 +72,6 @@ const HashParserHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         setProjectId: projectId => {
             dispatch(setProjectId(projectId));
-            if (projectId !== defaultProjectId) {
-                dispatch(closePreviewInfo());
-            }
         }
     });
     // Allow incoming props to override redux-provided props. Used to mock in tests.

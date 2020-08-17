@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {setProjectTitle} from '../reducers/project-title';
 
-import analytics from '../lib/analytics';
 import log from '../lib/log';
+import sharedMessages from '../lib/shared-messages';
+
 import {
     LoadingStates,
     getIsLoadingUpload,
+    getIsShowingWithoutId,
     onLoadedProject,
     requestProjectUpload
 } from '../reducers/project-state';
@@ -24,13 +27,14 @@ import {
 /**
  * SBFileUploader component passes a file input, load handler and props to its child.
  * It expects this child to be a function with the signature
- *     function (renderFileInput, loadProject) {}
+ *     function (renderFileInput, handleLoadProject) {}
  * The component can then be used to attach project loading functionality
  * to any other component:
  *
- * <SBFileUploader>{(renderFileInput, loadProject) => (
+ * <SBFileUploader>{(className, renderFileInput, handleLoadProject) => (
  *     <MyCoolComponent
- *         onClick={loadProject}
+ *         className={className}
+ *         onClick={handleLoadProject}
  *     >
  *         {renderFileInput()}
  *     </MyCoolComponent>
@@ -80,17 +84,40 @@ class SBFileUploader extends React.Component {
     }
     getProjectTitleFromFilename (fileInputFilename) {
         if (!fileInputFilename) return '';
-        // only parse title from files like "filename.sb2" or "filename.sb3"
-        const matches = fileInputFilename.match(/^(.*)\.sb[23]$/);
+        // only parse title with valid scratch project extensions
+        // (.sb, .sb2, and .sb3)
+        const matches = fileInputFilename.match(/^(.*)\.sb[23]?$/);
         if (!matches) return '';
         return matches[1].substring(0, 100); // truncate project title to max 100 chars
     }
     // called when user has finished selecting a file to upload
     handleChange (e) {
+        const {
+            intl,
+            isShowingWithoutId,
+            loadingState,
+            projectChanged,
+            userOwnsProject
+        } = this.props;
+
         const thisFileInput = e.target;
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];
-            this.props.requestProjectUpload(this.props.loadingState);
+
+            // If user owns the project, or user has changed the project,
+            // we must confirm with the user that they really intend to replace it.
+            // (If they don't own the project and haven't changed it, no need to confirm.)
+            let uploadAllowed = true;
+            if (userOwnsProject || (projectChanged && isShowingWithoutId)) {
+                uploadAllowed = confirm( // eslint-disable-line no-alert
+                    intl.formatMessage(sharedMessages.replaceProjectWarning)
+                );
+            }
+            if (uploadAllowed) {
+                this.props.requestProjectUpload(loadingState);
+            } else {
+                this.props.closeFileMenu();
+            }
         }
     }
     // called when file upload raw data is available in the reader
@@ -100,19 +127,12 @@ class SBFileUploader extends React.Component {
             const filename = this.fileToUpload && this.fileToUpload.name;
             this.props.vm.loadProject(this.reader.result)
                 .then(() => {
-                    analytics.event({
-                        category: 'project',
-                        action: 'Import Project File',
-                        nonInteraction: true
-                    });
-                    // Remove the hash if any (without triggering a hash change event or a reload)
-                    history.replaceState({}, document.title, '.');
                     this.props.onLoadingFinished(this.props.loadingState, true);
                     // Reset the file input after project is loaded
                     // This is necessary in case the user wants to reload a project
                     if (filename) {
                         const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
-                        this.props.onUpdateProjectTitle(uploadedProjectTitle);
+                        this.props.onReceivedProjectTitle(uploadedProjectTitle);
                     }
                     this.resetFileInput();
                 })
@@ -153,13 +173,17 @@ SBFileUploader.propTypes = {
     canSave: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     children: PropTypes.func,
     className: PropTypes.string,
+    closeFileMenu: PropTypes.func,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
+    isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
+    onReceivedProjectTitle: PropTypes.func,
+    userOwnsProject: PropTypes.bool,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
     })
@@ -171,19 +195,23 @@ const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         isLoadingUpload: getIsLoadingUpload(loadingState),
+        isShowingWithoutId: getIsShowingWithoutId(loadingState),
         loadingState: loadingState,
+        projectChanged: state.scratchGui.projectChanged,
         vm: state.scratchGui.vm
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+    closeFileMenu: () => dispatch(closeFileMenu()),
     onLoadingFinished: (loadingState, success) => {
         dispatch(onLoadedProject(loadingState, ownProps.canSave, success));
         dispatch(closeLoadingProject());
         dispatch(closeFileMenu());
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),
-    onLoadingStarted: () => dispatch(openLoadingProject())
+    onLoadingStarted: () => dispatch(openLoadingProject()),
+    onReceivedProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
 // Allow incoming props to override redux-provided props. Used to mock in tests.

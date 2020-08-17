@@ -13,8 +13,8 @@ describe('Sound Editor Component', () => {
             playhead: 0.5,
             trimStart: 0.2,
             trimEnd: 0.8,
-            onActivateTrim: jest.fn(),
             onChangeName: jest.fn(),
+            onDelete: jest.fn(),
             onPlay: jest.fn(),
             onRedo: jest.fn(),
             onReverse: jest.fn(),
@@ -36,19 +36,7 @@ describe('Sound Editor Component', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('trim button appears when trims are null', () => {
-        const wrapper = mountWithIntl(
-            <SoundEditor
-                {...props}
-                trimEnd={null}
-                trimStart={null}
-            />
-        );
-        wrapper.find('[children="Trim"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
-    });
-
-    test('save button appears when trims are not null', () => {
+    test('delete button appears when selection is not null', () => {
         const wrapper = mountWithIntl(
             <SoundEditor
                 {...props}
@@ -56,8 +44,8 @@ describe('Sound Editor Component', () => {
                 trimStart={0.25}
             />
         );
-        wrapper.find('[children="Save"]').simulate('click');
-        expect(props.onActivateTrim).toHaveBeenCalled();
+        wrapper.find('[children="Delete"]').simulate('click');
+        expect(props.onDelete).toHaveBeenCalled();
     });
 
     test('play button appears when playhead is null', () => {
@@ -99,9 +87,6 @@ describe('Sound Editor Component', () => {
 
         wrapper.find('[children="Reverse"]').simulate('click');
         expect(props.onReverse).toHaveBeenCalled();
-
-        wrapper.find('[children="Echo"]').simulate('click');
-        expect(props.onEcho).toHaveBeenCalled();
 
         wrapper.find('[children="Robot"]').simulate('click');
         expect(props.onRobot).toHaveBeenCalled();

@@ -611,11 +611,8 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled, isProjectRunning}) => (
-                                        <MenuItem
-                                            className={classNames({[styles.disabled]: isProjectRunning})}
-                                            onClick={toggleCompiler}
-                                        >
+                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled}) => (
+                                        <MenuItem onClick={toggleCompiler}>
                                             {compilerEnabled ? (
                                                 <FormattedMessage
                                                     defaultMessage="Disable Compiler"

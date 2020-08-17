@@ -31,7 +31,7 @@ const vmManagerHOC = function (WrappedComponent) {
             if (!this.props.vm.initialized) {
                 this.audioEngine = new AudioEngine();
                 this.props.vm.attachAudioEngine(this.audioEngine);
-                this.props.vm.setCompatibilityMode(true);
+                this.props.vm.setCompatibilityMode(this.props.compatibilityMode);
                 this.props.vm.initialized = true;
                 this.props.vm.setLocale(this.props.locale, this.props.messages);
             }
@@ -102,6 +102,7 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
+        compatibilityMode: PropTypes.bool,
         canSave: PropTypes.bool,
         cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
@@ -123,6 +124,7 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
+            compatibilityMode: state.scratchGui.tw.compatibility,
             fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
             locale: state.locales.locale,

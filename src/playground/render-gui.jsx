@@ -17,7 +17,7 @@ import styles from './gui.css';
 
 const onClickLogo = () => {
     // remove the hash to load the default project
-    history.pushState('', '', `${location.pathname}${location.search}`);
+    location.hash = '';
 };
 
 if (process.env.NODE_ENV === 'production' && typeof window === 'object') {

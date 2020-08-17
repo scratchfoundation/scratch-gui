@@ -44,7 +44,6 @@ const TWParserHoc = function (WrappedComponent) {
             window.addEventListener('hashchange', this.handleHashChange);
             window.addEventListener('popstate', this.handleSearchChange);
             this.handleHashChange();
-            this.handleSearchChange();
         }
         shouldComponentUpdate (nextProps) {
             return (
@@ -92,9 +91,13 @@ const TWParserHoc = function (WrappedComponent) {
         handleSearchChange () {
             if (useRouting) {
                 if (location.pathname === editorPath) {
-                    this.props.setIsPlayerOnly(false);
+                    if (this.props.isPlayerOnly) {
+                        this.props.setIsPlayerOnly(false);
+                    }
                 } else if (location.pathname === playerPath) {
-                    this.props.setIsPlayerOnly(true);
+                    if (!this.props.isPlayerOnly) {
+                        this.props.setIsPlayerOnly(true);
+                    }
                 }
             }
         }

@@ -102,6 +102,7 @@ const ariaMessages = defineMessages({
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
 const openPrivacyLink = () => window.open('/privacy.html', '_blank');
+const openAdvancedHelp = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -558,6 +559,13 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseSettings}
                             >
                                 <MenuSection>
+                                    <MenuItem onClick={openAdvancedHelp}>
+                                        <FormattedMessage
+                                            defaultMessage="Advanced Settings Help"
+                                            description=""
+                                            id="tw.settings.advancedHelp"
+                                        />
+                                    </MenuItem>
                                     <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (

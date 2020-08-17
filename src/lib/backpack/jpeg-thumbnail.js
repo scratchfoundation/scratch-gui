@@ -11,7 +11,7 @@ const jpegThumbnail = dataUrl => new Promise((resolve, reject) => {
             // drawImage can fail if image height/width is less than 1
             // Use blank image; the costume is too small to render anyway
             ctx.fillStyle = 'white'; // Create white background, since jpeg doesn't have transparency
-            ctx.fillRect(0, 0, maxDimension, maxDimension);
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
         } else {
             if (image.height > image.width) {
                 canvas.height = maxDimension;

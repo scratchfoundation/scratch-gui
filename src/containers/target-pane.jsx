@@ -14,6 +14,7 @@ import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
+import {BLOCKS_DEFAULT_SCALE} from '../lib/layout-constants';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
 import sharedMessages from '../lib/shared-messages';
@@ -171,7 +172,7 @@ class TargetPane extends React.Component {
                 metrics = {
                     scrollX: 0,
                     scrollY: 0,
-                    scale: 0.675 // TODO: Define this in a constant somewhere.
+                    scale: BLOCKS_DEFAULT_SCALE
                 };
             }
 

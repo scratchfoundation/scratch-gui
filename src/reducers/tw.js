@@ -106,6 +106,7 @@ const setHighQualityPen = function (highQualityPen) {
 
 export {
     reducer as default,
+    initialState as twInitialState,
     setCompatibilityState,
     setCompilerState,
     setUsername,

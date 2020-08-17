@@ -562,13 +562,13 @@ class MenuBar extends React.Component {
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn off high quality pen"
+                                                    defaultMessage="Turn Off High Quality Pen"
                                                     description="Menu bar item for turning off high quality pen"
                                                     id="tw.settings.hqpOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn on high quality pen (BETA)"
+                                                    defaultMessage="Turn On High Quality Pen"
                                                     description="Menu bar item for turning on high quality pen"
                                                     id="tw.settings.hqpOn"
                                                 />
@@ -583,20 +583,20 @@ class MenuBar extends React.Component {
                                             {canUseCloudVariables ? (
                                                 cloud ? (
                                                     <FormattedMessage
-                                                        defaultMessage="Disable cloud variables"
+                                                        defaultMessage="Disable Cloud Variables"
                                                         description="Menu bar item for disabling cloud variables"
                                                         id="tw.settings.cloudOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
-                                                        defaultMessage="Enable cloud variables"
+                                                        defaultMessage="Enable Cloud Variables"
                                                         description="Menu bar item for enabling cloud variables"
                                                         id="tw.settings.cloudOn"
                                                     />
                                                 )
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Cloud variables not available"
+                                                    defaultMessage="Cloud Variables are not Available"
                                                     description="Menu bar item for when cloud variables are not available"
                                                     id="tw.settings.cloudUnavailable"
                                                 />
@@ -627,13 +627,13 @@ class MenuBar extends React.Component {
                                         <MenuItem onClick={toggleStuck}>
                                             {stuck ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn off stuck checking"
+                                                    defaultMessage="Turn off Stuck Checking"
                                                     description="Menu bar item for turning off stuck checking"
                                                     id="tw.settings.stuckOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn on stuck checking"
+                                                    defaultMessage="Turn on Stuck Checking"
                                                     description="Menu bar item for turning on stuck checking"
                                                     id="tw.settings.stuckOn"
                                                 />

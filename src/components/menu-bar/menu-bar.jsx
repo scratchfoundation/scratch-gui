@@ -570,13 +570,13 @@ class MenuBar extends React.Component {
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn Off High Quality Pen"
+                                                    defaultMessage="Turn off High Quality Pen"
                                                     description="Menu bar item for turning off high quality pen"
                                                     id="tw.settings.hqpOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn On High Quality Pen"
+                                                    defaultMessage="Turn on High Quality Pen"
                                                     description="Menu bar item for turning on high quality pen"
                                                     id="tw.settings.hqpOn"
                                                 />

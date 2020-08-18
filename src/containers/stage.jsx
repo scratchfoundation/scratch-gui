@@ -169,6 +169,10 @@ class Stage extends React.Component {
         };
     }
     handleDoubleClick (e) {
+        // tw: Disable editing target changing in certain circumstances to avoid lag
+        if (this.props.disableEditingTargetChange) {
+            return;
+        }
         const {x, y} = getEventXY(e);
         // Set editing target from cursor position, if clicking on a sprite.
         const mousePosition = [x - this.rect.left, y - this.rect.top];
@@ -435,6 +439,8 @@ class Stage extends React.Component {
 Stage.propTypes = {
     // tw: handler for syncing high quality pen option changes
     onHighQualityPenChanged: PropTypes.func,
+    // tw: Disable editing target changing in certain circumstances to avoid lag
+    disableEditingTargetChange: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     isStarted: PropTypes.bool,
@@ -451,6 +457,8 @@ Stage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    // tw: Disable editing target changing in certain circumstances to avoid lag
+    disableEditingTargetChange: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly,
     isColorPicking: state.scratchGui.colorPicker.active,
     isFullScreen: state.scratchGui.mode.isFullScreen,
     isStarted: state.scratchGui.vmStatus.started,

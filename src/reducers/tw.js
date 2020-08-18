@@ -20,7 +20,11 @@ const getInitialUsername = () => {
         return searchParams.get('username');
     }
     try {
-        return localStorage.getItem(USERNAME_KEY);
+        const result = localStorage.getItem(USERNAME_KEY);
+        if ('' + result === 'null') throw new Error('Temporary username fix');
+        if (result) {
+            return result;
+        }
     } catch (e) { /* ignore */ }
     const randomId = Math.random().toString().substr(2, 6);
     const username = `player${randomId}`;

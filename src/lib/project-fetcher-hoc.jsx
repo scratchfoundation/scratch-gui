@@ -71,6 +71,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
+                    // tw: If the project data appears to be HTML, then this project doesn't exist.
+                    // When this happens, we'll replace the project with some minimal empty project instead of showing an error screen.
+                    if (projectAsset.data[0] === '<' || projectAsset.data[0] === 60) {
+                        projectAsset.data = '{"targets":[{"isStage":true,"name":"Stage","variables":{},"lists":{},"broadcasts":{},"blocks":{},"comments":{},"currentCostume":0,"costumes":[{"assetId":"30604b794e9cc27cc58e4fa93c98ccd1","name":"backdrop1","bitmapResolution":1,"md5ext":"30604b794e9cc27cc58e4fa93c98ccd1.svg","dataFormat":"svg","rotationCenterX":207.4166717529297,"rotationCenterY":15.981249999999989}],"sounds":[],"volume":100,"layerOrder":0,"tempo":60,"videoTransparency":50,"videoState":"on","textToSpeechLanguage":null}],"monitors":[],"extensions":[],"meta":{"semver":"3.0.0","vm":"0.2.0-prerelease.20200720182258","agent":""}}';
+                    }
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
                     } else {

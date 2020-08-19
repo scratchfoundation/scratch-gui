@@ -32,7 +32,7 @@ class ProjectInput extends React.Component {
     readProjectId (e) {
         const value = e.target.value;
         const numberMatch = value.match(/\d+/);
-        return numberMatch ? numberMatch[0] : '';
+        return numberMatch ? numberMatch[0] : defaultProjectId;
     }
     handleChange (e) {
         this.setState({

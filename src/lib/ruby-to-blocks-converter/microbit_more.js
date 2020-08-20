@@ -16,41 +16,41 @@ const MicroBitMoreConverter = {
             rubyBlockArgs && rubyBlockArgs.length === 0 &&
             rubyBlock) {
             switch (args[0].value) {
-            case 'microbit_more_button_pressed':
+            case 'mbit_more_button_pressed':
                 if (args.length === 2 && this._isString(args[1])) {
-                    block = this._createBlock('microbit_more_whenButtonPressed', 'hat');
+                    block = this._createBlock('microbitMore_whenButtonPressed', 'hat');
                     this._addFieldInput(
-                        block, 'BTN', 'microbit_more_menu_buttons', 'buttons',
+                        block, 'BTN', 'microbitMore_menu_buttons', 'buttons',
                         args[1], 'A'
                     );
                     this._setParent(rubyBlock, block);
                 }
                 break;
-            case 'microbit_more_gesture':
+            case 'mbit_more_gesture':
                 if (args.length === 2 && this._isString(args[1])) {
-                    block = this._createBlock('microbit_more_whenGesture', 'hat');
+                    block = this._createBlock('microbitMore_whenGesture', 'hat');
                     this._addFieldInput(
-                        block, 'GESTURE', 'microbit_more_menu_gestures', 'gestures',
+                        block, 'GESTURE', 'microbitMore_menu_gestures', 'gestures',
                         args[1], 'moved'
                     );
                     this._setParent(rubyBlock, block);
                 }
                 break;
-            case 'microbit_more_tilted':
+            case 'mbit_more_tilted':
                 if (args.length === 2 && this._isString(args[1])) {
-                    block = this._createBlock('microbit_more_whenTilted', 'hat');
+                    block = this._createBlock('microbitMore_whenTilted', 'hat');
                     this._addFieldInput(
-                        block, 'DIRECTION', 'microbit_more_menu_tiltDirectionAny', 'tiltDirectionAny',
+                        block, 'DIRECTION', 'microbitMore_menu_tiltDirectionAny', 'tiltDirectionAny',
                         args[1], 'any'
                     );
                     this._setParent(rubyBlock, block);
                 }
                 break;
-            case 'microbit_more_pin_connected':
+            case 'mbit_more_pin_connected':
                 if (args.length === 2 && this._isNumber(args[1])) {
-                    block = this._createBlock('microbit_more_whenPinConnected', 'hat');
+                    block = this._createBlock('microbitMore_whenPinConnected', 'hat');
                     this._addFieldInput(
-                        block, 'PIN', 'microbit_more_menu_touchPins', 'touchPins',
+                        block, 'PIN', 'microbitMore_menu_gpio', 'gpio',
                         args[1], '0'
                     );
                     this._setParent(rubyBlock, block);
@@ -59,7 +59,7 @@ const MicroBitMoreConverter = {
             }
         } else if (this._isSelf(receiver) || receiver === Opal.nil) {
             switch (name) {
-            case 'microbit_more':
+            case 'mbit_more':
                 if (args.length === 0) {
                     block = this._createRubyExpressionBlock(MicroBitMore, node);
                 }
@@ -69,19 +69,19 @@ const MicroBitMoreConverter = {
             switch (name) {
             case 'button_pressed?':
                 if (args.length === 1 && this._isString(args[0])) {
-                    block = this._changeBlock(receiver, 'microbit_more_isButtonPressed', 'value_boolean');
+                    block = this._changeBlock(receiver, 'microbitMore_isButtonPressed', 'value_boolean');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
                     this._addFieldInput(
-                        block, 'BTN', 'microbit_more_menu_buttons', 'buttons',
+                        block, 'BTN', 'microbitMore_menu_buttons', 'buttons',
                         args[0], 'A'
                     );
                 }
                 break;
             case 'display':
                 if (args.length === 5 && args.every(i => this._isString(i))) {
-                    block = this._changeBlock(receiver, 'microbit_more_displaySymbol', 'statement');
+                    block = this._changeBlock(receiver, 'microbitMore_displaySymbol', 'statement');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
@@ -98,7 +98,7 @@ const MicroBitMoreConverter = {
                 break;
             case 'display_text':
                 if (args.length === 1 && this._isString(args[0])) {
-                    block = this._changeBlock(receiver, 'microbit_more_displayText', 'statement');
+                    block = this._changeBlock(receiver, 'microbitMore_displayText', 'statement');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
@@ -107,32 +107,103 @@ const MicroBitMoreConverter = {
                 break;
             case 'clear_display':
                 if (args.length === 0) {
-                    block = this._changeBlock(receiver, 'microbit_more_displayClear', 'statement');
+                    block = this._changeBlock(receiver, 'microbitMore_displayClear', 'statement');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
                 }
                 break;
             case 'tilted?':
                 if (args.length === 1 && this._isString(args[0])) {
-                    block = this._changeBlock(receiver, 'microbit_more_isTilted', 'value_boolean');
+                    block = this._changeBlock(receiver, 'microbitMore_isTilted', 'value_boolean');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
                     this._addFieldInput(
-                        block, 'DIRECTION', 'microbit_more_menu_tiltDirectionAny', 'tiltDirectionAny',
+                        block, 'DIRECTION', 'microbitMore_menu_tiltDirectionAny', 'tiltDirectionAny',
                         args[0], 'any'
                     );
                 }
                 break;
             case 'tilt_angle':
                 if (args.length === 1 && this._isString(args[0])) {
-                    block = this._changeBlock(receiver, 'microbit_more_getTiltAngle', 'value');
+                    block = this._changeBlock(receiver, 'microbitMore_getTiltAngle', 'value');
                     delete this._context.blocks[receiver.inputs.EXPRESSION.block];
                     delete receiver.inputs.EXPRESSION;
 
                     this._addFieldInput(
-                        block, 'DIRECTION', 'microbit_more_menu_tiltDirection', 'tiltDirection',
+                        block, 'DIRECTION', 'microbitMore_menu_tiltDirection', 'tiltDirection',
                         args[0], 'front'
+                    );
+                }
+                break;
+            case 'pin_connected?':
+                if (args.length === 1 && this._isNumber(args[0])) {
+                    block = this._changeBlock(receiver, 'microbitMore_isPinConnected', 'value_boolean');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addFieldInput(
+                        block, 'PIN', 'microbitMore_menu_gpio', 'gpio',
+                        args[0], '0'
+                    );
+                }
+                break;
+            case 'light_level':
+                if (args.length === 0){
+                    block = this._changeBlock(receiver, 'microbitMore_getLightLevel', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+                }
+                break;
+            case 'temperature':
+                if (args.length === 0){
+                    block = this._changeBlock(receiver, 'microbitMore_getTemperature', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+                }
+                break;
+            case 'compass_heading':
+                if (args.length === 0){
+                    block = this._changeBlock(receiver, 'microbitMore_getCompassHeading', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+                }
+                break;
+            case 'pitch':
+                if (args.length === 0){
+                    block = this._changeBlock(receiver, 'microbitMore_getPitch', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+                }
+                break;
+            case 'roll':
+                if (args.length === 0){
+                    block = this._changeBlock(receiver, 'microbitMore_getRoll', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+                }
+                break;
+            case 'get_magnetic_force':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._changeBlock(receiver, 'microbitMore_getMagneticForce', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addFieldInput(
+                        block, 'AXIS', 'microbitMore_menu_axis', 'axis',
+                        args[0], 'absolute'
+                    );
+                }
+                break;
+            case 'get_acceleration':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._changeBlock(receiver, 'microbitMore_getAcceleration', 'value');
+                    delete this._context.blocks[receiver.inputs.EXPRESSION.block];
+                    delete receiver.inputs.EXPRESSION;
+
+                    this._addFieldInput(
+                        block, 'AXIS', 'microbitMore_menu_axis', 'axis',
+                        args[0], 'x'
                     );
                 }
                 break;

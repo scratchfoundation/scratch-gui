@@ -143,10 +143,20 @@ export default function (Generator) {
     };
 
     Generator.microbitMore_getPinEventTimestamp = function (block) {
-        block.isStatement = true;
         const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
         const event = Generator.getFieldValue(block, 'EVENT') || null;
         return `microbit_more.get_pin_event_timestamp(${pin}, ${event})\n`;
+    };
+
+    Generator.microbitMore_getSharedData = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_shared_data(${index})\n`;
+    };
+
+    Generator.microbitMore_setSharedData = function (block) {
+        const index = Generator.valueToCode(block, 'INDEX', Generator.ORDER_NONE) || null;
+        const value = Generator.valueToCode(block, 'VALUE', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_shared_data(${index}, ${value})\n`;
     };
 
     Generator.microbitMore_menu_buttons = function (block) {
@@ -207,6 +217,16 @@ export default function (Generator) {
     Generator.microbitMore_menu_pinEventTimestampMenu = function (block) {
         const pinEventTimestampMenu = Generator.getFieldValue(block, 'pinEventTimestampMenu') || 5;
         return [pinEventTimestampMenu, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_sharedDataIndex = function (block) {
+        const sharedDataIndex = Generator.getFieldValue(block, 'sharedDataIndex') || 'absolute';
+        return [sharedDataIndex, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_axis = function (block) {
+        const axis = Generator.getFieldValue(block, 'axis') || '0';
+        return [axis, Generator.ORDER_ATOMIC];
     };
 
     Generator.matrix = function (block) {

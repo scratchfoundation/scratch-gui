@@ -40,8 +40,9 @@ const Player = ({isPlayerOnly, projectId}) => (
                 <React.Fragment>
                     <Title />
                     <p>
-                        <b>Important update:</b> TurboWarp has moved from <i>turbowarp.github.io</i> to <i>turbowarp.xyz</i>.
-                        Links to the old site will still work.
+                        <b>Another important update: </b>
+                        TurboWarp has moved to <i>turbowarp.org</i> due to some issues encountered with the old .xyz domain.
+                        This is the final time TurboWarp will move domains.
                     </p>
                 </React.Fragment>
             ) : null}

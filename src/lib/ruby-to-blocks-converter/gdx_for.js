@@ -11,7 +11,7 @@ const GdxForConverter = {
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
             case 'gdx_for_acceleration':
-                if (args.length === 1 && this._isString(args[0])) {
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
                     block = this._createBlock('gdxfor_getAcceleration', 'value');
                     this._addInput(
                         block,
@@ -26,7 +26,7 @@ const GdxForConverter = {
                 }
                 break;
             case 'gdx_for_tilted?':
-                if (args.length === 1 && this._isString(args[0])) {
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
                     block = this._createBlock('gdxfor_isTilted', 'value');
                     this._addInput(
                         block,
@@ -36,7 +36,7 @@ const GdxForConverter = {
                 }
                 break;
             case 'gdx_for_tilt_angle':
-                if (args.length === 1 && this._isString(args[0])) {
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
                     block = this._createBlock('gdxfor_getTilt', 'value');
                     this._addInput(
                         block,
@@ -51,7 +51,7 @@ const GdxForConverter = {
                 }
                 break;
             case 'gdx_for_spin_speed':
-                if (args.length === 1 && this._isString(args[0])){
+                if (args.length === 1 && this._isStringOrBlock(args[0])){
                     block = this._createBlock('gdxfor_getSpinSpeed', 'value');
                     this._addInput(
                         block,
@@ -64,7 +64,7 @@ const GdxForConverter = {
         } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
             name === 'when' &&
             args.length === 2 && args[0].type === 'sym' &&
-            this._isString(args[1]) &&
+            this._isStringOrBlock(args[1]) &&
             rubyBlockArgs && rubyBlockArgs.length === 0 &&
             rubyBlock) {
             switch (args[0].value) {

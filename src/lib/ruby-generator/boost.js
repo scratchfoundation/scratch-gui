@@ -47,7 +47,7 @@ export default function (Generator) {
     Generator.boost_setMotorDirection = function (block) {
         const motorid = Generator.valueToCode(block, 'MOTOR_ID', Generator.ORDER_NONE) || null;
         const motordirection = Generator.valueToCode(block, 'MOTOR_DIRECTION') || null;
-        return `boost_motor_set_direction_for(${motorid}, ${motordirection})\n`
+        return `boost_motor_set_direction_for(${motorid}, ${motordirection})\n`;
     };
 
     Generator.boost_menu_MOTOR_REPORTER_ID = function (block) {
@@ -58,7 +58,7 @@ export default function (Generator) {
 
     Generator.boost_getMotorPosition = function (block) {
         const motorreporterid = Generator.valueToCode(block, 'MOTOR_REPORTER_ID', Generator.ORDER_NONE) || null;
-        return `boost_motor_get_position(${motorreporterid})\n`
+        return `boost_motor_get_position(${motorreporterid})\n`;
     };
 
     Generator.boost_menu_COLOR = function (block) {
@@ -70,12 +70,12 @@ export default function (Generator) {
     Generator.boost_whenColor = function (block) {
         block.isStatement = true;
         const color = Generator.valueToCode(block, 'COLOR', Generator.ORDER_NONE) || null;
-        return `${Generator.spriteName()}.when(:boost_color, ${color}) do\n`
+        return `${Generator.spriteName()}.when(:boost_color, ${color}) do\n`;
     };
 
     Generator.boost_seeingColor = function (block) {
         const color = Generator.valueToCode(block, 'COLOR', Generator.ORDER_NONE) || null;
-        return `boost_seeing_color?(${color})\n`
+        return `boost_seeing_color?(${color})\n`;
     };
 
     Generator.boost_menu_TILT_DIRECTION_ANY = function (block) {
@@ -87,7 +87,7 @@ export default function (Generator) {
     Generator.boost_whenTilted = function (block) {
         block.isStatement = true;
         const tiltdirectionany = Generator.valueToCode(block, 'TILT_DIRECTION_ANY', Generator.ORDER_NONE) || null;
-        return `${Generator.spriteName()}.when(:boost_tilted, ${tiltdirectionany}) do\n`
+        return `${Generator.spriteName()}.when(:boost_tilted, ${tiltdirectionany}) do\n`;
     };
 
     Generator.boost_menu_TILT_DIRECTION = function (block) {
@@ -98,12 +98,12 @@ export default function (Generator) {
 
     Generator.boost_getTiltAngle = function (block) {
         const tiltdirection = Generator.valueToCode(block, 'TILT_DIRECTION', Generator.ORDER_NONE) || null;
-        return `boost_get_tilt_angle(${tiltdirection})\n`
+        return `boost_get_tilt_angle(${tiltdirection})\n`;
     };
 
     Generator.boost_setLightHue = function (block) {
         const hue = Generator.valueToCode(block, 'HUE', Generator.ORDER_NONE) || null;
-        return `boost_set_light_color(${hue})\n`
+        return `boost_set_light_color(${hue})\n`;
     };
 
     return Generator;

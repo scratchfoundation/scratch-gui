@@ -8,7 +8,6 @@ const GdxForConverter = {
     // eslint-disable-next-line no-unused-vars
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
-        console.log(rubyBlockArgs)
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
             case 'gdx_for_acceleration':
@@ -64,7 +63,7 @@ const GdxForConverter = {
             }
         } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
             name === 'when' &&
-            args.length === 2 && args[0].type === "sym" &&
+            args.length === 2 && args[0].type === 'sym' &&
             this._isString(args[1]) &&
             rubyBlockArgs && rubyBlockArgs.length === 0 &&
             rubyBlock) {

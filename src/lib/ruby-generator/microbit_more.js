@@ -186,37 +186,37 @@ export default function (Generator) {
     };
 
     Generator.microbitMore_menu_touchPins = function (block) {
-        const touchPins = Generator.getFieldValue(block, 'touchPins') || '0';
+        const touchPins = Generator.quote_(Generator.getFieldValue(block, 'touchPins') || '0');
         return [touchPins, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_gpio = function (block) {
-        const gpio = Generator.getFieldValue(block, 'gpio') || '0';
+        const gpio = Generator.quote_(Generator.getFieldValue(block, 'gpio') || '0');
         return [gpio, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_axis = function (block) {
-        const axis = Generator.getFieldValue(block, 'axis') || 'absolute';
+        const axis = Generator.quote_(Generator.getFieldValue(block, 'axis') || 'absolute');
         return [axis, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_analogIn = function (block) {
-        const analogIn = Generator.getFieldValue(block, 'analogIn') || '0';
+        const analogIn = Generator.quote_(Generator.getFieldValue(block, 'analogIn') || '0');
         return [analogIn, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_pinMode = function (block) {
-        const pinMode = Generator.getFieldValue(block, 'pinMode') || 'pullUp';
+        const pinMode = Generator.quote_(Generator.getFieldValue(block, 'pinMode') || 'pullUp');
         return [pinMode, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_digitalValue = function (block) {
-        const digitalValue = Generator.getFieldValue(block, 'digitalValue') || '0';
+        const digitalValue = Generator.quote_(Generator.getFieldValue(block, 'digitalValue') || '0');
         return [digitalValue, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_pinEventTypeMenu = function (block) {
-        const pinEventTypeMenu = Generator.getFieldValue(block, 'pinEventTypeMenu') || 0;
+        const pinEventTypeMenu = Generator.quote_(Generator.getFieldValue(block, 'pinEventTypeMenu') || 0);
         return [pinEventTypeMenu, Generator.ORDER_ATOMIC];
     };
 

@@ -102,8 +102,6 @@ const Wedo2Converter = {
         } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
                     name === 'when' &&
                     args.length >= 1 && args[0].type === 'sym' &&
-                    this._isStringOrBlock(args[0]) &&
-                    this._isNumberOrBlock(args[1]) &&
                     rubyBlockArgs && rubyBlockArgs.length === 0 &&
                     rubyBlock) {
             switch (name) {

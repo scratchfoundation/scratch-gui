@@ -21,6 +21,7 @@ import MyBlocksConverter from './my-blocks';
 import MusicConverter from './music';
 import PenConverter from './pen';
 import MicroBitConverter from './microbit';
+import MicroBitMoreConverter from './microbit_more';
 import EV3Converter from './ev3';
 import Wedo2Converter from './wedo2';
 import GdxForConverter from './gdx_for';
@@ -80,6 +81,7 @@ class RubyToBlocksConverter {
             MusicConverter,
             PenConverter,
             MicroBitConverter,
+            MicroBitMoreConverter,
             EV3Converter,
             Wedo2Converter,
             GdxForConverter,

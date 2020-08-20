@@ -109,6 +109,26 @@ export default function (Generator) {
         return `microbit_more.set_pin_mode(${pin}, ${mode})\n`;
     };
 
+    Generator.microbitMore_setOutput = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const level = Generator.valueToCode(block, 'LEVEL', Generator.ORDER_NONE) || null;
+        return `microbit_more.set_output(${pin}, ${level})\n`;
+    };
+
+    Generator.microbitMore_setPWM = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const level = Generator.valueToCode(block, 'LEVEL', Generator.ORDER_NONE) || null;
+        return `microbit_more.set_pwm(${pin}, ${level})\n`;
+    };
+
+    Generator.microbitMore_setServo = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const angle = Generator.valueToCode(block, 'ANGLE', Generator.ORDER_NONE) || null;
+        const range = Generator.valueToCode(block, 'RANGE', Generator.ORDER_NONE) || 2000;
+        const center = Generator.valueToCode(block, 'CENTER', Generator.ORDER_NONE) || 1500;
+        return `microbit_more.set_servo(${pin}, ${angle}, ${range}, ${center})\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -151,6 +171,11 @@ export default function (Generator) {
 
     Generator.microbitMore_menu_pinMode = function (block) {
         const axis = Generator.getFieldValue(block, 'pinMode') || 'pullUp';
+        return [axis, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_digitalValue = function (block) {
+        const axis = Generator.getFieldValue(block, 'digitalValue') || '0';
         return [axis, Generator.ORDER_ATOMIC];
     };
 

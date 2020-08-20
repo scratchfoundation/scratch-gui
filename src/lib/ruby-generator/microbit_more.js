@@ -63,6 +63,36 @@ export default function (Generator) {
         return `microbit_more.pin_connected?(${pin})\n`;
     };
 
+    Generator.microbitMore_getLightLevel = function () {
+        return `microbit_more.light_level\n`;
+    };
+
+    Generator.microbitMore_getTemperature = function () {
+        return `microbit_more.temperature\n`;
+    };
+
+    Generator.microbitMore_getCompassHeading = function () {
+        return `microbit_more.compass_heading\n`;
+    };
+
+    Generator.microbitMore_getPitch = function () {
+        return `microbit_more.pitch\n`;
+    };
+
+    Generator.microbitMore_getRoll = function () {
+        return `microbit_more.roll\n`;
+    };
+
+    Generator.microbitMore_getMagneticForce = function (block) {
+        const axis = Generator.valueToCode(block, 'AXIS', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_magnetic_force(${axis})\n`;
+    };
+
+    Generator.microbitMore_getAcceleration = function (block) {
+        const axis = Generator.valueToCode(block, 'AXIS', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_acceleration(${axis})\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -91,6 +121,11 @@ export default function (Generator) {
     Generator.microbitMore_menu_gpio = function (block) {
         const gpio = Generator.getFieldValue(block, 'gpio') || '0';
         return [gpio, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_axis = function (block) {
+        const axis = Generator.getFieldValue(block, 'axis') || 'absolute';
+        return [axis, Generator.ORDER_ATOMIC];
     };
 
     Generator.matrix = function (block) {

@@ -159,6 +159,12 @@ export default function (Generator) {
         return `microbit_more.get_shared_data(${index}, ${value})\n`;
     };
 
+    Generator.microbitMore_whenConnectionChanged = function (block) {
+        block.isStatement = true;
+        const state = Generator.getFieldValue(block, 'STATE') || null;
+        return `${Generator.spriteName()}.when(:microbit_more_connection_changed, ${state}) do\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -224,9 +230,9 @@ export default function (Generator) {
         return [sharedDataIndex, Generator.ORDER_ATOMIC];
     };
 
-    Generator.microbitMore_menu_axis = function (block) {
-        const axis = Generator.getFieldValue(block, 'axis') || '0';
-        return [axis, Generator.ORDER_ATOMIC];
+    Generator.microbitMore_menu_connectionStateMenu = function (block) {
+        const connectionStateMenu = Generator.getFieldValue(block, 'connectionStateMenu') || 'connected';
+        return [connectionStateMenu, Generator.ORDER_ATOMIC];
     };
 
     Generator.matrix = function (block) {

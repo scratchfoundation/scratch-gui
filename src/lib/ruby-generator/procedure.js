@@ -17,7 +17,7 @@ export default function (Generator) {
         if (methodName.length === 0) {
             methodName = 'procedure';
         }
-        let args = [];
+        const args = [];
         const paramNamesIdsAndDefaults =
               Generator.currentTarget.blocks.getProcedureParamNamesIdsAndDefaults(block.mutation.proccode);
         if (isCall) {
@@ -33,7 +33,12 @@ export default function (Generator) {
                 args.push(Generator.nosToCode(value));
             }
         } else {
-            args = paramNamesIdsAndDefaults[0];
+            for (let i = 0; i < paramNamesIdsAndDefaults[0].length; i++) {
+                // Escape identity and Change first letter to lower case.
+                let paramName = Generator.escapeVariableName(paramNamesIdsAndDefaults[0][i]);
+                paramName = paramName.replace(/^[A-Z]/, firstLetter => firstLetter.toLowerCase());
+                args.push(paramName);
+            }
         }
         const argsString = args.length > 0 ? `(${args.join(', ')})` : '';
         return `${isCall ? '' : 'def self.'}${methodName}${argsString}\n`;

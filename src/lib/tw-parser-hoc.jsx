@@ -19,7 +19,7 @@ const getRoot = () => {
     return `/${path.join('/')}`;
 };
 
-const getUseRouting = () => ['turbowarp.xyz', 'localhost'].includes(location.hostname);
+const getUseRouting = () => ['turbowarp.org', 'localhost'].includes(location.hostname);
 
 const playerPath = getRoot();
 const editorPath = `${playerPath}editor.html`;

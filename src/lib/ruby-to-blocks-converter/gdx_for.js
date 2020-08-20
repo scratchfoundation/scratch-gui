@@ -8,10 +8,11 @@ const GdxForConverter = {
     // eslint-disable-next-line no-unused-vars
     onSend: function (receiver, name, args, rubyBlockArgs, rubyBlock) {
         let block;
+        console.log(rubyBlockArgs)
         if ((this._isSelf(receiver) || receiver === Opal.nil) && !rubyBlock) {
             switch (name) {
             case 'gdx_for_acceleration':
-                if (args.length === 1) {
+                if (args.length === 1 && this._isString(args[0])) {
                     block = this._createBlock('gdxfor_getAcceleration', 'value');
                     this._addInput(
                         block,
@@ -21,37 +22,52 @@ const GdxForConverter = {
                 }
                 break;
             case 'gdx_for_force':
-                block = this._createBlock('gdxfor_getForce', 'value');
+                if (args.length === 0){
+                    block = this._createBlock('gdxfor_getForce', 'value');
+                }
                 break;
             case 'gdx_for_tilted?':
-                block = this._createBlock('gdxfor_isTilted', 'value');
-                this._addInput(
-                    block,
-                    'TILT',
-                    this._createFieldBlock('gdxfor_menu_tiltAnyOptions', 'tiltAnyOptions', args[0])
-                );
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createBlock('gdxfor_isTilted', 'value');
+                    this._addInput(
+                        block,
+                        'TILT',
+                        this._createFieldBlock('gdxfor_menu_tiltAnyOptions', 'tiltAnyOptions', args[0])
+                    );
+                }
                 break;
             case 'gdx_for_tilt_angle':
-                block = this._createBlock('gdxfor_getTilt', 'value');
-                this._addInput(
-                    block,
-                    'TILT',
-                    this._createFieldBlock('gdxfor_menu_tiltOptions', 'tiltOptions', args[0])
-                );
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createBlock('gdxfor_getTilt', 'value');
+                    this._addInput(
+                        block,
+                        'TILT',
+                        this._createFieldBlock('gdxfor_menu_tiltOptions', 'tiltOptions', args[0])
+                    );
+                }
                 break;
             case 'gdx_for_falling?':
-                block = this._createBlock('gdxfor_isFreeFalling', 'value');
+                if (args.length === 0) {
+                    block = this._createBlock('gdxfor_isFreeFalling', 'value');
+                }
                 break;
             case 'gdx_for_spin_speed':
-                block = this._createBlock('gdxfor_getSpinSpeed', 'value');
-                this._addInput(
-                    block,
-                    'DIRECTION',
-                    this._createFieldBlock('gdxfor_menu_axisOptions', 'axisOptions', args[0])
-                );
+                if (args.length === 1 && this._isString(args[0])){
+                    block = this._createBlock('gdxfor_getSpinSpeed', 'value');
+                    this._addInput(
+                        block,
+                        'DIRECTION',
+                        this._createFieldBlock('gdxfor_menu_axisOptions', 'axisOptions', args[0])
+                    );
+                }
                 break;
             }
-        } else {
+        } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
+            name === 'when' &&
+            args.length === 2 && args[0].type === "sym" &&
+            this._isString(args[1]) &&
+            rubyBlockArgs && rubyBlockArgs.length === 0 &&
+            rubyBlock) {
             switch (args[0].value) {
             case 'gdx_for_gesture':
                 block = this._createBlock('gdxfor_whenGesture', 'hat');

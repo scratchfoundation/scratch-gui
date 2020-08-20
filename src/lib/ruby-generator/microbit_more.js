@@ -93,6 +93,22 @@ export default function (Generator) {
         return `microbit_more.get_acceleration(${axis})\n`;
     };
 
+    Generator.microbitMore_getAnalogValue = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_analog_value(${pin})\n`;
+    };
+
+    Generator.microbitMore_getDigitalValue = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        return `microbit_more.get_digital_value(${pin})\n`;
+    };
+
+    Generator.microbitMore_setPinMode = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const mode = Generator.getFieldValue(block, 'MODE') || null;
+        return `microbit_more.set_pin_mode(${pin}, ${mode})\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -125,6 +141,16 @@ export default function (Generator) {
 
     Generator.microbitMore_menu_axis = function (block) {
         const axis = Generator.getFieldValue(block, 'axis') || 'absolute';
+        return [axis, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_analogIn = function (block) {
+        const axis = Generator.getFieldValue(block, 'analogIn') || '0';
+        return [axis, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_pinMode = function (block) {
+        const axis = Generator.getFieldValue(block, 'pinMode') || 'pullUp';
         return [axis, Generator.ORDER_ATOMIC];
     };
 

@@ -129,6 +129,26 @@ export default function (Generator) {
         return `microbit_more.set_servo(${pin}, ${angle}, ${range}, ${center})\n`;
     };
 
+    Generator.microbitMore_setPinEventType = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const eventType = Generator.getFieldValue(block, 'EVENT_TYPE') || null;
+        return `microbit_more.set_pin_event_type(${pin}, ${eventType})\n`;
+    };
+
+    Generator.microbitMore_whenPinEvent = function (block) {
+        block.isStatement = true;
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const event = Generator.getFieldValue(block, 'EVENT') || null;
+        return `${Generator.spriteName()}.when(:microbit_more_pin_event, ${pin}, ${event}) do\n`;
+    };
+
+    Generator.microbitMore_getPinEventTimestamp = function (block) {
+        block.isStatement = true;
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        const event = Generator.getFieldValue(block, 'EVENT') || null;
+        return `microbit_more.get_pin_event_timestamp(${pin}, ${event})\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -165,18 +185,28 @@ export default function (Generator) {
     };
 
     Generator.microbitMore_menu_analogIn = function (block) {
-        const axis = Generator.getFieldValue(block, 'analogIn') || '0';
-        return [axis, Generator.ORDER_ATOMIC];
+        const analogIn = Generator.getFieldValue(block, 'analogIn') || '0';
+        return [analogIn, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_pinMode = function (block) {
-        const axis = Generator.getFieldValue(block, 'pinMode') || 'pullUp';
-        return [axis, Generator.ORDER_ATOMIC];
+        const pinMode = Generator.getFieldValue(block, 'pinMode') || 'pullUp';
+        return [pinMode, Generator.ORDER_ATOMIC];
     };
 
     Generator.microbitMore_menu_digitalValue = function (block) {
-        const axis = Generator.getFieldValue(block, 'digitalValue') || '0';
-        return [axis, Generator.ORDER_ATOMIC];
+        const digitalValue = Generator.getFieldValue(block, 'digitalValue') || '0';
+        return [digitalValue, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_pinEventTypeMenu = function (block) {
+        const pinEventTypeMenu = Generator.getFieldValue(block, 'pinEventTypeMenu') || 0;
+        return [pinEventTypeMenu, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_pinEventTimestampMenu = function (block) {
+        const pinEventTimestampMenu = Generator.getFieldValue(block, 'pinEventTimestampMenu') || 5;
+        return [pinEventTimestampMenu, Generator.ORDER_ATOMIC];
     };
 
     Generator.matrix = function (block) {

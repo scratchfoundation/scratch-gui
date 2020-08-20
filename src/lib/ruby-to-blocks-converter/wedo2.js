@@ -73,6 +73,63 @@ const Wedo2Converter = {
                     this._addNumberInput(block, 'HUE', 'math_number', args[0], 50);
                 }
                 break;
+            case 'wedo2_distance':
+                if (args.length === 0) {
+                    block = this._createBlock('wedo2_getDistance', 'value');
+                }
+                break;
+            case 'wedo2_tilted':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createBlock('wedo2_isTilted', 'value');
+                    this._addInput(
+                        block,
+                        'TILT_DIRECTION_ANY',
+                        this._createFieldBlock('wedo2_menu_TILT_DIRECTION_ANY', 'TILT_DIRECTION_ANY', args[0])
+                    );
+                }
+                break;
+            case 'wedo2_tilt_angle':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createBlock('wedo2_getTiltAngle', 'value');
+                    this._addInput(
+                        block,
+                        'TILT_DIRECTION',
+                        this._createFieldBlock('wedo2_menu_TILT_DIRECTION', 'TILT_DIRECTION', args[0])
+                    );
+                }
+                break;
+            }
+        } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
+                    name === 'when' &&
+                    args.length >= 1 && args[0].type === 'sym' &&
+                    this._isStringOrBlock(args[0]) &&
+                    this._isNumberOrBlock(args[1]) &&
+                    rubyBlockArgs && rubyBlockArgs.length === 0 &&
+                    rubyBlock) {
+            switch (name) {
+            case 'wedo2_when_tilted':
+                if (args.length === 1 && this._isString(args[0])) {
+                    block = this._createBlock('wedo2_whenTilted', 'hat');
+                    this._addInput(
+                        block,
+                        'TILT_DIRECTION_ANY',
+                        this._createFieldBlock('wedo2_menu_TILT_DIRECTION_ANY', 'TILT_DIRECTION_ANY', args[0])
+                    );
+                    this._setParent(rubyBlock, block);
+                }
+                break;
+            case 'wedo2_when_distance':
+                if (args.length === 2 && this._isString(args[0]) && this._isNumberOrBlock(args[1])) {
+                    block = this._createBlock('wedo2_whenDistance', 'hat');
+                    this._addInput(
+                        block,
+                        'OP',
+                        this._createFieldBlock('wedo2_menu_OP', 'OP', args[0])
+                    );
+                    this._addNumberInput(block, 'REFERENCE', 'math_number', args[1], 50);
+                    this._setParent(rubyBlock, block);
+                }
+                break;
             }
         }
         return block;

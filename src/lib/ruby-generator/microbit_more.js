@@ -58,6 +58,11 @@ export default function (Generator) {
         return `${Generator.spriteName()}.when(:microbit_more_pin_connected, ${pin}) do\n`;
     };
 
+    Generator.microbitMore_isPinConnected = function (block) {
+        const pin = Generator.valueToCode(block, 'PIN', Generator.ORDER_NONE) || null;
+        return `microbit_more.pin_connected?(${pin})\n`;
+    };
+
     Generator.microbitMore_menu_buttons = function (block) {
         const buttons = Generator.quote_(Generator.getFieldValue(block, 'buttons') || 'A');
         return [buttons, Generator.ORDER_ATOMIC];
@@ -81,6 +86,11 @@ export default function (Generator) {
     Generator.microbitMore_menu_touchPins = function (block) {
         const touchPins = Generator.getFieldValue(block, 'touchPins') || '0';
         return [touchPins, Generator.ORDER_ATOMIC];
+    };
+
+    Generator.microbitMore_menu_gpio = function (block) {
+        const gpio = Generator.getFieldValue(block, 'gpio') || '0';
+        return [gpio, Generator.ORDER_ATOMIC];
     };
 
     Generator.matrix = function (block) {

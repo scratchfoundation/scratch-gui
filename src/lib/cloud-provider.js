@@ -41,7 +41,11 @@ class CloudProvider {
         this.connectionAttempts += 1;
 
         try {
-            this.connection = new WebSocket((location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost);
+            // tw: only add ws:// or wss:// if it not already present in the cloudHost
+            if (!(this.cloudHost.includes('ws://') || this.cloudHost.includes('wss://'))) {
+                this.cloudHost = (location.protocol === 'http:' ? 'ws://' : 'wss://') + this.cloudHost;
+            }
+            this.connection = new WebSocket(this.cloudHost);
         } catch (e) {
             log.warn('Websocket support is not available in this browser', e);
             this.connection = null;

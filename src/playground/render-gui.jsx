@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 }
 
 const searchParams = new URLSearchParams(location.search);
-const cloudHost = searchParams.get('cloudhost') || 'wss://clouddata.turbowarp.org';
+const cloudHost = searchParams.get('cloud_host') || 'wss://clouddata.turbowarp.org';
 
 const Player = ({isPlayerOnly, projectId}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>

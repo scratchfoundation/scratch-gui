@@ -25,6 +25,9 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
     window.onbeforeunload = () => true;
 }
 
+const searchParams = new URLSearchParams(location.search);
+const cloudHost = searchParams.get('cloudhost') || 'clouddata.turbowarp.org';
+
 const Player = ({isPlayerOnly, projectId}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
@@ -48,7 +51,7 @@ const Player = ({isPlayerOnly, projectId}) => (
             ) : null}
             <GUI
                 onClickLogo={onClickLogo}
-                cloudHost={'cirrus.garbomuffin.com'}
+                cloudHost={cloudHost}
                 canSave={false}
                 canEditTitle
                 enableCommunity

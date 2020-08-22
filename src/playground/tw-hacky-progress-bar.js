@@ -37,6 +37,8 @@ if (isSupported()) {
         progressEl.style.width = `${10 + (progress * 90)}%`;
         if (progress >= 1) {
             hideProgress();
+        } else {
+            showProgress();
         }
         clearTimeout(hideTimeout);
         hideTimeout = setTimeout(hideProgress, HIDE_AFTER);
@@ -58,7 +60,6 @@ if (isSupported()) {
         if (isProjectDataRequest(url, opts)) {
             // `url` is known to be a string now
 
-            showProgress();
             setProgress(0);
 
             return new Promise((resolve, reject) => {
@@ -98,7 +99,7 @@ if (isSupported()) {
             // check that this is the right object
             if (message && typeof message === 'object') {
                 if ('url' in message && 'id' in message && 'options' in message) {
-                    showProgress();
+                    setProgress(0);
                     total++;
                 }
             }

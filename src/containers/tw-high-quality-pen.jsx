@@ -11,12 +11,6 @@ class HighQualityPen extends React.Component {
         ]);
     }
     toggleHighQualityPen () {
-        if (!this.props.highQualityPen) {
-            // todo: temporary until the mentioned bugs are fixed
-            if (!confirm("This is an experimental option that automatically resizes the pen layer to make it look smoother in fullscreen. Keep in mind:\n- the pen layer is CLEARED any time it is resized\n- please start the project at least once before enabling this, otherwise it may scale wrong\n- this may reduce performance\nI'll try to get most of these fixed eventually.")) {
-                return;
-            }
-        }
         this.props.vm.renderer.setUseHighQualityPen(!this.props.highQualityPen);
     }
     render () {

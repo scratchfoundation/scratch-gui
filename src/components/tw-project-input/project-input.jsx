@@ -12,6 +12,7 @@ class ProjectInput extends React.Component {
         bindAll(this, [
             'handleKeyDown',
             'handleChange',
+            'handleBlur',
             'handleFocus'
         ]);
         this.state = {
@@ -39,6 +40,9 @@ class ProjectInput extends React.Component {
             projectId: this.readProjectId(e)
         });
     }
+    handleBlur () {
+        this.props.setProjectId(this.state.projectId);
+    }
     handleKeyDown (e) {
         if (e.key === 'Enter') {
             this.props.setProjectId(this.state.projectId);
@@ -60,6 +64,7 @@ class ProjectInput extends React.Component {
                 value={`https://scratch.mit.edu/projects/${projectId}`}
                 autoFocus
                 className={styles.input}
+                onBlur={this.handleBlur}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}
                 onFocus={this.handleFocus}

@@ -71,7 +71,8 @@ class Stage extends React.Component {
             // default color
             this.props.vm.renderer.draw();
 
-            // tw: add handlers for our events
+            // tw: implement high quality pen
+            this.renderer.setUseHighQualityPen(this.props.highQualityPen);
             this.props.vm.renderer.on('UseHighQualityPenChanged', this.props.onHighQualityPenChanged);
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
@@ -437,8 +438,9 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
-    // tw: handler for syncing high quality pen option changes
+    // tw: High quality pen properties
     onHighQualityPenChanged: PropTypes.func,
+    highQualityPen: PropTypes.bool,
     // tw: Disable editing target changing in certain circumstances to avoid lag
     disableEditingTargetChange: PropTypes.bool,
     isColorPicking: PropTypes.bool,
@@ -457,6 +459,8 @@ Stage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    // tw: High quality pen property
+    highQualityPen: state.scratchGui.tw.highQualityPen,
     // tw: Disable editing target changing in certain circumstances to avoid lag
     disableEditingTargetChange: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly,
     isColorPicking: state.scratchGui.colorPicker.active,

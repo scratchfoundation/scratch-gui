@@ -34,12 +34,19 @@ const getInitialUsername = () => {
     return username;
 };
 
+const getInitialHighQualityPen = () => {
+    if (searchParams.has('hqpen')) {
+        return true;
+    }
+    return false;
+};
+
 export const initialState = {
     compatibility: getInitialCompatibility(),
     compiler: true,
     cloud: true,
     username: getInitialUsername(),
-    highQualityPen: false
+    highQualityPen: getInitialHighQualityPen()
 };
 
 const reducer = function (state, action) {

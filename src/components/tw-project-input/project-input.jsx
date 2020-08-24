@@ -41,10 +41,12 @@ class ProjectInput extends React.Component {
         });
     }
     handleBlur () {
-        this.props.setProjectId(this.state.projectId);
+        if (this.state.projectId) {
+            this.props.setProjectId(this.state.projectId);
+        }
     }
     handleKeyDown (e) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && this.state.projectId) {
             this.props.setProjectId(this.state.projectId);
             this.input.blur();
         }

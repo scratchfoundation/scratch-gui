@@ -62,7 +62,7 @@ class SaveLoadTab extends React.Component {
         };
     }
 
-    render () {
+    loadScratchFile (slot){
         const {
             vm
         } = this.props;
@@ -70,7 +70,15 @@ class SaveLoadTab extends React.Component {
         if (!vm.editingTarget) {
             return null;
         }
+        return async () => {
+            const blob = await fetch(mv2.savedProjectStates[slot.toString()]).then(res => res.blob());
+            blob.arrayBuffer().then(buffer => {
+                vm.loadProject(buffer);
+            });
+        };
+    }
 
+    render () {
         return (
             <div>
                 <div>
@@ -163,175 +171,34 @@ class SaveLoadTab extends React.Component {
                 {/* TODO: Refactor loading into a function*/}
 
                 <div>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['0']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer).then(() => {
-                                            vm.loadProject(buffer);
-                                        });
-                                    });
-
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('0')} >
                         Load from Slot 0
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['1']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('1')} >
                         Load from Slot 1
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['2']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('2')} >
                         Load from Slot 2
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['3']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('3')} >
                         Load from Slot 3
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['4']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('4')} >
                         Load from Slot 4
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['5']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('5')} >
                         Load from Slot 5
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['6']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('6')} >
                         Load from Slot 6
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['7']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('7')} >
                         Load from Slot 7
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['8']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('8')} >
                         Load from Slot 8
                     </button>
-                    <button
-                        onClick={
-                            function () {
-                                (async () => {
-                                    const parsed = JSON.parse(mv2.savedProjectStates['9']);
-                                    const blob = await fetch(parsed.blob).then(res => res.blob());
-                                    blob.arrayBuffer().then(buffer => {
-                                        vm.loadProject(buffer)
-                                            .then(() => {
-                                            });
-                                    });
-                                })();
-                            }
-                        }
-                    >
+                    <button onClick={this.loadScratchFile('9')} >
                         Load from Slot 9
                     </button>
                 </div>

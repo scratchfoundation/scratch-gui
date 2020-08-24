@@ -45,9 +45,9 @@ class SB3Downloader extends React.Component {
             // convert to base64 -> convert to string -> send through webview
             (async () => {
                 const b64 = await blobToBase64(content);
-                const blobAsJsonString = JSON.stringify({blob: b64});
+
                 // eslint-disable-next-line no-undef
-                mv2.savedProjectStates[slot] = blobAsJsonString;
+                mv2.savedProjectStates[slot.toString()] = b64;
                 mv2.send_REST(`save${JSON.stringify(mv2.savedProjectStates)}`);
             })();
 

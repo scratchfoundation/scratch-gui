@@ -186,22 +186,21 @@ workflows:
       - store_dist:
           requires:
             - build
-      # Disable deployment while running in parallel with Travis
-      # - deploy-npm:
-      #     requires:
-      #       - lint
-      #       - unit
-      #       - integration
-      #       - build
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #           - develop
-      #           - /^hotfix\/.*/
-      # - deploy-gh-pages:
-      #     requires:
-      #       - lint
-      #       - unit
-      #       - integration
-      #       - build
+      - deploy-npm:
+          requires:
+            - lint
+            - unit
+            - integration
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - /^hotfix\/.*/
+      - deploy-gh-pages:
+          requires:
+            - lint
+            - unit
+            - integration
+            - build

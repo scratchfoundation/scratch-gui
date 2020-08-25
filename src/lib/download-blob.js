@@ -14,10 +14,13 @@ export default (filename, blob) => {
         downloadLink.download = filename;
         downloadLink.type = blob.type;
         downloadLink.click();
-        document.body.removeChild(downloadLink);
-        window.URL.revokeObjectURL(url);
+        // remove the link after a timeout to prevent a crash on iOS 13 Safari
+        window.setTimeout(() => {
+            document.body.removeChild(downloadLink);
+            window.URL.revokeObjectURL(url);
+        }, 1000);
     } else {
-        // iOS Safari, open a new page and set href to data-uri
+        // iOS 12 Safari, open a new page and set href to data-uri
         let popup = window.open('', '_blank');
         const reader = new FileReader();
         reader.onloadend = function () {

@@ -201,8 +201,8 @@ module.exports = [
                 publicPath: `${STATIC_PATH}/`
             },
             externals: {
-                React: 'react',
-                ReactDOM: 'react-dom'
+                'react': 'react',
+                'react-dom': 'react-dom'
             },
             module: {
                 rules: base.module.rules.concat([

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,6 +13,8 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
+import {sendBlockArtie} from '../lib/artie-api';
+import {updateArtieBlock} from '../reducers/artie-api';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -37,6 +40,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('targetsUpdate', this.handleTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
+            this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockArtieUpdate);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
@@ -121,6 +125,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 shouldUpdateTargets,
                 shouldUpdateProjectChanged,
                 onBlockDragUpdate,
+                onBlockArtieUpdate,
                 onGreenFlag,
                 onKeyDown,
                 onKeyUp,
@@ -144,6 +149,7 @@ const vmListenerHOC = function (WrappedComponent) {
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
         onBlockDragUpdate: PropTypes.func.isRequired,
+        onBlockArtieUpdate: PropTypes.func.isRequired,
         onGreenFlag: PropTypes.func,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
@@ -187,8 +193,12 @@ const vmListenerHOC = function (WrappedComponent) {
         onMonitorsUpdate: monitorList => {
             dispatch(updateMonitors(monitorList));
         },
-        onBlockDragUpdate: areBlocksOverGui => {
+        onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
+        },
+        onBlockArtieUpdate: (blocks, areBlocksOverGui) => {
+            sendBlockArtie(blocks);
+            dispatch(updateArtieBlock(areBlocksOverGui));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

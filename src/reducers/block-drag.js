@@ -1,4 +1,4 @@
-const BLOCK_DRAG_UPDATE = 'scratch-gui/block-drag/BLOCK_DRAG_UPDATE';
+const BLOCK_DRAG_UPDATE = 'scratch-gui/block-drag/BLOCK_UPDATE';
 
 const initialState = false;
 

@@ -59,6 +59,20 @@ const BoostConverter = {
                     );
                     this._addNumberInput(block, 'POWER', 'math_number', args[1], 100);
                 }
+            case 'boost_motor_set_direction_for':
+                if (args.length === 2 && this._isStringOrBlock(args[0]) && this._isStringOrBlock(args[1])) {
+                    block = this._createBlock('boost_setMotorDirection', 'statement');
+                    this._addInput(
+                        block,
+                        'MOTOR_ID',
+                        this._createFieldBlock('boost_menu_MOTOR_ID', 'MOTOR_ID', args[0])
+                    );
+                    this._addInput(
+                        block,
+                        'MOTOR_DIRECTION',
+                        this._createFieldBlock('boost_menu_MOTOR_DIRECTION', 'MOTOR_DIRECTION', args[1])
+                    );
+                }
             }
         }
         return block;

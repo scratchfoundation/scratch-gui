@@ -49,6 +49,16 @@ const BoostConverter = {
                     );
                 }
                 break;
+            case 'boost_motor_set_power_for':
+                if (args.length === 2 && this._isStringOrBlock(args[0]) && this._isNumberOrBlock(args[1])) {
+                    block = this._createBlock('boost_setMotorPower', 'statement');
+                    this._addInput(
+                        block,
+                        'MOTOR_ID',
+                        this._createFieldBlock('boost_menu_MOTOR_ID', 'MOTOR_ID', args[0])
+                    );
+                    this._addNumberInput(block, 'POWER', 'math_number', args[1], 100);
+                }
             }
         }
         return block;

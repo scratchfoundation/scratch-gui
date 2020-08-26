@@ -204,3 +204,7 @@ workflows:
             - unit
             - integration
             - build
+          filters:
+            branches:
+              ignore:
+                - ^dependabot/.*/

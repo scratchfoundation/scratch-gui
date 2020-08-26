@@ -59,6 +59,7 @@ const BoostConverter = {
                     );
                     this._addNumberInput(block, 'POWER', 'math_number', args[1], 100);
                 }
+                break;
             case 'boost_motor_set_direction_for':
                 if (args.length === 2 && this._isStringOrBlock(args[0]) && this._isStringOrBlock(args[1])) {
                     block = this._createBlock('boost_setMotorDirection', 'statement');

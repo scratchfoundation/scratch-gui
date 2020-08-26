@@ -40,14 +40,7 @@ const Player = ({isPlayerOnly, projectId}) => (
         ) : null}
         <div className={styles.center}>
             {isPlayerOnly ? (
-                <React.Fragment>
-                    <Title />
-                    <p>
-                        <b>Another important update: </b>
-                        TurboWarp has moved to <i>turbowarp.org</i> due to some issues encountered with the old .xyz domain.
-                        This is the final time TurboWarp will move domains.
-                    </p>
-                </React.Fragment>
+                <Title />
             ) : null}
             <GUI
                 onClickLogo={onClickLogo}

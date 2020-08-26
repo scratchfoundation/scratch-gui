@@ -21,6 +21,17 @@ const BoostConverter = {
                     this._addNumberInput(block, 'DURATION', 'math_number', args[1], 1);
                 }
                 break;
+            case 'boost_motor_turn_this_way_for':
+                if (args.length === 2 && this._isStringOrBlock(args[0]) && this._isNumberOrBlock(args[1])) {
+                    block = this._createBlock('boost_motorOnForRotation', 'statement');
+                    this._addInput(
+                        block,
+                        'MOTOR_ID',
+                        this._createFieldBlock('boost_menu_MOTOR_ID', 'MOTOR_ID', args[0])
+                    );
+                    this._addNumberInput(block, 'ROTATION', 'math_number', args[1], 1);
+                }
+                break;
             }
         }
         return block;

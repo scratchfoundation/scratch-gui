@@ -521,13 +521,6 @@ class MenuBar extends React.Component {
                                             id="gui.menuBar.registerSolution"
                                         />
                                     </MenuItem>
-                                    <MenuItem>
-                                        <FormattedMessage
-                                            defaultMessage="Start new exercise"
-                                            description="Menu bar item for starting a new exercise"
-                                            id="gui.menuBar.startNewExercise"
-                                        />
-                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

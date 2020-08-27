@@ -29,7 +29,8 @@ const vmListenerHOC = function (WrappedComponent) {
                 'handleKeyDown',
                 'handleKeyUp',
                 'handleProjectChanged',
-                'handleTargetsUpdate'
+                'handleTargetsUpdate',
+                'handleBlockArtieUpdate'
             ]);
             // We have to start listening to the vm here rather than in
             // componentDidMount because the HOC mounts the wrapped component,
@@ -39,8 +40,8 @@ const vmListenerHOC = function (WrappedComponent) {
             // we need to start listening before mounting the wrapped component.
             this.props.vm.on('targetsUpdate', this.handleTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
+            this.props.vm.on('BLOCK_DRAG_UPDATE', this.handleBlockArtieUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
-            this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockArtieUpdate);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
@@ -117,6 +118,10 @@ const vmListenerHOC = function (WrappedComponent) {
                 e.preventDefault();
             }
         }
+        handleBlockArtieUpdate (blocks, areBlocksOverGui) {
+            this.props.onBlockArtieUpdate(blocks, areBlocksOverGui, this.props.projectTitle);
+        }
+
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -168,7 +173,8 @@ const vmListenerHOC = function (WrappedComponent) {
         shouldUpdateTargets: PropTypes.bool,
         shouldUpdateProjectChanged: PropTypes.bool,
         username: PropTypes.string,
-        vm: PropTypes.instanceOf(VM).isRequired
+        vm: PropTypes.instanceOf(VM).isRequired,
+        projectTitle: PropTypes.string
     };
     VMListener.defaultProps = {
         attachKeyboardEvents: true,
@@ -184,7 +190,8 @@ const vmListenerHOC = function (WrappedComponent) {
         shouldUpdateProjectChanged: !state.scratchGui.mode.isFullScreen && !state.scratchGui.mode.isPlayerOnly,
         vm: state.scratchGui.vm,
         username: state.session && state.session.session && state.session.session.user ?
-            state.session.session.user.username : ''
+            state.session.session.user.username : '',
+        projectTitle: state.scratchGui.projectTitle
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
@@ -196,8 +203,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onBlockArtieUpdate: (blocks, areBlocksOverGui) => {
-            sendBlockArtie(blocks);
+        onBlockArtieUpdate: (blocks, areBlocksOverGui, projectTitle) => {
+            sendBlockArtie(blocks, projectTitle);
             dispatch(updateArtieBlock(areBlocksOverGui));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),

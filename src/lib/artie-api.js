@@ -43,7 +43,8 @@ const generateArtieNextBlock = (parent, nextId, blocks) => {
     return parent;
 }
 
-const sendBlockArtie = (blocks) => new Promise((resolve, reject) => {
+const generateArtieBlock = (blocks) => {
+
     var tempBlocks = [];
     var tempInputs = [];
 
@@ -107,11 +108,19 @@ const sendBlockArtie = (blocks) => new Promise((resolve, reject) => {
         artieBlocks.push(createArtieBlockFromTempBlock(root));
     });
 
+    return artieBlocks;
+}
+
+const sendBlockArtie = (blocks, projectTitle) => new Promise((resolve, reject) => {
+    
+    const artieBlocks = generateArtieBlock(blocks);
+    const artiePedagogicalSoftwareData = {id: null, exercise: projectTitle, elements: artieBlocks};
+
     xhr({
         method: 'POST',
         uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(artieBlocks)
+        body: JSON.stringify(artiePedagogicalSoftwareData)
     }, (error, response) => {
         if (error || response.statusCode !== 200) {
             return reject();
@@ -120,4 +129,22 @@ const sendBlockArtie = (blocks) => new Promise((resolve, reject) => {
     });
 });
 
-export {sendBlockArtie};
+const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject) => {
+
+    const artieBlocks = generateArtieBlock(blocks);
+    const artiePedagogicalSoftwareSolution = {id: null, exercise: projectTitle, elements: artieBlocks};
+
+    xhr({
+        method: 'POST',
+        uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(artiePedagogicalSoftwareSolution)
+    }, (error, response) => {
+        if (error || response.statusCode !== 200) {
+            return reject();
+        }
+        return resolve(response.body);
+    });
+});
+
+export {sendBlockArtie, sendSolutionArtie};

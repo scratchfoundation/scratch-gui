@@ -104,6 +104,11 @@ const vmListenerHOC = function (WrappedComponent) {
                 (e.keyCode >= 37 && e.keyCode <= 40)) { // 37, 38, 39, 40 are arrows
                 e.preventDefault();
             }
+
+            // tw: prevent backspace from going back
+            if (e.keyCode === 8) {
+                e.preventDefault();
+            }
         }
         handleKeyUp (e) {
             // Always capture up events,

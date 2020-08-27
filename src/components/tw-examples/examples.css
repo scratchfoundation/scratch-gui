@@ -37,7 +37,7 @@
     height: 310px;
 }
 
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 750px) {
     .responsive .projects {
         height: 60px;
     }

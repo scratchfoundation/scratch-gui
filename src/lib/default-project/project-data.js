@@ -66,7 +66,7 @@ const projectData = translateFunction => {
             },
             {
                 isStage: false,
-                name: translator(messages.sprite, {index: 1}),
+                name: 'Marty',//translator(messages.sprite, {index: 1}),
                 variables: {},
                 lists: {},
                 broadcasts: {},

@@ -198,13 +198,13 @@ workflows:
                 - master
                 - develop
                 - /^hotfix\/.*/
-      # - deploy-gh-pages:
-      #     requires:
-      #       - lint
-      #       - unit
-      #       - integration
-      #       - build
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - ^dependabot/.*/
+      - deploy-gh-pages:
+          requires:
+            - lint
+            - unit
+            - integration
+            - build
+          filters:
+            branches:
+              ignore:
+                - ^dependabot/.*/

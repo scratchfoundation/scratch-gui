@@ -1,4 +1,28 @@
 ## Contributing
+
+### Bugs
+
+If you found a bug in TurboWarp, you should check to see if the bug occurs in Scratch itself. Bugs that exist in Scratch are Scratch bugs and should be submitted to Scratch, not to TurboWarp. If the bug only exists in TurboWarp, check to see if an issue has already been created for it, and if not you can file one.
+
+Being able to consistently reproduce issues is very important. Please see [Scratch's reproduction step guidelines](https://github.com/LLK/scratch-gui/wiki/Writing-good-repro-steps) when writing issues. Some issues are marked "Needs Repro". Adding a comment with good reproduction steps to those issues is a great way to help.
+
+TurboWarp bugs should *never* be reported to the Scratch "Bugs & Glitches" forum.
+
+### Pull requests
+
+Pull requests will be accepted for pretty much any open issue that isn't labeled "wontfix" or "upstream". Pull requests, especially small ones, don't necessarily need to have a matching issue, but it doesn't hurt to open an issue if one doesn't exist.
+
+Pull requests that should be included in Scratch itself should be submitted to Scratch, not to TurboWarp. This means that things like Scratch bug fixes, refactorings, or cleanups should *not* be submitted to TurboWarp.
+
+When submitting the pull request, make sure that you set the base repository to the TurboWarp fork, not to Scratch itself, as GitHub is sometimes inconsistent about this. For example, a pull request to the TurboWarp VM should be made against TurboWarp/scratch-vm, not LLK/scratch-vm.
+
+Guidelines for pull requests:
+ * Make the minimal amount of changes possible to Scratch code to make conflicts when pulling upstream code less painful.
+ * It might take a while for pull requests to get reviewed.
+
+<!--
+
+## Contributing
 The development of Scratch is an ongoing process, and we love to have people in the Scratch and open source communities help us along the way.
 
 ### Ways to Help
@@ -64,3 +88,5 @@ Beyond this repo, there are also some other resources that you might want to tak
 * [Open Source forum](https://scratch.mit.edu/discuss/49/) on Scratch
 * [Suggestions forum](https://scratch.mit.edu/discuss/1/) on Scratch
 * [Bugs & Glitches forum](https://scratch.mit.edu/discuss/3/) on Scratch
+
+-->

@@ -19,13 +19,14 @@ import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import fontsLoadedReducer, {fontsLoadedInitialState} from './fonts-loaded';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
+import rubyCodeReducer, {rubyCodeInitialState} from './ruby-code';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
 import timeoutReducer, {timeoutInitialState} from './timeout';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
-import rubyCodeReducer, {rubyCodeInitialState} from './ruby-code';
+import workspaceMetricsReducer, {workspaceMetricsInitialState} from './workspace-metrics';
 import throttle from 'redux-throttle';
 
 import decks from '../lib/libraries/decks/index.jsx';
@@ -53,13 +54,14 @@ const guiInitialState = {
     projectState: projectStateInitialState,
     projectTitle: projectTitleInitialState,
     fontsLoaded: fontsLoadedInitialState,
+    rubyCode: rubyCodeInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
     timeout: timeoutInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
-    rubyCode: rubyCodeInitialState
+    workspaceMetrics: workspaceMetricsInitialState
 };
 
 const initPlayer = function (currentState) {
@@ -153,12 +155,13 @@ const guiReducer = combineReducers({
     projectTitle: projectTitleReducer,
     fontsLoaded: fontsLoadedReducer,
     restoreDeletion: restoreDeletionReducer,
+    rubyCode: rubyCodeReducer,
     targets: targetReducer,
     timeout: timeoutReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,
-    rubyCode: rubyCodeReducer
+    workspaceMetrics: workspaceMetricsReducer
 });
 
 export {

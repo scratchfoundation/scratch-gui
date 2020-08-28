@@ -12,6 +12,7 @@ class ProjectInput extends React.Component {
         bindAll(this, [
             'handleKeyDown',
             'handleChange',
+            'handlePaste',
             'handleBlur',
             'handleFocus'
         ]);
@@ -30,25 +31,37 @@ class ProjectInput extends React.Component {
             });
         }
     }
+    extractProjectId (text) {
+        const numberMatch = text.match(/\d+/);
+        return numberMatch ? numberMatch[0] : null;
+    }
     readProjectId (e) {
-        const value = e.target.value;
-        const numberMatch = value.match(/\d+/);
-        return numberMatch ? numberMatch[0] : defaultProjectId;
+        const id = this.extractProjectId(e.target.value);
+        return id || defaultProjectId;
+    }
+    handleKeyDown (e) {
+        if (e.key === 'Enter' && this.state.projectId) {
+            this.props.setProjectId(this.state.projectId);
+            this.input.blur();
+        }
     }
     handleChange (e) {
         this.setState({
             projectId: this.readProjectId(e)
         });
     }
+    handlePaste (e) {
+        const data = e.clipboardData.getData('Text');
+        const id = this.extractProjectId(data);
+        if (id) {
+            this.setState({
+                projectId: id
+            });
+        }
+    }
     handleBlur () {
         if (this.state.projectId) {
             this.props.setProjectId(this.state.projectId);
-        }
-    }
-    handleKeyDown (e) {
-        if (e.key === 'Enter' && this.state.projectId) {
-            this.props.setProjectId(this.state.projectId);
-            this.input.blur();
         }
     }
     handleFocus (e) {
@@ -66,9 +79,10 @@ class ProjectInput extends React.Component {
                 value={`https://scratch.mit.edu/projects/${projectId}`}
                 autoFocus
                 className={styles.input}
-                onBlur={this.handleBlur}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}
+                onPaste={this.handlePaste}
+                onBlur={this.handleBlur}
                 onFocus={this.handleFocus}
             />
         );

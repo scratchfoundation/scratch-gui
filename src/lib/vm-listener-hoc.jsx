@@ -109,6 +109,10 @@ const vmListenerHOC = function (WrappedComponent) {
             if (e.keyCode === 8) {
                 e.preventDefault();
             }
+            // tw: prevent ' and / from opening quick find in Firefox
+            if (e.keyCode === 222 || e.keyCode === 191) {
+                e.preventDefault();
+            }
         }
         handleKeyUp (e) {
             // Always capture up events,

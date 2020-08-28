@@ -53,3 +53,11 @@ opal/opal-parser.min.js
 
   These files are licensed under the MIT License
   (see https://github.com/opal/opal/blob/master/LICENSE ).
+
+src/lib/libraries/extensions/microbit_more/microbitMore.png
+src/lib/libraries/extensions/microbit_more/microbitMore-illustration.svg
+src/lib/libraries/extensions/microbit_more/microbitMore-small.svg
+
+  These files are licensed under the MIT License
+  (see https://github.com/yokobond/scratch-microbit-more/blob/master/LICENSE ).
+

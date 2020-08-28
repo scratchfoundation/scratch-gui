@@ -51,13 +51,13 @@ class ProjectInput extends React.Component {
         });
     }
     handlePaste (e) {
-        const data = e.clipboardData.getData('Text');
-        const id = this.extractProjectId(data);
-        if (id) {
-            this.setState({
-                projectId: id
-            });
-        }
+        // const data = e.clipboardData.getData('Text');
+        // const id = this.extractProjectId(data);
+        // if (id) {
+        //     this.setState({
+        //         projectId: id
+        //     });
+        // }
     }
     handleBlur () {
         if (this.state.projectId) {

@@ -231,7 +231,8 @@ export default function (Generator) {
     };
 
     Generator.microbitMore_menu_connectionStateMenu = function (block) {
-        const connectionStateMenu = Generator.quote_(Generator.getFieldValue(block, 'connectionStateMenu') || 'connected');
+        const connectionStateMenu =
+              Generator.quote_(Generator.getFieldValue(block, 'connectionStateMenu') || 'connected');
         return [connectionStateMenu, Generator.ORDER_ATOMIC];
     };
 

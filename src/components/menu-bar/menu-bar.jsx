@@ -78,6 +78,8 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
+import {sendSolutionArtie} from '../../lib/artie-api';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -172,7 +174,8 @@ class MenuBar extends React.Component {
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickRegisterSolution'
         ]);
     }
     componentDidMount () {
@@ -286,6 +289,10 @@ class MenuBar extends React.Component {
         }
         }
     }
+    handleClickRegisterSolution (){
+        sendSolutionArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle);
+    }
+
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -514,7 +521,7 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseArtie}
                             >
                                 <MenuSection>
-                                    <MenuItem>
+                                    <MenuItem onClick={this.handleClickRegisterSolution}>
                                         <FormattedMessage
                                             defaultMessage="Register solution"
                                             description="Menu bar item for registering a solution"

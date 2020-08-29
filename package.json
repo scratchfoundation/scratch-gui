@@ -47,7 +47,7 @@
     "chromedriver": "84.0.1",
     "classnames": "2.2.6",
     "computed-style-to-inline-style": "3.0.0",
-    "copy-webpack-plugin": "^4.5.1",
+    "copy-webpack-plugin": "^6.0.4",
     "core-js": "2.5.7",
     "css-loader": "^1.0.0",
     "enzyme": "^3.5.0",

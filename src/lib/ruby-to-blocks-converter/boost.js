@@ -85,6 +85,16 @@ const BoostConverter = {
                     );
                 }
                 break;
+            case 'boost_seeing_color?':
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
+                    block = this._createBlock('boost_seeingColor', 'boolean');
+                    this._addInput(
+                        block,
+                        'COLOR',
+                        this._createFieldBlock('boost_menu_COLOR', 'COLOR', args[0])
+                    );
+                }
+                break;
             }
         }
         return block;

@@ -95,6 +95,16 @@ const BoostConverter = {
                     );
                 }
                 break;
+            case 'boost_get_tilt_angle':
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
+                    block = this._createBlock('boost_getTiltAngle', 'value');
+                    this._addInput(
+                        block,
+                        'TILT_DIRECTION',
+                        this._createFieldBlock('boost_menu_TILT_DIRECTION', 'TILT_DIRECTION', args[0])
+                    );
+                }
+                break;
             }
         }
         return block;

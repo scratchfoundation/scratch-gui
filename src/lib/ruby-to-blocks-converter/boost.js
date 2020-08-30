@@ -118,7 +118,7 @@ const BoostConverter = {
         this._isStringOrBlock(args[1]) &&
         rubyBlockArgs && rubyBlockArgs.length === 0 &&
         rubyBlock) {
-            switch(args[0].value) {
+            switch (args[0].value) {
             case 'boost_color':
                 block = this._createBlock('boost_whenColor', 'hat');
                 this._addInput(

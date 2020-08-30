@@ -128,6 +128,15 @@ const BoostConverter = {
                 );
                 this._setParent(rubyBlock, block);
                 break;
+            case 'boost_tilted':
+                block = this._createBlock('boost_whenTilted', 'hat');
+                this._addInput(
+                    block,
+                    'TILT_DIRECTION_ANY',
+                    this._createFieldBlock('boost_menu_TILT_DIRECTION_ANY', 'TILT_DIRECTION_ANY', args[1])
+                );
+                this._setParent(rubyBlock, block);
+                break;
             }
         }
         return block;

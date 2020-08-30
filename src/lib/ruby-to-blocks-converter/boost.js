@@ -74,6 +74,17 @@ const BoostConverter = {
                         this._createFieldBlock('boost_menu_MOTOR_DIRECTION', 'MOTOR_DIRECTION', args[1])
                     );
                 }
+                break;
+            case 'boost_motor_get_position':
+                if (args.length === 1 && this._isStringOrBlock(args[0])) {
+                    block = this._createBlock('boost_getMotorPosition', 'value');
+                    this._addInput(
+                        block,
+                        'MOTOR_REPORTER_ID',
+                        this._createFieldBlock('boost_menu_MOTOR_REPORTER_ID', 'MOTOR_REPORTER_ID', args[0])
+                    );
+                }
+                break;
             }
         }
         return block;

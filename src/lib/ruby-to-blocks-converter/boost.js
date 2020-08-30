@@ -105,6 +105,12 @@ const BoostConverter = {
                     );
                 }
                 break;
+            case 'boost_set_light_color':
+                if (args.length === 1 && this._isNumberOrBlock(args[0])) {
+                    block = this._createBlock('boost_setLightHue', 'statement');
+                    this._addNumberInput(block, 'HUE', 'math_number', args[0], 100);
+                }
+                break;
             }
         }
         return block;

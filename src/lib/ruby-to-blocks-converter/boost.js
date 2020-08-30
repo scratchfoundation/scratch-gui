@@ -112,6 +112,23 @@ const BoostConverter = {
                 }
                 break;
             }
+        } else if ((this._isSelf(receiver) || receiver === Opal.nil) &&
+        name === 'when' &&
+        args.length === 2 && args[0].type === 'sym' &&
+        this._isStringOrBlock(args[1]) &&
+        rubyBlockArgs && rubyBlockArgs.length === 0 &&
+        rubyBlock) {
+            switch(args[0].value) {
+            case 'boost_color':
+                block = this._createBlock('boost_whenColor', 'hat');
+                this._addInput(
+                    block,
+                    'COLOR',
+                    this._createFieldBlock('boost_menu_COLOR', 'COLOR', args[1])
+                );
+                this._setParent(rubyBlock, block);
+                break;
+            }
         }
         return block;
     }

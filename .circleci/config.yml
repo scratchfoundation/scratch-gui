@@ -137,12 +137,12 @@ jobs:
       - checkout
       - run: |
           echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
-          echo export NPM_TAG=circlelatest >> $BASH_ENV
+          echo export NPM_TAG=latest >> $BASH_ENV
           if [ "$CIRCLE_BRANCH" == "master" ]
-            then echo export NPM_TAG=circlestable >> $BASH_ENV
+            then echo export NPM_TAG=stable >> $BASH_ENV
           fi
           if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
-            then echo export NPM_TAG=circlehotfix >> $BASH_ENV
+            then echo export NPM_TAG=hotfix >> $BASH_ENV
           fi
       - run: npm version --no-git-tag-version $RELEASE_VERSION
       - run: |

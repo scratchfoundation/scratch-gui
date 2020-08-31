@@ -51,13 +51,14 @@ deploy:
     condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   script: if npm info scratch-gui | grep -q $RELEASE_VERSION; then git tag $RELEASE_VERSION && git push https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git $RELEASE_VERSION; fi
-- provider: script
-  on:
-    all_branches: true
-    condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^dependabot/
-    tags: false # Don't push tags to gh-pages
-  skip_cleanup: true
-  script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+# Skip deploy to gh pages. Circle will do it instead.
+# - provider: script
+#   on:
+#     all_branches: true
+#     condition: $TRAVIS_EVENT_TYPE != cron && ! $TRAVIS_BRANCH =~ ^dependabot/
+#     tags: false # Don't push tags to gh-pages
+#   skip_cleanup: true
+#   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script
   on:
     branch: develop

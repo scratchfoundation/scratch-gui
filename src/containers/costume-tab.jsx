@@ -158,14 +158,17 @@ class CostumeTab extends React.Component {
         const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
-    handleNewCostume (costume, fromCostumeLibrary) {
+    handleNewCostume (costume, fromCostumeLibrary, targetId) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
         return Promise.all(costumes.map(c => {
             if (fromCostumeLibrary) {
                 return this.props.vm.addCostumeFromLibrary(c.md5, c);
             }
-            return this.props.vm.addCostume(c.md5, c);
+            // If targetId is falsy, VM should default it to editingTarget.id
+            // However, targetId should be provided to prevent #5876,
+            // if making new costume takes a while
+            return this.props.vm.addCostume(c.md5, c, targetId);
         }));
     }
     handleNewBlankCostume () {
@@ -204,13 +207,14 @@ class CostumeTab extends React.Component {
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
                     costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
-                this.handleNewCostume(vmCostumes).then(() => {
+                this.handleNewCostume(vmCostumes, false, targetId).then(() => {
                     if (fileIndex === fileCount - 1) {
                         this.props.onCloseImporting();
                     }
@@ -220,9 +224,10 @@ class CostumeTab extends React.Component {
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         costumeUpload(buffer, 'image/png', storage, vmCostumes => {
             vmCostumes[0].name = this.props.intl.formatMessage(messages.costume, {index: 1});
-            this.handleNewCostume(vmCostumes);
+            this.handleNewCostume(vmCostumes, false, targetId);
         });
     }
     handleFileUploadClick () {

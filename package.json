@@ -28,6 +28,7 @@
   "dependencies": {
     "arraybuffer-loader": "^1.0.6",
     "autoprefixer": "^9.0.1",
+    "base64-loader": "1.0.0",
     "bowser": "1.9.4",
     "classnames": "2.2.6",
     "computed-style-to-inline-style": "3.0.0",
@@ -46,6 +47,7 @@
     "lodash.debounce": "4.0.8",
     "lodash.defaultsdeep": "4.6.0",
     "lodash.omit": "4.5.0",
+    "lodash.throttle": "4.0.1",
     "minilog": "3.1.0",
     "omggif": "1.0.9",
     "papaparse": "5.1.1",
@@ -79,9 +81,12 @@
     "scratch-storage": "1.3.3",
     "scratch-svg-renderer": "0.2.0-prerelease.20200610220938",
     "scratch-vm": "0.2.0-prerelease.20200820211625",
+    "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
+    "text-encoding": "0.7.0",
     "to-style": "1.3.3",
-    "wav-encoder": "1.3.0"
+    "wav-encoder": "1.3.0",
+    "xhr": "2.5.0"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -98,7 +103,6 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
-    "base64-loader": "1.0.0",
     "chromedriver": "84.0.1",
     "enzyme": "^3.5.0",
     "enzyme-adapter-react-16": "1.3.0",
@@ -112,21 +116,17 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^21.0.0",
     "jest-junit": "^7.0.0",
-    "lodash.throttle": "4.0.1",
     "mkdirp": "^1.0.3",
     "raf": "^3.4.0",
     "react-test-renderer": "16.2.0",
     "redux-mock-store": "^1.2.3",
     "rimraf": "^2.6.1",
     "selenium-webdriver": "3.6.0",
-    "startaudiocontext": "1.2.1",
-    "text-encoding": "0.7.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "web-audio-test-api": "^0.5.2",
     "webpack": "^4.6.0",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.3",
-    "xhr": "2.5.0"
+    "webpack-dev-server": "^3.1.3"
   },
   "jest": {
     "setupFiles": [

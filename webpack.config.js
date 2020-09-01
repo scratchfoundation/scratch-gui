@@ -96,7 +96,8 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'editor': './src/playground/editor.jsx',
-            'player': './src/playground/player.jsx'
+            'player': './src/playground/player.jsx',
+            'embed': './src/playground/embed.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -158,7 +159,14 @@ module.exports = [
                 title: 'TurboWarp - Run Scratch projects faster',
                 sentryConfig: process.env.SENTRY_CONFIG
             }),
-            new HtmlWebpackPlugin({ // turbowarp privacy policy
+            new HtmlWebpackPlugin({
+                chunks: ['embed'],
+                template: 'src/playground/index.ejs',
+                filename: 'embed.html',
+                title: 'TurboWarp Embed',
+                sentryConfig: process.env.SENTRY_CONFIG
+            }),
+            new HtmlWebpackPlugin({
                 chunks: [],
                 template: 'src/playground/privacy.html',
                 filename: 'privacy.html'

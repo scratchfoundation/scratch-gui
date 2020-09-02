@@ -8,9 +8,9 @@ import {
     getIsFetchingWithoutId,
     setProjectId
 } from '../reducers/project-state';
-
 import {
-    setPlayer
+    setPlayer,
+    setFullScreen
 } from '../reducers/mode';
 
 const getRoot = () => {
@@ -23,6 +23,7 @@ const getUseRouting = () => ['turbowarp.org', 'localhost'].includes(location.hos
 
 const playerPath = getRoot();
 const editorPath = `${playerPath}editor.html`;
+const fullscreenPath = `${playerPath}fullscreen.html`;
 const useRouting = getUseRouting();
 
 const TWParserHoc = function (WrappedComponent) {
@@ -43,6 +44,7 @@ const TWParserHoc = function (WrappedComponent) {
             return (
                 this.props.isFetchingWithoutId !== nextProps.isFetchingWithoutId ||
                 this.props.isPlayerOnly !== nextProps.isPlayerOnly ||
+                this.props.isFullScreen !== nextProps.isFullScreen ||
                 this.props.projectId !== nextProps.projectId
             );
         }
@@ -58,8 +60,10 @@ const TWParserHoc = function (WrappedComponent) {
             }
 
             // Store whether the editor is active.
-            if (useRouting && this.props.isPlayerOnly !== prevProps.isPlayerOnly) {
-                if (this.props.isPlayerOnly) {
+            if (useRouting && (this.props.isPlayerOnly !== prevProps.isPlayerOnly || this.props.isFullScreen !== prevProps.isFullScreen)) {
+                if (this.props.isFullScreen) {
+                    newPathname = fullscreenPath;
+                } else if (this.props.isPlayerOnly) {
                     newPathname = playerPath;
                 } else {
                     newPathname = editorPath;
@@ -85,9 +89,19 @@ const TWParserHoc = function (WrappedComponent) {
                     if (this.props.isPlayerOnly) {
                         this.props.setIsPlayerOnly(false);
                     }
+                    if (this.props.isFullScreen) {
+                        this.props.setIsFullScreen(false);
+                    }
                 } else if (location.pathname === playerPath) {
                     if (!this.props.isPlayerOnly) {
                         this.props.setIsPlayerOnly(true);
+                    }
+                    if (this.props.isFullScreen) {
+                        this.props.setIsFullScreen(false);
+                    }
+                } else if (location.pathname === fullscreenPath) {
+                    if (!this.props.isFullScreen) {
+                        this.props.setIsFullScreen(true);
                     }
                 }
             }
@@ -104,6 +118,8 @@ const TWParserHoc = function (WrappedComponent) {
         isFetchingWithoutId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
         setIsPlayerOnly: PropTypes.func,
+        isFullScreen: PropTypes.bool,
+        setIsFullScreen: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
     };
@@ -112,11 +128,13 @@ const TWParserHoc = function (WrappedComponent) {
         return {
             isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
             isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+            isFullScreen: state.scratchGui.mode.isFullScreen,
             projectId: state.scratchGui.projectState.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
         setIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
+        setIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
         setProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return connect(

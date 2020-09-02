@@ -97,6 +97,7 @@ module.exports = [
         entry: {
             'editor': './src/playground/editor.jsx',
             'player': './src/playground/player.jsx',
+            'fullscreen': './src/playground/fullscreen.jsx',
             'embed': './src/playground/embed.jsx'
         },
         output: {
@@ -160,10 +161,17 @@ module.exports = [
                 sentryConfig: process.env.SENTRY_CONFIG
             }),
             new HtmlWebpackPlugin({
+                chunks: ['fullscreen'],
+                template: 'src/playground/index.ejs',
+                filename: 'fullscreen.html',
+                title: 'TurboWarp',
+                sentryConfig: process.env.SENTRY_CONFIG
+            }),
+            new HtmlWebpackPlugin({
                 chunks: ['embed'],
                 template: 'src/playground/index.ejs',
                 filename: 'embed.html',
-                title: 'TurboWarp Embed',
+                title: 'TurboWarp',
                 sentryConfig: process.env.SENTRY_CONFIG
             }),
             new HtmlWebpackPlugin({

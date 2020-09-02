@@ -11,8 +11,9 @@ const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
 document.body.classList.add('tw-loaded');
 
-const searchParams = new URLSearchParams(location.search);
-const projectId = searchParams.get('id');
+// Read the project ID from location.hash once.
+// URL parameters are not used for this as hash is already used elsewhere, and this won't tell TurboWarp.org which project is being loaded. (I don't want to know!)
+const projectId = location.hash.substr(1);
 
 const WrappedGUI = compose(
     AppStateHOC

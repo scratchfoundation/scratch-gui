@@ -16,14 +16,8 @@ import Examples from '../components/tw-examples/examples.jsx';
 import styles from './gui.css';
 
 const onClickLogo = () => {
-    // remove the hash to load the default project
     location.hash = '';
 };
-
-if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
-    // Warn before navigating away
-    window.onbeforeunload = () => true;
-}
 
 const Interface = ({isPlayerOnly}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
@@ -70,9 +64,6 @@ const ConnectedInterface = connect(
     mapDispatchToProps
 )(Interface);
 
-// note that redux's 'compose' function is just being used as a general utility to make
-// the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
-// ability to compose reducers.
 const WrappedInterface = compose(
     AppStateHOC,
     TWParserHOC

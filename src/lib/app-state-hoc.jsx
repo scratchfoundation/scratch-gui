@@ -51,6 +51,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     guiMiddleware,
                     initFullScreen,
                     initPlayer,
+                    initEmbedded,
                     initTelemetryModal
                 } = guiRedux;
                 const {ScratchPaintReducer} = require('scratch-paint');
@@ -65,6 +66,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     }
                 } else if (props.showTelemetryModal) {
                     initializedGui = initTelemetryModal(initializedGui);
+                }
+                if (props.isEmbedded) {
+                    initializedGui = initEmbedded(initializedGui);
                 }
                 reducers = {
                     locales: localesReducer,
@@ -114,7 +118,8 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
-        showTelemetryModal: PropTypes.bool
+        showTelemetryModal: PropTypes.bool,
+        isEmbedded: PropTypes.bool
     };
     return AppStateWrapper;
 };

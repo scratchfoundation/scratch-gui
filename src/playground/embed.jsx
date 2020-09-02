@@ -7,7 +7,6 @@ import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 
 import GUI from './render-gui.jsx';
-import styles from './embed.css';
 
 const appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
@@ -22,7 +21,6 @@ const WrappedGUI = compose(
 )(GUI);
 
 ReactDOM.render(<WrappedGUI
-    isPlayerOnly
-    canSeeInside
+    isEmbedded
     projectId={projectId}
 />, appTarget);

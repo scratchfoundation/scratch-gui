@@ -102,6 +102,7 @@ const ariaMessages = defineMessages({
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
 const openPrivacyLink = () => window.open('/privacy.html', '_blank');
+const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank');
 const openAdvancedHelp = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings', '_blank');
 
 const MenuBarItemTooltip = ({
@@ -680,6 +681,13 @@ class MenuBar extends React.Component {
                                             defaultMessage="Privacy"
                                             description="Text for privacy policy in the Links dropdown"
                                             id="tw.links.privacy"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={openEmbedLink}>
+                                        <FormattedMessage
+                                            defaultMessage="Embed"
+                                            description="Text for embed in the Links dropdown"
+                                            id="tw.links.embed"
                                         />
                                     </MenuItem>
                                 </MenuSection>

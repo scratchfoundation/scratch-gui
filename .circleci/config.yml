@@ -206,6 +206,6 @@ workflows:
             - build
           filters:
             branches:
-              only: /^(?!pull\/).*$/ # don't deploy to gh pages on PRs.
               ignore:
                 - ^dependabot/.*/
+                - ^pull/.*/ # don't deploy to  gh pages on PRs.

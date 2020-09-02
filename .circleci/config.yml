@@ -207,5 +207,5 @@ workflows:
           filters:
             branches:
               ignore:
-                - ^dependabot/.*/
-                - ^pull/.*/ # don't deploy to  gh pages on PRs.
+                - /^dependabot/.*/
+                - /^pull/.*/ # don't deploy to  gh pages on PRs.

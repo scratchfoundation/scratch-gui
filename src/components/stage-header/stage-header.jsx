@@ -67,16 +67,7 @@ const StageHeaderComponent = function (props) {
         const stageDimensions = getStageDimensions(null, true);
         const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
-                <a
-                    href="https://scratch.mit.edu"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                >
-                    <img
-                        alt="Scratch"
-                        src={scratchLogo}
-                    />
-                </a>
+                {/* tw: we remove the embed branding entirely (for now) */}
             </div>
         ) : (
             <Button

@@ -45,7 +45,7 @@
     "keymirror": "0.1.1",
     "lodash.bindall": "4.4.0",
     "lodash.debounce": "4.0.8",
-    "lodash.defaultsdeep": "4.6.0",
+    "lodash.defaultsdeep": "4.6.1",
     "lodash.omit": "4.5.0",
     "lodash.throttle": "4.0.1",
     "minilog": "3.1.0",

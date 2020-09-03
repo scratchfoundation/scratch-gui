@@ -356,7 +356,7 @@ StudioView.Shufflers.random = function (groupSize) {
 // This can be any URL that is a proxy for https://scratch.mit.edu/site-api/projects/in/5235006/1/
 // Understandably scratch does not set CORS headers on this URL, but a proxy can set it manually.
 // $id will be replaced with the studio ID, and $page with the page.
-StudioView.STUDIO_API = 'https://scratch.garbomuffin.com/site-proxy/projects/in/$id/$page/';
+StudioView.STUDIO_API = 'https://trampoline.turbowarp.org/site-proxy/projects/in/$id/$page/';
 
 // The URL to download thumbnails from.
 // $id is replaced with the project's ID.

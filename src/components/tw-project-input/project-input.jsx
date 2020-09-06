@@ -26,6 +26,9 @@ class ProjectInput extends React.Component {
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId) {
+            if (this.props.projectId !== defaultProjectId) {
+                this.input.blur();
+            }
             this.setState({
                 projectId: this.props.projectId || ''
             });
@@ -77,7 +80,6 @@ class ProjectInput extends React.Component {
                 spellCheck="false"
                 type="text"
                 value={`https://scratch.mit.edu/projects/${projectId}`}
-                autoFocus
                 className={styles.input}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}

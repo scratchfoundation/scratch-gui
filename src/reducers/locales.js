@@ -4,6 +4,9 @@ import {localeData} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 import {isRtl} from 'scratch-l10n';
 
+// tw: store language in localStorage
+import {LANGUAGE_KEY} from '../lib/detect-locale.js';
+
 addLocaleData(localeData);
 
 const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';
@@ -39,6 +42,10 @@ const reducer = function (state, action) {
 };
 
 const selectLocale = function (locale) {
+    // tw: store language in localStorage
+    try {
+        localStorage.setItem(LANGUAGE_KEY, locale);
+    } catch (e) { /* ignore */ }
     return {
         type: SELECT_LOCALE,
         locale: locale

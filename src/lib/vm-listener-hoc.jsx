@@ -30,7 +30,8 @@ const vmListenerHOC = function (WrappedComponent) {
                 'handleKeyUp',
                 'handleProjectChanged',
                 'handleTargetsUpdate',
-                'handleBlockArtieUpdate'
+                'handleBlockArtieUpdate',
+                'handleBlockArtieChanged'
             ]);
             // We have to start listening to the vm here rather than in
             // componentDidMount because the HOC mounts the wrapped component,
@@ -42,6 +43,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.handleBlockArtieUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
+            this.props.vm.on('BLOCK_CHANGED', this.handleBlockArtieChanged);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
             this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
@@ -120,6 +122,9 @@ const vmListenerHOC = function (WrappedComponent) {
         }
         handleBlockArtieUpdate (blocks, areBlocksOverGui) {
             this.props.onBlockArtieUpdate(blocks, areBlocksOverGui, this.props.projectTitle);
+        }
+        handleBlockArtieChanged (blocks, blockId){
+            this.props.onBlockArtieUpdate(blocks, false, this.props.projectTitle);
         }
 
         render () {

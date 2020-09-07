@@ -529,6 +529,15 @@ class MenuBar extends React.Component {
                                         />
                                     </MenuItem>
                                 </MenuSection>
+                                <MenuSection>
+                                    <MenuItem>
+                                        <FormattedMessage
+                                            defaultMessage="Request help"
+                                            description="Menu bar item for requesting help"
+                                            id="gui.menuBar.requestHelp"
+                                        />
+                                    </MenuItem>
+                                </MenuSection>
                             </MenuBarMenu>
                         </div>
                     </div>

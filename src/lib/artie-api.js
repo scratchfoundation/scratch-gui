@@ -97,7 +97,7 @@ const generateArtieBlock = (blocks) => {
 
     // 3- Gets all the roots of the block tree (parent == null)
     const roots = tempBlocks.filter(tempBlock => tempBlock.tempParent === null);
-    
+
     // 3.1- Looking for the children
     Object.values(roots).forEach((root) => {
 
@@ -112,7 +112,7 @@ const generateArtieBlock = (blocks) => {
 }
 
 const sendBlockArtie = (blocks, projectTitle) => new Promise((resolve, reject) => {
-    
+
     const artieBlocks = generateArtieBlock(blocks);
     const artiePedagogicalSoftwareData = {id: null, exercise: projectTitle, elements: artieBlocks};
 
@@ -121,11 +121,13 @@ const sendBlockArtie = (blocks, projectTitle) => new Promise((resolve, reject) =
         uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(artiePedagogicalSoftwareData)
-    }, (error, response) => {
-        if (error || response.statusCode !== 200) {
+    }, (response) => {
+        if (response != null && response.statusCode !== 200) {
             return reject();
         }
-        return resolve(response.body);
+        else if(response != null){
+            return resolve(response.body);
+        }
     });
 });
 
@@ -139,11 +141,13 @@ const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject
         uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(artiePedagogicalSoftwareSolution)
-    }, (error, response) => {
-        if (error || response.statusCode !== 200) {
+    }, (response) => {
+        if (response != null && response.statusCode !== 200) {
             return reject();
         }
-        return resolve(response.body);
+        else if(response != null){
+            return resolve(response.body);
+        }
     });
 });
 

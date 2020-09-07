@@ -209,7 +209,7 @@ const vmListenerHOC = function (WrappedComponent) {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
         onBlockArtieUpdate: (blocks, areBlocksOverGui, projectTitle) => {
-            sendBlockArtie(blocks, projectTitle);
+            sendBlockArtie(blocks, projectTitle, false);
             dispatch(updateArtieBlock(areBlocksOverGui));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),

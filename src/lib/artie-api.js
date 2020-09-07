@@ -111,10 +111,10 @@ const generateArtieBlock = (blocks) => {
     return artieBlocks;
 }
 
-const sendBlockArtie = (blocks, projectTitle) => new Promise((resolve, reject) => {
+const sendBlockArtie = (blocks, projectTitle, requestHelp) => new Promise((resolve, reject) => {
 
     const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareData = {id: null, exercise: projectTitle, elements: artieBlocks};
+    const artiePedagogicalSoftwareData = {id: null, exercise: projectTitle, requestHelp: requestHelp, elements: artieBlocks};
 
     xhr({
         method: 'POST',

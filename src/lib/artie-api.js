@@ -22,7 +22,7 @@ const getInputNameFromInputId = (parent, inputId) => {
     return inputName;
 }
 
-const createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs});
+const createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested});
 
 const generateArtieNextBlock = (parent, nextId, blocks) => {
 
@@ -58,7 +58,7 @@ const generateArtieBlock = (blocks) => {
 
             // In the case that the block is an object
             const elementFamily = (block.opcode.split('_'))[0];
-            const tempElement = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, tempParent: block.parent, tempNext: block.next, next: null, tempInputs: block.inputs, inputs: []};
+            const tempElement = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, tempParent: block.parent, tempNext: block.next, next: null, tempInputs: block.inputs, inputs: [], nested: []};
             tempBlocks.push(tempElement);
         } else {
 
@@ -95,10 +95,28 @@ const generateArtieBlock = (blocks) => {
         }
     });
 
-    // 3- Gets all the roots of the block tree (parent == null)
+    //3- For each temporal block that has a parent, we set them as a nested block of the parent
+    Object.values(tempBlocks).forEach((tempBlock) =>{
+
+        // 3.1- If the block has a parent
+        if(tempBlock.tempParent !== null && tempBlock.tempParent !== undefined){
+
+            // 3.1.1- Gets the parent
+            var parents = tempBlocks.filter(block => block.id === tempBlock.tempParent);
+
+            // 3.1.2- Creates the block object
+            var block = createArtieBlockFromTempBlock(tempBlock);
+
+            // 3.1.3- Adds the nested block to the parent
+            parents[0].nested.push(block);
+        }
+
+    });
+
+    // 4- Gets all the roots of the block tree (parent == null)
     const roots = tempBlocks.filter(tempBlock => tempBlock.tempParent === null);
 
-    // 3.1- Looking for the children
+    // 4.1- Looking for the children
     Object.values(roots).forEach((root) => {
 
         if (root.tempNext !== null){

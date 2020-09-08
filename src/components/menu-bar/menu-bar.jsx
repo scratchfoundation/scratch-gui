@@ -78,7 +78,7 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie} from '../../lib/artie-api';
+import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
 
 const ariaMessages = defineMessages({
     language: {
@@ -175,7 +175,8 @@ class MenuBar extends React.Component {
             'handleRestoreOption',
             'getSaveToComputerHandler',
             'restoreOptionMessage',
-            'handleClickRegisterSolution'
+            'handleClickRegisterSolution',
+            'handleClickRequestHelp'
         ]);
     }
     componentDidMount () {
@@ -291,6 +292,9 @@ class MenuBar extends React.Component {
     }
     handleClickRegisterSolution (){
         sendSolutionArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle);
+    }
+    handleClickRequestHelp(){
+        sendBlockArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);
     }
 
     render () {
@@ -525,16 +529,16 @@ class MenuBar extends React.Component {
                                         <FormattedMessage
                                             defaultMessage="Register solution"
                                             description="Menu bar item for registering a solution"
-                                            id="gui.menuBar.registerSolution"
+                                            id="gui.menuBar.artie.registerSolution"
                                         />
                                     </MenuItem>
                                 </MenuSection>
                                 <MenuSection>
-                                    <MenuItem>
+                                    <MenuItem onClick={this.handleClickRequestHelp}>
                                         <FormattedMessage
                                             defaultMessage="Request help"
                                             description="Menu bar item for requesting help"
-                                            id="gui.menuBar.requestHelp"
+                                            id="gui.menuBar.artie.requestHelp"
                                         />
                                     </MenuItem>
                                 </MenuSection>

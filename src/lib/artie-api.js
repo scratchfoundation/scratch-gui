@@ -121,8 +121,8 @@ const sendBlockArtie = (blocks, projectTitle, requestHelp) => new Promise((resol
         uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(artiePedagogicalSoftwareData)
-    }, (response) => {
-        if (response != null && response.statusCode !== 200) {
+    }, (error, response) => {
+        if (response != null && response.statusCode !== 201) {
             return reject();
         }
         else if(response != null){
@@ -142,7 +142,7 @@ const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(artiePedagogicalSoftwareSolution)
     }, (response) => {
-        if (response != null && response.statusCode !== 200) {
+        if (response != null && response.statusCode !== 201) {
             return reject();
         }
         else if(response != null){

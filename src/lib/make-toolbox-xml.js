@@ -794,13 +794,15 @@ const sensing = function (isStage) {
                 <value>
                     <field name="SERVOCHOICE"></field>
                 </value>
-            </block>>
+            </block>
 
             <block type="ServoPosition" >
                 <value>
                     <field name="SERVOCHOICE"></field>
                 </value>
             </block>
+
+            <block type="mv2_obstaclesense" />
 
             <!--<block type="mv2_current" />-->
 

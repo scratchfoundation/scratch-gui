@@ -191,7 +191,7 @@ class TargetPane extends React.Component {
             topBlock.y = posY / scale;
         }
 
-        this.props.vm.shareBlocksToTarget(blocks, targetId, optFromTargetId);
+        return this.props.vm.shareBlocksToTarget(blocks, targetId, optFromTargetId);
     }
     handleDrop (dragInfo) {
         const {sprite: targetId} = this.props.hoveredTarget;

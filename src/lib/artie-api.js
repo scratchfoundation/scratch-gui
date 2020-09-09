@@ -9,124 +9,92 @@
 /* eslint-disable arrow-parens */
 import xhr from 'xhr';
 
-const getInputNameFromInputId = (parent, inputId) => {
-
-    var inputName;
-    var tempInputs = parent.tempInputs;
-    Object.values(tempInputs).forEach(tempInput => {
-        if (tempInput.block === inputId){
-            inputName = tempInput.name;
-        }
-    });
-
-    return inputName;
-}
-
-const createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested});
-
-const generateArtieNextBlock = (parent, nextId, blocks) => {
-
-    // 1- Searches for the next element in the block array
-    var nextElement = blocks.find(block => block.id === nextId);
-
-    // 2- If the next element has another next element
-    if (nextElement.tempNext !== null && nextElement !== undefined){
-        nextElement = generateArtieNextBlock(nextElement, nextElement.tempNext, blocks);
-    }
-
-    // 3- Transforms the next element in an artie next block
-    const artieNextElement = createArtieBlockFromTempBlock(nextElement);
-
-    // 4- Inserts the next element in the parent
-    parent.next = artieNextElement;
-
-    return parent;
-}
+const _createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested});
 
 const generateArtieBlock = (blocks) => {
 
-    var tempBlocks = [];
-    var tempInputs = [];
-
     var artieBlocks = [];
 
-    // 1- Gets the temporal block elements and the temporal field elements
-    Object.values(blocks).forEach((block) => {
+    // 1- Gets the top level elements
+    var arrayBlocks =[];
+    Object.values(blocks).forEach((block) => {arrayBlocks.push(block)});
 
-        // Looking if it's an input or an object
-        if (block.x !== undefined && block.y !== undefined){
+    var roots = arrayBlocks.filter(block => block.topLevel === true);
 
-            // In the case that the block is an object
-            const elementFamily = (block.opcode.split('_'))[0];
-            const tempElement = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, tempParent: block.parent, tempNext: block.next, next: null, tempInputs: block.inputs, inputs: [], nested: []};
-            tempBlocks.push(tempElement);
-        } else {
-
-            var tempFields = [];
-
-            // In the case that the block is an input
-            Object.values(block.fields).forEach((field) => {
-                const tempField = {name: field.name, value: field.value};
-                tempFields.push(tempField);
-            });
-
-            const tempInput = {id: block.id, parent: block.parent, fields: tempFields};
-            tempInputs.push(tempInput);
-        }
-    });
-
-    // 2- For each temporal input element we set the parent
-    Object.values(tempInputs).forEach((tempInput) => {
-
-        // 2.1- If the input has a parent
-        if (tempInput.parent !== null && tempInput.parent !== undefined){
-
-            // 2.1.1- Gets the parent
-            var parents = tempBlocks.filter(tempBlock => tempBlock.id === tempInput.parent);
-
-            // 2.1.2- Gets the input name from the parent field
-            var inputName = getInputNameFromInputId(parents[0], tempInput.id);
-
-            // 2.1.3- Creates the new input object
-            const input = {name: inputName, fields: tempInput.fields}
-
-            // 2.1.4- Adds the input to the block object
-            parents[0].inputs.push(input);
-        }
-    });
-
-    //3- For each temporal block that has a parent, we set them as a nested block of the parent
-    Object.values(tempBlocks).forEach((tempBlock) =>{
-
-        // 3.1- If the block has a parent
-        if(tempBlock.tempParent !== null && tempBlock.tempParent !== undefined){
-
-            // 3.1.1- Gets the parent
-            var parents = tempBlocks.filter(block => block.id === tempBlock.tempParent);
-
-            // 3.1.2- Creates the block object
-            var block = createArtieBlockFromTempBlock(tempBlock);
-
-            // 3.1.3- Adds the nested block to the parent
-            parents[0].nested.push(block);
-        }
-
-    });
-
-    // 4- Gets all the roots of the block tree (parent == null)
-    const roots = tempBlocks.filter(tempBlock => tempBlock.tempParent === null);
-
-    // 4.1- Looking for the children
+    // 2- Gets the nested elements, the next elements and the inputs
     Object.values(roots).forEach((root) => {
-
-        if (root.tempNext !== null){
-            root = generateArtieNextBlock(root, root.tempNext, tempBlocks);
-        }
-
-        artieBlocks.push(createArtieBlockFromTempBlock(root));
+        const element = _blockHandler(root, arrayBlocks);
+        artieBlocks.push(element);
     });
 
     return artieBlocks;
+}
+
+const _blockHandler = (block, blocks) => {
+
+    // 2.1- creates the temporal element for the root
+    var transformed = false;
+    const elementFamily = (block.opcode.split('_'))[0];
+    var element = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, next: null, inputs: [], nested: []};
+
+    // 2.2- Checks if this block has a next element
+    if(block.next !== null && block.next !== undefined){
+        element = _nextElementHandler(element, block.next, blocks);
+        transformed = true;
+    }
+
+    // 2.3- Checks if this block has inputs or nested elements
+    Object.values(block.inputs).forEach((input) => {
+        element = _nestedInputsHandler(element, input.block, input.name, blocks);
+        transformed = true;
+    });
+
+    if(transformed===false){
+        element = _createArtieBlockFromTempBlock(element);
+    }
+
+    return element;
+}
+
+const _nextElementHandler = (parent, nextId, blocks) => {
+
+    // Creates the return variable
+    var artieParent = _createArtieBlockFromTempBlock(parent);
+
+    // 1- Searches for the next element in the block array
+    var nextElement = blocks.find(block => block.id === nextId);
+    nextElement = _blockHandler(nextElement, blocks)
+
+    // 3- Inserts the next element in the parent
+    artieParent.next = nextElement;
+
+    return artieParent;
+}
+
+const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
+
+    // Creates the return variable
+    var artieParent = _createArtieBlockFromTempBlock(parent);
+
+    // 1- Searches for the input element in the block array
+    const tmpElement = blocks.find(block => block.id === inputId);
+    var inputElement = _blockHandler(tmpElement, blocks);
+
+    // 2.1- If the input element is a nested element
+    if (tmpElement.x !== undefined && tmpElement.y !== undefined){
+        artieParent.nested.push(inputElement);
+    }
+    // 2.2- If the input element is an input
+    else{
+        var tempInput = {name: inputName, fields:[]};
+        Object.values(tmpElement.fields).forEach((field) =>{
+            tempInput.fields.push({name: field.name, value: field.value});
+        });
+
+        artieParent.inputs.push(tempInput);
+    }
+
+    return artieParent;
 }
 
 const sendBlockArtie = (blocks, projectTitle, requestHelp) => new Promise((resolve, reject) => {

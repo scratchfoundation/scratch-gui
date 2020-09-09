@@ -1940,6 +1940,453 @@
         "rotationCenterY": 258
     },
     {
+        "name": "Character1-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "03bc23a9fa12c1244c83a07a81f20bfd",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "03bc23a9fa12c1244c83a07a81f20bfd.svg",
+        "rotationCenterX": 49.8898709690844,
+        "rotationCenterY": 124.76092657062226
+    },
+    {
+        "name": "Character1-b",
+        "tags": [
+            "disability",
+            "disabled",
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "f26b130c2c58b812be21d1a9745863a1",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "f26b130c2c58b812be21d1a9745863a1.svg",
+        "rotationCenterX": 54.60290188300769,
+        "rotationCenterY": 122.98040317401274
+    },
+    {
+        "name": "Character1-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "cc0be722cf93eef63726bd606ab11c5c",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "cc0be722cf93eef63726bd606ab11c5c.svg",
+        "rotationCenterX": 54.60291410943074,
+        "rotationCenterY": 126.85057804587933
+    },
+    {
+        "name": "Character1-d",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "6be261800647c53becb1f93ed31ed13e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "6be261800647c53becb1f93ed31ed13e.svg",
+        "rotationCenterX": 54.602918664146046,
+        "rotationCenterY": 123.84994499999999
+    },
+    {
+        "name": "Character1-e",
+        "tags": [
+            "disability",
+            "disabled",
+            "wheelchair",
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "6f78ce6a87d114162ed9fbef30f9a0fd",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "6f78ce6a87d114162ed9fbef30f9a0fd.svg",
+        "rotationCenterX": 65.725,
+        "rotationCenterY": 120.67006881854581
+    },
+    {
+        "name": "Character1-f",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "527ba82c5e82f43c8fca0be905dbe20a",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "527ba82c5e82f43c8fca0be905dbe20a.svg",
+        "rotationCenterX": 54.60291455471537,
+        "rotationCenterY": 126.76429674297606
+    },
+    {
+        "name": "Character1-g",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "1e303bb57aac0cb4678e85de4251f3f4",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "1e303bb57aac0cb4678e85de4251f3f4.svg",
+        "rotationCenterX": 54.60291143772301,
+        "rotationCenterY": 125.34991500000001
+    },
+    {
+        "name": "Character1-h",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "0f18f9e90d0ed68ebec23da087eb2603",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "0f18f9e90d0ed68ebec23da087eb2603.svg",
+        "rotationCenterX": 54.60291643772288,
+        "rotationCenterY": 126.34996499999997
+    },
+    {
+        "name": "Character1-i",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "5e2f620e5687a36e1954414054c69ccc",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "5e2f620e5687a36e1954414054c69ccc.svg",
+        "rotationCenterX": 59.662344830457954,
+        "rotationCenterY": 124.64983500000002
+    },
+    {
+        "name": "Character1-j",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "1044a68cc743f83564e36a6bca16830b",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "1044a68cc743f83564e36a6bca16830b.svg",
+        "rotationCenterX": 57.80000000000001,
+        "rotationCenterY": 127.9064156368213
+    },
+    {
+        "name": "Character1-k",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "b37d0e0d46f07cb2cbdc5285e176bf62",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "b37d0e0d46f07cb2cbdc5285e176bf62.svg",
+        "rotationCenterX": 55.00291821886171,
+        "rotationCenterY": 122.96517404562759
+    },
+    {
+        "name": "Character1-l",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "984043e1e7c544999c31f952d1d43a56",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "984043e1e7c544999c31f952d1d43a56.svg",
+        "rotationCenterX": 56,
+        "rotationCenterY": 124.849995
+    },
+    {
+        "name": "Character1-m",
+        "tags": [
+            "old",
+            "grandma",
+            "mom",
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "6d5ddfc69f9c6a3f1d2ded1428237931",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "6d5ddfc69f9c6a3f1d2ded1428237931.svg",
+        "rotationCenterX": 56,
+        "rotationCenterY": 126.73041545130786
+    },
+    {
+        "name": "Character2-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "7084b3baab935de819cc5ab46f7cecf8",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "7084b3baab935de819cc5ab46f7cecf8.svg",
+        "rotationCenterX": 47.99056799868501,
+        "rotationCenterY": 127.80503283089969
+    },
+    {
+        "name": "Character2-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "df7cbf2913bcea721df2e0360644f193",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "df7cbf2913bcea721df2e0360644f193.svg",
+        "rotationCenterX": 44.99552075655663,
+        "rotationCenterY": 125.14875889583388
+    },
+    {
+        "name": "Character2-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e0eacf1e575adc559c41e3a81a892168",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e0eacf1e575adc559c41e3a81a892168.svg",
+        "rotationCenterX": 47.95809,
+        "rotationCenterY": 123.53880000000001
+    },
+    {
+        "name": "Character2-d",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e8b44b0e904fd4bb7430c26b743f1520",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e8b44b0e904fd4bb7430c26b743f1520.svg",
+        "rotationCenterX": 44.995540756556636,
+        "rotationCenterY": 128.2061488659535
+    },
+    {
+        "name": "Character2-e",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "67d425b11544caa0fe9228f355c6485b",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "67d425b11544caa0fe9228f355c6485b.svg",
+        "rotationCenterX": 48.00809000000001,
+        "rotationCenterY": 122.45
+    },
+    {
+        "name": "Character2-f",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "db3f436fcb6fb28828a4c932b60feb5e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "db3f436fcb6fb28828a4c932b60feb5e.svg",
+        "rotationCenterX": 48.53553350541961,
+        "rotationCenterY": 126.89993965793039
+    },
+    {
+        "name": "Character2-g",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "93e035270675f933b94ee951d7e475e3",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "93e035270675f933b94ee951d7e475e3.svg",
+        "rotationCenterX": 47.53308999999999,
+        "rotationCenterY": 125.43368141092515
+    },
+    {
+        "name": "Character2-h",
+        "tags": [
+            "disability",
+            "disabled",
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "f4f2778df2840de5a6449a49f3efb599",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "f4f2778df2840de5a6449a49f3efb599.svg",
+        "rotationCenterX": 44.953870756556626,
+        "rotationCenterY": 128.08851543576878
+    },
+    {
+        "name": "Character2-i",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "1cf73a791959e07b5bafe18474f93b78",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "1cf73a791959e07b5bafe18474f93b78.svg",
+        "rotationCenterX": 48.00809000000001,
+        "rotationCenterY": 126.87082000000001
+    },
+    {
+        "name": "Character2-j",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "bf0d808f7bf0c11c338b4fea0a735874",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "bf0d808f7bf0c11c338b4fea0a735874.svg",
+        "rotationCenterX": 48.64271853726632,
+        "rotationCenterY": 128.03860864267807
+    },
+    {
         "name": "Cheesy Puffs",
         "tags": [
             "food"
@@ -5895,6 +6342,63 @@
         "rotationCenterY": 68
     },
     {
+        "name": "Kia-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e56e480c994572323d88355b8733e1a3",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e56e480c994572323d88355b8733e1a3.svg",
+        "rotationCenterX": 38.99436950683594,
+        "rotationCenterY": 133.91017150878906
+    },
+    {
+        "name": "Kia-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "b3d0a248adbc26b0d0826e042a81670a",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "b3d0a248adbc26b0d0826e042a81670a.svg",
+        "rotationCenterX": 33.86018625895264,
+        "rotationCenterY": 133.81014001838557
+    },
+    {
+        "name": "Kia-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "db6cd6b145bb6d8dc299475af7423d6e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "db6cd6b145bb6d8dc299475af7423d6e.svg",
+        "rotationCenterX": 55.533868959382346,
+        "rotationCenterY": 133.7360717987814
+    },
+    {
         "name": "Kiran-a",
         "tags": [
             "space",
@@ -6340,6 +6844,63 @@
         "md5ext": "ac80d75745315f052f7f7b4e62e4a850.svg",
         "rotationCenterX": 73,
         "rotationCenterY": 39
+    },
+    {
+        "name": "Luca-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "90fa2ad340edc6e6ba963710feef940e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "90fa2ad340edc6e6ba963710feef940e.svg",
+        "rotationCenterX": 44.518938859952925,
+        "rotationCenterY": 130.28487970293187
+    },
+    {
+        "name": "Luca-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "18dfad514602a4907502c7c84861b24e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "18dfad514602a4907502c7c84861b24e.svg",
+        "rotationCenterX": 41.801770753585856,
+        "rotationCenterY": 130.2642790555675
+    },
+    {
+        "name": "Luca-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "963cb82687acaf5de53a22b287192723",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "963cb82687acaf5de53a22b287192723.svg",
+        "rotationCenterX": 50.565256229860694,
+        "rotationCenterY": 130.02168173555543
     },
     {
         "name": "Magicwand",
@@ -6926,6 +7487,63 @@
         "md5ext": "592816f56409d582603c485cbefcbbb8.svg",
         "rotationCenterX": 74,
         "rotationCenterY": 78
+    },
+    {
+        "name": "Noor-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "4cf233c6540e434aded60608ba316ce3",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "4cf233c6540e434aded60608ba316ce3.svg",
+        "rotationCenterX": 38.4758779691426,
+        "rotationCenterY": 130.22760078036825
+    },
+    {
+        "name": "Noor-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "975585ca9461f0730a285fc96df73425",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "975585ca9461f0730a285fc96df73425.svg",
+        "rotationCenterX": 41.73210898803782,
+        "rotationCenterY": 130.22760078036825
+    },
+    {
+        "name": "Noor-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "c1792bbd5970034b4595ff7e742d6e47",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "c1792bbd5970034b4595ff7e742d6e47.svg",
+        "rotationCenterX": 50.673619073816894,
+        "rotationCenterY": 130.25802625960853
     },
     {
         "name": "Octopus-a",
@@ -8500,6 +9118,63 @@
         "rotationCenterY": 159
     },
     {
+        "name": "Sasha-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e26bf53469cafd730ca150e745ceeafc",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e26bf53469cafd730ca150e745ceeafc.svg",
+        "rotationCenterX": 48.12538146972656,
+        "rotationCenterY": 132.3017578125
+    },
+    {
+        "name": "Sasha-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "a0b8890ce458aebed5e7002e1897508e",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "a0b8890ce458aebed5e7002e1897508e.svg",
+        "rotationCenterX": 40.4882598059082,
+        "rotationCenterY": 132.05174255371094
+    },
+    {
+        "name": "Sasha-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "89bb25e1465eb9481d267e4f9df592af",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "89bb25e1465eb9481d267e4f9df592af.svg",
+        "rotationCenterX": 56.06647351528716,
+        "rotationCenterY": 131.95398475097656
+    },
+    {
         "name": "Saxophone-a",
         "tags": [
             "music",
@@ -9250,6 +9925,158 @@
         "rotationCenterY": 35
     },
     {
+        "name": "Tatiana-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "5cf65a9f942ca92c93915527ff9db1e6",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "5cf65a9f942ca92c93915527ff9db1e6.svg",
+        "rotationCenterX": 60.66618579359704,
+        "rotationCenterY": 53.97647634953694
+    },
+    {
+        "name": "Tatiana-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "91fb7d056beaf553ccec03d61d72c545",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "91fb7d056beaf553ccec03d61d72c545.svg",
+        "rotationCenterX": 49.74537298932822,
+        "rotationCenterY": 61.254895800177906
+    },
+    {
+        "name": "Tatiana-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e207fd3f99e1db8c5d66f49446f27e37",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e207fd3f99e1db8c5d66f49446f27e37.svg",
+        "rotationCenterX": 60.666205767105936,
+        "rotationCenterY": 53.86536113811712
+    },
+    {
+        "name": "Tatiana-d",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e2ea6bbc6066574d4836e808a1c5f849",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e2ea6bbc6066574d4836e808a1c5f849.svg",
+        "rotationCenterX": 49.85653018505951,
+        "rotationCenterY": 55.72124957487232
+    },
+    {
+        "name": "Taylor-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "ae2eaae0882543dc276c8e7d56ff2e7b",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "ae2eaae0882543dc276c8e7d56ff2e7b.svg",
+        "rotationCenterX": 59.066061145351995,
+        "rotationCenterY": 52.19126
+    },
+    {
+        "name": "Taylor-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "e0082f49fc5d0d83d7fad6124ba82bb1",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "e0082f49fc5d0d83d7fad6124ba82bb1.svg",
+        "rotationCenterX": 48.612321639466984,
+        "rotationCenterY": 53.0163
+    },
+    {
+        "name": "Taylor-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "ae2eaae0882543dc276c8e7d56ff2e7b",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "ae2eaae0882543dc276c8e7d56ff2e7b.svg",
+        "rotationCenterX": 59.066061145351995,
+        "rotationCenterY": 52.19126
+    },
+    {
+        "name": "Taylor-d",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "a504d785629f2d1ca6b87e80b334d5e8",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "a504d785629f2d1ca6b87e80b334d5e8.svg",
+        "rotationCenterX": 48.945654918401004,
+        "rotationCenterY": 50.35257000000004
+    },
+    {
         "name": "Ten80 Pop Down",
         "tags": [
             "people",
@@ -9581,6 +10408,82 @@
         "md5ext": "04758bd432a8b1cab527bddf14432147.svg",
         "rotationCenterX": 36,
         "rotationCenterY": 87
+    },
+    {
+        "name": "Trisha-a",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "55d31103bc86447c6a727b4f0664a5ea",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "55d31103bc86447c6a727b4f0664a5ea.svg",
+        "rotationCenterX": 81.34455278988648,
+        "rotationCenterY": 57.02459255690913
+    },
+    {
+        "name": "Trisha-b",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "c31dc8487a841f644889784ff437e2c5",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "c31dc8487a841f644889784ff437e2c5.svg",
+        "rotationCenterX": 63.260135124357646,
+        "rotationCenterY": 60.86251166255646
+    },
+    {
+        "name": "Trisha-c",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "55d31103bc86447c6a727b4f0664a5ea",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "55d31103bc86447c6a727b4f0664a5ea.svg",
+        "rotationCenterX": 81.34455278988648,
+        "rotationCenterY": 57.02459255690913
+    },
+    {
+        "name": "Trisha-d",
+        "tags": [
+            "people",
+            "person",
+            "boy",
+            "girl",
+            "nonbinary",
+            "non-binary",
+            "kid",
+            "character"
+        ],
+        "assetId": "2d06023ec09ec312ab49055530511134",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "2d06023ec09ec312ab49055530511134.svg",
+        "rotationCenterX": 63.275047131412066,
+        "rotationCenterY": 55.525379847189015
     },
     {
         "name": "Truck-a",

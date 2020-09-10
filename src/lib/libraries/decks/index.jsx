@@ -1734,7 +1734,7 @@ export default {
             image: 'glideAroundPoint'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'Tell-A-Story',
                 'switch-costume'
             ]
         }],

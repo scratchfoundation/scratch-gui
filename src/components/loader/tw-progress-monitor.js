@@ -27,10 +27,6 @@ const setProgress = progress => {
     }
     currentProgress = progress;
     progressHandler(state, progress, complete, total);
-    if (progress === 1) {
-        total = 0;
-        complete = 0;
-    }
 };
 
 const setState = newState => {
@@ -38,6 +34,8 @@ const setState = newState => {
         return;
     }
     state = newState;
+    complete = 0;
+    total = 0;
     setProgress(0);
 };
 

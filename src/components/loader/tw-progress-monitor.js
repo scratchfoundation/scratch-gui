@@ -44,7 +44,6 @@ const originalFetch = window.fetch;
 window.fetch = (url, opts) => {
     if (typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET') {
         setState(1);
-        setProgress(0);
 
         return new Promise((resolve, reject) => {
             // fetch() does not support progress, so we use XMLHttpRequest

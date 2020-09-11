@@ -1,4 +1,4 @@
-import './tw-imports';
+import './tw-self-check';
 
 import ReactDOM from 'react-dom';
 import React from 'react';

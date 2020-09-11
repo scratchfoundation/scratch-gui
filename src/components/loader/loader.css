@@ -180,3 +180,18 @@
     height: 20px;
     margin: 5px 0;
 }
+
+.tw-progress-outer {
+    position: relative;
+    width: 250px;
+    height: 5px;
+    border: 1px solid white;
+}
+.tw-progress-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: white;
+}

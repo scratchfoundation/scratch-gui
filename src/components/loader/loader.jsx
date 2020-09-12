@@ -78,8 +78,10 @@ class LoaderComponent extends React.Component {
         // TODO: support translations
         if (this._state === 1) {
             this.message.textContent = 'Loading project data …';
-        } else {
+        } else if (this.total > 0) {
             this.message.textContent = `Loading assets (${this.complete}/${this.total}) …`;
+        } else {
+            this.message.textContent = `Loading assets …`;
         }
     }
     barInnerRef (element) {

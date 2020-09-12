@@ -63,13 +63,11 @@ const StageHeaderComponent = function (props) {
 
     let header = null;
 
-    if (isFullScreen) {
+    // tw: treat embed as fullscreen
+    if (isFullScreen || showBranding) {
         const stageDimensions = getStageDimensions(null, true);
-        const stageButton = showBranding ? (
-            <div className={styles.embedScratchLogo}>
-                {/* tw: we remove the embed branding entirely (for now) */}
-            </div>
-        ) : (
+        // tw: we replace the branding image with a fullscreen button
+        const stageButton = isFullScreen ? (
             <Button
                 className={styles.stageButton}
                 onClick={onSetStageUnFull}
@@ -80,6 +78,20 @@ const StageHeaderComponent = function (props) {
                     className={styles.stageButtonIcon}
                     draggable={false}
                     src={unFullScreenIcon}
+                    title={props.intl.formatMessage(messages.fullscreenControl)}
+                />
+            </Button>
+            
+        ) : (
+            <Button
+                className={styles.stageButton}
+                onClick={onSetStageFull}
+            >
+                <img
+                    alt={props.intl.formatMessage(messages.fullStageSizeMessage)}
+                    className={styles.stageButtonIcon}
+                    draggable={false}
+                    src={fullScreenIcon}
                     title={props.intl.formatMessage(messages.fullscreenControl)}
                 />
             </Button>

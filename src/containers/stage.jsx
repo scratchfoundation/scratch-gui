@@ -89,6 +89,9 @@ class Stage extends React.Component {
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
+            // tw: update when innerWidth or isWindowFullScreen changes
+            this.props.isWindowFullScreen !== nextProps.isWindowFullScreen ||
+            this.props.innerWidth !== nextProps.innerWidth ||
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
             this.props.isStarted !== nextProps.isStarted;
@@ -445,6 +448,9 @@ Stage.propTypes = {
     disableEditingTargetChange: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    // tw: update when innerWidth or isWindowFullScreen changes
+    isWindowFullScreen: PropTypes.bool,
+    innerWidth: PropTypes.number,
     isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
@@ -464,7 +470,11 @@ const mapStateToProps = state => ({
     // tw: Disable editing target changing in certain circumstances to avoid lag
     disableEditingTargetChange: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly,
     isColorPicking: state.scratchGui.colorPicker.active,
-    isFullScreen: state.scratchGui.mode.isFullScreen,
+    // tw: embed is always considered fullscreen
+    isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.showBranding,
+    // tw: update when innerWidth or isWindowFullScreen changes
+    isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
+    innerWidth: state.scratchGui.tw.innerWidth,
     isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.

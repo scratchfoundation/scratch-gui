@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import {compose} from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
+import TWFullScreenHOC from '../lib/tw-fullscreen-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 
@@ -14,7 +15,8 @@ document.body.classList.add('tw-loaded');
 const projectId = location.hash.substr(1);
 
 const WrappedGUI = compose(
-    AppStateHOC
+    AppStateHOC,
+    TWFullScreenHOC
 )(GUI);
 
 ReactDOM.render(<WrappedGUI

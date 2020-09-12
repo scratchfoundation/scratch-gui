@@ -95,7 +95,8 @@ const initEmbedded = function (currentState) {
         currentState,
         {mode: {
             showBranding: true,
-            isFullScreen: true,
+            // tw: embed does not need isFullScreen anymore
+            isFullScreen: false,
             isPlayerOnly: true,
             hasEverEnteredEditor: false
         }}

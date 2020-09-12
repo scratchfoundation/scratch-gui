@@ -3,6 +3,8 @@ const SET_COMPILER_STATE = 'tw/SET_COMPILER_STATE';
 const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
 const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
+const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
+const SET_INNERWIDTH = 'tw/SET_INNERWIDTH';
 
 const USERNAME_KEY = 'tw:username';
 
@@ -46,7 +48,9 @@ export const initialState = {
     compiler: true,
     cloud: true,
     username: getInitialUsername(),
-    highQualityPen: getInitialHighQualityPen()
+    highQualityPen: getInitialHighQualityPen(),
+    isWindowFullScreen: false,
+    innerWidth: window.innerWidth
 };
 
 const reducer = function (state, action) {
@@ -74,6 +78,14 @@ const reducer = function (state, action) {
     case SET_HIGH_QUALITY_PEN:
         return Object.assign({}, state, {
             highQualityPen: action.highQualityPen
+        });
+    case SET_WINDOW_FULLSCREEN:
+        return Object.assign({}, state, {
+            isWindowFullScreen: action.isWindowFullScreen
+        });
+    case SET_INNERWIDTH:
+        return Object.assign({}, state, {
+            innerWidth: action.innerWidth
         });
     default:
         return state;
@@ -115,6 +127,20 @@ const setHighQualityPen = function (highQualityPen) {
     };
 };
 
+const setIsWindowFullScreen = function (isWindowFullScreen) {
+    return {
+        type: SET_WINDOW_FULLSCREEN,
+        isWindowFullScreen: isWindowFullScreen
+    };
+};
+
+const setInnerWidth = function (innerWidth) {
+    return {
+        type: SET_INNERWIDTH,
+        innerWidth: innerWidth
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -122,5 +148,7 @@ export {
     setCompilerState,
     setUsername,
     setCloud,
-    setHighQualityPen
+    setHighQualityPen,
+    setIsWindowFullScreen,
+    setInnerWidth
 };

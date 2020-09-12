@@ -15,6 +15,12 @@ import Examples from '../components/tw-examples/examples.jsx';
 
 import styles from './gui.css';
 
+if (window !== window.parent) {
+    // Show a warning when trying to embed this page. Users shouldn't do that.
+    // eslint-disable-next-line no-alert
+    alert('You are embedding TurboWarp incorrectly.\n\nGo here for instructions: https://github.com/TurboWarp/scratch-gui/wiki/Embedding');
+}
+
 const onClickLogo = () => {
     location.hash = '';
 };

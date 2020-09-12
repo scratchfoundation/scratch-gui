@@ -7,13 +7,14 @@ import {setFullScreen} from '../reducers/mode';
 import {setIsWindowFullScreen, setInnerWidth} from '../reducers/tw';
 
 const TWFullScreenHOC = function (WrappedComponent) {
-    class TWFullScreenHOC extends React.Component {
+    class FullScreenComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
                 'handleResize',
                 'handleFullScreenChange'
             ]);
+            this.initialTitle = document.title;
         }
         componentDidMount () {
             window.addEventListener('resize', this.handleResize);
@@ -51,7 +52,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
             );
         }
     }
-    TWFullScreenHOC.propTypes = {
+    FullScreenComponent.propTypes = {
         isFullScreen: PropTypes.bool,
         setInnerWidth: PropTypes.func,
         setIsFullScreen: PropTypes.func,
@@ -68,7 +69,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
     return connect(
         mapStateToProps,
         mapDispatchToProps
-    )(TWFullScreenHOC);
+    )(FullScreenComponent);
 };
 
 export {

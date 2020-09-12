@@ -3,7 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import classNames from 'classnames';
 import styles from './loader.css';
 import PropTypes from 'prop-types';
-import {bindAll} from 'lodash';
+import bindAll from 'lodash.bindall';
 
 import topBlock from './top-block.svg';
 import middleBlock from './middle-block.svg';

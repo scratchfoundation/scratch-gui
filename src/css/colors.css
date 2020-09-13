@@ -2,7 +2,8 @@ $ui-primary: hsla(215, 100%, 95%, 1); /* #E5F0FF */
 $ui-secondary: hsla(215, 75%, 95%, 1); /* #E9F1FC */
 $ui-tertiary: hsla(215, 50%, 90%, 1); /* #D9E3F2 */
 
-$ui-modal-overlay: hsla(215, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
+/* tw: update to match updated motion-primary */
+$ui-modal-overlay: hsla(0, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
 
 $ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
 $ui-white-dim: hsla(0, 100%, 100%, 0.75); /* 25% transparent version of ui-white */

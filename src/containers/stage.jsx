@@ -471,7 +471,7 @@ const mapStateToProps = state => ({
     disableEditingTargetChange: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly,
     isColorPicking: state.scratchGui.colorPicker.active,
     // tw: embed is always considered fullscreen
-    isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.showBranding,
+    isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.showBranding || false,
     // tw: update when innerWidth or isWindowFullScreen changes
     isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
     innerWidth: state.scratchGui.tw.innerWidth,

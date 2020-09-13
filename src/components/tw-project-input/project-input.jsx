@@ -17,7 +17,7 @@ class ProjectInput extends React.Component {
             'handleFocus'
         ]);
         this.state = {
-            projectId: ''
+            projectId: this.props.projectId
         };
     }
     componentDidMount () {

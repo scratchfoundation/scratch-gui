@@ -10,7 +10,7 @@ class ToggleStuck extends React.Component {
             'toggleStuck'
         ]);
         this.state = {
-            stuck: false
+            stuck: this.props.vm.runtime.compilerOptions.loopStuckChecking
         };
     }
     toggleStuck () {

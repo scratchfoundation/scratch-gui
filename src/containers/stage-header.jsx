@@ -25,7 +25,7 @@ class StageHeader extends React.Component {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
     handleKeyPress (event) {
-        if (event.key === 'Escape' && this.props.isFullScreen && !this.props.showBranding) {
+        if (event.key === 'Escape' && this.props.isFullScreen && this.props.editorModeEnabled) {
             this.props.onSetStageUnFull(false);
         }
     }
@@ -43,6 +43,7 @@ class StageHeader extends React.Component {
 }
 
 StageHeader.propTypes = {
+    editorModeEnabled: PropTypes.bool,
     isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
@@ -52,6 +53,7 @@ StageHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
+    editorModeEnabled: state.scratchGui.mode.editorModeEnabled,
     stageSizeMode: state.scratchGui.stageSize.stageSize,
     showBranding: state.scratchGui.mode.showBranding,
     isFullScreen: state.scratchGui.mode.isFullScreen,

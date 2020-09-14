@@ -31,6 +31,9 @@ class StageHeader extends React.Component {
     }
     render () {
         const {
+            /* eslint-disable no-unused-vars */
+            editorModeEnabled,
+            /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
         return (

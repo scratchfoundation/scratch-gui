@@ -57,7 +57,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             if (typeof window === 'object') {
                 // Note: it might be better to use a listener instead of assigning onbeforeunload;
                 // but then it'd be hard to turn this listening off in our tests
-                window.onbeforeunload = e => this.leavePageConfirm(e);
+                window.addEventListener('beforeunload', this.leavePageConfirm);
             }
 
             // Allow the GUI consumer to pass in a function to receive a trigger
@@ -115,10 +115,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             this.clearAutoSaveTimeout();
-            // Cant unset the beforeunload because it might no longer belong to this component
-            // i.e. if another of this component has been mounted before this one gets unmounted
-            // which happens when going from project to editor view.
-            // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+            window.removeEventListener('beforeunload', this.leavePageConfirm);
             // Remove project thumbnailer function since the components are unmounting
             this.props.onSetProjectThumbnailer(null);
             this.props.onSetProjectSaver(null);

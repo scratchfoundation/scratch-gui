@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
 
-import {defaultProjectId, setProjectId} from '../../reducers/project-state';
+import {defaultProjectId, setProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
 import styles from './project-input.css';
 
 class ProjectInput extends React.Component {
@@ -86,6 +86,7 @@ class ProjectInput extends React.Component {
                 onPaste={this.handlePaste}
                 onBlur={this.handleBlur}
                 onFocus={this.handleFocus}
+                disabled={this.props.loading}
             />
         );
     }
@@ -93,11 +94,13 @@ class ProjectInput extends React.Component {
 
 ProjectInput.propTypes = {
     projectId: PropTypes.string,
-    setProjectId: PropTypes.func
+    setProjectId: PropTypes.func,
+    loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    projectId: state.scratchGui.projectState.projectId
+    projectId: state.scratchGui.projectState.projectId,
+    loading: getIsLoading(state.scratchGui.projectState.loadingState) || getIsFetchingWithId(state.scratchGui.projectState.loadingState)
 });
 
 const mapDispatchToProps = dispatch => ({

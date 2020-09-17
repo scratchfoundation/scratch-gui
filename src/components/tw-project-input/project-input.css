@@ -7,8 +7,11 @@
     font-size: 23px;
     line-height: 32px;
     color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
 }
-
 .input:focus {
     color: rgba(0, 0, 0, 1);
+}
+.input:disabled {
+    opacity: 0.8;
 }

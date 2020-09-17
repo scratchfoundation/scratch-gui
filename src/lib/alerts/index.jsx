@@ -212,6 +212,20 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.SUCCESS
+    },
+    {
+        alertId: 'twWarning',
+        alertType: AlertTypes.STANDARD,
+        clearList: [],
+        content: (
+            <FormattedMessage
+                defaultMessage="Turn on stuck checking or disable compiler (in Advanced menu) while creating projects to avoid potential data loss."
+                description="Message warning user of potential data loss."
+                id="tw.alerts.warning"
+            />
+        ),
+        closeButton: true,
+        level: AlertLevels.WARN
     }
 ];
 

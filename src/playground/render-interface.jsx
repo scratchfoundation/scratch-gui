@@ -6,6 +6,7 @@ import {compose} from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWTitleHOC from '../lib/tw-title-hoc.jsx';
+import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -74,7 +75,8 @@ const ConnectedInterface = connect(
 const WrappedInterface = compose(
     AppStateHOC,
     TWParserHOC,
-    TWTitleHOC
+    TWTitleHOC,
+    TWEditorWarningHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

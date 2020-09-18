@@ -23,8 +23,8 @@ const base = {
     },
     output: {
         library: 'GUI',
-        filename: 'js/[name].[contenthash].js',
-        chunkFilename: 'js/[name].[contenthash].js'
+        filename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash].js' : 'js/[name].js',
+        chunkFilename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash].js' : 'js/[name].js'
     },
     externals: {
         React: 'react',
@@ -101,8 +101,7 @@ module.exports = [
             'embed': './src/playground/embed.jsx'
         },
         output: {
-            path: path.resolve(__dirname, 'build'),
-            filename: '[name].js'
+            path: path.resolve(__dirname, 'build')
         },
         externals: {
             React: 'react',
@@ -201,6 +200,7 @@ module.exports = [
 ].concat(
     process.env.NODE_ENV === 'production' || process.env.BUILD_MODE === 'dist' ? (
         // export as library
+        // tw: TODO: need to see if this even work anymore
         defaultsDeep({}, base, {
             target: 'web',
             entry: {

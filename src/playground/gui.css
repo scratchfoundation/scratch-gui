@@ -1,6 +1,9 @@
 p {
     margin: 0 0 16px;
 }
+a {
+    color: #25d;
+}
 
 .stage-only {
     position: absolute;
@@ -31,4 +34,16 @@ p {
     /* there's a couple extra pixels of border around the stage */
     width: 482px;
     margin: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #111;
+    }
+    .stage-only {
+        color: #ddd;
+    }
+    .stage-only a {
+        color: #4af;
+    }
 }

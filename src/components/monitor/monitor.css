@@ -13,6 +13,7 @@
     transition: box-shadow 0.2s;
     pointer-events: all;
     overflow: hidden;
+    color: #575e75; /* tw: explicitly set color to match Scratch */
 }
 
 .monitor:hover {

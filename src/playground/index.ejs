@@ -17,6 +17,7 @@
       }
       #splash h1 { font-size: 2rem; font-weight: bold; }
       .tw-loaded #splash { display: none; }
+      @media (prefers-color-scheme: dark) { #splash { background-color: #333; color: #ddd; } }
     </style>
     <% if (htmlWebpackPlugin.options.sentryConfig) { %>
         <!-- Sentry error logging to help with finding bugs -->

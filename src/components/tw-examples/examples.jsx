@@ -42,6 +42,12 @@ class Examples extends React.Component {
                 )}
             >
                 <div className={styles.projects}>
+                    <StudioView
+                        id={studioId}
+                        onSelect={this.handleSelect}
+                        disabled={this.props.loading}
+                        placeholder={!opened}
+                    />
                     {opened ? null : (
                         <div
                             className={styles.openerContainer}
@@ -56,12 +62,6 @@ class Examples extends React.Component {
                             </div>
                         </div>
                     )}
-                    <StudioView
-                        id={studioId}
-                        onSelect={this.handleSelect}
-                        disabled={this.props.loading}
-                        placeholder={!opened}
-                    />
                 </div>
                 <div className={styles.footer}>
                     <a

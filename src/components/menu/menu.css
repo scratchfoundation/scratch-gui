@@ -14,6 +14,13 @@
     box-shadow: 0 8px 8px 0 $ui-black-transparent;
 }
 
+/* tw: dark theme */
+@media (prefers-color-scheme: dark) {
+    .menu {
+        background-color: $motion-primary-dark;
+    }
+}
+
 .menu.left {
     right: 0;
 }

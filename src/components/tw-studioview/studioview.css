@@ -20,6 +20,7 @@ With changes to make it work properly in the scratch-gui environment.
 
 .studioview-root {
   height: 100%;
+  color: white;
 }
 .studioview-list {
   width: 100%;
@@ -34,32 +35,33 @@ With changes to make it work properly in the scratch-gui environment.
   margin-bottom: 1px;
   margin-right: 1px;
 }
-.studioview-project {
+.studioview-root .studioview-project {
+  color: inherit;
+  position: relative;
   text-decoration: none;
 }
-.studioview-root[theme=light] .studioview-loaded:hover {
-  background: rgba(0, 0, 0, 0.1);
+.studioview-loaded:hover::before, .studioview-loaded:active::before {
+  content: '';
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+  opacity: 0.1;
 }
-.studioview-root[theme=dark] .studioview-loaded:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-.studioview-root[theme=light] .studioview-loaded:active {
-  background: rgba(0, 0, 0, 0.2);
-}
-.studioview-root[theme=dark] .studioview-loaded:active {
-  background: rgba(255, 255, 255, 0.2);
+.studioview-root .studioview-loaded:active::before {
+  opacity: 0.2;
 }
 .studioview-root .studioview-title,
 .studioview-root .studioview-author {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: black;
+  color: inherit;
   text-decoration: none;
-}
-.studioview-root[theme=dark] .studioview-title,
-.studioview-root[theme=dark] .studioview-author {
-  color: #ddd;
 }
 .studioview-title {
   font-size: 0.8em;
@@ -81,15 +83,11 @@ With changes to make it work properly in the scratch-gui environment.
   height: 100%;
 }
 
-.studioview-thumbnail,
+.studioview-placeholder .studioview-thumbnail,
 .studioview-placeholder .studioview-title,
 .studioview-placeholder .studioview-author {
-  background: rgba(0, 0, 0, 0.1);
-}
-.studioview-root[theme=dark] .studioview-thumbnail,
-.studioview-root[theme=dark] .studioview-placeholder .studioview-title,
-.studioview-root[theme=dark] .studioview-placeholder .studioview-author {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: currentColor;
+  opacity: 0.1;
 }
 
 .studioview-title {

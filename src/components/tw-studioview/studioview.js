@@ -44,7 +44,6 @@ var StudioView = function (studioId) {
     this.projectList.className = styles.studioviewList;
     this.projectList.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
     this.root.appendChild(this.projectList);
-    this.setTheme('light');
 
     if ('IntersectionObserver' in window) {
         this.intersectionObserver = new IntersectionObserver(this.handleIntersection.bind(this), {
@@ -309,10 +308,6 @@ StudioView.prototype.loadNextPage = function () {
         .replace('$page', '' + this.page);
     xhr.open('GET', url);
     xhr.send();
-};
-
-StudioView.prototype.setTheme = function (theme) {
-    this.root.setAttribute('theme', theme);
 };
 
 StudioView.prototype.getURL = function () {

@@ -11,6 +11,8 @@ var autoprefixer = require('autoprefixer');
 var postcssVars = require('postcss-simple-vars');
 var postcssImport = require('postcss-import');
 
+process.env.NODE_ENV = 'production';
+
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
 const base = {
@@ -121,19 +123,7 @@ module.exports = [
         optimization: {
             splitChunks: {
                 chunks: 'all',
-                cacheGroups: {
-                    vendors: {
-                        name: 'vendors',
-                        test: /[\\/]node_modules[\\/]/,
-                        priority: -10
-                    },
-                    default: {
-                        name: 'gui',
-                        minChunks: 2,
-                        priority: -20,
-                        reuseExistingChunk: true
-                    }
-                }
+                minChunks: 2
             },
             runtimeChunk: {
                 name: 'runtime'

@@ -69,6 +69,7 @@ const initPlayer = function (currentState) {
         {},
         currentState,
         {mode: {
+            isEmbedded: false,
             isFullScreen: currentState.mode.isFullScreen,
             isPlayerOnly: true,
             // When initializing in player mode, make sure to reset
@@ -82,6 +83,7 @@ const initFullScreen = function (currentState) {
         {},
         currentState,
         {mode: {
+            isEmbedded: false,
             isFullScreen: true,
             isPlayerOnly: currentState.mode.isPlayerOnly,
             hasEverEnteredEditor: currentState.mode.hasEverEnteredEditor
@@ -94,7 +96,7 @@ const initEmbedded = function (currentState) {
         {},
         currentState,
         {mode: {
-            showBranding: true,
+            isEmbedded: true,
             // tw: embed does not need isFullScreen anymore
             isFullScreen: false,
             isPlayerOnly: true,

@@ -2,7 +2,7 @@ const SET_FULL_SCREEN = 'scratch-gui/mode/SET_FULL_SCREEN';
 const SET_PLAYER = 'scratch-gui/mode/SET_PLAYER';
 
 const initialState = {
-    showBranding: false,
+    isEmbedded: false,
     isFullScreen: false,
     isPlayerOnly: false,
     hasEverEnteredEditor: true

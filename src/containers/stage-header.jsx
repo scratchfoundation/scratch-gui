@@ -49,14 +49,16 @@ StageHeader.propTypes = {
     innerWidth: PropTypes.number,
     isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
-    showBranding: PropTypes.bool,
+    // tw: replace showBranding
+    isEmbedded: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    showBranding: state.scratchGui.mode.showBranding,
+    // tw: replace showBranding
+    isEmbedded: state.scratchGui.mode.isEmbedded,
     isFullScreen: state.scratchGui.mode.isFullScreen,
     // tw: update when innerWidth or isWindowFullScreen changes
     isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,

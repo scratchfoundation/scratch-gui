@@ -137,7 +137,7 @@ const mapStateToProps = state => {
         error: state.scratchGui.projectState.error,
         isError: getIsError(loadingState),
         // tw: embed is considered fullscreen
-        isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.showBranding,
+        isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         isRtl: state.locales.isRtl,
         isShowingProject: getIsShowingProject(loadingState),

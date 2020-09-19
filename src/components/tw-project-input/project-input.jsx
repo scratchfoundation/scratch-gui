@@ -20,17 +20,16 @@ class ProjectInput extends React.Component {
             projectId: this.props.projectId
         };
     }
-    componentDidMount () {
-        this.input.focus();
-        this.input.selectionStart = this.input.value.length;
-    }
     componentDidUpdate (prevProps) {
-        if (this.props.projectId !== prevProps.projectId) {
-            if (this.props.projectId !== defaultProjectId) {
+        if (this.props.projectId !== prevProps.projectId || this.props.loading !== prevProps.loading) {
+            if (this.props.projectId === defaultProjectId) {
+                this.input.focus();
+                this.input.selectionStart = this.input.value.length;
+            } else {
                 this.input.blur();
             }
             this.setState({
-                projectId: this.props.projectId || ''
+                projectId: this.props.projectId
             });
         }
     }
@@ -73,7 +72,7 @@ class ProjectInput extends React.Component {
         }
     }
     render () {
-        const projectId = this.state.projectId === defaultProjectId ? '' : this.state.projectId;
+        const projectId = this.state.projectId === defaultProjectId ? '' : this.state.projectId || '';
         return (
             <input
                 ref={elem => this.input = elem}

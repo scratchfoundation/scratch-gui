@@ -16,7 +16,7 @@ class CloudVariablesToggler extends React.Component {
             alert('Cannot use cloud variables, most likely because you opened the editor.');
             return;
         }
-        this.props.onCloudChange(!this.props.cloud);
+        this.props.onCloudChange(!this.props.enabled);
     }
     render () {
         const {
@@ -31,7 +31,7 @@ class CloudVariablesToggler extends React.Component {
 
 CloudVariablesToggler.propTypes = {
     children: PropTypes.func,
-    cloud: PropTypes.bool,
+    enabled: PropTypes.bool,
     username: PropTypes.string,
     onCloudChange: PropTypes.func,
     canUseCloudVariables: PropTypes.bool
@@ -39,14 +39,12 @@ CloudVariablesToggler.propTypes = {
 
 const mapStateToProps = state => ({
     username: state.scratchGui.tw.username,
-    cloud: state.scratchGui.tw.cloud,
+    enabled: state.scratchGui.tw.enabled,
     canUseCloudVariables: !state.scratchGui.mode.hasEverEnteredEditor
 });
 
 const mapDispatchToProps = dispatch => ({
-    onCloudChange: cloud => {
-        dispatch(setCloud(cloud));
-    }
+    onCloudChange: enabled => dispatch(setCloud(enabled))
 });
 
 export default connect(

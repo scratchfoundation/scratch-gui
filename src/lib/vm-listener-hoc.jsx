@@ -12,7 +12,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setCompatibilityState, setCompilerState} from '../reducers/tw';
+import {setCompatibilityState, setCompilerOptions} from '../reducers/tw';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -47,10 +47,9 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-            this.props.vm.on('COMPILER_ENABLED', this.props.onCompilerEnabled);
-            this.props.vm.on('COMPILER_DISABLED', this.props.onCompilerDisabled);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
             // tw: add handlers for our events
+            this.props.vm.on('COMPILER_OPTIONS_CHANGED', this.props.onCompilerOptionsChanged);
             this.props.vm.on('COMPATIBILITY_MODE_ON', this.props.onCompatibilityModeOn);
             this.props.vm.on('COMPATIBILITY_MODE_OFF', this.props.onCompatibilityModeOff);
         }
@@ -151,8 +150,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTurboModeOn,
                 onCompatibilityModeOff,
                 onCompatibilityModeOn,
-                onCompilerEnabled,
-                onCompilerDisabled,
+                onCompilerOptionsChanged,
                 onShowExtensionAlert,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -179,8 +177,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOn: PropTypes.func.isRequired,
         onCompatibilityModeOff: PropTypes.func.isRequired,
         onCompatibilityModeOn: PropTypes.func.isRequired,
-        onCompilerEnabled: PropTypes.func.isRequired,
-        onCompilerDisabled: PropTypes.func.isRequired,
+        onCompilerOptionsChanged: PropTypes.func.isRequired,
         projectChanged: PropTypes.bool,
         shouldUpdateTargets: PropTypes.bool,
         shouldUpdateProjectChanged: PropTypes.bool,
@@ -222,8 +219,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onCompatibilityModeOn: () => dispatch(setCompatibilityState(true)),
         onCompatibilityModeOff: () => dispatch(setCompatibilityState(false)),
-        onCompilerEnabled: () => dispatch(setCompilerState(true)),
-        onCompilerDisabled: () => dispatch(setCompilerState(false)),
+        onCompilerOptionsChanged: options => dispatch(setCompilerOptions(options)),
         onShowExtensionAlert: data => {
             dispatch(showExtensionAlert(data));
         },

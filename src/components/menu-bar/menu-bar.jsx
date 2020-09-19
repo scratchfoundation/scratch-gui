@@ -29,10 +29,9 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
 import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
-import ToggleCompiler from '../../containers/tw-toggle-compiler.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
-import CloudVariablesToggler from '../../containers/tw-cloud.jsx';
-import ToggleStuck from '../../containers/tw-toggle-stuck.jsx';
+import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
+import CompilerOptions from '../../containers/tw-compiler-options.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -103,7 +102,7 @@ const ariaMessages = defineMessages({
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
 const openPrivacyLink = () => window.open('/privacy.html', '_blank');
 const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank');
-const openAdvancedHelp = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings', '_blank');
+const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '_blank');
 
 const MenuBarItemTooltip = ({
     children,
@@ -525,23 +524,6 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
-                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
-                                        <MenuItem onClick={toggleHighQualityPen}>
-                                            {highQualityPen ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn off High Quality Pen"
-                                                    description="Menu bar item for turning off high quality pen"
-                                                    id="tw.settings.hqpOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn on High Quality Pen"
-                                                    description="Menu bar item for turning on high quality pen"
-                                                    id="tw.settings.hqpOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</HighQualityPen>
                                     <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
                                         <MenuItem
                                             className={classNames({[styles.disabled]: isProjectRunning})}
@@ -607,47 +589,57 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseSettings}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={openAdvancedHelp}>
-                                        <FormattedMessage
-                                            defaultMessage="Advanced Settings Help"
-                                            description=""
-                                            id="tw.settings.advancedHelp"
-                                        />
-                                    </MenuItem>
-                                    <ToggleCompiler>{(toggleCompiler, {compilerEnabled}) => (
-                                        <MenuItem onClick={toggleCompiler}>
-                                            {compilerEnabled ? (
+                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
+                                        <MenuItem onClick={toggleHighQualityPen}>
+                                            {highQualityPen ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Disable Compiler"
-                                                    description="Menu bar item for disabling the compiler"
-                                                    id="tw.settings.compilerOff"
+                                                    defaultMessage="Turn off High Quality Pen"
+                                                    description="Menu bar item for turning off high quality pen"
+                                                    id="tw.settings.hqpOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Enable Compiler"
-                                                    description="Menu bar item for enabling the compiler"
-                                                    id="tw.settings.compilerOn"
+                                                    defaultMessage="Turn on High Quality Pen"
+                                                    description="Menu bar item for turning on high quality pen"
+                                                    id="tw.settings.hqpOn"
                                                 />
                                             )}
                                         </MenuItem>
-                                    )}</ToggleCompiler>
-                                    <ToggleStuck>{(toggleStuck, stuck) => (
-                                        <MenuItem onClick={toggleStuck}>
-                                            {stuck ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn off Stuck Checking"
-                                                    description="Menu bar item for turning off stuck checking"
-                                                    id="tw.settings.stuckOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn on Stuck Checking"
-                                                    description="Menu bar item for turning on stuck checking"
-                                                    id="tw.settings.stuckOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</ToggleStuck>
+                                    )}</HighQualityPen>
+                                    <CompilerOptions>{({toggleEnabled, toggleWarpTimer, compilerOptions}) => (
+                                        <React.Fragment>
+                                            <MenuItem onClick={toggleEnabled}>
+                                                {compilerOptions.enabled ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Disable Compiler"
+                                                        description="Menu bar item for disabling the compiler"
+                                                        id="tw.settings.compilerOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Enable Compiler"
+                                                        description="Menu bar item for enabling the compiler"
+                                                        id="tw.settings.compilerOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
+                                            <MenuItem onClick={toggleWarpTimer}>
+                                                {compilerOptions.warpTimer ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn off Warp Timer"
+                                                        description="Menu bar item for turning off Warp Timer"
+                                                        id="tw.settings.warpTimerOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn on Warp Timer"
+                                                        description="Menu bar item for turning on Warp Timer"
+                                                        id="tw.settings.warpTimerOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
+                                        </React.Fragment>
+                                    )}</CompilerOptions>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -690,6 +682,13 @@ class MenuBar extends React.Component {
                                             defaultMessage="Embed"
                                             description="Text for embed in the Links dropdown"
                                             id="tw.links.embed"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={constURLParemetersLink}>
+                                        <FormattedMessage
+                                            defaultMessage="URL Parameters"
+                                            description="Text for url parameters in the Links dropdown"
+                                            id="tw.links.parameters"
                                         />
                                     </MenuItem>
                                 </MenuSection>

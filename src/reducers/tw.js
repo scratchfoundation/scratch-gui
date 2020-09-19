@@ -1,5 +1,5 @@
 const SET_COMPATIBILITY_STATE = 'tw/SET_COMPATIBILITY_STATE';
-const SET_COMPILER_STATE = 'tw/SET_COMPILER_STATE';
+const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
 const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
@@ -9,6 +9,8 @@ const SET_INNERWIDTH = 'tw/SET_INNERWIDTH';
 const USERNAME_KEY = 'tw:username';
 
 const searchParams = new URLSearchParams(location.search);
+
+// TODO: initial state parsing probably shouldn't happen in here
 
 const getInitialCompatibility = () => {
     if (searchParams.has('60fps')) {
@@ -45,10 +47,13 @@ const getInitialHighQualityPen = () => {
 
 export const initialState = {
     compatibility: getInitialCompatibility(),
-    compiler: true,
     cloud: true,
     username: getInitialUsername(),
     highQualityPen: getInitialHighQualityPen(),
+    compilerOptions: {
+        enabled: true,
+        warpTimer: false
+    },
     isWindowFullScreen: false,
     innerWidth: window.innerWidth
 };
@@ -60,9 +65,9 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             compatibility: action.compatibility
         });
-    case SET_COMPILER_STATE:
+    case SET_COMPILER_OPTIONS:
         return Object.assign({}, state, {
-            compiler: action.compiler
+            compilerOptions: action.compilerOptions
         });
     case SET_USERNAME:
         try {
@@ -99,10 +104,10 @@ const setCompatibilityState = function (compatibility) {
     };
 };
 
-const setCompilerState = function (compiler) {
+const setCompilerOptions = function (compilerOptions) {
     return {
-        type: SET_COMPILER_STATE,
-        compiler: compiler
+        type: SET_COMPILER_OPTIONS,
+        compilerOptions: compilerOptions
     };
 };
 
@@ -145,7 +150,7 @@ export {
     reducer as default,
     initialState as twInitialState,
     setCompatibilityState,
-    setCompilerState,
+    setCompilerOptions,
     setUsername,
     setCloud,
     setHighQualityPen,

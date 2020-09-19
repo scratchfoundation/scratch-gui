@@ -15,6 +15,11 @@
     z-index: $z-index-stage-header;
 }
 
+/* tw: do not show color in header when embedded */
+.stage-header-embed {
+    background-color: transparent;
+}
+
 .stage-menu-wrapper {
     display: flex;
     margin: auto;

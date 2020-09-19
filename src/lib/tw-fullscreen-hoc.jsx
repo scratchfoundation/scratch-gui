@@ -37,34 +37,43 @@ const TWFullScreenHOC = function (WrappedComponent) {
             document.removeEventListener('fullscreenchange', this.handleFullScreenChange);
         }
         handleResize () {
-            this.props.setInnerWidth(window.innerWidth);
+            this.props.onSetInnerWidth(window.innerWidth);
         }
         handleFullScreenChange () {
             const isFullScreen = !!document.fullscreenElement;
-            this.props.setWindowIsFullScreen(isFullScreen);
-            this.props.setIsFullScreen(isFullScreen);
+            this.props.onSetWindowIsFullScreen(isFullScreen);
+            this.props.onSetIsFullScreen(isFullScreen);
         }
         render () {
+            const {
+                /* eslint-disable no-unused-vars */
+                isFullScreen,
+                onSetInnerWidth,
+                onSetIsFullScreen,
+                onSetWindowIsFullScreen,
+                /* eslint-enable no-unused-vars */
+                ...props
+            } = this.props;
             return (
                 <WrappedComponent
-                    {...this.props}
+                    {...props}
                 />
             );
         }
     }
     FullScreenComponent.propTypes = {
         isFullScreen: PropTypes.bool,
-        setInnerWidth: PropTypes.func,
-        setIsFullScreen: PropTypes.func,
-        setWindowIsFullScreen: PropTypes.func
+        onSetInnerWidth: PropTypes.func,
+        onSetIsFullScreen: PropTypes.func,
+        onSetWindowIsFullScreen: PropTypes.func
     };
     const mapStateToProps = state => ({
         isFullScreen: state.scratchGui.mode.isFullScreen
     });
     const mapDispatchToProps = dispatch => ({
-        setIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
-        setWindowIsFullScreen: isFullScreen => dispatch(setIsWindowFullScreen(isFullScreen)),
-        setInnerWidth: innerWidth => dispatch(setInnerWidth(innerWidth))
+        onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
+        onSetWindowIsFullScreen: isFullScreen => dispatch(setIsWindowFullScreen(isFullScreen)),
+        onSetInnerWidth: innerWidth => dispatch(setInnerWidth(innerWidth))
     });
     return connect(
         mapStateToProps,

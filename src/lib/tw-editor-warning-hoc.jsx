@@ -1,4 +1,3 @@
-import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -11,15 +10,22 @@ const TWEditorWarningHOC = function (WrappedComponent) {
             this.shownWarning = false;
         }
         componentDidUpdate () {
-            // if (!this.props.isPlayerOnly && !this.shownWarning) {
-            //     this.shownWarning = true;
-            //     this.props.onShowWarning();
-            // }
+            if (!this.props.isPlayerOnly && !this.shownWarning) {
+                this.shownWarning = true;
+                this.props.onShowWarning();
+            }
         }
         render () {
+            const {
+                /* eslint-disable no-unused-vars */
+                isPlayerOnly,
+                onShowWarning,
+                /* eslint-enable no-unused-vars */
+                ...props
+            } = this.props;
             return (
                 <WrappedComponent
-                    {...this.props}
+                    {...props}
                 />
             );
         }

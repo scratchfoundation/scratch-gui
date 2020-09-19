@@ -47,9 +47,16 @@ const TWTitleHOC = function (WrappedComponent) {
             document.title = this.initialTitle;
         }
         render () {
+            const {
+                /* eslint-disable no-unused-vars */
+                isShowingWithId,
+                projectId,
+                /* eslint-enable no-unused-vars */
+                ...props
+            } = this.props;
             return (
                 <WrappedComponent
-                    {...this.props}
+                    {...props}
                 />
             );
         }

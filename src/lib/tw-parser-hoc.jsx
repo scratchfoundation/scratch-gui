@@ -19,12 +19,10 @@ const getRoot = () => {
     return `/${path.join('/')}`;
 };
 
-const getUseRouting = () => ['turbowarp.org', 'staging.turbowarp.org', 'localhost'].includes(location.hostname);
-
 const playerPath = getRoot();
 const editorPath = `${playerPath}editor.html`;
 const fullscreenPath = `${playerPath}fullscreen.html`;
-const useRouting = getUseRouting();
+const useRouting = true;
 
 const TWParserHoc = function (WrappedComponent) {
     class HashParserComponent extends React.Component {

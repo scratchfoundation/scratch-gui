@@ -525,6 +525,23 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</CompatibilityMode>
+                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
+                                        <MenuItem onClick={toggleHighQualityPen}>
+                                            {highQualityPen ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off High Quality Pen"
+                                                    description="Menu bar item for turning off high quality pen"
+                                                    id="tw.settings.hqpOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on High Quality Pen"
+                                                    description="Menu bar item for turning on high quality pen"
+                                                    id="tw.settings.hqpOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</HighQualityPen>
                                     <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
                                         <MenuItem
                                             className={classNames({[styles.disabled]: isProjectRunning})}
@@ -537,6 +554,34 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}</ChangeUsername>
+                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud, canUseCloudVariables}) => (
+                                        <MenuItem
+                                            className={classNames({[styles.disabled]: !canUseCloudVariables})}
+                                            onClick={toggleCloudVariables}
+                                        >
+                                            {canUseCloudVariables ? (
+                                                cloud ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Disable Cloud Variables"
+                                                        description="Menu bar item for disabling cloud variables"
+                                                        id="tw.settings.cloudOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Enable Cloud Variables"
+                                                        description="Menu bar item for enabling cloud variables"
+                                                        id="tw.settings.cloudOn"
+                                                    />
+                                                )
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Cloud Variables are not Available"
+                                                    description="Menu bar item for when cloud variables are not available"
+                                                    id="tw.settings.cloudUnavailable"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}</CloudVariablesToggler>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -569,51 +614,6 @@ class MenuBar extends React.Component {
                                             id="tw.settings.advancedHelp"
                                         />
                                     </MenuItem>
-                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
-                                        <MenuItem onClick={toggleHighQualityPen}>
-                                            {highQualityPen ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn off High Quality Pen"
-                                                    description="Menu bar item for turning off high quality pen"
-                                                    id="tw.settings.hqpOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn on High Quality Pen"
-                                                    description="Menu bar item for turning on high quality pen"
-                                                    id="tw.settings.hqpOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</HighQualityPen>
-                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud, canUseCloudVariables}) => (
-                                        <MenuItem
-                                            className={classNames({[styles.disabled]: !canUseCloudVariables})}
-                                            onClick={toggleCloudVariables}
-                                        >
-                                            {canUseCloudVariables ? (
-                                                cloud ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Disable Cloud Variables"
-                                                        description="Menu bar item for disabling cloud variables"
-                                                        id="tw.settings.cloudOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Enable Cloud Variables"
-                                                        description="Menu bar item for enabling cloud variables"
-                                                        id="tw.settings.cloudOn"
-                                                    />
-                                                )
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Cloud Variables are not Available"
-                                                    description="Menu bar item for when cloud variables are not available"
-                                                    id="tw.settings.cloudUnavailable"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</CloudVariablesToggler>
                                     <ToggleCompiler>{(toggleCompiler, {compilerEnabled}) => (
                                         <MenuItem onClick={toggleCompiler}>
                                             {compilerEnabled ? (

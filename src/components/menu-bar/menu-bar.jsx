@@ -536,13 +536,13 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}</ChangeUsername>
-                                    <CloudVariablesToggler>{(toggleCloudVariables, {cloud, canUseCloudVariables}) => (
+                                    <CloudVariablesToggler>{(toggleCloudVariables, {enabled, canUseCloudVariables}) => (
                                         <MenuItem
                                             className={classNames({[styles.disabled]: !canUseCloudVariables})}
                                             onClick={toggleCloudVariables}
                                         >
                                             {canUseCloudVariables ? (
-                                                cloud ? (
+                                                enabled ? (
                                                     <FormattedMessage
                                                         defaultMessage="Disable Cloud Variables"
                                                         description="Menu bar item for disabling cloud variables"

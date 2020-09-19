@@ -742,6 +742,9 @@ const turbowarp = function () {
                 </block>
             </value>
         </block>
+        <block type="argument_reporter_string_number">
+            <field name="VALUE">last key pressed</field>
+        </block>
     </category>
     `;
 };

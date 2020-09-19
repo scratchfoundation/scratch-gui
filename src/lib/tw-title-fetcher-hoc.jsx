@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {getIsShowingWithId} from '../reducers/project-state';
+import {setProjectTitle} from '../reducers/project-title';
 
 const API_URL = 'https://trampoline.turbowarp.org/proxy/projects/$id';
 
@@ -15,8 +16,8 @@ const fetchProjectTitle = projectId => fetch(API_URL.replace('$id', projectId))
         return '';
     });
 
-const TWTitleHOC = function (WrappedComponent) {
-    class TitleComponent extends React.Component {
+const TWTitleFetcherHOC = function (WrappedComponent) {
+    class TitleFetcherComponent extends React.Component {
         componentDidMount () {
             this.initialTitle = document.title;
         }
@@ -35,6 +36,7 @@ const TWTitleHOC = function (WrappedComponent) {
                             return;
                         }
                         document.title = `${title} - TurboWarp`;
+                        this.props.onSetProjectTitle(title);
                     })
                     .catch(() => {
                         // ignore errors
@@ -61,9 +63,10 @@ const TWTitleHOC = function (WrappedComponent) {
             );
         }
     }
-    TitleComponent.propTypes = {
+    TitleFetcherComponent.propTypes = {
         isShowingWithId: PropTypes.bool,
-        projectId: PropTypes.string
+        projectId: PropTypes.string,
+        onSetProjectTitle: PropTypes.func
     };
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
@@ -73,14 +76,14 @@ const TWTitleHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
-
+        onSetProjectTitle: title => dispatch(setProjectTitle(title))
     });
     return connect(
         mapStateToProps,
         mapDispatchToProps
-    )(TitleComponent);
+    )(TitleFetcherComponent);
 };
 
 export {
-    TWTitleHOC as default
+    TWTitleFetcherHOC as default
 };

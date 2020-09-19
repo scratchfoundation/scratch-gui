@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWParserHOC from '../lib/tw-parser-hoc.jsx';
-import TWTitleHOC from '../lib/tw-title-hoc.jsx';
+import TWTitleFetcherHOC from '../lib/tw-title-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 
 import GUI from './render-gui.jsx';
@@ -75,7 +75,7 @@ const ConnectedInterface = connect(
 const WrappedInterface = compose(
     AppStateHOC,
     TWParserHOC,
-    TWTitleHOC,
+    TWTitleFetcherHOC,
     TWEditorWarningHOC
 )(ConnectedInterface);
 

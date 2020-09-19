@@ -11,10 +11,10 @@ const TWEditorWarningHOC = function (WrappedComponent) {
             this.shownWarning = false;
         }
         componentDidUpdate () {
-            if (!this.props.isPlayerOnly && !this.shownWarning) {
-                this.shownWarning = true;
-                this.props.onShowWarning();
-            }
+            // if (!this.props.isPlayerOnly && !this.shownWarning) {
+            //     this.shownWarning = true;
+            //     this.props.onShowWarning();
+            // }
         }
         render () {
             return (

@@ -57,9 +57,9 @@ import {
     openSettingsMenu,
     closeSettingMenu,
     settingsMenuOpen,
-    openLinksMenu,
-    closeLinksMenu,
-    linksMenuOpen,
+    openHelpMenu,
+    closeHelpMenu,
+    helpMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,
@@ -626,13 +626,13 @@ class MenuBar extends React.Component {
                                             <MenuItem onClick={toggleWarpTimer}>
                                                 {compilerOptions.warpTimer ? (
                                                     <FormattedMessage
-                                                        defaultMessage="Turn off Warp Timer"
+                                                        defaultMessage="Turn off Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning off Warp Timer"
                                                         id="tw.settings.warpTimerOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
-                                                        defaultMessage="Turn on Warp Timer"
+                                                        defaultMessage="Turn on Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning on Warp Timer"
                                                         id="tw.settings.warpTimerOn"
                                                     />
@@ -645,50 +645,50 @@ class MenuBar extends React.Component {
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.linksMenuOpen
+                                [styles.active]: this.props.helpMenuOpen
                             })}
-                            onMouseUp={this.props.onClickLinks}
+                            onMouseUp={this.props.onClickHelp}
                         >
-                            <div className={classNames(styles.linksMenu)}>
+                            <div className={classNames(styles.helpMenu)}>
                                 <FormattedMessage
-                                    defaultMessage="Links"
-                                    description="Text for TurboWarp Links dropdown menu"
-                                    id="tw.links"
+                                    defaultMessage="Help"
+                                    description="Text for TurboWarp Help dropdown menu"
+                                    id="tw.help"
                                 />
                             </div>
                             <MenuBarMenu
                                 className={classNames(styles.menuBarMenu)}
-                                open={this.props.linksMenuOpen}
+                                open={this.props.helpMenuOpen}
                                 place={this.props.isRtl ? 'left' : 'right'}
-                                onRequestClose={this.props.onRequestCloseLinks}
+                                onRequestClose={this.props.onRequestCloseHelp}
                             >
                                 <MenuSection>
                                     <MenuItem onClick={openSourceCodeLink}>
                                         <FormattedMessage
                                             defaultMessage="Source Code"
-                                            description="Text for Source Code in the Links dropdown"
-                                            id="tw.links.code"
+                                            description="Text for Source Code in the Help dropdown"
+                                            id="tw.help.code"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={openPrivacyLink}>
                                         <FormattedMessage
                                             defaultMessage="Privacy"
-                                            description="Text for privacy policy in the Links dropdown"
-                                            id="tw.links.privacy"
+                                            description="Text for privacy policy in the Help dropdown"
+                                            id="tw.help.privacy"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={openEmbedLink}>
                                         <FormattedMessage
-                                            defaultMessage="Embed"
-                                            description="Text for embed in the Links dropdown"
-                                            id="tw.links.embed"
+                                            defaultMessage="Embedding"
+                                            description="Text for embedding in the Help dropdown"
+                                            id="tw.help.embed"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={constURLParemetersLink}>
                                         <FormattedMessage
                                             defaultMessage="URL Parameters"
-                                            description="Text for url parameters in the Links dropdown"
-                                            id="tw.links.parameters"
+                                            description="Text for url parameters in the Help dropdown"
+                                            id="tw.help.parameters"
                                         />
                                     </MenuItem>
                                 </MenuSection>
@@ -843,8 +843,8 @@ MenuBar.propTypes = {
     onClickSaveAsCopy: PropTypes.func,
     onClickSettings: PropTypes.func,
     onRequestCloseSettings: PropTypes.func,
-    onClickLinks: PropTypes.func,
-    onRequestCloseLinks: PropTypes.func,
+    onClickHelp: PropTypes.func,
+    onRequestCloseHelp: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -861,7 +861,7 @@ MenuBar.propTypes = {
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
     settingsMenuOpen: PropTypes.bool,
-    linksMenuOpen: PropTypes.bool,
+    helpMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
@@ -891,7 +891,7 @@ const mapStateToProps = (state, ownProps) => {
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         settingsMenuOpen: settingsMenuOpen(state),
-        linksMenuOpen: linksMenuOpen(state),
+        helpMenuOpen: helpMenuOpen(state),
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
@@ -915,8 +915,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onClickSettings: () => dispatch(openSettingsMenu()),
     onRequestCloseSettings: () => dispatch(closeSettingMenu()),
-    onClickLinks: () => dispatch(openLinksMenu()),
-    onRequestCloseLinks: () => dispatch(closeLinksMenu()),
+    onClickHelp: () => dispatch(openHelpMenu()),
+    onRequestCloseHelp: () => dispatch(closeHelpMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),

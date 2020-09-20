@@ -13,13 +13,7 @@ import {
     setFullScreen
 } from '../reducers/mode';
 
-const getRoot = () => {
-    const path = location.pathname.split('/');
-    path.pop();
-    return `/${path.join('/')}`;
-};
-
-const playerPath = getRoot();
+const playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
 const editorPath = `${playerPath}editor.html`;
 const fullscreenPath = `${playerPath}fullscreen.html`;
 const useRouting = true;

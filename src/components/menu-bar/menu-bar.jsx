@@ -80,7 +80,7 @@ import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin} from '../../reducers/artie-login';
-import Modal from '../../containers/modal.jsx';
+import ArtieLogin from '../artie-login/artie-login.jsx';
 
 const ariaMessages = defineMessages({
     language: {
@@ -300,11 +300,7 @@ class MenuBar extends React.Component {
         sendBlockArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);
     }
     handleClickArtieLogin(){
-        if(!this.props.artieLogin.active){
-            this.props.onActivateArtieLogin();
-        }else{
-            this.props.onDeactivateArtieLogin();
-        }
+        this.props.onActivateArtieLogin();
     }
 
     render () {
@@ -783,6 +779,13 @@ class MenuBar extends React.Component {
 
                 {aboutButton}
 
+                {this.props.artieLogin.active ? (
+                        <ArtieLogin
+                            onCancel={this.props.onDeactivateArtieLogin}
+                            title="Login"
+                        />
+                ) :
+                (<div></div>)}
             </Box>
         );
     }

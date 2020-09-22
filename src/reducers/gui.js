@@ -31,6 +31,8 @@ import logger from 'redux-logger';
 
 import decks from '../lib/libraries/decks/index.jsx';
 
+import artieLoginReducer, {artieLoginInitialState} from './artie-login';
+
 const guiMiddleware = compose(applyMiddleware(logger, throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
@@ -60,7 +62,8 @@ const guiInitialState = {
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
-    workspaceMetrics: workspaceMetricsInitialState
+    workspaceMetrics: workspaceMetricsInitialState,
+    artieLogin: artieLoginInitialState
 };
 
 const initPlayer = function (currentState) {
@@ -159,7 +162,8 @@ const guiReducer = combineReducers({
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,
-    workspaceMetrics: workspaceMetricsReducer
+    workspaceMetrics: workspaceMetricsReducer,
+    artieLogin: artieLoginReducer
 });
 
 export {

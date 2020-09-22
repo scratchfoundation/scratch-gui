@@ -79,6 +79,8 @@ import scratchLogo from './scratch-logo.svg';
 import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
+import {activateArtieLogin, deactivateArtieLogin} from '../../reducers/artie-login';
+import Modal from '../../containers/modal.jsx';
 
 const ariaMessages = defineMessages({
     language: {
@@ -176,7 +178,8 @@ class MenuBar extends React.Component {
             'getSaveToComputerHandler',
             'restoreOptionMessage',
             'handleClickRegisterSolution',
-            'handleClickRequestHelp'
+            'handleClickRequestHelp',
+            'handleClickArtieLogin'
         ]);
     }
     componentDidMount () {
@@ -295,6 +298,13 @@ class MenuBar extends React.Component {
     }
     handleClickRequestHelp(){
         sendBlockArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);
+    }
+    handleClickArtieLogin(){
+        if(!this.props.artieLogin.active){
+            this.props.onActivateArtieLogin();
+        }else{
+            this.props.onDeactivateArtieLogin();
+        }
     }
 
     render () {
@@ -524,6 +534,15 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseArtie}
                             >
+                                <MenuSection>
+                                    <MenuItem onClick={this.handleClickArtieLogin}>
+                                        <FormattedMessage
+                                            defaultMessage="Login"
+                                            description="Menu bar item for login"
+                                            id="gui.menuBar.artie.login"
+                                        />
+                                    </MenuItem>
+                                </MenuSection>
                                 <MenuSection>
                                     <MenuItem onClick={this.handleClickRegisterSolution}>
                                         <FormattedMessage
@@ -763,6 +782,7 @@ class MenuBar extends React.Component {
                 </div>
 
                 {aboutButton}
+
             </Box>
         );
     }
@@ -822,6 +842,8 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
+    onActivateArtieLogin: PropTypes.func,
+    onDeactivateArtieLogin: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -856,7 +878,8 @@ const mapStateToProps = (state, ownProps) => {
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        artieLogin: state.scratchGui.artieLogin
     };
 };
 
@@ -879,7 +902,9 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onActivateArtieLogin: () => dispatch(activateArtieLogin()),
+    onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin())
 });
 
 export default compose(

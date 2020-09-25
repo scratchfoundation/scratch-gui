@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {FormattedMessage} from 'react-intl';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWTitleFetcherHOC from '../lib/tw-title-fetcher-hoc.jsx';
@@ -49,6 +50,21 @@ const Interface = ({isPlayerOnly}) => (
                     <ProjectInput />
                     <About />
                     <Examples />
+                    <footer className={styles.footer}>
+                        <p className={styles.disclaimer}>
+                            <FormattedMessage
+                                defaultMessage="TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                                description="Disclaimer that TurboWarp is not connected to Scratch"
+                                id="tw.disclaimer"
+                            />
+                        </p>
+                        <a
+                            href="https://fosshost.org/"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className={styles.hostLogo}
+                        />
+                    </footer>
                 </div>
             ) : null}
         </div>

@@ -99,10 +99,10 @@ const ariaMessages = defineMessages({
     }
 });
 
-const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank');
-const openPrivacyLink = () => window.open('/privacy.html', '_blank');
-const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank');
-const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '_blank');
+const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank', 'noopener');
+const openPrivacyLink = () => window.open('/privacy.html', '_blank', 'noopener');
+const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank', 'noopener');
+const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '_blank', 'noopener');
 
 const MenuBarItemTooltip = ({
     children,

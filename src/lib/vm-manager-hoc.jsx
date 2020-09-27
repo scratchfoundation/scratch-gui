@@ -77,6 +77,7 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                compatibilityMode,
                 fontsLoaded,
                 loadingState,
                 locale,

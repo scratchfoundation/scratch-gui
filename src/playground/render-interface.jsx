@@ -51,19 +51,37 @@ const Interface = ({isPlayerOnly}) => (
                     <About />
                     <Examples />
                     <footer className={styles.footer}>
-                        <p className={styles.disclaimer}>
+                        <p>
                             <FormattedMessage
-                                defaultMessage="TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                                defaultMessage="TurboWarp is not affiliated with or otherwise officially connected to Scratch, the Scratch Team, or the Scratch Foundation."
                                 description="Disclaimer that TurboWarp is not connected to Scratch"
-                                id="tw.disclaimer"
+                                id="tw.footer.disclaimer"
                             />
                         </p>
-                        <a
-                            href="https://fosshost.org/"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className={styles.hostLogo}
-                        />
+                        <p>
+                            <FormattedMessage
+                                defaultMessage="TurboWarp is hosted by {fosshost}."
+                                description="Host credit"
+                                id="tw.footer.host"
+                                values={{
+                                    fosshost: (
+                                        <a
+                                            href="https://fosshost.org"
+                                            // _blank is safe here because of noopener
+                                            // eslint-disable-next-line react/jsx-no-target-blank
+                                            target="_blank"
+                                            rel="noopener"
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="fosshost.org"
+                                                description="Link to fosshost.org"
+                                                id="tw.footer.host.fosshost"
+                                            />
+                                        </a>
+                                    )
+                                }}
+                            />
+                        </p>
                     </footer>
                 </div>
             ) : null}

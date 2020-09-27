@@ -36,22 +36,8 @@ a {
     margin: auto;
 }
 
-.footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.disclaimer {
-    width: 270px;
+.footer p {
     font-size: small;
-}
-
-.host-logo {
-    width: 200px;
-    height: 100px;
-    float: right;
-    background-image: url('./host-light.png');
 }
 
 @media (prefers-color-scheme: dark) {
@@ -63,8 +49,5 @@ a {
     }
     .stage-only a {
         color: #4af;
-    }
-    .host-logo {
-        background-image: url('./host-dark.png');
     }
 }

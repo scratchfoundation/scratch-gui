@@ -1,5 +1,6 @@
 import {defineMessages} from 'react-intl';
 import sharedMessages from '../shared-messages';
+import EditorHome from '../../components/tw-home/editor-home.jsx';
 
 let messages = defineMessages({
     meow: {
@@ -56,7 +57,7 @@ const projectData = translateFunction => {
             },
             {
                 isStage: false,
-                name: translator(messages.sprite, {index: 1}),
+                name: EditorHome.MAGIC_SPRITE_NAME,
                 variables: {},
                 lists: {},
                 broadcasts: {},

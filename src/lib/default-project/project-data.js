@@ -51,17 +51,7 @@ const projectData = translateFunction => {
                         rotationCenterY: 180
                     }
                 ],
-                sounds: [
-                    {
-                        assetId: '83a9787d4cb6f3b7632b4ddfebf74367',
-                        name: translator(messages.pop),
-                        dataFormat: 'wav',
-                        format: '',
-                        rate: 11025,
-                        sampleCount: 258,
-                        md5ext: '83a9787d4cb6f3b7632b4ddfebf74367.wav'
-                    }
-                ],
+                sounds: [],
                 volume: 100
             },
             {
@@ -70,39 +60,57 @@ const projectData = translateFunction => {
                 variables: {},
                 lists: {},
                 broadcasts: {},
-                blocks: {},
+                blocks: {
+                    'Z2l`f?]oj|=Nq/GH@G_u': {
+                        opcode: 'control_if_else',
+                        next: null,
+                        parent: null,
+                        inputs: {
+                            CONDITION: [2, 'Fj5[gB=S0qJiUu$/!nym'],
+                            SUBSTACK: [1, null],
+                            SUBSTACK2: [1, null]
+                        },
+                        fields: {},
+                        shadow: false,
+                        topLevel: true,
+                        x: 302,
+                        y: 250,
+                        comment: 'UgZfouDT0`j;EW7Y3N2]'
+                    },
+                    'Fj5[gB=S0qJiUu$/!nym': {
+                        opcode: 'argument_reporter_boolean',
+                        next: null,
+                        parent: 'Z2l`f?]oj|=Nq/GH@G_u',
+                        inputs: {},
+                        fields: {VALUE: ['is compiled?', null]},
+                        shadow: false,
+                        topLevel: false
+                    }
+                },
+                comments: {
+                    'UgZfouDT0`j;EW7Y3N2]': {
+                        blockId: 'Z2l`f?]oj|=Nq/GH@G_u',
+                        x: 685.1870417418297,
+                        y: 258.07407407407516,
+                        width: 410.370361328125,
+                        height: 201.48150634765625,
+                        minimized: false,
+                        text: 'This is how you detect TurboWarp.\n\nSee here for more info:\nhttps://scratch.mit.edu/projects/414716080/'
+                    }
+                },
                 currentCostume: 0,
                 costumes: [
                     {
-                        assetId: 'b7853f557e4426412e64bb3da6531a99',
+                        assetId: '14e46ec3e2ba471c2adfe8f119052307',
                         name: translator(messages.costume, {index: 1}),
                         bitmapResolution: 1,
-                        md5ext: 'b7853f557e4426412e64bb3da6531a99.svg',
+                        md5ext: '14e46ec3e2ba471c2adfe8f119052307.svg',
                         dataFormat: 'svg',
-                        rotationCenterX: 48,
-                        rotationCenterY: 50
-                    },
-                    {
-                        assetId: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f',
-                        name: translator(messages.costume, {index: 2}),
-                        bitmapResolution: 1,
-                        md5ext: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg',
-                        dataFormat: 'svg',
-                        rotationCenterX: 46,
-                        rotationCenterY: 53
+                        rotationCenterX: 0,
+                        rotationCenterY: 0
                     }
                 ],
-                sounds: [
-                    {
-                        assetId: '83c36d806dc92327b9e7049a565c6bff',
-                        name: translator(messages.meow),
-                        dataFormat: 'wav',
-                        format: '',
-                        rate: 22050,
-                        sampleCount: 18688,
-                        md5ext: '83c36d806dc92327b9e7049a565c6bff.wav'
-                    }
-                ],
+                sounds: [],
                 volume: 100,
                 visible: true,
                 x: 0,

@@ -1,5 +1,7 @@
 import ScratchStorage from 'scratch-storage';
 
+import defaultProject from './default-project';
+
 /**
  * Wrapper for ScratchStorage which adds default web sources.
  * @todo make this more configurable
@@ -70,7 +72,13 @@ class Storage extends ScratchStorage {
         this.cacheDefaultProject();
     }
     cacheDefaultProject () {
-        // tw: no-op, default project is removed
+        const defaultProjectAssets = defaultProject(this.translator);
+        defaultProjectAssets.forEach(asset => this.builtinHelper._store(
+            this.AssetType[asset.assetType],
+            this.DataFormat[asset.dataFormat],
+            asset.data,
+            asset.id
+        ));
     }
 }
 

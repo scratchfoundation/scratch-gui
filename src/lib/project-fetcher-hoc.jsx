@@ -23,6 +23,8 @@ import {
 import log from './log';
 import storage from './storage';
 
+import {MISSING_PROJECT_ID} from './tw-missing-project';
+
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
  * @param {React.Component} WrappedComponent component to receive projectData prop
@@ -71,11 +73,13 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
-                    // tw: If the project data appears to be HTML, then this project doesn't exist.
-                    // When this happens, we'll replace the project with some minimal empty project instead of showing an error screen.
-                    if (projectAsset.data[0] === '<' || projectAsset.data[0] === '<'.charCodeAt(0)) {
-                        projectAsset.data = '{"targets":[{"isStage":true,"name":"Stage","variables":{},"lists":{},"broadcasts":{},"blocks":{},"comments":{},"currentCostume":0,"costumes":[{"assetId":"c17163c6954e9422ac2405de4c9d68c8","name":"backdrop1","bitmapResolution":1,"md5ext":"c17163c6954e9422ac2405de4c9d68c8.svg","dataFormat":"svg","rotationCenterX":207,"rotationCenterY":16}],"sounds":[],"volume":100,"layerOrder":0,"tempo":60,"videoTransparency":50,"videoState":"on","textToSpeechLanguage":null}],"monitors":[],"extensions":[],"meta":{"semver":"3.0.0","vm":"0.2.0","agent":""}}';
+                    // tw: If the project data appears to be HTML, then this project is missing. Load the "missing project" project instead.
+                    if (projectAsset && projectAsset.data && (projectAsset.data[0] === '<' || projectAsset.data[0] === '<'.charCodeAt(0))) {
+                        return storage.load(storage.AssetType.Project, MISSING_PROJECT_ID, storage.DataFormat.JSON);
                     }
+                    return projectAsset;
+                })
+                .then(projectAsset => {
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
                     } else {

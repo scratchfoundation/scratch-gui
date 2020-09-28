@@ -3,11 +3,6 @@ import sharedMessages from '../shared-messages';
 import EditorHome from '../../components/tw-home/editor-home.jsx';
 
 let messages = defineMessages({
-    meow: {
-        defaultMessage: 'Meow',
-        description: 'Name for the meow sound',
-        id: 'gui.defaultProject.meow'
-    },
     variable: {
         defaultMessage: 'my variable',
         description: 'Name for the default variable',

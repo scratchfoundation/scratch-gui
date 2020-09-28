@@ -6,6 +6,8 @@ import bindAll from 'lodash.bindall';
 import {defaultProjectId, setProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
 import styles from './project-input.css';
 
+const PROJECT_BASE = 'https://scratch.mit.edu/projects/';
+
 class ProjectInput extends React.Component {
     constructor (props) {
         super(props);
@@ -49,7 +51,7 @@ class ProjectInput extends React.Component {
     }
     handleChange (e) {
         this.setState({
-            projectId: this.readProjectId(e)
+            projectId: this.readProjectId(e) || defaultProjectId
         });
     }
     handlePaste (e) {
@@ -67,7 +69,7 @@ class ProjectInput extends React.Component {
         }
     }
     handleFocus (e) {
-        if (this.readProjectId(e)) {
+        if (this.extractProjectId(e.target.value)) {
             e.target.select();
         }
     }
@@ -78,7 +80,7 @@ class ProjectInput extends React.Component {
                 ref={elem => this.input = elem}
                 spellCheck="false"
                 type="text"
-                value={`https://scratch.mit.edu/projects/${projectId}`}
+                value={`${PROJECT_BASE}${projectId}`}
                 className={styles.input}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}

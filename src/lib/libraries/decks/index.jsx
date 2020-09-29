@@ -710,7 +710,7 @@ export default {
             image: 'animateCharChangeColor'
         }, {
             deckIds: [
-                'Chase-Game',
+                'code-cartoon',
                 'Tell-A-Story'
             ]
         }
@@ -1463,7 +1463,7 @@ export default {
         }, {
             deckIds: [
                 'animate-a-name',
-                'Make-Music'
+                'talking'
             ]
         }
         ],
@@ -1734,7 +1734,7 @@ export default {
             image: 'glideAroundPoint'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'Tell-A-Story',
                 'switch-costume'
             ]
         }],
@@ -1899,7 +1899,7 @@ export default {
             image: 'switchCostumes'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'imagine',
                 'add-effects'
             ]
         }],
@@ -1938,7 +1938,7 @@ export default {
             image: 'moveArrowKeysUpDown'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'make-it-fly',
                 'switch-costume'
             ]
         }],
@@ -1970,7 +1970,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume'
+                'code-cartoon'
             ]
         }],
         urlId: 'add-effects'

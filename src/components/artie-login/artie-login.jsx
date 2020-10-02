@@ -69,7 +69,7 @@ const ArtieLoginComponent = props =>(
                             id="gui.menuBar.artie.login.cancel"
                         />
                 </button>
-                <button className={styles.okButton}>
+                <button className={styles.okButton} onClick={props.onOk}>
                     <FormattedMessage
                             defaultMessage="OK"
                             description="Button in prompt for confirming the dialog"

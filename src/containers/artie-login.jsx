@@ -8,6 +8,7 @@ class ArtieLogin extends React.Component {
         super(props);
         bindAll(this, [
             'handleCancel',
+            'handleOk',
             'handleUserChange',
             'handlePasswordChange'
         ]);
@@ -15,6 +16,9 @@ class ArtieLogin extends React.Component {
 
     handleCancel () {
         this.props.onCancel();
+    }
+    handleOk(){
+        this.props.onOk();
     }
     handleUserChange () {
         this.props.onUserChange();
@@ -25,6 +29,7 @@ class ArtieLogin extends React.Component {
     render () {
         return(
             <ArtieLoginComponent
+                onOk={this.handleOk}
                 onCancel={this.handleCancel}
                 onUserChange={this.handleUserChange}
                 onPasswordChange={this.handlePasswordChange}
@@ -39,6 +44,7 @@ ArtieLogin.propTypes = {
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
+    onOk: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     students: PropTypes.array.isRequired
 }

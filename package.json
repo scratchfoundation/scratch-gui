@@ -86,7 +86,8 @@
     "text-encoding": "0.7.0",
     "to-style": "1.3.3",
     "wav-encoder": "1.3.0",
-    "xhr": "2.5.0"
+    "xhr": "2.5.0",
+    "redux-logger": "3.0.6"
   },
   "peerDependencies": {
     "react": "^16.0.0",

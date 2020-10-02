@@ -4,6 +4,7 @@ import Box from '../box/box.jsx';
 import Modal from '../../containers/modal.jsx';
 import styles from './artie-login.css';
 import {FormattedMessage} from 'react-intl';
+import Select from '../forms/select.jsx';
 
 
 const ArtieLoginComponent = props =>(
@@ -23,6 +24,7 @@ const ArtieLoginComponent = props =>(
                     <input
                         autoFocus
                         className={styles.variableNameTextInput}
+                        onChange={props.onUserChange}
                         name="userName"
                         type="text"
                         value="global"
@@ -39,14 +41,28 @@ const ArtieLoginComponent = props =>(
                     <input
                         autoFocus
                         className={styles.variableNameTextInput}
+                        onChange={props.onPasswordChange}
                         name="password"
                         type="password"
                         value="global"
                     />
                 </label>
             </Box>
+            <Box>
+                <label>
+                    <FormattedMessage
+                        defaultMessage="Student"
+                        description="student"
+                        id="gui.menuBar.artie.login.student"
+                    />
+                    <Select
+                      autofocus={true}
+                      data={props.students}
+                    />
+                </label>
+            </Box>
             <Box className={styles.buttonRow}>
-                <button className={styles.cancelButton}>
+                <button className={styles.cancelButton} onClick={props.onCancel}>
                     <FormattedMessage
                             defaultMessage="Cancel"
                             description="Button in prompt for cancelling the dialog"
@@ -67,6 +83,9 @@ const ArtieLoginComponent = props =>(
 
 ArtieLoginComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    onUserChange: PropTypes.func,
+    onPasswordChange: PropTypes.func,
+    title: PropTypes.string.isRequired,
+    students: PropTypes.array.isRequired
 };
 export default ArtieLoginComponent;

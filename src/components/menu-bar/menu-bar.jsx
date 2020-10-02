@@ -179,7 +179,9 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
-            'handleClickArtieLogin'
+            'handleClickArtieLogin',
+            'handleArtieUserChange',
+            'handleArtiePasswordChange'
         ]);
     }
     componentDidMount () {
@@ -301,6 +303,10 @@ class MenuBar extends React.Component {
     }
     handleClickArtieLogin(){
         this.props.onActivateArtieLogin();
+    }
+    handleArtieUserChange(){
+    }
+    handleArtiePasswordChange(){
     }
 
     render () {
@@ -781,8 +787,11 @@ class MenuBar extends React.Component {
 
                 {this.props.artieLogin.active ? (
                         <ArtieLogin
+                            onUserChange={this.handleArtieUserChange}
+                            onPasswordChange={this.handleArtiePasswordChange}
                             onCancel={this.props.onDeactivateArtieLogin}
                             title="Login"
+                            students={[{id: 1, value: "Luis"},{id: 2, value: "Eduardo"}]}
                         />
                 ) :
                 (<div></div>)}

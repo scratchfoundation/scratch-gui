@@ -78,7 +78,7 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
+import {sendSolutionArtie, sendBlockArtie, loginArtie} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin} from '../../reducers/artie-login';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 
@@ -161,6 +161,9 @@ const AboutButton = props => (
 AboutButton.propTypes = {
     onClick: PropTypes.func.isRequired
 };
+
+var userLogin = null;
+var passwordLogin = null;
 
 class MenuBar extends React.Component {
     constructor (props) {
@@ -306,10 +309,19 @@ class MenuBar extends React.Component {
         this.props.onActivateArtieLogin();
     }
     handleClickArtieLoginOk(){
+
+        var user = null;
+        loginArtie(userLogin, passwordLogin)
+            .then(contents => {
+                user = contents;
+                console.log(user);
+            });
     }
-    handleArtieUserChange(){
+    handleArtieUserChange(e){
+        userLogin = e.target.value;
     }
-    handleArtiePasswordChange(){
+    handleArtiePasswordChange(e){
+        passwordLogin = e.target.value;
     }
 
     render () {
@@ -795,7 +807,8 @@ class MenuBar extends React.Component {
                             onCancel={this.props.onDeactivateArtieLogin}
                             onOk={this.handleClickArtieLoginOk}
                             title="Login"
-                            students={[{id: 1, value: "Luis"},{id: 2, value: "Eduardo"}]}
+                            students={this.props.artieLogin.students}
+                            user={this.props.artieLogin.user}
                         />
                 ) :
                 (<div></div>)}

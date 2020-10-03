@@ -27,7 +27,6 @@ const ArtieLoginComponent = props =>(
                         onChange={props.onUserChange}
                         name="userName"
                         type="text"
-                        value="global"
                     />
                 </label>
             </Box>
@@ -44,23 +43,26 @@ const ArtieLoginComponent = props =>(
                         onChange={props.onPasswordChange}
                         name="password"
                         type="password"
-                        value="global"
                     />
                 </label>
             </Box>
-            <Box>
-                <label>
-                    <FormattedMessage
-                        defaultMessage="Student"
-                        description="student"
-                        id="gui.menuBar.artie.login.student"
-                    />
-                    <Select
-                      autofocus={true}
-                      data={props.students}
-                    />
-                </label>
-            </Box>
+            {props.user !== null ?
+                <Box>
+                    <label>
+                        <FormattedMessage
+                            defaultMessage="Student"
+                            description="student"
+                            id="gui.menuBar.artie.login.student"
+                        />
+                        <Select
+                        autofocus={true}
+                        data={props.students}
+                        />
+                    </label>
+                </Box>
+            :
+                <div></div>
+            }
             <Box className={styles.buttonRow}>
                 <button className={styles.cancelButton} onClick={props.onCancel}>
                     <FormattedMessage

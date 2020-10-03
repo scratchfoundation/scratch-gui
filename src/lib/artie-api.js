@@ -137,4 +137,22 @@ const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject
     });
 });
 
-export {sendBlockArtie, sendSolutionArtie};
+const loginArtie = (userName, password) => new Promise((resolve, reject) => {
+
+    xhr({
+        method: 'GET',
+        uri: `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`,
+        headers: {'Content-Type': 'application/json'},
+        json: true
+    }, (response) => {
+        if (response != null && response.statusCode !== 302) {
+            return reject();
+        }
+        else if(response != null){
+            return resolve(response.body);
+        }
+    });
+
+});
+
+export {sendBlockArtie, sendSolutionArtie, loginArtie};

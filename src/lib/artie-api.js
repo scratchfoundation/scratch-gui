@@ -154,4 +154,21 @@ const loginArtie = (userName, password, callback) => new Promise(() => {
 
 });
 
-export {sendBlockArtie, sendSolutionArtie, loginArtie};
+const getArtieStudents = (userName, password, callback) => new Promise(() => {
+
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+                callback(json.body.object);
+            }
+        }
+    });
+
+    xhr.open("GET", `http://localhost:8080/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.send();
+
+});
+
+export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents};

@@ -1,6 +1,7 @@
 const ACTIVATE_ARTIE_LOGIN = 'scratch-gui/artie-login/ACTIVATE_ARTIE_LOGIN';
 const DEACTIVATE_ARTIE_LOGIN = 'scratch-gui/artie-login/DEACTIVATE_ARTIE_LOGIN';
 const ARTIE_LOGGED = 'scratch-gui/artie-login/ARTIE_LOGGED';
+const ARTIE_SET_STUDENTS = 'scratch-gui/artie-login/ARTIE_SET_STUDENTS';
 
 const initialState = {
     active : false,
@@ -23,6 +24,10 @@ const reducer = function (state, action) {
             return Object.assign({}, state, {
                 user: action.user
             });
+        case ARTIE_SET_STUDENTS:
+            return Object.assign({}, state, {
+                students: action.students
+            });
         default:
             return state;
     }
@@ -39,7 +44,12 @@ const deactivateArtieLogin = () =>({
 
 const artieLogged = (user) => ({
     type: ARTIE_LOGGED,
-    user: user,
+    user: user
+});
+
+const artieSetStudents = (students) => ({
+    type: ARTIE_SET_STUDENTS,
+    students: students
 });
 
 export {
@@ -47,5 +57,6 @@ export {
     initialState as artieLoginInitialState,
     activateArtieLogin,
     deactivateArtieLogin,
-    artieLogged
+    artieLogged,
+    artieSetStudents
 };

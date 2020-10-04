@@ -17,13 +17,16 @@ class ArtieLogin extends React.Component {
         };
     }
     componentWillReceiveProps (newProps) {
-        console.log("user state changed");
         if (this.state.user !== newProps.artieLogin.user) {
             this.setState({
                 user: newProps.artieLogin.user
             });
-        }else{
-            return null; // nothing changed
+        }
+
+        if(this.state.students !== newProps.artieLogin.students){
+            this.setState({
+                students: newProps.artieLogin.students
+            });
         }
     }
     handleCancel () {
@@ -46,7 +49,7 @@ class ArtieLogin extends React.Component {
                 onUserChange={this.handleUserChange}
                 onPasswordChange={this.handlePasswordChange}
                 title={this.props.title}
-                students={this.props.artieLogin.students}
+                students={this.state.students}
                 user={this.state.user}
             />
         );

@@ -78,8 +78,8 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie, sendBlockArtie, loginArtie} from '../../lib/artie-api';
-import {activateArtieLogin, deactivateArtieLogin, artieLogged} from '../../reducers/artie-login';
+import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents} from '../../lib/artie-api';
+import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents} from '../../reducers/artie-login';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 
 const ariaMessages = defineMessages({
@@ -185,7 +185,8 @@ class MenuBar extends React.Component {
             'handleClickArtieLogin',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
-            'handleArtiePasswordChange'
+            'handleArtiePasswordChange',
+            'handleArtieLogged'
         ]);
     }
     componentDidMount () {
@@ -309,7 +310,19 @@ class MenuBar extends React.Component {
         this.props.onActivateArtieLogin();
     }
     handleClickArtieLoginOk(){
-        loginArtie(userLogin, passwordLogin, this.props.onArtieLogged);
+        loginArtie(userLogin, passwordLogin, this.handleArtieLogged);
+    }
+    handleArtieLogged(user){
+        this.props.onArtieLogged(user);
+
+        //If the user is read only, we check for the students
+        if(user.role == 0){
+            //We get the students
+            getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
+        } else if(user.role == 1){
+            //We close the login window
+            this.props.onDeactivateArtieLogin();
+        }
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;
@@ -929,7 +942,8 @@ const mapDispatchToProps = dispatch => ({
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
     onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),
     onArtieLogged: (user) => dispatch(artieLogged(user)),
-    onSendArtieLogin: () => dispatch(sendArtieLogin())
+    onArtieSetStudents: (students) => dispatch(artieSetStudents(students))
+
 });
 
 export default compose(

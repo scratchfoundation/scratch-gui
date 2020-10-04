@@ -13,7 +13,8 @@ class ArtieLoginComponent extends React.Component {
         super(props);
 
         this.state = {
-            user: null
+            user: null,
+            students: []
         };
     }
     componentWillReceiveProps (newProps) {
@@ -21,8 +22,12 @@ class ArtieLoginComponent extends React.Component {
             this.setState({
                 user: newProps.artieLogin.user
             });
-        }else{
-            return null; // nothing changed
+        }
+
+        if(this.state.students !== newProps.artieLogin.students){
+            this.setState({
+                students: newProps.artieLogin.students
+            });
         }
     }
 
@@ -75,8 +80,8 @@ class ArtieLoginComponent extends React.Component {
                                     id="gui.menuBar.artie.login.student"
                                 />
                                 <Select
-                                autofocus={true}
-                                data={this.props.students}
+                                    autofocus={true}
+                                    data={this.state.students}
                                 />
                             </label>
                         </Box>

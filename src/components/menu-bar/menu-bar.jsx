@@ -185,8 +185,7 @@ class MenuBar extends React.Component {
             'handleClickArtieLogin',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
-            'handleArtiePasswordChange',
-            'handleTest'
+            'handleArtiePasswordChange'
         ]);
     }
     componentDidMount () {
@@ -310,10 +309,7 @@ class MenuBar extends React.Component {
         this.props.onActivateArtieLogin();
     }
     handleClickArtieLoginOk(){
-        loginArtie(userLogin, passwordLogin, this.handleTest);
-    }
-    handleTest(body){
-        console.log(body);
+        loginArtie(userLogin, passwordLogin, this.props.onArtieLogged);
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;

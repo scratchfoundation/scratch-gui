@@ -46,7 +46,7 @@ const ArtieLoginComponent = props =>(
                     />
                 </label>
             </Box>
-            {props.user != null ?
+            {props.user !== undefined && props.user !== null ?
                 <Box>
                     <label>
                         <FormattedMessage
@@ -88,6 +88,7 @@ ArtieLoginComponent.propTypes = {
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
     title: PropTypes.string.isRequired,
-    students: PropTypes.array
+    students: PropTypes.array,
+    user: PropTypes.object
 };
 export default ArtieLoginComponent;

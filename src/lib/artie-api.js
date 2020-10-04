@@ -144,7 +144,7 @@ const loginArtie = (userName, password, callback) => new Promise(() => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response != null) {
                 var json = JSON.parse(xhr.response);
-                callback(json.body);
+                callback(json.body.object);
             }
         }
     });

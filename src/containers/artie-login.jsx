@@ -47,9 +47,7 @@ ArtieLogin.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    artieLogin: PropTypes.object,
-    userLogin: PropTypes.string,
-    passwordLogin: PropTypes.string
+    artieLogin: PropTypes.object
 }
 
 export default ArtieLogin;

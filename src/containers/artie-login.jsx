@@ -34,8 +34,8 @@ class ArtieLogin extends React.Component {
                 onUserChange={this.handleUserChange}
                 onPasswordChange={this.handlePasswordChange}
                 title={this.props.title}
-                students={this.props.students}
-                user={this.props.user}
+                students={this.props.artieLogin.students}
+                user={this.props.artieLogin.user}
             />
         );
     }
@@ -47,8 +47,9 @@ ArtieLogin.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    students: PropTypes.array,
-    user: PropTypes.object
+    artieLogin: PropTypes.object,
+    userLogin: PropTypes.string,
+    passwordLogin: PropTypes.string
 }
 
 export default ArtieLogin;

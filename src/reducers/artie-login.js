@@ -39,7 +39,7 @@ const deactivateArtieLogin = () =>({
 
 const artieLogged = (user) => ({
     type: ARTIE_LOGGED,
-    user: user
+    user: user,
 });
 
 export {

@@ -137,21 +137,20 @@ const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject
     });
 });
 
-const loginArtie = (userName, password) => new Promise((resolve, reject) => {
+const loginArtie = (userName, password, callback) => new Promise(() => {
 
-    xhr({
-        method: 'GET',
-        uri: `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`,
-        headers: {'Content-Type': 'application/json'},
-        json: true
-    }, (response) => {
-        if (response != null && response.statusCode !== 302) {
-            return reject();
-        }
-        else if(response != null){
-            return resolve(response.body);
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+                callback(json.body);
+            }
         }
     });
+
+    xhr.open("GET", `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.send();
 
 });
 

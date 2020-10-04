@@ -79,7 +79,7 @@ import scratchLogo from './scratch-logo.svg';
 import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie, loginArtie} from '../../lib/artie-api';
-import {activateArtieLogin, deactivateArtieLogin} from '../../reducers/artie-login';
+import {activateArtieLogin, deactivateArtieLogin, artieLogged} from '../../reducers/artie-login';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 
 const ariaMessages = defineMessages({
@@ -185,7 +185,8 @@ class MenuBar extends React.Component {
             'handleClickArtieLogin',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
-            'handleArtiePasswordChange'
+            'handleArtiePasswordChange',
+            'handleTest'
         ]);
     }
     componentDidMount () {
@@ -309,13 +310,10 @@ class MenuBar extends React.Component {
         this.props.onActivateArtieLogin();
     }
     handleClickArtieLoginOk(){
-
-        var user = null;
-        loginArtie(userLogin, passwordLogin)
-            .then(contents => {
-                user = contents;
-                console.log(user);
-            });
+        loginArtie(userLogin, passwordLogin, this.handleTest);
+    }
+    handleTest(body){
+        console.log(body);
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;
@@ -325,6 +323,7 @@ class MenuBar extends React.Component {
     }
 
     render () {
+
         const saveNowMessage = (
             <FormattedMessage
                 defaultMessage="Save now"
@@ -807,8 +806,7 @@ class MenuBar extends React.Component {
                             onCancel={this.props.onDeactivateArtieLogin}
                             onOk={this.handleClickArtieLoginOk}
                             title="Login"
-                            students={this.props.artieLogin.students}
-                            user={this.props.artieLogin.user}
+                            artieLogin={this.props.artieLogin}
                         />
                 ) :
                 (<div></div>)}
@@ -933,7 +931,9 @@ const mapDispatchToProps = dispatch => ({
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
-    onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin())
+    onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),
+    onArtieLogged: (user) => dispatch(artieLogged(user)),
+    onSendArtieLogin: () => dispatch(sendArtieLogin())
 });
 
 export default compose(

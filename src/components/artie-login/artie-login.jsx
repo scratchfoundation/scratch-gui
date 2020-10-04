@@ -12,6 +12,7 @@ const ArtieLoginComponent = props =>(
         onRequestClose={props.onCancel}
         className={styles.modalContent}
         contentLabel={props.title}
+        id="ArtieLogin"
     >
         <Box className={styles.body}>
             <Box>
@@ -38,7 +39,6 @@ const ArtieLoginComponent = props =>(
                         id="gui.menuBar.artie.login.password"
                     />
                     <input
-                        autoFocus
                         className={styles.variableNameTextInput}
                         onChange={props.onPasswordChange}
                         name="password"
@@ -46,7 +46,7 @@ const ArtieLoginComponent = props =>(
                     />
                 </label>
             </Box>
-            {props.user !== null ?
+            {props.user != null ?
                 <Box>
                     <label>
                         <FormattedMessage
@@ -88,6 +88,6 @@ ArtieLoginComponent.propTypes = {
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
     title: PropTypes.string.isRequired,
-    students: PropTypes.array.isRequired
+    students: PropTypes.array
 };
 export default ArtieLoginComponent;

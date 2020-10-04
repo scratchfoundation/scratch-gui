@@ -12,8 +12,20 @@ class ArtieLogin extends React.Component {
             'handleUserChange',
             'handlePasswordChange'
         ]);
+        this.state = {
+            user: null
+        };
     }
-
+    componentWillReceiveProps (newProps) {
+        console.log("user state changed");
+        if (this.state.user !== newProps.artieLogin.user) {
+            this.setState({
+                user: newProps.artieLogin.user
+            });
+        }else{
+            return null; // nothing changed
+        }
+    }
     handleCancel () {
         this.props.onCancel();
     }
@@ -35,7 +47,7 @@ class ArtieLogin extends React.Component {
                 onPasswordChange={this.handlePasswordChange}
                 title={this.props.title}
                 students={this.props.artieLogin.students}
-                user={this.props.artieLogin.user}
+                user={this.state.user}
             />
         );
     }

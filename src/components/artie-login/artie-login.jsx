@@ -7,81 +7,103 @@ import {FormattedMessage} from 'react-intl';
 import Select from '../forms/select.jsx';
 
 
-const ArtieLoginComponent = props =>(
-    <Modal
-        onRequestClose={props.onCancel}
-        className={styles.modalContent}
-        contentLabel={props.title}
-        id="ArtieLogin"
-    >
-        <Box className={styles.body}>
-            <Box>
-                <label>
-                    <FormattedMessage
-                        defaultMessage="Username"
-                        description="Username"
-                        id="gui.menuBar.artie.login.username"
-                    />
-                    <input
-                        autoFocus
-                        className={styles.variableNameTextInput}
-                        onChange={props.onUserChange}
-                        name="userName"
-                        type="text"
-                    />
-                </label>
-            </Box>
-            <Box>
-                <label>
-                    <FormattedMessage
-                        defaultMessage="Password"
-                        description="Password"
-                        id="gui.menuBar.artie.login.password"
-                    />
-                    <input
-                        className={styles.variableNameTextInput}
-                        onChange={props.onPasswordChange}
-                        name="password"
-                        type="password"
-                    />
-                </label>
-            </Box>
-            {props.user !== undefined && props.user !== null ?
-                <Box>
-                    <label>
-                        <FormattedMessage
-                            defaultMessage="Student"
-                            description="student"
-                            id="gui.menuBar.artie.login.student"
-                        />
-                        <Select
-                        autofocus={true}
-                        data={props.students}
-                        />
-                    </label>
+class ArtieLoginComponent extends React.Component {
+
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            user: null
+        };
+    }
+    componentWillReceiveProps (newProps) {
+        if (this.state.user !== newProps.artieLogin.user) {
+            this.setState({
+                user: newProps.artieLogin.user
+            });
+        }else{
+            return null; // nothing changed
+        }
+    }
+
+    render(){
+        return(
+            <Modal
+                onRequestClose={this.props.onCancel}
+                className={styles.modalContent}
+                contentLabel={this.props.title}
+                id="ArtieLogin"
+            >
+                <Box className={styles.body}>
+                    <Box>
+                        <label>
+                            <FormattedMessage
+                                defaultMessage="Username"
+                                description="Username"
+                                id="gui.menuBar.artie.login.username"
+                            />
+                            <input
+                                autoFocus
+                                className={styles.variableNameTextInput}
+                                onChange={this.props.onUserChange}
+                                name="userName"
+                                type="text"
+                            />
+                        </label>
+                    </Box>
+                    <Box>
+                        <label>
+                            <FormattedMessage
+                                defaultMessage="Password"
+                                description="Password"
+                                id="gui.menuBar.artie.login.password"
+                            />
+                            <input
+                                className={styles.variableNameTextInput}
+                                onChange={this.props.onPasswordChange}
+                                name="password"
+                                type="password"
+                            />
+                        </label>
+                    </Box>
+                    {this.state.user !== undefined && this.state.user !== null ?
+                        <Box>
+                            <label>
+                                <FormattedMessage
+                                    defaultMessage="Student"
+                                    description="student"
+                                    id="gui.menuBar.artie.login.student"
+                                />
+                                <Select
+                                autofocus={true}
+                                data={this.props.students}
+                                />
+                            </label>
+                        </Box>
+                    :
+                        <div></div>
+                    }
+                    <Box className={styles.buttonRow}>
+                        <button className={styles.cancelButton} onClick={this.props.onCancel}>
+                            <FormattedMessage
+                                    defaultMessage="Cancel"
+                                    description="Button in prompt for cancelling the dialog"
+                                    id="gui.menuBar.artie.login.cancel"
+                                />
+                        </button>
+                        <button className={styles.okButton} onClick={this.props.onOk}>
+                            <FormattedMessage
+                                    defaultMessage="OK"
+                                    description="Button in prompt for confirming the dialog"
+                                    id="gui.menuBar.artie.login.ok"
+                                />
+                        </button>
+                    </Box>
                 </Box>
-            :
-                <div></div>
-            }
-            <Box className={styles.buttonRow}>
-                <button className={styles.cancelButton} onClick={props.onCancel}>
-                    <FormattedMessage
-                            defaultMessage="Cancel"
-                            description="Button in prompt for cancelling the dialog"
-                            id="gui.menuBar.artie.login.cancel"
-                        />
-                </button>
-                <button className={styles.okButton} onClick={props.onOk}>
-                    <FormattedMessage
-                            defaultMessage="OK"
-                            description="Button in prompt for confirming the dialog"
-                            id="gui.menuBar.artie.login.ok"
-                        />
-                </button>
-            </Box>
-        </Box>
-    </Modal>
-);
+            </Modal>
+        );
+    }
+}
 
 ArtieLoginComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,

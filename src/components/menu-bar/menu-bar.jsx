@@ -79,7 +79,7 @@ import scratchLogo from './scratch-logo.svg';
 import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents} from '../../lib/artie-api';
-import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents} from '../../reducers/artie-login';
+import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout} from '../../reducers/artie-login';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 
 const ariaMessages = defineMessages({
@@ -184,6 +184,7 @@ class MenuBar extends React.Component {
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
             'handleClickArtieLogin',
+            'handleClickArtieLogout',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
             'handleArtiePasswordChange',
@@ -311,16 +312,22 @@ class MenuBar extends React.Component {
     handleClickArtieLogin(){
         this.props.onActivateArtieLogin();
     }
+    handleClickArtieLogout(){
+        this.props.onArtieLogout();
+    }
     handleClickArtieLoginOk(){
         //If the user has not logged
-        //if(this.props.artieLogin.user==null){
+        if(this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.students==[])){
             loginArtie(userLogin, passwordLogin, this.handleArtieLogged);
-        //}else{
-            //TODO: We register the student in the system
+        }else{
+            if(studentLogin !== ""){
+                var tempStudent = this.props.artieLogin.students.filter(s => s.id==studentLogin)[0];
+                this.props.onArtieSetCurrentStudent(tempStudent);
+            }
 
             //And we close the login window
-            //this.props.onDeactivateArtieLogin();
-        //}
+            this.props.onDeactivateArtieLogin();
+        }
     }
     handleArtieLogged(user){
         this.props.onArtieLogged(user);
@@ -573,32 +580,50 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseArtie}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={this.handleClickArtieLogin}>
-                                        <FormattedMessage
-                                            defaultMessage="Login"
-                                            description="Menu bar item for login"
-                                            id="gui.menuBar.artie.login"
-                                        />
-                                    </MenuItem>
+                                    {this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent==null)?
+                                        <MenuItem onClick={this.handleClickArtieLogin}>
+                                            <FormattedMessage
+                                                defaultMessage="Login"
+                                                description="Menu bar item for login"
+                                                id="gui.menuBar.artie.login"
+                                            />
+                                        </MenuItem>
+                                    :
+                                    <MenuItem onClick={this.handleClickArtieLogout}>
+                                    <FormattedMessage
+                                        defaultMessage="Logout"
+                                        description="Menu bar item for logout"
+                                        id="gui.menuBar.artie.logout"
+                                    />
+                                </MenuItem>
+                                    }
                                 </MenuSection>
-                                <MenuSection>
-                                    <MenuItem onClick={this.handleClickRegisterSolution}>
-                                        <FormattedMessage
-                                            defaultMessage="Register solution"
-                                            description="Menu bar item for registering a solution"
-                                            id="gui.menuBar.artie.registerSolution"
-                                        />
-                                    </MenuItem>
-                                </MenuSection>
-                                <MenuSection>
-                                    <MenuItem onClick={this.handleClickRequestHelp}>
-                                        <FormattedMessage
-                                            defaultMessage="Request help"
-                                            description="Menu bar item for requesting help"
-                                            id="gui.menuBar.artie.requestHelp"
-                                        />
-                                    </MenuItem>
-                                </MenuSection>
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==1?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickRegisterSolution}>
+                                            <FormattedMessage
+                                                defaultMessage="Register solution"
+                                                description="Menu bar item for registering a solution"
+                                                id="gui.menuBar.artie.registerSolution"
+                                            />
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    <div></div>
+                                }
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickRequestHelp}>
+                                            <FormattedMessage
+                                                defaultMessage="Request help"
+                                                description="Menu bar item for requesting help"
+                                                id="gui.menuBar.artie.requestHelp"
+                                            />
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    <div></div>
+                                }
                             </MenuBarMenu>
                         </div>
                     </div>
@@ -956,7 +981,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
     onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),
     onArtieLogged: (user) => dispatch(artieLogged(user)),
-    onArtieSetStudents: (students) => dispatch(artieSetStudents(students))
+    onArtieLogout: () => dispatch(artieLogout()),
+    onArtieSetStudents: (students) => dispatch(artieSetStudents(students)),
+    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))
 
 });
 

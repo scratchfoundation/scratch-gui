@@ -26,7 +26,7 @@ class ArtieLoginComponent extends React.Component {
 
         if(this.state.students !== newProps.artieLogin.students){
 
-            var students = []
+            var students = [{id: "", value: ""}]
             newProps.artieLogin.students.forEach(student => students.push({id: student.id, value: student.name.concat(" ", student.lastName)}));
 
             this.setState({

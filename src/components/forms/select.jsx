@@ -8,7 +8,7 @@ const Select = props => (
         {
             props.data.map((element, i) => {
                 i+=1
-                return(<option value={element.id}>{element.value}</option>)
+                return(<option key={i} value={element.id}>{element.value}</option>)
             })
         }
     </select>

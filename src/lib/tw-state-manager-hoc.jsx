@@ -33,8 +33,10 @@ const TWStateManager = function (WrappedComponent) {
         componentDidMount () {
             const urlParams = new URLSearchParams(location.search);
 
-            if (urlParams.has('60fps')) {
-                this.props.vm.renderer.setCompatibilityMode(false);
+            if (urlParams.has('fps')) {
+                this.props.vm.setFramerate(urlParams.get('fps'));
+            } else if (urlParams.has('60fps')) {
+                this.props.vm.setFramerate(60);
             }
 
             if (urlParams.has('username')) {

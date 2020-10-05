@@ -63,12 +63,6 @@ const TWStateManager = function (WrappedComponent) {
             if (urlParams.has('turbo')) {
                 this.props.vm.setTurboMode(true);
             }
-
-            if (urlParams.has('stuck')) {
-                this.props.vm.setCompilerOptions({
-                    warpTimer: true
-                });
-            }
         }
         componentDidUpdate (prevProps) {
             if (this.props.username !== prevProps.username && this.props.username !== this.doNotPersistUsername) {

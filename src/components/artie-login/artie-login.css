@@ -90,3 +90,10 @@
 .cloud-option-text {
     opacity: .5;
 }
+
+.status-message {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: red;
+}

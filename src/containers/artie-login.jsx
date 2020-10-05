@@ -8,7 +8,8 @@ class ArtieLogin extends React.Component {
         super(props);
         bindAll(this, []);
         this.state = {
-            user: null
+            user: null,
+            error: null
         };
     }
     componentWillReceiveProps (newProps) {
@@ -21,6 +22,12 @@ class ArtieLogin extends React.Component {
         if(this.state.students !== newProps.artieLogin.students){
             this.setState({
                 students: newProps.artieLogin.students
+            });
+        }
+
+        if (this.state.error !== newProps.artieLogin.error) {
+            this.setState({
+                error: newProps.artieLogin.error
             });
         }
     }
@@ -36,6 +43,7 @@ class ArtieLogin extends React.Component {
                 title={this.props.title}
                 students={this.state.students}
                 user={this.state.user}
+                error={this.state.error}
             />
         );
     }

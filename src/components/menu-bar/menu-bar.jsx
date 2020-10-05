@@ -79,7 +79,7 @@ import scratchLogo from './scratch-logo.svg';
 import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents} from '../../lib/artie-api';
-import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout} from '../../reducers/artie-login';
+import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 
 const ariaMessages = defineMessages({
@@ -318,7 +318,7 @@ class MenuBar extends React.Component {
     handleClickArtieLoginOk(){
         //If the user has not logged
         if(this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.students==[])){
-            loginArtie(userLogin, passwordLogin, this.handleArtieLogged);
+            loginArtie(userLogin, passwordLogin, this.handleArtieLogged, this.props.onArtieError);
         }else{
             if(studentLogin !== ""){
                 var tempStudent = this.props.artieLogin.students.filter(s => s.id==studentLogin)[0];
@@ -333,10 +333,10 @@ class MenuBar extends React.Component {
         this.props.onArtieLogged(user);
 
         //If the user is read only, we check for the students
-        if(user.role == 0){
+        if(user !== null && user.role == 0){
             //We get the students
             getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
-        } else if(user.role == 1){
+        } else if(user !== null && user.role == 1){
             //We close the login window
             this.props.onDeactivateArtieLogin();
         }
@@ -981,6 +981,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
     onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),
     onArtieLogged: (user) => dispatch(artieLogged(user)),
+    onArtieError: (error) => dispatch(artieError(error)),
     onArtieLogout: () => dispatch(artieLogout()),
     onArtieSetStudents: (students) => dispatch(artieSetStudents(students)),
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))

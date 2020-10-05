@@ -137,14 +137,20 @@ const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject
     });
 });
 
-const loginArtie = (userName, password, callback) => new Promise(() => {
+const loginArtie = (userName, password, callback, errorCallback) => new Promise(() => {
 
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response != null) {
                 var json = JSON.parse(xhr.response);
-                callback(json.body.object);
+
+                //We check if there are no errors
+                if(json.body.object !== null){
+                    callback(json.body.object);
+                }else{
+                    errorCallback(json.body.message);
+                }
             }
         }
     });

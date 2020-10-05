@@ -14,7 +14,8 @@ class ArtieLoginComponent extends React.Component {
 
         this.state = {
             user: null,
-            students: []
+            students: [],
+            error: null
         };
     }
     componentWillReceiveProps (newProps) {
@@ -33,6 +34,12 @@ class ArtieLoginComponent extends React.Component {
                 students: students
             });
         }
+
+        if (this.state.error !== newProps.artieLogin.error) {
+            this.setState({
+                error: newProps.artieLogin.error
+            });
+        }
     }
 
     render(){
@@ -44,6 +51,15 @@ class ArtieLoginComponent extends React.Component {
                 id="ArtieLogin"
             >
                 <Box className={styles.body}>
+                    <Box>
+                        {this.state.error !== "" ?
+                            <div className={styles.statusMessage}>
+                                {this.state.error}
+                            </div>
+                        :
+                            <div></div>
+                        }
+                    </Box>
                     <Box>
                         <label>
                             <FormattedMessage
@@ -122,6 +138,7 @@ ArtieLoginComponent.propTypes = {
     onStudentChange: PropTypes.func,
     title: PropTypes.string.isRequired,
     students: PropTypes.array,
-    user: PropTypes.object
+    user: PropTypes.object,
+    error: PropTypes.string
 };
 export default ArtieLoginComponent;

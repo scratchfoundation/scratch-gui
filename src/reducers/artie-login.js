@@ -4,12 +4,14 @@ const ARTIE_LOGGED = 'scratch-gui/artie-login/ARTIE_LOGGED';
 const ARTIE_LOGOUT = 'scratch-gui/artie-login/ARTIE_LOGOUT';
 const ARTIE_SET_STUDENTS = 'scratch-gui/artie-login/ARTIE_SET_STUDENTS';
 const ARTIE_SET_CURRENT_STUDENT = 'scratch-gui/artie-login/ARTIE_SET_CURRENT_STUDENT';
+const ARTIE_ERROR = 'scratch-gui/artie-login/ARTIE_ERROR';
 
 const initialState = {
     active : false,
     students: [],
     user: null,
-    currentStudent: null
+    currentStudent: null,
+    error: null
 }
 
 const reducer = function (state, action) {
@@ -25,21 +27,29 @@ const reducer = function (state, action) {
             });
         case ARTIE_LOGGED:
             return Object.assign({}, state, {
-                user: action.user
+                user: action.user,
+                error: null
             });
         case ARTIE_LOGOUT:
             return Object.assign({}, state, {
                 user: null,
                 students: [],
-                currentStudent: null
+                currentStudent: null,
+                error: null
             });
         case ARTIE_SET_STUDENTS:
             return Object.assign({}, state, {
-                students: action.students
+                students: action.students,
+                error: null
             });
         case ARTIE_SET_CURRENT_STUDENT:
             return Object.assign({}, state, {
-                currentStudent: action.currentStudent
+                currentStudent: action.currentStudent,
+                error: null
+            });
+        case ARTIE_ERROR:
+            return Object.assign({}, state, {
+                error: action.error
             });
         default:
             return state;
@@ -74,6 +84,11 @@ const artieLogout = () => ({
     type: ARTIE_LOGOUT
 });
 
+const artieError = (error) => ({
+    type: ARTIE_ERROR,
+    error: error
+});
+
 export {
     reducer as default,
     initialState as artieLoginInitialState,
@@ -82,5 +97,6 @@ export {
     artieLogged,
     artieSetStudents,
     artieSetCurrentStudent,
-    artieLogout
+    artieLogout,
+    artieError
 };

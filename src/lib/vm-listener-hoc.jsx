@@ -12,7 +12,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setFramerateState, setCompilerOptions} from '../reducers/tw';
+import {setFramerateState, setCompilerOptionsState} from '../reducers/tw';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -215,7 +215,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),
-        onCompilerOptionsChanged: options => dispatch(setCompilerOptions(options)),
+        onCompilerOptionsChanged: options => dispatch(setCompilerOptionsState(options)),
         onShowExtensionAlert: data => {
             dispatch(showExtensionAlert(data));
         },

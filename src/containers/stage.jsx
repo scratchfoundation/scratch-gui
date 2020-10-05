@@ -18,7 +18,7 @@ import {
     deactivateColorPicker
 } from '../reducers/color-picker';
 
-import {setHighQualityPen} from '../reducers/tw';
+import {setHighQualityPenState} from '../reducers/tw';
 
 const colorPickerRadius = 20;
 const dragThreshold = 3; // Same as the block drag threshold
@@ -482,7 +482,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     // tw: handler for syncing high quality pen option changes
-    onHighQualityPenChanged: enabled => dispatch(setHighQualityPen(enabled)),
+    onHighQualityPenChanged: enabled => dispatch(setHighQualityPenState(enabled)),
     onActivateColorPicker: () => dispatch(activateColorPicker()),
     onDeactivateColorPicker: color => dispatch(deactivateColorPicker(color))
 });

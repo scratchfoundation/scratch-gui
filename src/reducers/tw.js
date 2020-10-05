@@ -62,7 +62,7 @@ const setFramerateState = function (framerate) {
     };
 };
 
-const setCompilerOptions = function (compilerOptions) {
+const setCompilerOptionsState = function (compilerOptions) {
     return {
         type: SET_COMPILER_OPTIONS,
         compilerOptions: compilerOptions
@@ -83,7 +83,7 @@ const setCloud = function (cloud) {
     };
 };
 
-const setHighQualityPen = function (highQualityPen) {
+const setHighQualityPenState = function (highQualityPen) {
     return {
         type: SET_HIGH_QUALITY_PEN,
         highQualityPen: highQualityPen
@@ -108,10 +108,10 @@ export {
     reducer as default,
     initialState as twInitialState,
     setFramerateState,
-    setCompilerOptions,
+    setCompilerOptionsState,
     setUsername,
     setCloud,
-    setHighQualityPen,
+    setHighQualityPenState,
     setIsWindowFullScreen,
     setInnerWidth
 };

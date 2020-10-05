@@ -71,8 +71,7 @@ class Stage extends React.Component {
             // default color
             this.props.vm.renderer.draw();
 
-            // tw: implement high quality pen
-            this.renderer.setUseHighQualityPen(this.props.highQualityPen);
+            // tw: handle changes to high quality pen
             this.props.vm.renderer.on('UseHighQualityPenChanged', this.props.onHighQualityPenChanged);
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());

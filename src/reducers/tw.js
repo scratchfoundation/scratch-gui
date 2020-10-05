@@ -6,50 +6,11 @@ const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_INNERWIDTH = 'tw/SET_INNERWIDTH';
 
-const USERNAME_KEY = 'tw:username';
-
-const searchParams = new URLSearchParams(location.search);
-
-// TODO: initial state parsing probably shouldn't happen in here
-
-const getInitialCompatibility = () => {
-    if (searchParams.has('60fps')) {
-        return false;
-    }
-    return true;
-};
-
-const getInitialUsername = () => {
-    if (searchParams.has('username')) {
-        return searchParams.get('username');
-    }
-    try {
-        const result = localStorage.getItem(USERNAME_KEY);
-        if ('' + result === 'null') throw new Error('Temporary username fix');
-        if (result) {
-            return result;
-        }
-    } catch (e) { /* ignore */ }
-    const randomId = Math.random().toString().substr(2, 6);
-    const username = `player${randomId}`;
-    try {
-        localStorage.setItem(USERNAME_KEY, username);
-    } catch (e) { /* ignore */ }
-    return username;
-};
-
-const getInitialHighQualityPen = () => {
-    if (searchParams.has('hqpen')) {
-        return true;
-    }
-    return false;
-};
-
 export const initialState = {
-    compatibility: getInitialCompatibility(),
+    compatibility: true,
     cloud: true,
-    username: getInitialUsername(),
-    highQualityPen: getInitialHighQualityPen(),
+    username: '',
+    highQualityPen: false,
     compilerOptions: {
         enabled: true,
         warpTimer: false
@@ -70,9 +31,6 @@ const reducer = function (state, action) {
             compilerOptions: action.compilerOptions
         });
     case SET_USERNAME:
-        try {
-            localStorage.setItem(USERNAME_KEY, action.username);
-        } catch (e) { /* ignore */ }
         return Object.assign({}, state, {
             username: action.username
         });

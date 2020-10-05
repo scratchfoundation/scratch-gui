@@ -8,6 +8,7 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWTitleFetcherHOC from '../lib/tw-title-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
+import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -110,7 +111,8 @@ const WrappedInterface = compose(
     AppStateHOC,
     TWParserHOC,
     TWTitleFetcherHOC,
-    TWEditorWarningHOC
+    TWEditorWarningHOC,
+    TWStateManagerHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

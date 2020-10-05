@@ -12,7 +12,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setCompatibilityState, setCompilerOptions} from '../reducers/tw';
+import {setFramerateState, setCompilerOptions} from '../reducers/tw';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -50,8 +50,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
             // tw: add handlers for our events
             this.props.vm.on('COMPILER_OPTIONS_CHANGED', this.props.onCompilerOptionsChanged);
-            this.props.vm.on('COMPATIBILITY_MODE_ON', this.props.onCompatibilityModeOn);
-            this.props.vm.on('COMPATIBILITY_MODE_OFF', this.props.onCompatibilityModeOff);
+            this.props.vm.on('FRAMERATE_CHANGED', this.props.onFramerateChanged);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -148,8 +147,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onRuntimeStarted,
                 onTurboModeOff,
                 onTurboModeOn,
-                onCompatibilityModeOff,
-                onCompatibilityModeOn,
+                onFramerateChanged,
                 onCompilerOptionsChanged,
                 onShowExtensionAlert,
                 /* eslint-enable no-unused-vars */
@@ -175,8 +173,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
-        onCompatibilityModeOff: PropTypes.func.isRequired,
-        onCompatibilityModeOn: PropTypes.func.isRequired,
+        onFramerateChanged: PropTypes.func.isRequired,
         onCompilerOptionsChanged: PropTypes.func.isRequired,
         projectChanged: PropTypes.bool,
         shouldUpdateTargets: PropTypes.bool,
@@ -217,8 +214,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onRuntimeStarted: () => dispatch(setStartedState(true)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
-        onCompatibilityModeOn: () => dispatch(setCompatibilityState(true)),
-        onCompatibilityModeOff: () => dispatch(setCompatibilityState(false)),
+        onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),
         onCompilerOptionsChanged: options => dispatch(setCompilerOptions(options)),
         onShowExtensionAlert: data => {
             dispatch(showExtensionAlert(data));

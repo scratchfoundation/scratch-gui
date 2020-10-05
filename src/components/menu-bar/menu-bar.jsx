@@ -27,7 +27,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
-import CompatibilityMode from '../../containers/tw-compatibility-mode.jsx';
+import SixtyFPSToggler from '../../containers/tw-sixty-fps-toggler.jsx';
 import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
@@ -507,23 +507,23 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
-                                    <CompatibilityMode>{(toggleCompatibilityMode, {compatibilityMode}) => (
-                                        <MenuItem onClick={toggleCompatibilityMode}>
-                                            {compatibilityMode ? (
+                                    <SixtyFPSToggler>{(toggleSixtyFPS, {isSixty}) => (
+                                        <MenuItem onClick={toggleSixtyFPS}>
+                                            {isSixty ? (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn on 60 FPS mode"
-                                                    description="Menu bar item for turning on compatibility mode"
-                                                    id="tw.settings.compatOn"
+                                                    defaultMessage="Turn off 60 FPS mode"
+                                                    description="Menu bar item for turning off 60 FPS mode"
+                                                    id="tw.settings.60off"
                                                 />
                                             ) : (
                                                 <FormattedMessage
-                                                    defaultMessage="Turn off 60 FPS mode"
-                                                    description="Menu bar item for turning off compatibility mode"
-                                                    id="tw.settings.compatOff"
+                                                    defaultMessage="Turn on 60 FPS mode"
+                                                    description="Menu bar item for turning on 60 FPS mode"
+                                                    id="tw.settings.60on"
                                                 />
                                             )}
                                         </MenuItem>
-                                    )}</CompatibilityMode>
+                                    )}</SixtyFPSToggler>
                                     <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
                                         <MenuItem
                                             className={classNames({[styles.disabled]: isProjectRunning})}

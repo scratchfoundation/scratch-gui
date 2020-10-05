@@ -1,4 +1,4 @@
-const SET_COMPATIBILITY_STATE = 'tw/SET_COMPATIBILITY_STATE';
+const SET_FRAMERATE = 'tw/SET_FRAMERATE';
 const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
@@ -7,7 +7,7 @@ const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_INNERWIDTH = 'tw/SET_INNERWIDTH';
 
 export const initialState = {
-    compatibility: true,
+    framerate: 30,
     cloud: true,
     username: '',
     highQualityPen: false,
@@ -22,9 +22,9 @@ export const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case SET_COMPATIBILITY_STATE:
+    case SET_FRAMERATE:
         return Object.assign({}, state, {
-            compatibility: action.compatibility
+            framerate: action.framerate
         });
     case SET_COMPILER_OPTIONS:
         return Object.assign({}, state, {
@@ -55,10 +55,10 @@ const reducer = function (state, action) {
     }
 };
 
-const setCompatibilityState = function (compatibility) {
+const setFramerateState = function (framerate) {
     return {
-        type: SET_COMPATIBILITY_STATE,
-        compatibility: compatibility
+        type: SET_FRAMERATE,
+        framerate: framerate
     };
 };
 
@@ -107,7 +107,7 @@ const setInnerWidth = function (innerWidth) {
 export {
     reducer as default,
     initialState as twInitialState,
-    setCompatibilityState,
+    setFramerateState,
     setCompilerOptions,
     setUsername,
     setCloud,

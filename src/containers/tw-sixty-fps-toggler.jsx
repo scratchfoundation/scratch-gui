@@ -2,16 +2,21 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import VM from 'scratch-vm';
 
-class CompatibilityMode extends React.Component {
+class SixtyFPSToggler extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'toggleCompatibilityMode'
+            'toggleSixtyFPS'
         ]);
     }
-    toggleCompatibilityMode () {
-        this.props.vm.setCompatibilityMode(!this.props.compatibilityMode);
+    toggleSixtyFPS () {
+        if (this.props.isSixty) {
+            this.props.vm.setFramerate(30);
+        } else {
+            this.props.vm.setFramerate(60);
+        }
     }
     render () {
         const {
@@ -21,24 +26,22 @@ class CompatibilityMode extends React.Component {
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
-        return this.props.children(this.toggleCompatibilityMode, props);
+        return this.props.children(this.toggleSixtyFPS, props);
     }
 }
 
-CompatibilityMode.propTypes = {
+SixtyFPSToggler.propTypes = {
     children: PropTypes.func,
-    compatibilityMode: PropTypes.bool,
-    vm: PropTypes.shape({
-        setCompatibilityMode: PropTypes.func
-    })
+    isSixty: PropTypes.bool,
+    vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
-    vm: state.scratchGui.vm,
-    compatibilityMode: state.scratchGui.tw.compatibility
+    isSixty: state.scratchGui.tw.framerate === 60,
+    vm: state.scratchGui.vm
 });
 
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(CompatibilityMode);
+)(SixtyFPSToggler);

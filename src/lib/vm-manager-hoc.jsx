@@ -77,7 +77,6 @@ const vmManagerHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                compatibilityMode,
                 fontsLoaded,
                 loadingState,
                 locale,
@@ -103,7 +102,6 @@ const vmManagerHOC = function (WrappedComponent) {
     }
 
     VMManager.propTypes = {
-        compatibilityMode: PropTypes.bool,
         canSave: PropTypes.bool,
         cloudHost: PropTypes.string,
         fontsLoaded: PropTypes.bool,
@@ -125,7 +123,6 @@ const vmManagerHOC = function (WrappedComponent) {
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
-            compatibilityMode: state.scratchGui.tw.compatibility,
             fontsLoaded: state.scratchGui.fontsLoaded,
             isLoadingWithId: getIsLoadingWithId(loadingState),
             locale: state.locales.locale,

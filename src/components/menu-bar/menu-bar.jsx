@@ -164,6 +164,7 @@ AboutButton.propTypes = {
 
 var userLogin = null;
 var passwordLogin = null;
+var studentLogin = null;
 
 class MenuBar extends React.Component {
     constructor (props) {
@@ -186,6 +187,7 @@ class MenuBar extends React.Component {
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
             'handleArtiePasswordChange',
+            'handleArtieStudentChange',
             'handleArtieLogged'
         ]);
     }
@@ -310,7 +312,15 @@ class MenuBar extends React.Component {
         this.props.onActivateArtieLogin();
     }
     handleClickArtieLoginOk(){
-        loginArtie(userLogin, passwordLogin, this.handleArtieLogged);
+        //If the user has not logged
+        //if(this.props.artieLogin.user==null){
+            loginArtie(userLogin, passwordLogin, this.handleArtieLogged);
+        //}else{
+            //TODO: We register the student in the system
+
+            //And we close the login window
+            //this.props.onDeactivateArtieLogin();
+        //}
     }
     handleArtieLogged(user){
         this.props.onArtieLogged(user);
@@ -329,6 +339,9 @@ class MenuBar extends React.Component {
     }
     handleArtiePasswordChange(e){
         passwordLogin = e.target.value;
+    }
+    handleArtieStudentChange(e){
+        studentLogin = e.target.value;
     }
 
     render () {
@@ -812,6 +825,7 @@ class MenuBar extends React.Component {
                         <ArtieLogin
                             onUserChange={this.handleArtieUserChange}
                             onPasswordChange={this.handleArtiePasswordChange}
+                            onStudentChange={this.handleArtieStudentChange}
                             onCancel={this.props.onDeactivateArtieLogin}
                             onOk={this.handleClickArtieLoginOk}
                             title="Login"

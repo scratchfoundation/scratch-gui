@@ -25,8 +25,12 @@ class ArtieLoginComponent extends React.Component {
         }
 
         if(this.state.students !== newProps.artieLogin.students){
+
+            var students = []
+            newProps.artieLogin.students.forEach(student => students.push({id: student.id, value: student.name.concat(" ", student.lastName)}));
+
             this.setState({
-                students: newProps.artieLogin.students
+                students: students
             });
         }
     }
@@ -82,6 +86,7 @@ class ArtieLoginComponent extends React.Component {
                                 <Select
                                     autofocus={true}
                                     data={this.state.students}
+                                    onChange={this.props.onStudentChange}
                                 />
                             </label>
                         </Box>
@@ -114,6 +119,7 @@ ArtieLoginComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
+    onStudentChange: PropTypes.func,
     title: PropTypes.string.isRequired,
     students: PropTypes.array,
     user: PropTypes.object

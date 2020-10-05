@@ -6,12 +6,7 @@ import ArtieLoginComponent from '../components/artie-login/artie-login.jsx';
 class ArtieLogin extends React.Component {
     constructor (props) {
         super(props);
-        bindAll(this, [
-            'handleCancel',
-            'handleOk',
-            'handleUserChange',
-            'handlePasswordChange'
-        ]);
+        bindAll(this, []);
         this.state = {
             user: null
         };
@@ -29,25 +24,15 @@ class ArtieLogin extends React.Component {
             });
         }
     }
-    handleCancel () {
-        this.props.onCancel();
-    }
-    handleOk(){
-        this.props.onOk();
-    }
-    handleUserChange (e) {
-        this.props.onUserChange(e);
-    }
-    handlePasswordChange(e){
-        this.props.onPasswordChange(e);
-    }
+
     render () {
         return(
             <ArtieLoginComponent
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
-                onUserChange={this.handleUserChange}
-                onPasswordChange={this.handlePasswordChange}
+                onOk={this.props.onOk}
+                onCancel={this.props.onUserChange}
+                onUserChange={this.props.onUserChange}
+                onPasswordChange={this.props.onPasswordChange}
+                onStudentChange={this.props.onStudentChange}
                 title={this.props.title}
                 students={this.state.students}
                 user={this.state.user}
@@ -59,6 +44,7 @@ class ArtieLogin extends React.Component {
 ArtieLogin.propTypes = {
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
+    onStudentChange: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,

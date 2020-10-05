@@ -7,6 +7,7 @@ const Select = props => (
     <select autoFocus={props.autofocus} className={styles.variableNameTextInput} onChange={props.onChange}>
         {
             props.data.map((element, i) => {
+                i+=1
                 return(<option value={element.id}>{element.value}</option>)
             })
         }

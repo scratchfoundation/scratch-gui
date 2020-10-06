@@ -117,10 +117,10 @@ const sendBlockArtie = (student, blocks, projectTitle, requestHelp) => new Promi
     });
 });
 
-const sendSolutionArtie = (blocks, projectTitle) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, blocks, projectTitle) => new Promise((resolve, reject) => {
 
     const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareSolution = {id: null, exercise: projectTitle, elements: artieBlocks};
+    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: projectTitle, elements: artieBlocks};
 
     xhr({
         method: 'POST',

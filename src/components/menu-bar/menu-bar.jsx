@@ -304,7 +304,7 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
-        sendSolutionArtie(this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle);
+        sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle);
     }
     handleClickRequestHelp(){
         sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);

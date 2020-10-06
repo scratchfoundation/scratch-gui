@@ -97,10 +97,10 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (blocks, projectTitle, requestHelp) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, blocks, projectTitle, requestHelp) => new Promise((resolve, reject) => {
 
     const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareData = {id: null, exercise: projectTitle, requestHelp: requestHelp, elements: artieBlocks};
+    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: projectTitle, requestHelp: requestHelp, elements: artieBlocks};
 
     xhr({
         method: 'POST',
@@ -155,7 +155,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8081/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -172,7 +172,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost:8080/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8081/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });

@@ -17,7 +17,7 @@ import About from '../components/tw-home/about.jsx';
 import Title from '../components/tw-home/title.jsx';
 import Examples from '../components/tw-examples/examples.jsx';
 
-import styles from './gui.css';
+import styles from './interface.css';
 
 if (window !== window.parent) {
     // Show a warning when trying to embed this page. Users shouldn't do that.

@@ -4,7 +4,7 @@ const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
 const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
-const SET_INNERWIDTH = 'tw/SET_INNERWIDTH';
+const SET_DIMENSIONS = 'tw/SET_DIMENSIONS';
 
 export const initialState = {
     framerate: 30,
@@ -16,7 +16,7 @@ export const initialState = {
         warpTimer: false
     },
     isWindowFullScreen: false,
-    innerWidth: window.innerWidth
+    dimensions: [0, 0]
 };
 
 const reducer = function (state, action) {
@@ -46,9 +46,9 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             isWindowFullScreen: action.isWindowFullScreen
         });
-    case SET_INNERWIDTH:
+    case SET_DIMENSIONS:
         return Object.assign({}, state, {
-            innerWidth: action.innerWidth
+            dimensions: action.dimensions
         });
     default:
         return state;
@@ -97,10 +97,10 @@ const setIsWindowFullScreen = function (isWindowFullScreen) {
     };
 };
 
-const setInnerWidth = function (innerWidth) {
+const setDimensions = function (dimensions) {
     return {
-        type: SET_INNERWIDTH,
-        innerWidth: innerWidth
+        type: SET_DIMENSIONS,
+        dimensions: dimensions
     };
 };
 
@@ -113,5 +113,5 @@ export {
     setCloud,
     setHighQualityPenState,
     setIsWindowFullScreen,
-    setInnerWidth
+    setDimensions
 };

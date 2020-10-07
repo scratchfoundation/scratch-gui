@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {setFullScreen} from '../reducers/mode';
-import {setIsWindowFullScreen, setInnerWidth} from '../reducers/tw';
+import {setIsWindowFullScreen, setDimensions} from '../reducers/tw';
 
 const TWFullScreenHOC = function (WrappedComponent) {
     class FullScreenComponent extends React.Component {
@@ -37,7 +37,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
             document.removeEventListener('fullscreenchange', this.handleFullScreenChange);
         }
         handleResize () {
-            this.props.onSetInnerWidth(window.innerWidth);
+            this.props.onSetDimensions([window.innerWidth, window.innerHeight]);
         }
         handleFullScreenChange () {
             const isFullScreen = !!document.fullscreenElement;
@@ -48,7 +48,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 isFullScreen,
-                onSetInnerWidth,
+                onSetDimensions,
                 onSetIsFullScreen,
                 onSetWindowIsFullScreen,
                 /* eslint-enable no-unused-vars */
@@ -63,7 +63,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
     }
     FullScreenComponent.propTypes = {
         isFullScreen: PropTypes.bool,
-        onSetInnerWidth: PropTypes.func,
+        onSetDimensions: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
         onSetWindowIsFullScreen: PropTypes.func
     };
@@ -73,7 +73,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
     const mapDispatchToProps = dispatch => ({
         onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
         onSetWindowIsFullScreen: isFullScreen => dispatch(setIsWindowFullScreen(isFullScreen)),
-        onSetInnerWidth: innerWidth => dispatch(setInnerWidth(innerWidth))
+        onSetDimensions: dimensions => dispatch(setDimensions(dimensions))
     });
     return connect(
         mapStateToProps,

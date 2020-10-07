@@ -88,9 +88,9 @@ class Stage extends React.Component {
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
-            // tw: update when innerWidth or isWindowFullScreen changes
+            // tw: update when dimensions or isWindowFullScreen changes
             this.props.isWindowFullScreen !== nextProps.isWindowFullScreen ||
-            this.props.innerWidth !== nextProps.innerWidth ||
+            this.props.dimensions !== nextProps.dimensions ||
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
             this.props.isStarted !== nextProps.isStarted;
@@ -447,9 +447,9 @@ Stage.propTypes = {
     disableEditingTargetChange: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
-    // tw: update when innerWidth or isWindowFullScreen changes
+    // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: PropTypes.bool,
-    innerWidth: PropTypes.number,
+    dimensions: PropTypes.arrayOf(PropTypes.number),
     isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
@@ -471,9 +471,9 @@ const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     // tw: embed is always considered fullscreen
     isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded,
-    // tw: update when innerWidth or isWindowFullScreen changes
+    // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
-    innerWidth: state.scratchGui.tw.innerWidth,
+    dimensions: state.scratchGui.tw.dimensions,
     isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
     // Do not use editor drag style in fullscreen or player mode.

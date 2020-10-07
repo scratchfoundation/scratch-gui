@@ -44,9 +44,9 @@ class StageHeader extends React.Component {
 
 StageHeader.propTypes = {
     isFullScreen: PropTypes.bool,
-    // tw: update when innerWidth or isWindowFullScreen changes
+    // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: PropTypes.bool,
-    innerWidth: PropTypes.number,
+    dimensions: PropTypes.arrayOf(PropTypes.number),
     isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
     // tw: replace showBranding
@@ -60,9 +60,9 @@ const mapStateToProps = state => ({
     // tw: replace showBranding
     isEmbedded: state.scratchGui.mode.isEmbedded,
     isFullScreen: state.scratchGui.mode.isFullScreen,
-    // tw: update when innerWidth or isWindowFullScreen changes
+    // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
-    innerWidth: state.scratchGui.tw.innerWidth,
+    dimensions: state.scratchGui.tw.dimensions,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 

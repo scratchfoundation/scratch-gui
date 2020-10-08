@@ -3,6 +3,7 @@ import React from 'react';
 import {compose} from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWFullScreenHOC from '../lib/tw-fullscreen-hoc.jsx';
+import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 
@@ -16,6 +17,7 @@ const projectId = location.hash.substr(1);
 
 const WrappedGUI = compose(
     AppStateHOC,
+    TWStateManagerHOC,
     TWFullScreenHOC
 )(GUI);
 

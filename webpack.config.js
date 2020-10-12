@@ -13,6 +13,14 @@ var postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
+const htmlWebpackPluginCommon = {
+    sentryConfig: process.env.SENTRY_CONFIG,
+    plausible: process.env.PLAUSIBLE_HOST ? {
+        host: process.env.PLAUSIBLE_HOST,
+        domain: process.env.PLAUSIBLE_DOMAIN
+    } : null
+};
+
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devtool: process.env.NODE_ENV === 'production' ? false : 'cheap-module-source-map',
@@ -139,28 +147,28 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 filename: 'editor.html',
                 title: 'TurboWarp Editor',
-                sentryConfig: process.env.SENTRY_CONFIG
+                ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['player'],
                 template: 'src/playground/index.ejs',
                 filename: 'index.html',
                 title: 'TurboWarp - Run Scratch projects faster',
-                sentryConfig: process.env.SENTRY_CONFIG
+                ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['fullscreen'],
                 template: 'src/playground/index.ejs',
                 filename: 'fullscreen.html',
                 title: 'TurboWarp',
-                sentryConfig: process.env.SENTRY_CONFIG
+                ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['embed'],
                 template: 'src/playground/index.ejs',
                 filename: 'embed.html',
                 title: 'TurboWarp',
-                sentryConfig: process.env.SENTRY_CONFIG
+                ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: [],

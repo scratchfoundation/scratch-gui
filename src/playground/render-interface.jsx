@@ -54,8 +54,8 @@ const Interface = ({isPlayerOnly}) => (
                     <footer className={styles.footer}>
                         <p>
                             <FormattedMessage
-                                defaultMessage="TurboWarp is not affiliated with or otherwise officially connected to Scratch, the Scratch Team, or the Scratch Foundation."
-                                description="Disclaimer that TurboWarp is not connected to Scratch"
+                                defaultMessage="Projects from the Scratch website are licensed under the Creative Commons Attribution-ShareAlike 2.0 license. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                                description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
                                 id="tw.footer.disclaimer"
                             />
                         </p>

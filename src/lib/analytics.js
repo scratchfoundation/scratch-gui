@@ -1,6 +1,6 @@
-import GoogleAnalytics from 'react-ga';
-
-// disabled
-window.ga = () => {};
+// tw: disable analytics entirely
+const GoogleAnalytics = {
+    event () {}
+};
 
 export default GoogleAnalytics;

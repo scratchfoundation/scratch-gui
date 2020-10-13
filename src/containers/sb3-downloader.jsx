@@ -4,6 +4,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
+import {setProjectUnchanged} from '../reducers/project-changed';
+
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -26,6 +28,7 @@ class SB3Downloader extends React.Component {
         ]);
     }
     downloadProject () {
+        this.props.onProjectUnchanged();
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
@@ -57,7 +60,8 @@ SB3Downloader.propTypes = {
     className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    saveProjectSb3: PropTypes.func
+    saveProjectSb3: PropTypes.func,
+    onProjectUnchanged: PropTypes.func
 };
 SB3Downloader.defaultProps = {
     className: ''
@@ -68,7 +72,11 @@ const mapStateToProps = state => ({
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
 });
 
+const mapDispatchToProps = dispatch => ({
+    onProjectUnchanged: () => dispatch(setProjectUnchanged())
+});
+
 export default connect(
     mapStateToProps,
-    () => ({}) // omit dispatch prop
+    mapDispatchToProps
 )(SB3Downloader);

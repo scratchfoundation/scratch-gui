@@ -73,7 +73,16 @@ const TWParserHoc = function (WrappedComponent) {
         handleHashChange () {
             const hashMatch = window.location.hash.match(/#(\d+)/);
             const hashProjectId = hashMatch === null ? defaultProjectId : hashMatch[1];
-            this.props.onSetProjectId(hashProjectId.toString());
+            if (this.props.projectId !== hashProjectId) {
+                if (this.props.projectChanged) {
+                    // eslint-disable-next-line no-alert
+                    if (!confirm('Switch to different project?')) {
+                        history.pushState('', '', `#${this.props.projectId}`);
+                        return;
+                    }
+                }
+                this.props.onSetProjectId(hashProjectId.toString());
+            }
         }
         handleSearchChange () {
             if (useRouting) {
@@ -108,6 +117,7 @@ const TWParserHoc = function (WrappedComponent) {
                 onSetIsFullScreen,
                 projectId,
                 onSetProjectId,
+                projectChanged,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -121,24 +131,26 @@ const TWParserHoc = function (WrappedComponent) {
     HashParserComponent.propTypes = {
         isFetchingWithoutId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
-        onSetIsPlayerOnly: PropTypes.func,
         isFullScreen: PropTypes.bool,
         onSetIsFullScreen: PropTypes.func,
-        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        onSetProjectId: PropTypes.func
+        onSetIsPlayerOnly: PropTypes.func,
+        onSetProjectId: PropTypes.func,
+        projectChanged: PropTypes.bool,
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
     const mapStateToProps = state => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
-            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
             isFullScreen: state.scratchGui.mode.isFullScreen,
+            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+            projectChanged: state.scratchGui.projectChanged,
             projectId: state.scratchGui.projectState.projectId
         };
     };
     const mapDispatchToProps = dispatch => ({
-        onSetIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
         onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
+        onSetIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
         onSetProjectId: projectId => dispatch(setProjectId(projectId))
     });
     return connect(

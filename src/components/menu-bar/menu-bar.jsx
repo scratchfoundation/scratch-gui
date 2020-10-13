@@ -32,6 +32,7 @@ import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
 import CompilerOptions from '../../containers/tw-compiler-options.jsx';
+import TWSaveStatus from './tw-save-status.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -790,6 +791,12 @@ class MenuBar extends React.Component {
                                 />
                             </Button>
                         </a>
+                    </div>
+                </div>
+
+                <div className={styles.accountInfoGroup}>
+                    <div className={styles.menuBarItem}>
+                        <TWSaveStatus />
                     </div>
                 </div>
 

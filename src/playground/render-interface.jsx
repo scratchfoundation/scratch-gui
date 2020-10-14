@@ -25,15 +25,10 @@ if (window !== window.parent) {
     alert('You are embedding TurboWarp incorrectly.\n\nGo here for instructions: https://github.com/TurboWarp/scratch-gui/wiki/Embedding');
 }
 
-const onClickLogo = () => {
-    location.hash = '';
-};
-
 const Interface = ({isPlayerOnly}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
             <MenuBar
-                onClickLogo={onClickLogo}
                 canManageFiles
                 canChangeLanguage
                 enableSeeInside

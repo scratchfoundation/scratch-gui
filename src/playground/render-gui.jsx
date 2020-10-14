@@ -3,16 +3,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import GUI from '../containers/gui.jsx';
 
-const onClickLogo = () => {
-    location.hash = '';
-};
-
 const searchParams = new URLSearchParams(location.search);
 const cloudHost = searchParams.get('cloud_host') || 'wss://clouddata.turbowarp.org';
 
 const RenderGUI = ({isPlayerOnly, projectId}) => (
     <GUI
-        onClickLogo={onClickLogo}
         cloudHost={cloudHost}
         canSave={false}
         canEditTitle

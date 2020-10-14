@@ -3,6 +3,7 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
+import {inlineSvgFonts} from 'scratch-svg-renderer';
 
 import {connect} from 'react-redux';
 
@@ -52,6 +53,7 @@ class PaintEditorWrapper extends React.Component {
                 image={vm.getCostume(selectedCostumeIndex)}
                 onUpdateImage={this.handleUpdateImage}
                 onUpdateName={this.handleUpdateName}
+                fontInlineFn={inlineSvgFonts}
             />
         );
     }

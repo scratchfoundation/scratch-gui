@@ -11,14 +11,7 @@ const videos = {
         'pt': 'ngdfp8xg4x',
         'pt-br': 'ngdfp8xg4x',
         'ja': 'v2c2f3y2sc',
-        'ja-Hira': 'v2c2f3y2sc',
-        'es': 'htk2m9o65l',
-        'es-419': 'htk2m9o65l',
-        'sw': 'fd4bn2nli5',
-        'fr': 'dt015ouls8',
-        'am': 'e06wlsebqy',
-        'zu': 'st2x0emdx7',
-        'uk': '1ith4m4f8u'
+        'ja-Hira': 'v2c2f3y2sc'
     },
     'animate-a-name': {
         'en': 'pyur30ho05',

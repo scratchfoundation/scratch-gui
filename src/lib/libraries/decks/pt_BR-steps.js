@@ -199,7 +199,7 @@ import talesChooseSound from './steps/talking-11-choose-sound.pt_BR.gif';
 import talesDanceMoves from './steps/talking-12-dance-moves.pt_BR.png';
 import talesAskAnswer from './steps/talking-13-ask-and-answer.pt_BR.png';
 
-const pt_BRImages = {
+const ptBrImages = {
     // Intro
     introMove: introMove,
     introSay: introSay,
@@ -402,4 +402,4 @@ const pt_BRImages = {
     talesDanceMoves: talesDanceMoves
 };
 
-export {pt_BRImages};
+export {ptBrImages};

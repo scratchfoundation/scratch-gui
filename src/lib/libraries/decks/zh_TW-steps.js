@@ -199,7 +199,7 @@ import talesChooseSound from './steps/talking-11-choose-sound.zh_TW.gif';
 import talesDanceMoves from './steps/talking-12-dance-moves.zh_TW.png';
 import talesAskAnswer from './steps/talking-13-ask-and-answer.zh_TW.png';
 
-const zh_TWImages = {
+const zhTwImages = {
     // Intro
     introMove: introMove,
     introSay: introSay,
@@ -402,4 +402,4 @@ const zh_TWImages = {
     talesDanceMoves: talesDanceMoves
 };
 
-export {zh_TWImages};
+export {zhTwImages};

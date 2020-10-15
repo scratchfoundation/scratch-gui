@@ -14,11 +14,11 @@ const loadSpanish = () =>
 
 const loadSimplifiedChinese = () =>
     import(/* webpackChunkName: "zh_CN-steps" */ './zh_CN-steps.js')
-        .then(({zh_CNImages: imageData}) => imageData);
+        .then(({zhCnImages: imageData}) => imageData);
 
 const loadTraditionalChinese = () =>
     import(/* webpackChunkName: "zh_TW-steps" */ './zh_TW-steps.js')
-        .then(({zh_TWImages: imageData}) => imageData);
+        .then(({zhTwImages: imageData}) => imageData);
 
 const loadTurkish = () =>
     import(/* webpackChunkName: "tr-steps" */ './tr-steps.js')
@@ -30,7 +30,7 @@ const loadFrench = () =>
 
 const loadPortugueseBrazilian = () =>
     import(/* webpackChunkName: "pt_BR-steps" */ './pt_BR-steps.js')
-        .then(({pt_BRImages: imageData}) => imageData);
+        .then(({ptBrImages: imageData}) => imageData);
 
 const loadArabic = () =>
     import(/* webpackChunkName: "ar-steps" */ './ar-steps.js')
@@ -75,7 +75,6 @@ const translations = {
 };
 
 const loadImageData = locale => {
-    console.log(locale);
     if (translations.hasOwnProperty(locale)) {
         translations[locale]()
             .then(newImages => {

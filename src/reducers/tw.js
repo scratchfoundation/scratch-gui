@@ -5,6 +5,7 @@ const SET_CLOUD = 'tw/SET_CLOUD';
 const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_DIMENSIONS = 'tw/SET_DIMENSIONS';
+const SET_AUTHOR = 'tw/SET_AUTHOR';
 
 export const initialState = {
     framerate: 30,
@@ -16,7 +17,11 @@ export const initialState = {
         warpTimer: false
     },
     isWindowFullScreen: false,
-    dimensions: [0, 0]
+    dimensions: [0, 0],
+    author: {
+        username: '',
+        thumbnail: ''
+    }
 };
 
 const reducer = function (state, action) {
@@ -49,6 +54,10 @@ const reducer = function (state, action) {
     case SET_DIMENSIONS:
         return Object.assign({}, state, {
             dimensions: action.dimensions
+        });
+    case SET_AUTHOR:
+        return Object.assign({}, state, {
+            author: action.author
         });
     default:
         return state;
@@ -104,6 +113,13 @@ const setDimensions = function (dimensions) {
     };
 };
 
+const setAuthor = function (author) {
+    return {
+        type: SET_AUTHOR,
+        author: author
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -113,5 +129,6 @@ export {
     setCloud,
     setHighQualityPenState,
     setIsWindowFullScreen,
-    setDimensions
+    setDimensions,
+    setAuthor
 };

@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import log from './log';
 
 import {getIsShowingWithId} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
+import {setAuthor} from '../reducers/tw';
 
 const API_URL = 'https://trampoline.turbowarp.org/proxy/projects/$id';
 
-const fetchProjectTitle = projectId => fetch(API_URL.replace('$id', projectId))
-    .then(r => r.json())
-    .then(data => {
-        if (data.title) {
-            return data.title;
+const fetchProjectMeta = projectId => fetch(API_URL.replace('$id', projectId))
+    .then(r => {
+        if (r.status !== 200) {
+            throw new Error(`Unexpected status code: ${r.status}`);
         }
-        return '';
+        return r.json();
     });
 
-const TWTitleFetcherHOC = function (WrappedComponent) {
-    class TitleFetcherComponent extends React.Component {
+const TWProjectMetaFetcherHOC = function (WrappedComponent) {
+    class ProjectMetaFetcherComponent extends React.Component {
         componentDidMount () {
             this.initialTitle = document.title;
         }
@@ -25,21 +26,29 @@ const TWTitleFetcherHOC = function (WrappedComponent) {
             return this.props.isShowingWithId !== nextProps.isShowingWithId;
         }
         componentDidUpdate (prevProps) {
+            this.props.onSetProjectTitle('');
+            this.props.onSetAuthor('', '');
             if (this.props.isShowingWithId && !prevProps.isShowingWithId) {
                 const projectId = this.props.projectId;
-                fetchProjectTitle(projectId)
-                    .then(title => {
-                        if (!title) {
-                            return;
-                        }
+                fetchProjectMeta(projectId)
+                    .then(data => {
+                        // If project ID changed, ignore the results.
                         if (this.props.projectId !== projectId) {
                             return;
                         }
-                        document.title = `${title} - TurboWarp`;
-                        this.props.onSetProjectTitle(title);
+                        const title = data.title;
+                        if (title) {
+                            document.title = `${title} - TurboWarp`;
+                            this.props.onSetProjectTitle(title);
+                        }
+                        const authorName = data.author.username;
+                        const authorThumbnail = data.author.profile.images['32x32'];
+                        if (authorName && authorThumbnail) {
+                            this.props.onSetAuthor(authorName, authorThumbnail);
+                        }
                     })
-                    .catch(() => {
-                        // ignore errors
+                    .catch(err => {
+                        log.warn('cannot fetch project meta', err);
                     });
             } else {
                 document.title = this.initialTitle;
@@ -63,9 +72,10 @@ const TWTitleFetcherHOC = function (WrappedComponent) {
             );
         }
     }
-    TitleFetcherComponent.propTypes = {
+    ProjectMetaFetcherComponent.propTypes = {
         isShowingWithId: PropTypes.bool,
         projectId: PropTypes.string,
+        onSetAuthor: PropTypes.func,
         onSetProjectTitle: PropTypes.func
     };
     const mapStateToProps = state => {
@@ -76,14 +86,18 @@ const TWTitleFetcherHOC = function (WrappedComponent) {
         };
     };
     const mapDispatchToProps = dispatch => ({
+        onSetAuthor: (username, thumbnail) => dispatch(setAuthor({
+            username,
+            thumbnail
+        })),
         onSetProjectTitle: title => dispatch(setProjectTitle(title))
     });
     return connect(
         mapStateToProps,
         mapDispatchToProps
-    )(TitleFetcherComponent);
+    )(ProjectMetaFetcherComponent);
 };
 
 export {
-    TWTitleFetcherHOC as default
+    TWProjectMetaFetcherHOC as default
 };

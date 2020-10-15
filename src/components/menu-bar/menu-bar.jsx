@@ -888,6 +888,8 @@ const mapStateToProps = (state, ownProps) => {
     const user = state.session && state.session.session && state.session.session.user;
     return {
         accountMenuOpen: accountMenuOpen(state),
+        authorThumbnailUrl: state.scratchGui.tw.author.thumbnail,
+        authorUsername: state.scratchGui.tw.author.username,
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,

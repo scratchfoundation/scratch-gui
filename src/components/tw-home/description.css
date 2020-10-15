@@ -1,7 +1,8 @@
 .description {
     max-height: 220px;
     overflow: auto;
-    white-space: pre-wrap;
+    white-space: pre-line;
+    overflow-wrap: break-word;
     line-height: 1.5em;
     padding: 0.5rem;
     margin: 5px 0 7px 0;

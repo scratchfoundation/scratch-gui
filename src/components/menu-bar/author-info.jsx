@@ -35,7 +35,14 @@ const AuthorInfo = ({
                         description="Shows that a project was created by this user"
                         id="gui.authorInfo.byUser"
                         values={{
-                            username: <span className={styles.username}>{username}</span>
+                            username: <span className={styles.username}>
+                                <a
+                                    className={styles.usernameLink}
+                                    href={`https://scratch.mit.edu/users/${username}/`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >{username}</a>
+                            </span>
                         }}
                     />
                 </span>

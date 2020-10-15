@@ -37,3 +37,11 @@
 .username {
     font-weight: bold;
 }
+
+.username-link {
+    color: $ui-white !important;
+    text-decoration: none;
+}
+.username-link:hover {
+    text-decoration: underline;
+}

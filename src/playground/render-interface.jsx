@@ -16,6 +16,7 @@ import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import About from '../components/tw-home/about.jsx';
 import Title from '../components/tw-home/title.jsx';
 import Examples from '../components/tw-examples/examples.jsx';
+import Description from '../components/tw-home/description.jsx';
 
 import styles from './interface.css';
 
@@ -25,7 +26,10 @@ if (window !== window.parent) {
     alert('You are embedding TurboWarp incorrectly.\n\nGo here for instructions: https://github.com/TurboWarp/scratch-gui/wiki/Embedding');
 }
 
-const Interface = ({isPlayerOnly}) => (
+const Interface = ({
+    description,
+    isPlayerOnly
+}) => (
     <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
         {isPlayerOnly ? (
             <MenuBar
@@ -44,6 +48,10 @@ const Interface = ({isPlayerOnly}) => (
             {isPlayerOnly ? (
                 <div className="about">
                     <ProjectInput />
+                    <Description
+                        instructions={description.instructions}
+                        credits={description.credits}
+                    />
                     <About />
                     <Examples />
                     <footer className={styles.footer}>
@@ -86,10 +94,15 @@ const Interface = ({isPlayerOnly}) => (
 );
 
 Interface.propTypes = {
+    description: PropTypes.shape({
+        credits: PropTypes.string,
+        instructions: PropTypes.string
+    }),
     isPlayerOnly: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
+    description: state.scratchGui.tw.description,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 

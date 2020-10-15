@@ -6,6 +6,7 @@ const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
 const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_DIMENSIONS = 'tw/SET_DIMENSIONS';
 const SET_AUTHOR = 'tw/SET_AUTHOR';
+const SET_DESCRIPTION = 'tw/SET_DESCRIPTION';
 
 export const initialState = {
     framerate: 30,
@@ -21,6 +22,10 @@ export const initialState = {
     author: {
         username: '',
         thumbnail: ''
+    },
+    description: {
+        instructions: '',
+        credits: ''
     }
 };
 
@@ -58,6 +63,10 @@ const reducer = function (state, action) {
     case SET_AUTHOR:
         return Object.assign({}, state, {
             author: action.author
+        });
+    case SET_DESCRIPTION:
+        return Object.assign({}, state, {
+            description: action.description
         });
     default:
         return state;
@@ -120,6 +129,13 @@ const setAuthor = function (author) {
     };
 };
 
+const setDescription = function (description) {
+    return {
+        type: SET_DESCRIPTION,
+        description: description
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -130,5 +146,6 @@ export {
     setHighQualityPenState,
     setIsWindowFullScreen,
     setDimensions,
-    setAuthor
+    setAuthor,
+    setDescription
 };

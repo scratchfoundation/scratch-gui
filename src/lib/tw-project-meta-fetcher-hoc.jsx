@@ -5,7 +5,7 @@ import log from './log';
 
 import {getIsShowingWithId} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
-import {setAuthor} from '../reducers/tw';
+import {setAuthor, setDescription} from '../reducers/tw';
 
 const API_URL = 'https://trampoline.turbowarp.org/proxy/projects/$id';
 
@@ -28,6 +28,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         componentDidUpdate (prevProps) {
             this.props.onSetProjectTitle('');
             this.props.onSetAuthor('', '');
+            this.props.onSetDescription('', '');
             if (this.props.isShowingWithId && !prevProps.isShowingWithId) {
                 const projectId = this.props.projectId;
                 fetchProjectMeta(projectId)
@@ -45,6 +46,11 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                         const authorThumbnail = data.author.profile.images['32x32'];
                         if (authorName && authorThumbnail) {
                             this.props.onSetAuthor(authorName, authorThumbnail);
+                        }
+                        const instructions = data.instructions || '';
+                        const credits = data.description || '';
+                        if (instructions || credits) {
+                            this.props.onSetDescription(instructions, credits);
                         }
                     })
                     .catch(err => {
@@ -76,6 +82,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         isShowingWithId: PropTypes.bool,
         projectId: PropTypes.string,
         onSetAuthor: PropTypes.func,
+        onSetDescription: PropTypes.func,
         onSetProjectTitle: PropTypes.func
     };
     const mapStateToProps = state => {
@@ -89,6 +96,10 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         onSetAuthor: (username, thumbnail) => dispatch(setAuthor({
             username,
             thumbnail
+        })),
+        onSetDescription: (instructions, credits) => dispatch(setDescription({
+            instructions,
+            credits
         })),
         onSetProjectTitle: title => dispatch(setProjectTitle(title))
     });

@@ -1,0 +1,25 @@
+.description {
+    max-height: 220px;
+    overflow: auto;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+    padding: 0.5rem;
+    margin: 5px 0 7px 0;
+    border: 1px solid #b9d6ff;
+    background-color: #dbebff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .description {
+        border-color: #203652;
+        background-color: #16202c;
+    }
+}
+
+.header {
+    font-weight: bold;
+}
+
+.divider {
+    margin-top: 7px;
+}

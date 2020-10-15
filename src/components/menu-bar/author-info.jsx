@@ -20,10 +20,17 @@ const AuthorInfo = ({
             styles.authorInfo
         )}
     >
-        <UserAvatar
-            className={styles.avatar}
-            imageUrl={imageUrl}
-        />
+        <a
+            className={styles.usernameLink}
+            href={`https://scratch.mit.edu/users/${username}/`}
+            target="_blank"
+            rel="noreferrer"
+        >
+            <UserAvatar
+                className={styles.avatar}
+                imageUrl={imageUrl}
+            />
+        </a>
         <div className={styles.titleAuthor}>
             <span className={styles.projectTitle}>
                 {projectTitle}

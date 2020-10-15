@@ -16,9 +16,9 @@ const TWSaveStatus = ({
                 className={styles.saveNow}
             >
                 <FormattedMessage
-                    defaultMessage="UNSAVED CHANGES"
-                    description="Title bar link for unsaved changes"
-                    id="tw.unsavedChanges"
+                    defaultMessage="Save Now"
+                    description="Title bar link for saving now"
+                    id="gui.menuBar.saveNowLink"
                 />
             </div>
         )}</SB3Downloader>

@@ -81,7 +81,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Add a move block"
                     description="Step name for 'Add a move block' step"
-                    id="gui.howtos.intro-move.step_introMove"
+                    id="gui.howtos.intro-move.step_stepMove"
                 />
             ),
             image: 'introMove'
@@ -90,7 +90,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Add a say block"
                     description="Step name for 'Add A Say Block' step"
-                    id="gui.howtos.add-a-move-block.step_introSay"
+                    id="gui.howtos.add-a-move-block.step_stepSay"
                 />
             ),
             image: 'introSay'
@@ -99,7 +99,7 @@ export default {
                 <FormattedMessage
                     defaultMessage="Click the green flag to start"
                     description="Step name for 'Add A Green Flag' step"
-                    id="gui.howtos.add-a-move-block.step_introGreenFlag"
+                    id="gui.howtos.add-a-move-block.step_stepGreenFlag"
                 />
             ),
             image: 'introGreenFlag'

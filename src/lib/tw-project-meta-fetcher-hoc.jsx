@@ -26,7 +26,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             return this.props.isShowingWithId !== nextProps.isShowingWithId;
         }
         componentDidUpdate (prevProps) {
-            this.props.onSetProjectTitle('');
+            // project title resetting handled in titled-hoc.jsx
             this.props.onSetAuthor('', '');
             this.props.onSetDescription('', '');
             if (this.props.isShowingWithId && !prevProps.isShowingWithId) {

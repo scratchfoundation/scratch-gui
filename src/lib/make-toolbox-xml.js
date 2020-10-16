@@ -808,6 +808,8 @@ const sensing = function (isStage) {
 
             <block type="mv2_coloursense" />
 
+            <block type="mv2_coloursenseraw" />
+
             <block type="mv2_distancesense" />
 
             <!--<block type="mv2_current" />-->

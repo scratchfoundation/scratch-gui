@@ -15,6 +15,20 @@ document.body.classList.add('tw-loaded');
 // URL parameters are not used for this as hash is already used elsewhere, and this won't tell TurboWarp.org which project is being loaded. (I don't want to know!)
 const projectId = location.hash.substr(1);
 
+let vm;
+
+const onVmInit = _vm => {
+    vm = _vm;
+};
+
+const onProjectLoaded = () => {
+    const urlParams = new URLSearchParams(location.search);
+    if (urlParams.has('autoplay')) {
+        vm.start();
+        vm.greenFlag();
+    }
+};
+
 const WrappedGUI = compose(
     AppStateHOC,
     TWStateManagerHOC,
@@ -24,4 +38,6 @@ const WrappedGUI = compose(
 ReactDOM.render(<WrappedGUI
     isEmbedded
     projectId={projectId}
+    onVmInit={onVmInit}
+    onProjectLoaded={onProjectLoaded}
 />, appTarget);

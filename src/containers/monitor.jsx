@@ -96,6 +96,10 @@ class Monitor extends React.Component {
         return false;
     }
     componentDidUpdate () {
+        // tw: if monitor is not draggable (ie. not in editor), do not calculate size of monitor for performance
+        if (!this.props.draggable) {
+            return;
+        }
         this.props.resizeMonitorRect(this.props.id, this.element.offsetWidth, this.element.offsetHeight);
     }
     componentWillUnmount () {

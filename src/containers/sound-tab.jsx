@@ -113,8 +113,8 @@ class SoundTab extends React.Component {
     handleSurpriseSound () {
         const soundItem = soundLibraryContent[Math.floor(Math.random() * soundLibraryContent.length)];
         const vmSound = {
-            format: soundItem.format,
-            md5: soundItem.md5,
+            format: soundItem.dataFormat,
+            md5: soundItem.md5ext,
             rate: soundItem.rate,
             sampleCount: soundItem.sampleCount,
             name: soundItem.name

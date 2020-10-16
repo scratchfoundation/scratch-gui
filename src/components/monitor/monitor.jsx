@@ -31,86 +31,101 @@ const modes = {
 };
 
 const MonitorComponent = props => (
-    <ContextMenuTrigger
-        disable={!props.draggable}
-        holdToDisplay={props.mode === 'slider' ? -1 : 1000}
-        id={`monitor-${props.label}`}
-    >
-        <Draggable
-            bounds=".monitor-overlay" // Class for monitor container
-            cancel=".no-drag" // Class used for slider input to prevent drag
-            defaultClassNameDragging={styles.dragging}
-            disabled={!props.draggable}
-            onStop={props.onDragEnd}
+    // tw: when not draggable, Skip ContextMenuTrigger and Draggable entirely due to performance
+    // note that there are some changes in Monitor to fix positioning issues that resulted from this
+    props.draggable ? (
+        <ContextMenuTrigger
+            disable={!props.draggable}
+            holdToDisplay={props.mode === 'slider' ? -1 : 1000}
+            id={`monitor-${props.label}`}
         >
-            <Box
-                className={styles.monitorContainer}
-                componentRef={props.componentRef}
-                onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
+            <Draggable
+                bounds=".monitor-overlay" // Class for monitor container
+                cancel=".no-drag" // Class used for slider input to prevent drag
+                defaultClassNameDragging={styles.dragging}
+                disabled={!props.draggable}
+                onStop={props.onDragEnd}
             >
-                {React.createElement(modes[props.mode], {
-                    categoryColor: categories[props.category],
-                    ...props
-                })}
-            </Box>
-        </Draggable>
-        {ReactDOM.createPortal((
-            // Use a portal to render the context menu outside the flow to avoid
-            // positioning conflicts between the monitors `transform: scale` and
-            // the context menus `position: fixed`. For more details, see
-            // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
-            <ContextMenu id={`monitor-${props.label}`}>
-                {props.onSetModeToDefault &&
-                    <MenuItem onClick={props.onSetModeToDefault}>
-                        <FormattedMessage
-                            defaultMessage="normal readout"
-                            description="Menu item to switch to the default monitor"
-                            id="gui.monitor.contextMenu.default"
-                        />
-                    </MenuItem>}
-                {props.onSetModeToLarge &&
-                    <MenuItem onClick={props.onSetModeToLarge}>
-                        <FormattedMessage
-                            defaultMessage="large readout"
-                            description="Menu item to switch to the large monitor"
-                            id="gui.monitor.contextMenu.large"
-                        />
-                    </MenuItem>}
-                {props.onSetModeToSlider &&
-                    <MenuItem onClick={props.onSetModeToSlider}>
-                        <FormattedMessage
-                            defaultMessage="slider"
-                            description="Menu item to switch to the slider monitor"
-                            id="gui.monitor.contextMenu.slider"
-                        />
-                    </MenuItem>}
-                {props.onSliderPromptOpen && props.mode === 'slider' &&
-                    <BorderedMenuItem onClick={props.onSliderPromptOpen}>
-                        <FormattedMessage
-                            defaultMessage="change slider range"
-                            description="Menu item to change the slider range"
-                            id="gui.monitor.contextMenu.sliderRange"
-                        />
-                    </BorderedMenuItem>}
-                {props.onImport &&
-                    <MenuItem onClick={props.onImport}>
-                        <FormattedMessage
-                            defaultMessage="import"
-                            description="Menu item to import into list monitors"
-                            id="gui.monitor.contextMenu.import"
-                        />
-                    </MenuItem>}
-                {props.onExport &&
-                    <MenuItem onClick={props.onExport}>
-                        <FormattedMessage
-                            defaultMessage="export"
-                            description="Menu item to export from list monitors"
-                            id="gui.monitor.contextMenu.export"
-                        />
-                    </MenuItem>}
-            </ContextMenu>
-        ), document.body)}
-    </ContextMenuTrigger>
+                <Box
+                    className={styles.monitorContainer}
+                    componentRef={props.componentRef}
+                    onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
+                >
+                    {React.createElement(modes[props.mode], {
+                        categoryColor: categories[props.category],
+                        ...props
+                    })}
+                </Box>
+            </Draggable>
+            {ReactDOM.createPortal((
+                // Use a portal to render the context menu outside the flow to avoid
+                // positioning conflicts between the monitors `transform: scale` and
+                // the context menus `position: fixed`. For more details, see
+                // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+                <ContextMenu id={`monitor-${props.label}`}>
+                    {props.onSetModeToDefault &&
+                        <MenuItem onClick={props.onSetModeToDefault}>
+                            <FormattedMessage
+                                defaultMessage="normal readout"
+                                description="Menu item to switch to the default monitor"
+                                id="gui.monitor.contextMenu.default"
+                            />
+                        </MenuItem>}
+                    {props.onSetModeToLarge &&
+                        <MenuItem onClick={props.onSetModeToLarge}>
+                            <FormattedMessage
+                                defaultMessage="large readout"
+                                description="Menu item to switch to the large monitor"
+                                id="gui.monitor.contextMenu.large"
+                            />
+                        </MenuItem>}
+                    {props.onSetModeToSlider &&
+                        <MenuItem onClick={props.onSetModeToSlider}>
+                            <FormattedMessage
+                                defaultMessage="slider"
+                                description="Menu item to switch to the slider monitor"
+                                id="gui.monitor.contextMenu.slider"
+                            />
+                        </MenuItem>}
+                    {props.onSliderPromptOpen && props.mode === 'slider' &&
+                        <BorderedMenuItem onClick={props.onSliderPromptOpen}>
+                            <FormattedMessage
+                                defaultMessage="change slider range"
+                                description="Menu item to change the slider range"
+                                id="gui.monitor.contextMenu.sliderRange"
+                            />
+                        </BorderedMenuItem>}
+                    {props.onImport &&
+                        <MenuItem onClick={props.onImport}>
+                            <FormattedMessage
+                                defaultMessage="import"
+                                description="Menu item to import into list monitors"
+                                id="gui.monitor.contextMenu.import"
+                            />
+                        </MenuItem>}
+                    {props.onExport &&
+                        <MenuItem onClick={props.onExport}>
+                            <FormattedMessage
+                                defaultMessage="export"
+                                description="Menu item to export from list monitors"
+                                id="gui.monitor.contextMenu.export"
+                            />
+                        </MenuItem>}
+                </ContextMenu>
+            ), document.body)}
+        </ContextMenuTrigger>
+    ) : (
+        <Box
+            className={styles.monitorContainer}
+            componentRef={props.componentRef}
+            onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
+        >
+            {React.createElement(modes[props.mode], {
+                categoryColor: categories[props.category],
+                ...props
+            })}
+        </Box>
+    )
 
 );
 

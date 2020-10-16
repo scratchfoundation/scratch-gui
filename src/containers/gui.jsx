@@ -176,7 +176,7 @@ const WrappedGui = compose(
     LocalizationHOC,
     ErrorBoundaryHOC('Top Level App'),
     FontLoaderHOC,
-    QueryParserHOC,
+    // QueryParserHOC, // tw: HOC is unused
     ProjectFetcherHOC,
     TitledHOC,
     ProjectSaverHOC,

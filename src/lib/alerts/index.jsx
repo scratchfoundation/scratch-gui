@@ -219,7 +219,7 @@ const alerts = [
         clearList: [],
         content: (
             <FormattedMessage
-                defaultMessage="Turn on Warp Timer or disable compiler (in Advanced menu) while creating projects to avoid potential data loss."
+                defaultMessage="Turn on Warp Timer or disable compiler (in Advanced menu) while creating projects to avoid potential data loss. Also note that scripts may need to be restarted for changes to apply."
                 description="Message warning user of potential data loss."
                 id="tw.alerts.warning"
             />

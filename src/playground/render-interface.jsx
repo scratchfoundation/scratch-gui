@@ -28,81 +28,87 @@ if (window !== window.parent) {
 
 const Interface = ({
     description,
+    isFullScreen,
     isPlayerOnly
-}) => (
-    <div className={classNames(isPlayerOnly ? styles.stageOnly : styles.editor)}>
-        {isPlayerOnly ? (
-            <MenuBar
-                canManageFiles
-                canChangeLanguage
-                enableSeeInside
-            />
-        ) : null}
-        <div className={styles.center}>
-            {isPlayerOnly ? (
-                <Title />
+}) => {
+    const isHome = isPlayerOnly && !isFullScreen;
+    return (
+        <div className={classNames(isHome ? styles.stageOnly : styles.editor)}>
+            {isHome ? (
+                <MenuBar
+                    canManageFiles
+                    canChangeLanguage
+                    enableSeeInside
+                />
             ) : null}
-            <GUI
-                isPlayerOnly={isPlayerOnly}
-            />
-            {isPlayerOnly ? (
-                <div className="about">
-                    <ProjectInput />
-                    <Description
-                        instructions={description.instructions}
-                        credits={description.credits}
-                    />
-                    <About />
-                    <Examples />
-                    <footer className={styles.footer}>
-                        <p>
-                            <FormattedMessage
-                                defaultMessage="Projects from the Scratch website are licensed under the Creative Commons Attribution-ShareAlike 2.0 license. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
-                                description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
-                                id="tw.footer.disclaimer"
-                            />
-                        </p>
-                        <p>
-                            <FormattedMessage
-                                defaultMessage="TurboWarp is hosted by {fosshost}."
-                                description="Host credit"
-                                id="tw.footer.host"
-                                values={{
-                                    fosshost: (
-                                        <a
-                                            href="https://fosshost.org"
-                                            // _blank is safe here because of noopener
-                                            // eslint-disable-next-line react/jsx-no-target-blank
-                                            target="_blank"
-                                            rel="noopener"
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="fosshost.org"
-                                                description="Link to fosshost.org"
-                                                id="tw.footer.host.fosshost"
-                                            />
-                                        </a>
-                                    )
-                                }}
-                            />
-                        </p>
-                    </footer>
-                </div>
-            ) : null}
+            <div className={styles.center}>
+                {isHome ? (
+                    <Title />
+                ) : null}
+                <GUI
+                    isPlayerOnly={isHome}
+                />
+                {isHome ? (
+                    <div className="about">
+                        <ProjectInput />
+                        <Description
+                            instructions={description.instructions}
+                            credits={description.credits}
+                        />
+                        <About />
+                        <Examples />
+                        <footer className={styles.footer}>
+                            <p>
+                                <FormattedMessage
+                                    defaultMessage="Projects from the Scratch website are licensed under the Creative Commons Attribution-ShareAlike 2.0 license. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                                    description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
+                                    id="tw.footer.disclaimer"
+                                />
+                            </p>
+                            <p>
+                                <FormattedMessage
+                                    defaultMessage="TurboWarp is hosted by {fosshost}."
+                                    description="Host credit"
+                                    id="tw.footer.host"
+                                    values={{
+                                        fosshost: (
+                                            <a
+                                                href="https://fosshost.org"
+                                                // _blank is safe here because of noopener
+                                                // eslint-disable-next-line react/jsx-no-target-blank
+                                                target="_blank"
+                                                rel="noopener"
+                                            >
+                                                <FormattedMessage
+                                                    defaultMessage="fosshost.org"
+                                                    description="Link to fosshost.org"
+                                                    id="tw.footer.host.fosshost"
+                                                />
+                                            </a>
+                                        )
+                                    }}
+                                />
+                            </p>
+                        </footer>
+                    </div>
+                ) : null}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 Interface.propTypes = {
     description: PropTypes.shape({
         credits: PropTypes.string,
         instructions: PropTypes.string
     }),
+    isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     description: state.scratchGui.tw.description,
+    isFullScreen: state.scratchGui.mode.isFullScreen,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 

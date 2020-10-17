@@ -23,14 +23,14 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             this.initialTitle = document.title;
         }
         shouldComponentUpdate (nextProps) {
-            return this.props.isShowingWithId !== nextProps.isShowingWithId;
+            return this.props.projectId !== nextProps.projectId;
         }
-        componentDidUpdate (prevProps) {
-            // project title resetting handled in titled-hoc.jsx
+        componentDidUpdate () {
+            // project title resetting is handled in titled-hoc.jsx
             this.props.onSetAuthor('', '');
             this.props.onSetDescription('', '');
-            if (this.props.isShowingWithId && !prevProps.isShowingWithId) {
-                const projectId = this.props.projectId;
+            const projectId = this.props.projectId;
+            if (projectId) {
                 fetchProjectMeta(projectId)
                     .then(data => {
                         // If project ID changed, ignore the results.
@@ -66,7 +66,6 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                isShowingWithId,
                 projectId,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -79,19 +78,14 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         }
     }
     ProjectMetaFetcherComponent.propTypes = {
-        isShowingWithId: PropTypes.bool,
         projectId: PropTypes.string,
         onSetAuthor: PropTypes.func,
         onSetDescription: PropTypes.func,
         onSetProjectTitle: PropTypes.func
     };
-    const mapStateToProps = state => {
-        const loadingState = state.scratchGui.projectState.loadingState;
-        return {
-            isShowingWithId: getIsShowingWithId(loadingState),
-            projectId: state.scratchGui.projectState.projectId
-        };
-    };
+    const mapStateToProps = state => ({
+        projectId: state.scratchGui.projectState.projectId
+    });
     const mapDispatchToProps = dispatch => ({
         onSetAuthor: (username, thumbnail) => dispatch(setAuthor({
             username,

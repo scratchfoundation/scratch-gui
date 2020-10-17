@@ -9,6 +9,7 @@ import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
+import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -126,7 +127,8 @@ const WrappedInterface = compose(
     TWParserHOC,
     TWProjectMetaFetcherHOC,
     TWEditorWarningHOC,
-    TWStateManagerHOC
+    TWStateManagerHOC,
+    TWFullscreenResizerHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

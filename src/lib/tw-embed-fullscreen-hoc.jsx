@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {setFullScreen} from '../reducers/mode';
-import {setIsWindowFullScreen, setDimensions} from '../reducers/tw';
+import {setIsWindowFullScreen} from '../reducers/tw';
 
 const TWFullScreenHOC = function (WrappedComponent) {
     class FullScreenComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'handleResize',
                 'handleFullScreenChange'
             ]);
-            this.initialTitle = document.title;
         }
         componentDidMount () {
-            window.addEventListener('resize', this.handleResize);
             document.addEventListener('fullscreenchange', this.handleFullScreenChange);
         }
         shouldComponentUpdate (nextProps) {
@@ -33,11 +30,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
-            window.removeEventListener('resize', this.handleResize);
             document.removeEventListener('fullscreenchange', this.handleFullScreenChange);
-        }
-        handleResize () {
-            this.props.onSetDimensions([window.innerWidth, window.innerHeight]);
         }
         handleFullScreenChange () {
             const isFullScreen = !!document.fullscreenElement;
@@ -48,7 +41,6 @@ const TWFullScreenHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 isFullScreen,
-                onSetDimensions,
                 onSetIsFullScreen,
                 onSetWindowIsFullScreen,
                 /* eslint-enable no-unused-vars */
@@ -63,7 +55,6 @@ const TWFullScreenHOC = function (WrappedComponent) {
     }
     FullScreenComponent.propTypes = {
         isFullScreen: PropTypes.bool,
-        onSetDimensions: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
         onSetWindowIsFullScreen: PropTypes.func
     };
@@ -72,8 +63,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
     });
     const mapDispatchToProps = dispatch => ({
         onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
-        onSetWindowIsFullScreen: isFullScreen => dispatch(setIsWindowFullScreen(isFullScreen)),
-        onSetDimensions: dimensions => dispatch(setDimensions(dimensions))
+        onSetWindowIsFullScreen: isFullScreen => dispatch(setIsWindowFullScreen(isFullScreen))
     });
     return connect(
         mapStateToProps,

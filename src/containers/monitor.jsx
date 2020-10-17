@@ -165,12 +165,6 @@ class Monitor extends React.Component {
     }
     setElement (monitorElt) {
         this.element = monitorElt;
-        // tw: update position when element is set due to changes in MonitorComponent
-        // if not done, monitor positions get reset
-        if (this.element) {
-            this.element.style.top = `${this.props.y}px`;
-            this.element.style.left = `${this.props.x}px`;
-        }
     }
     handleImport () {
         importCSV().then(rows => {

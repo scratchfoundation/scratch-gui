@@ -78,9 +78,11 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents} from '../../lib/artie-api';
+import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
+import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
+import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 
 const ariaMessages = defineMessages({
     language: {
@@ -183,13 +185,14 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
-            'handleClickArtieLogin',
-            'handleClickArtieLogout',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
             'handleArtiePasswordChange',
+            'handleArtieLogout',
             'handleArtieStudentChange',
-            'handleArtieLogged'
+            'handleArtieLogged',
+            'handleClickArtieExercisesOk',
+            'handleArtieExerciseChange'
         ]);
     }
     componentDidMount () {
@@ -309,12 +312,6 @@ class MenuBar extends React.Component {
     handleClickRequestHelp(){
         sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);
     }
-    handleClickArtieLogin(){
-        this.props.onActivateArtieLogin();
-    }
-    handleClickArtieLogout(){
-        this.props.onArtieLogout();
-    }
     handleClickArtieLoginOk(){
         //If the user has not logged
         if(this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.students==[])){
@@ -334,8 +331,9 @@ class MenuBar extends React.Component {
 
         //If the user is read only, we check for the students
         if(user !== null && user.role == 0){
-            //We get the students
+            //We get the students and the exercises
             getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
+            getArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
         } else if(user !== null && user.role == 1){
             //We close the login window
             this.props.onDeactivateArtieLogin();
@@ -349,6 +347,16 @@ class MenuBar extends React.Component {
     }
     handleArtieStudentChange(e){
         studentLogin = e.target.value;
+    }
+    handleArtieLogout(){
+        this.props.onArtieLogout();
+        this.props.onArtieClearExercises();
+    }
+    handleClickArtieExercisesOk(){
+
+    }
+    handleArtieExerciseChange(e){
+
     }
 
     render () {
@@ -581,7 +589,7 @@ class MenuBar extends React.Component {
                             >
                                 <MenuSection>
                                     {this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent==null)?
-                                        <MenuItem onClick={this.handleClickArtieLogin}>
+                                        <MenuItem onClick={this.props.onActivateArtieLogin}>
                                             <FormattedMessage
                                                 defaultMessage="Login"
                                                 description="Menu bar item for login"
@@ -589,7 +597,7 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     :
-                                    <MenuItem onClick={this.handleClickArtieLogout}>
+                                    <MenuItem onClick={this.handleArtieLogout}>
                                     <FormattedMessage
                                         defaultMessage="Logout"
                                         description="Menu bar item for logout"
@@ -626,6 +634,43 @@ class MenuBar extends React.Component {
                                 }
                             </MenuBarMenu>
                         </div>
+
+                        {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                            <React.Fragment>
+                                <Divider className={classNames(styles.divider)} />
+                                <div
+                                    className={classNames(styles.menuBarItem)}
+                                >
+                                    <div className={classNames(styles.editMenu)}>
+
+                                        {this.props.artieExercises.currentExercise !== null ?
+                                            <React.Fragment>
+                                                <FormattedMessage
+                                                        defaultMessage="Exercise :"
+                                                        description="Exercise label"
+                                                        id="gui.menuBar.artie.exercise"
+                                                /><label>{this.props.artieExercises.currentExercise}</label>
+                                            </React.Fragment>
+                                        :
+                                            <FormattedMessage
+                                                defaultMessage="No exercise selected"
+                                                description="Exercise label"
+                                                id="gui.menuBar.artie.noExercise"
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                                <MenuItem onClick={this.props.onActivateArtieExercises}>
+                                    <FormattedMessage
+                                            defaultMessage="Select Exercise"
+                                            description="Menu bar item for select an exercise"
+                                            id="gui.menuBar.artie.selectExercise"
+                                    />
+                                </MenuItem>
+                            </React.Fragment>
+                        :
+                            null
+                        }
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div
@@ -858,6 +903,17 @@ class MenuBar extends React.Component {
                         />
                 ) :
                 (<div></div>)}
+
+                {this.props.artieExercises.active ? (
+                    <ArtieExercises
+                        title="Exercise Selector"
+                        onExerciseChange={this.handleArtieExerciseChange}
+                        onCancel={this.props.onDeactivateArtieExercises}
+                        onOk={this.handleClickArtieExercisesOk}
+                        artieExercises = {this.props.artieExercises}
+                    />
+                ) :
+                (<div></div>)}
             </Box>
         );
     }
@@ -919,6 +975,8 @@ MenuBar.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     onActivateArtieLogin: PropTypes.func,
     onDeactivateArtieLogin: PropTypes.func,
+    activateArtieExercises: PropTypes.func,
+    deactivateArtieExercises: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -954,7 +1012,8 @@ const mapStateToProps = (state, ownProps) => {
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm,
-        artieLogin: state.scratchGui.artieLogin
+        artieLogin: state.scratchGui.artieLogin,
+        artieExercises: state.scratchGui.artieExercises
     };
 };
 
@@ -983,8 +1042,12 @@ const mapDispatchToProps = dispatch => ({
     onArtieLogged: (user) => dispatch(artieLogged(user)),
     onArtieError: (error) => dispatch(artieError(error)),
     onArtieLogout: () => dispatch(artieLogout()),
+    onArtieClearExercises: () => dispatch(artieClearExercises()),
     onArtieSetStudents: (students) => dispatch(artieSetStudents(students)),
-    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))
+    onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
+    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
+    onActivateArtieExercises: () => dispatch(activateArtieExercises()),
+    onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises())
 
 });
 

@@ -36,7 +36,7 @@ class ArtieLogin extends React.Component {
         return(
             <ArtieLoginComponent
                 onOk={this.props.onOk}
-                onCancel={this.props.onUserChange}
+                onCancel={this.props.onCancel}
                 onUserChange={this.props.onUserChange}
                 onPasswordChange={this.props.onPasswordChange}
                 onStudentChange={this.props.onStudentChange}

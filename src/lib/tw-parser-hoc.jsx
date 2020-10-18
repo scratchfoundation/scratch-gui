@@ -47,7 +47,7 @@ const TWParserHoc = function (WrappedComponent) {
             // Store project ID in the URL.
             if (this.props.isFetchingWithoutId && !prevProps.isFetchingWithoutId) {
                 newHash = '';
-            } else if (this.props.projectId !== prevProps.projectId) {
+            } else if (this.props.projectId !== prevProps.projectId && this.props.projectId !== '0') {
                 newHash = `#${this.props.projectId}`;
             }
 

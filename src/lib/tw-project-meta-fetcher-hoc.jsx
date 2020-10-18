@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import log from './log';
 
-import {getIsShowingWithId} from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 import {setAuthor, setDescription} from '../reducers/tw';
 
@@ -30,35 +29,36 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             this.props.onSetAuthor('', '');
             this.props.onSetDescription('', '');
             const projectId = this.props.projectId;
-            if (projectId) {
-                fetchProjectMeta(projectId)
-                    .then(data => {
-                        // If project ID changed, ignore the results.
-                        if (this.props.projectId !== projectId) {
-                            return;
-                        }
-                        const title = data.title;
-                        if (title) {
-                            document.title = `${title} - TurboWarp`;
-                            this.props.onSetProjectTitle(title);
-                        }
-                        const authorName = data.author.username;
-                        const authorThumbnail = data.author.profile.images['32x32'];
-                        if (authorName && authorThumbnail) {
-                            this.props.onSetAuthor(authorName, authorThumbnail);
-                        }
-                        const instructions = data.instructions || '';
-                        const credits = data.description || '';
-                        if (instructions || credits) {
-                            this.props.onSetDescription(instructions, credits);
-                        }
-                    })
-                    .catch(err => {
-                        log.warn('cannot fetch project meta', err);
-                    });
-            } else {
-                document.title = this.initialTitle;
+            document.title = this.initialTitle;
+            // Don't try to load metadata for empty projects.
+            if (projectId === '0') {
+                return;
             }
+            fetchProjectMeta(projectId)
+                .then(data => {
+                    // If project ID changed, ignore the results.
+                    if (this.props.projectId !== projectId) {
+                        return;
+                    }
+                    const title = data.title;
+                    if (title) {
+                        document.title = `${title} - TurboWarp`;
+                        this.props.onSetProjectTitle(title);
+                    }
+                    const authorName = data.author.username;
+                    const authorThumbnail = data.author.profile.images['32x32'];
+                    if (authorName && authorThumbnail) {
+                        this.props.onSetAuthor(authorName, authorThumbnail);
+                    }
+                    const instructions = data.instructions || '';
+                    const credits = data.description || '';
+                    if (instructions || credits) {
+                        this.props.onSetDescription(instructions, credits);
+                    }
+                })
+                .catch(err => {
+                    log.warn('cannot fetch project meta', err);
+                });
         }
         componentWillUnmount () {
             document.title = this.initialTitle;

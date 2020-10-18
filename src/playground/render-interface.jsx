@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {FormattedMessage} from 'react-intl';
+
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
@@ -14,10 +15,8 @@ import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
-import About from '../components/tw-home/about.jsx';
-import Title from '../components/tw-home/title.jsx';
 import Examples from '../components/tw-examples/examples.jsx';
-import Description from '../components/tw-home/description.jsx';
+import Description from '../components/tw-description/description.jsx';
 
 import styles from './interface.css';
 
@@ -31,72 +30,117 @@ const Interface = ({
     description,
     isFullScreen,
     isPlayerOnly
-}) => {
-    const isHome = isPlayerOnly && !isFullScreen;
-    return (
-        <div className={classNames(isHome ? styles.stageOnly : styles.editor)}>
-            {isHome ? (
+}) => (
+    (isPlayerOnly && !isFullScreen) ? (
+        <div className={classNames(styles.container, styles.stageOnly)}>
+            <div className={styles.menu}>
                 <MenuBar
                     canManageFiles
                     canChangeLanguage
                     enableSeeInside
                 />
-            ) : null}
+            </div>
             <div className={styles.center}>
-                {isHome ? (
-                    <Title />
-                ) : null}
-                <GUI
-                    isPlayerOnly={isHome}
-                />
-                {isHome ? (
-                    <div className="about">
-                        <ProjectInput />
+                <GUI />
+                <div className={styles.section}>
+                    <ProjectInput />
+                </div>
+                {description.instructions || description.credits ? (
+                    <div className={styles.section}>
                         <Description
                             instructions={description.instructions}
                             credits={description.credits}
                         />
-                        <About />
-                        <Examples />
-                        <footer className={styles.footer}>
-                            <p>
-                                <FormattedMessage
-                                    defaultMessage="Projects from the Scratch website are licensed under the Creative Commons Attribution-ShareAlike 2.0 license. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
-                                    description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
-                                    id="tw.footer.disclaimer"
-                                />
-                            </p>
-                            <p>
-                                <FormattedMessage
-                                    defaultMessage="TurboWarp is hosted by {fosshost}."
-                                    description="Host credit"
-                                    id="tw.footer.host"
-                                    values={{
-                                        fosshost: (
-                                            <a
-                                                href="https://fosshost.org"
-                                                // _blank is safe here because of noopener
-                                                // eslint-disable-next-line react/jsx-no-target-blank
-                                                target="_blank"
-                                                rel="noopener"
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="fosshost.org"
-                                                    description="Link to fosshost.org"
-                                                    id="tw.footer.host.fosshost"
-                                                />
-                                            </a>
-                                        )
-                                    }}
-                                />
-                            </p>
-                        </footer>
                     </div>
                 ) : null}
+                <div className={styles.section}>
+                    <p>
+                        <FormattedMessage
+                            defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing an example project below."
+                            description="Description of TurboWarp"
+                            id="tw.home.description"
+                        />
+                    </p>
+                </div>
+                <div className={styles.section}>
+                    <Examples />
+                </div>
+                <footer className={classNames(styles.section, styles.footer)}>
+                    <p>
+                        <FormattedMessage
+                            defaultMessage="Projects from the Scratch website are licensed under the Creative Commons Attribution-ShareAlike 2.0 license. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                            description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
+                            id="tw.footer.disclaimer"
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            defaultMessage="Hosting for TurboWarp is provided by {fosshost}."
+                            description="Host credit"
+                            id="tw.footer.host"
+                            values={{
+                                fosshost: (
+                                    <a
+                                        href="https://fosshost.org"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="fosshost.org"
+                                            description="Link to fosshost.org"
+                                            id="tw.footer.host.fosshost"
+                                        />
+                                    </a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p className={styles.links}>
+                        <a
+                            href="https://github.com/TurboWarp"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Source Code"
+                                description="Link to footer to source code"
+                                id="tw.footer.source"
+                            />
+                        </a>
+                        {' - '}
+                        <a
+                            href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Feedback & Bugs"
+                                description="Link in footer to give feedback"
+                                id="tw.footer.feedback"
+                            />
+                        </a>
+                        {' - '}
+                        <a
+                            href="privacy.html"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FormattedMessage
+                                defaultMessage="Privacy"
+                                description="Link in footer to privacy policy"
+                                id="tw.footer.privacy"
+                            />
+                        </a>
+                    </p>
+                </footer>
             </div>
         </div>
-    );
-};
+    ) : (
+        <div className={styles.container}>
+            <GUI />
+        </div>
+    )
+);
 
 Interface.propTypes = {
     description: PropTypes.shape({

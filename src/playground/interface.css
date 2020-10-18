@@ -1,43 +1,39 @@
 p {
-    margin: 0 0 16px;
+    margin: 0;
 }
 a {
     color: #25d;
 }
 
-.stage-only {
+.container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
+}
+
+.stage-only {
     padding-bottom: 16px;
 }
-
-.editor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
 .stage-only * {
     box-sizing: border-box;
 }
-
-.center {
-    width: 100%;
-    height: 100%;
-}
-
 .stage-only .center {
     /* there's a couple extra pixels of border around the stage */
     width: 482px;
     margin: auto;
 }
-
+.menu {
+    margin-bottom: 8px;
+}
+.section {
+    margin: 8px 0 8px 0;
+}
 .footer p {
+    text-align: center;
     font-size: small;
+    margin: 8px 0 8px 0;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -31,8 +31,6 @@ import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
-import EditorHome from '../../components/tw-home/editor-home.jsx';
-
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
@@ -239,12 +237,6 @@ const GUIComponent = props => {
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
-                            {sprites[editingTarget] && sprites[editingTarget].name === EditorHome.MAGIC_SPRITE_NAME ? (
-                                <EditorHome
-                                    vm={vm}
-                                    editingTarget={editingTarget}
-                                />
-                            ) : null}
                             <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}

@@ -101,6 +101,7 @@ const ariaMessages = defineMessages({
 });
 
 const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank', 'noopener');
+const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank', 'noopener');
 const openPrivacyLink = () => window.open('/privacy.html', '_blank', 'noopener');
 const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank', 'noopener');
 const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '_blank', 'noopener');
@@ -516,13 +517,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Turn off 60 FPS mode"
                                                     description="Menu bar item for turning off 60 FPS mode"
-                                                    id="tw.settings.60off"
+                                                    id="tw.menuBar.60off"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Turn on 60 FPS mode"
                                                     description="Menu bar item for turning on 60 FPS mode"
-                                                    id="tw.settings.60on"
+                                                    id="tw.menuBar.60on"
                                                 />
                                             )}
                                         </MenuItem>
@@ -535,7 +536,7 @@ class MenuBar extends React.Component {
                                             <FormattedMessage
                                                 defaultMessage="Change Username"
                                                 description="Menu bar item for changing the username"
-                                                id="tw.settings.changeUsername"
+                                                id="tw.menuBar.changeUsername"
                                             />
                                         </MenuItem>
                                     )}</ChangeUsername>
@@ -549,20 +550,20 @@ class MenuBar extends React.Component {
                                                     <FormattedMessage
                                                         defaultMessage="Disable Cloud Variables"
                                                         description="Menu bar item for disabling cloud variables"
-                                                        id="tw.settings.cloudOff"
+                                                        id="tw.menuBar.cloudOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
                                                         defaultMessage="Enable Cloud Variables"
                                                         description="Menu bar item for enabling cloud variables"
-                                                        id="tw.settings.cloudOn"
+                                                        id="tw.menuBar.cloudOn"
                                                     />
                                                 )
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Cloud Variables are not Available"
                                                     description="Menu bar item for when cloud variables are not available"
-                                                    id="tw.settings.cloudUnavailable"
+                                                    id="tw.menuBar.cloudUnavailable"
                                                 />
                                             )}
                                         </MenuItem>
@@ -582,7 +583,7 @@ class MenuBar extends React.Component {
                                 <FormattedMessage
                                     defaultMessage="Advanced"
                                     description="Text for advanced settings dropdown menu"
-                                    id="tw.settings.advanced"
+                                    id="tw.menuBar.advanced"
                                 />
                             </div>
                             <MenuBarMenu
@@ -598,13 +599,13 @@ class MenuBar extends React.Component {
                                                 <FormattedMessage
                                                     defaultMessage="Turn off High Quality Pen"
                                                     description="Menu bar item for turning off high quality pen"
-                                                    id="tw.settings.hqpOff"
+                                                    id="tw.menuBar.hqpOff"
                                                 />
                                             ) : (
                                                 <FormattedMessage
                                                     defaultMessage="Turn on High Quality Pen"
                                                     description="Menu bar item for turning on high quality pen"
-                                                    id="tw.settings.hqpOn"
+                                                    id="tw.menuBar.hqpOn"
                                                 />
                                             )}
                                         </MenuItem>
@@ -616,13 +617,13 @@ class MenuBar extends React.Component {
                                                     <FormattedMessage
                                                         defaultMessage="Disable Compiler"
                                                         description="Menu bar item for disabling the compiler"
-                                                        id="tw.settings.compilerOff"
+                                                        id="tw.menuBar.compilerOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
                                                         defaultMessage="Enable Compiler"
                                                         description="Menu bar item for enabling the compiler"
-                                                        id="tw.settings.compilerOn"
+                                                        id="tw.menuBar.compilerOn"
                                                     />
                                                 )}
                                             </MenuItem>
@@ -631,13 +632,13 @@ class MenuBar extends React.Component {
                                                     <FormattedMessage
                                                         defaultMessage="Turn off Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning off Warp Timer"
-                                                        id="tw.settings.warpTimerOff"
+                                                        id="tw.menuBar.warpTimerOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
                                                         defaultMessage="Turn on Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning on Warp Timer"
-                                                        id="tw.settings.warpTimerOn"
+                                                        id="tw.menuBar.warpTimerOn"
                                                     />
                                                 )}
                                             </MenuItem>
@@ -656,7 +657,7 @@ class MenuBar extends React.Component {
                                 <FormattedMessage
                                     defaultMessage="Help"
                                     description="Text for TurboWarp Help dropdown menu"
-                                    id="tw.help"
+                                    id="tw.menuBar.help"
                                 />
                             </div>
                             <MenuBarMenu
@@ -669,29 +670,36 @@ class MenuBar extends React.Component {
                                     <MenuItem onClick={openSourceCodeLink}>
                                         <FormattedMessage
                                             defaultMessage="Source Code"
-                                            description="Text for Source Code in the Help dropdown"
-                                            id="tw.help.code"
+                                            description="Text for source code link in the Help menu"
+                                            id="tw.menuBar.code"
+                                        />
+                                    </MenuItem>
+                                    <MenuItem onClick={openFeedbackLink}>
+                                        <FormattedMessage
+                                            defaultMessage="Feedback & Bugs"
+                                            description="Text for feedback link in the Help menu"
+                                            id="tw.menuBar.feedback"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={openPrivacyLink}>
                                         <FormattedMessage
                                             defaultMessage="Privacy"
-                                            description="Text for privacy policy in the Help dropdown"
-                                            id="tw.help.privacy"
+                                            description="Text for privacy policy link in the Help menu"
+                                            id="tw.menuBar.privacy"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={openEmbedLink}>
                                         <FormattedMessage
                                             defaultMessage="Embedding"
-                                            description="Text for embedding in the Help dropdown"
-                                            id="tw.help.embed"
+                                            description="Text for embedding link in the Help menu"
+                                            id="tw.menuBar.embed"
                                         />
                                     </MenuItem>
                                     <MenuItem onClick={constURLParemetersLink}>
                                         <FormattedMessage
                                             defaultMessage="URL Parameters"
-                                            description="Text for url parameters in the Help dropdown"
-                                            id="tw.help.parameters"
+                                            description="Text for url parameters link in the Help menu"
+                                            id="tw.menuBar.parameters"
                                         />
                                     </MenuItem>
                                 </MenuSection>

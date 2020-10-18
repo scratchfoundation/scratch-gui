@@ -36,8 +36,7 @@ class Examples extends React.Component {
                 className={classNames(
                     styles.container,
                     {
-                        [styles.opened]: opened,
-                        [styles.responsive]: this.props.responsive
+                        [styles.opened]: opened
                     }
                 )}
             >
@@ -82,7 +81,6 @@ class Examples extends React.Component {
 }
 
 Examples.propTypes = {
-    responsive: PropTypes.bool,
     loading: PropTypes.bool,
     setProjectId: PropTypes.func
 };

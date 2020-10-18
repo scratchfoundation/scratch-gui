@@ -1,6 +1,5 @@
 import {defineMessages} from 'react-intl';
 import sharedMessages from '../shared-messages';
-import EditorHome from '../../components/tw-home/editor-home.jsx';
 
 let messages = defineMessages({
     variable: {
@@ -52,7 +51,7 @@ const projectData = translateFunction => {
             },
             {
                 isStage: false,
-                name: EditorHome.MAGIC_SPRITE_NAME,
+                name: translator(messages.sprite, {index: 1}),
                 variables: {},
                 lists: {},
                 broadcasts: {},

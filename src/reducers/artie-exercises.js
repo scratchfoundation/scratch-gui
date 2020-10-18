@@ -24,7 +24,7 @@ const reducer = function (state, action) {
             });
         case ARTIE_SET_CURRENT_EXERCISE:
             return Object.assign({}, state, {
-                currentStudent: action.currentExercise
+                currentExercise: action.currentExercise
             });
         case ARTIE_SET_EXERCISES:
             return Object.assign({}, state, {
@@ -32,7 +32,8 @@ const reducer = function (state, action) {
             });
         case ARTIE_CLEAR_EXERCISES:
             return Object.assign({}, state, {
-                exercises: []
+                exercises: [],
+                currentExercise: null
             });
         default:
             return state;

@@ -167,6 +167,7 @@ AboutButton.propTypes = {
 var userLogin = null;
 var passwordLogin = null;
 var studentLogin = null;
+var exerciseId = null;
 
 class MenuBar extends React.Component {
     constructor (props) {
@@ -353,10 +354,13 @@ class MenuBar extends React.Component {
         this.props.onArtieClearExercises();
     }
     handleClickArtieExercisesOk(){
-
+        //Searches for the exercise object in base of the exerciseId selected
+        const exercise  = this.props.artieExercises.exercises.filter(e => e.id ==exerciseId)[0];
+        this.props.onArtieSetCurrentExercise(exercise);
+        this.props.onDeactivateArtieExercises();
     }
     handleArtieExerciseChange(e){
-
+        exerciseId = e.target.value;
     }
 
     render () {
@@ -646,10 +650,10 @@ class MenuBar extends React.Component {
                                         {this.props.artieExercises.currentExercise !== null ?
                                             <React.Fragment>
                                                 <FormattedMessage
-                                                        defaultMessage="Exercise :"
+                                                        defaultMessage="Exercise: "
                                                         description="Exercise label"
                                                         id="gui.menuBar.artie.exercise"
-                                                /><label>{this.props.artieExercises.currentExercise}</label>
+                                                /><label>{this.props.artieExercises.currentExercise.name}</label>
                                             </React.Fragment>
                                         :
                                             <FormattedMessage
@@ -662,7 +666,7 @@ class MenuBar extends React.Component {
                                 </div>
                                 <MenuItem onClick={this.props.onActivateArtieExercises}>
                                     <FormattedMessage
-                                            defaultMessage="Select Exercise"
+                                            defaultMessage="Select exercise"
                                             description="Menu bar item for select an exercise"
                                             id="gui.menuBar.artie.selectExercise"
                                     />
@@ -1046,6 +1050,7 @@ const mapDispatchToProps = dispatch => ({
     onArtieSetStudents: (students) => dispatch(artieSetStudents(students)),
     onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
+    onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises())
 

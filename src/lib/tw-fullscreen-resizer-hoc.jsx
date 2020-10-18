@@ -20,12 +20,15 @@ const TWFullScreenResizerHOC = function (WrappedComponent) {
             window.removeEventListener('resize', this.handleResize);
         }
         handleResize () {
-            this.props.onSetDimensions([window.innerWidth, window.innerHeight]);
+            if (this.props.isFullScreen) {
+                this.props.onSetDimensions([window.innerWidth, window.innerHeight]);
+            }
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 onSetDimensions,
+                isFullScreen,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -37,10 +40,11 @@ const TWFullScreenResizerHOC = function (WrappedComponent) {
         }
     }
     FullScreenResizer.propTypes = {
+        isFullScreen: PropTypes.bool,
         onSetDimensions: PropTypes.func
     };
     const mapStateToProps = state => ({
-
+        isFullScreen: state.scratchGui.mode.isFullScreen
     });
     const mapDispatchToProps = dispatch => ({
         onSetDimensions: dimensions => dispatch(setDimensions(dimensions))

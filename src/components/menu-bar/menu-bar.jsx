@@ -332,13 +332,13 @@ class MenuBar extends React.Component {
 
         //If the user is read only, we check for the students
         if(user !== null && user.role == 0){
-            //We get the students and the exercises
+            //We get the students
             getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
-            getArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
         } else if(user !== null && user.role == 1){
             //We close the login window
             this.props.onDeactivateArtieLogin();
         }
+        getArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;
@@ -639,7 +639,7 @@ class MenuBar extends React.Component {
                             </MenuBarMenu>
                         </div>
 
-                        {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                        {this.props.artieLogin.user !== null && ((this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null)|| this.props.artieLogin.user.role == 1) ?
                             <React.Fragment>
                                 <Divider className={classNames(styles.divider)} />
                                 <div

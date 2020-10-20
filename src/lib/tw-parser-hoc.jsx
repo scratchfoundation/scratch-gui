@@ -16,7 +16,7 @@ import {
 const playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
 const editorPath = `${playerPath}editor.html`;
 const fullscreenPath = `${playerPath}fullscreen.html`;
-const useRouting = true;
+const useRouting = location.protocol === 'https:' || location.protocol === 'http:';
 
 const TWParserHoc = function (WrappedComponent) {
     class HashParserComponent extends React.Component {

@@ -5,6 +5,7 @@ import VM from 'scratch-vm';
 
 import {setUsername} from '../reducers/tw';
 import {openLoadingProject, closeLoadingProject} from '../reducers/modals';
+import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 const USERNAME_KEY = 'tw:username';
 
@@ -68,7 +69,7 @@ const TWStateManager = function (WrappedComponent) {
             if (urlParams.has('projectUrl')) {
                 const projectUrl = urlParams.get('projectUrl');
                 this.props.onProjectFetchStarted();
-                fetch(projectUrl)
+                progressMonitor.fetchWithProgress(projectUrl)
                     .then(res => {
                         if (res.status !== 200) {
                             throw new Error(`Unexpected status code: ${res.status}`);

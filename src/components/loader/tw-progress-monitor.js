@@ -39,36 +39,40 @@ const setState = newState => {
     setProgress(0);
 };
 
+export const fetchWithProgress = url => {
+    setState(1);
+    return new Promise((resolve, reject) => {
+        // fetch() does not support progress, so we use XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = () => {
+            resolve(new Response(xhr.response, {
+                status: xhr.status,
+                statusText: xhr.statusText
+            }));
+        };
+        xhr.onloadend = () => setProgress(1);
+        xhr.onerror = () => reject(new Error('[tw-progress-monitor] xhr failed'));
+        xhr.onprogress = e => {
+            if (e.lengthComputable) {
+                setProgress(e.loaded / e.total);
+            }
+        };
+        xhr.open('GET', url);
+        xhr.send();
+    });
+};
+
 // Scratch uses fetch() to download the project JSON, so we override it to monitor when the project is being downloaded.
 const originalFetch = window.fetch;
 window.fetch = (url, opts) => {
-    if (typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url) && opts && opts.method === 'GET') {
-        setState(1);
-
-        return new Promise((resolve, reject) => {
-            // fetch() does not support progress, so we use XMLHttpRequest
-            const xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = () => {
-                resolve(new Response(xhr.response, {
-                    status: xhr.status,
-                    statusText: xhr.statusText
-                }));
-            };
-            xhr.onloadend = () => setProgress(1);
-            xhr.onerror = () => reject(new Error('(tw-hacky-progress-bar) xhr failed'));
-            xhr.onprogress = e => {
-                if (e.lengthComputable) {
-                    setProgress(e.loaded / e.total);
-                }
-            };
-            xhr.open('GET', url);
-            xhr.send();
-        });
+    const isGET = typeof opts === 'object' && opts && opts.method === 'GET';
+    const isProjectURL = typeof url === 'string' && /^https:\/\/projects\.scratch\.mit\.edu\/\d+$/.test(url);
+    if (isGET && isProjectURL) {
+        return fetchWithProgress(url);
     }
     return originalFetch(url, opts);
 };
-
 
 const handleWorkerMessage = e => {
     const data = e.data;

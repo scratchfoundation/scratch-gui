@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
 import {setUsername} from '../reducers/tw';
+import {openLoadingProject, closeLoadingProject} from '../reducers/modals';
+import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 const USERNAME_KEY = 'tw:username';
 
@@ -63,6 +65,27 @@ const TWStateManager = function (WrappedComponent) {
             if (urlParams.has('turbo')) {
                 this.props.vm.setTurboMode(true);
             }
+
+            if (urlParams.has('projectUrl')) {
+                const projectUrl = urlParams.get('projectUrl');
+                this.props.onProjectFetchStarted();
+                progressMonitor.fetchWithProgress(projectUrl)
+                    .then(res => {
+                        if (res.status !== 200) {
+                            throw new Error(`Unexpected status code: ${res.status}`);
+                        }
+                        return res.arrayBuffer();
+                    })
+                    .then(arrayBuffer => this.props.vm.loadProject(arrayBuffer))
+                    .then(() => {
+                        this.props.onProjectFetchFinished();
+                        this.props.vm.renderer.draw();
+                    })
+                    .catch(err => {
+                        // eslint-disable-next-line no-alert
+                        alert(`cannot load project: ${err}`);
+                    });
+            }
         }
         componentDidUpdate (prevProps) {
             if (this.props.username !== prevProps.username && this.props.username !== this.doNotPersistUsername) {
@@ -89,6 +112,8 @@ const TWStateManager = function (WrappedComponent) {
     StateManagerComponent.propTypes = {
         onSetUsername: PropTypes.func,
         username: PropTypes.string,
+        onProjectFetchStarted: PropTypes.func,
+        onProjectFetchFinished: PropTypes.func,
         vm: PropTypes.instanceOf(VM)
     };
     const mapStateToProps = state => ({
@@ -96,7 +121,9 @@ const TWStateManager = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onSetUsername: username => dispatch(setUsername(username))
+        onSetUsername: username => dispatch(setUsername(username)),
+        onProjectFetchFinished: () => dispatch(closeLoadingProject()),
+        onProjectFetchStarted: () => dispatch(openLoadingProject())
     });
     return connect(
         mapStateToProps,

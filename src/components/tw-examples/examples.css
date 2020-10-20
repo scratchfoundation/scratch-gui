@@ -31,6 +31,7 @@
 .projects {
     position: relative;
     height: 154px;
+    transition: .2s height;
 }
 
 .opened .projects {

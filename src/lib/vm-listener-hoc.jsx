@@ -121,13 +121,13 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleBlockArtieUpdate (blocks, areBlocksOverGui) {
-            if(this.props.artieLogin.currentStudent !== null){
-                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, areBlocksOverGui, this.props.projectTitle);
+            if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
+                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, areBlocksOverGui, this.props.artieExercises.currentExercise);
             }
         }
         handleBlockArtieChanged (blocks, blockId){
-            if(this.props.artieLogin.currentStudent !== null){
-                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, false, this.props.projectTitle);
+            if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
+                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, false, this.props.artieExercises.currentExercise);
             }
         }
 
@@ -201,7 +201,8 @@ const vmListenerHOC = function (WrappedComponent) {
         username: state.session && state.session.session && state.session.session.user ?
             state.session.session.user.username : '',
         projectTitle: state.scratchGui.projectTitle,
-        artieLogin: state.scratchGui.artieLogin
+        artieLogin: state.scratchGui.artieLogin,
+        artieExercises: state.scratchGui.artieExercises
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
@@ -213,8 +214,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onBlockArtieUpdate: (student, blocks, areBlocksOverGui, projectTitle) => {
-            sendBlockArtie(student, blocks, projectTitle, false);
+        onBlockArtieUpdate: (student, blocks, areBlocksOverGui, exercise) => {
+            sendBlockArtie(student, blocks, exercise, false);
             dispatch(updateArtieBlock(areBlocksOverGui));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),

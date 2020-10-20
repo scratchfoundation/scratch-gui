@@ -308,10 +308,10 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
-        sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle);
+        sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise);
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.projectTitle, true);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true);
     }
     handleClickArtieLoginOk(){
         //If the user has not logged

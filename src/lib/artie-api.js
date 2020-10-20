@@ -97,10 +97,10 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, blocks, projectTitle, requestHelp) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, blocks, exercise, requestHelp) => new Promise((resolve, reject) => {
 
     const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: projectTitle, requestHelp: requestHelp, elements: artieBlocks};
+    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, elements: artieBlocks};
 
     xhr({
         method: 'POST',
@@ -117,10 +117,10 @@ const sendBlockArtie = (student, blocks, projectTitle, requestHelp) => new Promi
     });
 });
 
-const sendSolutionArtie = (userId, blocks, projectTitle) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, blocks, exercise) => new Promise((resolve, reject) => {
 
     const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: projectTitle, elements: artieBlocks};
+    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: artieBlocks};
 
     xhr({
         method: 'POST',

@@ -8,7 +8,7 @@ import speechAddExtension from './steps/speech-add-extension.sw.gif';
 import speechSaySomething from './steps/speech-say-something.sw.png';
 import speechSetVoice from './steps/speech-set-voice.sw.png';
 import speechMoveAround from './steps/speech-move-around.sw.png';
-import speechAddBackdrop from './steps/animate-char-pick-backdrop.LTR.gif';
+import speechAddBackdrop from './steps/pick-backdrop.LTR.gif';
 import speechAddSprite from './steps/speech-add-sprite.LTR.gif';
 import speechSong from './steps/speech-song.sw.png';
 import speechChangeColor from './steps/speech-change-color.sw.png';
@@ -64,7 +64,7 @@ import popGameChangeColor from './steps/pop-game-change-color.sw.png';
 import popGameResetScore from './steps/pop-game-reset-score.sw.png';
 
 // Animate A Character
-import animateCharPickBackdrop from './steps/animate-char-pick-backdrop.LTR.gif';
+import animateCharPickBackdrop from './steps/pick-backdrop.LTR.gif';
 import animateCharPickSprite from './steps/animate-char-pick-sprite.LTR.gif';
 import animateCharSaySomething from './steps/animate-char-say-something.sw.png';
 import animateCharAddSound from './steps/animate-char-add-sound.sw.png';

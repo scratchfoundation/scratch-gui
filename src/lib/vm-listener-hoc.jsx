@@ -13,7 +13,8 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {artieBlocksNeedUpdate} from '../reducers/artie-exercises';
+import {artieBlocksUpdated} from '../reducers/artie-exercises';
+import {sendBlockArtie} from '../lib/artie-api';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -119,14 +120,20 @@ const vmListenerHOC = function (WrappedComponent) {
                 e.preventDefault();
             }
         }
-        handleBlockArtieUpdate (blocks, areBlocksOverGui) {
+        handleBlockArtieUpdate (areBlocksOverGui) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
-                this.props.onArtieBlocksNeedUpdate();
+                setTimeout(() => {
+                    this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false);
+                }, 500);
             }
         }
-        handleBlockArtieChanged (blocks, blockId){
+        handleBlockArtieChanged (blockId){
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
-                this.props.onArtieBlocksNeedUpdate();
+                setTimeout(() => {
+                    this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false);
+                }, 500);
             }
         }
 
@@ -211,8 +218,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onArtieBlocksNeedUpdate: (blocks) => {
-            dispatch(artieBlocksNeedUpdate());
+        onArtieBlocksUpdated: (blocks) => {
+            dispatch(artieBlocksUpdated(blocks));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

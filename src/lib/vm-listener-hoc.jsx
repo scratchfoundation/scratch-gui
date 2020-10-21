@@ -13,8 +13,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {sendBlockArtie} from '../lib/artie-api';
-import {updateArtieBlock} from '../reducers/artie-api';
+import {artieBlocksNeedUpdate} from '../reducers/artie-exercises';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -122,12 +121,12 @@ const vmListenerHOC = function (WrappedComponent) {
         }
         handleBlockArtieUpdate (blocks, areBlocksOverGui) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
-                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, areBlocksOverGui, this.props.artieExercises.currentExercise);
+                this.props.onArtieBlocksNeedUpdate();
             }
         }
         handleBlockArtieChanged (blocks, blockId){
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
-                this.props.onBlockArtieUpdate(this.props.artieLogin.currentStudent, blocks, false, this.props.artieExercises.currentExercise);
+                this.props.onArtieBlocksNeedUpdate();
             }
         }
 
@@ -139,7 +138,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 shouldUpdateTargets,
                 shouldUpdateProjectChanged,
                 onBlockDragUpdate,
-                onBlockArtieUpdate,
                 onGreenFlag,
                 onKeyDown,
                 onKeyUp,
@@ -163,7 +161,6 @@ const vmListenerHOC = function (WrappedComponent) {
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
         onBlockDragUpdate: PropTypes.func.isRequired,
-        onBlockArtieUpdate: PropTypes.func.isRequired,
         onGreenFlag: PropTypes.func,
         onKeyDown: PropTypes.func,
         onKeyUp: PropTypes.func,
@@ -214,9 +211,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onBlockArtieUpdate: (student, blocks, areBlocksOverGui, exercise) => {
-            sendBlockArtie(student, blocks, exercise, false);
-            dispatch(updateArtieBlock(areBlocksOverGui));
+        onArtieBlocksNeedUpdate: (blocks) => {
+            dispatch(artieBlocksNeedUpdate());
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

@@ -3,11 +3,15 @@ const DEACTIVATE_ARTIE_EXERCISES = 'scratch-gui/artie-exercises/DEACTIVATE_ARTIE
 const ARTIE_SET_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_SET_EXERCISES';
 const ARTIE_SET_CURRENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SET_CURRENT_EXERCISE';
 const ARTIE_CLEAR_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_CLEAR_EXERCISES';
+const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
+const ARTIE_BLOCKS_NEED_UPDATE = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_NEED_UPDATE';
 
 const initialState = {
     exercises: [],
     currentExercise: null,
-    active : false
+    blocks: null,
+    active : false,
+    needUpdate: false
 }
 
 const reducer = function (state, action) {
@@ -33,7 +37,17 @@ const reducer = function (state, action) {
         case ARTIE_CLEAR_EXERCISES:
             return Object.assign({}, state, {
                 exercises: [],
-                currentExercise: null
+                currentExercise: null,
+                needUpdate: false,
+                blocks: null
+            });
+        case ARTIE_BLOCKS_UPDATED:
+            return Object.assign({}, state, {
+                blocks: action.blocks
+            });
+        case ARTIE_BLOCKS_NEED_UPDATE:
+            return Object.assign({}, state, {
+                needUpdate: action.needUpdate
             });
         default:
             return state;
@@ -62,6 +76,17 @@ const artieClearExercises = () => ({
     type: ARTIE_CLEAR_EXERCISES
 });
 
+const artieBlocksUpdated = (blocks) => ({
+    type: ARTIE_BLOCKS_UPDATED,
+    blocks: blocks,
+    needUpdate: false
+});
+
+const artieBlocksNeedUpdate = () => ({
+    type: ARTIE_BLOCKS_NEED_UPDATE,
+    needUpdate: true
+});
+
 
 export {
     reducer as default,
@@ -70,5 +95,7 @@ export {
     deactivateArtieExercises,
     artieSetExercises,
     artieSetCurrentExercise,
-    artieClearExercises
+    artieClearExercises,
+    artieBlocksUpdated,
+    artieBlocksNeedUpdate
 };

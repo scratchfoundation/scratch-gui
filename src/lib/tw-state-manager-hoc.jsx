@@ -66,8 +66,8 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.vm.setTurboMode(true);
             }
 
-            if (urlParams.has('projectUrl')) {
-                const projectUrl = urlParams.get('projectUrl');
+            if (urlParams.has('project_url')) {
+                const projectUrl = urlParams.get('project_url');
                 this.props.onProjectFetchStarted();
                 progressMonitor.fetchWithProgress(projectUrl)
                     .then(res => {

@@ -29,6 +29,7 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+import SelectExerciseButton from './select-exercise-button.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -664,24 +665,11 @@ class MenuBar extends React.Component {
                                         }
                                     </div>
                                 </div>
-                                <MenuItem onClick={this.props.onActivateArtieExercises}>
-                                    {this.props.artieExercises.currentExercise===null ? (
-                                        <FormattedMessage
-                                            defaultMessage="Select exercise"
-                                            description="Menu bar item for select an exercise"
-                                            id="gui.menuBar.artie.selectExercise"
-                                        />
-                                    )
-                                    :
-                                    (
-                                        <FormattedMessage
-                                            defaultMessage="Change exercise"
-                                            description="Menu bar item for select an exercise"
-                                            id="gui.menuBar.artie.changeExercise"
-                                        />
-                                    )}
-
-                                </MenuItem>
+                                <SelectExerciseButton
+                                    className={styles.menuBarButton}
+                                    onClick={this.props.onActivateArtieExercises}
+                                    isExerciseSelected = {this.props.artieExercises.artieSetCurrentExercise !== null}
+                                />
                             </React.Fragment>
                         :
                             null

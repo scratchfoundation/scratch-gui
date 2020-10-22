@@ -665,11 +665,22 @@ class MenuBar extends React.Component {
                                     </div>
                                 </div>
                                 <MenuItem onClick={this.props.onActivateArtieExercises}>
-                                    <FormattedMessage
+                                    {this.props.artieExercises.currentExercise===null ? (
+                                        <FormattedMessage
                                             defaultMessage="Select exercise"
                                             description="Menu bar item for select an exercise"
                                             id="gui.menuBar.artie.selectExercise"
-                                    />
+                                        />
+                                    )
+                                    :
+                                    (
+                                        <FormattedMessage
+                                            defaultMessage="Change exercise"
+                                            description="Menu bar item for select an exercise"
+                                            id="gui.menuBar.artie.changeExercise"
+                                        />
+                                    )}
+
                                 </MenuItem>
                             </React.Fragment>
                         :

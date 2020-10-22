@@ -895,7 +895,7 @@ class MenuBar extends React.Component {
 
                 {aboutButton}
 
-                {this.props.artieLogin.active ? (
+                {this.props.artieLogin.user===null || (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) || this.props.artieLogin.active ? (
                         <ArtieLogin
                             onUserChange={this.handleArtieUserChange}
                             onPasswordChange={this.handleArtiePasswordChange}
@@ -908,7 +908,7 @@ class MenuBar extends React.Component {
                 ) :
                 (<div></div>)}
 
-                {this.props.artieExercises.active ? (
+                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
                     <ArtieExercises
                         title="Exercise Selector"
                         onExerciseChange={this.handleArtieExerciseChange}

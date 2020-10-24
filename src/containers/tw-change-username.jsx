@@ -13,38 +13,26 @@ class ChangeUsername extends React.Component {
     }
     changeUsername () {
         // todo: translate
-        if (this.props.isProjectRunning) {
-            alert('Cannot change username when project is running.');
-        } else {
-            const newUsername = prompt('New username:', this.props.username);
-            if (newUsername === null) {
-                return;
-            }
-            this.props.onUsernameChange(newUsername);
+        // eslint-disable-next-line no-alert
+        const newUsername = prompt('New username:', this.props.username);
+        if (newUsername === null) {
+            return;
         }
+        this.props.onUsernameChange(newUsername);
     }
     render () {
-        const {
-            /* eslint-disable no-unused-vars */
-            children,
-            onUsernameChange,
-            /* eslint-enable no-unused-vars */
-            ...props
-        } = this.props;
-        return this.props.children(this.changeUsername, props);
+        return this.props.children(this.changeUsername);
     }
 }
 
 ChangeUsername.propTypes = {
     children: PropTypes.func,
     username: PropTypes.string,
-    isProjectRunning: PropTypes.bool,
     onUsernameChange: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username,
-    isProjectRunning: state.scratchGui.vmStatus.running
+    username: state.scratchGui.tw.username
 });
 
 const mapDispatchToProps = dispatch => ({

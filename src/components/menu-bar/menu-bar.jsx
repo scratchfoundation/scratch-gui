@@ -528,11 +528,8 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</SixtyFPSToggler>
-                                    <ChangeUsername>{(changeUsername, {isProjectRunning}) => (
-                                        <MenuItem
-                                            className={classNames({[styles.disabled]: isProjectRunning})}
-                                            onClick={changeUsername}
-                                        >
+                                    <ChangeUsername>{changeUsername => (
+                                        <MenuItem onClick={changeUsername}>
                                             <FormattedMessage
                                                 defaultMessage="Change Username"
                                                 description="Menu bar item for changing the username"

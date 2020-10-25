@@ -33,7 +33,7 @@ const Interface = ({
 }) => {
     const isHomepage = isPlayerOnly && !isFullScreen;
     return (
-        <div className={classNames(styles.container, {[styles.stageOnly]: isHomepage})}>
+        <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
             {isHomepage ? (
                 <div className={styles.menu}>
                     <MenuBar

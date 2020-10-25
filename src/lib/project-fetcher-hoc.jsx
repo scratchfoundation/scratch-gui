@@ -73,7 +73,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
-                    // tw: If the project data appears to be HTML, then this project is missing. Load the "missing project" project instead.
+                    // tw: If the project data appears to be HTML, then the result is probably an nginx 404 page,
+                    // and the "missing project" project should be loaded instead.
+                    // See: https://projects.scratch.mit.edu/9999999999999999999999
                     if (projectAsset && projectAsset.data && (projectAsset.data[0] === '<' || projectAsset.data[0] === '<'.charCodeAt(0))) {
                         return storage.load(storage.AssetType.Project, MISSING_PROJECT_ID, storage.DataFormat.JSON);
                     }

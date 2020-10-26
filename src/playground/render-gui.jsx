@@ -25,9 +25,7 @@ const mapStateToProps = state => ({
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = () => ({});
 
 export default connect(
     mapStateToProps,

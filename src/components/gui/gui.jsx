@@ -79,7 +79,6 @@ const GUIComponent = props => {
         connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
-        editingTarget,
         enableCommunity,
         intl,
         isCreating,
@@ -114,7 +113,6 @@ const GUIComponent = props => {
         showComingSoon,
         soundsTabVisible,
         stageSizeMode,
-        sprites,
         targetIsStage,
         telemetryModalVisible,
         tipsLibraryVisible,
@@ -383,7 +381,6 @@ GUIComponent.propTypes = {
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
-    editingTarget: PropTypes.string,
     enableCommunity: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
@@ -417,7 +414,6 @@ GUIComponent.propTypes = {
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
-    sprites: PropTypes.object,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
@@ -446,10 +442,8 @@ GUIComponent.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    sprites: state.scratchGui.targets.sprites,
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize,
-    editingTarget: state.scratchGui.targets.editingTarget,
+    stageSizeMode: state.scratchGui.stageSize.stageSize
 });
 
 export default injectIntl(connect(

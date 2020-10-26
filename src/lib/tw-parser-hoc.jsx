@@ -52,7 +52,10 @@ const TWParserHoc = function (WrappedComponent) {
             }
 
             // Store whether the editor is active.
-            if (useRouting && (this.props.isPlayerOnly !== prevProps.isPlayerOnly || this.props.isFullScreen !== prevProps.isFullScreen)) {
+            if (useRouting && (
+                this.props.isPlayerOnly !== prevProps.isPlayerOnly ||
+                this.props.isFullScreen !== prevProps.isFullScreen
+            )) {
                 if (this.props.isFullScreen) {
                     newPathname = fullscreenPath;
                 } else if (this.props.isPlayerOnly) {

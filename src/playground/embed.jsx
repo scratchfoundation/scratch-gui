@@ -9,8 +9,6 @@ import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import GUI from './render-gui.jsx';
 import appTarget from './app-target';
 
-// Read the project ID from location.hash once.
-// URL parameters are not used for this as hash is already used elsewhere, and this won't tell TurboWarp.org which project is being loaded. (I don't want to know!)
 const projectId = location.hash.substr(1);
 
 let vm;

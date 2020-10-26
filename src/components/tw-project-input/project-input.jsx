@@ -54,7 +54,7 @@ class ProjectInput extends React.Component {
             projectId: this.readProjectId(e) || defaultProjectId
         });
     }
-    handlePaste (e) {
+    handlePaste () {
         // const data = e.clipboardData.getData('Text');
         // const id = this.extractProjectId(data);
         // if (id) {

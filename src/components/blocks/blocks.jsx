@@ -8,7 +8,6 @@ const BlocksComponent = props => {
     const {
         containerRef,
         dragOver,
-        locked,
         ...componentProps
     } = props;
     return (

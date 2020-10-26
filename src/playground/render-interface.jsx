@@ -160,9 +160,7 @@ const mapStateToProps = state => ({
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = () => ({});
 
 const ConnectedInterface = connect(
     mapStateToProps,

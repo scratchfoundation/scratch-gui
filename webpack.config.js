@@ -103,10 +103,10 @@ module.exports = [
     // to run editor examples
     defaultsDeep({}, base, {
         entry: {
-            'editor': './src/playground/editor.jsx',
-            'player': './src/playground/player.jsx',
-            'fullscreen': './src/playground/fullscreen.jsx',
-            'embed': './src/playground/embed.jsx'
+            editor: './src/playground/editor.jsx',
+            player: './src/playground/player.jsx',
+            fullscreen: './src/playground/fullscreen.jsx',
+            embed: './src/playground/embed.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build')
@@ -197,7 +197,7 @@ module.exports = [
 ].concat(
     process.env.NODE_ENV === 'production' || process.env.BUILD_MODE === 'dist' ? (
         // export as library
-        // tw: TODO: need to see if this even work anymore
+        // tw: TODO: need to see if this even works anymore
         defaultsDeep({}, base, {
             target: 'web',
             entry: {

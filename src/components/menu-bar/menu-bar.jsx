@@ -719,6 +719,7 @@ class MenuBar extends React.Component {
                         <AuthorInfo
                             className={styles.authorInfo}
                             imageUrl={this.props.authorThumbnailUrl}
+                            projectId={this.props.projectId}
                             projectTitle={this.props.projectTitle}
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
@@ -871,6 +872,7 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
+    projectId: PropTypes.string,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -904,6 +906,7 @@ const mapStateToProps = (state, ownProps) => {
         languageMenuOpen: languageMenuOpen(state),
         locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
+        projectId: state.scratchGui.projectState.projectId,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         settingsMenuOpen: settingsMenuOpen(state),

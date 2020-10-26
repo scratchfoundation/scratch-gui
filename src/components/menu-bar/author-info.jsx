@@ -6,9 +6,11 @@ import UserAvatar from './user-avatar.jsx';
 
 import styles from './author-info.css';
 
+// tw: make author username and avatar clickable, as well as make the project title link link to the project itself
 const AuthorInfo = ({
     className,
     imageUrl,
+    projectId,
     projectTitle,
     // TODO: use userId to link to user's profile
     userId, // eslint-disable-line no-unused-vars
@@ -32,9 +34,22 @@ const AuthorInfo = ({
             />
         </a>
         <div className={styles.titleAuthor}>
-            <span className={styles.projectTitle}>
-                {projectTitle}
-            </span>
+            {projectId ? (
+                <a
+                    className={styles.projectLink}
+                    href={`https://scratch.mit.edu/projects/${projectId}/`}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <span className={styles.projectTitle}>
+                        {projectTitle}
+                    </span>
+                </a>
+            ) : (
+                <span className={styles.projectTitle}>
+                    {projectTitle}
+                </span>
+            )}
             <div>
                 <span className={styles.usernameLine}>
                     <FormattedMessage
@@ -61,6 +76,7 @@ const AuthorInfo = ({
 AuthorInfo.propTypes = {
     className: PropTypes.string,
     imageUrl: PropTypes.string,
+    projectId: PropTypes.string,
     projectTitle: PropTypes.string,
     userId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     username: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])

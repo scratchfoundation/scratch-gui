@@ -38,10 +38,10 @@
     font-weight: bold;
 }
 
-.username-link {
+.username-link, .project-link {
     color: $ui-white !important;
     text-decoration: none;
 }
-.username-link:hover {
+.username-link:hover, .project-link:hover {
     text-decoration: underline;
 }

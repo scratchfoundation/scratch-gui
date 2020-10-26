@@ -10,6 +10,11 @@
     background-color: #dbebff;
 }
 
+.description a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
 @media (prefers-color-scheme: dark) {
     .description {
         border-color: #203652;

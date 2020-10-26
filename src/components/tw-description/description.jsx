@@ -3,6 +3,36 @@ import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import styles from './description.css';
+import reactStringReplace from 'react-string-replace';
+
+const decorate = text => {
+    // https://github.com/LLK/scratch-www/blob/25232a06bcceeaddec8fcb24fb63a44d870cf1cf/src/lib/decorate-text.jsx
+
+    // Make @mentions clickable
+    text = reactStringReplace(text, /@([\w-]+)/, (match, i) => (
+        <a
+            href={`https://scratch.mit.edu/users/${match}/`}
+            rel="noreferrer"
+            key={match + i}
+        >
+            {`@${match}`}
+        </a>
+    ));
+
+    // Make links clickable
+    const linkRegex = /((?:^|\s)https?:\/\/(?:[\w-]+\.)*(?:.+)(?:\/(?:\S*[\w:/#[\]@$&'()*+=])?)?(?![^?!,:;\w\s]\S))/g;
+    text = reactStringReplace(text, linkRegex, (match, i) => (
+        <a
+            href={match}
+            rel="noreferrer"
+            key={match + i}
+        >
+            {match}
+        </a>
+    ));
+
+    return text;
+};
 
 const Description = ({
     instructions,
@@ -18,7 +48,7 @@ const Description = ({
                         id="tw.home.instructions"
                     />
                 </div>
-                {instructions}
+                {decorate(instructions)}
             </div>
         ) : null}
         {instructions && credits ? (
@@ -33,7 +63,7 @@ const Description = ({
                         id="tw.home.credit"
                     />
                 </div>
-                {credits}
+                {decorate(credits)}
             </div>
         ) : null}
     </div>

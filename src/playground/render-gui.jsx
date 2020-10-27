@@ -17,18 +17,4 @@ const RenderGUI = props => (
     />
 );
 
-RenderGUI.propTypes = {
-    isPlayerOnly: PropTypes.bool,
-    projectId: PropTypes.string
-};
-
-const mapStateToProps = state => ({
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
-});
-
-const mapDispatchToProps = () => ({});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(RenderGUI);
+export default RenderGUI;

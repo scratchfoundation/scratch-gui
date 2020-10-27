@@ -143,7 +143,8 @@ module.exports = [
                 'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.ANNOUNCEMENT': process.env.ANNOUNCEMENT ? '"' + process.env.ANNOUNCEMENT + '"' : '""',
-                'process.env.ROOT': JSON.stringify(root)
+                'process.env.ROOT': JSON.stringify(root),
+                'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE)
             }),
             new HtmlWebpackPlugin({
                 chunks: ['editor'],

@@ -44,15 +44,27 @@ const getLocalStorage = key => {
     return null;
 };
 
-class HashRouter {
+class Router {
     constructor ({onSetProjectId, onSetIsPlayerOnly, onSetIsFullScreen}) {
         this.onSetProjectId = onSetProjectId;
         this.onSetIsPlayerOnly = onSetIsPlayerOnly;
         this.onSetIsFullScreen = onSetIsFullScreen;
-
-        this.onhashchange();
     }
 
+    onhashchange () {
+
+    }
+
+    onpathchange () {
+
+    }
+
+    generateURL () {
+        return '';
+    }
+}
+
+class HashRouter extends Router {
     onhashchange () {
         const hashMatch = location.hash.match(/#(\d+)/);
         const projectId = hashMatch === null ? defaultProjectId : hashMatch[1];
@@ -67,7 +79,6 @@ class HashRouter {
 class FileHashRouter extends HashRouter {
     constructor (callbacks) {
         super(callbacks);
-
         this.playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
         this.editorPath = `${this.playerPath}editor.html`;
         this.fullscreenPath = `${this.playerPath}fullscreen.html`;
@@ -107,10 +118,83 @@ class FileHashRouter extends HashRouter {
     }
 }
 
+class WildcardRouter extends Router {
+    constructor (callbacks) {
+        super(callbacks);
+        this.root = process.env.ROOT;
+        // Root should always have a trailing /
+        if (!this.root.endsWith('/')) {
+            this.root += '/';
+        }
+    }
+
+    onhashchange () {
+        this.onpathchange();
+    }
+
+    onpathchange () {
+        const path = location.pathname.substr(this.root.length);
+        const parts = path.split('/');
+
+        const parseProjectId = id => {
+            if (id) {
+                this.onSetProjectId(id);
+            } else {
+                this.onSetProjectId(defaultProjectId);
+            }
+        };
+
+        const parsePageType = type => {
+            if (type === 'fullscreen') {
+                this.onSetIsFullScreen(true);
+            } else if (type === 'editor') {
+                this.onSetIsPlayerOnly(false);
+                this.onSetIsFullScreen(false);
+            } else {
+                this.onSetIsPlayerOnly(true);
+                this.onSetIsFullScreen(false);
+            }
+        };
+
+        if (+parts[0] && Number.isFinite(+parts[0])) {
+            parseProjectId(parts[0]);
+            parsePageType(parts[1]);
+        } else {
+            this.onSetProjectId(defaultProjectId);
+            parsePageType(parts[0]);
+        }
+    }
+
+    generateURL ({projectId, isPlayerOnly, isFullScreen}) {
+        const parts = [];
+
+        if (projectId !== '0') {
+            parts.push(projectId);
+        }
+        if (isFullScreen) {
+            parts.push('fullscreen');
+        } else if (!isPlayerOnly) {
+            parts.push('editor');
+        }
+
+        const path = `${this.root}${parts.join('/')}`;
+
+        return `${path}${location.search}${location.hash}`;
+    }
+}
+
+/**
+ * Return the optimal Router for the current environment
+ * @param {*} callbacks Redux callbacks
+ * @returns {Router} The optimal router for the current environment
+ */
 const createRouter = callbacks => {
     // When on non-http(s) protocols such as file:, do not attempt to use file-based routing.
     if (location.protocol !== 'http:' && location.protocol !== 'https:') {
         return new HashRouter(callbacks);
+    }
+    if (process.env.ROUTING_STYLE === 'wildcard') {
+        return new WildcardRouter(callbacks);
     }
     return new FileHashRouter(callbacks);
 };
@@ -186,6 +270,7 @@ const TWStateManager = function (WrappedComponent) {
                 onSetIsFullScreen: this.props.onSetIsFullScreen
             };
             this.router = createRouter(routerCallbacks);
+            this.router.onhashchange();
             window.addEventListener('hashchange', this.handleHashChange);
             window.addEventListener('popstate', this.handlePopState);
         }
@@ -217,14 +302,10 @@ const TWStateManager = function (WrappedComponent) {
             window.removeEventListener('popstate', this.handlePopState);
         }
         handleHashChange () {
-            if (this.router.onhashchange) {
-                this.router.onhashchange();
-            }
+            this.router.onhashchange();
         }
         handlePopState () {
-            if (this.router.onpathchange) {
-                this.router.onpathchange();
-            }
+            this.router.onpathchange();
         }
         render () {
             const {

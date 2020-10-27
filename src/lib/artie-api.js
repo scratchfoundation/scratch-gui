@@ -11,7 +11,7 @@ import xhr from 'xhr';
 
 const _createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested});
 
-const generateArtieBlock = (blocks) => {
+const _generateArtieBlock = (blocks) => {
 
     var artieBlocks = [];
 
@@ -97,10 +97,11 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, blocks, exercise, requestHelp) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise, screenShot) => new Promise((resolve, reject) => {
 
-    const artieBlocks = generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, elements: artieBlocks};
+    const artieBlocks = _generateArtieBlock(blocks);
+    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, finishedExercise: finishedExercise,
+                                          screenShot: screenShot, elements: artieBlocks};
 
     xhr({
         method: 'POST',

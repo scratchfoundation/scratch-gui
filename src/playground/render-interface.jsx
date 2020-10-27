@@ -6,7 +6,6 @@ import {compose} from 'redux';
 import {FormattedMessage} from 'react-intl';
 
 import AppStateHOC from '../lib/app-state-hoc.jsx';
-import TWParserHOC from '../lib/tw-parser-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
@@ -169,7 +168,6 @@ const ConnectedInterface = connect(
 
 const WrappedInterface = compose(
     AppStateHOC,
-    TWParserHOC,
     TWProjectMetaFetcherHOC,
     TWEditorWarningHOC,
     TWStateManagerHOC,

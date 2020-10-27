@@ -13,6 +13,8 @@ var postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
+const root = process.env.ROOT || '';
+
 const htmlWebpackPluginCommon = {
     sentryConfig: process.env.SENTRY_CONFIG,
     plausible: process.env.PLAUSIBLE_HOST ? {
@@ -32,7 +34,8 @@ const base = {
     output: {
         library: 'GUI',
         filename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash].js' : 'js/[name].js',
-        chunkFilename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash].js' : 'js/[name].js'
+        chunkFilename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash].js' : 'js/[name].js',
+        publicPath: root
     },
     externals: {
         React: 'react',
@@ -140,7 +143,7 @@ module.exports = [
                 'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.ANNOUNCEMENT': process.env.ANNOUNCEMENT ? '"' + process.env.ANNOUNCEMENT + '"' : '""',
-                'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
+                'process.env.ROOT': JSON.stringify(root)
             }),
             new HtmlWebpackPlugin({
                 chunks: ['editor'],

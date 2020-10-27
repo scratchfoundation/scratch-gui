@@ -1,5 +1,5 @@
 // Check our dependencies to make sure we are using the TurboWarp versions forks.
-// This is a development tool -- users should never see these messages.
+// This is a development tool. These messages should never be seen by users.
 
 /* eslint-disable */
 

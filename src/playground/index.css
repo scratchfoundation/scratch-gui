@@ -7,7 +7,7 @@ body,
     margin: 0;
 
     /* Setting min height/width makes the UI scroll below those sizes */
-    min-width: 1024px;
+    /* min-width: 1024px; Removed so the screen fits on mobile properly */
     min-height: 640px; /* Min height to fit sprite/backdrop button */
 }
 

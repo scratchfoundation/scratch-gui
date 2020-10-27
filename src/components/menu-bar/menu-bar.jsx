@@ -85,6 +85,8 @@ import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, art
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 
+import html2canvas from "html2canvas";
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -309,7 +311,13 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
-        sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise);
+        const body = document.querySelector('body');
+        var canvasUrl = '';
+        html2canvas(body).then(canvas => {
+            canvasUrl = canvas.toDataURL('image/png');
+            console.log(canvasUrl); //Maybe blank, maybe full image, maybe half of image
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, canvasUrl);
+        });
     }
     handleClickRequestHelp(){
         sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true);

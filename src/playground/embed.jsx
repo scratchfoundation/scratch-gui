@@ -39,4 +39,5 @@ ReactDOM.render(<WrappedGUI
     projectId={projectId}
     onVmInit={onVmInit}
     onProjectLoaded={onProjectLoaded}
+    routingStyle="hash"
 />, appTarget);

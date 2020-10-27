@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
+import log from './log';
 
 import {
     setUsername
@@ -24,7 +25,7 @@ import * as progressMonitor from '../components/loader/tw-progress-monitor';
 const USERNAME_KEY = 'tw:username';
 
 /**
- * The State Manager is responsible for parsing state from the URL and storing and loading persistent state.
+ * The State Manager is responsible for managing persistent state and the URL.
  */
 
 const setLocalStorage = (key, value) => {
@@ -129,10 +130,14 @@ class WildcardRouter extends Router {
     }
 
     onhashchange () {
-        this.onpathchange();
+        this.parseURL(false);
     }
 
     onpathchange () {
+        this.parseURL(true);
+    }
+
+    parseURL (detectPageType) {
         const path = location.pathname.substr(this.root.length);
         const parts = path.split('/');
 
@@ -145,6 +150,9 @@ class WildcardRouter extends Router {
         };
 
         const parsePageType = type => {
+            if (!detectPageType) {
+                return;
+            }
             if (type === 'fullscreen') {
                 this.onSetIsFullScreen(true);
             } else if (type === 'editor') {
@@ -183,20 +191,43 @@ class WildcardRouter extends Router {
     }
 }
 
+const routers = {
+    none: Router,
+    hash: HashRouter,
+    filehash: FileHashRouter,
+    wildcard: WildcardRouter
+};
+
 /**
  * Return the optimal Router for the current environment
+ * @param {string} style Routing style name
  * @param {*} callbacks Redux callbacks
  * @returns {Router} The optimal router for the current environment
  */
-const createRouter = callbacks => {
-    // When on non-http(s) protocols such as file:, do not attempt to use file-based routing.
-    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
-        return new HashRouter(callbacks);
+const createRouter = (style, callbacks) => {
+    const supportedStyles = ['none', 'hash'];
+
+    // FileHashRouter is not supported on non-http(s) protocols.
+    const isHTTP = location.protocol === 'http:' || location.protocol === 'https:';
+    if (isHTTP) {
+        supportedStyles.push('filehash');
     }
-    if (process.env.ROUTING_STYLE === 'wildcard') {
-        return new WildcardRouter(callbacks);
+
+    // WildcardRouter is not supported if ROOT is not set.
+    if (process.env.ROOT) {
+        supportedStyles.push('wildcard');
     }
-    return new FileHashRouter(callbacks);
+
+    if (!supportedStyles.includes(style)) {
+        log.warn(`routing style is unknown or not supported: ${style}, falling back to hash`);
+        style = 'hash';
+    }
+
+    if (routers.hasOwnProperty(style)) {
+        return new routers[style](callbacks);
+    }
+
+    throw new Error(`unknown router: ${style}`);
 };
 
 const TWStateManager = function (WrappedComponent) {
@@ -269,7 +300,7 @@ const TWStateManager = function (WrappedComponent) {
                 onSetIsPlayerOnly: this.props.onSetIsPlayerOnly,
                 onSetIsFullScreen: this.props.onSetIsFullScreen
             };
-            this.router = createRouter(routerCallbacks);
+            this.router = createRouter(this.props.routingStyle, routerCallbacks);
             this.router.onhashchange();
             window.addEventListener('hashchange', this.handleHashChange);
             window.addEventListener('popstate', this.handlePopState);
@@ -336,7 +367,11 @@ const TWStateManager = function (WrappedComponent) {
         onSetIsPlayerOnly: PropTypes.func,
         onSetProjectId: PropTypes.func,
         projectChanged: PropTypes.bool,
-        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        routingStyle: PropTypes.oneOf(Object.keys(routers))
+    };
+    StateManagerComponent.defaultProps = {
+        routingStyle: process.env.ROUTING_STYLE
     };
     const mapStateToProps = state => ({
         username: state.scratchGui.tw.username,

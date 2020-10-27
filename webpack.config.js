@@ -144,7 +144,7 @@ module.exports = [
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.ANNOUNCEMENT': process.env.ANNOUNCEMENT ? '"' + process.env.ANNOUNCEMENT + '"' : '""',
                 'process.env.ROOT': JSON.stringify(root),
-                'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE)
+                'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash')
             }),
             new HtmlWebpackPlugin({
                 chunks: ['editor'],

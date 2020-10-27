@@ -79,7 +79,7 @@ const artieBlocksUpdated = (blocks) => ({
 
 export {
     reducer as default,
-    initialState as artieLoginInitialState,
+    initialState as artieExerciseInitialState,
     activateArtieExercises,
     deactivateArtieExercises,
     artieSetExercises,

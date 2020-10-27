@@ -16,7 +16,8 @@ class ProjectInput extends React.Component {
             'handleChange',
             'handlePaste',
             'handleBlur',
-            'handleFocus'
+            'handleFocus',
+            'inputRef'
         ]);
         this.state = {
             projectId: this.props.projectId
@@ -73,11 +74,14 @@ class ProjectInput extends React.Component {
             e.target.select();
         }
     }
+    inputRef (el) {
+        this.input = el;
+    }
     render () {
         const projectId = this.state.projectId === defaultProjectId ? '' : this.state.projectId || '';
         return (
             <input
-                ref={elem => this.input = elem}
+                ref={this.inputRef}
                 spellCheck="false"
                 type="text"
                 value={`${PROJECT_BASE}${projectId}`}

@@ -13,6 +13,7 @@ class CloudVariablesToggler extends React.Component {
     }
     toggleCloudVariables () {
         if (!this.props.canUseCloudVariables) {
+            // eslint-disable-next-line no-alert
             alert('Cannot use cloud variables, most likely because you opened the editor.');
             return;
         }

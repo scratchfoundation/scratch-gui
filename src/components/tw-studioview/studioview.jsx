@@ -10,7 +10,8 @@ class StudioViewComponent extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleSelect'
+            'handleSelect',
+            'ref'
         ]);
     }
     componentDidMount () {
@@ -31,6 +32,9 @@ class StudioViewComponent extends React.Component {
     handleSelect (id) {
         this.props.onSelect(id);
     }
+    ref (el) {
+        this.el = el;
+    }
     render () {
         return (
             <div
@@ -40,7 +44,7 @@ class StudioViewComponent extends React.Component {
                         [styles.disabled]: this.props.disabled
                     }
                 )}
-                ref={el => this.el = el}
+                ref={this.ref}
             />
         );
     }

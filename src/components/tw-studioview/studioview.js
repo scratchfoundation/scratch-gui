@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Imported from:
 // https://github.com/forkphorus/forkphorus/tree/master/studioview
 // With changes to make it work properly in the scratch-gui environment.

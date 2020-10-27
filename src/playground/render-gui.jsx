@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
 import GUI from '../containers/gui.jsx';
 
 const searchParams = new URLSearchParams(location.search);

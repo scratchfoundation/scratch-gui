@@ -86,7 +86,8 @@ Examples.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    loading: getIsLoading(state.scratchGui.projectState.loadingState) || getIsFetchingWithId(state.scratchGui.projectState.loadingState)
+    loading: getIsLoading(state.scratchGui.projectState.loadingState) ||
+        getIsFetchingWithId(state.scratchGui.projectState.loadingState)
 });
 
 const mapDispatchToProps = dispatch => ({

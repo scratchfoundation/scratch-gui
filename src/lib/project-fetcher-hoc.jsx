@@ -82,8 +82,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     // tw: If the project data appears to be HTML, then the result is probably an nginx 404 page,
                     // and the "missing project" project should be loaded instead.
                     // See: https://projects.scratch.mit.edu/9999999999999999999999
-                    if (projectAsset && projectAsset.data && (projectAsset.data[0] === '<' || projectAsset.data[0] === '<'.charCodeAt(0))) {
-                        return storage.load(storage.AssetType.Project, MISSING_PROJECT_ID, storage.DataFormat.JSON);
+                    if (projectAsset && projectAsset.data) {
+                        const firstChar = projectAsset.data[0];
+                        if (firstChar === '<' || firstChar === '<'.charCodeAt(0)) {
+                            return storage.load(storage.AssetType.Project, MISSING_PROJECT_ID, storage.DataFormat.JSON);
+                        }
                     }
                     return projectAsset;
                 })

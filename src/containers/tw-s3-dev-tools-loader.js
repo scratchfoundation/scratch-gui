@@ -21,8 +21,8 @@ const load = () => {
     if (injected) return;
     injected = true;
 
-    // We try to delay the script loading until everything else is complete.
-    // Otherwise we might end up starting heavy network activity or script parsing on the main thread while critical things are still loading.
+    // We try to delay the script loading until everything else is complete to avoid main thread work
+    // This is critically important as the page is likely still loading when this runs
     if (window.requestIdleCallback) {
         requestIdleCallback(inject);
     } else {

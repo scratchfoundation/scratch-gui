@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 
 import {
@@ -43,25 +44,11 @@ const getLocalStorage = key => {
     return null;
 };
 
-// const useRouting = location.protocol === 'https:' || location.protocol === 'http:';
-const root = process.env.ROOT;
-
-/**
- * @typedef State
- * @property {string} projectId
- * @property {boolean} isPlayerOnly
- * @property {boolean} isFullScreen
- */
-
 class HashRouter {
     constructor ({onSetProjectId, onSetIsPlayerOnly, onSetIsFullScreen}) {
         this.onSetProjectId = onSetProjectId;
         this.onSetIsPlayerOnly = onSetIsPlayerOnly;
         this.onSetIsFullScreen = onSetIsFullScreen;
-
-        this.playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-        this.editorPath = `${this.playerPath}editor.html`;
-        this.fullscreenPath = `${this.playerPath}fullscreen.html`;
 
         this.onhashchange();
     }
@@ -70,6 +57,20 @@ class HashRouter {
         const hashMatch = location.hash.match(/#(\d+)/);
         const projectId = hashMatch === null ? defaultProjectId : hashMatch[1];
         this.onSetProjectId(projectId);
+    }
+
+    generateURL ({projectId}) {
+        return `${location.pathname}${location.search}#${projectId}`;
+    }
+}
+
+class FileHashRouter extends HashRouter {
+    constructor (callbacks) {
+        super(callbacks);
+
+        this.playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
+        this.editorPath = `${this.playerPath}editor.html`;
+        this.fullscreenPath = `${this.playerPath}fullscreen.html`;
     }
 
     onpathchange () {
@@ -106,8 +107,23 @@ class HashRouter {
     }
 }
 
+const createRouter = callbacks => {
+    // When on non-http(s) protocols such as file:, do not attempt to use file-based routing.
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+        return new HashRouter(callbacks);
+    }
+    return new FileHashRouter(callbacks);
+};
+
 const TWStateManager = function (WrappedComponent) {
     class StateManagerComponent extends React.Component {
+        constructor (props) {
+            super(props);
+            bindAll(this, [
+                'handleHashChange',
+                'handlePopState'
+            ]);
+        }
         componentDidMount () {
             const urlParams = new URLSearchParams(location.search);
 
@@ -169,11 +185,9 @@ const TWStateManager = function (WrappedComponent) {
                 onSetIsPlayerOnly: this.props.onSetIsPlayerOnly,
                 onSetIsFullScreen: this.props.onSetIsFullScreen
             };
-
-            this.router = new HashRouter(routerCallbacks);
-
-            window.addEventListener('hashchange', () => this.router.onhashchange());
-            window.addEventListener('popstate', () => this.router.onpathchange());
+            this.router = createRouter(routerCallbacks);
+            window.addEventListener('hashchange', this.handleHashChange);
+            window.addEventListener('popstate', this.handlePopState);
         }
         componentDidUpdate (prevProps) {
             if (this.props.username !== prevProps.username && this.props.username !== this.doNotPersistUsername) {
@@ -193,10 +207,23 @@ const TWStateManager = function (WrappedComponent) {
                     isFullScreen: this.props.isFullScreen
                 };
                 const newPath = this.router.generateURL(routerState);
-
                 if (newPath !== oldPath) {
                     history.pushState(null, null, newPath);
                 }
+            }
+        }
+        componentWillUnmount () {
+            window.removeEventListener('hashchange', this.handleHashChange);
+            window.removeEventListener('popstate', this.handlePopState);
+        }
+        handleHashChange () {
+            if (this.router.onhashchange) {
+                this.router.onhashchange();
+            }
+        }
+        handlePopState () {
+            if (this.router.onpathchange) {
+                this.router.onpathchange();
             }
         }
         render () {

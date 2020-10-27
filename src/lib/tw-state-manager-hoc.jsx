@@ -341,7 +341,16 @@ const TWStateManager = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                isFullScreen,
+                isPlayerOnly,
+                onProjectFetchFinished,
+                onProjectFetchStarted,
+                onSetIsFullScreen,
+                onSetIsPlayerOnly,
+                onSetProjectId,
                 onSetUsername,
+                projectId,
+                routingStyle,
                 username,
                 vm,
                 /* eslint-enable no-unused-vars */
@@ -355,39 +364,36 @@ const TWStateManager = function (WrappedComponent) {
         }
     }
     StateManagerComponent.propTypes = {
-        onSetUsername: PropTypes.func,
-        username: PropTypes.string,
-        onProjectFetchStarted: PropTypes.func,
-        onProjectFetchFinished: PropTypes.func,
-        vm: PropTypes.instanceOf(VM),
-        isFetchingWithoutId: PropTypes.bool,
-        isPlayerOnly: PropTypes.bool,
         isFullScreen: PropTypes.bool,
+        isPlayerOnly: PropTypes.bool,
+        onProjectFetchFinished: PropTypes.func,
+        onProjectFetchStarted: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
         onSetIsPlayerOnly: PropTypes.func,
         onSetProjectId: PropTypes.func,
-        projectChanged: PropTypes.bool,
+        onSetUsername: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        routingStyle: PropTypes.oneOf(Object.keys(routers))
+        routingStyle: PropTypes.oneOf(Object.keys(routers)),
+        username: PropTypes.string,
+        vm: PropTypes.instanceOf(VM)
     };
     StateManagerComponent.defaultProps = {
         routingStyle: process.env.ROUTING_STYLE
     };
     const mapStateToProps = state => ({
-        username: state.scratchGui.tw.username,
-        vm: state.scratchGui.vm,
         isFullScreen: state.scratchGui.mode.isFullScreen,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-        projectChanged: state.scratchGui.projectChanged,
-        projectId: state.scratchGui.projectState.projectId
+        projectId: state.scratchGui.projectState.projectId,
+        username: state.scratchGui.tw.username,
+        vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onSetUsername: username => dispatch(setUsername(username)),
         onProjectFetchFinished: () => dispatch(closeLoadingProject()),
         onProjectFetchStarted: () => dispatch(openLoadingProject()),
         onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
         onSetIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
-        onSetProjectId: projectId => dispatch(setProjectId(projectId))
+        onSetProjectId: projectId => dispatch(setProjectId(projectId)),
+        onSetUsername: username => dispatch(setUsername(username))
     });
     return connect(
         mapStateToProps,

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 
 import {
@@ -13,7 +12,6 @@ import {
 } from '../reducers/modals';
 import {
     defaultProjectId,
-    getIsFetchingWithoutId,
     setProjectId
 } from '../reducers/project-state';
 import {
@@ -45,20 +43,71 @@ const getLocalStorage = key => {
     return null;
 };
 
-const playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
-const editorPath = `${playerPath}editor.html`;
-const fullscreenPath = `${playerPath}fullscreen.html`;
-const useRouting = location.protocol === 'https:' || location.protocol === 'http:';
+// const useRouting = location.protocol === 'https:' || location.protocol === 'http:';
+const root = process.env.ROOT;
+
+/**
+ * @typedef State
+ * @property {string} projectId
+ * @property {boolean} isPlayerOnly
+ * @property {boolean} isFullScreen
+ */
+
+class HashRouter {
+    constructor ({onSetProjectId, onSetIsPlayerOnly, onSetIsFullScreen}) {
+        this.onSetProjectId = onSetProjectId;
+        this.onSetIsPlayerOnly = onSetIsPlayerOnly;
+        this.onSetIsFullScreen = onSetIsFullScreen;
+
+        this.playerPath = location.pathname.substring(0, location.pathname.lastIndexOf('/') + 1);
+        this.editorPath = `${this.playerPath}editor.html`;
+        this.fullscreenPath = `${this.playerPath}fullscreen.html`;
+
+        this.onhashchange();
+    }
+
+    onhashchange () {
+        const hashMatch = location.hash.match(/#(\d+)/);
+        const projectId = hashMatch === null ? defaultProjectId : hashMatch[1];
+        this.onSetProjectId(projectId);
+    }
+
+    onpathchange () {
+        const pathName = location.pathname;
+
+        if (pathName === this.playerPath) {
+            this.onSetIsPlayerOnly(true);
+            this.onSetIsFullScreen(false);
+        } else if (pathName === this.editorPath) {
+            this.onSetIsPlayerOnly(false);
+            this.onSetIsFullScreen(false);
+        } else if (pathName === this.fullscreenPath) {
+            this.onSetIsFullScreen(true);
+        }
+    }
+
+    generateURL ({projectId, isPlayerOnly, isFullScreen}) {
+        let newPathname = '';
+        let newHash = '';
+
+        if (projectId !== '0') {
+            newHash = `#${projectId}`;
+        }
+
+        if (isFullScreen) {
+            newPathname = this.fullscreenPath;
+        } else if (isPlayerOnly) {
+            newPathname = this.playerPath;
+        } else {
+            newPathname = this.editorPath;
+        }
+
+        return `${newPathname}${location.search}${newHash}`;
+    }
+}
 
 const TWStateManager = function (WrappedComponent) {
     class StateManagerComponent extends React.Component {
-        constructor (props) {
-            super(props);
-            bindAll(this, [
-                'handleHashChange',
-                'handleSearchChange'
-            ]);
-        }
         componentDidMount () {
             const urlParams = new URLSearchParams(location.search);
 
@@ -115,9 +164,16 @@ const TWStateManager = function (WrappedComponent) {
                     });
             }
 
-            window.addEventListener('hashchange', this.handleHashChange);
-            window.addEventListener('popstate', this.handleSearchChange);
-            this.handleHashChange();
+            const routerCallbacks = {
+                onSetProjectId: this.props.onSetProjectId,
+                onSetIsPlayerOnly: this.props.onSetIsPlayerOnly,
+                onSetIsFullScreen: this.props.onSetIsFullScreen
+            };
+
+            this.router = new HashRouter(routerCallbacks);
+
+            window.addEventListener('hashchange', () => this.router.onhashchange());
+            window.addEventListener('popstate', () => this.router.onpathchange());
         }
         componentDidUpdate (prevProps) {
             if (this.props.username !== prevProps.username && this.props.username !== this.doNotPersistUsername) {
@@ -125,68 +181,21 @@ const TWStateManager = function (WrappedComponent) {
                 setLocalStorage(USERNAME_KEY, this.props.username);
             }
 
-            let newPathname = location.pathname;
-            let newHash = location.hash;
-
-            // Store project ID in the URL.
-            if (this.props.isFetchingWithoutId && !prevProps.isFetchingWithoutId) {
-                newHash = '';
-            } else if (this.props.projectId !== prevProps.projectId && this.props.projectId !== '0') {
-                newHash = `#${this.props.projectId}`;
-            }
-
-            // Store whether the editor is active.
-            if (useRouting && (
+            if (
+                this.props.projectId !== prevProps.projectId ||
                 this.props.isPlayerOnly !== prevProps.isPlayerOnly ||
                 this.props.isFullScreen !== prevProps.isFullScreen
-            )) {
-                if (this.props.isFullScreen) {
-                    newPathname = fullscreenPath;
-                } else if (this.props.isPlayerOnly) {
-                    newPathname = playerPath;
-                } else {
-                    newPathname = editorPath;
-                }
-            }
+            ) {
+                const oldPath = `${location.pathname}${location.search}${location.hash}`;
+                const routerState = {
+                    projectId: this.props.projectId,
+                    isPlayerOnly: this.props.isPlayerOnly,
+                    isFullScreen: this.props.isFullScreen
+                };
+                const newPath = this.router.generateURL(routerState);
 
-            if (newHash !== location.hash || newPathname !== location.pathname) {
-                history.pushState('', '', `${newPathname}${location.search}${newHash}`);
-            }
-        }
-        handleHashChange () {
-            const hashMatch = window.location.hash.match(/#(\d+)/);
-            const hashProjectId = hashMatch === null ? defaultProjectId : hashMatch[1];
-            if (this.props.projectId !== hashProjectId) {
-                if (this.props.projectChanged) {
-                    // eslint-disable-next-line no-alert
-                    if (!confirm('Switch to different project?')) {
-                        history.pushState('', '', `#${this.props.projectId}`);
-                        return;
-                    }
-                }
-                this.props.onSetProjectId(hashProjectId.toString());
-            }
-        }
-        handleSearchChange () {
-            if (useRouting) {
-                if (location.pathname === editorPath) {
-                    if (this.props.isPlayerOnly) {
-                        this.props.onSetIsPlayerOnly(false);
-                    }
-                    if (this.props.isFullScreen) {
-                        this.props.onSetIsFullScreen(false);
-                    }
-                } else if (location.pathname === playerPath) {
-                    if (!this.props.isPlayerOnly) {
-                        this.props.onSetIsPlayerOnly(true);
-                    }
-                    if (this.props.isFullScreen) {
-                        this.props.onSetIsFullScreen(false);
-                    }
-                } else if (location.pathname === fullscreenPath) {
-                    if (!this.props.isFullScreen) {
-                        this.props.onSetIsFullScreen(true);
-                    }
+                if (newPath !== oldPath) {
+                    history.pushState(null, null, newPath);
                 }
             }
         }
@@ -221,18 +230,14 @@ const TWStateManager = function (WrappedComponent) {
         projectChanged: PropTypes.bool,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     };
-    const mapStateToProps = state => {
-        const loadingState = state.scratchGui.projectState.loadingState;
-        return {
-            username: state.scratchGui.tw.username,
-            vm: state.scratchGui.vm,
-            isFetchingWithoutId: getIsFetchingWithoutId(loadingState),
-            isFullScreen: state.scratchGui.mode.isFullScreen,
-            isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-            projectChanged: state.scratchGui.projectChanged,
-            projectId: state.scratchGui.projectState.projectId
-        };
-    };
+    const mapStateToProps = state => ({
+        username: state.scratchGui.tw.username,
+        vm: state.scratchGui.vm,
+        isFullScreen: state.scratchGui.mode.isFullScreen,
+        isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+        projectChanged: state.scratchGui.projectChanged,
+        projectId: state.scratchGui.projectState.projectId
+    });
     const mapDispatchToProps = dispatch => ({
         onSetUsername: username => dispatch(setUsername(username)),
         onProjectFetchFinished: () => dispatch(closeLoadingProject()),

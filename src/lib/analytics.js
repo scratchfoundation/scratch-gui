@@ -4,6 +4,18 @@ const isFile = location.protocol === 'file:';
 const enabled = plausibleHost && plausibleDomain && !isFile;
 
 if (enabled) {
+    let referrer = null;
+    if (document.referrer) {
+        try {
+            // Limit URL precision to origin
+            const url = new URL(document.referrer);
+            url.pathname = '';
+            referrer = url.href;
+        } catch (e) {
+            // If URL threw, ignore
+        }
+    }
+
     const sendEvent = eventName => {
         // Delay analytics events until idle, we don't need to run them immediately.
         (window.requestIdleCallback || window.setTimeout)(() => {
@@ -12,7 +24,7 @@ if (enabled) {
             url.pathname = url.pathname
                 // Don't include project IDs
                 .replace(/\d/g, '')
-                // Removing project IDs might result in multiple slashes: //editor, so merge multiple slashes into one
+                // Removing project IDs might result in multiple slashes: //editor, so merge multiple slashes
                 .replace(/\/+/g, '/');
 
             const req = new XMLHttpRequest();
@@ -22,23 +34,23 @@ if (enabled) {
                 n: eventName,
                 u: url.href,
                 d: plausibleDomain,
-                r: document.referrer || null,
+                r: referrer,
                 w: window.innerWidth
             }));
         });
     };
-    
+
     const trackPageview = () => {
         sendEvent('pageview');
     };
-    
+
     const originalPushState = history.pushState;
     history.pushState = (a, b, c) => {
         originalPushState.call(history, a, b, c);
         trackPageview();
     };
     window.addEventListener('popstate', trackPageview);
-    
+
     trackPageview();
 }
 

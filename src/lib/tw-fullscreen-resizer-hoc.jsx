@@ -44,7 +44,7 @@ const TWFullScreenResizerHOC = function (WrappedComponent) {
         onSetDimensions: PropTypes.func
     };
     const mapStateToProps = state => ({
-        isFullScreen: state.scratchGui.mode.isFullScreen
+        isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded
     });
     const mapDispatchToProps = dispatch => ({
         onSetDimensions: dimensions => dispatch(setDimensions(dimensions))

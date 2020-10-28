@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {FormattedMessage} from 'react-intl';
-
+import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
@@ -25,6 +25,13 @@ if (window !== window.parent) {
     alert('You are embedding TurboWarp incorrectly.\n\nGo here for instructions: https://github.com/TurboWarp/scratch-gui/wiki/Embedding');
 }
 
+let announcement = null;
+if (process.env.ANNOUNCEMENT) {
+    announcement = document.createElement('p');
+    // This is safe because process.env.ANNOUNCEMENT is set at build time.
+    announcement.innerHTML = process.env.ANNOUNCEMENT;
+}
+
 const Interface = ({
     description,
     isFullScreen,
@@ -43,6 +50,7 @@ const Interface = ({
                 </div>
             ) : null}
             <div className={styles.center}>
+                {announcement ? <DOMElementRenderer domElement={announcement} /> : null}
                 <GUI />
                 {isHomepage ? (
                     <React.Fragment>

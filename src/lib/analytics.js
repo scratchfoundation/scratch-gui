@@ -1,8 +1,7 @@
 const plausibleHost = process.env.PLAUSIBLE_HOST;
 const plausibleDomain = process.env.PLAUSIBLE_DOMAIN;
-const isLocalhost = false && /^localhost$|^127(?:\.[0-9]+){0,2}\.[0-9]+$|^(?:0*:)*?:?0*1$/.test(location.hostname);
 const isFile = location.protocol === 'file:';
-const enabled = plausibleHost && plausibleDomain && !isLocalhost && !isFile;
+const enabled = plausibleHost && plausibleDomain && !isFile;
 
 if (enabled) {
     const sendEvent = eventName => {

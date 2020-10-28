@@ -13,7 +13,10 @@ var postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
-const root = process.env.ROOT || '';
+let root = process.env.ROOT || '';
+if (root.length > 0 && !root.endsWith('/')) {
+    throw new Error('If ROOT is defined, it must have a trailing slash.');
+}
 
 const htmlWebpackPluginCommon = {
     sentryConfig: process.env.SENTRY_CONFIG,

@@ -123,10 +123,6 @@ class WildcardRouter extends Router {
     constructor (callbacks) {
         super(callbacks);
         this.root = process.env.ROOT;
-        // Root should always have a trailing /
-        if (!this.root.endsWith('/')) {
-            this.root += '/';
-        }
     }
 
     onhashchange () {

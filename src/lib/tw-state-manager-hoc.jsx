@@ -45,6 +45,11 @@ const getLocalStorage = key => {
     return null;
 };
 
+const readHashProjectId = () => {
+    const match = location.hash.match(/#(\d+)/);
+    return match === null ? null : match[1];
+};
+
 class Router {
     constructor ({onSetProjectId, onSetIsPlayerOnly, onSetIsFullScreen}) {
         this.onSetProjectId = onSetProjectId;
@@ -67,9 +72,7 @@ class Router {
 
 class HashRouter extends Router {
     onhashchange () {
-        const hashMatch = location.hash.match(/#(\d+)/);
-        const projectId = hashMatch === null ? defaultProjectId : hashMatch[1];
-        this.onSetProjectId(projectId);
+        this.onSetProjectId(readHashProjectId() || defaultProjectId);
     }
 
     generateURL ({projectId}) {
@@ -126,7 +129,15 @@ class WildcardRouter extends Router {
     }
 
     onhashchange () {
-        this.parseURL(false);
+        const hashProjectId = readHashProjectId();
+        if (hashProjectId) {
+            this.onSetProjectId(hashProjectId);
+            // Completely remove the hash
+            history.replaceState(null, null, `${location.pathname}${location.search}`);
+        } else {
+            // Do not detect page type here as it is already setup by index.html, editor.html, etc.
+            this.parseURL(false);
+        }
     }
 
     onpathchange () {

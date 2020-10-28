@@ -20,7 +20,7 @@ const decorate = text => {
     ));
 
     // Make links clickable
-    const linkRegex = /((?:^|\s)https?:\/\/(?:[\w-]+\.)*(?:.+)(?:\/(?:\S*[\w:/#[\]@$&'()*+=])?)?(?![^?!,:;\w\s]\S))/g;
+    const linkRegex = /(https?:\/\/[\w\d_\-.]{1,256}(?:\/(?:\S*[\w:/#[\]@$&'()*+=])?)?(?![^?!,:;\w\s]\S))/g;
     text = reactStringReplace(text, linkRegex, (match, i) => (
         <a
             href={match}

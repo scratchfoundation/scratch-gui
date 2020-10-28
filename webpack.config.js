@@ -19,7 +19,6 @@ if (root.length > 0 && !root.endsWith('/')) {
 }
 
 const htmlWebpackPluginCommon = {
-    sentryConfig: process.env.SENTRY_CONFIG,
     plausible: process.env.PLAUSIBLE_HOST ? {
         host: process.env.PLAUSIBLE_HOST,
         domain: process.env.PLAUSIBLE_DOMAIN

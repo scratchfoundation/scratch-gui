@@ -20,14 +20,6 @@
       .tw-loaded #splash { display: none; }
       @media (prefers-color-scheme: dark) { #splash { background-color: #333; color: #ddd; } }
     </style>
-    <% if (htmlWebpackPlugin.options.sentryConfig) { %>
-        <!-- Sentry error logging to help with finding bugs -->
-        <script src="https://browser.sentry-cdn.com/5.21.1/bundle.min.js" integrity="sha384-uFON5MXfE3NkWO60hM8JaXAYAV0fqTCQbdy282z8YfelqBoXx+F7JFzX6+WfFIML" crossorigin="anonymous"></script>
-        <script>
-            Sentry.init({ dsn: "<%= htmlWebpackPlugin.options.sentryConfig %>" });
-        </script>
-        <!-- /Sentry -->
-    <% } %>
   </head>
   <body>
     <div id="splash" aria-hidden="true">

@@ -50,7 +50,7 @@ const Interface = ({
                 </div>
             ) : null}
             <div className={styles.center}>
-                {announcement ? <DOMElementRenderer domElement={announcement} /> : null}
+                {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
                 <GUI />
                 {isHomepage ? (
                     <React.Fragment>

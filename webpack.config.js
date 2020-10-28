@@ -23,7 +23,8 @@ const htmlWebpackPluginCommon = {
     plausible: process.env.PLAUSIBLE_HOST ? {
         host: process.env.PLAUSIBLE_HOST,
         domain: process.env.PLAUSIBLE_DOMAIN
-    } : null
+    } : null,
+    root: root
 };
 
 const base = {

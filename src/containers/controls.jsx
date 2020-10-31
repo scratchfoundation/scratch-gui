@@ -50,7 +50,7 @@ class Controls extends React.Component {
         return (
             <ControlsComponent
                 {...props}
-                active={projectRunning}
+                active={projectRunning && isStarted}
                 turbo={turbo}
                 onGreenFlagClick={this.handleGreenFlagClick}
                 onStopAllClick={this.handleStopAllClick}
@@ -68,7 +68,7 @@ Controls.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isStarted: state.scratchGui.vmStatus.running,
+    isStarted: state.scratchGui.vmStatus.started,
     projectRunning: state.scratchGui.vmStatus.running,
     framerate: state.scratchGui.tw.framerate,
     turbo: state.scratchGui.vmStatus.turbo

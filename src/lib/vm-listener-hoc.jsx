@@ -215,10 +215,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectChanged: () => dispatch(setProjectChanged()),
         onProjectSaved: () => dispatch(setProjectUnchanged()),
         onRuntimeStarted: () => dispatch(setStartedState(true)),
-        onRuntimeStopped: () => {
-            dispatch(setRunningState(false));
-            dispatch(setStartedState(false));
-        },
+        onRuntimeStopped: () => dispatch(setStartedState(false)),
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),

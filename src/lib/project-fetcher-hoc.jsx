@@ -71,11 +71,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             }
         }
         fetchProject (projectId, loadingState) {
-            // tw: clear the VM before fetching
-            // this matters because we fetch many projects in the same VM,
-            // and the old project should stop when starting to fetch the new one
-            // VM.loadProject also does this, but that won't run until after fetching (which may take a while)
+            // tw: clear and stop the VM before fetching
+            // these will also happen later after the project is fetched, but fetching may take a while and
+            // the project shouldn't be running while fetching the new project
             this.props.vm.clear();
+            this.props.vm.stop();
             return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {

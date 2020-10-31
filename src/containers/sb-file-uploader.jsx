@@ -125,6 +125,8 @@ class SBFileUploader extends React.Component {
         if (this.reader) {
             this.props.onLoadingStarted();
             const filename = this.fileToUpload && this.fileToUpload.name;
+            // tw: stop when loading new project
+            this.props.vm.stop();
             this.props.vm.loadProject(this.reader.result)
                 .then(() => {
                     this.props.onLoadingFinished(this.props.loadingState, true);
@@ -185,7 +187,8 @@ SBFileUploader.propTypes = {
     onReceivedProjectTitle: PropTypes.func,
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.shape({
-        loadProject: PropTypes.func
+        loadProject: PropTypes.func,
+        stop: PropTypes.func
     })
 };
 SBFileUploader.defaultProps = {

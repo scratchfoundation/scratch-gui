@@ -44,6 +44,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
             this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
+            this.props.vm.on('RUNTIME_STOPPED', this.props.onRuntimeStopped);
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
@@ -145,6 +146,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onProjectRunStop,
                 onProjectSaved,
                 onRuntimeStarted,
+                onRuntimeStopped,
                 onTurboModeOff,
                 onTurboModeOn,
                 onFramerateChanged,
@@ -169,6 +171,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectRunStop: PropTypes.func.isRequired,
         onProjectSaved: PropTypes.func.isRequired,
         onRuntimeStarted: PropTypes.func.isRequired,
+        onRuntimeStopped: PropTypes.func.isRequired,
         onShowExtensionAlert: PropTypes.func.isRequired,
         onTargetsUpdate: PropTypes.func.isRequired,
         onTurboModeOff: PropTypes.func.isRequired,
@@ -212,6 +215,10 @@ const vmListenerHOC = function (WrappedComponent) {
         onProjectChanged: () => dispatch(setProjectChanged()),
         onProjectSaved: () => dispatch(setProjectUnchanged()),
         onRuntimeStarted: () => dispatch(setStartedState(true)),
+        onRuntimeStopped: () => {
+            dispatch(setRunningState(false));
+            dispatch(setStartedState(false));
+        },
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),

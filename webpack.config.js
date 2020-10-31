@@ -19,10 +19,6 @@ if (root.length > 0 && !root.endsWith('/')) {
 }
 
 const htmlWebpackPluginCommon = {
-    plausible: process.env.PLAUSIBLE_HOST ? {
-        host: process.env.PLAUSIBLE_HOST,
-        domain: process.env.PLAUSIBLE_DOMAIN
-    } : null,
     root: root
 };
 

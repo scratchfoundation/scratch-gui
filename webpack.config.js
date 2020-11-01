@@ -152,7 +152,7 @@ module.exports = [
                 'process.env.ANNOUNCEMENT': process.env.ANNOUNCEMENT ? '"' + process.env.ANNOUNCEMENT + '"' : '""',
                 'process.env.ROOT': JSON.stringify(root),
                 'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash'),
-                'process.env.PLAUSIBLE_HOST': JSON.stringify(process.env.PLAUSIBLE_HOST),
+                'process.env.PLAUSIBLE_API': JSON.stringify(process.env.PLAUSIBLE_API),
                 'process.env.PLAUSIBLE_DOMAIN': JSON.stringify(process.env.PLAUSIBLE_DOMAIN)
             }),
             new HtmlWebpackPlugin({

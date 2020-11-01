@@ -1,7 +1,13 @@
-const plausibleHost = process.env.PLAUSIBLE_HOST;
-const plausibleDomain = process.env.PLAUSIBLE_DOMAIN;
-const isFile = location.protocol === 'file:';
-const enabled = plausibleHost && plausibleDomain && !isFile;
+const PLAUSIBLE_API = process.env.PLAUSIBLE_API;
+const PLAUSIBLE_DOMAIN = process.env.PLAUSIBLE_DOMAIN;
+const enabled =
+    PLAUSIBLE_API &&
+    PLAUSIBLE_DOMAIN &&
+    // Must be on http: or https:
+    (location.protocol === 'http:' || location.protocol === 'https:') &&
+    // Domain must roughly match
+    // This type of comparison allows experiments.turbowarp.org and turbowarp.org to use the same domain
+    location.origin.includes(PLAUSIBLE_DOMAIN);
 
 if (enabled) {
     let referrer = null;
@@ -28,12 +34,12 @@ if (enabled) {
                 .replace(/\/+/g, '/');
 
             const req = new XMLHttpRequest();
-            req.open('POST', `${plausibleHost}/api/event`, true);
+            req.open('POST', PLAUSIBLE_API, true);
             req.setRequestHeader('Content-Type', 'text/plain');
             req.send(JSON.stringify({
                 n: eventName,
                 u: url.href,
-                d: plausibleDomain,
+                d: PLAUSIBLE_DOMAIN,
                 r: referrer,
                 w: window.innerWidth
             }));

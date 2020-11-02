@@ -47,6 +47,10 @@ import Controls from '../../containers/controls.jsx';
 import StageHeader from '../../containers/editor-stagesize-header.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 
+import MartyBatteryLevel from '../marty-battery-level/marty-battery-level.jsx';
+import MartySignalStrength from '../marty-signal-strength/marty-signal-strength.jsx';
+
+
 const messages = defineMessages({
     addExtension: {
         id: 'gui.gui.addExtension',
@@ -315,6 +319,8 @@ const GUIComponent = props => {
                                         />
                                     </Tab>
                                     <LanguageStandalone canChangeLanguage={canChangeLanguage} />
+                                    <MartyBatteryLevel />
+                                    <MartySignalStrength />
                                     <Box className={styles.controlsWrapper}>
                                         <Controls vm={vm} />
                                         <StageHeader

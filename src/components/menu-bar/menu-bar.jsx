@@ -100,11 +100,11 @@ const ariaMessages = defineMessages({
     }
 });
 
-const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '_blank', 'noopener');
-const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '_blank', 'noopener');
-const openPrivacyLink = () => window.open('/privacy.html', '_blank', 'noopener');
-const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '_blank', 'noopener');
-const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '_blank', 'noopener');
+const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '', 'noopener');
+const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '', 'noopener');
+const openPrivacyLink = () => window.open('/privacy.html', '', 'noopener');
+const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '', 'noopener');
+const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '', 'noopener');
 
 const MenuBarItemTooltip = ({
     children,

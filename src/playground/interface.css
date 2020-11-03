@@ -48,7 +48,7 @@ a {
     .player-only {
         color: #ddd;
     }
-    .player-only a {
+    a {
         color: #4af;
     }
 }

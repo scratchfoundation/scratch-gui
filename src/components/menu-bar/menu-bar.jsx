@@ -100,12 +100,6 @@ const ariaMessages = defineMessages({
     }
 });
 
-const openSourceCodeLink = () => window.open('https://github.com/TurboWarp', '', 'noopener');
-const openFeedbackLink = () => window.open('https://scratch.mit.edu/users/GarboMuffin/#comments', '', 'noopener');
-const openPrivacyLink = () => window.open('/privacy.html', '', 'noopener');
-const openEmbedLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/Embedding', '', 'noopener');
-const constURLParemetersLink = () => window.open('https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters', '', 'noopener');
-
 const MenuBarItemTooltip = ({
     children,
     className,
@@ -171,6 +165,25 @@ const AboutButton = props => (
 
 AboutButton.propTypes = {
     onClick: PropTypes.func.isRequired
+};
+
+// Unlike <MenuItem href="">, this uses an actual <a>
+const MenuItemLink = props => (
+    <a
+        href={props.href}
+        // _blank is safe because of noopener
+        // eslint-disable-next-line react/jsx-no-target-blank
+        target="_blank"
+        rel="noopener"
+        className={styles.menuItemLink}
+    >
+        <MenuItem>{props.children}</MenuItem>
+    </a>
+);
+
+MenuItemLink.propTypes = {
+    children: PropTypes.node.isRequired,
+    href: PropTypes.string.isRequired
 };
 
 class MenuBar extends React.Component {
@@ -664,41 +677,41 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseHelp}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={openSourceCodeLink}>
+                                    <MenuItemLink href="https://github.com/TurboWarp">
                                         <FormattedMessage
                                             defaultMessage="Source Code"
                                             description="Text for source code link in the Help menu"
                                             id="tw.menuBar.code"
                                         />
-                                    </MenuItem>
-                                    <MenuItem onClick={openFeedbackLink}>
+                                    </MenuItemLink>
+                                    <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
                                         <FormattedMessage
                                             defaultMessage="Feedback & Bugs"
                                             description="Text for feedback link in the Help menu"
                                             id="tw.menuBar.feedback"
                                         />
-                                    </MenuItem>
-                                    <MenuItem onClick={openPrivacyLink}>
+                                    </MenuItemLink>
+                                    <MenuItemLink href="/privacy.html">
                                         <FormattedMessage
                                             defaultMessage="Privacy"
                                             description="Text for privacy policy link in the Help menu"
                                             id="tw.menuBar.privacy"
                                         />
-                                    </MenuItem>
-                                    <MenuItem onClick={openEmbedLink}>
+                                    </MenuItemLink>
+                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Embedding">
                                         <FormattedMessage
                                             defaultMessage="Embedding"
                                             description="Text for embedding link in the Help menu"
                                             id="tw.menuBar.embed"
                                         />
-                                    </MenuItem>
-                                    <MenuItem onClick={constURLParemetersLink}>
+                                    </MenuItemLink>
+                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters">
                                         <FormattedMessage
                                             defaultMessage="URL Parameters"
                                             description="Text for url parameters link in the Help menu"
                                             id="tw.menuBar.parameters"
                                         />
-                                    </MenuItem>
+                                    </MenuItemLink>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

@@ -237,3 +237,9 @@
     margin: 0.5rem;
     vertical-align: middle;
 }
+
+/* tw: styles to override <a> styles */
+.menu-item-link {
+    color: $ui-white;
+    text-decoration: none;
+}

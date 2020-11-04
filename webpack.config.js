@@ -50,12 +50,11 @@ const base = {
                 babelrc: false,
                 plugins: [
                     '@babel/plugin-syntax-dynamic-import',
-                    '@babel/plugin-transform-async-to-generator',
                     '@babel/plugin-proposal-object-rest-spread',
                     ['react-intl', {
                         messagesDir: './translations/messages/'
                     }]],
-                presets: ['@babel/preset-env', '@babel/preset-react']
+                presets: [['@babel/preset-env', {exclude: ['transform-regenerator']}], '@babel/preset-react']
             }
         },
         {

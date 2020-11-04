@@ -1,0 +1,47 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+@import "../../css/typography.css";
+
+.button {
+    height: 2rem;
+    padding: 0.35rem;
+    outline: none;
+    background: white;
+    border-radius: 0.5rem;
+    border: 1px solid $ui-black-transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    user-select: none;
+    margin: 0px;
+}
+
+.main-content {
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.block {
+    background-color: $ui-white;
+    border: 1px solid $ui-black-transparent;
+    padding: calc(2 * $space);
+    display: flex;
+    flex-direction: column;
+}
+
+.even-row {
+    background-color: $ui-secondary;
+}
+
+.odd-row {
+    background-color: $ui-tertiary;
+}
+
+.error {
+    color: $error-light;
+    text-align: center;
+}

@@ -37,7 +37,6 @@ class SB3Downloader extends React.Component {
         ]);
     }
     downloadProject (slot) {
-        console.log('Clicked Save');
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();

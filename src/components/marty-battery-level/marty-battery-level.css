@@ -1,0 +1,37 @@
+.battery-flash {
+    opacity: 1;
+    animation: fade 2s linear infinite;
+}
+
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
+.battery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 80%;
+    padding: 5px
+}
+
+.battery-cap {
+    width: 5px;
+    height: 2px;
+}
+
+.battery-cylinder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-width: 1px;
+    border-style: solid;
+    width: 10px;
+    flex: 1;
+    border-radius: 2px;
+}

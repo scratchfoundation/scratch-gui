@@ -43,6 +43,10 @@ class GUI extends React.Component {
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
+        if (this.props.cacheDefaultProjectCallback) {
+            storage.setCacheDefaultProjectCallback(this.props.cacheDefaultProjectCallback);
+        }
+        storage.cacheDefaultProject();
         this.props.onVmInit(this.props.vm);
     }
     componentDidUpdate (prevProps) {
@@ -94,6 +98,7 @@ class GUI extends React.Component {
 
 GUI.propTypes = {
     assetHost: PropTypes.string,
+    cacheDefaultProjectCallback: PropTypes.func,
     children: PropTypes.node,
     cloudHost: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -120,7 +125,7 @@ GUI.defaultProps = {
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onProjectLoaded: () => {},
     onUpdateProjectId: () => {},
-    onVmInit: (/* vm */) => {}
+    onVmInit: (/* vm */) => {},
 };
 
 const mapStateToProps = state => {

@@ -1,4 +1,6 @@
 import ScratchStorage from 'scratch-storage';
+import PropTypes from 'prop-types';
+import log from './log.js';
 
 import defaultProject from './default-project';
 
@@ -7,10 +9,6 @@ import defaultProject from './default-project';
  * @todo make this more configurable
  */
 class Storage extends ScratchStorage {
-    constructor () {
-        super();
-        this.cacheDefaultProject();
-    }
     addOfficialScratchWebStores () {
         this.addWebStore(
             [this.AssetType.Project],
@@ -34,6 +32,9 @@ class Storage extends ScratchStorage {
     }
     setProjectHost (projectHost) {
         this.projectHost = projectHost;
+    }
+    setCacheDefaultProjectCallback (cacheDefaultProjectCallback) {
+        this.cacheDefaultProjectCallback = cacheDefaultProjectCallback;
     }
     getProjectGetConfig (projectAsset) {
         return `${this.projectHost}/${projectAsset.assetId}`;
@@ -73,12 +74,16 @@ class Storage extends ScratchStorage {
     }
     cacheDefaultProject () {
         const defaultProjectAssets = defaultProject(this.translator);
-        defaultProjectAssets.forEach(asset => this.builtinHelper._store(
-            this.AssetType[asset.assetType],
-            this.DataFormat[asset.dataFormat],
-            asset.data,
-            asset.id
-        ));
+        if (this.cacheDefaultProjectCallback) {
+            this.cacheDefaultProjectCallback(defaultProjectAssets);
+        } else {
+            defaultProjectAssets.forEach(asset => storage.builtinHelper._store(
+                this.AssetType[asset.assetType],
+                this.DataFormat[asset.dataFormat],
+                asset.data,
+                asset.id
+            ));
+        }
     }
 }
 

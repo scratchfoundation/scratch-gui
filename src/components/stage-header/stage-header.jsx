@@ -97,7 +97,7 @@ const StageHeaderComponent = function (props) {
         header = (
             <Box
                 className={classNames(styles.stageHeaderWrapperOverlay, {
-                    [styles.stageHeaderEmbed]: isEmbedded
+                    [styles.embedded]: isEmbedded
                 })}
             >
                 <Box

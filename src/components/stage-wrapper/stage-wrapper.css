@@ -33,3 +33,14 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* tw: do not show color in embeds */
+.stage-wrapper.embedded {
+    background-color: transparent;
+}
+/* unless in fullscreen mode */
+@media (display-mode: fullscreen) {
+    .stage-wrapper.embedded {
+        background-color: $ui-white;
+    }    
+}

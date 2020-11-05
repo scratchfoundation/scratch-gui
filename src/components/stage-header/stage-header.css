@@ -16,8 +16,14 @@
 }
 
 /* tw: do not show color in header when embedded */
-.stage-header-embed {
-    background-color: white;
+.embedded {
+    background-color: transparent;
+}
+/* unless in fullscreen mode */
+@media (display-mode: fullscreen) {
+    .embedded {
+        background-color: $ui-white;
+    }    
 }
 
 .stage-menu-wrapper {

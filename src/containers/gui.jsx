@@ -100,6 +100,8 @@ GUI.propTypes = {
     fetchingProject: PropTypes.bool,
     intl: intlShape,
     isError: PropTypes.bool,
+    isEmbedded: PropTypes.bool,
+    isFullScreen: PropTypes.bool,
     isLoading: PropTypes.bool,
     isScratchDesktop: PropTypes.bool,
     isShowingProject: PropTypes.bool,
@@ -136,7 +138,7 @@ const mapStateToProps = state => {
         costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
         error: state.scratchGui.projectState.error,
         isError: getIsError(loadingState),
-        // tw: embed is considered fullscreen
+        isEmbedded: state.scratchGui.mode.isEmbedded,
         isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         isRtl: state.locales.isRtl,

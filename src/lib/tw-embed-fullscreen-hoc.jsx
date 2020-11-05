@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {setFullScreen} from '../reducers/mode';
 import {setIsWindowFullScreen} from '../reducers/tw';
+import FullscreenAPI from './tw-fullscreen-api';
 
 const TWFullScreenHOC = function (WrappedComponent) {
     class FullScreenComponent extends React.Component {
@@ -21,11 +22,11 @@ const TWFullScreenHOC = function (WrappedComponent) {
             return this.props.isFullScreen !== nextProps.isFullScreen;
         }
         componentDidUpdate () {
-            if (document.fullscreenEnabled) {
+            if (FullscreenAPI.available()) {
                 if (this.props.isFullScreen) {
-                    document.body.requestFullscreen();
-                } else if (document.fullscreenElement) {
-                    document.exitFullscreen();
+                    FullscreenAPI.request();
+                } else if (FullscreenAPI.enabled()) {
+                    FullscreenAPI.exit();
                 }
             }
         }

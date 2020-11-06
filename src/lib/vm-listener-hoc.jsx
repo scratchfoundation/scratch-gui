@@ -5,6 +5,8 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
+import debounce from 'lodash.debounce';
+
 import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
@@ -12,6 +14,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
+import {blobToBase64} from './save-load-utils';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -34,6 +37,7 @@ const vmListenerHOC = function (WrappedComponent) {
             // mounts.
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
+            console.log('vmListener Starting Up');
             this.props.vm.on('targetsUpdate', this.handleTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
@@ -46,7 +50,8 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-
+            // debounce the auto save function so we aren't continuously saving if there are lots of changes happening
+            this.autoSaveProject = debounce(this.autoSaveProject.bind(this), 1000);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -76,6 +81,20 @@ const vmListenerHOC = function (WrappedComponent) {
         handleProjectChanged () {
             if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {
                 this.props.onProjectChanged();
+            }
+            this.autoSaveProject();
+        }
+        async autoSaveProject () {
+            // eslint-disable-next-line no-console
+            console.log('Saving project to "__autosave"');
+            const sb3Content = await this.props.vm.saveProjectSb3();
+            const base64sb3 = await blobToBase64(sb3Content);
+            try {
+                // eslint-disable-next-line no-undef
+                await mv2.saveScratchFile('__autosave', base64sb3);
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error('Failed to auto save project', error.message);
             }
         }
         handleTargetsUpdate (data) {

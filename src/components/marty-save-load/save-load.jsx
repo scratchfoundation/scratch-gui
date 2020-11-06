@@ -11,11 +11,10 @@ import VM from 'scratch-vm';
 import errorBoundaryHOC from '../../lib/error-boundary-hoc.jsx';
 import {activateTab, BLOCKS_TAB_INDEX} from '../../reducers/editor-tab';
 import Button from '../../components/button/button.jsx';
-import Label from '../../components/forms/label.jsx';
 import Input from '../../components/forms/input.jsx';
 import styles from './save-load.css';
 import collectMetadata from '../../lib/collect-metadata';
-import {blobToBase64} from './utils';
+import {blobToBase64} from '../../lib/save-load-utils';
 
 class SaveLoad extends React.Component {
     constructor (props) {
@@ -30,7 +29,9 @@ class SaveLoad extends React.Component {
 
     async getCurrentFiles () {
         const savedScratchFiles = await mv2.listSavedScratchFiles();
-        const fileNames = savedScratchFiles.fileNames.map(encodedFileName => decodeURIComponent(encodedFileName));
+        const fileNames = savedScratchFiles.fileNames
+            .map(encodedFileName => decodeURIComponent(encodedFileName))
+            .filter(fileName => fileName !== '__autosave');
         this.setState({fileNames});
     }
 
@@ -85,7 +86,8 @@ class SaveLoad extends React.Component {
             vm.loadProject(arrayBuffer);
             // eslint-disable-next-line no-alert
             alert('Loaded Project');
-            this.props.onActivateBlocksTab();
+            // this seems to be required to let the wm load the project
+            window.setTimeout(() => this.props.onActivateBlocksTab());
         } catch (error) {
             // eslint-disable-next-line no-alert
             alert(`Failed to load project: ${error.message}`);
@@ -115,8 +117,8 @@ class SaveLoad extends React.Component {
             >
                 <div className={styles.block}>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <div style={{display: 'flex', flexDirection: 'row', marginTop: 10}}>
-                            <Label>Create a new file:</Label>
+                        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', marginTop: 10}}>
+                            <div>Create a new file:</div>
                             <Input
                                 style={{flex: 1, marginLeft: 10}}
                                 type="text"
@@ -144,7 +146,7 @@ class SaveLoad extends React.Component {
                         className={styles.block}
                         style={{flex: 1}}
                     >
-                        <Label>Your Files:</Label>
+                        <div>Your Files:</div>
                         <div style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
                             {fileNames.sort().map((key, index) => (
                                 <div
@@ -153,9 +155,7 @@ class SaveLoad extends React.Component {
                                     style={{display: 'flex', flexDirection: 'row', padding: 5, alignItems: 'center'}}
                                 >
                                     <div style={{flex: 2}}>
-                                        <Label>
-                                            {key}
-                                        </Label>
+                                        {key}
                                     </div>
                                     <div style={{display: 'flex', flexDirection: 'row'}}>
                                         <Button

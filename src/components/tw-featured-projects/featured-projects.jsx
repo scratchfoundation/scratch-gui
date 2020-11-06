@@ -5,12 +5,10 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
-import styles from './examples.css';
+import styles from './featured-projects.css';
 import {getIsLoading, getIsFetchingWithId, setProjectId} from '../../reducers/project-state';
 
-const studioId = '27205657';
-
-class Examples extends React.Component {
+class FeaturedProjects extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -42,7 +40,7 @@ class Examples extends React.Component {
             >
                 <div className={styles.projects}>
                     <StudioView
-                        id={studioId}
+                        id={this.props.studio}
                         onSelect={this.handleSelect}
                         disabled={this.props.loading}
                         placeholder={!opened}
@@ -54,9 +52,9 @@ class Examples extends React.Component {
                         >
                             <div className={styles.openerContent}>
                                 <FormattedMessage
-                                    defaultMessage="Click to view example projects."
-                                    description="Text to view example projects"
-                                    id="tw.examples.view"
+                                    defaultMessage="Click to view featured projects."
+                                    description="Text to view featured projects"
+                                    id="tw.viewFeaturedProjects"
                                 />
                             </div>
                         </div>
@@ -66,12 +64,12 @@ class Examples extends React.Component {
                     <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={`https://scratch.mit.edu/studios/${studioId}/`}
+                        href={`https://scratch.mit.edu/studios/${this.props.studio}/`}
                     >
                         <FormattedMessage
                             defaultMessage="View studio on Scratch."
-                            description="Link to turbowarp examples studio"
-                            id="tw.examples.studioLink"
+                            description="Link to turbowarp featured projects studio"
+                            id="tw.featuredProjectsStudio"
                         />
                     </a>
                 </div>
@@ -80,9 +78,10 @@ class Examples extends React.Component {
     }
 }
 
-Examples.propTypes = {
+FeaturedProjects.propTypes = {
     loading: PropTypes.bool,
-    setProjectId: PropTypes.func
+    setProjectId: PropTypes.func,
+    studio: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -97,4 +96,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Examples);
+)(FeaturedProjects);

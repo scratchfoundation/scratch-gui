@@ -49,5 +49,5 @@
 @media (display-mode: fullscreen) {
     .stage-wrapper.embedded {
         background-color: $ui-white;
-    }    
+    }
 }

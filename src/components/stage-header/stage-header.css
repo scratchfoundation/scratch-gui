@@ -30,7 +30,7 @@
 @media (display-mode: fullscreen) {
     .embedded {
         background-color: $ui-white;
-    }    
+    }
 }
 
 .stage-menu-wrapper {

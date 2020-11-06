@@ -33,3 +33,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* tw: support dark mode */
+@media (prefers-color-scheme: dark) {
+    .stage-wrapper.full-screen {
+        background-color: #111;
+    }
+}

@@ -14,7 +14,7 @@ import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
-import Examples from '../components/tw-examples/examples.jsx';
+import FeaturedProjects from '../components/tw-featured-projects/featured-projects.jsx';
 import Description from '../components/tw-description/description.jsx';
 
 import styles from './interface.css';
@@ -68,14 +68,14 @@ const Interface = ({
                         <div className={styles.section}>
                             <p>
                                 <FormattedMessage
-                                    defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing an example project below."
+                                    defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
                                     description="Description of TurboWarp"
                                     id="tw.home.description"
                                 />
                             </p>
                         </div>
                         <div className={styles.section}>
-                            <Examples />
+                            <FeaturedProjects studio="27205657" />
                         </div>
                         <footer className={classNames(styles.section, styles.footer)}>
                             <p>

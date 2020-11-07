@@ -54,6 +54,13 @@ var StudioView = function (studioId) {
     } else {
         this.intersectionObserver = null;
     }
+
+    // will be filled in by studioview.jsx
+    this.messages = {
+        AUTHOR_ATTRIBUTION: '',
+        PROJECT_HOVER_TEXT: '',
+        LOAD_ERROR: ''
+    };
 };
 
 /**
@@ -122,7 +129,7 @@ StudioView.prototype.placeholderToProject = function (el, id, title, author) {
     el.dataset.id = id;
     el.dataset.title = title;
     el.dataset.author = author;
-    el.title = StudioView.PROJECT_HOVER_TEXT.replace('$author', author).replace('$title', title);
+    el.title = this.messages.PROJECT_HOVER_TEXT.replace('$author', author).replace('$title', title);
     el.href = StudioView.PROJECT_PAGE.replace('$id', id);
 
     var thumbnailSrc = StudioView.THUMBNAIL_SRC.replace('$id', id);
@@ -130,7 +137,7 @@ StudioView.prototype.placeholderToProject = function (el, id, title, author) {
     el.thumbnailEl.appendChild(thumbnailImg);
 
     el.titleEl.innerText = title;
-    el.authorEl.innerText = StudioView.AUTHOR_ATTRIBUTION.replace('$author', author);
+    el.authorEl.innerText = this.messages.AUTHOR_ATTRIBUTION.replace('$author', author);
 
     el.addEventListener('click', this.handleClick.bind(this), true);
     el.addEventListener('keydown', this.handleKeyDown.bind(this), true);
@@ -143,7 +150,7 @@ StudioView.prototype.placeholderToProject = function (el, id, title, author) {
  */
 StudioView.prototype.addErrorElement = function () {
     var el = document.createElement('div');
-    el.innerText = StudioView.LOAD_ERROR;
+    el.innerText = this.messages.LOAD_ERROR;
     el.className = styles.studioviewError;
     this.projectList.appendChild(el);
 };
@@ -365,17 +372,6 @@ StudioView.PROJECT_PAGE = 'https://scratch.mit.edu/projects/$id/';
 // The URL for studio pages.
 // $id is replaced with the studio ID.
 StudioView.STUDIO_PAGE = 'https://scratch.mit.edu/studios/$id/';
-
-// The text to appear under a project to credit the author of the project.
-// $author is replaced with the author's name.
-StudioView.AUTHOR_ATTRIBUTION = 'by $author';
-
-// The text to appear when hovering over a project.
-// $title becomes the project's title, $author becomes the author's name.
-StudioView.PROJECT_HOVER_TEXT = '$title by $author';
-
-// Displayed when the next page of projects could not be loaded.
-StudioView.LOAD_ERROR = 'There was an error loading the next page of projects.';
 
 // The amount of "placeholders" to insert before the next page loads.
 StudioView.PLACEHOLDER_COUNT = 9;

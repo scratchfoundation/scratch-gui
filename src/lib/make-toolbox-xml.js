@@ -725,7 +725,6 @@ const myBlocks = function () {
 
 // tw: add custom category
 const turbowarp = function () {
-    // todo: translate name
     return `
     <category name="TurboWarp" id="turbowarp" colour="#FF4D4D" secondaryColour="#FF3D3D">
         <block type="control_if">

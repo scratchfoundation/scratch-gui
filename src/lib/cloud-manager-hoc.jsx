@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import bindAll from 'lodash.bindall';
 
 import VM from 'scratch-vm';
@@ -14,6 +15,15 @@ import {
     showAlertWithTimeout
 } from '../reducers/alerts';
 
+// tw: show warning when username is invalid
+const messages = defineMessages({
+    usernameError: {
+        defaultMessage: 'Can\'t connect to cloud variables because username is invalid. You can change it in Edit > Change Username.\n\nIt might be too long, contain invalid characters, or be used by someone else. (Current username: {username})',
+        description: 'Warning that appears when connecting to cloud variable server if the username is invalid',
+        id: 'tw.usernamePrompt'
+    }
+});
+
 /*
  * Higher Order Component to manage the connection to the cloud server.
  * @param {React.Component} WrappedComponent component to manage VM events for
@@ -25,7 +35,9 @@ const cloudManagerHOC = function (WrappedComponent) {
             super(props);
             this.cloudProvider = null;
             bindAll(this, [
-                'handleCloudDataUpdate'
+                'handleCloudDataUpdate',
+                // tw: show warning when username is invalid
+                'onInvalidUsername'
             ]);
 
             this.props.vm.on('HAS_CLOUD_DATA_UPDATE', this.handleCloudDataUpdate);
@@ -92,6 +104,8 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.props.vm,
                 this.props.username,
                 this.props.projectId);
+            // tw: show warning when username is invalid
+            this.cloudProvider.onInvalidUsername = this.onInvalidUsername;
             this.props.vm.setCloudProvider(this.cloudProvider);
         }
         disconnectFromCloud () {
@@ -108,6 +122,13 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.props.onShowCloudInfo();
                 this.connectToCloud();
             }
+        }
+        // tw: show warning when username is invalid
+        onInvalidUsername (username) {
+            // eslint-disable-next-line no-alert
+            alert(this.props.intl.formatMessage(messages.usernameError, {
+                username
+            }));
         }
         render () {
             const {
@@ -138,6 +159,8 @@ const cloudManagerHOC = function (WrappedComponent) {
         cloudHost: PropTypes.string,
         hasCloudPermission: PropTypes.bool,
         isShowingWithId: PropTypes.bool.isRequired,
+        // tw: needs intl for username error message
+        intl: intlShape.isRequired,
         onShowCloudInfo: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
@@ -170,11 +193,12 @@ const cloudManagerHOC = function (WrappedComponent) {
         {}, stateProps, dispatchProps, ownProps
     );
 
-    return connect(
+    // tw: needs intl for username error message
+    return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps,
         mergeProps
-    )(CloudManager);
+    )(CloudManager));
 };
 
 export default cloudManagerHOC;

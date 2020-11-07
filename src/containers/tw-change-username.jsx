@@ -2,7 +2,16 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import {setUsername} from '../reducers/tw';
+
+const messages = defineMessages({
+    usernamePrompt: {
+        defaultMessage: 'New username:',
+        description: 'Prompt asking user to select new username',
+        id: 'tw.usernamePrompt'
+    }
+});
 
 class ChangeUsername extends React.Component {
     constructor (props) {
@@ -12,9 +21,8 @@ class ChangeUsername extends React.Component {
         ]);
     }
     changeUsername () {
-        // todo: translate
         // eslint-disable-next-line no-alert
-        const newUsername = prompt('New username:', this.props.username);
+        const newUsername = prompt(this.props.intl.formatMessage(messages.usernamePrompt), this.props.username);
         if (newUsername === null) {
             return;
         }
@@ -28,7 +36,8 @@ class ChangeUsername extends React.Component {
 ChangeUsername.propTypes = {
     children: PropTypes.func,
     username: PropTypes.string,
-    onUsernameChange: PropTypes.func
+    onUsernameChange: PropTypes.func,
+    intl: intlShape.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -41,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ChangeUsername);
+)(ChangeUsername));

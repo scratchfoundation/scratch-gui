@@ -99,10 +99,9 @@ class LoaderComponent extends React.Component {
         }
     }
     updateMessage () {
-        if (!this.message) {
-            return;
-        }
-        if (this._state === 1) {
+        if (this._state === 0) {
+            this.message.textContent = this.props.intl.formatMessage(messages.generic);
+        } else if (this._state === 1) {
             this.message.textContent = this.props.intl.formatMessage(messages.projectData);
         } else if (this.total > 0) {
             this.message.textContent = this.props.intl.formatMessage(messages.assetsKnown, {
@@ -118,9 +117,6 @@ class LoaderComponent extends React.Component {
     }
     messageRef (element) {
         this.message = element;
-        if (this.message) {
-            this.message.textContent = this.props.intl.formatMessage(messages.generic);
-        }
     }
     render () {
         return (

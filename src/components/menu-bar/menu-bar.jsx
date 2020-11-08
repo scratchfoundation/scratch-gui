@@ -680,36 +680,43 @@ class MenuBar extends React.Component {
                                     <MenuItemLink href="https://github.com/TurboWarp">
                                         <FormattedMessage
                                             defaultMessage="Source Code"
-                                            description="Text for source code link in the Help menu"
+                                            description="Menu bar item for source code link"
                                             id="tw.menuBar.code"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
                                         <FormattedMessage
                                             defaultMessage="Feedback & Bugs"
-                                            description="Text for feedback link in the Help menu"
+                                            description="Menu bar item for feedback link"
                                             id="tw.menuBar.feedback"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="/privacy.html">
                                         <FormattedMessage
                                             defaultMessage="Privacy"
-                                            description="Text for privacy policy link in the Help menu"
+                                            description="Menu bar item for privacy policy link"
                                             id="tw.menuBar.privacy"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Embedding">
                                         <FormattedMessage
                                             defaultMessage="Embedding"
-                                            description="Text for embedding link in the Help menu"
+                                            description="Menu bar item for embedding link"
                                             id="tw.menuBar.embed"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters">
                                         <FormattedMessage
                                             defaultMessage="URL Parameters"
-                                            description="Text for url parameters link in the Help menu"
+                                            description="Menu bar item for URL parameters link"
                                             id="tw.menuBar.parameters"
+                                        />
+                                    </MenuItemLink>
+                                    <MenuItemLink href="https://github.com/TurboWarp/translations/issues/1">
+                                        <FormattedMessage
+                                            defaultMessage="Help translate TurboWarp"
+                                            description="Menu bar item for translating TurboWarp link"
+                                            id="tw.menuBar.translate"
                                         />
                                     </MenuItemLink>
                                 </MenuSection>

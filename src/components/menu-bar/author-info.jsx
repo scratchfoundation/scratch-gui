@@ -41,7 +41,11 @@ const AuthorInfo = ({
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <span className={styles.projectTitle}>
+                    {/* tw: full project title as hover text */}
+                    <span
+                        className={styles.projectTitle}
+                        title={projectTitle}
+                    >
                         {projectTitle}
                     </span>
                 </a>

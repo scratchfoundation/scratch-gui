@@ -603,6 +603,13 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseSettings}
                             >
                                 <MenuSection>
+                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings">
+                                        <FormattedMessage
+                                            defaultMessage="Advanced Settings Help"
+                                            description="Menu bar item for advanced settings help"
+                                            id="tw.menuBar.advancedHelp"
+                                        />
+                                    </MenuItemLink>
                                     <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
                                         <MenuItem onClick={toggleHighQualityPen}>
                                             {highQualityPen ? (
@@ -714,7 +721,7 @@ class MenuBar extends React.Component {
                                     </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/translations/issues/1">
                                         <FormattedMessage
-                                            defaultMessage="Help translate TurboWarp"
+                                            defaultMessage="Help Translate TurboWarp"
                                             description="Menu bar item for translating TurboWarp link"
                                             id="tw.menuBar.translate"
                                         />

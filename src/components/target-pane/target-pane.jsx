@@ -82,9 +82,11 @@ const TargetPane = ({
             {stage.id && <StageSelector
                 asset={
                     stage.costume &&
-                    stage.costume.asset
+                    // TODO: set correct prop type for this
+                    stage.costume.asset // eslint-disable-line react/prop-types
                 }
-                backdropCount={stage.costumeCount}
+                // TODO: set correct prop type for this
+                backdropCount={stage.costumeCount} // eslint-disable-line react/prop-types
                 id={stage.id}
                 selected={stage.id === editingTarget}
                 onSelect={onSelectSprite}

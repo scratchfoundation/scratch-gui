@@ -196,7 +196,8 @@ class MenuBar extends React.Component {
             'handleArtieStudentChange',
             'handleArtieLogged',
             'handleClickArtieExercisesOk',
-            'handleArtieExerciseChange'
+            'handleArtieExerciseChange',
+            'handleClickFinishExercise'
         ]);
     }
     componentDidMount () {
@@ -315,12 +316,19 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            console.log(canvasUrl); //Maybe blank, maybe full image, maybe half of image
             sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, canvasUrl);
         });
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null);
+    }
+    handleClickFinishExercise(){
+        const body = document.querySelector('body');
+        var canvasUrl = '';
+        html2canvas(body).then(canvas => {
+            canvasUrl = canvas.toDataURL('image/png');
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false, true, canvasUrl);
+        });
     }
     handleClickArtieLoginOk(){
         //If the user has not logged
@@ -639,6 +647,19 @@ class MenuBar extends React.Component {
                                                 defaultMessage="Request help"
                                                 description="Menu bar item for requesting help"
                                                 id="gui.menuBar.artie.requestHelp"
+                                            />
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    <div></div>
+                                }
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickFinishExercise}>
+                                            <FormattedMessage
+                                                defaultMessage="Finish exercise"
+                                                description="Menu bar item for finish the exercise"
+                                                id="gui.menuBar.artie.finishExercise"
                                             />
                                         </MenuItem>
                                     </MenuSection>

@@ -61,7 +61,7 @@ const getItemImageSource = function (item) {
     }
 
     // TODO: adjust libraries to be more storage-friendly; don't use split() here.
-    const md5 = item.md5 || item.baseLayerMD5;
+    const md5 = item.costumes ? item.costumes[0].md5ext : item.md5ext;
     if (md5) {
         const [assetId, fileExtension] = md5.split('.');
         return {
@@ -266,7 +266,8 @@ class LibraryComponent extends React.Component {
                             extensionId={dataItem.extensionId}
                             featured={dataItem.featured}
                             hidden={dataItem.hidden}
-                            iconSource={iconSource}
+                            iconMd5={dataItem.costumes ? dataItem.costumes[0].md5ext : dataItem.md5ext}
+                            iconRawURL={dataItem.rawURL}
                             icons={icons}
                             id={index}
                             insetIconURL={dataItem.insetIconURL}

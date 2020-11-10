@@ -88,12 +88,21 @@ export default {
         }, {
             title: (
                 <FormattedMessage
-                    defaultMessage="Click the green flag to start"
+                    defaultMessage="Add a say block"
                     description="Step name for 'Add A Say Block' step"
-                    id="gui.howtos.add-a-move-block.step_stepMoveSayHello"
+                    id="gui.howtos.add-a-move-block.step_stepSay"
                 />
             ),
-            image: 'introSayHello'
+            image: 'introSay'
+        }, {
+            title: (
+                <FormattedMessage
+                    defaultMessage="Click the green flag to start"
+                    description="Step name for 'Add A Green Flag' step"
+                    id="gui.howtos.add-a-move-block.step_stepGreenFlag"
+                />
+            ),
+            image: 'introGreenFlag'
         }, {
             deckIds: [
                 'add-a-backdrop',
@@ -710,7 +719,7 @@ export default {
             image: 'animateCharChangeColor'
         }, {
             deckIds: [
-                'Chase-Game',
+                'code-cartoon',
                 'Tell-A-Story'
             ]
         }
@@ -1463,7 +1472,7 @@ export default {
         }, {
             deckIds: [
                 'animate-a-name',
-                'Make-Music'
+                'talking'
             ]
         }
         ],
@@ -1734,7 +1743,7 @@ export default {
             image: 'glideAroundPoint'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'Tell-A-Story',
                 'switch-costume'
             ]
         }],
@@ -1899,7 +1908,7 @@ export default {
             image: 'switchCostumes'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'imagine',
                 'add-effects'
             ]
         }],
@@ -1938,7 +1947,7 @@ export default {
             image: 'moveArrowKeysUpDown'
         }, {
             deckIds: [
-                'add-a-backdrop',
+                'make-it-fly',
                 'switch-costume'
             ]
         }],
@@ -1970,7 +1979,7 @@ export default {
         }, {
             deckIds: [
                 'add-a-backdrop',
-                'switch-costume'
+                'code-cartoon'
             ]
         }],
         urlId: 'add-effects'

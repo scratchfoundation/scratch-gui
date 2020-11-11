@@ -14,6 +14,7 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                alerts,
                 isPlayerOnly,
                 onShowWarning,
                 /* eslint-enable no-unused-vars */

@@ -74,7 +74,7 @@ class LoaderComponent extends React.Component {
     }
     componentDidMount () {
         progressMonitor.setProgressHandler(this.handleProgressChange);
-        this.update();
+        this.updateMessage();
     }
     componentDidUpdate () {
         this.update();

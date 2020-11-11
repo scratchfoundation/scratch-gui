@@ -1,15 +1,9 @@
-import es from './languages/es.json';
-import ja from './languages/ja.json';
-
-const languages = {
-    es,
-    ja
-};
+import translations from './translations.json';
 
 const mergeMessages = messages => {
-    for (const language of Object.keys(languages)) {
+    for (const language of Object.keys(translations)) {
         const languageMessages = messages[language];
-        const newMessages = languages[language];
+        const newMessages = translations[language];
         for (const messageId of Object.keys(newMessages)) {
             languageMessages[messageId] = newMessages[messageId];
         }

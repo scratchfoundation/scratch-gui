@@ -19,6 +19,8 @@ import unFullScreenIcon from './icon--unfullscreen.svg';
 import scratchLogo from '../menu-bar/scratch-logo.svg';
 import styles from './stage-header.css';
 
+import FullscreenAPI from '../../lib/tw-fullscreen-api';
+
 const messages = defineMessages({
     largeStageSizeMessage: {
         defaultMessage: 'Switch to large stage',
@@ -65,7 +67,9 @@ const StageHeaderComponent = function (props) {
 
     if (isFullScreen || isEmbedded) {
         const stageDimensions = getStageDimensions(null, true);
-        const stageButton = isFullScreen ? (
+        const stageButton = isEmbedded && !FullscreenAPI.available() ? (
+            null
+        ) : isFullScreen ? (
             <Button
                 className={styles.stageButton}
                 onClick={onSetStageUnFull}

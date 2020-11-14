@@ -34,7 +34,8 @@ const base = {
             rewrites: [
                 {from: /^\/\d+\/?$/, to: '/index.html'},
                 {from: /^\/\d+\/fullscreen\/?$/, to: '/fullscreen.html'},
-                {from: /^\/\d+\/editor\/?$/, to: '/editor.html'}
+                {from: /^\/\d+\/editor\/?$/, to: '/editor.html'},
+                {from: /^\/\d+\/embed\/?$/, to: '/embed.html'}
             ]
         }
     },

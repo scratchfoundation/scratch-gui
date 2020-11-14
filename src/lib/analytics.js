@@ -31,7 +31,9 @@ if (enabled) {
                 // Don't include project IDs
                 .replace(/\d/g, '')
                 // Removing project IDs might result in multiple slashes: //editor, so merge multiple slashes
-                .replace(/\/+/g, '/');
+                .replace(/\/+/g, '/')
+                // Remove .html so that old /fullscreen.html links will be logged as /fullscreen
+                .replace('.html', '');
 
             const req = new XMLHttpRequest();
             req.open('POST', PLAUSIBLE_API, true);

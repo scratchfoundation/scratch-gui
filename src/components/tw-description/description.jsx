@@ -14,9 +14,7 @@ const decorate = text => {
             href={`https://scratch.mit.edu/users/${match}/`}
             rel="noreferrer"
             key={match + i}
-        >
-            {`@${match}`}
-        </a>
+        >{`@${match}`}</a>
     ));
 
     // Make links clickable
@@ -26,9 +24,15 @@ const decorate = text => {
             href={match}
             rel="noreferrer"
             key={match + i}
-        >
-            {match}
-        </a>
+        >{match}</a>
+    ));
+
+    // Make hashtags clickable
+    text = reactStringReplace(text, /#([\w-]+)/g, (match, i) => (
+        <a
+            href={`https://scratch.mit.edu/search/projects?q=${match}`}
+            key={match + i}
+        >{`#${match}`}</a>
     ));
 
     return text;

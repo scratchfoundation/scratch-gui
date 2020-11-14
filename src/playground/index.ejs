@@ -15,21 +15,34 @@
         position: absolute; width: 100%; height: 100%; top: 0; left: 0;
         display: flex; align-items: center; justify-content: center; text-align: center;
       }
-      #splash h1 { font-size: 2rem; font-weight: bold; }
-      #splash a { color: inherit; text-decoration: underline; }
-      .tw-loaded #splash { display: none; }
+      #splash h1 { font-size: 2rem; font-weight: bold; } #splash a { color: inherit; }
+      .tw-loaded #splash, #splash-content { display: none; }
       @media (prefers-color-scheme: dark) { #splash { background-color: #333; color: #ddd; } }
     </style>
   </head>
   <body>
     <div id="splash" aria-hidden="true">
-      <div>
-        <h1>Loading scripts</h1>
-        <p>This may take a while …</p>
-        <p><a href="https://github.com/TurboWarp/scratch-gui/wiki/Troubleshooting" target="_blank" rel="noopener">Troubleshooting</a></p>
-        <noscript><p>Enable JavaScript.</p></noscript>
+      <noscript>
+        <h1>Enable JavaScript</h1>
+      </noscript>
+      <div id="splash-content">
+        <h1 id="splash-title">Loading scripts</h1>
+        <p id="splash-subtitle">This may take a while …</p>
+        <p><a id="splash-troubleshooting" href="https://github.com/TurboWarp/scratch-gui/wiki/Troubleshooting" target="_blank" rel="noopener">Troubleshooting</a></p>
       </div>
     </div>
+    <script>
+      (function() {
+        var languages = {};
+        var messages = languages[(window.navigator.userLanguage || window.navigator.language || '').split('-')[0].toLowerCase()];
+        if (messages) {
+          document.querySelector('#splash-title').textContent = messages[0];
+          document.querySelector('#splash-subtitle').textContent = messages[1];
+          document.querySelector('#splash-troubleshooting').textContent = messages[2];
+        }
+        document.querySelector('#splash-content').style.display = 'block';
+      })();
+    </script>
     <div id="app"></div>
   </body>
 </html>

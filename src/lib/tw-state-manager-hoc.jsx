@@ -336,7 +336,7 @@ const TWStateManager = function (WrappedComponent) {
                     isFullScreen: this.props.isFullScreen
                 };
                 const newPath = this.router.generateURL(routerState);
-                if (newPath !== oldPath) {
+                if (newPath && newPath !== oldPath) {
                     history.pushState(null, null, newPath);
                 }
             }

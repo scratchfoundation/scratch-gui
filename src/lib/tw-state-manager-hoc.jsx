@@ -325,13 +325,13 @@ const TWStateManager = function (WrappedComponent) {
             }
 
             if (
-                this.props.projectId !== prevProps.projectId ||
+                this.props.reduxProjectId !== prevProps.reduxProjectId ||
                 this.props.isPlayerOnly !== prevProps.isPlayerOnly ||
                 this.props.isFullScreen !== prevProps.isFullScreen
             ) {
                 const oldPath = `${location.pathname}${location.search}${location.hash}`;
                 const routerState = {
-                    projectId: this.props.projectId,
+                    projectId: this.props.reduxProjectId,
                     isPlayerOnly: this.props.isPlayerOnly,
                     isFullScreen: this.props.isFullScreen
                 };
@@ -362,7 +362,7 @@ const TWStateManager = function (WrappedComponent) {
                 onSetIsPlayerOnly,
                 onSetProjectId,
                 onSetUsername,
-                projectId,
+                reduxProjectId,
                 routingStyle,
                 username,
                 vm,
@@ -385,7 +385,7 @@ const TWStateManager = function (WrappedComponent) {
         onSetIsPlayerOnly: PropTypes.func,
         onSetProjectId: PropTypes.func,
         onSetUsername: PropTypes.func,
-        projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         routingStyle: PropTypes.oneOf(Object.keys(routers)),
         username: PropTypes.string,
         vm: PropTypes.instanceOf(VM)
@@ -396,7 +396,7 @@ const TWStateManager = function (WrappedComponent) {
     const mapStateToProps = state => ({
         isFullScreen: state.scratchGui.mode.isFullScreen,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-        projectId: state.scratchGui.projectState.projectId,
+        reduxProjectId: state.scratchGui.projectState.projectId,
         username: state.scratchGui.tw.username,
         vm: state.scratchGui.vm
     });

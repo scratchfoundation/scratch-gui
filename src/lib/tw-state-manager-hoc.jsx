@@ -281,6 +281,12 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.vm.setTurboMode(true);
             }
 
+            if (urlParams.has('stuck')) {
+                this.props.vm.setCompilerOptions({
+                    warpTimer: true
+                });
+            }
+
             if (urlParams.has('project_url')) {
                 const projectUrl = urlParams.get('project_url');
                 this.props.onProjectFetchStarted();

@@ -87,6 +87,7 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         isShared,
+        isWindowFullScreen,
         loading,
         logo,
         renderLogin,
@@ -141,19 +142,25 @@ const GUIComponent = props => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
 
         return isPlayerOnly ? (
-            <StageWrapper
-                isFullScreen={isFullScreen}
-                isEmbedded={isEmbedded}
-                isRendererSupported={isRendererSupported}
-                isRtl={isRtl}
-                loading={loading}
-                stageSize={STAGE_SIZE_MODES.large}
-                vm={vm}
-            >
-                {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
+            <React.Fragment>
+                {/* tw: when window is fullscreen, put a solid white background behind the stage */}
+                {isWindowFullScreen ? (
+                    <div className={styles.fullscreenBackground} />
                 ) : null}
-            </StageWrapper>
+                <StageWrapper
+                    isFullScreen={isFullScreen}
+                    isEmbedded={isEmbedded}
+                    isRendererSupported={isRendererSupported}
+                    isRtl={isRtl}
+                    loading={loading}
+                    stageSize={STAGE_SIZE_MODES.large}
+                    vm={vm}
+                >
+                    {alertsVisible ? (
+                        <Alerts className={styles.alertsContainer} />
+                    ) : null}
+                </StageWrapper>
+            </React.Fragment>
         ) : (
             <Box
                 className={styles.pageWrapper}
@@ -391,6 +398,7 @@ GUIComponent.propTypes = {
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
+    isWindowFullScreen: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
     onActivateCostumesTab: PropTypes.func,
@@ -445,6 +453,7 @@ GUIComponent.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
     // This is the button's mode, as opposed to the actual current state
     stageSizeMode: state.scratchGui.stageSize.stageSize
 });

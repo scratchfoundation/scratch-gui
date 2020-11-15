@@ -45,9 +45,3 @@
 .stage-wrapper.embedded {
     background-color: transparent;
 }
-/* unless in fullscreen mode */
-@media (display-mode: fullscreen) {
-    .stage-wrapper.embedded {
-        background-color: $ui-white;
-    }
-}

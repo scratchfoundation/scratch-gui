@@ -17,6 +17,7 @@ const TWFullScreenHOC = function (WrappedComponent) {
         }
         componentDidMount () {
             document.addEventListener('fullscreenchange', this.handleFullScreenChange);
+            document.addEventListener('webkitfullscreenchange', this.handleFullScreenChange);
         }
         shouldComponentUpdate (nextProps) {
             return this.props.isFullScreen !== nextProps.isFullScreen;
@@ -32,9 +33,10 @@ const TWFullScreenHOC = function (WrappedComponent) {
         }
         componentWillUnmount () {
             document.removeEventListener('fullscreenchange', this.handleFullScreenChange);
+            document.removeEventListener('webkitfullscreenchange', this.handleFullScreenChange);
         }
         handleFullScreenChange () {
-            const isFullScreen = !!document.fullscreenElement;
+            const isFullScreen = FullscreenAPI.enabled();
             this.props.onSetWindowIsFullScreen(isFullScreen);
             this.props.onSetIsFullScreen(isFullScreen);
         }

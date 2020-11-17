@@ -727,19 +727,8 @@ const myBlocks = function () {
 const turbowarp = function () {
     return `
     <category name="TurboWarp" id="turbowarp" colour="#FF4D4D" secondaryColour="#FF3D3D">
-        <block type="control_if">
-            <value name="CONDITION">
-                <block type="argument_reporter_boolean">
-                    <field name="VALUE">is compiled?</field>
-                </block>
-            </value>
-        </block>
-        <block type="control_if_else">
-            <value name="CONDITION">
-                <block type="argument_reporter_boolean">
-                    <field name="VALUE">is compiled?</field>
-                </block>
-            </value>
+        <block type="argument_reporter_boolean">
+            <field name="VALUE">is compiled?</field>
         </block>
         <block type="argument_reporter_string_number">
             <field name="VALUE">last key pressed</field>

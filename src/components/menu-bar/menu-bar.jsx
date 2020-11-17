@@ -820,9 +820,9 @@ class MenuBar extends React.Component {
                             {/* todo: icon */}
                             <Button className={styles.feedbackButton}>
                                 <FormattedMessage
-                                    defaultMessage="Give Feedback"
+                                    defaultMessage="TurboWarp Feedback"
                                     description="Text for the giving feedback button"
-                                    id="tw.giveFeedback"
+                                    id="tw.feedback"
                                 />
                             </Button>
                         </a>

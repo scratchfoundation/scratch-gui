@@ -88,7 +88,7 @@ const vmListenerHOC = function (WrappedComponent) {
         handleCompileError (target, error) {
             const errorMessage = `${error}`;
             // Ignore certain types of known errors
-            if (errorMessage.includes('running from flyout?')) {
+            if (errorMessage.includes('running from toolbox?')) {
                 return;
             }
             // Send an analytics event the first time this happens

@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
 
         // tw: Track error event. Error message will be included when plausible's custom props are ready.
         if (recommendedBrowser()) {
-            analytics.twEvent('Error');
+            analytics.twEvent('Crash');
         }
 
         // Display fallback UI

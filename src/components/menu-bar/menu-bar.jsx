@@ -804,11 +804,11 @@ class MenuBar extends React.Component {
                                             </MenuItemLink>
                                         </MenuSection>
                                         <MenuSection>
-                                            {this.props.compileErrors.map(({id, target, error}) => (
+                                            {this.props.compileErrors.map(({id, sprite, error}) => (
                                                 <MenuItem key={id}>
                                                     {this.props.intl.formatMessage(twMessages.compileError, {
-                                                        sprite: target.getName(),
-                                                        error: `${error}`
+                                                        sprite,
+                                                        error
                                                     })}
                                                 </MenuItem>
                                             ))}
@@ -925,8 +925,8 @@ MenuBar.propTypes = {
     canShare: PropTypes.bool,
     className: PropTypes.string,
     compileErrors: PropTypes.arrayOf(PropTypes.shape({
-        target: PropTypes.object,
-        error: PropTypes.object,
+        sprite: PropTypes.string,
+        error: PropTypes.string,
         id: PropTypes.number
     })),
     confirmReadyToReplaceProject: PropTypes.func,

@@ -86,14 +86,19 @@ const vmListenerHOC = function (WrappedComponent) {
         }
         // tw: handling for compile errors
         handleCompileError (target, error) {
+            const errorMessage = `${error}`;
+            // Ignore certain types of known errors
+            if (errorMessage.includes('running from flyout?')) {
+                return;
+            }
             // Send an analytics event the first time this happens
             if (!sentCompileErrorEvent) {
                 sentCompileErrorEvent = true;
                 analytics.twEvent('Compile Error');
             }
             this.props.onCompileError({
-                target,
-                error,
+                sprite: target.getName(),
+                error: errorMessage,
                 id: compileErrorCounter++
             });
         }

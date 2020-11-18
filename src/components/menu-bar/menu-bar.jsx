@@ -83,6 +83,7 @@ import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 import aboutIcon from './icon--about.svg';
+import errorIcon from './tw-error.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
@@ -763,61 +764,6 @@ class MenuBar extends React.Component {
                             username={this.props.authorUsername}
                         />
                     ) : null)}
-                    {/* tw: display compile errors */}
-                    {this.props.compileErrors.length > 0 ? (
-                        <React.Fragment>
-                            <Divider className={classNames(styles.divider)} />
-                            <div className={styles.fileGroup}>
-                                <div
-                                    className={classNames(styles.menuBarItem, styles.hoverable, {
-                                        [styles.active]: this.props.errorsMenuOpen
-                                    })}
-                                    onMouseUp={this.props.onClickErrors}
-                                >
-                                    <div className={classNames(styles.errorsMenu)}>
-                                        <FormattedMessage
-                                            defaultMessage="Errors"
-                                            description="Text for compile errors menu"
-                                            id="tw.menuBar.errors"
-                                        />
-                                    </div>
-                                    <MenuBarMenu
-                                        className={classNames(styles.menuBarMenu)}
-                                        open={this.props.errorsMenuOpen}
-                                        place={this.props.isRtl ? 'left' : 'right'}
-                                        onRequestClose={this.props.onRequestCloseErrors}
-                                    >
-                                        <MenuSection>
-                                            <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
-                                                <FormattedMessage
-                                                    defaultMessage="Some scripts could not be compiled."
-                                                    description="Menu bar item for advanced settings help"
-                                                    id="tw.menuBar.reportError1"
-                                                />
-                                            </MenuItemLink>
-                                            <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
-                                                <FormattedMessage
-                                                    defaultMessage="This is a bug; please report it."
-                                                    description="Menu bar item for advanced settings help"
-                                                    id="tw.menuBar.reportError2"
-                                                />
-                                            </MenuItemLink>
-                                        </MenuSection>
-                                        <MenuSection>
-                                            {this.props.compileErrors.map(({id, sprite, error}) => (
-                                                <MenuItem key={id}>
-                                                    {this.props.intl.formatMessage(twMessages.compileError, {
-                                                        sprite,
-                                                        error
-                                                    })}
-                                                </MenuItem>
-                                            ))}
-                                        </MenuSection>
-                                    </MenuBarMenu>
-                                </div>
-                            </div>
-                        </React.Fragment>
-                    ) : null}
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
@@ -893,6 +839,54 @@ class MenuBar extends React.Component {
                             </Button>
                         </a>
                     </div>
+                    {/* tw: display compile errors */}
+                    {this.props.compileErrors.length > 0 ? (
+                        <div className={styles.fileGroup}>
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable, {
+                                    [styles.active]: this.props.errorsMenuOpen
+                                })}
+                                onMouseUp={this.props.onClickErrors}
+                            >
+                                <div className={classNames(styles.errorsMenu)}>
+                                    <img src={errorIcon} />
+                                </div>
+                                <MenuBarMenu
+                                    className={classNames(styles.menuBarMenu)}
+                                    open={this.props.errorsMenuOpen}
+                                    place={this.props.isRtl ? 'left' : 'right'}
+                                    onRequestClose={this.props.onRequestCloseErrors}
+                                >
+                                    <MenuSection>
+                                        <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                                            <FormattedMessage
+                                                defaultMessage="Some scripts could not be compiled."
+                                                description="Menu bar item for advanced settings help"
+                                                id="tw.menuBar.reportError1"
+                                            />
+                                        </MenuItemLink>
+                                        <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                                            <FormattedMessage
+                                                defaultMessage="This is a bug. Please report it."
+                                                description="Menu bar item for advanced settings help"
+                                                id="tw.menuBar.reportError2"
+                                            />
+                                        </MenuItemLink>
+                                    </MenuSection>
+                                    <MenuSection>
+                                        {this.props.compileErrors.map(({id, sprite, error}) => (
+                                            <MenuItem key={id}>
+                                                {this.props.intl.formatMessage(twMessages.compileError, {
+                                                    sprite,
+                                                    error
+                                                })}
+                                            </MenuItem>
+                                        ))}
+                                    </MenuSection>
+                                </MenuBarMenu>
+                            </div>
+                        </div>
+                    ) : null}
                 </div>
 
                 <div className={styles.accountInfoGroup}>

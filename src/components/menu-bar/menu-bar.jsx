@@ -61,6 +61,9 @@ import {
     openHelpMenu,
     closeHelpMenu,
     helpMenuOpen,
+    openErrorsMenu,
+    closeErrorsMenu,
+    errorsMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,
@@ -97,6 +100,14 @@ const ariaMessages = defineMessages({
         id: 'gui.menuBar.tutorialsLibrary',
         defaultMessage: 'Tutorials',
         description: 'accessibility text for the tutorials button'
+    }
+});
+
+const twMessages = defineMessages({
+    compileError: {
+        id: 'tw.menuBar.compileError',
+        defaultMessage: '{sprite}: {error}',
+        description: 'Error message in errors dropdown'
     }
 });
 
@@ -752,6 +763,61 @@ class MenuBar extends React.Component {
                             username={this.props.authorUsername}
                         />
                     ) : null)}
+                    {/* tw: display compile errors */}
+                    {this.props.compileErrors.length > 0 ? (
+                        <React.Fragment>
+                            <Divider className={classNames(styles.divider)} />
+                            <div className={styles.fileGroup}>
+                                <div
+                                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                                        [styles.active]: this.props.errorsMenuOpen
+                                    })}
+                                    onMouseUp={this.props.onClickErrors}
+                                >
+                                    <div className={classNames(styles.errorsMenu)}>
+                                        <FormattedMessage
+                                            defaultMessage="Errors"
+                                            description="Text for compile errors menu"
+                                            id="tw.menuBar.errors"
+                                        />
+                                    </div>
+                                    <MenuBarMenu
+                                        className={classNames(styles.menuBarMenu)}
+                                        open={this.props.errorsMenuOpen}
+                                        place={this.props.isRtl ? 'left' : 'right'}
+                                        onRequestClose={this.props.onRequestCloseErrors}
+                                    >
+                                        <MenuSection>
+                                            <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                                                <FormattedMessage
+                                                    defaultMessage="Some scripts could not be compiled."
+                                                    description="Menu bar item for advanced settings help"
+                                                    id="tw.menuBar.reportError1"
+                                                />
+                                            </MenuItemLink>
+                                            <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
+                                                <FormattedMessage
+                                                    defaultMessage="This is a bug; please report it."
+                                                    description="Menu bar item for advanced settings help"
+                                                    id="tw.menuBar.reportError2"
+                                                />
+                                            </MenuItemLink>
+                                        </MenuSection>
+                                        <MenuSection>
+                                            {this.props.compileErrors.map(({id, target, error}) => (
+                                                <MenuItem key={id}>
+                                                    {this.props.intl.formatMessage(twMessages.compileError, {
+                                                        sprite: target.getName(),
+                                                        error: `${error}`
+                                                    })}
+                                                </MenuItem>
+                                            ))}
+                                        </MenuSection>
+                                    </MenuBarMenu>
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    ) : null}
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
@@ -858,6 +924,11 @@ MenuBar.propTypes = {
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
     className: PropTypes.string,
+    compileErrors: PropTypes.arrayOf(PropTypes.shape({
+        target: PropTypes.object,
+        error: PropTypes.object,
+        id: PropTypes.number
+    })),
     confirmReadyToReplaceProject: PropTypes.func,
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
@@ -887,6 +958,8 @@ MenuBar.propTypes = {
     onRequestCloseSettings: PropTypes.func,
     onClickHelp: PropTypes.func,
     onRequestCloseHelp: PropTypes.func,
+    onClickErrors: PropTypes.func,
+    onRequestCloseErrors: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -905,6 +978,7 @@ MenuBar.propTypes = {
     sessionExists: PropTypes.bool,
     settingsMenuOpen: PropTypes.bool,
     helpMenuOpen: PropTypes.bool,
+    errorsMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
@@ -924,6 +998,7 @@ const mapStateToProps = (state, ownProps) => {
         accountMenuOpen: accountMenuOpen(state),
         authorThumbnailUrl: state.scratchGui.tw.author.thumbnail,
         authorUsername: state.scratchGui.tw.author.username,
+        compileErrors: state.scratchGui.tw.compileErrors,
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
@@ -938,6 +1013,7 @@ const mapStateToProps = (state, ownProps) => {
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         settingsMenuOpen: settingsMenuOpen(state),
         helpMenuOpen: helpMenuOpen(state),
+        errorsMenuOpen: errorsMenuOpen(state),
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
@@ -963,6 +1039,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseSettings: () => dispatch(closeSettingMenu()),
     onClickHelp: () => dispatch(openHelpMenu()),
     onRequestCloseHelp: () => dispatch(closeHelpMenu()),
+    onClickErrors: () => dispatch(openErrorsMenu()),
+    onRequestCloseErrors: () => dispatch(closeErrorsMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),

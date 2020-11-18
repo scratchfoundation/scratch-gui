@@ -7,6 +7,7 @@ const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_DIMENSIONS = 'tw/SET_DIMENSIONS';
 const SET_AUTHOR = 'tw/SET_AUTHOR';
 const SET_DESCRIPTION = 'tw/SET_DESCRIPTION';
+const COMPILE_ERROR = 'tw/COMPILE_ERROR';
 
 export const initialState = {
     framerate: 30,
@@ -26,7 +27,8 @@ export const initialState = {
     description: {
         instructions: '',
         credits: ''
-    }
+    },
+    compileErrors: []
 };
 
 const reducer = function (state, action) {
@@ -67,6 +69,13 @@ const reducer = function (state, action) {
     case SET_DESCRIPTION:
         return Object.assign({}, state, {
             description: action.description
+        });
+    case COMPILE_ERROR:
+        return Object.assign({}, state, {
+            compileErrors: [
+                action.error,
+                ...state.compileErrors.slice(0, 4)
+            ]
         });
     default:
         return state;
@@ -136,6 +145,13 @@ const setDescription = function (description) {
     };
 };
 
+const compileError = function (error) {
+    return {
+        type: COMPILE_ERROR,
+        error: error
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -147,5 +163,6 @@ export {
     setIsWindowFullScreen,
     setDimensions,
     setAuthor,
-    setDescription
+    setDescription,
+    compileError
 };

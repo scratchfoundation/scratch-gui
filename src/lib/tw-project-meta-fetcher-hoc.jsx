@@ -5,6 +5,7 @@ import log from './log';
 
 import {setProjectTitle} from '../reducers/project-title';
 import {setAuthor, setDescription} from '../reducers/tw';
+import analytics from './analytics';
 
 const API_URL = 'https://trampoline.turbowarp.org/proxy/projects/$id';
 
@@ -55,8 +56,10 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     if (instructions || credits) {
                         this.props.onSetDescription(instructions, credits);
                     }
+                    analytics.twEvent('Load Shared');
                 })
                 .catch(err => {
+                    analytics.twEvent('Load Unshared');
                     log.warn('cannot fetch project meta', err);
                 });
         }

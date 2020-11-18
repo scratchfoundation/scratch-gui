@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './featured-projects.css';
 import {getIsLoading, getIsFetchingWithId, setProjectId} from '../../reducers/project-state';
+import analytics from '../../lib/analytics';
 
 class FeaturedProjects extends React.Component {
     constructor (props) {
@@ -21,6 +22,7 @@ class FeaturedProjects extends React.Component {
     }
     handleSelect (id) {
         this.props.setProjectId(id);
+        analytics.twEvent('Load Featured');
     }
     handleOpenProjects () {
         this.setState({

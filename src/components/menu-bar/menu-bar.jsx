@@ -108,7 +108,7 @@ const twMessages = defineMessages({
     compileError: {
         id: 'tw.menuBar.compileError',
         defaultMessage: '{sprite}: {error}',
-        description: 'Error message in errors dropdown'
+        description: 'Error message in error menu'
     }
 });
 
@@ -439,14 +439,14 @@ class MenuBar extends React.Component {
                                         <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
                                             <FormattedMessage
                                                 defaultMessage="Some scripts could not be compiled."
-                                                description="Menu bar item for advanced settings help"
+                                                description="Link in error menu"
                                                 id="tw.menuBar.reportError1"
                                             />
                                         </MenuItemLink>
                                         <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
                                             <FormattedMessage
                                                 defaultMessage="This is a bug. Please report it."
-                                                description="Menu bar item for advanced settings help"
+                                                description="Link in error menu"
                                                 id="tw.menuBar.reportError2"
                                             />
                                         </MenuItemLink>

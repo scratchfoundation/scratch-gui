@@ -29,7 +29,8 @@ const vmListenerHOC = function (WrappedComponent) {
                 'handleKeyDown',
                 'handleKeyUp',
                 'handleProjectChanged',
-                'handleTargetsUpdate'
+                'handleTargetsUpdate',
+                'handleProjectRunStart'
             ]);
             // We have to start listening to the vm here rather than in
             // componentDidMount because the HOC mounts the wrapped component,
@@ -37,13 +38,12 @@ const vmListenerHOC = function (WrappedComponent) {
             // mounts.
             // If the wrapped component uses the vm in componentDidMount, then
             // we need to start listening before mounting the wrapped component.
-            console.log('vmListener Starting Up');
             this.props.vm.on('targetsUpdate', this.handleTargetsUpdate);
             this.props.vm.on('MONITORS_UPDATE', this.props.onMonitorsUpdate);
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
-            this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
+            this.props.vm.on('PROJECT_RUN_START', this.handleProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
             this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
@@ -77,6 +77,14 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
             }
+        }
+        handleProjectRunStart () {
+            // eslint-disable-next-line no-undef
+            if (!mv2.isConnected) {
+                // eslint-disable-next-line no-alert
+                alert('You are not currently connected to a Marty. Please close scratch connect');
+            }
+            this.props.onProjectRunStart();
         }
         handleProjectChanged () {
             if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {

@@ -160,7 +160,7 @@ module.exports = [
                 chunks: ['editor'],
                 template: 'src/playground/index.ejs',
                 filename: 'editor.html',
-                title: 'TurboWarp Editor',
+                title: 'TurboWarp - Run Scratch projects faster',
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
@@ -174,14 +174,14 @@ module.exports = [
                 chunks: ['fullscreen'],
                 template: 'src/playground/index.ejs',
                 filename: 'fullscreen.html',
-                title: 'TurboWarp',
+                title: 'TurboWarp - Run Scratch projects faster',
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({
                 chunks: ['embed'],
                 template: 'src/playground/index.ejs',
                 filename: 'embed.html',
-                title: 'TurboWarp',
+                title: 'Embedded Project - TurboWarp',
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({

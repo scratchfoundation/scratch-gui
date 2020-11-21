@@ -12,7 +12,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setFramerateState, setCompilerOptionsState, compileError} from '../reducers/tw';
+import {setFramerateState, setCompilerOptionsState, addCompileError, clearCompileErrors} from '../reducers/tw';
 import analytics from './analytics';
 
 let compileErrorCounter = 0;
@@ -58,6 +58,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('COMPILER_OPTIONS_CHANGED', this.props.onCompilerOptionsChanged);
             this.props.vm.on('FRAMERATE_CHANGED', this.props.onFramerateChanged);
             this.props.vm.on('COMPILE_ERROR', this.handleCompileError);
+            this.props.vm.on('RUNTIME_STARTED', this.props.onClearCompileErrors);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -207,6 +208,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onFramerateChanged: PropTypes.func.isRequired,
         onCompilerOptionsChanged: PropTypes.func.isRequired,
         onCompileError: PropTypes.func,
+        onClearCompileErrors: PropTypes.func,
         projectChanged: PropTypes.bool,
         shouldUpdateTargets: PropTypes.bool,
         shouldUpdateProjectChanged: PropTypes.bool,
@@ -249,7 +251,8 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),
         onCompilerOptionsChanged: options => dispatch(setCompilerOptionsState(options)),
-        onCompileError: errors => dispatch(compileError(errors)),
+        onCompileError: errors => dispatch(addCompileError(errors)),
+        onClearCompileErrors: () => dispatch(clearCompileErrors()),
         onShowExtensionAlert: data => {
             dispatch(showExtensionAlert(data));
         },

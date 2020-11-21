@@ -7,7 +7,8 @@ const SET_WINDOW_FULLSCREEN = 'tw/SET_WINDOW_FULLSCREEN';
 const SET_DIMENSIONS = 'tw/SET_DIMENSIONS';
 const SET_AUTHOR = 'tw/SET_AUTHOR';
 const SET_DESCRIPTION = 'tw/SET_DESCRIPTION';
-const COMPILE_ERROR = 'tw/COMPILE_ERROR';
+const ADD_COMPILE_ERROR = 'tw/ADD_COMPILE_ERROR';
+const CLEAR_COMPILE_ERRORS = 'tw/CLEAR_COMPILE_ERRORS';
 
 export const initialState = {
     framerate: 30,
@@ -70,12 +71,16 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             description: action.description
         });
-    case COMPILE_ERROR:
+    case ADD_COMPILE_ERROR:
         return Object.assign({}, state, {
             compileErrors: [
                 action.error,
                 ...state.compileErrors.slice(0, 4)
             ]
+        });
+    case CLEAR_COMPILE_ERRORS:
+        return Object.assign({}, state, {
+            compileErrors: []
         });
     default:
         return state;
@@ -145,10 +150,16 @@ const setDescription = function (description) {
     };
 };
 
-const compileError = function (error) {
+const addCompileError = function (error) {
     return {
-        type: COMPILE_ERROR,
+        type: ADD_COMPILE_ERROR,
         error: error
+    };
+};
+
+const clearCompileErrors = function () {
+    return {
+        type: CLEAR_COMPILE_ERRORS
     };
 };
 
@@ -164,5 +175,6 @@ export {
     setDimensions,
     setAuthor,
     setDescription,
-    compileError
+    addCompileError,
+    clearCompileErrors
 };

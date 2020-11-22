@@ -423,6 +423,7 @@ class Stage extends React.Component {
         const {
             vm, // eslint-disable-line no-unused-vars
             onActivateColorPicker, // eslint-disable-line no-unused-vars
+            disableEditingTargetChange, // eslint-disable-line no-unused-vars
             ...props
         } = this.props;
         return (
@@ -467,7 +468,11 @@ const mapStateToProps = state => ({
     // tw: High quality pen property
     highQualityPen: state.scratchGui.tw.highQualityPen,
     // tw: Disable editing target changing in certain circumstances to avoid lag
-    disableEditingTargetChange: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly,
+    disableEditingTargetChange: (
+        state.scratchGui.mode.isFullScreen ||
+        state.scratchGui.mode.isEmbedded ||
+        state.scratchGui.mode.isPlayerOnly
+    ),
     isColorPicking: state.scratchGui.colorPicker.active,
     // tw: embed is always considered fullscreen
     isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded,

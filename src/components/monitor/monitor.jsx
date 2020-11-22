@@ -37,7 +37,7 @@ const MonitorComponent = props => (
         id={`monitor-${props.label}`}
     >
         <Draggable
-            bounds=".monitor-overlay" // Class for monitor container
+            bounds={props.bounded ? '.monitor-overlay' : null} // Class for monitor container
             cancel=".no-drag" // Class used for slider input to prevent drag
             defaultClassNameDragging={styles.dragging}
             disabled={!props.draggable}

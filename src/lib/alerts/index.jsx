@@ -175,9 +175,9 @@ const alerts = [
         clearList: ['cloudInfo'],
         content: (
             <FormattedMessage
-                defaultMessage="Please note, cloud variables in this mod support letters and symbols, not just numbers." // eslint-disable-line max-len
+                defaultMessage="Cloud variables in E羊icques support letters and symbols, not just numbers. There's no maximum length or number of cloud variables." // eslint-disable-line max-len
                 description="Info about lack of cloud variable limitations"
-                id="gui.alerts.cloudInfo"
+                id="gui.alerts.cloudInfo2"
             />
         ),
         closeButton: true,

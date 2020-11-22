@@ -22,6 +22,42 @@ In addition, you can finish the URL with a hash followed by a project ID to load
 
 For example, https://sheeptester.github.io/scratch-gui/?url=https://sheeptester.github.io/javascripts/utilities.js&width=640&height=360 will load my [Utilities extension](https://scratch.mit.edu/discuss/topic/306317/) and use a 16:9 stage size.
 
+### Other features
+
+In addition to those listed in the URL parameters table above, here are some additional features not otherwise listed:
+
+(GUI)
+
+- The backpack is enabled and saves assets locally to localStorage.
+- The sound editor no longer caps the volume again.
+- You can detect which mouse is pressed using `<key (join [Mouse] [N]) pressed?>`, where `N` is 0 (finger or pen), 1 (left click), 2 (middle click), 3 (right click), etc.
+
+(VM)
+
+- All modifier keys can be detected by inserting a join block into the key _ pressed? block. For example, `<key (join [Escape] []) pressed?>`. It uses event.key, as shown on [keycode.info](http://keycode.info/).
+- There is no cloud variable limit.
+
+Smaller details:
+
+- The broken and rightfully hidden Speech to Text extension is available, if you want.
+
+### Removed limits
+
+Adding `limits=false` to the URL removes the following limits:
+
+- Fencing of a sprite's position and size
+- Maximum clone count
+- List length
+- Pen size
+- Sound effects
+- Mouse X/Y
+- Say/think bubble length
+- Simultaneous sounds
+- Notes
+- Tempo
+
+Remember that the limits exist in vanilla Scratch for a reason, so you are responsible for ensuring that your project doesn't lag out of control.
+
 ## Development
 
 gui (you're here) &middot; [vm](https://github.com/SheepTester/scratch-vm/) &middot; [paint](https://github.com/SheepTester/scratch-paint/) &middot; [svg-renderer](https://github.com/SheepTester/scratch-svg-renderer/)
@@ -31,8 +67,6 @@ It's called E羊icques for two reasons:
 - To see how people deal with radical names like these
 
 - To comply with the Scratch license, which forbids the usage of their name to promote derived products like this mod (because it might seem like the mod is official when it's not)
-
-I also made the backpack sync to localStorage instead of being completely useless (because we can't access Scratch's backpack servers outside of Scratch).
 
 Here's how I made the mod:
 

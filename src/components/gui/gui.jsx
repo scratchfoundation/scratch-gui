@@ -337,6 +337,7 @@ const GUIComponent = props => {
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])} style={{maxWidth: `calc(${STAGE_DISPLAY_SCALES[stageSize] * standardStageWidth}px + 1rem)`}}>
                             <StageWrapper
+                                isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
                                 stageSize={stageSize}

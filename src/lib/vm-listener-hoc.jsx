@@ -89,9 +89,11 @@ const vmListenerHOC = function (WrappedComponent) {
         handleCompileError (target, error) {
             const errorMessage = `${error}`;
             // Ignore certain types of known errors
+            // TODO: fix the root cause of all of these
             if (
                 errorMessage.includes('running from toolbox?') ||
-                errorMessage.includes('This block is an input, not a stacked block')
+                errorMessage.includes('This block is an input, not a stacked block') ||
+                errorMessage.includes('event_whengreaterthan')
             ) {
                 return;
             }

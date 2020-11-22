@@ -238,6 +238,10 @@ class Stage extends React.Component {
             this.onStopDrag(mousePosition[0], mousePosition[1]);
         }
         this.props.vm.postIOData('mouse', data);
+        this.props.vm.postIOData('keyboard', {
+            key: 'Mouse' + e.which,
+            isDown: false
+        });
 
         if (this.props.isColorPicking &&
             mousePosition[0] > 0 && mousePosition[0] < this.rect.width &&
@@ -284,6 +288,10 @@ class Stage extends React.Component {
                 canvasHeight: this.rect.height
             };
             this.props.vm.postIOData('mouse', data);
+            this.props.vm.postIOData('keyboard', {
+                key: 'Mouse' + e.which,
+                isDown: true
+            });
             if (e.preventDefault) {
                 // Prevent default to prevent touch from dragging page
                 e.preventDefault();

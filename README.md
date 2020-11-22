@@ -8,7 +8,7 @@ The URLs in URL parameters should be [URI encoded](https://developer.mozilla.org
 
 | URL parameter | Description |
 | ------------- | ----------- |
-| `extension=[URL]` or `url=[URL]` | Load an extension dynamically (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). |
+| `extension=[URL]` or `url=[URL]` | Load an extension dynamically (more info on making an extension [here](https://scratch.mit.edu/discuss/topic/277217/)). You can specify this multiple times in a URL to load multiple extensions. |
 | `width=[NUMBER]` | Custom stage width (default 480). |
 | `height=[NUMBER]` | Custom stage width (default 360). |
 | `username=[STRING]` | Set a custom username (default "username") |

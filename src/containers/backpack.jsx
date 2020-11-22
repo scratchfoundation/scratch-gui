@@ -110,17 +110,14 @@ class Backpack extends React.Component {
                 .then(payload => {
                     // Force the asset to save to the asset server before storing in backpack
                     // Ensures any asset present in the backpack is also on the asset server
-                    // Except this mod is not official, so there's no need to save!
-                    if (false && presaveAsset && !presaveAsset.clean) {
-                        return storage.store(
-                            presaveAsset.assetType,
-                            presaveAsset.dataFormat,
-                            presaveAsset.data,
-                            presaveAsset.assetId
-                        ).then(() => payload);
+                    // Conveniently, this probably also means that these are the
+                    // assets that have an md5 hash ID!
+                    if (presaveAsset) {
+                        return {id: presaveAsset.assetId, ...payload};
                     }
                     return payload;
                 })
+                // This is the only place that calls saveBackpackObject :)
                 .then(payload => saveBackpackObject({
                     host: this.props.host,
                     token: this.props.token,

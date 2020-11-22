@@ -92,12 +92,17 @@ export default appTarget => {
 
     const compatibilityMode = urlFlag('compatibility_mode', true);
 
-    const extensionURL = urlOptionValue('(?:extension|url)', null);
+    const extensionURLs = [];
+    const extensionURLRegex = /[?&](?:extension|url)=([^&]*)/g;
+    let match;
+    while ((match = extensionURLRegex.exec(window.location.href))) {
+        extensionURLs.push(match[1]);
+    }
 
     const imposeLimits = urlFlag('limits', true);
 
     const onVmInit = vm => {
-        if (extensionURL) {
+        for (const extensionURL of extensionURLs) {
             vm.extensionManager.loadExtensionURL(decodeURIComponent(extensionURL));
         }
         if (!imposeLimits) {

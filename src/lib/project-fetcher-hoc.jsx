@@ -77,13 +77,13 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             try {
                 // eslint-disable-next-line no-undef
                 const data = await mv2.loadScratchFile('__autosave');
-                if (!data || !data.contents) {
+                if (!data || !data.contents || !confirm("Would you like to load the last autosave?")) {
                     // not really an error, but it will dump us out to the
                     // normal loading of default projects
                     throw new Error('No autosave file');
                 }
                 // eslint-disable-next-line no-console
-                console.log('Using autosave file', data.contents);
+                console.log('Using autosave file'); //, data.contents);
                 const blob = await fetch(data.contents);
                 const arrayBuffer = await blob.arrayBuffer();
                 return this.props.onFetchedProjectData(arrayBuffer, loadingState);

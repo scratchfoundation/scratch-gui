@@ -15,6 +15,7 @@ import Input from '../../components/forms/input.jsx';
 import styles from './save-load.css';
 import collectMetadata from '../../lib/collect-metadata';
 import {blobToBase64} from '../../lib/save-load-utils';
+import {requestNewProject} from '../../reducers/project-state';
 
 class SaveLoad extends React.Component {
     constructor (props) {
@@ -94,10 +95,10 @@ class SaveLoad extends React.Component {
         }
     }
 
-    async deleteFile (fileName) {
+    async deleteFile (fileName, getConfirmation = true) {
         const {fileNames} = this.state;
         // eslint-disable-next-line no-alert
-        if (window.confirm(`Are you sure you want to delete "${fileName}"?`)) {
+        if (!getConfirmation || window.confirm(`Are you sure you want to delete "${fileName}"?`)) {
             try {
                 await mv2.deleteScratchFile(encodeURIComponent(fileName));
                 const newFileNames = fileNames.filter(f => f !== fileName);
@@ -118,7 +119,19 @@ class SaveLoad extends React.Component {
                 <div className={styles.block}>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', marginTop: 10}}>
-                            <div>Create a new file:</div>
+                            <button
+                                className={styles.button}
+                                style={{marginRight: 5}}
+                                onClick={() => {
+                                    if (confirm("Do you want to start a new program? You will lose unsaved work")){
+                                        this.deleteFile('__autosave', false);
+                                        this.props.onConfirmNewProject()}
+                                    }
+                                }
+                            >
+                                Start New Program
+                            </button>
+                            <div>Save as new file:</div>
                             <Input
                                 style={{flex: 1, marginLeft: 10}}
                                 type="text"
@@ -191,7 +204,8 @@ SaveLoad.propTypes = {
     locale: PropTypes.string.isRequired,
     onProjectTelemetryEvent: PropTypes.func,
     projectTitle: PropTypes.string,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    onClickNew: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -203,7 +217,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX))
+    onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX)),
+    onConfirmNewProject: () => dispatch(requestNewProject(false))
 });
 
 export default errorBoundaryHOC('Save / Load')(

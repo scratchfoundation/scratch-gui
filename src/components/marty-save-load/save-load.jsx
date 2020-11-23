@@ -205,7 +205,7 @@ SaveLoad.propTypes = {
     onProjectTelemetryEvent: PropTypes.func,
     projectTitle: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired,
-    onClickNew: PropTypes.func,
+    onConfirmNewProject: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

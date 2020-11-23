@@ -13,8 +13,8 @@ const MonitorList = props => (
         // Use static `monitor-overlay` class for bounds of draggables
         className={classNames(styles.monitorList, 'monitor-overlay')}
         style={{
-            width: props.stageSize.width,
-            height: props.stageSize.height
+            width: props.stageSize.width || 0,
+            height: props.stageSize.height || 0
         }}
     >
         <Box

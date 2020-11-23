@@ -5,6 +5,8 @@ import VM from 'scratch-vm';
 
 import {connect} from 'react-redux';
 
+import debounce from 'lodash.debounce';
+
 import {updateTargets} from '../reducers/targets';
 import {updateBlockDrag} from '../reducers/block-drag';
 import {updateMonitors} from '../reducers/monitors';
@@ -12,6 +14,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
+import {blobToBase64} from './save-load-utils';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -26,7 +29,8 @@ const vmListenerHOC = function (WrappedComponent) {
                 'handleKeyDown',
                 'handleKeyUp',
                 'handleProjectChanged',
-                'handleTargetsUpdate'
+                'handleTargetsUpdate',
+                'handleProjectRunStart'
             ]);
             // We have to start listening to the vm here rather than in
             // componentDidMount because the HOC mounts the wrapped component,
@@ -39,14 +43,15 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('BLOCK_DRAG_UPDATE', this.props.onBlockDragUpdate);
             this.props.vm.on('TURBO_MODE_ON', this.props.onTurboModeOn);
             this.props.vm.on('TURBO_MODE_OFF', this.props.onTurboModeOff);
-            this.props.vm.on('PROJECT_RUN_START', this.props.onProjectRunStart);
+            this.props.vm.on('PROJECT_RUN_START', this.handleProjectRunStart);
             this.props.vm.on('PROJECT_RUN_STOP', this.props.onProjectRunStop);
             this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
             this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
-
+            // debounce the auto save function so we aren't continuously saving if there are lots of changes happening
+            this.autoSaveProject = debounce(this.autoSaveProject.bind(this), 1000);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {
@@ -73,9 +78,31 @@ const vmListenerHOC = function (WrappedComponent) {
                 document.removeEventListener('keyup', this.handleKeyUp);
             }
         }
+        handleProjectRunStart () {
+            // eslint-disable-next-line no-undef
+            if (!mv2.isConnected) {
+                // eslint-disable-next-line no-alert
+                alert('You are not currently connected to a Marty. Please close scratch and connect.');
+            }
+            this.props.onProjectRunStart();
+        }
         handleProjectChanged () {
             if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {
                 this.props.onProjectChanged();
+            }
+            this.autoSaveProject();
+        }
+        async autoSaveProject () {
+            // eslint-disable-next-line no-console
+            console.log('Saving project to "__autosave"');
+            const sb3Content = await this.props.vm.saveProjectSb3();
+            const base64sb3 = await blobToBase64(sb3Content);
+            try {
+                // eslint-disable-next-line no-undef
+                await mv2.saveScratchFile('__autosave', base64sb3);
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error('Failed to auto save project', error.message);
             }
         }
         handleTargetsUpdate (data) {

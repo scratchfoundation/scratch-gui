@@ -694,21 +694,6 @@ class MenuBar extends React.Component {
                                     )}</HighQualityPen>
                                     <CompilerOptions>{({toggleEnabled, toggleWarpTimer, compilerOptions}) => (
                                         <React.Fragment>
-                                            <MenuItem onClick={toggleEnabled}>
-                                                {compilerOptions.enabled ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Disable Compiler"
-                                                        description="Menu bar item for disabling the compiler"
-                                                        id="tw.menuBar.compilerOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Enable Compiler"
-                                                        description="Menu bar item for enabling the compiler"
-                                                        id="tw.menuBar.compilerOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
                                             <MenuItem onClick={toggleWarpTimer}>
                                                 {compilerOptions.warpTimer ? (
                                                     <FormattedMessage
@@ -721,6 +706,21 @@ class MenuBar extends React.Component {
                                                         defaultMessage="Turn on Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning on Warp Timer"
                                                         id="tw.menuBar.warpTimerOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
+                                            <MenuItem onClick={toggleEnabled}>
+                                                {compilerOptions.enabled ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Disable Compiler"
+                                                        description="Menu bar item for disabling the compiler"
+                                                        id="tw.menuBar.compilerOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Enable Compiler"
+                                                        description="Menu bar item for enabling the compiler"
+                                                        id="tw.menuBar.compilerOn"
                                                     />
                                                 )}
                                             </MenuItem>

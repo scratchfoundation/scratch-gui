@@ -21,9 +21,10 @@ class MartySignalStrength extends React.Component {
 
     render () {
         const {rssi} = this.state;
+        const flash = rssi == 0 ? styles.signalFlash : '';
         return (
             <div
-                className={styles.signalStrengthContainer}
+                className={`${flash} ${styles.signalStrengthContainer}`}
             >
                 <div
                     className={styles.signalBar}

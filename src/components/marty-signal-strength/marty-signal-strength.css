@@ -1,3 +1,15 @@
+.signal-flash {
+    opacity: 1;
+    animation: fade 2s linear infinite;
+}
+
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
+
 .signal-strength-container {
     display: flex;
     flex-direction: row;

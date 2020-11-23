@@ -7,26 +7,34 @@ class ToggleCompiler extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'toggleEnabled',
-            'toggleWarpTimer'
+            'toggleCompilerEnabled',
+            'toggleWarpTimer',
+            'toggleInfiniteClones'
         ]);
     }
-    toggleEnabled () {
-        this.props.vm.setCompilerOptions(Object.assign({}, this.props.compilerOptions, {
+    toggleCompilerEnabled () {
+        this.props.vm.setCompilerOptions({
             enabled: !this.props.compilerOptions.enabled
-        }));
+        });
     }
     toggleWarpTimer () {
-        this.props.vm.setCompilerOptions(Object.assign({}, this.props.compilerOptions, {
+        this.props.vm.setCompilerOptions({
             warpTimer: !this.props.compilerOptions.warpTimer
-        }));
+        });
+    }
+    toggleInfiniteClones () {
+        this.props.vm.setRuntimeOptions({
+            maxClones: this.props.runtimeOptions.maxClones === Infinity ? 300 : Infinity
+        });
     }
     render () {
         return this.props.children({
-            toggleEnabled: this.toggleEnabled,
+            compilerEnabled: this.props.compilerOptions.enabled,
+            toggleCompilerEnabled: this.toggleCompilerEnabled,
+            warpTimer: this.props.compilerOptions.warpTimer,
             toggleWarpTimer: this.toggleWarpTimer,
-            compilerOptions: this.props.compilerOptions,
-            runtimeOptions: this.props.runtimeOptions
+            infiniteClones: this.props.runtimeOptions.maxClones === Infinity,
+            toggleInfiniteClones: this.toggleInfiniteClones
         });
     }
 }

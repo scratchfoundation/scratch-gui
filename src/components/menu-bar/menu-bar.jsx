@@ -692,10 +692,32 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</HighQualityPen>
-                                    <VMOptions>{({toggleEnabled, toggleWarpTimer, compilerOptions}) => (
+                                    <VMOptions>{({
+                                        compilerEnabled,
+                                        toggleCompilerEnabled,
+                                        warpTimer,
+                                        toggleWarpTimer,
+                                        infiniteClones,
+                                        toggleInfiniteClones
+                                    }) => (
                                         <React.Fragment>
+                                            <MenuItem onClick={toggleInfiniteClones}>
+                                                {infiniteClones ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn off Infinite Clones"
+                                                        description="Menu bar item for turning off Infinite Clones"
+                                                        id="tw.menuBar.infiniteClonesOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn on Infinite Clones"
+                                                        description="Menu bar item for turning on Infinite Clones"
+                                                        id="tw.menuBar.infiniteClonesOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
                                             <MenuItem onClick={toggleWarpTimer}>
-                                                {compilerOptions.warpTimer ? (
+                                                {warpTimer ? (
                                                     <FormattedMessage
                                                         defaultMessage="Turn off Warp Timer (Stuck Checking)"
                                                         description="Menu bar item for turning off Warp Timer"
@@ -709,8 +731,8 @@ class MenuBar extends React.Component {
                                                     />
                                                 )}
                                             </MenuItem>
-                                            <MenuItem onClick={toggleEnabled}>
-                                                {compilerOptions.enabled ? (
+                                            <MenuItem onClick={toggleCompilerEnabled}>
+                                                {compilerEnabled ? (
                                                     <FormattedMessage
                                                         defaultMessage="Disable Compiler"
                                                         description="Menu bar item for disabling the compiler"

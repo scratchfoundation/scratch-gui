@@ -31,7 +31,7 @@ import SixtyFPSToggler from '../../containers/tw-sixty-fps-toggler.jsx';
 import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
-import CompilerOptions from '../../containers/tw-compiler-options.jsx';
+import VMOptions from '../../containers/tw-vm-options.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -692,7 +692,7 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</HighQualityPen>
-                                    <CompilerOptions>{({toggleEnabled, toggleWarpTimer, compilerOptions}) => (
+                                    <VMOptions>{({toggleEnabled, toggleWarpTimer, compilerOptions}) => (
                                         <React.Fragment>
                                             <MenuItem onClick={toggleWarpTimer}>
                                                 {compilerOptions.warpTimer ? (
@@ -725,7 +725,7 @@ class MenuBar extends React.Component {
                                                 )}
                                             </MenuItem>
                                         </React.Fragment>
-                                    )}</CompilerOptions>
+                                    )}</VMOptions>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>

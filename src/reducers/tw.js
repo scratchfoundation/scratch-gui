@@ -1,5 +1,6 @@
 const SET_FRAMERATE = 'tw/SET_FRAMERATE';
 const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
+const SET_RUNTIME_OPTIONS = 'tw/SET_RUNTIME_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
 const SET_CLOUD = 'tw/SET_CLOUD';
 const SET_HIGH_QUALITY_PEN = 'tw/SET_HIGH_QUALITY_PEN';
@@ -18,6 +19,9 @@ export const initialState = {
     compilerOptions: {
         enabled: true,
         warpTimer: false
+    },
+    runtimeOptions: {
+        maxClones: 300
     },
     isWindowFullScreen: false,
     dimensions: [0, 0],
@@ -101,6 +105,13 @@ const setCompilerOptionsState = function (compilerOptions) {
     };
 };
 
+const setRuntimeOptionsState = function (runtimeOptions) {
+    return {
+        type: SET_RUNTIME_OPTIONS,
+        runtimeOptions: runtimeOptions
+    };
+};
+
 const setUsername = function (username) {
     return {
         type: SET_USERNAME,
@@ -168,6 +179,7 @@ export {
     initialState as twInitialState,
     setFramerateState,
     setCompilerOptionsState,
+    setRuntimeOptionsState,
     setUsername,
     setCloud,
     setHighQualityPenState,

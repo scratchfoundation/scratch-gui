@@ -25,7 +25,8 @@ class ToggleCompiler extends React.Component {
         return this.props.children({
             toggleEnabled: this.toggleEnabled,
             toggleWarpTimer: this.toggleWarpTimer,
-            compilerOptions: this.props.compilerOptions
+            compilerOptions: this.props.compilerOptions,
+            runtimeOptions: this.props.runtimeOptions
         });
     }
 }
@@ -36,14 +37,19 @@ ToggleCompiler.propTypes = {
         enabled: PropTypes.bool,
         warpTimer: PropTypes.bool
     }),
+    runtimeOptions: PropTypes.shape({
+        maxClones: PropTypes.number
+    }),
     vm: PropTypes.shape({
-        setCompilerOptions: PropTypes.func
+        setCompilerOptions: PropTypes.func,
+        setRuntimeOptions: PropTypes.func
     })
 };
 
 const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
-    compilerOptions: state.scratchGui.tw.compilerOptions
+    compilerOptions: state.scratchGui.tw.compilerOptions,
+    runtimeOptions: state.scratchGui.tw.runtimeOptions
 });
 
 export default connect(

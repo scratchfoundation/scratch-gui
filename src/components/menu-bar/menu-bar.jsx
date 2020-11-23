@@ -437,10 +437,22 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}</SB3Downloader>
                                     </MenuSection>
+                                    <MenuSection>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.props.onClickChangeUrlSettings}
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="Change URL settings"
+                                                description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                id="gui.menuBar.wigglesAndGiggles"
+                                            />
+                                        </MenuItem>
+                                    </MenuSection>
                                 </MenuBarMenu>
                             </div>
                         )}
-                        <div
+                        {(this.props.canEdit) && <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
                             })}
@@ -487,7 +499,7 @@ class MenuBar extends React.Component {
                                     )}</TurboMode>
                                 </MenuSection>
                             </MenuBarMenu>
-                        </div>
+                        </div>}
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div

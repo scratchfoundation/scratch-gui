@@ -1,0 +1,68 @@
+@import "../css/colors.css";
+@import "../css/units.css";
+@import "../css/typography.css";
+@import "../css/z-index.css";
+
+@import "./index.css";
+@import "../components/gui/gui.css";
+
+/* Taken from src/components/webgl-modal/webgl-modal.css */
+
+.content {
+    margin: 100px auto;
+    padding: 1.5rem 2.25rem;
+    border-radius: $space;
+    width: 500px;
+
+    color: $text-primary;
+}
+
+.faq-link-text {
+    margin: 2rem 0 .5rem 0;
+    font-size: .875rem;
+    color: $text-primary;
+}
+.faq-link {
+    color: $motion-primary;
+    text-decoration: none;
+}
+
+/* Confirmation buttons at the bottom of the modal */
+.button-row {
+    margin: 1.5rem 0;
+    font-weight: bolder;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+}
+
+.button-row button {
+    border: 1px solid $motion-primary;
+    border-radius: 0.25rem;
+    padding: 0.5rem 2rem;
+    background: $motion-primary;
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.label {
+    margin-right: $space;
+}
+.default {
+    margin-left: $space;
+    color: $text-primary-transparent;
+}
+
+.monitor-container {
+    z-index: $z-index-monitor;
+    border: 1px solid $ui-black-transparent;
+    border-radius: calc($space / 2);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    transition: box-shadow 0.2s;
+    pointer-events: all;
+    overflow: hidden;
+    margin: 1em 0;
+}

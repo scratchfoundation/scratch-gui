@@ -100,6 +100,7 @@ const GUIComponent = props => {
         onActivateSoundsTab,
         onActivateTab,
         onClickLogo,
+        onClickChangeUrlSettings,
         onExtensionButtonClick,
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
@@ -211,6 +212,7 @@ const GUIComponent = props => {
                     canChangeLanguage={canChangeLanguage}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
+                    canEdit={true}
                     canEditTitle={canEditTitle}
                     canManageFiles={canManageFiles}
                     canRemix={canRemix}
@@ -225,6 +227,7 @@ const GUIComponent = props => {
                     onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
                     onClickLogo={onClickLogo}
+                    onClickChangeUrlSettings={onClickChangeUrlSettings}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
                     onOpenRegistration={onOpenRegistration}

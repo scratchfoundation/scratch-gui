@@ -105,9 +105,7 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'gui': './src/playground/index.jsx',
-            'blocksonly': './src/playground/blocks-only.jsx',
-            'compatibilitytesting': './src/playground/compatibility-testing.jsx',
-            'player': './src/playground/player.jsx'
+            'flags': './src/playground/flags.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -150,22 +148,10 @@ module.exports = [
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'blocksonly'],
+                chunks: ['lib.min', 'flags'],
                 template: 'src/playground/index.ejs',
-                filename: 'blocks-only.html',
-                title: 'Scratch 3.0 GUI: Blocks Only Example'
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'compatibilitytesting'],
-                template: 'src/playground/index.ejs',
-                filename: 'compatibility-testing.html',
-                title: 'Scratch 3.0 GUI: Compatibility Testing'
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'player'],
-                template: 'src/playground/index.ejs',
-                filename: 'player.html',
-                title: 'Scratch 3.0 GUI: Player Example'
+                filename: 'flags.html',
+                title: 'E羊icques: URL settings'
             }),
             new CopyWebpackPlugin([{
                 from: 'static',

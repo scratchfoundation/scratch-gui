@@ -7,8 +7,10 @@ import GUI from '../containers/gui.jsx';
 import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
+import parseOptionsFromUrl from './parse-url-options.js';
+
 const onClickLogo = () => {
-    window.location = 'https://github.com/SheepTester/scratch-gui#url-parameters';
+    window.location.href = window.location.href.replace(/\/(?=$|\?|#)/, '/flags.html');
 };
 
 const handleTelemetryModalCancel = () => {
@@ -22,27 +24,6 @@ const handleTelemetryModalOptIn = () => {
 const handleTelemetryModalOptOut = () => {
     log('User opted out of telemetry');
 };
-
-function urlOptionValue (name, defaultValue) {
-    const matches = window.location.href.match(new RegExp(`[?&]${name}=([^&]*)&?`));
-    return matches ? matches[1] : defaultValue;
-}
-
-function urlFlag (name, defaultValue = false) {
-    const matches = window.location.href.match(new RegExp(`[?&]${name}=([^&]+)`));
-    let yes = defaultValue;
-    if (matches) {
-        try {
-            // parse 'true' into `true`, 'false' into `false`, etc.
-            yes = JSON.parse(matches[1]);
-        } catch {
-            // it's not JSON so just use the string
-            // note that a typo like "falsy" will be treated as true
-            yes = matches[1];
-        }
-    }
-    return yes;
-}
 
 /*
  * Render the GUI playground. This is a separate function because importing anything
@@ -60,7 +41,18 @@ export default appTarget => {
         HashParserHOC
     )(GUI);
 
-    const loadGriffpatch = urlFlag('load_griffpatch', false);
+    const {
+        loadGriffpatch,
+        loadPlugins,
+        backpackHost,
+        cloudHost,
+        username,
+        simulateScratchDesktop,
+        compatibilityMode,
+        extensionURLs,
+        imposeLimits
+    } = parseOptionsFromUrl();
+
     if (loadGriffpatch) {
         // From https://github.com/griffpatch/Scratch3-Dev-Tools/blob/master/inject.user.js
         // Ideally, I'd just load inject.user.js directly, but jsdelivr seems to omit it.
@@ -73,33 +65,11 @@ export default appTarget => {
         }));
     }
 
-    const loadPlugin = urlOptionValue('load_plugin', null);
-    if (loadPlugin) {
+    for (const plugin of loadPlugins) {
         document.head.appendChild(Object.assign(document.createElement('script'), {
-            src: decodeURIComponent(loadPlugin)
+            src: decodeURIComponent(plugin)
         }));
     }
-
-    // TODO a hack for testing the backpack, allow backpack host to be set by url param
-    // (Currently ignored; it'll always use localStorage)
-    const backpackHost = decodeURIComponent(urlOptionValue('backpack_host', 'localStorage'));
-
-    const cloudHost = decodeURIComponent(urlOptionValue('cloud_host', 'localStorage'));
-
-    const username = urlOptionValue('username', 'username');
-
-    const simulateScratchDesktop = urlFlag('isScratchDesktop', false);
-
-    const compatibilityMode = urlFlag('compatibility_mode', true);
-
-    const extensionURLs = [];
-    const extensionURLRegex = /[?&](?:extension|url)=([^&]*)/g;
-    let match;
-    while ((match = extensionURLRegex.exec(window.location.href))) {
-        extensionURLs.push(match[1]);
-    }
-
-    const imposeLimits = urlFlag('limits', true);
 
     const onVmInit = vm => {
         for (const extensionURL of extensionURLs) {
@@ -137,6 +107,7 @@ export default appTarget => {
                 hasCloudPermission={true}
                 canSave={false}
                 onClickLogo={onClickLogo}
+                onClickChangeUrlSettings={onClickLogo}
                 onVmInit={onVmInit}
                 username={username}
             />,

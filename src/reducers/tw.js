@@ -47,6 +47,10 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             compilerOptions: action.compilerOptions
         });
+    case SET_RUNTIME_OPTIONS:
+        return Object.assign({}, state, {
+            runtimeOptions: action.runtimeOptions
+        });
     case SET_USERNAME:
         return Object.assign({}, state, {
             username: action.username

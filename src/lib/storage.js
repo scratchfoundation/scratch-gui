@@ -1,6 +1,4 @@
 import ScratchStorage from 'scratch-storage';
-import PropTypes from 'prop-types';
-import log from './log.js';
 
 import defaultProject from './default-project';
 
@@ -77,7 +75,7 @@ class Storage extends ScratchStorage {
         if (this.cacheDefaultProjectCallback) {
             this.cacheDefaultProjectCallback(defaultProjectAssets);
         } else {
-            defaultProjectAssets.forEach(asset => storage.builtinHelper._store(
+            defaultProjectAssets.forEach(asset => this.builtinHelper._store(
                 this.AssetType[asset.assetType],
                 this.DataFormat[asset.dataFormat],
                 asset.data,

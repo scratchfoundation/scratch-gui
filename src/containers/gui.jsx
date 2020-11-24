@@ -125,7 +125,7 @@ GUI.defaultProps = {
     onStorageInit: storageInstance => storageInstance.addOfficialScratchWebStores(),
     onProjectLoaded: () => {},
     onUpdateProjectId: () => {},
-    onVmInit: (/* vm */) => {},
+    onVmInit: (/* vm */) => {}
 };
 
 const mapStateToProps = state => {

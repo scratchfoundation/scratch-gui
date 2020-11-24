@@ -10,6 +10,7 @@ class ScanningStep extends React.Component {
         bindAll(this, [
             'handlePeripheralListUpdate',
             'handlePeripheralScanTimeout',
+            'handleUserPickedPeripheral',
             'handleRefresh'
         ]);
         this.state = {
@@ -23,6 +24,8 @@ class ScanningStep extends React.Component {
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.on(
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
+        this.props.vm.on(
+            'USER_PICKED_PERIPHERAL', this.handleUserPickedPeripheral);
     }
     componentWillUnmount () {
         // @todo: stop the peripheral scan here
@@ -30,6 +33,8 @@ class ScanningStep extends React.Component {
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.removeListener(
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
+        this.props.vm.removeListener(
+            'USER_PICKED_PERIPHERAL', this.handleUserPickedPeripheral);
     }
     handlePeripheralScanTimeout () {
         this.setState({
@@ -43,6 +48,15 @@ class ScanningStep extends React.Component {
             newList[id]
         );
         this.setState({peripheralList: peripheralArray});
+    }
+    handleUserPickedPeripheral (newList) {
+        const peripheralArray = Object.keys(newList).map(id =>
+            newList[id]
+        );
+        this.setState({peripheralList: peripheralArray});
+        if (peripheralArray.length > 0) {
+            this.props.onConnecting(peripheralArray[0].peripheralId);
+        }
     }
     handleRefresh () {
         this.props.vm.scanForPeripheral(this.props.extensionId);

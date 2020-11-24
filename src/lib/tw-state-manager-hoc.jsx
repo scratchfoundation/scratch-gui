@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import log from './log';
+import {defineMessages, intlShape, injectIntl} from 'react-intl';
 
 import {
     setUsername
@@ -21,6 +22,21 @@ import {
     setFullScreen
 } from '../reducers/mode';
 import * as progressMonitor from '../components/loader/tw-progress-monitor';
+
+/* eslint-disable no-alert */
+
+const messages = defineMessages({
+    invalidFPS: {
+        defaultMessage: 'fps URL parameter is invalid',
+        description: 'Alert displayed when fps URL parameter is invalid',
+        id: 'tw.invalidParameters.fps'
+    },
+    invalidClones: {
+        defaultMessage: 'clone URL parameter is invalid',
+        description: 'Alert displayed when clones URL parameter is invalid',
+        id: 'tw.invalidParameters.clones'
+    }
+});
 
 const USERNAME_KEY = 'tw:username';
 
@@ -250,7 +266,12 @@ const TWStateManager = function (WrappedComponent) {
             const urlParams = new URLSearchParams(location.search);
 
             if (urlParams.has('fps')) {
-                this.props.vm.setFramerate(+urlParams.get('fps'));
+                const fps = +urlParams.get('fps');
+                if (Number.isNaN(fps) || fps < 0) {
+                    alert(this.props.intl.formatMessage(messages.invalidFPS));
+                } else {
+                    this.props.vm.setFramerate(fps);
+                }
             } else if (urlParams.has('60fps')) {
                 this.props.vm.setFramerate(60);
             }
@@ -285,6 +306,17 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.vm.setCompilerOptions({
                     warpTimer: true
                 });
+            }
+
+            if (urlParams.has('clones')) {
+                const clones = +urlParams.get('clones');
+                if (Number.isNaN(clones) || clones < 0) {
+                    alert(this.props.intl.formatMessage(messages.invalidClones));
+                } else {
+                    this.props.vm.setRuntimeOptions({
+                        maxClones: clones
+                    });
+                }
             }
 
             if (urlParams.has('project_url')) {
@@ -377,6 +409,7 @@ const TWStateManager = function (WrappedComponent) {
         }
     }
     StateManagerComponent.propTypes = {
+        intl: intlShape,
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
         onProjectFetchFinished: PropTypes.func,
@@ -408,10 +441,10 @@ const TWStateManager = function (WrappedComponent) {
         onSetProjectId: projectId => dispatch(setProjectId(projectId)),
         onSetUsername: username => dispatch(setUsername(username))
     });
-    return connect(
+    return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps
-    )(StateManagerComponent);
+    )(StateManagerComponent));
 };
 
 export {

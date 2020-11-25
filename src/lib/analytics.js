@@ -9,7 +9,7 @@ const enabled =
     // This type of comparison allows experiments.turbowarp.org and turbowarp.org to use the same domain
     location.origin.includes(PLAUSIBLE_DOMAIN) &&
     // Respect Do Not Track
-    !navigator.doNotTrack;
+    navigator.doNotTrack !== '1';
 
 let referrer = null;
 if (enabled && document.referrer) {

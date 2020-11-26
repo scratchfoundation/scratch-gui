@@ -284,10 +284,10 @@ const TWStateManager = function (WrappedComponent) {
             } else {
                 const persistentUsername = getLocalStorage(USERNAME_KEY);
                 if (persistentUsername === null) {
-                    const randomNumber = Math.random().toString();
-                    const randomId = randomNumber.substr(2, 6);
+                    const digits = 4;
+                    const randomNumber = Math.round(Math.random() * (10 ** digits));
+                    const randomId = randomNumber.toString().padStart(digits, '0');
                     const randomUsername = `player${randomId}`;
-                    setLocalStorage(USERNAME_KEY, randomUsername);
                     this.props.onSetUsername(randomUsername);
                 } else {
                     this.props.onSetUsername(persistentUsername);

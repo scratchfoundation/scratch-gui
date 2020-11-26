@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TurboWarp Privacy Policy</title>
+        <title>Privacy Policy</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body {
@@ -11,37 +11,106 @@
     </head>
 
     <body>
-        <h1>TurboWarp Privacy Policy</h1>
+        <header>
+            <h1>Privacy Policy</h1>
 
-        <!-- UPDATE THIS WHEN MAKING CHANGES -->
-        <p><i>Updated October 11th, 2020.</i></p>
+            <!-- UPDATE THIS WHEN MAKING CHANGES -->
+            <p><i>Updated November 26th, 2020.</i></p>
+        </header>
 
-        <h2>Data collection</h2>
+        <main>
 
-        <p>We may collect web server logs which can include IP addresses, user agents, pages visited, timestamps, and other statistics. These logs are deleted within 14 days.</p>
+            <p>This is the privacy policy for <a href="https://turbowarp.org">https://turbowarp.org</a> and its subdomains.</p>
 
-        <p>A self-hosted instance of Plausible Analytics is used to track website usage. You can see the information collected by this on <a href="https://stats.turbowarp.org/turbowarp.org">https://stats.turbowarp.org/turbowarp.org</a>. This server stores no personal information.</p>
+            <h2>Data collection</h2>
 
-        <p>When loading projects that contain "cloud variables", your IP address, supplied username, and project ID are logged. This information is deleted within 14 days. The data stored in cloud variables is purged within 24 hours of no users being connected to a given project. </p>
+            <p>We may record anonymous aggregated access logs when you interact with the site. For example, we may log the number of requests, type of requests, how the request was processed (cache hit, cache miss, 404, etc.), errors, referrers, and similar aggregated information. These logs do not contain IP addresses or other identifiable information.</p>
 
-        <h2>Sharing information</h2>
+            <details>
+                <summary>Example of logs</summary>
+                <b>turbowarp.org</b>
+                <pre>[2020-11-25T21:39:20.345Z] info: *** Wed, 25 Nov 2020 21:39:20 GMT ***
+[2020-11-25T21:39:20.346Z] info: Serve File      delta: 5482     total: 84547
+[2020-11-25T21:39:20.347Z] info: 404             delta: 447      total: 3864
+[2020-11-25T21:39:20.347Z] info: Error           delta: 0        total: 0</pre>
+                <b>trampoline.turbowarp.org</b>
+                <pre>info: Stats *** Start stats update ***
+info: Stats time: Wed Nov 25 2020 21:39:25 GMT+0000 (Greenwich Mean Time)
+info: Stats *** Requests ***
+info: Stats total requests: 6051
+info: Stats since last check: 460
+info: Stats *** Cache: project-meta ***
+info: Stats fresh: 958  stale: 42  unseen: 172
+info: Stats *** Cache: user-meta ***
+info: Stats fresh: 0  stale: 0  unseen: 0
+info: Stats *** Cache: studio-meta ***
+info: Stats fresh: 0  stale: 0  unseen: 0
+info: Stats *** Cache: studio-pages ***
+info: Stats fresh: 2  stale: 0  unseen: 1
+info: Stats *** Cache: cloud-history ***
+info: Stats fresh: 0  stale: 0  unseen: 0
+info: Stats *** Referers ***
+info: Stats total referers: 4
+info: Stats  #1 "turbowarp.org" 255
+info: Stats  #2 "forkphorus.github.io" 203
+info: Stats  #3 "experiments.turbowarp.org" 1
+info: Stats  #4 "(none)" 1
+info: Stats *** End stats update ***</pre>
+            </details>
 
-        <p>Personal information is never shared, unless necessary to provide the service (eg. complying with local laws).</p>
+            <p>When using projects that contain "cloud variables", your username (supplied by user or randomly generated), project ID, and some technical details may be logged. This information is deleted within 14 days. The data stored in cloud variables is purged within 24 hours of no users being connected to a given project. You can opt out of this data collection by disabling cloud variables.</p>
 
-        <h2>Third Parties</h2>
+            <p>It may be possible to use a combination of logged usernames and project IDs to identify users.</p>
 
-        <p>This privacy policy does not apply to third parties. A non exhaustive list of notable third parties include:</p>
+            <details>
+                <summary>Example of logs</summary>
+                <p><code><i>Username</i></code> and <code><i>Project ID</i></code> represent censored values. 0.0.0.0 is the actual IP that is logged.</p>
+                <pre>[2020-11-25T21:44:26.381Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1001
+[2020-11-25T21:44:27.895Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1006
+[2020-11-25T21:44:52.794Z] info: Pinging 26 clients...
+[2020-11-25T21:45:01.300Z] info: [0.0.0.0] Connection opened
+[2020-11-25T21:45:01.365Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
+[2020-11-25T21:45:22.795Z] info: Pinging 27 clients...
+[2020-11-25T21:45:52.795Z] info: Pinging 27 clients...
+[2020-11-25T21:46:22.547Z] info: Removed room: 454924795
+[2020-11-25T21:46:22.796Z] info: Pinging 27 clients...
+[2020-11-25T21:46:36.417Z] info: [0.0.0.0] Connection opened
+[2020-11-25T21:46:36.718Z] info: Created room: 440208661
+[2020-11-25T21:46:36.719Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
+[2020-11-25T21:46:52.796Z] info: Pinging 28 clients...
+[2020-11-25T21:47:22.795Z] info: Pinging 28 clients...
+[2020-11-25T21:47:47.304Z] info: [0.0.0.0] Connection opened
+[2020-11-25T21:47:47.574Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
+[2020-11-25T21:47:52.796Z] info: Pinging 29 clients...
+[2020-11-25T21:47:59.667Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1001
+[2020-11-25T21:48:12.164Z] info: [0.0.0.0] Connection opened
+[2020-11-25T21:48:12.454Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
+[2020-11-25T21:48:22.797Z] info: Pinging 29 clients...</pre>
+            </details>
 
-        <h3>Scratch</h3>
+            <p>A self-hosted instance of Plausible Analytics is used to anonymously track site usage. You can opt out of this tracking by enabling your browser's "Do Not Track" setting. The data is publicly viewable at <a href="https://stats.turbowarp.org/turbowarp.org">https://stats.turbowarp.org/turbowarp.org</a>.</p>
 
-        <p>Projects may be loaded from the Scratch website. <a href="https://scratch.mit.edu/privacy_policy">Read the Scratch privacy policy</a>.</p>
+            <h2>Data use</h2>
 
-        <h3>jsDelivr CDN</h3>
+            <p>The data we collect is used to monitor usage, prevent abuse, optimize processes, etc.</p>
 
-        <p>The <a href="https://github.com/griffpatch/Scratch3-Dev-Tools/">Scratch 3 Dev Tools</a> are loaded from the jsDelivr CDN. <a href="https://www.jsdelivr.com/privacy-policy-jsdelivr-net">Read the jsDelivr CDN privacy policy</a>.</p>
+            <p>Personal information that we collect is never shared or sold to any third party, unless necessary to provide the service (such as hosting providers) or to comply with local laws (like a government subpoena).</p>
 
-        <h2>Contact</h2>
+            <h2>Third parties</h2>
 
-        <p>Any concerns related to privacy or any other matter should be sent to: <a href="mailto:contact@turbowarp.org">contact@turbowarp.org</a></p>
+            <p>This privacy policy does not apply to third parties. A non-exhaustive list of notable third parties include:</p>
+
+            <h3>Scratch</h3>
+
+            <p>The site may interact with the Scratch API to download projects. <a href="https://scratch.mit.edu/privacy_policy">Read the Scratch privacy policy</a>.</p>
+
+            <h3>jsDelivr CDN</h3>
+
+            <p>The <a href="https://github.com/griffpatch/Scratch3-Dev-Tools/">Scratch 3 Dev Tools</a> are loaded from the jsDelivr CDN. <a href="https://www.jsdelivr.com/privacy-policy-jsdelivr-net">Read the jsDelivr CDN privacy policy</a>.</p>
+
+            <h2>Contact</h2>
+
+            <p>Any concerns related to privacy or any other matter should be sent to: <a href="mailto:contact@turbowarp.org">contact@turbowarp.org</a></p>
+        </main>
     </body>
 </html>

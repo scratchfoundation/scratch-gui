@@ -184,6 +184,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onCompilerOptionsChanged,
                 onRuntimeOptionsChanged,
                 onCompileError,
+                onClearCompileErrors,
                 onShowExtensionAlert,
                 /* eslint-enable no-unused-vars */
                 ...props

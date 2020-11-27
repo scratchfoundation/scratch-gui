@@ -812,6 +812,10 @@ const sensing = function (isStage) {
 
             <block type="mv2_distancesense" />
 
+            <block type="mv2_lightsense" />
+
+            <block type="mv2_noisesense" />
+
             <!--<block type="mv2_current" />-->
 
             <!--<block type="mv2_accelerometer" />-->

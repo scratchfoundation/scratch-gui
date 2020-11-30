@@ -159,8 +159,8 @@ class SBFileUploader extends React.Component {
             (async () => {
                 const handle = await FileSystemAPI.showOpenFilePicker();
                 const file = await handle.getFile();
-                this.props.onSetFileHandle(handle);
                 this.handleSelectFile(file);
+                this.props.onSetFileHandle(handle);
             })().catch(err => {
                 // TODO: intl
                 alert(`Couldn't open file\n${err}`);

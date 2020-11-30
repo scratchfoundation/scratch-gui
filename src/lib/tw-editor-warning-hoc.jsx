@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {showStandardAlert} from '../reducers/alerts';
+import {closeAlertWithId, showStandardAlert} from '../reducers/alerts';
 
 const TWEditorWarningHOC = function (WrappedComponent) {
     class EditorWarningComponent extends React.Component {
@@ -9,12 +9,24 @@ const TWEditorWarningHOC = function (WrappedComponent) {
             if (this.props.alerts.find(i => i.alertId === 'twWarning')) {
                 return;
             }
+            if (!this.shouldShow()) {
+                return;
+            }
             this.props.onShowWarning();
+        }
+        componentDidUpdate () {
+            if (!this.shouldShow()) {
+                this.props.onCloseWarning();
+            }
+        }
+        shouldShow () {
+            return this.props.compilerOptions.enabled && !this.props.compilerOptions.warpTimer;
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
                 alerts,
+                compilerOptions,
                 isPlayerOnly,
                 onShowWarning,
                 /* eslint-enable no-unused-vars */
@@ -31,15 +43,22 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         alerts: PropTypes.arrayOf(PropTypes.shape({
             alertId: PropTypes.string
         })),
+        compilerOptions: PropTypes.shape({
+            enabled: PropTypes.bool,
+            warpTimer: PropTypes.bool
+        }),
         isPlayerOnly: PropTypes.bool,
-        onShowWarning: PropTypes.func
+        onShowWarning: PropTypes.func,
+        onCloseWarning: PropTypes.func
     };
     const mapStateToProps = state => ({
         alerts: state.scratchGui.alerts.alertsList,
+        compilerOptions: state.scratchGui.tw.compilerOptions,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly
     });
     const mapDispatchToProps = dispatch => ({
-        onShowWarning: () => dispatch(showStandardAlert('twWarning'))
+        onShowWarning: () => dispatch(showStandardAlert('twWarning')),
+        onCloseWarning: () => dispatch(closeAlertWithId('twWarning'))
     });
     return connect(
         mapStateToProps,

@@ -33,6 +33,8 @@ import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
 import VMOptions from '../../containers/tw-vm-options.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
+import SB3DownloaderFileSystem from '../../containers/tw-sb3-downloader-filesystem.jsx';
+import FileSystemAPI from '../../lib/tw-filesystem-api';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -526,18 +528,44 @@ class MenuBar extends React.Component {
                                                 </MenuItem>
                                             )}
                                         </SBFileUploader>
-                                        <SB3Downloader>{(className, downloadProjectCallback) => (
-                                            <MenuItem
-                                                className={className}
-                                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="Save to your computer"
-                                                    description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
-                                                    id="gui.menuBar.downloadToComputer"
-                                                />
-                                            </MenuItem>
-                                        )}</SB3Downloader>
+                                        {FileSystemAPI.available() ? (
+                                            <SB3DownloaderFileSystem>{(className, {name, saveToLastFile, saveAsNew}) => (
+                                                <React.Fragment>
+                                                    {name ? (
+                                                        <MenuItem
+                                                            className={className}
+                                                            onClick={this.getSaveToComputerHandler(saveToLastFile)}
+                                                        >
+                                                            {/* TODO: intl */}
+                                                            {`Save as ${name}`}
+                                                        </MenuItem>
+                                                    ) : null}
+                                                    <MenuItem
+                                                        className={className}
+                                                        onClick={this.getSaveToComputerHandler(saveAsNew)}
+                                                    >
+                                                        <FormattedMessage
+                                                            defaultMessage="Save to your computer"
+                                                            description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                            id="gui.menuBar.downloadToComputer"
+                                                        />
+                                                    </MenuItem>
+                                                </React.Fragment>
+                                            )}</SB3DownloaderFileSystem>
+                                        ) : (
+                                            <SB3Downloader>{(className, downloadProjectCallback) => (
+                                                <MenuItem
+                                                    className={className}
+                                                    onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                                                >
+                                                    <FormattedMessage
+                                                        defaultMessage="Save to your computer"
+                                                        description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                        id="gui.menuBar.downloadToComputer"
+                                                    />
+                                                </MenuItem>
+                                            )}</SB3Downloader>
+                                        )}
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>

@@ -10,6 +10,7 @@ const SET_AUTHOR = 'tw/SET_AUTHOR';
 const SET_DESCRIPTION = 'tw/SET_DESCRIPTION';
 const ADD_COMPILE_ERROR = 'tw/ADD_COMPILE_ERROR';
 const CLEAR_COMPILE_ERRORS = 'tw/CLEAR_COMPILE_ERRORS';
+const SET_FILE_HANDLE = 'tw/SET_FILE_HANDLE';
 
 export const initialState = {
     framerate: 30,
@@ -33,7 +34,8 @@ export const initialState = {
         instructions: '',
         credits: ''
     },
-    compileErrors: []
+    compileErrors: [],
+    fileHandle: null
 };
 
 const reducer = function (state, action) {
@@ -89,6 +91,10 @@ const reducer = function (state, action) {
     case CLEAR_COMPILE_ERRORS:
         return Object.assign({}, state, {
             compileErrors: []
+        });
+    case SET_FILE_HANDLE:
+        return Object.assign({}, state, {
+            fileHandle: action.fileHandle
         });
     default:
         return state;
@@ -178,6 +184,13 @@ const clearCompileErrors = function () {
     };
 };
 
+const setFileHandle = function (fileHandle) {
+    return {
+        type: SET_FILE_HANDLE,
+        fileHandle: fileHandle
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -192,5 +205,6 @@ export {
     setAuthor,
     setDescription,
     addCompileError,
-    clearCompileErrors
+    clearCompileErrors,
+    setFileHandle
 };

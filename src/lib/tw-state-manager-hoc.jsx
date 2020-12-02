@@ -147,9 +147,11 @@ class WildcardRouter extends Router {
     onhashchange () {
         const hashProjectId = readHashProjectId();
         if (hashProjectId) {
-            this.onSetProjectId(hashProjectId);
-            // Completely remove the hash
-            history.replaceState(null, null, `${location.pathname}${location.search}`);
+            const ok = this.onSetProjectId(hashProjectId);
+            if (ok) {
+                // Completely remove the hash
+                history.replaceState(null, null, `${location.pathname}${location.search}`);
+            }
         } else {
             // Do not detect page type here as it is already setup by index.html, editor.html, etc.
             this.parseURL(false);
@@ -259,7 +261,10 @@ const TWStateManager = function (WrappedComponent) {
             super(props);
             bindAll(this, [
                 'handleHashChange',
-                'handlePopState'
+                'handlePopState',
+                'onSetProjectId',
+                'onSetIsPlayerOnly',
+                'onSetIsFullScreen'
             ]);
         }
         componentDidMount () {
@@ -341,9 +346,9 @@ const TWStateManager = function (WrappedComponent) {
             }
 
             const routerCallbacks = {
-                onSetProjectId: this.props.onSetProjectId,
-                onSetIsPlayerOnly: this.props.onSetIsPlayerOnly,
-                onSetIsFullScreen: this.props.onSetIsFullScreen
+                onSetProjectId: this.onSetProjectId,
+                onSetIsPlayerOnly: this.onSetIsPlayerOnly,
+                onSetIsFullScreen: this.onSetIsFullScreen
             };
             this.router = createRouter(this.props.routingStyle, routerCallbacks);
             this.router.onhashchange();
@@ -383,11 +388,28 @@ const TWStateManager = function (WrappedComponent) {
         handlePopState () {
             this.router.onpathchange();
         }
+        onSetProjectId (id) {
+            if (this.props.projectChanged) {
+                if (!confirm('Are you sure you want to switch project?')) {
+                    return false;
+                }
+            }
+            this.props.onSetProjectId(id);
+            return true;
+        }
+        onSetIsPlayerOnly (isPlayerOnly) {
+            this.props.onSetIsPlayerOnly(isPlayerOnly);
+        }
+        onSetIsFullScreen (isFullScreen) {
+            this.props.onSetIsFullScreen(isFullScreen);
+        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                intl,
                 isFullScreen,
                 isPlayerOnly,
+                projectChanged,
                 onProjectFetchFinished,
                 onProjectFetchStarted,
                 onSetIsFullScreen,
@@ -412,6 +434,7 @@ const TWStateManager = function (WrappedComponent) {
         intl: intlShape,
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
+        projectChanged: PropTypes.bool,
         onProjectFetchFinished: PropTypes.func,
         onProjectFetchStarted: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
@@ -429,6 +452,7 @@ const TWStateManager = function (WrappedComponent) {
     const mapStateToProps = state => ({
         isFullScreen: state.scratchGui.mode.isFullScreen,
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+        projectChanged: state.scratchGui.projectChanged,
         reduxProjectId: state.scratchGui.projectState.projectId,
         username: state.scratchGui.tw.username,
         vm: state.scratchGui.vm

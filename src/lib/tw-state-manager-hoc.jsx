@@ -389,6 +389,9 @@ const TWStateManager = function (WrappedComponent) {
             this.router.onpathchange();
         }
         onSetProjectId (id) {
+            if (`${id}` === `${this.props.reduxProjectId}`) {
+                return true;
+            }
             if (this.props.projectChanged) {
                 if (!confirm('Are you sure you want to switch project?')) {
                     return false;
@@ -435,6 +438,7 @@ const TWStateManager = function (WrappedComponent) {
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
         projectChanged: PropTypes.bool,
+        projectId: PropTypes.string,
         onProjectFetchFinished: PropTypes.func,
         onProjectFetchStarted: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,

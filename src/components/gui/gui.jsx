@@ -86,6 +86,7 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         isShared,
+        isTelemetryEnabled,
         loading,
         logo,
         renderLogin,
@@ -160,6 +161,8 @@ const GUIComponent = props => {
             >
                 {telemetryModalVisible ? (
                     <TelemetryModal
+                        isRtl={isRtl}
+                        isTelemetryEnabled={isTelemetryEnabled}
                         onCancel={onTelemetryModalCancel}
                         onOptIn={onTelemetryModalOptIn}
                         onOptOut={onTelemetryModalOptOut}

@@ -33,25 +33,30 @@ const messages = defineMessages({
         description: 'Link to the Scratch privacy policy',
         id: 'gui.telemetryOptIn.privacyPolicyLink'
     },
-    noButton: {
-        defaultMessage: 'No, thanks',
-        description: 'Text for telemetry modal opt-out button',
-        id: 'gui.telemetryOptIn.buttonTextNo'
-    },
-    noTooltip: {
-        defaultMessage: 'Disable telemetry',
-        description: 'Tooltip for telemetry modal opt-out button',
-        id: 'gui.telemetryOptIn.buttonTooltipNo'
-    },
-    yesButton: {
-        defaultMessage: "Yes, I'd like to help improve Scratch",
+    optInText: {
+        defaultMessage: 'Share my usage data with the Scratch Team',
         description: 'Text for telemetry modal opt-in button',
-        id: 'gui.telemetryOptIn.buttonTextYes'
+        id: 'gui.telemetryOptIn.optInText'
     },
-    yesTooltip: {
+    optInTooltip: {
         defaultMessage: 'Enable telemetry',
         description: 'Tooltip for telemetry modal opt-in button',
-        id: 'gui.telemetryOptIn.buttonTooltipYes'
+        id: 'gui.telemetryOptIn.optInTooltip'
+    },
+    optOutText: {
+        defaultMessage: 'Do not share my usage data with the Scratch Team',
+        description: 'Text for telemetry modal opt-in button',
+        id: 'gui.telemetryOptIn.optOutText'
+    },
+    optOutTooltip: {
+        defaultMessage: 'Disable telemetry',
+        description: 'Tooltip for telemetry modal opt-out button',
+        id: 'gui.telemetryOptIn.optOutTooltip'
+    },
+    closeButton: {
+        defaultMessage: 'Close',
+        description: 'Text for the button which closes the telemetry modal dialog',
+        id: 'gui.telemetryOptIn.buttonClose'
     }
 });
 
@@ -60,8 +65,7 @@ class TelemetryModal extends React.PureComponent {
         super(props);
         bindAll(this, [
             'handleCancel',
-            'handleOptIn',
-            'handleOptOut'
+            'handleOptInOutChanged'
         ]);
     }
     handleCancel () {
@@ -70,19 +74,19 @@ class TelemetryModal extends React.PureComponent {
             this.props.onCancel();
         }
     }
-    handleOptIn () {
-        this.props.onRequestClose();
-        if (this.props.onOptIn) {
-            this.props.onOptIn();
-        }
-    }
-    handleOptOut () {
-        this.props.onRequestClose();
-        if (this.props.onOptOut) {
-            this.props.onOptOut();
+    handleOptInOutChanged (e) {
+        if (e.target.value === 'true') {
+            if (this.props.onOptIn) {
+                this.props.onOptIn();
+            }
+        } else if (e.target.value === 'false') {
+            if (this.props.onOptOut) {
+                this.props.onOptOut();
+            }
         }
     }
     render () {
+        const isUndecided = (typeof this.props.isTelemetryEnabled !== 'boolean');
         return (<ReactModal
             isOpen
             className={styles.modalContent}
@@ -109,20 +113,37 @@ class TelemetryModal extends React.PureComponent {
                             </a>)
                         }}
                     /></p>
+                    <Box className={styles.radioButtons}>
+                        <label>
+                            <input
+                                name="optInOut"
+                                type="radio"
+                                value="true"
+                                title={this.props.intl.formatMessage(messages.optInTooltip)}
+                                checked={this.props.isTelemetryEnabled === true}
+                                onChange={this.handleOptInOutChanged}
+                            />
+                            <FormattedMessage {...messages.optInText} />
+                        </label>
+                        <label>
+                            <input
+                                name="optInOut"
+                                type="radio"
+                                value="false"
+                                title={this.props.intl.formatMessage(messages.optOutTooltip)}
+                                checked={this.props.isTelemetryEnabled === false}
+                                onChange={this.handleOptInOutChanged}
+                            />
+                            <FormattedMessage {...messages.optOutText} />
+                        </label>
+                    </Box>
                     <Box className={styles.buttonRow}>
                         <button
-                            className={styles.optOut}
-                            title={this.props.intl.formatMessage(messages.noTooltip)}
-                            onClick={this.handleOptOut}
-                        >
-                            <FormattedMessage {...messages.noButton} />
-                        </button>
-                        <button
                             className={styles.optIn}
-                            title={this.props.intl.formatMessage(messages.yesTooltip)}
-                            onClick={this.handleOptIn}
+                            onClick={this.props.onRequestClose}
+                            disabled={isUndecided}
                         >
-                            <FormattedMessage {...messages.yesButton} />
+                            <FormattedMessage {...messages.closeButton} />
                         </button>
                     </Box>
                 </Box>
@@ -134,6 +155,7 @@ class TelemetryModal extends React.PureComponent {
 TelemetryModal.propTypes = {
     intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
+    isTelemetryEnabled: PropTypes.bool, // false=disabled, true=enabled, undefined=undecided
     onCancel: PropTypes.func,
     onOptIn: PropTypes.func.isRequired,
     onOptOut: PropTypes.func.isRequired,

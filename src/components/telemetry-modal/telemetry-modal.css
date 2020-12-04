@@ -37,7 +37,6 @@
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
-    text-align: left;
 }
 
 .privacy-policy-link {
@@ -45,38 +44,50 @@
     text-decoration: none;
 }
 
+.radioButtons {
+    justify-content: center;
+    width: fit-content;
+}
+
+/* stack the radio buttons vertically, not horizontally */
+.radioButtons label {
+    display: block;
+    margin: 0.5rem;
+}
+
 /* Confirmation buttons at the bottom of the modal */
 .button-row {
     margin: 1.5rem 0;
     font-weight: bolder;
+}
+
+[dir="ltr"] .button-row {
     text-align: right;
-    display: flex;
-    justify-content: center;
+}
+
+[dir="rtl"] .button-row {
+    text-align: left;
 }
 
 .button-row button {
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
     padding: 0.5rem 1.5rem;
-    background: white;
+    color: white;
+    background: $motion-primary;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
 }
 
-.button-row button.opt-in {
-    background: $motion-primary;
-    color: white;
+.button-row button:hover {
+    background: $extensions-primary;
+    box-shadow: 0 0 0 6px $motion-transparent;
 }
 
-.button-row button.opt-out {
-    color: $motion-primary;
-}
-
-[dir="ltr"] .button-row button + button {
-    margin-left: 0.5rem;
-}
-
-[dir="rtl"] .button-row button + button {
-    margin-right: 0.5rem;
+.button-row button:disabled {
+    background: $text-primary;
+    border-color: $ui-black-transparent;
+    box-shadow: none;
+    opacity: 0.25;
 }

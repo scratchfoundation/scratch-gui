@@ -1,6 +1,20 @@
 const available = () => !!window.showSaveFilePicker;
 
-const scratchFileType = {
+const scratch1 = {
+    description: 'Scratch 1 Project',
+    accept: {
+        // TODO: not sure what the proper type for this is
+        'application/x.scratch.sb': '.sb'
+    }
+};
+const scratch2 = {
+    description: 'Scratch 2 Project',
+    accept: {
+        // TODO: not sure what the proper type for this is
+        'application/x.scratch.sb2': '.sb2'
+    }
+};
+const scratch3 = {
     description: 'Scratch 3 Project',
     accept: {
         'application/x.scratch.sb3': '.sb3'
@@ -8,13 +22,13 @@ const scratchFileType = {
 };
 
 const showSaveFilePicker = async () => await window.showSaveFilePicker({
-    types: [scratchFileType]
+    types: [scratch3]
 });
 
 const showOpenFilePicker = async () => {
     const [handle] = await window.showOpenFilePicker({
         multiple: false,
-        types: [scratchFileType]
+        types: [scratch3, scratch2, scratch1]
     });
     return handle;
 };

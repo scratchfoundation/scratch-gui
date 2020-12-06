@@ -155,16 +155,19 @@ class SBFileUploader extends React.Component {
         }
     }
     handleClick () {
+        // tw: use the filesystem API when available
         if (FileSystemAPI.available()) {
             (async () => {
-                const handle = await FileSystemAPI.showOpenFilePicker();
-                const file = await handle.getFile();
-                this.handleSelectFile(file);
-                this.props.onSetFileHandle(handle);
-            })().catch(err => {
-                // TODO: intl
-                alert(`Couldn't open file\n${err}`);
-            });
+                try {
+                    const handle = await FileSystemAPI.showOpenFilePicker();
+                    const file = await handle.getFile();
+                    this.handleSelectFile(file);
+                    this.props.onSetFileHandle(handle);
+                } catch (err) {
+                    // eslint-disable-next-line no-console
+                    console.error(err);
+                }
+            })();
         } else {
             // open filesystem browsing window
             this.fileInput.click();

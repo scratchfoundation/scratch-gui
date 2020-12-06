@@ -531,15 +531,21 @@ class MenuBar extends React.Component {
                                         {FileSystemAPI.available() ? (
                                             <SB3DownloaderFileSystem>{(className, {name, saveToLastFile, saveAsNew}) => (
                                                 <React.Fragment>
-                                                    {name ? (
+                                                    {name !== null && (
                                                         <MenuItem
                                                             className={className}
                                                             onClick={this.getSaveToComputerHandler(saveToLastFile)}
                                                         >
-                                                            {/* TODO: intl */}
-                                                            {`Save as ${name}`}
+                                                            <FormattedMessage
+                                                                defaultMessage="Save as {file}"
+                                                                description="Menu bar item to save project to an existing file on the user's computer"
+                                                                id="tw.menuBar.saveAs"
+                                                                values={{
+                                                                    file: name
+                                                                }}
+                                                            />
                                                         </MenuItem>
-                                                    ) : null}
+                                                    )}
                                                     <MenuItem
                                                         className={className}
                                                         onClick={this.getSaveToComputerHandler(saveAsNew)}

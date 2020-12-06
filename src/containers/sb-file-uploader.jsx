@@ -23,6 +23,8 @@ import {
 import {
     closeFileMenu
 } from '../reducers/menus';
+import FileSystemAPI from '../lib/tw-filesystem-api';
+import {setFileHandle} from '../reducers/tw';
 
 /**
  * SBFileUploader component passes a file input, load handler and props to its child.
@@ -92,6 +94,11 @@ class SBFileUploader extends React.Component {
     }
     // called when user has finished selecting a file to upload
     handleChange (e) {
+        if (e.target.files) {
+            this.handleSelectFile(e.target.files[0]);
+        }
+    }
+    handleSelectFile (file) {
         const {
             intl,
             isShowingWithoutId,
@@ -100,9 +107,8 @@ class SBFileUploader extends React.Component {
             userOwnsProject
         } = this.props;
 
-        const thisFileInput = e.target;
-        if (thisFileInput.files) { // Don't attempt to load if no file was selected
-            this.fileToUpload = thisFileInput.files[0];
+        if (file) { // Don't attempt to load if no file was selected
+            this.fileToUpload = file;
 
             // If user owns the project, or user has changed the project,
             // we must confirm with the user that they really intend to replace it.
@@ -149,8 +155,23 @@ class SBFileUploader extends React.Component {
         }
     }
     handleClick () {
-        // open filesystem browsing window
-        this.fileInput.click();
+        // tw: use the filesystem API when available
+        if (FileSystemAPI.available()) {
+            (async () => {
+                try {
+                    const handle = await FileSystemAPI.showOpenFilePicker();
+                    const file = await handle.getFile();
+                    this.handleSelectFile(file);
+                    this.props.onSetFileHandle(handle);
+                } catch (err) {
+                    // eslint-disable-next-line no-console
+                    console.error(err);
+                }
+            })();
+        } else {
+            // open filesystem browsing window
+            this.fileInput.click();
+        }
     }
     setFileInput (input) {
         this.fileInput = input;
@@ -189,7 +210,8 @@ SBFileUploader.propTypes = {
     vm: PropTypes.shape({
         loadProject: PropTypes.func,
         stop: PropTypes.func
-    })
+    }),
+    onSetFileHandle: PropTypes.func
 };
 SBFileUploader.defaultProps = {
     className: ''
@@ -214,7 +236,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),
     onLoadingStarted: () => dispatch(openLoadingProject()),
-    onReceivedProjectTitle: title => dispatch(setProjectTitle(title))
+    onReceivedProjectTitle: title => dispatch(setProjectTitle(title)),
+    onSetFileHandle: fileHandle => dispatch(setFileHandle(fileHandle))
 });
 
 // Allow incoming props to override redux-provided props. Used to mock in tests.

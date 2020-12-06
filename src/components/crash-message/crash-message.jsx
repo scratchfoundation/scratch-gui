@@ -29,6 +29,11 @@ const CrashMessage = props => (
                     id="tw.gui.crashMessage.description"
                 />
             </p>
+            {props.errorMessage && (
+                <p className={styles.errorMessage}>
+                    {props.errorMessage}
+                </p>
+            )}
             {props.eventId && (
                 <p>
                     <FormattedMessage
@@ -57,6 +62,7 @@ const CrashMessage = props => (
 
 CrashMessage.propTypes = {
     eventId: PropTypes.string,
+    errorMessage: PropTypes.string,
     onReload: PropTypes.func.isRequired
 };
 

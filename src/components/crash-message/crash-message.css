@@ -11,7 +11,7 @@
     align-items: center;
 }
 .body {
-    width: 35%;
+    width: 50%;
     color: white;
     text-align: center;
 }
@@ -25,4 +25,8 @@
     font-weight: bold;
     font-size: 0.875rem;
     cursor: pointer;
+}
+
+.error-message {
+    font-family: monospace;
 }

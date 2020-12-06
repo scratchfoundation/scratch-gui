@@ -42,7 +42,8 @@ class ErrorBoundary extends React.Component {
         // Display fallback UI
         this.setState({
             hasError: true,
-            errorId: window.Sentry ? window.Sentry.lastEventId() : null
+            errorId: window.Sentry ? window.Sentry.lastEventId() : null,
+            errorMessage: `${error.message}`
         });
 
         // Log error locally for debugging as well.
@@ -63,6 +64,7 @@ class ErrorBoundary extends React.Component {
                 return (
                     <CrashMessageComponent
                         eventId={this.state.errorId}
+                        errorMessage={this.state.errorMessage}
                         onReload={this.handleReload}
                     />
                 );

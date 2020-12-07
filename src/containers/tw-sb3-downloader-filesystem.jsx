@@ -50,9 +50,9 @@ class SB3DownloaderFileSystem extends React.Component {
         return this.saveAsNew();
     }
     async saveToHandle (handle) {
-        this.props.onProjectUnchanged();
         const content = await this.props.saveProjectSb3();
         await FileSystemAPI.writeToHandle(handle, content);
+        this.props.onProjectUnchanged();
     }
     handleSaveError (e) {
         if (e.name === 'AbortError') {

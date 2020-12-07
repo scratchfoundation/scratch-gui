@@ -55,6 +55,9 @@ class SB3DownloaderFileSystem extends React.Component {
         await FileSystemAPI.writeToHandle(handle, content);
     }
     handleSaveError (e) {
+        if (e.name === 'AbortError') {
+            return;
+        }
         // eslint-disable-next-line no-console
         console.error(e);
         // eslint-disable-next-line no-alert

@@ -556,6 +556,15 @@ class MenuBar extends React.Component {
                                                             id="gui.menuBar.downloadToComputer"
                                                         />
                                                     </MenuItem>
+                                                    <SB3Downloader>{(_className, downloadProjectCallback) => (
+                                                        <MenuItem onClick={this.getSaveToComputerHandler(downloadProjectCallback)}>
+                                                            <FormattedMessage
+                                                                defaultMessage="Download to your computer (legacy)"
+                                                                description="Legacy menu bar item for downloading a project to your compute." // eslint-disable-line max-len
+                                                                id="tw.menuBar.legacyDownload"
+                                                            />
+                                                        </MenuItem>
+                                                    )}</SB3Downloader>
                                                 </React.Fragment>
                                             )}</SB3DownloaderFileSystem>
                                         ) : (

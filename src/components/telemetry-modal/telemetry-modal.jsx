@@ -87,6 +87,8 @@ class TelemetryModal extends React.PureComponent {
     }
     render () {
         const isUndecided = (typeof this.props.isTelemetryEnabled !== 'boolean');
+        const isOff = (this.props.isTelemetryEnabled === false);
+        const isOn = (this.props.isTelemetryEnabled === true);
         return (<ReactModal
             isOpen
             className={styles.modalContent}
@@ -114,7 +116,7 @@ class TelemetryModal extends React.PureComponent {
                         }}
                     /></p>
                     <Box className={styles.radioButtons}>
-                        <label>
+                        <label className={isOn ? styles.labelSelected : null}>
                             <input
                                 name="optInOut"
                                 type="radio"
@@ -125,7 +127,7 @@ class TelemetryModal extends React.PureComponent {
                             />
                             <FormattedMessage {...messages.optInText} />
                         </label>
-                        <label>
+                        <label className={isOff ? styles.labelSelected : null}>
                             <input
                                 name="optInOut"
                                 type="radio"

@@ -559,9 +559,15 @@ class MenuBar extends React.Component {
                                                     <SB3Downloader>{(_className, downloadProjectCallback) => (
                                                         <MenuItem onClick={this.getSaveToComputerHandler(downloadProjectCallback)}>
                                                             <FormattedMessage
-                                                                defaultMessage="Save to your computer (legacy)"
-                                                                description="Legacy menu bar item for downloading a project to your compute." // eslint-disable-line max-len
-                                                                id="tw.menuBar.legacyDownloadToComputer"
+                                                                defaultMessage="Save to your computer"
+                                                                description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                                id="gui.menuBar.downloadToComputer"
+                                                            />
+                                                            {/* W_L told me to make this a separate string */}
+                                                            <FormattedMessage
+                                                                defaultMessage=" (legacy)"
+                                                                description="Text that appears after 'Save project to your computer' on legacy button." // eslint-disable-line max-len
+                                                                id="tw.menuBar.downloadToComputerLegacyAppend"
                                                             />
                                                         </MenuItem>
                                                     )}</SB3Downloader>

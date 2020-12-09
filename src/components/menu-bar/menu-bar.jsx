@@ -855,7 +855,7 @@ class MenuBar extends React.Component {
                                             id="tw.menuBar.parameters"
                                         />
                                     </MenuItemLink>
-                                    <MenuItemLink href="https://github.com/TurboWarp/translations/issues/1">
+                                    <MenuItemLink href="https://github.com/TurboWarp/translations/issues/19">
                                         <FormattedMessage
                                             defaultMessage="Help Translate TurboWarp"
                                             description="Menu bar item for translating TurboWarp link"

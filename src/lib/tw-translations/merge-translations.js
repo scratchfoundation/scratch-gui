@@ -1,14 +1,18 @@
 import translations from './translations.json';
+import translationAliases from './aliases.json';
 
 const mergeMessages = messages => {
     for (const language of Object.keys(translations)) {
         if (language.startsWith('_')) {
             continue;
         }
-        const languageMessages = messages[language];
         const newMessages = translations[language];
-        for (const messageId of Object.keys(newMessages)) {
-            languageMessages[messageId] = newMessages[messageId];
+        const aliases = translationAliases[language] || [language];
+        for (const alias of aliases) {
+            const languageMessages = messages[alias];
+            for (const messageId of Object.keys(newMessages)) {
+                languageMessages[messageId] = newMessages[messageId];
+            }
         }
     }
 };

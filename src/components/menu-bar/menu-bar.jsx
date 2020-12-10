@@ -823,22 +823,22 @@ class MenuBar extends React.Component {
                                     <MenuItemLink href="https://github.com/TurboWarp">
                                         <FormattedMessage
                                             defaultMessage="Source Code"
-                                            description="Menu bar item for source code link"
-                                            id="tw.menuBar.code"
+                                            description="Link to source code"
+                                            id="tw.code"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="https://scratch.mit.edu/users/GarboMuffin/#comments">
                                         <FormattedMessage
                                             defaultMessage="Feedback & Bugs"
-                                            description="Menu bar item for feedback link"
-                                            id="tw.menuBar.feedback"
+                                            description="Link to feedback/bugs page"
+                                            id="tw.feedback"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="/privacy.html">
                                         <FormattedMessage
                                             defaultMessage="Privacy"
-                                            description="Menu bar item for privacy policy link"
-                                            id="tw.menuBar.privacy"
+                                            description="Link to privacy policy"
+                                            id="tw.privacy"
                                         />
                                     </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Embedding">
@@ -957,8 +957,8 @@ class MenuBar extends React.Component {
                             <Button className={styles.feedbackButton}>
                                 <FormattedMessage
                                     defaultMessage="TurboWarp Feedback"
-                                    description="Text for the giving feedback button"
-                                    id="tw.feedback"
+                                    description="Giving feedback button in the menu bar"
+                                    id="tw.feedbackButton"
                                 />
                             </Button>
                         </a>

@@ -33,7 +33,7 @@
     </div>
     <script>
       (function() {
-        var languages = {};
+        var languages = JSON.parse('{"es":["Cargando scripts","Esto puede tardar un rato ...","Solucionar Problemas"]}');
         var messages = languages[(window.navigator.userLanguage || window.navigator.language || '').split('-')[0].toLowerCase()];
         if (messages) {
           document.querySelector('#splash-title').textContent = messages[0];

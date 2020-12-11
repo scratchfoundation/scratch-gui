@@ -164,6 +164,10 @@ class SBFileUploader extends React.Component {
                     this.handleSelectFile(file);
                     this.props.onSetFileHandle(handle);
                 } catch (err) {
+                    // If user aborted process, do not show an error.
+                    if (e && e.name === 'AbortError') {
+                        return;
+                    }
                     // eslint-disable-next-line no-console
                     console.error(err);
                 }

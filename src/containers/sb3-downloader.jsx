@@ -6,7 +6,7 @@ import {injectIntl, defineMessages, intlShape} from 'react-intl';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
 import {setProjectUnchanged} from '../reducers/project-changed';
-import {showAlertWithTimeout} from '../reducers/alerts';
+import {showAlert, showAlertWithTimeout} from '../reducers/alerts';
 import {setFileHandle} from '../reducers/tw';
 import FileSystemAPI from '../lib/tw-filesystem-api';
 
@@ -62,8 +62,8 @@ class SB3Downloader extends React.Component {
     async saveAsNew () {
         try {
             const handle = await FileSystemAPI.showSaveFilePicker();
-            this.props.onSetFileHandle(handle);
             await this.saveToHandle(handle);
+            this.props.onSetFileHandle(handle);
         } catch (e) {
             this.handleSaveError(e);
         }
@@ -82,15 +82,17 @@ class SB3Downloader extends React.Component {
         return this.saveAsNew();
     }
     async saveToHandle (handle) {
+        const writable = await FileSystemAPI.createWritable(handle);
         this.startedSaving();
         const content = await this.props.saveProjectSb3();
-        await FileSystemAPI.writeToHandle(handle, content);
+        await FileSystemAPI.writeToWritable(writable, content);
         this.finishedSaving();
     }
     handleSaveError (e) {
         if (e.name === 'AbortError') {
             return;
         }
+        this.props.onShowSaveErrorAlert();
         // eslint-disable-next-line no-console
         console.error(e);
         // eslint-disable-next-line no-alert
@@ -137,6 +139,7 @@ SB3Downloader.propTypes = {
     onSetFileHandle: PropTypes.func,
     onShowSavingAlert: PropTypes.func,
     onShowSaveSuccessAlert: PropTypes.func,
+    onShowSaveErrorAlert: PropTypes.func,
     onProjectUnchanged: PropTypes.func
 };
 SB3Downloader.defaultProps = {
@@ -152,7 +155,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onSetFileHandle: fileHandle => dispatch(setFileHandle(fileHandle)),
     onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
-    onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'saveSuccess'),
+    onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'twSaveToDiskSuccess'),
+    onShowSaveErrorAlert: () => dispatch(showAlert('savingError')),
     onProjectUnchanged: () => dispatch(setProjectUnchanged())
 });
 

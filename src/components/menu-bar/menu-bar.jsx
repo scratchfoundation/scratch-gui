@@ -33,8 +33,6 @@ import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
 import VMOptions from '../../containers/tw-vm-options.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
-import SB3DownloaderFileSystem from '../../containers/tw-sb3-downloader-filesystem.jsx';
-import FileSystemAPI from '../../lib/tw-filesystem-api';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -528,65 +526,56 @@ class MenuBar extends React.Component {
                                                 </MenuItem>
                                             )}
                                         </SBFileUploader>
-                                        {FileSystemAPI.available() ? (
-                                            <SB3DownloaderFileSystem>{(className, {name, saveToLastFile, saveAsNew}) => (
-                                                <React.Fragment>
-                                                    {name !== null && (
+                                        <SB3Downloader>{(className, downloadProject, extended) => (
+                                            <React.Fragment>
+                                                {extended && (
+                                                    <React.Fragment>
+                                                        {extended.name !== null && (
+                                                            <MenuItem
+                                                                className={className}
+                                                                onClick={this.getSaveToComputerHandler(extended.saveToLastFile)}
+                                                            >
+                                                                <FormattedMessage
+                                                                    defaultMessage="Save as {file}"
+                                                                    description="Menu bar item to save project to an existing file on the user's computer"
+                                                                    id="tw.menuBar.saveAs"
+                                                                    values={{
+                                                                        file: extended.name
+                                                                    }}
+                                                                />
+                                                            </MenuItem>
+                                                        )}
                                                         <MenuItem
                                                             className={className}
-                                                            onClick={this.getSaveToComputerHandler(saveToLastFile)}
+                                                            onClick={this.getSaveToComputerHandler(extended.saveAsNew)}
                                                         >
-                                                            <FormattedMessage
-                                                                defaultMessage="Save as {file}"
-                                                                description="Menu bar item to save project to an existing file on the user's computer"
-                                                                id="tw.menuBar.saveAs"
-                                                                values={{
-                                                                    file: name
-                                                                }}
-                                                            />
-                                                        </MenuItem>
-                                                    )}
-                                                    <MenuItem
-                                                        className={className}
-                                                        onClick={this.getSaveToComputerHandler(saveAsNew)}
-                                                    >
-                                                        <FormattedMessage
-                                                            defaultMessage="Save to your computer"
-                                                            description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
-                                                            id="gui.menuBar.downloadToComputer"
-                                                        />
-                                                    </MenuItem>
-                                                    <SB3Downloader>{(_className, downloadProjectCallback) => (
-                                                        <MenuItem onClick={this.getSaveToComputerHandler(downloadProjectCallback)}>
                                                             <FormattedMessage
                                                                 defaultMessage="Save to your computer"
                                                                 description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
                                                                 id="gui.menuBar.downloadToComputer"
                                                             />
-                                                            {/* W_L told me to make this a separate string */}
-                                                            <FormattedMessage
-                                                                defaultMessage=" (legacy)"
-                                                                description="Text that appears after 'Save project to your computer' on legacy button." // eslint-disable-line max-len
-                                                                id="tw.menuBar.downloadToComputerLegacyAppend"
-                                                            />
                                                         </MenuItem>
-                                                    )}</SB3Downloader>
-                                                </React.Fragment>
-                                            )}</SB3DownloaderFileSystem>
-                                        ) : (
-                                            <SB3Downloader>{(className, downloadProjectCallback) => (
+                                                    </React.Fragment>
+                                                )}
                                                 <MenuItem
                                                     className={className}
-                                                    onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                                                    onClick={this.getSaveToComputerHandler(downloadProject)}
                                                 >
                                                     <FormattedMessage
                                                         defaultMessage="Save to your computer"
                                                         description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
                                                         id="gui.menuBar.downloadToComputer"
                                                     />
+                                                    {extended && (
+                                                        <FormattedMessage
+                                                            defaultMessage=" (legacy)"
+                                                            description="Text that appears after 'Save project to your computer' on legacy button." // eslint-disable-line max-len
+                                                            id="tw.menuBar.downloadToComputerLegacyAppend"
+                                                        />
+                                                    )}
                                                 </MenuItem>
-                                            )}</SB3Downloader>
-                                        )}
+                                            </React.Fragment>
+                                        )}</SB3Downloader>
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>

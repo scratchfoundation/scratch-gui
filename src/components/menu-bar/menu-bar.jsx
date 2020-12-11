@@ -531,10 +531,7 @@ class MenuBar extends React.Component {
                                                 {extended && (
                                                     <React.Fragment>
                                                         {extended.name !== null && (
-                                                            <MenuItem
-                                                                className={className}
-                                                                onClick={this.getSaveToComputerHandler(extended.saveToLastFile)}
-                                                            >
+                                                            <MenuItem onClick={this.getSaveToComputerHandler(extended.saveToLastFile)}>
                                                                 <FormattedMessage
                                                                     defaultMessage="Save as {file}"
                                                                     description="Menu bar item to save project to an existing file on the user's computer"
@@ -545,10 +542,7 @@ class MenuBar extends React.Component {
                                                                 />
                                                             </MenuItem>
                                                         )}
-                                                        <MenuItem
-                                                            className={className}
-                                                            onClick={this.getSaveToComputerHandler(extended.saveAsNew)}
-                                                        >
+                                                        <MenuItem onClick={this.getSaveToComputerHandler(extended.saveAsNew)}>
                                                             <FormattedMessage
                                                                 defaultMessage="Save to your computer"
                                                                 description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
@@ -557,10 +551,7 @@ class MenuBar extends React.Component {
                                                         </MenuItem>
                                                     </React.Fragment>
                                                 )}
-                                                <MenuItem
-                                                    className={className}
-                                                    onClick={this.getSaveToComputerHandler(downloadProject)}
-                                                >
+                                                <MenuItem onClick={this.getSaveToComputerHandler(downloadProject)}>
                                                     <FormattedMessage
                                                         defaultMessage="Save to your computer"
                                                         description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len

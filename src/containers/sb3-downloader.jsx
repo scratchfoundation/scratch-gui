@@ -42,12 +42,20 @@ class SB3Downloader extends React.Component {
             'saveToLastFileOrNew'
         ]);
     }
-    downloadProject () {
+    startedSaving () {
+        this.props.onShowSavingAlert();
+    }
+    finishedSaving () {
         this.props.onProjectUnchanged();
+        this.props.onShowSaveSuccessAlert();
+        if (this.props.onSaveFinished) {
+            this.props.onSaveFinished();
+        }
+    }
+    downloadProject () {
+        this.startedSaving();
         this.props.saveProjectSb3().then(content => {
-            if (this.props.onSaveFinished) {
-                this.props.onSaveFinished();
-            }
+            this.finishedSaving();
             downloadBlob(this.props.projectFilename, content);
         });
     }
@@ -74,9 +82,10 @@ class SB3Downloader extends React.Component {
         return this.saveAsNew();
     }
     async saveToHandle (handle) {
+        this.startedSaving();
         const content = await this.props.saveProjectSb3();
         await FileSystemAPI.writeToHandle(handle, content);
-        this.props.onProjectUnchanged();
+        this.finishedSaving();
     }
     handleSaveError (e) {
         if (e.name === 'AbortError') {

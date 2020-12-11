@@ -748,13 +748,13 @@ class MenuBar extends React.Component {
                                             <MenuItem onClick={toggleWarpTimer}>
                                                 {warpTimer ? (
                                                     <FormattedMessage
-                                                        defaultMessage="Turn off Warp Timer (Stuck Checking)"
+                                                        defaultMessage="Turn off Warp Timer"
                                                         description="Menu bar item for turning off Warp Timer"
                                                         id="tw.menuBar.warpTimerOff"
                                                     />
                                                 ) : (
                                                     <FormattedMessage
-                                                        defaultMessage="Turn on Warp Timer (Stuck Checking)"
+                                                        defaultMessage="Turn on Warp Timer"
                                                         description="Menu bar item for turning on Warp Timer"
                                                         id="tw.menuBar.warpTimerOn"
                                                     />

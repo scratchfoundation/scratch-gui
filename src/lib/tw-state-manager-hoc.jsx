@@ -307,7 +307,7 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.vm.setTurboMode(true);
             }
 
-            if (urlParams.has('stuck')) {
+            if (urlParams.has('stuck') || urlParams.has('warp_timer')) {
                 this.props.vm.setCompilerOptions({
                     warpTimer: true
                 });

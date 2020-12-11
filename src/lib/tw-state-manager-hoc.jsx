@@ -313,6 +313,12 @@ const TWStateManager = function (WrappedComponent) {
                 });
             }
 
+            if (urlParams.has('nocompile')) {
+                this.props.vm.setCompilerOptions({
+                    enabled: false
+                });
+            }
+
             if (urlParams.has('clones')) {
                 const clones = +urlParams.get('clones');
                 if (Number.isNaN(clones) || clones < 0) {

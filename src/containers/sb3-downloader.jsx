@@ -6,9 +6,14 @@ import {injectIntl, defineMessages, intlShape} from 'react-intl';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
 import {setProjectUnchanged} from '../reducers/project-changed';
-import {showAlert, showAlertWithTimeout} from '../reducers/alerts';
+import {showStandardAlert, showAlertWithTimeout} from '../reducers/alerts';
 import {setFileHandle} from '../reducers/tw';
 import FileSystemAPI from '../lib/tw-filesystem-api';
+
+// tw: we make some extensive changes to file saving
+//  - use the experimental FileSystem API when possible
+//  - saving marks project as unchanged
+//  - show spinner while saving and message when finished
 
 const messages = defineMessages({
     error: {
@@ -75,13 +80,14 @@ class SB3Downloader extends React.Component {
             this.handleSaveError(e);
         }
     }
-    async saveToLastFileOrNew () {
+    saveToLastFileOrNew () {
         if (this.props.fileHandle) {
             return this.saveToLastFile();
         }
         return this.saveAsNew();
     }
     async saveToHandle (handle) {
+        // Obtain the writable very early, otherwise browsers won't give us the handle when we ask.
         const writable = await FileSystemAPI.createWritable(handle);
         this.startedSaving();
         const content = await this.props.saveProjectSb3();
@@ -89,7 +95,8 @@ class SB3Downloader extends React.Component {
         this.finishedSaving();
     }
     handleSaveError (e) {
-        if (e.name === 'AbortError') {
+        // If user aborted process, do not show an error.
+        if (e && e.name === 'AbortError') {
             return;
         }
         this.props.onShowSaveErrorAlert();
@@ -107,7 +114,6 @@ class SB3Downloader extends React.Component {
         return children(
             this.props.className,
             this.downloadProject,
-            // tw: extended API when FileSystem API is available
             FileSystemAPI.available() ? {
                 name: this.props.fileHandle ? this.props.fileHandle.name : null,
                 saveAsNew: this.saveAsNew,
@@ -156,7 +162,7 @@ const mapDispatchToProps = dispatch => ({
     onSetFileHandle: fileHandle => dispatch(setFileHandle(fileHandle)),
     onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
     onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'twSaveToDiskSuccess'),
-    onShowSaveErrorAlert: () => dispatch(showAlert('savingError')),
+    onShowSaveErrorAlert: () => dispatch(showStandardAlert('savingError')),
     onProjectUnchanged: () => dispatch(setProjectUnchanged())
 });
 

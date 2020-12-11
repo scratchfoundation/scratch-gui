@@ -161,7 +161,7 @@ const alerts = [
         clearList: ['saveSuccess', 'saving', 'savingError', 'twSaveToDiskSuccess'],
         content: (
             <FormattedMessage
-                defaultMessage="Project saved to disk."
+                defaultMessage="Saved to your computer."
                 description="Message indicating that project was successfully saved to the user's disk"
                 id="tw.alerts.savedToDisk"
             />

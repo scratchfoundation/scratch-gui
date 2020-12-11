@@ -15,9 +15,9 @@ const TWSaveStatus = ({
     filterInlineAlerts(alertsList).length > 0 ? (
         <InlineMessages />
     ) : projectChanged && (
-        <SB3Downloader>{(_className, downloadProjectCallback) => (
+        <SB3Downloader>{(_className, _downloadProjectCallback, {smartSave}) => (
             <div
-                onClick={downloadProjectCallback}
+                onClick={smartSave}
                 className={styles.saveNow}
             >
                 <FormattedMessage

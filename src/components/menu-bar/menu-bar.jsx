@@ -526,9 +526,9 @@ class MenuBar extends React.Component {
                                                 </MenuItem>
                                             )}
                                         </SBFileUploader>
-                                        <SB3Downloader>{(className, downloadProject, extended) => (
+                                        <SB3Downloader>{(_className, downloadProject, extended) => (
                                             <React.Fragment>
-                                                {extended && (
+                                                {extended.available && (
                                                     <React.Fragment>
                                                         {extended.name !== null && (
                                                             <MenuItem onClick={this.getSaveToComputerHandler(extended.saveToLastFile)}>
@@ -557,7 +557,7 @@ class MenuBar extends React.Component {
                                                         description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
                                                         id="gui.menuBar.downloadToComputer"
                                                     />
-                                                    {extended && (
+                                                    {extended.available && (
                                                         <FormattedMessage
                                                             defaultMessage=" (legacy)"
                                                             description="Text that appears after 'Save project to your computer' on legacy button." // eslint-disable-line max-len

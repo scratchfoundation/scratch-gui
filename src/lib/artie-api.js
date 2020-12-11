@@ -9,7 +9,7 @@
 /* eslint-disable arrow-parens */
 import xhr from 'xhr';
 
-const _createArtieBlockFromTempBlock = (tempBlock) => ({elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested});
+const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});
 
 const _generateArtieBlock = (blocks) => {
 
@@ -35,7 +35,7 @@ const _blockHandler = (block, blocks) => {
     // 2.1- creates the temporal element for the root
     var transformed = false;
     const elementFamily = (block.opcode.split('_'))[0];
-    var element = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, next: null, inputs: [], nested: []};
+    var element = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, next: null, inputs: [], nested: [], previous: null, parent: null};
 
     // 2.2- Checks if this block has a next element
     if(block.next !== null && block.next !== undefined){
@@ -65,6 +65,9 @@ const _nextElementHandler = (parent, nextId, blocks) => {
     var nextElement = blocks.find(block => block.id === nextId);
     nextElement = _blockHandler(nextElement, blocks)
 
+    //2- Adds the previous element (the parent in this case), without its inputs, next, nested, previous and parent to avoid large objects
+    nextElement.previous = {id: parent.id, elementName: parent.elementName, elementFamily: parent.elementFamily, next: null, inputs: null, nested: [], previous: null, parent: null}
+
     // 3- Inserts the next element in the parent
     artieParent.next = nextElement;
 
@@ -82,6 +85,11 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
 
     // 2.1- If the input element is a nested element
     if (tmpElement.x !== undefined && tmpElement.y !== undefined){
+
+        //2.1.1- Adds the parent element, without its next, nested, previous and parent to avoid large objects
+        inputElement.parent = {id: parent.id, elementName: parent.elementName, elementFamily: parent.elementFamily, next: null, inputs: null, nested: [], previous: null, parent: null}
+
+        //2.1.2- Pushes the input element into the artie parent nested array
         artieParent.nested.push(inputElement);
     }
     // 2.2- If the input element is an input

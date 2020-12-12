@@ -89,10 +89,15 @@ class SB3Downloader extends React.Component {
     async saveToHandle (handle) {
         // Obtain the writable very early, otherwise browsers won't give us the handle when we ask.
         const writable = await FileSystemAPI.createWritable(handle);
-        this.startedSaving();
-        const content = await this.props.saveProjectSb3();
-        await FileSystemAPI.writeToWritable(writable, content);
-        this.finishedSaving();
+        try {
+            this.startedSaving();
+            const content = await this.props.saveProjectSb3();
+            await FileSystemAPI.writeToWritable(writable, content);
+            this.finishedSaving();
+        } finally {
+            // Always close the handle regardless of errors.
+            await FileSystemAPI.closeWritable(writable);
+        }
     }
     handleSaveError (e) {
         // If user aborted process, do not show an error.

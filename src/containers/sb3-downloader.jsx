@@ -44,8 +44,7 @@ class SB3Downloader extends React.Component {
             'downloadProject',
             'saveAsNew',
             'saveToLastFile',
-            'saveToLastFileOrNew',
-            'smartSave'
+            'saveToLastFileOrNew'
         ]);
     }
     startedSaving () {
@@ -95,13 +94,6 @@ class SB3Downloader extends React.Component {
         await FileSystemAPI.writeToWritable(writable, content);
         this.finishedSaving();
     }
-    smartSave () {
-        if (FileSystemAPI.available()) {
-            this.saveToLastFileOrNew();
-        } else {
-            this.downloadProject();
-        }
-    }
     handleSaveError (e) {
         // If user aborted process, do not show an error.
         if (e && e.name === 'AbortError') {
@@ -128,10 +120,10 @@ class SB3Downloader extends React.Component {
                 saveAsNew: this.saveAsNew,
                 saveToLastFile: this.saveToLastFile,
                 saveToLastFileOrNew: this.saveToLastFileOrNew,
-                smartSave: this.smartSave
+                smartSave: this.saveToLastFileOrNew
             } : {
                 available: false,
-                smartSave: this.smartSave
+                smartSave: this.downloadProject
             }
         );
     }

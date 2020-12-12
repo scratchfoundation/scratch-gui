@@ -10,6 +10,7 @@ import styles from './save-status.css';
 
 const TWSaveStatus = ({
     alertsList,
+    fileHandle,
     projectChanged
 }) => (
     filterInlineAlerts(alertsList).length > 0 ? (
@@ -20,22 +21,37 @@ const TWSaveStatus = ({
                 onClick={smartSave}
                 className={styles.saveNow}
             >
-                <FormattedMessage
-                    defaultMessage="Unsaved Changes"
-                    description="Title bar link indicating unsaved changes"
-                    id="tw.unsavedChanges"
-                />
+                {fileHandle ? (
+                    <FormattedMessage
+                        defaultMessage="Save as {file}"
+                        description="Menu bar item to save project to an existing file on the user's computer"
+                        id="tw.menuBar.saveAs"
+                        values={{
+                            file: fileHandle.name
+                        }}
+                    />
+                ) : (
+                    <FormattedMessage
+                        defaultMessage="Save to your computer"
+                        description="Menu bar item for downloading a project to your computer"
+                        id="gui.menuBar.downloadToComputer"
+                    />
+                )}
             </div>
         )}</SB3Downloader>
     ));
 
 TWSaveStatus.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
+    fileHandle: PropTypes.shape({
+        name: PropTypes.string
+    }),
     projectChanged: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     alertsList: state.scratchGui.alerts.alertsList,
+    fileHandle: state.scratchGui.tw.fileHandle,
     projectChanged: state.scratchGui.projectChanged
 });
 

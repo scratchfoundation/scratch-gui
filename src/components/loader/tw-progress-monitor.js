@@ -18,6 +18,19 @@ export const setProgressHandler = newHandler => {
     progressHandler(state, currentProgress, complete, total);
 };
 
+let progressHandlerTimeout = null;
+const fireProgressHandler = () => {
+    progressHandler(state, currentProgress, complete, total);
+    progressHandlerTimeout = null;
+};
+
+const queueProgressHandlerUpdate = () => {
+    if (progressHandlerTimeout !== null) {
+        cancelAnimationFrame(progressHandlerTimeout);
+    }
+    progressHandlerTimeout = requestAnimationFrame(fireProgressHandler);
+};
+
 const setProgress = progress => {
     if (progress < 0) {
         progress = 0;
@@ -26,7 +39,7 @@ const setProgress = progress => {
         progress = 1;
     }
     currentProgress = progress;
-    progressHandler(state, progress, complete, total);
+    queueProgressHandlerUpdate();
 };
 
 const setState = newState => {

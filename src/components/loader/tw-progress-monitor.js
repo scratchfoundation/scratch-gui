@@ -25,10 +25,9 @@ const fireProgressHandler = () => {
 };
 
 const queueProgressHandlerUpdate = () => {
-    if (progressHandlerTimeout !== null) {
-        cancelAnimationFrame(progressHandlerTimeout);
+    if (progressHandlerTimeout === null) {
+        progressHandlerTimeout = requestAnimationFrame(fireProgressHandler);
     }
-    progressHandlerTimeout = requestAnimationFrame(fireProgressHandler);
 };
 
 const setProgress = progress => {

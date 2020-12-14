@@ -43,7 +43,7 @@ class ErrorBoundary extends React.Component {
         this.setState({
             hasError: true,
             errorId: window.Sentry ? window.Sentry.lastEventId() : null,
-            errorMessage: `${error.message}`
+            errorMessage: `${(error && error.message) || error}`
         });
 
         // Log error locally for debugging as well.

@@ -105,30 +105,35 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise, screenShot) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise, screenShot, callback) => new Promise((resolve, reject) => {
 
     const artieBlocks = _generateArtieBlock(blocks);
     const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, finishedExercise: finishedExercise,
                                           screenShot: screenShot, elements: artieBlocks};
 
-    xhr({
-        method: 'POST',
-        uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(artiePedagogicalSoftwareData)
-    }, (error, response) => {
-        if (response != null && response.statusCode !== 201) {
-            return reject();
-        }
-        else if(response != null){
-            return resolve(response.body);
+    var xhr = new XMLHttpRequest();
+    var params = JSON.stringify(artiePedagogicalSoftwareData);
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 201 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+
+                //We check if there are no errors
+                if(json.body.object !== null){
+                    callback(json.body.object);
+                }
+            }
         }
     });
+
+    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(params);
 });
 
 const sendSolutionArtie = (userId, blocks, exercise, screenShot) => new Promise((resolve, reject) => {
 
-    const artieBlocks = generateArtieBlock(blocks);
+    const artieBlocks = _generateArtieBlock(blocks);
     const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: artieBlocks, screenShot: screenShot};
 
     xhr({

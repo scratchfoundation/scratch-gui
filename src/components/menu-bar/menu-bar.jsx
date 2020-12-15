@@ -189,6 +189,7 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
+            'handleHelpReceived',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
             'handleArtiePasswordChange',
@@ -320,7 +321,10 @@ class MenuBar extends React.Component {
         });
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null, this.handleHelpReceived);
+    }
+    handleHelpReceived(help){
+        console.log(help);
     }
     handleClickFinishExercise(){
         const body = document.querySelector('body');

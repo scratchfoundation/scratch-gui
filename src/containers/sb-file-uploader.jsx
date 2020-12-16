@@ -162,7 +162,9 @@ class SBFileUploader extends React.Component {
                     const handle = await FileSystemAPI.showOpenFilePicker();
                     const file = await handle.getFile();
                     this.handleSelectFile(file);
-                    this.props.onSetFileHandle(handle);
+                    if (file.name.endsWith('.sb3')) {
+                        this.props.onSetFileHandle(handle);
+                    }
                 } catch (err) {
                     // If user aborted process, do not show an error.
                     if (e && e.name === 'AbortError') {

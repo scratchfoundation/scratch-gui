@@ -244,14 +244,14 @@ const alerts = [
                 <hr />
                 <div>
                     <FormattedMessage
-                        defaultMessage="Please remember to save your project often, otherwise you will {loseAllYourWork} when the project crashes."
-                        description=""
+                        defaultMessage="Save your project often, otherwise you will {loseAllYourWork} when the project crashes."
+                        description="Part of the warning that appears when the editor is opened"
                         id="tw.alerts.warning.saveOften"
                         values={{
                             loseAllYourWork: <i>
                                 <FormattedMessage
-                                    defaultMessage="irrecoverably lose all your work"
-                                    description="Second line of the warning that appears when the editor is opened"
+                                    defaultMessage="irrecoverably lose all of your work"
+                                    description="a harsh way to phrase losing all of one's work"
                                     id="tw.alerts.warning.saveOften.loseAllYourWork"
                                 />
                             </i>
@@ -261,8 +261,16 @@ const alerts = [
                 <hr />
                 <div>
                     <FormattedMessage
+                        defaultMessage="Warp Timer has been enabled because you opened the editor. This fixes most crashes but hurts performance."
+                        description="Part of the warning that appears when the editor is opened"
+                        id="tw.alerts.warning.warpTimer"
+                    />
+                </div>
+                <hr />
+                <div>
+                    <FormattedMessage
                         defaultMessage="Scripts may need to be restarted for changes to apply."
-                        description="Third line of the warning that appears when the editor is opened"
+                        description="Part of the warning that appears when the editor is opened"
                         id="tw.alerts.warning.restartScripts"
                     />
                 </div>

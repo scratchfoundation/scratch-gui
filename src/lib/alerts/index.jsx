@@ -233,11 +233,40 @@ const alerts = [
         alertType: AlertTypes.STANDARD,
         clearList: [],
         content: (
-            <FormattedMessage
-                defaultMessage="Turn on Warp Timer or disable compiler (in Advanced menu) while creating projects to avoid potential data loss. Also note that scripts may need to be restarted for changes to apply."
-                description="Message warning user of potential data loss."
-                id="tw.alerts.warning"
-            />
+            <center>
+                <div>
+                    <FormattedMessage
+                        defaultMessage="Important Reminders"
+                        description="Header of the warning that appears when the editor is opened"
+                        id="tw.alerts.warning.top"
+                    />
+                </div>
+                <hr />
+                <div>
+                    <FormattedMessage
+                        defaultMessage="Please remember to save your project often, otherwise you will {loseAllYourWork} when the project crashes."
+                        description=""
+                        id="tw.alerts.warning.saveOften"
+                        values={{
+                            loseAllYourWork: <i>
+                                <FormattedMessage
+                                    defaultMessage="irrecoverably lose all your work"
+                                    description="Second line of the warning that appears when the editor is opened"
+                                    id="tw.alerts.warning.saveOften.loseAllYourWork"
+                                />
+                            </i>
+                        }}
+                    />
+                </div>
+                <hr />
+                <div>
+                    <FormattedMessage
+                        defaultMessage="Scripts may need to be restarted for changes to apply."
+                        description="Third line of the warning that appears when the editor is opened"
+                        id="tw.alerts.warning.restartScripts"
+                    />
+                </div>
+            </center>
         ),
         closeButton: true,
         level: AlertLevels.WARN

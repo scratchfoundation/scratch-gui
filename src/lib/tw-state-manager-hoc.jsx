@@ -331,7 +331,10 @@ const TWStateManager = function (WrappedComponent) {
             }
 
             if (urlParams.has('project_url')) {
-                const projectUrl = urlParams.get('project_url');
+                let projectUrl = urlParams.get('project_url');
+                if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
+                    projectUrl = `https:${projectUrl}`;
+                }
                 this.props.onProjectFetchStarted();
                 progressMonitor.fetchWithProgress(projectUrl)
                     .then(res => {

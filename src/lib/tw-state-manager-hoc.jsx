@@ -386,6 +386,70 @@ const TWStateManager = function (WrappedComponent) {
                     history.pushState(null, null, newPath);
                 }
             }
+
+            if (
+                this.props.runtimeOptions !== prevProps.runtimeOptions ||
+                this.props.compilerOptions !== prevProps.compilerOptions ||
+                this.props.highQualityPen !== prevProps.highQualityPen ||
+                this.props.framerate !== prevProps.framerate ||
+                this.props.turbo !== prevProps.turbo
+            ) {
+                const searchParams = new URLSearchParams(location.search);
+                const runtimeOptions = this.props.runtimeOptions;
+                const compilerOptions = this.props.compilerOptions;
+
+                if (this.props.framerate === 30) {
+                    searchParams.delete('fps');
+                } else {
+                    searchParams.set('fps', this.props.framerate);
+                }
+
+                if (this.props.turbo) {
+                    searchParams.set('turbo', '');
+                } else {
+                    searchParams.delete('turbo');
+                }
+
+                if (this.props.highQualityPen) {
+                    searchParams.set('hqpen', '');
+                } else {
+                    searchParams.delete('hqpen');
+                }
+
+                if (compilerOptions.enabled) {
+                    searchParams.delete('nocompile');
+                } else {
+                    searchParams.set('nocompile', '');
+                }
+
+                if (this.props.isPlayerOnly) {
+                    if (compilerOptions.warpTimer) {
+                        searchParams.set('stuck', '');
+                    } else {
+                        searchParams.delete('stuck');
+                    }
+                } else {
+                    // Leave ?stuck as-is when in editor
+                }
+
+                if (runtimeOptions.maxClones === 300) {
+                    searchParams.delete('clones');
+                } else {
+                    searchParams.set('clones', runtimeOptions.maxClones);
+                }
+
+                let newSearch = searchParams.toString();
+                if (newSearch.length > 0) {
+                    // Add leading question mark
+                    newSearch = `?${newSearch}`;
+                    // Remove '=' from empty values
+                    newSearch = newSearch.replace(/=(?=$|&)/g, '');
+                }
+ 
+                if (location.search !== newSearch) {
+                    history.replaceState(null, null, `${location.pathname}${newSearch}${location.hash}`);
+                }
+            }
         }
         componentWillUnmount () {
             window.removeEventListener('hashchange', this.handleHashChange);
@@ -422,6 +486,11 @@ const TWStateManager = function (WrappedComponent) {
                 isFullScreen,
                 isPlayerOnly,
                 projectChanged,
+                compilerOptions,
+                runtimeOptions,
+                highQualityPen,
+                framerate,
+                turbo,
                 onProjectFetchFinished,
                 onProjectFetchStarted,
                 onSetIsFullScreen,
@@ -448,6 +517,11 @@ const TWStateManager = function (WrappedComponent) {
         isPlayerOnly: PropTypes.bool,
         projectChanged: PropTypes.bool,
         projectId: PropTypes.string,
+        compilerOptions: PropTypes.shape({}),
+        runtimeOptions: PropTypes.shape({}),
+        highQualityPen: PropTypes.bool,
+        framerate: PropTypes.number,
+        turbo: PropTypes.bool,
         onProjectFetchFinished: PropTypes.func,
         onProjectFetchStarted: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
@@ -467,6 +541,11 @@ const TWStateManager = function (WrappedComponent) {
         isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
         projectChanged: state.scratchGui.projectChanged,
         reduxProjectId: state.scratchGui.projectState.projectId,
+        compilerOptions: state.scratchGui.tw.compilerOptions,
+        runtimeOptions: state.scratchGui.tw.runtimeOptions,
+        highQualityPen: state.scratchGui.tw.highQualityPen,
+        framerate: state.scratchGui.tw.framerate,
+        turbo: state.scratchGui.vmStatus.turbo,
         username: state.scratchGui.tw.username,
         vm: state.scratchGui.vm
     });

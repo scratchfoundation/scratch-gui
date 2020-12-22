@@ -18,6 +18,8 @@ const motion = function (isStage, targetId) {
         <!-- MARTY MOTION BLOCKS -->
 
         <block type="mv2_getReady" />
+        
+        <block type="mv2_discoEyes" />
 
         <block type="mv2_circle" >
             <value name="MOVETIME">

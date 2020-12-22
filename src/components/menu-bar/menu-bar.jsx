@@ -81,9 +81,11 @@ import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
-import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises} from '../../reducers/artie-exercises';
+import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
+        artieHelpReceived, artieClearHelp} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
+import ArtieHelpComponent from '../artie-help/artie-help.jsx';
 
 import html2canvas from "html2canvas";
 
@@ -189,7 +191,6 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
-            'handleHelpReceived',
             'handleClickArtieLoginOk',
             'handleArtieUserChange',
             'handleArtiePasswordChange',
@@ -321,10 +322,7 @@ class MenuBar extends React.Component {
         });
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null, this.handleHelpReceived);
-    }
-    handleHelpReceived(help){
-        console.log(help);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieHelpReceived);
     }
     handleClickFinishExercise(){
         const body = document.querySelector('body');
@@ -927,7 +925,8 @@ class MenuBar extends React.Component {
 
                 {aboutButton}
 
-                {this.props.artieLogin.user===null || (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) || this.props.artieLogin.active ? (
+                {this.props.artieLogin.user===null || (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) || 
+                this.props.artieLogin.active ? (
                         <ArtieLogin
                             onUserChange={this.handleArtieUserChange}
                             onPasswordChange={this.handleArtiePasswordChange}
@@ -940,7 +939,8 @@ class MenuBar extends React.Component {
                 ) :
                 (<div></div>)}
 
-                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
+                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null && 
+                this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
                     <ArtieExercises
                         title="Exercise Selector"
                         onExerciseChange={this.handleArtieExerciseChange}
@@ -950,6 +950,16 @@ class MenuBar extends React.Component {
                     />
                 ) :
                 (<div></div>)}
+
+                {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ? 
+                (
+                    <ArtieHelpComponent 
+                        onCancel={this.props.onArtieClearHelp}
+                        title="Next Steps Help"
+                    />
+                ) : 
+                (<div></div>)}
+
             </Box>
         );
     }
@@ -1084,7 +1094,9 @@ const mapDispatchToProps = dispatch => ({
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
     onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
-    onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises())
+    onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
+    onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
+    onArtieClearHelp: () => dispatch(artieClearHelp())
 
 });
 

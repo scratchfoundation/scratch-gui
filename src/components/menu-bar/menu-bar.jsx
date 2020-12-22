@@ -956,6 +956,8 @@ class MenuBar extends React.Component {
                     <ArtieHelpComponent 
                         onCancel={this.props.onArtieClearHelp}
                         title="Next Steps Help"
+                        help={this.props.artieExercises.help}
+                        blocks={this.props.vm.runtime.flyoutBlocks._blocks}
                     />
                 ) : 
                 (<div></div>)}

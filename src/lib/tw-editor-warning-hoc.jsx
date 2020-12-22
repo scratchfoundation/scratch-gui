@@ -16,10 +16,13 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         }
         enableWarpTimerIfInEditor () {
             if (!this.props.isPlayerOnly) {
-                this.props.onShowWarning();
-                this.props.vm.setCompilerOptions({
-                    warpTimer: true
-                });
+                // If compiler is already disabled, don't show the warning or change warp timer.
+                if (this.props.compilerOptions.enabled) {
+                    this.props.onShowWarning();
+                    this.props.vm.setCompilerOptions({
+                        warpTimer: true
+                    });
+                }
                 this.disabled = true;
             }
         }

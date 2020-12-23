@@ -714,23 +714,28 @@ class MenuBar extends React.Component {
                                             id="tw.menuBar.advancedHelp"
                                         />
                                     </MenuItemLink>
-                                    <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
-                                        <MenuItem onClick={toggleHighQualityPen}>
-                                            {highQualityPen ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn off High Quality Pen"
-                                                    description="Menu bar item for turning off high quality pen"
-                                                    id="tw.menuBar.hqpOff"
-                                                />
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn on High Quality Pen"
-                                                    description="Menu bar item for turning on high quality pen"
-                                                    id="tw.menuBar.hqpOn"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</HighQualityPen>
+                                </MenuSection>
+                                <MenuSection>
+                                    {/* Wrap the top item in a div so that it gets a border */}
+                                    <div>
+                                        <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
+                                            <MenuItem onClick={toggleHighQualityPen}>
+                                                {highQualityPen ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn off High Quality Pen"
+                                                        description="Menu bar item for turning off high quality pen"
+                                                        id="tw.menuBar.hqpOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn on High Quality Pen"
+                                                        description="Menu bar item for turning on high quality pen"
+                                                        id="tw.menuBar.hqpOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
+                                        )}</HighQualityPen>
+                                    </div>
                                     <VMOptions>{({
                                         compilerEnabled,
                                         toggleCompilerEnabled,

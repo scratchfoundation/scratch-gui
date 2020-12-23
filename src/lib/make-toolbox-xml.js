@@ -19,27 +19,6 @@ const motion = function (isStage, targetId) {
 
         <block type="mv2_getReady" />
 
-        <block type="mv2_discoChangeAllColour" >
-            <value>
-                <field name="COLOUR"></field>
-            </value>
-        </block>
-
-        <block type="mv2_discoChangeAllPattern" >
-            <value>
-                <field name="PROGRAM"></field>
-            </value>
-        </block>
-
-        <block type="mv2_discoChangeBlockColour" >
-            <value>
-                <field name="BOARDTYPE"></field>
-            </value>
-            <value>
-                <field name="COLOUR"></field>
-            </value>
-        </block>
-
         <block type="mv2_circle" >
             <value name="MOVETIME">
                 <shadow type="math_number">
@@ -797,6 +776,7 @@ const control = function (isStage) {
     `;
 };
 
+
 const sensing = function (isStage) {
     const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
     return `
@@ -837,6 +817,27 @@ const sensing = function (isStage) {
 
             <block type="mv2_noisesense" />
 
+            <block type="mv2_discoChangeAllColour" >
+                <value>
+                    <field name="COLOUR"></field>
+                </value>
+            </block>
+
+            <block type="mv2_discoChangeAllPattern" >
+                <value>
+                    <field name="PROGRAM"></field>
+                </value>
+            </block>
+
+            <block type="mv2_discoChangeBlockColour" >
+                <value>
+                    <field name="BOARDTYPE"></field>
+                </value>
+                <value>
+                    <field name="COLOUR"></field>
+                </value>
+            </block>
+
             <!--<block type="mv2_current" />-->
 
             <!--<block type="mv2_accelerometer" />-->
@@ -852,6 +853,8 @@ const sensing = function (isStage) {
                     </shadow>
                 </value>
             </block>-->
+
+
 
             ${blockSeparator}
 

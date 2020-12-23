@@ -483,6 +483,26 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
     <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
+        <block type="mv2_discoChangeAllColour" >
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+        </block>
+
+        <block type="mv2_discoChangeAllPattern" >
+            <value>
+                <field name="PROGRAM"></field>
+            </value>
+        </block>
+
+        <block type="mv2_discoChangeBlockColour" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+        </block>
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
@@ -816,27 +836,6 @@ const sensing = function (isStage) {
             <block type="mv2_lightsense" />
 
             <block type="mv2_noisesense" />
-
-            <block type="mv2_discoChangeAllColour" >
-                <value>
-                    <field name="COLOUR"></field>
-                </value>
-            </block>
-
-            <block type="mv2_discoChangeAllPattern" >
-                <value>
-                    <field name="PROGRAM"></field>
-                </value>
-            </block>
-
-            <block type="mv2_discoChangeBlockColour" >
-                <value>
-                    <field name="BOARDTYPE"></field>
-                </value>
-                <value>
-                    <field name="COLOUR"></field>
-                </value>
-            </block>
 
             <!--<block type="mv2_current" />-->
 

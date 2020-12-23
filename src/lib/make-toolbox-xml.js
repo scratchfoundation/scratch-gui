@@ -19,7 +19,7 @@ const motion = function (isStage, targetId) {
 
         <block type="mv2_getReady" />
 
-        <block type="mv2_discoChangeAll" >
+        <block type="mv2_discoChangeAllColour" >
             <value>
                 <field name="COLOUR"></field>
             </value>
@@ -31,9 +31,9 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_discoBlockColour" >
+        <block type="mv2_discoChangeBlockColour" >
             <value>
-                <field name="DISCOBLOCK"></field>
+                <field name="BOARDTYPE"></field>
             </value>
             <value>
                 <field name="COLOUR"></field>

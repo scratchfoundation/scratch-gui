@@ -9,5 +9,6 @@ const addons = [
 
 for (const addonId of addons) {
     const api = new AddonAPI(addonId);
-    require(`./addons/${addonId}`).default(api);
+    const module = require(`./addons/${addonId}`);
+    module.default(api);
 }

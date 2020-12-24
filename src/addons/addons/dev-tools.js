@@ -1,5 +1,6 @@
 /* eslint-disable */
 // GPL 3.0
+// https://github.com/griffpatch/Scratch3-Dev-Tools
 // Is what we're doing here technically a GPL violation? Perhaps, but griffpatch seems fine with including
 // his dev tools inside TW, so it shouldn't be an issue.
 

@@ -1,6 +1,6 @@
 import translations from './l10n/en.json';
 
-class Tab extends EventTarget {
+class Tab {
     waitForElement (selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
@@ -21,6 +21,10 @@ class Tab extends EventTarget {
                 subtree: true
             });
         });
+    }
+
+    addEventListener () {
+        // no-op
     }
 
     get editorMode () {

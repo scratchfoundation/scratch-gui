@@ -1,4 +1,4 @@
-import AddonAPI from './addon-api';
+import API from './api';
 
 /* eslint-disable import/no-commonjs */
 const addons = [
@@ -8,7 +8,7 @@ const addons = [
 ];
 
 for (const addonId of addons) {
-    const api = new AddonAPI(addonId);
+    const api = new API(addonId);
     const module = require(`./addons/${addonId}`);
     module.default(api);
 }

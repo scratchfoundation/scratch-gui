@@ -1,6 +1,6 @@
 import translations from './l10n/en.json';
 
-class Tab {
+class Tab extends EventTarget {
     waitForElement (selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
@@ -23,12 +23,11 @@ class Tab {
         });
     }
 
-    addEventListener () {
-        // no-op
-    }
-
     get editorMode () {
-        return 'editor';
+        if (location.pathname.includes('editor')) return 'editor';
+        if (location.pathname.includes('fullscreen')) return 'fullscreen';
+        if (location.pathname.includes('editor')) return 'editor';
+        return 'projectpage';
     }
 }
 
@@ -42,12 +41,31 @@ class Addon {
     }
 }
 
-class AddonAPI {
+const addon = new Addon();
+
+const emitUrlChange = () => {
+    setTimeout(() => {
+        addon.tab.dispatchEvent(new CustomEvent('urlChange'));
+    });
+};
+
+const originalReplaceState = history.replaceState;
+history.replaceState = function (...args) {
+    originalReplaceState.apply(this, args);
+    emitUrlChange();
+};
+const originalPushState = history.pushState;
+history.pushState = function (...args) {
+    originalPushState.apply(this, args);
+    emitUrlChange();
+};
+
+class API {
     constructor (id) {
         this._id = id;
         this.global = global;
         this.console = console;
-        this.addon = new Addon();
+        this.addon = addon;
         this.msg = this.msg.bind(this);
     }
 
@@ -60,4 +78,4 @@ class AddonAPI {
     }
 }
 
-export default AddonAPI;
+export default API;

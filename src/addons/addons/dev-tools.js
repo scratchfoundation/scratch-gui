@@ -3,10 +3,8 @@
 // Is what we're doing here technically a GPL violation? Perhaps, but griffpatch seems fine with including
 // his dev tools inside TW, so it shouldn't be an issue.
 
-import {addStylesheet} from '../lib';
-
-addStylesheet(`
-
+import addStyle from './lib/addStyle';
+addStyle(`
 #s3devToolBar {
     display: flex;
     white-space: nowrap;

@@ -2,11 +2,12 @@ import AddonAPI from './addon-api';
 
 /* eslint-disable import/no-commonjs */
 const addons = [
-    require('./addons/searchable-dropdowns'),
-    require('./addons/dev-tools')
+    'searchable-dropdowns',
+    'dev-tools',
+    'block-switching'
 ];
 
-const api = new AddonAPI();
-for (const addon of addons) {
-    addon.default(api);
+for (const addonId of addons) {
+    const api = new AddonAPI(addonId);
+    require(`./addons/${addonId}`).default(api);
 }

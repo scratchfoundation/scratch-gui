@@ -1,4 +1,6 @@
-class Tab {
+import translations from './l10n/en.json';
+
+class Tab extends EventTarget {
     waitForElement (selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
@@ -20,19 +22,37 @@ class Tab {
             });
         });
     }
+
+    get editorMode () {
+        return 'editor';
+    }
 }
 
 class Addon {
     constructor () {
         this.tab = new Tab();
     }
+
+    get settings () {
+        throw new Error('not implemented');
+    }
 }
 
 class AddonAPI {
-    constructor () {
+    constructor (id) {
+        this._id = id;
         this.global = global;
         this.console = console;
         this.addon = new Addon();
+        this.msg = this.msg.bind(this);
+    }
+
+    msg (key) {
+        const namespacedKey = `${this._id}/${key}`;
+        if (translations[namespacedKey]) {
+            return translations[namespacedKey];
+        }
+        return key;
     }
 }
 

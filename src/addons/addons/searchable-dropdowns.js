@@ -1,9 +1,8 @@
 /* eslint-disable */
 // https://github.com/ScratchAddons/ScratchAddons/tree/master/addons/editor-searchable-dropdowns
 
-import {addStylesheet} from '../lib';
-
-addStylesheet(`
+import addStyle from './lib/addStyle';
+addStyle(`
 .u-dropdown-searchbar {
   width: 100%;
   box-sizing: border-box;

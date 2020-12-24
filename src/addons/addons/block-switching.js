@@ -1,6 +1,9 @@
 /* eslint-disable */
-// https://github.com/ScratchAddons/ScratchAddons/tree/master/addons/block-switching
-// I wrote this code and am therefore not affected by the GPL.
+
+/*!
+ * https://github.com/ScratchAddons/ScratchAddons/tree/master/addons/block-switching
+ * I wrote this code and am therefore not affected by the GPL.
+ */
 
 import blockToDom from "./lib/blockToDom.js";
 

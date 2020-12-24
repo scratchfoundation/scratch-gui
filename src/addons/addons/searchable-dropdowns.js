@@ -1,6 +1,9 @@
 /* eslint-disable */
-// https://github.com/ScratchAddons/ScratchAddons/tree/master/addons/editor-searchable-dropdowns
-// I wrote this code and am therefore not affected by the GPL.
+
+/*!
+ * https://github.com/ScratchAddons/ScratchAddons/tree/master/addons/editor-searchable-dropdowns
+ * I wrote this code and am therefore not affected by the GPL.
+ */
 
 import addStyle from './lib/addStyle';
 addStyle(`

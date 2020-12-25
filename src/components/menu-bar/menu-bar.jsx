@@ -836,6 +836,13 @@ class MenuBar extends React.Component {
                                             id="tw.menuBar.embed"
                                         />
                                     </MenuItemLink>
+                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/TurboWarp-blocks">
+                                        <FormattedMessage
+                                            defaultMessage="TurboWarp Blocks"
+                                            description="Menu bar item for TurboWarp blocks link"
+                                            id="tw.menuBar.blocks"
+                                        />
+                                    </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters">
                                         <FormattedMessage
                                             defaultMessage="URL Parameters"

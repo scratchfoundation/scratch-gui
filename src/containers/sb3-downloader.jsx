@@ -61,8 +61,7 @@ class SB3Downloader extends React.Component {
         this.startedSaving();
         this.props.saveProjectSb3().then(content => {
             if (content.usesExtendedExtensions) {
-                if (!this.props.showedExtendedExtensionswarning) {
-                    this.props.onSetShowedExtendedExtensionsWarning(true);
+                if (!this.props.showedExtendedExtensionsWarning) {
                     this.props.onShowExtendedExtensionsWarning();
                 }
             }
@@ -158,8 +157,7 @@ SB3Downloader.propTypes = {
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     saveProjectSb3: PropTypes.func,
-    showedExtendedExtensionswarning: PropTypes.bool,
-    onSetShowedExtendedExtensionsWarning: PropTypes.func,
+    showedExtendedExtensionsWarning: PropTypes.bool,
     onShowExtendedExtensionsWarning: PropTypes.func,
     onSetFileHandle: PropTypes.func,
     onShowSavingAlert: PropTypes.func,
@@ -175,14 +173,15 @@ const mapStateToProps = state => ({
     fileHandle: state.scratchGui.tw.fileHandle,
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
-    showedExtendedExtensionswarning: state.scratchGui.tw.showedExtendedExtensionswarning
+    showedExtendedExtensionsWarning: state.scratchGui.tw.showedExtendedExtensionsWarning
 });
 
 const mapDispatchToProps = dispatch => ({
     onSetFileHandle: fileHandle => dispatch(setFileHandle(fileHandle)),
-    onSetShowedExtendedExtensionsWarning: showedExtendedExtensionswarning =>
-        dispatch(setShowedExtendedExtensionsWarning(showedExtendedExtensionswarning)),
-    onShowExtendedExtensionsWarning: () => dispatch(showStandardAlert('twExtendedExtensionsWarning')),
+    onShowExtendedExtensionsWarning: () => {
+        dispatch(showStandardAlert('twExtendedExtensionsWarning'));
+        dispatch(setShowedExtendedExtensionsWarning(true));
+    },
     onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
     onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'twSaveToDiskSuccess'),
     onShowSaveErrorAlert: () => dispatch(showStandardAlert('savingError')),

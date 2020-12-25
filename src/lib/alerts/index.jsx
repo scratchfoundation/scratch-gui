@@ -278,6 +278,20 @@ const alerts = [
         ),
         closeButton: true,
         level: AlertLevels.WARN
+    },
+    {
+        alertId: 'twExtendedExtensionsWarning',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['twExtendedExtensionsWarning'],
+        content: (
+            <FormattedMessage
+                defaultMessage="This project uses blocks exclusive to TurboWarp. It will not work in Scratch and should not be uploaded to the Scratch website."
+                description="Warning that this project uses blocks that will only work in TurboWarp"
+                id="tw.alerts.extendedExtensionsWarning"
+            />
+        ),
+        closeButton: true,
+        level: AlertLevels.WARN
     }
 ];
 

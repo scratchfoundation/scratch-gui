@@ -136,6 +136,7 @@ class Stage extends React.Component {
         canvas.addEventListener('mousedown', this.onMouseDown);
         canvas.addEventListener('touchstart', this.onMouseDown);
         canvas.addEventListener('wheel', this.onWheel);
+        canvas.addEventListener('contextmenu', this.onContextMenu);
     }
     detachMouseEvents (canvas) {
         document.removeEventListener('mousemove', this.onMouseMove);
@@ -145,6 +146,7 @@ class Stage extends React.Component {
         canvas.removeEventListener('mousedown', this.onMouseDown);
         canvas.removeEventListener('touchstart', this.onMouseDown);
         canvas.removeEventListener('wheel', this.onWheel);
+        canvas.removeEventListener('contextmenu', this.onContextMenu);
     }
     attachRectEvents () {
         window.addEventListener('resize', this.updateRect);
@@ -311,6 +313,9 @@ class Stage extends React.Component {
             deltaY: e.deltaY
         };
         this.props.vm.postIOData('mouseWheel', data);
+    }
+    onContextMenu (e) {
+        e.preventDefault();
     }
     cancelMouseDownTimeout () {
         if (this.state.mouseDownTimeoutId !== null) {

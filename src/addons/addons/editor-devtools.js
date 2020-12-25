@@ -1974,6 +1974,8 @@ export default async function () {
                 console.error(x);
             }
         } else if (e.button === 2) {    // Right click...
+            // tw: send to top/bottom is broken, disable for now
+            /*
             let spriteSelector = e.target.closest("div[class*='sprite-selector-item_sprite-selector-item']");
             if (spriteSelector) {
                 let contextMenu = spriteSelector.getElementsByTagName("nav")[0];
@@ -1986,6 +1988,7 @@ export default async function () {
                         `);
                 }
             }
+            */
 
             let blockSvg = e.target.closest('[data-id]');
             let isBackground = !blockSvg && e.target.closest("svg.blocklySvg");

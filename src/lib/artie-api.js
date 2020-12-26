@@ -208,4 +208,35 @@ const getArtieExercises = (userName, password, callback) => new Promise(() => {
 
 });
 
-export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents, getArtieExercises};
+/**
+ * Function to get the help in base of the Scratch instances
+ * @param {*} blocks 
+ * @param {*} help 
+ */
+const getBlocksFromHelp = (blocks, help) => {
+
+    var addArrayBlocks=[];
+    var deleteArrayBlocks=[];
+
+    //For adding elements
+    if(help !== null && blocks !== null && Array.isArray(help.nextSteps.addElements) && help.nextSteps.addElements.length > 0){
+
+        Object.values(help.nextSteps.addElements).forEach((addBlock) => {
+            addArrayBlocks[addBlock.elementName] = blocks[addBlock.elementName];
+        });
+    }
+
+    //For deleting elements
+    if(help !== null && blocks !== null && Array.isArray(help.nextSteps.deleteElements) && help.nextSteps.deleteElements.length > 0){
+
+        Object.values(help.nextSteps.deleteElements).forEach((deleteBlock) => {
+            deleteArrayBlocks[deleteBlock.elementName] = blocks[deleteBlock.elementName];
+        });
+    }
+
+    //TODO: Do the same for the input replacement and with the next and previous elements
+
+    return {addArrayBlocks, deleteArrayBlocks};
+}
+
+export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents, getArtieExercises, getBlocksFromHelp};

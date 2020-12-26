@@ -85,7 +85,7 @@ import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, art
         artieHelpReceived, artieClearHelp} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
-import ArtieHelpComponent from '../artie-help/artie-help.jsx';
+import ArtieHelp from '../../containers/artie-help.jsx';
 
 import html2canvas from "html2canvas";
 
@@ -953,11 +953,8 @@ class MenuBar extends React.Component {
 
                 {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ? 
                 (
-                    <ArtieHelpComponent 
-                        onCancel={this.props.onArtieClearHelp}
-                        title="Next Steps Help"
-                        help={this.props.artieExercises.help}
-                        blocks={this.props.vm.runtime.flyoutBlocks._blocks}
+                    <ArtieHelp 
+                        onRequestClose={this.props.onArtieClearHelp}
                     />
                 ) : 
                 (<div></div>)}

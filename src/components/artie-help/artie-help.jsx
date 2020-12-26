@@ -2,9 +2,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
 import Modal from '../../containers/modal.jsx';
-import styles from './artie-help.css';
-import {FormattedMessage} from 'react-intl';
+import {getBlocksFromHelp} from '../../lib/artie-api';
+import cloneDeep from 'lodash/cloneDeep';
 
+import styles from '../custom-procedures/custom-procedures.css';
+import textInputIcon from '../custom-procedures/icon--text-input.svg';
+import booleanInputIcon from '../custom-procedures/icon--boolean-input.svg';
+import labelIcon from '../custom-procedures/icon--label.svg';
+import VMScratchBlocks from '../../lib/blocks';
+import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+
+const messages = defineMessages({
+    myblockModalTitle: {
+        defaultMessage: 'Make a Block',
+        description: 'Title for the modal where you create a custom block.',
+        id: 'gui.customProcedures.myblockModalTitle'
+    }
+});
 
 class ArtieHelpComponent extends React.Component {
 
@@ -12,32 +26,37 @@ class ArtieHelpComponent extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        //var objBlocks = getBlocksFromHelp(this.props.vm.runtime.flyoutBlocks._blocks, this.props.help);
+
+        //We clone the VM for the blocks we have to add
+        //let localAddVm = cloneDeep(this.props.vm);
+
+        //We clone the VM for the blocks we have to delete
+        //let localDeleteVm = cloneDeep(this.props.vm);
+    }
+
     render(){
+
         return(
             <Modal
-                onRequestClose={this.props.onCancel}
-                className={styles.modalContent}
-                contentLabel={this.props.title}
-                id="ArtieHelp"
-            >
-                <Box className={styles.body}>
-                    <label>
-                        <FormattedMessage
-                            defaultMessage="Username"
-                            description="Username"
-                            id="gui.menuBar.artie.login.username"
-                        />
-                    </label>
-                </Box>
-            </Modal>
+                    className={styles.modalContent}
+                    onRequestClose={this.props.onCancel}
+                    id="ArtieHelp"
+                    contentLabel="ARTIE HELP"
+                >
+                    <Box
+                        className={styles.workspace}
+                        componentRef={this.props.componentRef}
+                    />
+                </Modal>
         );
     }
 
-}
+};
 
 ArtieHelpComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
 };
 
 export default ArtieHelpComponent;

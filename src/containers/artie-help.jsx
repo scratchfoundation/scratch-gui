@@ -44,7 +44,8 @@ class ArtieHelp extends React.Component {
         ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
 
         // Create the procedure declaration block for editing the mutation.
-        this.mutationRoot = this.workspace.newBlock('procedures_declaration');
+        //this.mutationRoot = this.workspace.newBlock('procedures_declaration');
+        this.mutationRoot = this.workspace.newBlock('event_whenflagclicked');
         // Make the declaration immovable, undeletable and have no context menu
         this.mutationRoot.setMovable(false);
         this.mutationRoot.setDeletable(false);
@@ -104,14 +105,14 @@ class ArtieHelp extends React.Component {
         var testXml = `<mutation proccode="nombre del bloque" argumentids="[]" argumentnames="[]" argumentdefaults="[]" warp="false"/>`;
         var dom = ScratchBlocks.Xml.textToDom(testXml);
         
-        this.mutationRoot.domToMutation(dom);
+        //this.mutationRoot.domToMutation(dom);
         this.mutationRoot.initSvg();
         this.mutationRoot.render();
-        this.setState({warp: this.mutationRoot.getWarp()});
+        //this.setState({warp: this.mutationRoot.getWarp()});
         // Allow the initial events to run to position this block, then focus.
-        setTimeout(() => {
+        /*setTimeout(() => {
             this.mutationRoot.focusLastEditor_();
-        });
+        });*/
     }
     handleCancel () {
         this.props.onRequestClose();

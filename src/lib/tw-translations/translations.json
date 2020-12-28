@@ -1,7 +1,6 @@
 {
     "de": {
         "tw.code": "Quellcode",
-        "tw.examples.studioLink": "Schaue das Studio auf Scratch an.",
         "tw.featuredProjectsStudio": "Schaue das Studio auf Scratch an.",
         "tw.feedback": "Rückmeldung & Fehler",
         "tw.footer.disclaimer": "Projekte von der Scratch Webseite sind uter der \"Commons Attribution-ShareAlike 2.0 license\" lizensiert. TurboWarp gehört nicht zu Scratch, dem Scratch Team, oder der Scratch Foundation.",
@@ -31,8 +30,6 @@
     "es": {
         "tw.alerts.savedToDisk": "Guardado a tu computadora.",
         "tw.code": "Código Fuente",
-        "tw.examples.studioLink": "Ver estudio en Scratch",
-        "tw.examples.view": "Clickee para ver proyectos de ejemplo",
         "tw.featuredProjectsStudio": "Ver estudio en Scratch",
         "tw.feedback": "Comentarios y Bugs",
         "tw.feedbackButton": "Comentarios (feedback) de TurboWarp",
@@ -84,7 +81,6 @@
     },
     "fr": {
         "tw.code": "Code source",
-        "tw.examples.studioLink": "Voir le studio sur scratch.",
         "tw.featuredProjectsStudio": "Voir le studio sur scratch.",
         "tw.feedback": "retour et signalement de bugues",
         "tw.footer.host": "Turbowarp est hébergé sur {fosshost}.",
@@ -120,7 +116,6 @@
     },
     "it": {
         "tw.code": "Codice Sorgente",
-        "tw.examples.studioLink": "Vai alla galleria su Scratch.",
         "tw.featuredProjectsStudio": "Vai alla galleria su Scratch.",
         "tw.feedback": "Feedback & Bug",
         "tw.footer.disclaimer": "I progetti del sito Scratch sono coperte da licenza Creative Commons Attribution-ShareAlike 2.0. TurboWarp non è affiliato con Scratch, lo Scratch Team o la Scratch Foundation.",
@@ -170,8 +165,6 @@
         "tw.blocks.lastKeyPressed": "última tecla pressionada",
         "tw.blocks.mouseButton.middle": "(1) do meio",
         "tw.code": "Código fonte",
-        "tw.examples.studioLink": "Ver estúdio no Scratch.",
-        "tw.examples.view": "Clique para ver projetos de exemplo.",
         "tw.featuredProjectsStudio": "Ver estúdio no Scratch.",
         "tw.feedback": "Feedback e bugs",
         "tw.feedbackButton": "Feedback do TurboWarp",
@@ -238,8 +231,6 @@
         "tw.blocks.mouseButton.primary": "(0) primar",
         "tw.blocks.mouseButton.secondary": "(2) secundar",
         "tw.code": "Cod sursă",
-        "tw.examples.studioLink": "Vezi atilierul pe Scratch.",
-        "tw.examples.view": "Apasă pentru a vedea proiectele exemplare.",
         "tw.featuredProjectsStudio": "Vezi atilierul pe Scratch.",
         "tw.feedback": "Sugestii și Erori",
         "tw.feedbackButton": "Spune-ți Părerea despre TurboWarp",
@@ -304,8 +295,6 @@
         "tw.blocks.mouseButton.primary": "(0) birincil",
         "tw.blocks.mouseButton.secondary": "(2) ikincil",
         "tw.code": "Kaynak Kodu",
-        "tw.examples.studioLink": "Stüdyoyu Scratch'te görüntüleyin.",
-        "tw.examples.view": "Örnek projeleri görmek için buraya tıklayınız.",
         "tw.featuredProjectsStudio": "Stüdyoyu Scratch'te görüntüleyin.",
         "tw.feedback": "Geribildirim ve Hatalar",
         "tw.feedbackButton": "Turbowarp geribildirim",

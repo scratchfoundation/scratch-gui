@@ -483,7 +483,6 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
     <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
-    
 
         <block type="mv2_discoChangeBlockPattern" >
             <value>
@@ -503,7 +502,7 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
             </value>
         </block>
 
-
+    ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">

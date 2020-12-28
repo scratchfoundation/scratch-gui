@@ -955,6 +955,7 @@ class MenuBar extends React.Component {
                 (
                     <ArtieHelp 
                         onRequestClose={this.props.onArtieClearHelp}
+                        help={this.props.artieExercises.help}
                     />
                 ) : 
                 (<div></div>)}

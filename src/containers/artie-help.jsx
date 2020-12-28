@@ -5,6 +5,7 @@ import React from 'react';
 import ArtieHelpComponent from '../components/artie-help/artie-help.jsx';
 import ScratchBlocks from 'scratch-blocks';
 import {connect} from 'react-redux';
+//import GreenFlag from '../components/green-flag/green-flag.svg';
 
 class ArtieHelp extends React.Component {
     constructor (props) {
@@ -43,76 +44,29 @@ class ArtieHelp extends React.Component {
         this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
         ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
 
-        // Create the procedure declaration block for editing the mutation.
-        //this.mutationRoot = this.workspace.newBlock('procedures_declaration');
-        this.mutationRoot = this.workspace.newBlock('event_whenflagclicked');
-        // Make the declaration immovable, undeletable and have no context menu
-        this.mutationRoot.setMovable(false);
-        this.mutationRoot.setDeletable(false);
-        this.mutationRoot.contextMenu = false;
+        this.workspace.options.pathToMedia = 'static/blocks-media/';
 
-        this.workspace.addChangeListener(() => {
-            this.mutationRoot.onChangeFn();
-            // Keep the block centered on the workspace
-            const metrics = this.workspace.getMetrics();
-            const {x, y} = this.mutationRoot.getRelativeToSurfaceXY();
-            const dy = (metrics.viewHeight / 2) - (this.mutationRoot.height / 2) - y;
-            let dx;
-            if (this.props.isRtl) {
-                // // TODO: https://github.com/LLK/scratch-gui/issues/2838
-                // This is temporary until we can figure out what's going on width
-                // block positioning on the workspace for RTL.
-                // Workspace is always origin top-left, with x increasing to the right
-                // Calculate initial starting offset and save it, every other move
-                // has to take the original offset into account.
-                // Calculate a new left postion based on new width
-                // Convert current x position into LTR (mirror) x position (uses original offset)
-                // Use the difference between ltrX and mirrorX as the amount to move
-                const ltrX = ((metrics.viewWidth / 2) - (this.mutationRoot.width / 2) + 25);
-                const mirrorX = x - ((x - this.state.rtlOffset) * 2);
-                if (mirrorX === ltrX) {
-                    return;
-                }
-                dx = mirrorX - ltrX;
-                const midPoint = metrics.viewWidth / 2;
-                if (x === 0) {
-                    // if it's the first time positioning, it should always move right
-                    if (this.mutationRoot.width < midPoint) {
-                        dx = ltrX;
-                    } else if (this.mutationRoot.width < metrics.viewWidth) {
-                        dx = midPoint - ((metrics.viewWidth - this.mutationRoot.width) / 2);
-                    } else {
-                        dx = midPoint + (this.mutationRoot.width - metrics.viewWidth);
-                    }
-                    this.mutationRoot.moveBy(dx, dy);
-                    this.setState({rtlOffset: this.mutationRoot.getRelativeToSurfaceXY().x});
-                    return;
-                }
-                if (this.mutationRoot.width > metrics.viewWidth) {
-                    dx = dx + this.mutationRoot.width - metrics.viewWidth;
-                }
-            } else {
-                dx = (metrics.viewWidth / 2) - (this.mutationRoot.width / 2) - x;
-                // If the procedure declaration is wider than the view width,
-                // keep the right-hand side of the procedure in view.
-                if (this.mutationRoot.width > metrics.viewWidth) {
-                    dx = metrics.viewWidth - this.mutationRoot.width - x;
-                }
-            }
-            this.mutationRoot.moveBy(dx, dy);
-        });
+        //If the help is not null and we have some blocks to add
+        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.addElements !== null){
 
-        var testXml = `<mutation proccode="nombre del bloque" argumentids="[]" argumentnames="[]" argumentdefaults="[]" warp="false"/>`;
-        var dom = ScratchBlocks.Xml.textToDom(testXml);
-        
-        //this.mutationRoot.domToMutation(dom);
-        this.mutationRoot.initSvg();
-        this.mutationRoot.render();
-        //this.setState({warp: this.mutationRoot.getWarp()});
-        // Allow the initial events to run to position this block, then focus.
-        /*setTimeout(() => {
-            this.mutationRoot.focusLastEditor_();
-        });*/
+            //We build the block array for the elements we have to add
+            var addBlockArray = [];
+            var dy = 0;
+            const dx = 0;
+            this.props.help.nextSteps.addElements.forEach(element => {addBlockArray.push(this.workspace.newBlock(element.elementName))});
+
+            //Configure and render all the blocks
+            addBlockArray.forEach(block => {
+                block.setMovable(false);
+                block.setDeletable(false);
+                block.contextMenu = false;
+                block.moveBy(dx,dy);
+                dy += 60;
+
+                block.initSvg();
+                block.render();
+            });
+        }
     }
     handleCancel () {
         this.props.onRequestClose();
@@ -161,7 +115,6 @@ class ArtieHelp extends React.Component {
 
 ArtieHelp.propTypes = {
     isRtl: PropTypes.bool,
-    mutator: PropTypes.instanceOf(Element),
     onRequestClose: PropTypes.func.isRequired,
     options: PropTypes.shape({
         media: PropTypes.string,
@@ -191,8 +144,7 @@ ArtieHelp.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    isRtl: state.locales.isRtl,
-    mutator: state.scratchGui.customProcedures.mutator
+    isRtl: state.locales.isRtl
 });
 
 export default connect(

@@ -31,7 +31,11 @@ class ArtieHelpComponent extends React.Component {
                 >
                     <Box
                         className={styles.workspace}
-                        componentRef={this.props.componentRef}
+                        componentRef={this.props.componentRefAdd}
+                    />
+                    <Box
+                        className={styles.workspace}
+                        componentRef={this.props.componentRefDel}
                     />
                 </Modal>
         );

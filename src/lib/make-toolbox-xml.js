@@ -484,6 +484,27 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
     return `
     <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
         ${isStage ? '' : `
+        
+
+        <block type="mv2_discoChangeBlockPattern" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="PROGRAM"></field>
+            </value>
+        </block>
+
+        <block type="mv2_discoChangeBlockColour" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+        </block>
+
+
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
@@ -817,26 +838,7 @@ const sensing = function (isStage) {
 
             <block type="mv2_noisesense" />
 
-            <block type="mv2_discoChangeAllColour" >
-                <value>
-                    <field name="COLOUR"></field>
-                </value>
-            </block>
-
-            <block type="mv2_discoChangeAllPattern" >
-                <value>
-                    <field name="PROGRAM"></field>
-                </value>
-            </block>
-
-            <block type="mv2_discoChangeBlockColour" >
-                <value>
-                    <field name="BOARDTYPE"></field>
-                </value>
-                <value>
-                    <field name="COLOUR"></field>
-                </value>
-            </block>
+            
 
             <!--<block type="mv2_current" />-->
 

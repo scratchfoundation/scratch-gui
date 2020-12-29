@@ -55,7 +55,7 @@ class ArtieHelp extends React.Component {
 
             //We build the block array for the elements we have to add
             var addBlockArray = [];
-            var dy = 0;
+            var dy = 10;
             var dx = -1;
             this.props.help.nextSteps.addElements.forEach(element => {addBlockArray.push(this.workspace.newBlock(element.elementName))});
 
@@ -130,7 +130,7 @@ class ArtieHelp extends React.Component {
 
             //We build the block array for the elements we have to delete
             var delBlockArray = [];
-            var dy = 0;
+            var dy = 10;
             var dx = -1;
             this.props.help.nextSteps.deleteElements.forEach(element => {delBlockArray.push(this.workspace.newBlock(element.elementName))});
 

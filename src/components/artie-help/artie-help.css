@@ -2,9 +2,9 @@
 @import "../../css/units.css";
 
 .modal-content {
-    width: 500px;
+    width: 400px;
     margin: 50px auto; /* This modal is taller than most, reduce top margin */
-    min-height: 500px;
+    min-height: 400px;
 }
 
 .body {
@@ -19,7 +19,7 @@
 
 /* Blocks workspace for custom procedure declaration editor */
 .workspace {
-    min-height: 250px;
+    min-height: 200px;
     position: relative;
 }
 

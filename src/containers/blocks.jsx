@@ -51,6 +51,7 @@ class Blocks extends React.Component {
     constructor (props) {
         super(props);
         this.ScratchBlocks = VMScratchBlocks(props.vm);
+        window.ScratchBlocks = this.ScratchBlocks;
         bindAll(this, [
             'attachVM',
             'detachVM',

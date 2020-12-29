@@ -164,6 +164,8 @@
         "tw.blocks.buttonIsDown": "botão [MOUSE_BUTTON] do mouse pressionado?",
         "tw.blocks.lastKeyPressed": "última tecla pressionada",
         "tw.blocks.mouseButton.middle": "(1) do meio",
+        "tw.blocks.mouseButton.primary": "(0) primário",
+        "tw.blocks.mouseButton.secondary": "(2) secundário",
         "tw.code": "Código fonte",
         "tw.featuredProjectsStudio": "Ver estúdio no Scratch.",
         "tw.feedback": "Feedback e bugs",

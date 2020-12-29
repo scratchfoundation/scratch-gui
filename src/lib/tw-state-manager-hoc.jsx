@@ -27,12 +27,12 @@ import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 const messages = defineMessages({
     invalidFPS: {
-        defaultMessage: 'fps URL parameter is invalid',
+        defaultMessage: '"fps" URL parameter is invalid',
         description: 'Alert displayed when fps URL parameter is invalid',
         id: 'tw.invalidParameters.fps'
     },
     invalidClones: {
-        defaultMessage: 'clone URL parameter is invalid',
+        defaultMessage: '"clone" URL parameter is invalid',
         description: 'Alert displayed when clones URL parameter is invalid',
         id: 'tw.invalidParameters.clones'
     }

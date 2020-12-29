@@ -2,7 +2,9 @@
 @import "../../css/units.css";
 
 .modal-content {
-    width: 360px;
+    width: 500px;
+    margin: 50px auto; /* This modal is taller than most, reduce top margin */
+    min-height: 500px;
 }
 
 .body {
@@ -15,85 +17,29 @@
     margin: 3px;
 }
 
+/* Blocks workspace for custom procedure declaration editor */
+.workspace {
+    min-height: 250px;
+    position: relative;
+}
+
+.workspace :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.workspace :global(.blocklySvg) {
+    background-color: $ui-primary;
+}
+
+/* Messages */
 .label {
-    font-weight: 500;
-    margin: 0 0 0.75rem;
-}
-
-.disabled-label {
-    opacity: 0.5;
-}
-
-.variable-name-text-input {
-    margin-bottom: 1.5rem;
-    width: 100%;
-    border: 1px solid $ui-black-transparent;
-    border-radius: 5px;
-    padding: 0 1rem;
-    height: 3rem;
-    color: $text-primary-transparent;
-    font-size: .875rem;
-}
-
-.info-message {
-    font-weight: normal;
-    font-size: .875rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.options-row {
-    display: flex;
-    font-weight: normal;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-}
-
-.button-row {
-    font-weight: bolder;
-    text-align: right;
-}
-
-.button-row button {
-    padding: 0.75rem 1rem;
-    border-radius: 0.25rem;
-    background: white;
-    border: 1px solid $ui-black-transparent;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-.button-row button.ok-button {
-    background: $motion-primary;
-    border: $motion-primary;
-    color: white;
-}
-
-[dir="ltr"] .button-row button + button {
-    margin-left: 0.5rem;
-}
-
-[dir="rtl"] .button-row button + button {
-    margin-right: 0.5rem;
-}
-
-.cloud-option {
-    display:flex;
-    border-top: 1px dashed hsla(0, 0%, 0%, .25);
-    overflow: visible;
-    padding: 1rem 0;
-    text-align: center;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.cloud-option-text {
-    opacity: .5;
-}
-
-.status-message {
-    width: 100%;
-    text-align: center;
-    font-size: 0.85rem;
-    color: red;
+    color:$ui-white;
+    background-color: $motion-tertiary;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
 }

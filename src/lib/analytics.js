@@ -19,6 +19,4 @@ if (GA_ID) {
         // would look like a memory leak in a live program.
     };
 }
->>>>>>> upstream/develop
-
 export default GoogleAnalytics;

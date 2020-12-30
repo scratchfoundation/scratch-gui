@@ -212,6 +212,7 @@ class ArtieHelp extends React.Component {
     render () {
         return (
             <ArtieHelpComponent
+                help={this.props.help}
                 componentRefAdd={this.setBlocksAdd}
                 componentRefDel={this.setBlocksDel}
                 warp={this.state.warp}

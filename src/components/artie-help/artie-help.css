@@ -7,6 +7,10 @@
     min-height: 400px;
 }
 
+.modal-content-congrats {
+    margin: 50px auto;
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
@@ -42,4 +46,16 @@
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 5px;
+}
+.label-congrats {
+    color: green;
+    background-color: $ui-white;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    height:80px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }

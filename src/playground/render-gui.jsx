@@ -74,11 +74,22 @@ export default appTarget => {
                 onTelemetryModalOptOut={handleTelemetryModalOptOut}
             /> :
             <WrappedGui
+                // isPlayerOnly
                 canEditTitle
                 backpackVisible
-                showComingSoon
+                // showComingSoon
                 backpackHost={backpackHost}
-                canSave={false}
+                assetHost={'http://sc.jzcode.cn/'}
+                cloudHost={'http://sc.jzcode.cn/'}
+                canSave={true}
+                canRemix={true}
+                // canUseBackpack={true}
+                canShare = {true}
+                isShared={true}
+                enableCommunity = {true}
+                authorId="123456"
+                authorUsername="rrqwrwqerwq"
+                backpackVisible ={true}
                 onClickLogo={onClickLogo}
             />,
         appTarget);

@@ -93,7 +93,6 @@ const SpriteList = function (props) {
                                 onClick={onSelectSprite}
                                 onDeleteButtonClick={onDeleteSprite}
                                 onDuplicateButtonClick={onDuplicateSprite}
-                                onExportButtonClick={onExportSprite}
                             />
                         </SortableAsset>
                     );

@@ -408,18 +408,21 @@ class MenuBar extends React.Component {
                                                 </MenuItem>
                                             )}
                                         </SBFileUploader>
-                                        <SB3Downloader>{(className, downloadProjectCallback) => (
-                                            <MenuItem
-                                                className={className}
-                                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="Save to your computer"
-                                                    description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
-                                                    id="gui.menuBar.downloadToComputer"
-                                                />
-                                            </MenuItem>
-                                        )}</SB3Downloader>
+                                        {/** joe changed */}
+                                        {(this.props.isAdmin) && (
+                                            <SB3Downloader>{(className, downloadProjectCallback) => (
+                                                <MenuItem
+                                                    className={className}
+                                                    onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                                                >
+                                                    <FormattedMessage
+                                                        defaultMessage="Save to your computer"
+                                                        description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                        id="gui.menuBar.downloadToComputer"
+                                                    />
+                                                </MenuItem>
+                                            )}</SB3Downloader>
+                                        )}
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>

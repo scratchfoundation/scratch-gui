@@ -47,12 +47,12 @@ const SpriteSelectorItem = props => (
                 <div className={styles.spriteDetails}>{props.details}</div>
             ) : null}
         </div>
-        {(props.selected && props.onDeleteButtonClick) ? (
+        {/* {(props.selected && props.onDeleteButtonClick) ? (
             <DeleteButton
                 className={styles.deleteButton}
                 onClick={props.onDeleteButtonClick}
             />
-        ) : null }
+        ) : null } */}
         {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (

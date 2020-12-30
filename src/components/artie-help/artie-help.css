@@ -9,6 +9,7 @@
 
 .modal-content-congrats {
     margin: 50px auto;
+    width: 400px;
 }
 
 .body {
@@ -53,9 +54,8 @@
     text-align: center;
     font-size: 0.85rem;
     font-weight: bold;
-    height:80px;
-    width: 100%;
     display:flex;
     justify-content: center;
     align-items: center;
+    height: 400px;
 }

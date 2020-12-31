@@ -94,9 +94,9 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     }
     // 2.2- If the input element is an input
     else{
-        var tempInput = {name: inputName, fields:[]};
+        var tempInput = {opcode: inputElement.elementName, name: inputName, fields:[]};
         Object.values(tmpElement.fields).forEach((field) =>{
-            tempInput.fields.push({name: field.name, value: field.value});
+            tempInput.fields.push({opcode: field.elementName, name: field.name, value: field.value});
         });
 
         artieParent.inputs.push(tempInput);

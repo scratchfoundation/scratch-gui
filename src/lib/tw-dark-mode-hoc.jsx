@@ -7,8 +7,9 @@ const DarkModeHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.handleQueryChange = this.handleQueryChange.bind(this);
+            const urlParams = new URLSearchParams(location.search);
             this.state = {
-                dark: mediaQuery.matches
+                dark: urlParams.has('theme') ? urlParams.get('theme') === 'dark' : mediaQuery.matches
             };
         }
         componentDidMount () {

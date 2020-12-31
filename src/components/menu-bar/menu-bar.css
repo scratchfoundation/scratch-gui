@@ -236,6 +236,6 @@
 
 /* tw: styles to override <a> styles */
 .menu-item-link {
-    color: $ui-white;
+    color: $ui-white !important;
     text-decoration: none;
 }

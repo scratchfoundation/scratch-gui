@@ -41,14 +41,18 @@ a {
     margin: 8px 0 8px 0;
 }
 
+[theme="dark"] .container {
+    background-color: #111;
+}
+[theme="dark"] .player-only {
+    color: #ddd;
+}
+[theme="dark"] a {
+    color: #4af;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #111;
-    }
-    .player-only {
-        color: #ddd;
-    }
-    a {
-        color: #4af;
     }
 }

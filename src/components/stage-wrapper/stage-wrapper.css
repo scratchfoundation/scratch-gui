@@ -35,10 +35,8 @@
 }
 
 /* tw: support dark mode */
-@media (prefers-color-scheme: dark) {
-    .stage-wrapper.full-screen {
-        background-color: #111;
-    }
+[theme="dark"] .stage-wrapper.full-screen {
+    background-color: #111;
 }
 
 /* tw: do not show color in embeds */

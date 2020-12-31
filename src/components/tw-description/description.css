@@ -15,11 +15,9 @@
     text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    .description {
-        border-color: #203652;
-        background-color: #16202c;
-    }
+[theme="dark"] .description {
+    border-color: #203652;
+    background-color: #16202c;
 }
 
 .header {

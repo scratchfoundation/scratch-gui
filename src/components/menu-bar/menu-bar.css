@@ -32,10 +32,8 @@
 }
 
 /* tw: dark theme */
-@media (prefers-color-scheme: dark) {
-    .menu-bar {
-        background-color: $motion-primary-dark;
-    }
+[theme="dark"] .menu-bar {
+    background-color: $motion-primary-dark;
 }
 
 .main-menu {
@@ -127,10 +125,8 @@
     text-decoration: none;
 }
 /* tw: dark theme */
-@media (prefers-color-scheme: dark) {
-    .feedback-link {
-        color: $motion-primary-dark !important;
-    }
+[theme="dark"] .feedback-link {
+    color: $motion-primary-dark !important;
 }
 
 .feedback-button {

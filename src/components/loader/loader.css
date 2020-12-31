@@ -18,10 +18,8 @@
 }
 
 /* tw: dark theme */
-@media (prefers-color-scheme: dark) {
-    .background {
-        background-color: $motion-primary-dark;
-    }
+[theme="dark"] .background {
+    background-color: $motion-primary-dark;
 }
 
 .fullscreen {

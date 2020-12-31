@@ -16,10 +16,8 @@
 }
 
 /* tw: support dark mode */
-@media (prefers-color-scheme: dark) {
-    .stage-header-wrapper-overlay {
-        background-color: #111;
-    }
+[theme="dark"] .stage-header-wrapper-overlay {
+    background-color: #111;
 }
 
 /* tw: do not show color in header when embedded */

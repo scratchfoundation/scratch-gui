@@ -38,6 +38,7 @@ class Stage extends React.Component {
             'onStartDrag',
             'onStopDrag',
             'onWheel',
+            'onContextMenu',
             'updateRect',
             'questionListener',
             'setDragCanvas',
@@ -315,7 +316,9 @@ class Stage extends React.Component {
         this.props.vm.postIOData('mouseWheel', data);
     }
     onContextMenu (e) {
-        e.preventDefault();
+        if (this.props.vm.runtime.ioDevices.mouse.usesRightClickDown) {
+            e.preventDefault();
+        }
     }
     cancelMouseDownTimeout () {
         if (this.state.mouseDownTimeoutId !== null) {

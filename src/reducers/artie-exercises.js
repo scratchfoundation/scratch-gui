@@ -100,7 +100,7 @@ const artieClearHelp = () => ({
 
 export {
     reducer as default,
-    initialState as artieExerciseInitialState,
+    initialState as artieExercisesInitialState,
     activateArtieExercises,
     deactivateArtieExercises,
     artieSetExercises,

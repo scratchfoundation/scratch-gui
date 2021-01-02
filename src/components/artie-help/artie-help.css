@@ -59,3 +59,43 @@
     align-items: center;
     height: 400px;
 }
+
+/* Table */
+.table{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.table thead{
+    background-color: $motion-primary;
+    justify-content: left;
+    align-items: left;
+}
+.table thead tr{
+    width: 100%;
+    display:table-row;
+}
+.table thead tr th{
+    flex:1;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: $ui-white;
+    font-weight: bold;
+}
+.table tbody{
+    background-color: $ui-white;
+    justify-content: center;
+    align-items: center;
+}
+.table tbody tr{
+    width: 100%;
+    display: table-row;
+}
+.table tbody tr td{
+    flex:1;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: $motion-primary;
+    display: table-cell;
+    text-align: center;
+}

@@ -18,7 +18,8 @@ class ArtieHelp extends React.Component {
             'handleCancel',
             'handleOk',
             'setBlocksAdd',
-            'setBlocksDel'
+            'setBlocksDel',
+            'setBlocksReplace'
         ]);
         this.state = {
             rtlOffset: 0,
@@ -207,7 +208,7 @@ class ArtieHelp extends React.Component {
             var replaceBlockArray = [];
             var dy = 10;
             var dx = -1;
-            this.props.help.nextSteps.replaceInputs.forEach(element => {replaceBlockArray.push(this.workspace.newBlock(element.elementName))});
+            this.props.help.nextSteps.replaceInputs.forEach(element => {replaceBlockArray.push(this.workspace.newBlock(element.element.elementName))});
 
             //Configure and render all the blocks
             replaceBlockArray.forEach(block => {
@@ -290,6 +291,7 @@ class ArtieHelp extends React.Component {
                 help={this.props.help}
                 componentRefAdd={this.setBlocksAdd}
                 componentRefDel={this.setBlocksDel}
+                componentRefReplace={this.setBlocksReplace}
                 warp={this.state.warp}
                 onAddBoolean={this.handleAddBoolean}
                 onAddLabel={this.handleAddLabel}

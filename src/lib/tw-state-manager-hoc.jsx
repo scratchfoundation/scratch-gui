@@ -422,14 +422,10 @@ const TWStateManager = function (WrappedComponent) {
                     searchParams.set('nocompile', '');
                 }
 
-                if (this.props.isPlayerOnly) {
-                    if (compilerOptions.warpTimer) {
-                        searchParams.set('stuck', '');
-                    } else {
-                        searchParams.delete('stuck');
-                    }
+                if (compilerOptions.warpTimer) {
+                    searchParams.set('stuck', '');
                 } else {
-                    // Leave ?stuck as-is when in editor
+                    searchParams.delete('stuck');
                 }
 
                 if (runtimeOptions.maxClones === 300) {

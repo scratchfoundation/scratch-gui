@@ -8,6 +8,7 @@ import AutoSaveAPI from '../lib/tw-indexeddb-autosave-api';
 import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
+import {closeAlertWithId} from '../reducers/alerts';
 
 const messages = defineMessages({
     error: {
@@ -68,6 +69,7 @@ const mapDispatchToProps = dispatch => ({
     onLoadingFinished: (loadingState, success) => {
         dispatch(onLoadedProject(loadingState, false, success));
         dispatch(closeLoadingProject());
+        dispatch(closeAlertWithId('twCrashRecovery'));
         dispatch(closeFileMenu());
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),

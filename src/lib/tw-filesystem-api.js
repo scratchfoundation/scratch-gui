@@ -8,7 +8,8 @@ const showSaveFilePicker = async () => await window.showSaveFilePicker({
                 'application/x.scratch.sb3': '.sb3'
             }
         }
-    ]
+    ],
+    excludeAcceptAllOption: true
 });
 
 const showOpenFilePicker = async () => {

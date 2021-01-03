@@ -167,7 +167,7 @@ class SBFileUploader extends React.Component {
                     }
                 } catch (err) {
                     // If user aborted process, do not show an error.
-                    if (e && e.name === 'AbortError') {
+                    if (err && err.name === 'AbortError') {
                         return;
                     }
                     // eslint-disable-next-line no-console

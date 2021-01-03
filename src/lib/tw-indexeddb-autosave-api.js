@@ -102,11 +102,16 @@ const load = async () => {
                 zip.file(cursor.key, cursor.value.data);
                 cursor.continue();
             } else {
-                // Cursor is done.
-                resolve(zip.generateAsync({
-                    type: 'arraybuffer'
-                    // No reason to compress this zip.
-                }));
+                // Cursor is done, all files added to zip.
+                const hasJSON = zip.file('project.json');
+                if (hasJSON) {
+                    resolve(zip.generateAsync({
+                        type: 'arraybuffer'
+                        // No reason to compress this zip.
+                    }));
+                } else {
+                    reject(new Error('No valid project.'));
+                }
             }
         };
     });

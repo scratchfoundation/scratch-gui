@@ -8,8 +8,7 @@ import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import AutoSaveAPI from './tw-indexeddb-autosave-api';
 
-// TODO: increase this
-const AUTOSAVE_TIMEOUT = 1000 * 60 * 1;
+const AUTOSAVE_TIMEOUT = 1000 * 60 * 5;
 
 let bailed = false;
 

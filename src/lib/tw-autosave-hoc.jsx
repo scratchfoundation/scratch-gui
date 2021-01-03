@@ -30,6 +30,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
                 } else {
                     // Project was saved; abort autosave.
                     clearTimeout(this.timeout);
+                    this.timeout = null;
                 }
             }
         }
@@ -39,19 +40,19 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         async autosave () {
             try {
                 this.props.onAutosavingStart();
-                AutoSaveAPI.save(this.props.vm);
-            } finally {
-                // Intentional delay.
-                // TODO: remove delay?
-                // TODO: error alert?
-                setTimeout(() => {
-                    this.props.onAutosavingFinish();
-                    if (this.props.projectChanged) {
-                        clearTimeout(this.timeout);
-                        this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
-                    }
-                }, 250);
+                await AutoSaveAPI.save(this.props.vm);
+            } catch (err) {
+                // eslint-disable-next-line no-alert
+                alert(err);
             }
+            this.timeout = null;
+            // Intentional delay.
+            setTimeout(() => {
+                this.props.onAutosavingFinish();
+                if (this.timeout === null && this.props.projectChanged) {
+                    this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
+                }
+            }, 250);
         }
         render () {
             const {

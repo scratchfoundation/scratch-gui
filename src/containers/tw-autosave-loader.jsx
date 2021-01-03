@@ -24,8 +24,8 @@ class ToggleCompiler extends React.Component {
                 this.props.onLoadingFinished(this.props.loadingState);
             })
             .catch(error => {
-                // TODO: proper error alert
-                console.error(error);
+                // eslint-disable-next-line no-alert
+                alert(error);
             });
     }
     render () {

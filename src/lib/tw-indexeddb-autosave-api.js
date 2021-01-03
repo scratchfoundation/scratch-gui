@@ -1,14 +1,19 @@
 import JSZip from 'jszip';
-// TODO: gracefully handle no window.indexedDB
 
 let _db;
 
 const openDB = () => new Promise((resolve, reject) => {
+    if (!window.indexedDB) {
+        reject(new Error('IndexedDB is not supported'));
+        return;
+    }
+
     if (_db) {
         resolve(_db);
         return;
     }
 
+    // Special constants: do not change without care.
     const request = indexedDB.open('TW_AutoSave', 1);
 
     request.onupgradeneeded = e => {
@@ -23,24 +28,30 @@ const openDB = () => new Promise((resolve, reject) => {
         resolve(_db);
     };
 
-    request.onerror = e => {
-        // TODO: examine error?
-        reject(new Error('Cannot get DB'));
+    request.onerror = () => {
+        reject(new Error(`Cannot open DB: ${request.error}`));
     };
 });
 
+/**
+ * Save a project to IDB.
+ * @param {VirtualMachine} vm Scratch VM
+ */
 const save = vm => new Promise(async (resolve, reject) => {
+    // To save a project, we will get all the assets inside it and save them to IDB.
+    // We will not actually zip the project as that is a slow process.
+
     const files = vm.saveProjectSb3DontZip();
     
     const db = await openDB();
     const transaction = db.transaction('project', 'readwrite');
-    transaction.onerror = e => {
-        // TODO: examine error?
-        reject(new Error('save transaction error'));
+    transaction.onerror = () => {
+        reject(new Error(`Transaction error while saving: ${transaction.error}`));
     };
 
     const projectStore = transaction.objectStore('project');
 
+    // Remove unused assets and don't waste time updating assets that are already in IDB.
     const exists = [];
     const request = projectStore.openCursor();
     request.onsuccess = e => {
@@ -54,6 +65,7 @@ const save = vm => new Promise(async (resolve, reject) => {
             }
             cursor.continue();
         } else {
+            // Cursor is done, save all new files and project.json to IDB.
             for (const file of Object.keys(files)) {
                 if (file === 'project.json' || !exists.includes(file)) {
                     projectStore.put({
@@ -66,15 +78,19 @@ const save = vm => new Promise(async (resolve, reject) => {
             resolve();
         }
     };
-    // TODO: check that cursorRequest error bubbles to transaction (same below)
 });
 
+/**
+ * Load a project from IDB.
+ * @returns {Promise<ArrayBuffer>} sb3 project to load.
+ */
 const load = () => new Promise(async (resolve, reject) => {
+    // To load a project, read the files from IDB and generate a .sb3
+
     const db = await openDB();
     const transaction = db.transaction('project', 'readonly');
-    transaction.onerror = e => {
-        // TODO: examine error?
-        reject(new Error('load transaction error'));
+    transaction.onerror = () => {
+        reject(new Error(`Transaction error while loading: ${transaction.error}`));
     };
 
     const zip = new JSZip();
@@ -86,8 +102,10 @@ const load = () => new Promise(async (resolve, reject) => {
             zip.file(cursor.key, cursor.value.data);
             cursor.continue();
         } else {
+            // Cursor is done.
             resolve(zip.generateAsync({
                 type: 'arraybuffer'
+                // No reason to compress this zip.
             }));
         }
     };

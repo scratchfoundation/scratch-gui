@@ -248,42 +248,25 @@ const alerts = [
             <center>
                 <div>
                     <FormattedMessage
-                        defaultMessage="Important Reminders"
-                        description="Header of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.top"
+                        defaultMessage="TurboWarp will now periodically backup your project if it's been a while since you've saved. In the event of a crash, the backup can be loaded from File > Load autosave (BETA)."
+                        description="Part of the warning that appears when the editor is opened"
+                        id="tw.alerts.warning.autosave"
                     />
                 </div>
                 <hr />
                 <div>
                     <FormattedMessage
-                        defaultMessage="Save your project often, otherwise you will {loseAllYourWork} when the project crashes."
+                        defaultMessage="You should still save your project often -- project recovery has not been thoroughly tested and may not work perfectly."
                         description="Part of the warning that appears when the editor is opened"
                         id="tw.alerts.warning.saveOften"
-                        values={{
-                            loseAllYourWork: <i>
-                                <FormattedMessage
-                                    defaultMessage="irrecoverably lose all of your work"
-                                    description="a harsh way to phrase losing all of one's work"
-                                    id="tw.alerts.warning.saveOften.loseAllYourWork"
-                                />
-                            </i>
-                        }}
                     />
                 </div>
                 <hr />
                 <div>
                     <FormattedMessage
-                        defaultMessage="Warp Timer has been enabled because you opened the editor. This fixes most crashes but hurts performance."
+                        defaultMessage="Warp Timer is no longer enabled by default in the editor."
                         description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.warpTimer"
-                    />
-                </div>
-                <hr />
-                <div>
-                    <FormattedMessage
-                        defaultMessage="Scripts may need to be restarted for changes to apply."
-                        description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.restartScripts"
+                        id="tw.alerts.warning.warpTimerOffByDefault"
                     />
                 </div>
             </center>

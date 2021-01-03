@@ -264,9 +264,9 @@ const alerts = [
                 <hr />
                 <div>
                     <FormattedMessage
-                        defaultMessage="Warp Timer is no longer enabled by default in the editor."
+                        defaultMessage="Warp Timer has been enabled because you opened the editor. This fixes most crashes but may reduce performance."
                         description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.warpTimerOffByDefault"
+                        id="tw.alerts.warning.warpTimer"
                     />
                 </div>
             </center>

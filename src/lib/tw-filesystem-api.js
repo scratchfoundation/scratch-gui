@@ -26,11 +26,9 @@ const showOpenFilePicker = async () => {
     return handle;
 };
 
-const createWritable = (handle) => {
-    return handle.createWritable();
-};
+const createWritable = handle => handle.createWritable();
 
-const closeWritable = async (writable) => {
+const closeWritable = async writable => {
     await writable.close();
 };
 

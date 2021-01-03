@@ -185,6 +185,19 @@ const alerts = [
         level: AlertLevels.INFO
     },
     {
+        alertId: 'twAutosaving',
+        alertType: AlertTypes.INLINE,
+        content: (
+            <FormattedMessage
+                defaultMessage="Creating autosave…"
+                description="Message indicating that an autosave is being created"
+                id="tw.alerts.autosaving"
+            />
+        ),
+        iconSpinner: true,
+        level: AlertLevels.INFO
+    },
+    {
         alertId: 'cloudInfo',
         alertType: AlertTypes.STANDARD,
         clearList: ['cloudInfo'],

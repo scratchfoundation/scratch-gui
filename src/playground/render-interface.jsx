@@ -11,6 +11,7 @@ import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
+import TWAutoSaveHOC from '../lib/tw-autosave-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -196,7 +197,8 @@ const WrappedInterface = compose(
     TWEditorWarningHOC,
     TWStateManagerHOC,
     TWFullscreenResizerHOC,
-    TWDarkModeHOC
+    TWDarkModeHOC,
+    TWAutoSaveHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

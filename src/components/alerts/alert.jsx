@@ -109,7 +109,7 @@ const AlertComponent = ({
                     onClick={onRecover}
                 >
                     <FormattedMessage
-                        defaultMessage="Recover"
+                        defaultMessage="Recover (BETA)"
                         description="Button to recover project"
                         id="tw.alerts.recover"
                     />

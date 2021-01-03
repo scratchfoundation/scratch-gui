@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
+import {getIsShowingProject} from '../reducers/project-state';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import AutoSaveAPI from './tw-indexeddb-autosave-api';
@@ -19,8 +20,11 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             this.timeout = null;
         }
         componentDidUpdate (prevProps) {
-            if (this.props.projectChanged !== prevProps.projectChanged) {
-                if (this.props.projectChanged) {
+            if (
+                this.props.projectChanged !== prevProps.projectChanged ||
+                this.props.isShowingProject !== prevProps.isShowingProject
+            ) {
+                if (this.props.projectChanged && this.props.isShowingProject) {
                     // Project was modified; queue autosave.
                     this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
                 } else {
@@ -67,12 +71,14 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         }
     }
     AutoSaveComponent.propTypes = {
+        isShowingProject: PropTypes.bool,
         projectChanged: PropTypes.bool,
         onStartAutosaving: PropTypes.func,
         onFinishAutosaving: PropTypes.func,
         vm: PropTypes.instanceOf(VM)
     };
     const mapStateToProps = state => ({
+        isShowingProject: getIsShowingProject(state.scratchGui.projectState.loadingState),
         projectChanged: state.scratchGui.projectChanged,
         vm: state.scratchGui.vm
     });

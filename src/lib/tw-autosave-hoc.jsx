@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {getIsShowingProject} from '../reducers/project-state';
 import bindAll from 'lodash.bindall';
@@ -8,7 +9,17 @@ import VM from 'scratch-vm';
 import AutoSaveAPI from './tw-indexeddb-autosave-api';
 
 // TODO: increase this
-const AUTOSAVE_TIMEOUT = 1000 * 60 * 1;
+const AUTOSAVE_TIMEOUT = 1000 * 60 * 0.1;
+
+let bailed = false;
+
+const messages = defineMessages({
+    error: {
+        defaultMessage: 'Could not autosave; autosaves are now disabled. Regular project saves are unaffected.\n\nDebug: {error}',
+        description: 'Alert displayed when autosave creation failed',
+        id: 'tw.autosave.createFail'
+    }
+});
 
 const TWAutoSaveHOC = function (WrappedComponent) {
     class AutoSaveComponent extends React.Component {
@@ -20,6 +31,9 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             this.timeout = null;
         }
         componentDidUpdate (prevProps) {
+            if (bailed) {
+                return;
+            }
             if (
                 this.props.projectChanged !== prevProps.projectChanged ||
                 this.props.isShowingProject !== prevProps.isShowingProject
@@ -41,15 +55,18 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             try {
                 this.props.onAutosavingStart();
                 await AutoSaveAPI.save(this.props.vm);
-            } catch (err) {
+            } catch (error) {
+                bailed = true;
                 // eslint-disable-next-line no-alert
-                alert(err);
+                alert(this.props.intl.formatMessage(messages.error, {
+                    error
+                }));
             }
             this.timeout = null;
             // Intentional delay.
             setTimeout(() => {
                 this.props.onAutosavingFinish();
-                if (this.timeout === null && this.props.projectChanged) {
+                if (this.timeout === null && this.props.projectChanged && this.props.isShowingProject) {
                     this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
                 }
             }, 250);
@@ -57,6 +74,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         render () {
             const {
                 /* eslint-disable no-unused-vars */
+                intl,
                 projectChanged,
                 onAutosavingStart,
                 onAutosavingFinish,
@@ -72,6 +90,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         }
     }
     AutoSaveComponent.propTypes = {
+        intl: intlShape,
         isShowingProject: PropTypes.bool,
         projectChanged: PropTypes.bool,
         onAutosavingStart: PropTypes.func,
@@ -87,10 +106,10 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         onAutosavingStart: () => dispatch(showStandardAlert('twAutosaving')),
         onAutosavingFinish: () => dispatch(closeAlertWithId('twAutosaving'))
     });
-    return connect(
+    return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps
-    )(AutoSaveComponent);
+    )(AutoSaveComponent));
 };
 
 export {

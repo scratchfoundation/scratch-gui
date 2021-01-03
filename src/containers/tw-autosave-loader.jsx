@@ -2,11 +2,20 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 import AutoSaveAPI from '../lib/tw-indexeddb-autosave-api';
 import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
+
+const messages = defineMessages({
+    error: {
+        defaultMessage: 'Could not load autosave.\n\nDebug: {error}',
+        description: 'Alert displayed when autosave loading failed',
+        id: 'tw.autosave.loadFail'
+    }
+});
 
 class ToggleCompiler extends React.Component {
     constructor (props) {
@@ -26,7 +35,9 @@ class ToggleCompiler extends React.Component {
             .catch(error => {
                 this.props.onLoadingFinished(this.props.loadingState, false);
                 // eslint-disable-next-line no-alert
-                alert(error);
+                alert(this.props.intl.formatMessage(messages.error, {
+                    error
+                }));
             });
     }
     render () {
@@ -38,6 +49,7 @@ class ToggleCompiler extends React.Component {
 }
 
 ToggleCompiler.propTypes = {
+    intl: intlShape,
     children: PropTypes.func,
     className: PropTypes.string,
     loadingState: PropTypes.string,
@@ -62,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
     onLoadingStarted: () => dispatch(openLoadingProject())
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ToggleCompiler);
+)(ToggleCompiler));

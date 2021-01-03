@@ -32,7 +32,7 @@ const openDB = () => {
         };
 
         request.onerror = () => {
-            reject(new Error(`Cannot open DB: ${request.error}`));
+            reject(new Error(`DB error: ${request.error}`));
         };
     });
 };
@@ -49,7 +49,7 @@ const save = async vm => {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readwrite');
         transaction.onerror = () => {
-            reject(new Error(`Transaction error while saving: ${transaction.error}`));
+            reject(new Error(`Save transaction error: ${transaction.error}`));
         };
 
         // Remove unused assets and don't waste time updating assets that are already in IDB.
@@ -93,7 +93,7 @@ const load = async () => {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readonly');
         transaction.onerror = () => {
-            reject(new Error(`Transaction error while loading: ${transaction.error}`));
+            reject(new Error(`Load transaction error: ${transaction.error}`));
         };
 
         const zip = new JSZip();

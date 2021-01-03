@@ -21,9 +21,10 @@ class ToggleCompiler extends React.Component {
         AutoSaveAPI.load()
             .then(arrayBuffer => this.props.vm.loadProject(arrayBuffer))
             .then(() => {
-                this.props.onLoadingFinished(this.props.loadingState);
+                this.props.onLoadingFinished(this.props.loadingState, true);
             })
             .catch(error => {
+                this.props.onLoadingFinished(this.props.loadingState, false);
                 // eslint-disable-next-line no-alert
                 alert(error);
             });
@@ -52,8 +53,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onLoadingFinished: loadingState => {
-        dispatch(onLoadedProject(loadingState, false, true));
+    onLoadingFinished: (loadingState, success) => {
+        dispatch(onLoadedProject(loadingState, false, success));
         dispatch(closeLoadingProject());
         dispatch(closeFileMenu());
     },

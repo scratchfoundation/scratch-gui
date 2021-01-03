@@ -66,7 +66,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             // Intentional delay.
             setTimeout(() => {
                 this.props.onAutosavingFinish();
-                if (this.timeout === null && this.props.projectChanged && this.props.isShowingProject) {
+                if (this.timeout === null && !bailed && this.props.projectChanged && this.props.isShowingProject) {
                     this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
                 }
             }, 250);

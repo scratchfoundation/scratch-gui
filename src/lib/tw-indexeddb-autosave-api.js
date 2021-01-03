@@ -1,3 +1,4 @@
+import JSZip from 'jszip';
 // TODO: gracefully handle no window.indexedDB
 
 let _db;
@@ -41,8 +42,8 @@ const save = vm => new Promise(async (resolve, reject) => {
     const projectStore = transaction.objectStore('project');
 
     const exists = [];
-    const cursorRequest = projectStore.openCursor();
-    cursorRequest.onsuccess = e => {
+    const request = projectStore.openCursor();
+    request.onsuccess = e => {
         const cursor = e.target.result;
         if (cursor) {
             const key = cursor.key;
@@ -65,11 +66,31 @@ const save = vm => new Promise(async (resolve, reject) => {
             resolve();
         }
     };
-    // TODO: check that cursorRequest error bubbles to transaction
+    // TODO: check that cursorRequest error bubbles to transaction (same below)
 });
 
-const load = () => new Promise((resolve, reject) => {
-    // TODO
+const load = () => new Promise(async (resolve, reject) => {
+    const db = await openDB();
+    const transaction = db.transaction('project', 'readonly');
+    transaction.onerror = e => {
+        // TODO: examine error?
+        reject(new Error('load transaction error'));
+    };
+
+    const zip = new JSZip();
+    const projectStore = transaction.objectStore('project');
+    const request = projectStore.openCursor();
+    request.onsuccess = e => {
+        const cursor = e.target.result;
+        if (cursor) {
+            zip.file(cursor.key, cursor.value.data);
+            cursor.continue();
+        } else {
+            resolve(zip.generateAsync({
+                type: 'arraybuffer'
+            }));
+        }
+    };
 });
 
 export default {

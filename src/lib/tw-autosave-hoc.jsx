@@ -4,39 +4,10 @@ import {connect} from 'react-redux';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
-import log from './log';
+import AutoSaveAPI from './tw-indexeddb-autosave-api';
 
 // TODO: increase this
 const AUTOSAVE_TIMEOUT = 1000 * 1;
-
-// TODO: refactor
-const deleteNonexistantKeys = (store, keys) => new Promise((resolve, reject) => {
-    const removed = [];
-    const exists = [];
-    const cursorRequest = store.openCursor();
-    cursorRequest.onsuccess = e => {
-        const cursor = e.target.result;
-        if (cursor) {
-            const key = cursor.key;
-            if (keys.includes(key)) {
-                exists.push(key);
-            } else {
-                cursor.delete();
-                removed.push(key);
-            }
-            cursor.continue();
-        } else {
-            resolve({
-                removed,
-                exists
-            });
-        }
-    };
-    cursorRequest.onerror = e => {
-        // TODO: look at error object
-        reject(new Error('Cursor error'));
-    };
-});
 
 const TWAutoSaveHOC = function (WrappedComponent) {
     class AutoSaveComponent extends React.Component {
@@ -46,66 +17,36 @@ const TWAutoSaveHOC = function (WrappedComponent) {
                 'autosave'
             ]);
             this.timeout = null;
-            this.db = null;
-            this.encoder = new TextEncoder();
-        }
-        componentDidMount () {
-            const request = indexedDB.open('TW_AutoSave', 1);
-
-            request.onupgradeneeded = e => {
-                const db = e.target.result;
-                db.createObjectStore('project', {
-                    keyPath: 'file'
-                });
-            };
-
-            request.onsuccess = e => {
-                const db = e.target.result;
-                this.db = db;
-            };
         }
         componentDidUpdate (prevProps) {
-            if (this.props.projectChanged && !prevProps.projectChanged) {
-                // Project was modified; queue
-                this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
-            } else if (!this.props.projectChanged && prevProps.projectChanged) {
-                // Project was saved; abort
-                clearTimeout(this.timeout);
+            if (this.props.projectChanged !== prevProps.projectChanged) {
+                if (this.props.projectChanged) {
+                    // Project was modified; queue autosave.
+                    this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
+                } else {
+                    // Project was saved; abort autosave.
+                    clearTimeout(this.timeout);
+                }
             }
         }
         componentWillUnmount () {
-            this.db.close();
             clearTimeout(this.timeout);
         }
-        autosave () {
-            this.props.onStartAutosaving();
-            this._autosave()
-                .then(() => {
+        async autosave () {
+            try {
+                this.props.onStartAutosaving();
+                AutoSaveAPI.save(this.props.vm);
+            } finally {
+                // Intentional delay.
+                // TODO: remove delay?
+                // TODO: error alert?
+                setTimeout(() => {
                     this.props.onFinishAutosaving();
                     if (this.props.projectChanged) {
+                        clearTimeout(this.timeout);
                         this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
                     }
-                })
-                .catch(err => {
-                    // TODO: show error
-                    log.error(err);
-                    this.props.onFinishAutosaving();
-                });
-        }
-        async _autosave () {
-            const files = this.props.vm.saveProjectSb3DontZip();
-            const transaction = this.db.transaction('project', 'readwrite');
-            const projectStore = transaction.objectStore('project');
-
-            const {exists} = await deleteNonexistantKeys(projectStore, Object.keys(files));
-
-            for (const file of Object.keys(files)) {
-                if (file === 'project.json' || !exists.includes(file)) {
-                    projectStore.put({
-                        file,
-                        data: files[file].buffer
-                    });
-                }
+                }, 250);
             }
         }
         render () {

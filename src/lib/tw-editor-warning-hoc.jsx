@@ -10,8 +10,25 @@ const DIRTY_KEY = 'tw:dirty';
 const TWEditorWarningHOC = function (WrappedComponent) {
     class EditorWarningComponent extends React.Component {
         componentDidMount () {
+            // This makes it so that if the VM ever is unable to finish a frame, we may be able to detect it.
+            // This isn't foolproof, but it's better than nothing.
+            this.props.vm.runtime.beforeStep = () => {
+                if (!this.props.isPlayerOnly) {
+                    localStorage.setItem(DIRTY_KEY, '1');
+                }
+            };
+            this.props.vm.runtime.afterStep = () => {
+                if (!this.props.isPlayerOnly) {
+                    localStorage.setItem(DIRTY_KEY, '0');
+                }
+            };
+
             if (!setup) {
                 this.showWarningIfInEditor();
+
+                if (localStorage.getItem(DIRTY_KEY) === '1') {
+                    this.props.onShowRecovery();
+                }
             }
         }
         shouldComponentUpdate () {
@@ -30,15 +47,6 @@ const TWEditorWarningHOC = function (WrappedComponent) {
                     this.props.vm.setCompilerOptions({
                         warpTimer: true
                     });
-                }
-
-                // This makes it so that if the VM ever is unable to finish a frame, we may be able to detect it.
-                // This isn't foolproof, but it's better than nothing.
-                this.props.vm.runtime.beforeStep = () => localStorage.setItem(DIRTY_KEY, '1');
-                this.props.vm.runtime.afterStep = () => localStorage.setItem(DIRTY_KEY, '0');
-
-                if (localStorage.getItem(DIRTY_KEY) === '1') {
-                    this.props.onShowRecovery();
                 }
             }
         }

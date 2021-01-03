@@ -1,5 +1,10 @@
 import JSZip from 'jszip';
 
+// Special constants -- do not change without care.
+const DATABASE_NAME = 'TW_AutoSave';
+const DATABASE_VERSION = 1;
+const STORE_NAME = 'project';
+
 let _db;
 
 const openDB = () => {
@@ -12,12 +17,11 @@ const openDB = () => {
     }
 
     return new Promise((resolve, reject) => {
-        // Special constants: do not change without care.
-        const request = indexedDB.open('TW_AutoSave', 1);
+        const request = indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
 
         request.onupgradeneeded = e => {
             const db = e.target.result;
-            db.createObjectStore('project', {
+            db.createObjectStore(STORE_NAME, {
                 keyPath: 'file'
             });
         };
@@ -43,15 +47,14 @@ const save = async vm => {
     const files = vm.saveProjectSb3DontZip();
     const db = await openDB();
     return new Promise((resolve, reject) => {
-        const transaction = db.transaction('project', 'readwrite');
+        const transaction = db.transaction(STORE_NAME, 'readwrite');
         transaction.onerror = () => {
             reject(new Error(`Transaction error while saving: ${transaction.error}`));
         };
 
-        const projectStore = transaction.objectStore('project');
-
         // Remove unused assets and don't waste time updating assets that are already in IDB.
         const exists = [];
+        const projectStore = transaction.objectStore(STORE_NAME);
         const request = projectStore.openCursor();
         request.onsuccess = e => {
             const cursor = e.target.result;
@@ -88,13 +91,13 @@ const load = async () => {
     // To load a project, read the files from IDB and generate a .sb3
     const db = await openDB();
     return new Promise((resolve, reject) => {
-        const transaction = db.transaction('project', 'readonly');
+        const transaction = db.transaction(STORE_NAME, 'readonly');
         transaction.onerror = () => {
             reject(new Error(`Transaction error while loading: ${transaction.error}`));
         };
 
         const zip = new JSZip();
-        const projectStore = transaction.objectStore('project');
+        const projectStore = transaction.objectStore(STORE_NAME);
         const request = projectStore.openCursor();
         request.onsuccess = e => {
             const cursor = e.target.result;

@@ -244,7 +244,6 @@ const alerts = [
     {
         alertId: 'twWarning',
         alertType: AlertTypes.STANDARD,
-        clearList: [],
         content: (
             <center>
                 <div>
@@ -318,6 +317,21 @@ const alerts = [
                 }}
             />
         ),
+        closeButton: true,
+        level: AlertLevels.WARN
+    },
+    {
+        alertId: 'twCrashRecovery',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['saveSuccess', 'twSaveToDiskSuccess'],
+        content: (
+            <FormattedMessage
+                defaultMessage="It looks like TurboWarp may have crashed. Do you want to attempt project recovery?"
+                description="Message indicating that a crash was detected that offers to recover the project"
+                id="tw.alerts.crashRecovery"
+            />
+        ),
+        showRecover: true,
         closeButton: true,
         level: AlertLevels.WARN
     }

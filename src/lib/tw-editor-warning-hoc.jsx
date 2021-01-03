@@ -3,36 +3,37 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {showStandardAlert} from '../reducers/alerts';
 
+let mounted = false;
+
+const DIRTY_KEY = 'tw:dirty';
+
 const TWEditorWarningHOC = function (WrappedComponent) {
     class EditorWarningComponent extends React.Component {
         componentDidMount () {
-            this.enableWarpTimerIfInEditor();
-        }
-        shouldComponentUpdate () {
-            return !this.disabled;
-        }
-        componentDidUpdate () {
-            this.enableWarpTimerIfInEditor();
-        }
-        enableWarpTimerIfInEditor () {
-            if (!this.props.isPlayerOnly) {
-                // If compiler is already disabled, don't show the warning or change warp timer.
-                if (this.props.compilerOptions.enabled) {
-                    this.props.onShowWarning();
-                    this.props.vm.setCompilerOptions({
-                        warpTimer: true
-                    });
-                }
-                this.disabled = true;
+            if (mounted) {
+                return;
+            }
+            mounted = true;
+
+            // This makes it so that if the VM ever is unable to finish a frame (possibly getting terminatd after an endless loop),
+            // we will be able to detect it below.
+            this.props.vm.runtime.beforeStep = () => localStorage.setItem(DIRTY_KEY, '1');
+            this.props.vm.runtime.afterStep = () => localStorage.setItem(DIRTY_KEY, '0');
+
+            if (localStorage.getItem(DIRTY_KEY) === '1') {
+                this.props.onShowRecovery();
+            } else if (this.props.compilerOptions.enabled) {
+                this.props.onShowWarning();
             }
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                alerts,
                 compilerOptions,
                 isPlayerOnly,
                 onShowWarning,
+                onShowRecovery,
+                vm,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -50,8 +51,12 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         }),
         isPlayerOnly: PropTypes.bool,
         onShowWarning: PropTypes.func,
+        onShowRecovery: PropTypes.func,
         vm: PropTypes.shape({
-            setCompilerOptions: PropTypes.func
+            runtime: PropTypes.shape({
+                beforeStep: PropTypes.func,
+                afterStep: PropTypes.func
+            })
         })
     };
     const mapStateToProps = state => ({
@@ -60,7 +65,8 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onShowWarning: () => dispatch(showStandardAlert('twWarning'))
+        onShowWarning: () => dispatch(showStandardAlert('twWarning')),
+        onShowRecovery: () => dispatch(showStandardAlert('twCrashRecovery'))
     });
     return connect(
         mapStateToProps,

@@ -3,6 +3,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import SB3Downloader from './sb3-downloader.jsx';
+import TWAutoSaveLoader from './tw-autosave-loader.jsx';
 import AlertComponent from '../components/alerts/alert.jsx';
 import {openConnectionModal} from '../reducers/modals';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
@@ -36,27 +37,32 @@ class Alert extends React.Component {
             onSaveNow,
             showDownload,
             showReconnect,
-            showSaveNow
+            showSaveNow,
+            showRecover
         } = this.props;
         return (
-            <SB3Downloader>{(_, downloadProject) => (
-                <AlertComponent
-                    closeButton={closeButton}
-                    content={content}
-                    extensionName={extensionName}
-                    iconSpinner={iconSpinner}
-                    iconURL={iconURL}
-                    level={level}
-                    message={message}
-                    showDownload={showDownload}
-                    showReconnect={showReconnect}
-                    showSaveNow={showSaveNow}
-                    onCloseAlert={this.handleOnCloseAlert}
-                    onDownload={downloadProject}
-                    onReconnect={this.handleOnReconnect}
-                    onSaveNow={onSaveNow}
-                />
-            )}</SB3Downloader>
+            <TWAutoSaveLoader>{(__, loadAutoSave) => (
+                <SB3Downloader>{(_, downloadProject) => (
+                    <AlertComponent
+                        closeButton={closeButton}
+                        content={content}
+                        extensionName={extensionName}
+                        iconSpinner={iconSpinner}
+                        iconURL={iconURL}
+                        level={level}
+                        message={message}
+                        showDownload={showDownload}
+                        showReconnect={showReconnect}
+                        showSaveNow={showSaveNow}
+                        showRecover={showRecover}
+                        onCloseAlert={this.handleOnCloseAlert}
+                        onDownload={downloadProject}
+                        onReconnect={this.handleOnReconnect}
+                        onRecover={loadAutoSave}
+                        onSaveNow={onSaveNow}
+                    />
+                )}</SB3Downloader>
+            )}</TWAutoSaveLoader>
         );
     }
 }
@@ -88,7 +94,8 @@ Alert.propTypes = {
     onSaveNow: PropTypes.func,
     showDownload: PropTypes.bool,
     showReconnect: PropTypes.bool,
-    showSaveNow: PropTypes.bool
+    showSaveNow: PropTypes.bool,
+    showRecover: PropTypes.bool
 };
 
 export default connect(

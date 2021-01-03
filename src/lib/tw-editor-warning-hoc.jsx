@@ -3,36 +3,58 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {showStandardAlert} from '../reducers/alerts';
 
+let shownWarning = false;
+
+const DIRTY_KEY = 'tw:dirty';
+
 const TWEditorWarningHOC = function (WrappedComponent) {
     class EditorWarningComponent extends React.Component {
         componentDidMount () {
-            this.enableWarpTimerIfInEditor();
+            // This makes it so that if the VM ever is unable to finish a frame, we may be able to detect it.
+            // This isn't foolproof, but it's better than nothing.
+            this.props.vm.runtime.beforeStep = () => {
+                if (!this.props.isPlayerOnly) {
+                    localStorage.setItem(DIRTY_KEY, '1');
+                }
+            };
+            this.props.vm.runtime.afterStep = () => {
+                if (!this.props.isPlayerOnly) {
+                    localStorage.setItem(DIRTY_KEY, '0');
+                }
+            };
+
+            if (!shownWarning) {
+                this.showWarningIfInEditor();
+
+                if (localStorage.getItem(DIRTY_KEY) === '1') {
+                    this.props.onShowRecovery();
+                }
+            }
         }
         shouldComponentUpdate () {
-            return !this.disabled;
+            return !shownWarning;
         }
         componentDidUpdate () {
-            this.enableWarpTimerIfInEditor();
+            this.showWarningIfInEditor();
         }
-        enableWarpTimerIfInEditor () {
+        showWarningIfInEditor () {
             if (!this.props.isPlayerOnly) {
-                // If compiler is already disabled, don't show the warning or change warp timer.
-                if (this.props.compilerOptions.enabled) {
-                    this.props.onShowWarning();
-                    this.props.vm.setCompilerOptions({
-                        warpTimer: true
-                    });
-                }
-                this.disabled = true;
+                shownWarning = true;
+
+                this.props.onShowWarning();
+                this.props.vm.setCompilerOptions({
+                    warpTimer: true
+                });
             }
         }
         render () {
             const {
                 /* eslint-disable no-unused-vars */
-                alerts,
                 compilerOptions,
                 isPlayerOnly,
                 onShowWarning,
+                onShowRecovery,
+                vm,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
@@ -45,12 +67,16 @@ const TWEditorWarningHOC = function (WrappedComponent) {
     }
     EditorWarningComponent.propTypes = {
         compilerOptions: PropTypes.shape({
-            enabled: PropTypes.bool,
-            warpTimer: PropTypes.bool
+            enabled: PropTypes.bool
         }),
         isPlayerOnly: PropTypes.bool,
         onShowWarning: PropTypes.func,
+        onShowRecovery: PropTypes.func,
         vm: PropTypes.shape({
+            runtime: PropTypes.shape({
+                beforeStep: PropTypes.func,
+                afterStep: PropTypes.func
+            }),
             setCompilerOptions: PropTypes.func
         })
     };
@@ -60,7 +86,8 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onShowWarning: () => dispatch(showStandardAlert('twWarning'))
+        onShowWarning: () => dispatch(showStandardAlert('twWarning')),
+        onShowRecovery: () => dispatch(showStandardAlert('twCrashRecovery'))
     });
     return connect(
         mapStateToProps,

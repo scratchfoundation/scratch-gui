@@ -38,14 +38,14 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         }
         async autosave () {
             try {
-                this.props.onStartAutosaving();
+                this.props.onAutosavingStart();
                 AutoSaveAPI.save(this.props.vm);
             } finally {
                 // Intentional delay.
                 // TODO: remove delay?
                 // TODO: error alert?
                 setTimeout(() => {
-                    this.props.onFinishAutosaving();
+                    this.props.onAutosavingFinish();
                     if (this.props.projectChanged) {
                         clearTimeout(this.timeout);
                         this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
@@ -57,8 +57,8 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 projectChanged,
-                onStartAutosaving,
-                onFinishAutosaving,
+                onAutosavingStart,
+                onAutosavingFinish,
                 vm,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -73,8 +73,8 @@ const TWAutoSaveHOC = function (WrappedComponent) {
     AutoSaveComponent.propTypes = {
         isShowingProject: PropTypes.bool,
         projectChanged: PropTypes.bool,
-        onStartAutosaving: PropTypes.func,
-        onFinishAutosaving: PropTypes.func,
+        onAutosavingStart: PropTypes.func,
+        onAutosavingFinish: PropTypes.func,
         vm: PropTypes.instanceOf(VM)
     };
     const mapStateToProps = state => ({
@@ -83,8 +83,8 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onStartAutosaving: () => dispatch(showStandardAlert('twAutosaving')),
-        onFinishAutosaving: () => dispatch(closeAlertWithId('twAutosaving'))
+        onAutosavingStart: () => dispatch(showStandardAlert('twAutosaving')),
+        onAutosavingFinish: () => dispatch(closeAlertWithId('twAutosaving'))
     });
     return connect(
         mapStateToProps,

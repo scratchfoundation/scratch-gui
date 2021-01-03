@@ -113,7 +113,7 @@ const load = async () => {
                         // No reason to compress this zip.
                     }));
                 } else {
-                    reject(new Error('No valid project.'));
+                    reject(new Error('Could not find project'));
                 }
             }
         };

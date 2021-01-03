@@ -70,6 +70,9 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 projectId,
+                onSetAuthor,
+                onSetDescription,
+                onSetProjectTitle,
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;

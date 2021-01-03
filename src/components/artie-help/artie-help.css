@@ -27,7 +27,6 @@
     min-height: 200px;
     position: relative;
 }
-
 .workspace :global(.injectionDiv){
     position: absolute;
     top: 0;
@@ -35,10 +34,25 @@
     bottom: 0;
     left: 0;
 }
-
 .workspace :global(.blocklySvg) {
     background-color: $ui-primary;
 }
+
+.workspace-full {
+    min-height: 400px;
+    position: relative;
+}
+.workspace-full :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.workspace-full :global(.blocklySvg) {
+    background-color: $ui-primary;
+}
+
 
 /* Messages */
 .label {

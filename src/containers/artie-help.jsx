@@ -19,7 +19,8 @@ class ArtieHelp extends React.Component {
             'handleOk',
             'setBlocksAdd',
             'setBlocksDel',
-            'setBlocksReplace'
+            'setBlocksReplaceInputs',
+            'setBlocksMisplaced'
         ]);
         this.state = {
             rtlOffset: 0,
@@ -181,7 +182,7 @@ class ArtieHelp extends React.Component {
             });
         }
     }
-    setBlocksReplace (blocksRef){
+    setBlocksReplaceInputs (blocksRef){
         if (!blocksRef) return;
         this.blocks = blocksRef;
         const workspaceConfig = defaultsDeep({},
@@ -212,6 +213,81 @@ class ArtieHelp extends React.Component {
 
             //Configure and render all the blocks
             replaceBlockArray.forEach(block => {
+                block.setMovable(false);
+                block.setDeletable(false);
+                block.contextMenu = false;
+
+                //If we haven't set the center of the workspace
+                if(dx == -1){
+
+                    const {x, y} = block.getRelativeToSurfaceXY();
+                    const ltrX = ((metrics.viewWidth / 2) - (block.width / 2) + 25);
+                    const mirrorX = x - ((x - this.state.rtlOffset) * 2);
+                    dx = mirrorX - ltrX;
+                    const midPoint = metrics.viewWidth / 2;
+
+                    if (x === 0) {
+                        // if it's the first time positioning, it should always move right
+                        if (block.width < midPoint) {
+                            dx = ltrX;
+                        } else if (block.width < metrics.viewWidth) {
+                            dx = midPoint - ((metrics.viewWidth - block.width) / 2);
+                        } else {
+                            dx = midPoint + (block.width - metrics.viewWidth);
+                        }
+                        this.setState({rtlOffset: block.getRelativeToSurfaceXY().x});
+                    }
+                    if (block.width > metrics.viewWidth) {
+                        dx = dx + block.width - metrics.viewWidth;
+                    }else {
+                        dx = (metrics.viewWidth / 2) - (block.width / 2) - x;
+                        // If the procedure declaration is wider than the view width,
+                        // keep the right-hand side of the procedure in view.
+                        if (block.width > metrics.viewWidth) {
+                            dx = metrics.viewWidth - block.width - x;
+                        }
+                    }
+                }
+
+                block.moveBy(dx,dy);
+                dy += 60;
+
+                block.initSvg();
+                block.render();
+            });
+        }
+    }
+    setBlocksMisplaced (blocksRef){
+        if (!blocksRef) return;
+        this.blocks = blocksRef;
+        const workspaceConfig = defaultsDeep({},
+            ArtieHelp.defaultOptions,
+            this.props.options,
+            {rtl: this.props.isRtl}
+        );
+
+        // @todo This is a hack to make there be no toolbox.
+        const oldDefaultToolbox = ScratchBlocks.Blocks.defaultToolbox;
+        ScratchBlocks.Blocks.defaultToolbox = null;
+        this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
+        ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
+
+        this.workspace.options.pathToMedia = 'static/blocks-media/';
+
+        // Gets the workspace metrics
+        const metrics = this.workspace.getMetrics();
+
+        //If the help is not null and we have some misplaced blocks
+        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.replacePositions !== null){
+
+            //We build the block array for the elements we have to add
+            var misplacedBlockArray = [];
+            var dy = 10;
+            var dx = -1;
+            this.props.help.nextSteps.replacePositions.forEach(element => {misplacedBlockArray.push(this.workspace.newBlock(element.elementName))});
+
+            //Configure and render all the blocks
+            misplacedBlockArray.forEach(block => {
                 block.setMovable(false);
                 block.setDeletable(false);
                 block.contextMenu = false;
@@ -291,7 +367,8 @@ class ArtieHelp extends React.Component {
                 help={this.props.help}
                 componentRefAdd={this.setBlocksAdd}
                 componentRefDel={this.setBlocksDel}
-                componentRefReplace={this.setBlocksReplace}
+                componentRefReplace={this.setBlocksReplaceInputs}
+                componentRefMisplaced={this.setBlocksMisplaced}
                 warp={this.state.warp}
                 onAddBoolean={this.handleAddBoolean}
                 onAddLabel={this.handleAddLabel}

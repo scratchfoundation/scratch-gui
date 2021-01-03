@@ -64,6 +64,30 @@ class ArtieHelpComponent extends React.Component {
                     </Modal>
             );
         }
+        else if(this.props.help.nextSteps !== null && this.props.help.nextSteps.replacePositions !== null && this.props.help.nextSteps.replacePositions.length > 0){
+            return(
+                <Modal
+                        className={styles.modalContent}
+                        onRequestClose={this.props.onCancel}
+                        id="ArtieHelp"
+                        contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
+                    >
+                        <Box
+                            className={styles.label}
+                        >
+                            <FormattedMessage
+                                    defaultMessage="List of misplaced items:"
+                                    description="List of misplaced items:"
+                                    id="gui.menuBar.artie.help.mispacedElements"
+                                />
+                        </Box>
+                        <Box
+                            className={styles.workspaceFull}
+                            componentRef={this.props.componentRefMisplaced}
+                        />
+                    </Modal>
+            );
+        }
         else if(this.props.help.nextSteps !== null && this.props.help.nextSteps.replaceInputs !== null && this.props.help.nextSteps.replaceInputs.length > 0){
             return(
                 <Modal

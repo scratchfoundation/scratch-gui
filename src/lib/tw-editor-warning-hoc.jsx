@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {showStandardAlert} from '../reducers/alerts';
 
-let setup = false;
+let shownWarning = false;
 
 const DIRTY_KEY = 'tw:dirty';
 
@@ -23,7 +23,7 @@ const TWEditorWarningHOC = function (WrappedComponent) {
                 }
             };
 
-            if (!setup) {
+            if (!shownWarning) {
                 this.showWarningIfInEditor();
 
                 if (localStorage.getItem(DIRTY_KEY) === '1') {
@@ -32,22 +32,19 @@ const TWEditorWarningHOC = function (WrappedComponent) {
             }
         }
         shouldComponentUpdate () {
-            return !setup;
+            return !shownWarning;
         }
         componentDidUpdate () {
             this.showWarningIfInEditor();
         }
         showWarningIfInEditor () {
             if (!this.props.isPlayerOnly) {
-                setup = true;
+                shownWarning = true;
 
-                // If compiler is already disabled, don't show the warning or change warp timer.
-                if (this.props.compilerOptions.enabled) {
-                    this.props.onShowWarning();
-                    this.props.vm.setCompilerOptions({
-                        warpTimer: true
-                    });
-                }
+                this.props.onShowWarning();
+                this.props.vm.setCompilerOptions({
+                    warpTimer: true
+                });
             }
         }
         render () {

@@ -928,10 +928,7 @@ export default async function () {
      * @returns {boolean}
      */
     function isBlockAnOrphan(topBlock) {
-        if (topBlock.getOutputShape() && !topBlock.getSurroundParent()) {
-            return true;
-        }
-        return false;
+        return !!topBlock.outputConnection;
     }
 
     /**

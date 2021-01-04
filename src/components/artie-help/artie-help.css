@@ -1,0 +1,115 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 400px;
+    margin: 50px auto; /* This modal is taller than most, reduce top margin */
+    min-height: 400px;
+}
+
+.modal-content-congrats {
+    margin: 50px auto;
+    width: 400px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
+/* Blocks workspace for custom procedure declaration editor */
+.workspace {
+    min-height: 200px;
+    position: relative;
+}
+.workspace :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.workspace :global(.blocklySvg) {
+    background-color: $ui-primary;
+}
+
+.workspace-full {
+    min-height: 400px;
+    position: relative;
+}
+.workspace-full :global(.injectionDiv){
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.workspace-full :global(.blocklySvg) {
+    background-color: $ui-primary;
+}
+
+
+/* Messages */
+.label {
+    color:$ui-white;
+    background-color: $motion-tertiary;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+}
+.label-congrats {
+    color: green;
+    background-color: $ui-white;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+/* Table */
+.table{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.table thead{
+    background-color: $motion-primary;
+    justify-content: left;
+    align-items: left;
+}
+.table thead tr{
+    width: 100%;
+    display:table-row;
+}
+.table thead tr th{
+    flex:1;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: $ui-white;
+    font-weight: bold;
+}
+.table tbody{
+    background-color: $ui-white;
+    justify-content: center;
+    align-items: center;
+}
+.table tbody tr{
+    width: 100%;
+    display: table-row;
+}
+.table tbody tr td{
+    flex:1;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: $motion-primary;
+    display: table-cell;
+    text-align: center;
+}

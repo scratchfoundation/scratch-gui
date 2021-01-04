@@ -502,6 +502,18 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
             </value>
         </block>
 
+        <block type="mv2_discoChangeRegionColour" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+            <value>
+                <field name="REGION"></field>
+            </value>
+        </block>
+
     ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">

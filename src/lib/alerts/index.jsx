@@ -189,8 +189,8 @@ const alerts = [
         alertType: AlertTypes.INLINE,
         content: (
             <FormattedMessage
-                defaultMessage="Creating autosave…"
-                description="Message indicating that an autosave is being created"
+                defaultMessage="Creating restore point…"
+                description="Message indicating that a restore point is being created"
                 id="tw.alerts.autosaving"
             />
         ),
@@ -248,7 +248,7 @@ const alerts = [
             <center>
                 <div>
                     <FormattedMessage
-                        defaultMessage="TurboWarp will now periodically backup your project if it's been a while since you've saved. In the event of a crash, the backup can be loaded from File > Load autosave (BETA)."
+                        defaultMessage="TurboWarp will now periodically backup your project if it's been a while since you've saved. In the event of a crash, the backup can be loaded from File > Load restore point (BETA)."
                         description="Part of the warning that appears when the editor is opened"
                         id="tw.alerts.warning.autosave"
                     />

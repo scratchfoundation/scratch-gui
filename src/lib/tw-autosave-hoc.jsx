@@ -14,8 +14,8 @@ let bailed = false;
 
 const messages = defineMessages({
     error: {
-        defaultMessage: 'Could not autosave; autosaves are now disabled. Regular project saves are unaffected.\n\nDebug: {error}',
-        description: 'Alert displayed when autosave creation failed',
+        defaultMessage: 'Could not restore point; restore points are now disabled. Regular project saves are unaffected.\n\nDebug: {error}',
+        description: 'Alert displayed when restore point creation failed',
         id: 'tw.autosave.createFail'
     }
 });

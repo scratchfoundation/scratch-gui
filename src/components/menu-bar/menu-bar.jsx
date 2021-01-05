@@ -586,8 +586,8 @@ class MenuBar extends React.Component {
                                                 onClick={loadAutoSave}
                                             >
                                                 <FormattedMessage
-                                                    defaultMessage="Load autosave (BETA)"
-                                                    description="Menu bar item for loading an autosave"
+                                                    defaultMessage="Load restore point (BETA)"
+                                                    description="Menu bar item for loading a restore point"
                                                     id="tw.menuBar.loadAutoSave"
                                                 />
                                             </MenuItem>

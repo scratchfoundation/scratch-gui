@@ -12,8 +12,8 @@ import {closeAlertWithId} from '../reducers/alerts';
 
 const messages = defineMessages({
     error: {
-        defaultMessage: 'Could not load autosave.\n\nDebug: {error}',
-        description: 'Alert displayed when autosave loading failed',
+        defaultMessage: 'Could not load restore point.\n\nDebug: {error}',
+        description: 'Alert displayed when restore point loading failed',
         id: 'tw.autosave.loadFail'
     }
 });

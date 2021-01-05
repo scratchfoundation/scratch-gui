@@ -48,8 +48,7 @@ const WrappedGUI = compose(
     AppStateHOC,
     TWStateManagerHOC,
     TWEmbedFullScreenHOC,
-    TWFullscreenResizerHOC,
-    TWDarkModeHOC
+    TWFullscreenResizerHOC
 )(GUI);
 
 ReactDOM.render(<WrappedGUI

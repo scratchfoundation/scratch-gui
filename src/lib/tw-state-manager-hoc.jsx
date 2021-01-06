@@ -442,8 +442,13 @@ const TWStateManager = function (WrappedComponent) {
                 if (newSearch.length > 0) {
                     // Add leading question mark
                     newSearch = `?${newSearch}`;
-                    // Remove '=' from empty values
-                    newSearch = newSearch.replace(/=(?=$|&)/g, '');
+                    newSearch = newSearch
+                        // Remove '=' from empty values
+                        // eslint-disable-next-line no-div-regex
+                        .replace(/=(?=$|&)/g, '')
+                        // Decode / and : (common in project_url setting)
+                        .replace(/%2F/g, '/')
+                        .replace(/%3A/g, ':');
                 }
  
                 if (location.search !== newSearch) {

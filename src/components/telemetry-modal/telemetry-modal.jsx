@@ -53,12 +53,20 @@ const messages = defineMessages({
         description: 'Tooltip for telemetry modal opt-out button',
         id: 'gui.telemetryOptIn.optOutTooltip'
     },
+    settingWasUpdated: {
+        defaultMessage: 'Your setting was updated.',
+        description: 'Message indicating that the telemetry setting was updated and saved',
+        id: 'gui.telemetryOptIn.settingWasUpdated'
+    },
     closeButton: {
         defaultMessage: 'Close',
         description: 'Text for the button which closes the telemetry modal dialog',
         id: 'gui.telemetryOptIn.buttonClose'
     }
 });
+
+// This should be at least as long as the CSS transition
+const SETTING_WAS_UPDATED_DURATION_MS = 3000;
 
 class TelemetryModal extends React.PureComponent {
     constructor (props) {
@@ -67,6 +75,10 @@ class TelemetryModal extends React.PureComponent {
             'handleCancel',
             'handleOptInOutChanged'
         ]);
+        this.state = {
+            // if the settingWasUpdated message is displayed, this will be the ID of its removal timer
+            settingWasUpdatedTimer: null
+        };
     }
     handleCancel () {
         this.props.onRequestClose();
@@ -78,17 +90,43 @@ class TelemetryModal extends React.PureComponent {
         if (e.target.value === 'true') {
             if (this.props.onOptIn) {
                 this.props.onOptIn();
+                this.handleSettingWasUpdated();
             }
         } else if (e.target.value === 'false') {
             if (this.props.onOptOut) {
                 this.props.onOptOut();
+                this.handleSettingWasUpdated();
             }
         }
+    }
+    handleSettingWasUpdated () {
+        if (this.state.settingWasUpdatedTimer) {
+            clearTimeout(this.state.settingWasUpdatedTimer);
+        }
+        const newTimer = setTimeout(
+            () => this.handleSettingWasUpdatedTimeout(newTimer),
+            SETTING_WAS_UPDATED_DURATION_MS
+        );
+        this.setState({
+            settingWasUpdatedTimer: newTimer
+        });
+    }
+    handleSettingWasUpdatedTimeout (thisTimer) {
+        if (thisTimer !== this.state.settingWasUpdatedTimer) {
+            // some other timer has taken over
+            return;
+        }
+        this.setState({
+            settingWasUpdatedTimer: null
+        });
     }
     render () {
         const isUndecided = (typeof this.props.isTelemetryEnabled !== 'boolean');
         const isOff = (this.props.isTelemetryEnabled === false);
         const isOn = (this.props.isTelemetryEnabled === true);
+        const settingWasUpdated = this.state.settingWasUpdatedTimer && (
+            <FormattedMessage {...messages.settingWasUpdated} />
+        );
         return (<ReactModal
             isOpen
             className={styles.modalContent}
@@ -140,6 +178,7 @@ class TelemetryModal extends React.PureComponent {
                         </label>
                     </Box>
                     <Box className={styles.buttonRow}>
+                        <span className={styles.settingWasUpdated}>{settingWasUpdated}</span>
                         <button
                             className={styles.optIn}
                             onClick={this.props.onRequestClose}

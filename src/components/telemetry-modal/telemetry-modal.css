@@ -107,16 +107,17 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 
 /* Confirmation buttons at the bottom of the modal */
 .button-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+
     margin: 1.5rem 0;
     font-weight: bolder;
 }
 
-[dir="ltr"] .button-row {
-    text-align: right;
-}
-
-[dir="rtl"] .button-row {
-    text-align: left;
+.settingWasUpdated {
+    color: $extensions-primary;
 }
 
 .button-row button {

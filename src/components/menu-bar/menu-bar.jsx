@@ -27,7 +27,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
-import SixtyFPSToggler from '../../containers/tw-sixty-fps-toggler.jsx';
+import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
 import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
@@ -643,8 +643,8 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
-                                    <SixtyFPSToggler>{(toggleSixtyFPS, {framerate}) => (
-                                        <MenuItem onClick={toggleSixtyFPS}>
+                                    <FramerateChanger>{(changeFramerate, {framerate}) => (
+                                        <MenuItem onClick={changeFramerate}>
                                             {framerate === 60 ? (
                                                 <FormattedMessage
                                                     defaultMessage="Turn off 60 FPS Mode"
@@ -659,7 +659,7 @@ class MenuBar extends React.Component {
                                                 />
                                             )}
                                         </MenuItem>
-                                    )}</SixtyFPSToggler>
+                                    )}</FramerateChanger>
                                     <ChangeUsername>{changeUsername => (
                                         <MenuItem onClick={changeUsername}>
                                             <FormattedMessage

@@ -4,15 +4,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
-class SixtyFPSToggler extends React.Component {
+class FramerateChanger extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'toggleSixtyFPS'
+            'changeFramerate'
         ]);
     }
-    toggleSixtyFPS (e) {
-        if (e && e.ctrlKey) {
+    changeFramerate (e) {
+        if (e && (e.ctrlKey || e.shiftKey)) {
             // eslint-disable-next-line no-alert
             const newFPS = prompt('Framerate: ', this.props.framerate);
             if (newFPS === null) {
@@ -36,11 +36,11 @@ class SixtyFPSToggler extends React.Component {
             /* eslint-enable no-unused-vars */
             ...props
         } = this.props;
-        return this.props.children(this.toggleSixtyFPS, props);
+        return this.props.children(this.changeFramerate, props);
     }
 }
 
-SixtyFPSToggler.propTypes = {
+FramerateChanger.propTypes = {
     children: PropTypes.func,
     framerate: PropTypes.number,
     vm: PropTypes.instanceOf(VM)
@@ -54,4 +54,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(SixtyFPSToggler);
+)(FramerateChanger);

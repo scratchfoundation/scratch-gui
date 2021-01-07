@@ -643,9 +643,9 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
-                                    <SixtyFPSToggler>{(toggleSixtyFPS, {isSixty}) => (
+                                    <SixtyFPSToggler>{(toggleSixtyFPS, {framerate}) => (
                                         <MenuItem onClick={toggleSixtyFPS}>
-                                            {isSixty ? (
+                                            {framerate === 60 ? (
                                                 <FormattedMessage
                                                     defaultMessage="Turn off 60 FPS Mode"
                                                     description="Menu bar item for turning off 60 FPS mode"

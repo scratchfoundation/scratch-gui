@@ -11,8 +11,18 @@ class SixtyFPSToggler extends React.Component {
             'toggleSixtyFPS'
         ]);
     }
-    toggleSixtyFPS () {
-        if (this.props.isSixty) {
+    toggleSixtyFPS (e) {
+        if (e && e.ctrlKey) {
+            // eslint-disable-next-line no-alert
+            const newFPS = prompt('Framerate: ', this.props.framerate);
+            if (newFPS === null) {
+                return;
+            }
+            const fps = +newFPS;
+            if (isFinite(fps) && fps > 0) {
+                this.props.vm.setFramerate(fps);
+            }
+        } else if (this.props.framerate === 60) {
             this.props.vm.setFramerate(30);
         } else {
             this.props.vm.setFramerate(60);
@@ -32,12 +42,12 @@ class SixtyFPSToggler extends React.Component {
 
 SixtyFPSToggler.propTypes = {
     children: PropTypes.func,
-    isSixty: PropTypes.bool,
+    framerate: PropTypes.number,
     vm: PropTypes.instanceOf(VM)
 };
 
 const mapStateToProps = state => ({
-    isSixty: state.scratchGui.tw.framerate === 60,
+    framerate: state.scratchGui.tw.framerate,
     vm: state.scratchGui.vm
 });
 

@@ -51,7 +51,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 }
 
 /* stack the radio buttons vertically, not horizontally */
-.radioButtons label {
+.radio-buttons label {
     display: block;
     margin: 0.5rem;
     transition: all .125s ease;
@@ -63,16 +63,16 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     vertical-align: middle;
 }
 
-.radioButtons label:hover {
+.radio-buttons label:hover {
     background-color: $ui-blue-10percent;
 }
 
-.radioButtons label.labelSelected,
-.radioButtons label.labelSelected:hover {
+.radio-buttons label.label-selected,
+.radio-buttons label.label-selected:hover {
     background-color: $ui-blue-25percent;
 }
 
-.radioButtons input[type="radio"] {
+.radio-buttons input[type="radio"] {
     margin: -1px 0.75rem 1px;
     border: 1px solid $active-gray;
     border-radius: 50%;
@@ -83,19 +83,19 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     vertical-align: middle;
 }
 
-.radioButtons input[type="radio"]:checked,
-.radioButtons input[type="radio"]:focus {
+.radio-buttons input[type="radio"]:checked,
+.radio-buttons input[type="radio"]:focus {
     box-shadow: 0 0 0 2px $ui-blue-25percent;
     outline: none;
 }
 
-.radioButtons input[type="radio"]:checked {
+.radio-buttons input[type="radio"]:checked {
     transition: all .25s ease;
     background-color: $ui-white;
     border: 1px solid $motion-primary;
 }
 
-.radioButtons input[type="radio"]:checked::after {
+.radio-buttons input[type="radio"]:checked::after {
     display: block;
     margin: 0.125rem;
     border-radius: 50%;
@@ -116,7 +116,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     font-weight: bolder;
 }
 
-.settingWasUpdated {
+.setting-was-updated {
     color: $extensions-primary;
 }
 

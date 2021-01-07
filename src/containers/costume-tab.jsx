@@ -179,16 +179,12 @@ class CostumeTab extends React.Component {
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
-        const split = item.md5.split('.');
-        const type = split.length > 1 ? split[1] : null;
-        const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
-        const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX,
-            rotationCenterY,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
@@ -197,10 +193,10 @@ class CostumeTab extends React.Component {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX: item.info[0] && item.info[0] / 2,
-            rotationCenterY: item.info[1] && item.info[1] / 2,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume);
@@ -312,7 +308,7 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
+                        fileAccept: '.svg, .png, .bmp, .jpg, .jpeg, .gif',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput,
                         fileMultiple: true

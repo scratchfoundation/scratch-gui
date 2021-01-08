@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>fill-radial-enabled</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="39.3896484%" id="radialGradient-1">
+            <stop stop-color="#4C97FF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="fill-radial-enabled" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.15">
+        <rect id="Radial" stroke="#000000" fill="url(#radialGradient-1)" x="0.5" y="0.5" width="19" height="19" rx="4"></rect>
+    </g>
+</svg>

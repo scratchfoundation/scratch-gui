@@ -197,6 +197,8 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    // Doesn't work on Android
+    /*
     test('Costumes animate on mouseover', async () => {
         await loadUri(uri);
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
@@ -214,7 +216,7 @@ describe('Working with costumes', () => {
         await expect(sourcesMatch).toBeFalsy(); // 'src' attribute should have changed by now
         const logs = await getLogs();
         await expect(logs).toEqual([]);
-    });
+    });*/
 
     test('Adding multiple costumes at the same time', async () => {
         const files = [

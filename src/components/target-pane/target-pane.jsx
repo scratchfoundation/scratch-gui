@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import VM from 'scratch-vm';
+import storage from '../../lib/storage';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
@@ -108,12 +109,14 @@ const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired,
+        asset: PropTypes.instanceOf(storage.Asset),
         // The following are optional because costumes uploaded from disk
         // will not have these properties available
         bitmapResolution: PropTypes.number,
         rotationCenterX: PropTypes.number,
         rotationCenterY: PropTypes.number
     }),
+    costumeCount: PropTypes.number,
     direction: PropTypes.number,
     id: PropTypes.string,
     name: PropTypes.string,

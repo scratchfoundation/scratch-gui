@@ -11,7 +11,7 @@ class HighQualityPen extends React.Component {
         ]);
     }
     toggleHighQualityPen () {
-        this.props.vm.renderer.setUseHighQualityPen(!this.props.highQualityPen);
+        this.props.vm.renderer.setUseHighQualityRender(!this.props.highQualityPen);
     }
     render () {
         const {
@@ -30,7 +30,7 @@ HighQualityPen.propTypes = {
     highQualityPen: PropTypes.bool,
     vm: PropTypes.shape({
         renderer: PropTypes.shape({
-            setUseHighQualityPen: PropTypes.func
+            setUseHighQualityRender: PropTypes.func
         })
     })
 };

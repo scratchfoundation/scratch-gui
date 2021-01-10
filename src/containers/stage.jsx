@@ -73,7 +73,7 @@ class Stage extends React.Component {
             this.props.vm.renderer.draw();
 
             // tw: handle changes to high quality pen
-            this.props.vm.renderer.on('UseHighQualityPenChanged', this.props.onHighQualityPenChanged);
+            this.props.vm.renderer.on('UseHighQualityRenderChanged', this.props.onHighQualityPenChanged);
         }
         this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());

@@ -300,7 +300,7 @@ const TWStateManager = function (WrappedComponent) {
             }
 
             if (urlParams.has('hqpen')) {
-                this.props.vm.renderer.setUseHighQualityPen(true);
+                this.props.vm.renderer.setUseHighQualityRender(true);
             }
 
             if (urlParams.has('turbo')) {

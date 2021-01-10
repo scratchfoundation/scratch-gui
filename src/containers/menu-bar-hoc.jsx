@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import React from 'react';
+import SB3Downloader from './sb3-downloader.jsx';
 
 const MenuBarHOC = function (WrappedComponent) {
     class MenuBarContainer extends React.PureComponent {
@@ -30,11 +31,14 @@ const MenuBarHOC = function (WrappedComponent) {
                 /* eslint-enable no-unused-vars */
                 ...props
             } = this.props;
-            return (<WrappedComponent
-                confirmReadyToReplaceProject={this.confirmReadyToReplaceProject}
-                shouldSaveBeforeTransition={this.shouldSaveBeforeTransition}
-                {...props}
-            />);
+            return (<SB3Downloader>{(_className, _downloadProject, extended) => (
+                <WrappedComponent
+                    confirmReadyToReplaceProject={this.confirmReadyToReplaceProject}
+                    shouldSaveBeforeTransition={this.shouldSaveBeforeTransition}
+                    handleSaveProject={extended.smartSave}
+                    {...props}
+                />
+            )}</SB3Downloader>);
         }
     }
 

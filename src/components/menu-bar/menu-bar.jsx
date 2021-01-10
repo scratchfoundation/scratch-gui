@@ -280,7 +280,7 @@ class MenuBar extends React.Component {
     handleKeyPress (event) {
         const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
         if (modifier && event.key === 's') {
-            // tw: disable Ctrl+S for now until it can be hooked up to the proper API
+            this.props.handleSaveProject();
             event.preventDefault();
         }
     }
@@ -1013,6 +1013,7 @@ MenuBar.propTypes = {
     editMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
+    handleSaveProject: PropTypes.func,
     intl: intlShape,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,

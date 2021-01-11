@@ -148,6 +148,20 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding a bmp from file', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/bmpfile.bmp'));
+        await clickText('bmpfile', scope.costumesTab);
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding several costumes with a gif', async () => {
         await loadUri(uri);
         await clickText('Costumes');
@@ -193,7 +207,7 @@ describe('Working with costumes', () => {
             .mouseMove(abbyElement)
             .perform();
         // wait for one of Abby's alternate costumes to appear
-        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/b6e23922f23b49ddc6f62f675e77417c.svg/get/"]');
+        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/45de34b47a2ce22f6f5d28bb35a44ff5.svg/get/"]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

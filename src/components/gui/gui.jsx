@@ -89,6 +89,7 @@ const GUIComponent = props => {
         loading,
         logo,
         renderLogin,
+        onClickAbout,
         onClickAccountNav,
         onCloseAccountNav,
         onLogOut,
@@ -105,6 +106,7 @@ const GUIComponent = props => {
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
+        onShowPrivacyPolicy,
         onStartSelectingFileUpload,
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
@@ -163,6 +165,7 @@ const GUIComponent = props => {
                         onOptIn={onTelemetryModalOptIn}
                         onOptOut={onTelemetryModalOptOut}
                         onRequestClose={onRequestCloseTelemetryModal}
+                        onShowPrivacyPolicy={onShowPrivacyPolicy}
                     />
                 ) : null}
                 {loading ? (
@@ -219,6 +222,7 @@ const GUIComponent = props => {
                     logo={logo}
                     renderLogin={renderLogin}
                     showComingSoon={showComingSoon}
+                    onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
                     onClickLogo={onClickLogo}
                     onCloseAccountNav={onCloseAccountNav}
@@ -334,6 +338,7 @@ const GUIComponent = props => {
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
+                                isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
                                 stageSize={stageSize}
@@ -390,6 +395,7 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
+    onClickAbout: PropTypes.func,
     onClickAccountNav: PropTypes.func,
     onClickLogo: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
@@ -401,6 +407,7 @@ GUIComponent.propTypes = {
     onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
+    onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,

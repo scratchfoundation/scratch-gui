@@ -116,7 +116,13 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     font-weight: bolder;
 }
 
+@keyframes fade-out {
+    0% {opacity: 1}
+    100% {opacity: 0}
+}
+
 .setting-was-updated {
+    animation: fade-out 3s ease-out;
     color: $extensions-primary;
 }
 

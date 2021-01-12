@@ -129,7 +129,7 @@ const alerts = [
         clearList: ['createSuccess', 'creating', 'createCopySuccess', 'creatingCopy',
             'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         showDownload: true,
-        showSaveNow: true,
+        // showSaveNow: true,
         closeButton: false,
         content: (
             <FormattedMessage

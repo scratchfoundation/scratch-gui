@@ -80,6 +80,11 @@ class TelemetryModal extends React.PureComponent {
             settingWasUpdatedTimer: null
         };
     }
+    componentWillUnmount () {
+        if (this.state.settingWasUpdatedTimer) {
+            clearTimeout(this.state.settingWasUpdatedTimer);
+        }
+    }
     handleCancel () {
         this.props.onRequestClose();
         if (this.props.onCancel) {
@@ -178,7 +183,10 @@ class TelemetryModal extends React.PureComponent {
                         </label>
                     </Box>
                     <Box className={styles.buttonRow}>
-                        <span className={styles.settingWasUpdated}>{settingWasUpdated}</span>
+                        <span
+                            className={styles.settingWasUpdated}
+                            key={this.state.settingWasUpdatedTimer} // restart CSS fade when timer changes
+                        >{settingWasUpdated}</span>
                         <button
                             className={styles.optIn}
                             onClick={this.props.onRequestClose}

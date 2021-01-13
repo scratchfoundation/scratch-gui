@@ -55,7 +55,9 @@ const cloudManagerHOC = function (WrappedComponent) {
             // tw: handle cases where we should explicitly close and reconnect() in the same update
             if (this.shouldReconnect(this.props, prevProps)) {
                 this.disconnectFromCloud();
-                this.connectToCloud();
+                if (this.shouldConnect(this.props)) {
+                    this.connectToCloud();
+                }
                 return;
             }
 

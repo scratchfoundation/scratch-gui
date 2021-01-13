@@ -16,7 +16,6 @@ import ShareButton from './share-button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
@@ -511,22 +510,11 @@ class MenuBar extends React.Component {
                                         </MenuSection>
                                     )}
                                     <MenuSection>
-                                        <SBFileUploader
-                                            canSave={this.props.canSave}
-                                            userOwnsProject={this.props.userOwnsProject}
+                                        <MenuItem
+                                            onClick={this.props.onStartSelectingFileUpload}
                                         >
-                                            {(className, renderFileInput, handleLoadProject) => (
-                                                <MenuItem
-                                                    className={className}
-                                                    onClick={handleLoadProject}
-                                                >
-                                                    {/* eslint-disable max-len */}
-                                                    {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
-                                                    {/* eslint-enable max-len */}
-                                                    {renderFileInput()}
-                                                </MenuItem>
-                                            )}
-                                        </SBFileUploader>
+                                            {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
+                                        </MenuItem>
                                         <SB3Downloader>{(_className, downloadProject, extended) => (
                                             <React.Fragment>
                                                 {extended.available && (
@@ -1052,6 +1040,7 @@ MenuBar.propTypes = {
     onRequestCloseLogin: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
+    onStartSelectingFileUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     projectId: PropTypes.string,
     projectTitle: PropTypes.string,

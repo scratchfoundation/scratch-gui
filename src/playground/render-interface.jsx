@@ -12,6 +12,7 @@ import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
 import TWAutoSaveHOC from '../lib/tw-autosave-hoc.jsx';
+import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -28,6 +29,10 @@ if (process.env.ANNOUNCEMENT) {
     announcement.innerHTML = process.env.ANNOUNCEMENT;
 }
 
+const WrappedMenuBar = compose(
+    SBFileUploaderHOC
+)(MenuBar);
+
 const Interface = ({
     description,
     isFullScreen,
@@ -38,7 +43,7 @@ const Interface = ({
         <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
             {isHomepage ? (
                 <div className={styles.menu}>
-                    <MenuBar
+                    <WrappedMenuBar
                         canManageFiles
                         canChangeLanguage
                         enableSeeInside

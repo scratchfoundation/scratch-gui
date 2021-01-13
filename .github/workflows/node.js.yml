@@ -22,5 +22,5 @@ jobs:
         node-version: 10.x
     - run: npm install
     - run: npm run build
-    - run: npm test:unit
-    - run: npm test:integration
+    - run: npm run test:unit
+    - run: npm run test:integration

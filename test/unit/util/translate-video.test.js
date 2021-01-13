@@ -1,3 +1,8 @@
+describe('no-op', () => {
+    test('no-op', () => {});
+});
+// tw: we intentionally break this test
+/*
 import {translateVideo} from '../../../src/lib/libraries/decks/translate-video.js';
 
 describe('translateVideo', () => {
@@ -17,3 +22,4 @@ describe('translateVideo', () => {
         expect(translateVideo('intro-move-sayhello', 'yum')).toEqual('rpjvs3v9gj');
     });
 });
+*/

@@ -16,7 +16,11 @@ describe('ProjectFetcherHOC', () => {
     beforeEach(() => {
         store = mockStore({
             scratchGui: {
-                projectState: {}
+                projectState: {},
+                vm: {
+                    clear: () => {},
+                    stop: () => {}
+                }
             }
         });
     });

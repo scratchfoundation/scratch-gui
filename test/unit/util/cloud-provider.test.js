@@ -196,4 +196,11 @@ describe('CloudProvider', () => {
         expect(cloudProvider.onInvalidUsername).toHaveBeenCalledTimes(1);
         expect(cloudProvider.onInvalidUsername).toHaveBeenLastCalledWith('aaa');
     });
+
+    test('close with normal code does not trigger invalid username', () => {
+        cloudProvider.username = 'aaa';
+        cloudProvider.onInvalidUsername = jest.fn();
+        cloudProvider.onClose({code: 1000});
+        expect(cloudProvider.onInvalidUsername).not.toHaveBeenCalled();
+    });
 });

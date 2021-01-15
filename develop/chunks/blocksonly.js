@@ -1,62 +1,23 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
-/***/ 1472:
+/***/ 1563:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/react/index.js
-var react = __webpack_require__(1);
-var react_default = /*#__PURE__*/__webpack_require__.n(react);
-
-// EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(35);
-var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
-
-// EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 14 modules
-var es = __webpack_require__(7);
-
-// EXTERNAL MODULE: ./src/containers/controls.jsx + 8 modules
-var controls = __webpack_require__(176);
-
-// EXTERNAL MODULE: ./src/containers/blocks.jsx + 11 modules
-var blocks = __webpack_require__(241);
-
-// EXTERNAL MODULE: ./src/containers/gui.jsx + 332 modules
-var gui = __webpack_require__(82);
-
-// EXTERNAL MODULE: ./src/lib/hash-parser-hoc.jsx
-var hash_parser_hoc = __webpack_require__(101);
-
-// EXTERNAL MODULE: ./src/lib/app-state-hoc.jsx + 1 modules
-var app_state_hoc = __webpack_require__(76);
-
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
-var injectStylesIntoStyleTag = __webpack_require__(6);
-var injectStylesIntoStyleTag_default = /*#__PURE__*/__webpack_require__.n(injectStylesIntoStyleTag);
-
-// EXTERNAL MODULE: ./node_modules/css-loader??ref--5-1!./node_modules/postcss-loader/src??postcss!./src/playground/blocks-only.css
-var blocks_only = __webpack_require__(401);
-var blocks_only_default = /*#__PURE__*/__webpack_require__.n(blocks_only);
-
-// CONCATENATED MODULE: ./src/playground/blocks-only.css
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = injectStylesIntoStyleTag_default()(blocks_only_default.a, options);
-
-
-
-/* harmony default export */ var playground_blocks_only = (blocks_only_default.a.locals || {});
-// CONCATENATED MODULE: ./src/playground/blocks-only.jsx
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(227);
+/* harmony import */ var _containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(295);
+/* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(113);
+/* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(134);
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(105);
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(931);
+/* harmony import */ var _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_blocks_only_css__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -73,28 +34,28 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var VMBlocks = Object(es["b" /* connect */])(mapStateToProps)(blocks["a" /* default */]);
-var VMControls = Object(es["b" /* connect */])(mapStateToProps)(controls["a" /* default */]);
+var VMBlocks = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"])(mapStateToProps)(_containers_blocks_jsx__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]);
+var VMControls = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[/* connect */ "b"])(mapStateToProps)(_containers_controls_jsx__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
 
-var blocks_only_BlocksOnly = function BlocksOnly(props) {
-  return /*#__PURE__*/react_default.a.createElement(gui["a" /* default */], props, /*#__PURE__*/react_default.a.createElement(VMBlocks, {
+var BlocksOnly = function BlocksOnly(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"], props, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMBlocks, {
     grow: 1,
     options: {
       media: "static/blocks-media/"
     }
-  }), /*#__PURE__*/react_default.a.createElement(VMControls, {
-    className: playground_blocks_only.controls
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VMControls, {
+    className: _blocks_only_css__WEBPACK_IMPORTED_MODULE_8___default.a.controls
   }));
 };
 
-var App = Object(app_state_hoc["a" /* default */])(Object(hash_parser_hoc["a" /* default */])(blocks_only_BlocksOnly));
+var App = Object(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(Object(_lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(BlocksOnly));
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(App, null), appTarget);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), appTarget);
 
 /***/ }),
 
-/***/ 401:
+/***/ 1564:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -109,7 +70,33 @@ exports.locals = {
 	"controls": "blocks-only_controls_2GEvs"
 };
 
+/***/ }),
+
+/***/ 931:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(1564);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(10)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
 /***/ })
 
-},[[1472,0]]]);
+},[[1563,0]]]);
 //# sourceMappingURL=blocksonly.js.map

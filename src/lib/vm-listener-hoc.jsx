@@ -91,11 +91,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const errorMessage = `${error}`;
             // Ignore certain types of known errors
             // TODO: fix the root cause of all of these
-            if (
-                errorMessage.includes('running from toolbox?') ||
-                errorMessage.includes('This block is an input, not a stacked block') ||
-                errorMessage.includes('event_whengreaterthan')
-            ) {
+            if (errorMessage.includes('event_whengreaterthan')) {
                 return;
             }
             // Send an analytics event the first time this happens

@@ -9,6 +9,7 @@
 /* eslint-disable arrow-parens */
 import xhr from 'xhr';
 
+const _inputElementsValues = ['text', 'math_number', 'math_positive_number'];
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});
 
 const _generateArtieBlock = (blocks) => {
@@ -84,7 +85,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     var inputElement = _blockHandler(tmpElement, blocks);
 
     // 2.1- If the input element is a nested element
-    if (tmpElement.x !== undefined && tmpElement.y !== undefined){
+    if ((tmpElement.x !== undefined && tmpElement.y !== undefined) || !_inputElementsValues.includes(tmpElement.opcode)){
 
         //2.1.1- Adds the parent element, without its next, nested, previous and parent to avoid large objects
         inputElement.parent = {id: parent.id, elementName: parent.elementName, elementFamily: parent.elementFamily, next: null, inputs: null, nested: [], previous: null, parent: null}
@@ -126,7 +127,7 @@ const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise
         }
     });
 
-    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -138,7 +139,7 @@ const sendSolutionArtie = (userId, blocks, exercise, screenShot) => new Promise(
 
     xhr({
         method: 'POST',
-        uri: 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution',
+        uri: 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(artiePedagogicalSoftwareSolution)
     }, (response) => {
@@ -169,7 +170,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://localhost:8081/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -186,7 +187,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost:8081/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -203,7 +204,7 @@ const getArtieExercises = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost:8081/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });

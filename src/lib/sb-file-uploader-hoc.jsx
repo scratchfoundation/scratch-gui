@@ -92,6 +92,8 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                         });
                         if (file.name.endsWith('.sb3')) {
                             this.props.onSetFileHandle(handle);
+                        } else {
+                            this.props.onSetFileHandle(null);
                         }
                     } catch (err) {
                         // If user aborted process, do not show an error.

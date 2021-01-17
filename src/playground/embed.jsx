@@ -6,8 +6,6 @@ import {compose} from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWEmbedFullScreenHOC from '../lib/tw-embed-fullscreen-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
-import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
-import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
 
 import GUI from './render-gui.jsx';
 import appTarget from './app-target';
@@ -47,8 +45,7 @@ const onProjectLoaded = () => {
 const WrappedGUI = compose(
     AppStateHOC,
     TWStateManagerHOC,
-    TWEmbedFullScreenHOC,
-    TWFullscreenResizerHOC
+    TWEmbedFullScreenHOC
 )(GUI);
 
 ReactDOM.render(<WrappedGUI

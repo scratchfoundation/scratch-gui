@@ -9,9 +9,7 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
-import TWFullscreenResizerHOC from '../lib/tw-fullscreen-resizer-hoc.jsx';
 import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
-import TWAutoSaveHOC from '../lib/tw-autosave-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
 
 import GUI from './render-gui.jsx';
@@ -195,9 +193,7 @@ const WrappedInterface = compose(
     TWProjectMetaFetcherHOC,
     TWEditorWarningHOC,
     TWStateManagerHOC,
-    TWFullscreenResizerHOC,
-    TWDarkModeHOC,
-    TWAutoSaveHOC
+    TWDarkModeHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

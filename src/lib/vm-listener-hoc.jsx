@@ -124,7 +124,7 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false, false, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null);
                 }, 500);
             }
         }
@@ -132,7 +132,7 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false, false, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null);
                 }, 500);
             }
         }
@@ -206,7 +206,8 @@ const vmListenerHOC = function (WrappedComponent) {
             state.session.session.user.username : '',
         projectTitle: state.scratchGui.projectTitle,
         artieLogin: state.scratchGui.artieLogin,
-        artieExercises: state.scratchGui.artieExercises
+        artieExercises: state.scratchGui.artieExercises,
+        sprites: state.scratchGui.targets.sprites
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {

@@ -318,18 +318,18 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendSolutionArtie(this.props.artieLogin.user.id, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, canvasUrl);
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl);
         });
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieHelpReceived);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieHelpReceived);
     }
     handleClickFinishExercise(){
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.vm.editingTarget.blocks._blocks, this.props.artieExercises.currentExercise, false, true, canvasUrl);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl);
         });
     }
     handleClickArtieLoginOk(){
@@ -925,7 +925,7 @@ class MenuBar extends React.Component {
 
                 {aboutButton}
 
-                {this.props.artieLogin.user===null || (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) || 
+                {this.props.artieLogin.user===null || (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) ||
                 this.props.artieLogin.active ? (
                         <ArtieLogin
                             onUserChange={this.handleArtieUserChange}
@@ -939,7 +939,7 @@ class MenuBar extends React.Component {
                 ) :
                 (<div></div>)}
 
-                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null && 
+                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
                 this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
                     <ArtieExercises
                         title="Exercise Selector"
@@ -951,13 +951,13 @@ class MenuBar extends React.Component {
                 ) :
                 (<div></div>)}
 
-                {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ? 
+                {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ?
                 (
-                    <ArtieHelp 
+                    <ArtieHelp
                         onRequestClose={this.props.onArtieClearHelp}
                         help={this.props.artieExercises.help}
                     />
-                ) : 
+                ) :
                 (<div></div>)}
 
             </Box>
@@ -1059,7 +1059,8 @@ const mapStateToProps = (state, ownProps) => {
             (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm,
         artieLogin: state.scratchGui.artieLogin,
-        artieExercises: state.scratchGui.artieExercises
+        artieExercises: state.scratchGui.artieExercises,
+        sprites: state.scratchGui.targets.sprites
     };
 };
 

@@ -106,11 +106,18 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise, screenShot, callback) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callback) => new Promise((resolve, reject) => {
 
-    const artieBlocks = _generateArtieBlock(blocks);
+    var spriteElements = [];
+
+    Object.values(sprites).forEach((sprite) => {
+        const artieBlocks = _generateArtieBlock(sprite.blocks);
+        const spriteElement = {id: sprite.id, name: sprite.name, blocks: artieBlocks};
+        spriteElements.push(spriteElement);
+    });
+
     const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, finishedExercise: finishedExercise,
-                                          screenShot: screenShot, elements: artieBlocks};
+                                          screenShot: screenShot, elements: spriteElements};
 
     var xhr = new XMLHttpRequest();
     var params = JSON.stringify(artiePedagogicalSoftwareData);
@@ -132,10 +139,17 @@ const sendBlockArtie = (student, blocks, exercise, requestHelp, finishedExercise
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, blocks, exercise, screenShot) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot) => new Promise((resolve, reject) => {
 
-    const artieBlocks = _generateArtieBlock(blocks);
-    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: artieBlocks, screenShot: screenShot};
+    var spriteElements = []
+
+    Object.values(sprites).forEach((sprite) => {
+        const artieBlocks = _generateArtieBlock(sprite.blocks);
+        const spriteElement = {id: sprite.id, name: sprite.name, blocks: artieBlocks};
+        spriteElements.push(spriteElement);
+    });
+
+    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: spriteElements, screenShot: screenShot};
 
     xhr({
         method: 'POST',

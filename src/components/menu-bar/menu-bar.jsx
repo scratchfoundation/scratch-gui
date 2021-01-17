@@ -412,7 +412,7 @@ class MenuBar extends React.Component {
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>)}
                         {/* tw: display compile errors */}
-                        {this.props.compileErrors.length > 0 && <div className={styles.fileGroup}>
+                        {this.props.compileErrors.length > 0 && <div>
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.errorsMenuOpen

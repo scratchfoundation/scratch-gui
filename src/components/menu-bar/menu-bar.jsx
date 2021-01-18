@@ -688,6 +688,20 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                        {this.props.onClickAddonSettings && (
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable)}
+                                onMouseUp={this.props.onClickAddonSettings}
+                            >
+                                <div className={classNames(styles.addonsMenu)}>
+                                    <FormattedMessage
+                                        defaultMessage="Addons"
+                                        description="Menu bar item for addon settings"
+                                        id="tw.menuBar.addons"
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.settingsMenuOpen
@@ -1016,6 +1030,7 @@ MenuBar.propTypes = {
     logo: PropTypes.string,
     onClickAbout: PropTypes.func,
     onClickAccount: PropTypes.func,
+    onClickAddonSettings: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,

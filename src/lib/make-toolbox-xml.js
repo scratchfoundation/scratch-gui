@@ -848,11 +848,6 @@ const sensing = function (isStage) {
 
             <block type="mv2_noisesense" />
 
-<<<<<<< HEAD
-            
-
-=======
->>>>>>> 2f6ecb49efc3261242b8e0e12d1b7bd16951a953
             <!--<block type="mv2_current" />-->
 
             <!--<block type="mv2_accelerometer" />-->

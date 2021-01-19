@@ -510,7 +510,38 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
     return `
     <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
-        ${isStage ? '' : `
+
+        <block type="mv2_discoChangeBlockPattern" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="PROGRAM"></field>
+            </value>
+        </block>
+
+        <block type="mv2_discoChangeBlockColour" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+        </block>
+
+        <block type="mv2_discoChangeRegionColour" >
+            <value>
+                <field name="BOARDTYPE"></field>
+            </value>
+            <value>
+                <field name="COLOUR"></field>
+            </value>
+            <value>
+                <field name="REGION"></field>
+            </value>
+        </block>
+
+    ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
                 <shadow type="text">
@@ -803,6 +834,7 @@ const control = function (isStage) {
     `;
 };
 
+
 const sensing = function (isStage) {
     const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
     return `
@@ -858,6 +890,8 @@ const sensing = function (isStage) {
                     </shadow>
                 </value>
             </block>-->
+
+
 
             ${blockSeparator}
 

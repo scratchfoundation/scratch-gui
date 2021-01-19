@@ -480,6 +480,8 @@ class AddonSettingsComponent extends React.Component {
         }
         if (key === 'f' && (e.ctrlKey || e.metaKey)) {
             this.searchBar.focus();
+            // TODO: disabling the builtin ctrl+f seems like a rude thing to do, consider only doing this in electron?
+            e.preventDefault();
         }
     }
     isIncludedInSearch (addonId, manifest) {

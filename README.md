@@ -13,7 +13,7 @@ The licensing situation is a bit more complex than for other projects because we
 GPLv3.0:
 
  - Everything in src/addons
- - Anything that references a file in src/addons (src/playground/[editor|player|fullscreen].jsx)
+ - Editor, player, fullscreen, addon settings pages (src/playground/[editor|player|fullscreen|addon-settings].jsx)
 
 BSD3c:
 

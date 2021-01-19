@@ -91,6 +91,10 @@ body {
     align-items: baseline;
 }
 
+.addon-checkbox {
+    margin-right: 5px;
+}
+
 .addon-title-text {
 
 }
@@ -150,6 +154,10 @@ body {
 
 .setting {
 
+}
+
+.setting input, .setting select {
+    margin-right: 5px;
 }
 
 .notice-container {

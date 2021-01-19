@@ -21,8 +21,6 @@ if (locale !== 'en') {
     }
 }
 
-const nbsp = '\u00a0';
-
 const AddonCreditsComponent = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
@@ -96,7 +94,6 @@ const SettingComponent = ({
                         checked={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.checked)}
                     />
-                    {nbsp}
                     {settingName}
                 </label>
             )}
@@ -110,7 +107,6 @@ const SettingComponent = ({
                         value={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, +e.target.value)}
                     />
-                    {nbsp}
                     {settingName}
                 </label>
             )}
@@ -127,7 +123,6 @@ const SettingComponent = ({
                             value={value}
                             onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
                         />
-                        {nbsp}
                         {settingName}
                     </label>
                 </div>
@@ -151,7 +146,6 @@ const SettingComponent = ({
                             );
                         })}
                     </select>
-                    {nbsp}
                     {settingName}
                 </label>
             )}
@@ -250,11 +244,11 @@ const AddonComponent = ({
             <label className={styles.addonTitle}>
                 <input
                     type="checkbox"
+                    className={styles.addonCheckbox}
                     onChange={e => SettingsStore.setAddonEnabled(id, e.target.checked)}
                     checked={settings.enabled}
                 />
                 <span className={styles.addonTitleText}>
-                    {nbsp}
                     {addonTranslations[`${id}/@name`] || manifest.name}
                 </span>
                 {manifest.tags && (

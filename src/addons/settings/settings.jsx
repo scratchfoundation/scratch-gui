@@ -296,7 +296,9 @@ const AddonComponent = ({
         )} */}
                 {manifest.credits && (
                     <div className={styles.creditContainer}>
-                        {settingsTranslations['tw.addons.settings.credits']}
+                        <span className={styles.creditTitle}>
+                            {settingsTranslations['tw.addons.settings.credits']}
+                        </span>
                         <AddonCreditsComponent credits={manifest.credits} />
                     </div>
                 )}

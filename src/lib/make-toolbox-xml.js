@@ -182,6 +182,33 @@ const motion = function (isStage, targetId) {
 
         <block type="mv2_wiggle" />
 
+        <block type="mv2_grabberArmBasic" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="HAND_POSITION">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="mv2_grabberArmTimed" >
+            <value name="MOVETIME">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="HAND_POSITION">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+
         <!-- OLD MARTY MOTION BLOCKS -->
 
 <!--               <block type="mv2_moveLeg">

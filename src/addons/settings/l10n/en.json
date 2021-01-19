@@ -3,7 +3,7 @@
   "tw.addons.settings.reset": "Reset",
   "tw.addons.settings.resetAll": "Reset all",
   "tw.addons.settings.confirmResetAll": "Are you sure you want to reset all addon settings to their default values?",
-  "tw.addons.settings.notice.info": "Note: ",
+  "tw.addons.settings.notice.info": "Note:",
   "tw.addons.settings.dirty": "Reload TurboWarp to apply settings.",
   "tw.addons.settings.dirtyButton": "Reload now",
   "tw.addons.settings.presets": "Presets",

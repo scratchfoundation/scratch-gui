@@ -25,7 +25,7 @@ const onSettingsChanged = () => {
 
 ReactDOM.render((
     <Settings
-        onReloadNow={onReloadNow}
+        onReloadNow={window.opener && onReloadNow}
         onSettingsChanged={onSettingsChanged}
     />
 ), appTarget);

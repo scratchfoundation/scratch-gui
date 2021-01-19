@@ -43,7 +43,7 @@ window.addEventListener('message', e => {
 });
 
 const handleClickAddonSettings = () => {
-    window.open('addons.html');
+    window.open(`${process.env.ROOT}addons.html`);
 };
 
 const handleLoadAddons = () => {

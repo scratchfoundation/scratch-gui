@@ -524,8 +524,8 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
             <value>
                 <field name="BOARDTYPE"></field>
             </value>
-            <value>
-                <field name="COLOUR"></field>
+            <value name="COLOR">
+                <shadow type="colour_picker"/>
             </value>
         </block>
 
@@ -533,8 +533,8 @@ const looks = function (isStage, targetId, costumeName, backdropName) {
             <value>
                 <field name="BOARDTYPE"></field>
             </value>
-            <value>
-                <field name="COLOUR"></field>
+            <value name="COLOR">
+                <shadow type="colour_picker"/>
             </value>
             <value>
                 <field name="REGION"></field>

@@ -1,0 +1,24 @@
+{
+  "name": "Searchable dropdowns",
+  "description": "Allows you to search dropdowns in the Scratch editor.",
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "userscript.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor", "recommended"],
+  "enabledByDefault": true,
+  "l10n": true
+}

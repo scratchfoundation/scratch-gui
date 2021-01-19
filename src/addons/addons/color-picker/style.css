@@ -1,0 +1,67 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
+ */
+
+.sa-color-picker {
+  display: flex;
+}
+
+.sa-color-picker-code {
+  margin: 8px 0;
+}
+
+.sa-color-picker-paint {
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.sa-color-picker > .sa-color-picker-color {
+  border: none;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding: 0;
+  padding-left: 0.6rem;
+  padding-right: 0.4rem;
+  margin: 0 0 0 0.5rem;
+  outline: none;
+  box-sizing: border-box;
+  width: 3rem;
+  height: 2rem;
+}
+
+.sa-color-picker > .sa-color-picker-text {
+  box-sizing: border-box;
+  width: calc(150px - 3rem);
+}
+
+.sa-color-picker > .sa-color-picker-code-text {
+  border-radius: 0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  width: calc(150px - 3rem);
+  height: 2rem;
+  padding: 0 0.75rem;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: bold;
+  transition: all 0.25s ease-out;
+}
+
+.sa-color-picker > .sa-color-picker-code-text:focus {
+  outline: none;
+  border-color: hsla(215, 100%, 65%, 1);
+  box-shadow: 0 0 0 0.25rem hsla(215, 100%, 65%, 0.35);
+}
+
+.sa-color-picker > .sa-color-picker-paint-text {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+body.sa-hide-eye-dropper-background div[class*="stage_color-picker-background"] {
+  /* Do not show eye dropper background if the color picker is "fake" */
+  display: none;
+}

@@ -1,0 +1,19 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
+ */
+
+.u-contextmenu-colored .blocklyContextMenu {
+  background-color: var(--u-contextmenu-bg);
+  border-color: #0003;
+}
+.u-contextmenu-colored .blocklyContextMenu .goog-menuitem .goog-menuitem-content {
+  color: white;
+}
+.u-contextmenu-colored .blocklyContextMenu .goog-menuitem:hover.goog-menuitem-highlight,
+.s3dev-mi:hover {
+  border-color: transparent;
+}
+.u-contextmenu-colored .blocklyContextMenu .goog-menuitem:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

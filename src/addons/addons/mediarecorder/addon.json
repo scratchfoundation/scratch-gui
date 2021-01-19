@@ -1,0 +1,13 @@
+{
+  "name": "Record project video",
+  "description": "Adds a \"start recording\" button to the editor that allows you to record the project's stage. After recording, a .webm video will be downloaded.",
+  "tags": ["editor", "beta"],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "enabledByDefault": false,
+  "l10n": true
+}

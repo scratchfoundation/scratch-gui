@@ -1,0 +1,144 @@
+{
+  "name": "Customizable block colors",
+  "description": "Edit block colors for each category in the editor.",
+  "info": [
+    {
+      "type": "notice",
+      "text": "Refresh the editor after enabling/disabling this theme.",
+      "id": "refresheditor"
+    }
+  ],
+  "credits": [
+    {
+      "name": "NitroCipher/ZenithRogue"
+    },
+    {
+      "name": "TheColaber",
+      "link": "https://scratch.mit.edu/users/TheColaber"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "theme3.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "theme3.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "settings": [
+    {
+      "name": "motion",
+      "id": "motion-color",
+      "type": "color",
+      "default": "#4C97FF",
+      "reloadRequired": false
+    },
+    {
+      "name": "looks",
+      "id": "looks-color",
+      "type": "color",
+      "default": "#9966FF",
+      "reloadRequired": false
+    },
+    {
+      "name": "sounds",
+      "id": "sounds-color",
+      "type": "color",
+      "default": "#CF63CF",
+      "reloadRequired": false
+    },
+    {
+      "name": "events",
+      "id": "events-color",
+      "type": "color",
+      "default": "#FFBF00",
+      "reloadRequired": false
+    },
+    {
+      "name": "control",
+      "id": "control-color",
+      "type": "color",
+      "default": "#FFAB19",
+      "reloadRequired": false
+    },
+    {
+      "name": "sensing",
+      "id": "sensing-color",
+      "type": "color",
+      "default": "#5CB1D6",
+      "reloadRequired": false
+    },
+    {
+      "name": "operators",
+      "id": "operators-color",
+      "type": "color",
+      "default": "#59C059",
+      "reloadRequired": false
+    },
+    {
+      "name": "variables",
+      "id": "data-color",
+      "type": "color",
+      "default": "#FF8C1A",
+      "reloadRequired": false
+    },
+    {
+      "name": "lists",
+      "id": "data-lists-color",
+      "type": "color",
+      "default": "#FF661A",
+      "reloadRequired": false
+    },
+    {
+      "name": "custom",
+      "id": "custom-color",
+      "type": "color",
+      "default": "#FF6680",
+      "reloadRequired": false
+    },
+    {
+      "name": "extensions",
+      "id": "Pen-color",
+      "type": "color",
+      "default": "#0FBD8C",
+      "reloadRequired": false
+    }
+  ],
+  "tags": ["editor", "theme"],
+  "enabledByDefault": false,
+  "presets": [
+    {
+      "name": "3.0 Tweaks",
+      "id": "tweaks",
+      "description": "Events, Control, and Custom blocks with 2.0 inspired colors",
+      "values": {
+        "events-color": "#DE9E2E",
+        "control-color": "#FFBF00",
+        "custom-color": "#5f49d8"
+      }
+    },
+    {
+      "name": "2.0 Colors",
+      "id": "original",
+      "description": "The original block colors from Scratch 2.0",
+      "values": {
+        "motion-color": "#4a6cd4",
+        "looks-color": "#8a55d7",
+        "sounds-color": "#bb42c3",
+        "events-color": "#c88330",
+        "control-color": "#e1a91a",
+        "sensing-color": "#2ca5e2",
+        "operators-color": "#5cb712",
+        "data-color": "#ee7d16",
+        "data-lists-color": "#cc5b22",
+        "custom-color": "#632d99",
+        "Pen-color": "#0e9a6c"
+      }
+    }
+  ],
+  "l10n": true
+}

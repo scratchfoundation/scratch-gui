@@ -1,0 +1,42 @@
+{
+  "name": "Data category tweaks",
+  "description": "Provides tweaks for the Data (\"Variables\") category in the editor.",
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "runAtComplete": false
+    }
+  ],
+  "settings": [
+    {
+      "name": "Separate List Category",
+      "id": "separateListCategory",
+      "type": "boolean",
+      "default": true,
+      "reloadRequired": false
+    },
+    {
+      "name": "Separate Sprite-only Variables",
+      "id": "separateLocalVariables",
+      "type": "boolean",
+      "default": false,
+      "reloadRequired": false
+    },
+    {
+      "name": "Move Reporters Under Operations",
+      "id": "moveReportersDown",
+      "type": "boolean",
+      "default": false,
+      "reloadRequired": false
+    }
+  ],
+  "tags": ["editor", "recommended"],
+  "enabledByDefault": false,
+  "l10n": true
+}

@@ -1,0 +1,26 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
+ */
+
+.u-dropdown-searchbar {
+  width: 100%;
+  box-sizing: border-box;
+  /* based on styles for the title input */
+  color: white;
+  background-color: hsla(0, 100%, 100%, 0.25);
+  border: 1px dashed hsla(0, 0%, 0%, 0.15);
+  padding: 0.5rem;
+  outline: none;
+  transition: 0.25s ease-out;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.u-dropdown-searchbar:hover {
+  background-color: hsla(0, 100%, 100%, 0.5);
+}
+.u-dropdown-searchbar:focus {
+  background-color: white;
+  color: black;
+}

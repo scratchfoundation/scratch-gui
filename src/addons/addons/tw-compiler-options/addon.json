@@ -1,0 +1,14 @@
+{
+  "name": "Disable compiler",
+  "description": "Disable the TurboWarp compiler by default.",
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "runAtComplete": false
+    }
+  ],
+  "enabledByDefault": false,
+  "tags": ["turbowarp"],
+  "l10n": true
+}

@@ -1,0 +1,486 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
+ */
+
+#s3devToolBar {
+  display: flex;
+  white-space: nowrap;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.s3devLabel {
+  display: flex;
+  padding-right: 2em;
+}
+
+.s3devLabel > span:first-child {
+  margin-left: 1.5em;
+  margin-right: 1em;
+  font-weight: bold;
+  font-size: 0.625rem;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.s3devAction {
+  transition: opacity 200ms ease-in;
+  /*font-weight: bold;*/
+  opacity: 0;
+}
+
+.s3devLabel:hover .s3devAction {
+  opacity: 0.7;
+}
+
+/* Wrapper around find button and drop down */
+.s3devWrap {
+  overflow: visible;
+  /*margin-left:3em;*/
+  position: relative;
+}
+
+#s3devFind {
+  height: 2rem;
+}
+
+/* Find Input Box */
+input.s3devInp {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: calc(0.5rem / 2);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.4em;
+  z-index: 2;
+  position: relative;
+
+  border: 1px solid hsla(0, 0%, 0%, 0.15);
+  /*height: 30px;*/
+  /*bottom: 5px;*/
+
+  min-width: 100%;
+  box-sizing: border-box !important;
+}
+
+.s3devInp:hover {
+  background-color: white;
+}
+
+.s3devInp:focus {
+  border-color: hsla(215, 100%, 65%, 1);
+  /*-webkit-box-shadow: 0 0 0 0.25rem hsla(215, 100%, 65%, 0.35);*/
+  /*box-shadow: 0 0 0 0.25rem hsla(215, 100%, 65%, 0.35);*/
+  outline: none;
+}
+
+/* Drop down from find button */
+#s3devDDOut {
+  top: -6px;
+}
+
+/* Drop down from find button */
+div.s3devDDOut {
+  z-index: 100;
+  left: 0;
+  width: 16em;
+  position: relative;
+  /*padding: 2.2em 0 0;*/
+  /*background-color: white;*/
+  padding: 4px;
+}
+
+/* Drop down from find button */
+ul.s3devDD {
+  display: none;
+  position: relative;
+  padding: 0.2em 0;
+  font-size: 0.75rem;
+  line-height: 1;
+  overflow-y: auto;
+  min-height: 128px;
+  max-height: 65vh;
+  user-select: none;
+  max-width: 100%;
+}
+
+div.s3devDDOut.vis {
+  /*box-shadow: 0 2px 3px rgba(0,0,0,0.3), 0 5px 8px rgba(0,0,0,0.2);*/
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+div.s3devDDOut.vis ul.s3devDD {
+  display: block;
+  border: none;
+}
+
+/* Drop down items */
+.s3devDD > li {
+  display: block;
+  padding: 0.5em 0.3em;
+  white-space: nowrap;
+  margin: 0;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.s3devDD > li > b {
+  background-color: #aaffaa;
+  color: black;
+}
+
+/* Drop down items */
+.s3devDD > li:hover,
+.s3devDD > li.sel {
+  color: white;
+  cursor: pointer;
+}
+
+#s3devDD > li::before {
+  content: "\25CF "; /* ● */
+}
+
+.define {
+  color: rgb(255, 102, 128);
+}
+.define:hover,
+.define.sel {
+  background-color: rgb(255, 102, 128);
+}
+
+.flag {
+  color: #4cbf56;
+}
+.flag:hover,
+.flag.sel {
+  background-color: #4cbf56;
+}
+
+.receive {
+  color: rgb(255, 191, 0);
+}
+.receive:hover,
+.receive.sel {
+  background-color: rgb(255, 191, 0);
+}
+
+.event {
+  background-color: rgb(255, 213, 0);
+  color: rgb(255, 191, 0);
+}
+.event:hover,
+.event.sel {
+  background-color: rgb(255, 191, 0);
+}
+
+.var,
+.VAR {
+  color: rgb(255, 120, 26);
+}
+.var:hover,
+.var.sel,
+.VAR:hover,
+.VAR.sel {
+  background-color: rgb(255, 120, 26);
+}
+
+.list,
+.LIST {
+  color: rgb(255, 102, 26);
+}
+.list:hover,
+.list.sel,
+.LIST:hover,
+.LIST.sel {
+  background-color: rgb(255, 102, 26);
+}
+
+.costume {
+  color: rgb(26, 66, 255);
+}
+.costume:hover,
+.costume.sel {
+  background-color: rgb(26, 66, 255);
+}
+
+.operators {
+  background-color: rgb(64, 191, 74);
+  color: rgb(56, 148, 56);
+}
+.operators:hover,
+.operators.sel {
+  background-color: rgb(56, 148, 56);
+}
+
+.data {
+  background-color: rgb(255, 140, 26);
+  color: rgb(219, 110, 0);
+}
+.data:hover,
+.data.sel {
+  background-color: rgb(219, 110, 0);
+}
+
+.data-lists {
+  background-color: rgb(255, 102, 26);
+  color: rgb(255, 102, 26);
+}
+.data-lists:hover,
+.data-lists.sel {
+  background-color: rgb(255, 102, 26);
+}
+
+.sensing {
+  background-color: rgb(76, 191, 230);
+  color: rgb(46, 142, 184);
+}
+.sensing:hover,
+.sensing.sel {
+  background-color: rgb(46, 142, 184);
+}
+
+.looks {
+  background-color: rgb(153, 102, 255);
+  color: rgb(119, 77, 203);
+}
+.looks:hover,
+.looks.sel {
+  background-color: rgb(119, 77, 203);
+}
+
+.sounds {
+  background-color: rgb(214, 92, 214);
+  color: rgb(189, 66, 189);
+}
+.sounds:hover,
+.sounds.sel {
+  background-color: rgb(189, 66, 189);
+}
+
+.motion {
+  background-color: rgb(76, 151, 255);
+  color: rgb(51, 115, 204);
+}
+.motion:hover,
+.motion.sel {
+  background-color: rgb(51, 115, 204);
+}
+
+.events {
+  background-color: rgb(255, 213, 0);
+  color: rgb(204, 153, 0);
+}
+.events:hover,
+.events.sel {
+  background-color: rgb(204, 153, 0);
+}
+
+.control {
+  background-color: rgb(255, 171, 25);
+  color: rgb(207, 139, 23);
+}
+.control:hover,
+.control.sel {
+  background-color: rgb(207, 139, 23);
+}
+
+.TurboWarp {
+  background-color: #ff4c4c;
+  color: rgb(207, 139, 23);
+}
+.TurboWarp:hover,
+.TurboWarp.sel {
+  background-color: #e64444;
+}
+
+.null {
+  background-color: rgb(255, 102, 128);
+  color: rgb(255, 77, 106);
+}
+.null:hover,
+.null.sel {
+  background-color: rgb(255, 77, 106);
+}
+
+.extension {
+  background-color: rgb(15 189 140);
+}
+.extension:hover,
+.extension.sel {
+  background-color: rgb(11 158 117);
+}
+
+/*.s3devDD>li.hat::before {                           content: '◠ ';}*/
+/*.s3devDD>li.hat::before {                           content: '▲ ';}*/
+/*.s3devDD>li.block::before {                         content: '■ ';}*/
+/*.s3devDD>li.reporter::before {                      content: '● ';}*/
+/*.s3devDD>li.boolean::before {                       content: '◆ ';}*/
+
+#s3devIDD > li {
+  height: 19px;
+  padding: 3px 8px;
+  margin: 2px 0.3em;
+  box-sizing: border-box;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  width: min-content;
+}
+
+.s3devDD > li.hat {
+  border-radius: 14px 14px 3px 3px;
+}
+.s3devDD > li.block {
+  border-radius: 3px;
+}
+.s3devDD > li.reporter {
+  border-radius: 10px;
+}
+
+.s3devDD > li.boolean {
+  width: min-content;
+}
+.s3devDD > li.boolean::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-right: 9px solid transparent;
+  border-top: 9px solid white;
+  border-bottom: 10px solid white;
+}
+.s3devDD > li.boolean::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-top: 9px solid white;
+  border-bottom: 10px solid white;
+}
+
+#s3devOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(80, 80, 80, 0.5);
+  z-index: 9999;
+  padding: 10em;
+  color: white;
+  font-weight: bold;
+}
+
+.s3devMulti {
+  font-weight: normal;
+  position: absolute;
+  right: 0;
+  white-space: nowrap;
+  background-color: inherit;
+  z-index: 1;
+  padding: 0;
+}
+
+.s3devNav {
+  padding: 0 6px;
+}
+
+.s3devNav:hover {
+  color: #ffff80;
+}
+
+.s3devAction {
+  margin-left: 2em;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 2;
+}
+
+@media screen and (max-width: 1180px) {
+  .s3devAction {
+    display: none;
+  }
+}
+
+.s3devHide {
+  display: none;
+}
+
+.s3dev-mi:hover {
+  background-color: #d6e9f8;
+}
+
+#s3devHelpPop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(64, 64, 64, 0.3);
+  z-index: 1000000;
+}
+
+#s3devHelpPop > div {
+  box-sizing: border-box;
+  position: relative;
+  width: 800px;
+  max-height: 800px;
+  max-width: 85%;
+  top: 20vh;
+  height: 60vh;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.4);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em 2em 4em;
+}
+
+#s3devFloatingBar {
+  display: flex;
+  white-space: nowrap;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  position: absolute;
+  min-width: 128px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px, rgba(0, 0, 0, 0.2) 0 3px 10px;
+
+  z-index: 1000001;
+}
+
+#s3devInsertLabel {
+  padding: 0;
+  align-items: center;
+}
+
+#s3devIInp {
+  border: 0;
+}
+
+/* Drop down from find button */
+ul#s3devIDD {
+  max-height: 200px;
+  margin-bottom: 0;
+}
+
+#s3devIDD > li > b {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+[data-highlighted="true"] {
+  background-color: hsla(30, 100%, 55%, 1) !important; /* orange */
+  color: white !important;
+}

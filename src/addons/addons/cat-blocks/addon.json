@@ -1,0 +1,18 @@
+{
+  "name": "Cat blocks",
+  "description": "Brings back editor cat hat blocks from April Fools 2020.",
+  "credits": [
+    {
+      "name": "TheColaber",
+      "link": "https://scratch.mit.edu/users/TheColaber"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["easterEgg"],
+  "enabledByDefault": false
+}

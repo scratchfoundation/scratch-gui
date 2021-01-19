@@ -11,6 +11,7 @@ import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
+import SettingsStore from '../addons/settings-store';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -26,6 +27,28 @@ if (process.env.ANNOUNCEMENT) {
     // This is safe because process.env.ANNOUNCEMENT is set at build time.
     announcement.innerHTML = process.env.ANNOUNCEMENT;
 }
+
+window.addEventListener('message', e => {
+    if (e.origin !== location.origin) {
+        return;
+    }
+    const data = e.data;
+    if (data.type === 'reload') {
+        location.reload();
+    }
+    if (data.type === 'settings-changed') {
+        SettingsStore.store = data.store;
+        SettingsStore.dispatchEvent(new CustomEvent('reread'));
+    }
+});
+
+const handleClickAddonSettings = () => {
+    window.open('addons.html');
+};
+
+const handleLoadAddons = () => {
+    import(/* webpackChunkName: "addons" */ '../addons/entry-web');
+};
 
 const WrappedMenuBar = compose(
     SBFileUploaderHOC
@@ -50,7 +73,10 @@ const Interface = ({
             ) : null}
             <div className={styles.center}>
                 {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
-                <GUI />
+                <GUI
+                    onClickAddonSettings={handleClickAddonSettings}
+                    onLoadAddons={handleLoadAddons}
+                />
                 {isHomepage ? (
                     <React.Fragment>
                         <div className={styles.section}>

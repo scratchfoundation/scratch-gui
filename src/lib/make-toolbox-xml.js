@@ -182,7 +182,7 @@ const motion = function (isStage, targetId) {
 
         <block type="mv2_wiggle" />
 
-        <block type="mv2_grabberArmBasic" >
+        <block type="mv2_gripperArmBasic" >
             <value name="MOVETIME">
                 <shadow type="math_number">
                     <field name="NUM">1</field>
@@ -195,7 +195,7 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
 
-        <block type="mv2_grabberArmTimed" >
+        <block type="mv2_gripperArmTimed" >
             <value name="MOVETIME">
                 <shadow type="math_number">
                     <field name="NUM">1</field>

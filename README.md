@@ -6,6 +6,20 @@ See https://github.com/TurboWarp/scratch-gui/wiki/Getting-Started to setup the c
 
 If you just want to play with the GUI then it's the same process as upstream scratch-gui.
 
+## A note on licensing
+
+The licensing situation is a bit more complex than for other projects because we include source code from a certain popular Scratch browser extension that uses the GPL, but we don't want to force embedders to be GPL-compliant. Parts of TurboWarp/scratch-gui are licensed under the BSD3c (see LICENSE) and parts of it are licensed under the GPLv3.0 (see LICENSE_GPL).
+
+GPLv3.0:
+
+ - Everything in src/addons
+ - Anything that references a file in src/addons (src/playground/[editor|player|fullscreen].jsx)
+
+BSD3c:
+
+ - The embed page (src/playground/embed.jsx)
+ - Everything not in src/addons that doesn't reference a file in src/addons
+
 <!--
 
 # scratch-gui

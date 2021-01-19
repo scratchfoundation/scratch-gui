@@ -42,8 +42,9 @@ window.addEventListener('message', e => {
     }
 });
 
+let locale = 'en';
 const handleClickAddonSettings = () => {
-    window.open(`${process.env.ROOT}addons.html`);
+    window.open(`${process.env.ROOT}addons.html?locale=${locale}`);
 };
 
 const handleLoadAddons = () => {
@@ -57,9 +58,11 @@ const WrappedMenuBar = compose(
 const Interface = ({
     description,
     isFullScreen,
-    isPlayerOnly
+    isPlayerOnly,
+    locale: _locale
 }) => {
     const isHomepage = isPlayerOnly && !isFullScreen;
+    locale = _locale;
     return (
         <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
             {isHomepage ? (
@@ -198,13 +201,15 @@ Interface.propTypes = {
         instructions: PropTypes.string
     }),
     isFullScreen: PropTypes.bool,
-    isPlayerOnly: PropTypes.bool
+    isPlayerOnly: PropTypes.bool,
+    locale: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    locale: state.locales.locale
 });
 
 const mapDispatchToProps = () => ({});

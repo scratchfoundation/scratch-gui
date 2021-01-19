@@ -1,4 +1,4 @@
-const addons = require('./addons.json')
+import addons from './addons.json';
 
 const addonMap = {};
 for (const addonId of addons) {

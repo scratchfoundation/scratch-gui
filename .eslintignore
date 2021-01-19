@@ -1,3 +1,7 @@
 node_modules/*
 build/*
 dist/*
+src/addons/addons
+src/addons/libraries
+src/addons/libraries-raw
+src/addons/api-libraries

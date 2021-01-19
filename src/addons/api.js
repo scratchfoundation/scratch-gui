@@ -3,8 +3,8 @@ import SettingsStore from './settings-store';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from './api-libraries/data-url-to-blob';
 
-const escapeHTML = (str) => str.replace(/([<>'"&])/g, (_, l) => `&#${l.charCodeAt(0)};`);
-const kebabCaseToCamelCase = (str) => str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+const escapeHTML = str => str.replace(/([<>'"&])/g, (_, l) => `&#${l.charCodeAt(0)};`);
+const kebabCaseToCamelCase = str => str.replace(/-([a-z])/g, g => g[1].toUpperCase());
 
 class Redux extends EventTarget {
     constructor () {
@@ -81,7 +81,7 @@ class Tab extends EventTarget {
         });
     }
 
-    waitForElement (selector, { markAsSeen = false } = {}) {
+    waitForElement (selector, {markAsSeen = false} = {}) {
         const firstQuery = document.querySelectorAll(selector);
         for (const element of firstQuery) {
             if (this._seenElements.has(element)) continue;
@@ -89,7 +89,7 @@ class Tab extends EventTarget {
             return Promise.resolve(element);
         }
 
-        return new Promise((resolve) =>
+        return new Promise(resolve =>
             new MutationObserver((mutationsList, observer) => {
                 const elements = document.querySelectorAll(selector);
                 for (const element of elements) {
@@ -102,7 +102,7 @@ class Tab extends EventTarget {
             }).observe(document.documentElement, {
                 attributes: false,
                 childList: true,
-                subtree: true,
+                subtree: true
             })
         );
     }
@@ -113,7 +113,7 @@ class Tab extends EventTarget {
         }
         const items = [
             new ClipboardItem({
-                "image/png": dataURLToBlob(dataURL),
+                'image/png': dataURLToBlob(dataURL)
             })
         ];
         return navigator.clipboard.write(items);

@@ -3,6 +3,8 @@ import SettingsStore from './settings-store';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from './api-libraries/data-url-to-blob';
 
+/* eslint-disable no-console */
+
 const escapeHTML = str => str.replace(/([<>'"&])/g, (_, l) => `&#${l.charCodeAt(0)};`);
 const kebabCaseToCamelCase = str => str.replace(/-([a-z])/g, g => g[1].toUpperCase());
 

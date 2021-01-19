@@ -1,23 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import addons from '../addon-manifests';
 import getAddonTranslations from '../get-addon-translations';
+import settingsTranslations from './l10n/en.json';
 import SettingsStore from '../settings-store';
 import styles from './settings.css';
+
+/* eslint-disable no-alert */
 
 const urlParameters = new URLSearchParams(location.search);
 const locale = urlParameters.get('locale') || 'en';
 const addonTranslations = getAddonTranslations(locale);
-
-const settingsTranslations = require('./l10n/en.json');
 if (locale !== 'en') {
     try {
         Object.assign(settingsTranslations, require(`./l10n/${locale}.json`));
     } catch (e) {
-    // ignore
+        // ignore
     }
 }
 
@@ -138,9 +138,9 @@ const SettingComponent = ({
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
                         value={value}
                     >
-                        {setting.potentialValues.map(value => {
-                            const valueId = value.id;
-                            const valueName = addonTranslations[`${addonId}/@settings-select-${settingId}-${valueId}`] || value.name;
+                        {setting.potentialValues.map(potentialValue => {
+                            const valueId = potentialValue.id;
+                            const valueName = addonTranslations[`${addonId}/@settings-select-${settingId}-${valueId}`] || potentialValue.name;
                             return (
                                 <option
                                     key={valueId}
@@ -163,9 +163,15 @@ SettingComponent.propTypes = {
     setting: PropTypes.shape({
         type: PropTypes.string,
         id: PropTypes.string,
-        name: PropTypes.string
+        name: PropTypes.string,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        potentialValues: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string
+        }))
     }),
-    value: PropTypes.any
+    value: PropTypes.oneOf(PropTypes.string, PropTypes.bool, PropTypes.number)
 };
 
 const NoticeComponent = ({
@@ -318,7 +324,10 @@ const AddonComponent = ({
 );
 AddonComponent.propTypes = {
     id: PropTypes.string,
-    settings: PropTypes.object,
+    settings: PropTypes.shape({
+        enabled: PropTypes.bool,
+        dirty: PropTypes.bool
+    }),
     manifest: PropTypes.shape({
         name: PropTypes.string,
         description: PropTypes.string,
@@ -598,7 +607,7 @@ class AddonSettingsComponent extends React.Component {
     }
 }
 AddonSettingsComponent.propTypes = {
-    addons: PropTypes.object,
+    addons: PropTypes.arrayOf(PropTypes.object),
     onReloadNow: PropTypes.func,
     onSettingsChanged: PropTypes.func
 };

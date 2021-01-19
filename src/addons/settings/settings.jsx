@@ -171,7 +171,7 @@ SettingComponent.propTypes = {
             name: PropTypes.string
         }))
     }),
-    value: PropTypes.oneOf(PropTypes.string, PropTypes.bool, PropTypes.number)
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number])
 };
 
 const NoticeComponent = ({
@@ -607,7 +607,7 @@ class AddonSettingsComponent extends React.Component {
     }
 }
 AddonSettingsComponent.propTypes = {
-    addons: PropTypes.arrayOf(PropTypes.object),
+    addons: PropTypes.objectOf(PropTypes.object),
     onReloadNow: PropTypes.func,
     onSettingsChanged: PropTypes.func
 };

@@ -1,6 +1,6 @@
 import addons from './addons.json';
 
-const clipboardSupported = !!navigator.clipboard;
+const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
 
 const addonMap = {};
 for (const addonId of addons) {

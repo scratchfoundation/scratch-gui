@@ -8,17 +8,9 @@ If you just want to play with the GUI then it's the same process as upstream scr
 
 ## A note on licensing
 
-The licensing situation is a bit more complex than for other projects because we include source code from a certain popular Scratch browser extension that uses the GPL, but we don't want to force embedders to be GPL-compliant. Parts of TurboWarp/scratch-gui are licensed under the BSD3c (see LICENSE) and parts of it are licensed under the GPLv3.0 (see LICENSE_GPL).
+Most files in TurboWarp/scratch-gui are dual licensed under BSD-3-Clause License (see LICENSE). However, some files are instead licensed under the GNU General Public License v3.0 (see LICENSE_GPL). Notably this includes everything in src/addons and anything that (indirectly or directly) imports a file from src/addons. These files generally have license disclaimers at the start of their contents.
 
-GPLv3.0:
-
- - Everything in src/addons
- - Editor, player, fullscreen, addon settings pages (src/playground/[editor|player|fullscreen|addon-settings].jsx)
-
-BSD3c:
-
- - The embed page (src/playground/embed.jsx)
- - Everything not in src/addons that doesn't reference a file in src/addons
+Note that the embed page is not one of the pages that are only available under the GPLv3.0, which means it is safe to use the embed in any environment.
 
 <!--
 

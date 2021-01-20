@@ -13,12 +13,12 @@ const TWEditorWarningHOC = function (WrappedComponent) {
             // This makes it so that if the VM ever is unable to finish a frame, we may be able to detect it.
             // This isn't foolproof, but it's better than nothing.
             this.props.vm.runtime.beforeStep = () => {
-                if (!this.props.isPlayerOnly) {
+                if (!this.props.isPlayerOnly && !document.hidden) {
                     localStorage.setItem(DIRTY_KEY, '1');
                 }
             };
             this.props.vm.runtime.afterStep = () => {
-                if (!this.props.isPlayerOnly) {
+                if (!this.props.isPlayerOnly && !document.hidden) {
                     localStorage.setItem(DIRTY_KEY, '0');
                 }
             };

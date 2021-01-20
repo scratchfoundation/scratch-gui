@@ -4,11 +4,10 @@
   "userscripts": [
     {
       "url": "userscript.js",
-      "matches": ["https://scratch.mit.edu/projects/*"],
-      "runAtComplete": false
+      "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
   "enabledByDefault": false,
-  "tags": ["turbowarp"],
+  "tags": ["turbowarp", "beta"],
   "l10n": true
 }

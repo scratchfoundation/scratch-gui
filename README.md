@@ -10,7 +10,7 @@ If you just want to play with the GUI then it's the same process as upstream scr
 
 Most files in TurboWarp/scratch-gui are dual licensed under BSD-3-Clause License (see LICENSE). However, some files are instead licensed under the GNU General Public License v3.0 (see LICENSE_GPL). Notably this includes everything in src/addons and anything that (indirectly or directly) imports a file from src/addons. These files generally have license disclaimers at the start of their contents.
 
-Note that the embed page is not one of the pages that are only available under the GPLv3.0, which means it is safe to use the embed in any environment.
+It is assumed that any contributions you send to this repository (via pull request or otherwise) are licensed under the BSD-3-Clause License, not the GPL.
 
 <!--
 

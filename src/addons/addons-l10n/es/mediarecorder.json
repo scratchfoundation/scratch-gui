@@ -1,1 +1,1 @@
-{"mediarecorder/record":"Empezar Grabación","mediarecorder/seconds":"¿Cuántos segundos quieres grabar?","mediarecorder/stop":"Detener Grabació","mediarecorder/@name":"Grabar video de proyecto","mediarecorder/@description":"Agrega un botón \"empezar grabación\" al editor que le permite grabar el escenario del proyecto (sin sonido). Luego de la grabación, se descargará un video con formato .webm."}
+{"mediarecorder/record":"Empezar Grabación","mediarecorder/stop":"Detener Grabació","mediarecorder/@name":"Grabar video de proyecto"}

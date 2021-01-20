@@ -53,13 +53,13 @@ class ArtieHelp extends React.Component {
         const metrics = this.workspace.getMetrics();
 
         //If the help is not null and we have some blocks to add
-        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.addElements !== null){
+        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.addBlocks !== null){
 
             //We build the block array for the elements we have to add
             var addBlockArray = [];
             var dy = 10;
             var dx = -1;
-            this.props.help.nextSteps.addElements.forEach(element => {addBlockArray.push(this.workspace.newBlock(element.elementName))});
+            this.props.help.nextSteps.addBlocks.forEach(element => {addBlockArray.push(this.workspace.newBlock(element.blockName))});
 
             //Configure and render all the blocks
             addBlockArray.forEach(block => {
@@ -128,13 +128,13 @@ class ArtieHelp extends React.Component {
         const metrics = this.workspace.getMetrics();
 
         //If the help is not null and we have some blocks to delete
-        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.deleteElements !== null){
+        if(this.props.help !== null && this.props.help.nextSteps !== null && this.props.help.nextSteps.deleteBlocks !== null){
 
-            //We build the block array for the elements we have to delete
+            //We build the block array for the blocks we have to delete
             var delBlockArray = [];
             var dy = 10;
             var dx = -1;
-            this.props.help.nextSteps.deleteElements.forEach(element => {delBlockArray.push(this.workspace.newBlock(element.elementName))});
+            this.props.help.nextSteps.deleteBlocks.forEach(element => {delBlockArray.push(this.workspace.newBlock(element.blockName))});
 
             //Configure and render all the blocks
             delBlockArray.forEach(block => {
@@ -209,7 +209,7 @@ class ArtieHelp extends React.Component {
             var replaceBlockArray = [];
             var dy = 10;
             var dx = -1;
-            this.props.help.nextSteps.replaceInputs.forEach(element => {replaceBlockArray.push(this.workspace.newBlock(element.element.elementName))});
+            this.props.help.nextSteps.replaceInputs.forEach(element => {replaceBlockArray.push(this.workspace.newBlock(element.element.blockName))});
 
             //Configure and render all the blocks
             replaceBlockArray.forEach(block => {
@@ -284,7 +284,7 @@ class ArtieHelp extends React.Component {
             var misplacedBlockArray = [];
             var dy = 10;
             var dx = -1;
-            this.props.help.nextSteps.replacePositions.forEach(element => {misplacedBlockArray.push(this.workspace.newBlock(element.elementName))});
+            this.props.help.nextSteps.replacePositions.forEach(element => {misplacedBlockArray.push(this.workspace.newBlock(element.blockName))});
 
             //Configure and render all the blocks
             misplacedBlockArray.forEach(block => {

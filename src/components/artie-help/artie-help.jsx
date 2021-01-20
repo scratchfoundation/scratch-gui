@@ -24,8 +24,8 @@ class ArtieHelpComponent extends React.Component {
 
     render(){
 
-        if(this.props.help.nextSteps !== null && 
-            (this.props.help.nextSteps.addElements.length >0 || this.props.help.nextSteps.deleteElements.length > 0))
+        if(this.props.help !== undefined && this.props.help.nextSteps !== null &&
+            (this.props.help.nextSteps.addBlocks.length >0 || this.props.help.nextSteps.deleteBlocks.length > 0))
         {
 
             return(
@@ -39,9 +39,9 @@ class ArtieHelpComponent extends React.Component {
                             className={styles.label}
                         >
                             <FormattedMessage
-                                    defaultMessage="List of elements to add:"
-                                    description="List of elements to add:"
-                                    id="gui.menuBar.artie.help.addElements"
+                                    defaultMessage="List of blocks to add:"
+                                    description="List of blocks to add:"
+                                    id="gui.menuBar.artie.help.addBlocks"
                                 />
                         </Box>
                         <Box
@@ -52,9 +52,9 @@ class ArtieHelpComponent extends React.Component {
                             className={styles.label}
                         >
                             <FormattedMessage
-                                    defaultMessage="List of elements to delete:"
-                                    description="List of elements to delete:"
-                                    id="gui.menuBar.artie.help.delElements"
+                                    defaultMessage="List of blocks to delete:"
+                                    description="List of blocks to delete:"
+                                    id="gui.menuBar.artie.help.delBlocks"
                                 />
                         </Box>
                         <Box
@@ -64,7 +64,7 @@ class ArtieHelpComponent extends React.Component {
                     </Modal>
             );
         }
-        else if(this.props.help.nextSteps !== null && this.props.help.nextSteps.replacePositions !== null && this.props.help.nextSteps.replacePositions.length > 0){
+        else if(this.props.help !== undefined && this.props.help.nextSteps !== null && this.props.help.nextSteps.replacePositions !== null && this.props.help.nextSteps.replacePositions.length > 0){
             return(
                 <Modal
                         className={styles.modalContent}
@@ -88,7 +88,7 @@ class ArtieHelpComponent extends React.Component {
                     </Modal>
             );
         }
-        else if(this.props.help.nextSteps !== null && this.props.help.nextSteps.replaceInputs !== null && this.props.help.nextSteps.replaceInputs.length > 0){
+        else if(this.props.help !== undefined && this.props.help.nextSteps !== null && this.props.help.nextSteps.replaceInputs !== null && this.props.help.nextSteps.replaceInputs.length > 0){
             return(
                 <Modal
                     className={styles.modalContent}

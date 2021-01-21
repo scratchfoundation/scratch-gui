@@ -141,7 +141,7 @@ class SoundTab extends React.Component {
                         this.props.onCloseImporting();
                     }
                 });
-            });
+            }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }
 

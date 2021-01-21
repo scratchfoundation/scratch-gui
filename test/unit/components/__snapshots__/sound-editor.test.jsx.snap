@@ -3,7 +3,7 @@
 exports[`Sound Editor Component matches snapshot 1`] = `
 <div
   className={undefined}
-  onMouseDown={undefined}
+  onMouseDown={[Function]}
 >
   <div
     className={undefined}
@@ -64,7 +64,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <div
         className=""
-        onClick={undefined}
+        onClick={[Function]}
         role="button"
       >
         <img
@@ -80,7 +80,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       </div>
       <div
         className=""
-        onClick={undefined}
+        onClick={[Function]}
         role="button"
       >
         <img
@@ -96,7 +96,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
       </div>
       <div
         className=""
-        onClick={undefined}
+        onClick={[Function]}
         role="button"
       >
         <img
@@ -428,7 +428,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
+      onClick={[Function]}
       role="button"
     >
       <img
@@ -446,7 +446,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
+      onClick={[Function]}
       role="button"
     >
       <img
@@ -464,7 +464,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
+      onClick={[Function]}
       role="button"
     >
       <img

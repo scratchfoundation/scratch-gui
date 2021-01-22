@@ -75,7 +75,8 @@ const WrappedMenuBar = compose(
 const Interface = ({
     description,
     isFullScreen,
-    isPlayerOnly
+    isPlayerOnly,
+    onClickTheme
 }) => {
     const isHomepage = isPlayerOnly && !isFullScreen;
     return (
@@ -86,6 +87,7 @@ const Interface = ({
                         canManageFiles
                         canChangeLanguage
                         enableSeeInside
+                        onClickTheme={onClickTheme}
                     />
                 </div>
             ) : null}
@@ -94,6 +96,7 @@ const Interface = ({
                 <GUI
                     onClickAddonSettings={handleClickAddonSettings}
                     onLoadAddons={handleLoadAddons}
+                    onClickTheme={onClickTheme}
                 />
                 {isHomepage ? (
                     <React.Fragment>
@@ -216,7 +219,8 @@ Interface.propTypes = {
         instructions: PropTypes.string
     }),
     isFullScreen: PropTypes.bool,
-    isPlayerOnly: PropTypes.bool
+    isPlayerOnly: PropTypes.bool,
+    onClickTheme: PropTypes.func
 };
 
 const mapStateToProps = state => ({

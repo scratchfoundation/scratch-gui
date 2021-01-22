@@ -464,6 +464,12 @@ class MenuBar extends React.Component {
                                 </MenuBarMenu>
                             </div>
                         </div>}
+                        {this.props.onClickTheme && (
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable, styles.themeButton)}
+                                onMouseUp={this.props.onClickTheme}
+                            />
+                        )}
                         {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -1031,6 +1037,7 @@ MenuBar.propTypes = {
     onClickAbout: PropTypes.func,
     onClickAccount: PropTypes.func,
     onClickAddonSettings: PropTypes.func,
+    onClickTheme: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,

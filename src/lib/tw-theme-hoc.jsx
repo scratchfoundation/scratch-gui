@@ -7,9 +7,9 @@ const ThemeHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             this.handleQueryChange = this.handleQueryChange.bind(this);
-            const urlParams = new URLSearchParams(location.search);
+            this.handleClickTheme = this.handleClickTheme.bind(this);
             this.state = {
-                dark: urlParams.has('theme') ? urlParams.get('theme') === 'dark' : darkMediaQuery.matches
+                dark: darkMediaQuery.matches
             };
         }
         componentDidMount () {
@@ -23,10 +23,16 @@ const ThemeHOC = function (WrappedComponent) {
                 dark: darkMediaQuery.matches
             });
         }
+        handleClickTheme () {
+            this.setState(state => ({
+                dark: !state.dark
+            }));
+        }
         render () {
             return (
                 <div theme={this.state.dark ? 'dark' : 'light'}>
                     <WrappedComponent
+                        onClickTheme={this.handleClickTheme}
                         {...this.props}
                     />
                 </div>

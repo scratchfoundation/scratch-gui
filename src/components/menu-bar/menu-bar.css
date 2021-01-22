@@ -239,3 +239,13 @@
     color: $ui-white !important;
     text-decoration: none;
 }
+
+.theme-button {
+    background-image: url("./tw-sun.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 48px;
+}
+[theme="dark"] .theme-button {
+    background-image: url("./tw-moon.svg");
+}

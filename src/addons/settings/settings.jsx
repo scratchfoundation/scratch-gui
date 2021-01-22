@@ -25,6 +25,7 @@ import getAddonTranslations from '../get-addon-translations';
 import settingsTranslations from './l10n/en.json';
 import SettingsStore from '../settings-store';
 import styles from './settings.css';
+import downloadBlob from '../libraries/download-blob';
 
 /* eslint-disable no-alert */
 
@@ -395,6 +396,8 @@ class AddonSettingsComponent extends React.Component {
         this.handleSettingStoreChanged = this.handleSettingStoreChanged.bind(this);
         this.handleReloadNow = this.handleReloadNow.bind(this);
         this.handleResetAll = this.handleResetAll.bind(this);
+        this.handleExport = this.handleExport.bind(this);
+        this.handleImport = this.handleImport.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.searchRef = this.searchRef.bind(this);
@@ -472,6 +475,33 @@ class AddonSettingsComponent extends React.Component {
                 search: ''
             });
         }
+    }
+    handleExport () {
+        const exportedData = SettingsStore.export();
+        const blob = new Blob([JSON.stringify(exportedData)]);
+        downloadBlob('turbowarp-addon-settings.json', blob);
+    }
+    handleImport () {
+        const fileSelector = document.createElement('input');
+        fileSelector.type = 'file';
+        fileSelector.accept = '.json';
+        document.body.appendChild(fileSelector);
+        fileSelector.click();
+        document.body.removeChild(fileSelector);
+        fileSelector.addEventListener('change', async () => {
+            const file = fileSelector.files[0];
+            if (!file) {
+                return;
+            }
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+                SettingsStore.import(data);
+            } catch (e) {
+                console.error(e);
+                alert(e);
+            }
+        });
     }
     handleSearch (e) {
         this.setState({
@@ -603,12 +633,26 @@ class AddonSettingsComponent extends React.Component {
                                     manifest={manifest}
                                 />
                             ))}
-                            <button
-                                className={styles.resetAllButton}
-                                onClick={this.handleResetAll}
-                            >
-                                {settingsTranslations['tw.addons.settings.resetAll']}
-                            </button>
+                            <div className={styles.footerButtons}>
+                                <button
+                                    className={styles.resetAllButton}
+                                    onClick={this.handleResetAll}
+                                >
+                                    {settingsTranslations['tw.addons.settings.resetAll']}
+                                </button>
+                                <button
+                                    className={styles.exportButton}
+                                    onClick={this.handleExport}
+                                >
+                                    {settingsTranslations['tw.addons.settings.export']}
+                                </button>
+                                <button
+                                    className={styles.importButton}
+                                    onClick={this.handleImport}
+                                >
+                                    {settingsTranslations['tw.addons.settings.import']}
+                                </button>
+                            </div>
                         </>
                     ) : (
                         <div className={styles.noResults}>

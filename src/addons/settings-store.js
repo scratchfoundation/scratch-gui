@@ -17,6 +17,7 @@
  */
 
 import addons from './addon-manifests';
+import upstreamMeta from './upstream-meta.json';
 
 const SETTINGS_KEY = 'tw:addons';
 
@@ -179,6 +180,44 @@ class SettingsStore extends EventTarget {
                     continue;
                 }
                 this.setAddonSetting(addonId, setting, null);
+            }
+        }
+    }
+
+    export () {
+        const result = {
+            core: {
+                // Upstream has a globalTheme property here. True is light, false is dark.
+                globalTheme: !window.matchMedia('(prefers-color-scheme: dark)').matches,
+                version: `${upstreamMeta.version}-tw`
+            },
+            addons: {}
+        };
+        for (const [addonId, manifest] of Object.entries(addons)) {
+            const enabled = this.getAddonEnabled(addonId);
+            const settings = {};
+            if (manifest.settings) {
+                for (const {id} of manifest.settings) {
+                    settings[id] = this.getAddonSetting(addonId, id);
+                }
+            }
+            result.addons[addonId] = {
+                enabled,
+                settings
+            };
+        }
+        return result;
+    }
+
+    import (data) {
+        for (const [addonId, value] of Object.entries(data.addons)) {
+            if (!addons.hasOwnProperty(addonId)) {
+                continue;
+            }
+            const {enabled, settings} = value;
+            this.setAddonEnabled(addonId, enabled);
+            for (const [settingId, settingValue] of Object.entries(settings)) {
+                this.setAddonSetting(addonId, settingId, settingValue);
             }
         }
     }

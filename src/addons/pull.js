@@ -128,3 +128,11 @@ for (const language of languages) {
         }
     }
 }
+
+const extensionManifestPath = pathUtil.join('ScratchAddons', 'manifest.json');
+const upstreamMetaPath = 'upstream-meta.json';
+const extensionManifest = JSON.parse(fs.readFileSync(extensionManifestPath, 'utf8'));
+const versionName = extensionManifest.version_name;
+fs.writeFileSync(upstreamMetaPath, JSON.stringify({
+    version: versionName
+}));

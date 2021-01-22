@@ -46,7 +46,7 @@
 
 @keyframes openScrollbar {
   0% {
-    transform: translateX(35px);
+    transform: translateX(36.5px);
   }
   100% {
     transform: translateX(296.5px);
@@ -58,7 +58,7 @@
     transform: translateX(296.5px);
   }
   100% {
-    transform: translateX(35px);
+    transform: translateX(36.5px);
   }
 }
 
@@ -78,4 +78,8 @@
   100% {
     transform: translateX(-260px);
   }
+}
+
+.injectionDiv {
+  overflow: hidden !important;
 }

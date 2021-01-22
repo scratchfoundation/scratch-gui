@@ -122,6 +122,9 @@ class SettingsStore extends EventTarget {
 
     setAddonSetting (addonId, settingId, value) {
         const settingObject = this.getAddonSettingObject(addonId, settingId);
+        if (!settingObject && settingId !== 'enabled') {
+            return;
+        }
         const key = this.getStorageKey(addonId, settingId);
         if (value === null) {
             delete this.store[key];

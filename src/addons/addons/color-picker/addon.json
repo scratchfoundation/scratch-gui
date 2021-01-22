@@ -1,0 +1,29 @@
+{
+  "name": "Hex color picker",
+  "description": "Adds hex code inputs to color pickers.",
+  "tags": ["editor", "recommended"],
+  "credits": [
+    {
+      "name": "Richie Bendall",
+      "link": "https://github.com/ScratchAddons/ScratchAddons/issues/311#issuecomment-699510743"
+    },
+    {
+      "name": "apple502j"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "libraries": ["tinycolor2"],
+  "enabledByDefault": true,
+  "l10n": true
+}

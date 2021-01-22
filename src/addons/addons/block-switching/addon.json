@@ -1,0 +1,87 @@
+{
+  "name": "Block switching",
+  "description": "Right click on a block to switch it to a related block.",
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor", "recommended"],
+  "settings": [
+    {
+      "name": "Show option to change block to self",
+      "id": "noop",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Add border",
+      "id": "border",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Motion blocks",
+      "id": "motion",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Looks blocks",
+      "id": "looks",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Sound blocks",
+      "id": "sound",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Event blocks",
+      "id": "event",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Control blocks",
+      "id": "control",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Operator blocks",
+      "id": "operator",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Sensing blocks",
+      "id": "sensing",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Data blocks",
+      "id": "data",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Extension blocks",
+      "id": "extension",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "libraries": ["scratch-blocks"],
+  "l10n": true,
+  "enabledByDefault": true
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Confirm sprite deletion",
+  "description": "Asks if you're sure when deleting a sprite inside a project.",
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor"],
+  "enabledByDefault": false,
+  "l10n": true
+}

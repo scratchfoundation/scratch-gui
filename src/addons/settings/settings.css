@@ -1,0 +1,252 @@
+/*
+Copyright (c) 2020 Thomas Weber
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+body {
+    background-color: white;
+    color: black;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: 8px 8px;
+    background-color: #fcfcfc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    display: flex;
+    background-color: #f0f0f0;
+    color: #222;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+}
+
+.search-container:focus-within {
+    border-color: currentColor;
+}
+
+.search-input {
+    width: 150px;
+    height: 16px;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.search-button {
+    height: 36px;
+    width: 36px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url("./search.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.addons {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px;
+}
+
+.addon {
+    background: #f7f7f7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    padding: 4px;
+}
+
+.addon-dirty {
+    background: #ffeedf;
+}
+
+.addon-title-container {
+    padding-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 24px;
+}
+
+.addon-title {
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+}
+
+.addon-checkbox {
+    margin-right: 5px;
+}
+
+.addon-title-text {
+
+}
+
+.addon-operations {
+
+}
+
+.tag {
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 12px;
+    margin-left: 10px;
+    border-bottom: 2px solid #111;
+}
+
+.tag-recommended {
+    color: white;
+    background-color: #175ef8;
+    border-color: #0e44b8;
+}
+
+.tag-beta {
+    color: white;
+    background-color: #fd662b;
+    border-color: #d84a12;
+}
+
+.tag-easter-egg {
+    color: black;
+    background-color: #b9f38d;
+    border-color: #8fce5e;
+}
+
+.tag-turbowarp {
+    color: white;
+    background: #ff4c4c;
+    border-color: rgb(185, 38, 38);
+}
+
+.credit-container {
+
+}
+
+.credit-title {
+    padding-right: 3px;
+}
+
+.credit {
+
+}
+
+.description {
+
+}
+
+.setting-container {
+    margin-left: 20px;
+    column-width: 300px;
+}
+
+.setting {
+
+}
+
+.setting input, .setting select {
+    margin-right: 5px;
+}
+
+.notice-container {
+
+}
+
+.notice {
+
+}
+
+.presets {
+
+}
+
+.reset-button {
+
+}
+
+.footer-buttons {
+
+}
+
+.reset-all-button {
+
+}
+
+.export-button {
+
+}
+
+.import-button {
+
+}
+
+.no-results {
+    text-align: center;
+    font-style: italic;
+}
+
+.dirty-outer {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    animation: dirty-appear 0.2s ease;
+    pointer-events: none;
+}
+
+.dirty-inner {
+    padding: 8px;
+    background: #ffeedf;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    pointer-events: auto;
+}
+
+.dirty-button {
+    margin-left: 4px;
+}
+
+@keyframes dirty-appear {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

@@ -1,6 +1,20 @@
 [
-    "// Make sure these IDs match their ID in SA",
-    "block-switching",
     "editor-devtools",
-    "editor-searchable-dropdowns"
+    "block-switching",
+    "editor-searchable-dropdowns",
+    "color-picker",
+    "data-category-tweaks-v2",
+    "mediarecorder",
+    "onion-skinning",
+    "editor-stage-left",
+    "editor-colored-context-menus",
+    "remove-sprite-confirm",
+    "bitmap-copy",
+    "editor-theme3",
+    "hide-flyout",
+    "clones",
+    "mouse-pos",
+    "fix-uploaded-svgs",
+    "tw-compiler-options",
+    "cat-blocks"
 ]

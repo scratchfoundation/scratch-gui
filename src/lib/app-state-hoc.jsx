@@ -82,11 +82,19 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(guiMiddleware);
             }
             const reducer = combineReducers(reducers);
+            const reducer2 = (a, b) => {
+                const next = reducer(a, b);
+                if (window.__APP_STATE_REDUCER__) {
+                    window.__APP_STATE_REDUCER__(b, next);
+                }
+                return next;
+            };
             this.store = createStore(
-                reducer,
+                reducer2,
                 initialState,
                 enhancer
             );
+            window.__APP_STATE_STORE__ = this.store;
         }
         componentDidUpdate (prevProps) {
             if (localesOnly) return;

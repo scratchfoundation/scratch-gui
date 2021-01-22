@@ -1,0 +1,85 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ */
+
+.blocklyFlyout.sa-flyoutClose {
+  transform: translateX(-200px) !important;
+}
+
+.blocklyFlyoutScrollbar.sa-flyoutClose {
+  transform: translateX(35px) !important;
+}
+
+.sa-lock-image.sa-flyoutClose {
+  transform: translateX(-260px);
+}
+
+.sa-flyout-placeHolder {
+  position: absolute;
+}
+
+.sa-lock-image {
+  position: absolute;
+  z-index: 20;
+  width: 20px;
+  cursor: pointer;
+}
+
+@keyframes openFlyout {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(60px);
+  }
+}
+
+@keyframes closeFlyout {
+  0% {
+    transform: translateX(60px);
+  }
+  100% {
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes openScrollbar {
+  0% {
+    transform: translateX(36.5px);
+  }
+  100% {
+    transform: translateX(296.5px);
+  }
+}
+
+@keyframes closeScrollbar {
+  0% {
+    transform: translateX(296.5px);
+  }
+  100% {
+    transform: translateX(36.5px);
+  }
+}
+
+@keyframes openLock {
+  0% {
+    transform: translateX(-260px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes closeLock {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-260px);
+  }
+}
+
+.injectionDiv {
+  overflow: hidden !important;
+}

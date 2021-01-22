@@ -1,3 +1,21 @@
+/**
+ * @license
+ * Copyright (c) 2020 Thomas Weber
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,6 +29,7 @@ import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
+import SettingsStore from '../addons/settings-store';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -26,6 +45,28 @@ if (process.env.ANNOUNCEMENT) {
     // This is safe because process.env.ANNOUNCEMENT is set at build time.
     announcement.innerHTML = process.env.ANNOUNCEMENT;
 }
+
+window.addEventListener('message', e => {
+    if (e.origin !== location.origin) {
+        return;
+    }
+    const data = e.data;
+    if (data.type === 'reload') {
+        location.reload();
+    }
+    if (data.type === 'settings-changed') {
+        SettingsStore.store = data.store;
+        SettingsStore.dispatchEvent(new CustomEvent('reread'));
+    }
+});
+
+const handleClickAddonSettings = () => {
+    window.open(`${process.env.ROOT}addons.html`);
+};
+
+const handleLoadAddons = () => {
+    import(/* webpackChunkName: "addons" */ '../addons/entry-web');
+};
 
 const WrappedMenuBar = compose(
     SBFileUploaderHOC
@@ -50,7 +91,10 @@ const Interface = ({
             ) : null}
             <div className={styles.center}>
                 {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
-                <GUI />
+                <GUI
+                    onClickAddonSettings={handleClickAddonSettings}
+                    onLoadAddons={handleLoadAddons}
+                />
                 {isHomepage ? (
                     <React.Fragment>
                         <div className={styles.section}>

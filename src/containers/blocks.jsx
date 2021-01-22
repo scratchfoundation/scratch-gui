@@ -32,8 +32,6 @@ import {
     SOUNDS_TAB_INDEX
 } from '../reducers/editor-tab';
 
-import loadAddons from '../addons/loader';
-
 const addFunctionListener = (object, property, callback) => {
     const oldFn = object[property];
     object[property] = function () {
@@ -162,11 +160,6 @@ class Blocks extends React.Component {
         // Do not check against prevProps.toolboxXML because that may not have been rendered.
         if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
             this.requestToolboxUpdate();
-        }
-
-        // tw: load addons when editor is visible
-        if (this.props.isVisible) {
-            loadAddons();
         }
 
         if (this.props.isVisible === prevProps.isVisible) {

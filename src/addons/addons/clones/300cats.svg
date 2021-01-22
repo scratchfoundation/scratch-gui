@@ -1,0 +1,28 @@
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+ <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+ <title>turbo-bolt-icon</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_27">
+   <ellipse ry="4.73311" rx="4.73311" id="svg_24" cy="8.48362" cx="7.41438" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffd1d8"/>
+   <path id="svg_25" d="m3.84274,6.09966l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffd1d8"/>
+   <path transform="rotate(16 9.66845703125,3.454792499542235) " id="svg_26" d="m8.40222,5.86972l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffd1d8"/>
+  </g>
+  <g id="svg_23">
+   <ellipse ry="4.73311" rx="4.73311" id="svg_20" cy="9.10385" cx="7.9869" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff91a3"/>
+   <path id="svg_21" d="m4.41526,6.71989l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff91a3"/>
+   <path transform="rotate(16 10.240974426269537,4.075020313262941) " id="svg_22" d="m8.97474,6.48995l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff91a3"/>
+  </g>
+  <g id="svg_19">
+   <ellipse ry="4.73311" rx="4.73311" id="svg_12" cy="9.48553" cx="8.9411" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff6680"/>
+   <path id="svg_14" d="m5.36946,7.10157l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff6680"/>
+   <path transform="rotate(16 11.195173263549806,4.456698894500731) " id="svg_15" d="m9.92894,6.87163l0.29594,-4.82986l2.23653,4.265" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ff6680"/>
+  </g>
+ </g>
+</svg>

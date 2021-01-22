@@ -1,0 +1,109 @@
+{
+  "name": "Onion skinning",
+  "description": "Shows transparent overlays of previous or next costumes when editing a costume. Controlled by buttons under the editor by the zoom buttons.",
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "runAtComplete": false
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "settings": [
+    {
+      "id": "default",
+      "name": "Enable by default",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "previous",
+      "name": "Default previous costumes",
+      "type": "integer",
+      "default": 1,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "next",
+      "name": "Default next costumes",
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "opacity",
+      "name": "Opacity (%)",
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 25
+    },
+    {
+      "id": "opacityStep",
+      "name": "Opacity Step (%)",
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 10
+    },
+    {
+      "id": "layering",
+      "name": "Default layering",
+      "type": "select",
+      "default": "front",
+      "potentialValues": [
+        {
+          "id": "front",
+          "name": "Front"
+        },
+        {
+          "id": "behind",
+          "name": "Behind"
+        }
+      ]
+    },
+    {
+      "id": "mode",
+      "name": "Default mode",
+      "type": "select",
+      "default": "merge",
+      "potentialValues": [
+        {
+          "id": "merge",
+          "name": "Merge images"
+        },
+        {
+          "id": "tint",
+          "name": "Color tint"
+        }
+      ]
+    },
+    {
+      "name": "Previous costume tint",
+      "id": "beforeTint",
+      "type": "color",
+      "default": "#FF0000"
+    },
+    {
+      "name": "Next costume tint",
+      "id": "afterTint",
+      "type": "color",
+      "default": "#0000FF"
+    }
+  ],
+  "tags": ["editor", "recommended"],
+  "enabledByDefault": false,
+  "l10n": true
+}

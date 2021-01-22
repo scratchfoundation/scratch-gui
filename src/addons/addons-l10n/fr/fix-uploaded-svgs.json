@@ -1,0 +1,1 @@
+{"fix-uploaded-svgs/@name":"Règler les exportations échouées des graphismes au format SVG","fix-uploaded-svgs/@description":"Règle un bug dans l'éditeur Scratch qui n'arrivait pas à exporter des fichiers SVG créés avec certains éditeurs d'images correctement, comme Affinity Designer."}

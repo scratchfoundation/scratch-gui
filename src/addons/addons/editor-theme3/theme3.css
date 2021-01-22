@@ -1,0 +1,100 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ */
+
+/* sa-autoupdate-theme-ignore */
+
+path.blocklyBlockBackground[fill="#FF6680"],
+path.blocklyBlockBackground[fill="#5CB1D6"],
+path.blocklyBlockBackground[fill="#FFBF00"],
+g[data-category] > path.blocklyBlockBackground {
+  stroke: #0003;
+}
+g[data-argument-type="dropdown"] > path,
+g[data-argument-type="dropdown"] > rect,
+g[data-argument-type="variable"] > rect,
+g[data-argument-type="variable"] > path,
+g[data-shapes="c-block c-1 hat"] > g[data-shapes="stack"]:not(.blocklyDraggable) > path,
+path[data-argument-type="boolean"] {
+  stroke: #0003;
+  fill: #0001;
+}
+g[data-argument-type*="text"] > path,
+g > line {
+  stroke: #0002;
+}
+.scratchCategoryItemBubble {
+  border-color: #0003 !important;
+}
+
+path.blocklyBlockBackground[fill="#FF6680"],
+path.blocklyBlockBackground[fill="#5CB1D6"],
+path.blocklyBlockBackground[fill="#FFBF00"],
+g[data-category] > path.blocklyBlockBackground {
+  stroke: #0003;
+}
+g[data-argument-type="dropdown"] > path,
+g[data-argument-type="dropdown"] > rect,
+g[data-argument-type="variable"] > rect,
+g[data-argument-type="variable"] > path,
+g[data-shapes="c-block c-1 hat"] > g[data-shapes="stack"]:not(.blocklyDraggable) > path,
+path[data-argument-type="boolean"] {
+  stroke: #0003;
+  fill: #0001;
+}
+g[data-argument-type*="text"] > path,
+g > line {
+  stroke: #0002;
+}
+.scratchCategoryItemBubble {
+  border-color: #0003 !important;
+}
+
+.s3devDD li.operators {
+  background-color: var(--editorTheme3-operatorsColor);
+}
+
+.s3devDD li.looks {
+  background-color: var(--editorTheme3-looksColor);
+}
+
+.s3devDD li.data {
+  background-color: var(--editorTheme3-dataColor);
+}
+
+.s3devDD li.sounds {
+  background-color: var(--editorTheme3-soundsColor);
+}
+
+.s3devDD li.motion {
+  background-color: var(--editorTheme3-motionColor);
+}
+
+.s3devDD li.control {
+  background-color: var(--editorTheme3-controlColor);
+}
+
+.s3devDD li.events {
+  background-color: var(--editorTheme3-eventsColor);
+}
+
+.s3devDD li.data-lists {
+  background-color: var(--editorTheme3-dataListsColor);
+}
+
+.s3devDD li.sensing {
+  background-color: var(--editorTheme3-sensingColor);
+}
+
+.s3devDD li.extension {
+  background-color: var(--editorTheme3-extensionsColor);
+}
+
+.blocklyEditableText rect {
+  fill: var(--editorTheme3-customColor);
+}
+
+.fieldTextInput {
+  border-color: var(--editorTheme3-customColor) !important;
+}

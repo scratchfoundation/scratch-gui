@@ -22,22 +22,23 @@ import classNames from 'classnames';
 
 import addons from '../addon-manifests';
 import getAddonTranslations from '../get-addon-translations';
-import settingsTranslations from './l10n/en.json';
+import settingsTranslationsEnglish from './l10n/en.json';
+import settingsTranslationsOther from './l10n/translations.json';
 import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
 import SettingsStore from '../settings-store';
-import styles from './settings.css';
 import downloadBlob from '../libraries/download-blob';
+import styles from './settings.css';
 
 /* eslint-disable no-alert */
 
 const locale = detectLocale(upstreamMeta.languages);
 const addonTranslations = getAddonTranslations(locale);
+const settingsTranslations = settingsTranslationsEnglish;
 if (locale !== 'en') {
-    try {
-        Object.assign(settingsTranslations, require(`./l10n/${locale}.json`));
-    } catch (e) {
-        // ignore
+    const messages = settingsTranslationsOther[locale];
+    if (messages) {
+        Object.assign(settingsTranslations, messages);
     }
 }
 

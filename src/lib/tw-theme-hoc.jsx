@@ -15,6 +15,9 @@ const ThemeHOC = function (WrappedComponent) {
         componentDidMount () {
             darkMediaQuery.addEventListener('change', this.handleQueryChange);
         }
+        componentDidUpdate () {
+            document.body.style.backgroundColor = this.state.dark ? '#111' : 'white';
+        }
         componentWillUnmount () {
             darkMediaQuery.removeEventListener('change', this.handleQueryChange);
         }

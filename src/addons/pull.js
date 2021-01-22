@@ -107,13 +107,15 @@ for (const addon of addons) {
     }
 }
 
-const languages = fs.readdirSync(pathUtil.join('ScratchAddons', 'addons-l10n'));
-for (const language of languages) {
-    const oldDirectory = pathUtil.join('ScratchAddons', 'addons-l10n', language);
-    const newDirectory = pathUtil.join('addons-l10n', language);
+const l10nFiles = fs.readdirSync(pathUtil.join('ScratchAddons', 'addons-l10n'));
+const languages = [];
+for (const file of l10nFiles) {
+    const oldDirectory = pathUtil.join('ScratchAddons', 'addons-l10n', file);
+    const newDirectory = pathUtil.join('addons-l10n', file);
     if (!fs.statSync(oldDirectory).isDirectory()) {
         continue;
     }
+    languages.push(file);
     fs.mkdirSync(newDirectory, {recursive: true});
     for (const addon of addons) {
         const oldFile = pathUtil.join(oldDirectory, `${addon}.json`);

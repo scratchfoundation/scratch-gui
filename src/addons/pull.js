@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable import/no-commonjs */
+
 const fs = require('fs');
 const childProcess = require('child_process');
 const rimraf = require('rimraf');

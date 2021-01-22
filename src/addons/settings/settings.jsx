@@ -23,14 +23,15 @@ import classNames from 'classnames';
 import addons from '../addon-manifests';
 import getAddonTranslations from '../get-addon-translations';
 import settingsTranslations from './l10n/en.json';
+import upstreamMeta from '../upstream-meta.json';
+import {detectLocale} from '../../lib/detect-locale';
 import SettingsStore from '../settings-store';
 import styles from './settings.css';
 import downloadBlob from '../libraries/download-blob';
 
 /* eslint-disable no-alert */
 
-const urlParameters = new URLSearchParams(location.search);
-const locale = urlParameters.get('locale') || 'en';
+const locale = detectLocale(upstreamMeta.languages);
 const addonTranslations = getAddonTranslations(locale);
 if (locale !== 'en') {
     try {

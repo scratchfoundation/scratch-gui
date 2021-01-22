@@ -240,12 +240,13 @@
     text-decoration: none;
 }
 
-.theme-button {
+.theme-icon {
     background-image: url("./tw-sun.svg");
     background-position: center;
     background-repeat: no-repeat;
-    width: 48px;
+    width: 24px;
+    height: 24px;
 }
-[theme="dark"] .theme-button {
+[theme="dark"] .theme-icon {
     background-image: url("./tw-moon.svg");
 }

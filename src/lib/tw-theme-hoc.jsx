@@ -1,26 +1,26 @@
 import React from 'react';
 
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-const DarkModeHOC = function (WrappedComponent) {
-    class DarkModeComponent extends React.Component {
+const ThemeHOC = function (WrappedComponent) {
+    class ThemeComponent extends React.Component {
         constructor (props) {
             super(props);
             this.handleQueryChange = this.handleQueryChange.bind(this);
             const urlParams = new URLSearchParams(location.search);
             this.state = {
-                dark: urlParams.has('theme') ? urlParams.get('theme') === 'dark' : mediaQuery.matches
+                dark: urlParams.has('theme') ? urlParams.get('theme') === 'dark' : darkMediaQuery.matches
             };
         }
         componentDidMount () {
-            mediaQuery.addEventListener('change', this.handleQueryChange);
+            darkMediaQuery.addEventListener('change', this.handleQueryChange);
         }
         componentWillUnmount () {
-            mediaQuery.removeEventListener('change', this.handleQueryChange);
+            darkMediaQuery.removeEventListener('change', this.handleQueryChange);
         }
         handleQueryChange () {
             this.setState({
-                dark: mediaQuery.matches
+                dark: darkMediaQuery.matches
             });
         }
         render () {
@@ -33,9 +33,9 @@ const DarkModeHOC = function (WrappedComponent) {
             );
         }
     }
-    return DarkModeComponent;
+    return ThemeComponent;
 };
 
 export {
-    DarkModeHOC as default
+    ThemeHOC as default
 };

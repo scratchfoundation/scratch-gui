@@ -22,6 +22,9 @@ $header-height: calc($stage-menu-height - 2px);
     cursor: pointer;
     transition: all 0.25s ease;
 }
+[theme="dark"] .stage-selector {
+    background-color: $ui-primary;
+}
 
 .stage-selector.is-selected {
     border-top-left-radius: .625rem;
@@ -47,6 +50,9 @@ $header-height: calc($stage-menu-height - 2px);
     border-bottom: 1px solid $ui-black-transparent;
     width: 100%;
     transition: background-color 0.25s ease;
+}
+[theme="dark"] .header {
+    background-color: $ui-primary;
 }
 
 .header-title {

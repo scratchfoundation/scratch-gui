@@ -10,6 +10,9 @@
     border-top-right-radius: $space;
     border-bottom: 1px solid $ui-black-transparent;
 }
+[theme="dark"] .sprite-info {
+    background-color: $ui-primary;
+}
 
 .row {
     display: flex;

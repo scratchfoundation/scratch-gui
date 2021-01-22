@@ -22,6 +22,9 @@
     text-align: center;
     cursor: pointer;
 }
+[theme="dark"] .library-item {
+    background: $ui-primary;
+}
 
 .library-item-extension {
     align-self: stretch;

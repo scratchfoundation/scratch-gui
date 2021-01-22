@@ -30,6 +30,9 @@
     white-space: nowrap;
     min-width: 0;
 }
+[theme="dark"] .input-form {
+    background: $ui-primary;
+}
 
 .input-form:hover {
     border-color: $motion-primary;

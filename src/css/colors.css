@@ -1,18 +1,18 @@
-$ui-primary: hsla(215, 100%, 95%, 1); /* #E5F0FF */
-$ui-secondary: hsla(215, 75%, 95%, 1); /* #E9F1FC */
-$ui-tertiary: hsla(215, 50%, 90%, 1); /* #D9E3F2 */
+$ui-primary: var(--ui-primary, hsla(215, 100%, 95%, 1)); /* #E5F0FF */
+$ui-secondary: var(--ui-secondary, hsla(215, 75%, 95%, 1)); /* #E9F1FC */
+$ui-tertiary: var(--ui-tertirary, hsla(215, 50%, 90%, 1)); /* #D9E3F2 */
 
 /* tw: update to match updated motion-primary */
 $ui-modal-overlay: hsla(0, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
 
-$ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
+$ui-white: var(--ui-white, hsla(0, 100%, 100%, 1)); /* #FFFFFF */
 $ui-white-dim: hsla(0, 100%, 100%, 0.75); /* 25% transparent version of ui-white */
 $ui-white-transparent: hsla(0, 100%, 100%, 0.25); /* 25% transparent version of ui-white */
 $ui-transparent: hsla(0, 100%, 100%, 0); /* 25% transparent version of ui-white */
 
 $ui-black-transparent: hsla(0, 0%, 0%, 0.15); /* 15% transparent version of black */
 
-$text-primary: hsla(225, 15%, 40%, 1); /* #575E75 */
+$text-primary: var(--text-primary, hsla(225, 15%, 40%, 1)); /* #575E75 */
 $text-primary-transparent: hsla(225, 15%, 40%, 0.75);
 
 /* tw: we change this to a red, even though motion isn't red. This is intentional. */

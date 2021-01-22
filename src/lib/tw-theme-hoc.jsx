@@ -1,4 +1,5 @@
 import React from 'react';
+import darkModeCSS from '!raw-loader!./tw-theme-dark.css';
 
 const THEME_KEY = 'tw:theme';
 
@@ -16,6 +17,9 @@ const getInitialDarkMode = () => {
     return darkMediaQuery.matches;
 };
 
+const darkModeStylesheet = document.createElement('style');
+darkModeStylesheet.textContent = darkModeCSS;
+
 const ThemeHOC = function (WrappedComponent) {
     class ThemeComponent extends React.Component {
         constructor (props) {
@@ -30,12 +34,18 @@ const ThemeHOC = function (WrappedComponent) {
             darkMediaQuery.addEventListener('change', this.handleQueryChange);
         }
         componentDidUpdate () {
+            const dark = this.state.dark;
             try {
-                localStorage.setItem(THEME_KEY, this.state.dark ? 'dark' : 'light');
+                localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
             } catch (e) {
                 // ignore
             }
-            document.body.style.backgroundColor = this.state.dark ? '#111' : 'white';
+            document.body.setAttribute('theme', dark ? 'dark' : 'light');
+            if (dark && !darkModeStylesheet.parentNode) {
+                document.head.appendChild(darkModeStylesheet);
+            } else if (!dark && darkModeStylesheet.parentNode) {
+                darkModeStylesheet.parentNode.removeChild(darkModeStylesheet);
+            }
         }
         componentWillUnmount () {
             darkMediaQuery.removeEventListener('change', this.handleQueryChange);
@@ -52,12 +62,10 @@ const ThemeHOC = function (WrappedComponent) {
         }
         render () {
             return (
-                <div theme={this.state.dark ? 'dark' : 'light'}>
-                    <WrappedComponent
-                        onClickTheme={this.handleClickTheme}
-                        {...this.props}
-                    />
-                </div>
+                <WrappedComponent
+                    onClickTheme={this.handleClickTheme}
+                    {...this.props}
+                />
             );
         }
     }

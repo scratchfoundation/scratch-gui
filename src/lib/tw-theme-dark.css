@@ -1,0 +1,20 @@
+:root {
+    background: #111;
+    --ui-primary: #111;
+    --ui-secondary: #222;
+    --ui-tertiary: #333;
+    --text-primary: #eee;
+}
+
+.blocklyMainBackground {
+    fill: #222 !important;
+}
+.blocklyFlyoutBackground {
+    fill: #111;
+}
+.blocklyToolboxDiv, .scratchCategoryMenu {
+    background: #111 !important;
+}
+.scratchCategoryMenuItem.categorySelected {
+    background: var(--ui-secondary);
+}

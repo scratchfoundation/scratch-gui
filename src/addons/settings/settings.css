@@ -28,12 +28,12 @@ body {
     }
 }
 
-a {
+a[href] {
     color: #2a67eb;
     text-decoration: underline;
 }
 @media (prefers-color-scheme: dark) {
-    a {
+    a[href] {
         color: #6d9bff;
     }
 }
@@ -263,7 +263,7 @@ a {
 
 }
 .credit-title {
-    padding-right: 3px;
+    padding-right: 5px;
 }
 .credit {
 
@@ -295,6 +295,14 @@ a {
     align-items: center;
     flex-wrap: wrap;
 }
+.setting-label {
+    font-weight: bold;
+    width: 200px;
+    text-transform: uppercase;
+    color: #aaa;
+    font-size: 12px;
+    margin-right: 10px;
+}
 .setting input {
     color: #fff;
     background: #222222;
@@ -303,19 +311,51 @@ a {
     border-radius: 4px;
     transition: 0.25s ease;
 }
-.color-setting {
-    display: flex;
-    align-items: center;
+.setting input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    background-size: 20px 20px;
+    background-position: center center;
 }
-.reset-color-button {
-    border-radius: 0 4px 4px 0px;
+.setting input[type="checkbox"]:checked {
+    background-color: #175ef8;
+    background-image: url("./check.svg");
 }
-.color-setting input[type="color"] {
+.setting input[type="checkbox"]:hover:not(:focus) {
+    border-color: #0e44b8;
+}
+.setting input[type="number"] {
+    border-radius: 20px;
+}
+.setting input[type="color"] {
     height: 30px;
     width: 100px;
     padding: 0;
     overflow: hidden;
     border-radius: 4px 0px 0px 4px;
+}
+.reset-color-button {
+    border-radius: 0 4px 4px 0px;
+}
+.select {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #222;
+    border: 1px solid #000;
+    user-select: none;
+}
+.select-option {
+    padding: 10px;
+    border-right: 1px solid #000;
+}
+.select-option.selected {
+    background: #ff7b26;
 }
 
 .presets {
@@ -323,17 +363,17 @@ a {
 }
 
 .footer-buttons {
-
+    margin-bottom: 10px;
 }
-
+.footer-buttons > .button {
+    margin-right: 10px;
+}
 .reset-all-button {
 
 }
-
 .export-button {
 
 }
-
 .import-button {
 
 }
@@ -364,7 +404,7 @@ a {
 }
 @media (prefers-color-scheme: dark) {
     .dirty-inner {
-        background: #555550;
+        background: rgb(48, 96, 110);
         border-color: #222;
     }
 }

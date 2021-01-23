@@ -83,6 +83,40 @@ SwitchComponent.propTypes = {
     value: PropTypes.bool
 };
 
+const SelectComponent = ({
+    addonId,
+    value,
+    setting
+}) => (
+    <div className={styles.select}>
+        {setting.potentialValues.map(potentialValue => {
+            const id = potentialValue.id;
+            const selected = id === value;
+            const valueName = addonTranslations[`${addonId}/@settings-select-${setting.id}-${id}`] || potentialValue.name;
+            return (
+                <div
+                    key={id}
+                    onClick={() => SettingsStore.setAddonSetting(addonId, setting.id, id)}
+                    className={classNames(styles.selectOption, {[styles.selected]: selected})}
+                >
+                    {valueName}
+                </div>
+            );
+        })}
+    </div>
+);
+SelectComponent.propTypes = {
+    addonId: PropTypes.string,
+    value: PropTypes.string,
+    setting: PropTypes.shape({
+        id: PropTypes.string,
+        potentialValues: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string
+        }))
+    })
+};
+
 const TagComponent = ({tags}) => tags.length > 0 && (
     <span className={styles.tagContainer}>
         {tags.includes('recommended') && (
@@ -118,23 +152,35 @@ const SettingComponent = ({
 }) => {
     const settingId = setting.id;
     const settingName = addonTranslations[`${addonId}/@settings-name-${settingId}`] || setting.name;
+    const uniqueId = `setting/${addonId}/${settingId}`
+    const label = (
+        <label
+            htmlFor={uniqueId}
+            className={styles.settingLabel}
+        >
+            {settingName}
+        </label>
+    );
     return (
         <div
             className={styles.setting}
         >
             {setting.type === 'boolean' && (
-                <label>
+                <>
+                    {label}
                     <input
+                        id={uniqueId}
                         type="checkbox"
                         checked={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.checked)}
                     />
-                    {settingName}
-                </label>
+                </>
             )}
             {setting.type === 'integer' && (
-                <label>
+                <>
+                    {label}
                     <input
+                        id={uniqueId}
                         type="number"
                         min={setting.min}
                         max={setting.max}
@@ -142,12 +188,13 @@ const SettingComponent = ({
                         value={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, +e.target.value)}
                     />
-                    {settingName}
-                </label>
+                </>
             )}
             {setting.type === 'color' && (
-                <div className={styles.colorSetting}>
+                <>
+                    {label}
                     <input
+                        id={uniqueId}
                         type="color"
                         value={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
@@ -158,30 +205,17 @@ const SettingComponent = ({
                     >
                         {settingsTranslations['tw.addons.settings.reset']}
                     </button>
-                    {settingName}
-                </div>
+                </>
             )}
             {setting.type === 'select' && (
-                <label>
-                    <select
-                        onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
+                <>
+                    {label}
+                    <SelectComponent
+                        addonId={addonId}
                         value={value}
-                    >
-                        {setting.potentialValues.map(potentialValue => {
-                            const valueId = potentialValue.id;
-                            const valueName = addonTranslations[`${addonId}/@settings-select-${settingId}-${valueId}`] || potentialValue.name;
-                            return (
-                                <option
-                                    key={valueId}
-                                    value={valueId}
-                                >
-                                    {valueName}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    {settingName}
-                </label>
+                        setting={setting}
+                    />
+                </>
             )}
         </div>
     );
@@ -639,19 +673,19 @@ class AddonSettingsComponent extends React.Component {
                             ))}
                             <div className={styles.footerButtons}>
                                 <button
-                                    className={styles.resetAllButton}
+                                    className={classNames(styles.button, styles.resetAllButton)}
                                     onClick={this.handleResetAll}
                                 >
                                     {settingsTranslations['tw.addons.settings.resetAll']}
                                 </button>
                                 <button
-                                    className={styles.exportButton}
+                                    className={classNames(styles.button, styles.exportButton)}
                                     onClick={this.handleExport}
                                 >
                                     {settingsTranslations['tw.addons.settings.export']}
                                 </button>
                                 <button
-                                    className={styles.importButton}
+                                    className={classNames(styles.button, styles.importButton)}
                                     onClick={this.handleImport}
                                 >
                                     {settingsTranslations['tw.addons.settings.import']}

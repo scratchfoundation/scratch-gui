@@ -305,7 +305,7 @@ a[href] {
     border-color: rgb(185, 38, 38);
 }
 @media (max-width: 550px) {
-    .tag-container {
+    .tag:not(.tag-beta) {
         display: none;
     }
 }

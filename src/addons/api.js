@@ -239,7 +239,7 @@ class AddonRunner {
                 const style = document.createElement('style');
                 style.className = 'scratch-addons-theme';
                 style.dataset.addonId = this.id;
-                style.innerText = source;
+                style.textContent = source;
                 // Insert styles at the start of the body so that they have higher precedence than those in <head>
                 document.body.insertBefore(style, document.body.firstChild);
             }

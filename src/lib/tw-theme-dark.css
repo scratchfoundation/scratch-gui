@@ -17,16 +17,16 @@
     fill: #111;
 }
 .blocklyFlyoutLabelText {
-    fill: #aaa;
+    fill: #ccc;
 }
 .blocklyFlyoutButton .blocklyText {
-    fill: #aaa;
+    fill: #ccc;
 }
 .blocklyFlyoutButton:hover {
     fill: #111;
 }
 .scratchCategoryMenu {
-    color: #aaa;
+    color: #ccc;
 }
 .blocklyToolboxDiv,
 .scratchCategoryMenu {

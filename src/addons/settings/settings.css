@@ -210,7 +210,7 @@ a[href] {
     background-color: transparent;
 }
 .reset-button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 .reset-button:focus-within {
     outline: none;
@@ -223,6 +223,9 @@ a[href] {
 @media (prefers-color-scheme: dark) {
     .reset-button-image {
         filter: invert(100%);
+    }
+    .reset-button:hover {
+        background: rgba(255, 255, 255, 0.05);
     }
 }
 
@@ -266,6 +269,10 @@ a[href] {
     }
 }
 
+.tag-container {
+    display: flex;
+    align-items: center;
+}
 .tag {
     border-radius: 4px;
     padding: 2px 5px;
@@ -328,7 +335,7 @@ a[href] {
 
 .setting {
     margin: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
     min-height: 35px;
     display: flex;
     align-items: center;
@@ -379,12 +386,17 @@ a[href] {
 .setting input[type="color"] {
     height: 30px;
     width: 100px;
+    box-sizing: border-box;
     padding: 0;
-    overflow: hidden;
+    margin: 0;
+    outline: none;
+    border: 1px solid transparent;
     border-radius: 4px 0px 0px 4px;
 }
 .reset-color-button {
     border-radius: 0 4px 4px 0px;
+    box-sizing: border-box;
+    height: 30px;
 }
 .select {
     display: flex;
@@ -433,7 +445,10 @@ a[href] {
 }
 
 .presets {
-
+    width: 100%;
+}
+.preset-button {
+    margin-right: 10px;
 }
 
 .footer-buttons {

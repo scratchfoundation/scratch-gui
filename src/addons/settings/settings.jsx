@@ -33,6 +33,7 @@ import undoImage from './undo.svg';
 import styles from './settings.css';
 
 /* eslint-disable no-alert */
+/* eslint-disable no-console */
 
 const locale = detectLocale(upstreamMeta.languages);
 const addonTranslations = getAddonTranslations(locale);
@@ -85,37 +86,33 @@ SwitchComponent.propTypes = {
 };
 
 const SelectComponent = ({
-    addonId,
+    onChange,
     value,
-    setting
+    values
 }) => (
     <div className={styles.select}>
-        {setting.potentialValues.map(potentialValue => {
+        {values.map(potentialValue => {
             const id = potentialValue.id;
             const selected = id === value;
-            const valueName = addonTranslations[`${addonId}/@settings-select-${setting.id}-${id}`] || potentialValue.name;
             return (
                 <button
                     key={id}
-                    onClick={() => SettingsStore.setAddonSetting(addonId, setting.id, id)}
+                    onClick={() => onChange(id)}
                     className={classNames(styles.selectOption, {[styles.selected]: selected})}
                 >
-                    {valueName}
+                    {potentialValue.name}
                 </button>
             );
         })}
     </div>
 );
 SelectComponent.propTypes = {
-    addonId: PropTypes.string,
+    onChange: PropTypes.func,
     value: PropTypes.string,
-    setting: PropTypes.shape({
+    values: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
-        potentialValues: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string
-        }))
-    })
+        name: PropTypes.string
+    }))
 };
 
 const TagComponent = ({tags}) => tags.length > 0 && (
@@ -153,7 +150,7 @@ const SettingComponent = ({
 }) => {
     const settingId = setting.id;
     const settingName = addonTranslations[`${addonId}/@settings-name-${settingId}`] || setting.name;
-    const uniqueId = `setting/${addonId}/${settingId}`
+    const uniqueId = `setting/${addonId}/${settingId}`;
     const label = (
         <label
             htmlFor={uniqueId}
@@ -212,8 +209,12 @@ const SettingComponent = ({
                 <>
                     {label}
                     <SelectComponent
-                        addonId={addonId}
                         value={value}
+                        values={setting.potentialValues.map(({id, name}) => ({
+                            id,
+                            name: addonTranslations[`${addonId}/@settings-select-${settingId}-${id}`] || name
+                        }))}
+                        onChange={v => SettingsStore.setAddonSetting(addonId, settingId, v)}
                         setting={setting}
                     />
                 </>
@@ -229,6 +230,7 @@ SettingComponent.propTypes = {
         name: PropTypes.string,
         min: PropTypes.number,
         max: PropTypes.number,
+        default: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
         potentialValues: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.string,
             name: PropTypes.string
@@ -266,32 +268,26 @@ const PresetComponent = ({
     addonId,
     presets
 }) => (
-    <select
-        className={styles.presets}
-        onChange={e => SettingsStore.applyAddonPreset(addonId, e.target.value)}
-        value="_presets"
-    >
-        <option
-            disabled
-            value="_presets"
-        >
+    <div className={classNames(styles.setting, styles.presets)}>
+        <div className={styles.settingLabel}>
             {settingsTranslations['tw.addons.settings.presets']}
-        </option>
+        </div>
         {presets.map(preset => {
             const presetId = preset.id;
             const name = addonTranslations[`${addonId}/@preset-name-${presetId}`] || preset.name;
             const description = addonTranslations[`${addonId}/@preset-description-${presetId}`] || preset.description;
             return (
-                <option
+                <button
                     key={presetId}
-                    value={presetId}
                     title={description}
+                    className={classNames(styles.button, styles.presetButton)}
+                    onClick={() => SettingsStore.applyAddonPreset(addonId, presetId)}
                 >
                     {name}
-                </option>
+                </button>
             );
         })}
-    </select>
+    </div>
 );
 PresetComponent.propTypes = {
     addonId: PropTypes.string,
@@ -344,7 +340,6 @@ const AddonComponent = ({
                     value={settings.enabled}
                     onChange={value => SettingsStore.setAddonEnabled(id, value)}
                 />
-                {/* TODO: Presets */}
             </div>
         </div>
         {settings.enabled && (
@@ -370,6 +365,12 @@ const AddonComponent = ({
                                 value={settings[setting.id]}
                             />
                         ))}
+                        {manifest.presets && (
+                            <PresetComponent
+                                addonId={id}
+                                presets={manifest.presets}
+                            />
+                        )}
                     </div>
                 )}
             </div>

@@ -47,14 +47,14 @@
 }
 
 /* Paint */
-.input_input-form_K5SYW {
+[class*="input_input-form"] {
     background-color: var(--ui-secondary);
     border-color: var(--ui-tertiary);
     color: var(--text-primary);
 }
-img.tool-select-base_tool-select-icon_2pPoi {
+img[class*="tool-select-base_tool-select-icon"] {
     filter: brightness(1.7);
 }
-.paint-editor_button-group-button-icon_1umM4 {
+[class*="paint-editor_button-group-button-icon"] {
     filter: brightness(1.7);
 }

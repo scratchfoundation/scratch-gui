@@ -13,7 +13,7 @@
   "tw.addons.settings.tags.turbowarp": "TurboWarp",
   "tw.addons.settings.search": "Search",
   "tw.addons.settings.noResults": "No results.",
-  "tw.addons.settings.export": "Export",
-  "tw.addons.settings.import": "Import",
+  "tw.addons.settings.export": "Export settings",
+  "tw.addons.settings.import": "Import settings",
   "tw.addons.settings.unsupported": "Some addons are not available in this browser:"
 }

@@ -738,7 +738,7 @@ class AddonSettingsComponent extends React.Component {
                             {settingsTranslations['tw.addons.settings.import']}
                         </button>
                     </div>
-                    {unsupportedAddons.length ? (
+                    {unsupported.length ? (
                         <UnsupportedAddonsComponent
                             addons={unsupported}
                         />

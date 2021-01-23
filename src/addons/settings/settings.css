@@ -28,6 +28,16 @@ body {
     }
 }
 
+a {
+    color: #2a67eb;
+    text-decoration: underline;
+}
+@media (prefers-color-scheme: dark) {
+    a {
+        color: #6d9bff;
+    }
+}
+
 .container {
     position: absolute;
     top: 0;

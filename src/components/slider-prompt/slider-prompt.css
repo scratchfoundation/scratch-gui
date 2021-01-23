@@ -9,6 +9,10 @@
     background: $ui-white;
     padding: 1.5rem 2.25rem;
 }
+[theme="dark"] .body {
+    color: $text-primary;
+    background: $ui-primary;
+}
 
 .label {
     font-weight: 500;
@@ -24,6 +28,10 @@
     height: 3rem;
     color: $text-primary-transparent;
     font-size: .875rem;
+}
+[theme="dark"] .min-input, [theme="dark"] .max-input {
+    background: $ui-secondary;
+    color: white;
 }
 
 .button-row {

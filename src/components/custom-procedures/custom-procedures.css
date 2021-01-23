@@ -11,6 +11,7 @@
     padding: 1.5rem 2.25rem;
 }
 [theme="dark"] .body {
+    color: $text-primary;
     background: $ui-secondary;
 }
 

@@ -378,12 +378,12 @@ div.s3devDDOut.vis ul.s3devDD {
   border-bottom: 10px solid white;
 }
 [theme="dark"] .s3devDD > li.boolean::before {
-    border-top-color: #111;
-    border-bottom-color: #111;
+  border-top-color: #111;
+  border-bottom-color: #111;
 }
 [theme="dark"] .s3devDD > li.boolean::after {
-    border-top-color: #111;
-    border-bottom-color: #111;
+  border-top-color: #111;
+  border-bottom-color: #111;
 }
 
 #s3devOverlay {

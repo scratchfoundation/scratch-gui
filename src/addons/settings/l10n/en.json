@@ -14,5 +14,6 @@
   "tw.addons.settings.search": "Search",
   "tw.addons.settings.noResults": "No results.",
   "tw.addons.settings.export": "Export",
-  "tw.addons.settings.import": "Import"
+  "tw.addons.settings.import": "Import",
+  "tw.addons.settings.unsupported": "Some addons are not available in this browser:"
 }

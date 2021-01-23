@@ -20,7 +20,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import addons from '../addon-manifests';
+import addons, {unsupportedAddons} from '../addon-manifests';
 import getAddonTranslations from '../get-addon-translations';
 import settingsTranslationsEnglish from './l10n/en.json';
 import settingsTranslationsOther from './l10n/translations.json';
@@ -72,12 +72,13 @@ AddonCreditsComponent.propTypes = {
     }))
 };
 
-const SwitchComponent = ({onChange, value}) => (
+const SwitchComponent = ({onChange, value, ...props}) => (
     <button
         className={styles.switch}
         state={value ? 'on' : 'off'}
         tabIndex="0"
         onClick={() => onChange(!value)}
+        {...props}
     />
 );
 SwitchComponent.propTypes = {
@@ -306,13 +307,18 @@ const AddonComponent = ({
 }) => (
     <div className={classNames(styles.addon, {[styles.addonDirty]: settings.dirty})}>
         <div className={styles.addonHeader}>
-            <img
-                className={styles.extensionImage}
-                src={extensionImage}
-            />
-            <div className={styles.addonTitleText}>
-                {addonTranslations[`${id}/@name`] || manifest.name}
-            </div>
+            <label
+                htmlFor={id}
+                className={styles.addonTitle}
+            >
+                <img
+                    className={styles.extensionImage}
+                    src={extensionImage}
+                />
+                <div className={styles.addonTitleText}>
+                    {addonTranslations[`${id}/@name`] || manifest.name}
+                </div>
+            </label>
             {manifest.tags && (
                 <TagComponent
                     tags={manifest.tags}
@@ -337,6 +343,7 @@ const AddonComponent = ({
                     </button>
                 )}
                 <SwitchComponent
+                    id={id}
                     value={settings.enabled}
                     onChange={value => SettingsStore.setAddonEnabled(id, value)}
                 />
@@ -415,6 +422,33 @@ const DirtyComponent = props => (
 );
 DirtyComponent.propTypes = {
     onReloadNow: PropTypes.func
+};
+
+const UnsupportedAddonsComponent = ({addons: addonList}) => (
+    <div className={styles.unsupportedContainer}>
+        <div className={styles.unsupportedText}>
+            {settingsTranslations['tw.addons.settings.unsupported']}
+        </div>
+        {addonList.map(({id, manifest}, index) => (
+            <div
+                key={id}
+                className={styles.unsupportedAddon}
+            >
+                {addonTranslations[`${id}/@name`] || manifest.name}
+                {index !== addonList.length - 1 && (
+                    ', '
+                )}
+            </div>
+        ))}
+    </div>
+);
+UnsupportedAddonsComponent.propTypes = {
+    addons: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        manifest: PropTypes.shape({
+            name: PropTypes.string
+        })
+    }))
 };
 
 const KONAMI = [
@@ -642,6 +676,10 @@ class AddonSettingsComponent extends React.Component {
             state: this.state[id]
         }))
             .filter(({id, manifest, state}) => this.shouldShowAddon(state, id, manifest));
+        const unsupported = Object.entries(this.props.unsupportedAddons).map(([id, manifest]) => ({
+            id,
+            manifest
+        }));
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
@@ -674,32 +712,37 @@ class AddonSettingsComponent extends React.Component {
                                     manifest={manifest}
                                 />
                             ))}
-                            <div className={styles.footerButtons}>
-                                <button
-                                    className={classNames(styles.button, styles.resetAllButton)}
-                                    onClick={this.handleResetAll}
-                                >
-                                    {settingsTranslations['tw.addons.settings.resetAll']}
-                                </button>
-                                <button
-                                    className={classNames(styles.button, styles.exportButton)}
-                                    onClick={this.handleExport}
-                                >
-                                    {settingsTranslations['tw.addons.settings.export']}
-                                </button>
-                                <button
-                                    className={classNames(styles.button, styles.importButton)}
-                                    onClick={this.handleImport}
-                                >
-                                    {settingsTranslations['tw.addons.settings.import']}
-                                </button>
-                            </div>
                         </>
                     ) : (
                         <div className={styles.noResults}>
                             {settingsTranslations['tw.addons.settings.noResults']}
                         </div>
                     )}
+                    <div className={styles.footerButtons}>
+                        <button
+                            className={classNames(styles.button, styles.resetAllButton)}
+                            onClick={this.handleResetAll}
+                        >
+                            {settingsTranslations['tw.addons.settings.resetAll']}
+                        </button>
+                        <button
+                            className={classNames(styles.button, styles.exportButton)}
+                            onClick={this.handleExport}
+                        >
+                            {settingsTranslations['tw.addons.settings.export']}
+                        </button>
+                        <button
+                            className={classNames(styles.button, styles.importButton)}
+                            onClick={this.handleImport}
+                        >
+                            {settingsTranslations['tw.addons.settings.import']}
+                        </button>
+                    </div>
+                    {unsupportedAddons.length ? (
+                        <UnsupportedAddonsComponent
+                            addons={unsupported}
+                        />
+                    ) : null}
                 </div>
             </div>
         );
@@ -707,11 +750,13 @@ class AddonSettingsComponent extends React.Component {
 }
 AddonSettingsComponent.propTypes = {
     addons: PropTypes.objectOf(PropTypes.object),
+    unsupportedAddons: PropTypes.objectOf(PropTypes.object),
     onReloadNow: PropTypes.func,
     onSettingsChanged: PropTypes.func
 };
 AddonSettingsComponent.defaultProps = {
-    addons
+    addons,
+    unsupportedAddons
 };
 
 export default AddonSettingsComponent;

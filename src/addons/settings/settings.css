@@ -184,6 +184,15 @@ a[href] {
     }
 }
 
+.addon-title {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.addon-title-text {
+
+}
+
 .inline-description {
     margin-left: 10px;
     color: gray;
@@ -461,6 +470,21 @@ a[href] {
     margin-right: 10px;
 }
 
+.unsupported-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #444;
+}
+.unsupported-addon {
+    margin-left: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    .unsupported-container {
+        color: #aaa;
+    }
+}
+
 .footer-buttons {
     margin-bottom: 10px;
 }
@@ -509,7 +533,7 @@ a[href] {
 }
 
 .dirty-button {
-    margin-left: 4px;
+    margin-left: 6px;
 }
 
 @keyframes dirty-appear {

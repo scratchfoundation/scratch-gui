@@ -63,6 +63,12 @@ a[href] {
         background-color: #222222;
     }
 }
+@media (max-width: 550px) {
+    .header {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
 
 .button {
     color: #000;
@@ -143,6 +149,12 @@ a[href] {
     overflow-x: hidden;
     padding: 10px 20px;
     height: 100%;
+}
+@media (max-width: 550px) {
+    .addons {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 
 .addon {

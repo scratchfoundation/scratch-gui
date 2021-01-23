@@ -54,7 +54,7 @@ a {
     flex-direction: row;
     align-items: center;
     position: relative;
-    padding: 8px 8px;
+    padding: 8px 20px;
     background-color: #fcfcfc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -118,7 +118,7 @@ a {
 .addons {
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 4px;
+    padding: 10px 20px;
 }
 
 .addon {
@@ -127,7 +127,7 @@ a {
     border: 1px solid #cfcfcf;
     border-radius: 5px;
     margin: 10px 0 10px 0;
-    padding: 4px;
+    font-size: 14px;
 }
 @media (prefers-color-scheme: dark) {
     .addon {
@@ -136,70 +136,113 @@ a {
     }
 }
 
-.addon-dirty {
-    background: #ffeedf;
+.addon-header {
+    padding: 0 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.extension-image {
+    height: 16px;
+    width: 16px;
+    margin-right: 8px;
 }
 @media (prefers-color-scheme: dark) {
-    .addon-dirty {
-        background: #555550;
+    .extension-image {
+        filter: invert(100%);
     }
 }
 
-.addon-title-container {
-    padding-bottom: 3px;
-    display: flex;
-    justify-content: space-between;
-    min-height: 24px;
-}
-
-.addon-title {
-    font-weight: bold;
-    display: flex;
-    align-items: baseline;
-}
-
-.addon-checkbox {
-    margin-right: 5px;
-}
-
-.addon-title-text {
-
+.inline-description {
+    margin-left: 10px;
+    color: gray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .addon-operations {
+    margin-left: auto;
+    display: flex;
+}
 
+.reset-button {
+    margin-right: 8px;
+    border-radius: 4px;
+}
+.reset-button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+.reset-button-image {
+    height: 16px;
+    width: 16px;
+}
+@media (prefers-color-scheme: dark) {
+    .reset-button-image {
+        filter: invert(100%);
+    }
+}
+
+.switch {
+    display: block;
+    background: #111;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.switch[state="on"] {
+    background: #ff4c4c;
+}
+.switch::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #aaa;
+    border-radius: 5px;
+    top: 5px;
+    left: 5px;
+    transition: all 0.25s ease;
+}
+.switch[state="on"]::before {
+    background: #fff;
+    left: 25px;
 }
 
 .tag {
     border-radius: 4px;
     padding: 2px 5px;
-    font-size: 12px;
     margin-left: 10px;
     border-bottom: 2px solid #111;
 }
-
 .tag-recommended {
     color: white;
     background-color: #175ef8;
     border-color: #0e44b8;
 }
-
 .tag-beta {
     color: white;
     background-color: #fd662b;
     border-color: #d84a12;
 }
-
 .tag-easter-egg {
     color: black;
     background-color: #b9f38d;
     border-color: #8fce5e;
 }
-
 .tag-turbowarp {
     color: white;
     background: #ff4c4c;
     border-color: rgb(185, 38, 38);
+}
+
+.addon-details {
+    padding: 0 20px;
 }
 
 .credit-container {

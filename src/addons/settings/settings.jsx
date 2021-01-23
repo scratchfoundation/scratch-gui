@@ -28,6 +28,8 @@ import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
 import SettingsStore from '../settings-store';
 import downloadBlob from '../libraries/download-blob';
+import extensionImage from './extension.svg';
+import undoImage from './undo.svg';
 import styles from './settings.css';
 
 /* eslint-disable no-alert */
@@ -67,6 +69,18 @@ AddonCreditsComponent.propTypes = {
         name: PropTypes.string,
         link: PropTypes.string
     }))
+};
+
+const SwitchComponent = ({onChange, value}) => (
+    <div
+        className={styles.switch}
+        state={value ? 'on' : 'off'}
+        onClick={() => onChange(!value)}
+    />
+);
+SwitchComponent.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.bool
 };
 
 const TagComponent = ({tags}) => tags.length > 0 && (
@@ -260,25 +274,44 @@ const AddonComponent = ({
     settings,
     manifest
 }) => (
-    <div className={classNames(styles.addon, {[styles.addonDirty]: settings.dirty})}>
-        <div className={styles.addonTitleContainer}>
-            <label className={styles.addonTitle}>
-                <input
-                    type="checkbox"
-                    className={styles.addonCheckbox}
-                    onChange={e => SettingsStore.setAddonEnabled(id, e.target.checked)}
-                    checked={settings.enabled}
+    <div className={styles.addon}>
+        <div className={styles.addonHeader}>
+            <img
+                className={styles.extensionImage}
+                src={extensionImage}
+            />
+            <div className={styles.addonTitleText}>
+                {addonTranslations[`${id}/@name`] || manifest.name}
+            </div>
+            {manifest.tags && (
+                <TagComponent
+                    tags={manifest.tags}
                 />
-                <span className={styles.addonTitleText}>
-                    {addonTranslations[`${id}/@name`] || manifest.name}
-                </span>
-                {manifest.tags && (
-                    <TagComponent
-                        tags={manifest.tags}
-                    />
+            )}
+            {!settings.enabled && (
+                <div className={styles.inlineDescription}>
+                    {addonTranslations[`${id}/@description`] || manifest.description}
+                </div>
+            )}
+            <div className={styles.addonOperations}>
+                {settings.enabled && manifest.settings && (
+                    <div
+                        className={styles.resetButton}
+                        onClick={() => SettingsStore.resetAddon(id)}
+                        title={settingsTranslations['tw.addons.settings.reset']}
+                    >
+                        <img
+                            src={undoImage}
+                            className={styles.resetButtonImage}
+                        />
+                    </div>
                 )}
-            </label>
-            {settings.enabled && (
+                <SwitchComponent
+                    value={settings.enabled}
+                    onChange={value => SettingsStore.setAddonEnabled(id, value)}
+                />
+            </div>
+            {/* {settings.enabled && (
                 <div className={styles.addonOperations}>
                     {manifest.presets && (
                         <PresetComponent
@@ -295,26 +328,13 @@ const AddonComponent = ({
                         </button>
                     )}
                 </div>
-            )}
-        </div>
-        <div className={styles.description}>
-            {addonTranslations[`${id}/@description`] || manifest.description}
+            )} */}
         </div>
         {settings.enabled && (
-            <div>
-                {/* notices are temporarily disabled because they're currently only used to notify a refresh is required */}
-                {/* we already handle notifying users of that different than upstream */}
-                {/* {manifest.info && (
-          <div className={styles.noticeContainer}>
-            {manifest.info.map((info) => (
-              <NoticeComponent
-                key={info.id}
-                addonId={id}
-                notice={info}
-              />
-            ))}
-          </div>
-        )} */}
+            <div className={styles.addonDetails}>
+                <div className={styles.description}>
+                    {addonTranslations[`${id}/@description`] || manifest.description}
+                </div>
                 {manifest.credits && (
                     <div className={styles.creditContainer}>
                         <span className={styles.creditTitle}>

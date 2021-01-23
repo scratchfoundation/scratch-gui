@@ -41,6 +41,9 @@
 .scratchCategoryMenuItem.categorySelected {
     background: var(--ui-secondary);
 }
+.valueReportBox {
+    color: black;
+}
 
 /* Paint */
 .input_input-form_K5SYW {

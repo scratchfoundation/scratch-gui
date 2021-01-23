@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
- */
-
 #s3devToolBar {
   display: flex;
   white-space: nowrap;
@@ -63,9 +58,16 @@ input.s3devInp {
   min-width: 100%;
   box-sizing: border-box !important;
 }
+[theme="dark"] input.s3devInp {
+  color: #eee;
+  background: #3333;
+}
 
 .s3devInp:hover {
   background-color: white;
+}
+[theme="dark"] input.s3devInp:hover {
+  background: #333;
 }
 
 .s3devInp:focus {
@@ -111,6 +113,9 @@ div.s3devDDOut.vis {
   background-color: white;
   border: none;
   border-radius: 4px;
+}
+[theme="dark"] div.s3devDDOut.vis {
+  background-color: #111;
 }
 
 div.s3devDDOut.vis ul.s3devDD {

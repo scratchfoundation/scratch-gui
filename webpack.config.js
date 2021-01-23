@@ -220,7 +220,7 @@ module.exports = [
                 chunks: ['addon-settings'],
                 template: 'src/playground/index.ejs',
                 filename: 'addons.html',
-                title: 'Addon Settings',
+                title: 'Addon Settings - TurboWarp',
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({

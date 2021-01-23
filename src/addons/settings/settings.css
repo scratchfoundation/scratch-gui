@@ -303,6 +303,12 @@ a[href] {
 .addon-details {
     padding: 0 20px;
     margin-bottom: 10px;
+    color: #111;
+}
+@media (prefers-color-scheme: dark) {
+    .addon-details {
+        color: #ddd;
+    }
 }
 
 .credit-container {

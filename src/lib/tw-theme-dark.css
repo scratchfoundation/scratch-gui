@@ -36,6 +36,7 @@
     fill: #666;
 }
 .blocklyZoom {
+    /* TODO: does not work in chrome */
     filter: invert(100%);
 }
 .scratchCategoryMenuItem.categorySelected {

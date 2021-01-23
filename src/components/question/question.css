@@ -23,6 +23,17 @@
     position: relative;
 }
 
+/* tw: input should not look different in dark mode */
+[theme="dark"] .question-input input {
+    color: hsla(225, 15%, 40%, 1);
+    background: hsla(215, 75%, 95%, 1);
+    border-color: hsla(215, 50%, 90%, 1);
+}
+[theme="dark"] .question-input input:hover,
+[theme="dark"] .question-input input:focus {
+    border-color: $motion-primary;
+}
+
 .question-submit-button {
     position: absolute;
     top: calc($space / 2);

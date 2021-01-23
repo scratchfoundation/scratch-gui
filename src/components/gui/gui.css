@@ -90,6 +90,9 @@
     user-select: none;
     white-space: nowrap;
 }
+[theme="dark"] .tab {
+    color: $text-primary;
+}
 
 [dir="ltr"] .tab {
     margin-left: -0.5rem;

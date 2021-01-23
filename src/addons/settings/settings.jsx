@@ -552,6 +552,9 @@ class AddonSettingsComponent extends React.Component {
         this.searchBar = searchBar;
     }
     handleKeyDown (e) {
+        if (e.key.toLowerCase() !== KONAMI[this.konamiProgress]) {
+            this.konamiProgress = 0;
+        }
         if (e.key.toLowerCase() === KONAMI[this.konamiProgress]) {
             this.konamiProgress++;
             if (this.konamiProgress >= KONAMI.length) {
@@ -564,8 +567,6 @@ class AddonSettingsComponent extends React.Component {
                 e.preventDefault();
                 return;
             }
-        } else {
-            this.konamiProgress = 0;
         }
         const key = e.key;
         if (key.length === 1 && key !== ' ' && !(e.ctrlKey || e.metaKey || e.altKey)) {

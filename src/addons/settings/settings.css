@@ -64,6 +64,19 @@ a {
     }
 }
 
+.button {
+    color: #fff;
+    background: #222222;
+    border: 1px solid #000;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: 0.25s ease;
+    outline: none;
+    height: 32px;
+    font-family: inherit;
+    font-size: 12px;
+}
+
 .search-container {
     display: flex;
     background-color: #f0f0f0;
@@ -243,16 +256,15 @@ a {
 
 .addon-details {
     padding: 0 20px;
+    margin-bottom: 10px;
 }
 
 .credit-container {
 
 }
-
 .credit-title {
     padding-right: 3px;
 }
-
 .credit {
 
 }
@@ -261,32 +273,52 @@ a {
 
 }
 
-.setting-container {
-    margin-left: 20px;
-    column-width: 300px;
-}
-
-.setting {
-
-}
-
-.setting input, .setting select {
-    margin-right: 5px;
-}
-
 .notice-container {
 
 }
-
 .notice {
 
 }
 
-.presets {
-
+.setting-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.reset-button {
+.setting {
+    margin: 10px;
+    margin-right: 10px;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.setting input {
+    color: #fff;
+    background: #222222;
+    border: 1px solid #000;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: 0.25s ease;
+}
+.color-setting {
+    display: flex;
+    align-items: center;
+}
+.reset-color-button {
+    border-radius: 0 4px 4px 0px;
+}
+.color-setting input[type="color"] {
+    height: 30px;
+    width: 100px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.presets {
 
 }
 

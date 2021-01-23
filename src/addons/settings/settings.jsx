@@ -146,20 +146,19 @@ const SettingComponent = ({
                 </label>
             )}
             {setting.type === 'color' && (
-                <div>
+                <div className={styles.colorSetting}>
+                    <input
+                        type="color"
+                        value={value}
+                        onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
+                    />
                     <button
+                        className={classNames(styles.button, styles.resetColorButton)}
                         onClick={() => SettingsStore.setAddonSetting(addonId, settingId, setting.default)}
                     >
                         {settingsTranslations['tw.addons.settings.reset']}
                     </button>
-                    <label>
-                        <input
-                            type="color"
-                            value={value}
-                            onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.value)}
-                        />
-                        {settingName}
-                    </label>
+                    {settingName}
                 </div>
             )}
             {setting.type === 'select' && (
@@ -310,25 +309,8 @@ const AddonComponent = ({
                     value={settings.enabled}
                     onChange={value => SettingsStore.setAddonEnabled(id, value)}
                 />
+                {/* TODO: Presets */}
             </div>
-            {/* {settings.enabled && (
-                <div className={styles.addonOperations}>
-                    {manifest.presets && (
-                        <PresetComponent
-                            addonId={id}
-                            presets={manifest.presets}
-                        />
-                    )}
-                    {settings.enabled && manifest.settings && (
-                        <button
-                            className={styles.resetButton}
-                            onClick={() => SettingsStore.resetAddon(id)}
-                        >
-                            {settingsTranslations['tw.addons.settings.reset']}
-                        </button>
-                    )}
-                </div>
-            )} */}
         </div>
         {settings.enabled && (
             <div className={styles.addonDetails}>

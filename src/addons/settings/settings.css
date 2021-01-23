@@ -396,20 +396,17 @@ a[href] {
     border: none;
     background: #f0f0f0;
     border: 1px solid #aaa;
+    border-right-width: 0;
     transition: 0.25s ease;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 .select-option:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 .select-option:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-right-width: 1px;
 }
 .select-option.selected {
     color: white;

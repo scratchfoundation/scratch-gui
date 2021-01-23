@@ -61,7 +61,10 @@ window.addEventListener('message', e => {
 });
 
 const handleClickAddonSettings = () => {
-    window.open(`${process.env.ROOT}addons.html`);
+    const w = window.open(`${process.env.ROOT}addons.html`, 'tw_addons');
+    if (w) {
+        w.focus();
+    }
 };
 
 const handleLoadAddons = () => {

@@ -16,6 +16,9 @@
     transition: opacity 0.2s ease;
     z-index: $z-index-context-menu;
 }
+[theme="dark"] .context-menu {
+    background-color: $ui-primary;
+}
 
 .menu-item {
     padding: 8px 12px;

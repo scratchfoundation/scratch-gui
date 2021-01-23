@@ -51,9 +51,3 @@ a {
 [theme="dark"] a {
     color: #4af;
 }
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #111;
-    }
-}

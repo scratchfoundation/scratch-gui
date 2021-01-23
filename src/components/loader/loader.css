@@ -16,8 +16,6 @@
     text-align: center;
     color: white;
 }
-
-/* tw: dark theme */
 [theme="dark"] .background {
     background-color: $motion-primary-dark;
 }

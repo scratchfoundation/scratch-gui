@@ -1,0 +1,60 @@
+/* GUI */
+:root {
+    background: #111;
+    color: #eee;
+    --ui-primary: rgb(17, 17, 17);
+    --ui-secondary: rgb(34, 34, 34);
+    --ui-tertiary: rgb(46, 46, 46);
+    --ui-modal-overlay: #333a;
+    --text-primary: #eee;
+}
+
+/* Blockly */
+.blocklyMainBackground {
+    fill: #222 !important;
+}
+.blocklyFlyoutBackground {
+    fill: #111;
+}
+.blocklyFlyoutLabelText {
+    fill: #aaa;
+}
+.blocklyFlyoutButton .blocklyText {
+    fill: #aaa;
+}
+.blocklyFlyoutButton:hover {
+    fill: #111;
+}
+.scratchCategoryMenu {
+    color: #aaa;
+}
+.blocklyToolboxDiv,
+.scratchCategoryMenu {
+    background: #111 !important;
+}
+.blocklyScrollbarHandle {
+    fill: #666;
+}
+.blocklyZoom {
+    /* TODO: does not work in chrome */
+    filter: invert(100%);
+}
+.scratchCategoryMenuItem.categorySelected {
+    background: var(--ui-secondary);
+}
+.valueReportBox {
+    color: black;
+}
+
+/* Paint */
+.input_input-form_K5SYW {
+    background-color: var(--ui-secondary);
+    border-color: var(--ui-tertiary);
+    color: var(--text-primary);
+}
+img.tool-select-base_tool-select-icon_2pPoi {
+    filter: brightness(1.7);
+}
+.paint-editor_button-group-button-icon_1umM4 {
+    filter: brightness(1.7);
+}

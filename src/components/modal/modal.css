@@ -25,7 +25,7 @@
     user-select: none;
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: $text-primary;
+    color: $text-primary-light;
     overflow: hidden;
 }
 

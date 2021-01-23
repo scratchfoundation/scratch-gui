@@ -10,6 +10,10 @@
     background: $ui-white;
     padding: 1.5rem 2.25rem;
 }
+[theme="dark"] .body {
+    color: $text-primary;
+    background: $ui-secondary;
+}
 
 .body input[type="checkbox"],
 .body input[type="radio"] {
@@ -50,6 +54,9 @@
     cursor: pointer;
     transition: all 0.2s;
     flex-basis: 100px;
+}
+[theme="dark"] .option-card {
+    background: $ui-tertiary;
 }
 
 .option-card:hover {

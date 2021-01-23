@@ -21,6 +21,22 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #222222;
+        color: white;
+    }
+}
+
+a {
+    color: #2a67eb;
+    text-decoration: underline;
+}
+@media (prefers-color-scheme: dark) {
+    a {
+        color: #6d9bff;
+    }
+}
 
 .container {
     position: absolute;
@@ -42,6 +58,11 @@ body {
     background-color: #fcfcfc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+@media (prefers-color-scheme: dark) {
+    .header {
+        background-color: #222222;
+    }
+}
 
 .search-container {
     display: flex;
@@ -50,12 +71,25 @@ body {
     border: 1px solid #cecece;
     border-radius: 4px;
 }
+@media (prefers-color-scheme: dark) {
+    .search-container {
+        color: white;
+        background-color: #111111;
+        border-color: #222222;
+    }
+}
 
 .search-container:focus-within {
-    border-color: currentColor;
+    border-color: #222;
+}
+@media (prefers-color-scheme: dark) {
+    .search-container:focus-within {
+        border-color: #444;
+    }
 }
 
 .search-input {
+    color: inherit;
     width: 150px;
     height: 16px;
     padding: 10px 15px;
@@ -75,6 +109,11 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+@media (prefers-color-scheme: dark) {
+    .search-button {
+        filter: invert(100%);
+    }
+}
 
 .addons {
     overflow-y: auto;
@@ -90,9 +129,20 @@ body {
     margin: 10px 0 10px 0;
     padding: 4px;
 }
+@media (prefers-color-scheme: dark) {
+    .addon {
+        background-color: #2a2a2a;
+        border-color: #333;
+    }
+}
 
 .addon-dirty {
     background: #ffeedf;
+}
+@media (prefers-color-scheme: dark) {
+    .addon-dirty {
+        background: #555550;
+    }
 }
 
 .addon-title-container {
@@ -236,6 +286,12 @@ body {
     border: 1px solid #cfcfcf;
     border-radius: 4px;
     pointer-events: auto;
+}
+@media (prefers-color-scheme: dark) {
+    .dirty-inner {
+        background: #555550;
+        border-color: #222;
+    }
 }
 
 .dirty-button {

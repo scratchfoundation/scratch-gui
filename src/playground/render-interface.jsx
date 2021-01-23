@@ -27,7 +27,7 @@ import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
-import TWDarkModeHOC from '../lib/tw-dark-mode-hoc.jsx';
+import TWThemeHOC from '../lib/tw-theme-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
 import SettingsStore from '../addons/settings-store';
 
@@ -75,7 +75,8 @@ const WrappedMenuBar = compose(
 const Interface = ({
     description,
     isFullScreen,
-    isPlayerOnly
+    isPlayerOnly,
+    onClickTheme
 }) => {
     const isHomepage = isPlayerOnly && !isFullScreen;
     return (
@@ -86,6 +87,7 @@ const Interface = ({
                         canManageFiles
                         canChangeLanguage
                         enableSeeInside
+                        onClickTheme={onClickTheme}
                     />
                 </div>
             ) : null}
@@ -94,6 +96,7 @@ const Interface = ({
                 <GUI
                     onClickAddonSettings={handleClickAddonSettings}
                     onLoadAddons={handleLoadAddons}
+                    onClickTheme={onClickTheme}
                 />
                 {isHomepage ? (
                     <React.Fragment>
@@ -216,7 +219,8 @@ Interface.propTypes = {
         instructions: PropTypes.string
     }),
     isFullScreen: PropTypes.bool,
-    isPlayerOnly: PropTypes.bool
+    isPlayerOnly: PropTypes.bool,
+    onClickTheme: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -237,7 +241,7 @@ const WrappedInterface = compose(
     TWProjectMetaFetcherHOC,
     TWEditorWarningHOC,
     TWStateManagerHOC,
-    TWDarkModeHOC
+    TWThemeHOC
 )(ConnectedInterface);
 
 export default WrappedInterface;

@@ -90,6 +90,9 @@
     user-select: none;
     white-space: nowrap;
 }
+[theme="dark"] .tab {
+    color: $text-primary;
+}
 
 [dir="ltr"] .tab {
     margin-left: -0.5rem;
@@ -121,12 +124,18 @@
 .tab:hover {
   background-color: $ui-primary;
 }
+[theme="dark"] .tab:hover {
+    background-color: $ui-secondary;
+}
 
 .tab.is-selected {
     height: 90%;
     color: $motion-primary;
     background-color: $ui-white;
     z-index: 4; /* Make sure selected is always above */
+}
+[theme="dark"] .tab.is-selected {
+    background-color: $ui-primary;
 }
 
 .tab img {

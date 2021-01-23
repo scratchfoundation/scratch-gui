@@ -411,6 +411,15 @@ class MenuBar extends React.Component {
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>)}
+                        {/* tw: theme toggler */}
+                        {this.props.onClickTheme && (
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable)}
+                                onMouseUp={this.props.onClickTheme}
+                            >
+                                <div className={styles.themeIcon} />
+                            </div>
+                        )}
                         {/* tw: display compile errors */}
                         {this.props.compileErrors.length > 0 && <div>
                             <div
@@ -1031,6 +1040,7 @@ MenuBar.propTypes = {
     onClickAbout: PropTypes.func,
     onClickAccount: PropTypes.func,
     onClickAddonSettings: PropTypes.func,
+    onClickTheme: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,

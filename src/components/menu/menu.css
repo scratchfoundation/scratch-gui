@@ -14,8 +14,6 @@
     color: $ui-white;
     box-shadow: 0 8px 8px 0 $ui-black-transparent;
 }
-
-/* tw: dark theme */
 [theme="dark"] .menu {
     background-color: $motion-primary-dark;
 }

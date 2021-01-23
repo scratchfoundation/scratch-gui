@@ -1,20 +1,50 @@
+/* GUI */
 :root {
     background: #111;
-    --ui-primary: #111;
-    --ui-secondary: #222;
-    --ui-tertiary: #333;
+    color: #eee;
+    --ui-primary: rgb(17, 17, 17);
+    --ui-secondary: rgb(34, 34, 34);
+    --ui-tertiary: rgb(46, 46, 46);
+    --ui-modal-overlay: #333a;
     --text-primary: #eee;
 }
 
+/* Blockly */
 .blocklyMainBackground {
     fill: #222 !important;
 }
 .blocklyFlyoutBackground {
     fill: #111;
 }
-.blocklyToolboxDiv, .scratchCategoryMenu {
+.blocklyFlyoutLabelText {
+    fill: #aaa;
+}
+.blocklyFlyoutButton .blocklyText {
+    fill: #aaa;
+}
+.blocklyFlyoutButton:hover {
+    fill: #111;
+}
+.scratchCategoryMenu {
+    color: #aaa;
+}
+.blocklyToolboxDiv,
+.scratchCategoryMenu {
     background: #111 !important;
+}
+.blocklyScrollbarHandle {
+    fill: #666;
+}
+.blocklyZoom {
+    filter: invert(100%);
 }
 .scratchCategoryMenuItem.categorySelected {
     background: var(--ui-secondary);
+}
+
+/* Paint */
+.input_input-form_K5SYW {
+    background-color: var(--ui-secondary);
+    border-color: var(--ui-tertiary);
+    color: var(--text-primary);
 }

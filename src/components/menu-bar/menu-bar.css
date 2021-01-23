@@ -30,8 +30,6 @@
     background-color: $motion-primary;
     color: $ui-white;
 }
-
-/* tw: dark theme */
 [theme="dark"] .menu-bar {
     background-color: $motion-primary-dark;
 }
@@ -124,7 +122,6 @@
     color: $motion-primary !important;
     text-decoration: none;
 }
-/* tw: dark theme */
 [theme="dark"] .feedback-link {
     color: $motion-primary-dark !important;
 }

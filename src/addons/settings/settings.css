@@ -74,11 +74,12 @@ a[href] {
     outline: none;
     height: 32px;
     font-family: inherit;
+    font-size: 14px;
 }
 .button:hover {
     background: #aaaaaa;
 }
-.button:focus-within {
+.button:active, .button:focus-within {
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 @media (prefers-color-scheme: dark) {
@@ -99,23 +100,9 @@ a[href] {
     border: 1px solid #cecece;
     border-radius: 4px;
 }
-@media (prefers-color-scheme: dark) {
-    .search-container {
-        color: white;
-        background-color: #111111;
-        border-color: #222222;
-    }
-}
-
 .search-container:focus-within {
     border-color: #222;
 }
-@media (prefers-color-scheme: dark) {
-    .search-container:focus-within {
-        border-color: #444;
-    }
-}
-
 .search-input {
     color: inherit;
     width: 150px;
@@ -124,8 +111,8 @@ a[href] {
     border: none;
     outline: none;
     background-color: transparent;
+    font-size: 14px;
 }
-
 .search-button {
     height: 36px;
     width: 36px;
@@ -138,6 +125,14 @@ a[href] {
     background-position: center;
 }
 @media (prefers-color-scheme: dark) {
+    .search-container {
+        color: white;
+        background-color: #111111;
+        border-color: #222222;
+    }
+    .search-container:focus-within {
+        border-color: #444;
+    }
     .search-button {
         filter: invert(100%);
     }
@@ -147,6 +142,7 @@ a[href] {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px 20px;
+    height: 100%;
 }
 
 .addon {
@@ -212,7 +208,7 @@ a[href] {
 .reset-button:hover {
     background: rgba(0, 0, 0, 0.05);
 }
-.reset-button:focus-within {
+.reset-button:active, .reset-button:focus-within {
     outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
@@ -259,7 +255,7 @@ a[href] {
     background: #fff;
     left: 25px;
 }
-.switch:focus-within {
+.switch:active, .switch:focus-within {
     outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
@@ -368,7 +364,7 @@ a[href] {
     border-radius: 4px;
     transition: 0.25s ease;
 }
-.setting input:focus {
+.setting input:focus, .setting input:active {
     outline: none;
     border-color: #ff4c4c;
     box-shadow: 0 0 0 3px #ff4c4c5d;
@@ -393,6 +389,7 @@ a[href] {
 }
 .setting input[type="number"] {
     border-radius: 20px;
+    font-size: 14px;
 }
 .setting input[type="color"] {
     height: 30px;
@@ -415,9 +412,11 @@ a[href] {
 .select-option {
     cursor: pointer;
     padding: 10px;
+    margin: 0;
     background: transparent;
     border: none;
     background: #f0f0f0;
+    color: #000;
     border: 1px solid #aaa;
     border-right-width: 0;
     transition: 0.25s ease;
@@ -435,7 +434,7 @@ a[href] {
     color: white;
     background: #ff4c4c;
 }
-.select-option:focus-within {
+.select-option:active, .select-option:focus-within {
     outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
@@ -446,7 +445,7 @@ a[href] {
     .setting input {
         color: #fff;
         background: #222222;
-        border: 1px solid #000;    
+        border: 1px solid #000;
     }
     .select-option {
         color: #fff;

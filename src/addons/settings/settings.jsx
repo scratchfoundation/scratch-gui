@@ -403,7 +403,7 @@ const DirtyComponent = props => (
             {settingsTranslations['tw.addons.settings.dirty']}
             {props.onReloadNow && (
                 <button
-                    className={styles.dirtyButton}
+                    className={classNames(styles.button, styles.dirtyButton)}
                     onClick={props.onReloadNow}
                 >
                     {settingsTranslations['tw.addons.settings.dirtyButton']}

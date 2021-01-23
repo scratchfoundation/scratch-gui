@@ -212,6 +212,10 @@ a[href] {
 .reset-button:hover {
     background: rgba(255, 255, 255, 0.05);
 }
+.reset-button:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 3px #ff4c4c5d;
+}
 .reset-button-image {
     height: 16px;
     width: 16px;
@@ -251,6 +255,10 @@ a[href] {
 .switch[state="on"]::before {
     background: #fff;
     left: 25px;
+}
+.switch:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 @media (prefers-color-scheme: dark) {
     .switch::before {
@@ -408,6 +416,7 @@ a[href] {
     background: #ff4c4c;
 }
 .select-option:focus-within {
+    outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 @media (prefers-color-scheme: dark) {

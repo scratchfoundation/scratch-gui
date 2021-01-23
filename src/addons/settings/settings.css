@@ -65,16 +65,28 @@ a[href] {
 }
 
 .button {
-    color: #fff;
-    background: #222222;
-    border: 1px solid #000;
+    color: #000;
+    background: #efefef;
+    border: 1px solid #acacac;
     padding: 8px 12px;
     border-radius: 4px;
     transition: 0.25s ease;
     outline: none;
     height: 32px;
     font-family: inherit;
-    font-size: 12px;
+}
+.button:hover {
+    background: #aaaaaa;
+}
+@media (prefers-color-scheme: dark) {
+    .button {
+        color: #fff;
+        background: #222222;
+        border-color: #000;
+    }
+    .button:hover {
+        background: #151515;
+    }
 }
 
 .search-container {
@@ -181,8 +193,12 @@ a[href] {
 }
 
 .reset-button {
+    display: block;
     margin-right: 8px;
     border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 .reset-button:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -202,6 +218,7 @@ a[href] {
     background: #111;
     width: 40px;
     height: 20px;
+    border: none;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
@@ -216,7 +233,7 @@ a[href] {
     display: block;
     width: 10px;
     height: 10px;
-    background: #aaa;
+    background: #fff;
     border-radius: 5px;
     top: 5px;
     left: 5px;
@@ -225,6 +242,11 @@ a[href] {
 .switch[state="on"]::before {
     background: #fff;
     left: 25px;
+}
+@media (prefers-color-scheme: dark) {
+    .switch::before {
+        background: #aaa;
+    }
 }
 
 .tag {
@@ -299,17 +321,22 @@ a[href] {
     font-weight: bold;
     width: 200px;
     text-transform: uppercase;
-    color: #aaa;
+    color: #555;
     font-size: 12px;
     margin-right: 10px;
 }
 .setting input {
-    color: #fff;
-    background: #222222;
-    border: 1px solid #000;
+    color: #000;
+    background: #efefef;
+    border: 1px solid #acacac;
     padding: 8px 12px;
     border-radius: 4px;
     transition: 0.25s ease;
+}
+.setting input:focus {
+    outline: none;
+    border-color: #ff4c4c;
+    box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 .setting input[type="checkbox"] {
     height: 20px;
@@ -346,16 +373,38 @@ a[href] {
     display: flex;
     border-radius: 4px;
     overflow: hidden;
-    background: #222;
-    border: 1px solid #000;
-    user-select: none;
+    background: #f0f0f0;
+    border: 1px solid #aaa;
 }
 .select-option {
+    cursor: pointer;
     padding: 10px;
-    border-right: 1px solid #000;
+    border-color: #aaa;
+}
+.select-option:not(:last-child) {
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 .select-option.selected {
-    background: #ff7b26;
+    color: white;
+    background: #ff4c4c;
+}
+@media (prefers-color-scheme: dark) {
+    .setting-label {
+        color: #aaa;
+    }
+    .setting input {
+        color: #fff;
+        background: #222222;
+        border: 1px solid #000;    
+    }
+    .select {
+        background: #222222;
+        border-color: #000000;
+    }
+    .select-option {
+        border-color: #000000;
+    }
 }
 
 .presets {
@@ -392,8 +441,8 @@ a[href] {
     justify-content: center;
     animation: dirty-appear 0.2s ease;
     pointer-events: none;
+    margin-top: 2px;
 }
-
 .dirty-inner {
     padding: 8px;
     background: #ffeedf;

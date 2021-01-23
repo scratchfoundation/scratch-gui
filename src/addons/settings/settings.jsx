@@ -72,9 +72,10 @@ AddonCreditsComponent.propTypes = {
 };
 
 const SwitchComponent = ({onChange, value}) => (
-    <div
+    <button
         className={styles.switch}
         state={value ? 'on' : 'off'}
+        tabIndex="0"
         onClick={() => onChange(!value)}
     />
 );
@@ -328,7 +329,7 @@ const AddonComponent = ({
             )}
             <div className={styles.addonOperations}>
                 {settings.enabled && manifest.settings && (
-                    <div
+                    <button
                         className={styles.resetButton}
                         onClick={() => SettingsStore.resetAddon(id)}
                         title={settingsTranslations['tw.addons.settings.reset']}
@@ -337,7 +338,7 @@ const AddonComponent = ({
                             src={undoImage}
                             className={styles.resetButtonImage}
                         />
-                    </div>
+                    </button>
                 )}
                 <SwitchComponent
                     value={settings.enabled}

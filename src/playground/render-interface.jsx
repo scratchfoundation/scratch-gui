@@ -60,11 +60,14 @@ window.addEventListener('message', e => {
     }
 });
 
+let addonWindow = null;
 const handleClickAddonSettings = () => {
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-    const w = window.open(`${process.env.ROOT}${path}`, 'tw_addons');
-    if (w) {
-        w.focus();
+    if (!addonWindow || addonWindow.closed) {
+        addonWindow = window.open(`${process.env.ROOT}${path}`);
+    }
+    if (addonWindow) {
+        addonWindow.focus();
     }
 };
 

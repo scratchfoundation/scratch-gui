@@ -22,6 +22,11 @@ $motion-light-transparent: hsla(0, 100%, 65%, 0.15); /* 15% transparent version 
 
 /* tw: dark color variants for certain elements (opt-in) */
 $motion-primary-dark: #333;
+/* forcing light colors for certain elements (opt-in) */
+$ui-primary-light: hsla(215, 100%, 95%, 1);
+$ui-secondary-light: hsla(215, 75%, 95%, 1);
+$ui-tertiary-light: hsla(215, 50%, 90%, 1);
+$text-primary-light: hsla(225, 15%, 40%, 1);
 
 $red-primary: hsla(20, 100%, 55%, 1); /* #FF661A */
 $red-tertiary: hsla(20, 100%, 45%, 1); /* #E64D00 */

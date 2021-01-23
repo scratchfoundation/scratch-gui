@@ -4,7 +4,7 @@
 
 .monitor-container {
     position: absolute;
-    background: hsla(215, 100%, 95%, 1); /* tw: do not look different in dark mode */
+    background: $ui-primary-light; /* tw: do not look different in dark mode */
     z-index: $z-index-monitor;
     border: 1px solid $ui-black-transparent;
     border-radius: calc($space / 2);
@@ -81,12 +81,12 @@
     padding: 3px;
     font-size: 0.75rem;
     font-weight: bold;
-    color: hsla(225, 15%, 40%, 1); /* tw: do not look different in dark mode */
+    color: $text-primary-light; /* tw: do not look different in dark mode */
     width: 100%;
 }
 
 .list-body {
-    background: hsla(215, 100%, 95%, 1); /* tw: do not look different in dark mode */
+    background: $ui-primary-light; /* tw: do not look different in dark mode */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -106,7 +106,7 @@
 
 .list-index {
     font-weight: bold;
-    color: hsla(225, 15%, 40%, 1); /* tw: do not look different in dark mode */
+    color: $text-primary-light; /* tw: do not look different in dark mode */
     margin: 0 3px;
 }
 
@@ -129,7 +129,7 @@
     padding: 3px;
     font-size: 0.75rem;
     font-weight: bold;
-    color: hsla(225, 15%, 40%, 1); /* tw: do not look different in dark mode */
+    color: $text-primary-light; /* tw: do not look different in dark mode */
 }
 
 .list-empty {

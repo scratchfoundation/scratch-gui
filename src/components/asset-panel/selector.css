@@ -39,7 +39,7 @@ $fade-out-distance: 100px;
     pointer-events: none;
 }
 [theme="dark"] .new-buttons:before {
-    background: linear-gradient(rgba(232,237,241, 0),rgb(59, 59, 59));
+    background: linear-gradient(rgba(94, 96, 97, 0),rgb(59, 59, 59));
 }
 
 .new-buttons > button + button {

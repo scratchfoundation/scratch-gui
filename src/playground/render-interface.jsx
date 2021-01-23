@@ -61,7 +61,8 @@ window.addEventListener('message', e => {
 });
 
 const handleClickAddonSettings = () => {
-    const w = window.open(`${process.env.ROOT}addons.html`, 'tw_addons');
+    const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
+    const w = window.open(`${process.env.ROOT}${path}`, 'tw_addons');
     if (w) {
         w.focus();
     }

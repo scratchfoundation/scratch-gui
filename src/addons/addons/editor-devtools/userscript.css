@@ -377,6 +377,14 @@ div.s3devDDOut.vis ul.s3devDD {
   border-top: 9px solid white;
   border-bottom: 10px solid white;
 }
+[theme="dark"] .s3devDD > li.boolean::before {
+    border-top-color: #111;
+    border-bottom-color: #111;
+}
+[theme="dark"] .s3devDD > li.boolean::after {
+    border-top-color: #111;
+    border-bottom-color: #111;
+}
 
 #s3devOverlay {
   position: fixed;

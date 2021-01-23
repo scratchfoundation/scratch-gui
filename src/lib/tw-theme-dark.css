@@ -52,3 +52,9 @@
     border-color: var(--ui-tertiary);
     color: var(--text-primary);
 }
+img.tool-select-base_tool-select-icon_2pPoi {
+    filter: brightness(1.7);
+}
+.paint-editor_button-group-button-icon_1umM4 {
+    filter: brightness(1.7);
+}

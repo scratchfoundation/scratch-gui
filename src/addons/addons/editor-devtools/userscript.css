@@ -1,3 +1,8 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ */
+
 #s3devToolBar {
   display: flex;
   white-space: nowrap;
@@ -449,6 +454,9 @@ div.s3devDDOut.vis ul.s3devDD {
   margin-left: auto;
   margin-right: auto;
   padding: 1em 2em 4em;
+}
+[theme="dark"] #s3devHelpPop > div {
+  background: #111;
 }
 
 #s3devFloatingBar {

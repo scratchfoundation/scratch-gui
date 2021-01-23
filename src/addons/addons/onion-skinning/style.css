@@ -85,3 +85,7 @@
   fill: white;
   stroke: #ddd;
 }
+
+.sa-onion-image[data-image="settings"] {
+  filter: invert(1);
+}

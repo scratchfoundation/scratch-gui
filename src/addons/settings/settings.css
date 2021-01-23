@@ -78,6 +78,9 @@ a[href] {
 .button:hover {
     background: #aaaaaa;
 }
+.button:focus-within {
+    box-shadow: 0 0 0 3px #ff4c4c5d;
+}
 @media (prefers-color-scheme: dark) {
     .button {
         color: #fff;
@@ -154,10 +157,16 @@ a[href] {
     margin: 10px 0 10px 0;
     font-size: 14px;
 }
+.addon-dirty {
+    background: #ffeedf;
+}
 @media (prefers-color-scheme: dark) {
     .addon {
         background-color: #2a2a2a;
         border-color: #333;
+    }
+    .addon-dirty {
+        background: rgb(39, 50, 53);
     }
 }
 
@@ -371,23 +380,35 @@ a[href] {
 }
 .select {
     display: flex;
-    border-radius: 4px;
-    overflow: hidden;
-    background: #f0f0f0;
-    border: 1px solid #aaa;
 }
 .select-option {
     cursor: pointer;
     padding: 10px;
-    border-color: #aaa;
+    background: transparent;
+    border: none;
+    background: #f0f0f0;
+    border: 1px solid #aaa;
+    transition: 0.25s ease;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
-.select-option:not(:last-child) {
-    border-right-width: 1px;
-    border-right-style: solid;
+.select-option:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+.select-option:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .select-option.selected {
     color: white;
     background: #ff4c4c;
+}
+.select-option:focus-within {
+    box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 @media (prefers-color-scheme: dark) {
     .setting-label {
@@ -398,11 +419,9 @@ a[href] {
         background: #222222;
         border: 1px solid #000;    
     }
-    .select {
-        background: #222222;
-        border-color: #000000;
-    }
     .select-option {
+        color: #fff;
+        background: #222222;
         border-color: #000000;
     }
 }
@@ -453,7 +472,7 @@ a[href] {
 }
 @media (prefers-color-scheme: dark) {
     .dirty-inner {
-        background: rgb(48, 96, 110);
+        background: rgb(39, 50, 53);
         border-color: #222;
     }
 }

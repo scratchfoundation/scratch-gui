@@ -95,13 +95,13 @@ const SelectComponent = ({
             const selected = id === value;
             const valueName = addonTranslations[`${addonId}/@settings-select-${setting.id}-${id}`] || potentialValue.name;
             return (
-                <div
+                <button
                     key={id}
                     onClick={() => SettingsStore.setAddonSetting(addonId, setting.id, id)}
                     className={classNames(styles.selectOption, {[styles.selected]: selected})}
                 >
                     {valueName}
-                </div>
+                </button>
             );
         })}
     </div>
@@ -308,7 +308,7 @@ const AddonComponent = ({
     settings,
     manifest
 }) => (
-    <div className={styles.addon}>
+    <div className={classNames(styles.addon, {[styles.addonDirty]: settings.dirty})}>
         <div className={styles.addonHeader}>
             <img
                 className={styles.extensionImage}

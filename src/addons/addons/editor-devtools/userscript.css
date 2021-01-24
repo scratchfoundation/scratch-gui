@@ -480,6 +480,9 @@ div.s3devDDOut.vis ul.s3devDD {
 
   z-index: 1000001;
 }
+[theme="dark"] #s3devFloatingBar {
+  background-color: #111;
+}
 
 #s3devInsertLabel {
   padding: 0;

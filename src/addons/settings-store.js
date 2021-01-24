@@ -175,6 +175,25 @@ class SettingsStore extends EventTarget {
             value = settingObject.default;
             delete storage[settingId];
         } else {
+            if (settingObject.type === 'boolean') {
+                if (typeof value !== 'boolean') {
+                    throw new Error('Setting value is invalid.');
+                }
+            } else if (settingObject.type === 'integer') {
+                if (typeof value !== 'number') {
+                    throw new Error('Setting value is invalid.');
+                }
+            } else if (settingObject.type === 'color') {
+                if (typeof value !== 'string' || !/^#[0-9a-f]{6}$/i.test(value)) {
+                    throw new Error('Setting value is invalid.');
+                }
+            } else if (settingObject.type === 'select') {
+                if (!settingObject.potentialValues.some(potentialValue => potentialValue.id === value)) {
+                    throw new Error('Setting value is invalid.');
+                }
+            } else {
+                throw new Error('Setting object is of unknown type');
+            }
             storage[settingId] = value;
         }
         this.saveToLocalStorage();

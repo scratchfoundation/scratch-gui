@@ -17,6 +17,7 @@
  */
 
 /* eslint-disable import/no-commonjs */
+/* eslint-disable import/no-nodejs-modules */
 
 const fs = require('fs');
 const childProcess = require('child_process');

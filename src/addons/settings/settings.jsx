@@ -144,6 +144,54 @@ TagComponent.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string)
 };
 
+class BufferedInput extends React.Component {
+    constructor (props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleFlush = this.handleFlush.bind(this);
+        this.state = {
+            value: null
+        };
+    }
+    handleKeyPress (e) {
+        if (e.key === 'Enter') {
+            this.handleFlush();
+            e.target.blur();
+        }
+    }
+    handleFlush () {
+        if (this.state.value === null) {
+            return;
+        }
+        if (this.props.type === 'number') {
+            this.props.onChange(+this.state.value);
+        } else {
+            this.props.onChange(this.state.value);
+        }
+        this.setState({value: null});
+    }
+    handleChange (e) {
+        this.setState({value: e.target.value});
+    }
+    render () {
+        return (
+            <input
+                {...this.props}
+                value={this.state.value === null ? this.props.value : this.state.value}
+                onBlur={this.handleFlush}
+                onChange={this.handleChange}
+                onKeyPress={this.handleKeyPress}
+            />
+        );
+    }
+}
+BufferedInput.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    type: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
+
 const SettingComponent = ({
     addonId,
     setting,
@@ -178,14 +226,14 @@ const SettingComponent = ({
             {setting.type === 'integer' && (
                 <>
                     {label}
-                    <input
+                    <BufferedInput
                         id={uniqueId}
                         type="number"
                         min={setting.min}
                         max={setting.max}
                         step="1"
                         value={value}
-                        onChange={e => SettingsStore.setAddonSetting(addonId, settingId, +e.target.value)}
+                        onChange={value => SettingsStore.setAddonSetting(addonId, settingId, value)}
                     />
                 </>
             )}

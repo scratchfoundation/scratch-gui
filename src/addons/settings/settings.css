@@ -186,6 +186,7 @@ a[href] {
     cursor: pointer;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 .addon-title-text {
 

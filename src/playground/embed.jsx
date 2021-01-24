@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) 2020 Thomas Weber
+ * Copyright (c) 2021 Thomas Weber
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

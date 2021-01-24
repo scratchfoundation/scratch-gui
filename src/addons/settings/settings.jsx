@@ -518,8 +518,8 @@ class AddonSettingsComponent extends React.Component {
             }
             return newState;
         });
-        if (this.props.onSettingsChanged) {
-            this.props.onSettingsChanged();
+        if (!reloadRequired && this.props.onSettingsChanged) {
+            this.props.onSettingsChanged(reloadRequired);
         }
     }
     handleReloadNow () {

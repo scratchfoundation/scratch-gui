@@ -31,6 +31,7 @@ import SettingsStore from '../settings-store';
 import downloadBlob from '../libraries/download-blob';
 import extensionImage from './extension.svg';
 import undoImage from './undo.svg';
+import infoImage from './info.svg';
 import styles from './settings.css';
 
 /* eslint-disable no-alert */
@@ -299,13 +300,20 @@ const NoticeComponent = ({
     notice
 }) => {
     const noticeId = notice.id;
+    // All themes require reloads. Users are already informed of this in other places of the UI
+    if (noticeId === 'refresheditor') {
+        return null;
+    }
     const text = addonTranslations[`${addonId}/@info-${noticeId}`] || notice.text;
     return (
         <div
             className={styles.notice}
             type={notice.type}
         >
-            {settingsTranslations['tw.addons.settings.notice.info']}
+            <img
+                className={styles.noticeIcon}
+                src={infoImage}
+            />
             {text}
         </div>
     );
@@ -408,6 +416,17 @@ const AddonComponent = ({
                 <div className={styles.description}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
                 </div>
+                {manifest.info && (
+                    <div className={styles.noticeContainer}>
+                        {manifest.info.map(info => (
+                            <NoticeComponent
+                                key={info.id}
+                                addonId={id}
+                                notice={info}
+                            />
+                        ))}
+                    </div>
+                )}
                 {manifest.credits && (
                     <div className={styles.creditContainer}>
                         <span className={styles.creditTitle}>

@@ -599,7 +599,7 @@ class AddonSettingsComponent extends React.Component {
             }
         }
         const key = e.key;
-        if (key.length === 1 && key !== ' ' && !(e.ctrlKey || e.metaKey || e.altKey)) {
+        if (key.length === 1 && key !== ' ' && e.target === document.body && !(e.ctrlKey || e.metaKey || e.altKey)) {
             this.searchBar.focus();
         }
         if (key === 'f' && (e.ctrlKey || e.metaKey)) {

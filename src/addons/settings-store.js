@@ -246,11 +246,12 @@ class SettingsStore extends EventTarget {
         }
     }
 
-    export () {
+    export ({theme}) {
         const result = {
             core: {
-                // Upstream has a globalTheme property here. True is light, false is dark.
-                globalTheme: !window.matchMedia('(prefers-color-scheme: dark)').matches,
+                // Upstream property. We don't use this.
+                lightTheme: theme === 'light',
+                // Append -tw to all versions, for example 1.8.0-prerelease-tw
                 version: `${upstreamMeta.version}-tw`
             },
             addons: {}

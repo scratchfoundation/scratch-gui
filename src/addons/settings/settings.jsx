@@ -47,7 +47,8 @@ if (locale !== 'en') {
     }
 }
 
-document.body.setAttribute('theme', getInitialDarkMode() ? 'dark' : 'light');
+const theme = getInitialDarkMode() ? 'dark' : 'light';
+document.body.setAttribute('theme', theme);
 
 const AddonCreditsComponent = ({credits}) => (
     credits.map((author, index) => {
@@ -599,7 +600,9 @@ class AddonSettingsComponent extends React.Component {
         }
     }
     handleExport () {
-        const exportedData = SettingsStore.export();
+        const exportedData = SettingsStore.export({
+            theme
+        });
         const blob = new Blob([JSON.stringify(exportedData)]);
         downloadBlob('turbowarp-addon-settings.json', blob);
     }

@@ -37,13 +37,16 @@ class SettingsStore extends EventTarget {
             base[addonId] = {};
         }
         try {
-            const value = localStorage.getItem(SETTINGS_KEY);
-            if (value) {
-                const result = JSON.parse(value);
+            const local = localStorage.getItem(SETTINGS_KEY);
+            if (local) {
+                const result = JSON.parse(local);
                 if (result && typeof result === 'object' && result._ === VERSION) {
                     for (const key of Object.keys(result)) {
                         if (base.hasOwnProperty(key)) {
-                            base[key] = result[key];
+                            const value = result[key];
+                            if (value && typeof value === 'object') {
+                                base[key] = value;
+                            }
                         }
                     }
                 }

@@ -30,8 +30,8 @@
   padding: 1em 2em 2em;
 }
 [theme="dark"] .mediaRecorderPopup > div {
-    color: var(--text-primary);
-    background-color: var(--ui-primary);
+  color: var(--text-primary);
+  background-color: var(--ui-primary);
 }
 
 .mediaRecorderPopup p {

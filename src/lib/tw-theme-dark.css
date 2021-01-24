@@ -2,16 +2,20 @@
 :root {
     background: #111;
     color: #eee;
+    /* see colors.csss */
     --ui-primary: rgb(17, 17, 17);
-    --ui-secondary: rgb(34, 34, 34);
+    --ui-secondary: rgb(30, 30, 30);
     --ui-tertiary: rgb(46, 46, 46);
     --ui-modal-overlay: #333a;
     --text-primary: #eee;
 }
 
 /* Blockly */
+.blocklySvg {
+    background-color: var(--ui-secondary) !important;
+}
 .blocklyMainBackground {
-    fill: #222 !important;
+    fill: var(--ui-secondary) !important;
 }
 .blocklyFlyoutBackground {
     fill: #111;

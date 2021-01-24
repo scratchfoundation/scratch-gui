@@ -505,23 +505,19 @@ class AddonSettingsComponent extends React.Component {
     }
     handleSettingStoreChanged (e) {
         const {addonId, settingId, value, reloadRequired} = e.detail;
-        this.setState(state => ({
-            [addonId]: {
-                ...state[addonId],
-                [settingId]: value
-            }
-        }));
-        if (reloadRequired) {
-            this.setState(state => ({
+        this.setState(state => {
+            const newState = {
                 [addonId]: {
                     ...state[addonId],
-                    dirty: true
+                    [settingId]: value
                 }
-            }));
-            this.setState({
-                dirty: true
-            });
-        }
+            };
+            if (reloadRequired) {
+                newState[addonId].dirty = true;
+                newState.dirty = true;
+            }
+            return newState;
+        });
         if (this.props.onSettingsChanged) {
             this.props.onSettingsChanged();
         }

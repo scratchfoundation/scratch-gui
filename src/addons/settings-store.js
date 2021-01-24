@@ -20,6 +20,7 @@ import addons from './addon-manifests';
 import upstreamMeta from './upstream-meta.json';
 
 const SETTINGS_KEY = 'tw:addons';
+const VERSION = 1;
 
 class SettingsStore extends EventTarget {
     constructor () {
@@ -31,15 +32,22 @@ class SettingsStore extends EventTarget {
      * @private
      */
     readLocalStorage () {
+        const base = {};
+        for (const addonId of Object.keys(addons)) {
+            base[addonId] = {};
+        }
         try {
             const value = localStorage.getItem(SETTINGS_KEY);
             if (value) {
-                return JSON.parse(value);
+                const result = JSON.parse(value);
+                if (result && typeof result === 'object' && result._ === VERSION) {
+                    return Object.assign(base, result);
+                }
             }
         } catch (e) {
             // ignore
         }
-        return {};
+        return base;
     }
 
     /**
@@ -47,7 +55,16 @@ class SettingsStore extends EventTarget {
      */
     saveToLocalStorage () {
         try {
-            localStorage.setItem(SETTINGS_KEY, JSON.stringify(this.store));
+            const result = {
+                _: VERSION
+            };
+            for (const addonId of Object.keys(addons)) {
+                const data = this.getAddonStorage(addonId);
+                if (Object.keys(data).length > 0) {
+                    result[addonId] = data;
+                }
+            }
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify(result));
         } catch (e) {
             // ignore
         }
@@ -56,8 +73,11 @@ class SettingsStore extends EventTarget {
     /**
      * @private
      */
-    getStorageKey (addonId, key) {
-        return `${addonId}/${key}`;
+    getAddonStorage (addonId) {
+        if (this.store[addonId]) {
+            return this.store[addonId];
+        }
+        throw new Error(`Unknown addon store: ${addonId}`);
     }
 
     /**
@@ -70,45 +90,10 @@ class SettingsStore extends EventTarget {
         throw new Error(`Unknown addon: ${addonId}`);
     }
 
-    getAddonEnabled (addonId) {
-        const key = this.getStorageKey(addonId, 'enabled');
-        if (this.store.hasOwnProperty(key)) {
-            return this.store[key];
-        }
-        const manifest = this.getAddonManifest(addonId);
-        return !!manifest.enabledByDefault;
-    }
-
-    getAddonSetting (addonId, settingId) {
-        const key = this.getStorageKey(addonId, settingId);
-        if (this.store.hasOwnProperty(key)) {
-            return this.store[key];
-        }
-        const manifest = this.getAddonManifest(addonId);
-        if (manifest.settings) {
-            for (const setting of manifest.settings) {
-                if (setting.id === settingId) {
-                    return setting.default;
-                }
-            }
-        }
-        throw new Error(`Unknown setting: ${settingId}`);
-    }
-
-    getDefaultSettings (addonId) {
-        const result = {};
-        const manifest = this.getAddonManifest(addonId);
-        for (const {id, default: value} of manifest.settings) {
-            result[id] = value;
-        }
-        return result;
-    }
-
     /**
      * @private
      */
-    getAddonSettingObject (addonId, settingId) {
-        const manifest = this.getAddonManifest(addonId);
+    getAddonSettingObject (manifest, settingId) {
         if (!manifest.settings) {
             return null;
         }
@@ -120,35 +105,82 @@ class SettingsStore extends EventTarget {
         return null;
     }
 
-    setAddonSetting (addonId, settingId, value) {
-        const settingObject = this.getAddonSettingObject(addonId, settingId);
-        if (!settingObject && settingId !== 'enabled') {
-            return;
+    getAddonEnabled (addonId) {
+        const storage = this.getAddonStorage(addonId);
+        if (storage.hasOwnProperty('enabled')) {
+            return storage.enabled;
         }
-        const key = this.getStorageKey(addonId, settingId);
-        if (value === null) {
-            delete this.store[key];
-            if (settingId === 'enabled') {
-                value = !!this.getAddonManifest(addonId).enabledByDefault;
-            } else {
-                value = settingObject.default;
-            }
-        } else {
-            this.store[key] = value;
-        }
-        this.saveToLocalStorage();
-        this.dispatchEvent(new CustomEvent('setting-changed', {
-            detail: {
-                addonId,
-                settingId,
-                reloadRequired: !(settingObject && settingObject.reloadRequired === false),
-                value
-            }
-        }));
+        const manifest = this.getAddonManifest(addonId);
+        return !!manifest.enabledByDefault;
     }
 
-    setAddonEnabled (addonId, enabled) {
-        this.setAddonSetting(addonId, 'enabled', enabled);
+    getAddonSetting (addonId, settingId) {
+        const storage = this.getAddonStorage(addonId);
+        const manifest = this.getAddonManifest(addonId);
+        const settingObject = this.getAddonSettingObject(manifest, settingId);
+        if (!settingObject) {
+            throw new Error(`Unknown setting: ${settingId}`);
+        }
+        if (storage.hasOwnProperty(settingId)) {
+            return storage[settingId];
+        }
+        return settingObject.default;
+    }
+
+    getDefaultSettings (addonId) {
+        const manifest = this.getAddonManifest(addonId);
+        const result = {};
+        for (const {id, default: value} of manifest.settings) {
+            result[id] = value;
+        }
+        return result;
+    }
+
+    setAddonEnabled (addonId, value) {
+        const storage = this.getAddonStorage(addonId);
+        const manifest = this.getAddonManifest(addonId);
+        const oldValue = this.getAddonEnabled(addonId);
+        if (value === null) {
+            value = !!manifest.enabledByDefault;
+            delete storage.enabled;
+        } else {
+            storage.enabled = value;
+        }
+        this.saveToLocalStorage();
+        if (value !== oldValue) {
+            this.dispatchEvent(new CustomEvent('setting-changed', {
+                detail: {
+                    addonId,
+                    settingId: 'enabled',
+                    reloadRequired: true,
+                    value
+                }
+            }));
+        }
+    }
+
+    setAddonSetting (addonId, settingId, value) {
+        const storage = this.getAddonStorage(addonId);
+        const manifest = this.getAddonManifest(addonId);
+        const settingObject = this.getAddonSettingObject(manifest, settingId);
+        const oldValue = this.getAddonSetting(addonId, settingId);
+        if (value === null) {
+            value = settingObject.default;
+            delete storage[settingId];
+        } else {
+            storage[settingId] = value;
+        }
+        this.saveToLocalStorage();
+        if (value !== oldValue) {
+            this.dispatchEvent(new CustomEvent('setting-changed', {
+                detail: {
+                    addonId,
+                    settingId,
+                    reloadRequired: settingObject.reloadRequired !== false,
+                    value
+                }
+            }));
+        }
     }
 
     applyAddonPreset (addonId, presetId) {
@@ -176,14 +208,12 @@ class SettingsStore extends EventTarget {
     }
 
     resetAddon (addonId, resetEverything) {
-        for (const key of Object.keys(this.store)) {
-            if (key.startsWith(addonId)) {
-                const setting = key.split('/')[1];
-                if (setting === 'enabled' && !resetEverything) {
-                    continue;
-                }
-                this.setAddonSetting(addonId, setting, null);
+        const storage = this.getAddonStorage(addonId);
+        for (const setting of Object.keys(storage)) {
+            if (setting === 'enabled' && !resetEverything) {
+                continue;
             }
+            this.setAddonSetting(addonId, setting, null);
         }
     }
 

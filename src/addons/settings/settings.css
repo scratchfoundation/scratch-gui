@@ -30,7 +30,7 @@ a[href] {
     color: #2a67eb;
     text-decoration: underline;
 }
-[theme="dark"] a {
+[theme="dark"] a[href] {
     color: #6d9bff;
 }
 

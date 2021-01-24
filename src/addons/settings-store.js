@@ -41,7 +41,11 @@ class SettingsStore extends EventTarget {
             if (value) {
                 const result = JSON.parse(value);
                 if (result && typeof result === 'object' && result._ === VERSION) {
-                    return Object.assign(base, result);
+                    for (const key of Object.keys(result)) {
+                        if (base.hasOwnProperty(key)) {
+                            base[key] = result[key];
+                        }
+                    }
                 }
             }
         } catch (e) {

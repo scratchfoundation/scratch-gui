@@ -210,7 +210,10 @@ class SettingsStore extends EventTarget {
     resetAddon (addonId, resetEverything) {
         const storage = this.getAddonStorage(addonId);
         for (const setting of Object.keys(storage)) {
-            if (setting === 'enabled' && !resetEverything) {
+            if (setting === 'enabled') {
+                if (resetEverything) {
+                    this.setAddonEnabled(addonId, null);
+                }
                 continue;
             }
             this.setAddonSetting(addonId, setting, null);

@@ -85,6 +85,7 @@ import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, art
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
+import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
 import html2canvas from "html2canvas";
 
@@ -669,11 +670,20 @@ class MenuBar extends React.Component {
 
                                         {this.props.artieExercises.currentExercise !== null ?
                                             <React.Fragment>
-                                                <FormattedMessage
-                                                        defaultMessage="Exercise: "
-                                                        description="Exercise label"
-                                                        id="gui.menuBar.artie.exercise"
-                                                /><label>{this.props.artieExercises.currentExercise.name}</label>
+                                                <ArtieExerciseStatementTooltip
+                                                    enable
+                                                    tooltipId="artie-exercise"
+                                                    place = 'bottom'
+                                                    className={classNames(styles.artieExercisesStatement)}
+                                                    tooltipClassName={styles.artieExercisesStatementTooltip}
+                                                    message={this.props.artieExercises.currentExercise.description}
+                                                >
+                                                    <FormattedMessage
+                                                            defaultMessage="Exercise: "
+                                                            description="Exercise label"
+                                                            id="gui.menuBar.artie.exercise"
+                                                    /><label>{this.props.artieExercises.currentExercise.name}</label>
+                                                </ArtieExerciseStatementTooltip>
                                             </React.Fragment>
                                         :
                                             <FormattedMessage

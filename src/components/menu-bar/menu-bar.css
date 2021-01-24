@@ -151,6 +151,10 @@
     opacity: 0.5;
 }
 
+.artie-exercises-statement >:not(.artie-exercises-statement-tooltip) {
+    opacity: 0.5;
+}
+
 .account-info-group {
     display: flex;
     flex-direction: row;

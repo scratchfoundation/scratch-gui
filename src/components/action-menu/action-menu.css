@@ -41,6 +41,10 @@ button::-moz-focus-inner {
     background: $data-primary;
 }
 
+.button.artie-exercises-statement:hover {
+    background: $data-primary;
+}
+
 .main-button {
     border-radius: 100%;
     width: $main-button-size;

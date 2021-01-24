@@ -13,13 +13,20 @@ const onReloadNow = () => {
     }
 };
 
+let timeout = null;
 const onSettingsChanged = () => {
-    if (window.opener) {
-        window.opener.postMessage({
-            type: 'settings-changed',
-            store: SettingsStore.store
-        }, location.origin);
+    if (timeout !== null) {
+        return;
     }
+    timeout = setTimeout(() => {
+        timeout = null;
+        if (window.opener) {
+            window.opener.postMessage({
+                type: 'settings-changed',
+                store: SettingsStore.store
+            }, location.origin);
+        }
+    });
 };
 
 ReactDOM.render((

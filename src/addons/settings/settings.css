@@ -216,6 +216,7 @@ a[href] {
 .addon-operations {
     margin-left: auto;
     display: flex;
+    align-items: center;
 }
 
 .reset-button {

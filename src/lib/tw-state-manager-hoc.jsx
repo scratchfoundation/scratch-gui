@@ -294,6 +294,9 @@ const TWStateManager = function (WrappedComponent) {
                     const randomId = randomNumber.toString().padStart(digits, '0');
                     const randomUsername = `player${randomId}`;
                     this.props.onSetUsername(randomUsername);
+                    if (this.props.isEmbedded) {
+                        this.doNotPersistUsername = randomUsername;
+                    }
                 } else {
                     this.props.onSetUsername(persistentUsername);
                 }

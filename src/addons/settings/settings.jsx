@@ -480,11 +480,11 @@ DirtyComponent.propTypes = {
 
 const UnsupportedAddonsComponent = ({addons: addonList}) => (
     <div className={styles.unsupportedContainer}>
-        <div className={styles.unsupportedText}>
+        <span className={styles.unsupportedText}>
             {settingsTranslations['tw.addons.settings.unsupported']}
-        </div>
+        </span>
         {addonList.map(({id, manifest}, index) => (
-            <div
+            <span
                 key={id}
                 className={styles.unsupportedAddon}
             >
@@ -492,7 +492,7 @@ const UnsupportedAddonsComponent = ({addons: addonList}) => (
                 {index !== addonList.length - 1 && (
                     ', '
                 )}
-            </div>
+            </span>
         ))}
     </div>
 );

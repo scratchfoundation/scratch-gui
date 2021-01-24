@@ -463,8 +463,6 @@ a[href] {
 }
 
 .unsupported-container {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
     color: #444;
 }
@@ -472,7 +470,7 @@ a[href] {
     color: #aaa;
 }
 .unsupported-addon {
-    margin-left: 8px;
+    padding-left: 5px;
 }
 
 .footer-buttons {

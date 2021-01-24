@@ -18,6 +18,8 @@
     font-size: 1rem !important;
     line-height: 1.25rem !important;
     z-index: $z-index-tooltip !important;
+    max-width: 500px;
+    white-space: normal;
 }
 
 .artie-exercises-statement:after {

@@ -8,7 +8,7 @@ If you just want to play with the GUI then it's the same process as upstream scr
 
 ## A note on licensing
 
-Most files in TurboWarp/scratch-gui are licensed under BSD-3-Clause License (see LICENSE). However, some files are instead licensed under the GNU General Public License v3.0 (see LICENSE_GPL). Notably this includes everything in src/addons and anything that (indirectly or directly) imports a file from src/addons. These files generally have license disclaimers at the start of their contents.
+Most files in TurboWarp/scratch-gui are licensed under BSD-3-Clause License (see LICENSE_BSD). However, some files are instead licensed under the GNU General Public License v3.0 (see LICENSE_GPL). Notably this includes everything in src/addons and anything that (indirectly or directly) imports a file from src/addons. These files generally have license disclaimers at the start of their contents.
 
 It is assumed that any contributions you send to this repository (via pull request or otherwise) are licensed under the BSD-3-Clause License, not the GPL.
 

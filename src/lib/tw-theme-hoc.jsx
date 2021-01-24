@@ -5,7 +5,7 @@ const THEME_KEY = 'tw:theme';
 
 const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-const getInitialDarkMode = () => {
+export const getInitialDarkMode = () => {
     try {
         const item = localStorage.getItem(THEME_KEY);
         if (item !== null) {

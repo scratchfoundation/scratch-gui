@@ -26,6 +26,7 @@ import settingsTranslationsEnglish from './l10n/en.json';
 import settingsTranslationsOther from './l10n/translations.json';
 import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
+import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 import SettingsStore from '../settings-store';
 import downloadBlob from '../libraries/download-blob';
 import extensionImage from './extension.svg';
@@ -34,6 +35,7 @@ import styles from './settings.css';
 
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
+/* eslint-disable react/no-multi-comp */
 
 const locale = detectLocale(upstreamMeta.languages);
 const addonTranslations = getAddonTranslations(locale);
@@ -44,6 +46,8 @@ if (locale !== 'en') {
         Object.assign(settingsTranslations, messages);
     }
 }
+
+document.body.setAttribute('theme', getInitialDarkMode() ? 'dark' : 'light');
 
 const AddonCreditsComponent = ({credits}) => (
     credits.map((author, index) => {

@@ -21,21 +21,17 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #222222;
-        color: white;
-    }
+body[theme="dark"] {
+    background-color: #222222;
+    color: white;
 }
 
 a[href] {
     color: #2a67eb;
     text-decoration: underline;
 }
-@media (prefers-color-scheme: dark) {
-    a[href] {
-        color: #6d9bff;
-    }
+[theme="dark"] a {
+    color: #6d9bff;
 }
 
 .container {
@@ -58,10 +54,8 @@ a[href] {
     background-color: #fcfcfc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-@media (prefers-color-scheme: dark) {
-    .header {
-        background-color: #222222;
-    }
+[theme="dark"] .header {
+    background-color: #222222;
 }
 @media (max-width: 550px) {
     .header {
@@ -82,21 +76,19 @@ a[href] {
     font-family: inherit;
     font-size: 14px;
 }
+[theme="dark"] .button {
+    color: #fff;
+    background: #222222;
+    border-color: #000;
+}
 .button:hover {
     background: #aaaaaa;
 }
+[theme="dark"] .button:hover {
+    background: #151515;
+}
 .button:active, .button:focus-within {
     box-shadow: 0 0 0 3px #ff4c4c5d;
-}
-@media (prefers-color-scheme: dark) {
-    .button {
-        color: #fff;
-        background: #222222;
-        border-color: #000;
-    }
-    .button:hover {
-        background: #151515;
-    }
 }
 
 .search-container {
@@ -130,18 +122,16 @@ a[href] {
     background-repeat: no-repeat;
     background-position: center;
 }
-@media (prefers-color-scheme: dark) {
-    .search-container {
-        color: white;
-        background-color: #111111;
-        border-color: #222222;
-    }
-    .search-container:focus-within {
-        border-color: #444;
-    }
-    .search-button {
-        filter: invert(100%);
-    }
+[theme="dark"] .search-container {
+    color: white;
+    background-color: #111111;
+    border-color: #222222;
+}
+[theme="dark"] .search-container:focus-within {
+    border-color: #444;
+}
+[theme="dark"] .search-button {
+    filter: invert(100%);
 }
 
 .addons {
@@ -168,14 +158,12 @@ a[href] {
 .addon-dirty {
     background: #ffeedf;
 }
-@media (prefers-color-scheme: dark) {
-    .addon {
-        background-color: #2a2a2a;
-        border-color: #333;
-    }
-    .addon-dirty {
-        background: rgb(39, 50, 53);
-    }
+[theme="dark"] .addon {
+    background-color: #2a2a2a;
+    border-color: #333;
+}
+[theme="dark"] .addon-dirty {
+    background: rgb(39, 50, 53);
 }
 
 .addon-header {
@@ -190,10 +178,8 @@ a[href] {
     width: 16px;
     margin-right: 8px;
 }
-@media (prefers-color-scheme: dark) {
-    .extension-image {
-        filter: invert(100%);
-    }
+[theme="dark"] .extension-image {
+    filter: invert(100%);
 }
 
 .addon-title {
@@ -238,13 +224,11 @@ a[href] {
     height: 16px;
     width: 16px;
 }
-@media (prefers-color-scheme: dark) {
-    .reset-button-image {
-        filter: invert(100%);
-    }
-    .reset-button:hover {
-        background: rgba(255, 255, 255, 0.05);
-    }
+[theme="dark"] .reset-button-image {
+    filter: invert(100%);
+}
+[theme="dark"] .reset-button:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .switch {
@@ -273,6 +257,9 @@ a[href] {
     left: 5px;
     transition: all 0.25s ease;
 }
+[theme="dark"] .switch::before {
+    background: #aaa;
+}
 .switch[state="on"]::before {
     background: #fff;
     left: 25px;
@@ -280,11 +267,6 @@ a[href] {
 .switch:active, .switch:focus-within {
     outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
-}
-@media (prefers-color-scheme: dark) {
-    .switch::before {
-        background: #aaa;
-    }
 }
 
 .tag-container {
@@ -328,10 +310,8 @@ a[href] {
     margin-bottom: 10px;
     color: #111;
 }
-@media (prefers-color-scheme: dark) {
-    .addon-details {
-        color: #ddd;
-    }
+[theme="dark"] .addon-details {
+    color: #ddd;
 }
 
 .credit-container {
@@ -378,6 +358,9 @@ a[href] {
     font-size: 12px;
     margin-right: 10px;
 }
+[theme="dark"] .setting-label {
+    color: #aaa;
+}
 .setting input {
     color: #000;
     background: #efefef;
@@ -385,6 +368,11 @@ a[href] {
     padding: 8px 12px;
     border-radius: 4px;
     transition: 0.25s ease;
+}
+[theme="dark"] .setting input {
+    color: #fff;
+    background: #222222;
+    border: 1px solid #000;
 }
 .setting input:focus, .setting input:active {
     outline: none;
@@ -460,20 +448,10 @@ a[href] {
     outline: none;
     box-shadow: 0 0 0 3px #ff4c4c5d;
 }
-@media (prefers-color-scheme: dark) {
-    .setting-label {
-        color: #aaa;
-    }
-    .setting input {
-        color: #fff;
-        background: #222222;
-        border: 1px solid #000;
-    }
-    .select-option {
-        color: #fff;
-        background: #222222;
-        border-color: #000000;
-    }
+[theme="dark"] .select-option {
+    color: #fff;
+    background: #222222;
+    border-color: #000000;
 }
 
 .presets {
@@ -489,13 +467,11 @@ a[href] {
     margin-bottom: 10px;
     color: #444;
 }
+[theme="dark"] .unsupported-container {
+    color: #aaa;
+}
 .unsupported-addon {
     margin-left: 8px;
-}
-@media (prefers-color-scheme: dark) {
-    .unsupported-container {
-        color: #aaa;
-    }
 }
 
 .footer-buttons {
@@ -538,11 +514,9 @@ a[href] {
     border-radius: 4px;
     pointer-events: auto;
 }
-@media (prefers-color-scheme: dark) {
-    .dirty-inner {
-        background: rgb(39, 50, 53);
-        border-color: #222;
-    }
+[theme="dark"] .dirty-inner {
+    background: rgb(39, 50, 53);
+    border-color: #222;
 }
 
 .dirty-button {

@@ -260,7 +260,11 @@ class SettingsStore extends EventTarget {
             const {enabled, settings} = value;
             this.setAddonEnabled(addonId, enabled);
             for (const [settingId, settingValue] of Object.entries(settings)) {
-                this.setAddonSetting(addonId, settingId, settingValue);
+                try {
+                    this.setAddonSetting(addonId, settingId, settingValue);
+                } catch (e) {
+                    // ignore
+                }
             }
         }
     }

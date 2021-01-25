@@ -136,6 +136,11 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+
+        // tw: Handle when extensions are added when Blocks isn't mounted
+        for (const category of this.props.vm.runtime._blockInfo) {
+            this.handleExtensionAdded(category);
+        }
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (

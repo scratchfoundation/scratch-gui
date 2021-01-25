@@ -55,8 +55,7 @@ window.addEventListener('message', e => {
         location.reload();
     }
     if (data.type === 'settings-changed') {
-        SettingsStore.store = data.store;
-        SettingsStore.dispatchEvent(new CustomEvent('reread'));
+        SettingsStore.setStore(data.store);
     }
 });
 
@@ -66,7 +65,7 @@ const handleClickAddonSettings = () => {
 };
 
 const handleLoadAddons = () => {
-    import(/* webpackChunkName: "addons" */ '../addons/entry-web');
+    import(/* webpackChunkName: "addons" */ '../addons/entry');
 };
 
 const WrappedMenuBar = compose(

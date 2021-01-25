@@ -294,7 +294,7 @@ history.pushState = function (...args) {
     emitUrlChange();
 };
 
-SettingsStore.addEventListener('reread', () => {
+SettingsStore.addEventListener('store-changed', () => {
     for (const runner of AddonRunner.instances) {
         runner.settingsChanged();
     }

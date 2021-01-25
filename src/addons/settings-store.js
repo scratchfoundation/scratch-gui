@@ -288,6 +288,11 @@ class SettingsStore extends EventTarget {
             }
         }
     }
+
+    setStore (store) {
+        this.store = store;
+        SettingsStore.dispatchEvent(new CustomEvent('store-changed'));
+    }
 }
 
 export default new SettingsStore();

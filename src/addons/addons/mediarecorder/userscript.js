@@ -29,7 +29,6 @@ export default async ({ addon, console, msg }) => {
           // FIXCLASS:modal_header-item-title_tLOU5
           className: "modal_header-item_2zQTd modal_header-item-title_tLOU5",
           textContent: msg("option-title"),
-          title: msg("added-by"),
         })
       );
       recordOptionPopup.appendChild(recordOptionHeader);

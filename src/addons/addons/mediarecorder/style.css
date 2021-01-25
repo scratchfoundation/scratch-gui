@@ -4,30 +4,19 @@
  */
 
 .mediaRecorderPopup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: hsla(0, 100%, 65%, 0.9);
-  z-index: 20000;
-}
-
-.mediaRecorderPopup > div {
-  border-radius: 0.5rem;
   box-sizing: border-box;
-  position: relative;
   width: 700px;
   max-height: min(800px, 60vh);
   max-width: 85%;
-  top: 20vh;
+  margin-top: 20vh;
   overflow-y: auto;
-  background-color: white;
-  box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.4);
   margin-left: auto;
   margin-right: auto;
-  user-select: none;
-  padding: 1em 2em 2em;
+}
+
+.mediaRecorderPopupContent {
+  background-color: white;
+  padding: 1.5rem 2.25rem;
 }
 [theme="dark"] .mediaRecorderPopup > div {
   color: var(--text-primary);
@@ -35,7 +24,7 @@
 }
 
 .mediaRecorderPopup p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin: 1rem auto;
 }
 
@@ -49,25 +38,8 @@
 
 .mediaRecorderPopupButtons {
   margin-top: 1.5rem;
-  text-align: right;
-  font-weight: bold;
 }
 
 .mediaRecorderPopupButtons button {
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  border-style: solid;
   margin-left: 0.5rem;
-}
-
-.mediaRecorderPopupStartButton {
-  border-color: var(--scratchr2-primaryColor, hsl(0, 100%, 65%));
-  background-color: var(--scratchr2-primaryColor, hsl(0, 100%, 65%));
-  color: white;
-}
-
-.mediaRecorderPopupCancelButton {
-  border-color: black;
-  background-color: white;
 }

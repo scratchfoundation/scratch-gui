@@ -20,11 +20,17 @@ import IntlMessageFormat from 'intl-messageformat';
 import SettingsStore from './settings-store';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from './api-libraries/data-url-to-blob';
+import fixHardcodedClassesCSS from '!raw-loader!./fix-hardcoded-classes.css';
 
 /* eslint-disable no-console */
 
 const escapeHTML = str => str.replace(/([<>'"&])/g, (_, l) => `&#${l.charCodeAt(0)};`);
 const kebabCaseToCamelCase = str => str.replace(/-([a-z])/g, g => g[1].toUpperCase());
+const createStylesheet = css => {
+    const style = document.createElement('style');
+    style.textContent = css;
+    return style;
+};
 
 class Redux extends EventTarget {
     constructor () {
@@ -56,6 +62,14 @@ class Redux extends EventTarget {
     }
 }
 
+const getEditorMode = () => {
+    const mode = tabReduxInstance.state.scratchGui.mode;
+    if (mode.isEmbedded) return 'embed';
+    if (mode.isFullScreen) return 'fullscreen';
+    if (mode.isPlayerOnly) return 'projectpage';
+    return 'editor';
+};
+
 const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
@@ -67,13 +81,7 @@ window.scratchAddons = {
     }
 };
 
-const getEditorMode = () => {
-    const mode = tabReduxInstance.state.scratchGui.mode;
-    if (mode.isEmbedded) return 'embed';
-    if (mode.isFullScreen) return 'fullscreen';
-    if (mode.isPlayerOnly) return 'projectpage';
-    return 'editor';
-};
+document.head.appendChild(createStylesheet(fixHardcodedClassesCSS));
 
 class Tab extends EventTarget {
     constructor () {
@@ -236,10 +244,9 @@ class AddonRunner {
         if (this.manifest.userstyles) {
             for (const userstyle of this.manifest.userstyles) {
                 const source = require(`./addons/${this.id}/${userstyle.url}`);
-                const style = document.createElement('style');
+                const style = createStylesheet(source);
                 style.className = 'scratch-addons-theme';
                 style.dataset.addonId = this.id;
-                style.textContent = source;
                 // Insert styles at the start of the body so that they have higher precedence than those in <head>
                 document.body.insertBefore(style, document.body.firstChild);
             }

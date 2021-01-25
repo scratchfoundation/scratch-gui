@@ -134,12 +134,12 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
         }
     });
 
-    xhr.open("POST", 'http://pre-prod.artie.rocks:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => new Promise((resolve, reject) => {
 
     var spriteElements = []
 
@@ -150,20 +150,19 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot) => new Promise
     });
 
     const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: spriteElements, screenShot: screenShot};
-
-    xhr({
-        method: 'POST',
-        uri: 'http://pre-prod.artie.rocks:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(artiePedagogicalSoftwareSolution)
-    }, (response) => {
-        if (response != null && response.statusCode !== 201) {
-            return reject();
-        }
-        else if(response != null){
-            return resolve(response.body);
+    var xhr = new XMLHttpRequest();
+    var params = JSON.stringify(artiePedagogicalSoftwareSolution);
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 201 && xhr.response != null) {
+                callback();
+            }
         }
     });
+
+    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(params);
 });
 
 const loginArtie = (userName, password, callback, errorCallback) => new Promise(() => {
@@ -184,7 +183,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -201,7 +200,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -218,7 +217,7 @@ const getArtieExercises = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });

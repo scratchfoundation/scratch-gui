@@ -6,6 +6,8 @@ const ARTIE_CLEAR_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_CLEAR_EXERCISES
 const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
 const ARTIE_HELP_RECEIVED = 'scratch-gui/artie-exercises/ARTIE_HELP_RECEIVED';
 const ARTIE_CLEAR_HELP = 'scratch-gui/artie-exercises/ARTIE_CLEAR_HELP';
+const ARTIE_SENDING_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_SENDING_SOLUTION';
+const ARTIE_SOLUTION_SENT = 'scratch-gui/artie-exercises/ARTIE_SOLUTION_SENT';
 
 
 const initialState = {
@@ -13,7 +15,8 @@ const initialState = {
     currentExercise: null,
     blocks: null,
     active : false,
-    help: null
+    help: null,
+    loading: false
 }
 
 const reducer = function (state, action) {
@@ -54,6 +57,14 @@ const reducer = function (state, action) {
         case ARTIE_CLEAR_HELP:
             return Object.assign({}, state, {
                 help: null
+            });
+        case ARTIE_SENDING_SOLUTION:
+            return Object.assign({}, state, {
+                loading: true
+            });
+        case ARTIE_SOLUTION_SENT:
+            return Object.assign({}, state, {
+                loading: false
             });
         default:
             return state;
@@ -97,6 +108,14 @@ const artieClearHelp = () => ({
     type: ARTIE_CLEAR_HELP
 });
 
+const artieSendingSolution = () => ({
+    type: ARTIE_SENDING_SOLUTION
+});
+
+const artieSolutionSent = () => ({
+    type: ARTIE_SOLUTION_SENT
+});
+
 
 export {
     reducer as default,
@@ -108,5 +127,7 @@ export {
     artieClearExercises,
     artieBlocksUpdated,
     artieHelpReceived,
-    artieClearHelp
+    artieClearHelp,
+    artieSendingSolution,
+    artieSolutionSent
 };

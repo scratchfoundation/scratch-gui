@@ -81,7 +81,7 @@ import sharedMessages from '../../lib/shared-messages';
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
-        artieHelpReceived, artieClearHelp} from '../../reducers/artie-exercises';
+        artieHelpReceived, artieClearHelp, artieSendingSolution, artieSolutionSent} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
@@ -314,11 +314,12 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
+        this.props.onArtieSendingSolution();
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl);
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieSolutionSent);
         });
     }
     handleClickRequestHelp(){
@@ -1096,7 +1097,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
-    onArtieClearHelp: () => dispatch(artieClearHelp())
+    onArtieClearHelp: () => dispatch(artieClearHelp()),
+    onArtieSendingSolution: () => dispatch(artieSendingSolution()),
+    onArtieSolutionSent: () => dispatch(artieSolutionSent())
 
 });
 

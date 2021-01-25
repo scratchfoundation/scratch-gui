@@ -30,6 +30,7 @@ import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 import SettingsStore from '../settings-store';
 import downloadBlob from '../libraries/download-blob';
 import extensionImage from './extension.svg';
+import brushImage from './brush.svg';
 import undoImage from './undo.svg';
 import infoImage from './info.svg';
 import styles from './settings.css';
@@ -373,10 +374,17 @@ const AddonComponent = ({
                 htmlFor={id}
                 className={styles.addonTitle}
             >
-                <img
-                    className={styles.extensionImage}
-                    src={extensionImage}
-                />
+                {manifest.tags && manifest.tags.includes('theme') ? (
+                    <img
+                        className={styles.extensionImage}
+                        src={brushImage}
+                    />
+                ) : (
+                    <img
+                        className={styles.extensionImage}
+                        src={extensionImage}
+                    />
+                )}
                 <div className={styles.addonTitleText}>
                     {addonTranslations[`${id}/@name`] || manifest.name}
                 </div>

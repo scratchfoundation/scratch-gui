@@ -357,6 +357,10 @@ const TWStateManager = function (WrappedComponent) {
                     });
             }
 
+            for (const extension of urlParams.getAll('extension')) {
+                this.props.vm.extensionManager.loadExtensionURL(extension);
+            }
+
             const routerCallbacks = {
                 onSetProjectId: this.onSetProjectId,
                 onSetIsPlayerOnly: this.onSetIsPlayerOnly,

@@ -511,6 +511,7 @@ a[href] {
     top: 100%;
     left: 0;
     width: 100%;
+    z-index: 10;
     justify-content: center;
     animation: dirty-appear 0.2s ease;
     pointer-events: none;

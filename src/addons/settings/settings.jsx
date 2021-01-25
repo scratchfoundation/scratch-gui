@@ -84,6 +84,8 @@ const SwitchComponent = ({onChange, value, ...props}) => (
     <button
         className={styles.switch}
         state={value ? 'on' : 'off'}
+        role="checkbox"
+        aria-checked={value ? 'true' : 'false'}
         tabIndex="0"
         onClick={() => onChange(!value)}
         {...props}
@@ -314,6 +316,7 @@ const NoticeComponent = ({
             <img
                 className={styles.noticeIcon}
                 src={infoImage}
+                alt=""
             />
             {text}
         </div>
@@ -372,17 +375,20 @@ const AddonComponent = ({
         <div className={styles.addonHeader}>
             <label
                 htmlFor={id}
+                id={`${id}-label`}
                 className={styles.addonTitle}
             >
                 {manifest.tags && manifest.tags.includes('theme') ? (
                     <img
                         className={styles.extensionImage}
                         src={brushImage}
+                        alt=""
                     />
                 ) : (
                     <img
                         className={styles.extensionImage}
                         src={extensionImage}
+                        alt=""
                     />
                 )}
                 <div className={styles.addonTitleText}>
@@ -409,11 +415,13 @@ const AddonComponent = ({
                         <img
                             src={undoImage}
                             className={styles.resetButtonImage}
+                            alt={settingsTranslations['tw.addons.settings.reset']}
                         />
                     </button>
                 )}
                 <SwitchComponent
                     id={id}
+                    aria-labelledby={`${id}-label`}
                     value={settings.enabled}
                     onChange={value => SettingsStore.setAddonEnabled(id, value)}
                 />
@@ -768,6 +776,7 @@ class AddonSettingsComponent extends React.Component {
                             value={this.state.search}
                             onChange={this.handleSearch}
                             placeholder={settingsTranslations['tw.addons.settings.search']}
+                            aria-label={settingsTranslations['tw.addons.settings.search']}
                             ref={this.searchRef}
                             spellCheck="false"
                             autoFocus

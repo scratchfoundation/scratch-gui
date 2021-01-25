@@ -177,7 +177,6 @@ export default async ({ addon, console, msg }) => {
     const recordElem = Object.assign(document.createElement("div"), {
       className: "sa-record " + elem.className,
       textContent: msg("record"),
-      title: msg("added-by"),
     });
     let isRecording = false;
     let isWaitingForFlag = false;

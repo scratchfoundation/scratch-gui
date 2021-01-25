@@ -62,3 +62,35 @@ img[class*="tool-select-base_tool-select-icon"] {
 [class*="paint-editor_button-group-button-icon"] {
     filter: brightness(1.7);
 }
+[class*="dropdown_mod-open"] {
+    background: var(--ui-secondary);
+}
+[class*="dropdown_dropdown"],
+[class*="fixed-tools_mod-dashed-border"],
+[class*="mode-tools_mod-dashed-border"],
+[class*="paint-editor_mod-dashed-border"],
+[class*="paint-editor_editor-container-top"],
+[class*="paint-editor_button-group-button"],
+[class*="paint-editor_canvas-container"],
+[class*="color-picker_swatch"],
+[class*="fixed-tools_button-group-button"],
+[class*="color-picker_divider"] {
+    border-color: var(--ui-tertiary) !important;
+}
+[class*="font-dropdown_font-dropdown"] {
+    color: var(--text-primary);
+}
+[class*="color-picker_row-header"] {
+    color: #ccc;
+}
+
+/* Other / Multipurpose */
+.Popover-body {
+    background: var(--ui-secondary);
+    border-color: var(--ui-tertiary);
+    color: var(--text-primary);
+}
+.Popover-tipShape {
+    fill: var(--ui-secondary);
+    stroke: var(--ui-tertiary);
+}

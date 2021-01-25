@@ -83,6 +83,10 @@ $border-radius: 0.25rem;
     user-select: none;
     margin: 0px;
 }
+[theme="dark"] .button {
+    background-color: var(--ui-primary);
+    border-color: var(--ui-tertiary) !important;
+}
 
 .button > img {
     flex-grow: 1;
@@ -101,6 +105,9 @@ $border-radius: 0.25rem;
     cursor: pointer;
     padding: 0.75rem;
     user-select: none;
+}
+[theme="dark"] .round-button {
+    border-color: transparent;
 }
 
 .round-button > img {

@@ -29,6 +29,9 @@
   width: 3rem;
   height: 2rem;
 }
+[theme="dark"] .sa-color-picker > .sa-color-picker-color {
+  background: var(--ui-secondary);
+}
 
 .sa-color-picker > .sa-color-picker-text {
   box-sizing: border-box;

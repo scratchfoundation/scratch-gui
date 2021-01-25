@@ -1,11 +1,30 @@
 {
+    "es": {
+        "tw.addons.settings.confirmResetAll": "¿Está seguro de que quiere reiniciar todos los addons a sus valores predeterminados?",
+        "tw.addons.settings.credits": "Créditos",
+        "tw.addons.settings.dirty": "Recargue TurboWarp para aplicar los cambios.",
+        "tw.addons.settings.dirtyButton": "Recargar ahora",
+        "tw.addons.settings.export": "Exportar ajustes",
+        "tw.addons.settings.import": "Importar ajustes",
+        "tw.addons.settings.noResults": "Sin resultados.",
+        "tw.addons.settings.presets": "Presets",
+        "tw.addons.settings.reset": "Reiniciar",
+        "tw.addons.settings.resetAll": "Reiniciar todos",
+        "tw.addons.settings.search": "Buscar",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Easter Egg",
+        "tw.addons.settings.tags.recommended": "Recomendado",
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
+    },
     "pt": {
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",
         "tw.addons.settings.credits": "Créditos:",
         "tw.addons.settings.dirty": "Recarregue o TurboWarp para aplicar as opções.",
         "tw.addons.settings.dirtyButton": "Recarregar agora",
+        "tw.addons.settings.export": "Exportar configuração",
+        "tw.addons.settings.import": "Importar configuração",
         "tw.addons.settings.noResults": "Sem resultados.",
-        "tw.addons.settings.notice.info": "Nota:",
         "tw.addons.settings.presets": "Predefinições",
         "tw.addons.settings.reset": "Resetar",
         "tw.addons.settings.resetAll": "Resetar tudo",
@@ -13,14 +32,14 @@
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.recommended": "Recomendado",
-        "tw.addons.settings.tags.turbowarp": "TurboWarp"
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.unsupported": "Alguns addons não estão disponíveis neste navegador:"
     },
     "ro": {
         "tw.addons.settings.credits": "Credite:",
         "tw.addons.settings.dirty": "Reîncarcă TurboWarp pentru a aplica setările.",
         "tw.addons.settings.dirtyButton": "Reîncarcă acum",
         "tw.addons.settings.noResults": "Niciun rezultat.",
-        "tw.addons.settings.notice.info": "Notă:",
         "tw.addons.settings.presets": "Presetări",
         "tw.addons.settings.reset": "Resetează",
         "tw.addons.settings.resetAll": "Resetează toate",
@@ -34,8 +53,9 @@
         "tw.addons.settings.credits": "Krediler:",
         "tw.addons.settings.dirty": "Ayarı uygulamak için Turbowarp'u yeniden açın.",
         "tw.addons.settings.dirtyButton": "Şimdi yeniden yükle",
+        "tw.addons.settings.export": "Dışarıya aktarmak ayarları",
+        "tw.addons.settings.import": "İçeri aktarmak ayarları",
         "tw.addons.settings.noResults": "Sonuçlar yok.",
-        "tw.addons.settings.notice.info": "Notlar:",
         "tw.addons.settings.presets": "Varsayılan ayarları",
         "tw.addons.settings.reset": "Sıfırla",
         "tw.addons.settings.resetAll": "Her şeyi sıfırla",
@@ -43,6 +63,7 @@
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Eğlenceli bir gizli şey",
         "tw.addons.settings.tags.recommended": "Önerildi",
-        "tw.addons.settings.tags.turbowarp": "TurboWarp"
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.unsupported": "Bazi içerikler bu web tarayacıda kullanamıyoruz:"
     }
 }

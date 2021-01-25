@@ -45,6 +45,9 @@
   right: initial;
   left: 24px;
 }
+.sa-onion-settings .sa-onion-button {
+  border-color: #d9d9d9 !important; /* override dark mode */
+}
 
 .sa-onion-settings-line {
   display: flex;

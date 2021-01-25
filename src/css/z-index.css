@@ -15,7 +15,7 @@ $z-index-stage-question: 49; /* "ask" block text input goes above monitors */
 $z-index-card: 480;
 $z-index-alerts: 490;
 $z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorials */
-$z-index-loader: 500;
+$z-index-loader: 490; /* tw: show below menu bar normally */
 $z-index-modal: 510;
 
 $z-index-drag-layer: 1000;

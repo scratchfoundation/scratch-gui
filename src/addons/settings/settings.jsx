@@ -223,7 +223,7 @@ const SettingComponent = ({
             className={styles.setting}
         >
             {setting.type === 'boolean' && (
-                <>
+                <React.Fragment>
                     {label}
                     <input
                         id={uniqueId}
@@ -231,10 +231,10 @@ const SettingComponent = ({
                         checked={value}
                         onChange={e => SettingsStore.setAddonSetting(addonId, settingId, e.target.checked)}
                     />
-                </>
+                </React.Fragment>
             )}
             {setting.type === 'integer' && (
-                <>
+                <React.Fragment>
                     {label}
                     <BufferedInput
                         id={uniqueId}
@@ -245,10 +245,10 @@ const SettingComponent = ({
                         value={value}
                         onChange={value => SettingsStore.setAddonSetting(addonId, settingId, value)}
                     />
-                </>
+                </React.Fragment>
             )}
             {setting.type === 'color' && (
-                <>
+                <React.Fragment>
                     {label}
                     <input
                         id={uniqueId}
@@ -262,10 +262,10 @@ const SettingComponent = ({
                     >
                         {settingsTranslations['tw.addons.settings.reset']}
                     </button>
-                </>
+                </React.Fragment>
             )}
             {setting.type === 'select' && (
-                <>
+                <React.Fragment>
                     {label}
                     <SelectComponent
                         value={value}
@@ -276,7 +276,7 @@ const SettingComponent = ({
                         onChange={v => SettingsStore.setAddonSetting(addonId, settingId, v)}
                         setting={setting}
                     />
-                </>
+                </React.Fragment>
             )}
         </div>
     );
@@ -791,7 +791,7 @@ class AddonSettingsComponent extends React.Component {
                 </div>
                 <div className={styles.addons}>
                     {filteredAddons.length > 0 ? (
-                        <>
+                        <React.Fragment>
                             {filteredAddons.map(({id, manifest, state}) => (
                                 <AddonComponent
                                     key={id}
@@ -800,7 +800,7 @@ class AddonSettingsComponent extends React.Component {
                                     manifest={manifest}
                                 />
                             ))}
-                        </>
+                        </React.Fragment>
                     ) : (
                         <div className={styles.noResults}>
                             {settingsTranslations['tw.addons.settings.noResults']}

@@ -312,6 +312,11 @@ a[href] {
     background-color: #175ef8;
     border-color: #0e44b8;
 }
+.tag-theme {
+    color: white;
+    background-color: #5f8d0b;
+    border-color: #3e5a09;
+}
 .tag-beta {
     color: white;
     background-color: #fd662b;

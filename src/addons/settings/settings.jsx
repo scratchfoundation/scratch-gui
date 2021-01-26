@@ -132,6 +132,11 @@ const TagComponent = ({tags}) => tags.length > 0 && (
                 {settingsTranslations['tw.addons.settings.tags.recommended']}
             </span>
         )}
+        {tags.includes('theme') && (
+            <span className={classNames(styles.tag, styles.tagTheme)}>
+                {settingsTranslations['tw.addons.settings.tags.theme']}
+            </span>
+        )}
         {tags.includes('beta') && (
             <span className={classNames(styles.tag, styles.tagBeta)}>
                 {settingsTranslations['tw.addons.settings.tags.beta']}

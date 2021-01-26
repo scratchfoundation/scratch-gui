@@ -32,23 +32,27 @@ const ThemeHOC = function (WrappedComponent) {
         }
         componentDidMount () {
             darkMediaQuery.addEventListener('change', this.handleQueryChange);
+            this.updateDark();
         }
         componentDidUpdate () {
-            const dark = this.state.dark;
             try {
-                localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+                localStorage.setItem(THEME_KEY, this.state.dark ? 'dark' : 'light');
             } catch (e) {
                 // ignore
             }
+            this.updateDark();
+        }
+        componentWillUnmount () {
+            darkMediaQuery.removeEventListener('change', this.handleQueryChange);
+        }
+        updateDark () {
+            const dark = this.state.dark;
             document.body.setAttribute('theme', dark ? 'dark' : 'light');
             if (dark && !darkModeStylesheet.parentNode) {
                 document.head.appendChild(darkModeStylesheet);
             } else if (!dark && darkModeStylesheet.parentNode) {
                 darkModeStylesheet.parentNode.removeChild(darkModeStylesheet);
             }
-        }
-        componentWillUnmount () {
-            darkMediaQuery.removeEventListener('change', this.handleQueryChange);
         }
         handleQueryChange () {
             this.setState({

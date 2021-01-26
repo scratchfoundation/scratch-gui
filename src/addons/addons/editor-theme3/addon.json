@@ -106,6 +106,13 @@
       "type": "color",
       "default": "#0FBD8C",
       "reloadRequired": false
+    },
+    {
+      "name": "TurboWarp",
+      "id": "tw-color",
+      "type": "color",
+      "default": "#ff4c4c",
+      "reloadRequired": false
     }
   ],
   "tags": ["editor", "theme"],

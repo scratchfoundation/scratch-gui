@@ -24,7 +24,8 @@ export default async function ({ addon, global, console }) {
 
       // Placeholder Div
       if (placeHolderDiv) placeHolderDiv.remove();
-      placeHolderDiv = document.body.appendChild(document.createElement("div"));
+      placeHolderDiv = document.createElement("div");
+      if (addon.settings.get("toggle") === "hover") document.body.appendChild(placeHolderDiv);
       placeHolderDiv.className = "sa-flyout-placeHolder";
 
       // Lock Img
@@ -73,6 +74,7 @@ export default async function ({ addon, global, console }) {
       function onmouseleave(e) {
         // If we go behind the flyout or the user has locked it, let's return
         if ((e && e.clientX <= scrollBar.getBoundingClientRect().left) || flyoutLock) return;
+        document.querySelector(".blocklyDropDownDiv").style.display = "none";
         flyOut.classList.add("sa-flyoutClose");
         flyOut.style.animation = `closeFlyout ${getSpeedValue()}s 1`;
         scrollBar.classList.add("sa-flyoutClose");

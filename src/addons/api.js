@@ -74,13 +74,6 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
-// Temporary until upstream removes window.scratchAddons
-window.scratchAddons = {
-    l10n: {
-        locale: language
-    }
-};
-
 document.head.appendChild(createStylesheet(fixHardcodedClassesCSS));
 
 class Tab extends EventTarget {
@@ -182,6 +175,7 @@ class AddonRunner {
         this.manifest = manifest;
         this.messageCache = {};
 
+        this.msg.locale = language;
         this.publicAPI = {
             global,
             console,

@@ -70,6 +70,11 @@ export default async function ({ addon, global, console }) {
       color: "#0FBD8C",
       alt: "pen",
     },
+    TurboWarp: {
+      color: "#ff4c4c",
+      alt: "tw",
+      var: "tw",
+    },
   };
 
   for (var prop of Object.keys(categories)) {

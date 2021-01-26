@@ -358,7 +358,10 @@ const TWStateManager = function (WrappedComponent) {
             }
 
             for (const extension of urlParams.getAll('extension')) {
-                this.props.vm.extensionManager.loadExtensionURL(extension);
+                // This is temporary until we feel more comfortable about the idea of running remote code in a Worker.
+                if (confirm(`Load extension: ${extension}`)) {
+                    this.props.vm.extensionManager.loadExtensionURL(extension);
+                }
             }
 
             const routerCallbacks = {

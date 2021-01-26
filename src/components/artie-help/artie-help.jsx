@@ -11,7 +11,7 @@ import ArtieHelpRenderValuesComponent from './artie-help-render-values.jsx';
 const messages = defineMessages({
     artieHelpModalTitle: {
         defaultMessage: 'ARTIE Help',
-        description: 'TARTIE Help.',
+        description: 'ARTIE Help.',
         id: 'gui.menuBar.artie.help.modalTitle'
     }
 });

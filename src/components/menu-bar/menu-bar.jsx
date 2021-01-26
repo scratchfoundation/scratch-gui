@@ -85,9 +85,11 @@ import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, art
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
+import ArtieLoading from '../../containers/artie-loading.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
 import html2canvas from "html2canvas";
+import Spinner from '../spinner/spinner.jsx';
 
 const ariaMessages = defineMessages({
     language: {
@@ -935,8 +937,7 @@ class MenuBar extends React.Component {
                             title="Login"
                             artieLogin={this.props.artieLogin}
                         />
-                ) :
-                (<div></div>)}
+                ) : null}
 
                 {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
                 this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
@@ -947,8 +948,7 @@ class MenuBar extends React.Component {
                         onOk={this.handleClickArtieExercisesOk}
                         artieExercises = {this.props.artieExercises}
                     />
-                ) :
-                (<div></div>)}
+                ) : null}
 
                 {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ?
                 (
@@ -956,9 +956,8 @@ class MenuBar extends React.Component {
                         onRequestClose={this.props.onArtieClearHelp}
                         help={this.props.artieExercises.help}
                     />
-                ) :
-                (<div></div>)}
-
+                ) : null}
+                {this.props.artieExercises.loading ? <ArtieLoading /> : null}
             </Box>
         );
     }

@@ -291,7 +291,7 @@ class SettingsStore extends EventTarget {
 
     setStore (store) {
         this.store = store;
-        SettingsStore.dispatchEvent(new CustomEvent('store-changed'));
+        this.dispatchEvent(new CustomEvent('store-changed'));
     }
 }
 

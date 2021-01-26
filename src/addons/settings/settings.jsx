@@ -28,7 +28,6 @@ import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
 import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 import SettingsStore from '../settings-store';
-import downloadBlob from '../libraries/download-blob';
 import extensionImage from './extension.svg';
 import brushImage from './brush.svg';
 import undoImage from './undo.svg';
@@ -639,8 +638,7 @@ class AddonSettingsComponent extends React.Component {
         const exportedData = SettingsStore.export({
             theme
         });
-        const blob = new Blob([JSON.stringify(exportedData)]);
-        downloadBlob('turbowarp-addon-settings.json', blob);
+        this.props.onExportSettings(exportedData);
     }
     handleImport () {
         const fileSelector = document.createElement('input');
@@ -840,7 +838,8 @@ AddonSettingsComponent.propTypes = {
     addons: PropTypes.objectOf(PropTypes.object),
     unsupportedAddons: PropTypes.objectOf(PropTypes.object),
     onReloadNow: PropTypes.func,
-    onSettingsChanged: PropTypes.func
+    onSettingsChanged: PropTypes.func,
+    onExportSettings: PropTypes.func
 };
 AddonSettingsComponent.defaultProps = {
     addons,

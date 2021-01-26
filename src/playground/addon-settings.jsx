@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import downloadBlob from '../lib/download-blob.js';
 import Settings from '../addons/settings/settings.jsx';
 import SettingsStore from '../addons/settings-store';
 import appTarget from './app-target';
@@ -29,9 +29,15 @@ const onSettingsChanged = () => {
     });
 };
 
+const onExportSettings = settings => {
+    const blob = new Blob([JSON.stringify(settings)]);
+    downloadBlob('turbowarp-addon-settings.json', blob);
+};
+
 ReactDOM.render((
     <Settings
         onReloadNow={window.opener && onReloadNow}
         onSettingsChanged={onSettingsChanged}
+        onExportSettings={onExportSettings}
     />
 ), appTarget);

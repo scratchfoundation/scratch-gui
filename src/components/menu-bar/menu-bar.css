@@ -228,3 +228,7 @@
     margin: 0.5rem;
     vertical-align: middle;
 }
+
+.spinner {
+    margin-right: $space;
+}

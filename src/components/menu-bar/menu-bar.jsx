@@ -85,7 +85,6 @@ import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, art
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
-import ArtieLoading from '../../containers/artie-loading.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
 import html2canvas from "html2canvas";
@@ -629,6 +628,13 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for registering a solution"
                                                 id="gui.menuBar.artie.registerSolution"
                                             />
+                                            {this.props.artieExercises.loading ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
                                         </MenuItem>
                                     </MenuSection>
                                 :
@@ -642,6 +648,13 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for requesting help"
                                                 id="gui.menuBar.artie.requestHelp"
                                             />
+                                            {this.props.artieExercises.loading ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
                                         </MenuItem>
                                     </MenuSection>
                                 :
@@ -655,6 +668,13 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for finish the exercise"
                                                 id="gui.menuBar.artie.finishExercise"
                                             />
+                                            {this.props.artieExercises.loading ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
                                         </MenuItem>
                                     </MenuSection>
                                 :
@@ -957,7 +977,6 @@ class MenuBar extends React.Component {
                         help={this.props.artieExercises.help}
                     />
                 ) : null}
-                {this.props.artieExercises.loading ? <ArtieLoading /> : null}
             </Box>
         );
     }

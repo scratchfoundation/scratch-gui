@@ -6,6 +6,11 @@
 import downloadBlob from "../../libraries/download-blob.js";
 
 export default async ({ addon, console, msg }) => {
+  // Safari supports mp4 but not webm
+  const CHECK_TYPES = ["video/webm", "video/mp4"];
+  const supportedVideoType = CHECK_TYPES.find((i) => MediaRecorder.isTypeSupported(i));
+  if (!supportedVideoType) throw new Error("no video types supported");
+
   while (true) {
     const elem = await addon.tab.waitForElement('div[class*="menu-bar_file-group"] > div:last-child:not(.sa-record)', {
       markAsSeen: true,
@@ -38,7 +43,10 @@ export default async ({ addon, console, msg }) => {
 
       recordOptionInner.appendChild(
         Object.assign(document.createElement("p"), {
-          textContent: msg("record-description"),
+          textContent:
+            supportedVideoType === "video/webm"
+              ? msg("record-description")
+              : msg("record-description").replace("WebM", "MP4"),
           className: "recordOptionDescription",
         })
       );
@@ -213,8 +221,8 @@ export default async ({ addon, console, msg }) => {
         disposeRecorder();
       } else {
         recorder.onstop = () => {
-          const blob = new Blob(recordBuffer, { type: "video/webm" });
-          downloadBlob("video.webm", blob);
+          const blob = new Blob(recordBuffer, { type: supportedVideoType });
+          downloadBlob("video" + supportedVideoType.split("/")[1], blob);
           disposeRecorder();
         };
         recorder.stop();
@@ -261,7 +269,7 @@ export default async ({ addon, console, msg }) => {
           stream.addTrack(track);
         }
       }
-      recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+      recorder = new MediaRecorder(stream, { mimeType: supportedVideoType });
       recorder.ondataavailable = (e) => {
         recordBuffer.push(e.data);
       };

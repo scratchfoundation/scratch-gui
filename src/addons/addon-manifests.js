@@ -19,7 +19,7 @@
 import addons from './addons.json';
 
 const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
-const mediaRecorderSupported = !!window.MediaRecorder && window.MediaRecorder.isTypeSupported('video/webm');
+const mediaRecorderSupported = !!window.MediaRecorder;
 const isSupported = manifest => {
     if (!manifest.permissions) {
         return true;

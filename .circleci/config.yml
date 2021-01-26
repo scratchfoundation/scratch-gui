@@ -112,6 +112,7 @@ jobs:
     parallelism: 2
     environment:
       JEST_JUNIT_OUTPUT_NAME: results.txt
+      DETECT_CHROMEDRIVER_VERSION: true
     steps:
       - *restore_git_cache
       - checkout

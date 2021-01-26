@@ -70,11 +70,12 @@ a[href] {
     border: 1px solid #acacac;
     padding: 8px 12px;
     border-radius: 4px;
-    transition: 0.25s ease;
     outline: none;
     height: 32px;
     font-family: inherit;
     font-size: 14px;
+    transition: 0.25s ease;
+    transition-property: background;
 }
 [theme="dark"] .button {
     color: #fff;
@@ -99,7 +100,7 @@ a[href] {
     border-radius: 4px;
 }
 .search-container:focus-within {
-    border-color: #222;
+    box-shadow: 0 0 0 3px #ff4c4c5d;
 }
 .search-input {
     color: inherit;
@@ -126,9 +127,6 @@ a[href] {
     color: white;
     background-color: #111111;
     border-color: #222222;
-}
-[theme="dark"] .search-container:focus-within {
-    border-color: #444;
 }
 [theme="dark"] .search-button {
     filter: invert(100%);
@@ -268,7 +266,8 @@ a[href] {
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: 0.25s ease;
+    transition-property: background;
 }
 .switch[state="on"] {
     background: #ff4c4c;
@@ -283,7 +282,8 @@ a[href] {
     border-radius: 5px;
     top: 5px;
     left: 5px;
-    transition: all 0.25s ease;
+    transition: 0.25s ease;
+    transition-property: background, left;
 }
 [theme="dark"] .switch::before {
     background: #aaa;
@@ -407,6 +407,7 @@ a[href] {
     padding: 8px 12px;
     border-radius: 4px;
     transition: 0.25s ease;
+    transition-property: background;
 }
 [theme="dark"] .setting input {
     color: #fff;
@@ -469,6 +470,7 @@ a[href] {
     border: 1px solid #aaa;
     border-right-width: 0;
     transition: 0.25s ease;
+    transition-property: color, background, border;
 }
 [theme="dark"] .select-option {
     color: #fff;

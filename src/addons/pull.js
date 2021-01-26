@@ -205,7 +205,6 @@ const includeImports = (folder, contents) => {
 
             if (file.endsWith('.js')) {
                 includeImportedLibraries(contents);
-                // includeDynamicallyImportedLibraries(contents);
                 await includeFixedHardcodedClasses(contents);
                 if (contents.includes('addon.self.dir') || contents.includes('addon.self.lib')) {
                     contents = includeImports(oldDirectory, contents);

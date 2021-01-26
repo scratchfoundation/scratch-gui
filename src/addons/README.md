@@ -8,7 +8,7 @@ We apply some patches on top of the original source files. These patches are mai
 
 entry.js is the script that will actually run the addons.
 
-pull.js is a magical script that automatically pulls code from GitHub, parses it with regex, and copies everything to the proper folders.
+pull.js is a magical script that automatically pulls code from GitHub, parses it with regex, applies some more patches, and copies everything to the proper folders.
 
 Directory structure:
 

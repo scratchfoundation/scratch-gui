@@ -165,17 +165,12 @@ class Settings extends EventTarget {
 }
 
 class Self {
-    constructor (id) {
-        this.dir = `addon-files/${id}`;
-        this.lib = 'addon-files/libraries-raw';
+    // These are removed at build-time by pull.js. Throw if attempting to access them at runtime.
+    get dir () {
+        throw new Error(`Addon tried to access addon.self.dir`);
     }
-}
-
-class Addon {
-    constructor (addonId, manifest) {
-        this.tab = new Tab();
-        this.settings = new Settings(addonId, manifest);
-        this.self = new Self(addonId);
+    get lib () {
+        throw new Error(`Addon tried to access addon.self.lib`);
     }
 }
 
@@ -190,7 +185,11 @@ class AddonRunner {
         this.publicAPI = {
             global,
             console,
-            addon: new Addon(id, manifest),
+            addon: {
+                tab: new Tab(),
+                settings: new Settings(id, manifest),
+                self: new Self()
+            },
             msg: this.msg.bind(this),
             safeMsg: this.safeMsg.bind(this)
         };
@@ -238,12 +237,17 @@ class AddonRunner {
         }
     }
 
-    _run () {
+    async _run () {
         this.updateCSSVariables();
 
         if (this.manifest.userstyles) {
             for (const userstyle of this.manifest.userstyles) {
-                const source = require(`./addons/${this.id}/${userstyle.url}`);
+                const m = await import(
+                    /* webpackInclude: /\.css$/ */
+                    /* webpackMode: "eager" */
+                    `!raw-loader!./addons/${this.id}/${userstyle.url}`
+                );
+                const source = m.default;
                 const style = createStylesheet(source);
                 style.className = 'scratch-addons-theme';
                 style.dataset.addonId = this.id;
@@ -254,17 +258,18 @@ class AddonRunner {
 
         if (this.manifest.userscripts) {
             for (const userscript of this.manifest.userscripts) {
-                require(`./addons/${this.id}/${userscript.url}`).default(this.publicAPI);
+                const m = await import(
+                    /* webpackInclude: /\.js$/ */
+                    /* webpackMode: "eager" */
+                    `./addons/${this.id}/${userscript.url}`
+                );
+                m.default(this.publicAPI);
             }
         }
     }
 
-    run () {
-        try {
-            this._run();
-        } catch (e) {
-            console.error('Addon error', e);
-        }
+    async run () {
+        this._run();
     }
 }
 AddonRunner.instances = [];

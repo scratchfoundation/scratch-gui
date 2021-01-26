@@ -14,7 +14,6 @@ Directory structure:
 
  - addons - the addons (managed by pull.js)
  - addons-l10n - addon translations (managed by pull.js)
- - libraries - libraries used by addons loaded with `import` (managed by pull.js)
- - libraries-raw - libraries used by addons loaded with `addon.tab.loadScript` (managed by pull.js)
+ - libraries - libraries used by addons (managed by pull.js)
  - api-libraries - libraries used by addon API
  - settings - the settings page and its translations

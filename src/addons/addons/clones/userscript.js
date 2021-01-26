@@ -3,6 +3,15 @@
  * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
  */
 
+/* inserted by pull.js */
+import _twAsset0 from "./300cats.svg";
+import _twAsset1 from "./cat.svg";
+const _twGetAsset = (path) => {
+  if (path === "/300cats.svg") return _twAsset0;
+  if (path === "/cat.svg") return _twAsset1;
+  throw new Error(`Unknown asset: ${path}`);
+};
+
 export default async function ({ addon, global, console, msg }) {
   console.log("clones counter enabled");
 
@@ -44,10 +53,10 @@ export default async function ({ addon, global, console, msg }) {
 
     if (v === 300) {
       count.style.color = "#ff6680";
-      icon.src = addon.self.dir + "/300cats.svg";
+      icon.src = /* changed by pull.js */ _twGetAsset("/300cats.svg");
     } else {
       count.style.color = "";
-      icon.src = addon.self.dir + "/cat.svg";
+      icon.src = /* changed by pull.js */ _twGetAsset("/cat.svg");
     }
     count.innerText = msg("clones", { cloneCount: v });
   }
@@ -58,7 +67,7 @@ export default async function ({ addon, global, console, msg }) {
     if (addon.tab.editorMode === "editor") {
       doCloneChecks(vm.runtime._cloneCounter);
 
-      icon.src = addon.self.dir + "/cat.svg";
+      icon.src = /* changed by pull.js */ _twGetAsset("/cat.svg");
 
       bar.appendChild(countContainerContainer);
     }

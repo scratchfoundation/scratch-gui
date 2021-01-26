@@ -51,12 +51,10 @@ rimraf.sync('ScratchAddons');
 rimraf.sync('addons');
 rimraf.sync('addons-l10n');
 rimraf.sync('libraries');
-rimraf.sync('libraries-raw');
 childProcess.execSync('git clone --depth=1 -b tw https://github.com/GarboMuffin/ScratchAddons ScratchAddons');
 fs.mkdirSync('addons', {recursive: true});
 fs.mkdirSync('addons-l10n', {recursive: true});
 fs.mkdirSync('libraries', {recursive: true});
-fs.mkdirSync('libraries-raw', {recursive: true});
 
 const JS_HEADER = `/**!
  * Imported from SA
@@ -72,19 +70,6 @@ const includeImportedLibraries = contents => {
         const libraryFile = match[1];
         const oldLibraryPath = pathUtil.join('ScratchAddons', 'libraries', libraryFile);
         const newLibraryPath = pathUtil.join('libraries', libraryFile);
-        const libraryContents = fs.readFileSync(oldLibraryPath, 'utf-8');
-        fs.writeFileSync(newLibraryPath, libraryContents);
-    }
-};
-
-const includeDynamicallyImportedLibraries = contents => {
-    // Parse things like:
-    // await addon.tab.loadScript(addon.self.lib + "/tinycolor-min.js");
-    const matches = [...contents.matchAll(/addon\.self\.lib *\+ *["']\/([\w\d_-]+\.js)["']/g)];
-    for (const match of matches) {
-        const libraryFile = match[1];
-        const oldLibraryPath = pathUtil.join('ScratchAddons', 'libraries', libraryFile);
-        const newLibraryPath = pathUtil.join('libraries-raw', libraryFile);
         const libraryContents = fs.readFileSync(oldLibraryPath, 'utf-8');
         fs.writeFileSync(newLibraryPath, libraryContents);
     }
@@ -158,6 +143,56 @@ const includeFixedHardcodedClasses = async contents => {
     }
 };
 
+const includeImports = (folder, contents) => {
+    // The first thing we have to do is figure out which files actually need to be loaded.
+    // Parse things like:
+    // await addon.tab.loadScript(addon.self.lib + "/tinycolor-min.js");
+    const matches = [...contents.matchAll(/addon\.self\.lib *\+ *["']\/([\w\d_-]+\.js)["']/g)];
+    const dynamicLibraries = [];
+    for (const match of matches) {
+        const libraryFile = match[1];
+        dynamicLibraries.push(libraryFile);
+        const oldLibraryPath = pathUtil.join('ScratchAddons', 'libraries', libraryFile);
+        const newLibraryPath = pathUtil.join('libraries', libraryFile);
+        const libraryContents = fs.readFileSync(oldLibraryPath, 'utf-8');
+        fs.writeFileSync(newLibraryPath, libraryContents);
+    }
+    const dynamicAssets = fs.readdirSync(folder)
+        .filter(file => file.endsWith('.svg'));
+
+    // Then we'll generate some JS to import them.
+    let header = '/* inserted by pull.js */\n';
+    dynamicAssets.forEach((file, index) => {
+        header += `import _twAsset${index} from "./${file}";\n`;
+    });
+    dynamicLibraries.forEach((file, index) => {
+        // Load as a file as it will be run through addon.tab.loadScript
+        header += `import _twScript${index} from "!file-loader!../../libraries/${file}";\n`;
+    });
+    header += `const _twGetAsset = (path) => {\n`;
+    dynamicAssets.forEach((file, index) => {
+        header += `  if (path === "/${file}") return _twAsset${index};\n`;
+    });
+    dynamicLibraries.forEach((file, index) => {
+        header += `  if (path === "/${file}") return _twScript${index};\n`;
+    });
+    header += '  throw new Error(`Unknown asset: ${path}`);\n';
+    header += '};\n';
+    header += '\n';
+
+    // And now we reroute everything to use our imports.
+    // Parse things like:
+    // el.src = addon.self.dir + "/" + name + ".svg";
+    //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  match
+    //                           ^^^^^^^^^^^^^^^^^^^  capture group 1
+    contents = contents.replace(
+        /addon\.self\.(?:dir|lib) *\+ *([^;]+)/g,
+        (_fullText, name) => `/* changed by pull.js */ _twGetAsset(${name})`
+    );
+
+    return header + contents;
+};
+
 (async () => {
     for (const addon of addons) {
         const oldDirectory = pathUtil.join('ScratchAddons', 'addons', addon);
@@ -168,15 +203,18 @@ const includeFixedHardcodedClasses = async contents => {
             fs.mkdirSync(newDirectory, {recursive: true});
             let contents = fs.readFileSync(oldPath, 'utf-8');
 
+            if (file.endsWith('.js')) {
+                includeImportedLibraries(contents);
+                // includeDynamicallyImportedLibraries(contents);
+                await includeFixedHardcodedClasses(contents);
+                if (contents.includes('addon.self.dir') || contents.includes('addon.self.lib')) {
+                    contents = includeImports(oldDirectory, contents);
+                }
+            }
+
             // Add a license notice, unless one already exists.
             if ((file.endsWith('.js') || file.endsWith('.css')) && !contents.includes('@license')) {
                 contents = JS_HEADER + contents;
-            }
-
-            if (file.endsWith('.js')) {
-                includeImportedLibraries(contents);
-                includeDynamicallyImportedLibraries(contents);
-                await includeFixedHardcodedClasses(contents);
             }
 
             fs.writeFileSync(newPath, contents);

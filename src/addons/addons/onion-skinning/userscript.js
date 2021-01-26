@@ -3,6 +3,19 @@
  * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
  */
 
+/* inserted by pull.js */
+import _twAsset0 from "./decrement.svg";
+import _twAsset1 from "./increment.svg";
+import _twAsset2 from "./settings.svg";
+import _twAsset3 from "./toggle.svg";
+const _twGetAsset = (path) => {
+  if (path === "/decrement.svg") return _twAsset0;
+  if (path === "/increment.svg") return _twAsset1;
+  if (path === "/settings.svg") return _twAsset2;
+  if (path === "/toggle.svg") return _twAsset3;
+  throw new Error(`Unknown asset: ${path}`);
+};
+
 export default async function ({ addon, global, console, msg }) {
   let project = null;
   let paperCanvas = null;
@@ -539,7 +552,7 @@ export default async function ({ addon, global, console, msg }) {
     el.className = "sa-onion-image";
     el.draggable = false;
     el.dataset.image = name;
-    el.src = addon.self.dir + "/" + name + ".svg";
+    el.src = /* changed by pull.js */ _twGetAsset("/" + name + ".svg");
     return el;
   };
 

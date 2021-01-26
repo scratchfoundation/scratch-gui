@@ -3,6 +3,15 @@
  * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
  */
 
+/* inserted by pull.js */
+import _twAsset0 from "./lock.svg";
+import _twAsset1 from "./unlock.svg";
+const _twGetAsset = (path) => {
+  if (path === "/lock.svg") return _twAsset0;
+  if (path === "/unlock.svg") return _twAsset1;
+  throw new Error(`Unknown asset: ${path}`);
+};
+
 export default async function ({ addon, global, console }) {
   var placeHolderDiv = null,
     lockDisplay = null,
@@ -21,11 +30,11 @@ export default async function ({ addon, global, console }) {
       // Lock Img
       if (lockDisplay) lockDisplay.remove();
       lockDisplay = document.createElement("img");
-      lockDisplay.src = addon.self.dir + "/unlock.svg";
+      lockDisplay.src = /* changed by pull.js */ _twGetAsset("/unlock.svg");
       lockDisplay.className = "sa-lock-image";
       lockDisplay.onclick = () => {
         flyoutLock = !flyoutLock;
-        lockDisplay.src = addon.self.dir + `/${flyoutLock ? "" : "un"}lock.svg`;
+        lockDisplay.src = /* changed by pull.js */ _twGetAsset(`/${flyoutLock ? "" : "un"}lock.svg`);
       };
 
       function positionElements() {

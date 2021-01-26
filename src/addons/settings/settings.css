@@ -134,6 +134,33 @@ a[href] {
     filter: invert(100%);
 }
 
+.feedback-button-outer {
+    background: white;
+    color: inherit !important;
+    box-sizing: border-box;
+    border: 1px solid #cecece;
+    height: 100%;
+    border-radius: 4px;
+    padding: 0 12px;
+    margin-left: 10px;
+    font-size: 12px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+}
+[theme="dark"] .feedback-button-outer {
+    background-color: #111111;
+    border-color: #222222;
+}
+.feedback-button-outer:active, .feedback-button-outer:focus-within {
+    box-shadow: 0 0 0 3px #ff4c4c5d;
+}
+.feedback-button-inner {
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .addons {
     overflow-y: auto;
     overflow-x: hidden;

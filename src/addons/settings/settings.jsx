@@ -781,6 +781,16 @@ class AddonSettingsComponent extends React.Component {
                         />
                         <div className={styles.searchButton} />
                     </label>
+                    <a
+                        href="https://scratch.mit.edu/users/World_Languages/#comments"
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.feedbackButtonOuter}
+                    >
+                        <span className={styles.feedbackButtonInner}>
+                            {settingsTranslations['tw.addons.settings.addonFeedback']}
+                        </span>
+                    </a>
                     {this.state.dirty && (
                         <DirtyComponent
                             onReloadNow={this.props.onReloadNow && this.handleReloadNow}

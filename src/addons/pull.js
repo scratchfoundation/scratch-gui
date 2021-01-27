@@ -47,11 +47,13 @@ const walk = dir => {
     return files;
 };
 
-rimraf.sync('ScratchAddons');
+if (!process.argv.includes('-')) {
+    rimraf.sync('ScratchAddons');
+    childProcess.execSync('git clone --depth=1 -b tw https://github.com/GarboMuffin/ScratchAddons ScratchAddons');
+}
 rimraf.sync('addons');
 rimraf.sync('addons-l10n');
 rimraf.sync('libraries');
-childProcess.execSync('git clone --depth=1 -b tw https://github.com/GarboMuffin/ScratchAddons ScratchAddons');
 fs.mkdirSync('addons', {recursive: true});
 fs.mkdirSync('addons-l10n', {recursive: true});
 fs.mkdirSync('libraries', {recursive: true});

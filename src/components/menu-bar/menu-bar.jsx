@@ -315,7 +315,7 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
-        this.props.onArtieLoadingSolution(true);
+        this.props.onArtieLoadingSolution(true, false);
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
@@ -328,12 +328,12 @@ class MenuBar extends React.Component {
         sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived);
     }
     handleClickFinishExercise(){
-        this.props.onArtieLoadingExercise(true);
+        this.props.onArtieLoadingExercise(true, false);
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null);
         });
     }
     handleClickArtieLoginOk(){
@@ -1119,8 +1119,8 @@ const mapDispatchToProps = dispatch => ({
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
     onArtieClearHelp: () => dispatch(artieClearHelp()),
-    onArtieLoadingSolution: (loading) => dispatch(artieLoadingSolution(loading)),
-    onArtieLoadingExercise: (loading) => dispatch(artieLoadingExercise(loading)),
+    onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
+    onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
     onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading))
 
 });

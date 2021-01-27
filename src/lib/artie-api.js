@@ -127,7 +127,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
 
                 //If the callback loading is not null, we indicate that the loading has finished
                 if(callbackLoading !==null){
-                    callbackLoading(false);
+                    callbackLoading(false, true);
                 }
 
                 var json = JSON.parse(xhr.response);
@@ -161,7 +161,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => n
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
-                callback(false);
+                callback(false, true);
             }
         }
     });

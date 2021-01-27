@@ -19,7 +19,8 @@ const initialState = {
     help: null,
     loadingSolution: false,
     loadingExercise: false,
-    loadingHelp: false
+    loadingHelp: false,
+    informationSent: false
 }
 
 const reducer = function (state, action) {
@@ -63,11 +64,13 @@ const reducer = function (state, action) {
             });
         case ARTIE_SENDING_SOLUTION:
             return Object.assign({}, state, {
-                loadingSolution: action.loadingSolution
+                loadingSolution: action.loadingSolution,
+                informationSent: action.informationSent
             });
         case ARTIE_SENDING_EXERCISE:
             return Object.assign({}, state, {
-                loadingExercise: action.loadingExercise
+                loadingExercise: action.loadingExercise,
+                informationSent: action.informationSent
             });
         case ARTIE_SENDING_HELP:
             return Object.assign({}, state, {
@@ -115,14 +118,16 @@ const artieClearHelp = () => ({
     type: ARTIE_CLEAR_HELP
 });
 
-const artieLoadingSolution = (loading) => ({
+const artieLoadingSolution = (loading, informationSent) => ({
     type: ARTIE_SENDING_SOLUTION,
-    loadingSolution: loading
+    loadingSolution: loading,
+    informationSent: informationSent
 });
 
-const artieLoadingExercise = (loading) => ({
+const artieLoadingExercise = (loading, informationSent) => ({
     type: ARTIE_SENDING_EXERCISE,
-    loadingExercise: loading
+    loadingExercise: loading,
+    informationSent: informationSent
 });
 
 const artieLoadingHelp = (loading) => ({

@@ -70,7 +70,7 @@ const handleLoadAddons = () => {
 
 const initialTitle = document.title;
 const handleUpdateProjectTitle = (title, isDefault) => {
-    if (isDefault) {
+    if (isDefault || !title) {
         document.title = initialTitle;
     } else {
         document.title = `${title} - TurboWarp`;

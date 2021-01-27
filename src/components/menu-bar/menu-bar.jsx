@@ -622,7 +622,7 @@ class MenuBar extends React.Component {
                                 </MenuItem>
                                     }
                                 </MenuSection>
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==1?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==1 && this.props.artieExercises.currentExercise !== null?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRegisterSolution}>
                                             <FormattedMessage

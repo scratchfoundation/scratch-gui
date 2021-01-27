@@ -222,7 +222,7 @@ export default async ({ addon, console, msg }) => {
       } else {
         recorder.onstop = () => {
           const blob = new Blob(recordBuffer, { type: supportedVideoType });
-          downloadBlob("video" + supportedVideoType.split("/")[1], blob);
+          downloadBlob("video." + supportedVideoType.split("/")[1], blob);
           disposeRecorder();
         };
         recorder.stop();

@@ -80,6 +80,8 @@ a:active, a:focus {
     font-size: 14px;
     transition: 0.25s ease;
     transition-property: background;
+    display: flex;
+    align-items: center;
 }
 [theme="dark"] .button {
     color: #fff;
@@ -519,6 +521,7 @@ a:active, a:focus {
 
 .footer-buttons {
     margin-bottom: 10px;
+    display: flex;
 }
 .footer-buttons > .button {
     margin-right: 10px;
@@ -557,6 +560,8 @@ a:active, a:focus {
     border: 1px solid #cfcfcf;
     border-radius: 4px;
     pointer-events: auto;
+    display: flex;
+    align-items: center;
 }
 [theme="dark"] .dirty-inner {
     background: rgb(39, 50, 53);

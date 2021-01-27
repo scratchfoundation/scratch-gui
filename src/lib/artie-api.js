@@ -124,18 +124,23 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
-                callbackLoading(false);
+
+                //If the callback loading is not null, we indicate that the loading has finished
+                if(callbackLoading !==null){
+                    callbackLoading(false);
+                }
+
                 var json = JSON.parse(xhr.response);
 
                 //We check if there are no errors
-                if(json.body.object !== null){
+                if(json.body.object !== null && callbackHelp !== null){
                     callbackHelp(json.body.object);
                 }
             }
         }
     });
 
-    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -161,7 +166,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => n
         }
     });
 
-    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
+    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });

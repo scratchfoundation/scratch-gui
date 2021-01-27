@@ -972,7 +972,8 @@ class MenuBar extends React.Component {
                     />
                 ) : null}
 
-                {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null ?
+                {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null &&
+                (this.props.artieExercises.help.nextSteps !== null || this.props.artieExercises.help.totalDistance === 0) ?
                 (
                     <ArtieHelp
                         onRequestClose={this.props.onArtieClearHelp}

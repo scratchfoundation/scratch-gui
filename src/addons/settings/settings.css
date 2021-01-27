@@ -311,9 +311,9 @@ a:active, a:focus {
     border-color: #0e44b8;
 }
 .tag-theme {
-    color: white;
-    background-color: #5f8d0b;
-    border-color: #3e5a09;
+    color: black;
+    background-color: #9ad4cf;
+    border-color: #628f8c;
 }
 .tag-beta {
     color: white;

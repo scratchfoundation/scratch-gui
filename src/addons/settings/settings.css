@@ -33,6 +33,10 @@ a[href] {
 [theme="dark"] a[href] {
     color: #6d9bff;
 }
+a:active, a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #ff4c4c5d;
+}
 
 .container {
     position: absolute;
@@ -119,7 +123,7 @@ a[href] {
     outline: none;
     cursor: pointer;
     background-color: transparent;
-    background-image: url("./search.svg");
+    background-image: url("./search-black.svg");
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -129,7 +133,7 @@ a[href] {
     border-color: #222222;
 }
 [theme="dark"] .search-button {
-    filter: invert(100%);
+    background-image: url("./search-white.svg");
 }
 
 .feedback-button-outer {
@@ -203,9 +207,6 @@ a[href] {
     width: 16px;
     margin-right: 8px;
 }
-[theme="dark"] .extension-image {
-    filter: invert(100%);
-}
 
 .addon-title {
     cursor: pointer;
@@ -249,9 +250,6 @@ a[href] {
 .reset-button-image {
     height: 16px;
     width: 16px;
-}
-[theme="dark"] .reset-button-image {
-    filter: invert(100%);
 }
 [theme="dark"] .reset-button:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -376,6 +374,7 @@ a[href] {
 }
 .notice-icon {
     height: 16px;
+    width: 16px;
     margin-right: 10px;
 }
 

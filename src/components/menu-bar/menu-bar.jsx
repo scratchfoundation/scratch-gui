@@ -81,7 +81,7 @@ import sharedMessages from '../../lib/shared-messages';
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
-        artieHelpReceived, artieClearHelp, artieSendingSolution, artieSolutionSent} from '../../reducers/artie-exercises';
+        artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
@@ -315,23 +315,25 @@ class MenuBar extends React.Component {
         }
     }
     handleClickRegisterSolution (){
-        this.props.onArtieSendingSolution();
+        this.props.onArtieLoadingSolution(true);
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieSolutionSent);
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieLoadingSolution);
         });
     }
     handleClickRequestHelp(){
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieHelpReceived);
+        this.props.onArtieLoadingHelp(true);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived);
     }
     handleClickFinishExercise(){
+        this.props.onArtieLoadingExercise(true);
         const body = document.querySelector('body');
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise);
         });
     }
     handleClickArtieLoginOk(){
@@ -628,7 +630,7 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for registering a solution"
                                                 id="gui.menuBar.artie.registerSolution"
                                             />
-                                            {this.props.artieExercises.loading ?
+                                            {this.props.artieExercises.loadingSolution ?
                                                 <Spinner
                                                     small
                                                     className={styles.spinner}
@@ -648,7 +650,7 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for requesting help"
                                                 id="gui.menuBar.artie.requestHelp"
                                             />
-                                            {this.props.artieExercises.loading ?
+                                            {this.props.artieExercises.loadingHelp ?
                                                 <Spinner
                                                     small
                                                     className={styles.spinner}
@@ -668,7 +670,7 @@ class MenuBar extends React.Component {
                                                 description="Menu bar item for finish the exercise"
                                                 id="gui.menuBar.artie.finishExercise"
                                             />
-                                            {this.props.artieExercises.loading ?
+                                            {this.props.artieExercises.loadingExercise ?
                                                 <Spinner
                                                     small
                                                     className={styles.spinner}
@@ -1116,8 +1118,9 @@ const mapDispatchToProps = dispatch => ({
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
     onArtieClearHelp: () => dispatch(artieClearHelp()),
-    onArtieSendingSolution: () => dispatch(artieSendingSolution()),
-    onArtieSolutionSent: () => dispatch(artieSolutionSent())
+    onArtieLoadingSolution: (loading) => dispatch(artieLoadingSolution(loading)),
+    onArtieLoadingExercise: (loading) => dispatch(artieLoadingExercise(loading)),
+    onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading))
 
 });
 

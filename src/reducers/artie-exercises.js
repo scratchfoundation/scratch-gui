@@ -7,7 +7,8 @@ const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
 const ARTIE_HELP_RECEIVED = 'scratch-gui/artie-exercises/ARTIE_HELP_RECEIVED';
 const ARTIE_CLEAR_HELP = 'scratch-gui/artie-exercises/ARTIE_CLEAR_HELP';
 const ARTIE_SENDING_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_SENDING_SOLUTION';
-const ARTIE_SOLUTION_SENT = 'scratch-gui/artie-exercises/ARTIE_SOLUTION_SENT';
+const ARTIE_SENDING_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SENDING_EXERCISE';
+const ARTIE_SENDING_HELP = 'scratch-gui/artie-exercises/ARTIE_SENDING_HELP';
 
 
 const initialState = {
@@ -16,7 +17,9 @@ const initialState = {
     blocks: null,
     active : false,
     help: null,
-    loading: false
+    loadingSolution: false,
+    loadingExercise: false,
+    loadingHelp: false
 }
 
 const reducer = function (state, action) {
@@ -60,11 +63,15 @@ const reducer = function (state, action) {
             });
         case ARTIE_SENDING_SOLUTION:
             return Object.assign({}, state, {
-                loading: true
+                loadingSolution: action.loadingSolution
             });
-        case ARTIE_SOLUTION_SENT:
+        case ARTIE_SENDING_EXERCISE:
             return Object.assign({}, state, {
-                loading: false
+                loadingExercise: action.loadingExercise
+            });
+        case ARTIE_SENDING_HELP:
+            return Object.assign({}, state, {
+                loadingHelp: action.loadingHelp
             });
         default:
             return state;
@@ -108,12 +115,19 @@ const artieClearHelp = () => ({
     type: ARTIE_CLEAR_HELP
 });
 
-const artieSendingSolution = () => ({
-    type: ARTIE_SENDING_SOLUTION
+const artieLoadingSolution = (loading) => ({
+    type: ARTIE_SENDING_SOLUTION,
+    loadingSolution: loading
 });
 
-const artieSolutionSent = () => ({
-    type: ARTIE_SOLUTION_SENT
+const artieLoadingExercise = (loading) => ({
+    type: ARTIE_SENDING_EXERCISE,
+    loadingExercise: loading
+});
+
+const artieLoadingHelp = (loading) => ({
+    type: ARTIE_SENDING_HELP,
+    loadingHelp: loading
 });
 
 
@@ -128,6 +142,7 @@ export {
     artieBlocksUpdated,
     artieHelpReceived,
     artieClearHelp,
-    artieSendingSolution,
-    artieSolutionSent
+    artieLoadingSolution,
+    artieLoadingExercise,
+    artieLoadingHelp
 };

@@ -106,7 +106,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callback) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp) => new Promise((resolve, reject) => {
 
     var spriteElements = [];
 
@@ -124,11 +124,12 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
+                callbackLoading(false);
                 var json = JSON.parse(xhr.response);
 
                 //We check if there are no errors
                 if(json.body.object !== null){
-                    callback(json.body.object);
+                    callbackHelp(json.body.object);
                 }
             }
         }
@@ -155,7 +156,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => n
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
-                callback();
+                callback(false);
             }
         }
     });

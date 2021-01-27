@@ -63,13 +63,19 @@ const AddonCreditsComponent = ({credits}) => (
                 className={styles.credit}
                 key={index}
             >
-                <a
-                    href={author.link}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    {author.name}
-                </a>
+                {author.link ? (
+                    <a
+                        href={author.link}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {author.name}
+                    </a>
+                ) : (
+                    <span>
+                        {author.name}
+                    </span>
+                )}
                 {isLast ? null : ', '}
             </span>
         );

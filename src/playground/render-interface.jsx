@@ -68,6 +68,15 @@ const handleLoadAddons = () => {
     import(/* webpackChunkName: "addons" */ '../addons/entry');
 };
 
+const initialTitle = document.title;
+const handleUpdateProjectTitle = (title, isDefault) => {
+    if (isDefault) {
+        document.title = initialTitle;
+    } else {
+        document.title = `${title} - TurboWarp`;
+    }
+};
+
 const WrappedMenuBar = compose(
     SBFileUploaderHOC
 )(MenuBar);
@@ -96,6 +105,7 @@ const Interface = ({
                 <GUI
                     onClickAddonSettings={handleClickAddonSettings}
                     onLoadAddons={handleLoadAddons}
+                    onUpdateProjectTitle={handleUpdateProjectTitle}
                     onClickTheme={onClickTheme}
                 />
                 {isHomepage ? (

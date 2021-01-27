@@ -18,9 +18,6 @@ const fetchProjectMeta = projectId => fetch(API_URL.replace('$id', projectId))
 
 const TWProjectMetaFetcherHOC = function (WrappedComponent) {
     class ProjectMetaFetcherComponent extends React.Component {
-        componentDidMount () {
-            this.initialTitle = document.title;
-        }
         shouldComponentUpdate (nextProps) {
             return this.props.projectId !== nextProps.projectId;
         }
@@ -29,7 +26,6 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             this.props.onSetAuthor('', '');
             this.props.onSetDescription('', '');
             const projectId = this.props.projectId;
-            document.title = this.initialTitle;
             // Don't try to load metadata for empty projects.
             if (projectId === '0') {
                 return;
@@ -42,7 +38,6 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     }
                     const title = data.title;
                     if (title) {
-                        document.title = `${title} - TurboWarp`;
                         this.props.onSetProjectTitle(title);
                     }
                     const authorName = data.author.username;

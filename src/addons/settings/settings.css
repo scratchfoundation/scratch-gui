@@ -61,7 +61,7 @@ a:active, a:focus {
 [theme="dark"] .header {
     background-color: #222222;
 }
-@media (max-width: 550px) {
+@media (max-width: 700px) {
     .header {
         padding-left: 5px;
         padding-right: 5px;
@@ -171,7 +171,7 @@ a:active, a:focus {
     padding: 10px 20px;
     height: 100%;
 }
-@media (max-width: 550px) {
+@media (max-width: 700px) {
     .addons {
         padding-left: 5px;
         padding-right: 5px;

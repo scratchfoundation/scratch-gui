@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {injectIntl, defineMessages, intlShape} from 'react-intl';
-import {projectTitleInitialState} from '../reducers/project-title';
+import {projectTitleInitialState, setProjectTitle} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {showStandardAlert, showAlertWithTimeout} from '../reducers/alerts';
@@ -22,6 +22,16 @@ const messages = defineMessages({
         id: 'tw.fs.saveError'
     }
 });
+
+// from sb-file-uploader-hoc.jsx
+const getProjectTitleFromFilename = fileInputFilename => {
+    if (!fileInputFilename) return '';
+    // only parse title with valid scratch project extensions
+    // (.sb, .sb2, and .sb3)
+    const matches = fileInputFilename.match(/^(.*)\.sb[23]?$/);
+    if (!matches) return '';
+    return matches[1].substring(0, 100); // truncate project title to max 100 chars
+};
 
 /**
  * Project saver component passes a downloadProject function to its child.
@@ -74,6 +84,10 @@ class SB3Downloader extends React.Component {
             const handle = await FileSystemAPI.showSaveFilePicker();
             await this.saveToHandle(handle);
             this.props.onSetFileHandle(handle);
+            const title = getProjectTitleFromFilename(handle.name);
+            if (title) {
+                this.props.onSetProjectTitle(title);
+            }
         } catch (e) {
             this.handleSaveError(e);
         }
@@ -160,6 +174,7 @@ SB3Downloader.propTypes = {
     showedExtendedExtensionsWarning: PropTypes.bool,
     onShowExtendedExtensionsWarning: PropTypes.func,
     onSetFileHandle: PropTypes.func,
+    onSetProjectTitle: PropTypes.func,
     onShowSavingAlert: PropTypes.func,
     onShowSaveSuccessAlert: PropTypes.func,
     onShowSaveErrorAlert: PropTypes.func,
@@ -182,6 +197,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showStandardAlert('twExtendedExtensionsWarning'));
         dispatch(setShowedExtendedExtensionsWarning(true));
     },
+    onSetProjectTitle: title => dispatch(setProjectTitle(title)),
     onShowSavingAlert: () => showAlertWithTimeout(dispatch, 'saving'),
     onShowSaveSuccessAlert: () => showAlertWithTimeout(dispatch, 'twSaveToDiskSuccess'),
     onShowSaveErrorAlert: () => dispatch(showStandardAlert('savingError')),

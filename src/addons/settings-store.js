@@ -242,7 +242,11 @@ class SettingsStore extends EventTarget {
                 }
                 continue;
             }
-            this.setAddonSetting(addonId, setting, null);
+            try {
+                this.setAddonSetting(addonId, setting, null);
+            } catch (e) {
+                // ignore
+            }
         }
     }
 

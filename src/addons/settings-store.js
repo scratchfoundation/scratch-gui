@@ -31,11 +31,19 @@ class SettingsStore extends EventTarget {
     /**
      * @private
      */
-    readLocalStorage () {
-        const base = {};
+    createEmptyStore () {
+        const result = {};
         for (const addonId of Object.keys(addons)) {
-            base[addonId] = {};
+            result[addonId] = {};
         }
+        return result;
+    }
+
+    /**
+     * @private
+     */
+    readLocalStorage () {
+        const base = this.createEmptyStore();
         try {
             const local = localStorage.getItem(SETTINGS_KEY);
             if (local) {
@@ -231,6 +239,9 @@ class SettingsStore extends EventTarget {
         for (const addon of Object.keys(addons)) {
             this.resetAddon(addon, true);
         }
+        // In case resetAddon missed some properties, do a hard reset on storage.
+        this.store = this.createEmptyStore();
+        this.saveToLocalStorage();
     }
 
     resetAddon (addonId, resetEverything) {

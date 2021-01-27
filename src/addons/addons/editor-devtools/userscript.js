@@ -1656,6 +1656,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
           contextMenu.insertAdjacentHTML(
             "beforeend",
             `
+                            <!-- FIXCLASS:context-menu_menu-item_3cioN -->
                             <div class="react-contextmenu-item context-menu_menu-item_3cioN s3devSTT" role="menuitem"
                                 tabindex="-1" aria-disabled="false" style="border-top: 1px solid hsla(0, 0%, 0%, 0.15);"><span>${m(
                                   "top"

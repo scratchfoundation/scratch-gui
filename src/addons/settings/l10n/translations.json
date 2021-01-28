@@ -1,5 +1,6 @@
 {
     "es": {
+        "tw.addons.settings.addonFeedback": "Feedback (comentarios) de addons",
         "tw.addons.settings.confirmResetAll": "¿Está seguro de que quiere reiniciar todos los addons a sus valores predeterminados?",
         "tw.addons.settings.credits": "Créditos",
         "tw.addons.settings.dirty": "Recargue TurboWarp para aplicar los cambios.",
@@ -18,6 +19,7 @@
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
     },
     "pt": {
+        "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",
         "tw.addons.settings.credits": "Créditos:",
         "tw.addons.settings.dirty": "Recarregue o TurboWarp para aplicar as opções.",

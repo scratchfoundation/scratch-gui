@@ -106,7 +106,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
 
     var spriteElements = [];
 
@@ -130,6 +130,11 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
                     callbackLoading(false, true);
                 }
 
+                //If the callback of the popup is not undefined and is not null, we show the popup
+                if(callbackPopup !== undefined && callbackPopup !== null){
+                    callbackPopup(true);
+                }
+
                 var json = JSON.parse(xhr.response);
 
                 //We check if there are no errors
@@ -145,7 +150,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, callbackPopup) => new Promise((resolve, reject) => {
 
     var spriteElements = []
 
@@ -161,6 +166,12 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => n
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
+
+                //If the callback of the popup is not undefined and is not null, we show the popup
+                if(callbackPopup !== undefined && callbackPopup !== null){
+                    callbackPopup(true);
+                }
+
                 callback(false, true);
             }
         }

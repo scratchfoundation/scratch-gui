@@ -81,9 +81,11 @@ import sharedMessages from '../../lib/shared-messages';
 import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
-        artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp} from '../../reducers/artie-exercises';
+        artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
+        artiePopupExercise, artiePopupSolution} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
+import ArtieExercisePopup from '../../containers/artie-exercises-popup.jsx';
 import ArtieHelp from '../../containers/artie-help.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
@@ -320,12 +322,12 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieLoadingSolution);
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieLoadingSolution, this.props.onArtieSolutionSentPopupOpen);
         });
     }
     handleClickRequestHelp(){
         this.props.onArtieLoadingHelp(true);
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
     }
     handleClickFinishExercise(){
         this.props.onArtieLoadingExercise(true, false);
@@ -333,7 +335,7 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
         });
     }
     handleClickArtieLoginOk(){
@@ -980,6 +982,18 @@ class MenuBar extends React.Component {
                         help={this.props.artieExercises.help}
                     />
                 ) : null}
+                {this.props.artieExercises.popupExercise ?
+                    <ArtieExercisePopup
+                        onCancel={this.props.onArtieExerciseSentPopupClose}
+                        type='exercise'
+                    />
+                : null}
+                {this.props.artieExercises.popupSolution ?
+                    <ArtieExercisePopup
+                        onCancel={this.props.onArtieSolutionSentPopupClose}
+                        type='solution'
+                    />
+                : null}
             </Box>
         );
     }
@@ -1121,8 +1135,11 @@ const mapDispatchToProps = dispatch => ({
     onArtieClearHelp: () => dispatch(artieClearHelp()),
     onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
     onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
-    onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading))
-
+    onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading)),
+    onArtieExerciseSentPopupClose: () => dispatch(artiePopupExercise(false)),
+    onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
+    onArtieSolutionSentPopupClose: () => dispatch(artiePopupSolution(false)),
+    onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active))
 });
 
 export default compose(

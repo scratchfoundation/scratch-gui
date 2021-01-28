@@ -1,0 +1,44 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 400px;
+    margin: 50px auto; /* This modal is taller than most, reduce top margin */
+    min-height: 400px;
+}
+
+.modal-content-congrats {
+    margin: 50px auto;
+    width: 400px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
+
+/* Messages */
+.label {
+    color:$ui-white;
+    background-color: $motion-tertiary;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+}
+.label-congrats {
+    color: green;
+    background-color: $ui-white;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}

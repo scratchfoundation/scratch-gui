@@ -94,6 +94,10 @@ const vmListenerHOC = function (WrappedComponent) {
             if (errorMessage.includes('event_whengreaterthan')) {
                 return;
             }
+            // Ignore intentonal errors
+            if (errorMessage.includes('Script explicitly disables compilation')) {
+                return;
+            }
             // Send an analytics event the first time this happens
             if (!sentCompileErrorEvent) {
                 sentCompileErrorEvent = true;

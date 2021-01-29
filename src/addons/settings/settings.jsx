@@ -671,6 +671,9 @@ class AddonSettingsComponent extends React.Component {
                 const text = await file.text();
                 const data = JSON.parse(text);
                 SettingsStore.import(data);
+                this.setState({
+                    search: ''
+                });
             } catch (e) {
                 console.error(e);
                 alert(e);

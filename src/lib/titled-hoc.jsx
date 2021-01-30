@@ -42,7 +42,7 @@ const TitledHOC = function (WrappedComponent) {
             if (this.props.reduxProjectTitle !== prevProps.reduxProjectTitle &&
                 this.props.reduxProjectTitle !== this.props.projectTitle) {
                 // tw: inform callback whether this title is a default title like "Project"
-                this.props.onUpdateProjectTitle(this.props.reduxProjectTitle, prevProps.reduxProjectTitle === '');
+                this.props.onUpdateProjectTitle(this.props.reduxProjectTitle, false);
             }
         }
         handleReceivedProjectTitle (requestedTitle) {

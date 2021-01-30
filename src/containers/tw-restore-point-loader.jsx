@@ -4,31 +4,31 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
-import AutoSaveAPI from '../lib/tw-indexeddb-autosave-api';
 import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
 import {closeAlertWithId} from '../reducers/alerts';
+import RestorePointAPI from '../lib/tw-restore-point-api';
 
 const messages = defineMessages({
     error: {
         defaultMessage: 'Could not load restore point.\n\nDebug: {error}',
         description: 'Alert displayed when restore point loading failed',
-        id: 'tw.autosave.loadFail'
+        id: 'tw.restorePoint.loadFail'
     }
 });
 
-class ToggleCompiler extends React.Component {
+class RestorePointLoader extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'loadAutoSave'
+            'loadRestorePoint'
         ]);
     }
-    loadAutoSave () {
+    loadRestorePoint () {
         this.props.onLoadingStarted();
         this.props.requestProjectUpload(this.props.loadingState);
-        AutoSaveAPI.load()
+        RestorePointAPI.load()
             .then(arrayBuffer => this.props.vm.loadProject(arrayBuffer))
             .then(() => {
                 this.props.onLoadingFinished(this.props.loadingState, true);
@@ -44,12 +44,12 @@ class ToggleCompiler extends React.Component {
     render () {
         return this.props.children(
             this.props.className,
-            this.loadAutoSave
+            this.loadRestorePoint
         );
     }
 }
 
-ToggleCompiler.propTypes = {
+RestorePointLoader.propTypes = {
     intl: intlShape,
     children: PropTypes.func,
     className: PropTypes.string,
@@ -79,4 +79,4 @@ const mapDispatchToProps = dispatch => ({
 export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ToggleCompiler));
+)(RestorePointLoader));

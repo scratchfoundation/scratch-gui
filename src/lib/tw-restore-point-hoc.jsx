@@ -6,9 +6,14 @@ import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {getIsShowingProject} from '../reducers/project-state';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
-import AutoSaveAPI from './tw-indexeddb-autosave-api';
+import RestorePointAPI from './tw-restore-point-api';
 
-const AUTOSAVE_TIMEOUT = 1000 * 60 * 5;
+/**
+ * @fileoverview
+ * HOC responsible for automatically creating restore points.
+ */
+
+const INTERVAL = 1000 * 60 * 5;
 
 let bailed = false;
 
@@ -16,16 +21,16 @@ const messages = defineMessages({
     error: {
         defaultMessage: 'Could not restore point; restore points are now disabled. Regular project saves are unaffected.\n\nDebug: {error}',
         description: 'Alert displayed when restore point creation failed',
-        id: 'tw.autosave.createFail'
+        id: 'tw.restorePoint.createFail'
     }
 });
 
-const TWAutoSaveHOC = function (WrappedComponent) {
-    class AutoSaveComponent extends React.Component {
+const TWRestorePointHOC = function (WrappedComponent) {
+    class RestorePointComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'autosave'
+                'createRestorePoint'
             ]);
             this.timeout = null;
         }
@@ -38,10 +43,10 @@ const TWAutoSaveHOC = function (WrappedComponent) {
                 this.props.isShowingProject !== prevProps.isShowingProject
             ) {
                 if (this.props.projectChanged && this.props.isShowingProject) {
-                    // Project was modified; queue autosave.
-                    this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
+                    // Project was modified; queue restore point.
+                    this.timeout = setTimeout(this.createRestorePoint, INTERVAL);
                 } else {
-                    // Project was saved; abort autosave.
+                    // Project was saved; abort restore point.
                     clearTimeout(this.timeout);
                     this.timeout = null;
                 }
@@ -50,10 +55,10 @@ const TWAutoSaveHOC = function (WrappedComponent) {
         componentWillUnmount () {
             clearTimeout(this.timeout);
         }
-        async autosave () {
+        async createRestorePoint () {
             try {
                 this.props.onAutosavingStart();
-                await AutoSaveAPI.save(this.props.vm);
+                await RestorePointAPI.save(this.props.vm);
             } catch (error) {
                 bailed = true;
                 // eslint-disable-next-line no-alert
@@ -66,7 +71,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             setTimeout(() => {
                 this.props.onAutosavingFinish();
                 if (this.timeout === null && !bailed && this.props.projectChanged && this.props.isShowingProject) {
-                    this.timeout = setTimeout(this.autosave, AUTOSAVE_TIMEOUT);
+                    this.timeout = setTimeout(this.createRestorePoint, INTERVAL);
                 }
             }, 250);
         }
@@ -88,7 +93,7 @@ const TWAutoSaveHOC = function (WrappedComponent) {
             );
         }
     }
-    AutoSaveComponent.propTypes = {
+    RestorePointComponent.propTypes = {
         intl: intlShape,
         isShowingProject: PropTypes.bool,
         projectChanged: PropTypes.bool,
@@ -108,9 +113,9 @@ const TWAutoSaveHOC = function (WrappedComponent) {
     return injectIntl(connect(
         mapStateToProps,
         mapDispatchToProps
-    )(AutoSaveComponent));
+    )(RestorePointComponent));
 };
 
 export {
-    TWAutoSaveHOC as default
+    TWRestorePointHOC as default
 };

@@ -248,9 +248,9 @@ const alerts = [
             <center>
                 <div>
                     <FormattedMessage
-                        defaultMessage="TurboWarp will now periodically backup your project if it's been a while since you've saved. In the event of a crash, the backup can be loaded from File > Load restore point (BETA)."
+                        defaultMessage="TurboWarp may periodically backup your project if you haven't saved recently. In the event of a crash, the backup can be loaded from File > Load restore point."
                         description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.autosave"
+                        id="tw.alerts.warning.restorePoints"
                     />
                 </div>
                 <hr />

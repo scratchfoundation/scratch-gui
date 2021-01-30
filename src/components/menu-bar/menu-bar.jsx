@@ -31,7 +31,7 @@ import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
 import VMOptions from '../../containers/tw-vm-options.jsx';
-import TWAutoSaveLoader from '../../containers/tw-autosave-loader.jsx';
+import TWRestorePointLoader from '../../containers/tw-restore-point-loader.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
@@ -577,18 +577,18 @@ class MenuBar extends React.Component {
                                         )}</SB3Downloader>
                                     </MenuSection>
                                     <MenuSection>
-                                        <TWAutoSaveLoader>{(className, loadAutoSave) => (
+                                        <TWRestorePointLoader>{(className, loadRestorePoint) => (
                                             <MenuItem
                                                 className={className}
-                                                onClick={loadAutoSave}
+                                                onClick={loadRestorePoint}
                                             >
                                                 <FormattedMessage
-                                                    defaultMessage="Load restore point (BETA)"
+                                                    defaultMessage="Load restore point"
                                                     description="Menu bar item for loading a restore point"
-                                                    id="tw.menuBar.loadAutoSave"
+                                                    id="tw.menuBar.loadRestorePoint"
                                                 />
                                             </MenuItem>
-                                        )}</TWAutoSaveLoader>
+                                        )}</TWRestorePointLoader>
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>

@@ -3,7 +3,6 @@ const SET_TURBO_STATE = 'scratch-gui/vm-status/SET_TURBO_STATE';
 const SET_STARTED_STATE = 'scratch-gui/vm-status/SET_STARTED_STATE';
 
 const initialState = {
-    compiler: true,
     running: false,
     started: false,
     turbo: false

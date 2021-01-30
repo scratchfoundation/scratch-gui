@@ -31,7 +31,10 @@ const ThemeHOC = function (WrappedComponent) {
             };
         }
         componentDidMount () {
-            darkMediaQuery.addEventListener('change', this.handleQueryChange);
+            // media query does not have listeners in legacy edge
+            if (darkMediaQuery.addEventListener) {
+                darkMediaQuery.addEventListener('change', this.handleQueryChange);
+            }
             this.updateDark();
         }
         componentDidUpdate () {
@@ -43,7 +46,10 @@ const ThemeHOC = function (WrappedComponent) {
             this.updateDark();
         }
         componentWillUnmount () {
-            darkMediaQuery.removeEventListener('change', this.handleQueryChange);
+            // media query does not have listeners in legacy edge
+            if (darkMediaQuery.removeEventListener) {
+                darkMediaQuery.removeEventListener('change', this.handleQueryChange);
+            }
         }
         updateDark () {
             const dark = this.state.dark;

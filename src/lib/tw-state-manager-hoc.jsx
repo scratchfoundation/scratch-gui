@@ -408,6 +408,9 @@ const TWStateManager = function (WrappedComponent) {
                 const runtimeOptions = this.props.runtimeOptions;
                 const compilerOptions = this.props.compilerOptions;
 
+                // Always remove legacy parameter
+                searchParams.delete('60fps');
+
                 if (this.props.framerate === 30) {
                     searchParams.delete('fps');
                 } else {

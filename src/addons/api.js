@@ -21,6 +21,7 @@ import SettingsStore from './settings-store';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from './api-libraries/data-url-to-blob';
 import fixHardcodedClassesCSS from '!raw-loader!./fix-hardcoded-classes.css';
+import EventTargetShim from './event-target';
 
 /* eslint-disable no-console */
 
@@ -32,7 +33,7 @@ const createStylesheet = css => {
     return style;
 };
 
-class Redux extends EventTarget {
+class Redux extends EventTargetShim {
     constructor () {
         super();
         this._initialized = false;
@@ -83,7 +84,7 @@ window.scratchAddons = {
 
 document.head.appendChild(createStylesheet(fixHardcodedClassesCSS));
 
-class Tab extends EventTarget {
+class Tab extends EventTargetShim {
     constructor () {
         super();
         this._seenElements = new WeakSet();
@@ -152,7 +153,7 @@ class Tab extends EventTarget {
     }
 }
 
-class Settings extends EventTarget {
+class Settings extends EventTargetShim {
     constructor (addonId, manifest) {
         super();
         this._addonId = addonId;

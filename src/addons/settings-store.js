@@ -18,11 +18,12 @@
 
 import addons from './addon-manifests';
 import upstreamMeta from './upstream-meta.json';
+import EventTargetShim from './event-target';
 
 const SETTINGS_KEY = 'tw:addons';
 const VERSION = 1;
 
-class SettingsStore extends EventTarget {
+class SettingsStore extends EventTargetShim {
     constructor () {
         super();
         this.store = this.readLocalStorage();

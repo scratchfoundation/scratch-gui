@@ -31,10 +31,10 @@ describe('Sound Editor Component', () => {
         };
     });
 
-    // test('matches snapshot', () => {
-    //     const component = componentWithIntl(<SoundEditor {...props} />);
-    //     expect(component.toJSON()).toMatchSnapshot();
-    // });
+    test('matches snapshot', () => {
+        const component = componentWithIntl(<SoundEditor {...props} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
 
     test('delete button appears when selection is not null', () => {
         const wrapper = mountWithIntl(

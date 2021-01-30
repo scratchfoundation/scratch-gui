@@ -9,7 +9,12 @@ const messages = defineMessages({
     usernamePrompt: {
         defaultMessage: 'New username:',
         description: 'Prompt asking user to select new username',
-        id: 'tw.usernamePrompt'
+        id: 'tw.changeUsername.prompt'
+    },
+    cannotChangeWhileRunning: {
+        defaultMessage: 'Username cannot be changed while the project is running.',
+        description: 'Alert that appears when trying to change username while project is running',
+        id: 'tw.changeUsername.cannotChangeWhileRunning'
     }
 });
 
@@ -21,6 +26,11 @@ class ChangeUsername extends React.Component {
         ]);
     }
     changeUsername () {
+        if (this.props.running) {
+            // eslint-disable-next-line no-alert
+            alert(this.props.intl.formatMessage(messages.cannotChangeWhileRunning));
+            return;
+        }
         // eslint-disable-next-line no-alert
         const newUsername = prompt(this.props.intl.formatMessage(messages.usernamePrompt), this.props.username);
         if (newUsername === null) {
@@ -29,7 +39,9 @@ class ChangeUsername extends React.Component {
         this.props.onUsernameChange(newUsername);
     }
     render () {
-        return this.props.children(this.changeUsername);
+        return this.props.children(this.changeUsername, {
+            running: this.props.running
+        });
     }
 }
 
@@ -37,11 +49,13 @@ ChangeUsername.propTypes = {
     children: PropTypes.func,
     username: PropTypes.string,
     onUsernameChange: PropTypes.func,
+    running: PropTypes.bool,
     intl: intlShape.isRequired
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username
+    username: state.scratchGui.tw.username,
+    running: state.scratchGui.vmStatus.running
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,8 @@
 import layout, {STAGE_DISPLAY_SCALES, STAGE_SIZE_MODES, STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import twStageSize from './tw-stage-size';
 
+const maxScaleParam = typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).get('scale');
+
 /**
  * @typedef {object} StageDimensions
  * @property {int} height - the height to be used for the stage in the current situation.
@@ -58,8 +60,11 @@ const getStageDimensions = (stageSize, isFullScreen) => {
 
         stageDimensions.width = stageDimensions.height * (twStageSize.width / twStageSize.height);
 
-        if (stageDimensions.width > window.innerWidth) {
-            stageDimensions.width = window.innerWidth;
+        const maxWidth = maxScaleParam ? (
+            Math.min(window.innerWidth, maxScaleParam * twStageSize.width)
+        ) : window.innerWidth;
+        if (stageDimensions.width > maxWidth) {
+            stageDimensions.width = maxWidth;
             stageDimensions.height = stageDimensions.width * (twStageSize.height / twStageSize.width);
         }
 

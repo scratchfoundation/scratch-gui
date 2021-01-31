@@ -1,3 +1,7 @@
+// Some limits to make sure the interface doesn't completely fall apart
+const MIN_WIDTH = 480;
+const MIN_HEIGHT = 25;
+
 const MAX_WIDTH = 4096;
 const MAX_HEIGHT = 4096;
 
@@ -32,19 +36,8 @@ const getDimensions = () => {
         };
     }
 
-    const width = +widthText;
-    const height = +heightText;
-    if (
-        width <= 0 ||
-        width > MAX_WIDTH ||
-        height <= 0 ||
-        height > MAX_HEIGHT
-    ) {
-        return {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
-        };
-    }
+    const width = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, +widthText));
+    const height = Math.max(MIN_HEIGHT, Math.min(MAX_HEIGHT, +heightText));
     return {
         width,
         height

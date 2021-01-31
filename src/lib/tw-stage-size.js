@@ -5,6 +5,14 @@ const DEFAULT_WIDTH = 480;
 const DEFAULT_HEIGHT = 360;
 
 const getDimensions = () => {
+    // Running in node.js
+    if (typeof URLSearchParams === 'undefined') {
+        return {
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT
+        };
+    }
+
     const urlParameters = new URLSearchParams(location.search);
     if (!urlParameters.has('d')) {
         return {

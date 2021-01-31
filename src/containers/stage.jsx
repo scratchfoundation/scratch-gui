@@ -68,6 +68,8 @@ class Stage extends React.Component {
                 -twStageSize.height / 2,
                 twStageSize.height / 2
             );
+            this.props.vm.runtime.stageWidth = twStageSize.width;
+            this.props.vm.runtime.stageHeight = twStageSize.height;
             this.props.vm.attachRenderer(this.renderer);
 
             // Only attach a video provider once because it is stateful

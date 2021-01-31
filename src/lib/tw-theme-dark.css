@@ -49,6 +49,17 @@
 .valueReportBox {
     color: black;
 }
+.blocklyWidgetDiv .goog-menu {
+    background: var(--ui-primary);
+    border-color: hsla(0, 0%, 0%, 0.15);
+}
+.blocklyWidgetDiv .goog-menuitem {
+    color: var(--text-primary);
+}
+.blocklyWidgetDiv .goog-menuitem.goog-menuitem-highlight {
+    background-color: var(--ui-tertiary);
+    border-color: transparent; /* remove border */
+}
 
 /* Paint */
 [class*="input_input-form"] {

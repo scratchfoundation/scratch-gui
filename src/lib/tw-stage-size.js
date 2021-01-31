@@ -4,6 +4,8 @@ const MAX_HEIGHT = 4096;
 const DEFAULT_WIDTH = 480;
 const DEFAULT_HEIGHT = 360;
 
+const PARAM = 'size';
+
 const getDimensions = () => {
     // Running in node.js
     if (typeof URLSearchParams === 'undefined') {
@@ -14,14 +16,14 @@ const getDimensions = () => {
     }
 
     const urlParameters = new URLSearchParams(location.search);
-    if (!urlParameters.has('d')) {
+    if (!urlParameters.has(PARAM)) {
         return {
             width: DEFAULT_WIDTH,
             height: DEFAULT_HEIGHT
         };
     }
 
-    const dimensionsQuery = urlParameters.get('d');
+    const dimensionsQuery = urlParameters.get(PARAM);
     const [_, widthText, heightText] = dimensionsQuery.match(/^(\d+)[^\d]+(\d+)$/);
     if (!widthText || !heightText) {
         return {

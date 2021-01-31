@@ -247,9 +247,9 @@ class AddonRunner {
                 const m = await import(
                     /* webpackInclude: /\.css$/ */
                     /* webpackMode: "eager" */
-                    `!raw-loader!./addons/${this.id}/${userstyle.url}`
+                    `!css-loader!./addons/${this.id}/${userstyle.url}`
                 );
-                const source = m.default;
+                const source = m.default[0][1];
                 const style = createStylesheet(source);
                 style.className = 'scratch-addons-theme';
                 style.dataset.addonId = this.id;

@@ -17,16 +17,36 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: #a065ff;
 }
 
 .clone-container {
   font-size: 0.625rem;
   font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #a065ff;
   white-space: nowrap;
 }
 
 .clone-icon {
   margin: 0.25rem;
+  display: inline-block;
+  background-image: url("./cat.svg");
+  height: 16px;
+  width: 16px;
+}
+
+.clone-container-container[data-count="0"] {
+  display: none;
+}
+
+.clone-container-container[data-count="300"] {
+  color: #ff6680;
+}
+
+.clone-container-container[data-count="300"] .clone-icon {
+  background-image: url("./300cats.svg");
+}
+
+.clone-count::after {
+  content: attr(data-str);
 }

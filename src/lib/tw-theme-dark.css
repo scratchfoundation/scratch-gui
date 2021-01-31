@@ -14,8 +14,8 @@
 .blocklySvg {
     background-color: var(--ui-secondary) !important;
 }
-.blocklyMainBackground {
-    fill: var(--ui-secondary) !important;
+[id^="blocklyGridPattern"] > line {
+    stroke: #484848;
 }
 .blocklyFlyoutBackground {
     fill: #111;

@@ -351,8 +351,8 @@ export default async function ({ addon, global, console, msg }) {
 
       const image = new Image();
       image.onload = () => {
-        const width = Math.min(960, image.width);
-        const height = Math.min(720, image.height);
+        const width = Math.min(PaperConstants.CENTER.x * 2, image.width);
+        const height = Math.min(PaperConstants.CENTER.y * 2, image.height);
 
         // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L151-L156
         if (typeof rotationCenterX === "undefined") {
@@ -366,8 +366,8 @@ export default async function ({ addon, global, console, msg }) {
         raster.parent = layer;
         raster.guide = true;
         raster.locked = true;
-        const x = width / 2 + (480 - rotationCenterX);
-        const y = height / 2 + (360 - rotationCenterY);
+        const x = width / 2 + (PaperConstants.CENTER.x - rotationCenterX);
+        const y = height / 2 + (PaperConstants.CENTER.y - rotationCenterY);
         raster.position = new PaperConstants.Point(x, y);
 
         raster.drawImage(image, 0, 0);

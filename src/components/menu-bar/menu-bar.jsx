@@ -964,15 +964,27 @@ class MenuBar extends React.Component {
                 ) : null}
 
                 {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
-                this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ? (
-                    <ArtieExercises
-                        title="Exercise Selector"
-                        onExerciseChange={this.handleArtieExerciseChange}
-                        onCancel={this.props.onDeactivateArtieExercises}
-                        onOk={this.handleClickArtieExercisesOk}
-                        artieExercises = {this.props.artieExercises}
-                    />
-                ) : null}
+                this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ?
+                    (this.props.artieExercises.currentExercise === null ?
+                        //If the exercise has been selected before, the onCancel just we logout to show the login window again
+                        <ArtieExercises
+                            title="Exercise Selector"
+                            onExerciseChange={this.handleArtieExerciseChange}
+                            onCancel={this.props.onArtieLogout}
+                            onOk={this.handleClickArtieExercisesOk}
+                            artieExercises = {this.props.artieExercises}
+                        />
+                    :
+                        //If the exercise has not been selected before, the onCancel just deactivate the popup window
+                        <ArtieExercises
+                            title="Exercise Selector"
+                            onExerciseChange={this.handleArtieExerciseChange}
+                            onCancel={this.props.onDeactivateArtieExercises}
+                            onOk={this.handleClickArtieExercisesOk}
+                            artieExercises = {this.props.artieExercises}
+                        />
+                    )
+                : null }
 
                 {this.props.artieLogin.user !== null && this.props.artieExercises.help !== null &&
                 (this.props.artieExercises.help.nextSteps !== null || this.props.artieExercises.help.totalDistance === 0) ?

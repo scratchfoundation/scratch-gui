@@ -363,7 +363,7 @@ class MenuBar extends React.Component {
             //We close the login window
             this.props.onDeactivateArtieLogin();
         }
-        getArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
+        getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;

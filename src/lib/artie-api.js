@@ -145,7 +145,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
         }
     });
 
-    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -177,7 +177,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, call
         }
     });
 
-    xhr.open("POST", 'http://localhost:8080/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
+    xhr.open("POST", 'http://localhost:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -200,7 +200,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -217,13 +217,13 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
 
 
-const getArtieExercises = (userName, password, callback) => new Promise(() => {
+const getArtieExercises = (userName, password, isEvaluation, callback) => new Promise(() => {
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
@@ -234,7 +234,7 @@ const getArtieExercises = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/exercises/getAllIsEvaluation?userName=${userName}&password=${password}&isEvaluation=${isEvaluation}`, true);
     xhr.send();
 
 });

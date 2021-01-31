@@ -65,10 +65,6 @@ const handleClickAddonSettings = () => {
     window.open(`${process.env.ROOT}${path}`);
 };
 
-const handleLoadAddons = () => {
-    import(/* webpackChunkName: "addons" */ '../addons/entry');
-};
-
 const initialTitle = document.title;
 const handleUpdateProjectTitle = (title, isDefault) => {
     if (isDefault || !title) {
@@ -82,6 +78,8 @@ const WrappedMenuBar = compose(
     SBFileUploaderHOC
 )(MenuBar);
 
+import(/* webpackChunkName: "addons" */ '../addons/entry');
+
 const Interface = ({
     description,
     isFullScreen,
@@ -94,9 +92,10 @@ const Interface = ({
             {isHomepage ? (
                 <div className={styles.menu}>
                     <WrappedMenuBar
-                        canManageFiles
                         canChangeLanguage
+                        canManageFiles
                         enableSeeInside
+                        onClickAddonSettings={handleClickAddonSettings}
                         onClickTheme={onClickTheme}
                     />
                 </div>
@@ -111,9 +110,8 @@ const Interface = ({
                 {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
                 <GUI
                     onClickAddonSettings={handleClickAddonSettings}
-                    onLoadAddons={handleLoadAddons}
-                    onUpdateProjectTitle={handleUpdateProjectTitle}
                     onClickTheme={onClickTheme}
+                    onUpdateProjectTitle={handleUpdateProjectTitle}
                 />
                 {isHomepage ? (
                     <React.Fragment>

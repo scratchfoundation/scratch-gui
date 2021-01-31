@@ -110,7 +110,7 @@ export default async function ({ addon, global, console, msg }) {
         PaperConstants.Point = rasterLayer.position.constructor;
         PaperConstants.Rectangle = rasterLayer.getBounds().constructor;
 
-        PaperConstants.CENTER = new PaperConstants.Point(480, 360);
+        PaperConstants.CENTER = backgroundGuideLayer.children[0].position;
       }
     });
   };

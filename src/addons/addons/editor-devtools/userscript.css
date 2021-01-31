@@ -437,6 +437,9 @@ div.s3devDDOut.vis ul.s3devDD {
 .s3dev-mi:hover {
   background-color: #d6e9f8;
 }
+[theme="dark"] .s3dev-mi:hover {
+  background-color: var(--ui-tertiary);
+}
 
 #s3devHelpPop {
   position: fixed;

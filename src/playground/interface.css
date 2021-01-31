@@ -26,8 +26,6 @@ a {
     box-sizing: border-box;
 }
 .player-only .center {
-    /* there's a couple extra pixels of border around the stage */
-    width: 482px;
     margin: auto;
 }
 .menu {

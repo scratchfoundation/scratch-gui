@@ -10,6 +10,7 @@ import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
 import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
+import twStageSize from '../lib/tw-stage-size';
 
 import StageComponent from '../components/stage/stage.jsx';
 
@@ -60,7 +61,13 @@ class Stage extends React.Component {
             this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
-            this.renderer = new Renderer(this.canvas);
+            this.renderer = new Renderer(
+                this.canvas,
+                -twStageSize.width / 2,
+                twStageSize.width / 2,
+                -twStageSize.height / 2,
+                twStageSize.height / 2
+            );
             this.props.vm.attachRenderer(this.renderer);
 
             // Only attach a video provider once because it is stateful

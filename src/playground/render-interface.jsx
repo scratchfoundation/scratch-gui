@@ -30,6 +30,7 @@ import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWThemeHOC from '../lib/tw-theme-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
 import SettingsStore from '../addons/settings-store';
+import twStageSize from '../lib/tw-stage-size';
 
 import GUI from './render-gui.jsx';
 import MenuBar from '../components/menu-bar/menu-bar.jsx';
@@ -100,7 +101,13 @@ const Interface = ({
                     />
                 </div>
             ) : null}
-            <div className={styles.center}>
+            <div
+                className={styles.center}
+                style={isPlayerOnly ? ({
+                    // add a couple pixels to account for border (TODO: remove weird hack)
+                    width: `${twStageSize.width + 2}px`
+                }) : null}
+            >
                 {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
                 <GUI
                     onClickAddonSettings={handleClickAddonSettings}

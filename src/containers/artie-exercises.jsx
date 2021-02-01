@@ -8,7 +8,8 @@ class ArtieExercises extends React.Component {
         super(props);
         bindAll(this, []);
         this.state = {
-            artieExercises: null
+            artieExercises: null,
+            isEvaluation: false
         };
     }
     componentWillReceiveProps (newProps) {
@@ -16,6 +17,12 @@ class ArtieExercises extends React.Component {
         if(this.state.artieExercises !== newProps.artieExercises){
             this.setState({
                 artieExercises: newProps.artieExercises
+            });
+        }
+
+        if(this.state.isEvaluation !== newProps.isEvaluation){
+            this.setState({
+                isEvaluation: newProps.isEvaluation
             });
         }
     }
@@ -38,7 +45,8 @@ ArtieExercises.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    artieExercises: PropTypes.object
+    artieExercises: PropTypes.object,
+    isEvaluation: PropTypes.bool.isRequired
 }
 
 export default ArtieExercises;

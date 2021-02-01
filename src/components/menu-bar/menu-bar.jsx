@@ -363,7 +363,16 @@ class MenuBar extends React.Component {
             //We close the login window
             this.props.onDeactivateArtieLogin();
         }
-        getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
+
+        //If the current user is not null and the competence is already set, we show the exercises
+        if(this.props.artieLogin.currentStudent==null && this.props.artieLogin.currentStudent.competence !== undefined &&
+           this.props.artieLogin.currentStudent.competence==null && this.props.artieLogin.currentStudent.competence > 0){
+            //Show the exercises
+            getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
+        }else{
+            //Show the evaluation
+            getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
+        }
     }
     handleArtieUserChange(e){
         userLogin = e.target.value;
@@ -956,7 +965,7 @@ class MenuBar extends React.Component {
                             onUserChange={this.handleArtieUserChange}
                             onPasswordChange={this.handleArtiePasswordChange}
                             onStudentChange={this.handleArtieStudentChange}
-                            onCancel={this.props.onDeactivateArtieLogin}
+                            onCancel={this.props.onArtieLogout}
                             onOk={this.handleClickArtieLoginOk}
                             title="Login"
                             artieLogin={this.props.artieLogin}

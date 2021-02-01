@@ -6,12 +6,14 @@ const ARTIE_CLEAR_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_CLEAR_EXERCISES
 const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
 const ARTIE_HELP_RECEIVED = 'scratch-gui/artie-exercises/ARTIE_HELP_RECEIVED';
 const ARTIE_CLEAR_HELP = 'scratch-gui/artie-exercises/ARTIE_CLEAR_HELP';
+
 const ARTIE_SENDING_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_SENDING_SOLUTION';
 const ARTIE_SENDING_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SENDING_EXERCISE';
 const ARTIE_SENDING_HELP = 'scratch-gui/artie-exercises/ARTIE_SENDING_HELP';
 const ARTIE_POPUP_SENT_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_SOLUTION';
 const ARTIE_POPUP_SENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_EXERCISE';
 
+const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP';
 
 
 const initialState = {
@@ -25,7 +27,8 @@ const initialState = {
     loadingHelp: false,
     informationSent: false,
     popupSolution: false,
-    popupExercise: false
+    popupExercise: false,
+    evaluationStop: false
 }
 
 const reducer = function (state, action) {
@@ -88,6 +91,10 @@ const reducer = function (state, action) {
         case ARTIE_POPUP_SENT_EXERCISE:
             return Object.assign({}, state, {
                 popupExercise: action.popupExercise
+            });
+        case ARTIE_EVALUATION_STOP:
+            return Object.assign({}, state, {
+                evaluationStop: true
             });
         default:
             return state;
@@ -158,6 +165,10 @@ const artiePopupExercise = (active) => ({
     popupExercise: active
 });
 
+const artieEvaluationStop = () => ({
+    type: ARTIE_EVALUATION_STOP
+});
+
 export {
     reducer as default,
     initialState as artieExercisesInitialState,
@@ -173,5 +184,6 @@ export {
     artieLoadingExercise,
     artieLoadingHelp,
     artiePopupSolution,
-    artiePopupExercise
+    artiePopupExercise,
+    artieEvaluationStop
 };

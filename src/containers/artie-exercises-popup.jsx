@@ -29,6 +29,19 @@ const solutionMessages = defineMessages({
     }
 });
 
+const initialEvaluationMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'Welcome',
+        description: 'Welcome',
+        id: 'gui.menuBar.artie.evaluation.welcome'
+    },
+    message: {
+        defaultMessage: "Welcome!In first place we will check your knowledge about Scratch! Let's see if you are a Padawan, Jedi or Master Jedi in Scratch.",
+        description: "Welcome!In first place we will check your knowledge about Scratch! Let's see if you are a Padawan, Jedi or Master Jedi in Scratch.",
+        id: 'gui.artie.evaluation.intro'
+    }
+});
+
 class ArtieExercisePopup extends React.Component {
     constructor (props) {
         super(props);
@@ -41,14 +54,28 @@ class ArtieExercisePopup extends React.Component {
                     onCancel={this.props.onCancel}
                     type = {this.props.type}
                     messages = {exercisesMessages}
+                    okButton = {false}
+                    cancelButton = {false}
                 />
             );
-        }else{
+        }else if(this.props.type == 'solution'){
             return(
                 <ArtiePopupComponent
                     onCancel={this.props.onCancel}
                     type = {this.props.type}
                     messages = {solutionMessages}
+                    okButton = {false}
+                    cancelButton = {false}
+                />
+            );
+        }else if(this.props.type == 'initialEvaluation'){
+            return(
+                <ArtiePopupComponent
+                    onCancel={this.props.onCancel}
+                    type = {this.props.type}
+                    messages = {solutionMessages}
+                    okButton = {true}
+                    cancelButton = {false}
                 />
             );
         }

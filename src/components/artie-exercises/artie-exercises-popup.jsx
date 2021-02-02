@@ -28,6 +28,32 @@ class ArtieExercisesPopupComponent extends React.Component {
                 >
                     {this.props.intl.formatMessage(this.props.messages.message)}
                 </Box>
+
+                { (this.props.okButton || this.props.cancelButton) ?
+                    <Box className={styles.buttonRow}>
+
+                        {this.props.okButton ?
+                            <button className={styles.cancelButton} onClick={this.props.onCancel}>
+                                <FormattedMessage
+                                        defaultMessage="Cancel"
+                                        description="Button in prompt for cancelling the dialog"
+                                        id="gui.menuBar.artie.exercises.cancel"
+                                    />
+                            </button>
+                        :  null }
+
+                        {this.props.cancelButton ?
+                            <button className={styles.okButton} onClick={this.props.onOk}>
+                                <FormattedMessage
+                                        defaultMessage="OK"
+                                        description="Button in prompt for confirming the dialog"
+                                        id="gui.menuBar.artie.exercises.ok"
+                                    />
+                            </button>
+                        : null }
+
+                    </Box>
+                : null}
             </Modal>
         );
     }
@@ -35,7 +61,10 @@ class ArtieExercisesPopupComponent extends React.Component {
 
 ArtieExercisesPopupComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    messages: PropTypes.object.isRequired,
+    okButton: PropTypes.bool.isRequired,
+    cancelButton: PropTypes.bool.isRequired
 };
 
 export default injectIntl(ArtieExercisesPopupComponent);

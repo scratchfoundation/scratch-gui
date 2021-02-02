@@ -239,4 +239,21 @@ const getArtieExercises = (userName, password, isEvaluation, callback) => new Pr
 
 });
 
-export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents, getArtieExercises};
+
+const getAllArtieExercises = (userName, password, callback) => new Promise(() => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+                callback(json.body.object);
+            }
+        }
+    });
+
+    xhr.open("GET", `http://localhost:8080/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.send();
+
+});
+
+export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents, getArtieExercises, getAllArtieExercises};

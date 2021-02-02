@@ -78,7 +78,7 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises} from '../../lib/artie-api';
+import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises, getAllArtieExercises} from '../../lib/artie-api';
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
@@ -365,12 +365,15 @@ class MenuBar extends React.Component {
         }
 
         //If the current user is not null and the competence is already set, we show the exercises
-        if(this.props.artieLogin.currentStudent==null && this.props.artieLogin.currentStudent.competence !== undefined &&
-           this.props.artieLogin.currentStudent.competence==null && this.props.artieLogin.currentStudent.competence > 0){
-            //Show the exercises
+        if(this.props.artieLogin.currentStudent!==null && this.props.artieLogin.currentStudent.competence !== undefined &&
+           this.props.artieLogin.currentStudent.competence!==null && this.props.artieLogin.currentStudent.competence > 0){
+            //Get the exercises
             getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
+        }else if(user.role !== null && user.role == 1){
+            //Get all the exercises
+            getAllArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
         }else{
-            //Show the evaluation
+            //Get the evaluations
             getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
         }
     }

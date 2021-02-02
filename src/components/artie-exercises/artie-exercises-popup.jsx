@@ -4,15 +4,9 @@ import Box from '../box/box.jsx';
 import Modal from '../../containers/modal.jsx';
 
 import styles from './artie-exercises-popup.css';
-import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
+import {injectIntl} from 'react-intl';
 
-const messages = defineMessages({
-    artieExercisesPopupModalTitle: {
-        defaultMessage: 'ARTIE',
-        description: 'ARTIE',
-        id: 'gui.menuBar.artie.exercises.popup.modalTitle'
-    }
-});
+
 
 class ArtieExercisesPopupComponent extends React.Component {
 
@@ -22,29 +16,17 @@ class ArtieExercisesPopupComponent extends React.Component {
 
     render(){
 
-        const exerciseMessage = <FormattedMessage
-                                    defaultMessage='The exercise has been sent successfully!'
-                                    description='The exercise has been sent successfully!'
-                                    id='gui.artie.exercise.sent'
-                                />
-
-        const solutionMessage = <FormattedMessage
-                                    defaultMessage='The solution has been sent successfully!'
-                                    description='The solution has been sent successfully!'
-                                    id='gui.artie.solution.sent'
-                                />
-
         return(
             <Modal
                 className={styles.modalContentCongrats}
                 onRequestClose={this.props.onCancel}
                 id="ArtieExercisePopup"
-                contentLabel={this.props.intl.formatMessage(messages.artieExercisesPopupModalTitle)}
+                contentLabel={this.props.intl.formatMessage(this.props.messages.popupModalTitle)}
             >
                 <Box
                     className={styles.labelCongrats}
                 >
-                    {this.props.type == 'exercise' ? exerciseMessage : solutionMessage }
+                    {this.props.intl.formatMessage(this.props.messages.message)}
                 </Box>
             </Modal>
         );

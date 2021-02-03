@@ -977,7 +977,8 @@ class MenuBar extends React.Component {
 
                 {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
                 this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ?
-                    (this.props.artieExercises.currentExercise === null ?
+
+                    (this.props.artieExercises.currentExercise === null &&  this.props.artieLogin.user.role === 0 ?
                         //If the exercise has been selected before, the onCancel just we logout to show the login window again
                         <ArtieExercises
                             title="Exercise Selector"

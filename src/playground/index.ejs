@@ -33,7 +33,7 @@
     </div>
     <script>
       (function() {
-        var languages = JSON.parse('{"es":["Cargando scripts","Esto puede tardar un rato ...","Solucionar Problemas"],"pt":["Carregando scripts","Isso pode demorar um pouco …","Solucionar problemas"],"ro":["Se încarcă blocurile","Asta ar putea dura o vreme ...","Raportați Probleme"],"tr":["Kodlar yükleniyor","Bu biraz zaman alabilir ...","Sorun giderme"],"zh-cn":["加载脚本中……","这可能需要一些时间……","有问题？"]}');
+        var languages = JSON.parse('{"es":["Cargando scripts","Esto puede tardar un rato ...","Solucionar Problemas"],"it":["Caricamento script in corso","Potrebbe richiedere un po\' di tempo...","Risoluzione dei problemi"],"pt":["Carregando scripts","Isso pode demorar um pouco …","Solucionar problemas"],"ro":["Se încarcă blocurile","Asta ar putea dura o vreme ...","Raportați Probleme"],"tr":["Kodlar yükleniyor","Bu biraz zaman alabilir ...","Sorun giderme"],"zh-cn":["加载脚本中……","这可能需要一些时间……","有问题？"]}');
         var lang = navigator.userLanguage || navigator.language || '';
         try {var local = localStorage.getItem('tw:language'); local && (lang = local);} catch (e) {}
         var messages = languages[lang = lang.toLowerCase()] || languages[lang.split('-')[0]];

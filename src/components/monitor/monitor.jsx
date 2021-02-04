@@ -32,7 +32,7 @@ const modes = {
 
 const MonitorComponent = props => (
     <ContextMenuTrigger
-        disable={!props.draggable}
+        disable={!props.draggable && !props.onExport}
         holdToDisplay={props.mode === 'slider' ? -1 : 1000}
         id={`monitor-${props.label}`}
     >

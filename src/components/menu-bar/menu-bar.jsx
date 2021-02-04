@@ -976,7 +976,8 @@ class MenuBar extends React.Component {
                 ) : null}
 
                 {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
-                this.props.artieExercises.currentExercise === null) || this.props.artieExercises.active ?
+                this.props.artieExercises.currentExercise === null &&
+                this.props.artieLogin.currentStudent.competence !== undefined && this.props.artieLogin.currentStudent.competence > 0) || this.props.artieExercises.active ?
 
                     (this.props.artieExercises.currentExercise === null &&  this.props.artieLogin.user.role === 0 ?
                         //If the exercise has been selected before, the onCancel just we logout to show the login window again
@@ -1019,6 +1020,14 @@ class MenuBar extends React.Component {
                         type='solution'
                     />
                 : null}
+                {this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
+                 (this.props.artieLogin.currentStudent.competence == undefined || this.props.artieLogin.currentStudent.competence === 0) ?
+                    <ArtieExercisePopup
+                        onCancel={this.props.onArtieSolutionSentPopupClose}
+                        type='initialEvaluation'
+                        exercies={this.props.artieExercises}
+                    />
+                : null }
             </Box>
         );
     }

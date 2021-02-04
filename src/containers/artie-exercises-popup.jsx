@@ -33,7 +33,7 @@ const initialEvaluationMessages = defineMessages({
     popupModalTitle: {
         defaultMessage: 'Welcome',
         description: 'Welcome',
-        id: 'gui.menuBar.artie.evaluation.welcome'
+        id: 'gui.artie.evaluation.welcome'
     },
     message: {
         defaultMessage: "Welcome!In first place we will check your knowledge about Scratch! Let's see if you are a Padawan, Jedi or Master Jedi in Scratch.",
@@ -69,22 +69,38 @@ class ArtieExercisePopup extends React.Component {
                 />
             );
         }else if(this.props.type == 'initialEvaluation'){
-            return(
-                <ArtiePopupComponent
-                    onCancel={this.props.onCancel}
-                    type = {this.props.type}
-                    messages = {solutionMessages}
-                    okButton = {true}
-                    cancelButton = {false}
-                />
-            );
+            if(this.props.artieExercises === undefined || this.props.artieExercises === null || this.props.artieExercises.currentExercise === null){
+                var image = require('../../static/ThreeJedi.jpg');
+                return(
+                    <ArtiePopupComponent
+                        onCancel={this.props.onCancel}
+                        type = {this.props.type}
+                        messages = {initialEvaluationMessages}
+                        okButton = {true}
+                        cancelButton = {false}
+                        type = {this.props.type}
+                        image={image}
+                    />
+                );
+            }else{
+                return(
+                    <ArtiePopupComponent
+                        onCancel={this.props.onCancel}
+                        type = {this.props.type}
+                        messages = {initialEvaluationMessages}
+                        okButton = {true}
+                        cancelButton = {false}
+                    />
+                );
+            }
         }
     }
 }
 
 ArtieExercisePopup.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    artieExercises: PropTypes.object
 }
 
 export default injectIntl(ArtieExercisePopup);

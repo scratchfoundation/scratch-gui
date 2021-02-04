@@ -12,6 +12,11 @@
     width: 400px;
 }
 
+.modal-content-evaluation {
+    margin: 50px auto;
+    width: 600px;
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
@@ -22,6 +27,12 @@
     margin: 3px;
 }
 
+/* Images */
+.modal-content-evaluation img{
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
 
 /* Messages */
 .label {
@@ -31,7 +42,7 @@
     padding-bottom: 20px;
     padding-left: 5px;
 }
-.label-congrats {
+.modal-content-congrats .label-congrats {
     color: green;
     background-color: $ui-white;
     text-align: center;
@@ -42,7 +53,17 @@
     align-items: center;
     height: 400px;
 }
-
+.modal-content-evaluation .label-congrats {
+    color: green;
+    background-color: $ui-white;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
 
 /* Buttons */
 .button-row {

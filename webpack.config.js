@@ -28,7 +28,7 @@ const base = {
         chunkFilename: 'chunks/[name].js'
     },
     resolve: {
-        symlinks: false
+        symlinks: false,
     },
     module: {
         rules: [{

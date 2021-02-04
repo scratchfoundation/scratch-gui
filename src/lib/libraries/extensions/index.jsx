@@ -29,6 +29,8 @@ import ev3InsetIconURL from './ev3/ev3-small.svg';
 import ev3ConnectionIconURL from './ev3/ev3-hub-illustration.svg';
 import ev3ConnectionSmallIconURL from './ev3/ev3-small.svg';
 
+import rocketscienceIconURL from './rocketscience.jpg';
+
 import wedo2IconURL from './wedo2/wedo.png'; // TODO: Rename file names to match variable/prop names?
 import wedo2InsetIconURL from './wedo2/wedo-small.svg';
 import wedo2ConnectionIconURL from './wedo2/wedo-illustration.svg';
@@ -47,6 +49,13 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 export default [
+    {
+        name:'火箭科学',
+        extensionId:'rocketscience',
+        iconURL:rocketscienceIconURL,
+        description:'孩子也能玩的火箭科学',
+        featured:true
+    },
     {
         name: (
             <FormattedMessage

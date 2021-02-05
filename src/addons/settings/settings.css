@@ -163,6 +163,7 @@ a:active, a:focus {
 .feedback-button-inner {
     text-decoration: none;
     font-weight: bold;
+    text-align: center;
 }
 
 .addons {
@@ -546,7 +547,8 @@ a:active, a:focus {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    width: calc(100% - 20px);
+    margin-left: 10px;
     z-index: 10;
     justify-content: center;
     animation: dirty-appear 0.2s ease;
@@ -562,6 +564,7 @@ a:active, a:focus {
     pointer-events: auto;
     display: flex;
     align-items: center;
+    text-align: center;
 }
 [theme="dark"] .dirty-inner {
     background: rgb(39, 50, 53);

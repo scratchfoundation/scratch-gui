@@ -60,6 +60,9 @@
     background-color: var(--ui-tertiary);
     border-color: transparent; /* remove border */
 }
+.scratchCommentText {
+    color: black;
+}
 
 /* Paint */
 [class*="input_input-form"] {

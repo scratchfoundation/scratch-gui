@@ -33,35 +33,40 @@ const createStylesheet = css => {
     return style;
 };
 
-const scratchClassNames = [
-    ...new Set(
-        [...document.styleSheets]
-            .filter(styleSheet =>
-                !(
-                    styleSheet.ownerNode.textContent.startsWith(
-                        '/* DO NOT EDIT\n@todo This file is copied from GUI and should be pulled out into a shared library.'
-                    ) &&
-                    (
-                        styleSheet.ownerNode.textContent.includes('input_input-form') ||
-                        styleSheet.ownerNode.textContent.includes('label_input-group_')
-                    )
+let _scratchClassNames = null;
+const getScratchClassNames = () => {
+    if (_scratchClassNames) {
+        return _scratchClassNames;
+    }
+    const classes = Array.from(document.styleSheets)
+        // Ignore some scratch-paint stylesheets
+        .filter(styleSheet => (
+            !(
+                styleSheet.ownerNode.textContent.startsWith(
+                    '/* DO NOT EDIT\n@todo This file is copied from GUI and should be pulled out into a shared library.'
+                ) &&
+                (
+                    styleSheet.ownerNode.textContent.includes('input_input-form') ||
+                    styleSheet.ownerNode.textContent.includes('label_input-group_')
                 )
             )
-            .map(e => {
-                try {
-                    return [...e.cssRules];
-                } catch (_e) {
-                    return [];
-                }
-            })
-            .flat()
-            .map(e => e.selectorText)
-            .filter(e => e)
-            .map(e => e.match(/(([\w-]+?)_([\w-]+)_([\w\d-]+))/g))
-            .filter(e => e)
-            .flat()
-    )
-];
+        ))
+        .map(e => {
+            try {
+                return [...e.cssRules];
+            } catch (_e) {
+                return [];
+            }
+        })
+        .flat()
+        .map(e => e.selectorText)
+        .filter(e => e)
+        .map(e => e.match(/(([\w-]+?)_([\w-]+)_([\w\d-]+))/g))
+        .filter(e => e)
+        .flat();
+    _scratchClassNames = [...new Set(classes)];
+    return _scratchClassNames;
+};
 
 class Redux extends EventTargetShim {
     constructor () {
@@ -179,24 +184,25 @@ class Tab extends EventTargetShim {
     }
 
     scratchClass (...args) {
-        let res = '';
-        args
-            .filter(arg => typeof arg === 'string')
-            .forEach(classNameToFind => {
-                res += scratchClassNames.find(className =>
-                    className.startsWith(`${classNameToFind}_`) && className.length === classNameToFind.length + 6
-                ) || '';
-                res += ' ';
-            });
-        if (typeof args[args.length - 1] === 'object') {
-            const options = args[args.length - 1];
-            const classNames = Array.isArray(options.others) ? options.others : [options.others];
-            classNames.forEach(string => (res += `${string} `));
+        const scratchClasses = getScratchClassNames();
+        const classes = [];
+        for (const arg of args) {
+            if (typeof arg === 'string') {
+                for (const scratchClass of scratchClasses) {
+                    if (scratchClass.startsWith(`${arg}_`) && scratchClass.length === arg.length + 6) {
+                        classes.push(scratchClass);
+                    }
+                }
+            }
         }
-        res = res.slice(0, -1);
-        res = res.replace(/"/g, '');
-        console.log(args, res);
-        return res;
+        const options = args[args.length - 1];
+        if (typeof options === 'object') {
+            const others = Array.isArray(options.others) ? options.others : [options.others];
+            for (const className of others) {
+                classes.push(className);
+            }
+        }
+        return classes.join(' ');
     }
 
     get editorMode () {

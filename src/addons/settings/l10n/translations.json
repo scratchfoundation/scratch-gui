@@ -21,7 +21,7 @@
     "it": {
         "tw.addons.settings.addonFeedback": "Feedback sull'Addon",
         "tw.addons.settings.confirmResetAll": "Sei sicuro di voler riportare tutte le impostazioni dell'addon al loro valore iniziale?",
-        "tw.addons.settings.credits": "Crediti:",
+        "tw.addons.settings.credits": "Autore/i:",
         "tw.addons.settings.dirty": "Ricarica TurboWarp per applicare le nuove impostazioni.",
         "tw.addons.settings.dirtyButton": "Ricarica ora",
         "tw.addons.settings.export": "Esporta le impostazioni",
@@ -33,7 +33,7 @@
         "tw.addons.settings.search": "Cerca",
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
-        "tw.addons.settings.tags.recommended": "Raccomandati",
+        "tw.addons.settings.tags.recommended": "Raccomandato",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"
     },

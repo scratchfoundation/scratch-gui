@@ -8,6 +8,8 @@
     "onion-skinning",
     "bitmap-copy",
     "remove-sprite-confirm",
+    "pause",
+    "mute-project",
     "clones",
     "mouse-pos",
     "hide-flyout",
@@ -15,8 +17,6 @@
     "editor-stage-left",
     "editor-colored-context-menus",
     "fix-uploaded-svgs",
-    "mute-project",
-    "pause",
     "tw-compiler-options",
     "cat-blocks"
 ]

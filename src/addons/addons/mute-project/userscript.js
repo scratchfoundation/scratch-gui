@@ -3,6 +3,13 @@
  * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
  */
 
+/* inserted by pull.js */
+import _twAsset0 from "./icon--mute.svg";
+const _twGetAsset = (path) => {
+  if (path === "/icon--mute.svg") return _twAsset0;
+  throw new Error(`Unknown asset: ${path}`);
+};
+
 export default async function ({ addon, global, console }) {
   const vm = addon.tab.traps.vm;
   while (true) {
@@ -10,7 +17,7 @@ export default async function ({ addon, global, console }) {
     let container = button.parentElement;
     let icon = document.createElement("img");
     container.appendChild(icon);
-    icon.src = "/static/assets/e21225ab4b675bc61eed30cfb510c288.svg";
+    icon.src = _twGetAsset("/icon--mute.svg");
     icon.style.display = "none";
     let mode = false;
     button.addEventListener("click", (e) => {

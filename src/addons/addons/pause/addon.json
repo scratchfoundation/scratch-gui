@@ -1,0 +1,24 @@
+{
+  "name": "Pause button",
+  "description": "Adds a pause button next to the green flag.",
+  "credits": [
+    {
+      "name": "Jeffalo"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor", "beta"],
+  "enabledByDefault": false,
+  "l10n": true
+}

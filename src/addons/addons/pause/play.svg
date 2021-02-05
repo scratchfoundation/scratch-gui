@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="play.svg"
+   id="svg8"
+   viewBox="0 0 18 18"
+   height="18"
+   width="18"
+   version="1.1">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg8"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:cy="13.31631"
+     inkscape:cx="-3.7061055"
+     inkscape:zoom="15.582395"
+     showgrid="false"
+     id="namedview10"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <g
+     id="g6"
+     transform="matrix(1.1394865,0,0,0.67943194,-264.59476,-113.29777)">
+    <g
+       id="g4"
+       style="mix-blend-mode:normal"
+       stroke-dashoffset="0"
+       stroke-dasharray="none"
+       stroke-miterlimit="10"
+       stroke-linejoin="miter"
+       stroke-linecap="butt"
+       stroke-width="1"
+       stroke="#d89400"
+       fill-rule="nonzero"
+       fill="#ffae00"
+       data-paper-data="{&quot;isPaintingLayer&quot;:true}">
+      <path
+         id="path2"
+         d="m 246.0546,180 -12.1092,12.1092 v -24.21841 z" />
+    </g>
+  </g>
+</svg>

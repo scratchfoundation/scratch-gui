@@ -20,7 +20,6 @@ import IntlMessageFormat from 'intl-messageformat';
 import SettingsStore from './settings-store';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from './api-libraries/data-url-to-blob';
-import fixHardcodedClassesCSS from '!raw-loader!./fix-hardcoded-classes.css';
 import EventTargetShim from './event-target';
 
 /* eslint-disable no-console */
@@ -116,8 +115,6 @@ window.scratchAddons = {
         lcoale: language
     }
 };
-
-document.head.appendChild(createStylesheet(fixHardcodedClassesCSS));
 
 class Tab extends EventTargetShim {
     constructor () {

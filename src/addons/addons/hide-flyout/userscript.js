@@ -31,11 +31,11 @@ export default async function ({ addon, global, console }) {
       // Lock Img
       if (lockDisplay) lockDisplay.remove();
       lockDisplay = document.createElement("img");
-      lockDisplay.src = /* changed by pull.js */ _twGetAsset("/unlock.svg");
+      lockDisplay.src = _twGetAsset("/unlock.svg");
       lockDisplay.className = "sa-lock-image";
       lockDisplay.onclick = () => {
         flyoutLock = !flyoutLock;
-        lockDisplay.src = /* changed by pull.js */ _twGetAsset(`/${flyoutLock ? "" : "un"}lock.svg`);
+        lockDisplay.src = _twGetAsset(`/${flyoutLock ? "" : "un"}lock.svg`);
       };
 
       function positionElements() {

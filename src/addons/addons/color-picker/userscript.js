@@ -17,7 +17,7 @@ import paintEditorHandler from "./paint-editor.js";
 // Note that we don't await other scripts (they block!)
 export default async (api) => {
   const { addon } = api;
-  await addon.tab.loadScript(/* changed by pull.js */ _twGetAsset("/tinycolor-min.js"));
+  await addon.tab.loadScript(_twGetAsset("/tinycolor-min.js"));
   codeEditorHandler(api);
   paintEditorHandler(api);
 };

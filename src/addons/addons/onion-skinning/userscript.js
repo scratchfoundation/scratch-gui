@@ -552,7 +552,7 @@ export default async function ({ addon, global, console, msg }) {
     el.className = "sa-onion-image";
     el.draggable = false;
     el.dataset.image = name;
-    el.src = /* changed by pull.js */ _twGetAsset("/" + name + ".svg");
+    el.src = _twGetAsset("/" + name + ".svg");
     return el;
   };
 

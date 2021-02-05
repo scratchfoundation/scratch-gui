@@ -118,7 +118,7 @@ const includeImports = (folder, contents) => {
     //                           ^^^^^^^^^^^^^^^^^^^  capture group 1
     contents = contents.replace(
         /addon\.self\.(?:dir|lib) *\+ *([^;]+)/g,
-        (_fullText, name) => `/* changed by pull.js */ _twGetAsset(${name})`
+        (_fullText, name) => `_twGetAsset(${name})`
     );
 
     return header + contents;

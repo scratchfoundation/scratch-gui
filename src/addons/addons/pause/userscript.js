@@ -32,7 +32,7 @@ export default async function ({ addon, global, console, msg }) {
       vm.runtime.audioEngine.audioContext.suspend();
       vm.runtime.ioDevices.clock.pause();
       playing = false;
-      document.querySelector(".pause-btn").src = /* changed by pull.js */ _twGetAsset("/play.svg");
+      document.querySelector(".pause-btn").src = _twGetAsset("/play.svg");
       return;
     }
     return oldStepToProcedure.call(this, thread, proccode);
@@ -43,7 +43,7 @@ export default async function ({ addon, global, console, msg }) {
   vm.runtime.greenFlag = function () {
     vm.runtime.audioEngine.audioContext.resume().then(() => {
       vm.runtime.ioDevices.clock.resume();
-      img.src = /* changed by pull.js */ _twGetAsset("/pause.svg");
+      img.src = _twGetAsset("/pause.svg");
       playing = true;
       return oldFlag.call(vm.runtime, arguments);
     });
@@ -54,8 +54,8 @@ export default async function ({ addon, global, console, msg }) {
 
     var img = document.createElement("img");
     img.className = "pause-btn";
-    if (playing) img.src = /* changed by pull.js */ _twGetAsset("/pause.svg");
-    if (!playing) img.src = /* changed by pull.js */ _twGetAsset("/play.svg");
+    if (playing) img.src = _twGetAsset("/pause.svg");
+    if (!playing) img.src = _twGetAsset("/play.svg");
     img.draggable = false;
     img.title = msg("pause");
 
@@ -66,14 +66,14 @@ export default async function ({ addon, global, console, msg }) {
         vm.runtime.audioEngine.audioContext.resume().then(() => {
           if (vm.runtime.threads.length === 0) vm.runtime.threads = threads;
           vm.runtime.ioDevices.clock.resume();
-          img.src = /* changed by pull.js */ _twGetAsset("/pause.svg");
+          img.src = _twGetAsset("/pause.svg");
         });
       } else {
         vm.runtime.audioEngine.audioContext.suspend().then(() => {
           threads = vm.runtime.threads;
           vm.runtime.threads = [];
           vm.runtime.ioDevices.clock.pause();
-          img.src = /* changed by pull.js */ _twGetAsset("/play.svg");
+          img.src = _twGetAsset("/play.svg");
         });
       }
       playing = !playing;

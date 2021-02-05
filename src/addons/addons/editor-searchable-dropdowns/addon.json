@@ -20,5 +20,6 @@
   ],
   "tags": ["editor", "recommended"],
   "enabledByDefault": true,
+  "enabledByDefaultMobile": false,
   "l10n": true
 }

@@ -51,6 +51,7 @@
   font-size: 0.75rem;
   font-weight: bold;
   transition: all 0.25s ease-out;
+  color: black; /* tw: dont be affected by dark mode */
 }
 
 .sa-color-picker > .sa-color-picker-code-text:focus {

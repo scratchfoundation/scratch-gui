@@ -109,6 +109,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             const {
                 isFullScreen, // eslint-disable-line no-unused-vars
                 isPlayerOnly, // eslint-disable-line no-unused-vars
+                isTelemetryEnabled, // eslint-disable-line no-unused-vars
                 showTelemetryModal, // eslint-disable-line no-unused-vars
                 ...componentProps
             } = this.props;
@@ -126,6 +127,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
     AppStateWrapper.propTypes = {
         isFullScreen: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
+        isTelemetryEnabled: PropTypes.bool,
         showTelemetryModal: PropTypes.bool,
         isEmbedded: PropTypes.bool
     };

@@ -7,6 +7,13 @@
       "link": "https://scratch.mit.edu/users/TheColaber"
     }
   ],
+  "info": [
+    {
+      "type": "notice",
+      "text": "\"Palette area hover\" mode only extends the viewing area. If you want to be able to drag blocks into that area without them getting trashed, use one of the other modes.",
+      "id": "hoverExplanation"
+    }
+  ],
   "userscripts": [
     {
       "url": "userscript.js",
@@ -20,6 +27,26 @@
     }
   ],
   "settings": [
+    {
+      "name": "Toggle on...",
+      "id": "toggle",
+      "type": "select",
+      "potentialValues": [
+        {
+          "id": "hover",
+          "name": "Palette area hover"
+        },
+        {
+          "id": "cathover",
+          "name": "Category hover"
+        },
+        {
+          "id": "category",
+          "name": "Category click"
+        }
+      ],
+      "default": "hover"
+    },
     {
       "name": "Animation duration",
       "id": "speed",
@@ -42,24 +69,8 @@
           "name": "Long"
         }
       ],
-      "default": "default",
-      "reloadRequired": false
-    },
-    {
-      "name": "Toggle on...",
-      "id": "toggle",
-      "type": "select",
-      "potentialValues": [
-        {
-          "id": "hover",
-          "name": "Hover"
-        },
-        {
-          "id": "category",
-          "name": "Category click"
-        }
-      ],
-      "default": "hover"
+      "reloadRequired": false,
+      "default": "default"
     }
   ],
   "tags": ["editor", "recommended"],

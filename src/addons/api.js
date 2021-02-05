@@ -33,6 +33,36 @@ const createStylesheet = css => {
     return style;
 };
 
+const scratchClassNames = [
+    ...new Set(
+        [...document.styleSheets]
+            .filter(styleSheet =>
+                !(
+                    styleSheet.ownerNode.textContent.startsWith(
+                        '/* DO NOT EDIT\n@todo This file is copied from GUI and should be pulled out into a shared library.'
+                    ) &&
+                    (
+                        styleSheet.ownerNode.textContent.includes('input_input-form') ||
+                        styleSheet.ownerNode.textContent.includes('label_input-group_')
+                    )
+                )
+            )
+            .map(e => {
+                try {
+                    return [...e.cssRules];
+                } catch (_e) {
+                    return [];
+                }
+            })
+            .flat()
+            .map(e => e.selectorText)
+            .filter(e => e)
+            .map(e => e.match(/(([\w-]+?)_([\w-]+)_([\w\d-]+))/g))
+            .filter(e => e)
+            .flat()
+    )
+];
+
 class Redux extends EventTargetShim {
     constructor () {
         super();
@@ -146,6 +176,27 @@ class Tab extends EventTargetShim {
             })
         ];
         return navigator.clipboard.write(items);
+    }
+
+    scratchClass (...args) {
+        let res = '';
+        args
+            .filter(arg => typeof arg === 'string')
+            .forEach(classNameToFind => {
+                res += scratchClassNames.find(className =>
+                    className.startsWith(`${classNameToFind}_`) && className.length === classNameToFind.length + 6
+                ) || '';
+                res += ' ';
+            });
+        if (typeof args[args.length - 1] === 'object') {
+            const options = args[args.length - 1];
+            const classNames = Array.isArray(options.others) ? options.others : [options.others];
+            classNames.forEach(string => (res += `${string} `));
+        }
+        res = res.slice(0, -1);
+        res = res.replace(/"/g, '');
+        console.log(args, res);
+        return res;
     }
 
     get editorMode () {

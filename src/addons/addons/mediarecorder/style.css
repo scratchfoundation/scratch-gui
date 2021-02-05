@@ -6,7 +6,7 @@
 .mediaRecorderPopup {
   box-sizing: border-box;
   width: 700px;
-  max-height: min(800px, 60vh);
+  max-height: min(800px, 80vh);
   max-width: 85%;
   margin-top: 20vh;
   overflow-y: auto;

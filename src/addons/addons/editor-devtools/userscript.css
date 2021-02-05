@@ -48,38 +48,27 @@
 
 /* Find Input Box */
 input.s3devInp {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: calc(0.5rem / 2);
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 0.4em;
-  z-index: 2;
-  position: relative;
-
-  border: 1px solid hsla(0, 0%, 0%, 0.15);
-  /*height: 30px;*/
-  /*bottom: 5px;*/
-
   min-width: 100%;
   box-sizing: border-box !important;
+  /* !important required for extension, because CSS injection method (and hence order) differs from addon */
+  height: 1.5rem;
+
+  /* Change Scratch default styles */
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  padding-left: 0.4em;
 }
 [theme="dark"] input.s3devInp {
   color: #eee;
   background: #3333;
 }
-
-.s3devInp:hover {
-  background-color: white;
-}
 [theme="dark"] input.s3devInp:hover {
   background: #333;
 }
 
-.s3devInp:focus {
-  border-color: hsla(215, 100%, 65%, 1);
-  /*-webkit-box-shadow: 0 0 0 0.25rem hsla(215, 100%, 65%, 0.35);*/
-  /*box-shadow: 0 0 0 0.25rem hsla(215, 100%, 65%, 0.35);*/
-  outline: none;
+input.s3devInp:focus {
+  /* Change Scratch default styles */
+  box-shadow: none;
 }
 
 /* Drop down from find button */
@@ -242,7 +231,7 @@ div.s3devDDOut.vis ul.s3devDD {
 }
 .data-lists:hover,
 .data-lists.sel {
-  background-color: rgb(255, 102, 26);
+  background-color: rgb(207, 81, 20);
 }
 
 .sensing {
@@ -441,30 +430,26 @@ div.s3devDDOut.vis ul.s3devDD {
   background-color: var(--ui-tertiary);
 }
 
-#s3devHelpPop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(64, 64, 64, 0.3);
-  z-index: 1000000;
-}
-
 #s3devHelpPop > div {
   box-sizing: border-box;
-  position: relative;
   width: 800px;
+  height: 60vh;
   max-height: 800px;
   max-width: 85%;
-  top: 20vh;
-  height: 60vh;
+  margin: auto;
+  margin-top: 20vh;
+}
+
+#s3devHelpPop [class*="modal_header-item-title"] {
+  margin: 0 -20rem 0 0;
+}
+
+#s3devHelpContent {
+  height: calc(100% - 3.125rem);
   overflow-y: auto;
-  background-color: white;
-  box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.4);
-  margin-left: auto;
-  margin-right: auto;
   padding: 1em 2em 4em;
+  background-color: white;
+  user-select: text;
 }
 [theme="dark"] #s3devHelpPop > div {
   background: #111;
@@ -490,10 +475,6 @@ div.s3devDDOut.vis ul.s3devDD {
 #s3devInsertLabel {
   padding: 0;
   align-items: center;
-}
-
-#s3devIInp {
-  border: 0;
 }
 
 /* Drop down from find button */

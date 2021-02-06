@@ -13,8 +13,6 @@ const _twGetAsset = (path) => {
 };
 
 export default async function ({ addon, global, console, msg }) {
-  console.log("pause enabled");
-
   const vm = addon.tab.traps.vm;
 
   var playing = true;

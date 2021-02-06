@@ -89,7 +89,6 @@ export default class DomHelpers {
   }
 
   unbindAllEvents() {
-    console.log("Unbinding Events - gui has become dirty");
     for (const event of this.events) {
       event.dom.removeEventListener(event.event, event.func, event.capture);
     }

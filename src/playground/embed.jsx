@@ -21,6 +21,7 @@ import './import-first';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import {compose} from 'redux';
+import {setAppElement} from 'react-modal';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWEmbedFullScreenHOC from '../lib/tw-embed-fullscreen-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
@@ -73,3 +74,4 @@ ReactDOM.render(<WrappedGUI
     onProjectLoaded={onProjectLoaded}
     routingStyle="none"
 />, appTarget);
+setAppElement(appTarget);

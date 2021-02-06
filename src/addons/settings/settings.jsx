@@ -157,6 +157,11 @@ const TagComponent = ({tags}) => tags.length > 0 && (
                 {settingsTranslations['tw.addons.settings.tags.easterEgg']}
             </span>
         )}
+        {tags.includes('new') && (
+            <span className={classNames(styles.tag, styles.tagNew)}>
+                {settingsTranslations['tw.addons.settings.tags.new']}
+            </span>
+        )}
         {tags.includes('turbowarp') && (
             <span className={classNames(styles.tag, styles.tagTurbowarp)}>
                 {settingsTranslations['tw.addons.settings.tags.turbowarp']}

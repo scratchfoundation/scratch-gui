@@ -17,6 +17,7 @@
  */
 
 import addons from './addons.json';
+import newAddons from './new-addons.json';
 import isMobile from './is-mobile';
 
 const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
@@ -42,6 +43,12 @@ for (const addonId of addons) {
         if (typeof manifest.enabledByDefaultMobile !== 'undefined') {
             manifest.enabledByDefault = manifest.enabledByDefaultMobile;
         }
+    }
+    if (newAddons.includes(addonId)) {
+        if (!manifest.tags) {
+            manifest.tags = [];
+        }
+        manifest.tags.push('new');
     }
     if (isSupported(manifest)) {
         addonMap[addonId] = manifest;

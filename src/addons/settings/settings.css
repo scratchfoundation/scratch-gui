@@ -328,6 +328,11 @@ a:active, a:focus {
     background-color: #b9f38d;
     border-color: #8fce5e;
 }
+.tag-new {
+    color: white;
+    background: #b117f8;
+    border-color: #b20eb8;
+}
 .tag-turbowarp {
     color: white;
     background: #ff4c4c;

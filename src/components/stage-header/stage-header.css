@@ -69,6 +69,15 @@
     user-select: none;
     cursor: pointer;
 }
+[theme="dark"] .stage-button {
+    background: $ui-secondary;
+}
+[theme="dark"] :not(.stage-size-toggle-group) > * > .stage-button > * {
+    filter: brightness(2);
+}
+[theme="dark"] .stage-size-toggle-group .stage-button-toggled-off > * {
+    filter: brightness(2);
+}
 
 .stage-button-icon {
     width: 100%;

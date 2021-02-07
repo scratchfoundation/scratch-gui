@@ -971,39 +971,21 @@ class MenuBar extends React.Component {
                     title="Login"
                     artieLogin={this.props.artieLogin}
                 />
-
-                {(this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent !== null &&
-                this.props.artieExercises.currentExercise === null &&
-                this.props.artieLogin.currentStudent.competence !== undefined && this.props.artieLogin.currentStudent.competence > 0) || this.props.artieExercises.active ?
-
-                    (this.props.artieExercises.currentExercise === null &&  this.props.artieLogin.user.role === 0 ?
-                        //If the exercise has been selected before, the onCancel just we logout to show the login window again
-                        <ArtieExercises
-                            title="Exercise Selector"
-                            onExerciseChange={this.handleArtieExerciseChange}
-                            onCancel={this.props.onArtieLogout}
-                            onOk={this.handleClickArtieExercisesOk}
-                            artieExercises = {this.props.artieExercises}
-                        />
-                    :
-                        //If the exercise has not been selected before, the onCancel just deactivate the popup window
-                        <ArtieExercises
-                            title="Exercise Selector"
-                            onExerciseChange={this.handleArtieExerciseChange}
-                            onCancel={this.props.onDeactivateArtieExercises}
-                            onOk={this.handleClickArtieExercisesOk}
-                            artieExercises = {this.props.artieExercises}
-                        />
-                    )
-                : null }
-
+                <ArtieExercises
+                    title="Exercise Selector"
+                    onExerciseChange={this.handleArtieExerciseChange}
+                    onLogout={this.props.onArtieLogout}
+                    onDeactivate={this.props.onDeactivateArtieExercises}
+                    onOk={this.handleClickArtieExercisesOk}
+                    artieExercises = {this.props.artieExercises}
+                    artieLogin = {this.props.artieLogin}
+                />
                 <ArtieHelp
                     onRequestClose={this.props.onArtieClearHelp}
                     artieLogin={this.props.artieLogin}
                     artieExercises = {this.props.artieExercises}
                     help={this.props.artieExercises.help}
                 />
-
                 <ArtieExercisePopup
                     onCancel={this.props.onArtieSolutionSentPopupClose}
                     artieExercies={this.props.artieExercises}

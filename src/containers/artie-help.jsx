@@ -362,28 +362,38 @@ class ArtieHelp extends React.Component {
         }
     }
     render () {
-        return (
-            <ArtieHelpComponent
-                help={this.props.help}
-                componentRefAdd={this.setBlocksAdd}
-                componentRefDel={this.setBlocksDel}
-                componentRefReplace={this.setBlocksReplaceInputs}
-                componentRefMisplaced={this.setBlocksMisplaced}
-                warp={this.state.warp}
-                onAddBoolean={this.handleAddBoolean}
-                onAddLabel={this.handleAddLabel}
-                onAddTextNumber={this.handleAddTextNumber}
-                onCancel={this.handleCancel}
-                onOk={this.handleOk}
-                onToggleWarp={this.handleToggleWarp}
-            />
-        );
+
+        if(this.props.artieLogin !== null && this.props.artieLogin !== undefined && this.props.artieLogin.user !== null &&
+           this.props.artieExercises !== null && this.props.artieExercises !== null && this.props.artieExercises.help !== null &&
+           (this.props.artieExercises.help.nextSteps !== null || this.props.artieExercises.help.totalDistance === 0))
+        {
+            return (
+                <ArtieHelpComponent
+                    help={this.props.help}
+                    componentRefAdd={this.setBlocksAdd}
+                    componentRefDel={this.setBlocksDel}
+                    componentRefReplace={this.setBlocksReplaceInputs}
+                    componentRefMisplaced={this.setBlocksMisplaced}
+                    warp={this.state.warp}
+                    onAddBoolean={this.handleAddBoolean}
+                    onAddLabel={this.handleAddLabel}
+                    onAddTextNumber={this.handleAddTextNumber}
+                    onCancel={this.handleCancel}
+                    onOk={this.handleOk}
+                    onToggleWarp={this.handleToggleWarp}
+                />
+            );
+        }else{
+            return null;
+        }
     }
 }
 
 ArtieHelp.propTypes = {
     isRtl: PropTypes.bool,
     onRequestClose: PropTypes.func.isRequired,
+    artieLogin: PropTypes.object,
+    artieExercises: PropTypes.object,
     options: PropTypes.shape({
         media: PropTypes.string,
         zoom: PropTypes.shape({

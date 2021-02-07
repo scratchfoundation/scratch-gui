@@ -48,6 +48,11 @@ const padawanEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Padawan level',
         description: 'Welcome to Padawan level',
         id: 'gui.artie.evaluation.welcome.padawan'
+    },
+    message: {
+        defaultMessage: "Welcome to Padawan level, this is the next task to complete:",
+        description: "Welcome to Padawan level, this is the next task to complete:",
+        id: 'gui.artie.evaluation.message.padawan'
     }
 });
 
@@ -56,6 +61,11 @@ const jediEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Jedi level',
         description: 'Welcome to Jedi level',
         id: 'gui.artie.evaluation.welcome.jedi'
+    },
+    message: {
+        defaultMessage: "Welcome to Jedi level, this is the next task to complete:",
+        description: "Welcome to Jedi level, this is the next task to complete:",
+        id: 'gui.artie.evaluation.message.jedi'
     }
 });
 
@@ -64,6 +74,11 @@ const masterJediEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Master Jedi level',
         description: 'Welcome to Master Jedi level',
         id: 'gui.artie.evaluation.welcome.masterjedi'
+    },
+    message: {
+        defaultMessage: "Welcome to Master Jedi level, this is the next task to complete:",
+        description: "Welcome to Master Jedi level, this is the next task to complete:",
+        id: 'gui.artie.evaluation.message.masterjedi'
     }
 });
 

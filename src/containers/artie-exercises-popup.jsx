@@ -48,8 +48,7 @@ const padawanEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Padawan level',
         description: 'Welcome to Padawan level',
         id: 'gui.artie.evaluation.welcome.padawan'
-    },
-    message: null
+    }
 });
 
 const jediEvaluationMessages = defineMessages({
@@ -57,8 +56,7 @@ const jediEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Jedi level',
         description: 'Welcome to Jedi level',
         id: 'gui.artie.evaluation.welcome.jedi'
-    },
-    message: null
+    }
 });
 
 const masterJediEvaluationMessages = defineMessages({
@@ -66,8 +64,7 @@ const masterJediEvaluationMessages = defineMessages({
         defaultMessage: 'Welcome to Master Jedi level',
         description: 'Welcome to Master Jedi level',
         id: 'gui.artie.evaluation.welcome.masterjedi'
-    },
-    message: null
+    }
 });
 
 const exerciseComponent = (onCancel, type) => {
@@ -204,6 +201,7 @@ class ArtieExercisePopup extends React.Component {
 
             //Checking if the current exercise is level 0, 1 or 2
             var image = null;
+            var messages = null;
             if(this.state.artieExercises.currentExercise.level === 0){
                 image = require('../../static/Padawan.jpg');
                 messages = padawanEvaluationMessages;
@@ -216,7 +214,7 @@ class ArtieExercisePopup extends React.Component {
             }
 
             return evaluationComponent(this.handleCloseEvaluationPopup, this.handleCloseEvaluationPopup, type, image,
-                                       messages, this.state.artieExercises.currentExercise.description);
+                                        messages, this.state.artieExercises.currentExercise.description);
         }else{
             return null;
         }

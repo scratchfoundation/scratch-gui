@@ -82,7 +82,7 @@ import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArti
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution} from '../../reducers/artie-exercises';
+        artiePopupExercise, artiePopupSolution, artiePopupEvaluation} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieExercisePopup from '../../containers/artie-exercises-popup.jsx';
@@ -988,9 +988,10 @@ class MenuBar extends React.Component {
                 />
                 <ArtieExercisePopup
                     onCancel={this.props.onArtieSolutionSentPopupClose}
-                    artieExercies={this.props.artieExercises}
-                    setCurrentExercise = {this.props.onArtieSetCurrentStudent}
+                    artieExercises={this.props.artieExercises}
+                    setCurrentExercise = {this.props.onArtieSetCurrentExercise}
                     artieLogin={this.props.artieLogin}
+                    onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
                 />
             </Box>
         );
@@ -1137,7 +1138,8 @@ const mapDispatchToProps = dispatch => ({
     onArtieExerciseSentPopupClose: () => dispatch(artiePopupExercise(false)),
     onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
     onArtieSolutionSentPopupClose: () => dispatch(artiePopupSolution(false)),
-    onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active))
+    onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active)),
+    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active))
 });
 
 export default compose(

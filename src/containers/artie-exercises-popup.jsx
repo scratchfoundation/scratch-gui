@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ArtiePopupComponent from '../components/artie-exercises/artie-exercises-popup.jsx';
 import {defineMessages, injectIntl} from 'react-intl';
+import bindAll from 'lodash.bindall';
 
 const exercisesMessages = defineMessages({
     popupModalTitle: {
@@ -83,6 +84,28 @@ const evaluationComponent = (onCancel, onOK, type, image, messages) => {
 class ArtieExercisePopup extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            artieExercises: null,
+            artieLogin: null
+        };
+        bindAll(this, [
+            'handleEvaluationOKClick',
+            'nextExercise'
+        ]);
+    }
+
+    componentWillReceiveProps (newProps) {
+        if(this.state.artieExercises !== newProps.artieExercises){
+            this.setState({
+                artieExercises: newProps.artieExercises
+            });
+        }
+
+        if(this.state.artieLogin !== newProps.artieLogin){
+            this.setState({
+                artieLogin: newProps.artieLogin
+            });
+        }
     }
 
     //Function to determine the type of popup to show
@@ -109,34 +132,42 @@ class ArtieExercisePopup extends React.Component {
         //1- If the current exercise is null or undefined, we take the first exercise
         if((currentExercise === undefined || currentExercise === null) && exercises.length > 0){
             //Setting the current exercise
-            nextExercise = exercise[0];
+            nextExercise = exercises[0];
         }else{
             var index = exercises.findIndex(exercise => exercise.id === currentExercise.id);
-            nextExercise = exercises[index + 1];
+
+            if(exercises.size > index+1){
+                nextExercise = exercises[index + 1];
+            }else{
+                nextExercise = null;
+            }
         }
+        return nextExercise;
+    }
+
+    handleEvaluationOKClick(){
+        const nextExercise = this.nextExercise(this.state.artieExercises.currentExercise, this.state.artieExercises.exercises);
 
         //Updating the store to set the current exercise
         this.props.setCurrentExercise(nextExercise);
-        return nextExercise;
+
+        //Closing this popup and showing the next one
+        this.props.onArtiePopupEvaluation(true);
     }
 
     render () {
 
-        var type = this.popupType(this.props.artieLogin, this.props.artieExercises);
+        var type = this.popupType(this.state.artieLogin, this.state.artieExercises);
 
         if( type === 'exercise'){
             return exerciseComponent(this.props.onCancel, type);
         }else if(type === 'solution'){
             return solutionComponent(this.props.onCancel, type)
         }else if(type === 'initialEvaluation'){
-
-            if(this.props.artieExercises === undefined || this.props.artieExercises === null || this.props.artieExercises.currentExercise === null){
-                var image = require('../../static/ThreeJedi.jpg');
-                return evaluationComponent(this.props.onCancel, this.props.onCancel, type, image, initialEvaluationMessages);
-            }else{
-                var image = require('../../static/ThreeJedi.jpg');
-                return evaluationComponent(this.props.onCancel, this.props.onCancel, type, image, initialEvaluationMessages);
-            }
+            var image = require('../../static/ThreeJedi.jpg');
+            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages);
+        }else if(type == 'evaluation'){
+            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, null, initialEvaluationMessages);
         }else{
             return null;
         }
@@ -147,7 +178,8 @@ ArtieExercisePopup.propTypes = {
     onCancel: PropTypes.func.isRequired,
     artieExercises: PropTypes.object,
     setCurrentExercise: PropTypes.func,
-    artieLogin: PropTypes.object
+    artieLogin: PropTypes.object,
+    onArtiePopupEvaluation: PropTypes.func
 }
 
 export default injectIntl(ArtieExercisePopup);

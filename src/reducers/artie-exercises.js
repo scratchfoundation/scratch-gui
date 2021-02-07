@@ -12,7 +12,7 @@ const ARTIE_SENDING_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SENDING_EXERCI
 const ARTIE_SENDING_HELP = 'scratch-gui/artie-exercises/ARTIE_SENDING_HELP';
 const ARTIE_POPUP_SENT_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_SOLUTION';
 const ARTIE_POPUP_SENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_EXERCISE';
-const ARTIE_POPUP_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_EVALUATION';
+const ARTIE_POPUP_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_POPUP_EVALUATION';
 
 const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP';
 
@@ -97,6 +97,10 @@ const reducer = function (state, action) {
         case ARTIE_EVALUATION_STOP:
             return Object.assign({}, state, {
                 evaluationStop: true
+            });
+        case ARTIE_POPUP_EVALUATION:
+            return Object.assign({}, state, {
+                popupEvaluation: action.popupEvaluation
             });
         default:
             return state;

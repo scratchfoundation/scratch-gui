@@ -42,65 +42,112 @@ const initialEvaluationMessages = defineMessages({
     }
 });
 
+const exerciseComponent = (onCancel, type) => {
+    return (
+        <ArtiePopupComponent
+            onCancel={onCancel}
+            type = {type}
+            messages = {exercisesMessages}
+            okButton = {false}
+            cancelButton = {false}
+        />
+    );
+}
+
+const solutionComponent = (onCancel, type) => {
+    return(
+        <ArtiePopupComponent
+            onCancel={onCancel}
+            type = {type}
+            messages = {solutionMessages}
+            okButton = {false}
+            cancelButton = {false}
+        />
+    );
+}
+
+const evaluationComponent = (onCancel, onOK, type, image, messages) => {
+    return(
+        <ArtiePopupComponent
+            onCancel={onCancel}
+            onOK={onOK}
+            type = {type}
+            messages = {messages}
+            okButton = {true}
+            cancelButton = {false}
+            image={image}
+        />
+    );
+}
+
 class ArtieExercisePopup extends React.Component {
     constructor (props) {
         super(props);
     }
 
+    //Function to determine the type of popup to show
+    popupType(login, exercises){
+        if( exercises !== undefined && exercises !== null && exercises.popupExercise){
+            return 'exercise';
+        }else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
+            return 'solution';
+        }else if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !==null &&
+                (login.currentStudent.competence == undefined || login.currentStudent.competence === 0) &&
+                (exercises === undefined || exercises === null || exercises.currentExercise === null)){
+            return 'initialEvaluation';
+        }else if(exercises !== undefined && exercises !== null && exercises.popupEvaluation){
+            return 'evaluation';
+        }else{
+            return null;
+        }
+    }
+
+    nextExercise(currentExercise, exercises){
+
+        var nextExercise=null;
+
+        //1- If the current exercise is null or undefined, we take the first exercise
+        if((currentExercise === undefined || currentExercise === null) && exercises.length > 0){
+            //Setting the current exercise
+            nextExercise = exercise[0];
+        }else{
+            var index = exercises.findIndex(exercise => exercise.id === currentExercise.id);
+            nextExercise = exercises[index + 1];
+        }
+
+        //Updating the store to set the current exercise
+        this.props.setCurrentExercise(nextExercise);
+        return nextExercise;
+    }
+
     render () {
-        if(this.props.type == 'exercise'){
-            return(
-                <ArtiePopupComponent
-                    onCancel={this.props.onCancel}
-                    type = {this.props.type}
-                    messages = {exercisesMessages}
-                    okButton = {false}
-                    cancelButton = {false}
-                />
-            );
-        }else if(this.props.type == 'solution'){
-            return(
-                <ArtiePopupComponent
-                    onCancel={this.props.onCancel}
-                    type = {this.props.type}
-                    messages = {solutionMessages}
-                    okButton = {false}
-                    cancelButton = {false}
-                />
-            );
-        }else if(this.props.type == 'initialEvaluation'){
+
+        var type = this.popupType(this.props.artieLogin, this.props.artieExercises);
+
+        if( type === 'exercise'){
+            return exerciseComponent(this.props.onCancel, type);
+        }else if(type === 'solution'){
+            return solutionComponent(this.props.onCancel, type)
+        }else if(type === 'initialEvaluation'){
+
             if(this.props.artieExercises === undefined || this.props.artieExercises === null || this.props.artieExercises.currentExercise === null){
                 var image = require('../../static/ThreeJedi.jpg');
-                return(
-                    <ArtiePopupComponent
-                        onCancel={this.props.onCancel}
-                        type = {this.props.type}
-                        messages = {initialEvaluationMessages}
-                        okButton = {true}
-                        cancelButton = {false}
-                        type = {this.props.type}
-                        image={image}
-                    />
-                );
+                return evaluationComponent(this.props.onCancel, this.props.onCancel, type, image, initialEvaluationMessages);
             }else{
-                return(
-                    <ArtiePopupComponent
-                        onCancel={this.props.onCancel}
-                        type = {this.props.type}
-                        messages = {initialEvaluationMessages}
-                        okButton = {true}
-                        cancelButton = {false}
-                    />
-                );
+                var image = require('../../static/ThreeJedi.jpg');
+                return evaluationComponent(this.props.onCancel, this.props.onCancel, type, image, initialEvaluationMessages);
             }
+        }else{
+            return null;
         }
     }
 }
 
 ArtieExercisePopup.propTypes = {
     onCancel: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired,
-    artieExercises: PropTypes.object
+    artieExercises: PropTypes.object,
+    setCurrentExercise: PropTypes.func,
+    artieLogin: PropTypes.object
 }
 
 export default injectIntl(ArtieExercisePopup);

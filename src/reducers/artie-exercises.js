@@ -12,6 +12,7 @@ const ARTIE_SENDING_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SENDING_EXERCI
 const ARTIE_SENDING_HELP = 'scratch-gui/artie-exercises/ARTIE_SENDING_HELP';
 const ARTIE_POPUP_SENT_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_SOLUTION';
 const ARTIE_POPUP_SENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_EXERCISE';
+const ARTIE_POPUP_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_EVALUATION';
 
 const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP';
 
@@ -28,6 +29,7 @@ const initialState = {
     informationSent: false,
     popupSolution: false,
     popupExercise: false,
+    popupEvaluation: false,
     evaluationStop: false
 }
 
@@ -165,6 +167,11 @@ const artiePopupExercise = (active) => ({
     popupExercise: active
 });
 
+const artiePopupEvaluation = (active) => ({
+    type: ARTIE_POPUP_EVALUATION,
+    popupEvaluation: active
+});
+
 const artieEvaluationStop = () => ({
     type: ARTIE_EVALUATION_STOP
 });
@@ -185,5 +192,6 @@ export {
     artieLoadingHelp,
     artiePopupSolution,
     artiePopupExercise,
+    artiePopupEvaluation,
     artieEvaluationStop
 };

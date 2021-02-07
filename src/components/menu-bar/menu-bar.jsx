@@ -1008,26 +1008,13 @@ class MenuBar extends React.Component {
                         help={this.props.artieExercises.help}
                     />
                 ) : null}
-                {this.props.artieExercises.popupExercise ?
-                    <ArtieExercisePopup
-                        onCancel={this.props.onArtieExerciseSentPopupClose}
-                        type='exercise'
-                    />
-                : null}
-                {this.props.artieExercises.popupSolution ?
-                    <ArtieExercisePopup
-                        onCancel={this.props.onArtieSolutionSentPopupClose}
-                        type='solution'
-                    />
-                : null}
-                {this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
-                 (this.props.artieLogin.currentStudent.competence == undefined || this.props.artieLogin.currentStudent.competence === 0) ?
-                    <ArtieExercisePopup
-                        onCancel={this.props.onArtieSolutionSentPopupClose}
-                        type='initialEvaluation'
-                        exercies={this.props.artieExercises}
-                    />
-                : null }
+
+                <ArtieExercisePopup
+                    onCancel={this.props.onArtieSolutionSentPopupClose}
+                    artieExercies={this.props.artieExercises}
+                    setCurrentExercise = {this.props.onArtieSetCurrentStudent}
+                    artieLogin={this.props.artieLogin}
+                />
             </Box>
         );
     }

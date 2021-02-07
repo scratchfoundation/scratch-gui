@@ -28,6 +28,18 @@ class ArtieExercisesPopupComponent extends React.Component {
         }
     }
 
+    bodyMessage(){
+
+        var message = null;
+        if(this.props.customBodyMessage !== null){
+            message = this.props.customMessage;
+        }else if(this.props.messages.message !== null){
+            message = this.props.intl.formatMessage(this.props.messages.message);
+        }
+
+        return message
+    }
+
     render(){
 
         return(
@@ -42,7 +54,7 @@ class ArtieExercisesPopupComponent extends React.Component {
                         {this.props.image !== undefined && this.props.image !== null ?
                             <img src={this.props.image} />
                         : null}
-                        {this.props.intl.formatMessage(this.props.messages.message)}
+                        {this.bodyMessage()}
                     </Box>
 
                     { (this.props.okButton || this.props.cancelButton) ?
@@ -82,6 +94,7 @@ ArtieExercisesPopupComponent.propTypes = {
     onOK: PropTypes.func,
     type: PropTypes.string.isRequired,
     messages: PropTypes.object.isRequired,
+    customBodyMessage: PropTypes.string,
     okButton: PropTypes.bool.isRequired,
     cancelButton: PropTypes.bool.isRequired,
     type: PropTypes.string,

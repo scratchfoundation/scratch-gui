@@ -43,6 +43,33 @@ const initialEvaluationMessages = defineMessages({
     }
 });
 
+const padawanEvaluationMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'Welcome to Padawan level',
+        description: 'Welcome to Padawan level',
+        id: 'gui.artie.evaluation.welcome.padawan'
+    },
+    message: null
+});
+
+const jediEvaluationMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'Welcome to Jedi level',
+        description: 'Welcome to Jedi level',
+        id: 'gui.artie.evaluation.welcome.jedi'
+    },
+    message: null
+});
+
+const masterJediEvaluationMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'Welcome to Master Jedi level',
+        description: 'Welcome to Master Jedi level',
+        id: 'gui.artie.evaluation.welcome.masterjedi'
+    },
+    message: null
+});
+
 const exerciseComponent = (onCancel, type) => {
     return (
         <ArtiePopupComponent
@@ -67,7 +94,7 @@ const solutionComponent = (onCancel, type) => {
     );
 }
 
-const evaluationComponent = (onCancel, onOK, type, image, messages) => {
+const evaluationComponent = (onCancel, onOK, type, image, messages, customBodyMessage) => {
     return(
         <ArtiePopupComponent
             onCancel={onCancel}
@@ -77,6 +104,7 @@ const evaluationComponent = (onCancel, onOK, type, image, messages) => {
             okButton = {true}
             cancelButton = {false}
             image={image}
+            customBodyMessage={customBodyMessage}
         />
     );
 }
@@ -90,7 +118,8 @@ class ArtieExercisePopup extends React.Component {
         };
         bindAll(this, [
             'handleEvaluationOKClick',
-            'nextExercise'
+            'nextExercise',
+            'handleCloseEvaluationPopup'
         ]);
     }
 
@@ -155,6 +184,11 @@ class ArtieExercisePopup extends React.Component {
         this.props.onArtiePopupEvaluation(true);
     }
 
+    handleCloseEvaluationPopup(){
+        //Closing this popup
+        this.props.onArtiePopupEvaluation(false);
+    }
+
     render () {
 
         var type = this.popupType(this.state.artieLogin, this.state.artieExercises);
@@ -165,9 +199,24 @@ class ArtieExercisePopup extends React.Component {
             return solutionComponent(this.props.onCancel, type)
         }else if(type === 'initialEvaluation'){
             var image = require('../../static/ThreeJedi.jpg');
-            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages);
+            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages, null);
         }else if(type == 'evaluation'){
-            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, null, initialEvaluationMessages);
+
+            //Checking if the current exercise is level 0, 1 or 2
+            var image = null;
+            if(this.state.artieExercises.currentExercise.level === 0){
+                image = require('../../static/Padawan.jpg');
+                messages = padawanEvaluationMessages;
+            }else if(this.state.artieExercises.currentExercise.level === 1){
+                image = require('../../static/Jedi.jpg');
+                messages = jediEvaluationMessages;
+            }else if(this.state.artieExercises.currentExercise.level === 2){
+                image = require('../../static/Master.jpg');
+                messages = masterJediEvaluationMessages;
+            }
+
+            return evaluationComponent(this.handleCloseEvaluationPopup, this.handleCloseEvaluationPopup, type, image,
+                                       messages, this.state.artieExercises.currentExercise.description);
         }else{
             return null;
         }

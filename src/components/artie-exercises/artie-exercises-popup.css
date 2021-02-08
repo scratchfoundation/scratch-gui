@@ -53,22 +53,47 @@
     align-items: center;
     height: 400px;
 }
-.modal-content-evaluation .label-congrats {
-    color: green;
+
+
+.modal-content-evaluation .body {
     background-color: $ui-white;
+}
+.modal-content-evaluation .text-body{
+    color: $text-primary;
     text-align: center;
     font-size: 0.85rem;
     font-weight: bold;
     display:flex;
     justify-content: center;
     align-items: center;
-    height: 150px;
+}
+.modal-content-evaluation .text-body .main-text{
+    margin: 15px;
+    text-align: left;
+}
+.modal-content-evaluation .custom-text-body {
+    color: green;
+    background-color: $ui-white;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    margin: 15px;
+}
+.modal-content-evaluation .image {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin: 15px;
+    object-fit: cover;
+    object-position: center right;
 }
 
 /* Buttons */
 .button-row {
     font-weight: bolder;
     text-align: right;
+    padding: 10px;
 }
 
 .button-row button {

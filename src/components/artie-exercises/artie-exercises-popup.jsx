@@ -38,11 +38,22 @@ class ArtieExercisesPopupComponent extends React.Component {
                 contentLabel={this.props.intl.formatMessage(this.props.messages.popupModalTitle)}
             >
                 <Box className={styles.body}>
-                    <Box className={styles.labelCongrats}>
+                    <Box className={styles.textBody}>
                         {this.props.image !== undefined && this.props.image !== null ?
-                            <img src={this.props.image} />
+                            <div>
+                                <img src={this.props.image} className={styles.image} />
+                            </div>
                         : null}
-                        {this.props.intl.formatMessage(this.props.messages.message)}
+                        <div>
+                            <div className={styles.mainText}>
+                                {this.props.intl.formatMessage(this.props.messages.message)}
+                            </div>
+                            {this.props.customBodyMessage !== undefined ?
+                                <div className={styles.customTextBody}>
+                                    {this.props.customBodyMessage}
+                                </div>
+                            : null}
+                        </div>
                     </Box>
 
                     { (this.props.okButton || this.props.cancelButton) ?
@@ -59,7 +70,7 @@ class ArtieExercisesPopupComponent extends React.Component {
                             :  null }
 
                             {this.props.okButton ?
-                                <button className={styles.okButton} onClick={this.props.onOk}>
+                                <button className={styles.okButton} onClick={this.props.onOK}>
                                     <FormattedMessage
                                             defaultMessage="OK"
                                             description="Button in prompt for confirming the dialog"

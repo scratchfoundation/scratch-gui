@@ -1,4 +1,23 @@
 {
+    "de": {
+        "tw.addons.settings.addonFeedback": "Addon-Feedback",
+        "tw.addons.settings.confirmResetAll": "Bist du sicher, dass du alle Addoneinstellungen auf ihre Standardwerte zurücksetzen willst?",
+        "tw.addons.settings.credits": "Danksagungen:",
+        "tw.addons.settings.dirty": "Lade TurboWarp neu, um die Einstellungen anzuwenden.",
+        "tw.addons.settings.dirtyButton": "Jetzt neu laden",
+        "tw.addons.settings.export": "Einstellungen exportieren",
+        "tw.addons.settings.import": "Einstellungen importieren",
+        "tw.addons.settings.noResults": "Keine Suchergebnisse.",
+        "tw.addons.settings.presets": "Voreinstellungen",
+        "tw.addons.settings.reset": "Zurücksetzen",
+        "tw.addons.settings.resetAll": "Alle zurücksetzen",
+        "tw.addons.settings.search": "Suchen",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Easter Egg",
+        "tw.addons.settings.tags.recommended": "Empfohlen",
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar."
+    },
     "es": {
         "tw.addons.settings.addonFeedback": "Feedback (comentarios) de addons",
         "tw.addons.settings.confirmResetAll": "¿Está seguro de que quiere reiniciar todos los addons a sus valores predeterminados?",

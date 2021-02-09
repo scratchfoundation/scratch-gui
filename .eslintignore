@@ -1,7 +1,7 @@
 node_modules/*
 build/*
 dist/*
+# Files imported from upstream
 src/addons/addons
 src/addons/libraries
-src/addons/libraries-raw
 src/addons/api-libraries

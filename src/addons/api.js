@@ -109,13 +109,6 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
-// Temporary
-window.scratchAddons = {
-    l10n: {
-        lcoale: language
-    }
-};
-
 class Tab extends EventTargetShim {
     constructor () {
         super();

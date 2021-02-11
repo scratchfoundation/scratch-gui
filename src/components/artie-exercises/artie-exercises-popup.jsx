@@ -23,6 +23,8 @@ class ArtieExercisesPopupComponent extends React.Component {
                 return styles.modalContentEvaluation;
             case 'evaluation':
                 return styles.modalContentEvaluation;
+            case 'evaluationStop':
+                return styles.modalContentEvaluation;
             default:
                 return styles.modalContentCongrats;
         }
@@ -96,7 +98,6 @@ ArtieExercisesPopupComponent.propTypes = {
     customBodyMessage: PropTypes.string,
     okButton: PropTypes.bool.isRequired,
     cancelButton: PropTypes.bool.isRequired,
-    type: PropTypes.string,
     image: PropTypes.string
 };
 

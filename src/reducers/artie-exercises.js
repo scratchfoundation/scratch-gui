@@ -96,7 +96,7 @@ const reducer = function (state, action) {
             });
         case ARTIE_EVALUATION_STOP:
             return Object.assign({}, state, {
-                evaluationStop: true
+                evaluationStop: action.evaluationStop
             });
         case ARTIE_POPUP_EVALUATION:
             return Object.assign({}, state, {
@@ -176,8 +176,9 @@ const artiePopupEvaluation = (active) => ({
     popupEvaluation: active
 });
 
-const artieEvaluationStop = () => ({
-    type: ARTIE_EVALUATION_STOP
+const artieEvaluationStop = (stop) => ({
+    type: ARTIE_EVALUATION_STOP,
+    evaluationStop: stop
 });
 
 export {

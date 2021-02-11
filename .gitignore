@@ -17,3 +17,7 @@ npm-*
 # Generated translation files
 /translations
 /locale
+.idea/.gitignore
+.idea/modules.xml
+.idea/scratch-gui.iml
+.idea/vcs.xml

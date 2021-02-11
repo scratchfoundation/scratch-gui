@@ -82,7 +82,7 @@ import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArti
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution, artiePopupEvaluation} from '../../reducers/artie-exercises';
+        artiePopupExercise, artiePopupSolution, artiePopupEvaluation, artieEvaluationStop} from '../../reducers/artie-exercises';
 import ArtieLogin from '../artie-login/artie-login.jsx';
 import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
 import ArtieExercisePopup from '../../containers/artie-exercises-popup.jsx';
@@ -202,7 +202,8 @@ class MenuBar extends React.Component {
             'handleArtieLogged',
             'handleClickArtieExercisesOk',
             'handleArtieExerciseChange',
-            'handleClickFinishExercise'
+            'handleClickFinishExercise',
+            'handleStopEvaluation'
         ]);
     }
     componentDidMount () {
@@ -398,6 +399,9 @@ class MenuBar extends React.Component {
     }
     handleArtieExerciseChange(e){
         exerciseId = e.target.value;
+    }
+    handleStopEvaluation(){
+        this.props.onArtieEvaluationStop(true);
     }
 
     render () {
@@ -618,7 +622,7 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseArtie}
                             >
                                 <MenuSection>
-                                    {this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent==null)?
+                                    {this.props.artieLogin.user==null || (this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent==null)?
                                         <MenuItem onClick={this.props.onActivateArtieLogin}>
                                             <FormattedMessage
                                                 defaultMessage="Login"
@@ -636,7 +640,7 @@ class MenuBar extends React.Component {
                                 </MenuItem>
                                     }
                                 </MenuSection>
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==1 && this.props.artieExercises.currentExercise !== null?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===1 && this.props.artieExercises.currentExercise !== null?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRegisterSolution}>
                                             <FormattedMessage
@@ -656,7 +660,7 @@ class MenuBar extends React.Component {
                                 :
                                     <div></div>
                                 }
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRequestHelp}>
                                             <FormattedMessage
@@ -676,7 +680,7 @@ class MenuBar extends React.Component {
                                 :
                                     <div></div>
                                 }
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickFinishExercise}>
                                             <FormattedMessage
@@ -699,7 +703,12 @@ class MenuBar extends React.Component {
                             </MenuBarMenu>
                         </div>
 
-                        {this.props.artieLogin.user !== null && ((this.props.artieLogin.user.role==0 && this.props.artieLogin.currentStudent!==null)|| this.props.artieLogin.user.role == 1) ?
+                        {this.props.artieLogin.user !== null &&
+                            (
+                                (this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null)
+                                || this.props.artieLogin.user.role === 1
+                            )
+                            ?
                             <React.Fragment>
                                 <Divider className={classNames(styles.divider)} />
                                 <div
@@ -733,11 +742,22 @@ class MenuBar extends React.Component {
                                         }
                                     </div>
                                 </div>
-                                <SelectExerciseButton
-                                    className={styles.menuBarButton}
-                                    onClick={this.props.onActivateArtieExercises}
-                                    isExerciseSelected = {this.props.artieExercises.artieSetCurrentExercise !== null}
-                                />
+
+                                {this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <SelectExerciseButton
+                                        className={styles.menuBarButton}
+                                        onClick={this.handleStopEvaluation}
+                                        isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
+                                        isEvaluation={this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation}
+                                    />
+                                :
+                                    <SelectExerciseButton
+                                        className={styles.menuBarButton}
+                                        onClick={this.props.onActivateArtieExercises}
+                                        isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
+                                        isEvaluation={this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation}
+                                    />
+                                }
                             </React.Fragment>
                         :
                             null
@@ -992,6 +1012,7 @@ class MenuBar extends React.Component {
                     setCurrentExercise = {this.props.onArtieSetCurrentExercise}
                     artieLogin={this.props.artieLogin}
                     onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
+                    onArtieEvaluationStop = {this.props.onArtieEvaluationStop}
                 />
             </Box>
         );
@@ -1139,7 +1160,8 @@ const mapDispatchToProps = dispatch => ({
     onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
     onArtieSolutionSentPopupClose: () => dispatch(artiePopupSolution(false)),
     onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active)),
-    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active))
+    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active)),
+    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop))
 });
 
 export default compose(

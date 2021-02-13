@@ -1011,10 +1011,11 @@ class MenuBar extends React.Component {
                 <ArtieExercisePopup
                     onCancel={this.props.onArtieSolutionSentPopupClose}
                     artieExercises={this.props.artieExercises}
-                    setCurrentExercise = {this.props.onArtieSetCurrentExercise}
                     artieLogin={this.props.artieLogin}
+                    onArtieSetCurrentExercise = {this.props.onArtieSetCurrentExercise}
                     onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
                     onArtieEvaluationStop = {this.props.onArtieEvaluationStop}
+                    onArtieSetCurrentStudent = {this.props.onArtieSetCurrentStudent}
                 />
             </Box>
         );

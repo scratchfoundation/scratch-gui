@@ -226,7 +226,7 @@ class ArtieExercisePopup extends React.Component {
         const nextExercise = this.nextExercise(this.state.artieExercises.currentExercise, this.state.artieExercises.exercises);
 
         //Updating the store to set the current exercise
-        this.props.setCurrentExercise(nextExercise);
+        this.props.onArtieSetCurrentExercise(nextExercise);
 
         //Closing this popup and showing the next one
         this.props.onArtiePopupEvaluation(true);
@@ -246,7 +246,10 @@ class ArtieExercisePopup extends React.Component {
     }
 
     onStudentCompetenceIsUpdated(response){
+        //Updates the current student and resets the exercise
+        this.props.onArtieSetCurrentStudent(response);
         this.props.onArtieEvaluationStop(false);
+        this.props.onArtieSetCurrentExercise(null);
     }
 
     handleEvaluationStopCancelClick(){
@@ -314,10 +317,11 @@ class ArtieExercisePopup extends React.Component {
 ArtieExercisePopup.propTypes = {
     onCancel: PropTypes.func.isRequired,
     artieExercises: PropTypes.object,
-    setCurrentExercise: PropTypes.func,
     artieLogin: PropTypes.object,
+    onArtieSetCurrentExercise: PropTypes.func,
     onArtiePopupEvaluation: PropTypes.func,
-    onArtieEvaluationStop: PropTypes.func
+    onArtieEvaluationStop: PropTypes.func,
+    onArtieSetCurrentStudent: PropTypes.func
 }
 
 export default injectIntl(ArtieExercisePopup);

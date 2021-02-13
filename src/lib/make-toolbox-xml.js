@@ -729,7 +729,7 @@ const turbowarp = function () {
     <category
         name="TurboWarp"
         id="turbowarp"
-        colour="#FF4D4D"
+        colour="#FF4C4C"
         secondaryColour="#FF3D3D">
     </category>
     `;

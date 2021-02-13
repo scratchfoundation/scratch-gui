@@ -19,9 +19,9 @@
         "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar."
     },
     "es": {
-        "tw.addons.settings.addonFeedback": "Feedback (comentarios) de addons",
+        "tw.addons.settings.addonFeedback": "Enviar comentarios sobre addons",
         "tw.addons.settings.confirmResetAll": "¿Está seguro de que quiere reiniciar todos los addons a sus valores predeterminados?",
-        "tw.addons.settings.credits": "Créditos",
+        "tw.addons.settings.credits": "Créditos:",
         "tw.addons.settings.dirty": "Recargue TurboWarp para aplicar los cambios.",
         "tw.addons.settings.dirtyButton": "Recargar ahora",
         "tw.addons.settings.export": "Exportar ajustes",
@@ -76,17 +76,23 @@
         "tw.addons.settings.unsupported": "Alguns addons não estão disponíveis neste navegador:"
     },
     "ro": {
+        "tw.addons.settings.addonFeedback": "Spune-ți Părerea despre Extensii",
+        "tw.addons.settings.confirmResetAll": "Ești sigur că vrei să resetezi toate setările extensiilor la valorile lor implicite?",
         "tw.addons.settings.credits": "Credite:",
         "tw.addons.settings.dirty": "Reîncarcă TurboWarp pentru a aplica setările.",
         "tw.addons.settings.dirtyButton": "Reîncarcă acum",
+        "tw.addons.settings.export": "Exportă setările",
+        "tw.addons.settings.import": "Importă setările",
         "tw.addons.settings.noResults": "Niciun rezultat.",
         "tw.addons.settings.presets": "Presetări",
         "tw.addons.settings.reset": "Resetează",
         "tw.addons.settings.resetAll": "Resetează toate",
         "tw.addons.settings.search": "Caută",
         "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Surprize Ascunse",
         "tw.addons.settings.tags.recommended": "Recomandat",
-        "tw.addons.settings.tags.turbowarp": "TurboWarp"
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.unsupported": "Unele extensii nu sunt disponibile în acest browser:"
     },
     "tr": {
         "tw.addons.settings.addonFeedback": "Eklenti geribildirim",

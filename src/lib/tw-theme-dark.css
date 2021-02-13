@@ -8,6 +8,10 @@
     --ui-tertiary: rgb(46, 46, 46);
     --ui-modal-overlay: #333a;
     --text-primary: #eee;
+    /* scratch-paint */
+    --paint-ui-pane-border: rgb(46, 46, 46);
+    --paint-text-primary: #eee;
+    --paint-form-border: rgb(46, 46, 46);
 }
 
 /* Blockly */
@@ -62,40 +66,6 @@
 }
 .scratchCommentText {
     color: black;
-}
-
-/* Paint */
-[class*="input_input-form"] {
-    background-color: var(--ui-secondary);
-    border-color: var(--ui-tertiary);
-    color: var(--text-primary);
-}
-img[class*="tool-select-base_tool-select-icon"] {
-    filter: brightness(1.7);
-}
-[class*="paint-editor_button-group-button-icon"] {
-    filter: brightness(1.7);
-}
-[class*="dropdown_mod-open"] {
-    background: var(--ui-secondary);
-}
-[class*="dropdown_dropdown"],
-[class*="fixed-tools_mod-dashed-border"],
-[class*="mode-tools_mod-dashed-border"],
-[class*="paint-editor_mod-dashed-border"],
-[class*="paint-editor_editor-container-top"],
-[class*="paint-editor_button-group-button"],
-[class*="paint-editor_canvas-container"],
-[class*="color-picker_swatch"],
-[class*="fixed-tools_button-group-button"],
-[class*="color-picker_divider"] {
-    border-color: var(--ui-tertiary) !important;
-}
-[class*="font-dropdown_font-dropdown"] {
-    color: var(--text-primary);
-}
-[class*="color-picker_row-header"] {
-    color: #ccc;
 }
 
 /* Other / Multipurpose */

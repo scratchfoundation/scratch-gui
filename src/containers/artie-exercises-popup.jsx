@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ArtiePopupComponent from '../components/artie-exercises/artie-exercises-popup.jsx';
-import {updateStudentCompetence} from '../lib/artie-api';
+import {updateStudentCompetence, getArtieExercises} from '../lib/artie-api';
 import {defineMessages, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 
@@ -164,7 +164,8 @@ class ArtieExercisePopup extends React.Component {
             'handleCloseEvaluationPopup',
             'handleEvaluationStopOKClick',
             'handleEvaluationStopCancelClick',
-            'onStudentCompetenceIsUpdated'
+            'onStudentCompetenceIsUpdated',
+            'onArtieExercisesLoaded'
         ]);
     }
 
@@ -246,8 +247,13 @@ class ArtieExercisePopup extends React.Component {
     }
 
     onStudentCompetenceIsUpdated(response){
-        //Updates the current student and resets the exercise
+        //Updates the list of exercises, the current student and resets the current exercise
+        getArtieExercises(this.props.userLogin, this.props.passwordLogin, false, this.onArtieExercisesLoaded);
         this.props.onArtieSetCurrentStudent(response);
+    }
+
+    onArtieExercisesLoaded(exercises){
+        this.props.onArtieSetExercises(exercises);
         this.props.onArtieEvaluationStop(false);
         this.props.onArtieSetCurrentExercise(null);
     }
@@ -321,7 +327,10 @@ ArtieExercisePopup.propTypes = {
     onArtieSetCurrentExercise: PropTypes.func,
     onArtiePopupEvaluation: PropTypes.func,
     onArtieEvaluationStop: PropTypes.func,
-    onArtieSetCurrentStudent: PropTypes.func
+    onArtieSetCurrentStudent: PropTypes.func,
+    onArtieSetExercises: PropTypes.func,
+    userLogin: PropTypes.string,
+    passwordLogin: PropTypes.string
 }
 
 export default injectIntl(ArtieExercisePopup);

@@ -1016,6 +1016,9 @@ class MenuBar extends React.Component {
                     onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
                     onArtieEvaluationStop = {this.props.onArtieEvaluationStop}
                     onArtieSetCurrentStudent = {this.props.onArtieSetCurrentStudent}
+                    onArtieSetExercises = {this.props.onArtieSetExercises}
+                    userLogin = {userLogin}
+                    passwordLogin = {passwordLogin}
                 />
             </Box>
         );

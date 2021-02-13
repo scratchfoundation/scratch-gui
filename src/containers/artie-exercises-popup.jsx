@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ArtiePopupComponent from '../components/artie-exercises/artie-exercises-popup.jsx';
+import {updateStudentCompetence} from '../lib/artie-api';
 import {defineMessages, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 
@@ -150,6 +151,7 @@ const stopEvaluationComponent = (onCancel, onOK, type, image, messages, customBo
 }
 
 class ArtieExercisePopup extends React.Component {
+
     constructor (props) {
         super(props);
         this.state = {
@@ -161,7 +163,8 @@ class ArtieExercisePopup extends React.Component {
             'nextExercise',
             'handleCloseEvaluationPopup',
             'handleEvaluationStopOKClick',
-            'handleEvaluationStopCancelClick'
+            'handleEvaluationStopCancelClick',
+            'onStudentCompetenceIsUpdated'
         ]);
     }
 
@@ -184,16 +187,16 @@ class ArtieExercisePopup extends React.Component {
 
         if(evaluationStop){
             return 'evaluationStop';
-        }else if( exercises !== undefined && exercises !== null && exercises.popupExercise){
-            return 'exercise';
-        }else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
-            return 'solution';
         }else if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !==null &&
-                (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
-                (exercises === undefined || exercises === null || exercises.currentExercise === null)){
+            (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
+            (exercises === undefined || exercises === null || exercises.currentExercise === null)) {
             return 'initialEvaluation';
         }else if(exercises !== undefined && exercises !== null && exercises.popupEvaluation){
             return 'evaluation';
+        } else if( exercises !== undefined && exercises !== null && exercises.popupExercise){
+            return 'exercise';
+        }else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
+            return 'solution';
         }else{
             return null;
         }
@@ -235,6 +238,14 @@ class ArtieExercisePopup extends React.Component {
     }
 
     handleEvaluationStopOKClick(){
+
+        //Updates the student competence
+        updateStudentCompetence(this.state.artieLogin.currentStudent.id,
+                                this.state.artieExercises.currentExercise.level,
+                                this.onStudentCompetenceIsUpdated);
+    }
+
+    onStudentCompetenceIsUpdated(response){
         this.props.onArtieEvaluationStop(false);
     }
 
@@ -260,16 +271,16 @@ class ArtieExercisePopup extends React.Component {
             return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages, null);
         }else if(type === 'evaluation'){
 
-            //Checking if the current exercise is level 0, 1 or 2
+            //Checking if the current exercise is level 1, 2 or 3
             image = null;
             let messages = null;
-            if(this.state.artieExercises.currentExercise.level === 0){
+            if(this.state.artieExercises.currentExercise.level === 1){
                 image = require('../../static/Padawan.jpg');
                 messages = padawanEvaluationMessages;
-            }else if(this.state.artieExercises.currentExercise.level === 1){
+            }else if(this.state.artieExercises.currentExercise.level === 2){
                 image = require('../../static/Jedi.jpg');
                 messages = jediEvaluationMessages;
-            }else if(this.state.artieExercises.currentExercise.level === 2){
+            }else if(this.state.artieExercises.currentExercise.level === 3){
                 image = require('../../static/Master.jpg');
                 messages = masterJediEvaluationMessages;
             }

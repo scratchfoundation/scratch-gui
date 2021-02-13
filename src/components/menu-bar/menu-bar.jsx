@@ -347,6 +347,15 @@ class MenuBar extends React.Component {
             if(studentLogin !== ""){
                 var tempStudent = this.props.artieLogin.students.filter(s => s.id==studentLogin)[0];
                 this.props.onArtieSetCurrentStudent(tempStudent);
+
+                //If the current user is not null and the competence is already set, we show the exercises
+                if(tempStudent.competence !== undefined && tempStudent.competence!==null && tempStudent.competence > 0){
+                    //Get the exercises
+                    getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
+                }else{
+                    //Get the evaluations
+                    getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
+                }
             }
 
             //And we close the login window
@@ -356,6 +365,12 @@ class MenuBar extends React.Component {
     handleArtieLogged(user){
         this.props.onArtieLogged(user);
 
+        //If the user role is admin, we load all the exercises (evaluations and normals)
+        if(user.role !== null && user.role == 1){
+            //Get all the exercises
+            getAllArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
+        }
+
         //If the user is read only, we check for the students
         if(user !== null && user.role == 0){
             //We get the students
@@ -363,19 +378,6 @@ class MenuBar extends React.Component {
         } else if(user !== null && user.role == 1){
             //We close the login window
             this.props.onDeactivateArtieLogin();
-        }
-
-        //If the current user is not null and the competence is already set, we show the exercises
-        if(this.props.artieLogin.currentStudent!==null && this.props.artieLogin.currentStudent.competence !== undefined &&
-           this.props.artieLogin.currentStudent.competence!==null && this.props.artieLogin.currentStudent.competence > 0){
-            //Get the exercises
-            getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
-        }else if(user.role !== null && user.role == 1){
-            //Get all the exercises
-            getAllArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
-        }else{
-            //Get the evaluations
-            getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
         }
     }
     handleArtieUserChange(e){

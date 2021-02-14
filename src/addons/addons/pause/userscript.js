@@ -15,69 +15,124 @@ const _twGetAsset = (path) => {
 export default async function ({ addon, global, console, msg }) {
   const vm = addon.tab.traps.vm;
 
-  var playing = true;
-  var threads = [];
+  const img = document.createElement("img");
+  img.className = "pause-btn";
+  img.src = _twGetAsset("/pause.svg");
+  img.draggable = false;
+  img.title = msg("pause");
+  img.addEventListener("click", () => setPaused(!paused));
 
-  /*const oldStepToProcedure = vm.runtime.sequencer.stepToProcedure;
+  let paused = false;
+  let pausedThreadState = new WeakMap();
 
-  vm.runtime.sequencer.stepToProcedure = function (thread, proccode) {
-    if (proccode.startsWith("sa-pause")) {
-      threads = vm.runtime.threads;
-      vm.runtime.threads.forEach((i) => {
-        i.status = 3;
-      });
-      vm.runtime.threads = [];
+  const setPaused = (_paused) => {
+    paused = _paused;
+
+    if (paused) {
       vm.runtime.audioEngine.audioContext.suspend();
-      vm.runtime.ioDevices.clock.pause();
-      playing = false;
-      document.querySelector(".pause-btn").src = _twGetAsset("/play.svg");
-      return;
-    }
-    return oldStepToProcedure.call(this, thread, proccode);
-  };*/
+      if (!vm.runtime.ioDevices.clock._paused) {
+        vm.runtime.ioDevices.clock.pause();
+      }
+      img.src = _twGetAsset("/play.svg");
 
-  const oldFlag = vm.runtime.greenFlag;
+      for (const thread of vm.runtime.threads) {
+        if (!thread.updateMonitor && !pausedThreadState.has(thread)) {
+          const pauseState = {
+            pauseTime: vm.runtime.currentMSecs,
+            status: thread.status,
+          };
+          pausedThreadState.set(thread, pauseState);
+          // Make sure that paused threads will always be paused.
+          // Setting thread.status is not enough for blocks like "ask and wait"
+          Object.defineProperty(thread, "status", {
+            get() {
+              return /* STATUS_PROMISE_WAIT */ 1;
+            },
+            set(status) {
+              // Status will be set when the thread is unpaused.
+              pauseState.status = status;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+        }
+      }
 
-  vm.runtime.greenFlag = function () {
-    vm.runtime.audioEngine.audioContext.resume().then(() => {
+      // Immediately emit project stop
+      // Scratch will do this automatically, but there may be a slight delay.
+      vm.runtime.emit("PROJECT_RUN_STOP");
+    } else {
+      vm.runtime.audioEngine.audioContext.resume();
       vm.runtime.ioDevices.clock.resume();
       img.src = _twGetAsset("/pause.svg");
-      playing = true;
-      return oldFlag.call(vm.runtime, arguments);
-    });
+
+      const now = Date.now();
+      for (const thread of vm.runtime.threads) {
+        const pauseState = pausedThreadState.get(thread);
+        if (pauseState) {
+          const stackFrame = thread.peekStackFrame();
+          if (stackFrame && stackFrame.executionContext && stackFrame.executionContext.timer) {
+            const dt = now - pauseState.pauseTime;
+            stackFrame.executionContext.timer.startTime += dt;
+          }
+          Object.defineProperty(thread, "status", {
+            value: pauseState.status,
+            configurable: true,
+            enumerable: true,
+            writable: true,
+          });
+        }
+      }
+      pausedThreadState = new WeakMap();
+    }
+  };
+
+  /*
+  const originalStepToProcedure = vm.runtime.sequencer.stepToProcedure;
+  vm.runtime.sequencer.stepToProcedure = function (thread, proccode) {
+    if (proccode.startsWith("sa-pause")) {
+      setPaused(true);
+      return;
+    }
+    return originalStepToProcedure.call(this, thread, proccode);
+  };
+  */
+
+  const originalGreenFlag = vm.runtime.greenFlag;
+  vm.runtime.greenFlag = function () {
+    setPaused(false);
+    return originalGreenFlag.call(this);
+  };
+
+  // Disable edge-activated hats and hats like "when key pressed" while paused.
+  const originalStartHats = vm.runtime.startHats;
+  vm.runtime.startHats = function (...args) {
+    if (paused) {
+      const hat = args[0];
+      // The project can still be edited and the user might manually trigger some events. Let these run.
+      if (hat !== "event_whenbroadcastreceived" && hat !== "control_start_as_clone") {
+        return [];
+      }
+    }
+    return originalStartHats.apply(this, args);
+  };
+
+  // Paused threads should not be counted as running when updating GUI state.
+  const originalGetMonitorThreadCount = vm.runtime._getMonitorThreadCount;
+  vm.runtime._getMonitorThreadCount = function (threads) {
+    let count = originalGetMonitorThreadCount.call(this, threads);
+    if (paused) {
+      for (const thread of threads) {
+        if (pausedThreadState.has(thread)) {
+          count++;
+        }
+      }
+    }
+    return count;
   };
 
   while (true) {
-    let bar = await addon.tab.waitForElement("[class^='controls_controls-container']", { markAsSeen: true });
-
-    var img = document.createElement("img");
-    img.className = "pause-btn";
-    if (playing) img.src = _twGetAsset("/pause.svg");
-    if (!playing) img.src = _twGetAsset("/play.svg");
-    img.draggable = false;
-    img.title = msg("pause");
-
-    document.querySelector("[class^='green-flag']").insertAdjacentElement("afterend", img);
-
-    img.addEventListener("click", (e) => {
-      if (!playing) {
-        vm.runtime.audioEngine.audioContext.resume().then(() => {
-          if (vm.runtime.threads.length === 0) vm.runtime.threads = threads;
-          vm.runtime.ioDevices.clock.resume();
-          img.src = _twGetAsset("/pause.svg");
-        });
-      } else {
-        vm.runtime.audioEngine.audioContext.suspend().then(() => {
-          threads = vm.runtime.threads;
-          vm.runtime.threads = [];
-          vm.runtime.ioDevices.clock.pause();
-          img.src = _twGetAsset("/play.svg");
-        });
-      }
-      playing = !playing;
-    });
-
-    //TODO: break points in scratch code
-    //eg. when gf clicked, move 10 steps, set sa_Breakpoint = true or something like that, then when that scratch variable is set to true, pause the project
+    const flag = await addon.tab.waitForElement("[class^='green-flag']", { markAsSeen: true });
+    flag.insertAdjacentElement("afterend", img);
   }
 }

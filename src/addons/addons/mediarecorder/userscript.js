@@ -280,7 +280,7 @@ export default async ({ addon, console, msg }) => {
       const videoStream = vm.runtime.renderer.canvas.captureStream();
       stream.addTrack(videoStream.getVideoTracks()[0]);
 
-      const ctx = new AudioContext();
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const dest = ctx.createMediaStreamDestination();
       if (opts.audioEnabled) {
         const mediaStreamDestination = vm.runtime.audioEngine.audioContext.createMediaStreamDestination();

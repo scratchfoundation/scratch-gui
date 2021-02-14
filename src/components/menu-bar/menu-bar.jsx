@@ -901,7 +901,7 @@ class MenuBar extends React.Component {
                                     </MenuItemLink>
                                     <MenuItemLink href="/privacy.html">
                                         <FormattedMessage
-                                            defaultMessage="Privacy"
+                                            defaultMessage="Privacy Policy"
                                             description="Link to privacy policy"
                                             id="tw.privacy"
                                         />

@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "scratch-render"
+      - dependency-name: "scratch-vm"
+      - dependency-name: "scratch-paint"

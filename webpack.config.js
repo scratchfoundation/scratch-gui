@@ -193,14 +193,9 @@ module.exports = [
                 title: 'Addon Settings - TurboWarp',
                 ...htmlWebpackPluginCommon
             }),
-            new HtmlWebpackPlugin({
-                chunks: [],
-                template: 'src/playground/privacy.html',
-                filename: 'privacy.html'
-            }),
             new CopyWebpackPlugin([{
                 from: 'static',
-                to: 'static'
+                to: ''
             }]),
             new CopyWebpackPlugin([{
                 from: 'node_modules/scratch-blocks/media',

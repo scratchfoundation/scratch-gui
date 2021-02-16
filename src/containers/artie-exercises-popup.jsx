@@ -4,6 +4,8 @@ import ArtiePopupComponent from '../components/artie-exercises/artie-exercises-p
 import {updateStudentCompetence, getArtieExercises} from '../lib/artie-api';
 import {defineMessages, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 const exercisesMessages = defineMessages({
     popupModalTitle: {
@@ -154,10 +156,6 @@ class ArtieExercisePopup extends React.Component {
 
     constructor (props) {
         super(props);
-        this.state = {
-            artieExercises: null,
-            artieLogin: null
-        };
         bindAll(this, [
             'handleEvaluationOKClick',
             'nextExercise',
@@ -167,20 +165,6 @@ class ArtieExercisePopup extends React.Component {
             'onStudentCompetenceIsUpdated',
             'onArtieExercisesLoaded'
         ]);
-    }
-
-    componentWillReceiveProps (newProps) {
-        if(this.state.artieExercises !== newProps.artieExercises){
-            this.setState({
-                artieExercises: newProps.artieExercises
-            });
-        }
-
-        if(this.state.artieLogin !== newProps.artieLogin){
-            this.setState({
-                artieLogin: newProps.artieLogin
-            });
-        }
     }
 
     //Function to determine the type of popup to show
@@ -226,7 +210,7 @@ class ArtieExercisePopup extends React.Component {
     }
 
     handleEvaluationOKClick(){
-        const nextExercise = this.nextExercise(this.state.artieExercises.currentExercise, this.state.artieExercises.exercises);
+        const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
 
         //Updating the store to set the current exercise
         this.props.onArtieSetCurrentExercise(nextExercise);
@@ -243,8 +227,8 @@ class ArtieExercisePopup extends React.Component {
     handleEvaluationStopOKClick(){
 
         //Updates the student competence
-        updateStudentCompetence(this.state.artieLogin.currentStudent.id,
-                                this.state.artieExercises.currentExercise.level,
+        updateStudentCompetence(this.props.artieLogin.currentStudent.id,
+                                this.props.artieExercises.currentExercise.level,
                                 this.onStudentCompetenceIsUpdated);
     }
 
@@ -269,8 +253,8 @@ class ArtieExercisePopup extends React.Component {
         let image;
         let type = null;
 
-        if(this.state.artieExercises !== null){
-            type = this.popupType(this.state.artieLogin, this.state.artieExercises);
+        if(this.props.artieExercises !== null){
+            type = this.popupType(this.props.artieLogin, this.props.artieExercises);
         }
 
         if( type === 'exercise'){
@@ -288,19 +272,19 @@ class ArtieExercisePopup extends React.Component {
             //Checking if the current exercise is level 1, 2 or 3
             image = null;
             let messages = null;
-            if(this.state.artieExercises.currentExercise.level === 1){
+            if(this.props.artieExercises.currentExercise.level === 1){
                 image = require('../../static/Padawan.jpg');
                 messages = padawanEvaluationMessages;
-            }else if(this.state.artieExercises.currentExercise.level === 2){
+            }else if(this.props.artieExercises.currentExercise.level === 2){
                 image = require('../../static/Jedi.jpg');
                 messages = jediEvaluationMessages;
-            }else if(this.state.artieExercises.currentExercise.level === 3){
+            }else if(this.props.artieExercises.currentExercise.level === 3){
                 image = require('../../static/Master.jpg');
                 messages = masterJediEvaluationMessages;
             }
 
             return evaluationComponent(this.handleCloseEvaluationPopup, this.handleCloseEvaluationPopup, type, image,
-                                        messages, this.state.artieExercises.currentExercise.description);
+                                        messages, this.props.artieExercises.currentExercise.description);
 
         }
         else if(type === 'evaluationStop'){
@@ -308,11 +292,11 @@ class ArtieExercisePopup extends React.Component {
             let level = "";
 
             //Checks the level of the student
-            if(this.state.artieLogin !== null && this.state.artieLogin.currentStudent !== null && this.state.artieLogin.currentStudent.competence===0){
+            if(this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===0){
                 level = "Padawan";
-            }else if (this.state.artieLogin !== null && this.state.artieLogin.currentStudent !== null && this.state.artieLogin.currentStudent.competence===1){
+            }else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===1){
                 level = "Jedi";
-            }else if (this.state.artieLogin !== null && this.state.artieLogin.currentStudent !== null && this.state.artieLogin.currentStudent.competence===2){
+            }else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===2){
                 level = "Maestro Jedi";
             }
 
@@ -323,13 +307,13 @@ class ArtieExercisePopup extends React.Component {
         }
         else if(type === 'nextEvaluation'){
 
-            const nextExercise = this.nextExercise(this.state.artieExercises.currentExercise, this.state.artieExercises.exercises);
+            const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
 
             //Updating the store to set the current exercise
             this.props.onArtieSetCurrentExercise(nextExercise);
 
             //Closing this popup and showing the next one
-            if(!this.state.artieExercises.popupEvaluation) {
+            if(!this.props.artieExercises.popupEvaluation) {
                 this.props.onArtiePopupEvaluation(true);
             }
 
@@ -345,8 +329,6 @@ class ArtieExercisePopup extends React.Component {
 ArtieExercisePopup.propTypes = {
     onCloseSentSolution: PropTypes.func.isRequired,
     onCloseSentExercise: PropTypes.func.isRequired,
-    artieExercises: PropTypes.object,
-    artieLogin: PropTypes.object,
     onArtieSetCurrentExercise: PropTypes.func,
     onArtiePopupEvaluation: PropTypes.func,
     onArtieEvaluationStop: PropTypes.func,
@@ -357,4 +339,21 @@ ArtieExercisePopup.propTypes = {
     passwordLogin: PropTypes.string
 }
 
-export default injectIntl(ArtieExercisePopup);
+const mapStateToProps = (state) => {
+    return{
+        artieLogin: state.scratchGui.artieLogin,
+        artieExercises: state.scratchGui.artieExercises
+    }
+};
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default compose(
+    injectIntl,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(ArtieExercisePopup);

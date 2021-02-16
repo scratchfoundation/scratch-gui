@@ -327,8 +327,6 @@ class ArtieFlow extends React.Component {
             return <ArtieExercisePopup
                         onCloseSentSolution={this.props.onArtieSolutionSentPopupClose}
                         onCloseSentExercise={this.props.onArtieExerciseSentPopupClose}
-                        artieExercises={this.props.artieExercises}
-                        artieLogin={this.props.artieLogin}
                         onArtieSetCurrentExercise = {this.props.onArtieSetCurrentExercise}
                         onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
                         onArtieEvaluationStop = {this.props.onArtieEvaluationStop}

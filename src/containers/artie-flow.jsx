@@ -118,8 +118,8 @@ class ArtieFlow extends React.Component {
         //3- Checks if we must show the help component or not
         const currentExercise = this.getCurrentExercise(nextProps.artieExercises);
         if(!nextState.artieHelpComponent){
-            if(currentStudent !== null && currentExercise !== null && currentExercise.help !== undefined && currentExercise.help !== null &&
-                (currentExercise.help.nextSteps !== null || currentExercise.help.totalDistance === 0)){
+            if(currentStudent !== null && currentExercise !== null && nextProps.artieExercises.help !== undefined && nextProps.artieExercises.help !== null &&
+                (nextProps.artieExercises.help.nextSteps !== null || nextProps.artieExercises.help.totalDistance === 0)){
 
                 artieLoginComponent = false;
                 artieExercisesComponent = false;
@@ -128,8 +128,8 @@ class ArtieFlow extends React.Component {
                 changes = true;
             }
         }else{
-            if(currentStudent === null || currentExercise === null || currentExercise.help === undefined || currentExercise.help === null ||
-                (currentExercise.help.nextSteps === null && currentExercise.help.totalDistance !== 0)){
+            if(currentStudent === null || currentExercise === null || nextProps.artieExercises.help === undefined || nextProps.artieExercises.help === null ||
+                (nextProps.artieExercises.help.nextSteps === null && nextProps.artieExercises.help.totalDistance !== 0)){
 
                 artieHelpComponent = false;
                 changes = true;

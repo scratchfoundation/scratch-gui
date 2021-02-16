@@ -274,10 +274,10 @@ class ArtieExercisePopup extends React.Component {
         }
 
         if( type === 'exercise'){
-            return exerciseComponent(this.props.onCancel, type);
+            return exerciseComponent(this.props.onCloseSentExercise, type);
         }
         else if(type === 'solution'){
-            return solutionComponent(this.props.onCancel, type)
+            return solutionComponent(this.props.onCloseSentSolution, type)
         }
         else if(type === 'initialEvaluation'){
             image = require('../../static/ThreeJedi.jpg');
@@ -343,7 +343,8 @@ class ArtieExercisePopup extends React.Component {
 }
 
 ArtieExercisePopup.propTypes = {
-    onCancel: PropTypes.func.isRequired,
+    onCloseSentSolution: PropTypes.func.isRequired,
+    onCloseSentExercise: PropTypes.func.isRequired,
     artieExercises: PropTypes.object,
     artieLogin: PropTypes.object,
     onArtieSetCurrentExercise: PropTypes.func,

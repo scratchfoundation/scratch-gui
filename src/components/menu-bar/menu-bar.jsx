@@ -78,11 +78,11 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArtieExercises, getAllArtieExercises} from '../../lib/artie-api';
-import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
-import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
-        artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution, artiePopupEvaluation, artieEvaluationStop, artieNextEvaluation} from '../../reducers/artie-exercises';
+import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
+import {activateArtieLogin, artieLogout} from '../../reducers/artie-login';
+import {activateArtieExercises, artieSetCurrentExercise, artieClearExercises,
+        artieHelpReceived, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
+        artiePopupExercise, artiePopupSolution, artieEvaluationStop} from '../../reducers/artie-exercises';
 import ArtieFlow from '../../containers/artie-flow.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 

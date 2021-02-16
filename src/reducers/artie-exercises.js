@@ -15,6 +15,8 @@ const ARTIE_POPUP_SENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_POPUP_SENT_
 const ARTIE_POPUP_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_POPUP_EVALUATION';
 
 const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP';
+const ARTIE_NEXT_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_NEXT_EVALUATION';
+const ARTIE_EVALUATION_MODE = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_MODE';
 
 
 const initialState = {
@@ -30,7 +32,8 @@ const initialState = {
     popupSolution: false,
     popupExercise: false,
     popupEvaluation: false,
-    evaluationStop: false
+    evaluationStop: false,
+    nextEvaluation: false
 }
 
 const reducer = function (state, action) {
@@ -101,6 +104,10 @@ const reducer = function (state, action) {
         case ARTIE_POPUP_EVALUATION:
             return Object.assign({}, state, {
                 popupEvaluation: action.popupEvaluation
+            });
+        case ARTIE_NEXT_EVALUATION:
+            return Object.assign({}, state, {
+                nextEvaluation: action.nextEvaluation
             });
         default:
             return state;
@@ -181,6 +188,11 @@ const artieEvaluationStop = (stop) => ({
     evaluationStop: stop
 });
 
+const artieNextEvaluation = (next) => ({
+   type: ARTIE_NEXT_EVALUATION,
+   nextEvaluation: next
+});
+
 export {
     reducer as default,
     initialState as artieExercisesInitialState,
@@ -198,5 +210,6 @@ export {
     artiePopupSolution,
     artiePopupExercise,
     artiePopupEvaluation,
-    artieEvaluationStop
+    artieEvaluationStop,
+    artieNextEvaluation
 };

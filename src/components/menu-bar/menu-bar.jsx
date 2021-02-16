@@ -82,11 +82,8 @@ import {sendSolutionArtie, sendBlockArtie, loginArtie, getArtieStudents, getArti
 import {activateArtieLogin, deactivateArtieLogin, artieLogged, artieSetStudents, artieSetCurrentStudent, artieLogout, artieError} from '../../reducers/artie-login';
 import {activateArtieExercises, deactivateArtieExercises, artieSetExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieClearHelp, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution, artiePopupEvaluation, artieEvaluationStop} from '../../reducers/artie-exercises';
-import ArtieLogin from '../artie-login/artie-login.jsx';
-import ArtieExercises from '../artie-exercises/artie-exercises.jsx';
-import ArtieExercisePopup from '../../containers/artie-exercises-popup.jsx';
-import ArtieHelp from '../../containers/artie-help.jsx';
+        artiePopupExercise, artiePopupSolution, artiePopupEvaluation, artieEvaluationStop, artieNextEvaluation} from '../../reducers/artie-exercises';
+import ArtieFlow from '../../containers/artie-flow.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
 import html2canvas from "html2canvas";
@@ -172,9 +169,6 @@ AboutButton.propTypes = {
     onClick: PropTypes.func.isRequired
 };
 
-var userLogin = null;
-var passwordLogin = null;
-var studentLogin = null;
 var exerciseId = null;
 
 class MenuBar extends React.Component {
@@ -194,13 +188,7 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickRegisterSolution',
             'handleClickRequestHelp',
-            'handleClickArtieLoginOk',
-            'handleArtieUserChange',
-            'handleArtiePasswordChange',
             'handleArtieLogout',
-            'handleArtieStudentChange',
-            'handleArtieLogged',
-            'handleClickArtieExercisesOk',
             'handleArtieExerciseChange',
             'handleClickFinishExercise',
             'handleStopEvaluation'
@@ -339,65 +327,9 @@ class MenuBar extends React.Component {
             sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
         });
     }
-    handleClickArtieLoginOk(){
-        //If the user has not logged
-        if(this.props.artieLogin.user==null || (this.props.artieLogin.user.role==0 && this.props.students==[])){
-            loginArtie(userLogin, passwordLogin, this.handleArtieLogged, this.props.onArtieError);
-        }else{
-            if(studentLogin !== ""){
-                var tempStudent = this.props.artieLogin.students.filter(s => s.id==studentLogin)[0];
-                this.props.onArtieSetCurrentStudent(tempStudent);
-
-                //If the current user is not null and the competence is already set, we show the exercises
-                if(tempStudent.competence !== undefined && tempStudent.competence!==null && tempStudent.competence > 0){
-                    //Get the exercises
-                    getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
-                }else{
-                    //Get the evaluations
-                    getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
-                }
-            }
-
-            //And we close the login window
-            this.props.onDeactivateArtieLogin();
-        }
-    }
-    handleArtieLogged(user){
-        this.props.onArtieLogged(user);
-
-        //If the user role is admin, we load all the exercises (evaluations and normals)
-        if(user.role !== null && user.role == 1){
-            //Get all the exercises
-            getAllArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
-        }
-
-        //If the user is read only, we check for the students
-        if(user !== null && user.role == 0){
-            //We get the students
-            getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
-        } else if(user !== null && user.role == 1){
-            //We close the login window
-            this.props.onDeactivateArtieLogin();
-        }
-    }
-    handleArtieUserChange(e){
-        userLogin = e.target.value;
-    }
-    handleArtiePasswordChange(e){
-        passwordLogin = e.target.value;
-    }
-    handleArtieStudentChange(e){
-        studentLogin = e.target.value;
-    }
     handleArtieLogout(){
         this.props.onArtieLogout();
         this.props.onArtieClearExercises();
-    }
-    handleClickArtieExercisesOk(){
-        //Searches for the exercise object in base of the exerciseId selected
-        const exercise  = this.props.artieExercises.exercises.filter(e => e.id ==exerciseId)[0];
-        this.props.onArtieSetCurrentExercise(exercise);
-        this.props.onDeactivateArtieExercises();
     }
     handleArtieExerciseChange(e){
         exerciseId = e.target.value;
@@ -984,42 +916,7 @@ class MenuBar extends React.Component {
 
                 {aboutButton}
 
-                <ArtieLogin
-                    onUserChange={this.handleArtieUserChange}
-                    onPasswordChange={this.handleArtiePasswordChange}
-                    onStudentChange={this.handleArtieStudentChange}
-                    onCancel={this.props.onArtieLogout}
-                    onOk={this.handleClickArtieLoginOk}
-                    title="Login"
-                    artieLogin={this.props.artieLogin}
-                />
-                <ArtieExercises
-                    title="Exercise Selector"
-                    onExerciseChange={this.handleArtieExerciseChange}
-                    onLogout={this.props.onArtieLogout}
-                    onDeactivate={this.props.onDeactivateArtieExercises}
-                    onOk={this.handleClickArtieExercisesOk}
-                    artieExercises = {this.props.artieExercises}
-                    artieLogin = {this.props.artieLogin}
-                />
-                <ArtieHelp
-                    onRequestClose={this.props.onArtieClearHelp}
-                    artieLogin={this.props.artieLogin}
-                    artieExercises = {this.props.artieExercises}
-                    help={this.props.artieExercises.help}
-                />
-                <ArtieExercisePopup
-                    onCancel={this.props.onArtieSolutionSentPopupClose}
-                    artieExercises={this.props.artieExercises}
-                    artieLogin={this.props.artieLogin}
-                    onArtieSetCurrentExercise = {this.props.onArtieSetCurrentExercise}
-                    onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
-                    onArtieEvaluationStop = {this.props.onArtieEvaluationStop}
-                    onArtieSetCurrentStudent = {this.props.onArtieSetCurrentStudent}
-                    onArtieSetExercises = {this.props.onArtieSetExercises}
-                    userLogin = {userLogin}
-                    passwordLogin = {passwordLogin}
-                />
+                <ArtieFlow />
             </Box>
         );
     }
@@ -1081,7 +978,6 @@ MenuBar.propTypes = {
     onStartSelectingFileUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onActivateArtieLogin: PropTypes.func,
-    onDeactivateArtieLogin: PropTypes.func,
     activateArtieExercises: PropTypes.func,
     deactivateArtieExercises: PropTypes.func,
     projectTitle: PropTypes.string,
@@ -1146,27 +1042,16 @@ const mapDispatchToProps = dispatch => ({
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
-    onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),
-    onArtieLogged: (user) => dispatch(artieLogged(user)),
-    onArtieError: (error) => dispatch(artieError(error)),
     onArtieLogout: () => dispatch(artieLogout()),
     onArtieClearExercises: () => dispatch(artieClearExercises()),
-    onArtieSetStudents: (students) => dispatch(artieSetStudents(students)),
-    onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
-    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
     onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
-    onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
-    onArtieClearHelp: () => dispatch(artieClearHelp()),
     onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
     onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
     onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading)),
-    onArtieExerciseSentPopupClose: () => dispatch(artiePopupExercise(false)),
     onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
-    onArtieSolutionSentPopupClose: () => dispatch(artiePopupSolution(false)),
     onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active)),
-    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active)),
     onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop))
 });
 

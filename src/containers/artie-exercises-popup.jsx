@@ -184,9 +184,11 @@ class ArtieExercisePopup extends React.Component {
     }
 
     //Function to determine the type of popup to show
-    popupType(login, exercises, evaluationStop){
+    popupType(login, exercises){
 
-        if(evaluationStop){
+        if(exercises !== undefined && exercises !== null && exercises.nextEvaluation) {
+            return 'nextEvaluation';
+        }else if(exercises !== undefined && exercises !== null && exercises.evaluationStop){
             return 'evaluationStop';
         }else if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !==null &&
             (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
@@ -205,14 +207,14 @@ class ArtieExercisePopup extends React.Component {
 
     nextExercise(currentExercise, exercises){
 
-        var nextExercise=null;
+        let nextExercise = null;
 
         //1- If the current exercise is null or undefined, we take the first exercise
         if((currentExercise === undefined || currentExercise === null) && exercises.length > 0){
             //Setting the current exercise
             nextExercise = exercises[0];
         }else{
-            var index = exercises.findIndex(exercise => exercise.id === currentExercise.id);
+            const index = exercises.findIndex(exercise => exercise.id === currentExercise.id);
 
             if(exercises.size > index+1){
                 nextExercise = exercises[index + 1];
@@ -268,17 +270,20 @@ class ArtieExercisePopup extends React.Component {
         let type = null;
 
         if(this.state.artieExercises !== null){
-            type = this.popupType(this.state.artieLogin, this.state.artieExercises, this.state.artieExercises.evaluationStop);
+            type = this.popupType(this.state.artieLogin, this.state.artieExercises);
         }
 
         if( type === 'exercise'){
             return exerciseComponent(this.props.onCancel, type);
-        }else if(type === 'solution'){
+        }
+        else if(type === 'solution'){
             return solutionComponent(this.props.onCancel, type)
-        }else if(type === 'initialEvaluation'){
+        }
+        else if(type === 'initialEvaluation'){
             image = require('../../static/ThreeJedi.jpg');
             return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages, null);
-        }else if(type === 'evaluation'){
+        }
+        else if(type === 'evaluation'){
 
             //Checking if the current exercise is level 1, 2 or 3
             image = null;
@@ -297,7 +302,8 @@ class ArtieExercisePopup extends React.Component {
             return evaluationComponent(this.handleCloseEvaluationPopup, this.handleCloseEvaluationPopup, type, image,
                                         messages, this.state.artieExercises.currentExercise.description);
 
-        }else if(type === 'evaluationStop'){
+        }
+        else if(type === 'evaluationStop'){
 
             let level = "";
 
@@ -314,7 +320,23 @@ class ArtieExercisePopup extends React.Component {
             return stopEvaluationComponent(this.handleEvaluationStopCancelClick, this.handleEvaluationStopOKClick, type,
                                             image, exitFromEvaluation, level);
 
-        }else{
+        }
+        else if(type === 'nextEvaluation'){
+
+            const nextExercise = this.nextExercise(this.state.artieExercises.currentExercise, this.state.artieExercises.exercises);
+
+            //Updating the store to set the current exercise
+            this.props.onArtieSetCurrentExercise(nextExercise);
+
+            //Closing this popup and showing the next one
+            if(!this.state.artieExercises.popupEvaluation) {
+                this.props.onArtiePopupEvaluation(true);
+            }
+
+            //Waits for the next popup with the next evaluation assignment
+            return null;
+        }
+        else{
             return null;
         }
     }
@@ -329,6 +351,7 @@ ArtieExercisePopup.propTypes = {
     onArtieEvaluationStop: PropTypes.func,
     onArtieSetCurrentStudent: PropTypes.func,
     onArtieSetExercises: PropTypes.func,
+    onArtieSetNextEvaluation: PropTypes.func,
     userLogin: PropTypes.string,
     passwordLogin: PropTypes.string
 }

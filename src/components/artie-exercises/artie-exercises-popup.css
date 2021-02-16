@@ -42,7 +42,7 @@
     padding-bottom: 20px;
     padding-left: 5px;
 }
-.modal-content-congrats .label-congrats {
+.modal-content-congrats .body {
     color: green;
     background-color: $ui-white;
     text-align: center;

@@ -165,7 +165,7 @@ class SoundEditor extends React.Component {
             )
             .catch(e => {
                 // Encoding failed, or the sound was too large to save so edit is rejected
-                log.error(`Encountered error while trying to encode sound update: ${e}`);
+                log.error(`Encountered error while trying to encode sound update: ${e.message}`);
                 return false; // Edit was not applied
             });
     }
@@ -349,7 +349,7 @@ class SoundEditor extends React.Component {
                 if (newRate === buffer.sampleRate / 2) {
                     return resolve(dropEveryOtherSample(buffer));
                 }
-                return reject('Could not resample');
+                return reject(new Error('Could not resample'));
             }
             const source = offlineContext.createBufferSource();
             const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);

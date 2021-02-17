@@ -6,6 +6,13 @@ import {defineMessages, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {
+    artieClearHelp, artieEvaluationStop, artiePopupEvaluation,
+    artiePopupExercise,
+    artiePopupSolution,
+    artieSetCurrentExercise, artieSetExercises
+} from "../reducers/artie-exercises";
+import {artieSetCurrentStudent} from "../reducers/artie-login";
 
 const exercisesMessages = defineMessages({
     popupModalTitle: {
@@ -43,6 +50,19 @@ const initialEvaluationMessages = defineMessages({
         defaultMessage: "Welcome!In first place we will check your knowledge about Scratch! Let's see if you are a Padawan, Jedi or Master Jedi in Scratch.",
         description: "Welcome!In first place we will check your knowledge about Scratch! Let's see if you are a Padawan, Jedi or Master Jedi in Scratch.",
         id: 'gui.artie.evaluation.intro'
+    }
+});
+
+const congratulationsMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'Congratulations',
+        description: 'Congratulations',
+        id: 'gui.artie.evaluation.congratulations'
+    },
+    message: {
+        defaultMessage: "Congratulations! You have completed the exercise!",
+        description: "Congratulations! you have completed the exercise!",
+        id: 'gui.menuBar.artie.help.congrats'
     }
 });
 
@@ -122,6 +142,18 @@ const solutionComponent = (onCancel, type) => {
     );
 }
 
+const congratulationsComponent = (onCancel, type) => {
+    return (
+        <ArtiePopupComponent
+            onCancel={onCancel}
+            type = {type}
+            messages = {congratulationsMessages}
+            okButton = {false}
+            cancelButton = {false}
+        />
+    );
+}
+
 const evaluationComponent = (onCancel, onOK, type, image, messages, customBodyMessage) => {
     return(
         <ArtiePopupComponent
@@ -184,6 +216,8 @@ class ArtieExercisePopup extends React.Component {
             return 'exercise';
         }else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
             return 'solution';
+        }else if(exercises !== undefined && exercises.help !== null && exercises.help.totalDistance === 0){
+            return 'congratulations';
         }else{
             return null;
         }
@@ -320,6 +354,10 @@ class ArtieExercisePopup extends React.Component {
             //Waits for the next popup with the next evaluation assignment
             return null;
         }
+        else if(type === 'congratulations'){
+
+            return congratulationsComponent(this.props.onArtieClearHelp, type);
+        }
         else{
             return null;
         }
@@ -327,14 +365,6 @@ class ArtieExercisePopup extends React.Component {
 }
 
 ArtieExercisePopup.propTypes = {
-    onCloseSentSolution: PropTypes.func.isRequired,
-    onCloseSentExercise: PropTypes.func.isRequired,
-    onArtieSetCurrentExercise: PropTypes.func,
-    onArtiePopupEvaluation: PropTypes.func,
-    onArtieEvaluationStop: PropTypes.func,
-    onArtieSetCurrentStudent: PropTypes.func,
-    onArtieSetExercises: PropTypes.func,
-    onArtieSetNextEvaluation: PropTypes.func,
     userLogin: PropTypes.string,
     passwordLogin: PropTypes.string
 }
@@ -347,7 +377,14 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+    onCloseSentSolution: () => dispatch(artiePopupSolution(false)),
+    onCloseSentExercise: () => dispatch(artiePopupExercise(false)),
+    onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
+    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active)),
+    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop)),
+    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
+    onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
+    onArtieClearHelp: () => dispatch(artieClearHelp())
 });
 
 export default compose(

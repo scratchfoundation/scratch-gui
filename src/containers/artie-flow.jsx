@@ -80,6 +80,11 @@ class ArtieFlow extends React.Component {
         let artiePopupComponent = nextState.artiePopupComponent;
         let changes = false;
 
+        const currentExercise = this.getCurrentExercise(nextProps.artieExercises);
+        const currentStudent = this.getCurrentStudent(nextProps.artieLogin);
+        const popupActivation = this.getPopupActivation(nextProps.artieExercises);
+
+
         //1- Checks if we must show the login component or not
         if(!nextState.artieLoginComponent){
             if(nextProps.artieLogin !== undefined &&
@@ -104,8 +109,6 @@ class ArtieFlow extends React.Component {
         }
 
         //2- Checks if we must show the exercises component or not
-        const currentStudent = this.getCurrentStudent(nextProps.artieLogin);
-        const popupActivation = this.getPopupActivation(nextProps.artieExercises);
         if(!nextState.artieExercisesComponent && !nextState.artieHelpComponent){
             if(((currentStudent !== null && currentStudent.competence > 0) || nextProps.artieExercises.active) && !popupActivation){
 
@@ -115,7 +118,7 @@ class ArtieFlow extends React.Component {
                 artiePopupComponent = false;
                 changes = true;
             }
-        }else{
+        }else if(nextState.artieExercisesComponent){
             if(((currentStudent === null || currentStudent.competence === 0) && !nextProps.artieExercises.active) || popupActivation) {
                 artieExercisesComponent = false;
                 changes = true;
@@ -123,10 +126,9 @@ class ArtieFlow extends React.Component {
         }
 
         //3- Checks if we must show the help component or not
-        const currentExercise = this.getCurrentExercise(nextProps.artieExercises);
         if(!nextState.artieHelpComponent){
             if(currentStudent !== null && currentExercise !== null && nextProps.artieExercises.help !== undefined && nextProps.artieExercises.help !== null &&
-                (nextProps.artieExercises.help.nextSteps !== null || nextProps.artieExercises.help.totalDistance === 0)){
+                nextProps.artieExercises.help.nextSteps !== null){
 
                 artieLoginComponent = false;
                 artieExercisesComponent = false;
@@ -134,9 +136,9 @@ class ArtieFlow extends React.Component {
                 artiePopupComponent = false;
                 changes = true;
             }
-        }else{
+        }else if(nextState.artieHelpComponent){
             if(currentStudent === null || currentExercise === null || nextProps.artieExercises.help === undefined || nextProps.artieExercises.help === null ||
-                (nextProps.artieExercises.help.nextSteps === null && nextProps.artieExercises.help.totalDistance !== 0)){
+                nextProps.artieExercises.help.nextSteps === null){
 
                 artieHelpComponent = false;
                 changes = true;
@@ -144,17 +146,16 @@ class ArtieFlow extends React.Component {
         }
 
         //4- Checks if we must show the popup component or not
-        if(!nextState.artiePopupComponent && !nextState.artieExercisesComponent){
+        if(!nextState.artiePopupComponent && !nextState.artieExercisesComponent && !nextState.artieHelpComponent){
             if((currentStudent !== null && (currentStudent.competence===undefined || currentStudent.competence === 0)) || popupActivation)
             {
-
                 artieLoginComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
                 artiePopupComponent = true;
                 changes = true;
 
-            }else{
+            }else if(nextState.artiePopupComponent){
                 if((currentStudent === null || (currentStudent.competence!==undefined && currentStudent.competence !== 0)) && !popupActivation)
                 {
                     artiePopupComponent = false;
@@ -205,7 +206,7 @@ class ArtieFlow extends React.Component {
                     (
                         artieExercises.nextEvaluation || artieExercises.evaluationStop ||
                         artieExercises.popupEvaluation || artieExercises.popupExercise ||
-                        artieExercises.popupSolution
+                        artieExercises.popupSolution || (artieExercises.help !== null && artieExercises.help.totalDistance === 0)
                     )
                 );
     }
@@ -325,14 +326,6 @@ class ArtieFlow extends React.Component {
         //4- Checks if the component must show the popup or not
         if(this.state.artiePopupComponent){
             return <ArtieExercisePopup
-                        onCloseSentSolution={this.props.onArtieSolutionSentPopupClose}
-                        onCloseSentExercise={this.props.onArtieExerciseSentPopupClose}
-                        onArtieSetCurrentExercise = {this.props.onArtieSetCurrentExercise}
-                        onArtiePopupEvaluation = {this.props.onArtiePopupEvaluation}
-                        onArtieEvaluationStop = {this.props.onArtieEvaluationStop}
-                        onArtieSetCurrentStudent = {this.props.onArtieSetCurrentStudent}
-                        onArtieSetExercises = {this.props.onArtieSetExercises}
-                        onArtieNextEvaluation = {this.props.onArtieNextEvaluation}
                         userLogin = {userLogin}
                         passwordLogin = {passwordLogin}
                     />
@@ -368,14 +361,7 @@ const mapDispatchToProps = dispatch => ({
     //3- Help properties
     onArtieClearHelp: () => dispatch(artieClearHelp()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
-
-    //4- Popup properties
-    onArtieSolutionSentPopupClose: () => dispatch(artiePopupSolution(false)),
-    onArtieExerciseSentPopupClose: () => dispatch(artiePopupExercise(false)),
-    onArtiePopupEvaluation: (active) => dispatch(artiePopupEvaluation(active)),
-    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop)),
-    onArtieNextEvaluation: (next) => dispatch(artieNextEvaluation(next))
-
+    
 });
 
 export default compose(

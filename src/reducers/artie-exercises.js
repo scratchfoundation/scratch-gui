@@ -16,7 +16,6 @@ const ARTIE_POPUP_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_POPUP_EVALUATI
 
 const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP';
 const ARTIE_NEXT_EVALUATION = 'scratch-gui/artie-exercises/ARTIE_NEXT_EVALUATION';
-const ARTIE_EVALUATION_MODE = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_MODE';
 
 
 const initialState = {

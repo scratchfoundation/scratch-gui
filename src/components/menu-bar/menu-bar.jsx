@@ -677,19 +677,20 @@ class MenuBar extends React.Component {
                                     </div>
                                 </div>
 
-                                {this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
+                                { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
+                                  this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
                                     <SelectExerciseButton
                                         className={styles.menuBarButton}
                                         onClick={this.handleStopEvaluation}
-                                        isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
-                                        isEvaluation={this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation}
+                                        isExerciseSelected = {true}
+                                        isEvaluation={this.props.artieExercises.currentExercise.isEvaluation}
                                     />
                                 :
                                     <SelectExerciseButton
                                         className={styles.menuBarButton}
                                         onClick={this.props.onActivateArtieExercises}
                                         isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
-                                        isEvaluation={this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation}
+                                        isEvaluation={false}
                                     />
                                 }
                             </React.Fragment>

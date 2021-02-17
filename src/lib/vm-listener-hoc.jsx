@@ -91,7 +91,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const errorMessage = `${error}`;
             // Ignore certain types of known errors
             // TODO: fix the root cause of all of these
-            if (errorMessage.includes('event_whengreaterthan')) {
+            if (errorMessage.includes('edge-activated hat')) {
                 return;
             }
             // Ignore intentonal errors

@@ -241,7 +241,7 @@ class ArtieExercisePopup extends React.Component {
         }else{
             const index = exercises.findIndex(exercise => exercise.id === currentExercise.id);
 
-            if(exercises.size > index+1){
+            if(exercises.length > index+1){
                 nextExercise = exercises[index + 1];
             }else{
                 nextExercise = null;

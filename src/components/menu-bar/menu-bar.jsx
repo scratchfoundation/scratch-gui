@@ -592,9 +592,10 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     </MenuSection>
                                 :
-                                    <div></div>
+                                    null
                                 }
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null &&
+                                 this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickRequestHelp}>
                                             <FormattedMessage
@@ -612,9 +613,10 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     </MenuSection>
                                 :
-                                    <div></div>
+                                    null
                                 }
-                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null?
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null &&
+                                 this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
                                     <MenuSection>
                                         <MenuItem onClick={this.handleClickFinishExercise}>
                                             <FormattedMessage
@@ -632,7 +634,7 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     </MenuSection>
                                 :
-                                    <div></div>
+                                    null
                                 }
                             </MenuBarMenu>
                         </div>

@@ -267,9 +267,11 @@ class ArtieExercisePopup extends React.Component {
 
     handleEvaluationStopOKClick(){
 
+        let competence = (this.props.artieLogin.currentStudent.competence === 0 ? 1 : this.props.artieLogin.currentStudent.competence);
+
         //Updates the student competence
         updateStudentCompetence(this.props.artieLogin.currentStudent.id,
-                                this.props.artieExercises.currentExercise.level,
+                                competence,
                                 this.onStudentCompetenceIsUpdated);
     }
 
@@ -370,10 +372,13 @@ class ArtieExercisePopup extends React.Component {
             if(this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===0){
                 level = "Padawan";
             }else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===1){
-                level = "Jedi";
+                level = "Padawan";
             }else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===2){
+                level = "Jedi";
+            }else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence===3){
                 level = "Maestro Jedi";
             }
+
 
             image = require('../../static/ThreeJedi.jpg');
             return stopEvaluationComponent(this.handleEvaluationStopCancelClick, this.handleEvaluationStopOKClick, type,

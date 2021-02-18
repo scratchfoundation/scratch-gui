@@ -21,12 +21,7 @@ import {
     deactivateArtieExercises,
     artieSetCurrentExercise,
     artieClearHelp,
-    artieHelpReceived,
-    artiePopupSolution,
-    artiePopupEvaluation,
-    artieEvaluationStop,
-    artieNextEvaluation,
-    artiePopupExercise
+    artieHelpReceived
 } from "../reducers/artie-exercises";
 import {compose} from "redux";
 import {injectIntl} from "react-intl";
@@ -204,7 +199,7 @@ class ArtieFlow extends React.Component {
     getPopupActivation(artieExercises){
         return (artieExercises !== undefined && artieExercises !== null &&
                     (
-                        artieExercises.nextEvaluation || artieExercises.evaluationStop ||
+                        artieExercises.evaluationStop ||
                         artieExercises.popupEvaluation || artieExercises.popupExercise ||
                         artieExercises.popupSolution || (artieExercises.help !== null && artieExercises.help.totalDistance === 0)
                     )
@@ -361,7 +356,7 @@ const mapDispatchToProps = dispatch => ({
     //3- Help properties
     onArtieClearHelp: () => dispatch(artieClearHelp()),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
-    
+
 });
 
 export default compose(

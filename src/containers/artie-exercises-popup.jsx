@@ -195,16 +195,23 @@ class ArtieExercisePopup extends React.Component {
             'handleEvaluationStopOKClick',
             'handleEvaluationStopCancelClick',
             'onStudentCompetenceIsUpdated',
-            'onArtieExercisesLoaded'
+            'onArtieExercisesLoaded',
+            'handleCongratulationsCloseClick'
         ]);
+    }
+
+    getCurrentStudent(login){
+        if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !== null){
+            return login.currentStudent;
+        }else{
+            return null;
+        }
     }
 
     //Function to determine the type of popup to show
     popupType(login, exercises){
 
-        if(exercises !== undefined && exercises !== null && exercises.nextEvaluation) {
-            return 'nextEvaluation';
-        }else if(exercises !== undefined && exercises !== null && exercises.evaluationStop){
+        if(exercises !== undefined && exercises !== null && exercises.evaluationStop){
             return 'evaluationStop';
         }else if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !==null &&
             (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
@@ -282,6 +289,40 @@ class ArtieExercisePopup extends React.Component {
         this.props.onArtieEvaluationStop(false);
     }
 
+    handleCongratulationsCloseClick(){
+
+        //Checks if the exercise is an evaluation and if the distance is 0 we show the next exercise
+        if(this.props.artieExercises !== undefined && this.props.artieExercises !== null &&
+           this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation &&
+           this.props.artieExercises.help !== null && this.props.artieExercises.help.totalDistance === 0){
+
+            //Getting the current student to update the competence of the student
+            const currentStudent = this.getCurrentStudent(this.props.artieLogin);
+            if(currentStudent !== null) {
+
+                //We update the competence with the evaluation level
+                currentStudent.competence = this.props.artieExercises.currentExercise.level;
+                this.props.onArtieSetCurrentStudent(currentStudent);
+
+                const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
+
+                //Updating the store to set the current exercise
+                this.props.onArtieSetCurrentExercise(nextExercise);
+
+                //If we have a next evaluations
+                if (nextExercise !== null) {
+                    //Closing this popup and showing the next one
+                    this.props.onArtiePopupEvaluation(true);
+                }else{
+                    //If we haven't next evaluations, we get all the exercises
+                    getArtieExercises(this.props.userLogin, this.props.passwordLogin, false, this.props.onArtieSetExercises);
+                }
+            }
+        }
+
+        this.props.onArtieClearHelp();
+    }
+
     render () {
 
         let image;
@@ -339,24 +380,9 @@ class ArtieExercisePopup extends React.Component {
                                             image, exitFromEvaluation, level);
 
         }
-        else if(type === 'nextEvaluation'){
-
-            const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
-
-            //Updating the store to set the current exercise
-            this.props.onArtieSetCurrentExercise(nextExercise);
-
-            //Closing this popup and showing the next one
-            if(!this.props.artieExercises.popupEvaluation) {
-                this.props.onArtiePopupEvaluation(true);
-            }
-
-            //Waits for the next popup with the next evaluation assignment
-            return null;
-        }
         else if(type === 'congratulations'){
 
-            return congratulationsComponent(this.props.onArtieClearHelp, type);
+            return congratulationsComponent(this.handleCongratulationsCloseClick, type);
         }
         else{
             return null;

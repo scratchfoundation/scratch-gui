@@ -1,7 +1,7 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[9],{
 
-/***/ 1572:
+/***/ 1562:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19,9 +19,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
 /* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(114);
 /* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(134);
-/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(105);
+/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(106);
 /* harmony import */ var _reducers_mode__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(76);
-/* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(386);
+/* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(385);
 /* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_player_css__WEBPACK_IMPORTED_MODULE_11__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -95,7 +95,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ 1573:
+/***/ 1563:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -114,11 +114,11 @@ exports.locals = {
 
 /***/ }),
 
-/***/ 386:
+/***/ 385:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(1573);
+var content = __webpack_require__(1563);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -140,5 +140,5 @@ if(false) {}
 
 /***/ })
 
-},[[1572,0]]]);
+},[[1562,0]]]);
 //# sourceMappingURL=player.js.map

@@ -1,8 +1,7 @@
 import {addLocaleData} from 'react-intl';
 
-import {localeData} from 'scratch-l10n';
+import {localeData, isRtl} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
-import {isRtl} from 'scratch-l10n';
 
 import {LANGUAGE_KEY} from '../lib/detect-locale.js';
 import mergeTranslations from '../lib/tw-translations/merge-translations.js';

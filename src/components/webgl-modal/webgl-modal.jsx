@@ -20,7 +20,6 @@ const WebGlModal = ({intl, ...props}) => (
         className={styles.modalContent}
         contentLabel={intl.formatMessage({...messages.label})}
         overlayClassName={styles.modalOverlay}
-        onRequestClose={props.onBack}
     >
         <div dir={props.isRtl ? 'rtl' : 'ltr'}>
             <Box className={styles.illustration} />
@@ -59,8 +58,7 @@ const WebGlModal = ({intl, ...props}) => (
 
 WebGlModal.propTypes = {
     intl: intlShape.isRequired,
-    isRtl: PropTypes.bool,
-    onBack: PropTypes.func.isRequired
+    isRtl: PropTypes.bool
 };
 
 export default injectIntl(WebGlModal);

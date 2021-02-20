@@ -24,6 +24,7 @@ import Watermark from '../../containers/watermark.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import TWEvalModal from '../webgl-modal/tw-eval-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
@@ -34,7 +35,7 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
-import isRendererSupported from '../../lib/tw-is-renderer-supported';
+import {isRendererSupported, isEvalSupported} from '../../lib/tw-environment-support-prober';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -187,6 +188,9 @@ const GUIComponent = props => {
                 ) : null}
                 {isRendererSupported() ? null : (
                     <WebGlModal isRtl={isRtl} />
+                )}
+                {isEvalSupported() ? null : (
+                    <TWEvalModal isRtl={isRtl} />
                 )}
                 {tipsLibraryVisible ? (
                     <TipsLibrary />

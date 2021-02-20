@@ -67,6 +67,7 @@ const WrappedGUI = compose(
     TWEmbedFullScreenHOC
 )(GUI);
 
+setAppElement(appTarget);
 ReactDOM.render(<WrappedGUI
     isEmbedded
     projectId={projectId}
@@ -74,4 +75,3 @@ ReactDOM.render(<WrappedGUI
     onProjectLoaded={onProjectLoaded}
     routingStyle="none"
 />, appTarget);
-setAppElement(appTarget);

@@ -42,8 +42,10 @@
           document.querySelector('#splash-troubleshooting').textContent = messages[2];
         }
         document.querySelector('#splash-content').style.display = 'block';
+        <% if (!htmlWebpackPlugin.options.noTheme) { %>
         try {var localTheme = localStorage.getItem('tw:theme');} catch (e) {}
         if (localTheme ? localTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches) document.querySelector('#splash').setAttribute('splash-theme', 'dark');
+        <% } %>
       })();
     </script>
     <div id="app"></div>

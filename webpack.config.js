@@ -176,6 +176,7 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 filename: 'embed.html',
                 title: 'Embedded Project - TurboWarp',
+                noTheme: true,
                 ...htmlWebpackPluginCommon
             }),
             new HtmlWebpackPlugin({

@@ -118,6 +118,10 @@ a:active, a:focus {
     background-color: transparent;
     font-size: 14px;
 }
+/* legacy edge */
+.search-input::-ms-clear {
+    display: none;
+}
 .search-button {
     height: 36px;
     width: 36px;

@@ -86,6 +86,7 @@ const GUIComponent = props => {
         isPlayerOnly,
         isRtl,
         isShared,
+        isTelemetryEnabled,
         loading,
         logo,
         renderLogin,
@@ -161,6 +162,8 @@ const GUIComponent = props => {
             >
                 {telemetryModalVisible ? (
                     <TelemetryModal
+                        isRtl={isRtl}
+                        isTelemetryEnabled={isTelemetryEnabled}
                         onCancel={onTelemetryModalCancel}
                         onOptIn={onTelemetryModalOptIn}
                         onOptOut={onTelemetryModalOptOut}
@@ -395,7 +398,6 @@ GUIComponent.propTypes = {
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
-    onClickAbout: PropTypes.func,
     onClickAccountNav: PropTypes.func,
     onClickLogo: PropTypes.func,
     onCloseAccountNav: PropTypes.func,

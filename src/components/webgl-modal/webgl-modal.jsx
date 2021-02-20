@@ -32,7 +32,7 @@ const WebGlModal = ({intl, ...props}) => (
                 <p>
                     { /* eslint-disable max-len */ }
                     <FormattedMessage
-                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for TurboWarp to run."
+                        defaultMessage="Unfortunately it looks like your browser or computer {webGlLink}. This technology is needed for this site to run. Try updating your browser and graphics drivers or restarting your computer."
                         description="WebGL missing message"
                         id="tw.webglModal.description"
                         values={{
@@ -52,41 +52,6 @@ const WebGlModal = ({intl, ...props}) => (
                     />
                     { /* eslint-enable max-len */ }
                 </p>
-
-                <Box className={styles.buttonRow}>
-                    <button
-                        className={styles.backButton}
-                        onClick={props.onBack}
-                    >
-                        <FormattedMessage
-                            defaultMessage="Back"
-                            description="Label for button go back when browser is unsupported"
-                            id="gui.webglModal.back"
-                        />
-                    </button>
-
-                </Box>
-                <div className={styles.faqLinkText}>
-                    <FormattedMessage
-                        defaultMessage="To learn more, go to the {previewFaqLink}."
-                        description="Scratch 3.0 FAQ description"
-                        id="gui.webglModal.previewfaq"
-                        values={{
-                            previewFaqLink: (
-                                <a
-                                    className={styles.faqLink}
-                                    href="//scratch.mit.edu/3faq"
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="FAQ"
-                                        description="link to Scratch 3.0 FAQ page"
-                                        id="gui.webglModal.previewfaqlinktext"
-                                    />
-                                </a>
-                            )
-                        }}
-                    />
-                </div>
             </Box>
         </div>
     </ReactModal>

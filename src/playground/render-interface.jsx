@@ -244,6 +244,7 @@ Interface.propTypes = {
         instructions: PropTypes.string
     }),
     isFullScreen: PropTypes.bool,
+    isRtl: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     onClickTheme: PropTypes.func
 };

@@ -8,8 +8,9 @@ class ToggleCompiler extends React.Component {
         super(props);
         bindAll(this, [
             'toggleCompilerEnabled',
-            'toggleWarpTimer',
-            'toggleInfiniteClones'
+            'toggleInfiniteClones',
+            'toggleInterpolation',
+            'toggleWarpTimer'
         ]);
     }
     toggleCompilerEnabled () {
@@ -27,6 +28,9 @@ class ToggleCompiler extends React.Component {
             maxClones: this.props.runtimeOptions.maxClones === Infinity ? 300 : Infinity
         });
     }
+    toggleInterpolation () {
+        this.props.vm.setInterpolation(!this.props.interpolation);
+    }
     render () {
         return this.props.children({
             compilerEnabled: this.props.compilerOptions.enabled,
@@ -34,7 +38,9 @@ class ToggleCompiler extends React.Component {
             warpTimer: this.props.compilerOptions.warpTimer,
             toggleWarpTimer: this.toggleWarpTimer,
             infiniteClones: this.props.runtimeOptions.maxClones === Infinity,
-            toggleInfiniteClones: this.toggleInfiniteClones
+            toggleInfiniteClones: this.toggleInfiniteClones,
+            interpolation: this.props.interpolation,
+            toggleInterpolation: this.toggleInterpolation
         });
     }
 }
@@ -45,19 +51,22 @@ ToggleCompiler.propTypes = {
         enabled: PropTypes.bool,
         warpTimer: PropTypes.bool
     }),
+    interpolation: PropTypes.bool,
     runtimeOptions: PropTypes.shape({
         maxClones: PropTypes.number
     }),
     vm: PropTypes.shape({
         setCompilerOptions: PropTypes.func,
+        setInterpolation: PropTypes.func,
         setRuntimeOptions: PropTypes.func
     })
 };
 
 const mapStateToProps = state => ({
-    vm: state.scratchGui.vm,
     compilerOptions: state.scratchGui.tw.compilerOptions,
-    runtimeOptions: state.scratchGui.tw.runtimeOptions
+    interpolation: state.scratchGui.tw.interpolation,
+    runtimeOptions: state.scratchGui.tw.runtimeOptions,
+    vm: state.scratchGui.vm
 });
 
 export default connect(

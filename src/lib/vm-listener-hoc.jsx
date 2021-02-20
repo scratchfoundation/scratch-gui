@@ -12,7 +12,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {setFramerateState, setCompilerOptionsState, addCompileError, clearCompileErrors, setRuntimeOptionsState} from '../reducers/tw';
+import {setFramerateState, setCompilerOptionsState, addCompileError, clearCompileErrors, setRuntimeOptionsState, setInterpolationState} from '../reducers/tw';
 import analytics from './analytics';
 
 let compileErrorCounter = 0;
@@ -58,6 +58,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('COMPILER_OPTIONS_CHANGED', this.props.onCompilerOptionsChanged);
             this.props.vm.on('RUNTIME_OPTIONS_CHANGED', this.props.onRuntimeOptionsChanged);
             this.props.vm.on('FRAMERATE_CHANGED', this.props.onFramerateChanged);
+            this.props.vm.on('INTERPOLATION_CHANGED', this.props.onInterpolationChanged);
             this.props.vm.on('COMPILE_ERROR', this.handleCompileError);
             this.props.vm.on('RUNTIME_STARTED', this.props.onClearCompileErrors);
         }
@@ -181,6 +182,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTurboModeOff,
                 onTurboModeOn,
                 onFramerateChanged,
+                onInterpolationChanged,
                 onCompilerOptionsChanged,
                 onRuntimeOptionsChanged,
                 onCompileError,
@@ -211,6 +213,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: PropTypes.func.isRequired,
         onTurboModeOn: PropTypes.func.isRequired,
         onFramerateChanged: PropTypes.func.isRequired,
+        onInterpolationChanged: PropTypes.func.isRequired,
         onCompilerOptionsChanged: PropTypes.func.isRequired,
         onRuntimeOptionsChanged: PropTypes.func.isRequired,
         onCompileError: PropTypes.func,
@@ -256,6 +259,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOn: () => dispatch(setTurboState(true)),
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),
+        onInterpolationChanged: interpolation => dispatch(setInterpolationState(interpolation)),
         onCompilerOptionsChanged: options => dispatch(setCompilerOptionsState(options)),
         onRuntimeOptionsChanged: options => dispatch(setRuntimeOptionsState(options)),
         onCompileError: errors => dispatch(addCompileError(errors)),

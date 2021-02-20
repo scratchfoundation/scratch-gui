@@ -1,4 +1,5 @@
 const SET_FRAMERATE = 'tw/SET_FRAMERATE';
+const SET_INTERPOLATION = 'tw/SET_INTERPOLATION';
 const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
 const SET_RUNTIME_OPTIONS = 'tw/SET_RUNTIME_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
@@ -15,6 +16,7 @@ const SET_SHOWED_EXTENDED_EXTENSIONS_WARNING = 'tw/SET_SHOWED_EXTENDED_EXTENSION
 
 export const initialState = {
     framerate: 30,
+    interpolation: false,
     cloud: true,
     username: '',
     highQualityPen: false,
@@ -46,6 +48,10 @@ const reducer = function (state, action) {
     case SET_FRAMERATE:
         return Object.assign({}, state, {
             framerate: action.framerate
+        });
+    case SET_INTERPOLATION:
+        return Object.assign({}, state, {
+            interpolation: action.interpolation
         });
     case SET_COMPILER_OPTIONS:
         return Object.assign({}, state, {
@@ -111,6 +117,13 @@ const setFramerateState = function (framerate) {
     return {
         type: SET_FRAMERATE,
         framerate: framerate
+    };
+};
+
+const setInterpolationState = function (interpolation) {
+    return {
+        type: SET_INTERPOLATION,
+        interpolation: interpolation
     };
 };
 
@@ -208,6 +221,7 @@ export {
     reducer as default,
     initialState as twInitialState,
     setFramerateState,
+    setInterpolationState,
     setCompilerOptionsState,
     setRuntimeOptionsState,
     setUsername,

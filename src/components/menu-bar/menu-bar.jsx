@@ -819,9 +819,26 @@ class MenuBar extends React.Component {
                                         warpTimer,
                                         toggleWarpTimer,
                                         infiniteClones,
-                                        toggleInfiniteClones
+                                        toggleInfiniteClones,
+                                        interpolation,
+                                        toggleInterpolation
                                     }) => (
                                         <React.Fragment>
+                                            <MenuItem onClick={toggleInterpolation}>
+                                                {interpolation ? (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn off Interpolation"
+                                                        description="Menu bar item for turning off interpolation"
+                                                        id="tw.menuBar.interpolationOff"
+                                                    />
+                                                ) : (
+                                                    <FormattedMessage
+                                                        defaultMessage="Turn on Interpolation"
+                                                        description="Menu bar item for turning on interpolation"
+                                                        id="tw.menuBar.interpolationOn"
+                                                    />
+                                                )}
+                                            </MenuItem>
                                             <MenuItem onClick={toggleInfiniteClones}>
                                                 {infiniteClones ? (
                                                     <FormattedMessage

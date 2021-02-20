@@ -32,6 +32,7 @@ const Controls = function (props) {
         onStopAllClick,
         turbo,
         framerate,
+        interpolation,
         ...componentProps
     } = props;
     return (
@@ -52,7 +53,10 @@ const Controls = function (props) {
             {turbo ? (
                 <TurboMode />
             ) : null}
-            <FramerateIndicator framerate={framerate} />
+            <FramerateIndicator
+                framerate={framerate}
+                interpolation={interpolation}
+            />
         </div>
     );
 };
@@ -64,6 +68,7 @@ Controls.propTypes = {
     onGreenFlagClick: PropTypes.func.isRequired,
     onStopAllClick: PropTypes.func.isRequired,
     framerate: PropTypes.number,
+    interpolation: PropTypes.bool,
     turbo: PropTypes.bool
 };
 

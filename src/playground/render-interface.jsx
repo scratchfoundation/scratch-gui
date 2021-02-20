@@ -37,6 +37,8 @@ import MenuBar from '../components/menu-bar/menu-bar.jsx';
 import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import FeaturedProjects from '../components/tw-featured-projects/featured-projects.jsx';
 import Description from '../components/tw-description/description.jsx';
+import WebGlModal from '../containers/webgl-modal.jsx';
+import isRendererSupported from '../lib/tw-is-renderer-supported';
 
 import styles from './interface.css';
 
@@ -115,6 +117,7 @@ const Interface = ({
                 />
                 {isHomepage ? (
                     <React.Fragment>
+                        {isRendererSupported() ? null : <WebGlModal />}
                         <div className={styles.section}>
                             <ProjectInput />
                         </div>

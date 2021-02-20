@@ -34,6 +34,8 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 
+import isRendererSupported from '../../lib/tw-is-renderer-supported';
+
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
@@ -47,10 +49,6 @@ const messages = defineMessages({
         defaultMessage: 'Add Extension'
     }
 });
-
-// Cache this value to only retrieve it once the first time.
-// Assume that it doesn't change for a session.
-let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
@@ -138,10 +136,6 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    if (isRendererSupported === null) {
-        isRendererSupported = Renderer.isSupported();
-    }
-
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
 
@@ -154,7 +148,7 @@ const GUIComponent = props => {
                 <StageWrapper
                     isFullScreen={isFullScreen}
                     isEmbedded={isEmbedded}
-                    isRendererSupported={isRendererSupported}
+                    isRendererSupported={isRendererSupported()}
                     isRtl={isRtl}
                     loading={loading}
                     stageSize={STAGE_SIZE_MODES.large}
@@ -191,7 +185,7 @@ const GUIComponent = props => {
                         messageId="gui.loader.creating"
                     />
                 ) : null}
-                {isRendererSupported ? null : (
+                {isRendererSupported() ? null : (
                     <WebGlModal isRtl={isRtl} />
                 )}
                 {tipsLibraryVisible ? (
@@ -358,7 +352,7 @@ const GUIComponent = props => {
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
                                 isFullScreen={isFullScreen}
-                                isRendererSupported={isRendererSupported}
+                                isRendererSupported={isRendererSupported()}
                                 isRtl={isRtl}
                                 stageSize={stageSize}
                                 vm={vm}

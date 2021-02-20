@@ -16,7 +16,7 @@
       }
       #splash h1 { font-size: 2rem; font-weight: bold; } #splash a { color: inherit; }
       .tw-loaded #splash, #splash-content { display: none; }
-      @media (prefers-color-scheme: dark) { #splash { background-color: #333; color: #ddd; } }
+      #splash[splash-theme="dark"] { background-color: #333; color: #ddd; }
     </style>
   </head>
   <body>
@@ -42,6 +42,8 @@
           document.querySelector('#splash-troubleshooting').textContent = messages[2];
         }
         document.querySelector('#splash-content').style.display = 'block';
+        try {var localTheme = localStorage.getItem('tw:theme');} catch (e) {}
+        if (localTheme ? localTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches) document.querySelector('#splash').setAttribute('splash-theme', 'dark');
       })();
     </script>
     <div id="app"></div>

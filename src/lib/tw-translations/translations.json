@@ -18,6 +18,8 @@
         "tw.changeUsername.prompt": "Neuer Benutzername:",
         "tw.code": "Quellcode",
         "tw.defaultProject.comment": "So kannst du TurboWarp erkennen.\n\nFür mehr Infos:\nhttps://scratch.mit.edu/projects/414716080/",
+        "tw.evalModal.description": "Eine Browsererweiterung stört TurboWarps Compiler. Bitte versuche deinen Werbeblocker auszuschalten und die Seite neu zu laden. Diese Website enthält keine Werbung oder Datenschutzinvasiven Analysen.",
+        "tw.evalModal.label": "Browser-Konfigurationsfehler",
         "tw.featuredProjectsStudio": "Schaue das Studio auf Scratch an.",
         "tw.feedback": "Rückmeldung & Fehler",
         "tw.feedbackButton": "TurboWarp-Feedback",
@@ -70,7 +72,8 @@
         "tw.studioview.error": "Es gab einen Fehler beim Laden der nächsten Seite von Projekten.",
         "tw.studioview.hoverText": "{title} von {author}",
         "tw.usernamePrompt": "Es konnte keine Verbindung zu den Cloud-Variablen hergestellt werden, weil der Benutzername ungültig ist. Du kannst ihn ändern unter Bearbeiten > Benutzername ändern.\n\nWahrscheinlich ist er zu lang, enthält ungültige Zeichen, oder wird von einem anderen Nutzer verwendet. (Aktueller Benutzername: {username})",
-        "tw.viewFeaturedProjects": "Klicke um vorgestellte Projekte anzusehen."
+        "tw.viewFeaturedProjects": "Klicke um vorgestellte Projekte anzusehen.",
+        "tw.webglModal.description": "Leider sieht es aus, als wäre dein Computer oder Browser {webGlLink}. Diese Technologie ist erforderlich, damit diese Seite funktioniert. Versuche, deinen Browser und deine Grafiktreiber zu aktualisieren, oder deinen Computer neuzustarten."
     },
     "es": {
         "tw.alerts.autosaving": "Creando punto de restauración...",
@@ -422,6 +425,7 @@
         "tw.changeUsername.prompt": "Yeni kullanıcı adı:",
         "tw.code": "Kaynak Kodu",
         "tw.defaultProject.comment": "Turbowarp'u bu şekilde tespit edilir.\n\nDaha fazla bilgi için buraya bakın:\nhttps://scratch.mit.edu/projects/414716080/",
+        "tw.evalModal.label": "Web Tarayıcı Yapılandırma Hatası",
         "tw.featuredProjectsStudio": "Stüdyoyu Scratch'te görüntüleyin.",
         "tw.feedback": "Geribildirim ve Hatalar",
         "tw.feedbackButton": "Turbowarp geribildirim",

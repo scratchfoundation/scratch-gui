@@ -86,6 +86,7 @@ const Interface = ({
     description,
     isFullScreen,
     isPlayerOnly,
+    isRtl,
     onClickTheme
 }) => {
     const isHomepage = isPlayerOnly && !isFullScreen;
@@ -117,7 +118,7 @@ const Interface = ({
                 />
                 {isHomepage ? (
                     <React.Fragment>
-                        {isRendererSupported() ? null : <WebGlModal />}
+                        {isRendererSupported() ? null : <WebGlModal isRtl={isRtl} />}
                         <div className={styles.section}>
                             <ProjectInput />
                         </div>
@@ -244,7 +245,8 @@ Interface.propTypes = {
 const mapStateToProps = state => ({
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    isRtl: state.locales.isRtl
 });
 
 const mapDispatchToProps = () => ({});

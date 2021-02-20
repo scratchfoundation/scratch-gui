@@ -32,12 +32,26 @@ const createStylesheet = css => {
     return style;
 };
 
+const flat = array => {
+    const result = [];
+    for (const i of array) {
+        if (Array.isArray(i)) {
+            for (const j of flat(i)) {
+                result.push(j);
+            }
+        } else {
+            result.push(i);
+        }
+    }
+    return result;
+};
+
 let _scratchClassNames = null;
 const getScratchClassNames = () => {
     if (_scratchClassNames) {
         return _scratchClassNames;
     }
-    const classes = Array.from(document.styleSheets)
+    const cssRules = flat(Array.from(document.styleSheets)
         // Ignore some scratch-paint stylesheets
         .filter(styleSheet => (
             !(
@@ -57,12 +71,13 @@ const getScratchClassNames = () => {
                 return [];
             }
         })
-        .flat()
+    );
+    const classes = flat(cssRules
         .map(e => e.selectorText)
         .filter(e => e)
         .map(e => e.match(/(([\w-]+?)_([\w-]+)_([\w\d-]+))/g))
         .filter(e => e)
-        .flat();
+    );
     _scratchClassNames = [...new Set(classes)];
     return _scratchClassNames;
 };

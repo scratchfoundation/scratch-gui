@@ -21,15 +21,17 @@ import newAddons from './new-addons.json';
 import isMobile from './is-mobile';
 
 const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
-const mediaRecorderSupported = !!window.MediaRecorder;
+const mediaRecorderSupported = !!window.MediaRecorder && (
+    MediaRecorder.isTypeSupported('video/webm') || MediaRecorder.isTypeSupported('video/mp4')
+);
 const isSupported = manifest => {
     if (!manifest.permissions) {
         return true;
     }
-    if (manifest.permissions.includes('clipboardWrite') && !clipboardSupported) {
+    if (!clipboardSupported && manifest.permissions.includes('clipboardWrite')) {
         return false;
     }
-    if (manifest.permissions.includes('mediaRecorder') && !mediaRecorderSupported) {
+    if (!mediaRecorderSupported && manifest.permissions.includes('mediaRecorder')) {
         return false;
     }
     return true;

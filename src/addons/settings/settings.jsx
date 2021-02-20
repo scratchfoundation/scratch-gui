@@ -583,6 +583,7 @@ class AddonSettingsComponent extends React.Component {
         this.handleImport = this.handleImport.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
         this.searchRef = this.searchRef.bind(this);
         this.searchBar = null;
         this.state = {
@@ -691,6 +692,12 @@ class AddonSettingsComponent extends React.Component {
             search: e.target.value
         });
     }
+    handleClickSearchButton () {
+        this.setState({
+            search: ''
+        });
+        this.searchBar.focus();
+    }
     searchRef (searchBar) {
         this.searchBar = searchBar;
     }
@@ -792,7 +799,7 @@ class AddonSettingsComponent extends React.Component {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <label className={styles.searchContainer}>
+                    <div className={styles.searchContainer}>
                         <input
                             className={styles.searchInput}
                             value={this.state.search}
@@ -803,8 +810,11 @@ class AddonSettingsComponent extends React.Component {
                             spellCheck="false"
                             autoFocus
                         />
-                        <div className={styles.searchButton} />
-                    </label>
+                        <div
+                            className={styles.searchButton}
+                            onClick={this.handleClickSearchButton}
+                        />
+                    </div>
                     <a
                         href="https://scratch.mit.edu/users/World_Languages/#comments"
                         target="_blank"

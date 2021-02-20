@@ -137,6 +137,12 @@ a:active, a:focus {
 [theme="dark"] .search-button {
     background-image: url("./search-white.svg");
 }
+.search-input:not([value=""]) ~ .search-button {
+    background-image: url("./clear-black.svg") !important;
+}
+[theme="dark"] .search-input:not([value=""]) ~ .search-button {
+    background-image: url("./clear-white.svg") !important;
+}
 
 .feedback-button-outer {
     background: white;

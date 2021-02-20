@@ -910,6 +910,10 @@ class MenuBar extends React.Component {
                                         {/* This is not a FormattedMessage because it should not be translated. */}
                                         {'TurboWarp Desktop'}
                                     </MenuItemLink>
+                                    <MenuItemLink href="https://packager.turbowarp.org/">
+                                        {/* This is not a FormattedMessage because it should not be translated. */}
+                                        {'TurboWarp Packager'}
+                                    </MenuItemLink>
                                     <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Embedding">
                                         <FormattedMessage
                                             defaultMessage="Embedding"

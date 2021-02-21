@@ -13,7 +13,7 @@ import {setProjectChanged, setProjectUnchanged} from '../reducers/project-change
 import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-status';
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
-import {artieBlocksUpdated} from '../reducers/artie-exercises';
+import {artieBlocksUpdated, artieHelpReceived} from '../reducers/artie-exercises';
 import {sendBlockArtie} from '../lib/artie-api';
 
 /*
@@ -124,7 +124,7 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null, null, null, null);
                 }, 500);
             }
         }
@@ -132,7 +132,7 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null, null, this.props.onArtieHelpReceived, null);
                 }, 500);
             }
         }
@@ -221,6 +221,9 @@ const vmListenerHOC = function (WrappedComponent) {
         },
         onArtieBlocksUpdated: (blocks) => {
             dispatch(artieBlocksUpdated(blocks));
+        },
+        onArtieHelpReceived: (help) => {
+            dispatch(artieHelpReceived(help));
         },
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),

@@ -1,0 +1,120 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-content {
+    width: 400px;
+    margin: 50px auto; /* This modal is taller than most, reduce top margin */
+    min-height: 400px;
+}
+
+.modal-content-congrats {
+    margin: 50px auto;
+    width: 400px;
+}
+
+.modal-content-evaluation {
+    margin: 50px auto;
+    width: 600px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+}
+
+.body input[type="checkbox"],
+.body input[type="radio"] {
+    margin: 3px;
+}
+
+/* Images */
+.modal-content-evaluation img{
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Messages */
+.label {
+    color:$ui-white;
+    background-color: $motion-tertiary;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+}
+.modal-content-congrats .body {
+    color: green;
+    background-color: $ui-white;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+
+.modal-content-evaluation .body {
+    background-color: $ui-white;
+}
+.modal-content-evaluation .text-body{
+    color: $text-primary;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content-evaluation .text-body .main-text{
+    margin: 15px;
+    text-align: left;
+}
+.modal-content-evaluation .custom-text-body {
+    color: green;
+    background-color: $ui-white;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    margin: 15px;
+}
+.modal-content-evaluation .image {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin: 15px;
+    object-fit: cover;
+    object-position: center right;
+}
+
+/* Buttons */
+.button-row {
+    font-weight: bolder;
+    text-align: right;
+    padding: 10px;
+}
+
+.button-row button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    background: white;
+    border: 1px solid $ui-black-transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.button-row button.ok-button {
+    background: $motion-primary;
+    border: $motion-primary;
+    color: white;
+}
+
+[dir="ltr"] .button-row button + button {
+    margin-left: 0.5rem;
+}
+
+[dir="rtl"] .button-row button + button {
+    margin-right: 0.5rem;
+}

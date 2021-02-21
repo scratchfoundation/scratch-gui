@@ -129,24 +129,7 @@ class ArtieHelpComponent extends React.Component {
             );
         }
         else{
-            return(
-                <Modal
-                        className={styles.modalContentCongrats}
-                        onRequestClose={this.props.onCancel}
-                        id="ArtieHelp"
-                        contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
-                    >
-                        <Box
-                            className={styles.labelCongrats}
-                        >
-                            <FormattedMessage
-                                    defaultMessage="Congratulations! You have completed the exercise!"
-                                    description="Congratulations! you have completed the exercise!"
-                                    id="gui.menuBar.artie.help.congrats"
-                                />
-                        </Box>
-                    </Modal>
-            );
+            return null;
         }
     }
 

@@ -28,6 +28,7 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+import SelectExerciseButton from './select-exercise-button.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -58,7 +59,10 @@ import {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    openArtieMenu,
+    closeArtieMenu,
+    artieMenuOpen
 } from '../../reducers/menus';
 
 import collectMetadata from '../../lib/collect-metadata';
@@ -76,6 +80,17 @@ import aboutIcon from './icon--about.svg';
 import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
+
+import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
+import {activateArtieLogin, artieLogout} from '../../reducers/artie-login';
+import {activateArtieExercises, artieSetCurrentExercise, artieClearExercises,
+        artieHelpReceived, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
+        artiePopupExercise, artiePopupSolution, artieEvaluationStop} from '../../reducers/artie-exercises';
+import ArtieFlow from '../../containers/artie-flow.jsx';
+import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
+
+import html2canvas from "html2canvas";
+import Spinner from '../spinner/spinner.jsx';
 
 const ariaMessages = defineMessages({
     language: {
@@ -157,6 +172,8 @@ AboutButton.propTypes = {
     onClick: PropTypes.func.isRequired
 };
 
+var exerciseId = null;
+
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
@@ -171,7 +188,13 @@ class MenuBar extends React.Component {
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickRegisterSolution',
+            'handleClickRequestHelp',
+            'handleArtieLogout',
+            'handleArtieExerciseChange',
+            'handleClickFinishExercise',
+            'handleStopEvaluation'
         ]);
     }
     componentDidMount () {
@@ -292,7 +315,7 @@ class MenuBar extends React.Component {
         }
         if (typeof onClickAbout === 'function') {
             // make a button which calls a function
-            return <AboutButton onClick={onClickAbout} />;
+            return <AboutButton onClick={onClickAbout}/>;
         }
         // assume it's an array of objects
         // each item must have a 'title' FormattedMessage and a 'handleClick' function
@@ -329,13 +352,47 @@ class MenuBar extends React.Component {
             </div>
         );
     }
+    handleClickRegisterSolution (){
+        this.props.onArtieLoadingSolution(true, false);
+        const body = document.querySelector('body');
+        var canvasUrl = '';
+        html2canvas(body).then(canvas => {
+            canvasUrl = canvas.toDataURL('image/png');
+            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieLoadingSolution, this.props.onArtieSolutionSentPopupOpen);
+        });
+    }
     wrapAboutMenuCallback (callback) {
         return () => {
             callback();
             this.props.onRequestCloseAbout();
         };
     }
+    handleClickRequestHelp(){
+        this.props.onArtieLoadingHelp(true);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
+    }
+    handleClickFinishExercise(){
+        this.props.onArtieLoadingExercise(true, false);
+        const body = document.querySelector('body');
+        var canvasUrl = '';
+        html2canvas(body).then(canvas => {
+            canvasUrl = canvas.toDataURL('image/png');
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
+        });
+    }
+    handleArtieLogout(){
+        this.props.onArtieLogout();
+        this.props.onArtieClearExercises();
+    }
+    handleArtieExerciseChange(e){
+        exerciseId = e.target.value;
+    }
+    handleStopEvaluation(){
+        this.props.onArtieEvaluationStop(true);
+    }
+
     render () {
+
         const saveNowMessage = (
             <FormattedMessage
                 defaultMessage="Save now"
@@ -529,6 +586,172 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
+                    <div className={styles.fileGroup}>
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable, {
+                                [styles.active]: this.props.artieMenuOpen
+                            })}
+                            onMouseUp={this.props.onClickArtie}
+                        >
+                            <div className={classNames(styles.editMenu)}>
+                                <FormattedMessage
+                                    defaultMessage="ARTIE"
+                                    description="Text for artie dropdown menu"
+                                    id="gui.menuBar.artie"
+                                />
+                            </div>
+                            <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
+                                open={this.props.artieMenuOpen}
+                                place={this.props.isRtl ? 'left' : 'right'}
+                                onRequestClose={this.props.onRequestCloseArtie}
+                            >
+                                <MenuSection>
+                                    {this.props.artieLogin.user==null || (this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent==null)?
+                                        <MenuItem onClick={this.props.onActivateArtieLogin}>
+                                            <FormattedMessage
+                                                defaultMessage="Login"
+                                                description="Menu bar item for login"
+                                                id="gui.menuBar.artie.login"
+                                            />
+                                        </MenuItem>
+                                    :
+                                    <MenuItem onClick={this.handleArtieLogout}>
+                                    <FormattedMessage
+                                        defaultMessage="Logout"
+                                        description="Menu bar item for logout"
+                                        id="gui.menuBar.artie.logout"
+                                    />
+                                </MenuItem>
+                                    }
+                                </MenuSection>
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===1 && this.props.artieExercises.currentExercise !== null?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickRegisterSolution}>
+                                            <FormattedMessage
+                                                defaultMessage="Register solution"
+                                                description="Menu bar item for registering a solution"
+                                                id="gui.menuBar.artie.registerSolution"
+                                            />
+                                            {this.props.artieExercises.loadingSolution ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    null
+                                }
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null &&
+                                 this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickRequestHelp}>
+                                            <FormattedMessage
+                                                defaultMessage="Request help"
+                                                description="Menu bar item for requesting help"
+                                                id="gui.menuBar.artie.requestHelp"
+                                            />
+                                            {this.props.artieExercises.loadingHelp ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    null
+                                }
+                                {this.props.artieLogin.user !== null && this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null &&
+                                 this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <MenuSection>
+                                        <MenuItem onClick={this.handleClickFinishExercise}>
+                                            <FormattedMessage
+                                                defaultMessage="Finish exercise"
+                                                description="Menu bar item for finish the exercise"
+                                                id="gui.menuBar.artie.finishExercise"
+                                            />
+                                            {this.props.artieExercises.loadingExercise ?
+                                                <Spinner
+                                                    small
+                                                    className={styles.spinner}
+                                                    level={'info'}
+                                                />
+                                            : null }
+                                        </MenuItem>
+                                    </MenuSection>
+                                :
+                                    null
+                                }
+                            </MenuBarMenu>
+                        </div>
+
+                        {this.props.artieLogin.user !== null &&
+                            (
+                                (this.props.artieLogin.user.role===0 && this.props.artieLogin.currentStudent!==null)
+                                || this.props.artieLogin.user.role === 1
+                            )
+                            ?
+                            <React.Fragment>
+                                <Divider className={classNames(styles.divider)} />
+                                <div
+                                    className={classNames(styles.menuBarItem)}
+                                >
+                                    <div className={classNames(styles.editMenu)}>
+
+                                        {this.props.artieExercises.currentExercise !== null ?
+                                            <React.Fragment>
+                                                <ArtieExerciseStatementTooltip
+                                                    enable
+                                                    tooltipId="artie-exercise"
+                                                    place = 'bottom'
+                                                    className={classNames(styles.artieExercisesStatement)}
+                                                    tooltipClassName={styles.artieExercisesStatementTooltip}
+                                                    message={this.props.artieExercises.currentExercise.description}
+                                                >
+                                                    <FormattedMessage
+                                                            defaultMessage="Exercise: "
+                                                            description="Exercise label"
+                                                            id="gui.menuBar.artie.exercise"
+                                                    /><label>{this.props.artieExercises.currentExercise.name}</label>
+                                                </ArtieExerciseStatementTooltip>
+                                            </React.Fragment>
+                                        :
+                                            <FormattedMessage
+                                                defaultMessage="No exercise selected"
+                                                description="Exercise label"
+                                                id="gui.menuBar.artie.noExercise"
+                                            />
+                                        }
+                                    </div>
+                                </div>
+
+                                { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
+                                  this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <SelectExerciseButton
+                                        className={styles.menuBarButton}
+                                        onClick={this.handleStopEvaluation}
+                                        isExerciseSelected = {true}
+                                        isEvaluation={this.props.artieExercises.currentExercise.isEvaluation}
+                                    />
+                                :
+                                    <SelectExerciseButton
+                                        className={styles.menuBarButton}
+                                        onClick={this.props.onActivateArtieExercises}
+                                        isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
+                                        isEvaluation={false}
+                                    />
+                                }
+                            </React.Fragment>
+                        :
+                            null
+                        }
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div
@@ -748,6 +971,8 @@ class MenuBar extends React.Component {
                 </div>
 
                 {aboutButton}
+
+                <ArtieFlow />
             </Box>
         );
     }
@@ -771,6 +996,7 @@ MenuBar.propTypes = {
     className: PropTypes.string,
     confirmReadyToReplaceProject: PropTypes.func,
     editMenuOpen: PropTypes.bool,
+    artieMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
@@ -794,6 +1020,7 @@ MenuBar.propTypes = {
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onClickArtie: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickLogo: PropTypes.func,
@@ -810,12 +1037,16 @@ MenuBar.propTypes = {
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
+    onRequestCloseArtie: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onRequestCloseLogin: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
+    onActivateArtieLogin: PropTypes.func,
+    activateArtieExercises: PropTypes.func,
+    deactivateArtieExercises: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
@@ -839,6 +1070,7 @@ const mapStateToProps = (state, ownProps) => {
         accountMenuOpen: accountMenuOpen(state),
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
+        artieMenuOpen: artieMenuOpen(state),
         isRtl: state.locales.isRtl,
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
@@ -850,7 +1082,10 @@ const mapStateToProps = (state, ownProps) => {
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        artieLogin: state.scratchGui.artieLogin,
+        artieExercises: state.scratchGui.artieExercises,
+        sprites: state.scratchGui.targets.sprites
     };
 };
 
@@ -863,6 +1098,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
+    onClickArtie: () => dispatch(openArtieMenu()),
+    onRequestCloseArtie: () => dispatch(closeArtieMenu()),
     onClickLanguage: () => dispatch(openLanguageMenu()),
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
@@ -873,7 +1110,19 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onActivateArtieLogin: () => dispatch(activateArtieLogin()),
+    onArtieLogout: () => dispatch(artieLogout()),
+    onArtieClearExercises: () => dispatch(artieClearExercises()),
+    onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
+    onActivateArtieExercises: () => dispatch(activateArtieExercises()),
+    onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
+    onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
+    onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
+    onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading)),
+    onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
+    onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active)),
+    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop))
 });
 
 export default compose(

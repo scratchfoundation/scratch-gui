@@ -106,7 +106,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
 
     var spriteElements = [];
 
@@ -124,11 +124,21 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
-                callbackLoading(false);
+
+                //If the callback loading is not null, we indicate that the loading has finished
+                if(callbackLoading !==null){
+                    callbackLoading(false, true);
+                }
+
+                //If the callback of the popup is not undefined and is not null, we show the popup
+                if(callbackPopup !== undefined && callbackPopup !== null){
+                    callbackPopup(true);
+                }
+
                 var json = JSON.parse(xhr.response);
 
                 //We check if there are no errors
-                if(json.body.object !== null){
+                if(json.body.object !== null && callbackHelp !== null){
                     callbackHelp(json.body.object);
                 }
             }
@@ -140,7 +150,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, callbackPopup) => new Promise((resolve, reject) => {
 
     var spriteElements = []
 
@@ -156,7 +166,13 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback) => n
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response != null) {
-                callback(false);
+
+                //If the callback of the popup is not undefined and is not null, we show the popup
+                if(callbackPopup !== undefined && callbackPopup !== null){
+                    callbackPopup(true);
+                }
+
+                callback(false, true);
             }
         }
     });
@@ -184,7 +200,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -201,13 +217,13 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
 
 
-const getArtieExercises = (userName, password, callback) => new Promise(() => {
+const getArtieExercises = (userName, password, isEvaluation, callback) => new Promise(() => {
     var xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", () => {
         if (xhr.readyState === 4) {
@@ -218,9 +234,43 @@ const getArtieExercises = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://localhost/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `http://localhost:8080/api/v1/exercises/getAllIsEvaluation?userName=${userName}&password=${password}&isEvaluation=${isEvaluation}`, true);
     xhr.send();
 
 });
 
-export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents, getArtieExercises};
+
+const getAllArtieExercises = (userName, password, callback) => new Promise(() => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+                callback(json.body.object);
+            }
+        }
+    });
+
+    xhr.open("GET", `http://localhost:8080/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.send();
+
+});
+
+const updateStudentCompetence = (studentId, competence, callback) => new Promise(() => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                var json = JSON.parse(xhr.response);
+                callback(json.body.object);
+            }
+        }
+    });
+
+    xhr.open("GET", `http://localhost:8080/api/v1/students/updateStudentCompetence?studentId=${studentId}&competence=${competence}`, true);
+    xhr.send();
+
+});
+
+export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents,
+        getArtieExercises, getAllArtieExercises, updateStudentCompetence};

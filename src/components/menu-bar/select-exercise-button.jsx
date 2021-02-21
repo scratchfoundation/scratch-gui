@@ -6,10 +6,12 @@ import Button from '../button/button.jsx';
 
 import styles from './select-exercise-button.css';
 
+
 const SelectExerciseButton = ({
     className,
     onClick,
     isExerciseSelected,
+    isEvaluation
 }) => (
     <Button
         className={classNames(
@@ -18,19 +20,26 @@ const SelectExerciseButton = ({
         )}
         onClick={onClick}
     >
-        {isExerciseSelected ? (
+        {isEvaluation ?
             <FormattedMessage
-                defaultMessage="Change exercise"
-                description="Menu bar item for select an exercise"
-                id="gui.menuBar.artie.changeExercise"
+                defaultMessage="Exit from the test"
+                description="Exit from the test"
+                id="gui.menuBar.artie.exitEvaluation"
             />
-        ) : (
-            <FormattedMessage
-                defaultMessage="Select exercise"
-                description="Menu bar item for select an exercise"
-                id="gui.menuBar.artie.selectExercise"
-            />
-        )}
+        :
+            isExerciseSelected ?
+                <FormattedMessage
+                    defaultMessage="Change exercise"
+                    description="Menu bar item for select an exercise"
+                    id="gui.menuBar.artie.changeExercise"
+                />
+            :
+                <FormattedMessage
+                    defaultMessage="Select exercise"
+                    description="Menu bar item for select an exercise"
+                    id="gui.menuBar.artie.selectExercise"
+                />
+    }
     </Button>
 );
 

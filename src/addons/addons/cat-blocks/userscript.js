@@ -4,6 +4,19 @@
  */
 
 export default async function ({ addon, global, console }) {
+  // TODO: Switch completely to Blockly?
+  // Well anyway future self, here you go: https://github.com/LLK/scratch-blocks/compare/hotfix/totally-normal-2020
+  const inject = async () => ((await addon.tab.traps.getBlockly()).BlockSvg.START_HAT_HEIGHT = 31);
+  if (addon.tab.editorMode === "editor") {
+    const interval = setInterval(() => {
+      if (Blockly.getMainWorkspace()) {
+        inject();
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+  addon.tab.addEventListener("urlChange", () => addon.tab.editorMode === "editor" && inject());
+
   var LEFT_EAR_UP = "c -1 -12.5 5.3 -23.3 8.4 -24.8 c 3.7 -1.8 16.5 13.1 18.4 15.4";
   var LEFT_EAR_DOWN = "c -5.8 -4.8 -8 -18 -4.9 -19.5 c 3.7 -1.8 24.5 11.1 31.7 10.1";
   var RIGHT_EAR_UP = "c 1.9 -2.3 14.7 -17.2 18.4 -15.4 c 3.1 1.5 9.4 12.3 8.4 24.8";

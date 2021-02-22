@@ -32,3 +32,7 @@
   border-top-right-radius: 0rem;
   border-top-left-radius: 0.5rem;
 }
+
+.Popover {
+  z-index: 40;
+}

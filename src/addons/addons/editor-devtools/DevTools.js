@@ -648,11 +648,7 @@ export default class DevTools {
         continue;
       }
 
-      // blocks._blocks is not iterable, have to do it using an 'in'
-      for (const id in blocks._blocks) {
-        if (!blocks._blocks.hasOwnProperty(id)) {
-          continue;
-        }
+      for (const id of Object.keys(blocks._blocks)) {
         const block = blocks._blocks[id];
         // To find event broadcaster blocks, we look for the nested "event_broadcast_menu" blocks first that match the event name
         if (block.opcode === "event_broadcast_menu" && block.fields.BROADCAST_OPTION.value === name) {

@@ -13,7 +13,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
   }
 
   // 0-indexed 6 = July
-  const releaseDate = new Date(2021, 1, 8);
+  const releaseDate = new Date(2021, 1, 22);
   const releaseDateLocalized = new Intl.DateTimeFormat(msg.locale).format(releaseDate);
 
   const helpHTML = `

@@ -27,7 +27,7 @@ export default class BlockFlasher {
      * @private
      */
     function _flash() {
-      myFlash.block.setColour(flashOn ? "#ffff80" : myFlash.colour);
+      myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : myFlash.colour;
       flashOn = !flashOn;
       count--;
       if (count > 0) {

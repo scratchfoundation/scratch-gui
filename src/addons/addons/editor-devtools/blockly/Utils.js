@@ -52,7 +52,7 @@ export default class Utils {
     const currentWorkspace = Blockly.getMainWorkspace();
     if (currentWorkspace.getToolbox()) {
       // Sadly get get workspace does not always return the 'real' workspace... Not sure how to get that at the moment,
-      //  but we can work out whether it's the right one by whether it hsa a toolbox.
+      //  but we can work out whether it's the right one by whether it has a toolbox.
       this._workspace = currentWorkspace;
     }
     return this._workspace;

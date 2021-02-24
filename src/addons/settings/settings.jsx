@@ -54,7 +54,7 @@ if (locale !== 'en') {
     }
 }
 
-document.title = settingsTranslations['tw.addons.settings.title'];
+document.title = `${settingsTranslations['tw.addons.settings.title']} - TurboWarp`;
 
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);

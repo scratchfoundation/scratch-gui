@@ -16,6 +16,7 @@
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.recommended": "Empfohlen",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Addon-Einstellungen",
         "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar."
     },
     "es": {
@@ -35,6 +36,7 @@
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.recommended": "Recomendado",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Ajustes de Addons",
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
     },
     "it": {
@@ -54,6 +56,7 @@
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.recommended": "Raccomandato",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Impostazioni Addon",
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"
     },
     "pt": {
@@ -73,6 +76,7 @@
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.recommended": "Recomendado",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Configurações de Addon",
         "tw.addons.settings.unsupported": "Alguns addons não estão disponíveis neste navegador:"
     },
     "ro": {
@@ -92,6 +96,7 @@
         "tw.addons.settings.tags.easterEgg": "Surprize Ascunse",
         "tw.addons.settings.tags.recommended": "Recomandat",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Setările Addon-urilor",
         "tw.addons.settings.unsupported": "Unele extensii nu sunt disponibile în acest browser:"
     },
     "tr": {
@@ -111,6 +116,7 @@
         "tw.addons.settings.tags.easterEgg": "Eğlenceli bir gizli şey",
         "tw.addons.settings.tags.recommended": "Önerildi",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "Eklenti Ayarlar",
         "tw.addons.settings.unsupported": "Bazi içerikler bu web tarayacıda kullanamıyoruz:"
     }
 }

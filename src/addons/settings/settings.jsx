@@ -45,10 +45,10 @@ import '../../lib/normalize.css';
 const locale = detectLocale(upstreamMeta.languages);
 const addonTranslations = getAddonTranslations(locale);
 const settingsTranslations = settingsTranslationsEnglish;
-document.documentElement.lang = locale;
 if (locale !== 'en') {
     const messages = settingsTranslationsOther[locale];
     if (messages) {
+        document.documentElement.lang = locale;
         Object.assign(settingsTranslations, messages);
     }
 }

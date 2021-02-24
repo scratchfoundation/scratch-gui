@@ -69,7 +69,7 @@ stageCostume.costumeName = 'backdrop1';
 projectJson.costumes.push(stageCostume);
 
 const sprite1 = projectJson.children[0];
-const numCostumes = 1000;
+const numCostumes = 750;
 while (sprite1.costumes.length < numCostumes) {
     const numLines = 20;
     const lines = [];

@@ -132,6 +132,21 @@ class Tab extends EventTargetShim {
             get vm () {
                 // We expose VM on window
                 return window.vm;
+            },
+            getBlockly: () => {
+                // The real Blockly is exposed on window. It may not exist until the user enters the editor.
+                if (window.ScratchBlocks) {
+                    return Promise.resolve(window.ScratchBlocks);
+                }
+                return new Promise((resolve, reject) => {
+                    const handler = () => {
+                        if (window.ScratchBlocks) {
+                            this.removeEventListener('urlChange', handler);
+                            resolve(window.ScratchBlocks);
+                        }
+                    };
+                    this.addEventListener('urlChange', handler);
+                });
             }
         };
     }

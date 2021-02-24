@@ -688,8 +688,19 @@ class AddonSettingsComponent extends React.Component {
         });
     }
     handleSearch (e) {
+        const value = e.target.value;
+        if (!this.state.easterEggs) {
+            if (
+                value.toLowerCase() === settingsTranslations['tw.addons.settings.tags.easterEgg'].toLowerCase() ||
+                value.toLowerCase() === settingsTranslationsEnglish['tw.addons.settings.tags.easterEgg'].toLowerCase()
+            ) {
+                this.setState({
+                    easterEggs: true
+                });
+            }
+        }
         this.setState({
-            search: e.target.value
+            search: value
         });
     }
     handleClickSearchButton () {

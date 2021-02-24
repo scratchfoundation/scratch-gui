@@ -53,6 +53,8 @@ if (locale !== 'en') {
     }
 }
 
+document.title = settingsTranslations['tw.addons.settings.title'];
+
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);
 

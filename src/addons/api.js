@@ -242,7 +242,7 @@ class Settings extends EventTargetShim {
     }
 }
 
-class Self {
+class Self extends EventTargetShim {
     // These are removed at build-time by pull.js. Throw if attempting to access them at runtime.
     get dir () {
         throw new Error(`Addon tried to access addon.self.dir`);

@@ -14,7 +14,9 @@
         "tw.addons.settings.search": "Suchen",
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
+        "tw.addons.settings.tags.new": "Neu!",
         "tw.addons.settings.tags.recommended": "Empfohlen",
+        "tw.addons.settings.tags.theme": "Design",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Addon-Einstellungen",
         "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar."
@@ -34,7 +36,9 @@
         "tw.addons.settings.search": "Buscar",
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
+        "tw.addons.settings.tags.new": "¡Nuevo!",
         "tw.addons.settings.tags.recommended": "Recomendado",
+        "tw.addons.settings.tags.theme": "Tema",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Ajustes de Addons",
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
@@ -54,7 +58,9 @@
         "tw.addons.settings.search": "Cerca",
         "tw.addons.settings.tags.beta": "Beta",
         "tw.addons.settings.tags.easterEgg": "Easter Egg",
+        "tw.addons.settings.tags.new": "Nuovo!",
         "tw.addons.settings.tags.recommended": "Raccomandato",
+        "tw.addons.settings.tags.theme": "Tema",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Impostazioni Addon",
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"

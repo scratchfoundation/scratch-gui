@@ -75,19 +75,6 @@ const includeImportedLibraries = contents => {
 };
 
 const includeImports = (folder, contents) => {
-    // The first thing we have to do is figure out which files actually need to be loaded.
-    // Parse things like:
-    // await addon.tab.loadScript(addon.self.lib + "/tinycolor-min.js");
-    const matches = [...contents.matchAll(/addon\.self\.lib *\+ *["']\/([\w\d_-]+\.js)["']/g)];
-    const dynamicLibraries = [];
-    for (const match of matches) {
-        const libraryFile = match[1];
-        dynamicLibraries.push(libraryFile);
-        const oldLibraryPath = pathUtil.join('ScratchAddons', 'libraries', libraryFile);
-        const newLibraryPath = pathUtil.join('libraries', libraryFile);
-        const libraryContents = fs.readFileSync(oldLibraryPath, 'utf-8');
-        fs.writeFileSync(newLibraryPath, libraryContents);
-    }
     const dynamicAssets = fs.readdirSync(folder)
         .filter(file => file.endsWith('.svg'));
 
@@ -96,17 +83,11 @@ const includeImports = (folder, contents) => {
     dynamicAssets.forEach((file, index) => {
         header += `import _twAsset${index} from "./${file}";\n`;
     });
-    dynamicLibraries.forEach((file, index) => {
-        // Load as a file as it will be run through addon.tab.loadScript
-        header += `import _twScript${index} from "!file-loader!../../libraries/${file}";\n`;
-    });
     header += `const _twGetAsset = (path) => {\n`;
     dynamicAssets.forEach((file, index) => {
         header += `  if (path === "/${file}") return _twAsset${index};\n`;
     });
-    dynamicLibraries.forEach((file, index) => {
-        header += `  if (path === "/${file}") return _twScript${index};\n`;
-    });
+    // eslint-disable-next-line no-template-curly-in-string
     header += '  throw new Error(`Unknown asset: ${path}`);\n';
     header += '};\n';
     header += '\n';

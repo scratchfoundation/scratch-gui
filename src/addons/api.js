@@ -155,14 +155,8 @@ class Tab extends EventTargetShim {
         return tabReduxInstance;
     }
 
-    loadScript (src) {
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.onload = () => resolve();
-            script.onerror = () => reject(new Error('Cannot load script'));
-            script.src = src;
-            document.body.appendChild(script);
-        });
+    loadScript () {
+        throw new Error('loadScript is not supported');
     }
 
     waitForElement (selector, {markAsSeen = false} = {}) {

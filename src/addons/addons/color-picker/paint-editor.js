@@ -5,6 +5,7 @@
 
 import { normalizeHex, getHexRegex } from "../../libraries/normalize-color.js";
 import RateLimiter from "../../libraries/rate-limiter.js";
+import tinycolor from "../../libraries/tinycolor-min.js";
 
 export default async ({ addon, console, msg }) => {
   let prevEventHandler;

@@ -111,10 +111,10 @@ module.exports = [
     // to run editor examples
     defaultsDeep({}, base, {
         entry: {
-            editor: './src/playground/editor.jsx',
-            player: './src/playground/player.jsx',
-            fullscreen: './src/playground/fullscreen.jsx',
-            embed: './src/playground/embed.jsx',
+            'editor': './src/playground/editor.jsx',
+            'player': './src/playground/player.jsx',
+            'fullscreen': './src/playground/fullscreen.jsx',
+            'embed': './src/playground/embed.jsx',
             'addon-settings': './src/playground/addon-settings.jsx'
         },
         output: {
@@ -134,7 +134,8 @@ module.exports = [
         optimization: {
             splitChunks: {
                 chunks: 'all',
-                minChunks: 2
+                minChunks: 2,
+                minSize: 50000
             },
             runtimeChunk: {
                 name: 'runtime'

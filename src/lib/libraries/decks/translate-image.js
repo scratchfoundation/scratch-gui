@@ -3,12 +3,10 @@
  * Utility functions for handling tutorial images in multiple languages
  */
 
-import {enImages as defaultImages} from './en-steps.js';
-
+const defaultImages = {};
 let savedImages = {};
 let savedLocale = '';
 
-// tw: we don't use the videos, remove them
 const translations = {
 
 };

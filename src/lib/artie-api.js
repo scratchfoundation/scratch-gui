@@ -85,7 +85,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     var inputElement = _blockHandler(tmpElement, blocks);
 
     // 2.1- If the input element is a nested element
-    if ((tmpElement.x !== undefined && tmpElement.y !== undefined) || !_inputElementsValues.includes(tmpElement.opcode)){
+    if (inputName==="SUBSTACK"){
 
         //2.1.1- Adds the parent element, without its next, nested, previous and parent to avoid large objects
         inputElement.parent = {id: parent.id, elementName: parent.elementName, elementFamily: parent.elementFamily, next: null, inputs: null, nested: [], previous: null, parent: null}

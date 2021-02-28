@@ -9,6 +9,7 @@ const _TextEncoder = typeof TextEncoder === 'function' ? TextEncoder : class Tex
         if (typeof str !== 'string') {
             throw new TypeError('Argument is not a string');
         }
+        str = unescape(encodeURIComponent(str));
         const arr = new Uint8Array(str.length);
         for (let i = 0; i < str.length; i++) {
             arr[i] = str.charCodeAt(i);
@@ -25,12 +26,12 @@ const _TextDecoder = typeof TextDecoder === 'function' ? TextDecoder : class Tex
         this.encoding = 'utf-8';
     }
     decode (view) {
-        const array = new Uint8Array(view);
+        const array = new Uint8Array(view.buffer, view.byteOffset, view.byteLength);
         let result = '';
         for (let i = 0; i < array.length; i++) {
             result += String.fromCharCode(array[i]);
         }
-        return result;
+        return decodeURIComponent(escape(result));
     }
 };
 

@@ -9,6 +9,9 @@
 /* eslint-disable arrow-parens */
 import xhr from 'xhr';
 
+const _inputElementsValues = ['text', 'math_number', 'math_positive_number'];
+
+
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});
 
 const _generateArtieBlock = (blocks) => {
@@ -84,7 +87,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     let inputElement = _blockHandler(tmpElement, blocks);
 
     // 2.1- If the input element is a nested element
-    if (inputName==="SUBSTACK"){
+    if (inputName.includes("SUBSTACK") && !_inputElementsValues.includes(tmpElement.opcode)){
 
         //2.1.1- Adds the parent element, without its next, nested, previous and parent to avoid large objects
         inputElement.parent = {id: parent.id, elementName: parent.elementName, elementFamily: parent.elementFamily, next: null, inputs: null, nested: [], previous: null, parent: null}

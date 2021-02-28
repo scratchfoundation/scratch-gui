@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
@@ -68,14 +68,13 @@ const handleClickAddonSettings = () => {
     window.open(`${process.env.ROOT}${path}`);
 };
 
-const initialTitle = document.title;
-const handleUpdateProjectTitle = (title, isDefault) => {
-    if (isDefault || !title) {
-        document.title = initialTitle;
-    } else {
-        document.title = `${title} - TurboWarp`;
+const messages = defineMessages({
+    defaultTitle: {
+        defaultMessage: 'Run Scratch projects faster',
+        description: 'Title of homepage',
+        id: 'tw.guiDefaultTitle'
     }
-};
+});
 
 const WrappedMenuBar = compose(
     SBFileUploaderHOC
@@ -83,162 +82,177 @@ const WrappedMenuBar = compose(
 
 import(/* webpackChunkName: "addons" */ '../addons/entry');
 
-const Interface = ({
-    description,
-    isFullScreen,
-    isPlayerOnly,
-    isRtl,
-    onClickTheme
-}) => {
-    const isHomepage = isPlayerOnly && !isFullScreen;
-    return (
-        <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
-            {isHomepage ? (
-                <div className={styles.menu}>
-                    <WrappedMenuBar
-                        canChangeLanguage
-                        canManageFiles
-                        enableSeeInside
+class Interface extends React.Component {
+    constructor (props) {
+        super(props);
+        this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
+    }
+    handleUpdateProjectTitle (title, isDefault) {
+        if (isDefault || !title) {
+            document.title = `TurboWarp - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
+        } else {
+            document.title = `${title} - TurboWarp`;
+        }
+    }
+    render () {
+        const {
+            description,
+            isFullScreen,
+            isPlayerOnly,
+            isRtl,
+            onClickTheme
+        } = this.props;
+        const isHomepage = isPlayerOnly && !isFullScreen;
+        return (
+            <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
+                {isHomepage ? (
+                    <div className={styles.menu}>
+                        <WrappedMenuBar
+                            canChangeLanguage
+                            canManageFiles
+                            enableSeeInside
+                            onClickAddonSettings={handleClickAddonSettings}
+                            onClickTheme={onClickTheme}
+                        />
+                    </div>
+                ) : null}
+                <div
+                    className={styles.center}
+                    style={isPlayerOnly ? ({
+                        // add a couple pixels to account for border (TODO: remove weird hack)
+                        width: `${twStageSize.width + 2}px`
+                    }) : null}
+                >
+                    {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
+                    <GUI
                         onClickAddonSettings={handleClickAddonSettings}
                         onClickTheme={onClickTheme}
+                        onUpdateProjectTitle={this.handleUpdateProjectTitle}
                     />
-                </div>
-            ) : null}
-            <div
-                className={styles.center}
-                style={isPlayerOnly ? ({
-                    // add a couple pixels to account for border (TODO: remove weird hack)
-                    width: `${twStageSize.width + 2}px`
-                }) : null}
-            >
-                {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
-                <GUI
-                    onClickAddonSettings={handleClickAddonSettings}
-                    onClickTheme={onClickTheme}
-                    onUpdateProjectTitle={handleUpdateProjectTitle}
-                />
-                {isHomepage ? (
-                    <React.Fragment>
-                        {isRendererSupported() ? null : (
-                            <WebGlModal isRtl={isRtl} />
-                        )}
-                        {isEvalSupported() ? null : (
-                            <TWEvalModal isRtl={isRtl} />
-                        )}
-                        <div className={styles.section}>
-                            <ProjectInput />
-                        </div>
-                        {description.instructions || description.credits ? (
+                    {isHomepage ? (
+                        <React.Fragment>
+                            {isRendererSupported() ? null : (
+                                <WebGlModal isRtl={isRtl} />
+                            )}
+                            {isEvalSupported() ? null : (
+                                <TWEvalModal isRtl={isRtl} />
+                            )}
                             <div className={styles.section}>
-                                <Description
-                                    instructions={description.instructions}
-                                    credits={description.credits}
-                                />
+                                <ProjectInput />
                             </div>
-                        ) : null}
-                        <div className={styles.section}>
-                            <p>
-                                <FormattedMessage
-                                    defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
-                                    description="Description of TurboWarp"
-                                    id="tw.home.description"
-                                />
-                            </p>
-                        </div>
-                        <div className={styles.section}>
-                            <FeaturedProjects studio="27205657" />
-                        </div>
-                        <footer className={classNames(styles.section, styles.footer)}>
-                            <p>
-                                <FormattedMessage
-                                    defaultMessage="Projects from the Scratch website are licensed under the {ccbysa2}. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
-                                    description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
-                                    id="tw.footer.disclaimer"
-                                    values={{
-                                        ccbysa2: (
-                                            <a
-                                                href="https://creativecommons.org/licenses/by-sa/2.0/"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="Creative Commons Attribution-ShareAlike 2.0 license"
-                                                    description="Name of the license used by Scratch projects, CC BY-SA 2.0."
-                                                    id="tw.footer.disclaimer.ccbysa2"
-                                                />
-                                            </a>
-                                        )
-                                    }}
-                                />
-                            </p>
-                            <p>
-                                <FormattedMessage
-                                    defaultMessage="Hosting for TurboWarp is provided by {fosshost}."
-                                    description="Host credit"
-                                    id="tw.footer.host"
-                                    values={{
-                                        fosshost: (
-                                            <a
-                                                href="https://fosshost.org"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="fosshost.org"
-                                                    description="Link to fosshost.org"
-                                                    id="tw.footer.host.fosshost"
-                                                />
-                                            </a>
-                                        )
-                                    }}
-                                />
-                            </p>
-                            <p className={styles.links}>
-                                <a
-                                    href="https://github.com/TurboWarp"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="Source Code"
-                                        description="Link to source code"
-                                        id="tw.code"
+                            {description.instructions || description.credits ? (
+                                <div className={styles.section}>
+                                    <Description
+                                        instructions={description.instructions}
+                                        credits={description.credits}
                                     />
-                                </a>
-                                {' - '}
-                                <a
-                                    href="https://scratch.mit.edu/users/GarboMuffin/#comments"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
+                                </div>
+                            ) : null}
+                            <div className={styles.section}>
+                                <p>
                                     <FormattedMessage
-                                        defaultMessage="Feedback & Bugs"
-                                        description="Link to feedback/bugs page"
-                                        id="tw.feedback"
+                                        defaultMessage="TurboWarp is a Scratch mod that compiles projects to JavaScript to make them run really fast. Try it out by inputting a project ID or URL above or choosing a featured project below."
+                                        description="Description of TurboWarp"
+                                        id="tw.home.description"
                                     />
-                                </a>
-                                {' - '}
-                                <a
-                                    href="privacy.html"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
+                                </p>
+                            </div>
+                            <div className={styles.section}>
+                                <FeaturedProjects studio="27205657" />
+                            </div>
+                            <footer className={classNames(styles.section, styles.footer)}>
+                                <p>
                                     <FormattedMessage
-                                        defaultMessage="Privacy Policy"
-                                        description="Link to privacy policy"
-                                        id="tw.privacy"
+                                        defaultMessage="Projects from the Scratch website are licensed under the {ccbysa2}. TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation."
+                                        description="Disclaimer that TurboWarp is not connected to Scratch and licensing information"
+                                        id="tw.footer.disclaimer"
+                                        values={{
+                                            ccbysa2: (
+                                                <a
+                                                    href="https://creativecommons.org/licenses/by-sa/2.0/"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <FormattedMessage
+                                                        defaultMessage="Creative Commons Attribution-ShareAlike 2.0 license"
+                                                        description="Name of the license used by Scratch projects, CC BY-SA 2.0."
+                                                        id="tw.footer.disclaimer.ccbysa2"
+                                                    />
+                                                </a>
+                                            )
+                                        }}
                                     />
-                                </a>
-                            </p>
-                        </footer>
-                    </React.Fragment>
-                ) : null}
+                                </p>
+                                <p>
+                                    <FormattedMessage
+                                        defaultMessage="Hosting for TurboWarp is provided by {fosshost}."
+                                        description="Host credit"
+                                        id="tw.footer.host"
+                                        values={{
+                                            fosshost: (
+                                                <a
+                                                    href="https://fosshost.org"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <FormattedMessage
+                                                        defaultMessage="fosshost.org"
+                                                        description="Link to fosshost.org"
+                                                        id="tw.footer.host.fosshost"
+                                                    />
+                                                </a>
+                                            )
+                                        }}
+                                    />
+                                </p>
+                                <p className={styles.links}>
+                                    <a
+                                        href="https://github.com/TurboWarp"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Source Code"
+                                            description="Link to source code"
+                                            id="tw.code"
+                                        />
+                                    </a>
+                                    {' - '}
+                                    <a
+                                        href="https://scratch.mit.edu/users/GarboMuffin/#comments"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Feedback & Bugs"
+                                            description="Link to feedback/bugs page"
+                                            id="tw.feedback"
+                                        />
+                                    </a>
+                                    {' - '}
+                                    <a
+                                        href="privacy.html"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="Privacy Policy"
+                                            description="Link to privacy policy"
+                                            id="tw.privacy"
+                                        />
+                                    </a>
+                                </p>
+                            </footer>
+                        </React.Fragment>
+                    ) : null}
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 Interface.propTypes = {
+    intl: intlShape,
     description: PropTypes.shape({
         credits: PropTypes.string,
         instructions: PropTypes.string
@@ -258,10 +272,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = () => ({});
 
-const ConnectedInterface = connect(
+const ConnectedInterface = injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Interface);
+)(Interface));
 
 const WrappedInterface = compose(
     AppStateHOC,

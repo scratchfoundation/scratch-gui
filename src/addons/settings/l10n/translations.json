@@ -121,8 +121,10 @@
         "tw.addons.settings.resetAll": "Her şeyi sıfırla",
         "tw.addons.settings.search": "Arama",
         "tw.addons.settings.tags.beta": "Beta",
-        "tw.addons.settings.tags.easterEgg": "Eğlenceli bir gizli şey",
+        "tw.addons.settings.tags.easterEgg": "Gizli Özellik",
+        "tw.addons.settings.tags.new": "Yeni!",
         "tw.addons.settings.tags.recommended": "Önerildi",
+        "tw.addons.settings.tags.theme": "Tema",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Eklenti Ayarlar",
         "tw.addons.settings.unsupported": "Bazi içerikler bu web tarayacıda kullanamıyoruz:"

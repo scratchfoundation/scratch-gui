@@ -24,6 +24,7 @@ import {compose} from 'redux';
 import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
+import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
@@ -279,6 +280,7 @@ const ConnectedInterface = injectIntl(connect(
 
 const WrappedInterface = compose(
     AppStateHOC,
+    ErrorBoundaryHOC('TW Interface'),
     TWProjectMetaFetcherHOC,
     TWEditorWarningHOC,
     TWStateManagerHOC,

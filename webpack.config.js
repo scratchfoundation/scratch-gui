@@ -47,7 +47,10 @@ const base = {
         publicPath: root
     },
     resolve: {
-        symlinks: false
+        symlinks: false,
+        alias: {
+            'text-encoding$': path.resolve(__dirname, 'src/lib/tw-text-encoder')
+        }
     },
     module: {
         rules: [{

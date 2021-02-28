@@ -17,4 +17,24 @@ const _TextEncoder = typeof TextEncoder === 'function' ? TextEncoder : class Tex
     }
 };
 
-export default _TextEncoder;
+const _TextDecoder = typeof TextDecoder === 'function' ? TextDecoder : class TextDecoder {
+    constructor (encoding) {
+        if (typeof encoding !== 'undefined' && encoding !== null && encoding !== 'utf-8' && encoding !== 'utf8') {
+            throw new Error('Encoding is not supported');
+        }
+        this.encoding = 'utf-8';
+    }
+    decode (view) {
+        const array = new Uint8Array(view);
+        let result = '';
+        for (let i = 0; i < array.length; i++) {
+            result += String.fromCharCode(array[i]);
+        }
+        return result;
+    }
+};
+
+export {
+    _TextEncoder as TextEncoder,
+    _TextDecoder as TextDecoder
+};

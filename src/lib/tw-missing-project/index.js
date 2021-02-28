@@ -3,7 +3,7 @@ import backdrop from '!raw-loader!./c17163c6954e9422ac2405de4c9d68c8.svg';
 /* eslint-enable import/no-unresolved */
 
 import projectData from './project-data';
-import TextEncoder from '../tw-text-encoder';
+import {TextEncoder} from '../tw-text-encoder';
 
 export const MISSING_PROJECT_ID = '__missing__';
 

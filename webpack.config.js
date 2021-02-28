@@ -139,7 +139,8 @@ module.exports = [
             splitChunks: {
                 chunks: 'all',
                 minChunks: 2,
-                maxInitialRequests: Infinity
+                minSize: 50000,
+                maxInitialRequests: 5
             }
         },
         plugins: base.plugins.concat([

@@ -17,6 +17,7 @@ export default async function ({ addon, global, console }) {
     let container = button.parentElement;
     let icon = document.createElement("img");
     container.appendChild(icon);
+    icon.loading = "lazy";
     icon.src = _twGetAsset("/icon--mute.svg");
     icon.style.display = "none";
     let mode = false;

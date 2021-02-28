@@ -80,13 +80,12 @@ const WrappedMenuBar = compose(
     SBFileUploaderHOC
 )(MenuBar);
 
+import(/* webpackChunkName: "addons" */ '../addons/entry');
+
 class Interface extends React.Component {
     constructor (props) {
         super(props);
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
-    }
-    componentDidMount () {
-        import(/* webpackChunkName: "addons" */ '../addons/entry');
     }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {

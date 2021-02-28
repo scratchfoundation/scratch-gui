@@ -45,15 +45,16 @@ const walk = dir => {
 };
 
 if (!process.argv.includes('-')) {
-    rimraf.sync('ScratchAddons');
-    childProcess.execSync('git clone --depth=1 -b tw https://github.com/GarboMuffin/ScratchAddons ScratchAddons');
+    const repoPath = pathUtil.resolve(__dirname, 'ScratchAddons');
+    rimraf.sync(repoPath);
+    childProcess.execSync(`git clone --depth=1 -b tw https://github.com/GarboMuffin/ScratchAddons ${repoPath}`);
 }
-rimraf.sync('addons');
-rimraf.sync('addons-l10n');
-rimraf.sync('libraries');
-fs.mkdirSync('addons', {recursive: true});
-fs.mkdirSync('addons-l10n', {recursive: true});
-fs.mkdirSync('libraries', {recursive: true});
+rimraf.sync(pathUtil.resolve(__dirname, 'addons'));
+rimraf.sync(pathUtil.resolve(__dirname, 'addons-l10n'));
+rimraf.sync(pathUtil.resolve(__dirname, 'libraries'));
+fs.mkdirSync(pathUtil.resolve(__dirname, 'addons'), {recursive: true});
+fs.mkdirSync(pathUtil.resolve(__dirname, 'addons-l10n'), {recursive: true});
+fs.mkdirSync(pathUtil.resolve(__dirname, 'libraries'), {recursive: true});
 
 const JS_HEADER = `/**!
  * Imported from SA
@@ -67,8 +68,8 @@ const includeImportedLibraries = contents => {
     const matches = [...contents.matchAll(/import +(?:{.*}|.*) +from +["']\.\.\/\.\.\/libraries\/([\w\d_-]+\.js)["'];/g)];
     for (const match of matches) {
         const libraryFile = match[1];
-        const oldLibraryPath = pathUtil.join('ScratchAddons', 'libraries', libraryFile);
-        const newLibraryPath = pathUtil.join('libraries', libraryFile);
+        const oldLibraryPath = pathUtil.resolve(__dirname, 'ScratchAddons', 'libraries', libraryFile);
+        const newLibraryPath = pathUtil.resolve(__dirname, 'libraries', libraryFile);
         const libraryContents = fs.readFileSync(oldLibraryPath, 'utf-8');
         fs.writeFileSync(newLibraryPath, libraryContents);
     }
@@ -107,8 +108,8 @@ const includeImports = (folder, contents) => {
 
 (async () => {
     for (const addon of addons) {
-        const oldDirectory = pathUtil.join('ScratchAddons', 'addons', addon);
-        const newDirectory = pathUtil.join('addons', addon);
+        const oldDirectory = pathUtil.resolve(__dirname, 'ScratchAddons', 'addons', addon);
+        const newDirectory = pathUtil.resolve(__dirname, 'addons', addon);
         for (const file of walk(oldDirectory)) {
             const oldPath = pathUtil.join(oldDirectory, file);
             const newPath = pathUtil.join(newDirectory, file);
@@ -131,11 +132,11 @@ const includeImports = (folder, contents) => {
         }
     }
 
-    const l10nFiles = fs.readdirSync(pathUtil.join('ScratchAddons', 'addons-l10n'));
+    const l10nFiles = fs.readdirSync(pathUtil.resolve(__dirname, 'ScratchAddons', 'addons-l10n'));
     const languages = [];
     for (const file of l10nFiles) {
-        const oldDirectory = pathUtil.join('ScratchAddons', 'addons-l10n', file);
-        const newDirectory = pathUtil.join('addons-l10n', file);
+        const oldDirectory = pathUtil.resolve(__dirname, 'ScratchAddons', 'addons-l10n', file);
+        const newDirectory = pathUtil.resolve(__dirname, 'addons-l10n', file);
         if (!fs.statSync(oldDirectory).isDirectory()) {
             continue;
         }
@@ -155,8 +156,8 @@ const includeImports = (folder, contents) => {
         }
     }
 
-    const extensionManifestPath = pathUtil.join('ScratchAddons', 'manifest.json');
-    const upstreamMetaPath = 'upstream-meta.json';
+    const extensionManifestPath = pathUtil.resolve(__dirname, 'ScratchAddons', 'manifest.json');
+    const upstreamMetaPath = pathUtil.resolve(__dirname, 'upstream-meta.json');
     const extensionManifest = JSON.parse(fs.readFileSync(extensionManifestPath, 'utf8'));
     const versionName = extensionManifest.version_name;
     fs.writeFileSync(upstreamMetaPath, JSON.stringify({

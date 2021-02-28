@@ -4,16 +4,10 @@ import projectData from './project-data';
 import backdrop from '!raw-loader!./cd21514d0531fdffb22204e0ec5ed84a.svg';
 import costume1 from '!raw-loader!./14e46ec3e2ba471c2adfe8f119052307.svg';
 /* eslint-enable import/no-unresolved */
+import TextEncoder from '../tw-text-encoder';
 
 const defaultProject = translator => {
-    let _TextEncoder;
-    if (typeof TextEncoder === 'undefined') {
-        _TextEncoder = require('text-encoding').TextEncoder;
-    } else {
-        /* global TextEncoder */
-        _TextEncoder = TextEncoder;
-    }
-    const encoder = new _TextEncoder();
+    const encoder = new TextEncoder();
 
     const projectJson = projectData(translator);
     return [{

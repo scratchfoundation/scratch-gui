@@ -4,7 +4,7 @@ import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import VM from 'scratch-vm';
 
-import backdropLibraryContent from '../lib/libraries/backdrops.json';
+import {getBackdropLibrary} from '../lib/libraries/tw-async-libraries';
 import backdropTags from '../lib/libraries/backdrop-tags';
 import LibraryComponent from '../components/library/library.jsx';
 
@@ -38,7 +38,7 @@ class BackdropLibrary extends React.Component {
     render () {
         return (
             <LibraryComponent
-                data={backdropLibraryContent}
+                data={getBackdropLibrary()}
                 id="backdropLibrary"
                 tags={backdropTags}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}

@@ -10,7 +10,7 @@ import LibraryComponent from '../components/library/library.jsx';
 import soundIcon from '../components/library-item/lib-icon--sound.svg';
 import soundIconRtl from '../components/library-item/lib-icon--sound-rtl.svg';
 
-import soundLibraryContent from '../lib/libraries/sounds.json';
+import {getSoundLibrary} from '../lib/libraries/tw-async-libraries';
 import soundTags from '../lib/libraries/sound-tags';
 
 import {connect} from 'react-redux';
@@ -21,6 +21,19 @@ const messages = defineMessages({
         description: 'Heading for the sound library',
         id: 'gui.soundLibrary.chooseASound'
     }
+});
+
+// @todo need to use this hack to avoid library using md5 for image
+const getSoundLibraryThumbnailData = (soundLibraryContent, isRtl) => soundLibraryContent.map(sound => {
+    const {
+        md5ext,
+        ...otherData
+    } = sound;
+    return {
+        _md5: md5ext,
+        rawURL: isRtl ? soundIconRtl : soundIcon,
+        ...otherData
+    };
 });
 
 class SoundLibrary extends React.PureComponent {
@@ -50,8 +63,22 @@ class SoundLibrary extends React.PureComponent {
          * function to call when the sound ends
          */
         this.handleStop = null;
+
+        const soundLibrary = getSoundLibrary();
+        this.state = {
+            data: Array.isArray(soundLibrary) ?
+                getSoundLibraryThumbnailData(soundLibrary, this.props.isRtl) :
+                soundLibrary
+        };
     }
     componentDidMount () {
+        if (this.state.data.then) {
+            this.state.data.then(data => {
+                this.setState({
+                    data: getSoundLibraryThumbnailData(data, this.props.isRtl)
+                });
+            });
+        }
         this.audioEngine = new AudioEngine();
         this.playingSoundPromise = null;
     }
@@ -146,23 +173,10 @@ class SoundLibrary extends React.PureComponent {
         });
     }
     render () {
-        // @todo need to use this hack to avoid library using md5 for image
-        const soundLibraryThumbnailData = soundLibraryContent.map(sound => {
-            const {
-                md5ext,
-                ...otherData
-            } = sound;
-            return {
-                _md5: md5ext,
-                rawURL: this.props.isRtl ? soundIconRtl : soundIcon,
-                ...otherData
-            };
-        });
-
         return (
             <LibraryComponent
                 showPlayButton
-                data={soundLibraryThumbnailData}
+                data={this.state.data}
                 id="soundLibrary"
                 setStopHandler={this.setStopHandler}
                 tags={soundTags}

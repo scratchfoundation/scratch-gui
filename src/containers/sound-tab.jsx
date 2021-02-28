@@ -17,7 +17,7 @@ import RecordModal from './record-modal.jsx';
 import SoundEditor from './sound-editor.jsx';
 import SoundLibrary from './sound-library.jsx';
 
-import soundLibraryContent from '../lib/libraries/sounds.json';
+import {getSoundLibrary} from '../lib/libraries/tw-async-libraries';
 import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
@@ -110,7 +110,8 @@ class SoundTab extends React.Component {
         this.setState({selectedSoundIndex: Math.max(sounds.length - 1, 0)});
     }
 
-    handleSurpriseSound () {
+    async handleSurpriseSound () {
+        const soundLibraryContent = await getSoundLibrary();
         const soundItem = soundLibraryContent[Math.floor(Math.random() * soundLibraryContent.length)];
         const vmSound = {
             format: soundItem.dataFormat,

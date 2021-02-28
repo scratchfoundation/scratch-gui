@@ -15,7 +15,7 @@ import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import {BLOCKS_DEFAULT_SCALE} from '../lib/layout-constants';
-import spriteLibraryContent from '../lib/libraries/sprites.json';
+import {getSpriteLibrary} from '../lib/libraries/tw-async-libraries';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
 import sharedMessages from '../lib/shared-messages';
 import {emptySprite} from '../lib/empty-assets';
@@ -105,7 +105,8 @@ class TargetPane extends React.Component {
             this.props.onHighlightTarget(id);
         }
     }
-    handleSurpriseSpriteClick () {
+    async handleSurpriseSpriteClick () {
+        const spriteLibraryContent = await getSpriteLibrary();
         const surpriseSprites = spriteLibraryContent.filter(sprite =>
             (sprite.tags.indexOf('letters') === -1) && (sprite.tags.indexOf('numbers') === -1)
         );

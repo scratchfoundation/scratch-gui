@@ -1,0 +1,1 @@
+This is basically https://github.com/LLK/scratch-render-fonts except the fonts are loaded as files instead of as base64 URIs in the JS.

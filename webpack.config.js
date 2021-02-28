@@ -49,7 +49,8 @@ const base = {
     resolve: {
         symlinks: false,
         alias: {
-            'text-encoding$': path.resolve(__dirname, 'src/lib/tw-text-encoder')
+            'text-encoding$': path.resolve(__dirname, 'src/lib/tw-text-encoder'),
+            'scratch-render-fonts$': path.resolve(__dirname, 'src/lib/tw-scratch-render-fonts')
         }
     },
     module: {
@@ -126,7 +127,7 @@ module.exports = [
         module: {
             rules: base.module.rules.concat([
                 {
-                    test: /\.(svg|png|wav|gif|jpg|mp3)$/,
+                    test: /\.(svg|png|wav|gif|jpg|mp3|ttf|otf)$/,
                     loader: 'file-loader',
                     options: {
                         outputPath: 'static/assets/'
@@ -227,7 +228,7 @@ module.exports = [
             module: {
                 rules: base.module.rules.concat([
                     {
-                        test: /\.(svg|png|wav|gif|jpg|mp3)$/,
+                        test: /\.(svg|png|wav|gif|jpg|mp3|ttf|otf)$/,
                         loader: 'file-loader',
                         options: {
                             outputPath: 'static/assets/',

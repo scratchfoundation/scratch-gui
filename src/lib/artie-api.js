@@ -22,7 +22,8 @@ const _generateArtieBlock = (blocks) => {
     let arrayBlocks =[];
     Object.values(blocks).forEach((block) => {arrayBlocks.push(block)});
 
-    let roots = arrayBlocks.filter(block => block.topLevel === true);
+    //Getting all the roots that are not included in the input elements values (because these elements are not elements but just inputs)
+    let roots = arrayBlocks.filter(block => block.topLevel === true && !_inputElementsValues.includes(block.opcode));
 
     // 2- Gets the nested elements, the next elements and the inputs
     Object.values(roots).forEach((root) => {
@@ -37,8 +38,8 @@ const _blockHandler = (block, blocks) => {
 
     // 2.1- creates the temporal element for the root
     let transformed = false;
-    const elementFamily = (block.opcode.split('_'))[0];
-    let element = {id: block.id, elementName: block.opcode, elementFamily: elementFamily, next: null, inputs: [], nested: [], previous: null, parent: null};
+    const elementFamily = (block !== undefined && block.opcode !== undefined ? (block.opcode.split('_'))[0] : null);
+    let element = {id: (block.id !== undefined ? block.id : null), elementName: (block.opcode!==undefined ? block.opcode : null), elementFamily: elementFamily, next: null, inputs: [], nested: [], previous: null, parent: null};
 
     // 2.2- Checks if this block has a next element
     if(block.next !== null && block.next !== undefined){

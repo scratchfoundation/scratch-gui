@@ -447,7 +447,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -512,8 +512,10 @@ var WorkerDispatch = /*#__PURE__*/function (_SharedDispatch) {
 
 
   _createClass(WorkerDispatch, [{
-    key: "setService",
-
+    key: "waitForConnection",
+    get: function get() {
+      return this._connectionPromise;
+    }
     /**
      * Set a local object as the global provider of the specified service.
      * WARNING: Any method on the provider can be called from any worker within the dispatch system.
@@ -521,6 +523,9 @@ var WorkerDispatch = /*#__PURE__*/function (_SharedDispatch) {
      * @param {object} provider - a local object which provides this service.
      * @returns {Promise} - a promise which will resolve once the service is registered.
      */
+
+  }, {
+    key: "setService",
     value: function setService(service, provider) {
       var _this2 = this;
 
@@ -583,11 +588,6 @@ var WorkerDispatch = /*#__PURE__*/function (_SharedDispatch) {
       }
 
       return promise;
-    }
-  }, {
-    key: "waitForConnection",
-    get: function get() {
-      return this._connectionPromise;
     }
   }]);
 

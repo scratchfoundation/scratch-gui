@@ -3,6 +3,12 @@
 @import "../../css/typography.css";
 @import "../../css/z-index.css";
 
+/* from scratch-www */
+$active-gray: hsla(0, 0%, 0%, .1);
+$ui-blue-10percent: hsla(215, 100%, 65%, .1);
+$ui-blue-25percent:  hsla(215, 100%, 65%, .25);
+$ui-gray: hsla(0, 0%, 95%, 1);
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -37,7 +43,6 @@
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
-    text-align: left;
 }
 
 .privacy-policy-link {
@@ -45,38 +50,101 @@
     text-decoration: none;
 }
 
+/* stack the radio buttons vertically, not horizontally */
+.radio-buttons label {
+    display: block;
+    margin: 0.5rem;
+    transition: all .125s ease;
+    background-color: $ui-gray;
+    border-radius: .5rem;
+    margin: 0 auto 0.375rem;
+    align-items: center;
+    padding: 1rem 0;
+    vertical-align: middle;
+}
+
+.radio-buttons label:hover {
+    background-color: $ui-blue-10percent;
+}
+
+.radio-buttons label.label-selected,
+.radio-buttons label.label-selected:hover {
+    background-color: $ui-blue-25percent;
+}
+
+.radio-buttons input[type="radio"] {
+    margin: -1px 0.75rem 1px;
+    border: 1px solid $active-gray;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    appearance: none;
+    background-color: $ui-white;
+    vertical-align: middle;
+}
+
+.radio-buttons input[type="radio"]:checked,
+.radio-buttons input[type="radio"]:focus {
+    box-shadow: 0 0 0 2px $ui-blue-25percent;
+    outline: none;
+}
+
+.radio-buttons input[type="radio"]:checked {
+    transition: all .25s ease;
+    background-color: $ui-white;
+    border: 1px solid $motion-primary;
+}
+
+.radio-buttons input[type="radio"]:checked::after {
+    display: block;
+    margin: 0.125rem;
+    border-radius: 50%;
+    background-color: $motion-primary;
+    width: .625rem;
+    height: .625rem;
+    content: "";
+}
+
 /* Confirmation buttons at the bottom of the modal */
 .button-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+
     margin: 1.5rem 0;
     font-weight: bolder;
-    text-align: right;
-    display: flex;
-    justify-content: center;
+}
+
+@keyframes fade-out {
+    0% {opacity: 1}
+    100% {opacity: 0}
+}
+
+.setting-was-updated {
+    animation: fade-out 3s ease-out;
+    color: $extensions-primary;
 }
 
 .button-row button {
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
     padding: 0.5rem 1.5rem;
-    background: white;
+    color: white;
+    background: $motion-primary;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
 }
 
-.button-row button.opt-in {
-    background: $motion-primary;
-    color: white;
+.button-row button:hover {
+    background: $extensions-primary;
+    box-shadow: 0 0 0 6px $motion-transparent;
 }
 
-.button-row button.opt-out {
-    color: $motion-primary;
-}
-
-[dir="ltr"] .button-row button + button {
-    margin-left: 0.5rem;
-}
-
-[dir="rtl"] .button-row button + button {
-    margin-right: 0.5rem;
+.button-row button:disabled {
+    background: $text-primary;
+    border-color: $ui-black-transparent;
+    box-shadow: none;
+    opacity: 0.25;
 }

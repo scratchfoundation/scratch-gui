@@ -76,7 +76,7 @@ describe('downsampleIfNeeded', () => {
         try {
             await downsampleIfNeeded({samples, sampleRate}, null);
         } catch (e) {
-            expect(e).toEqual('Sound too large to save, refusing to edit');
+            expect(e.message).toEqual('Sound too large to save, refusing to edit');
         }
     });
 });

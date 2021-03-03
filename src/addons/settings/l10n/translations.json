@@ -19,7 +19,7 @@
         "tw.addons.settings.tags.theme": "Design",
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Addon-Einstellungen",
-        "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar."
+        "tw.addons.settings.unsupported": "Manche Addons sind in diesem Browser nicht verfügbar:"
     },
     "es": {
         "tw.addons.settings.addonFeedback": "Enviar comentarios sobre addons",

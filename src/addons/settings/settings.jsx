@@ -48,7 +48,7 @@ const addonTranslations = getAddonTranslations(locale);
 const settingsTranslations = settingsTranslationsEnglish;
 document.documentElement.lang = locale;
 if (locale !== 'en') {
-    const messages = settingsTranslationsOther[locale];
+    const messages = settingsTranslationsOther[locale] || settingsTranslationsOther[locale.split('-')[0]];
     if (messages) {
         Object.assign(settingsTranslations, messages);
     }

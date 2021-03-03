@@ -82,7 +82,7 @@
     "scratch-vm": "github:TurboWarp/scratch-vm#develop",
     "scratch-paint": "github:TurboWarp/scratch-paint#develop",
     "scratch-render": "github:TurboWarp/scratch-render#develop",
-    "scratch-svg-renderer": "0.2.0-prerelease.20210219193204",
+    "scratch-svg-renderer": "github:TurboWarp/scratch-svg-renderer#develop",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
     "text-encoding": "0.7.0",

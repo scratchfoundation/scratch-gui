@@ -524,15 +524,22 @@ a:active, a:focus {
     margin-right: 10px;
 }
 
-.unsupported-container {
-    margin-bottom: 10px;
+.footer {
     color: #444;
 }
-[theme="dark"] .unsupported-container {
+[theme="dark"] .footer {
     color: #aaa;
+}
+
+.unsupported-container {
+    margin-bottom: 10px;
 }
 .unsupported-addon {
     padding-left: 5px;
+}
+
+.version {
+    margin-bottom: 10px;
 }
 
 .footer-buttons {

@@ -885,11 +885,16 @@ class AddonSettingsComponent extends React.Component {
                             {settingsTranslations['tw.addons.settings.import']}
                         </button>
                     </div>
-                    {unsupported.length ? (
-                        <UnsupportedAddonsComponent
-                            addons={unsupported}
-                        />
-                    ) : null}
+                    <footer className={styles.footer}>
+                        {unsupported.length ? (
+                            <UnsupportedAddonsComponent
+                                addons={unsupported}
+                            />
+                        ) : null}
+                        <div className={styles.version}>
+                            {`v${upstreamMeta.version} (${upstreamMeta.commit})`}
+                        </div>
+                    </footer>
                 </div>
             </div>
         );

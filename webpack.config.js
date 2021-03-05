@@ -119,6 +119,7 @@ module.exports = [
             'player': './src/playground/player.jsx',
             'fullscreen': './src/playground/fullscreen.jsx',
             'embed': './src/playground/embed.jsx',
+            'embedgpl': './src/playground/embedgpl.jsx',
             'addon-settings': './src/playground/addon-settings.jsx'
         },
         output: {
@@ -178,6 +179,14 @@ module.exports = [
                 chunks: ['embed'],
                 template: 'src/playground/index.ejs',
                 filename: 'embed.html',
+                title: 'Embedded Project - TurboWarp',
+                noTheme: true,
+                ...htmlWebpackPluginCommon
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['embedgpl'],
+                template: 'src/playground/index.ejs',
+                filename: 'embedgpl.html',
                 title: 'Embedded Project - TurboWarp',
                 noTheme: true,
                 ...htmlWebpackPluginCommon

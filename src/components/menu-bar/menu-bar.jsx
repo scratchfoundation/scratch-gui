@@ -31,6 +31,8 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
+import {toggleMysteryMode} from '../../reducers/mystery-mode';
+import {toggleWobblyDragging} from '../../reducers/wobbly-dragging';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -76,6 +78,8 @@ import aboutIcon from './icon--about.svg';
 import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
+
+const isEdge = bowser.msedge;
 
 const ariaMessages = defineMessages({
     language: {
@@ -526,6 +530,38 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>
+                                    <MenuItem onClick={this.props.onClickToggleMysteryMode}>
+                                        {this.props.mysteryMode ? (
+                                            <FormattedMessage
+                                                defaultMessage="Turn off Mystery Mode"
+                                                description="Menu bar item for turning off dark mode"
+                                                id="gui.menuBar.mysteryModeOff"
+                                            />
+                                        ) : (
+                                            <FormattedMessage
+                                                defaultMessage="Turn on Mystery Mode"
+                                                description="Menu bar item for turning on dark mode"
+                                                id="gui.menuBar.mysteryModeOn"
+                                            />
+                                        )}
+                                    </MenuItem>
+                                    {isEdge ? null : (
+                                        <MenuItem onClick={this.props.onClickToggleWobblyDragging}>
+                                            {this.props.wobblyDragging ? (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn off wobbly sprite dragging"
+                                                    description="Menu bar item for turning off wobbly sprite dragging"
+                                                    id="gui.menuBar.wobblyDraggingOff"
+                                                />
+                                            ) : (
+                                                <FormattedMessage
+                                                    defaultMessage="Turn on wobbly sprite dragging"
+                                                    description="Menu bar item for turning on wobbly sprite dragging"
+                                                    id="gui.menuBar.wobblyDraggingOn"
+                                                />
+                                            )}
+                                        </MenuItem>
+                                    )}
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -782,6 +818,7 @@ MenuBar.propTypes = {
     locale: PropTypes.string.isRequired,
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
+    mysteryMode: PropTypes.bool,
     onClickAbout: PropTypes.oneOfType([
         PropTypes.func, // button mode: call this callback when the About button is clicked
         PropTypes.arrayOf( // menu mode: list of items in the About menu
@@ -801,6 +838,8 @@ MenuBar.propTypes = {
     onClickRemix: PropTypes.func,
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
+    onClickToggleMysteryMode: PropTypes.func,
+    onClickToggleWobblyDragging: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
@@ -823,7 +862,8 @@ MenuBar.propTypes = {
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    wobblyDragging: PropTypes.bool
 };
 
 MenuBar.defaultProps = {
@@ -845,12 +885,14 @@ const mapStateToProps = (state, ownProps) => {
         languageMenuOpen: languageMenuOpen(state),
         locale: state.locales.locale,
         loginMenuOpen: loginMenuOpen(state),
+        mysteryMode: state.scratchGui.mysteryMode,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        wobblyDragging: state.scratchGui.wobblyDragging
     };
 };
 
@@ -873,6 +915,8 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
+    onClickToggleMysteryMode: () => dispatch(toggleMysteryMode()),
+    onClickToggleWobblyDragging: () => dispatch(toggleWobblyDragging()),
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

@@ -18,6 +18,7 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import MysteryMode from '../mystery-mode/mystery-mode.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
@@ -160,6 +161,7 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                <MysteryMode />
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}

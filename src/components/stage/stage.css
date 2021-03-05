@@ -84,6 +84,11 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
 }
 
+.dragging-sprite.wobbly {
+    /* prevent overflow (when canvas crosses the right edge of the page) from causing a scrollbar to appear */
+    position: fixed;
+}
+
 .stage-bottom-wrapper {
     position: absolute;
     display: flex;

@@ -51,6 +51,9 @@ import libraryCodeCartoon from './thumbnails/code-a-cartoon.jpg';
 // Talking Tales
 import libraryTalking from './thumbnails/talking.png';
 
+// Sprite Mystery
+import librarySpriteMystery from './thumbnails/sprite-mystery.png';
+
 // Videos
 import recordASound from './thumbnails/record-a-sound.jpg';
 import glideAroundThumb from './thumbnails/glide-around.jpg';
@@ -1478,7 +1481,20 @@ export default {
         ],
         urlId: 'animations-that-talk'
     },
-
+    'sprite-mystery': {
+        name: 'How to Find a Sprite',
+        img: librarySpriteMystery,
+        steps: [{
+            video: 'sprite-mystery'
+        }, {
+            deckIds: [
+                'intro-move-sayhello',
+                'add-sprite'
+            ]
+        }
+        ],
+        urlId: 'sprite-mystery'
+    },
     'talking': {
         name: (
             <FormattedMessage

@@ -104,6 +104,10 @@ const includeImports = (folder, contents) => {
     //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  match
     //                           ^^^^^^^^^^^^^^^^^^^  capture group 1
     contents = contents.replace(
+        /\${addon\.self\.(?:dir|lib) *\+ *([^;\n]+)}/g,
+        (_fullText, name) => `\${_twGetAsset(${name})}`
+    );
+    contents = contents.replace(
         /addon\.self\.(?:dir|lib) *\+ *([^;]+)/g,
         (_fullText, name) => `_twGetAsset(${name})`
     );

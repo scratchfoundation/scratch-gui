@@ -3,6 +3,13 @@
  * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
  */
 
+/* inserted by pull.js */
+import _twAsset0 from "./icon--close.svg";
+const _twGetAsset = (path) => {
+  if (path === "/icon--close.svg") return _twAsset0;
+  throw new Error(`Unknown asset: ${path}`);
+};
+
 import DevTools from "./DevTools.js";
 
 export default async function ({ addon, global, console, msg, safeMsg: m }) {
@@ -25,9 +32,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
     <div class="${addon.tab.scratchClass("close-button_close-button", "close-button_large", {
       others: "close-button",
     })}">
-	  <img class="${addon.tab.scratchClass(
-      "close-button_close-icon"
-    )}" src="/static/assets/cb666b99d3528f91b52f985dfb102afa.svg">
+	  <img class="${addon.tab.scratchClass("close-button_close-icon")}" src="${_twGetAsset("/icon--close.svg")}">
 	</div>
   </div>
 </div>

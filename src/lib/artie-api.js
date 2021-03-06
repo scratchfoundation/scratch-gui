@@ -9,7 +9,7 @@
 /* eslint-disable arrow-parens */
 import xhr from 'xhr';
 
-const _inputElementsValues = ['text', 'math_number', 'math_positive_number'];
+const _inputElementsValues = ['text', 'math_number', 'math_positive_number', 'math_whole_number'];
 
 
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});

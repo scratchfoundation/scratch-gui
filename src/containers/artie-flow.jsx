@@ -123,7 +123,7 @@ class ArtieFlow extends React.Component {
         //3- Checks if we must show the help component or not
         if(!nextState.artieHelpComponent){
             if(currentStudent !== null && currentExercise !== null && nextProps.artieExercises.help !== undefined && nextProps.artieExercises.help !== null &&
-                nextProps.artieExercises.help.nextSteps !== null){
+                nextProps.artieExercises.help.nextSteps !== null && nextProps.artieExercises.help.totalDistance > 0){
 
                 artieLoginComponent = false;
                 artieExercisesComponent = false;

@@ -129,6 +129,7 @@ class LibraryItemComponent extends React.PureComponent {
                     >
                         <img
                             className={styles.libraryItemImage}
+                            loading="lazy"
                             src={this.props.iconURL}
                         />
                     </Box>

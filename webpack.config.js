@@ -194,7 +194,7 @@ module.exports = [
             }),
             new HtmlWebpackPlugin({
                 chunks: ['addon-settings'],
-                template: 'src/playground/index.ejs',
+                template: 'src/playground/simple.ejs',
                 filename: 'addons.html',
                 title: 'Addon Settings - TurboWarp',
                 ...htmlWebpackPluginCommon

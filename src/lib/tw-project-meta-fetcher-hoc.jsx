@@ -55,9 +55,6 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     log.warn('cannot fetch project meta', err);
                 });
         }
-        componentWillUnmount () {
-            document.title = this.initialTitle;
-        }
         render () {
             const {
                 /* eslint-disable no-unused-vars */

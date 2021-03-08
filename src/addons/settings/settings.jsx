@@ -59,6 +59,21 @@ document.title = `${settingsTranslations['tw.addons.settings.title']} - TurboWar
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);
 
+const sortAddons = () => {
+    const sortedOrder = Object.keys(addons).sort((aId, bId) => {
+        const aNew = addons[aId].tags && addons[aId].tags.includes('new');
+        const bNew = addons[bId].tags && addons[bId].tags.includes('new');
+        if (aNew && !bNew) return -1;
+        if (bNew && !aNew) return 1;
+        return 0;
+    });
+    const result = {};
+    for (const key of sortedOrder) {
+        result[key] = addons[key];
+    }
+    return result;
+};
+
 const AddonCreditsComponent = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
@@ -908,7 +923,7 @@ AddonSettingsComponent.propTypes = {
     onExportSettings: PropTypes.func
 };
 AddonSettingsComponent.defaultProps = {
-    addons,
+    addons: sortAddons(),
     unsupportedAddons
 };
 

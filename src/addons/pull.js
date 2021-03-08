@@ -23,6 +23,7 @@
 const fs = require('fs');
 const childProcess = require('child_process');
 const rimraf = require('rimraf');
+const request = require('request');
 const pathUtil = require('path');
 const addons = require('./addons.json');
 
@@ -114,6 +115,12 @@ const includeImports = (folder, contents) => {
 
     return header + contents;
 };
+
+request('https://raw.githubusercontent.com/ScratchAddons/contributors/master/.all-contributorsrc', (err, response, body) => {
+    const parsed = JSON.parse(body);
+    const contributorsPath = pathUtil.resolve(__dirname, 'contributors.json');
+    fs.writeFileSync(contributorsPath, JSON.stringify(parsed.contributors, null, 4));
+});
 
 (async () => {
     for (const addon of addons) {

@@ -120,7 +120,8 @@ module.exports = [
             'fullscreen': './src/playground/fullscreen.jsx',
             'embed': './src/playground/embed.jsx',
             'embedgpl': './src/playground/embedgpl.jsx',
-            'addon-settings': './src/playground/addon-settings.jsx'
+            'addon-settings': './src/playground/addon-settings.jsx',
+            'credits': './src/playground/credits/credits.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build')
@@ -196,6 +197,14 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 filename: 'addons.html',
                 title: 'Addon Settings - TurboWarp',
+                ...htmlWebpackPluginCommon
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['credits'],
+                template: 'src/playground/index.ejs',
+                filename: 'credits.html',
+                title: 'Credits',
+                noSplash: true,
                 ...htmlWebpackPluginCommon
             }),
             new CopyWebpackPlugin([{

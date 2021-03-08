@@ -25,7 +25,7 @@ a {
 .main section {
     max-width: 900px;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .header-container {
@@ -33,6 +33,7 @@ a {
     background-color: $motion-primary;
     padding: 20px 0;
     text-align: center;
+    margin-bottom: 30px;
 }
 .header-text {
 

@@ -70,6 +70,7 @@ const Credits = () => (
         </section>
         <section>
             <h2>{'Addons'}</h2>
+            <p>Includes some translators as well.</p>
             <UserList users={UserData.addons} />
         </section>
     </main>

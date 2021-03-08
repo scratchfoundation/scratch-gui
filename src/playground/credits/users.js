@@ -23,40 +23,48 @@ for (const {credits} of Object.values(addonManifests)) {
 const translators = [
     {
         userId: '4648559',
-        username: 'World_Languages'
+        scratchUsername: 'World_Languages',
+        name: 'World_Languages'
     },
     {
         userId: '6103312',
-        username: 'Fupicat'
+        scratchUsername: 'Fupicat',
+        name: 'Fupicat'
     },
     {
         userId: '62181963',
-        username: 'DieForrobux'
+        scratchUsername: 'DieForrobux',
+        name: 'DieForrobux'
     },
     {
         userId: '61087321',
-        username: 'superscratch444tre'
+        scratchUsername: 'superscratch444tre',
+        name: 'superscratch444tre'
     },
     {
         userId: '67422866',
-        username: 'AArt1256'
+        scratchUsername: 'AArt1256',
+        name: 'AnnoyedArt1256'
     },
     {
         userId: '61067753',
-        username: 'diaowinner'
+        scratchUsername: 'diaowinner',
+        name: 'diaowinner'
     },
     {
         userId: '62626',
-        username: 's_federici'
+        scratchUsername: 's_federici',
+        name: 's_federici'
     },
     {
         userId: '34316478',
-        username: 'philipp2007'
+        scratchUsername: 'philipp2007',
+        name: 'iqnite'
     }
-].map(({userId, username}) => ({
+].map(({userId, scratchUsername, name}) => ({
     image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
-    href: `https://scratch.mit.edu/users/${username}/`,
-    text: username
+    href: `https://scratch.mit.edu/users/${scratchUsername}/`,
+    text: name
 }));
 
 const addons = addonsContributors.filter(({contributions, login}) => (

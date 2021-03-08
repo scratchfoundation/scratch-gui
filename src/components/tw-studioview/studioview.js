@@ -48,8 +48,7 @@ var StudioView = function (studioId) {
 
     if ('IntersectionObserver' in window) {
         this.intersectionObserver = new IntersectionObserver(this.handleIntersection.bind(this), {
-            root: this.projectList,
-            rootMargin: '25px 0px 25px 0px',
+            root: this.projectList
         });
     } else {
         this.intersectionObserver = null;

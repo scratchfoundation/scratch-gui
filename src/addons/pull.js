@@ -82,17 +82,19 @@ const includeImportedLibraries = contents => {
 };
 
 const includeImports = (folder, contents) => {
-    const dynamicAssets = fs.readdirSync(folder)
+    const dynamicAssets = walk(folder)
         .filter(file => file.endsWith('.svg'));
+
+    const stringifyPath = path => JSON.stringify(path).replace(/\\\\/g, '/');
 
     // Then we'll generate some JS to import them.
     let header = '/* inserted by pull.js */\n';
     dynamicAssets.forEach((file, index) => {
-        header += `import _twAsset${index} from "./${file}";\n`;
+        header += `import _twAsset${index} from ${stringifyPath(`./${file}`)};\n`;
     });
     header += `const _twGetAsset = (path) => {\n`;
     dynamicAssets.forEach((file, index) => {
-        header += `  if (path === "/${file}") return _twAsset${index};\n`;
+        header += `  if (path === ${stringifyPath(`/${file}`)}) return _twAsset${index};\n`;
     });
     // eslint-disable-next-line no-template-curly-in-string
     header += '  throw new Error(`Unknown asset: ${path}`);\n';

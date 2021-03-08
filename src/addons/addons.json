@@ -18,5 +18,9 @@
     "editor-stage-left",
     "editor-colored-context-menus",
     "fix-uploaded-svgs",
+    "folders",
+    "variable-manager",
+    "block-palette-icons",
+    "load-extensions",
     "cat-blocks"
 ]

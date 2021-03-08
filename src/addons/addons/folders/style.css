@@ -1,0 +1,17 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ */
+
+.sa-folders-contextmenu-container {
+}
+
+.sa-folders-contextmenu-item {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[sa-folders-context-type="folder"] > :not(.sa-folders-contextmenu-container) {
+  display: none;
+}

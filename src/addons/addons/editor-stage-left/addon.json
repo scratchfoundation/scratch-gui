@@ -1,13 +1,6 @@
 {
   "name": "Display stage on left side",
   "description": "Moves the stage to the left side of the editor.",
-  "info": [
-    {
-      "type": "notice",
-      "text": "Refresh the editor after enabling/disabling this theme.",
-      "id": "refresheditor"
-    }
-  ],
   "credits": [
     {
       "name": "NitroCipher/ZenithRogue"
@@ -19,6 +12,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
+  "dynamicDisable": true,
   "userstyles": [
     {
       "url": "stageleft.css",

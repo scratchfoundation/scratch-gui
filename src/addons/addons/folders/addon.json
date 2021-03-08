@@ -1,0 +1,37 @@
+{
+  "name": "Sprite folders",
+  "description": "Adds folders to sprite lists, as well as costume and sound lists. To create a folder, right click any sprite and click \"create folder\". Click a folder to open or close it. Right click a sprite to see what folders you can move it to, or alternatively drag and drop it into an open folder.",
+  "info": [
+    {
+      "type": "notice",
+      "text": "Users with this feature enabled will be able to see the folders in your project. Anyone else will see sprite lists normally (no folders).",
+      "id": "notice-folders-are-public"
+    },
+    {
+      "type": "notice",
+      "text": "This feature works by adding \"[folderName]//\" at the beginning of the names for your sprites.",
+      "id": "notice-sprite-names"
+    }
+  ],
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "runAtComplete": false
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor", "beta"],
+  "enabledByDefault": false,
+  "l10n": true
+}

@@ -4,7 +4,6 @@
  */
 
 export default async function ({ addon, global, console }) {
-  var style = document.createElement("style");
   var stylesheet = `path.blocklyBlockBackground[fill="#FF6680"],
     path.blocklyBlockBackground[fill="#5CB1D6"],
     path.blocklyBlockBackground[fill="#FFBF00"],

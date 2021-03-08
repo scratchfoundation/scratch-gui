@@ -205,6 +205,7 @@ class Tab extends EventTargetShim {
                 for (const scratchClass of scratchClasses) {
                     if (scratchClass.startsWith(`${arg}_`) && scratchClass.length === arg.length + 6) {
                         classes.push(scratchClass);
+                        break;
                     }
                 }
             }

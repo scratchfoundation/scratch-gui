@@ -432,11 +432,13 @@ export default async function ({ addon, global, console, msg }) {
       noopSwitch,
       {
         opcode: "data_changevariableby",
+        remapValueType: { VALUE: "math_number" },
       },
     ];
     blockSwitches["data_changevariableby"] = [
       {
         opcode: "data_setvariableto",
+        remapValueType: { VALUE: "text" },
       },
       noopSwitch,
     ];
@@ -601,8 +603,7 @@ export default async function ({ addon, global, console, msg }) {
     const pasteSeparately = [];
     // Apply input remappings.
     if (opcodeData.remap) {
-      const childNodes = Array.from(xml.children);
-      for (const child of childNodes) {
+      for (const child of Array.from(xml.children)) {
         const oldName = child.getAttribute("name");
         const newName = opcodeData.remap[oldName];
         if (newName) {
@@ -621,6 +622,18 @@ export default async function ({ addon, global, console, msg }) {
           } else {
             child.setAttribute("name", newName);
           }
+        }
+      }
+    }
+    if (opcodeData.remapValueType) {
+      for (const child of Array.from(xml.children)) {
+        const name = child.getAttribute("name");
+        const newType = opcodeData.remapValueType[name];
+        if (newType) {
+          const valueNode = child.firstChild;
+          const fieldNode = valueNode.firstChild;
+          valueNode.setAttribute("type", newType);
+          fieldNode.setAttribute("name", newType === "text" ? "TEXT" : "NUM");
         }
       }
     }

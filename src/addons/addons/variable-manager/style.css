@@ -1,0 +1,135 @@
+/**!
+ * Imported from SA
+ * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ */
+
+/* Change z-indexes to allow more than 3 tabs */
+.gui_tab_27Unf.gui_is-selected_sHAiu {
+  z-index: 10 !important;
+}
+.gui_tab_27Unf:nth-of-type(1) {
+  z-index: 9;
+}
+.gui_tab_27Unf:nth-of-type(2) {
+  z-index: 8;
+}
+.gui_tab_27Unf:nth-of-type(3) {
+  z-index: 7;
+}
+.gui_tab_27Unf:nth-of-type(4) {
+  z-index: 6;
+}
+
+.sa-var-manager {
+  display: block;
+  padding: 18px;
+  /* weird hack to fix scrolling??? */
+  height: 50px;
+  overflow-y: auto;
+}
+
+.sa-var-manager-searchbox {
+  border: 1px solid #dddddd;
+  background: none;
+  background-image: url("search.svg");
+  margin-bottom: 4px;
+  padding: 8px;
+  padding-right: 5%; /* for the text to not overlap the image */
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 95% center;
+}
+
+/* begin feedback stuff (remove when out of beta)*/
+.sa-var-manager-feedback {
+  float: right;
+}
+
+.sa-var-manager-feedback-description {
+  color: gray;
+  font-style: italic;
+}
+
+.sa-var-manager-feedback-button {
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: #ff7b26;
+  padding: 4px;
+  border-radius: 4px;
+  color: white !important;
+  transition: opacity linear 250ms;
+}
+
+.sa-var-manager-feedback-button:hover {
+  color: white !important;
+  opacity: 0.75;
+}
+
+/* end feedback stuff */
+
+.sa-var-manager.freeze .sa-var-manager-value *,
+.sa-var-manager.freeze .sa-var-manager-name {
+  opacity: 0.5;
+}
+
+.sa-var-manager.freeze input:focus {
+  opacity: 1 !important;
+}
+
+.sa-var-manager.freeze textarea:focus {
+  opacity: 1 !important;
+}
+
+.sa-var-manager-heading {
+  display: block;
+  font-weight: bold;
+  font-size: large;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.sa-var-manager-name {
+  word-break: break-word;
+}
+
+.sa-var-manager-value {
+  width: 75%;
+  padding: 0 !important;
+}
+
+.sa-var-manager-value > input {
+  background: none;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.sa-var-manager-value > textarea {
+  background: none;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  line-height: 2em;
+  resize: none;
+}
+
+.sa-var-manager table {
+  border-radius: 5px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.sa-var-manager td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* tr:nth-child(even) {
+    background-color: #dddddd;
+} */

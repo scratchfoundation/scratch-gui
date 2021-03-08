@@ -1,0 +1,38 @@
+{
+  "name": "Auto-show editor extensions",
+  "description": "Adds music, pen, video sensing, and other editor extensions automatically to the block category list.",
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "settings": [
+    {
+      "name": "Music",
+      "id": "music",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Pen",
+      "id": "pen",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name": "Text to Speech",
+      "id": "text2speech",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "Translate",
+      "id": "translate",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "tags": ["editor"],
+  "l10n": true
+}

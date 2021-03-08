@@ -1,0 +1,27 @@
+{
+  "name": "Variable manager",
+  "description": "Adds a tab next to \"sounds\" in the editor for easily updating variables and lists.",
+  "credits": [
+    {
+      "name": "Jeffalo"
+    },
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["editor", "beta"],
+  "enabledByDefault": false,
+  "l10n": true
+}

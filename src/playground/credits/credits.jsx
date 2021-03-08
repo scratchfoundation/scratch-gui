@@ -54,7 +54,6 @@ const Credits = () => (
             <h2>{'Fosshost'}</h2>
             <p>
                 <a href="https://fosshost.org/">Fosshost</a> provides free high quality hosting services to open source projects, including TurboWarp.
-                Consider <a href="https://fosshost.org/donate">donating</a> to them to support their work.
             </p>
             <a href="https://fosshost.org/">
                 <img
@@ -65,13 +64,16 @@ const Credits = () => (
             </a>
         </section>
         <section>
-            <h2>{'Translators'}</h2>
-            <UserList users={UserData.translators} />
+            <h2>{'Scratch'}</h2>
+            <p>TurboWarp benefits immensely from the work of the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>.</p>
         </section>
         <section>
             <h2>{'Addons'}</h2>
-            <p>Includes some translators as well.</p>
-            <UserList users={UserData.addons} />
+            <UserList users={UserData.addonDevelopers} />
+        </section>
+        <section>
+            <h2>{'Translators'}</h2>
+            <UserList users={UserData.translators} />
         </section>
     </main>
 );

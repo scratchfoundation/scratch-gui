@@ -21,11 +21,11 @@ for (const {credits} of Object.values(addonManifests)) {
 }
 
 const translators = [
-    {
-        userId: '4648559',
-        scratchUsername: 'World_Languages',
-        name: 'World_Languages'
-    },
+    // {
+    //     userId: '4648559',
+    //     scratchUsername: 'World_Languages',
+    //     name: 'World_Languages'
+    // },
     {
         userId: '6103312',
         scratchUsername: 'Fupicat',
@@ -50,37 +50,41 @@ const translators = [
         userId: '61067753',
         scratchUsername: 'diaowinner',
         name: 'diaowinner'
-    },
-    {
-        userId: '62626',
-        scratchUsername: 's_federici',
-        name: 's_federici'
-    },
-    {
-        userId: '34316478',
-        scratchUsername: 'philipp2007',
-        name: 'iqnite'
     }
+    // {
+    //     userId: '62626',
+    //     scratchUsername: 's_federici',
+    //     name: 's_federici'
+    // },
+    // {
+    //     userId: '34316478',
+    //     scratchUsername: 'philipp2007',
+    //     name: 'iqnite'
+    // }
 ].map(({userId, scratchUsername, name}) => ({
     image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
     href: `https://scratch.mit.edu/users/${scratchUsername}/`,
     text: name
 }));
 
-const addons = addonsContributors.filter(({contributions, login}) => (
-    contributions.includes('translation') ||
+const addonContributorToIcon = ({login, avatar_url: avatarUrl}) => ({
+    image: `${avatarUrl}&s=60`,
+    href: `https://github.com/${login}/`,
+    text: login
+});
+
+const addonDevelopers = addonsContributors.filter(({contributions, login}) => (
     contributions.includes('design') ||
     contributions.includes('business') ||
     contributions.includes('tool') ||
-    addonCreditsNames.some(i => normalize(i) === normalize(login))
-)).map(({login, avatar_url: avatarUrl, contributions}) => ({
-    image: `${avatarUrl}&s=60`,
-    href: `https://github.com/${login}/`,
-    text: login,
-    contributions
-}));
+    addonCreditsNames.some(i => i.includes(normalize(login)) || normalize(login).includes(i))
+)).map(addonContributorToIcon);
+
+const addonTranslators = addonsContributors.filter(({contributions}) => (
+    contributions.includes('translation')
+)).map(addonContributorToIcon);
 
 export default {
-    translators: translators,
-    addons: addons
+    translators: shuffle([...translators, ...addonTranslators]),
+    addonDevelopers: shuffle(addonDevelopers)
 };

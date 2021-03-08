@@ -21,9 +21,6 @@ a {
     height: 100%;
 }
 
-.player-only {
-    padding-bottom: 16px;
-}
 .player-only * {
     box-sizing: border-box;
 }
@@ -36,10 +33,34 @@ a {
 .section {
     margin: 8px 0 8px 0;
 }
-.footer p {
+
+.footer {
+    padding: 10px 0;
+    font-size: 14px;
+    margin-top: 10px;
+    background: #eee;
+}
+[theme="dark"] .footer {
+    background-color: #151515;
+}
+.footer-content {
+    width: 600px;
+    margin: auto;
+}
+.footer-text {
     text-align: center;
-    font-size: small;
-    margin: 8px 0 8px 0;
+    margin: 5px 0 10px 0;
+}
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-columns > * > * {
+    margin-bottom: 5px;
+}
+.footer-header {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 [theme="dark"] .container {

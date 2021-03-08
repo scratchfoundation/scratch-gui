@@ -380,8 +380,9 @@ const GUIComponent = props => {
                                 <Backpack host={backpackHost} />
                             ) : null}*/}
                         </Box>
-                        { stageSize === STAGE_SIZE_MODES.small ? (
-                            <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                            <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}
+                                style={stageSize === STAGE_SIZE_MODES.small ? '' : {display: 'none'}}
+                            >
                                 <StageWrapper
                                     isRendererSupported={isRendererSupported}
                                     isRtl={isRtl}
@@ -395,7 +396,6 @@ const GUIComponent = props => {
                                     />
                                 </Box>
                             </Box>
-                        ) : null }
                     </Box>
                 </Box>
                 <DragLayer />

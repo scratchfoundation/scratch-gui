@@ -2,7 +2,7 @@ import projectData from './project-data';
 
 /* eslint-disable import/no-unresolved */
 import backdrop from '!raw-loader!./cd21514d0531fdffb22204e0ec5ed84a.svg';
-import costume1 from '!raw-loader!./b7853f557e4426412e64bb3da6531a99.svg';
+import costume1 from '!raw-loader!./8e41346f9e386948096815a9b5d6b3e0.svg';
 /* eslint-enable import/no-unresolved */
 
 const defaultProject = translator => {
@@ -27,7 +27,7 @@ const defaultProject = translator => {
         dataFormat: 'SVG',
         data: encoder.encode(backdrop)
     }, {
-        id: 'b7853f557e4426412e64bb3da6531a99',
+        id: '8e41346f9e386948096815a9b5d6b3e0',
         assetType: 'ImageVector',
         dataFormat: 'SVG',
         data: encoder.encode(costume1)

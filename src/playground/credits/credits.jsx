@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import appTarget from '../app-target';
 import styles from './credits.css';
+import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 
 import fosshostLogo from './fosshost-light.png';
 import UserData from './users';
@@ -49,11 +50,11 @@ const Credits = () => (
                 {'TurboWarp Credits'}
             </h1>
         </header>
-        <section className={styles.body}>
+        <section>
             <h2>{'Fosshost'}</h2>
             <p>
-                <a href="https://fosshost.org/">Fosshost</a> provides free hosting services for open source projects, including TurboWarp.
-                Consider <a href="https://fosshost.org/donate">donating</a> to them.
+                <a href="https://fosshost.org/">Fosshost</a> provides free high quality hosting services to open source projects, including TurboWarp.
+                Consider <a href="https://fosshost.org/donate">donating</a> to them to support their work.
             </p>
             <a href="https://fosshost.org/">
                 <img
@@ -62,12 +63,18 @@ const Credits = () => (
                     height="125"
                 />
             </a>
+        </section>
+        <section>
             <h2>{'Translators'}</h2>
             <UserList users={UserData.translators} />
+        </section>
+        <section>
             <h2>{'Addons'}</h2>
             <UserList users={UserData.addons} />
         </section>
     </main>
 );
+
+document.body.setAttribute('theme', getInitialDarkMode() ? 'dark' : 'light');
 
 ReactDOM.render(<Credits />, appTarget);

@@ -10,9 +10,22 @@ body {
     padding: 0;
     background: white;
 }
+body[theme="dark"] {
+    background-color: #111;
+    color: #eee;
+}
 
-.main {
+a {
+    color: blue;
+}
+[theme="dark"] a {
+    color: #4af;
+}
 
+.main section {
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .header-container {
@@ -21,14 +34,8 @@ body {
     padding: 20px 0;
     text-align: center;
 }
-
 .header-text {
 
-}
-
-.body {
-    max-width: 900px;
-    margin: auto;
 }
 
 .users {
@@ -45,13 +52,6 @@ body {
     width: 300px;
     padding: 4px;
     font-size: 1.25rem;
-    color: inherit;
+    color: inherit !important;
     text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #111;
-        color: #eee;
-    }
 }

@@ -201,9 +201,9 @@ module.exports = [
             }),
             new HtmlWebpackPlugin({
                 chunks: ['credits'],
-                template: 'src/playground/index.ejs',
+                template: 'src/playground/simple.ejs',
                 filename: 'credits.html',
-                title: 'Credits',
+                title: 'TurboWarp Credits',
                 noSplash: true,
                 ...htmlWebpackPluginCommon
             }),

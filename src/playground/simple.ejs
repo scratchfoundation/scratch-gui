@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      body[splash-theme="dark"]:not(.tw-loaded) {
+        background: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      (function() {
+        try {var localTheme = localStorage.getItem('tw:theme');} catch (e) {}
+        if (localTheme ? localTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.setAttribute('splash-theme', 'dark');
+      })();
+    </script>
+    <div id="app"></div>
+  </body>
+</html>

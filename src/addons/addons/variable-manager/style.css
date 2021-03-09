@@ -40,6 +40,9 @@
   background-size: 18px 18px;
   background-position: 95% center;
 }
+[theme="dark"] .sa-var-manager-searchbox {
+  border-color: #333;
+}
 
 /* begin feedback stuff (remove when out of beta)*/
 .sa-var-manager-feedback {
@@ -128,6 +131,9 @@
   text-align: left;
   padding-left: 8px;
   padding-right: 8px;
+}
+[theme="dark"] .sa-var-manager td {
+  border-color: #333;
 }
 
 /* tr:nth-child(even) {

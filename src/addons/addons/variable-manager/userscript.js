@@ -237,8 +237,12 @@ export default async function ({ addon, global, console, msg }) {
     const stage = vm.runtime.getTargetForStage();
     localVariables = editingTarget.isStage
       ? []
-      : Object.values(editingTarget.variables).map((i) => new WrappedVariable(i, editingTarget));
-    globalVariables = Object.values(stage.variables).map((i) => new WrappedVariable(i, stage));
+      : Object.values(editingTarget.variables)
+          .filter((i) => i.type === "" || i.type === "list")
+          .map((i) => new WrappedVariable(i, editingTarget));
+    globalVariables = Object.values(stage.variables)
+      .filter((i) => i.type === "" || i.type === "list")
+      .map((i) => new WrappedVariable(i, stage));
 
     updateHeadingVisibility();
 

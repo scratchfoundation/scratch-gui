@@ -48,6 +48,9 @@
 
 .stage-wrapper {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* we want stage overlays to all be positioned in the same spot as the stage, but can't put them inside the border

@@ -52,15 +52,6 @@ const projectData = translateFunction => {
                     }
                 ],
                 sounds: [
-                    {
-                        assetId: '83a9787d4cb6f3b7632b4ddfebf74367',
-                        name: translator(messages.pop),
-                        dataFormat: 'wav',
-                        format: '',
-                        rate: 11025,
-                        sampleCount: 258,
-                        md5ext: '83a9787d4cb6f3b7632b4ddfebf74367.wav'
-                    }
                 ],
                 volume: 100
             },
@@ -74,38 +65,20 @@ const projectData = translateFunction => {
                 currentCostume: 0,
                 costumes: [
                     {
-                        assetId: 'b7853f557e4426412e64bb3da6531a99',
+                        assetId: '8e41346f9e386948096815a9b5d6b3e0',
                         name: translator(messages.costume, {index: 1}),
                         bitmapResolution: 1,
-                        md5ext: 'b7853f557e4426412e64bb3da6531a99.svg',
+                        md5ext: '8e41346f9e386948096815a9b5d6b3e0.svg',
                         dataFormat: 'svg',
                         rotationCenterX: 48,
                         rotationCenterY: 50
-                    },
-                    {
-                        assetId: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f',
-                        name: translator(messages.costume, {index: 2}),
-                        bitmapResolution: 1,
-                        md5ext: 'e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg',
-                        dataFormat: 'svg',
-                        rotationCenterX: 46,
-                        rotationCenterY: 53
                     }
                 ],
                 sounds: [
-                    {
-                        assetId: '83c36d806dc92327b9e7049a565c6bff',
-                        name: translator(messages.meow),
-                        dataFormat: 'wav',
-                        format: '',
-                        rate: 22050,
-                        sampleCount: 18688,
-                        md5ext: '83c36d806dc92327b9e7049a565c6bff.wav'
-                    }
                 ],
                 volume: 100,
                 visible: true,
-                x: 0,
+                x: -100,
                 y: 0,
                 size: 100,
                 direction: 90,

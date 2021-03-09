@@ -73,10 +73,7 @@ const addonContributorToIcon = ({login, avatar_url: avatarUrl}) => ({
     text: login
 });
 
-const addonDevelopers = addonsContributors.filter(({contributions, login}) => (
-    contributions.includes('design') ||
-    contributions.includes('business') ||
-    contributions.includes('tool') ||
+const addonDevelopers = addonsContributors.filter(({login}) => (
     addonCreditsNames.some(i => i.includes(normalize(login)) || normalize(login).includes(i))
 )).map(addonContributorToIcon);
 

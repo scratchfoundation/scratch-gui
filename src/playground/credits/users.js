@@ -36,11 +36,11 @@ const translators = [
         scratchUsername: 'DieForrobux',
         name: 'DieForrobux'
     },
-    {
-        userId: '61087321',
-        scratchUsername: 'superscratch444tre',
-        name: 'superscratch444tre'
-    },
+    // {
+    //     userId: '61087321',
+    //     scratchUsername: 'superscratch444tre',
+    //     name: 'superscratch444tre'
+    // },
     {
         userId: '67422866',
         scratchUsername: 'AArt1256',

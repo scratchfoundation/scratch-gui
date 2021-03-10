@@ -385,14 +385,11 @@ export default async function ({ addon, global, console, msg }) {
     });
 
   const getSelectedCostumeIndex = () => {
-    const costumeList = Array.from(document.querySelector("[class^='selector_list-area']").children);
-    for (let i = 0; i < costumeList.length; i++) {
-      const item = costumeList[i].firstChild;
-      if (item && item.className.includes("is-selected")) {
-        return i;
-      }
-    }
-    return -1;
+    const item = document.querySelector("[class*='selector_list-item'][class*='sprite-selector-item_is-selected']");
+    if (!item) return -1;
+    const numberEl = item.querySelector("[class*='sprite-selector-item_number']");
+    if (!numberEl) return -1;
+    return +numberEl.textContent - 1;
   };
 
   const updateOnionLayers = async () => {

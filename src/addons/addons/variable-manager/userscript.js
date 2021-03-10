@@ -128,7 +128,7 @@ export default async function ({ addon, global, console, msg }) {
     updateValue(force) {
       if (!this.visible && !force) return;
       let newValue;
-      if (this.scratchVariable.type == "list") {
+      if (this.scratchVariable.type === "list") {
         newValue = this.scratchVariable.value.join("\n");
       } else {
         newValue = this.scratchVariable.value;
@@ -140,7 +140,7 @@ export default async function ({ addon, global, console, msg }) {
 
     handleSearch(search) {
       // this doesn't check if this.visible is true or whatever. maybe that would improve performance while typing into the search box but it's probably fine™
-      if (this.scratchVariable.name.toLowerCase().includes(search.toLowerCase()) || search == "") {
+      if (this.scratchVariable.name.toLowerCase().includes(search.toLowerCase()) || !search) {
         // fuzzy searches are lame we are too cool for fuzzy searches (& i doubt they're even the right thing to use here, this should work fine enough)
         this.row.style.display = ""; // make the row normal
         this.updateValue(true); // force it to update because its hidden and it wouldnt be able to otherwise
@@ -203,7 +203,7 @@ export default async function ({ addon, global, console, msg }) {
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
           e.preventDefault();
-          if (this.scratchVariable.type == "list") {
+          if (this.scratchVariable.type === "list") {
             vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value.split("\n"));
           } else {
             vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value);
@@ -285,7 +285,7 @@ export default async function ({ addon, global, console, msg }) {
 
   addon.tab.redux.initialize();
   addon.tab.redux.addEventListener("statechanged", ({ detail }) => {
-    if (detail.action.type == "scratch-gui/navigation/ACTIVATE_TAB") {
+    if (detail.action.type === "scratch-gui/navigation/ACTIVATE_TAB") {
       if (detail.action.activeTabIndex === 3) {
         varTab.classList.add(
           addon.tab.scratchClass("react-tabs_react-tabs__tab--selected"),

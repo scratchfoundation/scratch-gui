@@ -2036,7 +2036,9 @@
             "kitty",
             "mammal",
             "orange",
-            "scratch cat"
+            "scratch cat",
+            "secret",
+            "april fools"
         ],
         "isStage": false,
         "variables": {},
@@ -2058,6 +2060,42 @@
                 "dataFormat": "svg",
                 "rotationCenterX": 46,
                 "rotationCenterY": 53
+            },
+            {
+                "assetId": "2a0accd3b5e660efe35cbe1953b84282",
+                "name": "snow cat",
+                "bitmapResolution": 1,
+                "md5ext": "2a0accd3b5e660efe35cbe1953b84282.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 44,
+                "rotationCenterY": 49
+            },
+            {
+                "assetId": "796e5286f6d3cbf1e4f2dfcf79b7db6a",
+                "name": "snorkel cat",
+                "bitmapResolution": 1,
+                "md5ext": "796e5286f6d3cbf1e4f2dfcf79b7db6a.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 49,
+                "rotationCenterY": 47
+            },
+            {
+                "assetId": "bc7cb57b2d40f551d0934a5faf228678",
+                "name": "surf cat",
+                "bitmapResolution": 1,
+                "md5ext": "bc7cb57b2d40f551d0934a5faf228678.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 46,
+                "rotationCenterY": 49
+            },
+            {
+                "assetId": "4eee7f206420c846499f6b3e1bed92a8",
+                "name": "space cat",
+                "bitmapResolution": 1,
+                "md5ext": "4eee7f206420c846499f6b3e1bed92a8.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 51,
+                "rotationCenterY": 63
             }
         ],
         "sounds": [
@@ -2080,7 +2118,9 @@
             "kitty",
             "kitten",
             "animals",
-            "mammal"
+            "mammal",
+            "secret",
+            "april fools"
         ],
         "isStage": false,
         "variables": {},
@@ -2093,6 +2133,15 @@
                 "dataFormat": "svg",
                 "rotationCenterX": 87,
                 "rotationCenterY": 39
+            },
+            {
+                "assetId": "054fd733b35a6566f2e35f840730d336",
+                "name": "rocket cat 2",
+                "bitmapResolution": 1,
+                "md5ext": "054fd733b35a6566f2e35f840730d336.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 92.26858520507812,
+                "rotationCenterY": 60.578433990478516
             }
         ],
         "sounds": [

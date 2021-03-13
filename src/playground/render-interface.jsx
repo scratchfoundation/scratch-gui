@@ -44,6 +44,10 @@ import {isRendererSupported, isEvalSupported} from '../lib/tw-environment-suppor
 
 import styles from './interface.css';
 
+if (window.parent !== window) {
+    alert('This page is embedding TurboWarp in a way that is unsupported and will cease to function in the near future. Please read https://github.com/TurboWarp/scratch-gui/wiki/Embedding');
+}
+
 let announcement = null;
 if (process.env.ANNOUNCEMENT) {
     announcement = document.createElement('p');

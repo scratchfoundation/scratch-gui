@@ -37,32 +37,27 @@ class Alert extends React.Component {
             onSaveNow,
             showDownload,
             showReconnect,
-            showSaveNow,
-            showRecover
+            showSaveNow
         } = this.props;
         return (
-            <TWRestorePointLoader>{(__, loadRestorePoint) => (
-                <SB3Downloader>{(_, downloadProject) => (
-                    <AlertComponent
-                        closeButton={closeButton}
-                        content={content}
-                        extensionName={extensionName}
-                        iconSpinner={iconSpinner}
-                        iconURL={iconURL}
-                        level={level}
-                        message={message}
-                        showDownload={showDownload}
-                        showReconnect={showReconnect}
-                        showSaveNow={showSaveNow}
-                        showRecover={showRecover}
-                        onCloseAlert={this.handleOnCloseAlert}
-                        onDownload={downloadProject}
-                        onReconnect={this.handleOnReconnect}
-                        onRecover={loadRestorePoint}
-                        onSaveNow={onSaveNow}
-                    />
-                )}</SB3Downloader>
-            )}</TWRestorePointLoader>
+            <SB3Downloader>{(_, downloadProject) => (
+                <AlertComponent
+                    closeButton={closeButton}
+                    content={content}
+                    extensionName={extensionName}
+                    iconSpinner={iconSpinner}
+                    iconURL={iconURL}
+                    level={level}
+                    message={message}
+                    showDownload={showDownload}
+                    showReconnect={showReconnect}
+                    showSaveNow={showSaveNow}
+                    onCloseAlert={this.handleOnCloseAlert}
+                    onDownload={downloadProject}
+                    onReconnect={this.handleOnReconnect}
+                    onSaveNow={onSaveNow}
+                />
+            )}</SB3Downloader>
         );
     }
 }
@@ -94,8 +89,7 @@ Alert.propTypes = {
     onSaveNow: PropTypes.func,
     showDownload: PropTypes.bool,
     showReconnect: PropTypes.bool,
-    showSaveNow: PropTypes.bool,
-    showRecover: PropTypes.bool
+    showSaveNow: PropTypes.bool
 };
 
 export default connect(

@@ -69,7 +69,6 @@ const mapDispatchToProps = dispatch => ({
     onLoadingFinished: (loadingState, success) => {
         dispatch(onLoadedProject(loadingState, false, success));
         dispatch(closeLoadingProject());
-        dispatch(closeAlertWithId('twCrashRecovery'));
         dispatch(closeFileMenu());
     },
     requestProjectUpload: loadingState => dispatch(requestProjectUpload(loadingState)),

@@ -28,9 +28,7 @@ const AlertComponent = ({
     onDownload,
     onSaveNow,
     onReconnect,
-    onRecover,
-    showReconnect,
-    showRecover
+    showReconnect
 }) => (
     <Box
         className={classNames(styles.alert, styles[level])}
@@ -103,18 +101,6 @@ const AlertComponent = ({
                     />
                 </button>
             )}
-            {showRecover && (
-                <button
-                    className={styles.alertConnectionButton}
-                    onClick={onRecover}
-                >
-                    <FormattedMessage
-                        defaultMessage="Recover"
-                        description="Button to recover project"
-                        id="tw.alerts.recover"
-                    />
-                </button>
-            )}
             {closeButton && (
                 <Box
                     className={styles.alertCloseButtonContainer}
@@ -142,11 +128,9 @@ AlertComponent.propTypes = {
     onDownload: PropTypes.func,
     onReconnect: PropTypes.func,
     onSaveNow: PropTypes.func,
-    onRecover: PropTypes.func,
     showDownload: PropTypes.func,
     showReconnect: PropTypes.bool,
-    showSaveNow: PropTypes.bool,
-    showRecover: PropTypes.bool
+    showSaveNow: PropTypes.bool
 };
 
 AlertComponent.defaultProps = {

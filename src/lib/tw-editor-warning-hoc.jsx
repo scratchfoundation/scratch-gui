@@ -43,7 +43,6 @@ const TWEditorWarningHOC = function (WrappedComponent) {
                 compilerOptions,
                 isPlayerOnly,
                 onShowWarning,
-                onShowRecovery,
                 vm,
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -61,7 +60,6 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         }),
         isPlayerOnly: PropTypes.bool,
         onShowWarning: PropTypes.func,
-        onShowRecovery: PropTypes.func,
         vm: PropTypes.shape({
             runtime: PropTypes.shape({
                 beforeStep: PropTypes.func,
@@ -76,8 +74,7 @@ const TWEditorWarningHOC = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onShowWarning: () => dispatch(showStandardAlert('twWarning')),
-        onShowRecovery: () => dispatch(showStandardAlert('twCrashRecovery'))
+        onShowWarning: () => dispatch(showStandardAlert('twWarning'))
     });
     return connect(
         mapStateToProps,

@@ -66,7 +66,6 @@ const reducer = function (state, action) {
                 newAlert.level = alertData.level;
                 newAlert.showDownload = alertData.showDownload;
                 newAlert.showSaveNow = alertData.showSaveNow;
-                newAlert.showRecover = alertData.showRecover;
 
                 newList.push(newAlert);
                 return Object.assign({}, state, {

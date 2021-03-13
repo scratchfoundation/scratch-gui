@@ -1,10 +1,8 @@
 {
     "de": {
         "tw.alerts.autosaving": "Wiederherstellungspunkt wird erstellt...",
-        "tw.alerts.crashRecovery": "Es sieht so aus, als wäre TuboWarp abgestürzt. Mötest du das Projekt wiederherstellen?",
         "tw.alerts.extendedExtensionsWarning": "Dieses Projekt verwendet Blöcke, die es nur auf TurboWarp gibt. Es wird nicht in Scratch funktionieren und sollte nicht auf die Scratch-Website geladen werden. {learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Mehr erfahren.",
-        "tw.alerts.recover": "Wiederherstellen",
         "tw.alerts.savedToDisk": "Auf deinem Computer gespeichert.",
         "tw.alerts.warning.restorePoints": "TurboWarp erstellt manchmal Backups deines Projekts, falls du es seit Längerem nicht gespeichert hast. Im Falle eines Absturzes, kann das Backup in Datei > Wiederherstellungspunkt laden geladen werden.",
         "tw.alerts.warning.saveOften": "Du solltest dein Projekt oft speichern -- das Wiederherstellen von Projekten wurde nicht vollständig getestet und funktioniert vielleicht nicht perfekt.",
@@ -83,10 +81,8 @@
     },
     "es": {
         "tw.alerts.autosaving": "Creando punto de restauración...",
-        "tw.alerts.crashRecovery": "Parece que TurboWarp falló. ¿Quieres intentar recuperar el proyecto?",
         "tw.alerts.extendedExtensionsWarning": "Este proyecto usa bloques exclusivos de TurboWarp. Este no va a funcionar en Scratch y no debería ser subido al sitio web de Scratch. {learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Ver más.",
-        "tw.alerts.recover": "Recuperar",
         "tw.alerts.savedToDisk": "Guardado a tu computadora.",
         "tw.alerts.warning.restorePoints": "TurboWarp ahora creará copias de su proyecto periódicamente si ha pasado bastante tiempo desde que lo ha guardado. Si sucede un fallo, la copia se podrá cargar desde Archivo > Cargar punto de restauración.",
         "tw.alerts.warning.saveOften": "Usted debería igualmente guardar su proyecto seguido -- la recuperación del proyecto puede que no funcione perfectamente.",
@@ -195,10 +191,8 @@
     },
     "it": {
         "tw.alerts.autosaving": "Creazione del punto di ripristino...",
-        "tw.alerts.crashRecovery": "Sembra che TurboWarp abbia smesso di funzionare. Vuoi provare il recupero del progetto?",
         "tw.alerts.extendedExtensionsWarning": "Questo progetto usa i blocchi speciali di TurboWarp. Non funzionerà quindi in Scratch e non deve essere caricato sul sito di Scratch. {learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Ulteriori informazioni.",
-        "tw.alerts.recover": "Recupera",
         "tw.alerts.savedToDisk": "Salvato sul computer.",
         "tw.alerts.warning.restorePoints": "TurboWarp salva di tanto in tanto il tuo progetto nel caso tu non lo abbia salvato di recente. Nell'eventualità di un malfunzionamento, il backup può essere caricato da File > Carica il punto di ripristino.",
         "tw.alerts.warning.saveOften": "Continua a salvare spesso il progetto -- il recupero dei progetti non è stato testato a fondo e potrebbe non funzionare sempre.",
@@ -279,10 +273,8 @@
     },
     "pt": {
         "tw.alerts.autosaving": "Criando ponto de restauração...",
-        "tw.alerts.crashRecovery": "Parece que o TurboWarp pode ter crashado. Quer tentar restaurar seu projeto?",
         "tw.alerts.extendedExtensionsWarning": "Esse projeto usa blocos exclusivos ao TurboWarp. Ele não vai funcionar no Scratch e não deve ser publicado no website do Scratch. {learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Aprender mais.",
-        "tw.alerts.recover": "Recuperar",
         "tw.alerts.savedToDisk": "Salvo no seu computador.",
         "tw.alerts.warning.restorePoints": "O TurboWarp pode criar backups do seu projeto se você não salva faz um tempo. Caso ocorra um crash, o backup pode ser carregado em Arquivo > Carregar ponto de restauração.",
         "tw.alerts.warning.saveOften": "Você ainda deve salvar seu projeto com frequência -- a recuperação de projetos ainda não foi completamente testada e pode não funcionar perfeitamente.",
@@ -362,10 +354,8 @@
     },
     "ro": {
         "tw.alerts.autosaving": "Se creează punctul de recuperare…",
-        "tw.alerts.crashRecovery": "Se pare că TurboWarp s-ar putea să se fi blocat. Vrei să încerci recuperarea proiectului?",
         "tw.alerts.extendedExtensionsWarning": "Acest proiect folosește blocuri care pot rula doar în TurboWarp. Nu va funcționa în Scratch și nu ar trebui să fie încărcat pe site-ul Scratch. {learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Află mai multe.",
-        "tw.alerts.recover": "Recuperează",
         "tw.alerts.savedToDisk": "Salvat pe calculatorul tău.",
         "tw.alerts.warning.restorePoints": "TurboWarp ar putea să îți rezerve periodic proiectul dacă nu l-ai salvat recent. În timpul unui crash, rezerva poate fi încărcată de la Fișier > Încarcă punctul de recuperare.",
         "tw.alerts.warning.saveOften": "Tot ar trebui să-ți salvezi proiectul des -- recuperarea proiectului nu a fost foarte mult testată și ar putea să nu funcționeze perfect.",
@@ -447,10 +437,8 @@
     },
     "tr": {
         "tw.alerts.autosaving": "Yükleme noktası yapılıyor",
-        "tw.alerts.crashRecovery": "Turbowarp çökmüş gibi görünüyor. Yükleme noktasını denemeyi istermisiniz?",
         "tw.alerts.extendedExtensionsWarning": "Bu proje Turbowarp'a özel bloklar kullanıyor. Scratch'te çalışmayacak ve Scratch websiteye yüklenmemelidir.{learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "Daha fazla bilgi edin.",
-        "tw.alerts.recover": "Kurtarmak",
         "tw.alerts.savedToDisk": "Bilgisayarına kaydedilmiştir.",
         "tw.alerts.warning.restorePoints": "TurboWarp, kaydettiğinizden bu yana uzun bir süre geçtiyse artık projenizi periyodik olarak yedekleyecektir. Turbowarp çökse o yedek projeyi açmak için Dosya > Yükleme noktasını yükleye tıklayın",
         "tw.alerts.warning.saveOften": "Ama halen sıklıkla projeni kaydet -- Proje Kurtarmak iyice testilmemiştir ve normal çalışmayabilir",
@@ -532,7 +520,6 @@
     },
     "zh-cn": {
         "tw.alerts.autosaving": "新建还原点……",
-        "tw.alerts.crashRecovery": "看起来TurboWarp可能已经崩溃了。你想尝试项目恢复吗？",
         "tw.alerts.extendedExtensionsWarning": "这个项目使用了TurboWarp独有的积木，它不能在Scratch中使用，也不能上传到Scratch网站。{learnMoreLink}",
         "tw.alerts.extendedExtensionsWarning.learnMoreLink": "查看更多。",
         "tw.alerts.savedToDisk": "已保存至您的计算机",

@@ -65,7 +65,7 @@ const Credits = () => (
         </section>
         <section>
             <h2>{'Scratch'}</h2>
-            <p>TurboWarp is based on work by the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>. TurboWarp is not affiliated wtih Scratch.</p>
+            <p>TurboWarp is based on work by the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>. TurboWarp is not affiliated with Scratch.</p>
         </section>
         <section>
             <h2>{'Addons'}</h2>

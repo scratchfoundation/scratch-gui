@@ -11,9 +11,8 @@ import UserData from './users';
 /* eslint-disable react/jsx-no-literals */
 
 const User = ({image, text, href}) => (
-    <a
+    <span
         className={styles.user}
-        href={href}
     >
         <img
             className={styles.userImage}
@@ -24,7 +23,7 @@ const User = ({image, text, href}) => (
         <div className={styles.userInfo}>
             {text}
         </div>
-    </a>
+    </span>
 );
 User.propTypes = {
     image: PropTypes.string.isRequired,

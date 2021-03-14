@@ -1388,7 +1388,7 @@ export default class DevTools {
       if (blockSvg || isBackground) {
         let dataId = blockSvg && blockSvg.getAttribute("data-id");
         if (dataId || isBackground) {
-          setTimeout(() => {
+          setTimeout(async () => {
             // Is there a popup menu to hi-jack?
             let widget = document.querySelector("div.blocklyWidgetDiv");
             if (!widget) {
@@ -1400,9 +1400,11 @@ export default class DevTools {
             }
             if (isBackground) {
               let nodes = blocklyContextMenu.children;
+              const realBlockly = await this.addon.tab.traps.getBlockly();
               for (const node of nodes) {
-                if (node.textContent === this.m("clean-plus")) {
+                if (node.textContent === realBlockly.Msg.CLEAN_UP) {
                   node.remove();
+                  break;
                 }
               }
               blocklyContextMenu.insertAdjacentHTML(

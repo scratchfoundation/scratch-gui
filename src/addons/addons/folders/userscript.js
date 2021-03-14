@@ -91,6 +91,7 @@ export default async function ({ addon, global, console, msg }) {
 
   const RESERVED_NAMES = ["_mouse_", "_stage_", "_edge_", "_myself_", "_random_"];
   const ensureNotReserved = (name) => {
+    if (name === "") return "2";
     if (RESERVED_NAMES.includes(name)) return `${name}2`;
     return name;
   };

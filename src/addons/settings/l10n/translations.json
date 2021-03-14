@@ -65,6 +65,28 @@
         "tw.addons.settings.title": "Impostazioni Addon",
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"
     },
+    "ko": {
+        "tw.addons.settings.addonFeedback": "애드온 피드백",
+        "tw.addons.settings.confirmResetAll": "정말로 애드온 설정을 기본값으로 초기화하시겠습니까?",
+        "tw.addons.settings.credits": "크레딧:",
+        "tw.addons.settings.dirty": "설정을 적용하기 위해 TurboWarp를 재시작합니다.",
+        "tw.addons.settings.dirtyButton": "지금 재시작",
+        "tw.addons.settings.export": "내보내기 설정",
+        "tw.addons.settings.import": "가져오기 설정",
+        "tw.addons.settings.noResults": "결과 없음",
+        "tw.addons.settings.presets": "프리셋",
+        "tw.addons.settings.reset": "초기화",
+        "tw.addons.settings.resetAll": "모두 초기화",
+        "tw.addons.settings.search": "검색",
+        "tw.addons.settings.tags.beta": "베타",
+        "tw.addons.settings.tags.easterEgg": "짜잔! 이스터에그!",
+        "tw.addons.settings.tags.new": "신규!",
+        "tw.addons.settings.tags.recommended": "추천",
+        "tw.addons.settings.tags.theme": "테마",
+        "tw.addons.settings.tags.turbowarp": "터보워프",
+        "tw.addons.settings.title": "애드온 설정",
+        "tw.addons.settings.unsupported": "몇몇 애드온은 다음 브라우저에서 사용 불가능합니다:"
+    },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",

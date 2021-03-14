@@ -50,7 +50,7 @@ const translators = [
         userId: '61067753',
         scratchUsername: 'diaowinner',
         name: 'diaowinner'
-    }
+    },
     // {
     //     userId: '62626',
     //     scratchUsername: 's_federici',
@@ -61,6 +61,11 @@ const translators = [
     //     scratchUsername: 'philipp2007',
     //     name: 'iqnite'
     // }
+    {
+        userId: '3318598',
+        scratchUsername: 'plant2014',
+        name: 'plant2014'
+    }
 ].map(({userId, scratchUsername, name}) => ({
     image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
     href: `https://scratch.mit.edu/users/${scratchUsername}/`,

@@ -36,7 +36,6 @@ a {
 
 .footer {
     padding: 10px 0;
-    font-size: 14px;
     margin-top: 10px;
     background: #eee;
 }
@@ -56,7 +55,7 @@ a {
     justify-content: space-between;
 }
 .footer-columns > * > * {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 .footer-header {
     font-weight: bold;

@@ -13,13 +13,13 @@ const CrashMessage = props => (
                 className={styles.reloadIcon}
                 src={reloadIcon}
             />
-            <h2>
+            <p className={styles.header}>
                 <FormattedMessage
                     defaultMessage="Oops! Something went wrong."
                     description="Crash Message title"
                     id="gui.crashMessage.label"
                 />
-            </h2>
+            </p>
             <p>
                 <FormattedMessage
                     defaultMessage={'We are so sorry, but it looks like TurboWarp has crashed.' +

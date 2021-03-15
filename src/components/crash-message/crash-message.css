@@ -27,6 +27,10 @@
     cursor: pointer;
 }
 
+.header {
+    font-size: 1.5em;
+    font-weight: bold;
+}
 .error-message {
     font-family: monospace;
 }

@@ -276,7 +276,9 @@
         "tw.webglModal.description": "Sembra che il tuo browser o il tuo computer non siano compatibili con {webGlLink}. Questa tecnologia è necessaria per poter usare questo sito. Prova ad aggiornare il tuo browser e i tuoi driver video o a riavviare il tuo computer."
     },
     "ko": {
-        "tw.footer.disclaimer": "터보워프는 스크래치, 스크래치 팀, 스크래치 재단에 소속되어있지 않습니다."
+        "tw.footer.about": "터보워프에 대하여",
+        "tw.footer.disclaimer": "터보워프는 스크래치, 스크래치 팀, 스크래치 재단에 소속되어있지 않습니다.",
+        "tw.privacy": "개인정보 보호 정책"
     },
     "pt": {
         "tw.alerts.autosaving": "Criando ponto de restauração...",

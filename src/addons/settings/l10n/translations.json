@@ -65,6 +65,9 @@
         "tw.addons.settings.title": "Impostazioni Addon",
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"
     },
+    "ja": {
+        "tw.addons.settings.title": "アドオン設定"
+    },
     "ko": {
         "tw.addons.settings.addonFeedback": "애드온 피드백",
         "tw.addons.settings.confirmResetAll": "정말로 애드온 설정을 기본값으로 초기화하시겠습니까?",

@@ -16,6 +16,8 @@ const fetchProjectMeta = projectId => fetch(API_URL.replace('$id', projectId))
         return r.json();
     });
 
+const getNoIndexTag = () => document.querySelector('meta[name="robots"][content="noindex"]');
+
 const TWProjectMetaFetcherHOC = function (WrappedComponent) {
     class ProjectMetaFetcherComponent extends React.Component {
         shouldComponentUpdate (nextProps) {
@@ -50,8 +52,17 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     if (instructions || credits) {
                         this.props.onSetDescription(instructions, credits);
                     }
+                    if (getNoIndexTag()) {
+                        getNoIndexTag().remove();
+                    }
                 })
                 .catch(err => {
+                    if (!getNoIndexTag()) {
+                        const tag = document.createElement('meta');
+                        tag.name = 'robots';
+                        tag.content = 'noindex';
+                        document.head.appendChild(tag);
+                    }
                     log.warn('cannot fetch project meta', err);
                 });
         }

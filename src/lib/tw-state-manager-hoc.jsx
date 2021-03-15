@@ -138,6 +138,16 @@ class FileHashRouter extends HashRouter {
     }
 }
 
+const getCanonicalLinkElement = () => {
+    let el = document.querySelector('link[rel=canonical]');
+    if (!el) {
+        el = document.createElement('link');
+        el.rel = 'canonical';
+        document.head.appendChild(el);
+    }
+    return el;
+};
+
 class WildcardRouter extends Router {
     constructor (callbacks) {
         super(callbacks);
@@ -211,6 +221,8 @@ class WildcardRouter extends Router {
         }
 
         const path = `${this.root}${parts.join('/')}`;
+        const canonical = `${location.origin}${this.root}${projectId === '0' ? '' : projectId}`;
+        getCanonicalLinkElement().href = canonical;
 
         return `${path}${location.search}${location.hash}`;
     }

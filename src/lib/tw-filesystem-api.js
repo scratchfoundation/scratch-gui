@@ -1,6 +1,6 @@
 const available = () => !!window.showSaveFilePicker;
 
-const showSaveFilePicker = async () => await window.showSaveFilePicker({
+const showSaveFilePicker = () => window.showSaveFilePicker({
     types: [
         {
             description: 'Scratch 3 Project',

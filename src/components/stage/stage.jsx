@@ -112,12 +112,23 @@ const StageComponent = props => {
                             </div>
                         )}
                     </div>
-                    <canvas
-                        className={styles.draggingSprite}
-                        height={0}
-                        ref={dragRef}
-                        width={0}
-                    />
+                    {
+                        // Give the canvases two different keys to prevent React from recycling the same canvas
+                        // across two different context types (2D and WebGL)
+                        wobblyDragging ? <canvas
+                            className={classNames(styles.draggingSprite, styles.wobbly)}
+                            height={0}
+                            ref={wobblyDragRef}
+                            width={0}
+                            key="non-wobbly"
+                        /> : <canvas
+                            className={styles.draggingSprite}
+                            height={0}
+                            ref={dragRef}
+                            width={0}
+                            key="wobbly"
+                        />
+                    }
                 </Box>
                 {isStarted ? null : (
                     <GreenFlagOverlay
@@ -125,55 +136,6 @@ const StageComponent = props => {
                         wrapperClass={styles.greenFlagOverlayWrapper}
                     />
                 )}
-                {isColorPicking && colorInfo ? (
-                    <Box className={styles.colorPickerWrapper}>
-                        <Loupe colorInfo={colorInfo} />
-                    </Box>
-                ) : null}
-                <div
-                    className={styles.stageBottomWrapper}
-                    style={{
-                        width: stageDimensions.width,
-                        height: stageDimensions.height,
-                        left: '50%',
-                        marginLeft: stageDimensions.width * -0.5
-                    }}
-                >
-                    {micIndicator ? (
-                        <MicIndicator
-                            className={styles.micIndicator}
-                            stageSize={stageDimensions}
-                        />
-                    ) : null}
-                    {question === null ? null : (
-                        <div
-                            className={styles.questionWrapper}
-                            style={{width: stageDimensions.width}}
-                        >
-                            <Question
-                                question={question}
-                                onQuestionAnswered={onQuestionAnswered}
-                            />
-                        </div>
-                    )}
-                </div>
-                {
-                    // Give the canvases two different keys to prevent React from recycling the same canvas
-                    // across two different context types (2D and WebGL)
-                    wobblyDragging ? <canvas
-                        className={classNames(styles.draggingSprite, styles.wobbly)}
-                        height={0}
-                        ref={wobblyDragRef}
-                        width={0}
-                        key="non-wobbly"
-                    /> : <canvas
-                        className={styles.draggingSprite}
-                        height={0}
-                        ref={dragRef}
-                        width={0}
-                        key="wobbly"
-                    />
-                }
             </Box>
             {isColorPicking ? (
                 <Box

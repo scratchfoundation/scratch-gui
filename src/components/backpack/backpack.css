@@ -18,6 +18,10 @@
     cursor: pointer;
     user-select: none;
 }
+[theme="dark"] .backpack-header {
+    background: $ui-primary;
+    border-color: $ui-secondary;
+}
 
 [dir="ltr"] .backpack-header {
     border-top-right-radius: $space;
@@ -85,6 +89,9 @@
 
 .backpack-item img {
     mix-blend-mode: multiply; /* Make white transparent for thumnbnails */
+}
+[theme="dark"] .backpack-item img {
+    mix-blend-mode: normal;
 }
 
 .more {

@@ -9,7 +9,8 @@ import {
     soundPayload,
     costumePayload,
     spritePayload,
-    codePayload
+    codePayload,
+    LOCAL_API
 } from '../lib/backpack-api';
 import DragConstants from '../lib/drag-constants';
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
@@ -52,7 +53,7 @@ class Backpack extends React.Component {
 
         // If a host is given, add it as a web source to the storage module
         // TODO remove the hacky flag that prevents double adding
-        if (props.host && !storage._hasAddedBackpackSource) {
+        if (props.host && !storage._hasAddedBackpackSource && props.host !== LOCAL_API) {
             storage.addWebSource(
                 [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
                 this.getBackpackAssetURL
@@ -108,7 +109,7 @@ class Backpack extends React.Component {
                 .then(payload => {
                     // Force the asset to save to the asset server before storing in backpack
                     // Ensures any asset present in the backpack is also on the asset server
-                    if (presaveAsset && !presaveAsset.clean) {
+                    if (presaveAsset && !presaveAsset.clean && !this.props.host === LOCAL_API) {
                         return storage.store(
                             presaveAsset.assetType,
                             presaveAsset.dataFormat,
@@ -157,7 +158,7 @@ class Backpack extends React.Component {
         });
     }
     getContents () {
-        if (this.props.token && this.props.username) {
+        if ((this.props.token && this.props.username) || this.props.host === LOCAL_API) {
             this.setState({loading: true, error: false}, () => {
                 getBackpackContents({
                     host: this.props.host,

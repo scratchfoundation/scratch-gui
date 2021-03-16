@@ -133,6 +133,8 @@ class Interface extends React.Component {
                         onClickAddonSettings={handleClickAddonSettings}
                         onClickTheme={onClickTheme}
                         onUpdateProjectTitle={this.handleUpdateProjectTitle}
+                        backpackVisible
+                        backpackHost="_local_"
                     />
                     {isHomepage ? (
                         <React.Fragment>

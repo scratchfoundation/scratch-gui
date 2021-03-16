@@ -397,7 +397,8 @@ class Stage extends React.Component {
             // Extract the drawable art
             const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
             if (this.props.wobblyDragging) {
-                this.wobblyDragCanvas.reinit(drawableData, x, y);
+                const ratio = this.canvas.getBoundingClientRect().width / this.canvas.width;
+                this.wobblyDragCanvas.reinit(drawableData, x, y, ratio);
             } else {
                 this.drawDragCanvas(drawableData, x, y);
                 this.positionDragCanvas(x, y);

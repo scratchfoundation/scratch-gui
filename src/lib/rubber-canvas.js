@@ -88,7 +88,6 @@ class RubberCanvas {
         this._canvas = canvas;
         this._gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         this._size = [0, 0];
-        this._mousePosition = [0, 0];
 
         const numPoints = (SUBDIVISIONS + 1) ** 2;
         this._springs = [];
@@ -168,7 +167,6 @@ class RubberCanvas {
         gl.activeTexture(gl.TEXTURE0);
         this._texture = gl.createTexture();
 
-        // This will be correct if https://github.com/LLK/scratch-render/pull/556 goes in in time
         gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
 
         gl.clearColor(0, 0, 0, 0);
@@ -178,11 +176,14 @@ class RubberCanvas {
         const {
             width,
             height,
-            x: grabX,
-            y: grabY
+            x: drawableX,
+            y: drawableY
         } = drawableData;
 
-        this._setData(drawableData);
+        const grabX = x - drawableX;
+        const grabY = y - drawableY;
+
+        this._setData(drawableData.imageData);
 
         // Reinitialize springs' mass based on their distance to the point at which the sprite was grabbed
         for (let i = 0; i <= SUBDIVISIONS; i++) {
@@ -204,8 +205,8 @@ class RubberCanvas {
 
         this._lastTimestamp = performance.now();
         const {x: parentX, y: parentY} = this._canvas.parentElement.getBoundingClientRect();
-        this._canvas.style.left = `${-grabX + parentX}px`;
-        this._canvas.style.top = `${-grabY + parentY}px`;
+        this._canvas.style.left = `${parentX - grabX}px`;
+        this._canvas.style.top = `${parentY - grabY}px`;
         this._canvas.style.display = 'block';
         this.step();
     }
@@ -248,9 +249,6 @@ class RubberCanvas {
     }
 
     updateMousePosition ([x, y]) {
-        this._mousePosition[0] = x;
-        this._mousePosition[1] = y;
-
         // update springs' destinations to match new mouse position
         for (let i = 0; i <= SUBDIVISIONS; i++) {
             const springX = (i / SUBDIVISIONS) * this._size[0];

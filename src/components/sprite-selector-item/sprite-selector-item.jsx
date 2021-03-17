@@ -92,7 +92,8 @@ SpriteSelectorItem.propTypes = {
     componentRef: PropTypes.func,
     costumeURL: PropTypes.string,
     details: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    name: PropTypes.any,
     number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,

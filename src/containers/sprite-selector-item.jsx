@@ -148,15 +148,18 @@ class SpriteSelectorItem extends React.PureComponent {
 }
 
 SpriteSelectorItem.propTypes = {
-    asset: PropTypes.instanceOf(storage.Asset),
+    // eslint-disable-next-line react/forbid-prop-types
+    asset: PropTypes.any,
     costumeURL: PropTypes.string,
     dispatchSetHoveredSprite: PropTypes.func.isRequired,
-    dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // eslint-disable-next-line react/forbid-prop-types
+    dragPayload: PropTypes.any,
     dragType: PropTypes.string,
     dragging: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     index: PropTypes.number,
-    name: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
+    name: PropTypes.any,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDrag: PropTypes.func.isRequired,

@@ -116,13 +116,15 @@ SpriteList.propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
         costume: PropTypes.shape({
             url: PropTypes.string,
-            name: PropTypes.string.isRequired,
-            bitmapResolution: PropTypes.number.isRequired,
-            rotationCenterX: PropTypes.number.isRequired,
-            rotationCenterY: PropTypes.number.isRequired
+            // eslint-disable-next-line react/forbid-prop-types
+            name: PropTypes.string,
+            bitmapResolution: PropTypes.number,
+            rotationCenterX: PropTypes.number,
+            rotationCenterY: PropTypes.number
         }),
-        name: PropTypes.string.isRequired,
-        order: PropTypes.number.isRequired
+        // eslint-disable-next-line react/forbid-prop-types
+        name: PropTypes.any,
+        order: PropTypes.number
     })),
     onAddSortable: PropTypes.func,
     onDeleteSprite: PropTypes.func,

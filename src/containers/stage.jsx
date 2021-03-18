@@ -382,11 +382,6 @@ class Stage extends React.Component {
         const offsetX = target.x - scratchMouseX;
         const offsetY = -(target.y + scratchMouseY);
 
-        // Ensure drag canvas' bounds are tight by forcing renderer to generate tight bounds
-        this.renderer.getBounds(drawableId);
-        // Extract the drawable art
-        const drawableData = this.renderer.extractDrawable(drawableId, x, y);
-
         this.props.vm.startDrag(targetId);
         this.setState({
             isDragging: true,
@@ -397,11 +392,14 @@ class Stage extends React.Component {
         });
 
         if (this.props.useEditorDragStyle) {
+            // Ensure drag canvas' bounds are tight by forcing renderer to generate tight bounds
+            if (this.props.wobblyDragging) this.renderer.getBounds(drawableId);
+            // Extract the drawable art
+            const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
             if (this.props.wobblyDragging) {
-                this.wobblyDragCanvas.reinit(drawableData, x, y);
+                const ratio = this.canvas.getBoundingClientRect().width / this.canvas.width;
+                this.wobblyDragCanvas.reinit(drawableData, x, y, ratio);
             } else {
-                // Extract the drawable art
-                const drawableData = this.renderer.extractDrawableScreenSpace(drawableId);
                 this.drawDragCanvas(drawableData, x, y);
                 this.positionDragCanvas(x, y);
             }

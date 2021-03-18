@@ -88,7 +88,7 @@ class RubberCanvas {
         this._canvas = canvas;
         this._gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         this._size = [0, 0];
-        this._mousePosition = [0, 0];
+        this._scaleFactor = 1;
 
         const numPoints = (SUBDIVISIONS + 1) ** 2;
         this._springs = [];
@@ -168,31 +168,31 @@ class RubberCanvas {
         gl.activeTexture(gl.TEXTURE0);
         this._texture = gl.createTexture();
 
-        // This will be correct if https://github.com/LLK/scratch-render/pull/556 goes in in time
         gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
 
         gl.clearColor(0, 0, 0, 0);
     }
 
-    reinit (drawableData, x, y) {
+    reinit (drawableData, x, y, scaleFactor) {
         const {
-            width,
-            height,
-            x: grabX,
-            y: grabY
+            x: drawableX,
+            y: drawableY
         } = drawableData;
 
-        this._setData(drawableData);
+        const grabX = x - drawableX;
+        const grabY = y - drawableY;
+
+        this._setData(drawableData.imageData);
 
         // Reinitialize springs' mass based on their distance to the point at which the sprite was grabbed
         for (let i = 0; i <= SUBDIVISIONS; i++) {
-            const springX = (i / SUBDIVISIONS) * width;
+            const springX = (i / SUBDIVISIONS) * this._size[0];
 
             for (let j = 0; j <= SUBDIVISIONS; j++) {
-                const springY = (j / SUBDIVISIONS) * height;
+                const springY = (j / SUBDIVISIONS) * this._size[1];
 
-                const distance = Math.hypot(springX - grabX, springY - grabY);
-                const distanceScaled = distance / Math.hypot(width, height);
+                const distance = Math.hypot(springX - (grabX / scaleFactor), springY - (grabY / scaleFactor));
+                const distanceScaled = distance / Math.hypot(...this._size);
                 this._springs[(j * (SUBDIVISIONS + 1)) + i].reinit({
                     anchor: [springX + x, springY + y],
                     position: [springX + x, springY + y],
@@ -204,9 +204,10 @@ class RubberCanvas {
 
         this._lastTimestamp = performance.now();
         const {x: parentX, y: parentY} = this._canvas.parentElement.getBoundingClientRect();
-        this._canvas.style.left = `${-grabX + parentX}px`;
-        this._canvas.style.top = `${-grabY + parentY}px`;
+        this._canvas.style.left = `${parentX - grabX}px`;
+        this._canvas.style.top = `${parentY - grabY}px`;
         this._canvas.style.display = 'block';
+        this._scaleFactor = scaleFactor;
         this.step();
     }
 
@@ -248,9 +249,6 @@ class RubberCanvas {
     }
 
     updateMousePosition ([x, y]) {
-        this._mousePosition[0] = x;
-        this._mousePosition[1] = y;
-
         // update springs' destinations to match new mouse position
         for (let i = 0; i <= SUBDIVISIONS; i++) {
             const springX = (i / SUBDIVISIONS) * this._size[0];
@@ -327,8 +325,12 @@ class RubberCanvas {
             // Avoid creating lag spikes from a huge WebGL canvas if the spring simulation blows up
             return;
         }
-        this._canvas.width = width;
-        this._canvas.height = height;
+        if (this._canvas.width !== width || this._canvas.height !== height) {
+            this._canvas.width = width;
+            this._canvas.height = height;
+            this._canvas.style.width = `${width * this._scaleFactor}px`;
+            this._canvas.style.height = `${height * this._scaleFactor}px`;
+        }
 
         gl.useProgram(this._shader.program);
         gl.uniform1i(this._shader.uniforms.u_image0, 0);

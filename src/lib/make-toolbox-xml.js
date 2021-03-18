@@ -783,13 +783,6 @@ const events = function (isStage) {
 const control = function (isStage) {
     return `
     <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
-        <block type="mv2_set_ip" >
-            <value name="IP">
-                <shadow type="text">
-                    <field name="TEXT">192.168.0.27</field>
-                </shadow>
-            </value>
-        </block>
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">

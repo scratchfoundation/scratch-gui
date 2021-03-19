@@ -123,7 +123,7 @@ jobs:
               JEST_JUNIT_OUTPUT_DIR: test-results/integration
           command: |
             export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
-            $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit" --runInBand
+            $(npm bin)/jest ./test/integration/* --reporters="default" --reporters="jest-junit" --runInBand
       - store_test_results:
           path: test-results
 

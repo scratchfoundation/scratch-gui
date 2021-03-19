@@ -499,13 +499,15 @@
         "tags": [
             "outdoors",
             "dinosaur",
-            "alex eben meyer"
+            "alex eben meyer",
+            "april fools",
+            "secret"
         ],
-        "assetId": "64025bdca5db4938f65597e3682fddcf",
+        "assetId": "b11caf19080a46a2f3f6a3a04dd60d7a",
         "bitmapResolution": 1,
         "dataFormat": "svg",
-        "md5ext": "64025bdca5db4938f65597e3682fddcf.svg",
-        "rotationCenterX": 240,
+        "md5ext": "b11caf19080a46a2f3f6a3a04dd60d7a.svg",
+        "rotationCenterX": 243,
         "rotationCenterY": 180
     },
     {
@@ -812,12 +814,14 @@
             "soccer",
             "football",
             "sports",
-            "alex eben meyer"
+            "alex eben meyer",
+            "secret",
+            "april fools"
         ],
-        "assetId": "04a63154f04b09494354090f7cc2f1b9",
+        "assetId": "dadb5689a58487f1a18b4ffa6a322b26",
         "bitmapResolution": 2,
         "dataFormat": "png",
-        "md5ext": "04a63154f04b09494354090f7cc2f1b9.png",
+        "md5ext": "dadb5689a58487f1a18b4ffa6a322b26.png",
         "rotationCenterX": 480,
         "rotationCenterY": 360
     },

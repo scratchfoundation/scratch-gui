@@ -158,6 +158,9 @@ const videos = {
     },
     'sprite-mystery': {
         en: 's69h0y6cs4'
+    },
+    'teach-scratch-to-your-cat': {
+        en: 'u1aibu2mfq'
     }
 };
 

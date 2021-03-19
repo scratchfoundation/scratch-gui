@@ -358,7 +358,7 @@ export default {
         img: teachScratchToYourCatThumb,
         tags: [],
         steps: [{
-            video: 'u1aibu2mfq'
+            video: 'teach-scratch-to-your-cat'
         }, {
             deckIds: [
                 'intro-move-sayhello',

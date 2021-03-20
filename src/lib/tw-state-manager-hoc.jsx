@@ -21,6 +21,7 @@ import {
     setPlayer,
     setFullScreen
 } from '../reducers/mode';
+import {generateRandomUsername} from './tw-username';
 import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 /* eslint-disable no-alert */
@@ -305,10 +306,7 @@ const TWStateManager = function (WrappedComponent) {
             } else {
                 const persistentUsername = this.props.isEmbedded ? null : getLocalStorage(USERNAME_KEY);
                 if (persistentUsername === null) {
-                    const digits = 4;
-                    const randomNumber = Math.round(Math.random() * (10 ** digits));
-                    const randomId = randomNumber.toString().padStart(digits, '0');
-                    const randomUsername = `player${randomId}`;
+                    const randomUsername = generateRandomUsername();
                     this.props.onSetUsername(randomUsername);
                     if (this.props.isEmbedded) {
                         this.doNotPersistUsername = randomUsername;

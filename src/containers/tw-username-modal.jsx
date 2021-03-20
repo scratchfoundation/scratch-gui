@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {setUsername} from '../reducers/tw';
 import UsernameModalComponent from '../components/tw-username-modal/username-modal.jsx';
 import {closeUsernameModal} from '../reducers/modals';
+import {generateRandomUsername} from '../lib/tw-username';
 
 class UsernameModal extends React.Component {
     constructor (props) {
@@ -44,8 +45,7 @@ class UsernameModal extends React.Component {
         });
     }
     handleReset () {
-        // TODO
-        const randomUsername = '';
+        const randomUsername = generateRandomUsername();
         this.setState({
             value: randomUsername
         });

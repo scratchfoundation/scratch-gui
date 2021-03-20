@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
-import {setUsername} from '../reducers/tw';
+import {openUsernameModal} from '../reducers/modals';
+import {closeEditMenu} from '../reducers/menus';
 
 const messages = defineMessages({
-    usernamePrompt: {
-        defaultMessage: 'New username:',
-        description: 'Prompt asking user to select new username',
-        id: 'tw.changeUsername.prompt'
-    },
     cannotChangeWhileRunning: {
         defaultMessage: 'Username cannot be changed while the project is running.',
         description: 'Alert that appears when trying to change username while project is running',
@@ -31,12 +27,7 @@ class ChangeUsername extends React.Component {
             alert(this.props.intl.formatMessage(messages.cannotChangeWhileRunning));
             return;
         }
-        // eslint-disable-next-line no-alert
-        const newUsername = prompt(this.props.intl.formatMessage(messages.usernamePrompt), this.props.username);
-        if (newUsername === null) {
-            return;
-        }
-        this.props.onUsernameChange(newUsername);
+        this.props.onOpenUsernameModal();
     }
     render () {
         return this.props.children(this.changeUsername, {
@@ -47,20 +38,19 @@ class ChangeUsername extends React.Component {
 
 ChangeUsername.propTypes = {
     children: PropTypes.func,
-    username: PropTypes.string,
-    onUsernameChange: PropTypes.func,
+    onOpenUsernameModal: PropTypes.func,
     running: PropTypes.bool,
-    intl: intlShape.isRequired
+    intl: intlShape
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username,
     running: state.scratchGui.vmStatus.running
 });
 
 const mapDispatchToProps = dispatch => ({
-    onUsernameChange: username => {
-        dispatch(setUsername(username));
+    onOpenUsernameModal: () => {
+        dispatch(openUsernameModal());
+        dispatch(closeEditMenu());
     }
 });
 

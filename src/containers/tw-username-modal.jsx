@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
-import {setUsername} from '../reducers/tw';
+import {setUsername, setUsernameInvalid} from '../reducers/tw';
 import UsernameModalComponent from '../components/tw-username-modal/username-modal.jsx';
 import {closeUsernameModal} from '../reducers/modals';
 import {generateRandomUsername} from '../lib/tw-username';
@@ -20,11 +20,11 @@ class UsernameModal extends React.Component {
         ]);
         this.state = {
             value: this.props.username,
-            valid: true
+            valueValid: !this.props.usernameInvalid
         };
     }
     handleKeyPress (event) {
-        if (event.key === 'Enter' && this.state.valid) {
+        if (event.key === 'Enter' && this.state.valueValid) {
             this.handleOk();
         }
     }
@@ -41,21 +41,20 @@ class UsernameModal extends React.Component {
     handleChange (e) {
         this.setState({
             value: e.target.value,
-            valid: e.target.checkValidity()
+            valueValid: e.target.checkValidity()
         });
     }
     handleReset () {
         const randomUsername = generateRandomUsername();
-        this.setState({
-            value: randomUsername
-        });
+        this.props.onCloseUsernameModal();
         this.props.onSetUsername(randomUsername);
     }
     render () {
         return (
             <UsernameModalComponent
-                valid={this.state.valid}
+                mustChangeUsername={this.props.usernameInvalid}
                 value={this.state.value}
+                valueValid={this.state.valueValid}
                 onKeyPress={this.handleKeyPress}
                 onFocus={this.handleFocus}
                 onOk={this.handleOk}
@@ -68,18 +67,23 @@ class UsernameModal extends React.Component {
 }
 
 UsernameModal.propTypes = {
-    username: PropTypes.string,
     onCloseUsernameModal: PropTypes.func,
-    onSetUsername: PropTypes.func
+    onSetUsername: PropTypes.func,
+    username: PropTypes.string,
+    usernameInvalid: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    username: state.scratchGui.tw.username
+    username: state.scratchGui.tw.username,
+    usernameInvalid: state.scratchGui.tw.usernameInvalid
 });
 
 const mapDispatchToProps = dispatch => ({
     onCloseUsernameModal: () => dispatch(closeUsernameModal()),
-    onSetUsername: username => dispatch(setUsername(username))
+    onSetUsername: username => {
+        dispatch(setUsername(username));
+        dispatch(setUsernameInvalid(false));
+    }
 });
 
 export default connect(

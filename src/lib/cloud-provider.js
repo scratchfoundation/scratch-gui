@@ -94,7 +94,7 @@ class CloudProvider {
         // tw: code 4002 is "Username Error" -- do not try to reconnect
         if (e && e.code === 4002) {
             log.info('Cloud username is invalid. Not reconnecting.');
-            this.onInvalidUsername(this.username);
+            this.onInvalidUsername();
             return;
         }
         log.info(`Closed connection to websocket`);
@@ -103,7 +103,7 @@ class CloudProvider {
     }
 
     // tw: method called when username is invalid
-    onInvalidUsername (username) { /* no-op */ }
+    onInvalidUsername () { /* no-op */ }
 
     exponentialTimeout () {
         return (Math.pow(2, Math.min(this.connectionAttempts, 5)) - 1) * 1000;

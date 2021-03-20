@@ -69,3 +69,10 @@
 .help-text {
     margin-bottom: 1.5rem;
 }
+
+.must-change {
+    font-weight: bold;
+}
+.reset-link {
+    cursor: pointer;
+}

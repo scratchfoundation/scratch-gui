@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Box from '../box/box.jsx';
 import Modal from '../../containers/modal.jsx';
+import classNames from 'classnames';
+
 import styles from './username-modal.css';
 
 const messages = defineMessages({
@@ -21,6 +23,29 @@ const UsernameModalComponent = props => (
         id="usernameModal"
     >
         <Box className={styles.body}>
+            {props.mustChangeUsername && <React.Fragment>
+                <p className={classNames(styles.helpText, styles.mustChange)}>
+                    <FormattedMessage
+                        defaultMessage="Sorry, the cloud variable server thinks your username may be unsafe. Please change it to something else or {resetIt}."
+                        description="Text in change username modal"
+                        id="tw.usernameModal.mustChange"
+                        values={{
+                            resetIt: (
+                                <a
+                                    className={styles.resetLink}
+                                    onClick={props.onReset}
+                                >
+                                    <FormattedMessage
+                                        defaultMessage="reset it (recommended)"
+                                        description="link to reset username"
+                                        id="tw.usernameModal.mustChange.resetIt"
+                                    />
+                                </a>
+                            )
+                        }}
+                    />
+                </p>
+            </React.Fragment>}
             <Box>
                 <input
                     autoFocus
@@ -33,15 +58,13 @@ const UsernameModalComponent = props => (
                     maxLength="20"
                 />
             </Box>
-            <Box className={styles.helpText}>
-                <p>
-                    <FormattedMessage
-                        defaultMessage="This will be stored in your browser's local storage."
-                        description="Text in change username modal"
-                        id="tw.usernameModal.help"
-                    />
-                </p>
-            </Box>
+            <p className={styles.helpText}>
+                <FormattedMessage
+                    defaultMessage="This value will be stored in your browser's storage. It may be logged when you interact with projects that contain cloud variables."
+                    description="Text in change username modal"
+                    id="tw.usernameModal.help"
+                />
+            </p>
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.cancelButton}
@@ -66,7 +89,7 @@ const UsernameModalComponent = props => (
                 <button
                     className={styles.okButton}
                     onClick={props.onOk}
-                    disabled={!props.valid}
+                    disabled={!props.valueValid}
                 >
                     <FormattedMessage
                         defaultMessage="OK"
@@ -81,8 +104,9 @@ const UsernameModalComponent = props => (
 
 UsernameModalComponent.propTypes = {
     intl: intlShape,
-    valid: PropTypes.bool.isRequired,
+    mustChangeUsername: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
+    valueValid: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onFocus: PropTypes.func.isRequired,

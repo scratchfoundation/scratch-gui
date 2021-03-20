@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import bindAll from 'lodash.bindall';
 
 import VM from 'scratch-vm';
@@ -14,15 +13,8 @@ import {
 import {
     showAlertWithTimeout
 } from '../reducers/alerts';
-
-// tw: show warning when username is invalid
-const messages = defineMessages({
-    usernameError: {
-        defaultMessage: 'Can\'t connect to cloud variables because username is invalid. You can change it in Edit > Change Username.\n\nIt might be too long, contain invalid characters, or be used by someone else. (Current username: {username})',
-        description: 'Warning that appears when connecting to cloud variable server if the username is invalid',
-        id: 'tw.usernamePrompt'
-    }
-});
+import {openUsernameModal} from '../reducers/modals';
+import {setUsernameInvalid} from '../reducers/tw';
 
 /*
  * Higher Order Component to manage the connection to the cloud server.
@@ -36,7 +28,6 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.cloudProvider = null;
             bindAll(this, [
                 'handleCloudDataUpdate',
-                // tw: show warning when username is invalid
                 'onInvalidUsername'
             ]);
 
@@ -106,7 +97,6 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.props.vm,
                 this.props.username,
                 this.props.projectId);
-            // tw: show warning when username is invalid
             this.cloudProvider.onInvalidUsername = this.onInvalidUsername;
             this.props.vm.setCloudProvider(this.cloudProvider);
         }
@@ -125,12 +115,8 @@ const cloudManagerHOC = function (WrappedComponent) {
                 this.connectToCloud();
             }
         }
-        // tw: show warning when username is invalid
-        onInvalidUsername (username) {
-            // eslint-disable-next-line no-alert
-            alert(this.props.intl.formatMessage(messages.usernameError, {
-                username
-            }));
+        onInvalidUsername () {
+            this.props.onInvalidUsername();
         }
         render () {
             const {
@@ -161,8 +147,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         cloudHost: PropTypes.string,
         hasCloudPermission: PropTypes.bool,
         isShowingWithId: PropTypes.bool.isRequired,
-        // tw: needs intl for username error message
-        intl: intlShape.isRequired,
+        onInvalidUsername: PropTypes.func,
         onShowCloudInfo: PropTypes.func,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         username: PropTypes.string,
@@ -187,7 +172,11 @@ const cloudManagerHOC = function (WrappedComponent) {
     };
 
     const mapDispatchToProps = dispatch => ({
-        onShowCloudInfo: () => showAlertWithTimeout(dispatch, 'cloudInfo')
+        onShowCloudInfo: () => showAlertWithTimeout(dispatch, 'cloudInfo'),
+        onInvalidUsername: () => {
+            dispatch(setUsernameInvalid(true));
+            dispatch(openUsernameModal());
+        }
     });
 
     // Allow incoming props to override redux-provided props. Used to mock in tests.
@@ -195,12 +184,11 @@ const cloudManagerHOC = function (WrappedComponent) {
         {}, stateProps, dispatchProps, ownProps
     );
 
-    // tw: needs intl for username error message
-    return injectIntl(connect(
+    return connect(
         mapStateToProps,
         mapDispatchToProps,
         mergeProps
-    )(CloudManager));
+    )(CloudManager);
 };
 
 export default cloudManagerHOC;

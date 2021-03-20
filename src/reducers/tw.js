@@ -13,6 +13,7 @@ const ADD_COMPILE_ERROR = 'tw/ADD_COMPILE_ERROR';
 const CLEAR_COMPILE_ERRORS = 'tw/CLEAR_COMPILE_ERRORS';
 const SET_FILE_HANDLE = 'tw/SET_FILE_HANDLE';
 const SET_SHOWED_EXTENDED_EXTENSIONS_WARNING = 'tw/SET_SHOWED_EXTENDED_EXTENSIONS_WARNING';
+const SET_USERNAME_INVALID = 'tw/SET_USERNAME_INVALID';
 
 export const initialState = {
     framerate: 30,
@@ -39,7 +40,8 @@ export const initialState = {
     },
     compileErrors: [],
     fileHandle: null,
-    showedExtendedExtensionsWarning: false
+    showedExtendedExtensionsWarning: false,
+    usernameInvalid: false
 };
 
 const reducer = function (state, action) {
@@ -107,6 +109,10 @@ const reducer = function (state, action) {
     case SET_SHOWED_EXTENDED_EXTENSIONS_WARNING:
         return Object.assign({}, state, {
             showedExtendedExtensionsWarning: action.showedExtendedExtensionsWarning
+        });
+    case SET_USERNAME_INVALID:
+        return Object.assign({}, state, {
+            usernameInvalid: action.usernameInvalid
         });
     default:
         return state;
@@ -217,6 +223,13 @@ const setShowedExtendedExtensionsWarning = function (showedExtendedExtensionsWar
     };
 };
 
+const setUsernameInvalid = function (usernameInvalid) {
+    return {
+        type: SET_USERNAME_INVALID,
+        usernameInvalid: usernameInvalid
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -234,5 +247,6 @@ export {
     addCompileError,
     clearCompileErrors,
     setFileHandle,
-    setShowedExtendedExtensionsWarning
+    setShowedExtendedExtensionsWarning,
+    setUsernameInvalid
 };

@@ -190,11 +190,9 @@ describe('CloudProvider', () => {
     });
 
     test('close with code 4002 triggers invalid username', () => {
-        cloudProvider.username = 'aaa';
         cloudProvider.onInvalidUsername = jest.fn();
         cloudProvider.onClose({code: 4002});
         expect(cloudProvider.onInvalidUsername).toHaveBeenCalledTimes(1);
-        expect(cloudProvider.onInvalidUsername).toHaveBeenLastCalledWith('aaa');
     });
 
     test('close with normal code does not trigger invalid username', () => {

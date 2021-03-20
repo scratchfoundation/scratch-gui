@@ -56,6 +56,7 @@ const UsernameModalComponent = props => (
                     onKeyPress={props.onKeyPress}
                     pattern="^[a-zA-Z0-9_-]*$"
                     maxLength="20"
+                    spellCheck="false"
                 />
             </Box>
             <p className={styles.helpText}>

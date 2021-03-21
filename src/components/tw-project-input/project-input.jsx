@@ -46,7 +46,6 @@ class ProjectInput extends React.Component {
     }
     handleKeyDown (e) {
         if (e.key === 'Enter' && this.state.projectId) {
-            this.props.setProjectId(this.state.projectId);
             this.input.blur();
         }
     }
@@ -65,7 +64,7 @@ class ProjectInput extends React.Component {
         // }
     }
     handleBlur () {
-        if (this.state.projectId) {
+        if (this.state.projectId && this.state.projectId !== this.props.projectId) {
             this.props.setProjectId(this.state.projectId);
         }
     }

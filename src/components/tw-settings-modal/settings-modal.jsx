@@ -117,7 +117,7 @@ const HighQualityPen = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="High Quality Pen makes the pen layer dynamically increase in resolution to match the size it's displayed instead of always being 480×360, which can make pen projects appear smoother."
+                    defaultMessage="High Quality Pen makes the pen layer dynamically increase in resolution to match the size it's displayed instead of always being 480×360, which can make pen projects render higher quality images. Not all projects benefit from this setting, and it may impact performance."
                     description="High quality pen setting help"
                     id="tw.settingsModal.highQualityPenHelp"
                 />
@@ -137,7 +137,7 @@ const Interpolation = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Interpolation is an experimental feature that makes project appear to run at higher framerates without changing their behavior. If you've ever run a project at 60 FPS and noticed that it's running too fast, that's the problem interpolation solves."
+                    defaultMessage="Interpolation is an experimental feature that makes project appear to run at higher framerates without changing their behavior by interpolation motion. If you've ever run a project at 60 FPS and noticed that it's running too fast, that's what interpolation solves."
                     description="Interpolation setting help"
                     id="tw.settingsModal.interpolationHelp"
                 />
@@ -184,12 +184,12 @@ const RemoveFencing = props => (
     </WrappedBooleanSetting>
 );
 
-const RemoveLimits = props => (
+const RemoveMiscLimits = props => (
     <WrappedBooleanSetting {...props}>
         <FormattedMessage
-            defaultMessage="Remove Limits"
+            defaultMessage="Remove Miscellaneous Limits"
             description="Remove Limits setting"
-            id="tw.settingsModal.removeLimits"
+            id="tw.settingsModal.removeMiscLimits"
         />
         <div>
             <p>
@@ -197,7 +197,7 @@ const RemoveLimits = props => (
                     // eslint-disable-next-line max-len
                     defaultMessage="Remove various limits that are unlikely to break projects: sound effect limits, etc."
                     description="Remove Limits setting help"
-                    id="tw.settingsModal.removeLimitsHelp"
+                    id="tw.settingsModal.removeMiscLimitsHelp"
                 />
             </p>
         </div>
@@ -215,7 +215,7 @@ const WarpTimer = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Warp Timer makes scripts check to see if they are stuck in a long or infinite loop, and run at a low framerate (~2 fps) instead of getting completely stuck until the loop completes (if the loop ever finishes)."
+                    defaultMessage="Warp Timer makes scripts check if they are stuck in a long or infinite loop and run at a low framerate (2 fps) instead of getting completely stuck until the loop finishes. This fixes many crashes."
                     description="Warp Timer help"
                     id="tw.settingsModal.warpTimerHelp"
                 />
@@ -223,16 +223,9 @@ const WarpTimer = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="This has a performance impact (up to 3x slower in some cases), which is why it's not enabled by default."
+                    defaultMessage="This has a significant performance impact, so it's not enabled by default outside of the editor."
                     description="Warp Timer help"
                     id="tw.settingsModal.warpTimerHelp2"
-                />
-            </p>
-            <p>
-                <FormattedMessage
-                    defaultMessage="Automatically enabled when you open the editor."
-                    description="Warp Timer help"
-                    id="tw.settingsModal.warpTimerHelp3"
                 />
             </p>
         </div>
@@ -302,7 +295,15 @@ CustomStageSize.propTypes = {
     onStageHeightChange: PropTypes.func
 };
 
-const Divider = () => <div className={styles.divider} />;
+const Header = props => (
+    <div className={styles.header}>
+        {props.children}
+        <div className={styles.divider} />
+    </div>
+);
+Header.propTypes = {
+    children: PropTypes.node
+};
 
 const SettingsModalComponent = props => (
     <Modal
@@ -312,53 +313,10 @@ const SettingsModalComponent = props => (
         id="settingsModal"
     >
         <Box className={styles.body}>
-            <HighQualityPen
-                value={props.highQualityPen}
-                onChange={props.onHighQualityPenChange}
-            />
-            <Interpolation
-                value={props.interpolation}
-                onChange={props.onInterpolationChange}
-            />
-            <WarpTimer
-                value={props.warpTimer}
-                onChange={props.onWarpTimerChange}
-            />
-            <Divider />
-            <InfiniteClones
-                value={props.infiniteClones}
-                onChange={props.onInfiniteClonesChange}
-            />
-            <RemoveFencing
-                value={props.removeFencing}
-                onChange={props.onRemoveFencingChange}
-            />
-            <RemoveLimits
-                value={props.removeLimits}
-                onChange={props.onRemoveLimitsChange}
-            />
-            <Divider />
-            <DisableCompiler
-                value={props.disableCompiler}
-                onChange={props.onDisableCompilerChange}
-            />
-            <Divider />
-            <CustomStageSize
-                {...props}
-            />
-            {props.reloadRequired && <Box className={styles.info}>
-                <p>
-                    <FormattedMessage
-                        defaultMessage="A reload is required to apply these settings."
-                        description="Part of the settings modal"
-                        id="tw.settingsModal.reloadRequired"
-                    />
-                </p>
-            </Box>}
             <Box className={styles.info}>
                 <p>
                     <FormattedMessage
-                        defaultMessage="These settings will automatically be stored in the page URL. {additionalHelp}"
+                        defaultMessage="Settings will automatically be stored in the page URL. {additionalHelp}"
                         description="Part of the settings modal"
                         id="tw.settingsModal.url"
                         values={{
@@ -379,6 +337,58 @@ const SettingsModalComponent = props => (
                     />
                 </p>
             </Box>
+            <Header>
+                <FormattedMessage
+                    defaultMessage="Recommended"
+                    description="Settings modal section"
+                    id="tw.settingsModal.recommended"
+                />
+            </Header>
+            <Interpolation
+                value={props.interpolation}
+                onChange={props.onInterpolationChange}
+            />
+            <HighQualityPen
+                value={props.highQualityPen}
+                onChange={props.onHighQualityPenChange}
+            />
+            <WarpTimer
+                value={props.warpTimer}
+                onChange={props.onWarpTimerChange}
+            />
+            <Header>
+                <FormattedMessage
+                    defaultMessage="Remove Limits"
+                    description="Settings modal section"
+                    id="tw.settingsModal.removeLimits"
+                />
+            </Header>
+            <InfiniteClones
+                value={props.infiniteClones}
+                onChange={props.onInfiniteClonesChange}
+            />
+            <RemoveFencing
+                value={props.removeFencing}
+                onChange={props.onRemoveFencingChange}
+            />
+            <RemoveMiscLimits
+                value={props.removeLimits}
+                onChange={props.onRemoveLimitsChange}
+            />
+            <Header>
+                <FormattedMessage
+                    defaultMessage="Danger Zone"
+                    description="Settings modal section"
+                    id="tw.settingsModal.dangerZone"
+                />
+            </Header>
+            <DisableCompiler
+                value={props.disableCompiler}
+                onChange={props.onDisableCompilerChange}
+            />
+            <CustomStageSize
+                {...props}
+            />
         </Box>
     </Modal>
 );

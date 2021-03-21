@@ -9,7 +9,7 @@ import twStageSize from '../lib/tw-stage-size';
 
 const messages = defineMessages({
     confirmReload: {
-        defaultMessage: 'A reload is required to apply these settings, are you should you want to reload?',
+        defaultMessage: 'A reload is required to change stage size, are you should you want to reload?',
         description: 'Confirmation that user wants to reload to apply settings',
         id: 'tw.settingsModal.confirmReload'
     }

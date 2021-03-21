@@ -1,0 +1,31 @@
+{
+  "name": "Interface Customization",
+  "description": "Customize some parts of the interface.",
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "remove-backpack.css",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "settingMatch": {
+        "id": "removeBackpack",
+        "value": true
+      }
+    }
+  ],
+  "settings": [
+    {
+      "name": "Remove backpack",
+      "id": "removeBackpack",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "tags": ["beta"],
+  "enabledByDefault": false,
+  "l10n": true
+}

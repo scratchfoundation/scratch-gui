@@ -3,8 +3,20 @@
   "description": "Customize some parts of the interface.",
   "userscripts": [
     {
-      "url": "userscript.js",
-      "matches": ["https://scratch.mit.edu/projects/*"]
+      "url": "remove-backpack.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "settingMatch": {
+        "id": "removeBackpack",
+        "value": true
+      }
+    },
+    {
+      "url": "remove-warning.js",
+      "matches": ["https://scratch.mit.edu/projects/*"],
+      "settingMatch": {
+        "id": "removeWarning1",
+        "value": true
+      }
     }
   ],
   "userstyles": [
@@ -21,6 +33,12 @@
     {
       "name": "Remove backpack",
       "id": "removeBackpack",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "Remove editor warning",
+      "id": "removeWarning1",
       "type": "boolean",
       "default": false
     }

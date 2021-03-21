@@ -196,6 +196,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 onRuntimeStopped,
                 onTurboModeOff,
                 onTurboModeOn,
+                onHasCloudVariablesChanged,
                 onFramerateChanged,
                 onInterpolationChanged,
                 onCompilerOptionsChanged,

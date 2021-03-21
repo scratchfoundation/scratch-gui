@@ -48,7 +48,7 @@ class BooleanSetting extends React.Component {
             'handleClickHelp'
         ]);
         this.state = {
-            helpVisible: false
+            helpVisible: this.props.value
         };
     }
     componentDidUpdate (prevProps) {

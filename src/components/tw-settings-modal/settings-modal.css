@@ -81,3 +81,8 @@
 .custom-stage-size > * {
     margin-right: 0.5rem;
 }
+
+.divider {
+    width: 100%;
+    border-top: 1px dashed $ui-tertiary;
+}

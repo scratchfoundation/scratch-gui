@@ -302,6 +302,8 @@ CustomStageSize.propTypes = {
     onStageHeightChange: PropTypes.func
 };
 
+const Divider = () => <div className={styles.divider} />;
+
 const SettingsModalComponent = props => (
     <Modal
         className={styles.modalContent}
@@ -318,6 +320,11 @@ const SettingsModalComponent = props => (
                 value={props.interpolation}
                 onChange={props.onInterpolationChange}
             />
+            <WarpTimer
+                value={props.warpTimer}
+                onChange={props.onWarpTimerChange}
+            />
+            <Divider />
             <InfiniteClones
                 value={props.infiniteClones}
                 onChange={props.onInfiniteClonesChange}
@@ -330,14 +337,12 @@ const SettingsModalComponent = props => (
                 value={props.removeLimits}
                 onChange={props.onRemoveLimitsChange}
             />
-            <WarpTimer
-                value={props.warpTimer}
-                onChange={props.onWarpTimerChange}
-            />
+            <Divider />
             <DisableCompiler
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
             />
+            <Divider />
             <CustomStageSize
                 {...props}
             />

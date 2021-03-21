@@ -1,0 +1,16 @@
+.badge {
+    padding: 0.5rem;
+    margin: 5px 0 8px 0;
+    border: 1px solid #b9d6ff;
+    background-color: #dbebff;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 0.25rem;
+}
+
+.text {
+
+}

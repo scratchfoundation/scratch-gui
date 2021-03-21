@@ -40,6 +40,7 @@ import FeaturedProjects from '../components/tw-featured-projects/featured-projec
 import Description from '../components/tw-description/description.jsx';
 import WebGlModal from '../containers/webgl-modal.jsx';
 import TWEvalModal from '../components/webgl-modal/tw-eval-modal.jsx';
+import CloudVariableBadge from '../components/tw-cloud-variable-badge/cloud-variable-badge.jsx';
 import {isRendererSupported, isEvalSupported} from '../lib/tw-environment-support-prober';
 
 import styles from './interface.css';
@@ -101,6 +102,7 @@ class Interface extends React.Component {
     }
     render () {
         const {
+            cloudVariables,
             description,
             isFullScreen,
             isPlayerOnly,
@@ -153,6 +155,11 @@ class Interface extends React.Component {
                             <div className={styles.section}>
                                 <ProjectInput />
                             </div>
+                            {cloudVariables && (
+                                <div className={styles.section}>
+                                    <CloudVariableBadge />
+                                </div>
+                            )}
                             {description.instructions || description.credits ? (
                                 <div className={styles.section}>
                                     <Description
@@ -289,6 +296,7 @@ class Interface extends React.Component {
 
 Interface.propTypes = {
     intl: intlShape,
+    cloudVariables: PropTypes.bool,
     description: PropTypes.shape({
         credits: PropTypes.string,
         instructions: PropTypes.string
@@ -300,6 +308,7 @@ Interface.propTypes = {
 };
 
 const mapStateToProps = state => ({
+    cloudVariables: state.scratchGui.vm.runtime.hasCloudData(),
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,

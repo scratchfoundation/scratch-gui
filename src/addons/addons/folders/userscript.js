@@ -808,10 +808,13 @@ export default async function ({ addon, global, console, msg }) {
         if (typeof this.props.id === "number") {
           const itemData = getItemData(this.props);
           if (itemData) {
-            const originalId = this.props.id;
-            this.props.id = itemData.realIndex;
+            const originalProps = this.props;
+            this.props = {
+              ...originalProps,
+              id: itemData.realIndex
+            };
             const ret = original.call(this, ...args);
-            this.props.id = originalId;
+            this.props = originalProps;
             return ret;
           }
         }

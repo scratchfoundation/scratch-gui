@@ -190,6 +190,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                             const uploadedProjectTitle = this.getProjectTitleFromFilename(filename);
                             this.props.onSetProjectTitle(uploadedProjectTitle);
                         }
+                        this.props.vm.renderer.draw();
                         loadingSuccess = true;
                     })
                     .catch(error => {

@@ -49,8 +49,8 @@ STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless
 export default {
     standardStageWidth: twStageSize.width,
     standardStageHeight: twStageSize.height,
-    fullSizeMinWidth: 1096 + (twStageSize.width - 480),
-    fullSizePaintMinWidth: 1250 + (twStageSize.width - 480)
+    fullSizeMinWidth: 1096 + Math.max(0, twStageSize.width - 480),
+    fullSizePaintMinWidth: 1250 + Math.max(0, twStageSize.width - 480)
 };
 
 export {

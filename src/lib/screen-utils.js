@@ -82,6 +82,8 @@ const getStageDimensions = (stageSize, isFullScreen) => {
     return stageDimensions;
 };
 
+const getMinWidth = stageSize => STAGE_DISPLAY_SCALES[stageSize] * 480;
+
 /**
  * Take a pair of sizes for the stage (a target height and width and a default height and width),
  * calculate the ratio between them, and return a CSS transform to scale to that ratio.
@@ -105,6 +107,7 @@ const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
 
 export {
     getStageDimensions,
+    getMinWidth,
     resolveStageSize,
     stageSizeToTransform
 };

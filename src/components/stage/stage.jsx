@@ -11,7 +11,7 @@ import GreenFlagOverlay from '../../containers/green-flag-overlay.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import {getStageDimensions} from '../../lib/screen-utils.js';
+import {getStageDimensions, getMinWidth} from '../../lib/screen-utils.js';
 import styles from './stage.css';
 
 const StageComponent = props => {
@@ -20,6 +20,7 @@ const StageComponent = props => {
         dragRef,
         isColorPicking,
         isFullScreen,
+        isPlayerOnly,
         isStarted,
         colorInfo,
         micIndicator,
@@ -33,6 +34,7 @@ const StageComponent = props => {
     } = props;
 
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
+    const minWidth = getMinWidth(stageSize);
 
     return (
         <React.Fragment>
@@ -41,6 +43,9 @@ const StageComponent = props => {
                     styles.stageWrapper,
                     {[styles.withColorPicker]: !isFullScreen && isColorPicking})}
                 onDoubleClick={onDoubleClick}
+                style={isPlayerOnly ? null : {
+                    minWidth: `${minWidth}px`
+                }}
             >
                 <Box
                     className={classNames(
@@ -139,6 +144,7 @@ StageComponent.propTypes = {
     dragRef: PropTypes.func,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    isPlayerOnly: PropTypes.bool,
     isStarted: PropTypes.bool,
     micIndicator: PropTypes.bool,
     onDeactivateColorPicker: PropTypes.func,

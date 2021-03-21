@@ -466,6 +466,7 @@ Stage.propTypes = {
     disableEditingTargetChange: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
+    isPlayerOnly: PropTypes.bool,
     // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: PropTypes.bool,
     dimensions: PropTypes.arrayOf(PropTypes.number),
@@ -494,6 +495,7 @@ const mapStateToProps = state => ({
     isColorPicking: state.scratchGui.colorPicker.active,
     // tw: embed is always considered fullscreen
     isFullScreen: state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isEmbedded,
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     // tw: update when dimensions or isWindowFullScreen changes
     isWindowFullScreen: state.scratchGui.tw.isWindowFullScreen,
     dimensions: state.scratchGui.tw.dimensions,

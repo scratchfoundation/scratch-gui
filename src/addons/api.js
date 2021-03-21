@@ -318,11 +318,23 @@ class AddonRunner {
         }
     }
 
+    settingsMatch (settingMatch) {
+        if (!settingMatch) {
+            // No settings to match.
+            return true;
+        }
+        const settingValue = this.publicAPI.addon.settings.get(settingMatch.id);
+        return settingValue === settingMatch.value;
+    }
+
     async _run () {
         this.updateCSSVariables();
 
         if (this.manifest.userstyles) {
             for (const userstyle of this.manifest.userstyles) {
+                if (!this.settingsMatch(userstyle.settingMatch)) {
+                    continue;
+                }
                 const m = await import(
                     /* webpackInclude: /\.css$/ */
                     /* webpackMode: "eager" */
@@ -339,6 +351,9 @@ class AddonRunner {
 
         if (this.manifest.userscripts) {
             for (const userscript of this.manifest.userscripts) {
+                if (!this.settingsMatch(userscript.settingMatch)) {
+                    continue;
+                }
                 const m = await import(
                     /* webpackInclude: /\.js$/ */
                     /* webpackMode: "eager" */

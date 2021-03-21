@@ -347,8 +347,16 @@ const TWStateManager = function (WrappedComponent) {
                 }
             }
 
+            if (urlParams.has('offscreen')) {
+                this.props.vm.setRuntimeOptions({
+                    fencing: false
+                });
+            }
+
             if (urlParams.has('limitless')) {
-                this.props.vm.setLimits(false);
+                this.props.vm.setRuntimeOptions({
+                    effectLimits: false
+                });
             }
 
             if (urlParams.has('project_url')) {

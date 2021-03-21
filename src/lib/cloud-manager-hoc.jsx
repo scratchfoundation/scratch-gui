@@ -128,6 +128,7 @@ const cloudManagerHOC = function (WrappedComponent) {
                 hasCloudPermission,
                 isShowingWithId,
                 onShowCloudInfo,
+                onInvalidUsername,
                 /* eslint-enable no-unused-vars */
                 vm,
                 ...componentProps

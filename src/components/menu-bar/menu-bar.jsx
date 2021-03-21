@@ -27,14 +27,12 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
-import HighQualityPen from '../../containers/tw-high-quality-pen.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
 import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
-import VMOptions from '../../containers/tw-vm-options.jsx';
 import TWRestorePointLoader from '../../containers/tw-restore-point-loader.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
 
-import {openTipsLibrary} from '../../reducers/modals';
+import {openTipsLibrary, openSettingsModal} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
     autoUpdateProject,
@@ -58,9 +56,6 @@ import {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
-    openSettingsMenu,
-    closeSettingMenu,
-    settingsMenuOpen,
     openHelpMenu,
     closeHelpMenu,
     helpMenuOpen,
@@ -748,6 +743,15 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     )}</CloudVariablesToggler>
                                 </MenuSection>
+                                <MenuSection>
+                                    <MenuItem onClick={this.props.onClickSettings}>
+                                        <FormattedMessage
+                                            defaultMessage="Advanced Settings"
+                                            description="Menu bar item for advanced settings"
+                                            id="tw.menuBar.moreSettings"
+                                        />
+                                    </MenuItem>
+                                </MenuSection>
                             </MenuBarMenu>
                         </div>
                         {this.props.onClickAddonSettings && (
@@ -755,7 +759,7 @@ class MenuBar extends React.Component {
                                 className={classNames(styles.menuBarItem, styles.hoverable)}
                                 onMouseUp={this.props.onClickAddonSettings}
                             >
-                                <div className={classNames(styles.addonsMenu)}>
+                                <div>
                                     <FormattedMessage
                                         defaultMessage="Addons"
                                         description="Menu bar item for addon settings"
@@ -765,129 +769,16 @@ class MenuBar extends React.Component {
                             </div>
                         )}
                         <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.settingsMenuOpen
-                            })}
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
                             onMouseUp={this.props.onClickSettings}
                         >
-                            <div className={classNames(styles.settingsMenu)}>
+                            <div>
                                 <FormattedMessage
                                     defaultMessage="Advanced"
-                                    description="Text for advanced settings dropdown menu"
+                                    description="Text for advanced settings menu item"
                                     id="tw.menuBar.advanced"
                                 />
                             </div>
-                            <MenuBarMenu
-                                className={classNames(styles.menuBarMenu)}
-                                open={this.props.settingsMenuOpen}
-                                place={this.props.isRtl ? 'left' : 'right'}
-                                onRequestClose={this.props.onRequestCloseSettings}
-                            >
-                                <MenuSection>
-                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings">
-                                        <FormattedMessage
-                                            defaultMessage="Advanced Settings Help"
-                                            description="Menu bar item for advanced settings help"
-                                            id="tw.menuBar.advancedHelp"
-                                        />
-                                    </MenuItemLink>
-                                </MenuSection>
-                                <MenuSection>
-                                    {/* Wrap the top item in a div so that it gets a border */}
-                                    <div>
-                                        <HighQualityPen>{(toggleHighQualityPen, {highQualityPen}) => (
-                                            <MenuItem onClick={toggleHighQualityPen}>
-                                                {highQualityPen ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn off High Quality Pen"
-                                                        description="Menu bar item for turning off high quality pen"
-                                                        id="tw.menuBar.hqpOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn on High Quality Pen"
-                                                        description="Menu bar item for turning on high quality pen"
-                                                        id="tw.menuBar.hqpOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
-                                        )}</HighQualityPen>
-                                    </div>
-                                    <VMOptions>{({
-                                        compilerEnabled,
-                                        toggleCompilerEnabled,
-                                        warpTimer,
-                                        toggleWarpTimer,
-                                        infiniteClones,
-                                        toggleInfiniteClones,
-                                        interpolation,
-                                        toggleInterpolation
-                                    }) => (
-                                        <React.Fragment>
-                                            <MenuItem onClick={toggleInterpolation}>
-                                                {interpolation ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn off Interpolation"
-                                                        description="Menu bar item for turning off interpolation"
-                                                        id="tw.menuBar.interpolationOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn on Interpolation"
-                                                        description="Menu bar item for turning on interpolation"
-                                                        id="tw.menuBar.interpolationOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
-                                            <MenuItem onClick={toggleInfiniteClones}>
-                                                {infiniteClones ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn off Infinite Clones"
-                                                        description="Menu bar item for turning off Infinite Clones"
-                                                        id="tw.menuBar.infiniteClonesOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn on Infinite Clones"
-                                                        description="Menu bar item for turning on Infinite Clones"
-                                                        id="tw.menuBar.infiniteClonesOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
-                                            <MenuItem onClick={toggleWarpTimer}>
-                                                {warpTimer ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn off Warp Timer"
-                                                        description="Menu bar item for turning off Warp Timer"
-                                                        id="tw.menuBar.warpTimerOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Turn on Warp Timer"
-                                                        description="Menu bar item for turning on Warp Timer"
-                                                        id="tw.menuBar.warpTimerOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
-                                            <MenuItem onClick={toggleCompilerEnabled}>
-                                                {compilerEnabled ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Disable Compiler"
-                                                        description="Menu bar item for disabling the compiler"
-                                                        id="tw.menuBar.compilerOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Enable Compiler"
-                                                        description="Menu bar item for enabling the compiler"
-                                                        id="tw.menuBar.compilerOn"
-                                                    />
-                                                )}
-                                            </MenuItem>
-                                        </React.Fragment>
-                                    )}</VMOptions>
-                                </MenuSection>
-                            </MenuBarMenu>
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -1127,7 +1018,6 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onClickSettings: PropTypes.func,
-    onRequestCloseSettings: PropTypes.func,
     onClickHelp: PropTypes.func,
     onRequestCloseHelp: PropTypes.func,
     onClickErrors: PropTypes.func,
@@ -1151,7 +1041,6 @@ MenuBar.propTypes = {
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
-    settingsMenuOpen: PropTypes.bool,
     helpMenuOpen: PropTypes.bool,
     errorsMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
@@ -1187,7 +1076,6 @@ const mapStateToProps = (state, ownProps) => {
         projectId: state.scratchGui.projectState.projectId,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
-        settingsMenuOpen: settingsMenuOpen(state),
         helpMenuOpen: helpMenuOpen(state),
         errorsMenuOpen: errorsMenuOpen(state),
         username: user ? user.username : null,
@@ -1211,8 +1099,6 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickSettings: () => dispatch(openSettingsMenu()),
-    onRequestCloseSettings: () => dispatch(closeSettingMenu()),
     onClickHelp: () => dispatch(openHelpMenu()),
     onRequestCloseHelp: () => dispatch(closeHelpMenu()),
     onClickErrors: () => dispatch(openErrorsMenu()),
@@ -1223,6 +1109,10 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
+    onClickSettings: () => {
+        dispatch(openSettingsModal());
+        dispatch(closeEditMenu());
+    },
     onSeeCommunity: () => dispatch(setPlayer(true))
 });
 

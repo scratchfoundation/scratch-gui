@@ -347,6 +347,10 @@ const TWStateManager = function (WrappedComponent) {
                 }
             }
 
+            if (urlParams.has('limitless')) {
+                this.props.vm.setLimits(false);
+            }
+
             if (urlParams.has('project_url')) {
                 let projectUrl = urlParams.get('project_url');
                 if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
@@ -466,10 +470,11 @@ const TWStateManager = function (WrappedComponent) {
                     // Leave ?stuck as-is when in editor
                 }
 
-                if (runtimeOptions.maxClones === 300) {
-                    searchParams.delete('clones');
+                if (this.props.vm.hasLimits()) {
+                    searchParams.delete('limitless');
                 } else {
-                    searchParams.set('clones', runtimeOptions.maxClones);
+                    searchParams.set('limitless', '');
+                    searchParams.delete('clones');
                 }
 
                 let newSearch = searchParams.toString();

@@ -1,0 +1,83 @@
+@import "../../css/colors.css";
+
+.modal-content {
+    max-width: 750px;
+}
+
+.body {
+    background: $ui-white;
+    padding: 1.5rem 2.25rem;
+    min-height: 150px;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+[theme="dark"] .body {
+    color: $text-primary;
+    background: $ui-primary;
+}
+
+.setting {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+}
+.setting.active {
+    background: #dbebff;
+}
+.setting:hover,
+.setting:focus-within {
+    background: #cadef5;
+}
+[theme="dark"] .setting.active {
+    background: #16202c;
+}
+[theme="dark"] .setting:hover,
+[theme="dark"] .setting:focus-within {
+    background: #202f41;
+}
+
+.label {
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.setting table {
+    border-collapse: collapse;
+}
+.setting tr,
+.setting td,
+.setting th {
+    padding: 0;
+    margin: 0;
+    border: 1px solid $ui-tertiary;
+}
+
+.checkbox {
+    margin-right: 0.5rem;
+}
+
+.help-icon {
+    border: 0;
+    background-color: transparent;
+    background-image: url("./help-black.svg");
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+[theme="dark"] .help-icon {
+    background-image: url("./help-white.svg");
+}
+
+.info {
+    margin-bottom: 1.5rem;
+}
+
+.custom-stage-size > * {
+    margin-right: 0.5rem;
+}

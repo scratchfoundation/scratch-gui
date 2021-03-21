@@ -35,6 +35,9 @@ const StageComponent = props => {
 
     const stageDimensions = getStageDimensions(stageSize, isFullScreen);
     const minWidth = getMinWidth(stageSize);
+    const transformStyle = stageDimensions.width < minWidth && !isFullScreen ? {
+        transform: `translateX(${(minWidth - stageDimensions.width) / 2}px)`
+    } : {};
 
     return (
         <React.Fragment>
@@ -54,7 +57,8 @@ const StageComponent = props => {
                     )}
                     style={{
                         height: stageDimensions.height,
-                        width: stageDimensions.width
+                        width: stageDimensions.width,
+                        ...transformStyle
                     }}
                 >
                     <DOMElementRenderer
@@ -89,6 +93,7 @@ const StageComponent = props => {
                         styles.stageOverlays,
                         {[styles.fullScreen]: isFullScreen}
                     )}
+                    style={transformStyle}
                 >
                     <div
                         className={styles.stageBottomWrapper}

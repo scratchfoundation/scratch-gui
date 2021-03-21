@@ -313,30 +313,28 @@ const SettingsModalComponent = props => (
         id="settingsModal"
     >
         <Box className={styles.body}>
-            <Box className={styles.info}>
-                <p>
-                    <FormattedMessage
-                        defaultMessage="Settings will automatically be stored in the page URL. {additionalHelp}"
-                        description="Part of the settings modal"
-                        id="tw.settingsModal.url"
-                        values={{
-                            additionalHelp: (
-                                <a
-                                    href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    <FormattedMessage
-                                        defaultMessage="Additional help"
-                                        description="Link to advanced settings on the wiki"
-                                        id="tw.settingsModal.moreHelp"
-                                    />
-                                </a>
-                            )
-                        }}
-                    />
-                </p>
-            </Box>
+            <p className={styles.info}>
+                <FormattedMessage
+                    defaultMessage="Settings will automatically be stored in the page URL. {additionalHelp}"
+                    description="Part of the settings modal"
+                    id="tw.settingsModal.url"
+                    values={{
+                        additionalHelp: (
+                            <a
+                                href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Additional help"
+                                    description="Link to advanced settings on the wiki"
+                                    id="tw.settingsModal.moreHelp"
+                                />
+                            </a>
+                        )
+                    }}
+                />
+            </p>
             <Header>
                 <FormattedMessage
                     defaultMessage="Recommended"

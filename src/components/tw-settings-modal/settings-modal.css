@@ -74,19 +74,19 @@
     background-image: url("./help-white.svg");
 }
 
-.info {
-    margin-bottom: 1.5rem;
-}
-
 .custom-stage-size > * {
     margin-right: 0.5rem;
+}
+
+.info {
+    margin-bottom: 0.25rem;
 }
 
 .header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0.75rem 0 0.25rem 0;
+    margin: 0.25rem 0;
     font-weight: bold;
 }
 .divider {

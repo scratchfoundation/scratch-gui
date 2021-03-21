@@ -17,17 +17,9 @@ const _twGetAsset = (path) => {
 };
 
 export default async function ({ addon, global, console, msg }) {
-  let project = null;
-  let paperCanvas = null;
-  let expectingImport = false;
+  let paper = null;
+  let paperCenter;
   const storedOnionLayers = [];
-  const PaperConstants = {
-    Raster: null,
-    Layer: null,
-    Point: null,
-    Rectangle: null,
-    CENTER: null,
-  };
 
   const parseHexColor = (color) => {
     const hexString = color.substr(1);
@@ -51,16 +43,18 @@ export default async function ({ addon, global, console, msg }) {
     afterTint: parseHexColor(addon.settings.get("afterTint")),
   };
 
-  const foundPaper = (_project) => {
-    if (project === _project) {
-      return;
-    }
-    project = _project;
+  const getProject = () => paper && paper.project;
+
+  const foundPaper = (_paper) => {
+    paper = _paper;
+
+    const backgroundGuideLayer = paper.project.layers.find((i) => i.data.isBackgroundGuideLayer);
+    paperCenter = backgroundGuideLayer.children[0].position;
 
     // When background guide layer is added, show onion layers.
     // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/helper/layer.js#L145
-    const originalAddLayer = project.addLayer;
-    project.addLayer = function (layer) {
+    const originalAddLayer = paper.Project.prototype.addLayer;
+    paper.Project.prototype.addLayer = function (layer) {
       const result = originalAddLayer.call(this, layer);
       if (layer.data.isBackgroundGuideLayer) {
         let onion;
@@ -75,8 +69,8 @@ export default async function ({ addon, global, console, msg }) {
     // Scratch uses importJSON to undo or redo
     // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/helper/undo.js#L37
     // The code prior to this will remove our onion layers, so we have to manually add them back.
-    const originalImportJSON = project.importJSON;
-    project.importJSON = function (json) {
+    const originalImportJSON = paper.Project.prototype.importJSON;
+    paper.Project.prototype.importJSON = function (json) {
       const result = originalImportJSON.call(this, json);
       if (settings.enabled) {
         updateOnionLayers();
@@ -84,15 +78,12 @@ export default async function ({ addon, global, console, msg }) {
       return result;
     };
 
-    // At this point the project hasn't even finished its constructor, so we can't access layers yet.
-    setTimeout(() => {
-      // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/helper/layer.js#L114
-      // When background guide layer is removed, hide onion layers.
-      const backgroundGuideLayer = project.layers.find((i) => i.data.isBackgroundGuideLayer);
-      const originalRemove = backgroundGuideLayer.remove;
-      backgroundGuideLayer.remove = function () {
-        originalRemove.call(this);
-        for (const layer of project.layers) {
+    // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/helper/layer.js#L114
+    // When background guide layer is removed, hide onion layers.
+    const originalRemoveLayer = paper.Layer.prototype.remove;
+    paper.Layer.prototype.remove = function () {
+      if (this.data.isBackgroundGuideLayer) {
+        for (const layer of paper.project.layers) {
           if (layer.data.sa_isOnionLayer) {
             storedOnionLayers.push(layer);
           }
@@ -100,31 +91,20 @@ export default async function ({ addon, global, console, msg }) {
         for (const layer of storedOnionLayers) {
           layer.remove();
         }
-      };
-
-      if (PaperConstants.Layer === null) {
-        PaperConstants.Layer = project.activeLayer.constructor;
-
-        const rasterLayer = project.layers.find((i) => i.data.isRasterLayer);
-        PaperConstants.Raster = rasterLayer.children[0].constructor;
-        PaperConstants.Point = rasterLayer.position.constructor;
-        PaperConstants.Rectangle = rasterLayer.getBounds().constructor;
-
-        PaperConstants.CENTER = backgroundGuideLayer.children[0].position;
       }
-    });
+      return originalRemoveLayer.call(this);
+    };
   };
 
-  const foundPaperCanvas = (_paperCanvas) => {
-    if (paperCanvas === _paperCanvas) {
-      return;
-    }
-    paperCanvas = _paperCanvas;
+  const foundPaperCanvas = (paperCanvas) => {
+    let expectingImport = false;
+
+    const PaperCanvas = paperCanvas.constructor;
 
     // importImage is called to start loading an image.
     // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L124
-    const originalImportImage = paperCanvas.importImage;
-    paperCanvas.importImage = function (...args) {
+    const originalImportImage = PaperCanvas.prototype.importImage;
+    PaperCanvas.prototype.importImage = function (...args) {
       expectingImport = true;
       removeOnionLayers();
       return originalImportImage.call(this, ...args);
@@ -134,8 +114,8 @@ export default async function ({ addon, global, console, msg }) {
     // all paths of importImage will result in a call to this method.
     // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L310-L327
     // We use this to know when to add layers.
-    const originalRecalibrateSize = paperCanvas.recalibrateSize;
-    paperCanvas.recalibrateSize = function (callback) {
+    const originalRecalibrateSize = PaperCanvas.prototype.recalibrateSize;
+    PaperCanvas.prototype.recalibrateSize = function (callback) {
       return originalRecalibrateSize.call(this, () => {
         if (callback) callback();
         if (expectingImport) {
@@ -146,6 +126,11 @@ export default async function ({ addon, global, console, msg }) {
         }
       });
     };
+
+    // Prototype overrides will work for all future instances, but Scratch manually binds some methods to `this`
+    // so we have to manually copy them for the current instance (but not future instances)
+    paperCanvas.recalibrateSize = PaperCanvas.prototype.recalibrateSize.bind(paperCanvas);
+    paperCanvas.importImage = PaperCanvas.prototype.importImage.bind(paperCanvas);
   };
 
   const createCanvas = (width, height) => {
@@ -157,7 +142,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const createOnionLayer = () => {
-    const layer = new PaperConstants.Layer();
+    const layer = new paper.Layer();
     layer.locked = true;
     layer.guide = true;
     layer.data.sa_isOnionLayer = true;
@@ -165,6 +150,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const removeOnionLayers = () => {
+    const project = getProject();
     if (!project) {
       return;
     }
@@ -181,6 +167,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const relayerOnionLayers = () => {
+    const project = getProject();
     if (!project) {
       return;
     }
@@ -279,7 +266,7 @@ export default async function ({ addon, global, console, msg }) {
         }
       }
 
-      project.importSVG(asset, {
+      getProject().importSVG(asset, {
         expandShapes: true,
         onLoad: (root) => {
           if (!root) {
@@ -302,7 +289,7 @@ export default async function ({ addon, global, console, msg }) {
             i.locked = true;
             i.guide = true;
           });
-          root.scale(2, new PaperConstants.Point(0, 0));
+          root.scale(2, new paper.Point(0, 0));
 
           if (settings.mode === "tint") {
             const gradients = new Set();
@@ -330,13 +317,13 @@ export default async function ({ addon, global, console, msg }) {
 
           // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L277-L287
           if (typeof rotationCenterX !== "undefined" && typeof rotationCenterY !== "undefined") {
-            let rotationPoint = new PaperConstants.Point(rotationCenterX, rotationCenterY);
+            let rotationPoint = new paper.Point(rotationCenterX, rotationCenterY);
             if (viewBox && viewBox.length >= 2 && !isNaN(viewBox[0]) && !isNaN(viewBox[1])) {
               rotationPoint = rotationPoint.subtract(viewBox[0], viewBox[1]);
             }
-            root.translate(PaperConstants.CENTER.subtract(rotationPoint.multiply(2)));
+            root.translate(paperCenter.subtract(rotationPoint.multiply(2)));
           } else {
-            root.translate(PaperConstants.CENTER.subtract(root.bounds.width, root.bounds.height));
+            root.translate(paperCenter.subtract(root.bounds.width, root.bounds.height));
           }
 
           layer.addChild(root);
@@ -351,8 +338,8 @@ export default async function ({ addon, global, console, msg }) {
 
       const image = new Image();
       image.onload = () => {
-        const width = Math.min(PaperConstants.CENTER.x * 2, image.width);
-        const height = Math.min(PaperConstants.CENTER.y * 2, image.height);
+        const width = Math.min(paperCenter.x * 2, image.width);
+        const height = Math.min(paperCenter.y * 2, image.height);
 
         // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L151-L156
         if (typeof rotationCenterX === "undefined") {
@@ -362,13 +349,13 @@ export default async function ({ addon, global, console, msg }) {
           rotationCenterY = height / 2;
         }
 
-        const raster = new PaperConstants.Raster(createCanvas(width, height));
+        const raster = new paper.Raster(createCanvas(width, height));
         raster.parent = layer;
         raster.guide = true;
         raster.locked = true;
-        const x = width / 2 + (PaperConstants.CENTER.x - rotationCenterX);
-        const y = height / 2 + (PaperConstants.CENTER.y - rotationCenterY);
-        raster.position = new PaperConstants.Point(x, y);
+        const x = width / 2 + (paperCenter.x - rotationCenterX);
+        const y = height / 2 + (paperCenter.y - rotationCenterY);
+        raster.position = new paper.Point(x, y);
 
         raster.drawImage(image, 0, 0);
 
@@ -393,6 +380,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const updateOnionLayers = async () => {
+    const project = getProject();
     if (!project) {
       return;
     }
@@ -476,43 +464,49 @@ export default async function ({ addon, global, console, msg }) {
     toggleButton.dataset.enabled = settings.enabled;
   };
 
-  const installPrototypeHacks = () => {
-    // https://github.com/LLK/paper.js/blob/16d5ff0267e3a0ef647c25e58182a27300afad20/src/item/Project.js#L64-L65
-    Object.defineProperty(Object.prototype, "_view", {
-      set(value) {
-        Object.defineProperty(this, "_view", {
-          value: value,
-          writable: true,
-          enumerable: true,
-          configurable: true,
-        });
-        if (
-          typeof this._activeLayer === "object" &&
-          Array.isArray(this.layers) &&
-          typeof this.addLayer === "function" &&
-          typeof this.importJSON === "function" &&
-          typeof this.importSVG === "function"
-        ) {
-          foundPaper(this);
-        }
-      },
-    });
+  const untilInEditor = () => {
+    if (addon.tab.editorMode !== "editor") {
+      return new Promise((resolve, reject) => {
+        const handler = () => {
+          if (addon.tab.editorMode === "editor") {
+            resolve();
+            addon.tab.removeEventListener("urlChange", handler);
+          }
+        };
+        addon.tab.addEventListener("urlChange", handler);
+      });
+    }
+  };
 
-    // https://github.com/LLK/scratch-paint/blob/cdf0afc217633e6cfb8ba90ea4ae38b79882cf6c/src/containers/paper-canvas.jsx#L45-L51
-    // In Scratch, this code block should always run.
-    Object.defineProperty(Object.prototype, "shouldZoomToFit", {
-      set(value) {
-        Object.defineProperty(this, "shouldZoomToFit", {
-          value: value,
-          writable: true,
-          enumerable: true,
-          configurable: true,
-        });
-        if (typeof this.importImage === "function" && typeof this.recalibrateSize === "function") {
-          foundPaperCanvas(this);
-        }
-      },
-    });
+  const accessScratchInternals = () => {
+    if (paper) {
+      return;
+    }
+
+    const REACT_INTERNAL_PREFIX = "__reactInternalInstance$";
+
+    // We can access paper through .tool on tools, for example:
+    // https://github.com/LLK/scratch-paint/blob/develop/src/containers/bit-brush-mode.jsx#L60-L62
+    // It happens that paper's Tool objects contain a reference to the entirety of paper's scope.
+    const modeSelector = document.querySelector("[class*='paint-editor_mode-selector']");
+    const reactInternalKey = Object.keys(modeSelector).find((i) => i.startsWith(REACT_INTERNAL_PREFIX));
+    const internalState = modeSelector[reactInternalKey].child;
+
+    // .tool only exists on the selected tool
+    let toolState = internalState;
+    let tool;
+    while (!(tool = toolState.child.stateNode.tool)) {
+      toolState = toolState.sibling;
+    }
+    const paperScope = tool._scope;
+
+    const paintEditorCanvasContainer = document.querySelector("[class^='paint-editor_canvas-container']");
+    const paperCanvas = paintEditorCanvasContainer[reactInternalKey].child.child.child.stateNode;
+
+    if (paperScope && paperCanvas) {
+      foundPaper(paperScope);
+      foundPaperCanvas(paperCanvas);
+    }
   };
 
   const settingsChanged = (onlyRelayerNeeded) => {
@@ -739,11 +733,12 @@ export default async function ({ addon, global, console, msg }) {
   settingsPage.appendChild(settingsTip);
 
   const controlsLoop = async () => {
-    let fixedClassNames = false;
+    let hasRunOnce = false;
     while (true) {
       const canvasControls = await addon.tab.waitForElement("[class^='paint-editor_canvas-controls']", {
         markAsSeen: true,
       });
+      accessScratchInternals();
       const zoomControlsContainer = canvasControls.querySelector("[class^='paint-editor_zoom-controls']");
       const canvasContainer = document.querySelector("[class^='paint-editor_canvas-container']");
 
@@ -760,8 +755,8 @@ export default async function ({ addon, global, console, msg }) {
       canvasControls.appendChild(paintEditorControlsContainer);
       canvasContainer.appendChild(settingsPage);
 
-      if (!fixedClassNames) {
-        fixedClassNames = true;
+      if (!hasRunOnce) {
+        hasRunOnce = true;
         const groupClass = zoomControlsContainer.firstChild.className;
         const buttonClass = zoomControlsContainer.firstChild.firstChild.className;
         const imageClass = zoomControlsContainer.firstChild.firstChild.firstChild.className;
@@ -775,20 +770,13 @@ export default async function ({ addon, global, console, msg }) {
           el.className += " " + imageClass;
         }
       }
+
+      if (settings.enabled) {
+        updateOnionLayers();
+      }
     }
   };
 
-  if (addon.tab.editorMode === "editor") {
-    installPrototypeHacks();
-  } else {
-    const listener = () => {
-      if (addon.tab.editorMode === "editor") {
-        installPrototypeHacks();
-        addon.tab.removeEventListener("urlChange", listener);
-      }
-    };
-    addon.tab.addEventListener("urlChange", listener);
-  }
-
+  await untilInEditor();
   controlsLoop();
 }

@@ -102,7 +102,7 @@ class Interface extends React.Component {
     }
     render () {
         const {
-            cloudVariables,
+            hasCloudVariables,
             description,
             isFullScreen,
             isPlayerOnly,
@@ -155,7 +155,7 @@ class Interface extends React.Component {
                             <div className={styles.section}>
                                 <ProjectInput />
                             </div>
-                            {cloudVariables && (
+                            {hasCloudVariables && (
                                 <div className={styles.section}>
                                     <CloudVariableBadge />
                                 </div>
@@ -296,7 +296,7 @@ class Interface extends React.Component {
 
 Interface.propTypes = {
     intl: intlShape,
-    cloudVariables: PropTypes.bool,
+    hasCloudVariables: PropTypes.bool,
     description: PropTypes.shape({
         credits: PropTypes.string,
         instructions: PropTypes.string
@@ -308,7 +308,7 @@ Interface.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    cloudVariables: state.scratchGui.vm.runtime.hasCloudData(),
+    hasCloudVariables: state.scratchGui.tw.hasCloudVariables,
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,

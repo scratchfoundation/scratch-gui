@@ -8,6 +8,7 @@ const CloudVariableBadge = () => (
         <div className={styles.icon}>
             <img
                 src={cloudIcon}
+                alt="Cloud"
                 width="32"
                 height="32"
             />

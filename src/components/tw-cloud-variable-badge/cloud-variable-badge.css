@@ -6,6 +6,10 @@
     display: flex;
     align-items: center;
 }
+[theme="dark"] .badge {
+    border-color: #203652;
+    background-color: #16202c;
+}
 
 .icon {
     margin-right: 0.25rem;

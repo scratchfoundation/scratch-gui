@@ -14,6 +14,7 @@ const CLEAR_COMPILE_ERRORS = 'tw/CLEAR_COMPILE_ERRORS';
 const SET_FILE_HANDLE = 'tw/SET_FILE_HANDLE';
 const SET_SHOWED_EXTENDED_EXTENSIONS_WARNING = 'tw/SET_SHOWED_EXTENDED_EXTENSIONS_WARNING';
 const SET_USERNAME_INVALID = 'tw/SET_USERNAME_INVALID';
+const SET_HAS_CLOUD_VARIABLES = 'tw/SET_HAS_CLOUD_VARIABLES';
 
 export const initialState = {
     framerate: 30,
@@ -43,7 +44,8 @@ export const initialState = {
     compileErrors: [],
     fileHandle: null,
     showedExtendedExtensionsWarning: false,
-    usernameInvalid: false
+    usernameInvalid: false,
+    hasCloudVariables: false
 };
 
 const reducer = function (state, action) {
@@ -115,6 +117,10 @@ const reducer = function (state, action) {
     case SET_USERNAME_INVALID:
         return Object.assign({}, state, {
             usernameInvalid: action.usernameInvalid
+        });
+    case SET_HAS_CLOUD_VARIABLES:
+        return Object.assign({}, state, {
+            hasCloudVariables: action.hasCloudVariables
         });
     default:
         return state;
@@ -232,6 +238,13 @@ const setUsernameInvalid = function (usernameInvalid) {
     };
 };
 
+const setHasCloudVariables = function (hasCloudVariables) {
+    return {
+        type: SET_HAS_CLOUD_VARIABLES,
+        hasCloudVariables: hasCloudVariables
+    };
+};
+
 export {
     reducer as default,
     initialState as twInitialState,
@@ -250,5 +263,6 @@ export {
     clearCompileErrors,
     setFileHandle,
     setShowedExtendedExtensionsWarning,
-    setUsernameInvalid
+    setUsernameInvalid,
+    setHasCloudVariables
 };

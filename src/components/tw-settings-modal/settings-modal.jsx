@@ -146,17 +146,56 @@ const Interpolation = props => (
     </WrappedBooleanSetting>
 );
 
+const InfiniteClones = props => (
+    <WrappedBooleanSetting {...props}>
+        <FormattedMessage
+            defaultMessage="Infinite Clones"
+            description="Infinite Clones setting"
+            id="tw.settingsModal.infiniteClones"
+        />
+        <div>
+            <p>
+                <FormattedMessage
+                    defaultMessage="Disables Scratch's 300 clone limit."
+                    description="Infinite Clones setting help"
+                    id="tw.settingsModal.infiniteClonesHelp"
+                />
+            </p>
+        </div>
+    </WrappedBooleanSetting>
+);
+
+const RemoveFencing = props => (
+    <WrappedBooleanSetting {...props}>
+        <FormattedMessage
+            defaultMessage="Remove Fencing"
+            description="Remove Fencing setting"
+            id="tw.settingsModal.removeFencing"
+        />
+        <div>
+            <p>
+                <FormattedMessage
+                    defaultMessage="Allows sprites to move offscreen."
+                    description="Remove Fencing setting help"
+                    id="tw.settingsModal.removeFencingHelp"
+                />
+            </p>
+        </div>
+    </WrappedBooleanSetting>
+);
+
 const RemoveLimits = props => (
     <WrappedBooleanSetting {...props}>
         <FormattedMessage
-            defaultMessage="Remove Limits (previously &quot;Infinite Clones&quot;)"
+            defaultMessage="Remove Limits"
             description="Remove Limits setting"
             id="tw.settingsModal.removeLimits"
         />
         <div>
             <p>
                 <FormattedMessage
-                    defaultMessage="Disables the following limits: Clone limit, sprite fencing, and sound effect limits"
+                    // eslint-disable-next-line max-len
+                    defaultMessage="Remove various limits that are unlikely to break projects: sound effect limits, etc."
                     description="Remove Limits setting help"
                     id="tw.settingsModal.removeLimitsHelp"
                 />
@@ -279,6 +318,14 @@ const SettingsModalComponent = props => (
                 value={props.interpolation}
                 onChange={props.onInterpolationChange}
             />
+            <InfiniteClones
+                value={props.infiniteClones}
+                onChange={props.onInfiniteClonesChange}
+            />
+            <RemoveFencing
+                value={props.removeFencing}
+                onChange={props.onRemoveFencingChange}
+            />
             <RemoveLimits
                 value={props.removeLimits}
                 onChange={props.onRemoveLimitsChange}
@@ -339,6 +386,10 @@ SettingsModalComponent.propTypes = {
     onHighQualityPenChange: PropTypes.func,
     interpolation: PropTypes.bool,
     onInterpolationChange: PropTypes.func,
+    infiniteClones: PropTypes.bool,
+    onInfiniteClonesChange: PropTypes.func,
+    removeFencing: PropTypes.bool,
+    onRemoveFencingChange: PropTypes.func,
     removeLimits: PropTypes.bool,
     onRemoveLimitsChange: PropTypes.func,
     warpTimer: PropTypes.bool,

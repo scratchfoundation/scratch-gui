@@ -470,11 +470,22 @@ const TWStateManager = function (WrappedComponent) {
                     // Leave ?stuck as-is when in editor
                 }
 
-                if (this.props.vm.hasLimits()) {
+                if (runtimeOptions.maxClones === 300) {
+                    searchParams.delete('clones');
+                } else {
+                    searchParams.set('clones', runtimeOptions.maxClones);
+                }
+
+                if (runtimeOptions.fencing) {
+                    searchParams.delete('offscreen');
+                } else {
+                    searchParams.set('offscreen', '');
+                }
+
+                if (runtimeOptions.effectLimits) {
                     searchParams.delete('limitless');
                 } else {
                     searchParams.set('limitless', '');
-                    searchParams.delete('clones');
                 }
 
                 let newSearch = searchParams.toString();

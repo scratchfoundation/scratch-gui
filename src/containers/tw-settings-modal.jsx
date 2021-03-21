@@ -24,6 +24,8 @@ class UsernameModal extends React.Component {
             'handleClose',
             'handleHighQualityPenChange',
             'handleInterpolationChange',
+            'handleInfiniteClonesChange',
+            'handleRemoveFencingChange',
             'handleRemoveLimitsChange',
             'handleWarpTimerChange',
             'handleStageWidthChange',
@@ -57,8 +59,20 @@ class UsernameModal extends React.Component {
     handleInterpolationChange (e) {
         this.props.vm.setInterpolation(e.target.checked);
     }
+    handleInfiniteClonesChange (e) {
+        this.props.vm.setRuntimeOptions({
+            maxClones: e.target.checked ? Infinity : 300
+        });
+    }
+    handleRemoveFencingChange (e) {
+        this.props.vm.setRuntimeOptions({
+            fencing: !e.target.checked
+        });
+    }
     handleRemoveLimitsChange (e) {
-        this.props.vm.setLimits(!e.target.checked);
+        this.props.vm.setRuntimeOptions({
+            effectLimits: !e.target.checked
+        });
     }
     handleWarpTimerChange (e) {
         this.props.vm.setCompilerOptions({
@@ -107,6 +121,8 @@ class UsernameModal extends React.Component {
                 reloadRequired={this.state.reloadRequired}
                 onHighQualityPenChange={this.handleHighQualityPenChange}
                 onInterpolationChange={this.handleInterpolationChange}
+                onInfiniteClonesChange={this.handleInfiniteClonesChange}
+                onRemoveFencingChange={this.handleRemoveFencingChange}
                 onRemoveLimitsChange={this.handleRemoveLimitsChange}
                 onWarpTimerChange={this.handleWarpTimerChange}
                 onStageWidthChange={this.handleStageWidthChange}
@@ -128,12 +144,14 @@ UsernameModal.propTypes = {
         renderer: PropTypes.shape({
             setUseHighQualityRender: PropTypes.func
         }),
+        setCompilerOptions: PropTypes.func,
         setInterpolation: PropTypes.func,
-        setLimits: PropTypes.func,
-        setCompilerOptions: PropTypes.func
+        setRuntimeOptions: PropTypes.func
     }),
     highQualityPen: PropTypes.bool,
     interpolation: PropTypes.bool,
+    infiniteClones: PropTypes.bool,
+    removeFencing: PropTypes.bool,
     removeLimits: PropTypes.bool,
     warpTimer: PropTypes.bool,
     disableCompiler: PropTypes.bool
@@ -143,7 +161,9 @@ const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
     highQualityPen: state.scratchGui.tw.highQualityPen,
     interpolation: state.scratchGui.tw.interpolation,
-    removeLimits: !state.scratchGui.vm.hasLimits(),
+    infiniteClones: state.scratchGui.tw.runtimeOptions.maxClones === Infinity,
+    removeFencing: !state.scratchGui.tw.runtimeOptions.fencing,
+    removeLimits: !state.scratchGui.tw.runtimeOptions.effectLimits,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     disableCompiler: !state.scratchGui.tw.compilerOptions.enabled
 });

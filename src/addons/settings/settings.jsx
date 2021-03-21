@@ -578,19 +578,6 @@ UnsupportedAddonsComponent.propTypes = {
     }))
 };
 
-const KONAMI = [
-    'arrowup',
-    'arrowup',
-    'arrowdown',
-    'arrowdown',
-    'arrowleft',
-    'arrowright',
-    'arrowleft',
-    'arrowright',
-    'b',
-    'a'
-];
-
 class AddonSettingsComponent extends React.Component {
     constructor (props) {
         super(props);
@@ -606,10 +593,8 @@ class AddonSettingsComponent extends React.Component {
         this.searchBar = null;
         this.state = {
             dirty: false,
-            easterEggs: false,
             search: ''
         };
-        this.konamiProgress = 0;
         for (const [id, manifest] of Object.entries(this.props.addons)) {
             const addonState = {
                 enabled: SettingsStore.getAddonEnabled(id),
@@ -707,16 +692,6 @@ class AddonSettingsComponent extends React.Component {
     }
     handleSearch (e) {
         const value = e.target.value;
-        if (!this.state.easterEggs) {
-            if (
-                value.toLowerCase() === settingsTranslations['tw.addons.settings.tags.easterEgg'].toLowerCase() ||
-                value.toLowerCase() === settingsTranslationsEnglish['tw.addons.settings.tags.easterEgg'].toLowerCase()
-            ) {
-                this.setState({
-                    easterEggs: true
-                });
-            }
-        }
         this.setState({
             search: value
         });
@@ -731,22 +706,6 @@ class AddonSettingsComponent extends React.Component {
         this.searchBar = searchBar;
     }
     handleKeyDown (e) {
-        if (e.key.toLowerCase() !== KONAMI[this.konamiProgress]) {
-            this.konamiProgress = 0;
-        }
-        if (e.key.toLowerCase() === KONAMI[this.konamiProgress]) {
-            this.konamiProgress++;
-            if (this.konamiProgress >= KONAMI.length) {
-                this.setState({
-                    easterEggs: true,
-                    search: settingsTranslations['tw.addons.settings.tags.easterEgg']
-                });
-                this.konamiProgress = 0;
-                this.searchBar.blur();
-                e.preventDefault();
-                return;
-            }
-        }
         const key = e.key;
         if (key.length === 1 && key !== ' ' && e.target === document.body && !(e.ctrlKey || e.metaKey || e.altKey)) {
             this.searchBar.focus();
@@ -807,15 +766,7 @@ class AddonSettingsComponent extends React.Component {
         return true;
     }
     shouldShowAddon (state, addonId, manifest) {
-        if (!this.isIncludedInSearch(addonId, manifest)) {
-            return false;
-        }
-        if (this.state.easterEggs) {
-            // Show everything when easter eggs are visible.
-            return true;
-        }
-        // Otherwise, only show easter eggs when they are enabled.
-        return state.enabled || !(manifest.tags && manifest.tags.includes('easterEgg'));
+        return this.isIncludedInSearch(addonId, manifest);
     }
     render () {
         const filteredAddons = Object.entries(this.props.addons).map(([id, manifest]) => ({

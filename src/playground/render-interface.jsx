@@ -131,7 +131,7 @@ class Interface extends React.Component {
                     className={styles.center}
                     style={isPlayerOnly ? ({
                         // add a couple pixels to account for border (TODO: remove weird hack)
-                        width: `${twStageSize.width + 2}px`
+                        width: `${Math.max(480, twStageSize.width) + 2}px`
                     }) : null}
                 >
                     {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}

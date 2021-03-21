@@ -55,10 +55,12 @@
 .language-icon {
     height:  1.5rem;
     vertical-align: middle;
+    width: 24px;
 }
 
 .language-caret {
     margin: 0 .125rem;
+    width: 8px;
 }
 
 .language-menu {

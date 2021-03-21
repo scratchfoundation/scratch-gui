@@ -7,7 +7,6 @@ import VM from 'scratch-vm';
 import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
-import {closeAlertWithId} from '../reducers/alerts';
 import RestorePointAPI from '../lib/tw-restore-point-api';
 
 const messages = defineMessages({

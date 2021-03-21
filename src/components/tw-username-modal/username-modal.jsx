@@ -26,6 +26,7 @@ const UsernameModalComponent = props => (
             {props.mustChangeUsername && <React.Fragment>
                 <p className={classNames(styles.helpText, styles.mustChange)}>
                     <FormattedMessage
+                        // eslint-disable-next-line max-len
                         defaultMessage="Sorry, the cloud variable server thinks your username may be unsafe. Please change it to something else or {resetIt}."
                         description="Text in change username modal"
                         id="tw.usernameModal.mustChange"
@@ -61,6 +62,7 @@ const UsernameModalComponent = props => (
             </Box>
             <p className={styles.helpText}>
                 <FormattedMessage
+                    // eslint-disable-next-line max-len
                     defaultMessage="This value will be stored in your browser's storage. It may be logged when you interact with projects that contain cloud variables."
                     description="Text in change username modal"
                     id="tw.usernameModal.help"

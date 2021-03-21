@@ -108,8 +108,14 @@ class Interface extends React.Component {
             onClickTheme
         } = this.props;
         const isHomepage = isPlayerOnly && !isFullScreen;
+        const isEditor = !isPlayerOnly;
         return (
-            <div className={classNames(styles.container, isHomepage ? styles.playerOnly : styles.editor)}>
+            <div
+                className={classNames(styles.container, {
+                    [styles.playerOnly]: isHomepage,
+                    [styles.editor]: isEditor
+                })}
+            >
                 {isHomepage ? (
                     <div className={styles.menu}>
                         <WrappedMenuBar

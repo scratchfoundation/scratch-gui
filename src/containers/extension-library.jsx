@@ -32,7 +32,8 @@ class ExtensionLibrary extends React.PureComponent {
     handleItemSelect (item) {
         const id = item.extensionId;
         let url = item.extensionURL ? item.extensionURL : id;
-        if (!item.disabled && !id) {
+        const isCustomURL = !item.disabled && !id;
+        if (isCustomURL) {
             // eslint-disable-next-line no-alert
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         }
@@ -40,9 +41,25 @@ class ExtensionLibrary extends React.PureComponent {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(id);
             } else {
-                this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
-                    this.props.onCategorySelected(id);
-                });
+                this.props.vm.extensionManager.loadExtensionURL(url)
+                    .then(() => {
+                        this.props.onCategorySelected(id);
+                        if (isCustomURL) {
+                            let newUrl = location.pathname;
+                            if (location.search) {
+                                newUrl += location.search;
+                                newUrl += '&';
+                            } else {
+                                newUrl += '?';
+                            }
+                            newUrl += `extension=${encodeURIComponent(url)}`;
+                            history.replaceState('', '', newUrl);
+                        }
+                    })
+                    .catch(err => {
+                        // eslint-disable-next-line no-alert
+                        alert(err);
+                    });
             }
         }
     }

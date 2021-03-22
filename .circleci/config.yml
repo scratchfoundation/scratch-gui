@@ -14,11 +14,11 @@ aliases:
     save_cache:
       paths:
         - build
-      key: v3-build-{{ .Revision }}
+      key: v4-build-{{ .Revision }}
   - &restore_build_cache
     restore_cache:
       keys:
-        - v3-build-{{ .Revision }}
+        - v4-build-{{ .Revision }}
   - &save_dist_cache
     save_cache:
       paths:
@@ -32,12 +32,12 @@ aliases:
     save_cache:
       paths:
         - node_modules
-      key: v3-npm-{{ checksum "package-lock.json" }}
+      key: v4-npm-{{ checksum "package-lock.json" }}
   - &restore_npm_cache
     restore_cache:
       keys:
-        - v3-npm-{{ checksum "package-lock.json" }}
-        - v3-npm-
+        - v4-npm-{{ checksum "package-lock.json" }}
+        - v4-npm-
   - &defaults
     docker:
       - image: circleci/node:10-browsers

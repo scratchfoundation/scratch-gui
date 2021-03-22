@@ -117,7 +117,7 @@ const HighQualityPen = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="High Quality Pen makes the pen layer dynamically increase in resolution to match the size it's displayed instead of always being 480×360, which can make pen projects render higher quality images. Not all projects benefit from this setting, and it may impact performance."
+                    defaultMessage="High Quality Pen allows pen projects to render at a higher resolution. It also disables some rounding in the renderer. Not all projects benefit from this setting, and it may impact performance."
                     description="High quality pen setting help"
                     id="tw.settingsModal.highQualityPenHelp"
                 />
@@ -137,7 +137,7 @@ const Interpolation = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Interpolation is an experimental feature that makes project appear to run at higher framerates without changing their behavior by interpolation motion. If you've ever run a project at 60 FPS and noticed that it's running too fast, that's what interpolation solves."
+                    defaultMessage="Interpolation is an experimental feature that makes project appear to run at higher framerates without changing their behavior by interpolating sprite motion. If you've ever run a project at 60 FPS and noticed that it's running too fast, that's what interpolation solves."
                     description="Interpolation setting help"
                     id="tw.settingsModal.interpolationHelp"
                 />
@@ -188,15 +188,15 @@ const RemoveMiscLimits = props => (
     <WrappedBooleanSetting {...props}>
         <FormattedMessage
             defaultMessage="Remove Miscellaneous Limits"
-            description="Remove Limits setting"
+            description="Remove Miscellaneous Limits setting"
             id="tw.settingsModal.removeMiscLimits"
         />
         <div>
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Remove various limits that are unlikely to break projects: sound effect limits, etc."
-                    description="Remove Limits setting help"
+                    defaultMessage="Remove various limits that are unlikely to break projects, such as sound effect limits."
+                    description="Remove Miscellaneous Limits setting help"
                     id="tw.settingsModal.removeMiscLimitsHelp"
                 />
             </p>

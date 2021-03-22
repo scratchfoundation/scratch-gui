@@ -453,11 +453,15 @@ a:active, a:focus {
     background-position: center center;
 }
 .setting input[type="checkbox"]:checked {
+    border-color: #ff4c4c;
     background-color: #ff4c4c;
     background-image: url("./check.svg");
 }
 .setting input[type="checkbox"]:hover:not(:focus) {
     border-color: #ec4646;
+}
+.setting input[type="checkbox"]:checked:hover {
+    border-color: hsla(0, 60%, 50%, 1);
 }
 .setting input[type="number"] {
     border-radius: 20px;

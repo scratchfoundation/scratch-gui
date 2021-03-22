@@ -12,11 +12,10 @@
     border: 1px solid rgb(92, 92, 92);
     outline: none;
 }
-.checkbox:hover {
+.checkbox:hover, .checkbox:focus, .checkbox:active, .checkbox:checked {
     border-color: $motion-primary;
 }
 .checkbox:focus, .checkbox:active {
-    border-color: black;
     box-shadow: 0 0 0 3px $motion-transparent;
 }
 .checkbox:checked {

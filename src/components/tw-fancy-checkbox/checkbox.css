@@ -1,3 +1,28 @@
+@import "../../css/colors.css";
+
 .checkbox {
-    /* TODO */
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    transition: .2s;
+    background-color: white;
+    transition-property: background-color;
+    background-size: 100%;
+    border: 1px solid rgb(92, 92, 92);
+    outline: none;
+}
+.checkbox:hover {
+    border-color: $motion-primary;
+}
+.checkbox:focus, .checkbox:active {
+    border-color: black;
+    box-shadow: 0 0 0 3px $motion-transparent;
+}
+.checkbox:checked {
+    background-color: $motion-primary;
+    background-image: url("./checkbox.svg");
+}
+[theme="dark"] .checkbox {
+    border-color: transparent;
 }

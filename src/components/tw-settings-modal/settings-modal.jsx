@@ -195,7 +195,7 @@ const RemoveMiscLimits = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Remove various limits that are unlikely to break projects, such as sound effect limits."
+                    defaultMessage="Removes various limits that are unlikely to break projects, such as sound effect limits."
                     description="Remove Miscellaneous Limits setting help"
                     id="tw.settingsModal.removeMiscLimitsHelp"
                 />

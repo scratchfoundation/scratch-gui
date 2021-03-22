@@ -74,6 +74,8 @@ const sortAddons = () => {
     return result;
 };
 
+const isEasterEgg = addonManifest => addonManifest.tags && addonManifest.tags.includes('easterEgg');
+
 const AddonCreditsComponent = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
@@ -607,13 +609,15 @@ class AddonSettingsComponent extends React.Component {
         this.searchBar = null;
         this.state = {
             dirty: false,
-            easterEggs: false,
             search: ''
         };
+        this.easterEggsVisible = false;
         this.konamiProgress = 0;
         for (const [id, manifest] of Object.entries(this.props.addons)) {
+            const enabled = SettingsStore.getAddonEnabled(id);
             const addonState = {
-                enabled: SettingsStore.getAddonEnabled(id),
+                enabled: enabled,
+                visible: enabled || !isEasterEgg(manifest),
                 dirty: false
             };
             if (manifest.settings) {
@@ -708,7 +712,7 @@ class AddonSettingsComponent extends React.Component {
     }
     handleSearch (e) {
         const value = e.target.value;
-        if (!this.state.easterEggs) {
+        if (!this.easterEggsVisible) {
             if (
                 value.toLowerCase() === settingsTranslations['tw.addons.settings.tags.easterEgg'].toLowerCase() ||
                 value.toLowerCase() === settingsTranslationsEnglish['tw.addons.settings.tags.easterEgg'].toLowerCase()
@@ -727,9 +731,21 @@ class AddonSettingsComponent extends React.Component {
         this.searchBar.focus();
     }
     handleOpenEasterEggs () {
+        for (const [addonId, addonManifest] of Object.entries(this.props.addons)) {
+            const addonState = this.state[addonId];
+            if (!addonState.visible && isEasterEgg(addonManifest)) {
+                this.setState(prevState => ({
+                    [addonId]: {
+                        ...prevState[addonId],
+                        visible: true
+                    }
+                }));
+            }
+        }
         this.setState({
-            easterEggs: true
+            search: settingsTranslations['tw.addons.settings.tags.easterEgg']
         });
+        this.easterEggsVisible = true;
     }
     searchRef (searchBar) {
         this.searchBar = searchBar;
@@ -741,10 +757,7 @@ class AddonSettingsComponent extends React.Component {
         if (e.key.toLowerCase() === KONAMI[this.konamiProgress]) {
             this.konamiProgress++;
             if (this.konamiProgress >= KONAMI.length) {
-                this.setState({
-                    easterEggs: true,
-                    search: settingsTranslations['tw.addons.settings.tags.easterEgg']
-                });
+                this.handleOpenEasterEggs();
                 this.konamiProgress = 0;
                 this.searchBar.blur();
                 e.preventDefault();
@@ -811,15 +824,13 @@ class AddonSettingsComponent extends React.Component {
         return true;
     }
     shouldShowAddon (state, addonId, manifest) {
+        if (!state.visible) {
+            return false;
+        }
         if (!this.isIncludedInSearch(addonId, manifest)) {
             return false;
         }
-        if (this.state.easterEggs) {
-            // Show everything when easter eggs are visible.
-            return true;
-        }
-        // Otherwise, only show easter eggs when they are enabled.
-        return state.enabled || !(manifest.tags && manifest.tags.includes('easterEgg'));
+        return true;
     }
     render () {
         const filteredAddons = Object.entries(this.props.addons).map(([id, manifest]) => ({

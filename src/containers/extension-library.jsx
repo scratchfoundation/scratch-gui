@@ -36,7 +36,7 @@ class ExtensionLibrary extends React.PureComponent {
             // eslint-disable-next-line no-alert
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         }
-        if (id && !item.disabled) {
+        if (url && !item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(id);
             } else {

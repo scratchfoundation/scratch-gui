@@ -68,6 +68,14 @@ const UsernameModalComponent = props => (
                     id="tw.usernameModal.help"
                 />
             </p>
+            <p className={styles.helpText}>
+                <FormattedMessage
+                    // eslint-disable-next-line max-len
+                    defaultMessage="It is recommended to leave this value as-is or change it to your Scratch username, as other values may be unusable with cloud variables."
+                    description="Text in change username modal"
+                    id="tw.usernameModal.help2"
+                />
+            </p>
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.cancelButton}

@@ -82,6 +82,7 @@ import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 import aboutIcon from './icon--about.svg';
 import errorIcon from './tw-error.svg';
+import themeIcon from './tw-moon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
@@ -451,10 +452,14 @@ class MenuBar extends React.Component {
                                 <img
                                     className={styles.languageIcon}
                                     src={languageIcon}
+                                    width="24"
+                                    height="24"
                                 />
                                 <img
                                     className={styles.languageCaret}
                                     src={dropdownCaret}
+                                    width="8"
+                                    height="5"
                                 />
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
@@ -465,7 +470,11 @@ class MenuBar extends React.Component {
                                 className={classNames(styles.menuBarItem, styles.hoverable)}
                                 onMouseUp={this.props.onClickTheme}
                             >
-                                <div className={styles.themeIcon} />
+                                <img
+                                    src={themeIcon}
+                                    width="24"
+                                    height="24"
+                                />
                             </div>
                         )}
                         {/* tw: display compile errors */}

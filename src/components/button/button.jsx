@@ -9,6 +9,8 @@ const ButtonComponent = ({
     disabled,
     iconClassName,
     iconSrc,
+    iconWidth,
+    iconHeight,
     onClick,
     children,
     ...props
@@ -23,6 +25,8 @@ const ButtonComponent = ({
             className={classNames(iconClassName, styles.icon)}
             draggable={false}
             src={iconSrc}
+            height={iconHeight}
+            width={iconWidth}
         />
     );
 
@@ -48,6 +52,8 @@ ButtonComponent.propTypes = {
     disabled: PropTypes.bool,
     iconClassName: PropTypes.string,
     iconSrc: PropTypes.string,
+    iconHeight: PropTypes.string,
+    iconWidth: PropTypes.string,
     onClick: PropTypes.func
 };
 

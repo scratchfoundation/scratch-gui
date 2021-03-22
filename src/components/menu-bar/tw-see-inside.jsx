@@ -18,6 +18,8 @@ const SeeInsideButton = ({
         )}
         iconClassName={styles.seeInsideButtonIcon}
         iconSrc={communityIcon}
+        iconWidth="20"
+        iconHeight="20"
         onClick={onClick}
     >
         <FormattedMessage

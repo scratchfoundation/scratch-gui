@@ -15,6 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+@import "../../css/colors.css";
+
 body {
     background-color: white;
     color: black;
@@ -35,7 +37,7 @@ a[href] {
 }
 a:active, a:focus {
     outline: none;
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 
 .container {
@@ -95,7 +97,7 @@ a:active, a:focus {
     background: #151515;
 }
 .button:active, .button:focus-within {
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 
 .search-container {
@@ -106,7 +108,7 @@ a:active, a:focus {
     border-radius: 4px;
 }
 .search-container:focus-within {
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 .search-input {
     color: inherit;
@@ -168,7 +170,7 @@ a:active, a:focus {
     border-color: #222222;
 }
 .feedback-button-outer:active, .feedback-button-outer:focus-within {
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 .feedback-button-inner {
     text-decoration: none;
@@ -258,7 +260,7 @@ a:active, a:focus {
 }
 .reset-button:active, .reset-button:focus-within {
     outline: none;
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 .reset-button-image {
     height: 16px;
@@ -281,7 +283,7 @@ a:active, a:focus {
     transition-property: background;
 }
 .switch[state="on"] {
-    background: #ff4c4c;
+    background: $motion-primary;
 }
 .switch::before {
     content: "";
@@ -305,7 +307,7 @@ a:active, a:focus {
 }
 .switch:active, .switch:focus-within {
     outline: none;
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 
 .tag-container {
@@ -345,7 +347,7 @@ a:active, a:focus {
 }
 .tag-turbowarp {
     color: white;
-    background: #ff4c4c;
+    background: $motion-primary;
     border-color: rgb(185, 38, 38);
 }
 @media (max-width: 550px) {
@@ -438,8 +440,8 @@ a:active, a:focus {
 }
 .setting input:focus, .setting input:active {
     outline: none;
-    border-color: #ff4c4c;
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    border-color: $motion-primary;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 .setting input[type="checkbox"] {
     height: 20px;
@@ -453,15 +455,15 @@ a:active, a:focus {
     background-position: center center;
 }
 .setting input[type="checkbox"]:checked {
-    border-color: #ff4c4c;
-    background-color: #ff4c4c;
+    border-color: $motion-primary;
+    background-color: $motion-primary;
     background-image: url("./check.svg");
 }
 .setting input[type="checkbox"]:hover:not(:focus) {
-    border-color: #ec4646;
+    border-color: $motion-tertiary;
 }
 .setting input[type="checkbox"]:checked:hover {
-    border-color: hsla(0, 60%, 50%, 1);
+    border-color: $motion-tertiary;
 }
 .setting input[type="number"] {
     border-radius: 20px;
@@ -514,11 +516,11 @@ a:active, a:focus {
 }
 .select-option.selected {
     color: white;
-    background: #ff4c4c;
+    background: $motion-primary;
 }
 .select-option:active, .select-option:focus-within {
     outline: none;
-    box-shadow: 0 0 0 3px #ff4c4c5d;
+    box-shadow: 0 0 0 3px $motion-transparent;
 }
 
 .presets {

@@ -602,6 +602,7 @@ class AddonSettingsComponent extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
+        this.handleOpenEasterEggs = this.handleOpenEasterEggs.bind(this);
         this.searchRef = this.searchRef.bind(this);
         this.searchBar = null;
         this.state = {
@@ -712,9 +713,7 @@ class AddonSettingsComponent extends React.Component {
                 value.toLowerCase() === settingsTranslations['tw.addons.settings.tags.easterEgg'].toLowerCase() ||
                 value.toLowerCase() === settingsTranslationsEnglish['tw.addons.settings.tags.easterEgg'].toLowerCase()
             ) {
-                this.setState({
-                    easterEggs: true
-                });
+                this.handleOpenEasterEggs();
             }
         }
         this.setState({
@@ -726,6 +725,11 @@ class AddonSettingsComponent extends React.Component {
             search: ''
         });
         this.searchBar.focus();
+    }
+    handleOpenEasterEggs () {
+        this.setState({
+            easterEggs: true
+        });
     }
     searchRef (searchBar) {
         this.searchBar = searchBar;
@@ -907,7 +911,16 @@ class AddonSettingsComponent extends React.Component {
                             />
                         ) : null}
                         <div className={styles.version}>
-                            {`v${upstreamMeta.version} (${upstreamMeta.commit})`}
+                            {`v${upstreamMeta.version} (${upstreamMeta.commit}) `}
+                            <span
+                                role="button"
+                                tabIndex="0"
+                                className={styles.dango}
+                                onClick={this.handleOpenEasterEggs}
+                                title="Dango"
+                            >
+                                {'🍡'}
+                            </span>
                         </div>
                     </footer>
                 </div>

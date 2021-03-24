@@ -121,6 +121,12 @@ export default async function ({ addon, global, console, msg }) {
     throw new Error("cannot find SortableHOC");
   };
 
+  const getBackpackFromElement = (el) => {
+    const gui = el.closest('[class*="gui_editor-wrapper"]');
+    if (!gui) throw new Error("cannot find Backpack");
+    return gui[reactInternalKey].child.sibling.child.stateNode;
+  };
+
   const clamp = (n, min, max) => {
     return Math.min(Math.max(n, min), max);
   };
@@ -270,7 +276,6 @@ export default async function ({ addon, global, console, msg }) {
       typeof sortableHOCInstance.containerBox !== "undefined" &&
       typeof SortableHOC.prototype.componentDidMount === "undefined" &&
       typeof SortableHOC.prototype.componentDidUpdate === "undefined" &&
-      typeof SortableHOC.prototype.componentWillReceiveProps === "function" &&
       typeof SortableHOC.prototype.handleAddSortable === "function" &&
       typeof SortableHOC.prototype.handleRemoveSortable === "function" &&
       typeof SortableHOC.prototype.setRef === "function"
@@ -309,6 +314,17 @@ export default async function ({ addon, global, console, msg }) {
     )
       return;
     throw new Error("Can not comprehend VM");
+  };
+
+  const verifyBackpack = (backpackInstance) => {
+    const Backpack = backpackInstance.constructor;
+    if (
+      typeof Backpack.prototype.handleDrop === "function" &&
+      typeof Backpack.prototype.componentDidUpdate === "undefined"
+    ) {
+      return;
+    }
+    throw new Error("Can not comprehend Backpack");
   };
 
   const patchSortableHOC = (SortableHOC, type) => {
@@ -445,8 +461,18 @@ export default async function ({ addon, global, console, msg }) {
             folderItem.costume = {
               asset: folderAsset,
             };
+            // For sprite items, `id` is used as the drag payload and toString is used as a React key
+            folderItem.id = {
+              sa_folder_items: folderItems,
+              toString() {
+                return `&__${folderName}`;
+              },
+            };
           } else {
             folderItem.asset = folderAsset;
+            folderItem.dragPayload = {
+              sa_folder_items: folderItems,
+            };
           }
           items.push(folderItem);
 
@@ -552,26 +578,6 @@ export default async function ({ addon, global, console, msg }) {
           }
         }
       }
-    };
-
-    const originalComponentWillReceiveProps = SortableHOC.prototype.componentWillReceiveProps;
-    SortableHOC.prototype.componentWillReceiveProps = function (...args) {
-      const newProps = args[0];
-      // If a folder item is dropped in the backpack, change the type to something invalid to avoid a crash.
-      if (newProps && !newProps.dragInfo.dragging && this.props.dragInfo.dragging) {
-        if (this.props.dragInfo.payload === undefined) {
-          const backpack = document.querySelector("[class*='backpack_backpack-list-inner']");
-          if (backpack) {
-            const backpackRect = backpack.getBoundingClientRect();
-            const { x, y } = this.props.dragInfo.currentOffset;
-            const { top, left, bottom, right } = backpackRect;
-            if (x >= left && x <= right && y >= top && y <= bottom) {
-              this.props.dragInfo.dragType = "sa_invalid";
-            }
-          }
-        }
-      }
-      return originalComponentWillReceiveProps.call(this, ...args);
     };
 
     const originalSortableHOCRender = SortableHOC.prototype.render;
@@ -811,7 +817,7 @@ export default async function ({ addon, global, console, msg }) {
             const originalProps = this.props;
             this.props = {
               ...originalProps,
-              id: itemData.realIndex
+              id: itemData.realIndex,
             };
             const ret = original.call(this, ...args);
             this.props = originalProps;
@@ -1164,6 +1170,57 @@ export default async function ({ addon, global, console, msg }) {
     };
   };
 
+  const patchBackpack = (backpackInstance) => {
+    const Backpack = backpackInstance.constructor;
+    Backpack.prototype.sa_loadNextItem = function () {
+      if (!this.sa_queuedItems) return;
+      const item = this.sa_queuedItems.pop();
+      if (item) {
+        let payload;
+        let type;
+        if (item.dragPayload) {
+          if (item.costumeURL) {
+            type = "SOUND";
+          } else {
+            type = "COSTUME";
+          }
+          payload = item.dragPayload;
+        } else if (item.id) {
+          type = "SPRITE";
+          payload = item.id;
+        }
+        if (type && payload) {
+          originalHandleDrop.call(this, {
+            dragType: type,
+            payload: payload,
+          });
+        }
+      }
+    };
+
+    Backpack.prototype.componentDidUpdate = function (prevProps, prevState) {
+      if (!this.state.loading && prevState.loading && !this.state.error) {
+        this.sa_loadNextItem();
+      }
+    };
+
+    const originalHandleDrop = Backpack.prototype.handleDrop;
+    Backpack.prototype.handleDrop = function (...args) {
+      // When a folder is dropped into the backpack, upload all the items in the folder.
+      const dragInfo = args[0];
+      const folderItems = dragInfo && dragInfo.payload && dragInfo.payload.sa_folder_items;
+      if (Array.isArray(folderItems)) {
+        if (confirm(msg("confirm-backpack-folder"))) {
+          this.sa_queuedItems = folderItems;
+          this.sa_loadNextItem();
+        }
+        return;
+      }
+      return originalHandleDrop.call(this, ...args);
+    };
+    backpackInstance.handleDrop = Backpack.prototype.handleDrop.bind(backpackInstance);
+  };
+
   await untilInEditor();
 
   // Sprite list
@@ -1181,6 +1238,14 @@ export default async function ({ addon, global, console, msg }) {
     sortableHOCInstance.saInitialSetup();
     patchVM();
   }
+
+  // Backpack
+  (async () => {
+    const backpackContainer = await addon.tab.waitForElement("[class*='backpack_backpack-list-inner']");
+    const backpackInstance = getBackpackFromElement(backpackContainer);
+    verifyBackpack(backpackInstance);
+    patchBackpack(backpackInstance);
+  })();
 
   // Costume and sound list
   {

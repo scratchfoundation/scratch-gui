@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 import BlockInstance from "../BlockInstance.js";
 import BlockFlasher from "./BlockFlasher.js";
 

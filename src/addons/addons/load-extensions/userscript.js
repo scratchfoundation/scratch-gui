@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 export default async function ({ addon, global, console }) {
   // IDs are taken from https://github.com/LLK/scratch-vm/blob/ffa78b91b8645b6a8c80f698a3637bb73abf2931/src/extension-support/extension-manager.js#L11
   const Extensions = ["music", "pen", "text2speech", "translate"];

@@ -62,11 +62,6 @@ const commitHash = childProcess.execSync('git rev-parse --short HEAD')
     .toString()
     .trim();
 
-const JS_HEADER = `/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */\n\n`;
-
 const includeImportedLibraries = contents => {
     // Parse things like:
     // import { normalizeHex, getHexRegex } from "../../libraries/normalize-color.js";
@@ -139,11 +134,6 @@ request('https://raw.githubusercontent.com/ScratchAddons/contributors/master/.al
                 if (contents.includes('addon.self.dir') || contents.includes('addon.self.lib')) {
                     contents = includeImports(oldDirectory, contents);
                 }
-            }
-
-            // Add a license notice, unless one already exists.
-            if ((file.endsWith('.js') || file.endsWith('.css')) && !contents.includes('@license')) {
-                contents = JS_HEADER + contents;
             }
 
             fs.writeFileSync(newPath, contents);

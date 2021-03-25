@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 /* inserted by pull.js */
 import _twAsset0 from "./lock.svg";
 import _twAsset1 from "./unlock.svg";

@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 /**
  * Encapsulates a block (either in this sprite or another / Blockly, or native JSON block
  */

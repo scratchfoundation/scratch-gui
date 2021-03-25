@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 export default async function ({ addon, global, console }) {
   // TODO: Switch completely to Blockly?
   // Well anyway future self, here you go: https://github.com/LLK/scratch-blocks/compare/hotfix/totally-normal-2020

@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 export default async ({ addon, console, msg }) => {
   if (!addon.tab.redux.state) return console.warn("Redux is not available!");
   const vm = addon.tab.traps.vm;

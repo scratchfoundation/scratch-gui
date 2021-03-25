@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 /**
  * This class is dedicated to maintaining the Undo stack of Blockly
  * It allows us to initiate an undo group such that all subsequent operations are recorded as a single

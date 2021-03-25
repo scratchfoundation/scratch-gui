@@ -1,8 +1,3 @@
-/**!
- * Imported from SA
- * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
- */
-
 import { normalizeHex, getHexRegex } from "../../libraries/normalize-color.js";
 import RateLimiter from "../../libraries/rate-limiter.js";
 import tinycolor from "../../libraries/tinycolor-min.js";

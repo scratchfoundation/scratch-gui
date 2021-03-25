@@ -1,6 +1,6 @@
 /**!
  * Imported from SA
- * @license GPLv3.0 (see LICENSE_GPL or https://www.gnu.org/licenses/ for more information)
+ * @license GPLv3.0 (see LICENSE or https://www.gnu.org/licenses/ for more information)
  */
 
 import blockToDom from "./blockToDom.js";

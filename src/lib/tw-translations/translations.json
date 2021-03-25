@@ -288,7 +288,7 @@
         "tw.cloudVariableBadge": "이 프로젝트는 클라우드 변수를 사용합니다. TurboWarp는 스크래치와 독립적인 자체 클라우드 서버를 사용합니다. 사용자가 사용자 이름에서 말하는 것과 다를 수 있음을 주의하세요.",
         "tw.code": "소스코드",
         "tw.customExtension.description": "URL에서 사용자 지정 확장 프로그램을 불러옵니다. 실험적 개발자 기능입니다.",
-        "tw.customExtension.name": "커스텀 확장 프로그램",
+        "tw.customExtension.name": "사용자 지정 확장 프로그램",
         "tw.defaultProject.comment": "이것으로 프로젝트가 TurboWarp에서 실행되었는지를 탐지합니다.\n\n자세히 알아보기:\nhttps://scratch.mit.edu/projects/414716080/",
         "tw.evalModal.description": "브라우저 확장 프로그램이 TurboWarp의 스크립트 컴파일 성능을 저하시키고 있습니다. 애드블록을 비활성화 후 새로고침 해주세요. 이 사이트는 광고를 붙이거나 개인정보를 수집하지 않습니다.",
         "tw.evalModal.label": "브라우저 식별 오류",

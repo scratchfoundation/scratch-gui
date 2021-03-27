@@ -71,7 +71,7 @@ class UsernameModal extends React.Component {
     }
     handleRemoveLimitsChange (e) {
         this.props.vm.setRuntimeOptions({
-            effectLimits: !e.target.checked
+            miscLimits: !e.target.checked
         });
     }
     handleWarpTimerChange (e) {
@@ -163,7 +163,7 @@ const mapStateToProps = state => ({
     interpolation: state.scratchGui.tw.interpolation,
     infiniteClones: state.scratchGui.tw.runtimeOptions.maxClones === Infinity,
     removeFencing: !state.scratchGui.tw.runtimeOptions.fencing,
-    removeLimits: !state.scratchGui.tw.runtimeOptions.effectLimits,
+    removeLimits: !state.scratchGui.tw.runtimeOptions.miscLimits,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     disableCompiler: !state.scratchGui.tw.compilerOptions.enabled
 });

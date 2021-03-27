@@ -28,7 +28,7 @@ export const initialState = {
     },
     runtimeOptions: {
         maxClones: 300,
-        effectLimits: true,
+        miscLimits: true,
         fencing: true
     },
     isWindowFullScreen: false,

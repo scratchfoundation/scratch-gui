@@ -355,7 +355,7 @@ const TWStateManager = function (WrappedComponent) {
 
             if (urlParams.has('limitless')) {
                 this.props.vm.setRuntimeOptions({
-                    effectLimits: false
+                    miscLimits: false
                 });
             }
 
@@ -490,7 +490,7 @@ const TWStateManager = function (WrappedComponent) {
                     searchParams.set('offscreen', '');
                 }
 
-                if (runtimeOptions.effectLimits) {
+                if (runtimeOptions.miscLimits) {
                     searchParams.delete('limitless');
                 } else {
                     searchParams.set('limitless', '');

@@ -83,6 +83,27 @@ const getScratchClassNames = () => {
     return _scratchClassNames;
 };
 
+let _mutationObserver;
+let _mutationObserverCallbacks = [];
+const addMutationObserverCallback = newCallback => {
+    if (!_mutationObserver) {
+        _mutationObserver = new MutationObserver(() => {
+            for (const cb of _mutationObserverCallbacks) {
+                cb();
+            }
+        });
+        _mutationObserver.observe(document.documentElement, {
+            attributes: false,
+            childList: true,
+            subtree: true
+        });
+    }
+    _mutationObserverCallbacks.push(newCallback);
+};
+const removeMutationObserverCallback = callback => {
+    _mutationObserverCallbacks = _mutationObserverCallbacks.filter(i => i !== callback);
+};
+
 class Redux extends EventTargetShim {
     constructor () {
         super();
@@ -172,22 +193,19 @@ class Tab extends EventTargetShim {
             return Promise.resolve(element);
         }
 
-        return new Promise(resolve =>
-            new MutationObserver((mutationsList, observer) => {
+        return new Promise(resolve => {
+            const callback = () => {
                 const elements = document.querySelectorAll(selector);
                 for (const element of elements) {
                     if (this._seenElements.has(element)) continue;
-                    observer.disconnect();
                     resolve(element);
+                    removeMutationObserverCallback(callback);
                     if (markAsSeen) this._seenElements.add(element);
                     break;
                 }
-            }).observe(document.documentElement, {
-                attributes: false,
-                childList: true,
-                subtree: true
-            })
-        );
+            };
+            addMutationObserverCallback(callback);
+        });
     }
 
     copyImage (dataURL) {

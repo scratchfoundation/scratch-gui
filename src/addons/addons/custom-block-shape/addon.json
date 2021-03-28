@@ -37,7 +37,8 @@
       "type": "integer",
       "min": 50,
       "default": 100,
-      "max": 200
+      "max": 200,
+      "reloadRequired": false
     },
     {
       "name": "Corner size (0-300%)",
@@ -45,7 +46,8 @@
       "type": "integer",
       "min": 0,
       "default": 100,
-      "max": 300
+      "max": 300,
+      "reloadRequired": false
     },
     {
       "name": "Notch height (0-150%)",
@@ -53,7 +55,8 @@
       "type": "integer",
       "min": 0,
       "default": 100,
-      "max": 150
+      "max": 150,
+      "reloadRequired": false
     }
   ],
   "presets": [

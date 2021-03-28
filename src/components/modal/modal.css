@@ -67,11 +67,14 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $motion-primary-dark;
-
+    background-color: $motion-primary;
+    
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: normal;
+}
+[theme="dark"] .header {
+    background-color: $motion-primary-dark;
 }
 
 .header-item {

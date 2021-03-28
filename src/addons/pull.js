@@ -78,7 +78,7 @@ const includeImportedLibraries = contents => {
 
 const includeImports = (folder, contents) => {
     const dynamicAssets = walk(folder)
-        .filter(file => file.endsWith('.svg'));
+        .filter(file => file.endsWith('.svg') || file.endsWith('.png'));
 
     const stringifyPath = path => JSON.stringify(path).replace(/\\\\/g, '/');
 
@@ -106,7 +106,7 @@ const includeImports = (folder, contents) => {
         (_fullText, name) => `\${_twGetAsset(${name})}`
     );
     contents = contents.replace(
-        /addon\.self\.(?:dir|lib) *\+ *([^;]+)/g,
+        /addon\.self\.(?:dir|lib) *\+ *([^;,]+)/g,
         (_fullText, name) => `_twGetAsset(${name})`
     );
 
@@ -127,9 +127,10 @@ request('https://raw.githubusercontent.com/ScratchAddons/contributors/master/.al
             const oldPath = pathUtil.join(oldDirectory, file);
             const newPath = pathUtil.join(newDirectory, file);
             fs.mkdirSync(pathUtil.dirname(newPath), {recursive: true});
-            let contents = fs.readFileSync(oldPath, 'utf-8');
+            let contents = fs.readFileSync(oldPath);
 
             if (file.endsWith('.js')) {
+                contents = contents.toString('utf-8');
                 includeImportedLibraries(contents);
                 if (contents.includes('addon.self.dir') || contents.includes('addon.self.lib')) {
                     contents = includeImports(oldDirectory, contents);

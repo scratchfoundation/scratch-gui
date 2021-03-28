@@ -170,9 +170,28 @@ export default async function ({ addon, global, console, msg }) {
       const labelCell = document.createElement("td");
       labelCell.className = "sa-var-manager-name";
 
-      const label = document.createElement("label");
-      label.textContent = this.scratchVariable.name;
+      const label = document.createElement("input");
+      label.value = this.scratchVariable.name;
       label.htmlFor = id;
+      const onLabelOut = (e) => {
+        e.preventDefault();
+        Blockly.getMainWorkspace().renameVariableById(this.scratchVariable.id, label.value);
+        label.blur();
+      };
+      label.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) onLabelOut(e);
+      });
+      label.addEventListener("focusout", onLabelOut);
+
+      label.addEventListener("focus", (e) => {
+        preventUpdate = true;
+        manager.classList.add("freeze");
+      });
+
+      label.addEventListener("blur", (e) => {
+        preventUpdate = false;
+        manager.classList.remove("freeze");
+      });
       labelCell.appendChild(label);
 
       rowToVariableMap.set(row, this);
@@ -195,17 +214,20 @@ export default async function ({ addon, global, console, msg }) {
         this.input.addEventListener("input", () => this.resizeInputIfList(), false);
       }
 
-      input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-          e.preventDefault();
-          if (this.scratchVariable.type === "list") {
-            vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value.split("\n"));
-          } else {
-            vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value);
-          }
-          input.blur();
+      const onInputOut = (e) => {
+        e.preventDefault();
+        if (this.scratchVariable.type === "list") {
+          vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value.split("\n"));
+        } else {
+          vm.setVariableValue(this.target.id, this.scratchVariable.id, input.value);
         }
+        input.blur();
+      };
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) onInputOut(e);
       });
+      input.addEventListener("focusout", onInputOut);
 
       input.addEventListener("focus", (e) => {
         preventUpdate = true;

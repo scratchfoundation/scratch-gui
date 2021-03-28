@@ -1,6 +1,5 @@
 [
-    "folders",
-    "variable-manager",
-    "block-palette-icons",
-    "load-extensions"
+    "drag-drop",
+    "custom-block-shape",
+    "2d-color-picker"
 ]

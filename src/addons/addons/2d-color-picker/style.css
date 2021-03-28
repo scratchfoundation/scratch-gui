@@ -1,0 +1,15 @@
+.sa-2dcolor-picker {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  margin: 8px;
+  position: relative;
+  user-select: none;
+}
+
+.sa-2dcolor-picker-image {
+  border-radius: 8px;
+  width: 150px;
+  height: 150px;
+  user-select: none;
+}

@@ -1,0 +1,102 @@
+{
+  "name": "Custom block shape",
+  "description": "Adjust the padding, corner radius, and notch height of Scratch blocks.",
+  "tags": ["editor", "theme"],
+  "credits": [
+    {
+      "name": "SheepTester",
+      "link": "https://scratch.mit.edu/users/Sheep_maker/"
+    },
+    {
+      "name": "lisa_wolfgang",
+      "link": "https://scratch.mit.edu/users/lisa_wolfgang"
+    },
+    {
+      "name": "GarboMuffin",
+      "link": "https://scratch.mit.edu/users/GarboMuffin"
+    }
+  ],
+  "enabledByDefault": false,
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "info": [
+    {
+      "type": "warning",
+      "text": "Decreasing the padding size is only visible to you, so when your projects are viewed by other users, your scripts may overlap.",
+      "id": "paddingWarning"
+    }
+  ],
+  "settings": [
+    {
+      "name": "Padding size (50-200%)",
+      "id": "paddingSize",
+      "type": "integer",
+      "min": 50,
+      "default": 100,
+      "max": 200
+    },
+    {
+      "name": "Corner size (0-300%)",
+      "id": "cornerSize",
+      "type": "integer",
+      "min": 0,
+      "default": 100,
+      "max": 300
+    },
+    {
+      "name": "Notch height (0-150%)",
+      "id": "notchSize",
+      "type": "integer",
+      "min": 0,
+      "default": 100,
+      "max": 150
+    }
+  ],
+  "presets": [
+    {
+      "name": "3.0 Blocks",
+      "id": "default3",
+      "description": "The regular appearance of Scratch 3.0 blocks",
+      "values": {
+        "paddingSize": 100,
+        "cornerSize": 100,
+        "notchSize": 100
+      }
+    },
+    {
+      "name": "2.0 Blocks",
+      "id": "default2",
+      "description": "An appearance similar to Scratch 2.0 blocks",
+      "values": {
+        "paddingSize": 70,
+        "cornerSize": 150,
+        "notchSize": 75
+      }
+    },
+    {
+      "name": "3.0 Flat",
+      "id": "flat3",
+      "description": "Scratch 3.0 blocks with notches and corners removed",
+      "values": {
+        "paddingSize": 100,
+        "cornerSize": 0,
+        "notchSize": 0
+      }
+    },
+    {
+      "name": "2.0 Flat",
+      "id": "flat2",
+      "description": "Scratch 2.0 blocks with notches and corners removed",
+      "values": {
+        "paddingSize": 70,
+        "cornerSize": 0,
+        "notchSize": 0
+      }
+    }
+  ],
+  "l10n": true
+}

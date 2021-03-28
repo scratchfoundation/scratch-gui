@@ -59,11 +59,11 @@ export default async function ({ addon, global, console }) {
       function onmouseenter(speed = {}) {
         speed = typeof speed === "object" ? getSpeedValue() : speed;
         flyOut.classList.remove("sa-flyoutClose");
-        flyOut.style.animation = `openFlyout ${speed}s 1`;
+        flyOut.style.transitionDuration = `${speed}s`;
         scrollBar.classList.remove("sa-flyoutClose");
-        scrollBar.style.animation = `openScrollbar ${speed}s 1`;
+        scrollBar.style.transitionDuration = `${speed}s`;
         lockDisplay.classList.remove("sa-flyoutClose");
-        lockDisplay.style.animation = `openLock ${speed}s 1`;
+        lockDisplay.style.transitionDuration = `${speed}s`;
         setTimeout(() => Blockly.getMainWorkspace().recordCachedAreas(), speed * 1000);
       }
       function onmouseleave(e, speed = getSpeedValue()) {
@@ -74,11 +74,11 @@ export default async function ({ addon, global, console }) {
         )
           return;
         flyOut.classList.add("sa-flyoutClose");
-        flyOut.style.animation = `closeFlyout ${speed}s 1`;
+        flyOut.style.transitionDuration = `${speed}s`;
         scrollBar.classList.add("sa-flyoutClose");
-        scrollBar.style.animation = `closeScrollbar ${speed}s 1`;
+        scrollBar.style.transitionDuration = `${speed}s`;
         lockDisplay.classList.add("sa-flyoutClose");
-        lockDisplay.style.animation = `closeLock ${speed}s 1`;
+        lockDisplay.style.transitionDuration = `${speed}s`;
         setTimeout(() => Blockly.getMainWorkspace().recordCachedAreas(), speed * 1000);
       }
 

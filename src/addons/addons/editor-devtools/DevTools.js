@@ -1356,7 +1356,7 @@ export default class DevTools {
       }
     } else if (e.button === 2) {
       // Right click...
-      let spriteSelector = e.target.closest("div[class*='sprite-selector-item_sprite-selector-item']");
+      let spriteSelector = e.target.closest("#react-tabs-3 div[class*='sprite-selector-item_sprite-selector-item']");
       if (spriteSelector) {
         let contextMenu = spriteSelector.getElementsByTagName("nav")[0];
         if (!contextMenu.querySelector("div.s3devSTT")) {

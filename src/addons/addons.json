@@ -23,5 +23,8 @@
     "block-palette-icons",
     "tw-interface-customization",
     "load-extensions",
+    "drag-drop",
+    "custom-block-shape",
+    "2d-color-picker",
     "cat-blocks"
 ]

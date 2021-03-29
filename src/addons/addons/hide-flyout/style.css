@@ -18,6 +18,10 @@
 
 .sa-flyout-placeHolder {
   position: absolute;
+  left: 61px;
+  top: 44px;
+  height: 100%;
+  width: 251px;
 }
 
 .sa-lock-image {
@@ -25,6 +29,8 @@
   z-index: 20;
   width: 20px;
   cursor: pointer;
+  top: 46px;
+  left: 280px;
 }
 
 .injectionDiv {

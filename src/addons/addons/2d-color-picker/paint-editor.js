@@ -204,6 +204,8 @@ export default async ({ addon, console, msg }) => {
     } else updateHandleFinal(1, 1);
 
     saColorPicker.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+
       originalPos = {
         x: parseFloat(saColorPickerHandle.style.left) + 8,
         y: parseFloat(saColorPickerHandle.style.top) + 8,

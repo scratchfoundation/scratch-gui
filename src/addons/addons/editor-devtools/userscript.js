@@ -32,13 +32,6 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
   </div>
 </div>
 <div id="s3devHelpContent">
-<p>${m("version", {
-    version: "1.12.0",
-    date: releaseDateLocalized,
-    ndash: "&ndash;",
-    url: '<a target="_blank" rel="noreferrer noopener" href="https://www.youtube.com/griffpatch">Griffpatch</a>',
-  })}</p>
-<hr />
 <h2><strong>${m("code-tab-features")}</strong></h2>
 <p><strong>${m("interactive-find-bar")}</strong> - ${m("interactive-find-bar-desc")}</p>
 <p><strong>${m("improved-tidy-up")}</strong> &ndash; ${m("improved-tidy-up-desc")}</p>

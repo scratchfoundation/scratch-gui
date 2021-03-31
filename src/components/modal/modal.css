@@ -76,6 +76,9 @@ $sides: 20rem;
 [theme="dark"] .header {
     background-color: $motion-primary-dark;
 }
+[theme="dark"] .full-screen .header {
+    background-color: $motion-primary;
+}
 
 .header-item {
     display: flex;

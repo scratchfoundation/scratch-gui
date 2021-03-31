@@ -331,6 +331,17 @@
         "tw.viewFeaturedProjects": "Clicca per vedere i progetti in primo piano.",
         "tw.webglModal.description": "Sembra che il tuo browser o il tuo computer non siano compatibili con {webGlLink}. Questa tecnologia è necessaria per poter usare questo sito. Prova ad aggiornare il tuo browser e i tuoi driver video o a riavviare il tuo computer."
     },
+    "ja": {
+        "tw.code": "ソースコード",
+        "tw.feedback": "フィードバックとバグ",
+        "tw.home.credit": "メモとクレジット",
+        "tw.home.instructions": "使い方",
+        "tw.loader.data": "プロジェクトのデータを読み込み中…",
+        "tw.loader.generic": "プロジェクトを読み込み中…",
+        "tw.menuBar.seeInside": "中を見る",
+        "tw.menuBar.translate": "TurboWarpの翻訳を手伝う",
+        "tw.privacy": "プライバシーポリシー"
+    },
     "ko": {
         "tw.alerts.autosaving": "복원 지점 생성 중...",
         "tw.alerts.extendedExtensionsWarning": "이 프로젝트는 TurboWarp Desktop에서만 사용할 수 있는 블럭을 사용하고 있습니다. 이것은 스크래치에서 작동하지 않고, 스크래치 웹사이트에 업로드될 수 없습니다. {learnMoreLink}",

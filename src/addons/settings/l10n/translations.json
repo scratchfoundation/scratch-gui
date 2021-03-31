@@ -66,7 +66,26 @@
         "tw.addons.settings.unsupported": "Alcuni addon non sono disponibili in questo browser:"
     },
     "ja": {
-        "tw.addons.settings.title": "アドオン設定"
+        "tw.addons.settings.addonFeedback": "アドオンのフィードバック",
+        "tw.addons.settings.confirmResetAll": "アドオンの設定を削除し、デフォルトに戻します。よろしいですか？",
+        "tw.addons.settings.credits": "クレジット:",
+        "tw.addons.settings.dirty": "再読み込みをしてアドオンの効果を反映する。",
+        "tw.addons.settings.dirtyButton": "すぐに再読み込みする",
+        "tw.addons.settings.export": "設定を保存する",
+        "tw.addons.settings.import": "設定を読み込む",
+        "tw.addons.settings.noResults": "検索条件に一致する結果はありません。",
+        "tw.addons.settings.presets": "プリセット",
+        "tw.addons.settings.reset": "リセット",
+        "tw.addons.settings.resetAll": "全てリセットする",
+        "tw.addons.settings.search": "検索",
+        "tw.addons.settings.tags.beta": "ベータ版",
+        "tw.addons.settings.tags.easterEgg": "イースターエッグ",
+        "tw.addons.settings.tags.new": "新機能!",
+        "tw.addons.settings.tags.recommended": "おすすめ",
+        "tw.addons.settings.tags.theme": "テーマ",
+        "tw.addons.settings.tags.turbowarp": "TurboWarp",
+        "tw.addons.settings.title": "アドオン設定",
+        "tw.addons.settings.unsupported": "いくつかのアドオンがお使いのブラウザに対応していません:"
     },
     "ko": {
         "tw.addons.settings.addonFeedback": "애드온 피드백",

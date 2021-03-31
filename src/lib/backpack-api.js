@@ -102,6 +102,22 @@ const deleteBackpackObject = ({
     });
 });
 
+const updateBackpackObject = ({
+    host,
+    id,
+    name
+}) => new Promise((resolve, reject) => {
+    if (host === LOCAL_API) {
+        return localBackpackAPI.updateBackpackObject({
+            id,
+            name
+        })
+            .then(resolve)
+            .catch(reject);
+    }
+    reject(new Error('updateBackpackObject not supported'));
+});
+
 // Two types of backpack items are not retreivable through storage
 // code, as json and sprite3 as arraybuffer zips.
 const fetchAs = (responseType, uri) => new Promise((resolve, reject) => {
@@ -122,6 +138,7 @@ export {
     getBackpackContents,
     saveBackpackObject,
     deleteBackpackObject,
+    updateBackpackObject,
     costumePayload,
     soundPayload,
     spritePayload,

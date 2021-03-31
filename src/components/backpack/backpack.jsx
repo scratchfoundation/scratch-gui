@@ -52,6 +52,7 @@ const Backpack = ({
     showMore,
     onToggle,
     onDelete,
+    onRename,
     onMouseEnter,
     onMouseLeave,
     onMore
@@ -122,6 +123,8 @@ const Backpack = ({
                                         selected={false}
                                         onClick={noop}
                                         onDeleteButtonClick={onDelete}
+                                        // Currently, renaming sprites is not supported.
+                                        onRenameButtonClick={item.type === 'sprite' ? null : onRename}
                                     />
                                 ))}
                                 {showMore && (
@@ -168,6 +171,7 @@ Backpack.propTypes = {
     intl: intlShape,
     loading: PropTypes.bool,
     onDelete: PropTypes.func,
+    onRename: PropTypes.func,
     onMore: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,

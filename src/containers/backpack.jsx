@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import BackpackComponent from '../components/backpack/backpack.jsx';
 import {
     getBackpackContents,
     saveBackpackObject,
     deleteBackpackObject,
+    updateBackpackObject,
     soundPayload,
     costumePayload,
     spritePayload,
@@ -22,6 +24,14 @@ import VM from 'scratch-vm';
 const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND, DragConstants.SPRITE];
 const DroppableBackpack = DropAreaHOC(dragTypes)(BackpackComponent);
 
+const messages = defineMessages({
+    rename: {
+        defaultMessage: 'New name:',
+        description: 'Renaming a backpack item',
+        id: 'tw.backpack.rename'
+    }
+});
+
 class Backpack extends React.Component {
     constructor (props) {
         super(props);
@@ -29,6 +39,7 @@ class Backpack extends React.Component {
             'handleDrop',
             'handleToggle',
             'handleDelete',
+            'handleRename',
             'getBackpackAssetURL',
             'getContents',
             'handleMouseEnter',
@@ -157,6 +168,34 @@ class Backpack extends React.Component {
                 });
         });
     }
+    findItemById (id) {
+        return this.state.contents.find(i => i.id === id);
+    }
+    handleRename (id) {
+        const item = this.findItemById(id);
+        // eslint-disable-next-line no-alert
+        const newName = prompt(this.props.intl.formatMessage(messages.rename), item.name);
+        if (!newName) {
+            return;
+        }
+        this.setState({loading: true}, () => {
+            updateBackpackObject({
+                host: this.props.host,
+                ...item,
+                name: newName
+            })
+                .then(newItem => {
+                    this.setState({
+                        loading: false,
+                        contents: this.state.contents.map(i => (i === item ? newItem : i))
+                    });
+                })
+                .catch(error => {
+                    this.setState({error: true, loading: false});
+                    throw error;
+                });
+        });
+    }
     getContents () {
         if ((this.props.token && this.props.username) || this.props.host === LOCAL_API) {
             this.setState({loading: true, error: false}, () => {
@@ -226,6 +265,7 @@ class Backpack extends React.Component {
                 loading={this.state.loading}
                 showMore={this.state.moreToLoad}
                 onDelete={this.handleDelete}
+                onRename={this.handleRename}
                 onDrop={this.handleDrop}
                 onMore={this.handleMore}
                 onMouseEnter={this.handleMouseEnter}
@@ -237,6 +277,7 @@ class Backpack extends React.Component {
 }
 
 Backpack.propTypes = {
+    intl: intlShape,
     host: PropTypes.string,
     token: PropTypes.string,
     username: PropTypes.string,
@@ -272,4 +313,4 @@ const mapStateToProps = state => Object.assign(
 
 const mapDispatchToProps = () => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Backpack);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Backpack));

@@ -163,6 +163,7 @@ const saveBackpackObject = async ({
 const deleteBackpackObject = async ({
     id
 }) => {
+    id = +id;
     const db = await openDB();
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(STORE_NAME, 'readwrite');
@@ -171,9 +172,35 @@ const deleteBackpackObject = async ({
         };
         const store = transaction.objectStore(STORE_NAME);
         // Convert string IDs to number IDs
-        const deleteRequest = store.delete(+id);
+        const deleteRequest = store.delete(id);
         deleteRequest.onsuccess = () => {
             resolve();
+        };
+    });
+};
+
+const updateBackpackObject = async ({
+    id,
+    name
+}) => {
+    id = +id;
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(STORE_NAME, 'readwrite');
+        transaction.onerror = () => {
+            reject(new Error(`Transaction error: ${transaction.error}`));
+        };
+        const store = transaction.objectStore(STORE_NAME);
+        const getRequest = store.get(id);
+        getRequest.onsuccess = () => {
+            const newItem = {
+                ...getRequest.result,
+                name: name
+            };
+            const putRequest = store.put(newItem);
+            putRequest.onsuccess = () => {
+                resolve(idbItemToBackpackItem(newItem));
+            };
         };
     });
 };
@@ -181,5 +208,6 @@ const deleteBackpackObject = async ({
 export default {
     getBackpackContents,
     saveBackpackObject,
-    deleteBackpackObject
+    deleteBackpackObject,
+    updateBackpackObject
 };

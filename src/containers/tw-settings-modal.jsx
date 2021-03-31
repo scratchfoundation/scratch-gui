@@ -42,19 +42,21 @@ class UsernameModal extends React.Component {
         this.state = {
             stageWidth: twStageSize.width,
             stageHeight: twStageSize.height,
-            reloadRequired: false
+            reloadRequired: false,
+            isReloading: false
         };
-        this.isReloading = false;
     }
     handleClose () {
-        if (this.isReloading) {
+        if (this.state.isReloading) {
             return;
         }
         if (this.state.reloadRequired) {
             // eslint-disable-next-line no-alert
             if (confirm(this.props.intl.formatMessage(messages.confirmReload))) {
-                this.isReloading = true;
                 this.applyChangesThatNeedReload();
+                this.setState({
+                    isReloading: true
+                });
                 return;
             }
         }
@@ -135,6 +137,7 @@ class UsernameModal extends React.Component {
         return (
             <SettingsModalComponent
                 onClose={this.handleClose}
+                disabled={this.state.isReloading}
                 reloadRequired={this.state.reloadRequired}
                 onFramerateChange={this.handleFramerateChange}
                 onCustomizeFramerate={this.handleCustomizeFramerate}

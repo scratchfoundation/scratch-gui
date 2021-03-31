@@ -16,6 +16,13 @@
     background: $ui-primary;
 }
 
+.disabled {
+    pointer-events: none;
+}
+.disabled > * {
+    opacity: 0.8;
+}
+
 .setting {
     display: flex;
     flex-direction: column;

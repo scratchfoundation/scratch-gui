@@ -363,7 +363,7 @@ const SettingsModalComponent = props => (
         contentLabel={props.intl.formatMessage(messages.title)}
         id="settingsModal"
     >
-        <Box className={styles.body}>
+        <Box className={classNames(styles.body, {[styles.disabled]: props.disabled})}>
             <Header>
                 <FormattedMessage
                     defaultMessage="Featured"
@@ -429,6 +429,7 @@ SettingsModalComponent.propTypes = {
     intl: intlShape,
     onClose: PropTypes.func,
     reloadRequired: PropTypes.bool,
+    disabled: PropTypes.bool,
     framerate: PropTypes.number,
     onFramerateChange: PropTypes.func,
     onCustomizeFramerate: PropTypes.func,

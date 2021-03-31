@@ -119,7 +119,7 @@ export default async function ({ addon, global, console, msg }) {
   const getBackpackFromElement = (el) => {
     const gui = el.closest('[class*="gui_editor-wrapper"]');
     if (!gui) throw new Error("cannot find Backpack");
-    return gui[reactInternalKey].child.sibling.child.stateNode;
+    return gui[reactInternalKey].child.sibling.child.child.stateNode;
   };
 
   const clamp = (n, min, max) => {

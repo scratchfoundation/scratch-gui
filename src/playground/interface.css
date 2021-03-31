@@ -3,6 +3,8 @@ p {
 }
 a {
     color: #25d;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .container {

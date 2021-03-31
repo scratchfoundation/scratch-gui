@@ -273,7 +273,7 @@ class SettingsStore extends EventTargetShim {
             addons: {}
         };
         for (const [addonId, manifest] of Object.entries(addons)) {
-            const enabled = this.getAddonEnabled(addonId);
+            const enabled = this.getAddonEnabled(addonId) && addonId !== 'cat-blocks';
             const settings = {};
             if (manifest.settings) {
                 for (const {id} of manifest.settings) {

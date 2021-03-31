@@ -18,6 +18,7 @@
 }
 [theme="dark"] .context-menu {
     background-color: $ui-primary;
+    border-color: $ui-tertiary;
 }
 
 .menu-item {
@@ -34,6 +35,9 @@
 
 .menu-item-bordered {
     border-top: 1px solid $ui-black-transparent;
+}
+[theme="dark"] .menu-item-bordered {
+    border-color: $ui-tertiary;
 }
 
 .menu-item-danger:hover {

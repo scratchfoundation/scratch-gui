@@ -464,8 +464,6 @@ const TWStateManager = function (WrappedComponent) {
 
                 if (compilerOptions.enabled) {
                     searchParams.delete('nocompile');
-                } else {
-                    searchParams.set('nocompile', '');
                 }
 
                 if (this.props.isPlayerOnly) {

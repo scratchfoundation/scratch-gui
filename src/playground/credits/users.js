@@ -70,6 +70,11 @@ const translators = [
         userId: '56013432',
         scratchUsername: 'Developer_Diary',
         name: 'Developer_Diary'
+    },
+    {
+        userId: '72794568',
+        scratchUsername: '52Tellur',
+        name: '52Tellur'
     }
 ].map(({userId, scratchUsername, name}) => ({
     image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,

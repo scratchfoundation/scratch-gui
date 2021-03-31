@@ -1236,7 +1236,7 @@ export default async function ({ addon, global, console, msg }) {
 
   // Backpack
   (async () => {
-    const backpackContainer = await addon.tab.waitForElement("[class*='backpack_backpack-list-inner']");
+    const backpackContainer = await addon.tab.waitForElement("[class*='backpack_backpack-list_']");
     const backpackInstance = getBackpackFromElement(backpackContainer);
     verifyBackpack(backpackInstance);
     patchBackpack(backpackInstance);

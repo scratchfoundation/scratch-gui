@@ -151,11 +151,11 @@ a:active, a:focus {
 }
 
 .feedback-button-outer {
-    background: white;
-    color: inherit !important;
-    box-sizing: border-box;
+    background: #f0f0f0;
     border: 1px solid #cecece;
-    height: 38px;
+    color: #333 !important;
+    height: 36px;
+    box-sizing: border-box;
     border-radius: 4px;
     padding: 0 12px;
     margin-left: 10px;
@@ -166,8 +166,8 @@ a:active, a:focus {
     text-decoration: none !important;
 }
 [theme="dark"] .feedback-button-outer {
-    background-color: #111111;
-    border-color: #222222;
+    background-color: white;
+    border-color: white;
 }
 .feedback-button-outer:active, .feedback-button-outer:focus-within {
     box-shadow: 0 0 0 3px $motion-transparent;

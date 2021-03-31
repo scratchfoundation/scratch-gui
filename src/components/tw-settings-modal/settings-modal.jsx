@@ -48,7 +48,7 @@ class BooleanSetting extends React.Component {
             'handleClickHelp'
         ]);
         this.state = {
-            helpVisible: this.props.value
+            helpVisible: false
         };
     }
     componentDidUpdate (prevProps) {
@@ -117,14 +117,71 @@ const HighQualityPen = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="High Quality Pen allows pen projects to render at a higher resolution. It also disables some rounding in the renderer. Not all projects benefit from this setting, and it may impact performance."
+                    defaultMessage="High Quality Pen allows pen projects to render at a higher resolution. See {comparison}. It also disables some rounding in the renderer. Not all projects benefit from this setting, and it may impact performance."
                     description="High quality pen setting help"
                     id="tw.settingsModal.highQualityPenHelp"
+                    values={{
+                        comparison: (
+                            <a
+                                href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings#high-quality-pen"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="comparison enabled and disabled"
+                                    description="High quality pen setting help"
+                                    id="tw.settingsModal.highQualityPenHelp.comparison"
+                                />
+                            </a>
+                        )
+                    }}
                 />
             </p>
         </div>
     </WrappedBooleanSetting>
 );
+
+const CustomFPS = props => (
+    <WrappedBooleanSetting
+        value={props.framerate !== 30}
+        onChange={props.onChange}
+    >
+        <FormattedMessage
+            defaultMessage="60 FPS (Custom FPS)"
+            description="FPS setting"
+            id="tw.settingsModal.fps"
+        />
+        <div>
+            <p>
+                <FormattedMessage
+                    // eslint-disable-next-line max-len
+                    defaultMessage="Runs scripts 60 times per second instead of 30. Most projects will not work properly with this enabled. You should try Interpolation with 60 FPS mode disabled if that is the case. {customFramerate}."
+                    description="FPS setting help"
+                    id="tw.settingsModal.fpsHelp"
+                    values={{
+                        customFramerate: (
+                            <a
+                                onClick={props.onCustomizeFramerate}
+                                tabIndex="0"
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Click to use a framerate other than 30 or 60"
+                                    description="FPS settings help"
+                                    id="tw.settingsModal.fpsHelp.customFramerate"
+                                />
+                            </a>
+                        )
+                    }}
+                />
+            </p>
+        </div>
+    </WrappedBooleanSetting>
+);
+CustomFPS.propTypes = {
+    framerate: PropTypes.number,
+    onChange: PropTypes.func,
+    onCustomizeFramerate: PropTypes.func
+};
 
 const Interpolation = props => (
     <WrappedBooleanSetting {...props}>
@@ -137,7 +194,7 @@ const Interpolation = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Interpolation is an experimental feature that makes project appear to run at higher framerates without changing their behavior by interpolating sprite motion. If you've ever run a project at 60 FPS and noticed that it's running too fast, that's what interpolation solves."
+                    defaultMessage="Interpolation makes project appear to run at higher framerates by interpolating sprite motion. Unlike 60 FPS mode, this will not make projects run at double their speed. Interpolation should not be used on projects that primarily use pen."
                     description="Interpolation setting help"
                     id="tw.settingsModal.interpolationHelp"
                 />
@@ -168,14 +225,15 @@ const InfiniteClones = props => (
 const RemoveFencing = props => (
     <WrappedBooleanSetting {...props}>
         <FormattedMessage
-            defaultMessage="Remove Fencing"
+            defaultMessage="Allow Sprites to Move Offscreen"
             description="Remove Fencing setting"
             id="tw.settingsModal.removeFencing"
         />
         <div>
             <p>
                 <FormattedMessage
-                    defaultMessage="Allows sprites to move offscreen."
+                    // eslint-disable-next-line max-len
+                    defaultMessage="Allows sprites to move offscreen and become as large or small as they want. Previously &quot;Removing Fencing&quot;."
                     description="Remove Fencing setting help"
                     id="tw.settingsModal.removeFencingHelp"
                 />
@@ -215,17 +273,9 @@ const WarpTimer = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Warp Timer makes scripts check if they are stuck in a long or infinite loop and run at a low framerate (2 fps) instead of getting completely stuck until the loop finishes. This fixes many crashes."
+                    defaultMessage="Warp Timer makes scripts check if they are stuck in a long or infinite loop and run at a a low framerate instead of getting stuck until the loop finishes, which fixes most crashes. This has a significant performance impact, so it's not enabled by default outside of the editor."
                     description="Warp Timer help"
                     id="tw.settingsModal.warpTimerHelp"
-                />
-            </p>
-            <p>
-                <FormattedMessage
-                    // eslint-disable-next-line max-len
-                    defaultMessage="This has a significant performance impact, so it's not enabled by default outside of the editor."
-                    description="Warp Timer help"
-                    id="tw.settingsModal.warpTimerHelp2"
                 />
             </p>
         </div>
@@ -242,7 +292,8 @@ const DisableCompiler = props => (
         <div>
             <p>
                 <FormattedMessage
-                    defaultMessage="Disables the TurboWarp compiler. You probably do not want to enable this."
+                    // eslint-disable-next-line max-len
+                    defaultMessage="Disables the TurboWarp compiler. You may want to enable this while editing projects so that scripts update immediately, otherwise you should not enable this."
                     description="Disable Compiler help"
                     id="tw.settingsModal.disableCompilerHelp"
                 />
@@ -313,35 +364,18 @@ const SettingsModalComponent = props => (
         id="settingsModal"
     >
         <Box className={styles.body}>
-            <p className={styles.info}>
-                <FormattedMessage
-                    defaultMessage="Settings will automatically be stored in the page URL. {additionalHelp}"
-                    description="Part of the settings modal"
-                    id="tw.settingsModal.url"
-                    values={{
-                        additionalHelp: (
-                            <a
-                                href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FormattedMessage
-                                    defaultMessage="Additional help"
-                                    description="Link to advanced settings on the wiki"
-                                    id="tw.settingsModal.moreHelp"
-                                />
-                            </a>
-                        )
-                    }}
-                />
-            </p>
             <Header>
                 <FormattedMessage
-                    defaultMessage="Recommended"
+                    defaultMessage="Featured"
                     description="Settings modal section"
-                    id="tw.settingsModal.recommended"
+                    id="tw.settingsModal.featured"
                 />
             </Header>
+            <CustomFPS
+                framerate={props.framerate}
+                onChange={props.onFramerateChange}
+                onCustomizeFramerate={props.onCustomizeFramerate}
+            />
             <Interpolation
                 value={props.interpolation}
                 onChange={props.onInterpolationChange}
@@ -380,12 +414,12 @@ const SettingsModalComponent = props => (
                     id="tw.settingsModal.dangerZone"
                 />
             </Header>
+            <CustomStageSize
+                {...props}
+            />
             <DisableCompiler
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
-            />
-            <CustomStageSize
-                {...props}
             />
         </Box>
     </Modal>
@@ -395,6 +429,9 @@ SettingsModalComponent.propTypes = {
     intl: intlShape,
     onClose: PropTypes.func,
     reloadRequired: PropTypes.bool,
+    framerate: PropTypes.number,
+    onFramerateChange: PropTypes.func,
+    onCustomizeFramerate: PropTypes.func,
     highQualityPen: PropTypes.bool,
     onHighQualityPenChange: PropTypes.func,
     interpolation: PropTypes.bool,

@@ -2603,6 +2603,18 @@
         "rotationCenterY": 200
     },
     {
+        "name": "Dango",
+        "tags": [
+            "food"
+        ],
+        "assetId": "b4ab6b3b69de1bc3ed6a94ace172a0b0",
+        "bitmapResolution": 1,
+        "dataFormat": "svg",
+        "md5ext": "b4ab6b3b69de1bc3ed6a94ace172a0b0.svg",
+        "rotationCenterX": 44,
+        "rotationCenterY": 44
+    },
+    {
         "name": "Dani-a",
         "tags": [
             "people"

@@ -3110,6 +3110,27 @@
         "blocks": {}
     },
     {
+        "name": "Dango",
+        "tags": [
+            "food"
+        ],
+        "isStage": false,
+        "variables": {},
+        "costumes": [
+            {
+                "assetId": "b4ab6b3b69de1bc3ed6a94ace172a0b0",
+                "name": "dango",
+                "bitmapResolution": 1,
+                "md5ext": "b4ab6b3b69de1bc3ed6a94ace172a0b0.svg",
+                "dataFormat": "svg",
+                "rotationCenterX": 44,
+                "rotationCenterY": 44
+            }
+        ],
+        "sounds": [],
+        "blocks": {}
+    },
+    {
         "name": "Dani",
         "tags": [
             "people"

@@ -225,7 +225,7 @@ const InfiniteClones = props => (
 const RemoveFencing = props => (
     <WrappedBooleanSetting {...props}>
         <FormattedMessage
-            defaultMessage="Allow Sprites to Move Offscreen"
+            defaultMessage="Remove Fencing"
             description="Remove Fencing setting"
             id="tw.settingsModal.removeFencing"
         />
@@ -233,7 +233,7 @@ const RemoveFencing = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Allows sprites to move offscreen and become as large or small as they want. Previously &quot;Removing Fencing&quot;."
+                    defaultMessage="Allows sprites to move offscreen and become as large or as small as they want."
                     description="Remove Fencing setting help"
                     id="tw.settingsModal.removeFencingHelp"
                 />

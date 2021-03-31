@@ -580,6 +580,97 @@ UnsupportedAddonsComponent.propTypes = {
     }))
 };
 
+const normalize = i => i.toLowerCase();
+
+class AddonList extends React.Component {
+    shouldShowAddon (state, addonId, manifest) {
+        if (!state.visible) {
+            return false;
+        }
+        const terms = normalize(this.props.search.trim()).split(' ');
+        if (terms.length === 0) {
+            return true;
+        }
+        const texts = [
+            normalize(addonId),
+            normalize(addonTranslations[`${addonId}/@name`] || manifest.name),
+            normalize(addonTranslations[`${addonId}/@name`] || manifest.description)
+        ];
+        if (manifest.settings) {
+            for (const setting of manifest.settings) {
+                texts.push(normalize(addonTranslations[`${addonId}/@settings-name-${setting.id}`] || setting.name));
+            }
+        }
+        if (manifest.presets) {
+            for (const preset of manifest.presets) {
+                texts.push(normalize(addonTranslations[`${addonId}/@preset-name-${preset.id}`] || preset.name));
+                texts.push(normalize(
+                    addonTranslations[`${addonId}/@preset-description-${preset.id}`] ||
+                    preset.description
+                ));
+            }
+        }
+        if (manifest.tags) {
+            for (const tag of manifest.tags) {
+                const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
+                if (translatedTag) {
+                    texts.push(normalize(settingsTranslations[`tw.addons.settings.tags.${tag}`]));
+                }
+            }
+        }
+        // For an addon to be included, all search terms must match one of the texts.
+        for (const term of terms) {
+            if (!term) continue;
+            let found = false;
+            for (const text of texts) {
+                if (text.includes(term)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
+    }
+    render () {
+        const filteredAddons = this.props.addons
+            .filter(({id, manifest, state}) => this.shouldShowAddon(state, id, manifest));
+        if (filteredAddons.length === 0) {
+            return (
+                <div className={styles.noResults}>
+                    {settingsTranslations['tw.addons.settings.noResults']}
+                </div>
+            );
+        }
+        return (
+            <div>
+                {filteredAddons.map(({id, manifest, state}) => (
+                    <AddonComponent
+                        key={id}
+                        id={id}
+                        settings={state}
+                        manifest={manifest}
+                    />
+                ))}
+            </div>
+        );
+    }
+}
+AddonList.propTypes = {
+    addons: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        state: PropTypes.shape({
+
+        }).isRequired,
+        manifest: PropTypes.shape({
+
+        }).isRequired
+    })).isRequired,
+    search: PropTypes.string.isRequired
+};
+
 const KONAMI = [
     'arrowup',
     'arrowup',
@@ -774,71 +865,12 @@ class AddonSettingsComponent extends React.Component {
             e.preventDefault();
         }
     }
-    isIncludedInSearch (addonId, manifest) {
-        const normalize = i => i.toLowerCase();
-        const terms = normalize(this.state.search.trim()).split(' ');
-        if (terms.length === 0) {
-            return true;
-        }
-        const texts = [
-            normalize(addonId),
-            normalize(addonTranslations[`${addonId}/@name`] || manifest.name),
-            normalize(addonTranslations[`${addonId}/@name`] || manifest.description)
-        ];
-        if (manifest.settings) {
-            for (const setting of manifest.settings) {
-                texts.push(normalize(addonTranslations[`${addonId}/@settings-name-${setting.id}`] || setting.name));
-            }
-        }
-        if (manifest.presets) {
-            for (const preset of manifest.presets) {
-                texts.push(normalize(addonTranslations[`${addonId}/@preset-name-${preset.id}`] || preset.name));
-                texts.push(normalize(
-                    addonTranslations[`${addonId}/@preset-description-${preset.id}`] ||
-                    preset.description
-                ));
-            }
-        }
-        if (manifest.tags) {
-            for (const tag of manifest.tags) {
-                const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
-                if (translatedTag) {
-                    texts.push(normalize(settingsTranslations[`tw.addons.settings.tags.${tag}`]));
-                }
-            }
-        }
-        // For an addon to be included, all search terms must match one of the texts.
-        for (const term of terms) {
-            if (!term) continue;
-            let found = false;
-            for (const text of texts) {
-                if (text.includes(term)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                return false;
-            }
-        }
-        return true;
-    }
-    shouldShowAddon (state, addonId, manifest) {
-        if (!state.visible) {
-            return false;
-        }
-        if (!this.isIncludedInSearch(addonId, manifest)) {
-            return false;
-        }
-        return true;
-    }
     render () {
-        const filteredAddons = Object.entries(this.props.addons).map(([id, manifest]) => ({
+        const addonState = Object.entries(this.props.addons).map(([id, manifest]) => ({
             id,
             manifest,
             state: this.state[id]
-        }))
-            .filter(({id, manifest, state}) => this.shouldShowAddon(state, id, manifest));
+        }));
         const unsupported = Object.entries(this.props.unsupportedAddons).map(([id, manifest]) => ({
             id,
             manifest
@@ -879,22 +911,10 @@ class AddonSettingsComponent extends React.Component {
                     )}
                 </div>
                 <div className={styles.addons}>
-                    {filteredAddons.length > 0 ? (
-                        <React.Fragment>
-                            {filteredAddons.map(({id, manifest, state}) => (
-                                <AddonComponent
-                                    key={id}
-                                    id={id}
-                                    settings={state}
-                                    manifest={manifest}
-                                />
-                            ))}
-                        </React.Fragment>
-                    ) : (
-                        <div className={styles.noResults}>
-                            {settingsTranslations['tw.addons.settings.noResults']}
-                        </div>
-                    )}
+                    <AddonList
+                        addons={addonState}
+                        search={this.state.search}
+                    />
                     <div className={styles.footerButtons}>
                         <button
                             className={classNames(styles.button, styles.resetAllButton)}

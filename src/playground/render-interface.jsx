@@ -193,7 +193,7 @@ class Interface extends React.Component {
                             />
                         </div>
                         <div className={styles.footerColumns}>
-                            <div>
+                            <div className={styles.footerSection}>
                                 <div className={styles.footerHeader}>
                                     <FormattedMessage
                                         defaultMessage="Credits"
@@ -220,7 +220,7 @@ class Interface extends React.Component {
                                     </a>
                                 </div>
                             </div>
-                            <div>
+                            <div className={styles.footerSection}>
                                 <div className={styles.footerHeader}>
                                     <FormattedMessage
                                         defaultMessage="Links"
@@ -250,7 +250,7 @@ class Interface extends React.Component {
                                     </a>
                                 </div>
                             </div>
-                            <div>
+                            <div className={styles.footerSection}>
                                 <div className={styles.footerHeader}>
                                     <FormattedMessage
                                         defaultMessage="About"

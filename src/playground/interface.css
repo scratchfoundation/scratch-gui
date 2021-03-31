@@ -43,8 +43,9 @@ a {
     background-color: #151515;
 }
 .footer-content {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
+    flex-wrap: wrap;
 }
 .footer-text {
     text-align: center;
@@ -53,8 +54,13 @@ a {
 .footer-columns {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
-.footer-columns > * > * {
+.footer-section {
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+.footer-section > * {
     margin-bottom: 8px;
 }
 .footer-header {

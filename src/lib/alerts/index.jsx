@@ -246,27 +246,20 @@ const alerts = [
         alertType: AlertTypes.STANDARD,
         content: (
             <center>
-                <div>
+                <div style={{marginBottom: '3px'}}>
                     <FormattedMessage
-                        defaultMessage="TurboWarp may periodically backup your project if you haven't saved recently. In the event of a crash, the backup can be loaded from File > Load restore point."
-                        description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.restorePoints"
+                        // eslint-disable-next-line max-len
+                        defaultMessage="Remember to save your project often. In the event of a crash, you can try to load an automatic backup with File > Load Restore Point, but you shouldn't rely on this."
+                        description="Warning that appears when the editor is opened"
+                        id="tw.editorWarning.1"
                     />
                 </div>
-                <hr />
                 <div>
                     <FormattedMessage
-                        defaultMessage="You should still save your project often -- project recovery has not been thoroughly tested and may not work perfectly."
-                        description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.saveOften"
-                    />
-                </div>
-                <hr />
-                <div>
-                    <FormattedMessage
-                        defaultMessage="Warp Timer has been enabled because you opened the editor. This fixes most crashes but may reduce performance."
-                        description="Part of the warning that appears when the editor is opened"
-                        id="tw.alerts.warning.warpTimer"
+                        // eslint-disable-next-line max-len
+                        defaultMessage="Warp Timer has been enabled because you opened the editor, which may reduce performance. See Advanced for more options."
+                        description="Warning that appears when the editor is opened"
+                        id="tw.editorWarning.2"
                     />
                 </div>
             </center>

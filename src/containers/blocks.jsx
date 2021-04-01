@@ -130,6 +130,9 @@ class Blocks extends React.Component {
                 log.warn('cannot open docs URI', e);
             }
         });
+        toolboxWorkspace.registerButtonCallback('TW_MIGRATION', () => {
+            window.open('https://github.com/TurboWarp/scratch-gui/discussions/100');
+        });
 
         // Store the xml of the toolbox that is actually rendered.
         // This is used in componentDidUpdate instead of prevProps, because

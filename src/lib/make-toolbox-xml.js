@@ -724,23 +724,15 @@ const myBlocks = function () {
 };
 
 // tw: add custom category
-const turbowarp = function () {
-    return `
-    <category
-        name="TurboWarp"
-        id="turbowarp"
-        colour="#FF4C4C"
-        secondaryColour="#FF3D3D">
-    </category>
-    `;
-};
-const turbowarpIsCompiledBlock = function () {
-    return `
-    <block type="argument_reporter_boolean">
-        <field name="VALUE">is compiled?</field>
-    </block>
-    `;
-};
+// eslint-disable-next-line max-len
+const turbowarpIsCompiledBlock = `<block type="argument_reporter_boolean"><field name="VALUE">is compiled?</field></block>`;
+const turbowarpCategory = `<category
+    name="TurboWarp"
+    id="tw"
+    colour="#FF4C4C"
+    secondaryColour="#FF3D3D">
+    <button text="The other blocks have moved" callbackKey="TW_MIGRATION"></button>
+    ${turbowarpIsCompiledBlock}</category>`;
 /* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';
@@ -790,9 +782,11 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId);
     // tw: add custom category
-    let turbowarpXML = moveCategory('tw') || turbowarp(isInitialSetup, isStage, targetId);
+    let turbowarpXML = moveCategory('tw') || turbowarpCategory;
     // terrible hack to add "is compiled" to the top of the category...
-    turbowarpXML = turbowarpXML.replace('<block', `${turbowarpIsCompiledBlock()}<block`);
+    if (!turbowarpXML.includes(turbowarpIsCompiledBlock)) {
+        turbowarpXML = turbowarpXML.replace('<block', `${turbowarpIsCompiledBlock}<block`);
+    }
 
     const everything = [
         xmlOpen,

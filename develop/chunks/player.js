@@ -1,28 +1,73 @@
 var GUI =
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[9],{
 
-/***/ 1566:
+/***/ 1470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(47);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44);
-/* harmony import */ var _components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
-/* harmony import */ var _containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(114);
-/* harmony import */ var _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(134);
-/* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(106);
-/* harmony import */ var _reducers_mode__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(76);
-/* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(384);
-/* harmony import */ var _player_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_player_css__WEBPACK_IMPORTED_MODULE_11__);
+
+// EXTERNAL MODULE: ./node_modules/classnames/index.js
+var classnames = __webpack_require__(4);
+var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
+
+// EXTERNAL MODULE: ./node_modules/prop-types/index.js
+var prop_types = __webpack_require__(0);
+var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
+
+// EXTERNAL MODULE: ./node_modules/react/index.js
+var react = __webpack_require__(1);
+var react_default = /*#__PURE__*/__webpack_require__.n(react);
+
+// EXTERNAL MODULE: ./node_modules/react-dom/index.js
+var react_dom = __webpack_require__(35);
+var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
+
+// EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 14 modules
+var es = __webpack_require__(7);
+
+// EXTERNAL MODULE: ./node_modules/redux/es/index.js + 6 modules
+var redux_es = __webpack_require__(32);
+
+// EXTERNAL MODULE: ./src/components/box/box.jsx + 1 modules
+var box = __webpack_require__(8);
+
+// EXTERNAL MODULE: ./src/containers/gui.jsx + 332 modules
+var gui = __webpack_require__(82);
+
+// EXTERNAL MODULE: ./src/lib/hash-parser-hoc.jsx
+var hash_parser_hoc = __webpack_require__(101);
+
+// EXTERNAL MODULE: ./src/lib/app-state-hoc.jsx + 1 modules
+var app_state_hoc = __webpack_require__(76);
+
+// EXTERNAL MODULE: ./src/reducers/mode.js
+var mode = __webpack_require__(55);
+
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
+var injectStylesIntoStyleTag = __webpack_require__(6);
+var injectStylesIntoStyleTag_default = /*#__PURE__*/__webpack_require__.n(injectStylesIntoStyleTag);
+
+// EXTERNAL MODULE: ./node_modules/css-loader??ref--5-1!./node_modules/postcss-loader/src??postcss!./src/playground/player.css
+var player = __webpack_require__(401);
+var player_default = /*#__PURE__*/__webpack_require__.n(player);
+
+// CONCATENATED MODULE: ./src/playground/player.css
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = injectStylesIntoStyleTag_default()(player_default.a, options);
+
+
+
+/* harmony default export */ var playground_player = (player_default.a.locals || {});
+// CONCATENATED MODULE: ./src/playground/player.jsx
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
@@ -46,15 +91,15 @@ if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) ===
 
 
 
-var Player = function Player(_ref) {
+var player_Player = function Player(_ref) {
   var isPlayerOnly = _ref.isPlayerOnly,
       onSeeInside = _ref.onSeeInside,
       projectId = _ref.projectId;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(isPlayerOnly ? _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.stageOnly : _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.editor)
-  }, isPlayerOnly && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
+  return /*#__PURE__*/react_default.a.createElement(box["a" /* default */], {
+    className: classnames_default()(isPlayerOnly ? playground_player.stageOnly : playground_player.editor)
+  }, isPlayerOnly && /*#__PURE__*/react_default.a.createElement("button", {
     onClick: onSeeInside
-  }, 'See inside'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_containers_gui_jsx__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"], {
+  }, 'See inside'), /*#__PURE__*/react_default.a.createElement(gui["a" /* default */], {
     canEditTitle: true,
     enableCommunity: true,
     isPlayerOnly: isPlayerOnly,
@@ -62,10 +107,10 @@ var Player = function Player(_ref) {
   }));
 };
 
-Player.propTypes = {
-  isPlayerOnly: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  onSeeInside: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  projectId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+player_Player.propTypes = {
+  isPlayerOnly: prop_types_default.a.bool,
+  onSeeInside: prop_types_default.a.func,
+  projectId: prop_types_default.a.string
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -74,28 +119,28 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var player_mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onSeeInside: function onSeeInside() {
-      return dispatch(Object(_reducers_mode__WEBPACK_IMPORTED_MODULE_10__[/* setPlayer */ "d"])(false));
+      return dispatch(Object(mode["d" /* setPlayer */])(false));
     }
   };
 };
 
-var ConnectedPlayer = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__[/* connect */ "b"])(mapStateToProps, mapDispatchToProps)(Player); // note that redux's 'compose' function is just being used as a general utility to make
+var ConnectedPlayer = Object(es["b" /* connect */])(mapStateToProps, player_mapDispatchToProps)(player_Player); // note that redux's 'compose' function is just being used as a general utility to make
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
 
-var WrappedPlayer = Object(redux__WEBPACK_IMPORTED_MODULE_5__[/* compose */ "d"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"], _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(ConnectedPlayer);
+var WrappedPlayer = Object(redux_es["d" /* compose */])(app_state_hoc["a" /* default */], hash_parser_hoc["a" /* default */])(ConnectedPlayer);
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);
-react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(WrappedPlayer, {
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(WrappedPlayer, {
   isPlayerOnly: true
 }), appTarget);
 
 /***/ }),
 
-/***/ 1567:
+/***/ 401:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -112,33 +157,7 @@ exports.locals = {
 	"editor": "player_editor_wkTja"
 };
 
-/***/ }),
-
-/***/ 384:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(1567);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(10)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
 /***/ })
 
-},[[1566,0]]]);
+},[[1470,0]]]);
 //# sourceMappingURL=player.js.map

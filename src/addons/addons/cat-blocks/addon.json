@@ -14,6 +14,6 @@
     }
   ],
   "tags": ["easterEgg"],
-  "enabledByDefault": true,
+  "enabledByDefault": false,
   "l10n": true
 }

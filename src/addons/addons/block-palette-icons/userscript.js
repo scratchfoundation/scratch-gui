@@ -46,7 +46,7 @@ export default async function ({ addon, global, console }) {
       variables: "variables_icon",
       lists: "list_icon",
       myBlocks: "block_icon",
-      tw: "tw_icon"
+      tw: "tw_icon",
     };
     //For each .scratchCategoryItemBubble add an icon
     document.querySelectorAll(".scratchCategoryItemBubble").forEach((item) => {
@@ -54,7 +54,9 @@ export default async function ({ addon, global, console }) {
       item.style.padding = "11px";
       //Position it relative so that absolute positioning will be relative to the bubble.
       item.style.position = "relative";
-      const category = Array.from(item.parentNode.classList).find(i => i.startsWith('scratchCategoryId')).split('-')[1];
+      const category = Array.from(item.parentNode.classList)
+        .find((i) => i.startsWith("scratchCategoryId"))
+        .split("-")[1];
       const imgSrc = icons[category];
       if (!imgSrc) return;
       let k = document.createElement("img");

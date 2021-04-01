@@ -319,6 +319,7 @@ a:active, a:focus {
     padding: 2px 5px;
     margin-left: 10px;
     border-bottom: 2px solid #111;
+    white-space: nowrap;
 }
 .tag-recommended {
     color: white;

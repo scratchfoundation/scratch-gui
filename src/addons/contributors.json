@@ -723,6 +723,48 @@
         "avatar_url": "https://avatars.githubusercontent.com/u/67440879?v=4",
         "profile": "https://github.com/FunctionalMetatable",
         "contributions": [
+            "ideas",
+            "code"
+        ]
+    },
+    {
+        "login": "Barthdry",
+        "name": "Barthdry",
+        "avatar_url": "https://avatars.githubusercontent.com/u/67647112?v=4",
+        "profile": "https://sites.google.com/view/barthdry/home",
+        "contributions": [
+            "translation",
+            "ideas",
+            "bug"
+        ]
+    },
+    {
+        "login": "Genius398",
+        "name": "Anantjit",
+        "avatar_url": "https://avatars.githubusercontent.com/u/74092334?v=4",
+        "profile": "http://anantjit.whjr.site",
+        "contributions": [
+            "bug",
+            "code",
+            "ideas"
+        ]
+    },
+    {
+        "login": "SetuCoder",
+        "name": "SetuCoder",
+        "avatar_url": "https://avatars.githubusercontent.com/u/58362876?v=4",
+        "profile": "http://setusree.carrd.co",
+        "contributions": [
+            "code"
+        ]
+    },
+    {
+        "login": "lightningmc09",
+        "name": "lightningmc09",
+        "avatar_url": "https://avatars.githubusercontent.com/u/81425039?v=4",
+        "profile": "https://github.com/lightningmc09",
+        "contributions": [
+            "bug",
             "ideas"
         ]
     }

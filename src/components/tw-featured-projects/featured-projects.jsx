@@ -1,13 +1,12 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './featured-projects.css';
 import analytics from '../../lib/analytics';
-import { setProjectId } from '../../lib/tw-navigation-utils.js';
+import {setProjectId} from '../../lib/tw-navigation-utils.js';
 
 class FeaturedProjects extends React.Component {
     constructor (props) {
@@ -19,6 +18,16 @@ class FeaturedProjects extends React.Component {
         this.state = {
             opened: false
         };
+    }
+    componentDidUpdate (prevProps) {
+        if (prevProps.projectId !== this.props.projectId) {
+            if (this.props.projectId === '0') {
+                // eslint-disable-next-line react/no-did-update-set-state
+                this.setState({
+                    opened: true
+                });
+            }
+        }
     }
     handleSelect (id) {
         this.props.setProjectId(id);
@@ -33,12 +42,7 @@ class FeaturedProjects extends React.Component {
         const opened = this.state.opened;
         return (
             <div
-                className={classNames(
-                    styles.container,
-                    {
-                        [styles.opened]: opened
-                    }
-                )}
+                className={styles.container}
             >
                 <div className={styles.projects}>
                     <StudioView
@@ -81,10 +85,13 @@ class FeaturedProjects extends React.Component {
 
 FeaturedProjects.propTypes = {
     setProjectId: PropTypes.func,
+    projectId: PropTypes.string,
     studio: PropTypes.string
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    projectId: state.scratchGui.projectState.projectId
+});
 
 const mapDispatchToProps = dispatch => ({
     setProjectId: projectId => setProjectId(dispatch, projectId)

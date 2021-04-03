@@ -366,7 +366,7 @@ StudioView.THUMBNAIL_SRC = 'https://cdn2.scratch.mit.edu/get_image/project/$id_1
 
 // The URL for project pages.
 // $id is replaced with the project ID.
-StudioView.PROJECT_PAGE = 'https://scratch.mit.edu/projects/$id/';
+StudioView.PROJECT_PAGE = 'https://turbowarp.org/$id/';
 
 // The URL for studio pages.
 // $id is replaced with the studio ID.

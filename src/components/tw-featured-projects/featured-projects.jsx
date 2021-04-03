@@ -44,7 +44,6 @@ class FeaturedProjects extends React.Component {
                     <StudioView
                         id={this.props.studio}
                         onSelect={this.handleSelect}
-                        disabled={this.props.loading}
                         placeholder={!opened}
                     />
                     {opened ? null : (
@@ -81,15 +80,11 @@ class FeaturedProjects extends React.Component {
 }
 
 FeaturedProjects.propTypes = {
-    loading: PropTypes.bool,
     setProjectId: PropTypes.func,
     studio: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    loading: getIsLoading(state.scratchGui.projectState.loadingState) ||
-        getIsFetchingWithId(state.scratchGui.projectState.loadingState)
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
     setProjectId: projectId => dispatch(setProjectId(projectId))

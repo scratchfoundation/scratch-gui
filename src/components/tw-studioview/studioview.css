@@ -8,11 +8,6 @@ With changes to make it work properly in the scratch-gui environment.
 .wrapper {
   height: 100%;
 }
-/* we let you disable the view */
-.disabled {
-  pointer-events: none;
-  opacity: 0.8;
-}
 /* fix some styles that can be messed up by scratch-gui */
 .studioview-root * {
   box-sizing: content-box !important;

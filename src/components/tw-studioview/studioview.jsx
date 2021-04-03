@@ -68,10 +68,7 @@ class StudioViewComponent extends React.Component {
         return (
             <div
                 className={classNames(
-                    styles.wrapper,
-                    {
-                        [styles.disabled]: this.props.disabled
-                    }
+                    styles.wrapper
                 )}
                 ref={this.ref}
             />
@@ -82,7 +79,6 @@ class StudioViewComponent extends React.Component {
 StudioViewComponent.propTypes = {
     id: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
-    disabled: PropTypes.bool,
     placeholder: PropTypes.bool,
     onSelect: PropTypes.func.isRequired
 };

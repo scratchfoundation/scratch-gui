@@ -90,7 +90,6 @@ class ProjectInput extends React.Component {
                 onPaste={this.handlePaste}
                 onBlur={this.handleBlur}
                 onFocus={this.handleFocus}
-                disabled={this.props.loading}
             />
         );
     }

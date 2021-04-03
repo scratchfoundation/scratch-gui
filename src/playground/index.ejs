@@ -10,13 +10,13 @@
       #splash {
         position: absolute; width: 100%; height: 100%; top: 0; left: 0;
         display: flex; align-items: center; justify-content: center;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #ff4c4c;
       }
       .tw-loaded #splash, #splash-content { display: none; }
-      #splash[splash-theme="dark"] { background-color: #333; color: #ddd; }
+      #splash[splash-theme="dark"] { background-color: #333; color: #fff; }
       #splash-spinner:after {
         content: " "; display: block; width: 64px; height: 64px;
-        border-radius: 50%; border: 6px solid #ff4c4c; border-color: #ff4c4c transparent #ff4c4c transparent;
+        border-radius: 50%; border: 6px solid; border-color: currentColor transparent currentColor transparent;
         animation: splash-spinner 1.2s linear infinite;
       }
       @keyframes splash-spinner {

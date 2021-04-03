@@ -14,6 +14,9 @@
 .icon {
     margin-right: 0.25rem;
 }
+[theme="dark"] .icon {
+    filter: invert(100%);
+}
 
 .text {
 

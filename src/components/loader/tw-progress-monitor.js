@@ -94,18 +94,20 @@ const handleWorkerMessage = e => {
     }
 };
 
-let downloadWorker = null;
-const originalPostMessage = window.Worker.prototype.postMessage;
-window.Worker.prototype.postMessage = function (message) {
-    if (downloadWorker === null) {
-        if (message && message.url && message.id && message.options) {
-            downloadWorker = this;
-            downloadWorker.addEventListener('message', handleWorkerMessage);
+if (window.Worker) {
+    let downloadWorker = null;
+    const originalPostMessage = window.Worker.prototype.postMessage;
+    window.Worker.prototype.postMessage = function (message) {
+        if (downloadWorker === null) {
+            if (message && message.url && message.id && message.options) {
+                downloadWorker = this;
+                downloadWorker.addEventListener('message', handleWorkerMessage);
+            }
         }
-    }
-    if (downloadWorker === this) {
-        setState(2);
-        total++;
-    }
-    originalPostMessage.call(this, message);
-};
+        if (downloadWorker === this) {
+            setState(2);
+            total++;
+        }
+        originalPostMessage.call(this, message);
+    };
+}

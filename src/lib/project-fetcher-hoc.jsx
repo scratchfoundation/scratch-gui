@@ -25,6 +25,7 @@ import storage from './storage';
 
 import {MISSING_PROJECT_ID} from './tw-missing-project';
 import VM from 'scratch-vm';
+import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
@@ -76,8 +77,28 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             // the project shouldn't be running while fetching the new project
             this.props.vm.clear();
             this.props.vm.stop();
-            return storage
-                .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+
+            let assetPromise;
+            const urlParams = new URLSearchParams(location.search);
+            if (urlParams.has('project_url')) {
+                let projectUrl = urlParams.get('project_url');
+                if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
+                    projectUrl = `https://${projectUrl}`;
+                }
+                assetPromise = progressMonitor.fetchWithProgress(projectUrl)
+                    .then(r => {
+                        if (!r.ok) {
+                            throw new Error(`Request returned status ${r.status}`);
+                        }
+                        return r.arrayBuffer();
+                    })
+                    .then(buffer => ({data: buffer}));
+            } else {
+                assetPromise = storage
+                    .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON);
+            }
+
+            return assetPromise
                 .then(projectAsset => {
                     // tw: If the project data appears to be HTML, then the result is probably an nginx 404 page,
                     // and the "missing project" project should be loaded instead.

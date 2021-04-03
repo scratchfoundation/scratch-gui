@@ -10,10 +10,6 @@ import {
     setUsername
 } from '../reducers/tw';
 import {
-    openLoadingProject,
-    closeLoadingProject
-} from '../reducers/modals';
-import {
     defaultProjectId,
     setProjectId
 } from '../reducers/project-state';
@@ -22,7 +18,6 @@ import {
     setFullScreen
 } from '../reducers/mode';
 import {generateRandomUsername} from './tw-username';
-import * as progressMonitor from '../components/loader/tw-progress-monitor';
 
 /* eslint-disable no-alert */
 
@@ -359,30 +354,6 @@ const TWStateManager = function (WrappedComponent) {
                 });
             }
 
-            if (urlParams.has('project_url')) {
-                let projectUrl = urlParams.get('project_url');
-                if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
-                    projectUrl = `https://${projectUrl}`;
-                }
-                this.props.onProjectFetchStarted();
-                progressMonitor.fetchWithProgress(projectUrl)
-                    .then(res => {
-                        if (res.status !== 200) {
-                            throw new Error(`Unexpected status code: ${res.status}`);
-                        }
-                        return res.arrayBuffer();
-                    })
-                    .then(arrayBuffer => this.props.vm.loadProject(arrayBuffer))
-                    .then(() => {
-                        this.props.onProjectFetchFinished();
-                        this.props.vm.renderer.draw();
-                    })
-                    .catch(err => {
-                        // eslint-disable-next-line no-alert
-                        alert(`cannot load project: ${err}`);
-                    });
-            }
-
             for (const extension of urlParams.getAll('extension')) {
                 // This is temporary until we feel more comfortable about the idea of running remote code in a Worker.
                 if (confirm(`Load extension: ${extension}`)) {
@@ -553,8 +524,6 @@ const TWStateManager = function (WrappedComponent) {
                 highQualityPen,
                 framerate,
                 turbo,
-                onProjectFetchFinished,
-                onProjectFetchStarted,
                 onSetIsFullScreen,
                 onSetIsPlayerOnly,
                 onSetProjectId,
@@ -586,8 +555,6 @@ const TWStateManager = function (WrappedComponent) {
         framerate: PropTypes.number,
         interpolation: PropTypes.bool,
         turbo: PropTypes.bool,
-        onProjectFetchFinished: PropTypes.func,
-        onProjectFetchStarted: PropTypes.func,
         onSetIsFullScreen: PropTypes.func,
         onSetIsPlayerOnly: PropTypes.func,
         onSetProjectId: PropTypes.func,
@@ -616,8 +583,6 @@ const TWStateManager = function (WrappedComponent) {
         vm: state.scratchGui.vm
     });
     const mapDispatchToProps = dispatch => ({
-        onProjectFetchFinished: () => dispatch(closeLoadingProject()),
-        onProjectFetchStarted: () => dispatch(openLoadingProject()),
         onSetIsFullScreen: isFullScreen => dispatch(setFullScreen(isFullScreen)),
         onSetIsPlayerOnly: isPlayerOnly => dispatch(setPlayer(isPlayerOnly)),
         onSetProjectId: projectId => dispatch(setProjectId(projectId)),

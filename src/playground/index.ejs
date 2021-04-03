@@ -8,14 +8,21 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
       #splash {
-        user-select: none;
-        background-color: hsla(0, 100%, 65%, 1); color: white; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-        display: flex; align-items: center; justify-content: center; text-align: center;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
-      #splash h1 { font-size: 2rem; font-weight: bold; } #splash a { color: inherit; }
       .tw-loaded #splash, #splash-content { display: none; }
       #splash[splash-theme="dark"] { background-color: #333; color: #ddd; }
+      #splash-spinner:after {
+        content: " "; display: block; width: 64px; height: 64px;
+        border-radius: 50%; border: 6px solid #ff4c4c; border-color: #ff4c4c transparent #ff4c4c transparent;
+        animation: splash-spinner 1.2s linear infinite;
+      }
+      @keyframes splash-spinner {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>
@@ -24,22 +31,11 @@
         <h1>Enable JavaScript</h1>
       </noscript>
       <div id="splash-content">
-        <h1 id="splash-title">Loading scripts</h1>
-        <p id="splash-subtitle">This may take a while …</p>
-        <p><a id="splash-troubleshooting" href="https://github.com/TurboWarp/scratch-gui/wiki/Troubleshooting" target="_blank" rel="noopener">Troubleshooting</a></p>
-      </div>
+        <div id="splash-spinner"></div>
+     </div>
     </div>
     <script>
       (function() {
-        var languages = /*===*/{"de":["Skripte werden geladen","Dies kann eine Weile dauern...","Problembehandlung"],"es":["Cargando scripts","Esto puede tardar un rato ...","Solucionar Problemas"],"it":["Caricamento script in corso","Potrebbe richiedere un po' di tempo...","Risoluzione dei problemi"],"ja":["スクリプトの読み込み","少しお待ちください…","トラブルシューティング"],"ko":["스크립트를 불러오는 중입니다...","이 작업은 시간이 걸릴 수 있습니다.","문제 해결"],"pt":["Carregando scripts","Isso pode demorar um pouco …","Solucionar problemas"],"ro":["Se încarcă blocurile","Asta ar putea dura o vreme ...","Raportați Probleme"],"tr":["Kodlar yükleniyor","Bu biraz zaman alabilir ...","Sorun giderme"],"zh-cn":["加载脚本中……","这可能需要一些时间……","有问题？"]}/*===*/;
-        var lang = navigator.userLanguage || navigator.language || '';
-        try {var local = localStorage.getItem('tw:language'); local && (lang = local);} catch (e) {}
-        var messages = languages[lang = lang.toLowerCase()] || languages[lang.split('-')[0]];
-        if (messages) {
-          document.querySelector('#splash-title').textContent = messages[0];
-          document.querySelector('#splash-subtitle').textContent = messages[1];
-          document.querySelector('#splash-troubleshooting').textContent = messages[2];
-        }
         document.querySelector('#splash-content').style.display = 'block';
         <% if (!htmlWebpackPlugin.options.noTheme) { %>
         try {var localTheme = localStorage.getItem('tw:theme');} catch (e) {}

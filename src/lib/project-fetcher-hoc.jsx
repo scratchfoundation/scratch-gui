@@ -79,9 +79,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             this.props.vm.stop();
 
             let assetPromise;
-            const urlParams = new URLSearchParams(location.search);
-            if (urlParams.has('project_url')) {
-                let projectUrl = urlParams.get('project_url');
+            // In case running in node...
+            let projectUrl = typeof URLSearchParams === 'undefined' ?
+                null :
+                new URLSearchParams(location.search).get('project_url');
+            if (projectUrl) {
                 if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
                     projectUrl = `https://${projectUrl}`;
                 }

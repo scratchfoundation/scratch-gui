@@ -1,7 +1,13 @@
 import {setProjectId as reduxSetProjectId} from '../reducers/project-state';
 
 const setProjectId = (dispatch, projectId) => {
-    // TODO
+    if (process.env.ROUTING_STYLE === 'wildcard') {
+        if (projectId === '0') {
+            projectId = '';
+        }
+        location.href = `${process.env.ROOT}${projectId}${location.search}`;
+        return;
+    }
     dispatch(reduxSetProjectId(projectId));
 };
 

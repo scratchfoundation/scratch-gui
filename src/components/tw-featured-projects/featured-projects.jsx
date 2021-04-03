@@ -7,6 +7,7 @@ import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './featured-projects.css';
 import analytics from '../../lib/analytics';
 import {setProjectId} from '../../lib/tw-navigation-utils.js';
+import classNames from 'classnames';
 
 class FeaturedProjects extends React.Component {
     constructor (props) {
@@ -16,7 +17,8 @@ class FeaturedProjects extends React.Component {
             'handleOpenProjects'
         ]);
         this.state = {
-            opened: false
+            opened: false,
+            transition: true
         };
     }
     componentDidUpdate (prevProps) {
@@ -24,7 +26,8 @@ class FeaturedProjects extends React.Component {
             if (this.props.projectId === '0') {
                 // eslint-disable-next-line react/no-did-update-set-state
                 this.setState({
-                    opened: true
+                    opened: true,
+                    transition: false
                 });
             }
         }
@@ -41,10 +44,16 @@ class FeaturedProjects extends React.Component {
     render () {
         const opened = this.state.opened;
         return (
-            <div
-                className={styles.container}
-            >
-                <div className={styles.projects}>
+            <div className={styles.container}>
+                <div
+                    className={classNames(
+                        styles.projects,
+                        {
+                            [styles.opened]: opened,
+                            [styles.transition]: this.state.transition
+                        }
+                    )}
+                >
                     <StudioView
                         id={this.props.studio}
                         onSelect={this.handleSelect}

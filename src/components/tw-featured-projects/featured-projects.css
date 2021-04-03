@@ -30,6 +30,12 @@
 
 .projects {
     position: relative;
+    height: 155px;
+}
+.projects.transition {
+    transition: .2s height;
+}
+.projects.opened {
     height: 310px;
 }
 

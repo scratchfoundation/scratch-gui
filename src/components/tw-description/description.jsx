@@ -40,9 +40,21 @@ const decorate = text => {
 
 const Description = ({
     instructions,
-    credits
+    credits,
+    projectId
 }) => (
     <div className={styles.description}>
+        <a
+            href={`https://scratch.mit.edu/projects/${projectId}/`}
+            target="_blank"
+            rel="noreferrer"
+        >
+            <FormattedMessage
+                defaultMessage="View project on Scratch."
+                description="Link to project on Scratch"
+                id="tw.home.viewOnScratch"
+            />
+        </a>
         {instructions ? (
             <div>
                 <div className={styles.header}>
@@ -75,7 +87,8 @@ const Description = ({
 
 Description.propTypes = {
     instructions: PropTypes.string,
-    credits: PropTypes.string
+    credits: PropTypes.string,
+    projectId: PropTypes.string
 };
 
 export default Description;

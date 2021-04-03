@@ -106,7 +106,8 @@ class Interface extends React.Component {
             isFullScreen,
             isPlayerOnly,
             isRtl,
-            onClickTheme
+            onClickTheme,
+            projectId
         } = this.props;
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
@@ -164,6 +165,7 @@ class Interface extends React.Component {
                                     <Description
                                         instructions={description.instructions}
                                         credits={description.credits}
+                                        projectId={projectId}
                                     />
                                 </div>
                             ) : null}
@@ -303,7 +305,8 @@ Interface.propTypes = {
     isFullScreen: PropTypes.bool,
     isRtl: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
-    onClickTheme: PropTypes.func
+    onClickTheme: PropTypes.func,
+    projectId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -311,7 +314,8 @@ const mapStateToProps = state => ({
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-    isRtl: state.locales.isRtl
+    isRtl: state.locales.isRtl,
+    projectId: state.scratchGui.projectState.projectId
 });
 
 const mapDispatchToProps = () => ({});

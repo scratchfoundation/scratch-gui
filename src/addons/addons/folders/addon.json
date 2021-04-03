@@ -32,6 +32,6 @@
     }
   ],
   "tags": ["editor", "recommended"],
-  "enabledByDefault": false,
+  "enabledByDefault": true,
   "l10n": true
 }

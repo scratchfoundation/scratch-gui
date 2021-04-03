@@ -146,7 +146,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const openFolderAsset = {
-    assetId: "sa_folders_folder",
+    assetId: "&__sa_folders_folder",
     encodeDataURI() {
       // Doesn't actually need to be a data: URI
       return _twGetAsset("/folder.svg");
@@ -322,8 +322,50 @@ export default async function ({ addon, global, console, msg }) {
     throw new Error("Can not comprehend Backpack");
   };
 
+  class Cache {
+    constructor() {
+      this.map = new Map();
+      this.used = [];
+    }
+
+    has(id) {
+      return this.map.has(id);
+    }
+
+    get(id) {
+      this.used.push(id);
+      return this.map.get(id);
+    }
+
+    set(id, value) {
+      this.used.push(id);
+      this.map.set(id, value);
+    }
+
+    start() {
+      this.used = [];
+    }
+
+    end() {
+      for (const id of Array.from(this.map.keys())) {
+        if (!this.used.includes(id)) {
+          this.map.delete(id);
+        }
+      }
+    }
+
+    clear() {
+      this.start();
+      this.map.clear();
+    }
+  }
+
   const patchSortableHOC = (SortableHOC, type) => {
     // SortableHOC should be: https://github.com/LLK/scratch-gui/blob/29d9851778febe4e69fa5111bf7559160611e366/src/lib/sortable-hoc.jsx#L8
+
+    const itemCache = new Cache();
+    const folderItemCache = new Cache();
+    const folderAssetCache = new Cache();
 
     const PREVIEW_SIZE = 80;
     const PREVIEW_POSITIONS = [
@@ -357,46 +399,46 @@ export default async function ({ addon, global, console, msg }) {
       return "data:image/svg+xml;," + new XMLSerializer().serializeToString(svg);
     };
 
-    const getFolderPreviewAssetId = (items) => {
-      let id = "sa_folder_preview||";
-      for (let i = 0; i < Math.min(PREVIEW_POSITIONS.length, items.length); i++) {
+    const getUniqueIdOfFolderItems = (items) => {
+      let id = "sa_folder&&";
+      for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.asset) {
           id += item.asset.assetId;
         } else if (item.costume && item.costume.asset) {
           id += item.costume.asset.assetId;
         }
-        id += "||";
+        id += "&&";
       }
       return id;
     };
 
     const processItems = (openFolders, props) => {
       const processItem = (item) => {
-        const itemFolderName = getFolderFromName(item.name);
-        const itemData = {
-          realName: item.name,
-          realIndex: i,
-          inFolder: itemFolderName,
-          // toString() will be used as react key
-          toString() {
-            return `_${item.name}`;
-          },
-        };
-        const newItem = {
-          ...item,
-          name: itemData,
-        };
+        const itemId = item.name;
 
-        if (type === TYPE_SPRITES) {
-          newItem.costume = item.costume;
-          newItem.id = item.id;
-        } else if (type === TYPE_ASSETS) {
-          newItem.asset = item.asset;
-          if (item.url) {
-            newItem.url = item.url;
-          }
+        let newItem;
+        let itemData;
+        if (itemCache.has(itemId)) {
+          newItem = itemCache.get(itemId);
+          itemData = newItem.name;
+        } else {
+          itemData = {
+            toString() {
+              return `_${item.name}`;
+            },
+          };
+          newItem = {};
+          itemCache.set(itemId, newItem);
         }
+
+        const itemFolderName = getFolderFromName(item.name);
+
+        Object.assign(newItem, item);
+        itemData.realName = item.name;
+        itemData.realIndex = i;
+        itemData.inFolder = itemFolderName;
+        newItem.name = itemData;
 
         return {
           newItem,
@@ -404,6 +446,11 @@ export default async function ({ addon, global, console, msg }) {
         };
       };
 
+      itemCache.start();
+      folderItemCache.start();
+      folderAssetCache.start();
+
+      const folderOccurences = new Map();
       const items = [];
       const result = {
         items,
@@ -424,68 +471,19 @@ export default async function ({ addon, global, console, msg }) {
           }
         } else {
           const isOpen = openFolders.indexOf(folderName) !== -1;
-          const folderData = {
-            folder: folderName,
-            folderOpen: isOpen,
-            // toString() will be used as react key for costumes/sounds
-            toString() {
-              return `/${folderName}`;
-            },
-          };
           const folderItems = [];
-          const folderItem = {
-            items: folderItems,
-            name: folderData,
-          };
-          // id is used as react key for sprites
-          if (type === TYPE_SPRITES) {
-            folderItem.id = `/${folderName}`;
-          }
-          const folderAsset = isOpen
-            ? openFolderAsset
-            : {
-                // We don't know these when the folder item is created
-                get assetId() {
-                  return getFolderPreviewAssetId(folderItem.items);
-                },
-                encodeDataURI() {
-                  return createFolderPreview(folderItem.items);
-                },
-              };
-          if (type === TYPE_SPRITES) {
-            folderItem.costume = {
-              asset: folderAsset,
-            };
-            // For sprite items, `id` is used as the drag payload and toString is used as a React key
-            folderItem.id = {
-              sa_folder_items: folderItems,
-              toString() {
-                return `&__${folderName}`;
-              },
-            };
-          } else {
-            folderItem.asset = folderAsset;
-            folderItem.dragPayload = {
-              sa_folder_items: folderItems,
-            };
-          }
-          items.push(folderItem);
-
           while (i < props.items.length) {
-            const newItem = props.items[i];
-            const processedItem = processItem(newItem);
-            if (getFolderFromName(newItem.name) !== folderName) {
+            const childItem = props.items[i];
+            const processedItem = processItem(childItem);
+            if (getFolderFromName(childItem.name) !== folderName) {
               break;
             }
             folderItems.push(processedItem.newItem);
-            if (isOpen) {
-              items.push(processedItem.newItem);
-            }
             if (type === TYPE_ASSETS) {
               const isSelected = props.selectedItemIndex === i;
               if (isSelected) {
                 if (isOpen) {
-                  result.selectedItemIndex = items.length - 1;
+                  result.selectedItemIndex = items.length + folderItems.length;
                 } else {
                   result.selectedItemIndex = -1;
                 }
@@ -494,10 +492,78 @@ export default async function ({ addon, global, console, msg }) {
             i++;
           }
           i--;
+
+          const occurence = folderOccurences.get(folderName) || 0;
+          folderOccurences.set(folderName, occurence + 1);
+          const baseUniqueId = getUniqueIdOfFolderItems(folderItems);
+          const itemUniqueId = `${isOpen}&${occurence}&${folderName}&${baseUniqueId}&`;
+          const assetUniqueId = baseUniqueId;
+
+          let folderItem;
+          let folderData;
+          if (folderItemCache.has(itemUniqueId)) {
+            folderItem = folderItemCache.get(itemUniqueId);
+            folderData = folderItem.name;
+          } else {
+            folderItem = {
+              // Can be used as a react key
+              toString() {
+                return itemUniqueId;
+              },
+            };
+            folderData = {};
+            folderItemCache.set(itemUniqueId, folderItem);
+          }
+
+          folderData.folder = folderName;
+          folderData.folderOpen = isOpen;
+          folderItem.items = folderItems;
+          folderItem.name = folderData;
+
+          let folderAsset;
+          if (isOpen) {
+            folderAsset = openFolderAsset;
+          } else {
+            if (folderAssetCache.has(assetUniqueId)) {
+              folderAsset = folderAssetCache.get(assetUniqueId);
+            } else {
+              folderAsset = {
+                assetId: assetUniqueId,
+                encodeDataURI() {
+                  return createFolderPreview(folderItems);
+                },
+              };
+              folderAssetCache.set(assetUniqueId, folderAsset);
+            }
+          }
+
+          if (type === TYPE_SPRITES) {
+            if (!folderItem.costume) folderItem.costume = {};
+            folderItem.costume.asset = folderAsset;
+            // For sprite items, `id` is used as the drag payload and toString is used as a React key
+            if (!folderItem.id) folderItem.id = {};
+            folderItem.id.sa_folder_items = folderItems;
+            folderItem.id.toString = () => `&__${occurence}_${folderName}`;
+          } else {
+            folderItem.asset = folderAsset;
+            if (!folderItem.dragPayload) folderItem.dragPayload = {};
+            folderItem.dragPayload.sa_folder_items = folderItems;
+          }
+
+          items.push(folderItem);
+          if (isOpen) {
+            for (const item of folderItems) {
+              items.push(item);
+            }
+          }
         }
 
         i++;
       }
+
+      itemCache.end();
+      folderItemCache.end();
+      folderAssetCache.end();
 
       return result;
     };
@@ -514,6 +580,9 @@ export default async function ({ addon, global, console, msg }) {
     };
 
     SortableHOC.prototype.saInitialSetup = function () {
+      itemCache.clear();
+      folderItemCache.clear();
+      folderAssetCache.clear();
       const folders = [];
       const selectedItem = getSelectedItem(this);
       if (selectedItem && !selectedItem.isStage) {
@@ -968,7 +1037,7 @@ export default async function ({ addon, global, console, msg }) {
     };
 
     const abstractReorder = (
-      { guiItems, getAll, set, rename, getVMItemFromGUIItem, zeroIndexed, end },
+      { guiItems, getAll, set, rename, getVMItemFromGUIItem, zeroIndexed, onFolderChanged },
       itemIndex,
       newIndex
     ) => {
@@ -1079,9 +1148,10 @@ export default async function ({ addon, global, console, msg }) {
           const name = asset.getName ? asset.getName() : asset.name;
           rename(asset, setFolderOfName(name, newFolder));
         }
+        if (onFolderChanged) {
+          onFolderChanged();
+        }
       }
-
-      end();
 
       return true;
     };
@@ -1102,8 +1172,7 @@ export default async function ({ addon, global, console, msg }) {
           getVMItemFromGUIItem: (item, targets) => {
             return targets.find((i) => i.id === item.id);
           },
-          end: () => {
-            // Emit a workspace update to update blocks if a sprite was renamed
+          onFolderChanged: () => {
             this.emitWorkspaceUpdate();
           },
           guiItems: currentSpriteItems,
@@ -1130,7 +1199,6 @@ export default async function ({ addon, global, console, msg }) {
             const itemData = getItemData(item);
             return costumes.find((c) => c.name === itemData.realName);
           },
-          end() {},
           guiItems: currentAssetItems,
           zeroIndexed: true,
         },
@@ -1155,7 +1223,6 @@ export default async function ({ addon, global, console, msg }) {
             const itemData = getItemData(item);
             return sounds.find((c) => c.name === itemData.realName);
           },
-          end() {},
           guiItems: currentAssetItems,
           zeroIndexed: true,
         },

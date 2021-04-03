@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {closeSettingsModal} from '../reducers/modals';
 import SettingsModalComponent from '../components/tw-settings-modal/settings-modal.jsx';
 import twStageSize from '../lib/tw-stage-size';
+import {searchParamsToString} from '../lib/tw-navigation-utils';
 
 const messages = defineMessages({
     confirmReload: {
@@ -115,9 +116,8 @@ class UsernameModal extends React.Component {
         } else {
             urlParams.set('size', `${this.state.stageWidth}x${this.state.stageHeight}`);
         }
-        const search = urlParams.toString();
-        const newUrl = `${location.pathname}${search.length > 0 ? '?' : ''}${search}`;
-        location.href = newUrl;
+        const search = searchParamsToString(urlParams);
+        location.href = `${location.pathname}${search}`;
     }
     render () {
         const {

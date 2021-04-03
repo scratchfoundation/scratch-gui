@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
-
-import {defaultProjectId, setProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
+import {defaultProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
 import styles from './project-input.css';
+import { setProjectId } from '../../lib/tw-navigation-utils';
 
 const PROJECT_BASE = 'https://scratch.mit.edu/projects/';
 
@@ -103,11 +103,12 @@ ProjectInput.propTypes = {
 
 const mapStateToProps = state => ({
     projectId: state.scratchGui.projectState.projectId,
-    loading: getIsLoading(state.scratchGui.projectState.loadingState) || getIsFetchingWithId(state.scratchGui.projectState.loadingState)
+    loading: getIsLoading(state.scratchGui.projectState.loadingState) ||
+        getIsFetchingWithId(state.scratchGui.projectState.loadingState)
 });
 
 const mapDispatchToProps = dispatch => ({
-    setProjectId: projectId => dispatch(setProjectId(projectId))
+    setProjectId: projectId => setProjectId(dispatch, projectId)
 });
 
 export default connect(

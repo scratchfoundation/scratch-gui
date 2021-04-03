@@ -6,8 +6,8 @@ import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import StudioView from '../tw-studioview/studioview.jsx';
 import styles from './featured-projects.css';
-import {getIsLoading, getIsFetchingWithId, setProjectId} from '../../reducers/project-state';
 import analytics from '../../lib/analytics';
+import { setProjectId } from '../../lib/tw-navigation-utils.js';
 
 class FeaturedProjects extends React.Component {
     constructor (props) {
@@ -87,7 +87,7 @@ FeaturedProjects.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    setProjectId: projectId => dispatch(setProjectId(projectId))
+    setProjectId: projectId => setProjectId(dispatch, projectId)
 });
 
 export default connect(

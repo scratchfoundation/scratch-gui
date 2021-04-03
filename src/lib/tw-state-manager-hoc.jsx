@@ -18,6 +18,7 @@ import {
     setFullScreen
 } from '../reducers/mode';
 import {generateRandomUsername} from './tw-username';
+import {setSearchParams} from './tw-navigation-utils';
 
 /* eslint-disable no-alert */
 
@@ -465,22 +466,7 @@ const TWStateManager = function (WrappedComponent) {
                     searchParams.set('limitless', '');
                 }
 
-                let newSearch = searchParams.toString();
-                if (newSearch.length > 0) {
-                    // Add leading question mark
-                    newSearch = `?${newSearch}`;
-                    newSearch = newSearch
-                        // Remove '=' from empty values
-                        // eslint-disable-next-line no-div-regex
-                        .replace(/=(?=$|&)/g, '')
-                        // Decode / and : (common in project_url setting)
-                        .replace(/%2F/g, '/')
-                        .replace(/%3A/g, ':');
-                }
- 
-                if (location.search !== newSearch) {
-                    history.replaceState(null, null, `${location.pathname}${newSearch}${location.hash}`);
-                }
+                setSearchParams(searchParams);
             }
         }
         componentWillUnmount () {

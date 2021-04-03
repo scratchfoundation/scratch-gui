@@ -44,17 +44,19 @@ const Description = ({
     projectId
 }) => (
     <div className={styles.description}>
-        <a
-            href={`https://scratch.mit.edu/projects/${projectId}/`}
-            target="_blank"
-            rel="noreferrer"
-        >
-            <FormattedMessage
-                defaultMessage="View project on Scratch."
-                description="Link to project on Scratch"
-                id="tw.home.viewOnScratch"
-            />
-        </a>
+        <div className={styles.projectLink}>
+            <a
+                href={`https://scratch.mit.edu/projects/${projectId}/`}
+                target="_blank"
+                rel="noreferrer"
+            >
+                <FormattedMessage
+                    defaultMessage="View project on Scratch."
+                    description="Link to project on Scratch"
+                    id="tw.home.viewOnScratch"
+                />
+            </a>
+        </div>
         {instructions ? (
             <div>
                 <div className={styles.header}>

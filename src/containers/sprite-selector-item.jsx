@@ -163,7 +163,8 @@ SpriteSelectorItem.propTypes = {
     dragPayload: PropTypes.any,
     dragType: PropTypes.string,
     dragging: PropTypes.bool,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // eslint-disable-next-line react/forbid-prop-types
+    id: PropTypes.any,
     index: PropTypes.number,
     // eslint-disable-next-line react/forbid-prop-types
     name: PropTypes.any,

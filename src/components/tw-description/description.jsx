@@ -51,9 +51,9 @@ const Description = ({
                 rel="noreferrer"
             >
                 <FormattedMessage
-                    defaultMessage="View project on Scratch."
-                    description="Link to project on Scratch"
-                    id="tw.home.viewOnScratch"
+                    defaultMessage="View project on Scratch"
+                    description="Link to view project on Scratch"
+                    id="tw.viewOnScratch"
                 />
             </a>
         </div>

@@ -100,6 +100,7 @@
         "tw.usernameModal.reset": "Zurücksetzen",
         "tw.usernameModal.title": "Benutzernamen ändern",
         "tw.viewFeaturedProjects": "Klicke, um vorgestellte Projekte anzusehen.",
+        "tw.viewOnScratch": "Projekt auf Scratch anzeigen",
         "tw.webglModal.description": "Leider sieht es aus, als würde dein Computer oder Browser {webGlLink}. Diese Technologie ist erforderlich, damit diese Seite funktioniert. Versuche, deinen Browser und deine Grafiktreiber zu aktualisieren, oder deinen Computer neuzustarten."
     },
     "es": {
@@ -326,6 +327,7 @@
         "tw.usernameModal.reset": "Resetta",
         "tw.usernameModal.title": "Cambia Username",
         "tw.viewFeaturedProjects": "Clicca per vedere i progetti in primo piano.",
+        "tw.viewOnScratch": "Mostra il progetto nel sito di Scratch",
         "tw.webglModal.description": "Sembra che il tuo browser o il tuo computer non siano compatibili con {webGlLink}. Questa tecnologia è necessaria per poter usare questo sito. Prova ad aggiornare il tuo browser e i tuoi driver video o a riavviare il tuo computer."
     },
     "ja": {
@@ -341,6 +343,7 @@
         "tw.changeUsername.cannotChangeWhileRunning": "ユーザー名をプロジェクトを実行中に変えることは出来ません。",
         "tw.cloudVariableBadge": "このプロジェクトはクラウド変数を使っています。TurboWarpはScratchとは別の独自のサーバーを使っています。また、ユーザー名はScratchなどのユーザーと同じでない可能性があることに注意してください。",
         "tw.code": "ソースコード",
+        "tw.customExtension.description": "URLから拡張機能を読み込みます。開発者向けで、実験段階です。",
         "tw.customExtension.name": "カスタム拡張子",
         "tw.featuredProjectsStudio": "Scratchのスタジオで見る。",
         "tw.feedback": "フィードバックとバグ",
@@ -350,6 +353,7 @@
         "tw.footer.disclaimer": "TurboWarpはScratch、Scratch Team、Scratch財団と提携していません。",
         "tw.footer.fosshost": "Fosshostにホストされています",
         "tw.footer.links": "関連リンク",
+        "tw.fs.saveError": "ファイルを保存できませんでした。({error})",
         "tw.gui.crashMessage.description": "申し訳ございません。TurboWarpはクラッシュしてしまいました。ページを再読み込みして下さい。",
         "tw.gui.defaultProjectTitle": "プロジェクト",
         "tw.guiDefaultTitle": "Scratchのプロジェクトを速く動かす",
@@ -374,6 +378,7 @@
         "tw.menuBar.help": "ヘルプ",
         "tw.menuBar.loadRestorePoint": "前回のプロジェクトを復元する",
         "tw.menuBar.moreSettings": "高度な設定",
+        "tw.menuBar.newFramerate": "新しいFPS:",
         "tw.menuBar.parameters": "URLパラメーター",
         "tw.menuBar.reportError1": "コンパイルされていないスクリプトがあります。",
         "tw.menuBar.reportError2": "これはバグです。報告してください。",
@@ -390,6 +395,8 @@
         "tw.settingsModal.removeMiscLimits": "その他の制限を解除",
         "tw.settingsModal.title": "高度な設定",
         "tw.studioview.error": "プロジェクトを次のページで読み込む際にエラーが発生しました。",
+        "tw.twExtension.description": "奇妙な新しいブロック。Scratchでは使えません。",
+        "tw.twExtension.name": "TurboWarpのブロック",
         "tw.usernameModal.reset": "リセット",
         "tw.usernameModal.title": "ユーザー名を変える",
         "tw.viewFeaturedProjects": "クリックしてプロジェクトの特集を見る。"

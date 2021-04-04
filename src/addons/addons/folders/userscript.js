@@ -497,6 +497,7 @@ export default async function ({ addon, global, console, msg }) {
           folderOccurences.set(folderName, occurence + 1);
           const baseUniqueId = getUniqueIdOfFolderItems(folderItems);
           const itemUniqueId = `${isOpen}&${occurence}&${folderName}&${baseUniqueId}&`;
+          const reactKey = `&__${occurence}_${folderName}`;
           const assetUniqueId = baseUniqueId;
 
           let folderItem;
@@ -507,11 +508,18 @@ export default async function ({ addon, global, console, msg }) {
           } else {
             folderItem = {
               // Can be used as a react key
-              toString() {
-                return itemUniqueId;
+              id: {
+                toString() {
+                  return reactKey;
+                },
               },
             };
-            folderData = {};
+            folderData = {
+              // Can be used as a react key
+              toString() {
+                return reactKey;
+              },
+            };
             folderItemCache.set(itemUniqueId, folderItem);
           }
 

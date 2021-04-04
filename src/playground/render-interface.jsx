@@ -154,7 +154,7 @@ class Interface extends React.Component {
                             <div className={styles.section}>
                                 <ProjectInput />
                             </div>
-                            {hasCloudVariables && (
+                            {hasCloudVariables && projectId !== '0' && (
                                 <div className={styles.section}>
                                     <CloudVariableBadge />
                                 </div>

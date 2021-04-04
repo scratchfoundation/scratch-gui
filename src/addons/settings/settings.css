@@ -247,7 +247,7 @@ a:active, a:focus {
 }
 
 .reset-button {
-    display: block;
+    display: flex;
     margin-right: 8px;
     border-radius: 4px;
     cursor: pointer;
@@ -262,6 +262,7 @@ a:active, a:focus {
     box-shadow: 0 0 0 3px $motion-transparent;
 }
 .reset-button-image {
+    padding: 1px 0;
     height: 16px;
     width: 16px;
 }

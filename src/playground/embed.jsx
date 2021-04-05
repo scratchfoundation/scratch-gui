@@ -24,7 +24,7 @@ const getProjectId = () => {
     if (pathMatch !== null) {
         return pathMatch[pathMatch.length - 1];
     }
-    return null;
+    return '0';
 };
 
 const projectId = getProjectId();

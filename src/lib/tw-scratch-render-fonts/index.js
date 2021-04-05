@@ -80,7 +80,10 @@ const loadFonts = () => fetchFonts()
         log.error(err);
     });
 
+const getFonts = () => fontData;
+
 export {
+    getFonts as default,
     loadFonts,
     fontData as FONTS
 };

@@ -1,11 +1,13 @@
-import SansSerif from './NotoSans-Medium.ttf';
-import Serif from './SourceSerifPro-Regular.otf';
-import Handwriting from './handlee-regular.ttf';
-import Marker from './Knewave.ttf';
-import Curly from './Griffy-Regular.ttf';
-import Pixel from './Grand9K-Pixel.ttf';
-import Scratch from './Scratch.ttf';
-import log from '../log';
+/* eslint-disable import/no-commonjs */
+
+const SansSerif = require('./NotoSans-Medium.ttf');
+const Serif = require('./SourceSerifPro-Regular.otf');
+const Handwriting = require('./handlee-regular.ttf');
+const Marker = require('./Knewave.ttf');
+const Curly = require('./Griffy-Regular.ttf');
+const Pixel = require('./Grand9K-Pixel.ttf');
+const Scratch = require('./Scratch.ttf');
+const log = require('../log');
 
 const fontSource = {
     'Sans Serif': SansSerif,
@@ -82,8 +84,6 @@ const loadFonts = () => fetchFonts()
 
 const getFonts = () => fontData;
 
-export {
-    getFonts as default,
-    loadFonts,
-    fontData as FONTS
-};
+module.exports = getFonts;
+module.exports.loadFonts = loadFonts;
+module.exports.FONTS = fontData; // legacy, should be removed

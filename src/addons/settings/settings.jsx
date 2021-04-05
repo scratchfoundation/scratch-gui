@@ -203,16 +203,23 @@ class BufferedInput extends React.Component {
     }
     handleKeyPress (e) {
         if (e.key === 'Enter') {
-            this.handleFlush();
+            this.handleFlush(e);
             e.target.blur();
         }
     }
-    handleFlush () {
+    handleFlush (e) {
         if (this.state.value === null) {
             return;
         }
         if (this.props.type === 'number') {
-            this.props.onChange(+this.state.value);
+            let value = +this.state.value;
+            const min = e.target.min;
+            const max = e.target.max;
+            const step = e.target.step;
+            if (min !== '') value = Math.max(min, value);
+            if (max !== '') value = Math.min(max, value);
+            if (step === '1') value = Math.round(value);
+            this.props.onChange(value);
         } else {
             this.props.onChange(this.state.value);
         }

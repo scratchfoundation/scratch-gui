@@ -15,7 +15,7 @@
  */
 
 import IntlMessageFormat from 'intl-messageformat';
-import SettingsStore from './settings-store';
+import SettingsStore from './settings-store-singleton';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from '../lib/data-uri-to-blob';
 import EventTargetShim from './event-target';

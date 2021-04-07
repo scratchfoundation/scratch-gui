@@ -18,7 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import downloadBlob from '../lib/download-blob.js';
 import Settings from '../addons/settings/settings.jsx';
-import SettingsStore from '../addons/settings-store';
+import SettingsStore from '../addons/settings-store-singleton';
 import appTarget from './app-target';
 
 const onReloadNow = () => {

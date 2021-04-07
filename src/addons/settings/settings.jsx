@@ -25,7 +25,7 @@ import settingsTranslationsOther from './l10n/translations.json';
 import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
 import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
-import SettingsStore from '../settings-store';
+import SettingsStore from '../settings-store-singleton';
 import extensionImageWhite from './extension-white.svg';
 import extensionImageBlack from './extension-black.svg';
 import brushImageWhite from './brush-white.svg';

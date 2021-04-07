@@ -309,4 +309,4 @@ class SettingsStore extends EventTargetShim {
     }
 }
 
-export default new SettingsStore();
+export default SettingsStore;

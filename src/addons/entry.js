@@ -16,7 +16,7 @@
 
 import AddonRunner from './api';
 import addons from './addon-manifests';
-import SettingsStore from './settings-store';
+import SettingsStore from './settings-store-singleton';
 
 for (const [id, manifest] of Object.entries(addons)) {
     if (!SettingsStore.getAddonEnabled(id)) {

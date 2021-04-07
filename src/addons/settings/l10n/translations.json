@@ -172,5 +172,8 @@
         "tw.addons.settings.tags.turbowarp": "TurboWarp",
         "tw.addons.settings.title": "Eklenti Ayarlar",
         "tw.addons.settings.unsupported": "Bazi içerikler bu web tarayacıda kullanamıyoruz:"
+    },
+    "zh-cn": {
+        "tw.addons.settings.search": "搜索"
     }
 }

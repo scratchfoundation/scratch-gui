@@ -7,17 +7,26 @@ test('enabled, event', () => {
     expect(store.getAddonEnabled('editor-devtools')).toBe(true);
     store.setAddonEnabled('editor-devtools', false);
     expect(store.getAddonEnabled('editor-devtools')).toBe(false);
-    expect(fn).toHaveBeenCalledTimes(1);
+    store.setAddonEnabled('editor-devtools', true);
+    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('cat-blocks', null);
+    expect(fn).toHaveBeenCalledTimes(4);
     expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
     expect(fn.mock.calls[0][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[0][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[0][0].detail.value).toBe(false);
-    store.setAddonEnabled('editor-devtools', true);
-    expect(fn).toHaveBeenCalledTimes(2);
     expect(fn.mock.calls[1][0].detail.addonId).toBe('editor-devtools');
     expect(fn.mock.calls[1][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[1][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[1][0].detail.value).toBe(true);
+    expect(fn.mock.calls[2][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[2][0].detail.settingId).toBe('enabled');
+    expect(fn.mock.calls[2][0].detail.reloadRequired).toBe(true);
+    expect(fn.mock.calls[2][0].detail.value).toBe(true);
+    expect(fn.mock.calls[3][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[3][0].detail.settingId).toBe('enabled');
+    expect(fn.mock.calls[3][0].detail.reloadRequired).toBe(true);
+    expect(fn.mock.calls[3][0].detail.value).toBe(false);
 });
 
 test('settings, event, default values', () => {
@@ -71,8 +80,21 @@ test('changing settings throws on unknown settings', () => {
     expect(fn).toHaveBeenCalledTimes(0);
 });
 
-test('changing settings throws on invalid values', () => {
+test('changing enabled throws on invalid values', () => {
     const store = new SettingStore();
+    const fn = jest.fn();
+    store.addEventListener('setting-changed', fn);
+    expect(() => store.setAddonEnabled('cat-blocks', 'sdfjlksdflk')).toThrow();
+    expect(() => store.setAddonEnabled('cat-blocks', 0)).toThrow();
+    expect(() => store.setAddonEnabled('cat-blocks', [])).toThrow();
+    expect(() => store.setAddonEnabled('cat-blocks', {})).toThrow();
+    expect(fn).toHaveBeenCalledTimes(0);
+});
+
+test('changing settings checks value validity and throws', () => {
+    const store = new SettingStore();
+    const fn = jest.fn();
+    store.addEventListener('setting-changed', fn);
     // boolean
     expect(() => store.setAddonSetting('onion-skinning', 'default', '#abcdef')).toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'default', [])).toThrow();
@@ -93,8 +115,8 @@ test('changing settings throws on invalid values', () => {
     expect(() => store.setAddonSetting('onion-skinning', 'mode', '')).toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'mode', false)).toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'mode', 1)).toThrow();
-    expect(() => store.setAddonEnabled('onion-skinning', 'mode', 'tint')).not.toThrow();
-    expect(() => store.setAddonEnabled('onion-skinning', 'mode', 'merge')).not.toThrow();
+    expect(() => store.setAddonSetting('onion-skinning', 'mode', 'tint')).not.toThrow();
+    expect(() => store.setAddonSetting('onion-skinning', 'mode', 'merge')).not.toThrow();
     // color
     expect(() => store.setAddonSetting('onion-skinning', 'beforeTint', '#abcdef')).not.toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'beforeTint', '#abcDE1')).not.toThrow();
@@ -103,6 +125,7 @@ test('changing settings throws on invalid values', () => {
     expect(() => store.setAddonSetting('onion-skinning', 'beforeTint', '')).toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'beforeTint', false)).toThrow();
     expect(() => store.setAddonSetting('onion-skinning', 'beforeTint', 1)).toThrow();
+    expect(fn).toHaveBeenCalledTimes(4);
 });
 
 test('reset does not change enabled', () => {
@@ -259,7 +282,7 @@ test('invalid imports', () => {
     expect(() => store.import({
         addons: {
             'onion-skinning': {
-                enabled: true,
+                enabled: false,
                 settings: {
                     dsjfokosdfj: 5
                 }
@@ -274,4 +297,16 @@ test('invalid imports', () => {
             }
         }
     })).not.toThrow();
+    expect(() => store.import({
+        addons: {
+            'onion-skinning': {
+                enabled: '4',
+                settings: {
+                    default: '3'
+                }
+            }
+        }
+    })).not.toThrow();
+    expect(store.getAddonEnabled('onion-skinning')).toBe(false);
+    expect(store.getAddonSetting('onion-skinning', 'default')).toBe(false);
 });

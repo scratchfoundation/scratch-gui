@@ -160,8 +160,10 @@ class SettingsStore extends EventTargetShim {
         if (value === null) {
             value = !!manifest.enabledByDefault;
             delete storage.enabled;
-        } else {
+        } else if (typeof value === 'boolean') {
             storage.enabled = value;
+        } else {
+            throw new Error('Enabled value is invalid.');
         }
         this.saveToLocalStorage();
         if (value !== oldValue) {
@@ -295,7 +297,9 @@ class SettingsStore extends EventTargetShim {
                 continue;
             }
             const {enabled, settings} = value;
-            this.setAddonEnabled(addonId, enabled);
+            if (typeof enabled === 'boolean') {
+                this.setAddonEnabled(addonId, enabled);
+            }
             for (const [settingId, settingValue] of Object.entries(settings)) {
                 try {
                     this.setAddonSetting(addonId, settingId, settingValue);

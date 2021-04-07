@@ -31,26 +31,12 @@ const createStylesheet = css => {
     return style;
 };
 
-const flat = array => {
-    const result = [];
-    for (const i of array) {
-        if (Array.isArray(i)) {
-            for (const j of flat(i)) {
-                result.push(j);
-            }
-        } else {
-            result.push(i);
-        }
-    }
-    return result;
-};
-
 let _scratchClassNames = null;
 const getScratchClassNames = () => {
     if (_scratchClassNames) {
         return _scratchClassNames;
     }
-    const cssRules = flat(Array.from(document.styleSheets)
+    const cssRules = Array.from(document.styleSheets)
         // Ignore some scratch-paint stylesheets
         .filter(styleSheet => (
             !(
@@ -70,13 +56,13 @@ const getScratchClassNames = () => {
                 return [];
             }
         })
-    );
-    const classes = flat(cssRules
+        .flat();
+    const classes = cssRules
         .map(e => e.selectorText)
         .filter(e => e)
         .map(e => e.match(/(([\w-]+?)_([\w-]+)_([\w\d-]+))/g))
         .filter(e => e)
-    );
+        .flat();
     _scratchClassNames = [...new Set(classes)];
     return _scratchClassNames;
 };

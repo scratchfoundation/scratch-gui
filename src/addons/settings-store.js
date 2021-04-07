@@ -141,6 +141,9 @@ class SettingsStore extends EventTargetShim {
         return settingObject.default;
     }
 
+    /**
+     * @private
+     */
     getDefaultSettings (addonId) {
         const manifest = this.getAddonManifest(addonId);
         const result = {};

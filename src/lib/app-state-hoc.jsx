@@ -54,7 +54,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                     initEmbedded,
                     initTelemetryModal
                 } = guiRedux;
-                const {ScratchPaintReducer} = require('scratch-paint');
+                const {ScratchPaintReducer} = require('./tw-scratch-paint');
 
                 let initializedGui = guiInitialState;
                 if (props.isFullScreen || props.isPlayerOnly) {

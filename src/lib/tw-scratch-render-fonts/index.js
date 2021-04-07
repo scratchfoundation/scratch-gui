@@ -7,7 +7,7 @@ const Marker = require('./Knewave.ttf');
 const Curly = require('./Griffy-Regular.ttf');
 const Pixel = require('./Grand9K-Pixel.ttf');
 const Scratch = require('./Scratch.ttf');
-const log = require('../log');
+const log = require('../log').default;
 
 const fontSource = {
     'Sans Serif': SansSerif,
@@ -52,14 +52,16 @@ const addFontsToDocument = () => {
     if (document.getElementById('scratch-font-styles')) {
         return;
     }
-    const documentStyleTag = document.createElement('style');
-    documentStyleTag.id = 'scratch-font-styles';
+    let css = '';
     for (const fontName of Object.keys(fontSource)) {
-        const css = fontData[fontName];
-        if (css) {
-            documentStyleTag.textContent += css;
+        const fontCSS = fontData[fontName];
+        if (fontCSS) {
+            css += fontCSS;
         }
     }
+    const documentStyleTag = document.createElement('style');
+    documentStyleTag.id = 'scratch-font-styles';
+    documentStyleTag.textContent = css;
     document.body.insertBefore(documentStyleTag, document.body.firstChild);
 };
 
@@ -84,6 +86,7 @@ const loadFonts = () => fetchFonts()
 
 const getFonts = () => fontData;
 
+// We have to use legacy module.exports as some parts of Scratch expect require('scratch-render-font') to be a function
 module.exports = getFonts;
 module.exports.loadFonts = loadFonts;
-module.exports.FONTS = fontData; // legacy, should be removed
+module.exports.FONTS = fontData;

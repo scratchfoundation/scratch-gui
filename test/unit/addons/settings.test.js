@@ -184,9 +184,11 @@ test('apply preset', () => {
     const store = new SettingStore();
     const fn = jest.fn();
     store.addEventListener('setting-changed', fn);
+    store.setAddonSetting('editor-theme3', 'tw-color', '#abcdef');
     store.applyAddonPreset('editor-theme3', 'original');
     expect(fn.mock.calls.length).toBeGreaterThan(5);
     expect(store.getAddonSetting('editor-theme3', 'motion-color')).toBe('#4a6cd4');
+    expect(store.getAddonSetting('editor-theme3', 'tw-color')).toBe('#ff4c4c');
 });
 
 test('unknown preset throws', () => {

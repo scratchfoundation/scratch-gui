@@ -1,3 +1,5 @@
 import SettingsStore from './settings-store';
 
-export default new SettingsStore();
+const settingStore = new SettingsStore();
+settingStore.store = settingStore.readLocalStorage();
+export default settingStore;

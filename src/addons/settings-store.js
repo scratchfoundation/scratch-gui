@@ -24,7 +24,7 @@ const VERSION = 1;
 class SettingsStore extends EventTargetShim {
     constructor () {
         super();
-        this.store = this.readLocalStorage();
+        this.store = this.createEmptyStore();
     }
 
     /**
@@ -38,11 +38,8 @@ class SettingsStore extends EventTargetShim {
         return result;
     }
 
-    /**
-     * @private
-     */
     readLocalStorage () {
-        const base = this.createEmptyStore();
+        const base = this.store;
         try {
             const local = localStorage.getItem(SETTINGS_KEY);
             if (local) {

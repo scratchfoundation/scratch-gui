@@ -58,7 +58,7 @@ class SettingsStore extends EventTargetShim {
         } catch (e) {
             // ignore
         }
-        return base;
+        this.store = base;
     }
 
     /**

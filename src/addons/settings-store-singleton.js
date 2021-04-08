@@ -1,5 +1,5 @@
 import SettingsStore from './settings-store';
 
 const settingStore = new SettingsStore();
-settingStore.store = settingStore.readLocalStorage();
+settingStore.readLocalStorage();
 export default settingStore;

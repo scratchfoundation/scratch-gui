@@ -1,5 +1,21 @@
 import SettingStore from '../../../src/addons/settings-store';
 
+class LocalStorageShim {
+    constructor () {
+        this.storage = Object.create(null);
+    }
+    getItem (key) {
+        return this.storage[key];
+    }
+    setItem (key, value) {
+        this.storage[key] = value.toString();
+    }
+}
+
+beforeEach(() => {
+    global.localStorage = new LocalStorageShim();
+});
+
 test('enabled, event', () => {
     const store = new SettingStore();
     const fn = jest.fn();
@@ -318,4 +334,32 @@ test('invalid imports', () => {
     })).not.toThrow();
     expect(store.getAddonEnabled('onion-skinning')).toBe(false);
     expect(store.getAddonSetting('onion-skinning', 'default')).toBe(false);
+});
+
+test('local storage', () => {
+    const store = new SettingStore();
+    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonSetting('onion-skinning', 'default', true);
+    const newStore = new SettingStore();
+    newStore.readLocalStorage();
+    expect(newStore.store).toEqual(store.store);
+});
+
+test('local storage is resistent to errors', () => {
+    global.localStorage = new LocalStorageShim();
+    const store = new SettingStore();
+    localStorage.getItem = () => {
+        throw new Error(':(');
+    };
+    store.readLocalStorage();
+    localStorage.getItem = () => 'eoiru4jtg)(R(';
+    store.readLocalStorage();
+    localStorage.setItem = () => {
+        throw new Error(':(');
+    };
+    store.setAddonEnabled('cat-blocks', true);
+    // eslint-disable-next-line no-undefined
+    global.localStorage = undefined;
+    store.readLocalStorage();
+    store.setAddonEnabled('cat-blocks', false);
 });

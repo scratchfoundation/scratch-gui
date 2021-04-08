@@ -207,8 +207,8 @@ export default async function ({ addon, global, console, msg }) {
       const id = Object.keys(folderColors).length;
       const className = `sa-folders-color-${id}`;
       folderColors[folderName] = className;
-      folderColorStylesheet.textContent += `.${className} { background-color: ${color} !important; }`;
-      folderColorStylesheet.textContent += `.${className}[class*="sprite-selector_raised"] { background-color: hsla(${hue}deg, 100%, 77%, 1) !important; }`;
+      folderColorStylesheet.textContent += `.${className}{background-color:${color} !important;}`;
+      folderColorStylesheet.textContent += `.${className}[class*="sprite-selector_raised"]:not([class*="sa-folders-folder"]){background-color:hsla(${hue}deg, 100%, 77%, 1) !important;}`;
     }
     return folderColors[folderName];
   };
@@ -401,12 +401,14 @@ export default async function ({ addon, global, console, msg }) {
 
     const getUniqueIdOfFolderItems = (items) => {
       let id = "sa_folder&&";
-      for (let i = 0; i < items.length; i++) {
+      for (let i = 0; i < Math.min(PREVIEW_POSITIONS.length, items.length); i++) {
         const item = items[i];
         if (item.asset) {
           id += item.asset.assetId;
         } else if (item.costume && item.costume.asset) {
           id += item.costume.asset.assetId;
+        } else if (item.url) {
+          id += item.url;
         }
         id += "&&";
       }
@@ -551,7 +553,7 @@ export default async function ({ addon, global, console, msg }) {
             // For sprite items, `id` is used as the drag payload and toString is used as a React key
             if (!folderItem.id) folderItem.id = {};
             folderItem.id.sa_folder_items = folderItems;
-            folderItem.id.toString = () => `&__${occurence}_${folderName}`;
+            folderItem.id.toString = () => reactKey;
           } else {
             folderItem.asset = folderAsset;
             if (!folderItem.dragPayload) folderItem.dragPayload = {};
@@ -981,7 +983,7 @@ export default async function ({ addon, global, console, msg }) {
           }
           this.props.selected = false;
           this.props.number = null;
-          this.props.className += ` ${getFolderColorClass(itemData.folder)}`;
+          this.props.className += ` ${getFolderColorClass(itemData.folder)} sa-folders-folder`;
         }
         if (typeof itemData.inFolder === "string") {
           this.props.className += ` ${getFolderColorClass(itemData.inFolder)}`;
@@ -1249,7 +1251,7 @@ export default async function ({ addon, global, console, msg }) {
         let payload;
         let type;
         if (item.dragPayload) {
-          if (item.costumeURL) {
+          if (item.url) {
             type = "SOUND";
           } else {
             type = "COSTUME";

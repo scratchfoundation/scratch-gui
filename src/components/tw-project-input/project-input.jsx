@@ -23,13 +23,14 @@ class ProjectInput extends React.Component {
         };
     }
     componentDidUpdate (prevProps) {
-        if (this.props.projectId !== prevProps.projectId || this.props.loading !== prevProps.loading) {
+        if (this.props.projectId !== prevProps.projectId) {
             if (this.props.projectId === defaultProjectId) {
                 this.input.focus();
                 this.input.selectionStart = this.input.value.length;
             } else {
                 this.input.blur();
             }
+            // eslint-disable-next-line react/no-did-update-set-state
             this.setState({
                 projectId: this.props.projectId
             });

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
 import {defaultProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
 import styles from './project-input.css';
-import { setProjectId } from '../../lib/tw-navigation-utils';
+import {setProjectId} from '../../lib/tw-navigation-utils';
 
 const PROJECT_BASE = 'https://scratch.mit.edu/projects/';
 
@@ -14,7 +14,6 @@ class ProjectInput extends React.Component {
         bindAll(this, [
             'handleKeyDown',
             'handleChange',
-            'handlePaste',
             'handleBlur',
             'handleFocus',
             'inputRef'
@@ -54,15 +53,6 @@ class ProjectInput extends React.Component {
             projectId: this.readProjectId(e) || defaultProjectId
         });
     }
-    handlePaste () {
-        // const data = e.clipboardData.getData('Text');
-        // const id = this.extractProjectId(data);
-        // if (id) {
-        //     this.setState({
-        //         projectId: id
-        //     });
-        // }
-    }
     handleBlur () {
         if (this.state.projectId && this.state.projectId !== this.props.projectId) {
             this.props.setProjectId(this.state.projectId);
@@ -87,7 +77,6 @@ class ProjectInput extends React.Component {
                 className={styles.input}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}
-                onPaste={this.handlePaste}
                 onBlur={this.handleBlur}
                 onFocus={this.handleFocus}
             />

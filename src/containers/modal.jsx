@@ -38,8 +38,8 @@ class Modal extends React.Component {
         return `modal-${this.props.id}`;
     }
     pushHistory (state, push) {
-        if (push) return history.pushState(state, this.id);
-        history.replaceState(state, this.id);
+        if (push) return history.pushState(state, this.id, '');
+        history.replaceState(state, this.id, '');
     }
     render () {
         return <ModalComponent {...this.props} />;

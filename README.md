@@ -82,7 +82,7 @@ Here's how to link your local `scratch-gui` code to another project's `node_modu
 2. From the top level of each repository (such as `scratch-www`) that depends on `scratch-gui`:
     1. Make sure you have run `npm install`
     2. Run `npm link scratch-gui`
-    3. Build or run the repository
+    3. Build or run the repositoriy
 
 #### Using `npm run watch`
 

@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
-import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
+import {SVGRenderer as V2SVGAdapter, BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 import twStageSize from '../lib/tw-stage-size';
 
 import StageComponent from '../components/stage/stage.jsx';
@@ -83,6 +83,7 @@ class Stage extends React.Component {
             // tw: handle changes to high quality pen
             this.props.vm.renderer.on('UseHighQualityRenderChanged', this.props.onHighQualityPenChanged);
         }
+        this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
     }
     componentDidMount () {

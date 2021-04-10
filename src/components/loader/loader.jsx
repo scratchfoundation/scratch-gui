@@ -43,17 +43,17 @@ const messages = defineMessages({
         id: 'tw.loader.generic'
     },
     projectData: {
-        defaultMessage: 'Loading project data …',
+        defaultMessage: 'Downloading project data …',
         description: 'Appears when loading project data',
         id: 'tw.loader.data'
     },
     assetsKnown: {
-        defaultMessage: 'Loading assets ({complete}/{total}) …',
+        defaultMessage: 'Downloading assets ({complete}/{total}) …',
         description: 'Appears when loading project assets and amount of assets is known',
         id: 'tw.loader.assets.known'
     },
     assetsUnknown: {
-        defaultMessage: 'Loading assets …',
+        defaultMessage: 'Downloading assets …',
         description: 'Appears when loading project assets but amount of assets is unknown',
         id: 'tw.loader.assets.unknown'
     }

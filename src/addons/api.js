@@ -64,6 +64,20 @@ const getScratchClassNames = () => {
         .filter(e => e)
         .flat();
     _scratchClassNames = [...new Set(classes)];
+    const observer = new MutationObserver(mutationList => {
+        for (const mutation of mutationList) {
+            for (const node of mutation.addedNodes) {
+                if (node.tagName === 'STYLE') {
+                    _scratchClassNames = null;
+                    observer.disconnect();
+                    return;
+                }
+            }
+        }
+    });
+    observer.observe(document.head, {
+        childList: true
+    });
     return _scratchClassNames;
 };
 

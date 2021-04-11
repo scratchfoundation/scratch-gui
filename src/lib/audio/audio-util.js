@@ -86,7 +86,7 @@ const downsampleIfNeeded = (buffer, resampler) => {
     }
     // Cannot save this sound at 22khz, refuse to edit
     // In the future we could introduce further compression here
-    return Promise.reject('Sound too large to save, refusing to edit');
+    return Promise.reject(new Error('Sound too large to save, refusing to edit'));
 };
 
 /**

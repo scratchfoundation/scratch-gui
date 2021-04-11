@@ -4,40 +4,40 @@ aliases:
     save_cache:
       paths:
         - .git
-      key: v2-git-{{ .Revision }}
+      key: v3-git-{{ .Revision }}
   - &restore_git_cache
     restore_cache:
       keys:
-        - v2-git-{{ .Revision }}
-        - v2-git-
+        - v3-git-{{ .Revision }}
+        - v3-git-
   - &save_build_cache
     save_cache:
       paths:
         - build
-      key: v2-build-{{ .Revision }}
+      key: v3-build-{{ .Revision }}
   - &restore_build_cache
     restore_cache:
       keys:
-        - v2-build-{{ .Revision }}
+        - v3-build-{{ .Revision }}
   - &save_dist_cache
     save_cache:
       paths:
         - dist
-      key: v2-dist-{{ .Revision }}
+      key: v3-dist-{{ .Revision }}
   - &restore_dist_cache
     restore_cache:
       keys:
-        - v2-dist-{{ .Revision }}
+        - v3-dist-{{ .Revision }}
   - &save_npm_cache
     save_cache:
       paths:
         - node_modules
-      key: v2-npm-{{ checksum "package-lock.json" }}
+      key: v3-npm-{{ checksum "package-lock.json" }}
   - &restore_npm_cache
     restore_cache:
       keys:
-        - v2-npm-{{ checksum "package-lock.json" }}
-        - v2-npm-
+        - v3-npm-{{ checksum "package-lock.json" }}
+        - v3-npm-
   - &defaults
     docker:
       - image: circleci/node:10-browsers

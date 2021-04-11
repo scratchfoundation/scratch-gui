@@ -88,7 +88,7 @@ const getBackpackObjectById = id => {
 const fetchAs = (responseType, uri) => new Promise((resolve, reject) => {
     xhr({uri, responseType}, (error, response) => {
         if (error || response.statusCode !== 200) {
-            return reject();
+            return reject(new Error(response.status));
         }
         return resolve(response.body);
     });

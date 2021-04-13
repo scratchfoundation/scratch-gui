@@ -27,20 +27,24 @@ export default async function ({ addon, global, console }) {
     while (true) {
       if (hat) {
         let hatblock = await addon.tab.waitForElement("[data-shapes='hat']", { markAsSeen: true });
-        let hatpath = hatblock.querySelector("path").getAttribute("d");
-
-        hatblock.querySelector("path").style.d = `path("${hatpath.replace(
-          "c 25,-22 71,-22 96,0",
-          `c2.6,-2.3 5.5,-4.3 8.5,-6.2${LEFT_EAR_UP}c8.4,-1.3 17,-1.3 25.4,0${RIGHT_EAR_UP}c3,1.8 5.9,3.9 8.5,6.1`
-        )}")`;
+        const path = hatblock.querySelector("path");
+        let hatpath = path.getAttribute("d");
+        path.setAttribute(
+          "d",
+          hatpath.replace(
+            "c 25,-22 71,-22 96,0",
+            `c2.6,-2.3 5.5,-4.3 8.5,-6.2${LEFT_EAR_UP}c8.4,-1.3 17,-1.3 25.4,0${RIGHT_EAR_UP}c3,1.8 5.9,3.9 8.5,6.1`
+          )
+        );
         insertCatStuff(hatblock);
       } else {
         let customblock = await addon.tab.waitForElement("[data-shapes='c-block c-1 hat']", { markAsSeen: true });
-        let custompath = customblock.querySelector("path").getAttribute("d");
-        customblock.querySelector("path").style.d = `path("${custompath.replace(
-          "a 20,20 0 0,1 20,-20",
-          DEFINE_HAT_LEFT_EAR_UP + DEFINE_HAT_RIGHT_EAR_UP
-        )}")`;
+        const path = customblock.querySelector("path");
+        let custompath = path.getAttribute("d");
+        path.setAttribute(
+          "d",
+          custompath.replace("a 20,20 0 0,1 20,-20", DEFINE_HAT_LEFT_EAR_UP + DEFINE_HAT_RIGHT_EAR_UP)
+        );
         insertCatStuff(customblock);
       }
     }
@@ -119,15 +123,21 @@ export default async function ({ addon, global, console }) {
       // ear flick
       ear2.setAttribute("fill-opacity", "");
       ear1.setAttribute("fill-opacity", "0");
-      svgBlock.style.d = svgBlock.style.d.replace(LEFT_EAR_UP, LEFT_EAR_DOWN);
-      svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_LEFT_EAR_UP, DEFINE_HAT_LEFT_EAR_DOWN);
-      svgBlock.style.d = svgBlock.style.d.replace(RIGHT_EAR_DOWN, RIGHT_EAR_UP);
-      svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_RIGHT_EAR_DOWN, DEFINE_HAT_RIGHT_EAR_UP);
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(LEFT_EAR_UP, LEFT_EAR_DOWN));
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(DEFINE_HAT_LEFT_EAR_UP, DEFINE_HAT_LEFT_EAR_DOWN));
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(RIGHT_EAR_DOWN, RIGHT_EAR_UP));
+      svgBlock.setAttribute(
+        "d",
+        svgBlock.getAttribute("d").replace(DEFINE_HAT_RIGHT_EAR_DOWN, DEFINE_HAT_RIGHT_EAR_UP)
+      );
       // reset after a short delay
       ear2Fn = setTimeout(() => {
         ear1.setAttribute("fill-opacity", "");
-        svgBlock.style.d = svgBlock.style.d.replace(LEFT_EAR_DOWN, LEFT_EAR_UP);
-        svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_LEFT_EAR_DOWN, DEFINE_HAT_LEFT_EAR_UP);
+        svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(LEFT_EAR_DOWN, LEFT_EAR_UP));
+        svgBlock.setAttribute(
+          "d",
+          svgBlock.getAttribute("d").replace(DEFINE_HAT_LEFT_EAR_DOWN, DEFINE_HAT_LEFT_EAR_UP)
+        );
       }, 50);
     });
 
@@ -137,16 +147,22 @@ export default async function ({ addon, global, console }) {
       // ear flick
       ear1.setAttribute("fill-opacity", "");
       ear2.setAttribute("fill-opacity", "0");
-      svgBlock.style.d = svgBlock.style.d.replace(RIGHT_EAR_UP, RIGHT_EAR_DOWN);
-      svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_RIGHT_EAR_UP, DEFINE_HAT_RIGHT_EAR_DOWN);
-      svgBlock.style.d = svgBlock.style.d.replace(LEFT_EAR_DOWN, LEFT_EAR_UP);
-      svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_LEFT_EAR_DOWN, DEFINE_HAT_LEFT_EAR_UP);
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(RIGHT_EAR_UP, RIGHT_EAR_DOWN));
+      svgBlock.setAttribute(
+        "d",
+        svgBlock.getAttribute("d").replace(DEFINE_HAT_RIGHT_EAR_UP, DEFINE_HAT_RIGHT_EAR_DOWN)
+      );
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(LEFT_EAR_DOWN, LEFT_EAR_UP));
+      svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(DEFINE_HAT_LEFT_EAR_DOWN, DEFINE_HAT_LEFT_EAR_UP));
 
       // reset after a short delay
       earFn = setTimeout(() => {
         ear2.setAttribute("fill-opacity", "");
-        svgBlock.style.d = svgBlock.style.d.replace(RIGHT_EAR_DOWN, RIGHT_EAR_UP);
-        svgBlock.style.d = svgBlock.style.d.replace(DEFINE_HAT_RIGHT_EAR_DOWN, DEFINE_HAT_RIGHT_EAR_UP);
+        svgBlock.setAttribute("d", svgBlock.getAttribute("d").replace(RIGHT_EAR_DOWN, RIGHT_EAR_UP));
+        svgBlock.setAttribute(
+          "d",
+          svgBlock.getAttribute("d").replace(DEFINE_HAT_RIGHT_EAR_DOWN, DEFINE_HAT_RIGHT_EAR_UP)
+        );
       }, 50);
     });
   }

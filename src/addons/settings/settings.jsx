@@ -425,7 +425,7 @@ const AddonComponent = ({
                 id={`${id}-label`}
                 className={styles.addonTitle}
             >
-                {manifest.tags && manifest.tags.includes('theme') ? (
+                {manifest.tags.includes('theme') ? (
                     <img
                         className={styles.extensionImage}
                         src={theme === 'dark' ? brushImageWhite : brushImageBlack}
@@ -448,11 +448,9 @@ const AddonComponent = ({
                     {addonTranslations[`${id}/@name`] || manifest.name}
                 </div>
             </label>
-            {manifest.tags && (
-                <TagComponent
-                    tags={manifest.tags}
-                />
-            )}
+            <TagComponent
+                tags={manifest.tags}
+            />
             {!settings.enabled && (
                 <div className={styles.inlineDescription}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
@@ -623,12 +621,10 @@ class AddonList extends React.Component {
                 ));
             }
         }
-        if (manifest.tags) {
-            for (const tag of manifest.tags) {
-                const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
-                if (translatedTag) {
-                    texts.push(normalize(settingsTranslations[`tw.addons.settings.tags.${tag}`]));
-                }
+        for (const tag of manifest.tags) {
+            const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
+            if (translatedTag) {
+                texts.push(normalize(settingsTranslations[`tw.addons.settings.tags.${tag}`]));
             }
         }
         // For an addon to be included, all search terms must match one of the texts.

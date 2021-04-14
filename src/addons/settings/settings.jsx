@@ -30,6 +30,8 @@ import extensionImageWhite from './extension-white.svg';
 import extensionImageBlack from './extension-black.svg';
 import brushImageWhite from './brush-white.svg';
 import brushImageBlack from './brush-black.svg';
+import eggImageWhite from './egg-white.svg';
+import eggImageBlack from './egg-black.svg';
 import undoImageWhite from './undo-white.svg';
 import undoImageBlack from './undo-black.svg';
 import infoImage from './info.svg';
@@ -427,6 +429,12 @@ const AddonComponent = ({
                     <img
                         className={styles.extensionImage}
                         src={theme === 'dark' ? brushImageWhite : brushImageBlack}
+                        alt=""
+                    />
+                ) : manifest.tags.includes('easterEgg') ? (
+                    <img
+                        className={styles.extensionImage}
+                        src={theme === 'dark' ? eggImageWhite : eggImageBlack}
                         alt=""
                     />
                 ) : (

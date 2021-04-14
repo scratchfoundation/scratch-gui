@@ -76,7 +76,7 @@ const sortAddons = () => {
 
 const isEasterEgg = addonManifest => addonManifest.tags && addonManifest.tags.includes('easterEgg');
 
-const AddonCreditsComponent = ({credits}) => (
+const AddonCredits = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
         return (
@@ -102,14 +102,14 @@ const AddonCreditsComponent = ({credits}) => (
         );
     })
 );
-AddonCreditsComponent.propTypes = {
+AddonCredits.propTypes = {
     credits: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         link: PropTypes.string
     }))
 };
 
-const SwitchComponent = ({onChange, value, ...props}) => (
+const Switch = ({onChange, value, ...props}) => (
     <button
         className={styles.switch}
         state={value ? 'on' : 'off'}
@@ -120,12 +120,12 @@ const SwitchComponent = ({onChange, value, ...props}) => (
         {...props}
     />
 );
-SwitchComponent.propTypes = {
+Switch.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.bool
 };
 
-const SelectComponent = ({
+const Select = ({
     onChange,
     value,
     values
@@ -146,7 +146,7 @@ const SelectComponent = ({
         })}
     </div>
 );
-SelectComponent.propTypes = {
+Select.propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
     values: PropTypes.arrayOf(PropTypes.shape({
@@ -155,7 +155,7 @@ SelectComponent.propTypes = {
     }))
 };
 
-const TagComponent = ({tags}) => tags.length > 0 && (
+const Tags = ({tags}) => tags.length > 0 && (
     <span className={styles.tagContainer}>
         {tags.includes('recommended') && (
             <span className={classNames(styles.tag, styles.tagRecommended)}>
@@ -189,7 +189,7 @@ const TagComponent = ({tags}) => tags.length > 0 && (
         )}
     </span>
 );
-TagComponent.propTypes = {
+Tags.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string)
 };
 
@@ -248,7 +248,7 @@ BufferedInput.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
-const SettingComponent = ({
+const Setting = ({
     addonId,
     setting,
     value
@@ -313,7 +313,7 @@ const SettingComponent = ({
             {setting.type === 'select' && (
                 <React.Fragment>
                     {label}
-                    <SelectComponent
+                    <Select
                         value={value}
                         values={setting.potentialValues.map(({id, name}) => ({
                             id,
@@ -327,7 +327,7 @@ const SettingComponent = ({
         </div>
     );
 };
-SettingComponent.propTypes = {
+Setting.propTypes = {
     addonId: PropTypes.string,
     setting: PropTypes.shape({
         type: PropTypes.string,
@@ -344,7 +344,7 @@ SettingComponent.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number])
 };
 
-const NoticeComponent = ({
+const Notice = ({
     addonId,
     notice
 }) => {
@@ -369,7 +369,7 @@ const NoticeComponent = ({
         </div>
     );
 };
-NoticeComponent.propTypes = {
+Notice.propTypes = {
     addonId: PropTypes.string,
     notice: PropTypes.shape({
         type: PropTypes.string,
@@ -378,7 +378,7 @@ NoticeComponent.propTypes = {
     })
 };
 
-const PresetComponent = ({
+const Presets = ({
     addonId,
     presets
 }) => (
@@ -403,7 +403,7 @@ const PresetComponent = ({
         })}
     </div>
 );
-PresetComponent.propTypes = {
+Presets.propTypes = {
     addonId: PropTypes.string,
     presets: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
@@ -413,7 +413,7 @@ PresetComponent.propTypes = {
     }))
 };
 
-const AddonComponent = ({
+const Addon = ({
     id,
     settings,
     manifest
@@ -448,7 +448,7 @@ const AddonComponent = ({
                     {addonTranslations[`${id}/@name`] || manifest.name}
                 </div>
             </label>
-            <TagComponent
+            <Tags
                 tags={manifest.tags}
             />
             {!settings.enabled && (
@@ -470,7 +470,7 @@ const AddonComponent = ({
                         />
                     </button>
                 )}
-                <SwitchComponent
+                <Switch
                     id={id}
                     aria-labelledby={`${id}-label`}
                     value={settings.enabled}
@@ -486,7 +486,7 @@ const AddonComponent = ({
                 {manifest.info && (
                     <div className={styles.noticeContainer}>
                         {manifest.info.map(info => (
-                            <NoticeComponent
+                            <Notice
                                 key={info.id}
                                 addonId={id}
                                 notice={info}
@@ -499,13 +499,13 @@ const AddonComponent = ({
                         <span className={styles.creditTitle}>
                             {settingsTranslations['tw.addons.settings.credits']}
                         </span>
-                        <AddonCreditsComponent credits={manifest.credits} />
+                        <AddonCredits credits={manifest.credits} />
                     </div>
                 )}
                 {manifest.settings && (
                     <div className={styles.settingContainer}>
                         {manifest.settings.map(setting => (
-                            <SettingComponent
+                            <Setting
                                 key={setting.id}
                                 addonId={id}
                                 setting={setting}
@@ -513,7 +513,7 @@ const AddonComponent = ({
                             />
                         ))}
                         {manifest.presets && (
-                            <PresetComponent
+                            <Presets
                                 addonId={id}
                                 presets={manifest.presets}
                             />
@@ -524,7 +524,7 @@ const AddonComponent = ({
         )}
     </div>
 );
-AddonComponent.propTypes = {
+Addon.propTypes = {
     id: PropTypes.string,
     settings: PropTypes.shape({
         enabled: PropTypes.bool,
@@ -545,7 +545,7 @@ AddonComponent.propTypes = {
     })
 };
 
-const DirtyComponent = props => (
+const Dirty = props => (
     <div className={styles.dirtyOuter}>
         <div className={styles.dirtyInner}>
             {settingsTranslations['tw.addons.settings.dirty']}
@@ -560,11 +560,11 @@ const DirtyComponent = props => (
         </div>
     </div>
 );
-DirtyComponent.propTypes = {
+Dirty.propTypes = {
     onReloadNow: PropTypes.func
 };
 
-const UnsupportedAddonsComponent = ({addons: addonList}) => (
+const UnsupportedAddons = ({addons: addonList}) => (
     <div className={styles.unsupportedContainer}>
         <span className={styles.unsupportedText}>
             {settingsTranslations['tw.addons.settings.unsupported']}
@@ -582,7 +582,7 @@ const UnsupportedAddonsComponent = ({addons: addonList}) => (
         ))}
     </div>
 );
-UnsupportedAddonsComponent.propTypes = {
+UnsupportedAddons.propTypes = {
     addons: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
         manifest: PropTypes.shape({
@@ -656,7 +656,7 @@ class AddonList extends React.Component {
         return (
             <div>
                 {filteredAddons.map(({id, manifest, state}) => (
-                    <AddonComponent
+                    <Addon
                         key={id}
                         id={id}
                         settings={state}
@@ -914,7 +914,7 @@ class AddonSettingsComponent extends React.Component {
                         </span>
                     </a>
                     {this.state.dirty && (
-                        <DirtyComponent
+                        <Dirty
                             onReloadNow={this.props.onReloadNow && this.handleReloadNow}
                         />
                     )}
@@ -946,7 +946,7 @@ class AddonSettingsComponent extends React.Component {
                     </div>
                     <footer className={styles.footer}>
                         {unsupported.length ? (
-                            <UnsupportedAddonsComponent
+                            <UnsupportedAddons
                                 addons={unsupported}
                             />
                         ) : null}

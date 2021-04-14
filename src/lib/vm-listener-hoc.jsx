@@ -142,6 +142,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
                 key: key,
+                keyCode: e.keyCode,
                 isDown: true
             });
 
@@ -166,6 +167,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
                 key: key,
+                keyCode: e.keyCode,
                 isDown: false
             });
 

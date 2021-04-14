@@ -184,7 +184,7 @@ const Tags = ({tags}) => tags.length > 0 && (
         )}
         {tags.includes('turbowarp') && (
             <span className={classNames(styles.tag, styles.tagTurbowarp)}>
-                {settingsTranslations['tw.addons.settings.tags.turbowarp']}
+                {'TurboWarp'}
             </span>
         )}
     </span>

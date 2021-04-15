@@ -244,6 +244,10 @@ class Tab extends EventTargetShim {
     get editorMode () {
         return getEditorMode();
     }
+
+    displayNoneWhileDisabled () {
+        // no-op
+    }
 }
 
 class Settings extends EventTargetShim {
@@ -265,6 +269,10 @@ class Self extends EventTargetShim {
     }
     get lib () {
         throw new Error(`Addon tried to access addon.self.lib`);
+    }
+    get disabled () {
+        // no-op
+        return false;
     }
 }
 

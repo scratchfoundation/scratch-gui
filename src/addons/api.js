@@ -148,6 +148,8 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
+const alwaysTrue = () => true;
+
 class Tab extends EventTargetShim {
     constructor () {
         super();
@@ -184,12 +186,14 @@ class Tab extends EventTargetShim {
         throw new Error('loadScript is not supported');
     }
 
-    waitForElement (selector, {markAsSeen = false, condition, reduxEvents} = {}) {
-        const firstQuery = document.querySelectorAll(selector);
-        for (const element of firstQuery) {
-            if (this._seenElements.has(element)) continue;
-            if (markAsSeen) this._seenElements.add(element);
-            return Promise.resolve(element);
+    waitForElement (selector, {markAsSeen = false, condition = alwaysTrue, reduxEvents} = {}) {
+        if (condition()) {
+            const firstQuery = document.querySelectorAll(selector);
+            for (const element of firstQuery) {
+                if (this._seenElements.has(element)) continue;
+                if (markAsSeen) this._seenElements.add(element);
+                return Promise.resolve(element);
+            }
         }
 
         let reduxListener;
@@ -200,9 +204,13 @@ class Tab extends EventTargetShim {
                     reduxEventSatisifed = true;
                 }
             };
+            const oldCondition = condition;
             condition = () => {
+                if (!oldCondition()) {
+                    return false;
+                }
                 if (reduxEventSatisifed) {
-                    reduxEventSatisifed = false;
+                    reduxEventSatisifed = false; // TODO resetting this flag might be unsafe
                     return true;
                 }
                 return false;
@@ -213,7 +221,7 @@ class Tab extends EventTargetShim {
 
         return new Promise(resolve => {
             const callback = () => {
-                if (condition && !condition()) {
+                if (!condition()) {
                     return;
                 }
                 const elements = document.querySelectorAll(selector);

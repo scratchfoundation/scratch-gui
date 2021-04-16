@@ -152,7 +152,6 @@ class Tab extends EventTargetShim {
     constructor () {
         super();
         this._seenElements = new WeakSet();
-        this._isFirstWaitForElement = false;
         // traps is public API
         this.traps = {
             get vm () {
@@ -186,11 +185,6 @@ class Tab extends EventTargetShim {
     }
 
     waitForElement (selector, {markAsSeen = false, condition, reduxEvents} = {}) {
-        if (this._isFirstWaitForElement) {
-            this._isFirstWaitForElement = false;
-            reduxEvents = null;
-        }
-
         const firstQuery = document.querySelectorAll(selector);
         for (const element of firstQuery) {
             if (this._seenElements.has(element)) continue;

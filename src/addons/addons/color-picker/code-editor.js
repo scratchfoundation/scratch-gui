@@ -44,7 +44,12 @@ export default async ({ addon, console, msg }) => {
     element.click();
   };
   while (true) {
-    const element = await addon.tab.waitForElement("button.scratchEyedropper", { markAsSeen: true });
+    const element = await addon.tab.waitForElement("button.scratchEyedropper", {
+      markAsSeen: true,
+      condition: () =>
+        addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 0 &&
+        !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
+    });
     rateLimiter.abort(false);
     if (addon.tab.editorMode !== "editor") continue;
     addon.tab.redux.initialize();

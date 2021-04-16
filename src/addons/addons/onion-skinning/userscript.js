@@ -732,7 +732,9 @@ export default async function ({ addon, global, console, msg }) {
     while (true) {
       const canvasControls = await addon.tab.waitForElement("[class^='paint-editor_canvas-controls']", {
         markAsSeen: true,
-        condition: () => addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1,
+        condition: () =>
+          addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1 &&
+          !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
       });
       accessScratchInternals();
       const zoomControlsContainer = canvasControls.querySelector("[class^='paint-editor_zoom-controls']");

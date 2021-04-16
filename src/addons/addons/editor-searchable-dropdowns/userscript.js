@@ -171,7 +171,13 @@ export default async function ({ addon, global, console }) {
   }
 
   function findBlocklyDropDownDiv() {
-    return addon.tab.waitForElement(".blocklyDropDownDiv").then(() => document.querySelector(".blocklyDropDownDiv"));
+    return addon.tab
+      .waitForElement(".blocklyDropDownDiv", {
+        condition: () =>
+          addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 0 &&
+          !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
+      })
+      .then(() => document.querySelector(".blocklyDropDownDiv"));
   }
 
   blocklyDropDownDiv = await findBlocklyDropDownDiv();

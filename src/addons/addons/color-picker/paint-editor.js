@@ -48,7 +48,9 @@ export default async ({ addon, console, msg }) => {
   while (true) {
     const element = await addon.tab.waitForElement('div[class*="color-picker_swatch-row"]', {
       markAsSeen: true,
-      condition: () => addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1,
+      condition: () =>
+        addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1 &&
+        !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
     });
     rateLimiter.abort(false);
     addon.tab.redux.initialize();

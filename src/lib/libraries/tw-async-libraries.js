@@ -19,5 +19,3 @@ export const getSoundLibrary = asyncLibrary(
 export const getSpriteLibrary = asyncLibrary(
     () => import(/* webpackChunkName: "library-sprites" */ './sprites.json')
 );
-
-window.a = getSpriteLibrary;

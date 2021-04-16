@@ -210,7 +210,6 @@ class Tab extends EventTargetShim {
                     return false;
                 }
                 if (reduxEventSatisifed) {
-                    reduxEventSatisifed = false; // TODO resetting this flag might be unsafe
                     return true;
                 }
                 return false;

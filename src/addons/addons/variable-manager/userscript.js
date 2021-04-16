@@ -334,6 +334,7 @@ export default async function ({ addon, global, console, msg }) {
   while (true) {
     const tabs = await addon.tab.waitForElement("[class^='react-tabs_react-tabs__tab-list']", {
       markAsSeen: true,
+      reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
     });
 
     contentArea = document.querySelector("[class^=gui_tabs]");

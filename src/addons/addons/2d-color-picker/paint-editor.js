@@ -71,7 +71,10 @@ export default async ({ addon, console, msg }) => {
   // le loop
   while (true) {
     // wait for color dialog box appearance
-    const element = await addon.tab.waitForElement('div[class*="color-picker_swatch-row"]', { markAsSeen: true });
+    const element = await addon.tab.waitForElement('div[class*="color-picker_swatch-row"]', {
+      markAsSeen: true,
+      condition: () => addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1,
+    });
     rateLimiter.abort(false);
 
     // update the bg color of the picker

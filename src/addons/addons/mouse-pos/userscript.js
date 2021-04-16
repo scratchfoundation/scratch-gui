@@ -36,7 +36,10 @@ export default async function ({ addon, global, console }) {
   hideInSmallStageMode({ addon });
 
   while (true) {
-    let bar = await addon.tab.waitForElement('[class*="controls_controls-container"]', { markAsSeen: true });
+    let bar = await addon.tab.waitForElement('[class*="controls_controls-container"]', {
+      markAsSeen: true,
+      reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+    });
 
     if (addon.tab.editorMode === "editor") {
       // my attempt at detecting if they're in the editor?

@@ -152,6 +152,7 @@ class Tab extends EventTargetShim {
     constructor () {
         super();
         this._seenElements = new WeakSet();
+        // traps is public API
         this.traps = {
             get vm () {
                 // We expose VM on window
@@ -183,7 +184,7 @@ class Tab extends EventTargetShim {
         throw new Error('loadScript is not supported');
     }
 
-    waitForElement (selector, {markAsSeen = false} = {}) {
+    waitForElement (selector, {markAsSeen = false, condition, reduxEvents} = {}) {
         const firstQuery = document.querySelectorAll(selector);
         for (const element of firstQuery) {
             if (this._seenElements.has(element)) continue;
@@ -193,6 +194,9 @@ class Tab extends EventTargetShim {
 
         return new Promise(resolve => {
             const callback = () => {
+                if (condition && !condition()) {
+                    return;
+                }
                 const elements = document.querySelectorAll(selector);
                 for (const element of elements) {
                     if (this._seenElements.has(element)) continue;

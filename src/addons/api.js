@@ -152,6 +152,7 @@ class Tab extends EventTargetShim {
     constructor () {
         super();
         this._seenElements = new WeakSet();
+        this._isFirstWaitForElement = false;
         // traps is public API
         this.traps = {
             get vm () {
@@ -185,11 +186,35 @@ class Tab extends EventTargetShim {
     }
 
     waitForElement (selector, {markAsSeen = false, condition, reduxEvents} = {}) {
+        if (this._isFirstWaitForElement) {
+            this._isFirstWaitForElement = false;
+            reduxEvents = null;
+        }
+
         const firstQuery = document.querySelectorAll(selector);
         for (const element of firstQuery) {
             if (this._seenElements.has(element)) continue;
             if (markAsSeen) this._seenElements.add(element);
             return Promise.resolve(element);
+        }
+
+        let reduxListener;
+        if (reduxEvents) {
+            let reduxEventSatisifed = false;
+            reduxListener = ({detail}) => {
+                if (reduxEvents.includes(detail.action.type)) {
+                    reduxEventSatisifed = true;
+                }
+            };
+            condition = () => {
+                if (reduxEventSatisifed) {
+                    reduxEventSatisifed = false;
+                    return true;
+                }
+                return false;
+            };
+            this.redux.initialize();
+            this.redux.addEventListener('statechanged', reduxListener);
         }
 
         return new Promise(resolve => {
@@ -203,6 +228,9 @@ class Tab extends EventTargetShim {
                     resolve(element);
                     removeMutationObserverCallback(callback);
                     if (markAsSeen) this._seenElements.add(element);
+                    if (reduxListener) {
+                        this.redux.removeEventListener('statechanged', reduxListener);
+                    }
                     break;
                 }
             };

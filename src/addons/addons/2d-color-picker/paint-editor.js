@@ -248,11 +248,8 @@ export default async ({ addon, console, msg }) => {
     addon.tab.redux.addEventListener("statechanged", prevEventHandler);
     saColorPicker.appendChild(saColorPickerImage);
     saColorPicker.appendChild(saColorPickerHandle);
-    let e = element;
-    if (element.parentElement.querySelector(".sa-color-picker"))
-      e = element.parentElement.querySelector(".sa-color-picker");
-    element.parentElement.insertBefore(saColorLabel, e);
-    element.parentElement.insertBefore(saColorPicker, e);
+    element.parentElement.insertBefore(saColorPicker, element.parentElement.children[4]);
+    element.parentElement.insertBefore(saColorLabel, element.parentElement.children[4]);
 
     //hide sat and bright sliders
     saColorPicker.parentElement.children[2].style.display = "none";

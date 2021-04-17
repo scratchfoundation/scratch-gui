@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import ArtieStudentDataPopupComponent from '../components/artie-student-data/artie-student-data-popup.jsx';
 import {defineMessages, injectIntl} from "react-intl";
+import {compose} from "redux";
+import {connect} from "react-redux";
+
+import ArtieStudentDataPopupComponent from '../components/artie-student-data/artie-student-data-popup.jsx';
+import {updateStudentData} from "../lib/artie-api";
+import {artieSetCurrentStudent} from "../reducers/artie-login";
 
 const gender = defineMessages({
     boy: {
@@ -16,31 +21,70 @@ const gender = defineMessages({
         id: 'gui.artie.data.gender.girl'
     }
 });
-
 const responsesGender = [
     this.props.intl.formatMessage(gender.boy),
     this.props.intl.formatMessage(gender.girl)
 ];
 
+
+
 class ArtieStudentDataPopup extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            gender: 0
+        };
+        bindAll(this, [
+            'handleOnGenderChange',
+            'handleOnOkClick',
+            'handleStudentUpdated',
+            'handleOnCancelClick'
+        ]);
     }
+
+    //Handler when the gender has been changed
+    handleOnGenderChange(e){
+        this.state.gender = e;
+    }
+
+    handleOnOkClick(){
+        updateStudentData(this.props.student.id, this.state.gender, this.handleStudentUpdated);
+    }
+    handleStudentUpdated(){
+        this.props.student.gender = this.state.gender;
+        this.props.onArtieSetCurrentStudent(this.props.student);
+    }
+
+    handleOnCancelClick(){}
 
     render () {
         return(
             <ArtieStudentDataPopupComponent
-                onOk={this.props.onOk}
-                onCancel={this.props.onCancel}
+                onOk={this.handleOnOkClick}
+                onCancel={this.handleOnCancelClick}
                 student={this.props.student}
                 genderResponses={responsesGender}
+                onGenderChange={this.handleOnGenderChange}
+                title="Student Data"
             />
         );
     }
 }
 
+const mapStateToProps = (state) => {};
+const mapDispatchToProps = dispatch => ({
+    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))
+});
+
+
 ArtieStudentDataPopup.propTypes = {
     student: PropTypes.object.isRequired
 }
 
-export default injectIntl(ArtieStudentDataPopup);
+export default compose(
+    injectIntl,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(ArtieStudentDataPopup);

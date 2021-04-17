@@ -36,6 +36,7 @@ import undoImageWhite from './undo-white.svg';
 import undoImageBlack from './undo-black.svg';
 import infoImage from './info.svg';
 import styles from './settings.css';
+import '../polyfill';
 import '../../lib/normalize.css';
 
 /* eslint-disable no-alert */

@@ -19,9 +19,7 @@ import newAddons from './new-addons.json';
 import isMobile from './is-mobile';
 
 const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
-const mediaRecorderSupported = !!window.MediaRecorder && (
-    MediaRecorder.isTypeSupported('video/webm') || MediaRecorder.isTypeSupported('video/mp4')
-);
+const mediaRecorderSupported = !!window.MediaRecorder && MediaRecorder.isTypeSupported('video/webm');
 const isSupported = manifest => {
     if (!manifest.permissions) {
         return true;

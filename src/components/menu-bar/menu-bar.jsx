@@ -89,6 +89,7 @@ import scratchLogo from './scratch-logo.svg';
 import sharedMessages from '../../lib/shared-messages';
 
 import SeeInsideButton from './tw-see-inside.jsx';
+import analytics from '../../lib/analytics';
 
 const ariaMessages = defineMessages({
     language: {
@@ -1108,7 +1109,10 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickHelp: () => dispatch(openHelpMenu()),
+    onClickHelp: () => {
+        analytics.twEvent('Open Help');
+        dispatch(openHelpMenu());
+    },
     onRequestCloseHelp: () => dispatch(closeHelpMenu()),
     onClickErrors: () => dispatch(openErrorsMenu()),
     onRequestCloseErrors: () => dispatch(closeErrorsMenu()),

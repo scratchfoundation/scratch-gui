@@ -413,8 +413,7 @@ class Flags extends React.Component {
                         Use a custom cloud host instead of the default
                         behaviour, which is to save cloud variables to
                         localStorage. Note that for some reason, Scratch doesn't
-                        want you to include the protocol (ie, omit
-                        <code>ws://</code> or <code>wss://</code>).
+                        want you to include the protocol (ie, omit <code>ws://</code> or <code>wss://</code>).
                         <FormattedMessage
                             defaultMessage=" Also, unless you use the {previewFaqLink}, the cloud server cannot be {code} unless it's on localhost because this site is on HTTPS."
                             description="Scratch 3.0 FAQ description"

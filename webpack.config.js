@@ -100,8 +100,8 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'lib.min': ['react', 'react-dom'],
-            'gui': './src/playground/index.jsx',
-            'flags': './src/playground/flags.jsx'
+            'gui.min': './src/playground/index.jsx',
+            'flags.min': './src/playground/flags.jsx'
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -134,13 +134,13 @@ module.exports = [
                 'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'gui'],
+                chunks: ['lib.min', 'gui.min'],
                 template: 'src/playground/index.ejs',
                 title: 'E羊icques: A Scratch mod with a custom aspect ratio that can load an extension from a URL',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'flags'],
+                chunks: ['lib.min', 'flags.min'],
                 template: 'src/playground/index.ejs',
                 filename: 'flags.html',
                 title: 'E羊icques: URL settings'
@@ -154,9 +154,9 @@ module.exports = [
                 to: 'static/blocks-media'
             }]),
             new CopyWebpackPlugin([{
-                from: 'extensions/**',
-                to: 'static',
-                context: 'src/examples'
+                from: '**',
+                to: '16-9',
+                context: 'src/examples/16-9'
             }]),
             new CopyWebpackPlugin([{
                 from: 'extension-worker.{js,js.map}',

@@ -92,6 +92,10 @@ const vmListenerHOC = function (WrappedComponent) {
                 key: key,
                 isDown: true
             });
+            this.props.vm.postIOData('keyboard', {
+                key: 'code_' + e.code,
+                isDown: true
+            });
 
             // Prevent space/arrow key from scrolling the page.
             if (e.keyCode === 32 || // 32=space
@@ -105,6 +109,10 @@ const vmListenerHOC = function (WrappedComponent) {
             const key = (!e.key || e.key === 'Dead') ? e.keyCode : e.key;
             this.props.vm.postIOData('keyboard', {
                 key: key,
+                isDown: false
+            });
+            this.props.vm.postIOData('keyboard', {
+                key: 'code_' + e.code,
                 isDown: false
             });
 

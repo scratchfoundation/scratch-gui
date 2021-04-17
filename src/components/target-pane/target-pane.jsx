@@ -19,6 +19,7 @@ import styles from './target-pane.css';
 const TargetPane = ({
     editingTarget,
     fileInputRef,
+    isRtl,
     hoveredTarget,
     spriteLibraryVisible,
     onActivateBlocksTab,

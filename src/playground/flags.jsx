@@ -241,7 +241,7 @@ class Flags extends React.Component {
             + `&load_griffpatch=${loadGriffpatch}`
             + extensionURLs.map(url => `&extension=${encodeURIComponent(url)}`).join('')
             + loadPlugins.map(url => `&load_plugin=${encodeURIComponent(url)}`).join('');
-        window.location.href = './' + params + window.location.hash;
+        window.location.href = './index.html' + params + window.location.hash;
     }
     handleClickLogo () {
         window.location.href = window.location.href.replace(/flags(\.html)?/, '');
@@ -405,11 +405,38 @@ class Flags extends React.Component {
                     </ul>
                     <p>
                         <sup>[2]</sup>
-                        Compatibility mode makes projects run at 30 fps. When disabled, projects will run at 60 fps.
+                        Compatibility mode makes projects run at 30 fps. When
+                        disabled, projects will run at 60 fps.
                     </p>
                     <p>
                         <sup>[3]</sup>
-                        Use a custom cloud host instead of the default behaviour, which is to save cloud variables to localStorage. Note that for some reason, Scratch doesn't want you to include the protocol (ie, omit <code>ws://</code> or <code>wss://</code>).
+                        Use a custom cloud host instead of the default
+                        behaviour, which is to save cloud variables to
+                        localStorage. Note that for some reason, Scratch doesn't
+                        want you to include the protocol (ie, omit
+                        <code>ws://</code> or <code>wss://</code>).
+                        <FormattedMessage
+                            defaultMessage=" Also, unless you use the {previewFaqLink}, the cloud server cannot be {code} unless it's on localhost because this site is on HTTPS."
+                            description="Scratch 3.0 FAQ description"
+                            id="gui.aaab.zzweee"
+                            values={{
+                                previewFaqLink: (
+                                    <a
+                                        className={styles.faqLink}
+                                        href="https://github.com/SheepTester/scratch-gui/archive/gh-pages.zip"
+                                    >
+                                        <FormattedMessage
+                                            defaultMessage="offline mod"
+                                            description="link to Scratch 3.0 FAQ page"
+                                            id="gui.aaab.z21"
+                                        />
+                                    </a>
+                                ),
+                                code: (
+                                    <code>ws://</code>
+                                )
+                            }}
+                        />
                     </p>
                     <div className={styles.faqLinkText}>
                         <FormattedMessage

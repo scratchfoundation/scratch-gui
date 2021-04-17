@@ -143,7 +143,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
         return;
     }
 
-    const bitmapAdapter = new BitmapAdapter(standardStageWidth, standardStageHeight);
+    const bitmapAdapter = new BitmapAdapter(null, null, standardStageWidth, standardStageHeight);
     const addCostumeFromBuffer = function (dataBuffer) {
         const vmCostume = createVMAsset(
             storage,

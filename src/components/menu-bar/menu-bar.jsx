@@ -162,6 +162,7 @@ class MenuBar extends React.Component {
         super(props);
         bindAll(this, [
             'handleClickNew',
+            'handleClickOfflineMod',
             'handleClickRemix',
             'handleClickSave',
             'handleClickSaveAsCopy',
@@ -335,6 +336,9 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+    handleClickOfflineMod () {
+        window.location = 'https://github.com/SheepTester/scratch-gui/archive/gh-pages.zip';
+    }
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -487,6 +491,16 @@ class MenuBar extends React.Component {
                                                 defaultMessage="Change URL settings"
                                                 description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
                                                 id="gui.menuBar.wigglesAndGiggles"
+                                            />
+                                        </MenuItem>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleClickOfflineMod}
+                                        >
+                                            <FormattedMessage
+                                                defaultMessage="Download offline mod"
+                                                description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
+                                                id="gui.menuBar.wigglesAndGiggles2"
                                             />
                                         </MenuItem>
                                     </MenuSection>

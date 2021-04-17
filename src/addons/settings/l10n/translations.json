@@ -104,6 +104,11 @@
         "tw.addons.settings.title": "애드온 설정",
         "tw.addons.settings.unsupported": "일부 애드온은 다음 브라우저에서는 사용하실 수 없습니다:"
     },
+    "nb": {
+        "tw.addons.settings.noResults": "Ingen resultater.",
+        "tw.addons.settings.search": "Søk",
+        "tw.addons.settings.tags.new": "Ny!"
+    },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",
@@ -143,6 +148,26 @@
         "tw.addons.settings.tags.recommended": "Recomandat",
         "tw.addons.settings.title": "Setările Addon-urilor",
         "tw.addons.settings.unsupported": "Unele extensii nu sunt disponibile în acest browser:"
+    },
+    "sl": {
+        "tw.addons.settings.addonFeedback": "Povratne informacije o dodatkih",
+        "tw.addons.settings.confirmResetAll": "Ste prepričani, da želite ponastaviti vse nastavitve dodatkov?",
+        "tw.addons.settings.credits": "Hvala:",
+        "tw.addons.settings.dirty": "Znova naložite TurboWarp, da uporabite spremenjene nastavitve.",
+        "tw.addons.settings.dirtyButton": "Znova naloži zdaj",
+        "tw.addons.settings.export": "Izvozi nastavitve",
+        "tw.addons.settings.import": "Uvozi nastavitve",
+        "tw.addons.settings.noResults": "Ni rezultatov.",
+        "tw.addons.settings.presets": "Prednastavitve",
+        "tw.addons.settings.reset": "Ponastavi",
+        "tw.addons.settings.resetAll": "Ponastavi vse",
+        "tw.addons.settings.search": "Iskanje",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.new": "Novo!",
+        "tw.addons.settings.tags.recommended": "Priporočeno",
+        "tw.addons.settings.tags.theme": "Tema",
+        "tw.addons.settings.title": "Nastavitve dodatkov",
+        "tw.addons.settings.unsupported": "Nekateri dodatki v tem brskalniku niso na voljo:"
     },
     "tr": {
         "tw.addons.settings.addonFeedback": "Eklenti geribildirim",

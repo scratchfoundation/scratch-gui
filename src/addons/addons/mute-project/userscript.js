@@ -33,7 +33,7 @@ export default async function ({ addon, global, console }) {
     });
     let container = button.parentElement;
     container.appendChild(icon);
-    button.addEventListener("click", toggleMute);
+    if (!window.safari) button.addEventListener("click", toggleMute);
     button.addEventListener("contextmenu", toggleMute);
   }
 }

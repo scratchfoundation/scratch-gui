@@ -1,4 +1,4 @@
-export const getHexRegex = () => /^#?([0-9a-fA-F]{3}){1,2}$/g;
+export const getHexRegex = () => /^#[0-9a-fA-F]{3,8}$/;
 
 export const normalizeHex = (input) => {
   let hex = String(input);

@@ -10,6 +10,8 @@
 import xhr from 'xhr';
 
 const _inputElementsValues = ['text', 'math_number', 'math_positive_number', 'math_whole_number'];
+const _pedagogicalInterventionWebServiceUrl = 'http://pre-prod.artie.rocks:8082';
+const _pedagogialWebUrl = 'http://pre-prod.artie.rocks';
 
 
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});
@@ -156,7 +158,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
         }
     });
 
-    xhr.open("POST", 'http://pre-prod.artie.rocks:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData', true);
+    xhr.open("POST", `${_pedagogicalInterventionWebServiceUrl}/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -188,7 +190,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, call
         }
     });
 
-    xhr.open("POST", 'http://pre-prod.artie.rocks:8082/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution', true);
+    xhr.open("POST", `${_pedagogicalInterventionWebServiceUrl}/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(params);
 });
@@ -211,7 +213,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -228,7 +230,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -245,7 +247,7 @@ const getArtieExercises = (userName, password, isEvaluation, callback) => new Pr
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/exercises/getAllIsEvaluation?userName=${userName}&password=${password}&isEvaluation=${isEvaluation}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/exercises/getAllIsEvaluation?userName=${userName}&password=${password}&isEvaluation=${isEvaluation}`, true);
     xhr.send();
 
 });
@@ -262,7 +264,7 @@ const getAllArtieExercises = (userName, password, callback) => new Promise(() =>
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
     xhr.send();
 
 });
@@ -278,10 +280,27 @@ const updateStudentCompetence = (studentId, competence, callback) => new Promise
         }
     });
 
-    xhr.open("GET", `http://pre-prod.artie.rocks/api/v1/students/updateStudentCompetence?studentId=${studentId}&competence=${competence}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentCompetence?studentId=${studentId}&competence=${competence}`, true);
     xhr.send();
 
 });
 
+const updateStudentData = (studentId, gender, callback) => new Promise(() => {
+
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response != null) {
+                let json = JSON.parse(xhr.response);
+                callback(json.body.object);
+            }
+        }
+    });
+
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentData?studentId=${studentId}&gender=${gender}`, true);
+    xhr.send();
+});
+
 export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents,
-        getArtieExercises, getAllArtieExercises, updateStudentCompetence};
+        getArtieExercises, getAllArtieExercises, updateStudentCompetence,
+        updateStudentData};

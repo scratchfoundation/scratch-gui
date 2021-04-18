@@ -71,7 +71,7 @@ class Stage extends React.Component {
             // default color
             this.props.vm.renderer.draw();
         }
-        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter(standardStageWidth, standardStageHeight));
+        this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter(null, null, standardStageWidth, standardStageHeight));
     }
     componentDidMount () {
         this.attachRectEvents();

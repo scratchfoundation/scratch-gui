@@ -107,7 +107,10 @@
     "nb": {
         "tw.addons.settings.noResults": "Ingen resultater.",
         "tw.addons.settings.search": "Søk",
-        "tw.addons.settings.tags.new": "Ny!"
+        "tw.addons.settings.tags.new": "Ny!",
+        "tw.addons.settings.tags.recommended": "Anbefalt",
+        "tw.addons.settings.tags.theme": "Tema",
+        "tw.addons.settings.title": "Innstillinger for utvidelser"
     },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",

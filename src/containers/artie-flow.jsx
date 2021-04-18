@@ -4,6 +4,7 @@ import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 
 import ArtieLogin from "../components/artie-login/artie-login.jsx";
+import ArtieStudentData from "./artie-student-data-popup.jsx";
 import ArtieExercises from "../components/artie-exercises/artie-exercises.jsx";
 import ArtieHelp from "./artie-help.jsx";
 import ArtieExercisePopup from "./artie-exercises-popup.jsx";
@@ -39,6 +40,7 @@ class ArtieFlow extends React.Component {
         super(props);
         this.state = {
             artieLoginComponent: false,
+            artieStudentDataComponent: false,
             artieExercisesComponent: false,
             artieHelpComponent: false,
             artiePopupComponent: false
@@ -70,6 +72,7 @@ class ArtieFlow extends React.Component {
     flow(nextProps, nextState){
 
         let artieLoginComponent = nextState.artieLoginComponent;
+        let artieStudentDataComponent = nextState.artieStudentDataComponent;
         let artieExercisesComponent = nextState.artieExercisesComponent;
         let artieHelpComponent = nextState.artieHelpComponent;
         let artiePopupComponent = nextState.artiePopupComponent;
@@ -87,6 +90,7 @@ class ArtieFlow extends React.Component {
                     (nextProps.artieLogin.user.role === 0 && nextProps.artieLogin.students ===[])))
             {
                 artieLoginComponent = true;
+                artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
                 artiePopupComponent = false;
@@ -103,11 +107,27 @@ class ArtieFlow extends React.Component {
             }
         }
 
-        //2- Checks if we must show the exercises component or not
-        if(!nextState.artieExercisesComponent && !nextState.artieHelpComponent){
+        //2- Checks if we must show the student data component or not
+        if(!nextState.artieStudentDataComponent && !nextState.artieLoginComponent){
+            if(currentStudent !== null && currentStudent !== undefined && (currentStudent.gender === undefined || currentStudent.gender===0)){
+                artieLoginComponent = false;
+                artieStudentDataComponent = true;
+                artieExercisesComponent = false;
+                artieHelpComponent = false;
+                artiePopupComponent = false;
+                changes = true;
+            }else if(nextState.artieStudentDataComponent){
+                artieStudentDataComponent = false;
+                changes = true;
+            }
+        }
+
+        //3- Checks if we must show the exercises component or not
+        if(!nextState.artieExercisesComponent && !nextState.artieHelpComponent && !nextState.artieStudentDataComponent){
             if(((currentStudent !== null && currentStudent.competence > 0) || nextProps.artieExercises.active) && !popupActivation){
 
                 artieLoginComponent = false;
+                artieStudentDataComponent = false;
                 artieExercisesComponent = true;
                 artieHelpComponent = false;
                 artiePopupComponent = false;
@@ -120,12 +140,13 @@ class ArtieFlow extends React.Component {
             }
         }
 
-        //3- Checks if we must show the help component or not
+        //4- Checks if we must show the help component or not
         if(!nextState.artieHelpComponent){
             if(currentStudent !== null && currentExercise !== null && nextProps.artieExercises.help !== undefined && nextProps.artieExercises.help !== null &&
                 nextProps.artieExercises.help.nextSteps !== null && nextProps.artieExercises.help.totalDistance > 0){
 
                 artieLoginComponent = false;
+                artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = true;
                 artiePopupComponent = false;
@@ -140,11 +161,12 @@ class ArtieFlow extends React.Component {
             }
         }
 
-        //4- Checks if we must show the popup component or not
+        //5- Checks if we must show the popup component or not
         if(!nextState.artiePopupComponent && !nextState.artieExercisesComponent && !nextState.artieHelpComponent){
             if((currentStudent !== null && (currentStudent.competence===undefined || currentStudent.competence === 0)) || popupActivation)
             {
                 artieLoginComponent = false;
+                artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
                 artiePopupComponent = true;
@@ -161,6 +183,7 @@ class ArtieFlow extends React.Component {
         //Checks if we must do changes
         if(changes){
             this.setState({artieLoginComponent: artieLoginComponent,
+                                artieStudentDataComponent: artieStudentDataComponent,
                                 artieExercisesComponent: artieExercisesComponent,
                                 artieHelpComponent: artieHelpComponent,
                                 artiePopupComponent: artiePopupComponent
@@ -294,7 +317,12 @@ class ArtieFlow extends React.Component {
                     />
         }
 
-        //2- Checks if the component must show the exercise component or not
+        //2- Checks if the component must show the student data component or not
+        if(this.state.artieStudentDataComponent){
+            return <ArtieStudentData student={this.props.artieLogin.currentStudent} />
+        }
+
+        //3- Checks if the component must show the exercise component or not
         if(this.state.artieExercisesComponent){
             return <ArtieExercises
                         title="Exercise Selector"
@@ -307,7 +335,7 @@ class ArtieFlow extends React.Component {
                     />
         }
 
-        //3- Checks if the component must show the help component or not
+        //4- Checks if the component must show the help component or not
         if(this.state.artieHelpComponent){
             return <ArtieHelp
                         onRequestClose={this.props.onArtieClearHelp}
@@ -318,7 +346,7 @@ class ArtieFlow extends React.Component {
         }
 
 
-        //4- Checks if the component must show the popup or not
+        //5- Checks if the component must show the popup or not
         if(this.state.artiePopupComponent){
             return <ArtieExercisePopup
                         userLogin = {userLogin}

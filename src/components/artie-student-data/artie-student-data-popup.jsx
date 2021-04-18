@@ -8,7 +8,7 @@ import Select from '../forms/select.jsx';
 
 
 
-const genderComponent = (onGenderChange, responses) => {
+const genderComponent = (onGenderChange, genderResponses) => {
 
     return(
         <Box>
@@ -20,7 +20,7 @@ const genderComponent = (onGenderChange, responses) => {
                 />
                 <Select
                     autofocus={true}
-                    data={responses}
+                    data={genderResponses}
                     onChange={onGenderChange}
                 />
             </label>
@@ -35,15 +35,27 @@ class ArtieStudentDataPopupComponent extends React.Component {
     }
 
     render(){
-        return null;
+        return(
+            <Modal
+                onRequestClose={this.props.onCancel}
+                className={styles.modalContent}
+                contentLabel={this.props.title}
+                id="ArtieStudentData"
+            >
+                {this.props.showGender ?
+                    genderComponent(this.props.onGenderChange, this.props.genderResponses)
+                : null}
+            </Modal>
+        );
     }
-}
+};
 
 ArtieStudentDataPopupComponent.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onOk: PropTypes.func,
     title: PropTypes.string.isRequired,
-    student: PropTypes.object,
-    genderResponses: PropTypes.object
+    showGender: PropTypes.bool.isRequired,
+    genderResponses: PropTypes.object,
+    onGenderChange: PropTypes.func
 };
 export default ArtieStudentDataPopupComponent;

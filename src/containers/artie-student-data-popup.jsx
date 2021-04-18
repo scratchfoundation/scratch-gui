@@ -21,10 +21,6 @@ const gender = defineMessages({
         id: 'gui.artie.data.gender.girl'
     }
 });
-const responsesGender = [
-    this.props.intl.formatMessage(gender.boy),
-    this.props.intl.formatMessage(gender.girl)
-];
 
 
 
@@ -58,20 +54,32 @@ class ArtieStudentDataPopup extends React.Component {
     handleOnCancelClick(){}
 
     render () {
-        return(
-            <ArtieStudentDataPopupComponent
-                onOk={this.handleOnOkClick}
-                onCancel={this.handleOnCancelClick}
-                student={this.props.student}
-                genderResponses={responsesGender}
-                onGenderChange={this.handleOnGenderChange}
-                title="Student Data"
-            />
-        );
+        let showGender = (!this.props.student.gender === undefined || this.props.student.gender === 0);
+
+        //If we want the user fills the personal data
+        if(showGender) {
+
+            let responsesGender = [
+                this.props.intl.formatMessage(gender.boy),
+                this.props.intl.formatMessage(gender.girl)
+            ];
+
+            return (
+                <ArtieStudentDataPopupComponent
+                    onOk={this.handleOnOkClick}
+                    onCancel={this.handleOnCancelClick}
+                    genderResponses={responsesGender}
+                    onGenderChange={this.handleOnGenderChange}
+                    showGender={showGender}
+                    title='Student Data'
+                />
+            );
+        }else{
+            return null;
+        }
     }
 }
 
-const mapStateToProps = (state) => {};
 const mapDispatchToProps = dispatch => ({
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))
 });
@@ -84,7 +92,7 @@ ArtieStudentDataPopup.propTypes = {
 export default compose(
     injectIntl,
     connect(
-        mapStateToProps,
+        null,
         mapDispatchToProps
     )
 )(ArtieStudentDataPopup);

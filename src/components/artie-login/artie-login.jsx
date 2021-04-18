@@ -67,7 +67,7 @@ class ArtieLoginComponent extends React.Component {
                                     {this.state.error}
                                 </div>
                             :
-                                <div></div>
+                                null
                             }
                         </Box>
                         <Box>
@@ -117,7 +117,7 @@ class ArtieLoginComponent extends React.Component {
                                 </label>
                             </Box>
                         :
-                            <div></div>
+                            null
                         }
                         <Box className={styles.buttonRow}>
                             <button className={styles.cancelButton} onClick={this.props.onCancel}>

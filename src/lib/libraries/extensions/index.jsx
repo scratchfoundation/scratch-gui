@@ -349,6 +349,7 @@ export default [
                 id="tw.customExtension.name"
             />
         ),
+        extensionId: '',
         iconURL: customExtensionIcon,
         description: (
             <FormattedMessage

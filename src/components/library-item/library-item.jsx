@@ -21,7 +21,7 @@ class LibraryItemComponent extends React.PureComponent {
                     {
                         [styles.disabled]: this.props.disabled
                     },
-                    this.props.extensionId ? styles.libraryItemExtension : null,
+                    typeof this.props.extensionId === 'string' ? styles.libraryItemExtension : null,
                     this.props.hidden ? styles.hidden : null
                 )}
                 onClick={this.props.onClick}
@@ -50,7 +50,7 @@ class LibraryItemComponent extends React.PureComponent {
                     </div>
                 ) : null}
                 <div
-                    className={this.props.extensionId ?
+                    className={typeof this.props.extensionId === 'string' ?
                         classNames(styles.featuredExtensionText, styles.featuredText) : styles.featuredText
                     }
                 >

@@ -38,10 +38,13 @@
     font-weight: bold;
 }
 
-.username-link, .project-link {
-    color: $ui-white !important;
+.link {
     text-decoration: none;
+    color: $ui-white;
 }
-.username-link:hover, .project-link:hover {
+.link:hover {
     text-decoration: underline;
+}
+.link .author-info {
+    cursor: pointer;
 }

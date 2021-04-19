@@ -40,7 +40,7 @@
 
 .link {
     text-decoration: none;
-    color: $ui-white;
+    color: $ui-white !important;
 }
 .link:hover {
     text-decoration: underline;

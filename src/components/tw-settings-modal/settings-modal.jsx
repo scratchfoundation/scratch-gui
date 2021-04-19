@@ -273,7 +273,7 @@ const WarpTimer = props => (
             <p>
                 <FormattedMessage
                     // eslint-disable-next-line max-len
-                    defaultMessage="Warp Timer makes scripts check if they are stuck in a long or infinite loop and run at a a low framerate instead of getting stuck until the loop finishes, which fixes most crashes. This has a significant performance impact, so it's not enabled by default outside of the editor."
+                    defaultMessage="Warp Timer makes scripts check if they are stuck in a long or infinite loop and run at a low framerate instead of getting stuck until the loop finishes, which fixes most crashes. This has a significant performance impact, so it's not enabled by default outside of the editor."
                     description="Warp Timer help"
                     id="tw.settingsModal.warpTimerHelp"
                 />

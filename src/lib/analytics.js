@@ -34,7 +34,9 @@ const sendEvent = eventName => {
             // Removing project IDs might result in multiple slashes like //editor, so merge multiple slashes
             .replace(/\/+/g, '/')
             // Remove .html so that old links like /fullscreen.html links will be logged as /fullscreen
-            .replace('.html', '');
+            .replace('.html', '')
+            // Remove trailing /
+            .replace(/(?!^)\/$/, '');
 
         const req = new XMLHttpRequest();
         req.open('POST', PLAUSIBLE_API, true);

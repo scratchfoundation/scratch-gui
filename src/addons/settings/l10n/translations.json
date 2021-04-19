@@ -105,12 +105,24 @@
         "tw.addons.settings.unsupported": "일부 애드온은 다음 브라우저에서는 사용하실 수 없습니다:"
     },
     "nb": {
+        "tw.addons.settings.addonFeedback": "Utvidelse tilbakemelding",
+        "tw.addons.settings.confirmResetAll": "Er du sikkert at du vil tilbakestill alle utvidelser?",
+        "tw.addons.settings.credits": "Fra:",
+        "tw.addons.settings.dirty": "Oppdater siden nå til å oppdater innstillinger.",
+        "tw.addons.settings.dirtyButton": "Oppdater siden nå",
+        "tw.addons.settings.export": "Eksportinnstillinger",
+        "tw.addons.settings.import": "Importinnstillinger",
         "tw.addons.settings.noResults": "Ingen resultater.",
+        "tw.addons.settings.reset": "Tilbakestill",
+        "tw.addons.settings.resetAll": "Tilbakestill alt",
         "tw.addons.settings.search": "Søk",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Easter Egg",
         "tw.addons.settings.tags.new": "Ny!",
         "tw.addons.settings.tags.recommended": "Anbefalt",
         "tw.addons.settings.tags.theme": "Tema",
-        "tw.addons.settings.title": "Innstillinger for utvidelser"
+        "tw.addons.settings.title": "Innstillinger for utvidelser",
+        "tw.addons.settings.unsupported": "Noen utvidelser er ikke tilgjengelig på dette nettleser."
     },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",

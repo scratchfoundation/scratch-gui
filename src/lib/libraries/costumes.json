@@ -7227,19 +7227,6 @@
         "rotationCenterY": 48
     },
     {
-        "name": "Neigh Pony",
-        "tags": [
-            "animals",
-            "fantasy"
-        ],
-        "assetId": "592816f56409d582603c485cbefcbbb8",
-        "bitmapResolution": 1,
-        "dataFormat": "svg",
-        "md5ext": "592816f56409d582603c485cbefcbbb8.svg",
-        "rotationCenterX": 74,
-        "rotationCenterY": 78
-    },
-    {
         "name": "Noor-a",
         "tags": [
             "people",

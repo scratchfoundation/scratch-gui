@@ -9066,38 +9066,6 @@
         "blocks": {}
     },
     {
-        "name": "Neigh Pony",
-        "tags": [
-            "animals",
-            "fantasy"
-        ],
-        "isStage": false,
-        "variables": {},
-        "costumes": [
-            {
-                "assetId": "592816f56409d582603c485cbefcbbb8",
-                "name": "neigh pony",
-                "bitmapResolution": 1,
-                "md5ext": "592816f56409d582603c485cbefcbbb8.svg",
-                "dataFormat": "svg",
-                "rotationCenterX": 74,
-                "rotationCenterY": 78
-            }
-        ],
-        "sounds": [
-            {
-                "assetId": "45ffcf97ee2edca0199ff5aa71a5b72e",
-                "name": "horse",
-                "dataFormat": "wav",
-                "format": "",
-                "rate": 44100,
-                "sampleCount": 57856,
-                "md5ext": "45ffcf97ee2edca0199ff5aa71a5b72e.wav"
-            }
-        ],
-        "blocks": {}
-    },
-    {
         "name": "Noor",
         "tags": [
             "people",

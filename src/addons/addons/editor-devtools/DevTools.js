@@ -369,22 +369,25 @@ export default class DevTools {
   /**
    * A much nicer way of laying out the blocks into columns
    */
-  doCleanUp(e) {
+  doCleanUp(e, dataId) {
     let workspace = this.utils.getWorkspace();
     if (e) {
       e.cancelBubble = true;
       e.preventDefault();
       this.hidePopups(workspace);
-      setTimeout(() => this.doCleanUp(), 0);
+      setTimeout(() => this.doCleanUp(undefined, dataId), 0);
       return;
     }
+
+    let makeSpaceForBlock = dataId && workspace.getBlockById(dataId);
+    makeSpaceForBlock = makeSpaceForBlock && makeSpaceForBlock.getRootBlock();
 
     UndoGroup.startUndoGroup(workspace);
 
     let result = this.getOrderedTopBlockColumns(true);
     let columns = result.cols;
     let orphanCount = result.orphans.blocks.length;
-    if (orphanCount > 0) {
+    if (orphanCount > 0 && !dataId) {
       let message = this.msg("orphaned", {
         count: orphanCount,
       });
@@ -406,15 +409,17 @@ export default class DevTools {
       let maxWidth = 0;
 
       for (const block of column.blocks) {
+        let extraWidth = block === makeSpaceForBlock ? 380 : 0;
+        let extraHeight = block === makeSpaceForBlock ? 480 : 72;
         let xy = block.getRelativeToSurfaceXY();
         if (cursorX - xy.x !== 0 || cursorY - xy.y !== 0) {
           block.moveBy(cursorX - xy.x, cursorY - xy.y);
         }
         let heightWidth = block.getHeightWidth();
-        cursorY += heightWidth.height + 72;
+        cursorY += heightWidth.height + extraHeight;
 
         let maxWidthWithComments = maxWidths[block.id] || 0;
-        maxWidth = Math.max(maxWidth, Math.max(heightWidth.width, maxWidthWithComments));
+        maxWidth = Math.max(maxWidth, Math.max(heightWidth.width + extraWidth, maxWidthWithComments));
       }
 
       cursorX += maxWidth + 96;
@@ -446,7 +451,7 @@ export default class DevTools {
         }
       }
 
-      if (unusedLocals.length > 0) {
+      if (unusedLocals.length > 0 && !dataId) {
         const unusedCount = unusedLocals.length;
         let message = this.msg("unused-var", {
           count: unusedCount,
@@ -1229,12 +1234,15 @@ export default class DevTools {
   }
 
   /**
-   * Initiates a drag event for all block stacks expect those in the set of ids.
+   * Initiates a drag event for all block stacks except those in the set of ids.
    * But why? - Because we know all the ids of the existing stacks before we paste / duplicate - so we can find the
    * new stack by excluding all the known ones.
    * @param ids Set of previously known ids
    */
   beginDragOfNewBlocksNotInIDs(ids) {
+    if (!this.addon.settings.get("enablePasteBlocksAtMouse")) {
+      return;
+    }
     let wksp = this.utils.getWorkspace();
     let topBlocks = wksp.getTopBlocks();
     for (const block of topBlocks) {
@@ -1297,6 +1305,9 @@ export default class DevTools {
       if (document.activeElement.tagName === "INPUT") {
         return;
       }
+      // todo: if (!this.addon.settings.get("enableCtrlLeftRightNav")) {
+      //         return;
+      //       }
       if (this.isScriptEditor()) {
         this.utils.navigationHistory.goBack();
       } else if (this.isCostumeEditor()) {
@@ -1312,6 +1323,9 @@ export default class DevTools {
       if (document.activeElement.tagName === "INPUT") {
         return;
       }
+      // todo: if (!this.addon.settings.get("enableCtrlLeftRightNav")) {
+      //         return;
+      //       }
       if (this.isScriptEditor()) {
         this.utils.navigationHistory.goForward();
       } else if (this.isCostumeEditor()) {
@@ -1363,12 +1377,14 @@ export default class DevTools {
           contextMenu.insertAdjacentHTML(
             "beforeend",
             `
-                            <div class="${this.addon.tab.scratchClass("context-menu_menu-item", {
-                              others: ["react-contextmenu-item", "s3devSTT"],
-                            })}" role="menuitem"
-                                tabindex="-1" aria-disabled="false" style="border-top: 1px solid hsla(0, 0%, 0%, 0.15);"><span>${this.m(
-                                  "top"
-                                )}</span></div>
+                            <div class="${this.addon.tab.scratchClass(
+                              "context-menu_menu-item",
+                              "context-menu_menu-item-bordered",
+                              {
+                                others: ["react-contextmenu-item", "s3devSTT"],
+                              }
+                            )}" role="menuitem"
+                                tabindex="-1" aria-disabled="false"><span>${this.m("top")}</span></div>
                             <div class="${this.addon.tab.scratchClass("context-menu_menu-item", {
                               others: ["react-contextmenu-item", "s3devSTT"],
                             })}" role="menuitem"
@@ -1394,27 +1410,32 @@ export default class DevTools {
               return;
             }
             if (isBackground) {
+              let cleanupPlus = this.addon.settings.get("enableCleanUpPlus");
+
               let nodes = blocklyContextMenu.children;
               const realBlockly = await this.addon.tab.traps.getBlockly();
-              for (const node of nodes) {
-                if (node.textContent === realBlockly.Msg.CLEAN_UP) {
-                  node.remove();
-                  break;
+              if (cleanupPlus) {
+                for (const node of nodes) {
+                  if (node.textContent === realBlockly.Msg.CLEAN_UP) {
+                    node.remove();
+                    break;
+                  }
                 }
               }
-              blocklyContextMenu.insertAdjacentHTML(
-                "beforeend",
-                `
-                            <div id="s3devCleanUp" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
-                                <div class="goog-menuitem-content" style="user-select: none;">${this.m(
-                                  "clean-plus"
-                                )}</div>
-                            </div>
-                            <div id="s3devPaste" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
-                                <div class="goog-menuitem-content" style="user-select: none;">${this.m("paste")}</div>
-                            </div>
-                            `
-              );
+              let html = cleanupPlus
+                ? `
+                  <div id="s3devCleanUp" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
+                      <div class="goog-menuitem-content" style="user-select: none;">${this.m("clean-plus")}</div>
+                  </div>
+              `
+                : "";
+
+              html += `
+                  <div id="s3devPaste" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
+                      <div class="goog-menuitem-content" style="user-select: none;">${this.m("paste")}</div>
+                  </div>
+              `;
+              blocklyContextMenu.insertAdjacentHTML("beforeend", html);
             } else {
               let wksp = this.utils.getWorkspace();
               let block = wksp.getBlockById(dataId);
@@ -1453,22 +1474,19 @@ export default class DevTools {
                 blocklyContextMenu.insertAdjacentHTML(
                   "beforeend",
                   `
-                                    <div id="s3devCopy" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
-                                        <div class="goog-menuitem-content" style="user-select: none;">${this.m(
-                                          "copy-all"
-                                        )}</div>
-                                    </div>
-                                    <div id="s3devCopyBlock" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
-                                        <div class="goog-menuitem-content" style="user-select: none;">${this.m(
-                                          "copy-block"
-                                        )}</div>
-                                    </div>
-                                    <div id="s3devCutBlock" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
-                                        <div class="goog-menuitem-content" style="user-select: none;">${this.m(
-                                          "cut-block"
-                                        )}</div>
-                                    </div>
-                                `
+                    <div id="s3devMakeSpace" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
+                        <div class="goog-menuitem-content" style="user-select: none;">${this.m("make-space")}</div>
+                    </div>
+                    <div id="s3devCopy" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
+                        <div class="goog-menuitem-content" style="user-select: none;">${this.m("copy-all")}</div>
+                    </div>
+                    <div id="s3devCopyBlock" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
+                        <div class="goog-menuitem-content" style="user-select: none;">${this.m("copy-block")}</div>
+                    </div>
+                    <div id="s3devCutBlock" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none;">
+                        <div class="goog-menuitem-content" style="user-select: none;">${this.m("cut-block")}</div>
+                    </div>
+                  `
                 );
               }
 
@@ -1477,12 +1495,12 @@ export default class DevTools {
                 blocklyContextMenu.insertAdjacentHTML(
                   "beforeend",
                   `
-                                <div id="s3devReplaceAllVars" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
-                                    <div class="goog-menuitem-content" style="user-select: none;">${this.m("swap", {
-                                      var: block.getCategory() === "data" ? this.m("variables") : this.m("lists"),
-                                    })}</div>
-                                </div>
-                                `
+                        <div id="s3devReplaceAllVars" class="goog-menuitem s3dev-mi" role="menuitem" style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);">
+                            <div class="goog-menuitem-content" style="user-select: none;">${this.m("swap", {
+                              var: block.getCategory() === "data" ? this.m("variables") : this.m("lists"),
+                            })}</div>
+                        </div>
+                  `
                 );
                 this.selVarID = block.getVars()[0];
               }
@@ -1497,6 +1515,10 @@ export default class DevTools {
             let copyDiv = blocklyContextMenu.querySelector("div#s3devCleanUp");
             if (copyDiv) {
               copyDiv.addEventListener("click", (...e) => this.doCleanUp(...e));
+            }
+            copyDiv = blocklyContextMenu.querySelector("div#s3devMakeSpace");
+            if (copyDiv) {
+              copyDiv.addEventListener("click", (e) => this.doCleanUp(e, dataId));
             }
             copyDiv = blocklyContextMenu.querySelector("div#s3devCopy");
             if (copyDiv) {
@@ -1622,6 +1644,10 @@ export default class DevTools {
       return;
     }
 
+    // todo: if (!this.addon.settings.get("enableBlockInjector")) {
+    //         return;
+    //       }
+
     e.cancelBubble = true;
     e.preventDefault();
 
@@ -1678,6 +1704,10 @@ export default class DevTools {
         this.blockCursor = null; // Clear the cursor if using the mouse
         this.middleClickWorkspace(e);
       }
+      return;
+    }
+
+    if (!this.addon.settings.get("enableMiddleClickFinder")) {
       return;
     }
 

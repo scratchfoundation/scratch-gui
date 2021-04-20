@@ -452,7 +452,7 @@ export default async function ({ addon, global, console, msg }) {
       folderItemCache.start();
       folderAssetCache.start();
 
-      const folderOccurences = new Map();
+      const folderOccurrences = new Map();
       const items = [];
       const result = {
         items,
@@ -495,11 +495,11 @@ export default async function ({ addon, global, console, msg }) {
           }
           i--;
 
-          const occurence = folderOccurences.get(folderName) || 0;
-          folderOccurences.set(folderName, occurence + 1);
+          const occurrence = folderOccurrences.get(folderName) || 0;
+          folderOccurrences.set(folderName, occurrence + 1);
           const baseUniqueId = getUniqueIdOfFolderItems(folderItems);
-          const itemUniqueId = `${isOpen}&${occurence}&${folderName}&${baseUniqueId}&`;
-          const reactKey = `&__${occurence}_${folderName}`;
+          const itemUniqueId = `${isOpen}&${occurrence}&${folderName}&${baseUniqueId}&`;
+          const reactKey = `&__${occurrence}_${folderName}`;
           const assetUniqueId = baseUniqueId;
 
           let folderItem;

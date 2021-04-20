@@ -1,0 +1,89 @@
+{
+  "name": "Custom scripts area zoom settings",
+  "description": "Adjust the minimum, maximum, speed, and start size of the zoom in the project code editor, and autohide the controls.",
+  "tags": ["editor"],
+  "credits": [
+    {
+      "name": "ErrorGamer2000",
+      "link": "https://scratch.mit.edu/users/ErrorGamer2000/"
+    }
+  ],
+  "enabledByDefault": false,
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "settings": [
+    {
+      "name": "Maximum Zoom (50-500%)",
+      "id": "maxZoom",
+      "type": "integer",
+      "min": 100,
+      "default": 300,
+      "max": 500
+    },
+    {
+      "name": "Minimum Zoom (1-100%)",
+      "id": "minZoom",
+      "type": "integer",
+      "min": 1,
+      "default": 30,
+      "max": 100
+    },
+    {
+      "name": "Start Zoom (50-500%)",
+      "id": "startZoom",
+      "type": "integer",
+      "min": 50,
+      "default": 68,
+      "max": 500
+    },
+    {
+      "name": "Zoom Speed (50-200%)",
+      "id": "zoomSpeed",
+      "type": "integer",
+      "min": 50,
+      "default": 100,
+      "max": 200
+    },
+    {
+      "name": "Autohide Zoom Controls",
+      "id": "autohide",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "Autohide Animation duration",
+      "id": "speed",
+      "type": "select",
+      "potentialValues": [
+        {
+          "id": "none",
+          "name": "None"
+        },
+        {
+          "id": "short",
+          "name": "Short"
+        },
+        {
+          "id": "default",
+          "name": "Default"
+        },
+        {
+          "id": "long",
+          "name": "Long"
+        }
+      ],
+      "default": "default"
+    }
+  ],
+  "l10n": true
+}

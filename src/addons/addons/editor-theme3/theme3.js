@@ -110,5 +110,15 @@ export default async function ({ addon, global, console }) {
     }
   }
 
-  document.querySelector(".scratch-addons-theme[data-addon-id='editor-theme3']").textContent += stylesheet;
+  const otherStyle = document.querySelector(`[data-addon-id='${addon.self.id}']`);
+  const newStyle = document.createElement("style");
+  newStyle.textContent = stylesheet;
+  newStyle.className = "scratch-addons-style";
+  newStyle.setAttribute("data-addon-id", addon.self.id);
+  newStyle.setAttribute("data-addon-index", otherStyle.getAttribute("data-addon-index"));
+
+  otherStyle.parentElement.insertBefore(newStyle, otherStyle.nextSibling);
+
+  // Look for reenable event to enable the style. cs.js cannot handle an appended style.
+  addon.self.addEventListener("reenabled", () => (newStyle.disabled = false));
 }

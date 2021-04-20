@@ -3,9 +3,17 @@
   "description": "Replaces the colored circles that identify block categories with custom icons.",
   "tags": ["editor"],
   "enabledByDefault": false,
+  "dynamicEnable": true,
+  "dynamicDisable": true,
   "userscripts": [
     {
       "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],

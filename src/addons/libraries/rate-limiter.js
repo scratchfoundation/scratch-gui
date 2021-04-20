@@ -4,7 +4,7 @@ export default class RateLimiter {
     this.callback = null;
     this.wait = wait;
   }
-  
+
   abort (call = true) {
     if (this.timeout) {
       clearTimeout(this.timeout);
@@ -12,7 +12,7 @@ export default class RateLimiter {
       this.timeout = this.callback = null;
     }
   }
-  
+
   limit (callback) {
     this.abort(false);
     this.callback = callback;

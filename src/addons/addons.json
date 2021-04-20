@@ -25,5 +25,8 @@
     "load-extensions",
     "tw-interface-customization",
     "drag-drop",
+    "initialise-sprite-position",
+    "blocks2image",
+    "custom-zoom",
     "cat-blocks"
 ]

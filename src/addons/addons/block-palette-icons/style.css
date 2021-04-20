@@ -1,0 +1,16 @@
+.scratchCategoryItemBubble {
+  /*Make the padding a little bigger to fit the icons.*/
+  padding: 11px !important;
+  /*Position it relative so that absolute positioning will be relative to the bubble.*/
+  position: relative;
+}
+#sa-category-icon {
+  filter: brightness(50000%);
+  top: 50%;
+  color: white;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 17px;
+  height: 17px;
+}

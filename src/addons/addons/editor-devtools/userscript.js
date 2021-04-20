@@ -14,10 +14,6 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
     return;
   }
 
-  // 0-indexed 6 = July
-  const releaseDate = new Date(2021, 2, 28);
-  const releaseDateLocalized = new Intl.DateTimeFormat(msg.locale).format(releaseDate);
-
   const helpHTML = `
 <div id="s3devHelpPop" class="${addon.tab.scratchClass("modal_modal-overlay")}">
 <div class="${addon.tab.scratchClass("modal_modal-content")}">
@@ -32,9 +28,17 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
   </div>
 </div>
 <div id="s3devHelpContent">
+<!-- tw: we don't put this in because including "Scratch Addons" would probably violate BE/US policy :(
+<p>${m("help-title")} ${m("help-by", {
+    ndash: "&ndash;",
+    url: '<a target="_blank" rel="noreferrer noopener" href="https://www.youtube.com/griffpatch">Griffpatch</a>',
+  })}</p>
+-->
+<hr />
 <h2><strong>${m("code-tab-features")}</strong></h2>
-<p><strong>${m("interactive-find-bar")}</strong> - ${m("interactive-find-bar-desc")}</p>
+<p><strong>${m("interactive-find-bar")}</strong> &ndash; ${m("interactive-find-bar-desc")}</p>
 <p><strong>${m("improved-tidy-up")}</strong> &ndash; ${m("improved-tidy-up-desc")}</p>
+<p><strong>${m("help-make-space")} ${m("help-new")}</strong> &ndash; ${m("help-make-space-desc")}</p>
 <p><strong>${m("copy-to-clipboard")}</strong> &ndash; ${m("copy-to-clipboard-desc")}</p>
 <p><strong>${m("paste-from-clipboard")}</strong> &ndash; ${m("paste-from-clipboard-desc")}</p>
 <p><strong>${m("swap-variable")}</strong> &ndash; ${m("swap-variable-desc")}</p>

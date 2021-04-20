@@ -9,7 +9,7 @@ export default class BlockFlasher {
   static flash(block) {
     if (myFlash.timerID > 0) {
       clearTimeout(myFlash.timerID);
-      myFlash.block.setColour(myFlash.colour);
+      myFlash.block.svgPath_.style.fill = myFlash.colour;
     }
 
     let count = 4;

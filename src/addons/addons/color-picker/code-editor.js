@@ -63,7 +63,9 @@ export default async ({ addon, console, msg }) => {
       value: defaultColor || "#000000",
     });
     const saColorPickerText = Object.assign(document.createElement("input"), {
-      className: "sa-color-picker-text sa-color-picker-code-text",
+      className: addon.tab.scratchClass("input_input-form", {
+        others: "sa-color-picker-text sa-color-picker-code-text",
+      }),
       type: "text",
       pattern: "^#?([0-9a-fA-F]{3}){1,2}$",
       placeholder: msg("hex"),

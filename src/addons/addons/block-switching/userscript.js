@@ -668,6 +668,8 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const customContextMenuHandler = function (options) {
+    if (addon.self.disabled) return;
+
     if (addon.settings.get("border")) {
       addBorderToContextMenuItem = options.length;
     }
@@ -723,6 +725,7 @@ export default async function ({ addon, global, console, msg }) {
   };
 
   const mutationObserverCallback = (mutations) => {
+    if (addon.self.disabled) return;
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {
         if (node.classList.contains("blocklyContextMenu")) {

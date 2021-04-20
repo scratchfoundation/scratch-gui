@@ -1,5 +1,5 @@
 [
-    "drag-drop",
-    "custom-block-shape",
-    "2d-color-picker"
+    "initialise-sprite-position",
+    "blocks2image",
+    "custom-zoom"
 ]

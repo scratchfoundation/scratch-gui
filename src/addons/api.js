@@ -296,16 +296,17 @@ class Settings extends EventTargetShim {
 }
 
 class Self extends EventTargetShim {
+    constructor (id) {
+        super();
+        this.id = id;
+        this.disabled = false;
+    }
     // These are removed at build-time by pull.js. Throw if attempting to access them at runtime.
     get dir () {
         throw new Error(`Addon tried to access addon.self.dir`);
     }
     get lib () {
         throw new Error(`Addon tried to access addon.self.lib`);
-    }
-    get disabled () {
-        // no-op
-        return false;
     }
 }
 
@@ -324,7 +325,7 @@ class AddonRunner {
             addon: {
                 tab: new Tab(),
                 settings: new Settings(id, manifest),
-                self: new Self()
+                self: new Self(id)
             },
             msg: this.msg.bind(this),
             safeMsg: this.safeMsg.bind(this)

@@ -1,13 +1,15 @@
 /* Based on the `stage-selector_raised` class */
 .sa-drag-area,
 .sa-drag-area div[class*="stage-selector_header_"],
-.sa-drag-area div[class*="sprite-info_sprite-info"] {
+.sa-drag-area div[class*="sprite-info_sprite-info"],
+.sa-drag-area div[class*="monitor_list-body"] {
   -webkit-transition: background-color 0.25s ease;
   -o-transition: background-color 0.25s ease;
   transition: background-color 0.25s ease;
 }
 .sa-dragged-over,
 .sa-dragged-over div[class*="stage-selector_header_"],
-.sa-dragged-over div[class*="sprite-info_sprite-info"] {
+.sa-dragged-over div[class*="sprite-info_sprite-info"],
+.sa-dragged-over div[class*="monitor_list-body"] {
   background-color: hsla(0, 100%, 77%, 1);
 }

@@ -5,14 +5,10 @@ export default function ({ addon, global, console }) {
 
   addon.self.addEventListener("disabled", () => {
     clearInterval(interval);
-    // TODO: when dynamicEnable is a thing, set it to false for this addon (its default value)
-    // and make sure "disabled" event is fired after styles are updated, and remove disabled logic
-    document.querySelector(".scratch-addons-theme[data-addon-id='editor-stage-left']").disabled = true;
     Blockly.getMainWorkspace().recordCachedAreas();
   });
   addon.self.addEventListener("reenabled", () => {
     if (!injected) tryInjecting();
-    document.querySelector(".scratch-addons-theme[data-addon-id='editor-stage-left']").disabled = false;
     Blockly.getMainWorkspace().recordCachedAreas();
   });
 

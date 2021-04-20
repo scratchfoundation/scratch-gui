@@ -1,0 +1,43 @@
+{
+  "name": "Change new sprite default position",
+  "description": "Moves sprites to a specified x/y position when they are created.",
+  "credits": [
+    {
+      "name": "pufferfish101007",
+      "link": "https://scratch.mit.edu/users/pufferfish101007"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "settings": [
+    {
+      "id": "x",
+      "name": "X position",
+      "type": "integer",
+      "default": 0,
+      "min": -240,
+      "max": 240
+    },
+    {
+      "id": "y",
+      "name": "Y position",
+      "type": "integer",
+      "default": 0,
+      "min": -180,
+      "max": 180
+    },
+    {
+      "id": "library",
+      "name": "Randomize the position of library sprites",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "tags": ["editor"],
+  "enabledByDefault": false,
+  "l10n": true
+}

@@ -30,3 +30,9 @@ if (!Array.prototype.flat) {
         return result;
     };
 }
+
+if (typeof queueMicrotask !== 'function') {
+    window.queueMicrotask = callback => {
+        setTimeout(callback);
+    };
+};

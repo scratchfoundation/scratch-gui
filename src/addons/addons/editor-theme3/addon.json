@@ -17,6 +17,10 @@
       "link": "https://scratch.mit.edu/users/TheColaber"
     }
   ],
+  "dynamicEnable": true,
+  "dynamicDisable": true,
+  "injectAsStyleElt": true,
+
   "userscripts": [
     {
       "url": "theme3.js",

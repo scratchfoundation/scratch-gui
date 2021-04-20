@@ -1,0 +1,50 @@
+.sa-gamepad-spacer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.sa-gamepad-popup-outer {
+  /* above fullscreen */
+  z-index: 99999;
+}
+.sa-gamepad-popup {
+  box-sizing: border-box;
+  width: 700px;
+  max-height: min(800px, 85vh);
+  height: 100%;
+  max-width: 85%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+}
+.sa-gamepad-popup-content {
+  background-color: white;
+  padding: 1.5rem 2.25rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.sa-gamepad-popup [class*="modal_header-item-title"] {
+  margin: 0 -20rem 0 0;
+}
+
+.sa-gamepad-cursor-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sa-gamepad-cursor-image {
+  display: block;
+  transform: translate(-50%, -50%);
+  image-rendering: optimizeSpeed;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+.sa-gamepad-cursor-down {
+  filter: invert(100%);
+}

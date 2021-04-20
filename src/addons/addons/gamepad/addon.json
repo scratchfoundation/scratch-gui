@@ -1,0 +1,28 @@
+{
+  "name": "Gamepad support",
+  "description": "Interact with projects using a controller/gamepad.",
+  "credits": [
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    },
+    {
+      "url": "gamepadlib.css",
+      "matches": ["https://scratch.mit.edu/projects/*"]
+    }
+  ],
+  "tags": ["beta"],
+  "enabledByDefault": false,
+  "l10n": true
+}

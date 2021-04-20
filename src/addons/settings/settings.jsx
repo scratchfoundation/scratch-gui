@@ -75,8 +75,6 @@ const sortAddons = () => {
     return result;
 };
 
-const isEasterEgg = addonManifest => addonManifest.tags && addonManifest.tags.includes('easterEgg');
-
 const AddonCredits = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
@@ -681,19 +679,6 @@ AddonList.propTypes = {
     search: PropTypes.string.isRequired
 };
 
-const KONAMI = [
-    'arrowup',
-    'arrowup',
-    'arrowdown',
-    'arrowdown',
-    'arrowleft',
-    'arrowright',
-    'arrowleft',
-    'arrowright',
-    'b',
-    'a'
-];
-
 class AddonSettingsComponent extends React.Component {
     constructor (props) {
         super(props);
@@ -705,20 +690,18 @@ class AddonSettingsComponent extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
-        this.handleOpenEasterEggs = this.handleOpenEasterEggs.bind(this);
         this.searchRef = this.searchRef.bind(this);
         this.searchBar = null;
         this.state = {
             dirty: false,
             search: ''
         };
-        this.easterEggsVisible = false;
         this.konamiProgress = 0;
         for (const [id, manifest] of Object.entries(this.props.addons)) {
             const enabled = SettingsStore.getAddonEnabled(id);
             const addonState = {
                 enabled: enabled,
-                visible: enabled || !isEasterEgg(manifest),
+                visible: true,
                 dirty: false
             };
             if (manifest.settings) {
@@ -813,14 +796,6 @@ class AddonSettingsComponent extends React.Component {
     }
     handleSearch (e) {
         const value = e.target.value;
-        if (!this.easterEggsVisible) {
-            if (
-                value.toLowerCase() === settingsTranslations['tw.addons.settings.tags.easterEgg'].toLowerCase() ||
-                value.toLowerCase() === settingsTranslationsEnglish['tw.addons.settings.tags.easterEgg'].toLowerCase()
-            ) {
-                this.handleOpenEasterEggs();
-            }
-        }
         this.setState({
             search: value
         });
@@ -831,40 +806,10 @@ class AddonSettingsComponent extends React.Component {
         });
         this.searchBar.focus();
     }
-    handleOpenEasterEggs () {
-        for (const [addonId, addonManifest] of Object.entries(this.props.addons)) {
-            const addonState = this.state[addonId];
-            if (!addonState.visible && isEasterEgg(addonManifest)) {
-                this.setState(prevState => ({
-                    [addonId]: {
-                        ...prevState[addonId],
-                        visible: true
-                    }
-                }));
-            }
-        }
-        this.setState({
-            search: settingsTranslations['tw.addons.settings.tags.easterEgg']
-        });
-        this.easterEggsVisible = true;
-    }
     searchRef (searchBar) {
         this.searchBar = searchBar;
     }
     handleKeyDown (e) {
-        if (e.key.toLowerCase() !== KONAMI[this.konamiProgress]) {
-            this.konamiProgress = 0;
-        }
-        if (e.key.toLowerCase() === KONAMI[this.konamiProgress]) {
-            this.konamiProgress++;
-            if (this.konamiProgress >= KONAMI.length) {
-                this.handleOpenEasterEggs();
-                this.konamiProgress = 0;
-                this.searchBar.blur();
-                e.preventDefault();
-                return;
-            }
-        }
         const key = e.key;
         if (key.length === 1 && key !== ' ' && e.target === document.body && !(e.ctrlKey || e.metaKey || e.altKey)) {
             this.searchBar.focus();
@@ -953,15 +898,6 @@ class AddonSettingsComponent extends React.Component {
                         ) : null}
                         <div className={styles.version}>
                             {`v${upstreamMeta.version} (${upstreamMeta.commit}) `}
-                            <span
-                                role="button"
-                                tabIndex="0"
-                                className={styles.dango}
-                                onClick={this.handleOpenEasterEggs}
-                                title="Dango"
-                            >
-                                {'🍡'}
-                            </span>
                         </div>
                     </footer>
                 </div>

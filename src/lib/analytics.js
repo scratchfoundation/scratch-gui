@@ -52,23 +52,7 @@ const sendEvent = eventName => {
 };
 
 if (enabled) {
-    const trackPageview = () => {
-        sendEvent('pageview');
-    };
-
-    const originalPushState = history.pushState;
-    history.pushState = (a, b, c) => {
-        originalPushState.call(history, a, b, c);
-        trackPageview();
-    };
-    const originalReplaceState = history.replaceState;
-    history.replaceState = (a, b, c) => {
-        originalReplaceState.call(history, a, b, c);
-        trackPageview();
-    };
-    window.addEventListener('popstate', trackPageview);
-
-    trackPageview();
+    sendEvent('pageview');
 }
 
 const GoogleAnalytics = {

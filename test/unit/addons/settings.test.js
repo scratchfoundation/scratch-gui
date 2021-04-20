@@ -220,20 +220,23 @@ test('export core', () => {
     const store = new SettingStore();
     const exported = store.export({theme: 'light'});
     expect(exported.core.version).toMatch(/tw/);
+    expect(exported.core.lightTheme).toBe(true);
+    const dark = store.export({theme: 'dark'});
+    expect(dark.core.lightTheme).toBe(false);
 });
 
 test('export settings', () => {
     const store = new SettingStore();
     let exported = store.export({theme: 'light'});
-    expect(exported.addons['cat-blocks'].enabled).toBe(false);
-    expect(exported.addons['cat-blocks'].settings).toEqual({});
+    expect(exported.addons['remove-sprite-confirm'].enabled).toBe(false);
+    expect(exported.addons['remove-sprite-confirm'].settings).toEqual({});
     expect(exported.addons['onion-skinning'].enabled).toBe(true);
     expect(exported.addons['onion-skinning'].settings.default).toEqual(false);
-    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('remove-sprite-confirm', true);
     store.setAddonSetting('onion-skinning', 'default', true);
     exported = store.export({theme: 'light'});
-    expect(exported.addons['cat-blocks'].enabled).toBe(true);
-    expect(exported.addons['cat-blocks'].settings).toEqual({});
+    expect(exported.addons['remove-sprite-confirm'].enabled).toBe(true);
+    expect(exported.addons['remove-sprite-confirm'].settings).toEqual({});
     expect(exported.addons['onion-skinning'].enabled).toBe(true);
     expect(exported.addons['onion-skinning'].settings.default).toEqual(true);
 });

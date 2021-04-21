@@ -63,7 +63,7 @@ ArtieStudentDataPopupComponent.propTypes = {
     onOk: PropTypes.func,
     title: PropTypes.string.isRequired,
     showGender: PropTypes.bool.isRequired,
-    genderResponses: PropTypes.object,
+    genderResponses: PropTypes.array,
     onGenderChange: PropTypes.func
 };
 export default ArtieStudentDataPopupComponent;

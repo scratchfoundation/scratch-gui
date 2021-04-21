@@ -29,7 +29,7 @@ class ArtieStudentDataPopup extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            gender: 0
+            gender: 1
         };
         bindAll(this, [
             'handleOnGenderChange',
@@ -38,23 +38,18 @@ class ArtieStudentDataPopup extends React.Component {
             'handleOnCancelClick'
         ]);
 
-        this.responsesGender = [{
-            id: 1,
-            value:  this.props.intl.formatMessage(gender.boy)
-        },
-        {
-            id: 2,
-            value: this.props.intl.formatMessage(gender.girl)
-        }];
+        this.responsesGender = [{id: 1,  value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
     }
 
     //Handler when the gender has been changed
     handleOnGenderChange(e){
-        this.state.gender = e;
+        this.state.gender = e.target.value;
     }
 
     handleOnOkClick(){
-        updateStudentData(this.props.student.id, this.state.gender, this.handleStudentUpdated);
+        if(this.state.gender !== null) {
+            updateStudentData(this.props.student.id, this.state.gender, this.handleStudentUpdated);
+        }
     }
     handleStudentUpdated(){
         this.props.student.gender = this.state.gender;
@@ -64,11 +59,10 @@ class ArtieStudentDataPopup extends React.Component {
     handleOnCancelClick(){}
 
     render () {
+
         let showGender = (this.props.student.gender === undefined || this.props.student.gender === 0);
 
-        //If we want the user fills the personal data
         if(showGender) {
-
             return (
                 <ArtieStudentDataPopupComponent
                     onOk={this.handleOnOkClick}

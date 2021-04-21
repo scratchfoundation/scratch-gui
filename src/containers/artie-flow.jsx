@@ -162,7 +162,7 @@ class ArtieFlow extends React.Component {
         }
 
         //5- Checks if we must show the popup component or not
-        if(!nextState.artiePopupComponent && !nextState.artieExercisesComponent && !nextState.artieHelpComponent){
+        if(!nextState.artiePopupComponent && !nextState.artieExercisesComponent && !nextState.artieHelpComponent && !nextState.artieStudentDataComponent){
             if((currentStudent !== null && (currentStudent.competence===undefined || currentStudent.competence === 0)) || popupActivation)
             {
                 artieLoginComponent = false;

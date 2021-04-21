@@ -7,6 +7,7 @@
     "block-palette-icons",
     "hide-flyout",
     "mediarecorder",
+    "drag-drop",
     "onion-skinning",
     "2d-color-picker",
     "bitmap-copy",
@@ -23,11 +24,10 @@
     "editor-colored-context-menus",
     "variable-manager",
     "load-extensions",
-    "tw-interface-customization",
-    "drag-drop",
+    "custom-zoom",
     "initialise-sprite-position",
     "blocks2image",
-    "custom-zoom",
     "gamepad",
+    "tw-interface-customization",
     "cat-blocks"
 ]

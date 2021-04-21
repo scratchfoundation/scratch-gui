@@ -454,7 +454,7 @@
         "tw.customExtension.name": "사용자 지정 확장 프로그램",
         "tw.defaultProject.comment": "이것으로 프로젝트가 TurboWarp에서 실행되었는지를 탐지합니다.\n\n자세히 알아보기:\nhttps://scratch.mit.edu/projects/414716080/",
         "tw.editorWarning.1": "프로젝트를 자주 저장하세요. 충돌이 발생할 경우 파일 > 복원 지점 불러오기로 자동 백업을 복원할 수 있지만 이를 과신하지 마세요.",
-        "tw.editorWarning.2": "편집기를 열었기 때문에 Warp Timer가 활성화되어 성능이 저하될 수 있습니다. 자세한 설정은 고급 설정을 참조하세요.",
+        "tw.editorWarning.2": "편집기를 열었기 때문에 Warp Timer가 활성화되어 성능이 저하될 수 있습니다. 자세한 내용은 고급 설정에서 확인해 주세요.",
         "tw.evalModal.description": "브라우저 확장 프로그램이 TurboWarp의 스크립트 컴파일 성능을 저하시키고 있습니다. 애드블록을 비활성화 후 새로고침 해주세요. 이 사이트는 광고를 붙이거나 개인정보를 수집하지 않습니다.",
         "tw.evalModal.label": "브라우저 식별 오류",
         "tw.featuredProjectsStudio": "스크래치에 있는 스튜디오를 방문하세요.",

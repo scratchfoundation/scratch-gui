@@ -6,6 +6,13 @@
       "name": "GarboMuffin"
     }
   ],
+  "info": [
+    {
+      "type": "notice",
+      "text": "This addon is highly experimental and subject to change. It can be configured with the gamepad button by the green flag.",
+      "id": "info"
+    }
+  ],
   "userscripts": [
     {
       "url": "userscript.js",

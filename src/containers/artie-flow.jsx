@@ -116,7 +116,9 @@ class ArtieFlow extends React.Component {
                 artieHelpComponent = false;
                 artiePopupComponent = false;
                 changes = true;
-            }else if(nextState.artieStudentDataComponent){
+            }
+        }else if(nextState.artieStudentDataComponent){
+            if(currentStudent !== null && currentStudent !== undefined && currentStudent.gender !== undefined && currentStudent.gender > 0) {
                 artieStudentDataComponent = false;
                 changes = true;
             }

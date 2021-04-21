@@ -175,7 +175,7 @@ class Monitor extends React.Component {
                 columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
             }
             let newListValue;
-            if (isNaN(columnNumber)) {
+            if (isNaN(columnNumber) || numberOfColumns === 1) {
                 newListValue = text.split('\n');
             } else {
                 newListValue = rows.map(row => row[columnNumber - 1])

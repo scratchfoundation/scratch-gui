@@ -176,7 +176,7 @@ class Monitor extends React.Component {
             }
             let newListValue;
             if (isNaN(columnNumber) || numberOfColumns === 1) {
-                newListValue = text.split('\n');
+                newListValue = text.replace(/\r/g, '').split('\n');
             } else {
                 newListValue = rows.map(row => row[columnNumber - 1])
                     .filter(item => typeof item === 'string'); // CSV importer can leave undefineds

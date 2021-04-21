@@ -611,7 +611,3 @@ a:active, a:focus {
         transform: translateY(0);
     }
 }
-
-.dango {
-    cursor: pointer;
-}

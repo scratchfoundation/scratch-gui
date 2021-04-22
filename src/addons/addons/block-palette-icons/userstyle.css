@@ -1,0 +1,51 @@
+.scratchCategoryItemBubble {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 17px 17px;
+  height: 22px;
+  width: 22px;
+}
+
+.scratchCategoryId-motion .scratchCategoryItemBubble {
+  background-image: url(icons/motion_icon.svg);
+}
+
+.scratchCategoryId-looks .scratchCategoryItemBubble {
+  background-image: url(icons/looks_icon.svg);
+}
+
+.scratchCategoryId-sound .scratchCategoryItemBubble {
+  background-image: url(icons/sound_icon.svg);
+}
+
+.scratchCategoryId-events .scratchCategoryItemBubble {
+  background-image: url(icons/events_icon.svg);
+}
+
+.scratchCategoryId-control .scratchCategoryItemBubble {
+  background-image: url(icons/control_icon.svg);
+}
+
+.scratchCategoryId-sensing .scratchCategoryItemBubble {
+  background-image: url(icons/sensing_icon.svg);
+}
+
+.scratchCategoryId-operators .scratchCategoryItemBubble {
+  background-image: url(icons/operators_icon.svg);
+}
+
+.scratchCategoryId-variables .scratchCategoryItemBubble {
+  background-image: url(icons/variables_icon.svg);
+}
+
+.scratchCategoryId-lists .scratchCategoryItemBubble {
+  background-image: url(icons/list_icon.svg);
+}
+
+.scratchCategoryId-myBlocks .scratchCategoryItemBubble {
+  background-image: url(icons/block_icon.svg);
+}
+
+.scratchCategoryId-tw .scratchCategoryItemBubble {
+  background-image: url(icons/tw_icon.svg);
+}

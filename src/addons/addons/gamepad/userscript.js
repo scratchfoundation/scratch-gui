@@ -101,16 +101,23 @@ export default async function ({ addon, global, console, msg }) {
 
   const virtualCursorContainer = document.createElement("div");
   virtualCursorContainer.hidden = true;
-  const virtualCursorImageContainer = document.createElement("div");
-  virtualCursorImageContainer.className = "sa-gamepad-cursor-container";
+  virtualCursorContainer.className = "sa-gamepad-cursor";
   const virtualCursorImage = document.createElement("img");
   virtualCursorImage.className = "sa-gamepad-cursor-image";
   virtualCursorImage.src = _twGetAsset("/cursor.png");
-  virtualCursorImageContainer.appendChild(virtualCursorImage);
-  virtualCursorContainer.appendChild(virtualCursorImageContainer);
+  virtualCursorContainer.appendChild(virtualCursorImage);
+
+  let hideCursorTimeout;
 
   const virtualCursorSetVisible = (visible) => {
     virtualCursorContainer.hidden = !visible;
+    clearTimeout(hideCursorTimeout);
+    if (visible) {
+      hideCursorTimeout = setTimeout(virtualCursorHide, 8000);
+    }
+  };
+  const virtualCursorHide = () => {
+    virtualCursorSetVisible(false);
   };
   const virtualCursorSetDown = (down) => {
     virtualCursorSetVisible(true);
@@ -120,7 +127,7 @@ export default async function ({ addon, global, console, msg }) {
     virtualCursorSetVisible(true);
     const stageX = width / 2 + x;
     const stageY = height / 2 - y;
-    virtualCursorImageContainer.style.transform = `translate(${stageX}px, ${stageY}px)`;
+    virtualCursorContainer.style.transform = `translate(${(stageX / width) * 100}%, ${(stageY / height) * 100}%)`;
   };
 
   document.addEventListener("mousemove", () => {
@@ -148,7 +155,7 @@ export default async function ({ addon, global, console, msg }) {
       canvasWidth: width,
       x: Math.max(0, Math.min(width, vm.runtime.ioDevices.mouse._clientX)),
       canvasHeight: height,
-      y: vm.runtime.ioDevices.mouse._clientY,
+      y: Math.max(0, Math.min(height, vm.runtime.ioDevices.mouse._clientY)),
     });
   };
   const handleGamepadMouseUp = () => {

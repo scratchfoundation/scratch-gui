@@ -9,12 +9,11 @@ export default class BlockFlasher {
   static flash(block) {
     if (myFlash.timerID > 0) {
       clearTimeout(myFlash.timerID);
-      myFlash.block.svgPath_.style.fill = myFlash.colour;
+      myFlash.block.svgPath_.style.fill = "";
     }
 
     let count = 4;
     let flashOn = true;
-    myFlash.colour = block.getColour();
     myFlash.block = block;
 
     /**
@@ -22,7 +21,7 @@ export default class BlockFlasher {
      * @private
      */
     function _flash() {
-      myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : myFlash.colour;
+      myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : "";
       flashOn = !flashOn;
       count--;
       if (count > 0) {

@@ -29,15 +29,16 @@
   margin: 0 -20rem 0 0;
 }
 
-.sa-gamepad-cursor-container {
+.sa-gamepad-cursor {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   user-select: none;
   pointer-events: none;
   will-change: transform;
 }
-
 .sa-gamepad-cursor-image {
   display: block;
   transform: translate(-50%, -50%);

@@ -1,22 +1,19 @@
 {
   "name": "Block palette category icons",
-  "description": "Replaces the colored circles that identify block categories with custom icons.",
-  "tags": ["editor"],
+  "description": "Adds icons inside the colored circles that identify block categories.",
+  "tags": ["editor", "theme"],
   "enabledByDefault": false,
   "dynamicEnable": true,
   "dynamicDisable": true,
-  "userscripts": [
-    {
-      "url": "userscript.js",
-      "matches": ["https://scratch.mit.edu/projects/*"]
-    }
-  ],
   "userstyles": [
     {
-      "url": "style.css",
+      "url": "userstyle.css",
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
   "l10n": true,
-  "credits": [{ "name": "--Explosion--", "link": "https://github.com/explosion-scratch" }]
+  "credits": [
+    { "name": "--Explosion--", "link": "https://scratch.mit.edu/users/--Explosion--/" },
+    { "name": "RedGuy7", "link": "https://scratch.mit.edu/users/RedGuy7/" }
+  ]
 }

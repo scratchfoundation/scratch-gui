@@ -79,12 +79,12 @@ export default async function ({ addon, global, console }) {
 			background-color: var(--editorTheme3-${categories[prop].var ? categories[prop].var : prop}Color) !important;
 		}
     .blocklyDropDownDiv[data-category="${prop}"] {
-      background-color: var(--editorTheme3-${categories[prop].var ? categories[prop].var : prop}Color) !important;
+      background-color: var(--editorTheme3-${categories[prop].var ? categories[prop].var : prop}Color);
     }
 	    `;
     if (prop === "custom") {
       stylesheet += `path.blocklyBlockBackground[fill="#FF6680"] {
-				fill: var(--editorTheme3-${prop}Color) !important;
+				fill: var(--editorTheme3-${prop}Color);
         	}`;
     }
     if (prop === "sensing") {

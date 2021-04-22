@@ -54,7 +54,7 @@ class ArtieStudentDataPopup extends React.Component {
         ]);
 
         this.responsesGender = [{id: 1,  value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
-        this.respponsesMotherTongue = [{id: 1, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 0, value: this.props.intl.formatMessage(motherTongue.no)}];
+        this.responsesMotherTongue = [{id: 1, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 0, value: this.props.intl.formatMessage(motherTongue.no)}];
     }
 
     //Handler when the gender has been changed
@@ -94,6 +94,8 @@ class ArtieStudentDataPopup extends React.Component {
                     onGenderChange={this.handleOnGenderChange}
                     showGender={showGender}
                     showModerTongue={showMotherTongue}
+                    motherTongueResponses={this.responsesMotherTongue}
+                    onMotherTongueChange={this.handleOnMotherTongueChange}
                     title='Student Data'
                 />
             );

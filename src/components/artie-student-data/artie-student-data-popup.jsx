@@ -9,7 +9,6 @@ import Select from '../forms/select.jsx';
 
 
 const genderComponent = (onGenderChange, genderResponses) => {
-
     return(
         <label>
             <FormattedMessage
@@ -21,6 +20,23 @@ const genderComponent = (onGenderChange, genderResponses) => {
                 autofocus={true}
                 data={genderResponses}
                 onChange={onGenderChange}
+            />
+        </label>
+    );
+}
+
+const motherTongueComponent = (onMotherTongueChange, motherTongueResponses) => {
+    return(
+        <label>
+            <FormattedMessage
+                defaultMessage="Is Spanish your mother tongue?"
+                description="Is Spanish your mother tongue?"
+                id="gui.artie.data.motherTongue.spanish"
+            />
+            <Select
+                autofocus={true}
+                data={motherTongueResponses}
+                onChange={onMotherTongueChange}
             />
         </label>
     );
@@ -42,6 +58,7 @@ class ArtieStudentDataPopupComponent extends React.Component {
             >
                 <Box className={styles.body}>
                     {this.props.showGender ? genderComponent(this.props.onGenderChange, this.props.genderResponses) : null}
+                    {this.props.showModerTongue ? motherTongueComponent(this.props.onMotherTongueChange, this.props.motherTongueResponses) : null}
 
                     <Box className={styles.buttonRow}>
                         <button className={styles.okButton} onClick={this.props.onOk}>
@@ -64,6 +81,9 @@ ArtieStudentDataPopupComponent.propTypes = {
     title: PropTypes.string.isRequired,
     showGender: PropTypes.bool.isRequired,
     genderResponses: PropTypes.array,
-    onGenderChange: PropTypes.func
+    onGenderChange: PropTypes.func,
+    showMotherTongue: PropTypes.bool.isRequired,
+    motherTongueResponses: PropTypes.array,
+    onMotherTongueChange: PropTypes.func
 };
 export default ArtieStudentDataPopupComponent;

@@ -20,7 +20,8 @@
       "type": "integer",
       "default": 0,
       "min": -240,
-      "max": 240
+      "max": 240,
+      "reloadRequired": false
     },
     {
       "id": "y",
@@ -28,13 +29,15 @@
       "type": "integer",
       "default": 0,
       "min": -180,
-      "max": 180
+      "max": 180,
+      "reloadRequired": false
     },
     {
       "id": "library",
       "name": "Randomize the position of library sprites",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "reloadRequired": false
     }
   ],
   "tags": ["editor"],

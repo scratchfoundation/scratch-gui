@@ -28,7 +28,8 @@
       "type": "integer",
       "min": 100,
       "default": 300,
-      "max": 500
+      "max": 500,
+      "reloadRequired": false
     },
     {
       "name": "Minimum Zoom (1-100%)",
@@ -36,7 +37,8 @@
       "type": "integer",
       "min": 1,
       "default": 30,
-      "max": 100
+      "max": 100,
+      "reloadRequired": false
     },
     {
       "name": "Start Zoom (50-500%)",
@@ -44,7 +46,8 @@
       "type": "integer",
       "min": 50,
       "default": 68,
-      "max": 500
+      "max": 500,
+      "reloadRequired": false
     },
     {
       "name": "Zoom Speed (50-200%)",
@@ -52,7 +55,8 @@
       "type": "integer",
       "min": 50,
       "default": 100,
-      "max": 200
+      "max": 200,
+      "reloadRequired": false
     },
     {
       "name": "Autohide Zoom Controls",
@@ -82,7 +86,8 @@
           "name": "Long"
         }
       ],
-      "default": "default"
+      "default": "default",
+      "reloadRequired": false
     }
   ],
   "l10n": true

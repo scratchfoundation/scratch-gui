@@ -285,7 +285,7 @@ const updateStudentCompetence = (studentId, competence, callback) => new Promise
 
 });
 
-const updateStudentData = (studentId, gender, callback) => new Promise(() => {
+const updateStudentData = (studentId, gender, motherTongue, callback) => new Promise(() => {
 
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", () => {
@@ -297,7 +297,7 @@ const updateStudentData = (studentId, gender, callback) => new Promise(() => {
         }
     });
 
-    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentData?studentId=${studentId}&gender=${gender}`, true);
+    xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentData?studentId=${studentId}&gender=${gender}&motherTongue=${motherTongue}`, true);
     xhr.send();
 });
 

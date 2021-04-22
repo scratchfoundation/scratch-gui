@@ -109,7 +109,8 @@ class ArtieFlow extends React.Component {
 
         //2- Checks if we must show the student data component or not
         if(!nextState.artieStudentDataComponent && !nextState.artieLoginComponent){
-            if(currentStudent !== null && currentStudent !== undefined && (currentStudent.gender === undefined || currentStudent.gender===0)){
+            if(currentStudent !== null && currentStudent !== undefined &&
+                (currentStudent.gender === undefined || currentStudent.gender===0 || currentStudent.motherTongue===0)){
                 artieLoginComponent = false;
                 artieStudentDataComponent = true;
                 artieExercisesComponent = false;

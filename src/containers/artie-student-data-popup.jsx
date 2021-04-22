@@ -22,6 +22,19 @@ const gender = defineMessages({
     }
 });
 
+const motherTongue = defineMessages({
+    yes: {
+        defaultMessage: 'Yes',
+        description: 'Yes',
+        id: 'gui.artie.yes'
+    },
+    no: {
+        defaultMessage: 'No',
+        description: 'No',
+        id: 'gui.artie.no'
+    }
+});
+
 
 
 class ArtieStudentDataPopup extends React.Component {
@@ -29,16 +42,19 @@ class ArtieStudentDataPopup extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            gender: 1
+            gender: 1,
+            motherTongue: 1
         };
         bindAll(this, [
             'handleOnGenderChange',
+            'handleOnMotherTongueChange',
             'handleOnOkClick',
             'handleStudentUpdated',
             'handleOnCancelClick'
         ]);
 
         this.responsesGender = [{id: 1,  value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
+        this.respponsesMotherTongue = [{id: 1, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 0, value: this.props.intl.formatMessage(motherTongue.no)}];
     }
 
     //Handler when the gender has been changed
@@ -46,13 +62,19 @@ class ArtieStudentDataPopup extends React.Component {
         this.state.gender = e.target.value;
     }
 
+    //Handler when the mother tongue has been changed
+    handleOnMotherTongueChange(e){
+        this.state.motherTongue = e.target.value;
+    }
+
     handleOnOkClick(){
-        if(this.state.gender !== null) {
-            updateStudentData(this.props.student.id, this.state.gender, this.handleStudentUpdated);
+        if(this.state.gender !== null || this.state.motherTongue !== null) {
+            updateStudentData(this.props.student.id, this.state.gender, this.state.motherTongue, this.handleStudentUpdated);
         }
     }
     handleStudentUpdated(){
         this.props.student.gender = this.state.gender;
+        this.props.student.motherTongue = this.state.motherTongue;
         this.props.onArtieSetCurrentStudent(this.props.student);
     }
 
@@ -61,6 +83,7 @@ class ArtieStudentDataPopup extends React.Component {
     render () {
 
         let showGender = (this.props.student.gender === undefined || this.props.student.gender === 0);
+        let showMotherTongue = (this.props.student.motherTongue === undefined);
 
         if(showGender) {
             return (
@@ -70,6 +93,7 @@ class ArtieStudentDataPopup extends React.Component {
                     genderResponses={this.responsesGender}
                     onGenderChange={this.handleOnGenderChange}
                     showGender={showGender}
+                    showModerTongue={showMotherTongue}
                     title='Student Data'
                 />
             );

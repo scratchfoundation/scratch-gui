@@ -43,7 +43,7 @@ class ArtieStudentDataPopup extends React.Component {
         super(props);
         this.state = {
             gender: 1,
-            motherTongue: 1
+            motherTongue: 2
         };
         bindAll(this, [
             'handleOnGenderChange',
@@ -54,7 +54,7 @@ class ArtieStudentDataPopup extends React.Component {
         ]);
 
         this.responsesGender = [{id: 1,  value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
-        this.responsesMotherTongue = [{id: 1, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 0, value: this.props.intl.formatMessage(motherTongue.no)}];
+        this.responsesMotherTongue = [{id: 2, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 1, value: this.props.intl.formatMessage(motherTongue.no)}];
     }
 
     //Handler when the gender has been changed
@@ -83,9 +83,9 @@ class ArtieStudentDataPopup extends React.Component {
     render () {
 
         let showGender = (this.props.student.gender === undefined || this.props.student.gender === 0);
-        let showMotherTongue = (this.props.student.motherTongue === undefined);
+        let showMotherTongue = (this.props.student.motherTongue === undefined  || this.props.student.motherTongue === 0);
 
-        if(showGender) {
+        if(showGender || showMotherTongue) {
             return (
                 <ArtieStudentDataPopupComponent
                     onOk={this.handleOnOkClick}
@@ -93,7 +93,7 @@ class ArtieStudentDataPopup extends React.Component {
                     genderResponses={this.responsesGender}
                     onGenderChange={this.handleOnGenderChange}
                     showGender={showGender}
-                    showModerTongue={showMotherTongue}
+                    showMotherTongue={showMotherTongue}
                     motherTongueResponses={this.responsesMotherTongue}
                     onMotherTongueChange={this.handleOnMotherTongueChange}
                     title='Student Data'

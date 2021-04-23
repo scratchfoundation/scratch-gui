@@ -58,7 +58,7 @@ class ArtieStudentDataPopupComponent extends React.Component {
             >
                 <Box className={styles.body}>
                     {this.props.showGender ? genderComponent(this.props.onGenderChange, this.props.genderResponses) : null}
-                    {this.props.showModerTongue ? motherTongueComponent(this.props.onMotherTongueChange, this.props.motherTongueResponses) : null}
+                    {this.props.showMotherTongue ? motherTongueComponent(this.props.onMotherTongueChange, this.props.motherTongueResponses) : null}
 
                     <Box className={styles.buttonRow}>
                         <button className={styles.okButton} onClick={this.props.onOk}>

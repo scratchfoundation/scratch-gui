@@ -124,6 +124,27 @@
         "tw.addons.settings.title": "Innstillinger for utvidelser",
         "tw.addons.settings.unsupported": "Noen utvidelser er ikke tilgjengelig på dette nettleser."
     },
+    "nl": {
+        "tw.addons.settings.addonFeedback": "Addon Feedback",
+        "tw.addons.settings.confirmResetAll": "Ben je zeker dat je alle addon instellingen wil resetten naar hun standaard waarden?",
+        "tw.addons.settings.credits": "Dank aan:",
+        "tw.addons.settings.dirty": "Herlaad TurboWarp om de instellingen te accepteren.",
+        "tw.addons.settings.dirtyButton": "Herlaad nu",
+        "tw.addons.settings.export": "Exporteer instellingen",
+        "tw.addons.settings.import": "Importeer instellingen",
+        "tw.addons.settings.noResults": "Geen resultaten.",
+        "tw.addons.settings.presets": "Voorinstellingen",
+        "tw.addons.settings.reset": "Reset",
+        "tw.addons.settings.resetAll": "Reset alles",
+        "tw.addons.settings.search": "Zoek",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Paas Ei",
+        "tw.addons.settings.tags.new": "Nieuw!",
+        "tw.addons.settings.tags.recommended": "Aanbevolen",
+        "tw.addons.settings.tags.theme": "Thema",
+        "tw.addons.settings.title": "Addons Instellingen",
+        "tw.addons.settings.unsupported": "Sommige addons zijn niet beschikbaar in deze browser."
+    },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",

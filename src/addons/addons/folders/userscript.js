@@ -1318,9 +1318,7 @@ export default async function ({ addon, global, console, msg }) {
   // Backpack
   (async () => {
     const backpackContainer = await addon.tab.waitForElement("[class*='backpack_backpack-list_']", {
-      condition: () =>
-        addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 0 &&
-        !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
+      condition: () => !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
     });
     const backpackInstance = getBackpackFromElement(backpackContainer);
     verifyBackpack(backpackInstance);

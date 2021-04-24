@@ -1,8 +1,8 @@
 /* Based on the `stage-selector_raised` class */
-.sa-drag-area,
-.sa-drag-area div[class*="stage-selector_header_"],
-.sa-drag-area div[class*="sprite-info_sprite-info"],
-.sa-drag-area div[class*="monitor_list-body"] {
+div[class*="stage-selector_header_"],
+div[class*="sprite-selector_sprite-selector"],
+div[class*="sprite-info_sprite-info"],
+div[class*="monitor_list-body"] {
   -webkit-transition: background-color 0.25s ease;
   -o-transition: background-color 0.25s ease;
   transition: background-color 0.25s ease;

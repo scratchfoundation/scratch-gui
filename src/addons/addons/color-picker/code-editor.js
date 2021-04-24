@@ -43,15 +43,9 @@ export default async ({ addon, console, msg }) => {
     document.body.classList.add("sa-hide-eye-dropper-background");
     element.click();
   };
-  while (true) {
-    const element = await addon.tab.waitForElement("button.scratchEyedropper", {
-      markAsSeen: true,
-      condition: () =>
-        addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 0 &&
-        !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
-    });
+  const addColorPicker = () => {
+    const element = document.querySelector("button.scratchEyedropper");
     rateLimiter.abort(false);
-    if (addon.tab.editorMode !== "editor") continue;
     addon.tab.redux.initialize();
     const defaultColor = getColor(element);
     const saColorPicker = Object.assign(document.createElement("div"), {
@@ -82,5 +76,12 @@ export default async ({ addon, console, msg }) => {
     saColorPicker.appendChild(saColorPickerColor);
     saColorPicker.appendChild(saColorPickerText);
     element.parentElement.insertBefore(saColorPicker, element);
-  }
+  };
+  const ScratchBlocks = await addon.tab.traps.getBlockly();
+  const originalShowEditor = ScratchBlocks.FieldColourSlider.prototype.showEditor_;
+  ScratchBlocks.FieldColourSlider.prototype.showEditor_ = function (...args) {
+    const r = originalShowEditor.call(this, ...args);
+    addColorPicker();
+    return r;
+  };
 };

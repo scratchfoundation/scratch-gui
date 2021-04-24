@@ -1295,6 +1295,26 @@ export default async function ({ addon, global, console, msg }) {
 
   await untilInEditor();
 
+  // Backpack
+  {
+    const clickListener = (e) => {
+      if (!e.target.closest('[class*="backpack_backpack-header_"]')) {
+        return;
+      }
+      setTimeout(() => {
+        const backpackContainer = document.querySelector("[class^='backpack_backpack-list_']");
+        if (!backpackContainer) {
+          return;
+        }
+        document.removeEventListener("click", clickListener);
+        const backpackInstance = getBackpackFromElement(backpackContainer);
+        verifyBackpack(backpackInstance);
+        patchBackpack(backpackInstance);
+      });
+    };
+    document.addEventListener("click", clickListener, true);
+  }
+
   // Sprite list
   {
     const spriteSelectorItemElement = await addon.tab.waitForElement("[class*='sprite-selector_sprite-wrapper']", {
@@ -1314,16 +1334,6 @@ export default async function ({ addon, global, console, msg }) {
     sortableHOCInstance.saInitialSetup();
     patchVM();
   }
-
-  // Backpack
-  (async () => {
-    const backpackContainer = await addon.tab.waitForElement("[class*='backpack_backpack-list_']", {
-      condition: () => !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
-    });
-    const backpackInstance = getBackpackFromElement(backpackContainer);
-    verifyBackpack(backpackInstance);
-    patchBackpack(backpackInstance);
-  })();
 
   // Costume and sound list
   {

@@ -10,9 +10,24 @@ import {
     artieClearHelp, artieEvaluationStop, artiePopupEvaluation,
     artiePopupExercise,
     artiePopupSolution,
-    artieSetCurrentExercise, artieSetExercises
+    artieSetCurrentExercise,
+    artieSetExercises,
+    artiePopupStatement
 } from "../reducers/artie-exercises";
 import {artieSetCurrentStudent} from "../reducers/artie-login";
+
+const statementMessages = defineMessages({
+    popupModalTitle: {
+        defaultMessage: 'ARTIE',
+        description: 'ARTIE',
+        id: 'gui.menuBar.artie.exercises.popup.modalTitle'
+    },
+    message: {
+        defaultMessage: 'This is the statement of the exercise you will have to complete:',
+        description: 'This is the statement of the exercise you will have to complete:',
+        id: 'gui.artie.exercise.statement'
+    }
+});
 
 const exercisesMessages = defineMessages({
     popupModalTitle: {
@@ -118,6 +133,19 @@ const exitFromEvaluation = defineMessages({
     }
 });
 
+const statementComponent = (onCancel, type, statementMessages, customBodyMessage) => {
+    return (
+        <ArtiePopupComponent
+            onCancel={onCancel}
+            type = {type}
+            messages = {statementMessages}
+            okButton = {false}
+            cancelButton = {false}
+            customBodyMessage={customBodyMessage}
+        />
+    );
+}
+
 const exerciseComponent = (onCancel, type) => {
     return (
         <ArtiePopupComponent
@@ -196,7 +224,8 @@ class ArtieExercisePopup extends React.Component {
             'handleEvaluationStopCancelClick',
             'onStudentCompetenceIsUpdated',
             'onArtieExercisesLoaded',
-            'handleCongratulationsCloseClick'
+            'handleCongratulationsCloseClick',
+            'handleStatementCloseClick'
         ]);
     }
 
@@ -215,13 +244,15 @@ class ArtieExercisePopup extends React.Component {
             return 'evaluationStop';
         }else if(login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !==null &&
             (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
-            (exercises === undefined || exercises === null || exercises.currentExercise === null)) {
+            (exercises === undefined || exercises === null || exercises.currentExercise === null)) {
             return 'initialEvaluation';
         }else if(exercises !== undefined && exercises !== null && exercises.popupEvaluation){
             return 'evaluation';
-        } else if( exercises !== undefined && exercises !== null && exercises.popupExercise){
+        }else if(exercises !== undefined && exercises !== null && exercises.popupExercise){
             return 'exercise';
-        }else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
+        }else if(exercises !== undefined && exercises !== null && exercises.popupStatement){
+            return 'statement';
+        } else if(exercises !== undefined && exercises !== null && exercises.popupSolution){
             return 'solution';
         }else if(exercises !== undefined && exercises.help !== null && exercises.help.totalDistance === 0){
             return 'congratulations';
@@ -325,6 +356,10 @@ class ArtieExercisePopup extends React.Component {
         this.props.onArtieClearHelp();
     }
 
+    handleStatementCloseClick(){
+        this.props.onArtiePopupStatement(false);
+    }
+
     render () {
 
         let image;
@@ -336,6 +371,10 @@ class ArtieExercisePopup extends React.Component {
 
         if( type === 'exercise'){
             return exerciseComponent(this.props.onCloseSentExercise, type);
+        }
+        else if( type === 'statement'){
+            return statementComponent(this.handleStatementCloseClick, type, statementMessages,
+                                      this.props.artieExercises.currentExercise.description);
         }
         else if(type === 'solution'){
             return solutionComponent(this.props.onCloseSentSolution, type)
@@ -415,7 +454,8 @@ const mapDispatchToProps = dispatch => ({
     onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop)),
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
     onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
-    onArtieClearHelp: () => dispatch(artieClearHelp())
+    onArtieClearHelp: () => dispatch(artieClearHelp()),
+    onArtiePopupStatement: (active) => dispatch(artiePopupStatement(active))
 });
 
 export default compose(

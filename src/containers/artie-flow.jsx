@@ -22,7 +22,8 @@ import {
     deactivateArtieExercises,
     artieSetCurrentExercise,
     artieClearHelp,
-    artieHelpReceived
+    artieHelpReceived,
+    artiePopupStatement
 } from "../reducers/artie-exercises";
 import {compose} from "redux";
 import {injectIntl} from "react-intl";
@@ -228,7 +229,8 @@ class ArtieFlow extends React.Component {
                     (
                         artieExercises.evaluationStop ||
                         artieExercises.popupEvaluation || artieExercises.popupExercise ||
-                        artieExercises.popupSolution || (artieExercises.help !== null && artieExercises.help.totalDistance === 0)
+                        artieExercises.popupSolution || (artieExercises.help !== null && artieExercises.help.totalDistance === 0) ||
+                        artieExercises.popupStatement
                     )
                 );
     }
@@ -302,6 +304,9 @@ class ArtieFlow extends React.Component {
         const exercise  = this.props.artieExercises.exercises.filter(e => e.id ==exerciseId)[0];
         this.props.onArtieSetCurrentExercise(exercise);
         this.props.onDeactivateArtieExercises();
+
+        //Shows the popup with the statement
+        this.props.onArtiePopupStatement(true);
     }
     //------------------------------------
 
@@ -384,6 +389,7 @@ const mapDispatchToProps = dispatch => ({
     onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
+    onArtiePopupStatement: (active) => dispatch(artiePopupStatement(active)),
 
     //3- Help properties
     onArtieClearHelp: () => dispatch(artieClearHelp()),

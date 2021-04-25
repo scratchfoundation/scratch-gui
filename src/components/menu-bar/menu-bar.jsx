@@ -69,6 +69,7 @@ import {
     closeLoginMenu,
     loginMenuOpen
 } from '../../reducers/menus';
+import {setFileHandle} from '../../reducers/tw.js';
 
 import collectMetadata from '../../lib/collect-metadata';
 
@@ -1118,7 +1119,10 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseErrors: () => dispatch(closeErrorsMenu()),
     onRequestOpenAbout: () => dispatch(openAboutMenu()),
     onRequestCloseAbout: () => dispatch(closeAboutMenu()),
-    onClickNew: needSave => dispatch(requestNewProject(needSave)),
+    onClickNew: needSave => {
+        dispatch(requestNewProject(needSave));
+        dispatch(setFileHandle(null));
+    },
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),

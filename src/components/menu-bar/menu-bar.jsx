@@ -30,6 +30,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SelectExerciseButton from './select-exercise-button.jsx';
 import RequestHelpButton from "./request-help-button.jsx";
+import StatementButton from "./statement-button.jsx";
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -86,7 +87,7 @@ import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
 import {activateArtieLogin, artieLogout} from '../../reducers/artie-login';
 import {activateArtieExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution, artieEvaluationStop} from '../../reducers/artie-exercises';
+        artiePopupExercise, artiePopupSolution, artieEvaluationStop, artiePopupStatement} from '../../reducers/artie-exercises';
 import ArtieFlow from '../../containers/artie-flow.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
@@ -195,7 +196,8 @@ class MenuBar extends React.Component {
             'handleArtieLogout',
             'handleArtieExerciseChange',
             'handleClickFinishExercise',
-            'handleStopEvaluation'
+            'handleStopEvaluation',
+            'handleShowPopupStatement'
         ]);
     }
     componentDidMount () {
@@ -390,6 +392,9 @@ class MenuBar extends React.Component {
     }
     handleStopEvaluation(){
         this.props.onArtieEvaluationStop(true);
+    }
+    handleShowPopupStatement(){
+        this.props.onArtiePopupStatement(true);
     }
 
     render () {
@@ -735,35 +740,44 @@ class MenuBar extends React.Component {
 
                                 { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
                                   this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
-                                    <SelectExerciseButton
-                                        className={styles.menuBarButton}
-                                        onClick={this.handleStopEvaluation}
-                                        isExerciseSelected = {true}
-                                        isEvaluation={this.props.artieExercises.currentExercise.isEvaluation}
-                                    />
+                                    <React.Fragment>
+                                        <SelectExerciseButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleStopEvaluation}
+                                            isExerciseSelected = {true}
+                                            isEvaluation={this.props.artieExercises.currentExercise.isEvaluation}
+                                        />
+                                        <Divider className={classNames(styles.divider)} />
+                                        <RequestHelpButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleClickRequestHelp}
+                                        />
+                                        <Divider className={classNames(styles.divider)} />
+                                        <StatementButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleShowPopupStatement}
+                                        />
+                                    </React.Fragment>
                                 :
-                                    <SelectExerciseButton
-                                        className={styles.menuBarButton}
-                                        onClick={this.props.onActivateArtieExercises}
-                                        isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
-                                        isEvaluation={false}
-                                    />
+                                    <React.Fragment>
+                                        <SelectExerciseButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.props.onActivateArtieExercises}
+                                            isExerciseSelected = {this.props.artieExercises.currentExercise !== null}
+                                            isEvaluation={false}
+                                        />
+                                        <Divider className={classNames(styles.divider)} />
+                                        <StatementButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleShowPopupStatement}
+                                        />
+                                    </React.Fragment>
                                 }
                             </React.Fragment>
                         :
                             null
                         }
                     </div>
-                    <Divider className={classNames(styles.divider)} />
-                    { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
-                      this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
-                            <RequestHelpButton
-                                className={styles.menuBarButton}
-                                onClick={this.handleClickRequestHelp}
-                            />
-                        :
-                            null
-                    }
                     <Divider className={classNames(styles.divider)} />
                     <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
@@ -1127,7 +1141,8 @@ const mapDispatchToProps = dispatch => ({
     onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading)),
     onArtieExerciseSentPopupOpen: (active) => dispatch(artiePopupExercise(active)),
     onArtieSolutionSentPopupOpen: (active) => dispatch(artiePopupSolution(active)),
-    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop))
+    onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop)),
+    onArtiePopupStatement: (active) => dispatch(artiePopupStatement(active))
 });
 
 export default compose(

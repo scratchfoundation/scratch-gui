@@ -1,0 +1,5 @@
+@import "../../css/colors.css";
+
+.select-exercise-button {
+    background: $data-primary;
+}

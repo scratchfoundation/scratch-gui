@@ -29,6 +29,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SelectExerciseButton from './select-exercise-button.jsx';
+import RequestHelpButton from "./request-help-button.jsx";
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
@@ -754,6 +755,16 @@ class MenuBar extends React.Component {
                         }
                     </div>
                     <Divider className={classNames(styles.divider)} />
+                    { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
+                      this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
+                            <RequestHelpButton
+                                className={styles.menuBarButton}
+                                onClick={this.handleClickRequestHelp}
+                            />
+                        :
+                            null
+                    }
+                    <Divider className={classNames(styles.divider)} />
                     <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -805,13 +816,9 @@ class MenuBar extends React.Component {
                                     }
                                 </ProjectWatcher>
                             )
-                        ) : (
-                            this.props.showComingSoon ? (
-                                <MenuBarItemTooltip id="share-button">
-                                    <ShareButton className={styles.menuBarButton} />
-                                </MenuBarItemTooltip>
-                            ) : []
-                        )}
+                        ) :
+                            null
+                        }
                         {this.props.canRemix ? remixButton : []}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
@@ -832,11 +839,9 @@ class MenuBar extends React.Component {
                                     }
                                 </ProjectWatcher>
                             )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : [])}
+                        ) :
+                            null
+                        }
                     </div>
                 </div>
 

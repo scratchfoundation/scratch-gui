@@ -27,6 +27,7 @@ export default async function ({ addon, global, console, msg }) {
   const renderer = vm.runtime.renderer;
   const width = renderer._xRight - renderer._xLeft;
   const height = renderer._yTop - renderer._yBottom;
+  const canvas = renderer.canvas;
 
   const spacer = document.createElement("div");
   spacer.className = "sa-gamepad-spacer";
@@ -134,6 +135,18 @@ export default async function ({ addon, global, console, msg }) {
     virtualCursorSetVisible(false);
   });
 
+  // Both in Scratch space
+  let virtualX = 0;
+  let virtualY = 0;
+  const postMouseData = (data) => {
+    vm.postIOData("mouse", {
+      ...data,
+      canvasWidth: canvas.width,
+      canvasHeight: canvas.height,
+      x: (virtualX + width / 2) * (canvas.width / width),
+      y: (height / 2 - virtualY) * (canvas.height / height),
+    });
+  };
   const handleGamepadButtonDown = (e) => {
     const key = e.detail;
     vm.postIOData("keyboard", {
@@ -150,29 +163,21 @@ export default async function ({ addon, global, console, msg }) {
   };
   const handleGamepadMouseDown = () => {
     virtualCursorSetDown(true);
-    vm.postIOData("mouse", {
+    postMouseData({
       isDown: true,
-      canvasWidth: width,
-      x: Math.max(0, Math.min(width, vm.runtime.ioDevices.mouse._clientX)),
-      canvasHeight: height,
-      y: Math.max(0, Math.min(height, vm.runtime.ioDevices.mouse._clientY)),
     });
   };
   const handleGamepadMouseUp = () => {
     virtualCursorSetDown(false);
-    vm.postIOData("mouse", {
+    postMouseData({
       isDown: false,
     });
   };
   const handleGamepadMouseMove = (e) => {
-    const { x, y } = e.detail;
-    virtualCursorSetPosition(x, y);
-    vm.postIOData("mouse", {
-      canvasWidth: width,
-      x: x + width / 2,
-      canvasHeight: height,
-      y: height / 2 - y,
-    });
+    virtualX = e.detail.x;
+    virtualY = e.detail.y;
+    virtualCursorSetPosition(virtualX, virtualY);
+    postMouseData({});
   };
 
   GamepadLib.setConsole(console);

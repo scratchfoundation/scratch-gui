@@ -119,7 +119,8 @@ class ArtieFlow extends React.Component {
                 changes = true;
             }
         }else if(nextState.artieStudentDataComponent){
-            if(currentStudent !== null && currentStudent !== undefined && currentStudent.gender !== undefined && currentStudent.gender > 0) {
+            if(currentStudent !== null && currentStudent !== undefined && currentStudent.gender !== undefined && currentStudent.gender > 0 &&
+               currentStudent.motherTongue !== undefined && currentStudent.motherTongue > 0) {
                 artieStudentDataComponent = false;
                 changes = true;
             }

@@ -11,5 +11,5 @@ div[class*="monitor_list-body"] {
 .sa-dragged-over div[class*="stage-selector_header_"],
 .sa-dragged-over div[class*="sprite-info_sprite-info"],
 .sa-dragged-over div[class*="monitor_list-body"] {
-  background-color: hsla(0, 100%, 77%, 1);
+  background-color: hsla(0, 100%, 77%, 1) !important;
 }

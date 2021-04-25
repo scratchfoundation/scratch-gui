@@ -22,6 +22,9 @@
 
 .header {
     font-weight: bold;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
 }
 
 .divider {

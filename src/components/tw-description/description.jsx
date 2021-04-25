@@ -59,13 +59,13 @@ const Description = ({
         </div>
         {instructions ? (
             <div>
-                <div className={styles.header}>
+                <h2 className={styles.header}>
                     <FormattedMessage
                         defaultMessage="Instructions"
                         description="Header for instructions section of description"
                         id="tw.home.instructions"
                     />
-                </div>
+                </h2>
                 {decorate(instructions)}
             </div>
         ) : null}
@@ -74,13 +74,13 @@ const Description = ({
         ) : null}
         {credits ? (
             <div>
-                <div className={styles.header}>
+                <h2 className={styles.header}>
                     <FormattedMessage
                         defaultMessage="Notes and Credits"
                         description="Header for notes and credits section of description"
                         id="tw.home.credit"
                     />
-                </div>
+                </h2>
                 {decorate(credits)}
             </div>
         ) : null}

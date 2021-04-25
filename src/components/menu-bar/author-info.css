@@ -22,6 +22,8 @@
     font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
 .username-line {

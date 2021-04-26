@@ -2,11 +2,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import bindAll from 'lodash.bindall';
-import {defaultProjectId, getIsLoading, getIsFetchingWithId} from '../../reducers/project-state';
+import ReactTooltip from 'react-tooltip';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defaultProjectId} from '../../reducers/project-state';
 import styles from './project-input.css';
 import {setProjectId} from '../../lib/tw-navigation-utils';
 
 const PROJECT_BASE = 'https://scratch.mit.edu/projects/';
+
+const messages = defineMessages({
+    tooltip: {
+        defaultMessage: 'Copy and paste a Scratch project link here!',
+        description: 'Project ID input tooltip',
+        id: 'tw.input.tooltip'
+    }
+});
 
 class ProjectInput extends React.Component {
     constructor (props) {
@@ -16,7 +26,8 @@ class ProjectInput extends React.Component {
             'handleChange',
             'handleBlur',
             'handleFocus',
-            'inputRef'
+            'inputRef',
+            'tooltipRef'
         ]);
         this.state = {
             projectId: this.props.projectId
@@ -58,50 +69,62 @@ class ProjectInput extends React.Component {
         if (this.state.projectId && this.state.projectId !== this.props.projectId) {
             this.props.setProjectId(this.state.projectId);
         }
+        ReactTooltip.hide(this.tooltip);
     }
     handleFocus (e) {
         if (this.extractProjectId(e.target.value)) {
             e.target.select();
         }
+        ReactTooltip.show(this.tooltip);
     }
     inputRef (el) {
         this.input = el;
     }
+    tooltipRef (el) {
+        this.tooltip = el;
+    }
     render () {
         const projectId = this.state.projectId === defaultProjectId ? '' : this.state.projectId || '';
         return (
-            <input
-                ref={this.inputRef}
-                spellCheck="false"
-                type="text"
-                value={`${PROJECT_BASE}${projectId}`}
-                className={styles.input}
-                onKeyDown={this.handleKeyDown}
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-                onFocus={this.handleFocus}
-            />
+            <div
+                ref={this.tooltipRef}
+                data-tip={this.props.intl.formatMessage(messages.tooltip)}
+            >
+                <ReactTooltip
+                    className={styles.tooltip}
+                    effect="solid"
+                />
+                <input
+                    ref={this.inputRef}
+                    spellCheck="false"
+                    type="text"
+                    value={`${PROJECT_BASE}${projectId}`}
+                    className={styles.input}
+                    onKeyDown={this.handleKeyDown}
+                    onChange={this.handleChange}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                />
+            </div>
         );
     }
 }
 
 ProjectInput.propTypes = {
+    intl: intlShape,
     projectId: PropTypes.string,
-    setProjectId: PropTypes.func,
-    loading: PropTypes.bool
+    setProjectId: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    projectId: state.scratchGui.projectState.projectId,
-    loading: getIsLoading(state.scratchGui.projectState.loadingState) ||
-        getIsFetchingWithId(state.scratchGui.projectState.loadingState)
+    projectId: state.scratchGui.projectState.projectId
 });
 
 const mapDispatchToProps = dispatch => ({
     setProjectId: projectId => setProjectId(dispatch, projectId)
 });
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProjectInput);
+)(ProjectInput));

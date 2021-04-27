@@ -42,6 +42,26 @@ const motherTongueComponent = (onMotherTongueChange, motherTongueResponses) => {
     );
 }
 
+const ageComponent = (onAgeChange) => {
+    return(
+        <label>
+            <FormattedMessage
+                defaultMessage="How old are you?"
+                description="How old are you?"
+                id="gui.artie.data.age"
+            />
+            <input
+                min={1}
+                max={99}
+                className={styles.variableNameTextInput}
+                onChange={onAgeChange}
+                name="age"
+                type="number"
+            />
+        </label>
+    );
+}
+
 class ArtieStudentDataPopupComponent extends React.Component {
 
     constructor (props) {
@@ -59,6 +79,7 @@ class ArtieStudentDataPopupComponent extends React.Component {
                 <Box className={styles.body}>
                     {this.props.showGender ? genderComponent(this.props.onGenderChange, this.props.genderResponses) : null}
                     {this.props.showMotherTongue ? motherTongueComponent(this.props.onMotherTongueChange, this.props.motherTongueResponses) : null}
+                    {this.props.showAge ? ageComponent(this.props.onAgeChange) : null}
 
                     <Box className={styles.buttonRow}>
                         <button className={styles.okButton} onClick={this.props.onOk}>
@@ -84,6 +105,8 @@ ArtieStudentDataPopupComponent.propTypes = {
     onGenderChange: PropTypes.func,
     showMotherTongue: PropTypes.bool.isRequired,
     motherTongueResponses: PropTypes.array,
-    onMotherTongueChange: PropTypes.func
+    onMotherTongueChange: PropTypes.func,
+    showAge: PropTypes.bool.isRequired,
+    onAgeChange: PropTypes.func
 };
 export default ArtieStudentDataPopupComponent;

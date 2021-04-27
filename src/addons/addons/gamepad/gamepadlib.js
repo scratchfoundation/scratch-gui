@@ -118,14 +118,12 @@ const transformAndCopyMapping = (mapping) => {
   return copy;
 };
 
-const buttonHtmlId = (n) => `gamepadlib-button-${n}`;
-const axisHtmlId = (n) => `gamepadlib-axis-${n}`;
+const getGamepadId = (gamepad) => `${gamepad.id} (${gamepad.index})`;
 
 class GamepadData {
   /** @param {Gamepad} gamepad Source Gamepad */
   constructor(gamepad) {
     this.gamepad = gamepad;
-    this.id = gamepad.id;
     this.buttonMappings = this.getDefaultButtonMappings().map(transformAndCopyMapping);
     this.axesMappings = this.getDefaultAxisMappings().map(transformAndCopyMapping);
   }
@@ -333,7 +331,7 @@ class GamepadLib extends EventTarget {
 
   handleConnect(e) {
     const gamepad = e.gamepad;
-    const id = gamepad.id;
+    const id = getGamepadId(gamepad);
     console.log("connected", gamepad);
     const gamepadData = new GamepadData(gamepad);
     this.gamepads.set(id, gamepadData);
@@ -345,7 +343,7 @@ class GamepadLib extends EventTarget {
 
   handleDisconnect(e) {
     const gamepad = e.gamepad;
-    const id = gamepad.id;
+    const id = getGamepadId(gamepad);
     console.log("disconnected", gamepad);
     const gamepadData = this.gamepads.get(id);
     this.gamepads.delete(id);
@@ -449,7 +447,7 @@ class GamepadLib extends EventTarget {
         continue;
       }
 
-      const id = gamepad.id;
+      const id = getGamepadId(gamepad);
       const data = this.gamepads.get(id);
 
       for (let i = 0; i < gamepad.buttons.length; i++) {
@@ -503,6 +501,8 @@ const removeAllChildren = (el) => {
     el.removeChild(el.firstChild);
   }
 };
+const buttonHtmlId = (n) => `gamepadlib-button-${n}`;
+const axisHtmlId = (n) => `gamepadlib-axis-${n}`;
 
 class GamepadEditor {
   constructor(gamepadLib) {

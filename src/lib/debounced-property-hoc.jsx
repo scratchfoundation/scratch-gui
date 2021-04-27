@@ -1,59 +1,63 @@
 import React from 'react';
-​
+
 /* Higher Order Component to throttle updates to specific props by delaying it,
  * instead of ignoring it (like ThrottledPropertyHOC)
  * @param {string} propName the name of the prop to throttle updates from.
  * @param {string} throttleTime the minimum time (in ms) between updates to that specific property.
  * @returns {function} a function that accepts a component to wrap.
  */
-​
+
 const DebouncedPropertyHOC = function (propName, throttleTime) {
     return function (WrappedComponent) {
         class DebouncedPropertyWrapper extends React.Component {
             constructor () {
                 super();
                 this.state = {
-                    propValue: this.props[propName]
+                    propValue: this.props && this.props[propName]
                 };
-                this._timeout = null;
+                this.pendingTimeout = null;
             }
-​
+
+            shouldComponentUpdate (nextProps) {
+                // if pending timeout, we may or may not want to update
+                if (this.pendingTimeout) {
+                    // update if any other property *besides* propName's value has changed
+                    for (const nextProp in nextProps) {
+                        if (nextProp !== propName && this.props[nextProp] !== nextProps[nextProp]) {
+                            return true;
+                        }
+                    }
+                    return false; // nothing besides propName's value has changed
+                }
+                return true; // not pending timeout, so definitely want to update
+            }
+
             componentDidUpdate (prevProps) {
-                if (!this._timeout && prevProps[propName] !== this.props[propName]) {
-                    this._timeout = setTimeout(() => {
-                        this.setState({
-                            propValue: this.props[propName]
-                        });
-                        this._timeout = null;
+                // if no timeout is pending, and propName's value has changed:
+                if (!this.pendingTimeout && prevProps[propName] !== this.props[propName]) {
+                    // set a timeout, at the end of which we'll update state's propValue
+                    this.pendingTimeout = setTimeout(() => {
+                        this.pendingTimeout = null;
+                        if (this.state.propValue !== this.props[propName]) {
+                            this.setState({
+                                propValue: this.props[propName]
+                            });
+                        }
                     }, throttleTime);
-                    // update the state.propValue
-                    this.setState({
+                    this.setState({ // eslint-disable-line react/no-did-update-set-state
                         propValue: this.props[propName]
-                    })
+                    });
                 }
             }
-​
-            // shouldComponentUpdate (nextProps) {
-            //     // Always re-render when timeout is finished
-            //     if (!this._timeout) return true;
-            //     if (nextProps[propName] === this.props[propName]) return true;
-            //     for (const nextProp in nextProps) {
-            //         if (nextProp !== propName && this.props[nextProp] !== nextProps[nextProp]) {
-            //             return true; // Always update if another property has changed
-            //         }
-            //     }
-            //     return false;
-            // }
-​
+
             componentWillUnmount () {
-                if (this._timeout) clearTimeout(this._timeout);
+                if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
             }
-​
+
             render () {
-​
-                let props =  {};
-                if (this._timeout) {
-                    props = Object.assign({[propName]: this.state.propValue}, this.props);
+                let props = {};
+                if (this.pendingTimeout) {
+                    props = Object.assign({}, this.props, {[propName]: this.state.propValue});
                 } else {
                     props = this.props;
                 }
@@ -67,5 +71,5 @@ const DebouncedPropertyHOC = function (propName, throttleTime) {
         return DebouncedPropertyWrapper;
     };
 };
-​
+
 export default DebouncedPropertyHOC;

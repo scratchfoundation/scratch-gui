@@ -27,6 +27,7 @@ class Watermark extends React.Component {
     }
 
     render () {
+        console.log('rerendering watermark');
         const componentProps = omit(this.props, ['asset', 'vm']);
         return (
             <WatermarkComponent

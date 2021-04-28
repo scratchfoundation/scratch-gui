@@ -14,7 +14,7 @@ export default async ({ addon, console, msg }) => {
     } else if (state.scratchPaint.modals.strokeColor) {
       fillOrStroke = "stroke";
     } else {
-      fillOrStroke = "ihadastroke";
+      // fillOrStroke = "ihadastroke";
       return;
     }
     const colorType = state.scratchPaint.fillMode.colorIndex;

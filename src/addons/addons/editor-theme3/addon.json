@@ -129,6 +129,38 @@
       "default": "#ff4c4c",
       "allowTransparency": true,
       "reloadRequired": false
+    },
+    {
+      "name": "Block inputs",
+      "id": "input-color",
+      "type": "color",
+      "default": "#FFFFFF",
+      "reloadRequired": false
+    },
+    {
+      "name": "Text color",
+      "id": "text",
+      "type": "select",
+      "default": "white",
+      "potentialValues": [
+        {
+          "id": "white",
+          "name": "White"
+        },
+        {
+          "id": "black",
+          "name": "Black"
+        },
+        {
+          "id": "colorOnWhite",
+          "name": "Colored on white background"
+        },
+        {
+          "id": "colorOnBlack",
+          "name": "Colored on black background"
+        }
+      ],
+      "reloadRequired": false
     }
   ],
   "tags": ["editor", "theme"],
@@ -139,9 +171,19 @@
       "id": "tweaks",
       "description": "Events, Control, and Custom blocks with 2.0 inspired colors",
       "values": {
+        "motion-color": "#4C97FF",
+        "looks-color": "#9966FF",
+        "sounds-color": "#CF63CF",
         "events-color": "#DE9E2E",
         "control-color": "#FFBF00",
-        "custom-color": "#5f49d8"
+        "sensing-color": "#5CB1D6",
+        "operators-color": "#59C059",
+        "data-color": "#FF8C1A",
+        "data-lists-color": "#FF661A",
+        "custom-color": "#5f49d8",
+        "Pen-color": "#0FBD8C",
+        "input-color": "#FFFFFF",
+        "text": "white"
       }
     },
     {
@@ -159,7 +201,49 @@
         "data-color": "#ee7d16",
         "data-lists-color": "#cc5b22",
         "custom-color": "#632d99",
-        "Pen-color": "#0e9a6c"
+        "Pen-color": "#0e9a6c",
+        "input-color": "#ffffff",
+        "text": "white"
+      }
+    },
+    {
+      "name": "Dark",
+      "id": "dark",
+      "description": "Dark versions of the default colors",
+      "values": {
+        "motion-color": "#004099",
+        "looks-color": "#220066",
+        "sounds-color": "#752475",
+        "events-color": "#997300",
+        "control-color": "#664100",
+        "sensing-color": "#1f5f7a",
+        "operators-color": "#235c23",
+        "data-color": "#b35900",
+        "data-lists-color": "#993300",
+        "custom-color": "#99004d",
+        "Pen-color": "#064734",
+        "input-color": "#202020",
+        "text": "white"
+      }
+    },
+    {
+      "name": "Black",
+      "id": "black",
+      "description": "Makes block backgrounds black",
+      "values": {
+        "motion-color": "#4C97FF",
+        "looks-color": "#9966FF",
+        "sounds-color": "#CF63CF",
+        "events-color": "#FFBF00",
+        "control-color": "#FFAB19",
+        "sensing-color": "#5CB1D6",
+        "operators-color": "#59C059",
+        "data-color": "#FF8C1A",
+        "data-lists-color": "#FF661A",
+        "custom-color": "#FF6680",
+        "Pen-color": "#0FBD8C",
+        "input-color": "#202020",
+        "text": "colorOnBlack"
       }
     }
   ],

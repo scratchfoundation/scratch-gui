@@ -54,15 +54,13 @@ const removeNode = (node) => {
 };
 
 const fieldToDomVariable_ = function (field) {
-  var id = field.getValue();
   // The field had not been initialized fully before being serialized.
   // This can happen if a block is created directly through a call to
   // workspace.newBlock instead of from XML.
   // The new block will be serialized for the first time when firing a block
   // creation event.
-  if (id == null) {
+  if (field.getValue() == null) {
     field.initModel();
-    id = field.getValue();
   }
   // Get the variable directly from the field, instead of doing a lookup.  This
   // will work even if the variable has already been deleted.  This can happen

@@ -83,16 +83,11 @@ export default class Utils {
     let base = this.getTopOfStackFor(block);
     let ePos = base.getRelativeToSurfaceXY(), // Align with the top of the block
       rPos = root.getRelativeToSurfaceXY(), // Align with the left of the block 'stack'
-      eSiz = block.getHeightWidth(),
       scale = workspace.scale,
-      // x = (ePos.x + (workspace.RTL ? -1 : 1) * eSiz.width / 2) * scale,
       x = rPos.x * scale,
       y = ePos.y * scale,
       xx = block.width + x, // Turns out they have their x & y stored locally, and they are the actual size rather than scaled or including children...
       yy = block.height + y,
-      // xx = eSiz.width * scale + x,
-      // yy = eSiz.height * scale + y,
-
       s = workspace.getMetrics();
     if (
       x < s.viewLeft + this.offsetX - 4 ||

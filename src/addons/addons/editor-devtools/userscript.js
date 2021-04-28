@@ -48,7 +48,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
 <hr />
 <h2><strong>${m("costume-tab-features")}</strong></h2>
 <p><strong>${m("find-bar")}</strong> &ndash; ${m("find-bar-costume-desc")}</p>
-<p><strong>${m("ctrl-lr")}</strong> &ndash; ${m("ctrl-lr-desc")}</p>
+<p><strong>${m("ctrl-lr")}</strong> &ndash; ${m("ctrl-lr-costume-desc")}</p>
 <p><strong>${m("send-top-bottom")}</strong> &ndash; ${m("send-top-bottom-desc")}</p>
 <hr />
 <p>${m(

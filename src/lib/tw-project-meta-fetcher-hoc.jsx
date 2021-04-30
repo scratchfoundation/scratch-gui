@@ -10,6 +10,9 @@ const API_URL = 'https://trampoline.turbowarp.org/proxy/projects/$id';
 
 const fetchProjectMeta = projectId => fetch(API_URL.replace('$id', projectId))
     .then(r => {
+        if (r.status === 404) {
+            throw new Error('Probably unshared (API returned 404)');
+        }
         if (r.status !== 200) {
             throw new Error(`Unexpected status code: ${r.status}`);
         }
@@ -75,6 +78,9 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                 })
                 .catch(err => {
                     setIndexable(false);
+                    if (`${err}`.includes('unshared')) {
+                        this.props.onSetDescription('unshared', 'unshared');
+                    }
                     log.warn('cannot fetch project meta', err);
                 });
         }

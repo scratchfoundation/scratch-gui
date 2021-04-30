@@ -897,7 +897,7 @@ class AddonSettingsComponent extends React.Component {
                             />
                         ) : null}
                         <div className={styles.version}>
-                            {`v${upstreamMeta.version} (${upstreamMeta.commit}) `}
+                            {`v${upstreamMeta.version} (${upstreamMeta.commit})`}
                         </div>
                     </footer>
                 </div>

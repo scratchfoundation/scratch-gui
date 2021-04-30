@@ -870,6 +870,7 @@
         "tw.home.credit": "Opombe in zasluge",
         "tw.home.description": "TurboWarp je spremenjena različica Scratcha, ki prevede projekte v JavaScript, da delujejo zelo hitro. Preizkusite ga tako, da zgoraj vnesete ID ali URL projekta ali pa spodaj izberete enega od izpostavljenih projektov.",
         "tw.home.instructions": "Navodila",
+        "tw.input.tooltip": "Prilepite povezavo na Scratch projekt sem!",
         "tw.invalidParameters.clones": "Parameter \"clone\" v URL-ju ni veljaven",
         "tw.invalidParameters.fps": "Parameter \"fps\" v URL-ju ni veljaven",
         "tw.loader.assets.known": "Nalaganje projekta ({complete}/{total}) ...",

@@ -4,40 +4,40 @@ aliases:
     save_cache:
       paths:
         - .git
-      key: v1-git-{{ .Revision }}
+      key: v3-git-{{ .Revision }}
   - &restore_git_cache
     restore_cache:
       keys:
-        - v1-git-{{ .Revision }}
-        - v1-git-
+        - v3-git-{{ .Revision }}
+        - v3-git-
   - &save_build_cache
     save_cache:
       paths:
         - build
-      key: v1-build-{{ .Revision }}
+      key: v3-build-{{ .Revision }}
   - &restore_build_cache
     restore_cache:
       keys:
-        - v1-build-{{ .Revision }}
+        - v3-build-{{ .Revision }}
   - &save_dist_cache
     save_cache:
       paths:
         - dist
-      key: v1-dist-{{ .Revision }}
+      key: v3-dist-{{ .Revision }}
   - &restore_dist_cache
     restore_cache:
       keys:
-        - v1-dist-{{ .Revision }}
+        - v3-dist-{{ .Revision }}
   - &save_npm_cache
     save_cache:
       paths:
         - node_modules
-      key: v1-npm-{{ checksum "package-lock.json" }}
+      key: v3-npm-{{ checksum "package-lock.json" }}
   - &restore_npm_cache
     restore_cache:
       keys:
-        - v1-npm-{{ checksum "package-lock.json" }}
-        - v1-npm-
+        - v3-npm-{{ checksum "package-lock.json" }}
+        - v3-npm-
   - &defaults
     docker:
       - image: circleci/node:10-browsers
@@ -50,7 +50,9 @@ jobs:
       - *restore_git_cache
       - checkout
       - *restore_npm_cache
+      - run: rm -rf node_modules/scratch-vm
       - run: npm install
+      - run: (cd node_modules/scratch-vm && npm --production=false install && $(npm bin)/webpack --colors --bail --silent)
       - *save_git_cache
       - *save_npm_cache
   lint:
@@ -127,30 +129,6 @@ jobs:
       - store_test_results:
           path: test-results
 
-  deploy-npm:
-    <<: *defaults
-    environment:
-      NODE_OPTIONS: --max-old-space-size=4000
-    steps:
-      - *restore_git_cache
-      - *restore_dist_cache
-      - checkout
-      - run: |
-          echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
-          echo export NPM_TAG=circlelatest >> $BASH_ENV
-          if [ "$CIRCLE_BRANCH" == "master" ]
-            then echo export NPM_TAG=circlestable >> $BASH_ENV
-          fi
-          if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
-            then echo export NPM_TAG=circlehotfix >> $BASH_ENV
-          fi
-      - run: npm version --no-git-tag-version $RELEASE_VERSION
-      - run: |
-          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish --tag $NPM_TAG
-      - run: git tag $RELEASE_VERSION
-      - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
-
   deploy-gh-pages:
     <<: *defaults
     steps:
@@ -161,7 +139,8 @@ jobs:
       - run: |
           git config --global user.email $(git log --pretty=format:"%ae" -n1)
           git config --global user.name $(git log --pretty=format:"%an" -n1)
-      - run: npm run deploy -- -e $CIRCLE_BRANCH
+      - run: npm run deploy -- -x -r https://${GH_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+      - run: npm run deploy:smalruby.app -- -x -r https://${GH_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
 
 workflows:
   version: 2
@@ -186,7 +165,7 @@ workflows:
       - store_dist:
           requires:
             - build
-      - deploy-npm:
+      - deploy-gh-pages:
           requires:
             - lint
             - unit
@@ -194,17 +173,6 @@ workflows:
             - build
           filters:
             branches:
-              only:
-                - master
-                - develop
-                - /^hotfix\/.*/
-      # - deploy-gh-pages:
-      #     requires:
-      #       - lint
-      #       - unit
-      #       - integration
-      #       - build
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - ^dependabot/.*/
+              ignore:
+                - /^dependabot/.*/
+                - /^pull/.*/ # don't deploy to  gh pages on PRs.

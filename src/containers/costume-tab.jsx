@@ -158,14 +158,17 @@ class CostumeTab extends React.Component {
         const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
-    handleNewCostume (costume, fromCostumeLibrary) {
+    handleNewCostume (costume, fromCostumeLibrary, targetId) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
         return Promise.all(costumes.map(c => {
             if (fromCostumeLibrary) {
                 return this.props.vm.addCostumeFromLibrary(c.md5, c);
             }
-            return this.props.vm.addCostume(c.md5, c);
+            // If targetId is falsy, VM should default it to editingTarget.id
+            // However, targetId should be provided to prevent #5876,
+            // if making new costume takes a while
+            return this.props.vm.addCostume(c.md5, c, targetId);
         }));
     }
     handleNewBlankCostume () {
@@ -176,16 +179,12 @@ class CostumeTab extends React.Component {
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
-        const split = item.md5.split('.');
-        const type = split.length > 1 ? split[1] : null;
-        const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
-        const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX,
-            rotationCenterY,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
@@ -194,23 +193,24 @@ class CostumeTab extends React.Component {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX: item.info[0] && item.info[0] / 2,
-            rotationCenterY: item.info[1] && item.info[1] / 2,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume);
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
                     costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
-                this.handleNewCostume(vmCostumes).then(() => {
+                this.handleNewCostume(vmCostumes, false, targetId).then(() => {
                     if (fileIndex === fileCount - 1) {
                         this.props.onCloseImporting();
                     }
@@ -220,9 +220,10 @@ class CostumeTab extends React.Component {
     }
     handleCameraBuffer (buffer) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         costumeUpload(buffer, 'image/png', storage, vmCostumes => {
             vmCostumes[0].name = this.props.intl.formatMessage(messages.costume, {index: 1});
-            this.handleNewCostume(vmCostumes);
+            this.handleNewCostume(vmCostumes, false, targetId);
         });
     }
     handleFileUploadClick () {
@@ -307,7 +308,7 @@ class CostumeTab extends React.Component {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
+                        fileAccept: '.svg, .png, .bmp, .jpg, .jpeg, .gif',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput,
                         fileMultiple: true

@@ -1,8 +1,9 @@
 /* eslint-env jest */
-import monitorLayoutReducer from '../../../src/reducers/monitor-layout';
-import {addMonitorRect, moveMonitorRect} from '../../../src/reducers/monitor-layout';
-import {resizeMonitorRect, removeMonitorRect} from '../../../src/reducers/monitor-layout';
-import {getInitialPosition, PADDING, SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../src/reducers/monitor-layout';
+import monitorLayoutReducer, {
+    addMonitorRect, moveMonitorRect,
+    resizeMonitorRect, removeMonitorRect,
+    getInitialPosition, PADDING, SCREEN_WIDTH, SCREEN_HEIGHT
+} from '../../../src/reducers/monitor-layout';
 
 test('initialState', () => {
     let defaultState;

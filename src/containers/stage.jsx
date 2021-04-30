@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
-import {SVGRenderer as V2SVGAdapter} from 'scratch-svg-renderer';
 import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
 
 import StageComponent from '../components/stage/stage.jsx';
@@ -69,7 +68,6 @@ class Stage extends React.Component {
             // default color
             this.props.vm.renderer.draw();
         }
-        this.props.vm.attachV2SVGAdapter(new V2SVGAdapter());
         this.props.vm.attachV2BitmapAdapter(new V2BitmapAdapter());
     }
     componentDidMount () {

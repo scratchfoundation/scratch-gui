@@ -111,7 +111,7 @@ class TargetPane extends React.Component {
         );
         const item = surpriseSprites[Math.floor(Math.random() * surpriseSprites.length)];
         randomizeSpritePosition(item);
-        this.props.vm.addSprite(JSON.stringify(item.json))
+        this.props.vm.addSprite(JSON.stringify(item))
             .then(this.handleActivateBlocksTab);
     }
     handlePaintSpriteClick () {
@@ -191,7 +191,7 @@ class TargetPane extends React.Component {
             topBlock.y = posY / scale;
         }
 
-        this.props.vm.shareBlocksToTarget(blocks, targetId, optFromTargetId);
+        return this.props.vm.shareBlocksToTarget(blocks, targetId, optFromTargetId);
     }
     handleDrop (dragInfo) {
         const {sprite: targetId} = this.props.hoveredTarget;
@@ -228,10 +228,8 @@ class TargetPane extends React.Component {
                 }, targetId);
             } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
                 fetchCode(dragInfo.payload.bodyUrl)
-                    .then(blocks => {
-                        this.shareBlocks(blocks, targetId);
-                        this.props.vm.refreshWorkspace();
-                    });
+                    .then(blocks => this.shareBlocks(blocks, targetId))
+                    .then(() => this.props.vm.refreshWorkspace());
             }
         }
     }

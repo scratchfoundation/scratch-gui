@@ -266,11 +266,11 @@ class RubyToBlocksConverter {
         });
     }
 
-    _callConvertersHandler (handlerName) {
+    _callConvertersHandler (handlerName, ...args) {
         for (let i = 0; i < this._converters.length; i++) {
             const converter = this._converters[i];
             if (converter.hasOwnProperty(handlerName)) {
-                const block = converter[handlerName].apply(this, Array.prototype.slice.call(arguments, 1));
+                const block = converter[handlerName].apply(this, args);
                 if (block) {
                     return block;
                 }

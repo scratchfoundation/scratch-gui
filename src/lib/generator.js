@@ -240,7 +240,7 @@ class Generator {
         const childBlocks = this.getChildren(block);
         childBlocks.forEach(child => {
             if (!ignoreShadows || !child.shadow) {
-                blocks.push.apply(blocks, this.getDescendants(child, ignoreShadows));
+                blocks.push(...this.getDescendants(child, ignoreShadows));
             }
         });
         return blocks;

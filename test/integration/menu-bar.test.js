@@ -70,6 +70,7 @@ describe('Menu bar settings', () => {
     test('User is not warned before uploading project file over a fresh project', async () => {
         await loadUri(uri);
         await clickText('File');
+        await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
         // No replace alert since no changes were made
@@ -84,6 +85,7 @@ describe('Menu bar settings', () => {
         await clickText('delete', scope.spriteTile);
 
         await clickText('File');
+        await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
         await driver.switchTo().alert()

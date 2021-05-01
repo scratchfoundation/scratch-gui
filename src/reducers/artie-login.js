@@ -12,7 +12,7 @@ const initialState = {
     user: null,
     currentStudent: null,
     error: null,
-    latestLogin: null
+    lastLogin: null
 }
 
 const reducer = function (state, action) {
@@ -29,7 +29,7 @@ const reducer = function (state, action) {
         case ARTIE_LOGGED:
             return Object.assign({}, state, {
                 user: action.user,
-                latestLogin: action.latestLogin,
+                lastLogin: action.lastLogin,
                 error: null
             });
         case ARTIE_LOGOUT:
@@ -70,7 +70,7 @@ const deactivateArtieLogin = () =>({
 const artieLogged = (user, date) => ({
     type: ARTIE_LOGGED,
     user: user,
-    latestLogin: date
+    lastLogin: date
 });
 
 const artieSetStudents = (students) => ({

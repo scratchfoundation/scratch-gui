@@ -119,7 +119,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, lastLogin, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
 
     let spriteElements = [];
 
@@ -130,7 +130,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
     });
 
     const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, finishedExercise: finishedExercise,
-                                          screenShot: screenShot, elements: spriteElements};
+                                          lastLogin: lastLogin, screenShot: screenShot, elements: spriteElements};
 
     let xhr = new XMLHttpRequest();
     let params = JSON.stringify(artiePedagogicalSoftwareData);

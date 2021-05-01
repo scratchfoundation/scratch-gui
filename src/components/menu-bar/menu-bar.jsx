@@ -372,7 +372,8 @@ class MenuBar extends React.Component {
     }
     handleClickRequestHelp(){
         this.props.onArtieLoadingHelp(true);
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true, false, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, this.props.artieLogin.lastLogin,
+            false, null, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
     }
     handleClickFinishExercise(){
         this.props.onArtieLoadingExercise(true, false);
@@ -380,7 +381,8 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true,
+                this.props.artieLogin.lastLogin, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
         });
     }
     handleArtieLogout(){

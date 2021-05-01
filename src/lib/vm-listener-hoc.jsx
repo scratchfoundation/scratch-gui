@@ -124,7 +124,8 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null, null, null, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false,
+                        this.props.artieLogin.lastLogin, null, null, null, null);
                 }, 500);
             }
         }
@@ -132,7 +133,8 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null, null, this.props.onArtieHelpReceived, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false,
+                        this.props.artieLogin.lastLogin,null, null, this.props.onArtieHelpReceived, null);
                 }, 500);
             }
             this.props.onProjectRunStart();
@@ -141,7 +143,8 @@ const vmListenerHOC = function (WrappedComponent) {
             if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false, null, null, this.props.onArtieHelpReceived, null);
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, false,
+                        this.props.artieLogin.lastLogin, null, null, this.props.onArtieHelpReceived, null);
                 }, 500);
             }
             this.props.onGreenFlag();

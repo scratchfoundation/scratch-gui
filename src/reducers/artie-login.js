@@ -7,11 +7,12 @@ const ARTIE_SET_CURRENT_STUDENT = 'scratch-gui/artie-login/ARTIE_SET_CURRENT_STU
 const ARTIE_ERROR = 'scratch-gui/artie-login/ARTIE_ERROR';
 
 const initialState = {
-    active : false,
+    active: false,
     students: [],
     user: null,
     currentStudent: null,
-    error: null
+    error: null,
+    latestLogin: null
 }
 
 const reducer = function (state, action) {
@@ -28,12 +29,13 @@ const reducer = function (state, action) {
         case ARTIE_LOGGED:
             return Object.assign({}, state, {
                 user: action.user,
+                latestLogin: action.latestLogin,
                 error: null
             });
         case ARTIE_LOGOUT:
             return Object.assign({}, state, {
                 user: null,
-                students: [],
+                students: [],
                 currentStudent: null,
                 error: null
             });
@@ -65,9 +67,10 @@ const deactivateArtieLogin = () =>({
     type: DEACTIVATE_ARTIE_LOGIN
 });
 
-const artieLogged = (user) => ({
+const artieLogged = (user, date) => ({
     type: ARTIE_LOGGED,
-    user: user
+    user: user,
+    latestLogin: date
 });
 
 const artieSetStudents = (students) => ({

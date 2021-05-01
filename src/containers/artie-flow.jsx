@@ -276,7 +276,9 @@ class ArtieFlow extends React.Component {
 
     handleArtieLogged(user){
 
-        this.props.onArtieLogged(user);
+        //Gets the datetime
+        const date = new Date().toLocaleString();
+        this.props.onArtieLogged(user, date);
 
         //If the user role is admin, we load all the exercises (evaluations and normals)
         if(user.role !== null && user.role == 1){

@@ -21,3 +21,6 @@ npm-*
 .idea/modules.xml
 .idea/scratch-gui.iml
 .idea/vcs.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.idea/inspectionProfiles/Project_Default.xml

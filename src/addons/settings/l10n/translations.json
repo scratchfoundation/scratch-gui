@@ -248,6 +248,24 @@
         "tw.addons.settings.unsupported": "Bazi içerikler bu web tarayacıda kullanamıyoruz:"
     },
     "zh-cn": {
-        "tw.addons.settings.search": "搜索"
+        "tw.addons.settings.addonFeedback": "插件反馈",
+        "tw.addons.settings.confirmResetAll": "你确定要将所有加载项设置重置为其默认值吗？",
+        "tw.addons.settings.credits": "作者：",
+        "tw.addons.settings.dirty": "重新加载TurboWarp以应用设置。",
+        "tw.addons.settings.dirtyButton": "立即重新加载",
+        "tw.addons.settings.export": "导出设置",
+        "tw.addons.settings.import": "导入设置",
+        "tw.addons.settings.noResults": "无结果。",
+        "tw.addons.settings.presets": "预设",
+        "tw.addons.settings.reset": "重置",
+        "tw.addons.settings.resetAll": "重置所有",
+        "tw.addons.settings.search": "搜索",
+        "tw.addons.settings.tags.beta": "测试版",
+        "tw.addons.settings.tags.easterEgg": "彩蛋",
+        "tw.addons.settings.tags.new": "新！",
+        "tw.addons.settings.tags.recommended": "推荐",
+        "tw.addons.settings.tags.theme": "主题",
+        "tw.addons.settings.title": "插件设置",
+        "tw.addons.settings.unsupported": "某些插件在此浏览器中不可用："
     }
 }

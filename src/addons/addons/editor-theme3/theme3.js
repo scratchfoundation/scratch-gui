@@ -126,7 +126,7 @@ function updateSettings(addon, newStyle) {
     } else {
       let background = { colorOnWhite: "#fff", colorOnBlack: "#282828" }[textMode];
       let inputShadow = { colorOnWhite: "#00000026", colorOnBlack: "#fff3" }[textMode];
-      let secondary = multiply(addon.settings.get(prop + "-color"), { a: 0.15 });
+      let secondary = multiply(addon.settings.get((prop === "TurboWarp" ? "tw" : prop) + "-color"), { a: 0.15 });
       stylesheet += `g[data-category="${prop}"] > path.blocklyBlockBackground,
       g[data-category="${prop}"] > g[data-argument-type="dropdown"] > rect,
       g[data-category="${prop}"] > g[data-argument-type="variable"] > rect {

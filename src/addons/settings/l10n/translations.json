@@ -145,6 +145,27 @@
         "tw.addons.settings.title": "Addons Instellingen",
         "tw.addons.settings.unsupported": "Sommige addons zijn niet beschikbaar in deze browser."
     },
+    "pl": {
+        "tw.addons.settings.addonFeedback": "Opinia o dodatkach",
+        "tw.addons.settings.confirmResetAll": "Jesteś pewien, że chcesz zresetować wszystkie dodatki do ich domyślnych wartości?",
+        "tw.addons.settings.credits": "Kredyty:",
+        "tw.addons.settings.dirty": "Odśwież TurboWarp, aby zastosować ustawienia.",
+        "tw.addons.settings.dirtyButton": "Odśwież teraz",
+        "tw.addons.settings.export": "Eksportuj ustawienia",
+        "tw.addons.settings.import": "Importuj ustawienia",
+        "tw.addons.settings.noResults": "Brak wyników.",
+        "tw.addons.settings.presets": "Ustawienia wstępne",
+        "tw.addons.settings.reset": "Resetuj",
+        "tw.addons.settings.resetAll": "Resetuj wszystko",
+        "tw.addons.settings.search": "Szukaj",
+        "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Zabawny Sekret",
+        "tw.addons.settings.tags.new": "Nowość!",
+        "tw.addons.settings.tags.recommended": "Polecane",
+        "tw.addons.settings.tags.theme": "Motyw",
+        "tw.addons.settings.title": "Ustawienia Dodatków",
+        "tw.addons.settings.unsupported": "Niektóre dodatki nie są dostępne w tej przeglądarce:"
+    },
     "pt": {
         "tw.addons.settings.addonFeedback": "Dar Feedback sobre Addons",
         "tw.addons.settings.confirmResetAll": "Tem certeza que quer resetar as configurações de todos os addons aos seus valores padrão?",

@@ -325,36 +325,6 @@ StudioView.prototype.onselect = function (id, el) { };
 StudioView.prototype.onpageload = function () { };
 StudioView.prototype.onend = function () { };
 
-// Types of shufflers
-function shuffleList(list) {
-    // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
-    for (var i = list.length - 1; i > 0; i--) {
-        var random = Math.floor(Math.random() * (i + 1));
-        var tmp = list[i];
-        list[i] = list[random];
-        list[random] = tmp;
-    }
-}
-StudioView.Shufflers = {};
-StudioView.Shufflers.random = function (groupSize) {
-    groupSize = groupSize || Infinity;
-    return function (projects) {
-        if (groupSize === Infinity) {
-            shuffleList(projects);
-            return projects;
-        }
-        var result = [];
-        for (var i = 0; i < projects.length; i += groupSize) {
-            var group = projects.slice(i, i + groupSize);
-            shuffleList(group);
-            for (var j = 0; j < group.length; j++) {
-                result.push(group[j]);
-            }
-        }
-        return result;
-    };
-};
-
 // This can be any URL that is a proxy for https://scratch.mit.edu/site-api/projects/in/5235006/1/
 // Understandably scratch does not set CORS headers on this URL, but a proxy can set it manually.
 // $id will be replaced with the studio ID, and $page with the page.

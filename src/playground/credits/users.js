@@ -1,5 +1,4 @@
 import addonTranslatorsJSON from '../../addons/translators.json';
-import addonManifests from '../../addons/all-addon-manifests';
 
 const shuffle = list => {
     for (let i = list.length - 1; i > 0; i--) {
@@ -10,15 +9,6 @@ const shuffle = list => {
     }
     return list;
 };
-
-const normalize = str => str.toLowerCase().replace(/[^a-z]/gi, '');
-
-const addonCreditsNames = [];
-for (const {credits} of Object.values(addonManifests)) {
-    for (const {name} of credits || []) {
-        addonCreditsNames.push(normalize(name));
-    }
-}
 
 const fromHardcoded = ({userId, username, name}) => ({
     image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
@@ -94,6 +84,10 @@ const translators = [
         userId: '71978380',
         username: 'TheBugCoder'
     },
+    // {
+    //     userId: '16426047',
+    //     username: 'Maximouse'
+    // },
     {
         userId: '55742784',
         username: 'RedGuy7'

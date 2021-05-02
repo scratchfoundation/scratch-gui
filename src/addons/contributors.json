@@ -685,10 +685,10 @@
         ]
     },
     {
-        "login": "Remixsuper-on-scratch",
-        "name": "Remixsuper-on-scratch",
+        "login": "remixsuper",
+        "name": "remixsuper",
         "avatar_url": "https://avatars.githubusercontent.com/u/74250922?v=4",
-        "profile": "https://github.com/Remixsuper-on-scratch",
+        "profile": "https://github.com/remixsuper",
         "contributions": [
             "translation"
         ]
@@ -737,9 +737,7 @@
         "avatar_url": "https://avatars.githubusercontent.com/u/67647112?v=4",
         "profile": "https://sites.google.com/view/barthdry/home",
         "contributions": [
-            "translation",
-            "ideas",
-            "bug"
+            "translation"
         ]
     },
     {
@@ -770,6 +768,43 @@
         "contributions": [
             "bug",
             "ideas"
+        ]
+    },
+    {
+        "login": "22yeetz22",
+        "name": "22yeetz22",
+        "avatar_url": "https://avatars.githubusercontent.com/u/74276537?v=4",
+        "profile": "https://github.com/22yeetz22",
+        "contributions": [
+            "bug"
+        ]
+    },
+    {
+        "login": "Tacodude7729",
+        "name": "Tacodude7729",
+        "avatar_url": "https://avatars.githubusercontent.com/u/27910867?v=4",
+        "profile": "https://github.com/Tacodude7729",
+        "contributions": [
+            "code",
+            "ideas"
+        ]
+    },
+    {
+        "login": "Tofix26",
+        "name": "Tofix26",
+        "avatar_url": "https://avatars.githubusercontent.com/u/73693639?v=4",
+        "profile": "https://github.com/Tofix26",
+        "contributions": [
+            "translation"
+        ]
+    },
+    {
+        "login": "iltersinavv",
+        "name": "İlter | iltersinavv Hosting / isn | hogra",
+        "avatar_url": "https://avatars.githubusercontent.com/u/80217178?v=4",
+        "profile": "https://github.com/iltersinavv",
+        "contributions": [
+            "translation"
         ]
     }
 ]

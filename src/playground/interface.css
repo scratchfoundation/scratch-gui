@@ -23,9 +23,6 @@ a {
     height: 100%;
 }
 
-.player-only * {
-    box-sizing: border-box;
-}
 .player-only .center {
     margin: auto;
 }

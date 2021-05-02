@@ -11,7 +11,10 @@ import UserData from './users';
 /* eslint-disable react/jsx-no-literals */
 
 const User = ({image, text, href}) => (
-    <span
+    <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
         className={styles.user}
     >
         <img
@@ -23,7 +26,7 @@ const User = ({image, text, href}) => (
         <div className={styles.userInfo}>
             {text}
         </div>
-    </span>
+    </a>
 );
 User.propTypes = {
     image: PropTypes.string.isRequired,
@@ -64,7 +67,7 @@ const Credits = () => (
         </section>
         <section>
             <h2>{'Scratch'}</h2>
-            <p>TurboWarp is based on work by the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>. TurboWarp is not affiliated with Scratch.</p>
+            <p>TurboWarp is based on the work of the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>. TurboWarp is not affiliated with Scratch.</p>
         </section>
         <section>
             <h2>{'Addons'}</h2>
@@ -73,6 +76,13 @@ const Credits = () => (
         <section>
             <h2>{'Translators'}</h2>
             <UserList users={UserData.translators} />
+        </section>
+        <section>
+            <p>Contributors are listed in no particular order.</p>
+            <p>
+                The TurboWarp project currently does not accept donations.
+                Consider sending your money to Scratch or Fosshost instead.
+            </p>
         </section>
     </main>
 );

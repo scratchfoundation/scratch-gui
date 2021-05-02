@@ -1,4 +1,4 @@
-import addonsContributors from '../../addons/contributors.json';
+import addonTranslatorsJSON from '../../addons/translators.json';
 import addonManifests from '../../addons/all-addon-manifests';
 
 const shuffle = list => {
@@ -20,82 +20,143 @@ for (const {credits} of Object.values(addonManifests)) {
     }
 }
 
+const fromHardcoded = ({userId, username, name}) => ({
+    image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
+    href: `https://scratch.mit.edu/users/${username}/`,
+    text: name || username
+});
+
+const fromAddons = ({login, avatar_url: avatarUrl}) => ({
+    image: `${avatarUrl}&s=60`,
+    text: login
+    // No links to GitHub profiles for now :(
+});
+
 const translators = [
     // {
     //     userId: '4648559',
-    //     scratchUsername: 'World_Languages',
+    //     username: 'World_Languages',
     //     name: 'World_Languages'
     // },
     {
         userId: '6103312',
-        scratchUsername: 'Fupicat',
-        name: 'Fupicat'
+        username: 'Fupicat'
     },
     {
         userId: '62181963',
-        scratchUsername: 'DieForrobux',
-        name: 'DieForrobux'
+        username: 'DieForrobux'
     },
     // {
     //     userId: '61087321',
-    //     scratchUsername: 'superscratch444tre',
+    //     username: 'superscratch444tre',
     //     name: 'superscratch444tre'
     // },
     {
         userId: '67422866',
-        scratchUsername: 'AArt1256',
+        username: 'AArt1256',
         name: 'AnnoyedArt1256'
     },
     {
         userId: '61067753',
-        scratchUsername: 'diaowinner',
-        name: 'diaowinner'
+        username: 'diaowinner'
     },
     // {
     //     userId: '62626',
-    //     scratchUsername: 's_federici',
+    //     username: 's_federici',
     //     name: 's_federici'
     // },
     // {
     //     userId: '34316478',
-    //     scratchUsername: 'philipp2007',
+    //     username: 'philipp2007',
     //     name: 'iqnite'
     // }
     {
         userId: '3318598',
-        scratchUsername: 'plant2014',
-        name: 'plant2014'
+        username: 'plant2014'
     },
     {
         userId: '56013432',
-        scratchUsername: 'Developer_Diary',
-        name: 'Developer_Diary'
+        username: 'Developer_Diary'
     },
     {
         userId: '72794568',
-        scratchUsername: '52Tellur',
-        name: '52Tellur'
+        username: '52Tellur'
+    },
+    {
+        userId: '33381624',
+        username: 'Mikez333'
+    },
+    {
+        userId: '60084940',
+        username: 'ThisFeelsScratchy'
+    },
+    {
+        userId: '71978380',
+        username: 'TheBugCoder'
+    },
+    {
+        userId: '55742784',
+        username: 'RedGuy7'
     }
-].map(({userId, scratchUsername, name}) => ({
-    image: `https://cdn2.scratch.mit.edu/get_image/user/${userId}_60x60.png`,
-    href: `https://scratch.mit.edu/users/${scratchUsername}/`,
-    text: name
-}));
+].map(fromHardcoded);
 
-const addonContributorToIcon = ({login, avatar_url: avatarUrl}) => ({
-    image: `${avatarUrl}&s=60`,
-    href: `https://github.com/${login}/`,
-    text: login
-});
+const addonDevelopers = [
+    {
+        userId: '34018398',
+        username: 'Jeffalo'
+    },
+    {
+        userId: '64184234',
+        username: 'ErrorGamer2000'
+    },
+    {
+        userId: '41616512',
+        username: 'pufferfish101007'
+    },
+    {
+        userId: '61409215',
+        username: 'TheColaber'
+    },
+    {
+        userId: '1882674',
+        username: 'griffpatch'
+    },
+    {
+        userId: '10817178',
+        username: 'apple502j'
+    },
+    {
+        userId: '16947341',
+        username: '--Explosion--'
+    },
+    {
+        userId: '14880401',
+        username: 'Sheep_maker'
+    },
+    {
+        userId: '9981676',
+        username: 'NitroCipher'
+    },
+    {
+        userId: '2561680',
+        username: 'lisa_wolfgang'
+    },
+    {
+        userId: '60000111',
+        username: 'GDUcrash'
+    },
+    {
+        userId: '4648559',
+        username: 'World_Languages'
+    },
+    {
+        userId: '17340565',
+        username: 'GarboMuffin'
+    }
+    // TODO: summerscar if this is their Scratch account: https://scratch.mit.edu/users/summerscar/
+].map(fromHardcoded);
 
-const addonDevelopers = addonsContributors.filter(({contributions, login}) => (
-    contributions.includes('business') ||
-    addonCreditsNames.some(i => i.includes(normalize(login)) || normalize(login).includes(i))
-)).map(addonContributorToIcon);
-
-const addonTranslators = addonsContributors.filter(({contributions}) => (
-    contributions.includes('translation')
-)).map(addonContributorToIcon);
+const addonTranslators = addonTranslatorsJSON.map(fromAddons);
 
 export default {
     translators: shuffle([...translators, ...addonTranslators]),

@@ -113,8 +113,9 @@ const includeImports = (folder, contents) => {
 
 request('https://raw.githubusercontent.com/ScratchAddons/contributors/master/.all-contributorsrc', (err, response, body) => {
     const parsed = JSON.parse(body);
-    const contributorsPath = pathUtil.resolve(__dirname, 'contributors.json');
-    fs.writeFileSync(contributorsPath, JSON.stringify(parsed.contributors, null, 4));
+    const contributors = parsed.contributors.filter(({contributions}) => contributions.includes('translation'));
+    const contributorsPath = pathUtil.resolve(__dirname, 'translators.json');
+    fs.writeFileSync(contributorsPath, JSON.stringify(contributors, null, 4));
 });
 
 (async () => {

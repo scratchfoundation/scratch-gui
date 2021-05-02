@@ -52,7 +52,15 @@ a {
     align-items: center;
     width: 300px;
     padding: 4px;
+    border-radius: 4px;
     font-size: 1.25rem;
     color: inherit !important;
     text-decoration: none;
+    transition: background .2s;
+}
+.user:link:hover {
+    background: #eee;
+}
+[theme="dark"] .user:link:hover {
+    background: #222;
 }

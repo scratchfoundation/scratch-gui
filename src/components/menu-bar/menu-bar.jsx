@@ -87,7 +87,7 @@ import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
 import {activateArtieLogin, artieLogout} from '../../reducers/artie-login';
 import {activateArtieExercises, artieSetCurrentExercise, artieClearExercises,
         artieHelpReceived, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-        artiePopupExercise, artiePopupSolution, artieEvaluationStop, artiePopupStatement} from '../../reducers/artie-exercises';
+        artiePopupExercise, artiePopupSolution, artieEvaluationStop, artiePopupStatement, artieResetSecondsHelpOpen} from '../../reducers/artie-exercises';
 import ArtieFlow from '../../containers/artie-flow.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
@@ -372,8 +372,12 @@ class MenuBar extends React.Component {
     }
     handleClickRequestHelp(){
         this.props.onArtieLoadingHelp(true);
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, this.props.artieLogin.lastLogin,
-            false, null, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true,
+            this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
+            null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
+        if(this.props.artieExercises.secondsHelpOpen > 0) {
+            this.props.onArtieResetSecondsHelpOpen();
+        }
     }
     handleClickFinishExercise(){
         this.props.onArtieLoadingExercise(true, false);
@@ -381,8 +385,12 @@ class MenuBar extends React.Component {
         var canvasUrl = '';
         html2canvas(body).then(canvas => {
             canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false, true,
-                this.props.artieLogin.lastLogin, canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
+            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false,
+                this.props.artieExercises.secondsHelpOpen, true, this.props.artieLogin.lastLogin,
+                canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
+            if(this.props.artieExercises.secondsHelpOpen > 0) {
+                this.props.onArtieResetSecondsHelpOpen();
+            }
         });
     }
     handleArtieLogout(){
@@ -1135,9 +1143,10 @@ const mapDispatchToProps = dispatch => ({
     onActivateArtieLogin: () => dispatch(activateArtieLogin()),
     onArtieLogout: () => dispatch(artieLogout()),
     onArtieClearExercises: () => dispatch(artieClearExercises()),
+    onArtieResetSecondsHelpOpen: () => dispatch(artieResetSecondsHelpOpen()),
     onArtieSetCurrentExercise: (currentExercise) => dispatch(artieSetCurrentExercise(currentExercise)),
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
-    onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
+    onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help, new Date())),
     onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
     onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
     onArtieLoadingHelp: (loading) => dispatch(artieLoadingHelp(loading)),

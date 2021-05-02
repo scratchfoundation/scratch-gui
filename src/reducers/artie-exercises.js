@@ -6,6 +6,7 @@ const ARTIE_CLEAR_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_CLEAR_EXERCISES
 const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
 const ARTIE_HELP_RECEIVED = 'scratch-gui/artie-exercises/ARTIE_HELP_RECEIVED';
 const ARTIE_CLEAR_HELP = 'scratch-gui/artie-exercises/ARTIE_CLEAR_HELP';
+const ARTIE_RESET_SECONDS_HELP_OPEN = 'scratch-gui/artie-exercises/ARTIE_RESET_SECONDS_HELP_OPEN';
 
 const ARTIE_SENDING_SOLUTION = 'scratch-gui/artie-exercises/ARTIE_SENDING_SOLUTION';
 const ARTIE_SENDING_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SENDING_EXERCISE';
@@ -24,6 +25,8 @@ const initialState = {
     blocks: null,
     active : false,
     help: null,
+    timeHelpReceived: null,
+    secondsHelpOpen: 0,
     loadingSolution: false,
     loadingExercise: false,
     loadingHelp: false,
@@ -62,17 +65,25 @@ const reducer = function (state, action) {
                 needUpdate: false,
                 blocks: null
             });
+        case ARTIE_RESET_SECONDS_HELP_OPEN:
+            return Object.assign({}, state, {
+                secondsHelpOpen: 0
+            });
         case ARTIE_BLOCKS_UPDATED:
             return Object.assign({}, state, {
                 blocks: action.blocks
             });
         case ARTIE_HELP_RECEIVED:
             return Object.assign({}, state, {
-                help: action.help
+                help: action.help,
+                timeHelpReceived: action.timeHelpReceived,
+                secondsHelpOpen: 0
             });
         case ARTIE_CLEAR_HELP:
             return Object.assign({}, state, {
-                help: null
+                help: null,
+                secondsHelpOpen: (action.timeHelpClosed - state.timeHelpReceived) / 1000,
+                timeHelpReceived: null,
             });
         case ARTIE_SENDING_SOLUTION:
             return Object.assign({}, state, {
@@ -135,19 +146,25 @@ const artieClearExercises = () => ({
     type: ARTIE_CLEAR_EXERCISES
 });
 
+const artieResetSecondsHelpOpen = () => ({
+   type: ARTIE_RESET_SECONDS_HELP_OPEN
+});
+
 const artieBlocksUpdated = (blocks) => ({
     type: ARTIE_BLOCKS_UPDATED,
     blocks: blocks,
     needUpdate: false
 });
 
-const artieHelpReceived = (help) => ({
+const artieHelpReceived = (help, date) => ({
     type: ARTIE_HELP_RECEIVED,
-    help: help
+    help: help,
+    timeHelpReceived: date
 });
 
-const artieClearHelp = () => ({
-    type: ARTIE_CLEAR_HELP
+const artieClearHelp = (timeHelpClosed) => ({
+    type: ARTIE_CLEAR_HELP,
+    timeHelpClosed: timeHelpClosed
 });
 
 const artieLoadingSolution = (loading, informationSent) => ({
@@ -200,6 +217,7 @@ export {
     artieSetExercises,
     artieSetCurrentExercise,
     artieClearExercises,
+    artieResetSecondsHelpOpen,
     artieBlocksUpdated,
     artieHelpReceived,
     artieClearHelp,

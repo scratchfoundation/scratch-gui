@@ -119,7 +119,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercise, lastLogin, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
 
     let spriteElements = [];
 
@@ -129,8 +129,8 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
         spriteElements.push(spriteElement);
     });
 
-    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, finishedExercise: finishedExercise,
-                                          lastLogin: lastLogin, screenShot: screenShot, elements: spriteElements};
+    const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, secondsHelpOpen: secondsHelpOpen,
+                                          finishedExercise: finishedExercise, lastLogin: lastLogin, screenShot: screenShot, elements: spriteElements};
 
     let xhr = new XMLHttpRequest();
     let params = JSON.stringify(artiePedagogicalSoftwareData);
@@ -148,11 +148,13 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, finishedExercis
                     callbackPopup(true);
                 }
 
-                let json = JSON.parse(xhr.response);
+                if(xhr.response !== "") {
+                    let json = JSON.parse(xhr.response);
 
-                //We check if there are no errors
-                if(json.body.object !== null && callbackHelp !== null){
-                    callbackHelp(json.body.object);
+                    //We check if there are no errors
+                    if (json.body.object !== null && callbackHelp !== null) {
+                        callbackHelp(json.body.object);
+                    }
                 }
             }
         }

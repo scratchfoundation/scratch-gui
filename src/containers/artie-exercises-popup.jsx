@@ -454,7 +454,7 @@ const mapDispatchToProps = dispatch => ({
     onArtieEvaluationStop: (stop) => dispatch(artieEvaluationStop(stop)),
     onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent)),
     onArtieSetExercises: (exercises) => dispatch(artieSetExercises(exercises)),
-    onArtieClearHelp: () => dispatch(artieClearHelp()),
+    onArtieClearHelp: () => dispatch(artieClearHelp(new Date())),
     onArtiePopupStatement: (active) => dispatch(artiePopupStatement(active))
 });
 

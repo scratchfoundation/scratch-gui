@@ -398,7 +398,7 @@ const mapDispatchToProps = dispatch => ({
     onArtiePopupStatement: (active) => dispatch(artiePopupStatement(active)),
 
     //3- Help properties
-    onArtieClearHelp: () => dispatch(artieClearHelp()),
+    onArtieClearHelp: () => dispatch(artieClearHelp(new Date())),
     onArtieHelpReceived: (help) => dispatch(artieHelpReceived(help)),
 
 });

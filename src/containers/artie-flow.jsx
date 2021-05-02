@@ -277,7 +277,10 @@ class ArtieFlow extends React.Component {
     handleArtieLogged(user){
 
         //Gets the datetime
-        const date = new Date().toLocaleString();
+        const options = {year: 'numeric', month: '2-digit', day: '2-digit',
+                         hour: '2-digit', minute:'2-digit', second: '2-digit',
+                         timeZone: 'UTC', timeZoneName: 'short'};
+        const date = new Date().toLocaleDateString('es-ES', options);
         this.props.onArtieLogged(user, date);
 
         //If the user role is admin, we load all the exercises (evaluations and normals)
@@ -381,7 +384,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
 
     //1- Login Properties
-    onArtieLogged: (user) => dispatch(artieLogged(user)),
+    onArtieLogged: (user, date) => dispatch(artieLogged(user, date)),
     onArtieLogout: () => dispatch(artieLogout()),
     onArtieError: (error) => dispatch(artieError(error)),
     onDeactivateArtieLogin: () => dispatch(deactivateArtieLogin()),

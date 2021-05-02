@@ -5,9 +5,8 @@ const enabled =
     PLAUSIBLE_DOMAIN &&
     // Must be on http: or https:
     (location.protocol === 'http:' || location.protocol === 'https:') &&
-    // Domain must roughly match
-    // This type of comparison allows experiments.turbowarp.org and turbowarp.org to use the same domain
-    location.origin.includes(PLAUSIBLE_DOMAIN) &&
+    // Domain must match expected
+    location.origin === PLAUSIBLE_DOMAIN &&
     // Respect Do Not Track
     navigator.doNotTrack !== '1';
 

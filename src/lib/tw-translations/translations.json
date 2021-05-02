@@ -529,6 +529,7 @@
         "tw.menuBar.translate": "TurboWarp 번역 돕기",
         "tw.paint.alpha": "불투명도",
         "tw.privacy": "개인정보 보호 정책",
+        "tw.regardingUnshared": "공유되지 않은 프로젝트에 대하여",
         "tw.restorePoint.createFail": "복원 지점을 설정할 수 없습니다; 복원 지점이 비활성화 되었습니다.\n일반적인 프로젝트 저장은 영향을 받지 않습니다.\n\n디버그: {error}",
         "tw.restorePoint.loadFail": "복원 지점을 불러올 수 없습니다.\n\n디버그: {error}",
         "tw.settingsModal.confirmReload": "무대 크기를 변경하려면 새로고침해야 합니다. 새로고침하시겠습니까?",

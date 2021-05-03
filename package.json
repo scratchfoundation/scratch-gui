@@ -1,6 +1,6 @@
 {
   "name": "scratch-gui",
-  "version": "0.3.0-artie",
+  "version": "0.3.1-artie",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./dist/scratch-gui.js",
   "scripts": {
@@ -75,7 +75,7 @@
     "redux-throttle": "0.1.1",
     "scratch-audio": "0.1.0-prerelease.20200528195344",
     "scratch-blocks": "0.1.0-prerelease.20210415062829",
-    "scratch-l10n": "3.15.0-artie",
+    "scratch-l10n": "3.15.1-artie",
     "scratch-paint": "0.2.0-prerelease.20210407203313",
     "scratch-render": "0.1.0-prerelease.20210325231800",
     "scratch-render-fonts": "1.0.0-prerelease.20210401210003",

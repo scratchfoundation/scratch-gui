@@ -105,7 +105,7 @@ $header-height: calc($stage-menu-height - 2px);
     bottom: 0.75rem;
 }
 
-.raised, .raised .header {
+.stage-selector.raised, .stage-selector.raised .header {
     background-color: $drop-highlight;
     transition: all 0.25s ease;
 }

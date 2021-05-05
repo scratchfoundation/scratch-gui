@@ -6,7 +6,7 @@ const enabled =
     // Must be on http: or https:
     (location.protocol === 'http:' || location.protocol === 'https:') &&
     // Domain must match expected
-    location.origin === PLAUSIBLE_DOMAIN &&
+    location.hostname === PLAUSIBLE_DOMAIN &&
     // Respect Do Not Track
     navigator.doNotTrack !== '1';
 

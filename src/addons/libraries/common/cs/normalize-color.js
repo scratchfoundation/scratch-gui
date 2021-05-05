@@ -9,4 +9,4 @@ export const normalizeHex = (input) => {
     hex = `#${r}${r}${g}${g}${b}${b}`;
   }
   return hex.toLowerCase();
-}
+};

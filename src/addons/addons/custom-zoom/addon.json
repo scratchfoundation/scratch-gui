@@ -1,7 +1,7 @@
 {
   "name": "Custom scripts area zoom settings",
   "description": "Adjust the minimum, maximum, speed, and start size of the zoom in the project code editor, and autohide the controls.",
-  "tags": ["editor"],
+  "tags": ["editor", "codeEditor"],
   "credits": [
     {
       "name": "ErrorGamer2000",

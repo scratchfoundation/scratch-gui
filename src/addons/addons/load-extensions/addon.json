@@ -33,6 +33,6 @@
       "default": false
     }
   ],
-  "tags": ["editor"],
+  "tags": ["editor", "codeEditor"],
   "l10n": true
 }

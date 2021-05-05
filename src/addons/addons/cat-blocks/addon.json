@@ -5,6 +5,9 @@
     {
       "name": "TheColaber",
       "link": "https://scratch.mit.edu/users/TheColaber"
+    },
+    {
+      "name": "GarboMuffin"
     }
   ],
   "userscripts": [
@@ -28,7 +31,8 @@
       "type": "boolean"
     }
   ],
-  "tags": ["easterEgg"],
+  "tags": ["editor", "codeEditor"],
+  "versionAdded": "1.14.0",
   "enabledByDefault": false,
   "libraries": ["scratch-blocks"],
   "l10n": true

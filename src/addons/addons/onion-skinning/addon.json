@@ -103,7 +103,7 @@
       "default": "#0000FF"
     }
   ],
-  "tags": ["editor", "recommended"],
+  "tags": ["editor", "costumeEditor", "recommended"],
   "enabledByDefault": true,
   "l10n": true
 }

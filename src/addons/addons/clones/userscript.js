@@ -59,6 +59,7 @@ async function hideInSmallStageMode({ addon }) {
     await addon.tab.waitForElement("[class*='stage-header_stage-size-toggle-group']", {
       markAsSeen: true,
       reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+      condition: () => !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
     });
 
     document.querySelector("[class*='stage-header_stage-button-first']").addEventListener("click", () => {

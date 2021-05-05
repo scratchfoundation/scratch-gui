@@ -1,11 +1,11 @@
 export default class RateLimiter {
-  constructor (wait) {
+  constructor(wait) {
     this.timeout = null;
     this.callback = null;
     this.wait = wait;
   }
 
-  abort (call = true) {
+  abort(call = true) {
     if (this.timeout) {
       clearTimeout(this.timeout);
       if (call) this.callback();
@@ -13,7 +13,7 @@ export default class RateLimiter {
     }
   }
 
-  limit (callback) {
+  limit(callback) {
     this.abort(false);
     this.callback = callback;
     this.timeout = setTimeout(() => {

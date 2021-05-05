@@ -79,7 +79,7 @@ export default async function ({ addon, global, console, msg }) {
     (changes) => {
       for (const change of changes) {
         const variable = rowToVariableMap.get(change.target);
-        variable.setVisible(change.isIntersecting);
+        variable.setVisible(change.intersectionRatio > 0);
       }
     },
     {
@@ -326,6 +326,7 @@ export default async function ({ addon, global, console, msg }) {
     const tabs = await addon.tab.waitForElement("[class^='react-tabs_react-tabs__tab-list']", {
       markAsSeen: true,
       reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+      condition: () => !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
     });
     const soundTab = tabs.children[2];
     soundTab.insertAdjacentElement("afterend", varTab);

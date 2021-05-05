@@ -68,14 +68,15 @@ export default async function ({ addon, global, console, msg }) {
     }
   }
 
-  while (true) {
-    let blocklyWorkspace = await addon.tab.waitForElement("g.blocklyWorkspace", {
-      markAsSeen: true,
-    });
-
-    // insert contextmenu
-    blocklyWorkspace.addEventListener("mousedown", (e) => eventMouseDown(e));
-  }
+  document.addEventListener(
+    "mousedown",
+    (e) => {
+      if (e.target.closest("g.blocklyWorkspace")) {
+        eventMouseDown(e);
+      }
+    },
+    true
+  );
 
   function exportBlock(request, sender, sendMessage) {
     // console.log(request)

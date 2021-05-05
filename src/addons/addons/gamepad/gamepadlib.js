@@ -561,7 +561,7 @@ class GamepadEditor {
       return;
     }
     this.selector.hidden = false;
-    for (const [id, gamepadData] of gamepads) {
+    for (const [id, _] of gamepads) {
       const option = document.createElement("option");
       option.textContent = id;
       option.value = id;

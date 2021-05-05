@@ -1,7 +1,7 @@
 {
   "name": "Record project video",
   "description": "Adds a \"start recording\" button to the editor that allows you to record the project's stage.",
-  "tags": ["editor", "recommended"],
+  "tags": ["editor", "editorMenuBar", "recommended"],
   "userscripts": [
     {
       "url": "userscript.js",

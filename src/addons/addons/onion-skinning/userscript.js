@@ -733,6 +733,7 @@ export default async function ({ addon, global, console, msg }) {
       const canvasControls = await addon.tab.waitForElement("[class^='paint-editor_canvas-controls']", {
         markAsSeen: true,
         condition: () =>
+          addon.tab.redux.state &&
           addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 1 &&
           !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
       });

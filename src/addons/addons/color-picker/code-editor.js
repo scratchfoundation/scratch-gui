@@ -1,6 +1,6 @@
-import { normalizeHex, getHexRegex } from "../../libraries/normalize-color.js";
-import RateLimiter from "../../libraries/rate-limiter.js";
-import tinycolor from "../../libraries/tinycolor-min.js";
+import { normalizeHex, getHexRegex } from "../../libraries/common/cs/normalize-color.js";
+import RateLimiter from "../../libraries/common/cs/rate-limiter.js";
+import tinycolor from "../../libraries/thirdparty/cs/tinycolor-min.js";
 
 export default async ({ addon, console, msg }) => {
   // 250-ms rate limit

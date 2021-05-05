@@ -1,7 +1,7 @@
 {
   "name": "Hex color picker",
   "description": "Adds hex code inputs to color pickers.",
-  "tags": ["editor", "recommended"],
+  "tags": ["editor", "costumeEditor", "recommended"],
   "credits": [
     {
       "name": "Richie Bendall"

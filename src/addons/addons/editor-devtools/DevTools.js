@@ -2227,7 +2227,7 @@ export default class DevTools {
                         <div ${
                           this.addon.self._isDevtoolsExtension ? "" : 'style="display: none;"'
                         }><a href="#" class="s3devAction" id="s3devHelp"><b>${this.m("help")}</b></a>
-                        <a href="https://www.youtube.com/griffpatch" class="s3devAction" target="_blank" id="s3devHelp">${this.m(
+                        <a href="https://www.youtube.com/griffpatch" class="s3devAction" target="_blank" rel="noreferrer noopener" id="s3devHelp">${this.m(
                           "tutorials"
                         )}</a></div>
                     </label>

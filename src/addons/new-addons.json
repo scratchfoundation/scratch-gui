@@ -1,6 +1,6 @@
 [
-    "initialise-sprite-position",
-    "blocks2image",
-    "custom-zoom",
+    "editor-sounds",
+    "remove-curved-stage-border",
+    "gamepad",
     "cat-blocks"
 ]

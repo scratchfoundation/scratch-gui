@@ -38,7 +38,7 @@ export default async function ({ addon, global, console }) {
   while (true) {
     let bar = await addon.tab.waitForElement('[class*="controls_controls-container"]', {
       markAsSeen: true,
-      reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+      reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
     });
 
     if (addon.tab.editorMode === "editor") {
@@ -66,7 +66,7 @@ async function hideInSmallStageMode({ addon }) {
   while (true) {
     await addon.tab.waitForElement("[class*='stage-header_stage-size-toggle-group']", {
       markAsSeen: true,
-      reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+      reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
     });
 
     document.querySelector("[class*='stage-header_stage-button-first']").addEventListener("click", () => {

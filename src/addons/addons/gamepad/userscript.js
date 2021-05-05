@@ -216,7 +216,7 @@ export default async function ({ addon, global, console, msg }) {
   while (true) {
     const stageHeaderWrapper = await addon.tab.waitForElement('[class*="stage-header_stage-menu-wrapper"]', {
       markAsSeen: true,
-      reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
+      reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
     });
     stageHeaderWrapper.insertBefore(spacer, stageHeaderWrapper.lastChild);
 

@@ -41,6 +41,19 @@
         "tw.addons.settings.title": "Ajustes de Addons",
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
     },
+    "fr": {
+        "tw.addons.settings.credits": "Crédits :",
+        "tw.addons.settings.export": "Exporter les paramètres",
+        "tw.addons.settings.import": "Importer les paramètres",
+        "tw.addons.settings.noResults": "Aucuns résultats",
+        "tw.addons.settings.reset": "Réinitialiser",
+        "tw.addons.settings.search": "Rechercher",
+        "tw.addons.settings.tags.beta": "Bêta",
+        "tw.addons.settings.tags.new": "Nouveau !",
+        "tw.addons.settings.tags.recommended": "Recommandé",
+        "tw.addons.settings.tags.theme": "Thème",
+        "tw.addons.settings.title": "Paramètres des addons"
+    },
     "it": {
         "tw.addons.settings.addonFeedback": "Feedback sull'Addon",
         "tw.addons.settings.confirmResetAll": "Sei sicuro di voler riportare tutte le impostazioni dell'addon al loro valore iniziale?",
@@ -220,6 +233,7 @@
         "tw.addons.settings.resetAll": "Ponastavi vse",
         "tw.addons.settings.search": "Iskanje",
         "tw.addons.settings.tags.beta": "Beta",
+        "tw.addons.settings.tags.easterEgg": "Skriven dodatek",
         "tw.addons.settings.tags.new": "Novo!",
         "tw.addons.settings.tags.recommended": "Priporočeno",
         "tw.addons.settings.tags.theme": "Tema",

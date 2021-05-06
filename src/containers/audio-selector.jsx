@@ -42,7 +42,7 @@ class AudioSelector extends React.Component {
             distanceThreshold: 0
         });
     }
-    componentWillReceiveProps (newProps) {
+    UNSAFE_componentWillReceiveProps (newProps) {
         const {trimStart, trimEnd} = this.props;
         if (newProps.trimStart === trimStart && newProps.trimEnd === trimEnd) return;
         this.setState({

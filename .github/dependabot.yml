@@ -9,3 +9,4 @@ updates:
       - dependency-name: "scratch-vm"
       - dependency-name: "scratch-paint"
       - dependency-name: "scratch-svg-renderer"
+      - dependency-name: "scratch-blocks"

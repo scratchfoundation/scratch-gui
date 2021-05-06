@@ -60,11 +60,20 @@ const commitHash = childProcess.execSync('git rev-parse --short HEAD')
     .toString()
     .trim();
 
+const matchAll = (str, regex) => {
+    const matches = [];
+    let match;
+    while ((match = regex.exec(str)) !== null) {
+        matches.push(match);
+    }
+    return matches;
+};
+
 const includeImportedLibraries = contents => {
     // Parse things like:
     // import { normalizeHex, getHexRegex } from "../../libraries/normalize-color.js";
     // import RateLimiter from "../../libraries/rate-limiter.js";
-    const matches = [...contents.matchAll(/import +(?:{.*}|.*) +from +["']\.\.\/\.\.\/libraries\/([\w\d_\/-]+(?:\.esm)?\.js)["'];/g)];
+    const matches = matchAll(contents, /import +(?:{.*}|.*) +from +["']\.\.\/\.\.\/libraries\/([\w\d_\/-]+(?:\.esm)?\.js)["'];/g);
     for (const match of matches) {
         const libraryFile = match[1];
         const oldLibraryPath = pathUtil.resolve(__dirname, 'ScratchAddons', 'libraries', libraryFile);

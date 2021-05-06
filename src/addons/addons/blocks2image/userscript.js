@@ -196,6 +196,7 @@ export default async function ({ addon, global, console, msg }) {
       let y = g.getAttribute("transform").match(/translate\((.*?),(.*?)\)/)[2] || 0;
       xArr.push(x * (isExportPNG ? 2 : 1));
       yArr.push(y * (isExportPNG ? 2 : 1));
+      g.style.display = ""; // because of TW scratch-blocks changes
     });
 
     svgchild.setAttribute(

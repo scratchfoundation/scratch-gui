@@ -47,12 +47,14 @@
         "tw.addons.settings.import": "Importer les paramètres",
         "tw.addons.settings.noResults": "Aucuns résultats",
         "tw.addons.settings.reset": "Réinitialiser",
+        "tw.addons.settings.resetAll": "Tout réinitialiser",
         "tw.addons.settings.search": "Rechercher",
         "tw.addons.settings.tags.beta": "Bêta",
         "tw.addons.settings.tags.new": "Nouveau !",
         "tw.addons.settings.tags.recommended": "Recommandé",
         "tw.addons.settings.tags.theme": "Thème",
-        "tw.addons.settings.title": "Paramètres des addons"
+        "tw.addons.settings.title": "Paramètres des addons",
+        "tw.addons.settings.unsupported": "Certains addons ne sont pas disponibles sur ce navigateur "
     },
     "it": {
         "tw.addons.settings.addonFeedback": "Feedback sull'Addon",

@@ -96,8 +96,8 @@ class Storage extends ScratchStorage {
                     error = e;
                 }
                 log.warn(`Attempt to get ${asset} failed, trying again`, e);
-                // Add slight randomized delay
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Wait a little bit before trying again
+                await new Promise(resolve => setTimeout(resolve, (i + 1) * 1000 * Math.random()));
             }
         }
         throw new Error(`Cannot fetch asset: ${error}`);

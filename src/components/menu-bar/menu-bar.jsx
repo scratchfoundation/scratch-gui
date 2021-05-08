@@ -750,22 +750,28 @@ class MenuBar extends React.Component {
 
                                 { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
                                   this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
-                                    <React.Fragment>
                                         <SelectExerciseButton
                                             className={styles.menuBarButton}
                                             onClick={this.handleStopEvaluation}
                                             isExerciseSelected = {true}
                                             isEvaluation={this.props.artieExercises.currentExercise.isEvaluation}
                                         />
-                                        { this.props.artieExercises.currentExercise.isEvaluation === false ?
-                                            <React.Fragment>
-                                                <Divider className={classNames(styles.divider)} />º
-                                                <RequestHelpButton
-                                                    className={styles.menuBarButton}
-                                                    onClick={this.handleClickRequestHelp}
-                                                />
-                                            </React.Fragment>
-                                        : null }
+                                : null }
+
+                                { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
+                                  this.props.artieExercises.currentExercise !== null && !this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <React.Fragment>
+                                        <Divider className={classNames(styles.divider)} />
+                                        <RequestHelpButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleClickRequestHelp}
+                                        />
+                                    </React.Fragment>
+                                : null }
+
+                                { this.props.artieLogin !== null && this.props.artieLogin.user !== null && this.props.artieLogin.user.role === 0 &&
+                                this.props.artieExercises.currentExercise !== null && this.props.artieExercises.currentExercise.isEvaluation ?
+                                    <React.Fragment>
                                         <Divider className={classNames(styles.divider)} />
                                         <StatementButton
                                             className={styles.menuBarButton}
@@ -774,6 +780,7 @@ class MenuBar extends React.Component {
                                     </React.Fragment>
                                 :
                                     <React.Fragment>
+                                        <Divider className={classNames(styles.divider)} />
                                         <SelectExerciseButton
                                             className={styles.menuBarButton}
                                             onClick={this.props.onActivateArtieExercises}

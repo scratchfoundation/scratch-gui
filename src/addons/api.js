@@ -200,7 +200,10 @@ class Tab extends EventTargetShim {
         if (reduxEvents) {
             let reduxEventSatisifed = false;
             reduxListener = ({detail}) => {
-                if (reduxEvents.includes(detail.action.type)) {
+                const type = detail.action.type;
+                // As addons can't run before DOM exists here, ignore fontsLoaded/SET_FONTS_LOADED
+                // Otherwise, as our font loading is very async, we could activate more often than required.
+                if (reduxEvents.includes(type) && type !== 'fontsLoaded/SET_FONTS_LOADED') {
                     reduxEventSatisifed = true;
                 }
             };

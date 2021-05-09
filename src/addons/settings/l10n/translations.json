@@ -1,12 +1,12 @@
 {
     "de": {
-        "tw.addons.settings.addonFeedback": "Addon-Feedback",
+        "tw.addons.settings.addonFeedback": "Feedback für Addons",
         "tw.addons.settings.confirmResetAll": "Bist du sicher, dass du alle Addoneinstellungen auf ihre Standardwerte zurücksetzen willst?",
         "tw.addons.settings.credits": "Danksagungen:",
         "tw.addons.settings.dirty": "Lade TurboWarp neu, um die Einstellungen anzuwenden.",
         "tw.addons.settings.dirtyButton": "Jetzt neu laden",
-        "tw.addons.settings.export": "Einstellungen exportieren",
-        "tw.addons.settings.import": "Einstellungen importieren",
+        "tw.addons.settings.export": "Einstellungen Exportieren",
+        "tw.addons.settings.import": "Einstellungen Importieren",
         "tw.addons.settings.noResults": "Keine Suchergebnisse.",
         "tw.addons.settings.presets": "Voreinstellungen",
         "tw.addons.settings.reset": "Zurücksetzen",

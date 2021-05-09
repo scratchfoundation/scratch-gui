@@ -31,6 +31,6 @@
   ],
   "tags": ["editor", "beta"],
   "versionAdded": "1.14.0",
-  "enabledByDefault": true,
+  "enabledByDefault": false,
   "l10n": true
 }

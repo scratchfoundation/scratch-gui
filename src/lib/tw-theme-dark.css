@@ -44,7 +44,6 @@
     fill: #666;
 }
 .blocklyZoom {
-    /* TODO: does not work in chrome */
     filter: invert(100%);
 }
 .scratchCategoryMenuItem.categorySelected {
@@ -66,6 +65,9 @@
 }
 .scratchCommentText {
     color: black;
+}
+.blocklyInsertionMarker > .blocklyPath {
+    fill: #ccc;
 }
 
 /* Other / Multipurpose */

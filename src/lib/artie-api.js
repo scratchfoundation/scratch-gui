@@ -10,8 +10,8 @@
 import xhr from 'xhr';
 
 const _inputElementsValues = ['text', 'math_number', 'math_positive_number', 'math_whole_number'];
-const _pedagogicalInterventionWebServiceUrl = 'http://pre-prod.artie.rocks:8082';
-const _pedagogialWebUrl = 'http://pre-prod.artie.rocks';
+const _pedagogicalInterventionWebServiceUrl = 'http://pre-prod.artie.rocks:8000';
+const _pedagogialWebUrl = 'http://pre-prod.artie.rocks:8000';
 
 
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});

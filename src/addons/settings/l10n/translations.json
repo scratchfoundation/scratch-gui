@@ -99,7 +99,7 @@
         "tw.addons.settings.unsupported": "いくつかのアドオンがお使いのブラウザに対応していません:"
     },
     "ko": {
-        "tw.addons.settings.addonFeedback": "애드온 피드백",
+        "tw.addons.settings.addonFeedback": "애드온에 문의하기",
         "tw.addons.settings.confirmResetAll": "정말로 애드온 설정을 기본값으로 초기화하시겠습니까?",
         "tw.addons.settings.credits": "크레딧:",
         "tw.addons.settings.dirty": "설정을 적용하기 위해 TurboWarp를 재시작합니다.",

@@ -9,32 +9,11 @@ import styles from './studioview.css';
 import classNames from 'classnames';
 
 /**
- * Determines if an element is visible, accounting for parents and their bounding rects.
- */
-function isElementVisible(el) {
-    // see https://stackoverflow.com/a/21627295
-    var rect = el.getBoundingClientRect();
-    var top = rect.top;
-    var height = rect.height;
-    var el = el.parentNode;
-
-    if (rect.bottom < 0) return false;
-    if (top > document.documentElement.clientHeight) return false;
-    do {
-        rect = el.getBoundingClientRect();
-        if (top <= rect.bottom === false) return false;
-        if ((top + height) <= rect.top) return false;
-        el = el.parentNode;
-    } while (el != document.body)
-    return true;
-}
-
-/**
  * @class
  */
 var StudioView = function (studioId) {
     this.studioId = studioId;
-    this.page = 1;
+    this.offset = 0;
     this.ended = false;
     this.loadingPage = false;
     this.unusedPlaceholders = [];
@@ -43,15 +22,18 @@ var StudioView = function (studioId) {
     this.root.className = styles.studioviewRoot;
     this.projectList = document.createElement('div');
     this.projectList.className = styles.studioviewList;
-    this.projectList.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
     this.root.appendChild(this.projectList);
 
     if ('IntersectionObserver' in window) {
         this.intersectionObserver = new IntersectionObserver(this.handleIntersection.bind(this), {
             root: this.projectList
         });
+        this.loadNextPageObserver = new IntersectionObserver(this.handleLoadNextPageIntersection.bind(this), {
+            root: this.projectList
+        });
     } else {
         this.intersectionObserver = null;
+        this.loadNextPageObserver = null;
     }
 
     // will be filled in by studioview.jsx
@@ -154,10 +136,12 @@ StudioView.prototype.addErrorElement = function () {
     this.projectList.appendChild(el);
 };
 
-// Called when the project list is scrolled
-StudioView.prototype.handleScroll = function (e) {
-    if (this.canLoadNext() && isElementVisible(this.projectList.lastChild)) {
-        this.loadNextPage();
+StudioView.prototype.handleLoadNextPageIntersection = function (e) {
+    for (var i = 0; i < e.length; i++) {
+        var intersection = e[i];
+        if (intersection.intersectionRatio > 0 && this.canLoadNext()) {
+            this.loadNextPage();
+        }
     }
 };
 
@@ -219,6 +203,9 @@ StudioView.prototype.cleanupPlaceholders = function () {
  * Add placeholder placeholder elements.
  */
 StudioView.prototype.addPlaceholders = function () {
+    if (this.loadNextPageObserver) {
+        this.loadNextPageObserver.disconnect();
+    }
     for (var i = 0; i < StudioView.PLACEHOLDER_COUNT; i++) {
         var el = this.createPlaceholder();
         this.unusedPlaceholders.push(el);
@@ -252,36 +239,20 @@ StudioView.prototype.loadNextPage = function () {
     this.loadingPage = true;
 
     var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
     xhr.onload = function () {
-        // We cannot just set xhr.responseType="document" because the proxy returns text/plain
-        var docSource = xhr.response;
-        var doc = new DOMParser().parseFromString(docSource, 'text/html');
-
+        var rawProjects = xhr.response;
+        if (!Array.isArray(rawProjects)) {
+            xhr.onerror();
+            return;
+        }
         var projects = [];
-        var projectElements = doc.querySelectorAll('.project');
-        /*
-        Each project element should be:
-        <li class="project thumb item" data-id="12345">
-          <a href="/projects/12345/">
-            <img class="lazy image" data-original="//cdn2.scratch.mit.edu/get_image/project/12345_144x108.png" width="144" height="108" />
-          </a>
-          <span class="title">
-            <a href="/projects/12345/">Title</a>
-          </span>
-          <span class="owner" >
-            by <a href="/users/Author/">Author</a>
-          </span>
-        </li>
-        */
-        for (var i = 0; i < projectElements.length; i++) {
-            var project = projectElements[i];
-            var id = project.getAttribute('data-id');
-            var title = project.querySelector('.title').textContent.trim();
-            var author = project.querySelector('.owner a').textContent.trim();
+        for (var i = 0; i < rawProjects.length; i++) {
+            var p = rawProjects[i];
             projects.push({
-                id: id,
-                title: title,
-                author: author,
+                id: p.id,
+                title: p.title,
+                author: p.username,
             });
         }
         projects = this.shuffler(projects);
@@ -290,13 +261,16 @@ StudioView.prototype.loadNextPage = function () {
         }
         this.cleanupPlaceholders();
 
-        // All pages except the last have a next page button.
-        if (!doc.querySelector('.next-page')) {
+        if (rawProjects.length === 40) {
+            if (this.loadNextPageObserver) {
+                this.loadNextPageObserver.observe(this.projectList.lastChild);
+            }
+        } else {
             this.ended = true;
             this.onend();
         }
 
-        this.page++;
+        this.offset += projects.length;
         this.loadingPage = false;
         this.root.removeAttribute('loading');
 
@@ -312,7 +286,7 @@ StudioView.prototype.loadNextPage = function () {
 
     var url = StudioView.STUDIO_API
         .replace('$id', this.studioId)
-        .replace('$page', '' + this.page);
+        .replace('$offset', '' + this.offset);
     xhr.open('GET', url);
     xhr.send();
 };
@@ -325,10 +299,7 @@ StudioView.prototype.onselect = function (id, el) { };
 StudioView.prototype.onpageload = function () { };
 StudioView.prototype.onend = function () { };
 
-// This can be any URL that is a proxy for https://scratch.mit.edu/site-api/projects/in/5235006/1/
-// Understandably scratch does not set CORS headers on this URL, but a proxy can set it manually.
-// $id will be replaced with the studio ID, and $page with the page.
-StudioView.STUDIO_API = 'https://trampoline.turbowarp.org/site-proxy/projects/in/$id/$page/';
+StudioView.STUDIO_API = 'https://trampoline.turbowarp.org/proxy/studios/$id/projectstemporary/$offset';
 
 // The URL to download thumbnails from.
 // $id is replaced with the project's ID.

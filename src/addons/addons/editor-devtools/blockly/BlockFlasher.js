@@ -9,7 +9,9 @@ export default class BlockFlasher {
   static flash(block) {
     if (myFlash.timerID > 0) {
       clearTimeout(myFlash.timerID);
-      myFlash.block.svgPath_.style.fill = "";
+      if (myFlash.block.svgPath_) {
+        myFlash.block.svgPath_.style.fill = "";
+      }
     }
 
     let count = 4;
@@ -21,13 +23,16 @@ export default class BlockFlasher {
      * @private
      */
     function _flash() {
-      myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : "";
+      if (myFlash.block.svgPath_) {
+        myFlash.block.svgPath_.style.fill = flashOn ? "#ffff80" : "";
+      }
       flashOn = !flashOn;
       count--;
       if (count > 0) {
         myFlash.timerID = setTimeout(_flash, 200);
       } else {
         myFlash.timerID = 0;
+        myFlash.block = null;
       }
     }
 
@@ -35,4 +40,4 @@ export default class BlockFlasher {
   }
 }
 
-const myFlash = { block: null, timerID: null, colour: null };
+const myFlash = { block: null, timerID: null };

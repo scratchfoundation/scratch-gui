@@ -1639,6 +1639,14 @@ export default class DevTools {
     }
   }
 
+  eventMouseUp(e) {
+    if (e.button === 1 && e.target.closest("svg.blocklySvg")) {
+      // On Linux systems, middle click is often treated as a paste.
+      // We do not want this as we assign our own functionality to middle mouse.
+      e.preventDefault();
+    }
+  }
+
   middleClickWorkspace(e) {
     if (!this.isScriptEditor()) {
       return;
@@ -2261,6 +2269,7 @@ export default class DevTools {
 
     this.domHelpers.bindOnce(document, "mousemove", (...e) => this.eventMouseMove(...e), true);
     this.domHelpers.bindOnce(document, "mousedown", (...e) => this.eventMouseDown(...e), true); // true to capture all mouse downs 'before' the dom events handle them
+    this.domHelpers.bindOnce(document, "mouseup", (...e) => this.eventMouseUp(...e), true);
     // bindOnce(document.getElementById("s3devDeep"), "click", deepSearch);
     // bindOnce(document.getElementById('s3devCleanUp'),'click', clickCleanUp);
     // bindOnce(document.getElementById("s3devInject"), "click", clickInject);

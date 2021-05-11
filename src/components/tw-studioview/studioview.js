@@ -139,7 +139,7 @@ StudioView.prototype.addErrorElement = function () {
 StudioView.prototype.handleLoadNextPageIntersection = function (e) {
     for (var i = 0; i < e.length; i++) {
         var intersection = e[i];
-        if (intersection.intersectionRatio > 0 && this.canLoadNext()) {
+        if (intersection.isIntersecting && this.canLoadNext()) {
             this.loadNextPage();
         }
     }
@@ -203,9 +203,6 @@ StudioView.prototype.cleanupPlaceholders = function () {
  * Add placeholder placeholder elements.
  */
 StudioView.prototype.addPlaceholders = function () {
-    if (this.loadNextPageObserver) {
-        this.loadNextPageObserver.disconnect();
-    }
     for (var i = 0; i < StudioView.PLACEHOLDER_COUNT; i++) {
         var el = this.createPlaceholder();
         this.unusedPlaceholders.push(el);
@@ -234,6 +231,9 @@ StudioView.prototype.loadNextPage = function () {
 
     if (this.unusedPlaceholders.length === 0) {
         this.addPlaceholders();
+    }
+    if (this.loadNextPageObserver) {
+        this.loadNextPageObserver.disconnect();
     }
     this.root.setAttribute('loading', '');
     this.loadingPage = true;

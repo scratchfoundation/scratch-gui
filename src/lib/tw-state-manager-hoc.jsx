@@ -509,6 +509,7 @@ const TWStateManager = function (WrappedComponent) {
                 runtimeOptions,
                 highQualityPen,
                 framerate,
+                interpolation,
                 turbo,
                 onSetIsFullScreen,
                 onSetIsPlayerOnly,

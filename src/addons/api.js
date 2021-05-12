@@ -19,6 +19,7 @@ import SettingsStore from './settings-store-singleton';
 import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from '../lib/data-uri-to-blob';
 import EventTargetShim from './event-target';
+import AddonHooks from './hooks';
 import './polyfill';
 
 /* eslint-disable no-console */
@@ -111,7 +112,7 @@ class Redux extends EventTargetShim {
 
     initialize () {
         if (!this._initialized) {
-            window.__APP_STATE_REDUCER__ = (action, next) => {
+            AddonHooks.appStateReducer = (action, next) => {
                 this._nextState = next;
                 this.dispatchEvent(new CustomEvent('statechanged', {
                     detail: {
@@ -127,12 +128,12 @@ class Redux extends EventTargetShim {
     }
 
     dispatch (m) {
-        return __APP_STATE_STORE__.dispatch(m);
+        return AddonHooks.appStateStore.dispatch(m);
     }
 
     get state () {
         if (this._nextState) return this._nextState;
-        return __APP_STATE_STORE__.getState();
+        return AddonHooks.appStateStore.getState();
     }
 }
 

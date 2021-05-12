@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers, compose} from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
+import AddonHooks from '../addons/hooks';
 
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
 
@@ -82,11 +83,9 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 enhancer = composeEnhancers(guiMiddleware);
             }
             const reducer = combineReducers(reducers);
-            const reducer2 = (a, b) => {
-                const next = reducer(a, b);
-                if (window.__APP_STATE_REDUCER__) {
-                    window.__APP_STATE_REDUCER__(b, next);
-                }
+            const reducer2 = (state, action) => {
+                const next = reducer(state, action);
+                AddonHooks.appStateReducer(action, next);
                 return next;
             };
             this.store = createStore(
@@ -94,7 +93,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 initialState,
                 enhancer
             );
-            window.__APP_STATE_STORE__ = this.store;
+            AddonHooks.appStateStore = this.store;
         }
         componentDidUpdate (prevProps) {
             if (localesOnly) return;

@@ -44,8 +44,7 @@ const sendEvent = eventName => {
             n: eventName,
             u: url.href,
             d: PLAUSIBLE_DOMAIN,
-            r: referrer,
-            w: window.innerWidth
+            r: referrer
         }));
     });
 };

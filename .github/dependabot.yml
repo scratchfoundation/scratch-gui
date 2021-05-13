@@ -10,3 +10,4 @@ updates:
       - dependency-name: "scratch-paint"
       - dependency-name: "scratch-svg-renderer"
       - dependency-name: "scratch-blocks"
+      - dependency-name: "scratch-l10n"

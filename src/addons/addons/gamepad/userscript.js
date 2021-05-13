@@ -159,13 +159,13 @@ export default async function ({ addon, global, console, msg }) {
   let virtualX = 0;
   let virtualY = 0;
   const postMouseData = (data) => {
-    const [unscaledCanvasWidth, unscaledCanvasHeight] = getCanvasSize();
+    const [rectWidth, rectHeight] = getCanvasSize();
     vm.postIOData("mouse", {
       ...data,
-      canvasWidth: canvas.width,
-      canvasHeight: canvas.height,
-      x: (virtualX + width / 2) * (unscaledCanvasWidth / width),
-      y: (height / 2 - virtualY) * (unscaledCanvasHeight / height),
+      canvasWidth: rectWidth,
+      canvasHeight: rectHeight,
+      x: (virtualX + width / 2) * (rectWidth / width),
+      y: (height / 2 - virtualY) * (rectHeight / height),
     });
   };
   const handleGamepadButtonDown = (e) => {

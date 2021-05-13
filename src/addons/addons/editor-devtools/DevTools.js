@@ -1255,9 +1255,13 @@ export default class DevTools {
     }
   }
 
-  eventMouseMove(e) {
+  updateMousePosition(e) {
     this.mouseXY.x = e.clientX;
     this.mouseXY.y = e.clientY;
+  }
+
+  eventMouseMove(e) {
+    this.updateMousePosition(e);
   }
 
   eventKeyDown(e) {
@@ -1351,6 +1355,8 @@ export default class DevTools {
   }
 
   eventMouseDown(e) {
+    this.updateMousePosition(e);
+
     if (this.ddOut && this.ddOut.classList.contains("vis") && !e.target.closest("#s3devDDOut")) {
       // If we click outside the dropdown, then instigate the hide code...
       this.hideDropDown();
@@ -1640,6 +1646,8 @@ export default class DevTools {
   }
 
   eventMouseUp(e) {
+    this.updateMousePosition(e);
+
     if (e.button === 1 && e.target.closest("svg.blocklySvg")) {
       // On Linux systems, middle click is often treated as a paste.
       // We do not want this as we assign our own functionality to middle mouse.
@@ -1822,7 +1830,7 @@ export default class DevTools {
 
     let options = [];
 
-    let t = Blockly.getMainWorkspace().getToolbox();
+    let t = this.utils.getWorkspace().getToolbox();
 
     let blocks = t.flyout_.getWorkspace().getTopBlocks();
     // 107 blocks, not in order... but we can sort by y value or description right :)
@@ -2048,6 +2056,10 @@ export default class DevTools {
    * @param e
    */
   dropDownFloatClick(e) {
+    if (e.target.closest("input")) {
+      return;
+    }
+
     e.cancelBubble = true;
     e.preventDefault();
 

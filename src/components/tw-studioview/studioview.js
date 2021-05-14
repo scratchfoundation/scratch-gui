@@ -115,6 +115,7 @@ StudioView.prototype.placeholderToProject = function (el, id, title, author) {
 
     var thumbnailSrc = StudioView.THUMBNAIL_SRC.replace('$id', id);
     var thumbnailImg = this.createLazyImage(thumbnailSrc);
+    thumbnailImg.alt = el.title;
     el.thumbnailEl.appendChild(thumbnailImg);
 
     el.titleEl.innerText = title;

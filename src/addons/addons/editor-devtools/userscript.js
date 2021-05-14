@@ -8,11 +8,20 @@ const _twGetAsset = (path) => {
 import DevTools from "./DevTools.js";
 
 export default async function ({ addon, global, console, msg, safeMsg: m }) {
-  // noinspection JSUnresolvedVariable
-  if (!addon.self._isDevtoolsExtension && window.initGUI) {
-    console.log("Extension running, stopping addon");
-    return;
-  }
+  const untilInEditor = () => {
+    if (addon.tab.editorMode === "editor") return;
+    return new Promise((resolve, reject) => {
+      const handler = () => {
+        if (addon.tab.editorMode === "editor") {
+          resolve();
+          addon.tab.removeEventListener("urlChange", handler);
+        }
+      };
+      addon.tab.addEventListener("urlChange", handler);
+    });
+  };
+
+  await untilInEditor();
 
   const helpHTML = `
 <div id="s3devHelpPop" class="${addon.tab.scratchClass("modal_modal-overlay")}">

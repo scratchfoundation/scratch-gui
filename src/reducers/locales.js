@@ -4,10 +4,6 @@ import {localeData, isRtl} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 
 import {LANGUAGE_KEY} from '../lib/detect-locale.js';
-import mergeTranslations from '../lib/tw-translations/merge-translations.js';
-
-// tw: merge our translations into editorMessages
-mergeTranslations(editorMessages);
 
 addLocaleData(localeData);
 

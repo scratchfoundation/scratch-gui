@@ -66,7 +66,6 @@ StudioView.prototype.createLazyImage = function (src) {
     var el = document.createElement('img');
     if (this.intersectionObserver) {
         this.intersectionObserver.observe(el);
-        el.className = styles.studioviewLazy;
         el.dataset.src = src;
     } else {
         // then we just won't lazy load it

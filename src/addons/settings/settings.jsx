@@ -30,8 +30,6 @@ import extensionImageWhite from './extension-white.svg';
 import extensionImageBlack from './extension-black.svg';
 import brushImageWhite from './brush-white.svg';
 import brushImageBlack from './brush-black.svg';
-import eggImageWhite from './egg-white.svg';
-import eggImageBlack from './egg-black.svg';
 import undoImageWhite from './undo-white.svg';
 import undoImageBlack from './undo-black.svg';
 import infoImage from './info.svg';
@@ -169,11 +167,6 @@ const Tags = ({tags}) => tags.length > 0 && (
         {tags.includes('beta') && (
             <span className={classNames(styles.tag, styles.tagBeta)}>
                 {settingsTranslations['tw.addons.settings.tags.beta']}
-            </span>
-        )}
-        {tags.includes('easterEgg') && (
-            <span className={classNames(styles.tag, styles.tagEasterEgg)}>
-                {settingsTranslations['tw.addons.settings.tags.easterEgg']}
             </span>
         )}
         {tags.includes('new') && (
@@ -428,12 +421,6 @@ const Addon = ({
                     <img
                         className={styles.extensionImage}
                         src={theme === 'dark' ? brushImageWhite : brushImageBlack}
-                        alt=""
-                    />
-                ) : manifest.tags.includes('easterEgg') ? (
-                    <img
-                        className={styles.extensionImage}
-                        src={theme === 'dark' ? eggImageWhite : eggImageBlack}
                         alt=""
                     />
                 ) : (

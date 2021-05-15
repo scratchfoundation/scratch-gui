@@ -94,3 +94,20 @@
     margin-left: 1rem;
     border-top: 1px dashed $ui-tertiary;
 }
+
+.button {
+    color: #000;
+    background: $ui-secondary;
+    border: 1px solid $ui-tertiary;
+    color: $text-primary;
+    padding: 8px 12px;
+    border-radius: 4px;
+    outline: none;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    margin: 0.25rem 0;
+}
+.button:active, .button:focus-within {
+    box-shadow: 0 0 0 3px $motion-transparent;
+}

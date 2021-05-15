@@ -346,6 +346,19 @@ CustomStageSize.propTypes = {
     onStageHeightChange: PropTypes.func
 };
 
+const StoreProjectOptions = ({onStoreProjectOptions}) => (
+    <button
+        onClick={onStoreProjectOptions}
+        className={styles.button}
+    >
+        {/* No l10n until functionality and text is finalized */}
+        {'Store options in project (Experimental)'}
+    </button>
+);
+StoreProjectOptions.propTypes = {
+    onStoreProjectOptions: PropTypes.func
+};
+
 const Header = props => (
     <div className={styles.header}>
         {props.children}
@@ -421,6 +434,9 @@ const SettingsModalComponent = props => (
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
             />
+            <StoreProjectOptions
+                onStoreProjectOptions={props.onStoreProjectOptions}
+            />
         </Box>
     </Modal>
 );
@@ -445,7 +461,8 @@ SettingsModalComponent.propTypes = {
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,
-    onDisableCompilerChange: PropTypes.func
+    onDisableCompilerChange: PropTypes.func,
+    onStoreProjectOptions: PropTypes.func
 };
 
 export default injectIntl(SettingsModalComponent);

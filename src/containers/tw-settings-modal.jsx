@@ -38,7 +38,8 @@ class UsernameModal extends React.Component {
             'handleWarpTimerChange',
             'handleStageWidthChange',
             'handleStageHeightChange',
-            'handleDisableCompilerChange'
+            'handleDisableCompilerChange',
+            'handleStoreProjectOptions'
         ]);
         this.state = {
             stageWidth: twStageSize.width,
@@ -119,6 +120,9 @@ class UsernameModal extends React.Component {
         const search = searchParamsToString(urlParams);
         location.href = `${location.pathname}${search}`;
     }
+    handleStoreProjectOptions () {
+        this.props.vm.storeProjectOptions();
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -145,6 +149,7 @@ class UsernameModal extends React.Component {
                 stageWidth={this.state.stageWidth}
                 stageHeight={this.state.stageHeight}
                 customStageSizeEnabled={this.state.stageWidth !== 480 || this.state.stageHeight !== 360}
+                onStoreProjectOptions={this.handleStoreProjectOptions}
                 {...props}
             />
         );
@@ -161,7 +166,8 @@ UsernameModal.propTypes = {
         setFramerate: PropTypes.func,
         setCompilerOptions: PropTypes.func,
         setInterpolation: PropTypes.func,
-        setRuntimeOptions: PropTypes.func
+        setRuntimeOptions: PropTypes.func,
+        storeProjectOptions: PropTypes.func
     }),
     framerate: PropTypes.number,
     highQualityPen: PropTypes.bool,

@@ -347,13 +347,28 @@ CustomStageSize.propTypes = {
 };
 
 const StoreProjectOptions = ({onStoreProjectOptions}) => (
-    <button
-        onClick={onStoreProjectOptions}
-        className={styles.button}
-    >
-        {/* No l10n until functionality and text is finalized */}
-        {'Store options in project (Experimental)'}
-    </button>
+    <Setting>
+        <div>
+            <button
+                onClick={onStoreProjectOptions}
+                className={styles.button}
+            >
+                <FormattedMessage
+                    defaultMessage="Store settings in project (Experimental)"
+                    description="Button to store settings in project in advanced settings menu"
+                    id="tw.settingsModal.storeInProject"
+                />
+            </button>
+            <p>
+                <FormattedMessage
+                    // eslint-disable-next-line max-len
+                    defaultMessage="Attempts to store the selected advanced settings in a script comment in the stage so that they will be automatically applied when this project is loaded in TurboWarp. Custom stage size and warp timer will not be saved. The project must manually be saved from TurboWarp and uploaded to Scratch. This is still very experimental."
+                    description="Help text for store settings in project button"
+                    id="tw.settingsModal.storeInProject.help"
+                />
+            </p>
+        </div>
+    </Setting>
 );
 StoreProjectOptions.propTypes = {
     onStoreProjectOptions: PropTypes.func
@@ -435,7 +450,7 @@ const SettingsModalComponent = props => (
                 onChange={props.onDisableCompilerChange}
             />
             <StoreProjectOptions
-                onStoreProjectOptions={props.onStoreProjectOptions}
+                {...props}
             />
         </Box>
     </Modal>
@@ -461,8 +476,7 @@ SettingsModalComponent.propTypes = {
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,
-    onDisableCompilerChange: PropTypes.func,
-    onStoreProjectOptions: PropTypes.func
+    onDisableCompilerChange: PropTypes.func
 };
 
 export default injectIntl(SettingsModalComponent);

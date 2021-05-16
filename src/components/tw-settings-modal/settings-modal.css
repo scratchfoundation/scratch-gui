@@ -106,7 +106,6 @@
     height: 32px;
     display: flex;
     align-items: center;
-    margin: 0.25rem 0;
 }
 .button:active, .button:focus-within {
     box-shadow: 0 0 0 3px $motion-transparent;

@@ -23,7 +23,7 @@ const messages = defineMessages({
     help: {
         defaultMessage: 'Click for help',
         description: 'Hover text of help icon in settings',
-        id: 'tw.stetingsModal.help'
+        id: 'tw.settingsModal.help'
     }
 });
 

@@ -353,19 +353,11 @@ const StoreProjectOptions = ({onStoreProjectOptions}) => (
                 onClick={onStoreProjectOptions}
                 className={styles.button}
             >
-                <FormattedMessage
-                    defaultMessage="Store settings in project (Experimental)"
-                    description="Button to store settings in project in advanced settings menu"
-                    id="tw.settingsModal.storeInProject"
-                />
+                {'Store settings in project (Experimental)'}
             </button>
             <p>
-                <FormattedMessage
-                    // eslint-disable-next-line max-len
-                    defaultMessage="Attempts to store the selected advanced settings in a script comment in the stage so that they will be automatically applied when this project is loaded in TurboWarp. Custom stage size and warp timer will not be saved. The project must manually be saved from TurboWarp and uploaded to Scratch. This is still very experimental."
-                    description="Help text for store settings in project button"
-                    id="tw.settingsModal.storeInProject.help"
-                />
+                {/* eslint-disable-next-line max-len */}
+                {'Attempts to store the selected advanced settings in a script comment in the stage so that they will be automatically applied when this project is loaded in TurboWarp. Custom stage size and warp timer will not be saved. You may have to manually download the project from TurboWarp and upload it to Scratch. This is very experimental and may be removed if it does not work as well as hoped.'}
             </p>
         </div>
     </Setting>

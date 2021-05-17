@@ -21,6 +21,9 @@
 
     user-select: none;
 }
+[theme="dark"] .sprite-selector-item {
+    border-color: rgba(255, 255, 255, 0.1);
+}
 
 .sprite-selector-item.is-selected {
     box-shadow: 0px 0px 0px 4px $motion-transparent;

@@ -119,7 +119,8 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, binary,
+                        callbackLoading, callbackHelp, callbackPopup) => new Promise((resolve, reject) => {
 
     let spriteElements = [];
 
@@ -130,7 +131,8 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
     });
 
     const artiePedagogicalSoftwareData = {id: null, student: student, exercise: exercise, requestHelp: requestHelp, secondsHelpOpen: secondsHelpOpen,
-                                          finishedExercise: finishedExercise, lastLogin: lastLogin, screenShot: screenShot, elements: spriteElements};
+                                          finishedExercise: finishedExercise, lastLogin: lastLogin, screenShot: screenShot, binary: binary,
+                                          elements: spriteElements};
 
     let xhr = new XMLHttpRequest();
     let params = JSON.stringify(artiePedagogicalSoftwareData);
@@ -165,7 +167,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, callbackPopup) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary, callback, callbackPopup) => new Promise((resolve, reject) => {
 
     let spriteElements = []
 
@@ -175,7 +177,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, callback, call
         spriteElements.push(spriteElement);
     });
 
-    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: spriteElements, screenShot: screenShot};
+    const artiePedagogicalSoftwareSolution = {id: null, userId: userId, exercise: exercise, elements: spriteElements, screenShot: screenShot, binary: binary};
     let xhr = new XMLHttpRequest();
     let params = JSON.stringify(artiePedagogicalSoftwareSolution);
     xhr.addEventListener("readystatechange", () => {

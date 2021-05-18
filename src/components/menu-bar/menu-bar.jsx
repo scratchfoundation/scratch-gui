@@ -93,6 +93,7 @@ import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-
 
 import html2canvas from "html2canvas";
 import Spinner from '../spinner/spinner.jsx';
+import downloadBlob from "../../lib/download-blob";
 
 const ariaMessages = defineMessages({
     language: {
@@ -358,10 +359,27 @@ class MenuBar extends React.Component {
     handleClickRegisterSolution (){
         this.props.onArtieLoadingSolution(true, false);
         const body = document.querySelector('body');
-        var canvasUrl = '';
-        html2canvas(body).then(canvas => {
-            canvasUrl = canvas.toDataURL('image/png');
-            sendSolutionArtie(this.props.artieLogin.user.id, this.props.sprites, this.props.artieExercises.currentExercise, canvasUrl, this.props.onArtieLoadingSolution, this.props.onArtieSolutionSentPopupOpen);
+
+        //Getting the blob
+        this.props.saveProjectSb3().then(content => {
+
+            let binary = '';
+            let canvasUrl = '';
+            const reader = new FileReader();
+            const userId = this.props.artieLogin.user.id;
+            const sprites = this.props.sprites;
+            const currentExercise = this.props.artieExercises.currentExercise;
+            const fOnArtieLoadingSolution = this.props.onArtieLoadingSolution;
+            const fOnArtieExerciseSentPopupOpen = this.props.onArtieExerciseSentPopupOpen;
+
+            reader.readAsDataURL(content);
+            reader.onloadend = function() {
+                binary = reader.result;
+                html2canvas(body).then(canvas => {
+                    canvasUrl = canvas.toDataURL('image/png');
+                    sendSolutionArtie(userId, sprites, currentExercise, canvasUrl, binary, fOnArtieLoadingSolution, fOnArtieExerciseSentPopupOpen);
+                });
+            };
         });
     }
     wrapAboutMenuCallback (callback) {
@@ -382,15 +400,34 @@ class MenuBar extends React.Component {
     handleClickFinishExercise(){
         this.props.onArtieLoadingExercise(true, false);
         const body = document.querySelector('body');
-        var canvasUrl = '';
-        html2canvas(body).then(canvas => {
-            canvasUrl = canvas.toDataURL('image/png');
-            sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false,
-                this.props.artieExercises.secondsHelpOpen, true, this.props.artieLogin.lastLogin,
-                canvasUrl, this.props.onArtieLoadingExercise, null, this.props.onArtieExerciseSentPopupOpen);
-            if(this.props.artieExercises.secondsHelpOpen > 0) {
-                this.props.onArtieResetSecondsHelpOpen();
-            }
+
+        //Getting the blob
+        this.props.saveProjectSb3().then(content => {
+
+            let binary = '';
+            let canvasUrl = '';
+            const reader = new FileReader();
+            const currentStudent = this.props.artieLogin.currentStudent;
+            const sprites = this.props.sprites;
+            const currentExercise = this.props.artieExercises.currentExercise;
+            const secondsHelpOpen = this.props.artieExercises.secondsHelpOpen;
+            const lastLogin = this.props.artieLogin.lastLogin;
+            const fOnArtieLoadingExercise = this.props.onArtieLoadingExercise;
+            const fOnArtieExerciseSentPopupOpen = this.props.onArtieExerciseSentPopupOpen;
+            const fOnArtieResetSecondsHelpOpen = this.props.onArtieResetSecondsHelpOpen;
+
+            reader.readAsDataURL(content);
+            reader.onloadend = function() {
+                binary = reader.result;
+                html2canvas(body).then(canvas => {
+                    canvasUrl = canvas.toDataURL('image/png');
+                    sendBlockArtie(currentStudent, sprites, currentExercise, false, secondsHelpOpen, true, lastLogin,
+                                   canvasUrl, binary, fOnArtieLoadingExercise, null, fOnArtieExerciseSentPopupOpen);
+                    if(secondsHelpOpen > 0) {
+                        fOnArtieResetSecondsHelpOpen();
+                    }
+                });
+            };
         });
     }
     handleArtieLogout(){
@@ -1125,7 +1162,8 @@ const mapStateToProps = (state, ownProps) => {
         vm: state.scratchGui.vm,
         artieLogin: state.scratchGui.artieLogin,
         artieExercises: state.scratchGui.artieExercises,
-        sprites: state.scratchGui.targets.sprites
+        sprites: state.scratchGui.targets.sprites,
+        saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm)
     };
 };
 

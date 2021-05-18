@@ -1,6 +1,6 @@
 {
   "name": "scratch-gui",
-  "version": "0.3.1-artie",
+  "version": "0.4.0-artie",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./dist/scratch-gui.js",
   "scripts": {

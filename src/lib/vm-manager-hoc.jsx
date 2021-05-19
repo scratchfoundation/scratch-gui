@@ -32,7 +32,6 @@ const vmManagerHOC = function (WrappedComponent) {
                 window.vm = this.props.vm;
                 this.audioEngine = new AudioEngine();
                 this.props.vm.attachAudioEngine(this.audioEngine);
-                this.props.vm.setCompatibilityMode(true);
                 this.props.vm.initialized = true;
                 this.props.vm.setLocale(this.props.locale, this.props.messages);
                 /* eslint-disable no-console */

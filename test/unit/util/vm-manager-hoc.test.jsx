@@ -43,7 +43,6 @@ describe('VMManagerHOC', () => {
             />
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
-        expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
         expect(vm.setLocale.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
 
@@ -62,7 +61,6 @@ describe('VMManagerHOC', () => {
             />
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(1);
-        expect(vm.setCompatibilityMode.mock.calls.length).toBe(1);
         expect(vm.setLocale.mock.calls.length).toBe(1);
         expect(vm.initialized).toBe(true);
 
@@ -81,7 +79,6 @@ describe('VMManagerHOC', () => {
             />
         );
         expect(vm.attachAudioEngine.mock.calls.length).toBe(0);
-        expect(vm.setCompatibilityMode.mock.calls.length).toBe(0);
         expect(vm.setLocale.mock.calls.length).toBe(0);
         expect(vm.initialized).toBe(true);
 

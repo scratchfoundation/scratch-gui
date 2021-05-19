@@ -50,6 +50,20 @@ const defaultAxesMappings = {
       deadZone: 0.5,
     },
   ],
+  wasd: [
+    {
+      type: "key",
+      high: "d",
+      low: "a",
+      deadZone: 0.5,
+    },
+    {
+      type: "key",
+      high: "s",
+      low: "w",
+      deadZone: 0.5,
+    },
+  ],
   cursor: [
     {
       /*
@@ -679,6 +693,12 @@ class GamepadEditor {
     );
     selector.appendChild(
       Object.assign(document.createElement("option"), {
+        textContent: "WASD",
+        value: "wasd",
+      })
+    );
+    selector.appendChild(
+      Object.assign(document.createElement("option"), {
         textContent: this.msg("axis-cursor"),
         value: "cursor",
       })
@@ -688,6 +708,9 @@ class GamepadEditor {
       if (selector.value === "arrows") {
         mappingList[index] = defaultAxesMappings.arrows[0];
         mappingList[index + 1] = defaultAxesMappings.arrows[1];
+      } else if (selector.value === "wasd") {
+        mappingList[index] = defaultAxesMappings.wasd[0];
+        mappingList[index + 1] = defaultAxesMappings.wasd[1];
       } else if (selector.value === "cursor") {
         mappingList[index] = defaultAxesMappings.cursor[0];
         mappingList[index + 1] = defaultAxesMappings.cursor[1];
@@ -699,7 +722,11 @@ class GamepadEditor {
 
     const mapping = mappingList[index];
     if (mapping.type === "key") {
-      selector.value = "arrows";
+      if (mapping.high.includes("Arrow")) {
+        selector.value = "arrows";
+      } else {
+        selector.value = "wasd";
+      }
     } else if (mapping.type === "virtual_cursor") {
       selector.value = "cursor";
     } else {

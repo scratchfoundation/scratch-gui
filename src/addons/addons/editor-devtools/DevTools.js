@@ -2061,7 +2061,9 @@ export default class DevTools {
     }
 
     e.cancelBubble = true;
-    e.preventDefault();
+    if (!e.target.closest("input")) {
+      e.preventDefault();
+    }
 
     let wksp = this.utils.getWorkspace();
 

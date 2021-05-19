@@ -174,9 +174,7 @@ export default async function ({ addon, global, console }) {
 
   function findBlocklyDropDownDiv() {
     return addon.tab.waitForElement(".blocklyDropDownDiv", {
-      condition: () =>
-        addon.tab.redux.state.scratchGui.editorTab.activeTabIndex === 0 &&
-        !addon.tab.redux.state.scratchGui.mode.isPlayerOnly,
+      reduxCondition: (state) => state.scratchGui.editorTab.activeTabIndex === 0 && !state.scratchGui.mode.isPlayerOnly,
     });
   }
 

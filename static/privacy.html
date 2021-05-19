@@ -5,7 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body {
-                font-family: sans-serif;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                border-top: 5px solid hsla(0, 100%, 65%, 1);
+                margin: 0; padding: 0;
+            }
+            header {
+                background-color: hsla(0, 100%, 65%, 1);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+            }
+            main {
+                max-width: 600px;
+                margin: auto;
+            }
+            @media (prefers-color-scheme: dark) {
+                body { background: #111; color: #eee; }
+                a { color: #4af; }
             }
         </style>
     </head>
@@ -13,12 +29,11 @@
     <body>
         <header>
             <h1>Privacy Policy</h1>
-
-            <!-- UPDATE THIS WHEN MAKING CHANGES -->
-            <p><i>Updated February 1st, 2021.</i></p>
         </header>
-
+        
         <main>
+            <!-- UPDATE THIS WHEN MAKING CONTENT CHANGES -->
+            <p><i>Updated February 1st, 2021.</i></p>
 
             <p>This is the privacy policy for <a href="https://turbowarp.org">https://turbowarp.org</a> and its subdomains.</p>
 

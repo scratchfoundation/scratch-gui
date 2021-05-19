@@ -2056,10 +2056,6 @@ export default class DevTools {
    * @param e
    */
   dropDownFloatClick(e) {
-    if (e.target.closest("input")) {
-      return;
-    }
-
     e.cancelBubble = true;
     if (!e.target.closest("input")) {
       e.preventDefault();

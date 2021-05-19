@@ -307,9 +307,20 @@ class SettingsStore extends EventTargetShim {
         }
     }
 
-    setStore (store) {
-        this.store = store;
-        this.dispatchEvent(new CustomEvent('store-changed'));
+    setStore (newStore) {
+        const oldStore = this.store;
+        for (const addonId of Object.keys(newStore)) {
+            if (JSON.stringify(oldStore[addonId]) !== JSON.stringify(newStore[addonId])) {
+                const detail = {
+                    addonId
+                };
+                // TODO: dynamic enable and disable
+                this.dispatchEvent(new CustomEvent('addon-changed', {
+                    detail
+                }));
+            }
+        }
+        this.store = newStore;
     }
 }
 

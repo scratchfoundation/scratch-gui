@@ -453,9 +453,12 @@ history.pushState = function (...args) {
     emitUrlChange();
 };
 
-SettingsStore.addEventListener('store-changed', () => {
+SettingsStore.addEventListener('addon-changed', e => {
+    const addonId = e.detail.addonId;
     for (const runner of AddonRunner.instances) {
-        runner.settingsChanged();
+        if (runner.id === addonId) {
+            runner.settingsChanged();
+        }
     }
 });
 

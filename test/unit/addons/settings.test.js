@@ -366,3 +366,22 @@ test('local storage is resistent to errors', () => {
     store.readLocalStorage();
     store.setAddonEnabled('cat-blocks', false);
 });
+
+test('setStore diffing', () => {
+    const settingsStore = new SettingStore();
+    const pageStore = new SettingStore();
+    // To avoid issues caused by pass-by-reference
+    const exportStore = () => JSON.parse(JSON.stringify(settingsStore.store));
+    settingsStore.setAddonEnabled('editor-devtools', false);
+    pageStore.setAddonEnabled('editor-devtools', false);
+    const fn = jest.fn();
+    pageStore.addEventListener('addon-changed', fn);
+    pageStore.setStore(exportStore());
+    expect(fn).toHaveBeenCalledTimes(0);
+    settingsStore.setAddonEnabled('editor-devtools', true);
+    settingsStore.setAddonSetting('onion-skinning', 'next', 10);
+    pageStore.setStore(exportStore());
+    expect(fn).toHaveBeenCalledTimes(2);
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('onion-skinning');
+});

@@ -149,8 +149,6 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
-const alwaysTrue = () => true;
-
 class Tab extends EventTargetShim {
     constructor () {
         super();
@@ -187,8 +185,16 @@ class Tab extends EventTargetShim {
         throw new Error('loadScript is not supported');
     }
 
-    waitForElement (selector, {markAsSeen = false, condition = alwaysTrue, reduxEvents} = {}) {
-        if (condition()) {
+    waitForElement (selector, {markAsSeen = false, condition, reduxCondition, reduxEvents} = {}) {
+        let externalEventSatisfied = true;
+        const evaluateCondition = () => {
+            if (!externalEventSatisfied) return false;
+            if (condition && !condition()) return false;
+            if (reduxCondition && !reduxCondition(tabReduxInstance.state)) return false;
+            return true;
+        };
+
+        if (evaluateCondition()) {
             const firstQuery = document.querySelectorAll(selector);
             for (const element of firstQuery) {
                 if (this._seenElements.has(element)) continue;
@@ -199,24 +205,14 @@ class Tab extends EventTargetShim {
 
         let reduxListener;
         if (reduxEvents) {
-            let reduxEventSatisifed = false;
+            externalEventSatisfied = false;
             reduxListener = ({detail}) => {
                 const type = detail.action.type;
                 // As addons can't run before DOM exists here, ignore fontsLoaded/SET_FONTS_LOADED
                 // Otherwise, as our font loading is very async, we could activate more often than required.
                 if (reduxEvents.includes(type) && type !== 'fontsLoaded/SET_FONTS_LOADED') {
-                    reduxEventSatisifed = true;
+                    externalEventSatisfied = true;
                 }
-            };
-            const oldCondition = condition;
-            condition = () => {
-                if (!oldCondition()) {
-                    return false;
-                }
-                if (reduxEventSatisifed) {
-                    return true;
-                }
-                return false;
             };
             this.redux.initialize();
             this.redux.addEventListener('statechanged', reduxListener);
@@ -224,7 +220,7 @@ class Tab extends EventTargetShim {
 
         return new Promise(resolve => {
             const callback = () => {
-                if (!condition()) {
+                if (!evaluateCondition()) {
                     return;
                 }
                 const elements = document.querySelectorAll(selector);

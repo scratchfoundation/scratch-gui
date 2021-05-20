@@ -164,11 +164,12 @@ class SettingsStore extends EventTargetShim {
         }
         this.saveToLocalStorage();
         if (value !== oldValue) {
+            const reloadRequired = value ? !manifest.dynamicEnable : !manifest.dynamicDisable;
             this.dispatchEvent(new CustomEvent('setting-changed', {
                 detail: {
                     addonId,
                     settingId: 'enabled',
-                    reloadRequired: true,
+                    reloadRequired,
                     value
                 }
             }));
@@ -307,16 +308,23 @@ class SettingsStore extends EventTargetShim {
         }
     }
 
-    setStore (newStore) {
+    setStore (originalNewStore) {
+        // Clone the new store to avoid issues caused by pass-by-reference
+        const newStore = JSON.parse(JSON.stringify(originalNewStore));
         const oldStore = this.store;
         for (const addonId of Object.keys(newStore)) {
-            if (JSON.stringify(oldStore[addonId]) !== JSON.stringify(newStore[addonId])) {
-                const detail = {
-                    addonId
-                };
-                // TODO: dynamic enable and disable
+            const oldSettings = oldStore[addonId];
+            const newSettings = newStore[addonId];
+            if (JSON.stringify(oldSettings) !== JSON.stringify(newSettings)) {
+                const manifest = this.getAddonManifest(addonId);
+                const dynamicEnable = !!manifest.dynamicEnable && !oldSettings.enabled && newSettings.enabled;
+                const dynamicDisable = !!manifest.dynamicDisable && oldSettings.enabled && !newSettings.enabled;
                 this.dispatchEvent(new CustomEvent('addon-changed', {
-                    detail
+                    detail: {
+                        addonId,
+                        dynamicEnable,
+                        dynamicDisable
+                    }
                 }));
             }
         }

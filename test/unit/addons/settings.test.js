@@ -33,20 +33,34 @@ test('enabled, event', () => {
     expect(fn).toHaveBeenCalledTimes(4);
     expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
     expect(fn.mock.calls[0][0].detail.settingId).toBe('enabled');
-    expect(fn.mock.calls[0][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[0][0].detail.value).toBe(false);
     expect(fn.mock.calls[1][0].detail.addonId).toBe('editor-devtools');
     expect(fn.mock.calls[1][0].detail.settingId).toBe('enabled');
-    expect(fn.mock.calls[1][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[1][0].detail.value).toBe(true);
     expect(fn.mock.calls[2][0].detail.addonId).toBe('cat-blocks');
     expect(fn.mock.calls[2][0].detail.settingId).toBe('enabled');
-    expect(fn.mock.calls[2][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[2][0].detail.value).toBe(true);
     expect(fn.mock.calls[3][0].detail.addonId).toBe('cat-blocks');
     expect(fn.mock.calls[3][0].detail.settingId).toBe('enabled');
-    expect(fn.mock.calls[3][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[3][0].detail.value).toBe(false);
+});
+
+test('setAddonEnabled reloadRequired', () => {
+    const store = new SettingStore();
+    const fn = jest.fn();
+    store.setAddonEnabled('editor-devtools', false);
+    store.setAddonEnabled('block-palette-icons', false);
+    store.addEventListener('setting-changed', fn);
+    store.setAddonEnabled('editor-devtools', true);
+    store.setAddonEnabled('block-palette-icons', true);
+    store.setAddonEnabled('block-palette-icons', false);
+    expect(fn).toHaveBeenCalledTimes(3);
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
+    expect(fn.mock.calls[0][0].detail.reloadRequired).toBe(true);
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[1][0].detail.reloadRequired).toBe(false);
+    expect(fn.mock.calls[2][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[2][0].detail.reloadRequired).toBe(false);
 });
 
 test('settings, event, default values', () => {
@@ -370,18 +384,35 @@ test('local storage is resistent to errors', () => {
 test('setStore diffing', () => {
     const settingsStore = new SettingStore();
     const pageStore = new SettingStore();
-    // To avoid issues caused by pass-by-reference
-    const exportStore = () => JSON.parse(JSON.stringify(settingsStore.store));
     settingsStore.setAddonEnabled('editor-devtools', false);
     pageStore.setAddonEnabled('editor-devtools', false);
     const fn = jest.fn();
     pageStore.addEventListener('addon-changed', fn);
-    pageStore.setStore(exportStore());
+    pageStore.setStore(settingsStore.store);
     expect(fn).toHaveBeenCalledTimes(0);
     settingsStore.setAddonEnabled('editor-devtools', true);
     settingsStore.setAddonSetting('onion-skinning', 'next', 10);
-    pageStore.setStore(exportStore());
+    pageStore.setStore(settingsStore.store);
     expect(fn).toHaveBeenCalledTimes(2);
     expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
     expect(fn.mock.calls[1][0].detail.addonId).toBe('onion-skinning');
+});
+
+test('setStore dynamic enable/disable', () => {
+    const settingsStore = new SettingStore();
+    const pageStore = new SettingStore();
+    settingsStore.setAddonEnabled('block-palette-icons', false);
+    pageStore.setStore(settingsStore.store);
+    const fn = jest.fn();
+    pageStore.addEventListener('addon-changed', fn);
+    settingsStore.setAddonEnabled('block-palette-icons', true);
+    pageStore.setStore(settingsStore.store);
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[0][0].detail.dynamicEnable).toBe(true);
+    expect(fn.mock.calls[0][0].detail.dynamicDisable).toBe(false);
+    settingsStore.setAddonEnabled('block-palette-icons', false);
+    pageStore.setStore(settingsStore.store);
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[1][0].detail.dynamicEnable).toBe(false);
+    expect(fn.mock.calls[1][0].detail.dynamicDisable).toBe(true);
 });

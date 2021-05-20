@@ -150,9 +150,12 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
+const getDisplayNoneWhileDisabledVariable = id => `--${kebabCaseToCamelCase(id)}_displayNoneWhileDisabledValue`;
+
 class Tab extends EventTargetShim {
-    constructor () {
+    constructor (id) {
         super();
+        this._id = id;
         this._seenElements = new WeakSet();
         // traps is public API
         this.traps = {
@@ -279,8 +282,9 @@ class Tab extends EventTargetShim {
         return getEditorMode();
     }
 
-    displayNoneWhileDisabled () {
-        // no-op
+    displayNoneWhileDisabled (el, {display = ''} = {}) {
+        const varName = getDisplayNoneWhileDisabledVariable(this._id);
+        el.style.display = `var(${varName}${display ? `,${display}` : ''})`;
     }
 }
 
@@ -319,13 +323,14 @@ class AddonRunner {
         this.id = id;
         this.manifest = manifest;
         this.messageCache = {};
+        this.stylesheets = [];
 
         this.msg.locale = language;
         this.publicAPI = {
             global,
             console,
             addon: {
-                tab: new Tab(),
+                tab: new Tab(id),
                 settings: new Settings(id, manifest),
                 self: new Self(id)
             },
@@ -387,6 +392,33 @@ class AddonRunner {
         return settingValue === settingMatch.value;
     }
 
+    dynamicEnable () {
+        this.publicAPI.addon.self.dispatchEvent(new CustomEvent('reenabled'));
+        this.publicAPI.addon.self.disabled = false;
+        document.documentElement.style.removeProperty(getDisplayNoneWhileDisabledVariable(this.id));
+        this.appendStylesheets();
+    }
+
+    dynamicDisable () {
+        this.publicAPI.addon.self.dispatchEvent(new CustomEvent('disabled'));
+        this.publicAPI.addon.self.disabled = true;
+        document.documentElement.style.setProperty(getDisplayNoneWhileDisabledVariable(this.id), 'none');
+        this.removeStylesheets();
+    }
+
+    removeStylesheets () {
+        for (const style of this.stylesheets) {
+            style.remove();
+        }
+    }
+
+    appendStylesheets () {
+        for (const style of this.stylesheets) {
+            // Insert styles at the start of the body so that they have higher precedence than those in <head>
+            document.body.insertBefore(style, document.body.firstChild);
+        }
+    }
+
     async run () {
         this.updateCSSVariables();
 
@@ -404,10 +436,10 @@ class AddonRunner {
                 const style = createStylesheet(source);
                 style.className = 'scratch-addons-theme';
                 style.dataset.addonId = this.id;
-                // Insert styles at the start of the body so that they have higher precedence than those in <head>
-                document.body.insertBefore(style, document.body.firstChild);
+                this.stylesheets.push(style);
             }
         }
+        this.appendStylesheets();
 
         if (this.manifest.userscripts) {
             for (const userscript of this.manifest.userscripts) {
@@ -459,10 +491,20 @@ history.pushState = function (...args) {
 
 SettingsStore.addEventListener('addon-changed', e => {
     const addonId = e.detail.addonId;
-    for (const runner of AddonRunner.instances) {
-        if (runner.id === addonId) {
-            runner.settingsChanged();
+    const runner = AddonRunner.instances.find(i => i.id === addonId);
+    if (e.detail.dynamicEnable) {
+        if (runner) {
+            runner.dynamicEnable();
+        } else {
+            runAddon(addonId);
         }
+    } else if (e.detail.dynamicDisable) {
+        if (runner) {
+            runner.dynamicDisable();
+        }
+    }
+    if (runner) {
+        runner.settingsChanged();
     }
 });
 

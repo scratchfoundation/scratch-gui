@@ -20,6 +20,7 @@ import getAddonTranslations from './get-addon-translations';
 import dataURLToBlob from '../lib/data-uri-to-blob';
 import EventTargetShim from './event-target';
 import AddonHooks from './hooks';
+import addons from './addon-manifests';
 import './polyfill';
 
 /* eslint-disable no-console */
@@ -311,8 +312,9 @@ class Self extends EventTargetShim {
 }
 
 class AddonRunner {
-    constructor (id, manifest) {
+    constructor (id) {
         AddonRunner.instances.push(this);
+        const manifest = addons[id];
 
         this.id = id;
         this.manifest = manifest;
@@ -385,7 +387,7 @@ class AddonRunner {
         return settingValue === settingMatch.value;
     }
 
-    async _run () {
+    async run () {
         this.updateCSSVariables();
 
         if (this.manifest.userstyles) {
@@ -421,17 +423,19 @@ class AddonRunner {
             }
         }
     }
-
-    async run () {
-        this._run();
-    }
 }
 AddonRunner.instances = [];
+
+const runAddon = addonId => {
+    const runner = new AddonRunner(addonId);
+    runner.run();
+};
 
 let oldMode = getEditorMode();
 const emitUrlChange = () => {
     // In Scratch, URL changes usually mean someone went from editor to fullscreen or something like that.
-    // This is not the case in TW -- the URL can change for many other reasons that addons probably aren't prepared to handle.
+    // This is not the case in TW -- the URL can change for many other reasons that addons probably aren't prepared
+    // to handle.
     const newMode = getEditorMode();
     if (newMode !== oldMode) {
         oldMode = newMode;
@@ -462,4 +466,9 @@ SettingsStore.addEventListener('addon-changed', e => {
     }
 });
 
-export default AddonRunner;
+for (const id of Object.keys(addons)) {
+    if (!SettingsStore.getAddonEnabled(id)) {
+        continue;
+    }
+    runAddon(id);
+}

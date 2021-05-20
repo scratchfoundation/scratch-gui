@@ -139,6 +139,7 @@ class Redux extends EventTargetShim {
 }
 
 const getEditorMode = () => {
+    // eslint-disable-next-line no-use-before-define
     const mode = tabReduxInstance.state.scratchGui.mode;
     if (mode.isEmbedded) return 'embed';
     if (mode.isFullScreen) return 'fullscreen';
@@ -168,7 +169,7 @@ class Tab extends EventTargetShim {
                 if (window.ScratchBlocks) {
                     return Promise.resolve(window.ScratchBlocks);
                 }
-                return new Promise((resolve, reject) => {
+                return new Promise(resolve => {
                     const handler = () => {
                         if (window.ScratchBlocks) {
                             this.removeEventListener('urlChange', handler);
@@ -248,6 +249,7 @@ class Tab extends EventTargetShim {
             return Promise.reject(new Error('Clipboard API not supported'));
         }
         const items = [
+            // eslint-disable-next-line no-undef
             new ClipboardItem({
                 'image/png': dataURLToBlob(dataURL)
             })

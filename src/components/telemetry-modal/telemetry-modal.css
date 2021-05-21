@@ -148,3 +148,16 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     box-shadow: none;
     opacity: 0.25;
 }
+
+@media screen and (max-height: 660px) {
+    .modal-content {
+        margin: 5vh auto;
+        width: 90%;
+    }
+}
+
+@media screen and (max-height: 540px) {
+    .illustration {
+        display: none;
+    }
+}

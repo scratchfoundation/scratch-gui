@@ -1,7 +1,7 @@
 import {addLocaleData} from 'react-intl';
 
-import {localeData, isRtl} from 'scratch-l10n';
-import editorMessages from 'scratch-l10n/locales/editor-msgs';
+import {localeData, isRtl} from '@turbowarp/scratch-l10n';
+import editorMessages from '@turbowarp/scratch-l10n/locales/editor-msgs';
 
 import {LANGUAGE_KEY} from '../lib/detect-locale.js';
 

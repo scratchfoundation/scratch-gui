@@ -7,7 +7,7 @@ import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteList from './sprite-list.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
-import {isRtl} from 'scratch-l10n';
+import {isRtl} from '@turbowarp/scratch-l10n';
 
 import styles from './sprite-selector.css';
 

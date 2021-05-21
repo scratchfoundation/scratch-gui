@@ -26,6 +26,7 @@ import upstreamMeta from '../upstream-meta.json';
 import {detectLocale} from '../../lib/detect-locale';
 import {getInitialDarkMode} from '../../lib/tw-theme-hoc.jsx';
 import SettingsStore from '../settings-store-singleton';
+import Channels from '../channels';
 import extensionImageWhite from './extension-white.svg';
 import extensionImageBlack from './extension-black.svg';
 import brushImageWhite from './brush-white.svg';
@@ -57,6 +58,18 @@ document.title = `${settingsTranslations['tw.addons.settings.title']} - TurboWar
 
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);
+
+let _throttleTimeout;
+const postThrottledSettingsChange = store => {
+    if (_throttleTimeout) {
+        clearTimeout(_throttleTimeout);
+    }
+    _throttleTimeout = setTimeout(() => {
+        Channels.changeChannel.postMessage({
+            store
+        });
+    }, 100);
+};
 
 const sortAddons = () => {
     const sortedOrder = Object.keys(addons).sort((aId, bId) => {
@@ -535,14 +548,12 @@ const Dirty = props => (
     <div className={styles.dirtyOuter}>
         <div className={styles.dirtyInner}>
             {settingsTranslations['tw.addons.settings.dirty']}
-            {props.onReloadNow && (
-                <button
-                    className={classNames(styles.button, styles.dirtyButton)}
-                    onClick={props.onReloadNow}
-                >
-                    {settingsTranslations['tw.addons.settings.dirtyButton']}
-                </button>
-            )}
+            <button
+                className={classNames(styles.button, styles.dirtyButton)}
+                onClick={props.onReloadNow}
+            >
+                {settingsTranslations['tw.addons.settings.dirtyButton']}
+            </button>
         </div>
     </div>
 );
@@ -722,12 +733,13 @@ class AddonSettingsComponent extends React.Component {
             }
             return newState;
         });
-        if (!reloadRequired && this.props.onSettingsChanged) {
-            this.props.onSettingsChanged(reloadRequired);
+        if (!reloadRequired) {
+            postThrottledSettingsChange(SettingsStore.store);
         }
     }
     handleReloadNow () {
-        this.props.onReloadNow();
+        // Value posted does not matter
+        Channels.reloadChannel.postMessage(0);
         this.setState({
             dirty: false
         });
@@ -848,7 +860,7 @@ class AddonSettingsComponent extends React.Component {
                     </a>
                     {this.state.dirty && (
                         <Dirty
-                            onReloadNow={this.props.onReloadNow && this.handleReloadNow}
+                            onReloadNow={this.handleReloadNow}
                         />
                     )}
                 </div>
@@ -895,8 +907,6 @@ class AddonSettingsComponent extends React.Component {
 AddonSettingsComponent.propTypes = {
     addons: PropTypes.objectOf(PropTypes.object),
     unsupportedAddons: PropTypes.objectOf(PropTypes.object),
-    onReloadNow: PropTypes.func,
-    onSettingsChanged: PropTypes.func,
     onExportSettings: PropTypes.func
 };
 AddonSettingsComponent.defaultProps = {

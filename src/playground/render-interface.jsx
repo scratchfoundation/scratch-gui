@@ -41,6 +41,7 @@ import WebGlModal from '../containers/webgl-modal.jsx';
 import TWEvalModal from '../components/webgl-modal/tw-eval-modal.jsx';
 import CloudVariableBadge from '../components/tw-cloud-variable-badge/cloud-variable-badge.jsx';
 import {isRendererSupported, isEvalSupported} from '../lib/tw-environment-support-prober';
+import AddonChannels from '../addons/channels';
 
 import styles from './interface.css';
 
@@ -55,19 +56,6 @@ if (process.env.ANNOUNCEMENT) {
     // This is safe because process.env.ANNOUNCEMENT is set at build time.
     announcement.innerHTML = process.env.ANNOUNCEMENT;
 }
-
-window.addEventListener('message', e => {
-    if (e.origin !== location.origin) {
-        return;
-    }
-    const data = e.data;
-    if (data.type === 'reload') {
-        location.reload();
-    }
-    if (data.type === 'settings-changed') {
-        SettingsStore.setStore(data.store);
-    }
-});
 
 const handleClickAddonSettings = () => {
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
@@ -85,6 +73,15 @@ const messages = defineMessages({
 const WrappedMenuBar = compose(
     SBFileUploaderHOC
 )(MenuBar);
+
+AddonChannels.reloadChannel.addEventListener('message', () => {
+    location.reload();
+});
+
+AddonChannels.changeChannel.addEventListener('message', e => {
+    const store = e.data.store;
+    SettingsStore.setStore(store);
+});
 
 import(/* webpackChunkName: "addons" */ '../addons/entry');
 

@@ -308,13 +308,14 @@ class SettingsStore extends EventTargetShim {
         }
     }
 
-    setStore (originalNewStore) {
-        // Clone the new store to avoid issues caused by pass-by-reference
-        const newStore = JSON.parse(JSON.stringify(originalNewStore));
+    setStore (newStore) {
         const oldStore = this.store;
-        for (const addonId of Object.keys(newStore)) {
+        for (const addonId of Object.keys(oldStore)) {
             const oldSettings = oldStore[addonId];
             const newSettings = newStore[addonId];
+            if (!newSettings || typeof newSettings !== 'object') {
+                continue;
+            }
             if (JSON.stringify(oldSettings) !== JSON.stringify(newSettings)) {
                 const manifest = this.getAddonManifest(addonId);
                 const dynamicEnable = !!manifest.dynamicEnable && !oldSettings.enabled && newSettings.enabled;
@@ -326,9 +327,9 @@ class SettingsStore extends EventTargetShim {
                         dynamicDisable
                     }
                 }));
+                Object.assign(oldSettings, newSettings);
             }
         }
-        this.store = newStore;
     }
 }
 

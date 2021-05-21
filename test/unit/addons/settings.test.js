@@ -416,3 +416,16 @@ test('setStore dynamic enable/disable', () => {
     expect(fn.mock.calls[1][0].detail.dynamicEnable).toBe(false);
     expect(fn.mock.calls[1][0].detail.dynamicDisable).toBe(true);
 });
+
+test('setStore weird values', () => {
+    const settingsStore = new SettingStore();
+    expect(settingsStore.getAddonEnabled('pause')).toBe(true);
+    settingsStore.setAddonEnabled('pause', false);
+    settingsStore.setAddonEnabled('clones', true);
+    settingsStore.setStore({
+        invalid0: {},
+        invalid1: null,
+        pause: null
+    });
+    expect(settingsStore.getAddonEnabled('pause')).toBe(false);
+});

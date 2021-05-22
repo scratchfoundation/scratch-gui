@@ -173,13 +173,13 @@ div.s3devDDOut.vis ul.s3devDD {
 
 .var,
 .VAR {
-  background-color: rgb(15 189 140);
+  color: rgb(255, 120, 26);
 }
 .var:hover,
 .var.sel,
 .VAR:hover,
 .VAR.sel {
-  background-color: rgb(11 158 117);
+  background-color: rgb(255, 120, 26);
 }
 
 .list,

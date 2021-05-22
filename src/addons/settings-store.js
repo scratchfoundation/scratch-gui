@@ -317,6 +317,7 @@ class SettingsStore extends EventTargetShim {
                 continue;
             }
             if (JSON.stringify(oldSettings) !== JSON.stringify(newSettings)) {
+                Object.assign(oldSettings, newSettings);
                 const manifest = this.getAddonManifest(addonId);
                 const dynamicEnable = !!manifest.dynamicEnable && !oldSettings.enabled && newSettings.enabled;
                 const dynamicDisable = !!manifest.dynamicDisable && oldSettings.enabled && !newSettings.enabled;
@@ -327,7 +328,6 @@ class SettingsStore extends EventTargetShim {
                         dynamicDisable
                     }
                 }));
-                Object.assign(oldSettings, newSettings);
             }
         }
     }

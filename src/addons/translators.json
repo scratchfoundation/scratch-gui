@@ -140,7 +140,8 @@
         "profile": "http://www.gugalcrom.net",
         "contributions": [
             "ideas",
-            "translation"
+            "translation",
+            "code"
         ]
     },
     {
@@ -340,6 +341,26 @@
         "avatar_url": "https://avatars.githubusercontent.com/u/83602831?v=4",
         "profile": "https://github.com/hello34090",
         "contributions": [
+            "translation"
+        ]
+    },
+    {
+        "login": "piw-piw",
+        "name": "piw-piw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/76477070?v=4",
+        "profile": "https://github.com/piw-piw",
+        "contributions": [
+            "translation",
+            "ideas"
+        ]
+    },
+    {
+        "login": "Sly-Little-Fox",
+        "name": "Sly Little Fox",
+        "avatar_url": "https://avatars.githubusercontent.com/u/69681150?v=4",
+        "profile": "https://server-backuper.cloud",
+        "contributions": [
+            "code",
             "translation"
         ]
     }

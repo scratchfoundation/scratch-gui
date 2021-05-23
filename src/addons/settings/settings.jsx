@@ -365,12 +365,16 @@ const Notice = ({
             className={styles.notice}
             type={notice.type}
         >
-            <img
-                className={styles.noticeIcon}
-                src={infoImage}
-                alt=""
-            />
-            {text}
+            <div>
+                <img
+                    className={styles.noticeIcon}
+                    src={infoImage}
+                    alt=""
+                />
+            </div>
+            <div>
+                {text}
+            </div>
         </div>
     );
 };

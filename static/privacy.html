@@ -33,91 +33,34 @@
         
         <main>
             <!-- UPDATE THIS WHEN MAKING CONTENT CHANGES -->
-            <p><i>Updated February 1st, 2021.</i></p>
+            <p><i>Updated May 23rd, 2021</i></p>
 
             <p>This is the privacy policy for <a href="https://turbowarp.org">https://turbowarp.org</a> and its subdomains.</p>
 
             <h2>Data collection</h2>
 
-            <p>We may record anonymous aggregated access logs when you interact with the site. For example, we may log the number of requests, type of requests, how the request was processed (cache hit, cache miss, 404, etc.), errors, referrers, and similar aggregated information. These logs do not contain IP addresses or other identifiable information.</p>
+            <p>We may record aggregated statistics when you interact with the site. These logs may include the number of requests, type of requests, errors, referrers, browser information, system information, your country, and other information. These logs do not contain IP addresses or persistent identifiers.</p>
 
-            <details>
-                <summary>Example of logs</summary>
-                <b>turbowarp.org</b>
-                <pre>[2020-11-25T21:39:20.345Z] info: *** Wed, 25 Nov 2020 21:39:20 GMT ***
-[2020-11-25T21:39:20.346Z] info: Serve File      delta: 5482     total: 84547
-[2020-11-25T21:39:20.347Z] info: 404             delta: 447      total: 3864
-[2020-11-25T21:39:20.347Z] info: Error           delta: 0        total: 0</pre>
-                <b>trampoline.turbowarp.org</b>
-                <pre>info: Stats *** Start stats update ***
-info: Stats time: Wed Nov 25 2020 21:39:25 GMT+0000 (Greenwich Mean Time)
-info: Stats *** Requests ***
-info: Stats total requests: 6051
-info: Stats since last check: 460
-info: Stats *** Cache: project-meta ***
-info: Stats fresh: 958  stale: 42  unseen: 172
-info: Stats *** Cache: user-meta ***
-info: Stats fresh: 0  stale: 0  unseen: 0
-info: Stats *** Cache: studio-meta ***
-info: Stats fresh: 0  stale: 0  unseen: 0
-info: Stats *** Cache: studio-pages ***
-info: Stats fresh: 2  stale: 0  unseen: 1
-info: Stats *** Cache: cloud-history ***
-info: Stats fresh: 0  stale: 0  unseen: 0
-info: Stats *** Referers ***
-info: Stats total referers: 4
-info: Stats  #1 "turbowarp.org" 255
-info: Stats  #2 "forkphorus.github.io" 203
-info: Stats  #3 "experiments.turbowarp.org" 1
-info: Stats  #4 "(none)" 1
-info: Stats *** End stats update ***</pre>
-            </details>
+            <p>When interacting with cloud variables, the project ID and your username may be additionally logged. This information is deleted within 14 days.</p>
 
-            <p>When using projects that contain "cloud variables", your username (randomly generated or set by user), project ID, and some technical details may be logged. This information is deleted within 14 days. The data stored in cloud variables is purged within 24 hours of no users being connected to a given project. You can opt out of this data collection by disabling cloud variables.</p>
-
-            <p>By default, your username (randomly generated or set by user) is persisted between visits in your browser's "localStorage". To mitigate the possibility of uniquely identifying users with this feature, all randomly generated usernames are anonymized. However, usernames explicitly set by a user may be logged verbatim.</p>
-
-            <details>
-                <summary>Example of logs</summary>
-                <p><code><i>Username</i></code> and <code><i>Project ID</i></code> represent censored values. 0.0.0.0 is the actual IP that is logged.</p>
-                <pre>[2020-11-25T21:44:26.381Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1001
-[2020-11-25T21:44:27.895Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1006
-[2020-11-25T21:44:52.794Z] info: Pinging 26 clients...
-[2020-11-25T21:45:01.300Z] info: [0.0.0.0] Connection opened
-[2020-11-25T21:45:01.365Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
-[2020-11-25T21:45:22.795Z] info: Pinging 27 clients...
-[2020-11-25T21:45:52.795Z] info: Pinging 27 clients...
-[2020-11-25T21:46:22.547Z] info: Removed room: 454924795
-[2020-11-25T21:46:22.796Z] info: Pinging 27 clients...
-[2020-11-25T21:46:36.417Z] info: [0.0.0.0] Connection opened
-[2020-11-25T21:46:36.718Z] info: Created room: 440208661
-[2020-11-25T21:46:36.719Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
-[2020-11-25T21:46:52.796Z] info: Pinging 28 clients...
-[2020-11-25T21:47:22.795Z] info: Pinging 28 clients...
-[2020-11-25T21:47:47.304Z] info: [0.0.0.0] Connection opened
-[2020-11-25T21:47:47.574Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
-[2020-11-25T21:47:52.796Z] info: Pinging 29 clients...
-[2020-11-25T21:47:59.667Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Connection closed: code 1001
-[2020-11-25T21:48:12.164Z] info: [0.0.0.0] Connection opened
-[2020-11-25T21:48:12.454Z] info: [0.0.0.0 "<i>Username</i>" in <i>Project ID</i>] Joined room
-[2020-11-25T21:48:22.797Z] info: Pinging 29 clients...</pre>
-            </details>
-
-            <p>A self-hosted instance of Plausible Analytics is used to anonymously track site usage. You can opt out of this tracking by enabling your browser's "Do Not Track" setting.</p>
+            <p>Your randomly generated or chosen username is stored in your browser's local storage. To mitigate the potential to track users with this feature, all randomly generated usernames are anonymized in server-side logs. However, usernames explicitly set by a user may be logged.</p>
 
             <h2>Data use</h2>
 
-            <p>The data we collect is used to monitor usage, prevent abuse, optimize processes, etc.</p>
+            <p>The data we collect is used to monitor use, prevent abuse, and improve the site. Collected data is not used to track users or show advertisements.</p>
 
-            <p>Personal information that we collect is never shared or sold to any third party, unless necessary to provide the service (such as hosting providers) or to comply with local laws (like a government subpoena).</p>
+            <p>Any personal information that we collect is never shared or sold to any third party, unless necessary to provide the service or to comply with the laws of the United States. Anonymous aggregated information may be shared.</p>
 
             <h2>Third parties</h2>
 
-            <p>This privacy policy does not apply to third parties. A non-exhaustive list of notable third parties include:</p>
+            <p>A non-exhaustive list of third parties that this document does not apply to:</p>
 
-            <h3>Scratch</h3>
-
-            <p>The site may interact with the Scratch API to download projects. <a href="https://scratch.mit.edu/privacy_policy">Read the Scratch privacy policy</a>.</p>
+            <ul>
+                <li>Scratch, which may contacted to access projects, thumbnails, avatars, and online features used by projects. See the <a href="https://scratch.mit.edu/privacy_policy">Scratch privacy policy</a> for their privacy practices.</li>
+                <li>Projects, especially those that use cloud variables.</li>
+                <li>Links to external websites.</li>
+                <li>Custom extensions.</li>
+            </ul>
 
             <h2>Contact</h2>
 

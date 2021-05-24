@@ -18,18 +18,21 @@
       "name": "Enhance \"Clean up Blocks\"",
       "id": "enableCleanUpPlus",
       "type": "boolean",
+      "reloadRequired": false,
       "default": true
     },
     {
       "name": "Paste blocks at mouse cursor",
       "id": "enablePasteBlocksAtMouse",
       "type": "boolean",
+      "reloadRequired": false,
       "default": true
     },
     {
       "name": "Middle mouse click variables, custom blocks or events to navigate",
       "id": "enableMiddleClickFinder",
       "type": "boolean",
+      "reloadRequired": false,
       "default": true
     }
   ],

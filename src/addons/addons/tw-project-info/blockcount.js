@@ -24,13 +24,14 @@ export default async function ({ addon, console, msg }) {
           reduxEvents: ["scratch-gui/mode/SET_PLAYER"],
         });
         let display = topBar.appendChild(document.createElement("span"));
+        addon.tab.displayNoneWhileDisabled(display);
         display.style.order = 1;
         display.style.padding = "9px";
         display.innerText = msg("blocks", { num: getBlockCount().blockCount });
         let debounce; // debouncing values because of the way 'PROJECT_CHANGED' works
-        vm.on("PROJECT_CHANGED", async () => {
+        vm.on("PROJECT_CHANGED", () => {
           clearTimeout(debounce);
-          debounce = setTimeout(async () => {
+          debounce = setTimeout(() => {
             display.innerText = msg("blocks", { num: getBlockCount().blockCount });
           }, 1000);
         });

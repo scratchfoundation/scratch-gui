@@ -182,7 +182,6 @@
         "data-lists-color": "#FF661A",
         "custom-color": "#5f49d8",
         "Pen-color": "#0FBD8C",
-        "tw-color": "#660000",
         "input-color": "#FFFFFF",
         "text": "white"
       }
@@ -223,6 +222,7 @@
         "data-lists-color": "#993300",
         "custom-color": "#99004d",
         "Pen-color": "#064734",
+        "tw-color": "#660000",
         "input-color": "#202020",
         "text": "white"
       }

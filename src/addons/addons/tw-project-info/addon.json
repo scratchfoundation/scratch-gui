@@ -14,5 +14,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
+  "dynamicEnable": true,
+  "dynamicDisable": true,
   "l10n": true
 }

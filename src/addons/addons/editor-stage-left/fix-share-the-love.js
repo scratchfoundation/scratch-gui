@@ -1,4 +1,4 @@
-export default function ({ addon, global, console }) {
+export default async function ({ addon, global, console }) {
   await addon.tab.traps.getBlockly();
 
   window.dispatchEvent(new Event("resize"));

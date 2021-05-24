@@ -392,7 +392,7 @@ class MenuBar extends React.Component {
         this.props.onArtieLoadingHelp(true);
         sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true,
             this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-            null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
+            null, null, this.props.onArtieLoadingHelp, this.props.onArtieHelpReceived, null);
         if(this.props.artieExercises.secondsHelpOpen > 0) {
             this.props.onArtieResetSecondsHelpOpen();
         }

@@ -429,3 +429,13 @@ test('setStore weird values', () => {
     });
     expect(settingsStore.getAddonEnabled('pause')).toBe(false);
 });
+
+test('resetting an addon through setStore', () => {
+    const store = new SettingStore();
+    expect(store.getAddonSetting('custom-block-shape', 'paddingSize')).toBe(100);
+    store.setAddonSetting('custom-block-shape', 'paddingSize', 50);
+    expect(store.getAddonSetting('custom-block-shape', 'paddingSize')).toBe(50);
+    const store2 = new SettingStore();
+    store.setStore(store2.store);
+    expect(store.getAddonSetting('custom-block-shape', 'paddingSize')).toBe(100);
+});

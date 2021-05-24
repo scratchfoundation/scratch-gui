@@ -320,7 +320,8 @@ class SettingsStore extends EventTargetShim {
                 const manifest = this.getAddonManifest(addonId);
                 const dynamicEnable = !!manifest.dynamicEnable && !oldSettings.enabled && newSettings.enabled;
                 const dynamicDisable = !!manifest.dynamicDisable && oldSettings.enabled && !newSettings.enabled;
-                Object.assign(oldSettings, newSettings);
+                // Clone to avoid pass-by-reference issues
+                this.store[addonId] = JSON.parse(JSON.stringify(newSettings));
                 this.dispatchEvent(new CustomEvent('addon-changed', {
                     detail: {
                         addonId,

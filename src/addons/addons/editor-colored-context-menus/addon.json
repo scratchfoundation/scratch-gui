@@ -8,6 +8,7 @@
   ],
   "dynamicEnable": true,
   "dynamicDisable": true,
+  "versionAdded": "1.0.0",
   "injectAsStyleElt": true,
   "userscripts": [
     {

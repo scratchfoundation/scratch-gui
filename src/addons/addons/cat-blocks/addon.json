@@ -31,8 +31,8 @@
       "type": "boolean"
     }
   ],
-  "tags": ["editor", "codeEditor", "theme"],
   "versionAdded": "1.14.0",
+  "tags": ["editor", "codeEditor", "theme"],
   "enabledByDefault": false,
   "libraries": ["scratch-blocks"],
   "l10n": true

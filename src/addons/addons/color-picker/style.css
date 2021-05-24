@@ -18,7 +18,7 @@
   padding: 0;
   padding-left: 0.6rem;
   padding-right: 0.4rem;
-  margin: 0 0 0 0.5rem;
+  margin-left: 0.5rem;
   outline: none;
   box-sizing: border-box;
   width: 3rem;
@@ -33,6 +33,22 @@
   width: calc(150px - 3rem);
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+[dir="rtl"] .sa-color-picker > .sa-color-picker-color {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .sa-color-picker > .sa-color-picker-text {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 body.sa-hide-eye-dropper-background div[class*="stage_color-picker-background"] {

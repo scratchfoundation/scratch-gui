@@ -26,6 +26,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
+  "versionAdded": "1.8.0",
   "settings": [
     {
       "name": "Toggle on...",

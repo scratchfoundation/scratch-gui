@@ -13,6 +13,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
+  "versionAdded": "1.13.0",
   "enabledByDefault": false,
   "l10n": true
 }

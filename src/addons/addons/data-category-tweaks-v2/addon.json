@@ -13,6 +13,7 @@
       "runAtComplete": false
     }
   ],
+  "versionAdded": "1.7.0",
   "settings": [
     {
       "name": "Separate List Category",

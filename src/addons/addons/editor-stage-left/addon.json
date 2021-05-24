@@ -22,6 +22,7 @@
     }
   ],
   "tags": ["editor", "theme", "recommended"],
+  "versionAdded": "1.1.0",
   "enabledByDefault": false,
   "l10n": true
 }

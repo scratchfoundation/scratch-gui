@@ -1,4 +1,6 @@
 export default async function ({ addon, global, console }) {
+  await addon.tab.traps.getBlockly();
+
   let controlsRect;
   let previousIsHovered = false;
   const speeds = {

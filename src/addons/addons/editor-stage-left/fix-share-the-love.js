@@ -1,4 +1,6 @@
 export default function ({ addon, global, console }) {
+  await addon.tab.traps.getBlockly();
+
   window.dispatchEvent(new Event("resize"));
 
   let interval, injected;

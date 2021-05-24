@@ -39,6 +39,12 @@
   border-color: #333;
 }
 
+[dir="rtl"] .sa-var-manager-searchbox {
+  padding-right: 8px;
+  padding-left: 32px;
+  background-position: 7px center;
+}
+
 .sa-var-manager.freeze .sa-var-manager-value *,
 .sa-var-manager.freeze .sa-var-manager-name * {
   opacity: 0.5;

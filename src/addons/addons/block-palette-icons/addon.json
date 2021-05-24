@@ -12,6 +12,7 @@
     }
   ],
   "l10n": true,
+  "versionAdded": "1.11.0",
   "credits": [
     { "name": "--Explosion--", "link": "https://scratch.mit.edu/users/--Explosion--/" },
     { "name": "RedGuy7", "link": "https://scratch.mit.edu/users/RedGuy7/" }

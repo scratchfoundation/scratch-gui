@@ -9,6 +9,10 @@
   margin-right: auto;
 }
 
+.mediaRecorderPopup [class*="modal_header-item-title"] {
+  margin: 0; /* required because there is no close button */
+}
+
 .mediaRecorderPopupContent {
   background-color: white;
   padding: 1.5rem 2.25rem;
@@ -25,6 +29,11 @@
 
 .mediaRecorderPopup p :last-child {
   margin-left: 1rem;
+}
+
+.mediaRecorderPopup[dir="rtl"] p :last-child {
+  margin-left: 0;
+  margin-right: 1rem;
 }
 
 #recordOptionSecondsInput {

@@ -14,7 +14,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
-  "permissions": ["mediaRecorder"],
+  "versionAdded": "1.6.0",
   "enabledByDefault": false,
   "l10n": true
 }

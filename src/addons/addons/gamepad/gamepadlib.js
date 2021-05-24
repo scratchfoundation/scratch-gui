@@ -330,6 +330,8 @@ class GamepadLib extends EventTarget {
 
     this._editor = null;
 
+    this.connectCallbacks = [];
+
     this.addEventHandlers();
   }
 
@@ -343,7 +345,20 @@ class GamepadLib extends EventTarget {
     window.removeEventListener("gamepaddisconnected", this.handleDisconnect);
   }
 
+  gamepadConnected() {
+    if (this.gamepads.size > 0) {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      this.connectCallbacks.push(resolve);
+    });
+  }
+
   handleConnect(e) {
+    for (const callback of this.connectCallbacks) {
+      callback();
+    }
+    this.connectCallbacks = [];
     const gamepad = e.gamepad;
     const id = getGamepadId(gamepad);
     console.log("connected", gamepad);

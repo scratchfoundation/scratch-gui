@@ -21,6 +21,7 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
+  "versionAdded": "1.11.0",
   "tags": ["editor", "recommended"],
   "enabledByDefault": false,
   "l10n": true

@@ -8,6 +8,7 @@
   ],
   "dynamicEnable": true,
   "dynamicDisable": true,
+  "versionAdded": "1.4.0",
   "userscripts": [
     {
       "url": "userscript.js",

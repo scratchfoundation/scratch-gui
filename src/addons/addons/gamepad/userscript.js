@@ -24,6 +24,25 @@ export default async function ({ addon, global, console, msg }) {
     vm.runtime.once("PROJECT_LOADED", resolve);
   });
 
+  GamepadLib.setConsole(console);
+  const gamepad = new GamepadLib();
+
+  if (addon.settings.get("hide")) {
+    await new Promise((resolve) => {
+      const end = () => {
+        addon.settings.removeEventListener("change", listener);
+        resolve();
+      };
+      const listener = () => {
+        if (!addon.settings.get("hide")) {
+          end();
+        }
+      };
+      gamepad.gamepadConnected().then(end);
+      addon.settings.addEventListener("change", listener);
+    });
+  }
+
   const renderer = vm.runtime.renderer;
   const width = renderer._xRight - renderer._xLeft;
   const height = renderer._yTop - renderer._yBottom;
@@ -31,6 +50,7 @@ export default async function ({ addon, global, console, msg }) {
 
   const spacer = document.createElement("div");
   spacer.className = "sa-gamepad-spacer";
+  addon.tab.displayNoneWhileDisabled(spacer, { display: "flex" });
   const buttonGroup = document.createElement("div");
   buttonGroup.className = addon.tab.scratchClass("stage-header_stage-size-toggle-group");
   const buttonContainer = document.createElement("div");
@@ -53,6 +73,7 @@ export default async function ({ addon, global, console, msg }) {
     const close = () => {
       modalOverlay.remove();
       document.body.removeEventListener("click", handleClickOutside, true);
+      addon.self.removeEventListener("disabled", close);
       editor.hide();
     };
     const handleClickOutside = (e) => {
@@ -61,6 +82,7 @@ export default async function ({ addon, global, console, msg }) {
       }
     };
     document.body.addEventListener("click", handleClickOutside, true);
+    addon.self.addEventListener("disabled", close);
 
     const modalOverlay = document.createElement("div");
     modalOverlay.className = addon.tab.scratchClass("modal_modal-overlay", { others: "sa-gamepad-popup-outer" });
@@ -107,6 +129,9 @@ export default async function ({ addon, global, console, msg }) {
   virtualCursorImage.className = "sa-gamepad-cursor-image";
   virtualCursorImage.src = _twGetAsset("/cursor.png");
   virtualCursorContainer.appendChild(virtualCursorImage);
+  addon.self.addEventListener("disabled", () => {
+    virtualCursorContainer.hidden = true;
+  });
 
   let hideCursorTimeout;
 
@@ -169,6 +194,7 @@ export default async function ({ addon, global, console, msg }) {
     });
   };
   const handleGamepadButtonDown = (e) => {
+    if (addon.self.disabled) return;
     const key = e.detail;
     vm.postIOData("keyboard", {
       key: key,
@@ -176,6 +202,7 @@ export default async function ({ addon, global, console, msg }) {
     });
   };
   const handleGamepadButtonUp = (e) => {
+    if (addon.self.disabled) return;
     const key = e.detail;
     vm.postIOData("keyboard", {
       key: key,
@@ -183,26 +210,27 @@ export default async function ({ addon, global, console, msg }) {
     });
   };
   const handleGamepadMouseDown = () => {
+    if (addon.self.disabled) return;
     virtualCursorSetDown(true);
     postMouseData({
       isDown: true,
     });
   };
   const handleGamepadMouseUp = () => {
+    if (addon.self.disabled) return;
     virtualCursorSetDown(false);
     postMouseData({
       isDown: false,
     });
   };
   const handleGamepadMouseMove = (e) => {
+    if (addon.self.disabled) return;
     virtualX = e.detail.x;
     virtualY = e.detail.y;
     virtualCursorSetPosition(virtualX, virtualY);
     postMouseData({});
   };
 
-  GamepadLib.setConsole(console);
-  const gamepad = new GamepadLib();
   gamepad.virtualCursor.maxX = renderer._xRight;
   gamepad.virtualCursor.minX = renderer._xLeft;
   gamepad.virtualCursor.maxY = renderer._yTop;

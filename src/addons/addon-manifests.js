@@ -20,14 +20,14 @@ import isMobile from './is-mobile';
 
 const clipboardSupported = !!(navigator.clipboard && navigator.clipboard.write);
 const mediaRecorderSupported = !!window.MediaRecorder && MediaRecorder.isTypeSupported('video/webm');
-const isSupported = manifest => {
+const isSupported = (addonId, manifest) => {
     if (!manifest.permissions) {
         return true;
     }
     if (!clipboardSupported && manifest.permissions.includes('clipboardWrite')) {
         return false;
     }
-    if (!mediaRecorderSupported && manifest.permissions.includes('mediaRecorder')) {
+    if (!mediaRecorderSupported && addonId === 'mediarecorder') {
         return false;
     }
     return true;
@@ -48,7 +48,7 @@ for (const addonId of addons) {
         }
         manifest.tags.push('new');
     }
-    if (isSupported(manifest)) {
+    if (isSupported(addonId, manifest)) {
         addonMap[addonId] = manifest;
     } else {
         unsupportedAddons[addonId] = manifest;

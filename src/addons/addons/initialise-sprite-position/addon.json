@@ -40,6 +40,7 @@
       "reloadRequired": false
     }
   ],
+  "versionAdded": "1.13.0",
   "tags": ["editor"],
   "enabledByDefault": false,
   "l10n": true

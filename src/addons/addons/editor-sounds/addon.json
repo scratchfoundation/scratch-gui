@@ -13,7 +13,7 @@
     }
   ],
   "tags": ["editor", "codeEditor"],
-  "versionAdded": "1.14.0",
   "enabledByDefault": false,
+  "versionAdded": "1.14.0",
   "l10n": true
 }

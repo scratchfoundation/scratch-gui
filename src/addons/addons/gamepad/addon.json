@@ -29,8 +29,18 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
-  "tags": ["editor", "beta"],
-  "versionAdded": "1.14.0",
+  "settings": [
+    {
+      "name": "Hide settings button when no controllers detected",
+      "type": "boolean",
+      "default": false,
+      "id": "hide"
+    }
+  ],
+  "tags": ["editor", "recommended"],
   "enabledByDefault": false,
+  "versionAdded": "1.14.0",
+  "dynamicEnable": true,
+  "dynamicDisable": true,
   "l10n": true
 }

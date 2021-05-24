@@ -20,6 +20,7 @@
     }
   ],
   "libraries": ["tinycolor2"],
+  "versionAdded": "1.12.0",
   "enabledByDefault": false,
   "l10n": true
 }

@@ -1,6 +1,8 @@
 import blockToDom from "./blockToDom.js";
 
 export default async function ({ addon, global, console, msg }) {
+  await addon.tab.traps.getBlockly();
+
   const blockSwitches = {};
 
   const noopSwitch = {

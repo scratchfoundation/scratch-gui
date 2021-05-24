@@ -20,7 +20,7 @@
   "dynamicEnable": true,
   "dynamicDisable": true,
   "injectAsStyleElt": true,
-
+  "versionAdded": "1.2.0",
   "userscripts": [
     {
       "url": "theme3.js",

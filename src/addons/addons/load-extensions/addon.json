@@ -33,6 +33,7 @@
       "default": false
     }
   ],
+  "versionAdded": "1.10.0",
   "tags": ["editor", "codeEditor"],
   "l10n": true
 }

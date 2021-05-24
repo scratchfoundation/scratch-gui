@@ -45,6 +45,7 @@
     border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
     height: calc(100% - 3.25rem) !important;
+    overflow-x: hidden;
 
     /*
         For now, the layout cannot support scrollbars in the category menu.

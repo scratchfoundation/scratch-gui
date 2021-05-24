@@ -552,12 +552,14 @@ const Dirty = props => (
     <div className={styles.dirtyOuter}>
         <div className={styles.dirtyInner}>
             {settingsTranslations['tw.addons.settings.dirty']}
-            <button
-                className={classNames(styles.button, styles.dirtyButton)}
-                onClick={props.onReloadNow}
-            >
-                {settingsTranslations['tw.addons.settings.dirtyButton']}
-            </button>
+            {props.onReloadNow && (
+                <button
+                    className={classNames(styles.button, styles.dirtyButton)}
+                    onClick={props.onReloadNow}
+                >
+                    {settingsTranslations['tw.addons.settings.dirtyButton']}
+                </button>
+            )}
         </div>
     </div>
 );
@@ -723,7 +725,9 @@ class AddonSettingsComponent extends React.Component {
         document.body.removeEventListener('keydown', this.handleKeyDown);
     }
     handleSettingStoreChanged (e) {
-        const {addonId, settingId, value, reloadRequired} = e.detail;
+        const {addonId, settingId, value} = e.detail;
+        // If channels are unavailable, every change requires reload.
+        const reloadRequired = e.detail.reloadRequired || !Channels.changeChannel;
         this.setState(state => {
             const newState = {
                 [addonId]: {
@@ -864,7 +868,7 @@ class AddonSettingsComponent extends React.Component {
                     </a>
                     {this.state.dirty && (
                         <Dirty
-                            onReloadNow={this.handleReloadNow}
+                            onReloadNow={Channels.reloadChannel ? this.handleReloadNow : null}
                         />
                     )}
                 </div>

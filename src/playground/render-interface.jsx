@@ -74,14 +74,18 @@ const WrappedMenuBar = compose(
     SBFileUploaderHOC
 )(MenuBar);
 
-AddonChannels.reloadChannel.addEventListener('message', () => {
-    location.reload();
-});
+if (AddonChannels.reloadChannel) {
+    AddonChannels.reloadChannel.addEventListener('message', () => {
+        location.reload();
+    });
+}
 
-AddonChannels.changeChannel.addEventListener('message', e => {
-    const store = e.data.store;
-    SettingsStore.setStore(store);
-});
+if (AddonChannels.changeChannel) {
+    AddonChannels.changeChannel.addEventListener('message', e => {
+        const store = e.data.store;
+        SettingsStore.setStore(store);
+    });
+}
 
 import(/* webpackChunkName: "addons" */ '../addons/entry');
 

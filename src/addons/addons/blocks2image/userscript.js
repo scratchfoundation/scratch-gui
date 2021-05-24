@@ -27,7 +27,7 @@ export default async function ({ addon, global, console, msg }) {
                 const wrapperItem = document.createElement("div");
                 wrapperItem.id = `blocks2imgCommand${index + 1}`;
                 wrapperItem.classList.add("goog-menuitem", "blocks2img");
-                if (document.querySelector(".gui").dir === "rtl") wrapperItem.classList.add("goog-menuitem-rtl");
+                if (addon.tab.direction === "rtl") wrapperItem.classList.add("goog-menuitem-rtl");
                 wrapperItem.onmouseenter = () => wrapperItem.classList.add("goog-menuitem-highlight");
                 wrapperItem.onmouseleave = () => wrapperItem.classList.remove("goog-menuitem-highlight");
                 wrapperItem.style.userSelect = "none";

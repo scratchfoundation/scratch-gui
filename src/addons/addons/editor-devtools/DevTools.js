@@ -1432,9 +1432,7 @@ export default class DevTools {
                 ? `
                   <div
                     id="s3devCleanUp"
-                    class="goog-menuitem s3dev-mi ${
-                      document.querySelector(".gui").dir === "rtl" ? "goog-menuitem-rtl" : ""
-                    }"
+                    class="goog-menuitem s3dev-mi ${this.addon.tab.direction === "rtl" ? "goog-menuitem-rtl" : ""}"
                     role="menuitem"
                     style="user-select: none; border-top: 1px solid hsla(0, 0%, 0%, 0.15);"
                   >
@@ -1446,9 +1444,7 @@ export default class DevTools {
               html += `
                   <div
                     id="s3devPaste" 
-                    class="goog-menuitem s3dev-mi ${
-                      document.querySelector(".gui").dir === "rtl" ? "goog-menuitem-rtl" : ""
-                    }"
+                    class="goog-menuitem s3dev-mi ${this.addon.tab.direction === "rtl" ? "goog-menuitem-rtl" : ""}"
                     role="menuitem"
                     style="user-select: none;"
                   >
@@ -1690,7 +1686,7 @@ export default class DevTools {
     document.body.insertAdjacentHTML(
       "beforeend",
       `
-            <div id="s3devFloatingBar" dir="${document.querySelector(".gui").dir}">
+            <div id="s3devFloatingBar" dir="${this.addon.tab.direction}">
                 <label class='title s3devLabel' id=s3devInsertLabel>
                     <span style="display:none;">${this.m("insert")} </span>
                     <span id=s3devInsert class="s3devWrap">

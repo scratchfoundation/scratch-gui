@@ -288,6 +288,10 @@ class Tab extends EventTargetShim {
         const varName = getDisplayNoneWhileDisabledVariable(this._id);
         el.style.display = `var(${varName}${display ? `,${display}` : ''})`;
     }
+
+    get direction () {
+        return tabReduxInstance.state.locales.isRtl ? 'rtl' : 'ltr';
+    }
 }
 
 class Settings extends EventTargetShim {

@@ -23,7 +23,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
 
   await untilInEditor();
 
-  const guiDirection = (await addon.tab.waitForElement(".gui")).dir;
+  const guiDirection = addon.tab.direction;
   const helpHTML = `
 <div id="s3devHelpPop" class="${addon.tab.scratchClass("modal_modal-overlay")}" dir="${guiDirection}">
 <div class="${addon.tab.scratchClass("modal_modal-content")}">

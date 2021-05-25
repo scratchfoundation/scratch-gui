@@ -363,5 +363,14 @@
             "code",
             "translation"
         ]
+    },
+    {
+        "login": "DevCascade",
+        "name": "DevCascade",
+        "avatar_url": "https://avatars.githubusercontent.com/u/80895875?v=4",
+        "profile": "https://github.com/DevCascade",
+        "contributions": [
+            "translation"
+        ]
     }
 ]

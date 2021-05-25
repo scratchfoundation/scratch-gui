@@ -1,0 +1,50 @@
+{
+  "name": "Block transparency",
+  "description": "Adjust the transparency for blocks in the editor, with separate options for orphaned blocks (those without a hat block at the top) and blocks that are being dragged.",
+  "tags": ["editor", "codeEditor"],
+  "versionAdded": "1.15.0",
+  "dynamicDisable": true,
+  "dynamicEnable": true,
+  "credits": [
+    {
+      "name": "ErrorGamer2000",
+      "link": "https://scratch.mit.edu/users/ErrorGamer2000/"
+    },
+    {
+      "name": "GarboMuffin"
+    }
+  ],
+  "settings": [
+    {
+      "name": "Block transparency (%)",
+      "id": "block",
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    {
+      "name": "Orphaned transparency (%)",
+      "id": "orphan",
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 25
+    },
+    {
+      "name": "Dragged transparency (%)",
+      "id": "dragged",
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 25
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "userstyle.css",
+      "matches": ["projects"]
+    }
+  ],
+  "l10n": true
+}

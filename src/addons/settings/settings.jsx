@@ -354,11 +354,6 @@ const Notice = ({
     notice
 }) => {
     const noticeId = notice.id;
-    // All themes require reload, so ignore these alerts from upstream.
-    // Users are already informed of this in other places of the UI.
-    if (noticeId === 'refresheditor') {
-        return null;
-    }
     const text = addonTranslations[`${addonId}/@info-${noticeId}`] || notice.text;
     return (
         <div

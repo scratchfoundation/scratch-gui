@@ -41,6 +41,18 @@
     background-color: $ui-tertiary;
 }
 
+.saveList{
+    margin:4px, 4px;
+    padding:4px;
+    height: 275px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10;
+}
+
 .error {
     color: $error-light;
     text-align: center;

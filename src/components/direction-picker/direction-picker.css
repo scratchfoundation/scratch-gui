@@ -1,5 +1,19 @@
 @import "../../css/colors.css";
 
+/* Copied from scratch-paint color-picker.css. */
+:global(.Popover-body) {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
+}
+:global(.Popover-tipShape) {
+    fill: white;
+    stroke: #ddd;
+}
+
 .button-row {
     display: flex;
     flex-direction: row;

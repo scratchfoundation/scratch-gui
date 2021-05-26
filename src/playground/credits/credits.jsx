@@ -31,7 +31,7 @@ const User = ({image, text, href}) => (
 User.propTypes = {
     image: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired
+    href: PropTypes.string
 };
 
 const UserList = ({users}) => (
@@ -44,6 +44,9 @@ const UserList = ({users}) => (
         ))}
     </div>
 );
+UserList.propTypes = {
+    users: PropTypes.arrayOf(PropTypes.object)
+};
 
 const Credits = () => (
     <main className={styles.main}>
@@ -53,9 +56,18 @@ const Credits = () => (
             </h1>
         </header>
         <section>
+            <p>
+                Thank you to everyone that makes this project possible.
+            </p>
+            <p>
+                The TurboWarp project does not accept donations. Instead, donate to <a href="https://fosshost.org/donate">Fosshost</a> or <a href="https:/scratch.mit.edu/donate">Scratch</a> (or both!). Thank you.
+            </p>
+        </section>
+        <section>
             <h2>{'Fosshost'}</h2>
             <p>
                 <a href="https://fosshost.org/">Fosshost</a> provides free high quality hosting services to open source projects, including TurboWarp.
+                {' '}<a href="https://fosshost.org/donate">Donate to them</a> to support their work.
             </p>
             <a href="https://fosshost.org/">
                 <img
@@ -69,6 +81,11 @@ const Credits = () => (
             <h2>{'Scratch'}</h2>
             <p>TurboWarp is based on the work of the <a href="https://scratch.mit.edu/credits">Scratch contributors</a>. TurboWarp is not affiliated with Scratch.</p>
         </section>
+        {/* It's really tempting to uncomment this */}
+        {/* <section>
+            <h2>{'Core Contributors'}</h2>
+            <UserList users={UserData.coreContributors} />
+        </section> */}
         <section>
             <h2>{'Addons'}</h2>
             <UserList users={UserData.addonDevelopers} />
@@ -78,15 +95,13 @@ const Credits = () => (
             <UserList users={UserData.translators} />
         </section>
         <section>
-            <p>Contributors are listed in no particular order.</p>
-            <p>
-                The TurboWarp project currently does not accept donations.
-                Consider sending your money to Scratch or Fosshost instead.
-            </p>
+            <p>Individual contributors are listed in no particular order.</p>
         </section>
     </main>
 );
 
 document.body.setAttribute('theme', getInitialDarkMode() ? 'dark' : 'light');
 
-ReactDOM.render(<Credits />, appTarget);
+ReactDOM.render((
+    <Credits />
+), appTarget);

@@ -22,6 +22,13 @@ const fromAddons = ({login, avatar_url: avatarUrl}) => ({
     // No links to GitHub profiles for now :(
 });
 
+const coreContributors = [
+    {
+        userId: '17340565',
+        username: 'GarboMuffin'
+    }
+].map(fromHardcoded);
+
 const translators = [
     // {
     //     userId: '4648559',
@@ -153,6 +160,7 @@ const addonDevelopers = [
 const addonTranslators = addonTranslatorsJSON.map(fromAddons);
 
 export default {
+    coreContributors,
     translators: shuffle([...translators, ...addonTranslators]),
     addonDevelopers: shuffle(addonDevelopers)
 };

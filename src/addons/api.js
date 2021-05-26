@@ -290,7 +290,7 @@ class Tab extends EventTargetShim {
     }
 
     get direction () {
-        return tabReduxInstance.state.locales.isRtl ? 'rtl' : 'ltr';
+        return this.redux.state.locales.isRtl ? 'rtl' : 'ltr';
     }
 }
 

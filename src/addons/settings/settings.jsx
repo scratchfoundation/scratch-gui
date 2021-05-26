@@ -695,7 +695,6 @@ class AddonSettingsComponent extends React.Component {
             dirty: false,
             search: ''
         };
-        this.konamiProgress = 0;
         for (const [id, manifest] of Object.entries(this.props.addons)) {
             const enabled = SettingsStore.getAddonEnabled(id);
             const addonState = {

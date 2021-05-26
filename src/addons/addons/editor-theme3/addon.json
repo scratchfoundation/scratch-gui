@@ -1,13 +1,6 @@
 {
   "name": "Customizable block colors",
   "description": "Edit block colors for each category in the editor.",
-  "info": [
-    {
-      "type": "notice",
-      "text": "Refresh the editor after enabling/disabling this theme.",
-      "id": "refresheditor"
-    }
-  ],
   "credits": [
     {
       "name": "NitroCipher/ZenithRogue"

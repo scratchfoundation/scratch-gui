@@ -21,6 +21,7 @@
       "type": "integer",
       "min": 0,
       "max": 100,
+      "reloadRequired": false,
       "default": 0
     },
     {
@@ -29,6 +30,7 @@
       "type": "integer",
       "min": 0,
       "max": 100,
+      "reloadRequired": false,
       "default": 25
     },
     {
@@ -37,6 +39,7 @@
       "type": "integer",
       "min": 0,
       "max": 100,
+      "reloadRequired": false,
       "default": 25
     }
   ],

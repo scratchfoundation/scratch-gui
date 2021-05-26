@@ -1,6 +1,6 @@
 {
   "name": "Interface customization",
-  "description": "Customize some parts of the interface.",
+  "description": "Customize some other parts of the interface.",
   "userscripts": [
     {
       "url": "remove-backpack.js",
@@ -43,7 +43,7 @@
       "default": false
     }
   ],
-  "tags": ["beta"],
+  "tags": ["theme"],
   "enabledByDefault": false,
   "l10n": true
 }

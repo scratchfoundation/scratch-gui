@@ -1,6 +1,7 @@
 const available = () => !!window.showSaveFilePicker;
 
-const showSaveFilePicker = () => window.showSaveFilePicker({
+const showSaveFilePicker = fileName => window.showSaveFilePicker({
+    suggestedName: fileName,
     types: [
         {
             description: 'Scratch 3 Project',

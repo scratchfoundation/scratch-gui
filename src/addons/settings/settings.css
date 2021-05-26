@@ -391,12 +391,7 @@ a:active, a:focus {
     margin: 10px 0;
     display: flex;
     align-items: center;
-}
-.notice[type="notice"] {
     background: rgba(154, 212, 207, 0.7);
-}
-.notice[type="warning"] {
-    background: rgba(255, 235, 59, 0.7);
 }
 .notice-icon {
     height: 16px;

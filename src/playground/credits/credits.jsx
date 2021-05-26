@@ -60,7 +60,7 @@ const Credits = () => (
                 Thank you to everyone that makes this project possible.
             </p>
             <p>
-                The TurboWarp project does not accept donations. Instead, donate to <a href="https://fosshost.org/donate">Fosshost</a> or <a href="https:/scratch.mit.edu/donate">Scratch</a> (or both!). Thank you.
+                The TurboWarp project does not accept donations. Instead, donate to <a href="https://fosshost.org/donate">Fosshost</a> or <a href="https://scratch.mit.edu/donate">Scratch</a> (or both!). Thank you.
             </p>
         </section>
         <section>

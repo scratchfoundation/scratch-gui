@@ -151,7 +151,7 @@ const tabReduxInstance = new Redux();
 const language = tabReduxInstance.state.locales.locale.split('-')[0];
 const translations = getAddonTranslations(language);
 
-const getDisplayNoneWhileDisabledVariable = id => `--${kebabCaseToCamelCase(id)}_displayNoneWhileDisabledValue`;
+const getDisplayNoneWhileDisabledClass = id => `addons-display-none-${id}`;
 
 class Tab extends EventTargetShim {
     constructor (id) {
@@ -284,9 +284,8 @@ class Tab extends EventTargetShim {
         return getEditorMode();
     }
 
-    displayNoneWhileDisabled (el, {display = ''} = {}) {
-        const varName = getDisplayNoneWhileDisabledVariable(this._id);
-        el.style.display = `var(${varName}${display ? `,${display}` : ''})`;
+    displayNoneWhileDisabled (el) {
+        el.classList.add(getDisplayNoneWhileDisabledClass(this._id));
     }
 
     get direction () {
@@ -330,6 +329,7 @@ class AddonRunner {
         this.manifest = manifest;
         this.messageCache = {};
         this.stylesheets = [];
+        this.disabledStylesheet = null;
 
         this.msg.locale = language;
         this.publicAPI = {
@@ -399,15 +399,20 @@ class AddonRunner {
     dynamicEnable () {
         this.publicAPI.addon.self.dispatchEvent(new CustomEvent('reenabled'));
         this.publicAPI.addon.self.disabled = false;
-        document.documentElement.style.removeProperty(getDisplayNoneWhileDisabledVariable(this.id));
         this.appendStylesheets();
+        if (this.disabledStylesheet) {
+            this.disabledStylesheet.remove();
+            this.disabledStylesheet = null;
+        }
     }
 
     dynamicDisable () {
         this.publicAPI.addon.self.dispatchEvent(new CustomEvent('disabled'));
         this.publicAPI.addon.self.disabled = true;
-        document.documentElement.style.setProperty(getDisplayNoneWhileDisabledVariable(this.id), 'none');
         this.removeStylesheets();
+        const disabledCSS = `.${getDisplayNoneWhileDisabledClass(this.id)}{display:none !important;}`;
+        this.disabledStylesheet = createStylesheet(disabledCSS);
+        document.body.insertBefore(this.disabledStylesheet, document.body.firstChild);
     }
 
     removeStylesheets () {

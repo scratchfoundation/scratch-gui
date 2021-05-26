@@ -1,4 +1,5 @@
 import SettingStore from '../../../src/addons/settings-store';
+import upstreamMeta from '../../../src/addons/upstream-meta.json';
 
 class LocalStorageShim {
     constructor () {
@@ -438,4 +439,21 @@ test('resetting an addon through setStore', () => {
     const store2 = new SettingStore();
     store.setStore(store2.store);
     expect(store.getAddonSetting('custom-block-shape', 'paddingSize')).toBe(100);
+});
+
+test('setStoreWithVersionCheck', () => {
+    const store = new SettingStore();
+    store.setStore = jest.fn();
+    store.setStoreWithVersionCheck({
+        store: '1234',
+        version: upstreamMeta.commit
+    });
+    expect(store.setStore).toHaveBeenCalledTimes(1);
+    expect(store.setStore).toHaveBeenCalledWith('1234');
+    store.setStore = jest.fn();
+    store.setStoreWithVersionCheck({
+        store: '1234',
+        version: 'something invalid'
+    });
+    expect(store.setStore).toHaveBeenCalledTimes(0);
 });

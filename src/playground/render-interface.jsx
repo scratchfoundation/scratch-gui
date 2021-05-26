@@ -82,8 +82,7 @@ if (AddonChannels.reloadChannel) {
 
 if (AddonChannels.changeChannel) {
     AddonChannels.changeChannel.addEventListener('message', e => {
-        const store = e.data.store;
-        SettingsStore.setStore(store);
+        SettingsStore.setStoreWithVersionCheck(e.data);
     });
 }
 

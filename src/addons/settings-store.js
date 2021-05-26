@@ -308,6 +308,13 @@ class SettingsStore extends EventTargetShim {
         }
     }
 
+    setStoreWithVersionCheck ({version, store}) {
+        if (version !== upstreamMeta.commit) {
+            return;
+        }
+        this.setStore(store);
+    }
+
     setStore (newStore) {
         const oldStore = this.store;
         for (const addonId of Object.keys(oldStore)) {

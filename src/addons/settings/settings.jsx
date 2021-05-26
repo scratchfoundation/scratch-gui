@@ -66,6 +66,7 @@ const postThrottledSettingsChange = store => {
     }
     _throttleTimeout = setTimeout(() => {
         Channels.changeChannel.postMessage({
+            version: upstreamMeta.commit,
             store
         });
     }, 100);

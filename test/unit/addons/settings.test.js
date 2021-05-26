@@ -200,12 +200,12 @@ test('reset all addons', () => {
     store.addEventListener('setting-changed', fn);
     store.resetAllAddons();
     expect(fn).toHaveBeenCalledTimes(2);
-    expect(fn.mock.calls[0][0].detail.addonId).toBe('onion-skinning');
-    expect(fn.mock.calls[0][0].detail.settingId).toBe('default');
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[0][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[0][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[0][0].detail.value).toBe(false);
-    expect(fn.mock.calls[1][0].detail.addonId).toBe('cat-blocks');
-    expect(fn.mock.calls[1][0].detail.settingId).toBe('enabled');
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('onion-skinning');
+    expect(fn.mock.calls[1][0].detail.settingId).toBe('default');
     expect(fn.mock.calls[1][0].detail.reloadRequired).toBe(true);
     expect(fn.mock.calls[1][0].detail.value).toBe(false);
 });

@@ -86,7 +86,7 @@ const sortAddons = () => {
     return result;
 };
 
-const AddonCredits = ({credits}) => (
+const CreditList = ({credits}) => (
     credits.map((author, index) => {
         const isLast = index === credits.length - 1;
         return (
@@ -112,7 +112,7 @@ const AddonCredits = ({credits}) => (
         );
     })
 );
-AddonCredits.propTypes = {
+CreditList.propTypes = {
     credits: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         link: PropTypes.string
@@ -481,6 +481,14 @@ const Addon = ({
                 <div className={styles.description}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
                 </div>
+                {manifest.credits && (
+                    <div className={styles.creditContainer}>
+                        <span className={styles.creditTitle}>
+                            {settingsTranslations['tw.addons.settings.credits']}
+                        </span>
+                        <CreditList credits={manifest.credits} />
+                    </div>
+                )}
                 {manifest.info && (
                     <div className={styles.noticeContainer}>
                         {manifest.info.map(info => (
@@ -490,14 +498,6 @@ const Addon = ({
                                 notice={info}
                             />
                         ))}
-                    </div>
-                )}
-                {manifest.credits && (
-                    <div className={styles.creditContainer}>
-                        <span className={styles.creditTitle}>
-                            {settingsTranslations['tw.addons.settings.credits']}
-                        </span>
-                        <AddonCredits credits={manifest.credits} />
                     </div>
                 )}
                 {manifest.settings && (

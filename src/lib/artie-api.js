@@ -12,6 +12,7 @@ import xhr from 'xhr';
 const _inputElementsValues = ['text', 'math_number', 'math_positive_number', 'math_whole_number'];
 const _pedagogicalInterventionWebServiceUrl = 'http://pre-prod.artie.rocks:8000';
 const _pedagogialWebUrl = 'http://pre-prod.artie.rocks:8000';
+const _apiKey = 'k6siZlG9OZGyMorpmSUeYo87ebfsN7s0';
 
 
 const _createArtieBlockFromTempBlock = (tempBlock) => ({id: tempBlock.id, elementName: tempBlock.elementName, elementFamily: tempBlock.elementFamily, next: tempBlock.next, inputs: tempBlock.inputs, nested: tempBlock.nested, previous: tempBlock.previous, parent: tempBlock.parent});
@@ -164,6 +165,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
 
     xhr.open("POST", `${_pedagogicalInterventionWebServiceUrl}/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareData`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send(params);
 });
 
@@ -196,6 +198,7 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary, callba
 
     xhr.open("POST", `${_pedagogicalInterventionWebServiceUrl}/api/v1/pedagogicalsoftware/sendPedagogicalSoftwareSolution`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send(params);
 });
 
@@ -218,6 +221,7 @@ const loginArtie = (userName, password, callback, errorCallback) => new Promise(
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/users/loginWithRole?userName=${userName}&password=${password}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 
 });
@@ -235,6 +239,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/getAllActiveString?userName=${userName}&password=${password}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 
 });
@@ -252,6 +257,7 @@ const getArtieExercises = (userName, password, isEvaluation, callback) => new Pr
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/exercises/getAllIsEvaluation?userName=${userName}&password=${password}&isEvaluation=${isEvaluation}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 
 });
@@ -269,6 +275,7 @@ const getAllArtieExercises = (userName, password, callback) => new Promise(() =>
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/exercises/getAll?userName=${userName}&password=${password}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 
 });
@@ -285,6 +292,7 @@ const updateStudentCompetence = (studentId, competence, callback) => new Promise
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentCompetence?studentId=${studentId}&competence=${competence}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 
 });
@@ -302,6 +310,7 @@ const updateStudentData = (studentId, gender, motherTongue, age, callback) => ne
     });
 
     xhr.open("GET", `${_pedagogialWebUrl}/api/v1/students/updateStudentData?studentId=${studentId}&gender=${gender}&motherTongue=${motherTongue}&age=${age}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
     xhr.send();
 });
 

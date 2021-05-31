@@ -211,6 +211,23 @@
         "tw.addons.settings.title": "Setările Addon-urilor",
         "tw.addons.settings.unsupported": "Unele extensii nu sunt disponibile în acest browser:"
     },
+    "ru": {
+        "tw.addons.settings.credits": "Благодарности:",
+        "tw.addons.settings.dirty": "Перезагрузить TurboWarp, чтобы применить настройки.",
+        "tw.addons.settings.dirtyButton": "Перезагрузить сейчас",
+        "tw.addons.settings.export": "Экспорт настроек",
+        "tw.addons.settings.import": "Импорт настроек",
+        "tw.addons.settings.noResults": "Нет результатов.",
+        "tw.addons.settings.reset": "Сбросить",
+        "tw.addons.settings.resetAll": "Сбросить всё",
+        "tw.addons.settings.search": "Поиск",
+        "tw.addons.settings.tags.beta": "Бета",
+        "tw.addons.settings.tags.new": "Новое!",
+        "tw.addons.settings.tags.recommended": "Рекомендованно",
+        "tw.addons.settings.tags.theme": "Тема",
+        "tw.addons.settings.title": "Настройки дополнений.",
+        "tw.addons.settings.unsupported": "Некоторые дополнения не доступны в этом браузере:"
+    },
     "sl": {
         "tw.addons.settings.addonFeedback": "Povratne informacije o dodatkih",
         "tw.addons.settings.confirmResetAll": "Ste prepričani, da želite ponastaviti vse nastavitve dodatkov?",

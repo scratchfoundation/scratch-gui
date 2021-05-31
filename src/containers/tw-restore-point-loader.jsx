@@ -8,6 +8,7 @@ import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
 import RestorePointAPI from '../lib/tw-restore-point-api';
+import analytics from '../lib/analytics';
 
 const messages = defineMessages({
     error: {
@@ -30,9 +31,11 @@ class RestorePointLoader extends React.Component {
         RestorePointAPI.load()
             .then(arrayBuffer => this.props.vm.loadProject(arrayBuffer))
             .then(() => {
+                analytics.twEvent('Load restore point');
                 this.props.onLoadingFinished(this.props.loadingState, true);
             })
             .catch(error => {
+                analytics.twEvent('Load restore point error');
                 this.props.onLoadingFinished(this.props.loadingState, false);
                 // eslint-disable-next-line no-alert
                 alert(this.props.intl.formatMessage(messages.error, {

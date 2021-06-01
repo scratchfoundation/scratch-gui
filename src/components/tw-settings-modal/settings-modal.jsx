@@ -323,7 +323,7 @@ const CustomStageSize = ({
                 onSubmit={onStageWidthChange}
                 type="number"
                 min="0"
-                max="4096"
+                max="1024"
                 step="1"
             />
             <span>{'×'}</span>
@@ -332,9 +332,21 @@ const CustomStageSize = ({
                 onSubmit={onStageHeightChange}
                 type="number"
                 min="0"
-                max="4096"
+                max="1024"
                 step="1"
             />
+        </div>
+        <div>
+            {(stageWidth > 1024 || stageHeight > 1024) && (
+                <div className={styles.largeStageWarning}>
+                    <FormattedMessage
+                        // eslint-disable-next-line max-len
+                        defaultMessage="Using large stage sizes is not recommended! Instead, use a lower size with the same aspect ratio and let fullscreen mode upscale it to match the user's display."
+                        description="Warning about using stages that are too large in settings modal"
+                        id="tw.settingsModal.largeStageWarning"
+                    />
+                </div>
+            )}
         </div>
     </Setting>
 );

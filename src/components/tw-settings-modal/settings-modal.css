@@ -77,15 +77,6 @@
 .custom-stage-size > * {
     margin-right: 0.5rem;
 }
-.large-stage-warning {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background: rgb(233, 233, 53);
-}
-[theme="dark"] .large-stage-warning {
-    background: rgb(114, 102, 0);
-}
 
 .info {
     margin-bottom: 0.25rem;
@@ -118,4 +109,14 @@
 }
 .button:active, .button:focus-within {
     box-shadow: 0 0 0 3px $motion-transparent;
+}
+
+.warning {
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    background: rgb(233, 233, 53);
+}
+[theme="dark"] .warning {
+    background: rgb(114, 102, 0);
 }

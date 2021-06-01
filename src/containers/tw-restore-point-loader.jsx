@@ -8,7 +8,6 @@ import {closeFileMenu} from '../reducers/menus';
 import {closeLoadingProject, openLoadingProject} from '../reducers/modals';
 import {onLoadedProject, requestProjectUpload} from '../reducers/project-state';
 import RestorePointAPI from '../lib/tw-restore-point-api';
-import analytics from '../lib/analytics';
 
 const messages = defineMessages({
     error: {

@@ -8,7 +8,8 @@ const enabled =
     // Domain must match expected
     location.hostname === PLAUSIBLE_DOMAIN &&
     // Respect Do Not Track
-    navigator.doNotTrack !== '1';
+    navigator.doNotTrack !== '1' &&
+    typeof DISABLE_ANALYTICS === 'undefined';
 
 let referrer = null;
 if (enabled && document.referrer) {

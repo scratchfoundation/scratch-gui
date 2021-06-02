@@ -1,0 +1,21 @@
+{
+  "short_name": "TurboWarp",
+  "name": "TurboWarp",
+  "description": "Mod of Scratch 3 with a compiler, dark mode, and more features.",
+  "icons": [
+    {
+      "src": "images/192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "editor",
+  "background_color": "#333333",
+  "display": "standalone",
+  "theme_color": "#333333"
+}

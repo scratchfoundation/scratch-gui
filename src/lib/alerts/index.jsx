@@ -240,35 +240,6 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.SUCCESS
-    },
-    {
-        alertId: 'twExtendedExtensionsWarning',
-        alertType: AlertTypes.STANDARD,
-        clearList: ['twExtendedExtensionsWarning'],
-        content: (
-            <FormattedMessage
-                defaultMessage="This project uses blocks exclusive to TurboWarp. It will not work in Scratch and should not be uploaded to the Scratch website. {learnMoreLink}"
-                description="Warning that this project uses blocks that will only work in TurboWarp"
-                id="tw.alerts.extendedExtensionsWarning"
-                values={{
-                    learnMoreLink: (
-                        <a
-                            href="https://github.com/TurboWarp/scratch-gui/wiki/TurboWarp-blocks"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                            <FormattedMessage
-                                defaultMessage="Learn more."
-                                description="Link text to TurboWarp-exclusive blocks FAQ"
-                                id="tw.alerts.extendedExtensionsWarning.learnMoreLink"
-                            />
-                        </a>
-                    )
-                }}
-            />
-        ),
-        closeButton: true,
-        level: AlertLevels.WARN
     }
 ];
 

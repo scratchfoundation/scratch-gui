@@ -12,7 +12,6 @@ const SET_DESCRIPTION = 'tw/SET_DESCRIPTION';
 const ADD_COMPILE_ERROR = 'tw/ADD_COMPILE_ERROR';
 const CLEAR_COMPILE_ERRORS = 'tw/CLEAR_COMPILE_ERRORS';
 const SET_FILE_HANDLE = 'tw/SET_FILE_HANDLE';
-const SET_SHOWED_EXTENDED_EXTENSIONS_WARNING = 'tw/SET_SHOWED_EXTENDED_EXTENSIONS_WARNING';
 const SET_USERNAME_INVALID = 'tw/SET_USERNAME_INVALID';
 const SET_HAS_CLOUD_VARIABLES = 'tw/SET_HAS_CLOUD_VARIABLES';
 
@@ -43,7 +42,6 @@ export const initialState = {
     },
     compileErrors: [],
     fileHandle: null,
-    showedExtendedExtensionsWarning: false,
     usernameInvalid: false,
     hasCloudVariables: false
 };
@@ -109,10 +107,6 @@ const reducer = function (state, action) {
     case SET_FILE_HANDLE:
         return Object.assign({}, state, {
             fileHandle: action.fileHandle
-        });
-    case SET_SHOWED_EXTENDED_EXTENSIONS_WARNING:
-        return Object.assign({}, state, {
-            showedExtendedExtensionsWarning: action.showedExtendedExtensionsWarning
         });
     case SET_USERNAME_INVALID:
         return Object.assign({}, state, {
@@ -224,13 +218,6 @@ const setFileHandle = function (fileHandle) {
     };
 };
 
-const setShowedExtendedExtensionsWarning = function (showedExtendedExtensionsWarning) {
-    return {
-        type: SET_SHOWED_EXTENDED_EXTENSIONS_WARNING,
-        showedExtendedExtensionsWarning: showedExtendedExtensionsWarning
-    };
-};
-
 const setUsernameInvalid = function (usernameInvalid) {
     return {
         type: SET_USERNAME_INVALID,
@@ -262,7 +249,6 @@ export {
     addCompileError,
     clearCompileErrors,
     setFileHandle,
-    setShowedExtendedExtensionsWarning,
     setUsernameInvalid,
     setHasCloudVariables
 };

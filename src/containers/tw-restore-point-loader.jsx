@@ -14,6 +14,12 @@ const messages = defineMessages({
         defaultMessage: 'Could not load restore point.\n\nDebug: {error}',
         description: 'Alert displayed when restore point loading failed',
         id: 'tw.restorePoint.loadFail'
+    },
+    confirm: {
+        // eslint-disable-next-line max-len
+        defaultMessage: 'TurboWarp records one automatic restore point in case something went wrong and you forgot to save. Try to load it?',
+        description: 'Confirmation to load restore point',
+        id: 'tw.restorePoint.confirm'
     }
 });
 
@@ -25,6 +31,10 @@ class RestorePointLoader extends React.Component {
         ]);
     }
     loadRestorePoint () {
+        // eslint-disable-next-line no-alert
+        if (!confirm(this.props.intl.formatMessage(messages.confirm))) {
+            return;
+        }
         this.props.onLoadingStarted();
         this.props.requestProjectUpload(this.props.loadingState);
         RestorePointAPI.load()

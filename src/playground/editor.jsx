@@ -22,6 +22,7 @@ import {setAppElement} from 'react-modal';
 
 import Interface from './render-interface.jsx';
 import appTarget from './app-target';
+import './load-service-worker';
 
 setAppElement(appTarget);
 ReactDOM.render(<Interface />, appTarget);

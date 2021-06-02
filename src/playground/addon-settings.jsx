@@ -19,6 +19,7 @@ import ReactDOM from 'react-dom';
 import downloadBlob from '../lib/download-blob.js';
 import Settings from '../addons/settings/settings.jsx';
 import appTarget from './app-target';
+import './load-service-worker';
 
 const onExportSettings = settings => {
     const blob = new Blob([JSON.stringify(settings)]);

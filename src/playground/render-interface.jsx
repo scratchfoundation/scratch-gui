@@ -24,7 +24,6 @@ import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
-import TWEditorWarningHOC from '../lib/tw-editor-warning-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import TWThemeHOC from '../lib/tw-theme-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
@@ -320,7 +319,6 @@ const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
     TWProjectMetaFetcherHOC,
-    TWEditorWarningHOC,
     TWStateManagerHOC,
     TWThemeHOC
 )(ConnectedInterface);

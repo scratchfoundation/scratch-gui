@@ -242,32 +242,6 @@ const alerts = [
         level: AlertLevels.SUCCESS
     },
     {
-        alertId: 'twWarning',
-        alertType: AlertTypes.STANDARD,
-        content: (
-            <center>
-                <div style={{marginBottom: '3px'}}>
-                    <FormattedMessage
-                        // eslint-disable-next-line max-len
-                        defaultMessage="Remember to save your project often. In the event of a crash, you can try to load an automatic backup with File > Load Restore Point, but you shouldn't rely on this."
-                        description="Warning that appears when the editor is opened"
-                        id="tw.editorWarning.1"
-                    />
-                </div>
-                <div>
-                    <FormattedMessage
-                        // eslint-disable-next-line max-len
-                        defaultMessage="Warp Timer has been enabled because you opened the editor, which may reduce performance. See Advanced for more options."
-                        description="Warning that appears when the editor is opened"
-                        id="tw.editorWarning.2"
-                    />
-                </div>
-            </center>
-        ),
-        closeButton: true,
-        level: AlertLevels.WARN
-    },
-    {
         alertId: 'twExtendedExtensionsWarning',
         alertType: AlertTypes.STANDARD,
         clearList: ['twExtendedExtensionsWarning'],

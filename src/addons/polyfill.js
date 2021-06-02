@@ -33,6 +33,6 @@ if (!Array.prototype.flat) {
 
 if (typeof queueMicrotask !== 'function') {
     window.queueMicrotask = callback => {
-        setTimeout(callback);
+        Promise.resolve().then(callback);
     };
-};
+}

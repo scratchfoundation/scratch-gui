@@ -20,6 +20,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
+import {getIsLoading} from '../reducers/project-state.js';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -41,6 +42,7 @@ import TWEvalModal from '../components/webgl-modal/tw-eval-modal.jsx';
 import CloudVariableBadge from '../components/tw-cloud-variable-badge/cloud-variable-badge.jsx';
 import {isRendererSupported, isEvalSupported} from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
+import loadServiceWorker from './load-service-worker';
 
 import styles from './interface.css';
 
@@ -186,6 +188,11 @@ class Interface extends React.Component {
         super(props);
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
     }
+    componentDidUpdate (prevProps) {
+        if (prevProps.isLoading && !this.props.isLoading) {
+            loadServiceWorker();
+        }
+    }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {
             document.title = `TurboWarp - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
@@ -293,8 +300,9 @@ Interface.propTypes = {
         instructions: PropTypes.string
     }),
     isFullScreen: PropTypes.bool,
-    isRtl: PropTypes.bool,
+    isLoading: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
+    isRtl: PropTypes.bool,
     onClickTheme: PropTypes.func,
     projectId: PropTypes.string
 };
@@ -303,6 +311,7 @@ const mapStateToProps = state => ({
     hasCloudVariables: state.scratchGui.tw.hasCloudVariables,
     description: state.scratchGui.tw.description,
     isFullScreen: state.scratchGui.mode.isFullScreen,
+    isLoading: getIsLoading(state.scratchGui.projectState.loadingState),
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isRtl: state.locales.isRtl,
     projectId: state.scratchGui.projectState.projectId

@@ -147,6 +147,7 @@ module.exports = [
                 'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
                 'process.env.ANNOUNCEMENT': JSON.stringify(process.env.ANNOUNCEMENT || ''),
+                'process.env.ENABLE_SERVICE_WORKER': JSON.stringify(process.env.ENABLE_SERVICE_WORKER || ''),
                 'process.env.ROOT': JSON.stringify(root),
                 'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash'),
                 'process.env.PLAUSIBLE_API': JSON.stringify(process.env.PLAUSIBLE_API),

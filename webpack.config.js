@@ -5,6 +5,7 @@ var webpack = require('webpack');
 // Plugins
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var TWGenerateServiceWorkerPlugin = require('./src/playground/generate-service-worker-plugin');
 
 // PostCss
 var autoprefixer = require('autoprefixer');
@@ -211,7 +212,8 @@ module.exports = [
             new CopyWebpackPlugin([{
                 from: 'extension-worker.{js,js.map}',
                 context: 'node_modules/scratch-vm/dist/web'
-            }])
+            }]),
+            new TWGenerateServiceWorkerPlugin()
         ])
     })
 ].concat(

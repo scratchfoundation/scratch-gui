@@ -56,7 +56,6 @@ a {
 .footer-columns {
     display: flex;
     justify-content: center;
-    align-items: center;
     justify-items: center;
     flex-wrap: wrap;
 }
@@ -67,10 +66,6 @@ a {
     margin-bottom: 10px;
 }
 .footer-section > * {
-    margin-bottom: 10px;
-}
-.footer-header {
-    font-weight: bold;
     margin-bottom: 10px;
 }
 

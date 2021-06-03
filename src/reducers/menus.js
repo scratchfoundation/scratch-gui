@@ -5,7 +5,6 @@ const MENU_ABOUT = 'aboutMenu';
 const MENU_ACCOUNT = 'accountMenu';
 const MENU_FILE = 'fileMenu';
 const MENU_EDIT = 'editMenu';
-const MENU_HELP = 'linksMenu';
 const MENU_LANGUAGE = 'languageMenu';
 const MENU_LOGIN = 'loginMenu';
 const MENU_ERRORS = 'errorMenu';
@@ -16,7 +15,6 @@ const initialState = {
     [MENU_ACCOUNT]: false,
     [MENU_FILE]: false,
     [MENU_EDIT]: false,
-    [MENU_HELP]: false,
     [MENU_LANGUAGE]: false,
     [MENU_LOGIN]: false,
     [MENU_ERRORS]: false
@@ -57,9 +55,6 @@ const fileMenuOpen = state => state.scratchGui.menus[MENU_FILE];
 const openEditMenu = () => openMenu(MENU_EDIT);
 const closeEditMenu = () => closeMenu(MENU_EDIT);
 const editMenuOpen = state => state.scratchGui.menus[MENU_EDIT];
-const openHelpMenu = () => openMenu(MENU_HELP);
-const closeHelpMenu = () => closeMenu(MENU_HELP);
-const helpMenuOpen = state => state.scratchGui.menus[MENU_HELP];
 const openLanguageMenu = () => openMenu(MENU_LANGUAGE);
 const closeLanguageMenu = () => closeMenu(MENU_LANGUAGE);
 const languageMenuOpen = state => state.scratchGui.menus[MENU_LANGUAGE];
@@ -85,9 +80,6 @@ export {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
-    openHelpMenu,
-    closeHelpMenu,
-    helpMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,

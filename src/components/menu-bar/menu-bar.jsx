@@ -56,9 +56,6 @@ import {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
-    openHelpMenu,
-    closeHelpMenu,
-    helpMenuOpen,
     openErrorsMenu,
     closeErrorsMenu,
     errorsMenuOpen,
@@ -790,72 +787,6 @@ class MenuBar extends React.Component {
                                 />
                             </div>
                         </div>
-                        <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, {
-                                [styles.active]: this.props.helpMenuOpen
-                            })}
-                            onMouseUp={this.props.onClickHelp}
-                        >
-                            <div className={classNames(styles.helpMenu)}>
-                                <FormattedMessage
-                                    defaultMessage="Help"
-                                    description="Text for TurboWarp Help dropdown menu"
-                                    id="tw.menuBar.help"
-                                />
-                            </div>
-                            <MenuBarMenu
-                                className={classNames(styles.menuBarMenu)}
-                                open={this.props.helpMenuOpen}
-                                place={this.props.isRtl ? 'left' : 'right'}
-                                onRequestClose={this.props.onRequestCloseHelp}
-                            >
-                                <MenuSection>
-                                    <MenuItemLink href="https://github.com/TurboWarp">
-                                        <FormattedMessage
-                                            defaultMessage="Source Code"
-                                            description="Link to source code"
-                                            id="tw.code"
-                                        />
-                                    </MenuItemLink>
-                                    <MenuItemLink href="/privacy.html">
-                                        <FormattedMessage
-                                            defaultMessage="Privacy Policy"
-                                            description="Link to privacy policy"
-                                            id="tw.privacy"
-                                        />
-                                    </MenuItemLink>
-                                    <MenuItemLink href="https://desktop.turbowarp.org/">
-                                        {/* This is not a FormattedMessage because it should not be translated. */}
-                                        {'TurboWarp Desktop'}
-                                    </MenuItemLink>
-                                    <MenuItemLink href="https://packager.turbowarp.org/">
-                                        {/* This is not a FormattedMessage because it should not be translated. */}
-                                        {'TurboWarp Packager'}
-                                    </MenuItemLink>
-                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Embedding">
-                                        <FormattedMessage
-                                            defaultMessage="Embedding"
-                                            description="Menu bar item for embedding link"
-                                            id="tw.menuBar.embed"
-                                        />
-                                    </MenuItemLink>
-                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/URL-Parameters">
-                                        <FormattedMessage
-                                            defaultMessage="URL Parameters"
-                                            description="Menu bar item for URL parameters link"
-                                            id="tw.menuBar.parameters"
-                                        />
-                                    </MenuItemLink>
-                                    <MenuItemLink href="https://github.com/TurboWarp/scratch-gui/wiki/Help-translate-TurboWarp">
-                                        <FormattedMessage
-                                            defaultMessage="Help Translate TurboWarp"
-                                            description="Menu bar item for translating TurboWarp link"
-                                            id="tw.menuBar.translate"
-                                        />
-                                    </MenuItemLink>
-                                </MenuSection>
-                            </MenuBarMenu>
-                        </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
@@ -1028,8 +959,6 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onClickSettings: PropTypes.func,
-    onClickHelp: PropTypes.func,
-    onRequestCloseHelp: PropTypes.func,
     onClickErrors: PropTypes.func,
     onRequestCloseErrors: PropTypes.func,
     onLogOut: PropTypes.func,
@@ -1051,7 +980,6 @@ MenuBar.propTypes = {
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
     sessionExists: PropTypes.bool,
-    helpMenuOpen: PropTypes.bool,
     errorsMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
@@ -1086,7 +1014,6 @@ const mapStateToProps = (state, ownProps) => {
         projectId: state.scratchGui.projectState.projectId,
         projectTitle: state.scratchGui.projectTitle,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
-        helpMenuOpen: helpMenuOpen(state),
         errorsMenuOpen: errorsMenuOpen(state),
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
@@ -1109,8 +1036,6 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
-    onClickHelp: () => dispatch(openHelpMenu()),
-    onRequestCloseHelp: () => dispatch(closeHelpMenu()),
     onClickErrors: () => dispatch(openErrorsMenu()),
     onRequestCloseErrors: () => dispatch(closeErrorsMenu()),
     onRequestOpenAbout: () => dispatch(openAboutMenu()),

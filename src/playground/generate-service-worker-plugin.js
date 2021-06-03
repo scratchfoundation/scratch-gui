@@ -17,6 +17,7 @@ class TWGenerateServiceWorkerPlugin {
             const assetNames = compilation.getAssets()
                 .map(i => i.name)
                 .filter(name => {
+                    /*
                     if (name.startsWith('static/blocks-media') || name.startsWith('static/assets')) {
                         // Assets that are only used in horizontal mode
                         if (
@@ -39,7 +40,9 @@ class TWGenerateServiceWorkerPlugin {
                         ) return false;
                         return true;
                     }
+                    */
                     if (name.startsWith('js/')) {
+                        if (name.endsWith('.map')) return false;
                         // Extension worker
                         if (name.includes('worker')) return false;
                         // Unnecessary pages

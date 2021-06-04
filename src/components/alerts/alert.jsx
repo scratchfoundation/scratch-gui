@@ -128,7 +128,7 @@ AlertComponent.propTypes = {
     onDownload: PropTypes.func,
     onReconnect: PropTypes.func,
     onSaveNow: PropTypes.func,
-    showDownload: PropTypes.func,
+    showDownload: PropTypes.bool,
     showReconnect: PropTypes.bool,
     showSaveNow: PropTypes.bool
 };

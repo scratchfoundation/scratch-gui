@@ -101,6 +101,10 @@ class SB3Downloader extends React.Component {
         }
     }
     handleSaveError (e) {
+        // AbortError can happen when someone cancels the file selector dialog
+        if (e && e.name === 'AbortError') {
+            return;
+        }
         log.error(e);
         this.props.onShowSaveErrorAlert();
     }

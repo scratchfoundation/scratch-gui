@@ -6,11 +6,6 @@ let messages = defineMessages({
         defaultMessage: 'my variable',
         description: 'Name for the default variable',
         id: 'gui.defaultProject.variable'
-    },
-    comment: {
-        defaultMessage: 'This is how you detect TurboWarp.\n\nSee here for more info:\nhttps://scratch.mit.edu/projects/414716080/',
-        description: 'Script comment describing the "is compiled?" block',
-        id: 'tw.defaultProject.comment'
     }
 });
 
@@ -60,44 +55,8 @@ const projectData = translateFunction => {
                 variables: {},
                 lists: {},
                 broadcasts: {},
-                blocks: {
-                    'Z2l`f?]oj|=Nq/GH@G_u': {
-                        opcode: 'control_if_else',
-                        next: null,
-                        parent: null,
-                        inputs: {
-                            CONDITION: [2, 'Fj5[gB=S0qJiUu$/!nym'],
-                            SUBSTACK: [1, null],
-                            SUBSTACK2: [1, null]
-                        },
-                        fields: {},
-                        shadow: false,
-                        topLevel: true,
-                        x: 302,
-                        y: 250,
-                        comment: 'UgZfouDT0`j;EW7Y3N2]'
-                    },
-                    'Fj5[gB=S0qJiUu$/!nym': {
-                        opcode: 'argument_reporter_boolean',
-                        next: null,
-                        parent: 'Z2l`f?]oj|=Nq/GH@G_u',
-                        inputs: {},
-                        fields: {VALUE: ['is compiled?', null]},
-                        shadow: false,
-                        topLevel: false
-                    }
-                },
-                comments: {
-                    'UgZfouDT0`j;EW7Y3N2]': {
-                        blockId: 'Z2l`f?]oj|=Nq/GH@G_u',
-                        x: 685,
-                        y: 258,
-                        width: 400,
-                        height: 200,
-                        minimized: false,
-                        text: translator(messages.comment)
-                    }
-                },
+                blocks: {},
+                comments: {},
                 currentCostume: 0,
                 costumes: [
                     {

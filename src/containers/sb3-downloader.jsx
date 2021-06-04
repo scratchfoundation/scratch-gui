@@ -2,26 +2,13 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {injectIntl, defineMessages, intlShape} from 'react-intl';
 import {projectTitleInitialState, setProjectTitle} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {showStandardAlert, showAlertWithTimeout} from '../reducers/alerts';
 import {setFileHandle} from '../reducers/tw';
 import FileSystemAPI from '../lib/tw-filesystem-api';
-
-// tw: we make some extensive changes to file saving
-//  - use the experimental FileSystem API when possible
-//  - saving marks project as unchanged
-//  - show spinner while saving and message when finished
-
-const messages = defineMessages({
-    error: {
-        defaultMessage: `Could not save file. ({error})`,
-        description: 'Error displayed when a file could not be saved',
-        id: 'tw.fs.saveError'
-    }
-});
+import log from '../lib/log';
 
 // from sb-file-uploader-hoc.jsx
 const getProjectTitleFromFilename = fileInputFilename => {
@@ -114,17 +101,8 @@ class SB3Downloader extends React.Component {
         }
     }
     handleSaveError (e) {
-        // If user aborted process, do not show an error.
-        if (e && e.name === 'AbortError') {
-            return;
-        }
+        log.error(e);
         this.props.onShowSaveErrorAlert();
-        // eslint-disable-next-line no-console
-        console.error(e);
-        // eslint-disable-next-line no-alert
-        alert(this.props.intl.formatMessage(messages.error, {
-            error: `${e}`
-        }));
     }
     render () {
         const {
@@ -158,7 +136,6 @@ const getProjectFilename = (curTitle, defaultTitle) => {
 
 SB3Downloader.propTypes = {
     children: PropTypes.func,
-    intl: intlShape,
     className: PropTypes.string,
     fileHandle: PropTypes.shape({
         name: PropTypes.string
@@ -192,7 +169,7 @@ const mapDispatchToProps = dispatch => ({
     onProjectUnchanged: () => dispatch(setProjectUnchanged())
 });
 
-export default injectIntl(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SB3Downloader));
+)(SB3Downloader);

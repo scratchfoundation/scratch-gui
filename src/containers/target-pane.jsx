@@ -238,6 +238,7 @@ class TargetPane extends React.Component {
         /* eslint-disable no-unused-vars */
         const {
             dispatchUpdateRestore,
+            isRtl,
             onActivateTab,
             onCloseImporting,
             onHighlightTarget,

@@ -52,6 +52,11 @@ const sendEvent = eventName => {
 
 if (enabled) {
     sendEvent('pageview');
+
+    window.addEventListener('appinstalled', () => {
+        if (document.hidden) return;
+        sendEvent('Installed');
+    });
 }
 
 const GoogleAnalytics = {

@@ -41,14 +41,18 @@ class UsernameModal extends React.Component {
             'handleDisableCompilerChange',
             'handleStoreProjectOptions'
         ]);
+        this.initialStageWidth = twStageSize.width;
+        this.initialStageHeight = twStageSize.height;
         this.state = {
-            stageWidth: twStageSize.width,
-            stageHeight: twStageSize.height,
-            reloadRequired: false
+            stageWidth: this.initialStageWidth,
+            stageHeight: this.initialStageHeight
         };
     }
+    getNeedsReload () {
+        return this.state.stageWidth !== this.initialStageWidth || this.state.stageHeight !== this.initialStageHeight;
+    }
     handleClose () {
-        if (this.state.reloadRequired) {
+        if (this.getNeedsReload()) {
             // eslint-disable-next-line no-alert
             if (confirm(this.props.intl.formatMessage(messages.confirmReload))) {
                 this.applyChangesThatNeedReload();
@@ -100,14 +104,12 @@ class UsernameModal extends React.Component {
     }
     handleStageWidthChange (value) {
         this.setState({
-            stageWidth: value,
-            reloadRequired: true
+            stageWidth: value
         });
     }
     handleStageHeightChange (value) {
         this.setState({
-            stageHeight: value,
-            reloadRequired: true
+            stageHeight: value
         });
     }
     applyChangesThatNeedReload () {
@@ -134,7 +136,6 @@ class UsernameModal extends React.Component {
         return (
             <SettingsModalComponent
                 onClose={this.handleClose}
-                reloadRequired={this.state.reloadRequired}
                 onFramerateChange={this.handleFramerateChange}
                 onCustomizeFramerate={this.handleCustomizeFramerate}
                 onHighQualityPenChange={this.handleHighQualityPenChange}

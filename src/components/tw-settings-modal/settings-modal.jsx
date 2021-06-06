@@ -481,7 +481,6 @@ const SettingsModalComponent = props => (
 SettingsModalComponent.propTypes = {
     intl: intlShape,
     onClose: PropTypes.func,
-    reloadRequired: PropTypes.bool,
     framerate: PropTypes.number,
     onFramerateChange: PropTypes.func,
     onCustomizeFramerate: PropTypes.func,

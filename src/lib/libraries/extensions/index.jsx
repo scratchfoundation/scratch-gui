@@ -4,11 +4,6 @@ import {FormattedMessage} from 'react-intl';
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
-import martyImage from './marty.png';
-import martyExtImage from './marty_extended.png';
-import martyPeripheralImage from './marty/marty-illustration.svg';
-import martyMenuImage from './marty/marty-small.svg';
-
 import penIconURL from './pen/pen.png';
 import penInsetIconURL from './pen/pen-small.svg';
 
@@ -52,42 +47,6 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 export default [
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Marty the Robot"
-                description="Name for the 'Marty the Robot' extension"
-                id="gui.extension.marty.name"
-            />
-        ),
-        extensionId: 'marty',
-        iconURL: martyImage,
-        insetIconURL: martyMenuImage,
-        description: (
-            <FormattedMessage
-                defaultMessage="Play and program with Marty."
-                description="Description for the 'Marty the Robot' extension"
-                id="gui.extension.marty.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        launchPeripheralConnectionFlow: true,
-        wifiConnectionRequired: true,
-        collaborator: "Robotical",
-        useAutoScan: false,
-        useManual: true,
-        peripheralImage: martyPeripheralImage,
-        smallPeripheralImage: martyMenuImage,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting... Make sure your Marty is on and connected to the same network as your computer."
-                description="Message to help people connect to their Marty."
-                id="gui.extension.marty.connectingMessage"
-            />
-        ),
-        helpLink: 'https://robotical.io/support'
-    },
     {
         name: (
             <FormattedMessage

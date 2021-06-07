@@ -31,7 +31,6 @@ self.addEventListener('fetch', event => {
         rewrite = 'addons.html';
     }
     if (rewrite) {
-        const request = new Request(rewrite);
-        event.respondWith(fetch(request).catch(() => caches.match(request)));
+        event.respondWith(fetch(event.request).catch(() => caches.match(new Request(rewrite))));
     }
 });

@@ -14,17 +14,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const normalize = i => i.toLowerCase()
-    .replace(/['"()\-+,./]/g, '')
+const normalize = text => text.toLowerCase()
+    .replace(/['"()\-+,./]/g, ' ')
     .trim();
+
+const splitToWords = text => normalize(text)
+    .split(' ')
+    .filter(i => i);
 
 const parseTexts = texts => {
     const result = [];
     for (const {score, text} of texts) {
-        const words = normalize(text).split(' ');
         result.push({
             score,
-            words
+            words: splitToWords(text)
         });
     }
     return result;
@@ -36,7 +39,7 @@ class Search {
     }
 
     search (query) {
-        const terms = normalize(query).split(' ');
+        const terms = splitToWords(query);
         const result = [];
         const processItem = (item, index) => {
             let totalScore = 0;

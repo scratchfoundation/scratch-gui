@@ -18,7 +18,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import addons, {unsupportedAddons} from '../addon-manifests';
+import Search from './search';
+import importedAddons, {unsupportedAddons} from '../addon-manifests';
 import getAddonTranslations from '../get-addon-translations';
 import settingsTranslationsEnglish from './l10n/en.json';
 import settingsTranslationsOther from './l10n/translations.json';
@@ -73,16 +74,16 @@ const postThrottledSettingsChange = store => {
 };
 
 const sortAddons = () => {
-    const sortedOrder = Object.keys(addons).sort((aId, bId) => {
-        const aNew = addons[aId].tags.includes('new');
-        const bNew = addons[bId].tags.includes('new');
+    const sortedOrder = Object.keys(importedAddons).sort((aId, bId) => {
+        const aNew = importedAddons[aId].tags.includes('new');
+        const bNew = importedAddons[bId].tags.includes('new');
         if (aNew && !bNew) return -1;
         if (bNew && !aNew) return 1;
         return 0;
     });
     const result = {};
     for (const key of sortedOrder) {
-        result[key] = addons[key];
+        result[key] = importedAddons[key];
     }
     return result;
 };
@@ -590,71 +591,52 @@ UnsupportedAddons.propTypes = {
     }))
 };
 
-const normalize = i => i.toLowerCase();
+const addonToKeyWords = ({id, manifest}) => {
+    const texts = [];
+    const addText = text => texts.push(text);
+    addText(id);
+    addText(addonTranslations[`${id}/@name`] || manifest.name);
+    addText(addonTranslations[`${id}/@description`] || manifest.description);
+    if (manifest.settings) {
+        for (const setting of manifest.settings) {
+            addText(addonTranslations[`${id}/@settings-name-${setting.id}`] || setting.name);
+        }
+    }
+    if (manifest.presets) {
+        for (const preset of manifest.presets) {
+            addText(addonTranslations[`${id}/@preset-name-${preset.id}`] || preset.name);
+            addText(addonTranslations[`${id}/@preset-description-${preset.id}`] || preset.description);
+        }
+    }
+    for (const tag of manifest.tags) {
+        const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
+        if (translatedTag) {
+            addText(settingsTranslations[`tw.addons.settings.tags.${tag}`]);
+        }
+    }
+    if (manifest.info) {
+        for (const info of manifest.info) {
+            addText(addonTranslations[`${id}/@info-${info.id}`] || info.text);
+        }
+    }
+    return texts;
+};
 
 class AddonList extends React.Component {
-    shouldShowAddon (state, addonId, manifest) {
-        if (!state.visible) {
-            return false;
-        }
-        const terms = normalize(this.props.search.trim()).split(' ');
-        if (terms.length === 0) {
-            return true;
-        }
-        const texts = [
-            normalize(addonId),
-            normalize(addonTranslations[`${addonId}/@name`] || manifest.name),
-            normalize(addonTranslations[`${addonId}/@name`] || manifest.description)
-        ];
-        if (manifest.settings) {
-            for (const setting of manifest.settings) {
-                texts.push(normalize(addonTranslations[`${addonId}/@settings-name-${setting.id}`] || setting.name));
-            }
-        }
-        if (manifest.presets) {
-            for (const preset of manifest.presets) {
-                texts.push(normalize(addonTranslations[`${addonId}/@preset-name-${preset.id}`] || preset.name));
-                texts.push(normalize(
-                    addonTranslations[`${addonId}/@preset-description-${preset.id}`] ||
-                    preset.description
-                ));
-            }
-        }
-        for (const tag of manifest.tags) {
-            const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
-            if (translatedTag) {
-                texts.push(normalize(settingsTranslations[`tw.addons.settings.tags.${tag}`]));
-            }
-        }
-        // For an addon to be included, all search terms must match one of the texts.
-        for (const term of terms) {
-            if (!term) continue;
-            let found = false;
-            for (const text of texts) {
-                if (text.includes(term)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                return false;
-            }
-        }
-        return true;
+    constructor (props) {
+        super(props);
+        this.search = new Search(this.props.addons.map(addonToKeyWords));
     }
     render () {
-        const filteredAddons = this.props.addons
-            .filter(({id, manifest, state}) => this.shouldShowAddon(state, id, manifest));
-        if (filteredAddons.length === 0) {
-            return (
-                <div className={styles.noResults}>
-                    {settingsTranslations['tw.addons.settings.noResults']}
-                </div>
-            );
+        let addons;
+        if (this.props.search) {
+            addons = this.search.search(this.props.search).map(({index}) => this.props.addons[index]);
+        } else {
+            addons = this.props.addons;
         }
         return (
             <div>
-                {filteredAddons.map(({id, manifest, state}) => (
+                {addons.map(({id, manifest, state}) => (
                     <Addon
                         key={id}
                         id={id}
@@ -700,7 +682,6 @@ class AddonSettingsComponent extends React.Component {
             const enabled = SettingsStore.getAddonEnabled(id);
             const addonState = {
                 enabled: enabled,
-                visible: true,
                 dirty: false
             };
             if (manifest.settings) {
@@ -746,7 +727,7 @@ class AddonSettingsComponent extends React.Component {
         this.setState({
             dirty: false
         });
-        for (const addonId of Object.keys(addons)) {
+        for (const addonId of Object.keys(importedAddons)) {
             if (this.state[addonId].dirty) {
                 this.setState(state => ({
                     [addonId]: {

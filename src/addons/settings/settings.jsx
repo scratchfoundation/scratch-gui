@@ -591,32 +591,35 @@ UnsupportedAddons.propTypes = {
     }))
 };
 
-const addonToKeyWords = ({id, manifest}) => {
+const addonToSearchItem = ({id, manifest}) => {
     const texts = [];
-    const addText = text => texts.push(text);
-    addText(id);
-    addText(addonTranslations[`${id}/@name`] || manifest.name);
-    addText(addonTranslations[`${id}/@description`] || manifest.description);
+    const addText = (score, text) => texts.push({
+        score,
+        text
+    });
+    addText(1, id);
+    addText(1, addonTranslations[`${id}/@name`] || manifest.name);
+    addText(0.5, addonTranslations[`${id}/@description`] || manifest.description);
     if (manifest.settings) {
         for (const setting of manifest.settings) {
-            addText(addonTranslations[`${id}/@settings-name-${setting.id}`] || setting.name);
+            addText(0.25, addonTranslations[`${id}/@settings-name-${setting.id}`] || setting.name);
         }
     }
     if (manifest.presets) {
         for (const preset of manifest.presets) {
-            addText(addonTranslations[`${id}/@preset-name-${preset.id}`] || preset.name);
-            addText(addonTranslations[`${id}/@preset-description-${preset.id}`] || preset.description);
+            addText(0.1, addonTranslations[`${id}/@preset-name-${preset.id}`] || preset.name);
+            addText(0.1, addonTranslations[`${id}/@preset-description-${preset.id}`] || preset.description);
         }
     }
     for (const tag of manifest.tags) {
         const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
         if (translatedTag) {
-            addText(settingsTranslations[`tw.addons.settings.tags.${tag}`]);
+            addText(0.25, settingsTranslations[`tw.addons.settings.tags.${tag}`]);
         }
     }
     if (manifest.info) {
         for (const info of manifest.info) {
-            addText(addonTranslations[`${id}/@info-${info.id}`] || info.text);
+            addText(0.25, addonTranslations[`${id}/@info-${info.id}`] || info.text);
         }
     }
     return texts;
@@ -625,7 +628,7 @@ const addonToKeyWords = ({id, manifest}) => {
 class AddonList extends React.Component {
     constructor (props) {
         super(props);
-        this.search = new Search(this.props.addons.map(addonToKeyWords));
+        this.search = new Search(this.props.addons.map(addonToSearchItem));
     }
     render () {
         let addons;

@@ -18,44 +18,66 @@ const normalize = i => i.toLowerCase()
     .replace(/['"()\-+,./]/g, '')
     .trim();
 
-const textsToWords = texts => {
-    const words = new Set();
-    for (const text of texts) {
-        for (const word of normalize(text).split(' ')) {
-            words.add(word);
-        }
+const parseTexts = texts => {
+    const result = [];
+    for (const {score, text} of texts) {
+        const words = normalize(text).split(' ');
+        result.push({
+            score,
+            words
+        });
     }
-    return Array.from(words);
+    return result;
 };
 
 class Search {
     constructor (items) {
-        this.items = items.map(textsToWords);
+        this.items = items.map(parseTexts);
     }
 
     search (query) {
         const terms = normalize(query).split(' ');
         const result = [];
         const processItem = (item, index) => {
+            let totalScore = 0;
             for (const term of terms) {
-                let found = false;
-                for (const itemWord of item) {
-                    if (itemWord.includes(term)) {
-                        found = true;
-                        break;
+                let highestScoreForTerm = 0;
+                for (const group of item) {
+                    for (const word of group.words) {
+                        const wordIndex = word.indexOf(term);
+                        if (wordIndex !== -1) {
+                            let multiplier;
+                            if (wordIndex === 0) {
+                                if (word === term) {
+                                    multiplier = 2;
+                                } else {
+                                    multiplier = 1.5;
+                                }
+                            } else {
+                                multiplier = 1;
+                            }
+                            const itemScore = group.score * multiplier;
+                            if (itemScore > highestScoreForTerm) {
+                                highestScoreForTerm = itemScore;
+                            }
+                            break;
+                        }
                     }
                 }
-                if (!found) {
+                if (highestScoreForTerm === 0) {
                     return;
                 }
+                totalScore += highestScoreForTerm;
             }
             result.push({
-                index
+                index,
+                score: totalScore
             });
         };
         for (let i = 0; i < this.items.length; i++) {
             processItem(this.items[i], i);
         }
+        result.sort((a, b) => b.score - a.score);
         return result;
     }
 }

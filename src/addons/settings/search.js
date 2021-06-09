@@ -14,7 +14,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const normalize = text => text.toLowerCase()
+const normalize = text => text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
     .replace(/['"()\-+,./]/g, ' ')
     .trim();
 

@@ -5,6 +5,7 @@
     background-color: #dbebff;
     display: flex;
     align-items: center;
+    border-radius: 0.5rem;
 }
 [theme="dark"] .badge {
     border-color: #203652;

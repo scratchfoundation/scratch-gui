@@ -637,6 +637,13 @@ class AddonList extends React.Component {
         } else {
             addons = this.props.addons;
         }
+        if (addons.length === 0) {
+            return (
+                <div className={styles.noResults}>
+                    {settingsTranslations['tw.addons.settings.noResults']}
+                </div>
+            );
+        }
         return (
             <div>
                 {addons.map(({id, manifest, state}) => (

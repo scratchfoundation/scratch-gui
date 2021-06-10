@@ -37,14 +37,14 @@ const parseTexts = texts => {
 };
 
 class Search {
-    constructor (items) {
-        this.items = items.map(parseTexts);
+    constructor (texts) {
+        this.items = texts.map(parseTexts);
     }
 
     search (query) {
         const terms = splitToWords(query);
         const result = [];
-        const processItem = (item, index) => {
+        const processItem = item => {
             let totalScore = 0;
             for (const term of terms) {
                 let highestScoreForTerm = 0;
@@ -54,11 +54,7 @@ class Search {
                         if (wordIndex !== -1) {
                             let multiplier;
                             if (wordIndex === 0) {
-                                if (word === term) {
-                                    multiplier = 2;
-                                } else {
-                                    multiplier = 1.5;
-                                }
+                                multiplier = 1.5;
                             } else {
                                 multiplier = 1;
                             }
@@ -66,7 +62,6 @@ class Search {
                             if (itemScore > highestScoreForTerm) {
                                 highestScoreForTerm = itemScore;
                             }
-                            break;
                         }
                     }
                 }
@@ -75,13 +70,16 @@ class Search {
                 }
                 totalScore += highestScoreForTerm;
             }
-            result.push({
-                index,
-                score: totalScore
-            });
+            return totalScore;
         };
         for (let i = 0; i < this.items.length; i++) {
-            processItem(this.items[i], i);
+            const score = processItem(this.items[i]);
+            if (score > 0) {
+                result.push({
+                    index: i,
+                    score
+                });
+            }
         }
         result.sort((a, b) => b.score - a.score);
         return result;

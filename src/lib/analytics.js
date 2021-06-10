@@ -57,10 +57,6 @@ if (enabled) {
         if (document.hidden) return;
         sendEvent('Installed');
     });
-
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        sendEvent('Standalone');
-    }
 }
 
 const GoogleAnalytics = {

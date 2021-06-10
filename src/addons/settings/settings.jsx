@@ -592,34 +592,44 @@ UnsupportedAddons.propTypes = {
 };
 
 const addonToSearchItem = ({id, manifest}) => {
-    const texts = [];
-    const addText = (score, text) => texts.push({
-        score,
-        text
-    });
+    const texts = new Set();
+    const addText = (score, text) => {
+        if (text) {
+            texts.add({
+                score,
+                text
+            });
+        }
+    };
     addText(1, id);
-    addText(1, addonTranslations[`${id}/@name`] || manifest.name);
-    addText(0.5, addonTranslations[`${id}/@description`] || manifest.description);
+    addText(1, manifest.name);
+    addText(1, addonTranslations[`${id}/@name`]);
+    addText(0.5, manifest.description);
+    addText(0.5, addonTranslations[`${id}/@description`]);
     if (manifest.settings) {
         for (const setting of manifest.settings) {
-            addText(0.25, addonTranslations[`${id}/@settings-name-${setting.id}`] || setting.name);
+            addText(0.25, setting.name);
+            addText(0.25, addonTranslations[`${id}/@settings-name-${setting.id}`]);
         }
     }
     if (manifest.presets) {
         for (const preset of manifest.presets) {
-            addText(0.1, addonTranslations[`${id}/@preset-name-${preset.id}`] || preset.name);
-            addText(0.1, addonTranslations[`${id}/@preset-description-${preset.id}`] || preset.description);
+            addText(0.1, preset.name);
+            addText(0.1, addonTranslations[`${id}/@preset-name-${preset.id}`]);
+            addText(0.1, preset.description);
+            addText(0.1, addonTranslations[`${id}/@preset-description-${preset.id}`]);
         }
     }
     for (const tag of manifest.tags) {
-        const translatedTag = settingsTranslations[`tw.addons.settings.tags.${tag}`];
-        if (translatedTag) {
-            addText(0.25, settingsTranslations[`tw.addons.settings.tags.${tag}`]);
+        const key = `tw.addons.settings.tags.${tag}`;
+        if (settingsTranslations[key]) {
+            addText(0.25, settingsTranslations[key]);
         }
     }
     if (manifest.info) {
         for (const info of manifest.info) {
-            addText(0.25, addonTranslations[`${id}/@info-${info.id}`] || info.text);
+            addText(0.25, info.text);
+            addText(0.25, addonTranslations[`${id}/@info-${info.id}`]);
         }
     }
     return texts;

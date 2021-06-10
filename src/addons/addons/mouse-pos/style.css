@@ -26,3 +26,7 @@
 .pos-container > span::after {
   content: attr(data-content);
 }
+
+.sa-mouse-pos-small .pos-container-container {
+  display: none !important;
+}

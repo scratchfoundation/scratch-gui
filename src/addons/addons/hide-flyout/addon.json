@@ -74,6 +74,5 @@
       "default": "default"
     }
   ],
-  "tags": ["editor", "codeEditor", "recommended"],
-  "l10n": true
+  "tags": ["editor", "codeEditor", "recommended"]
 }

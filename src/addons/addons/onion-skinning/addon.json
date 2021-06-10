@@ -105,6 +105,5 @@
   ],
   "versionAdded": "1.5.0",
   "tags": ["editor", "costumeEditor", "recommended"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

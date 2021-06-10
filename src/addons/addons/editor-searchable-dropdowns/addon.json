@@ -22,6 +22,5 @@
   ],
   "versionAdded": "1.0.0",
   "tags": ["editor", "codeEditor", "recommended"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

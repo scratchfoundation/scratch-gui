@@ -17,6 +17,5 @@
       "url": "remove-borders.css",
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
-  ],
-  "l10n": true
+  ]
 }

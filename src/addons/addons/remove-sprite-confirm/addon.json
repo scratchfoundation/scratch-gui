@@ -9,6 +9,5 @@
   ],
   "versionAdded": "1.0.0",
   "tags": ["editor", "recommended"],
-  "enabledByDefault": false,
-  "l10n": true
+  "enabledByDefault": false
 }

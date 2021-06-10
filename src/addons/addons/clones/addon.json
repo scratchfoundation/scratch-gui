@@ -22,6 +22,5 @@
     }
   ],
   "tags": ["editor", "projectPlayer"],
-  "enabledByDefault": false,
-  "l10n": true
+  "enabledByDefault": false
 }

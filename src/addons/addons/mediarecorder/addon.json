@@ -15,6 +15,5 @@
     }
   ],
   "versionAdded": "1.6.0",
-  "enabledByDefault": false,
-  "l10n": true
+  "enabledByDefault": false
 }

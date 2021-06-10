@@ -17,6 +17,5 @@
   "versionAdded": "1.0.0",
   "tags": ["editor", "costumeEditor"],
   "permissions": ["clipboardWrite"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

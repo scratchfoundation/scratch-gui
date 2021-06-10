@@ -14,6 +14,5 @@
     }
   ],
   "versionAdded": "1.13.0",
-  "enabledByDefault": false,
-  "l10n": true
+  "enabledByDefault": false
 }

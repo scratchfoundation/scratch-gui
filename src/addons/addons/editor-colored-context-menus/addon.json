@@ -23,6 +23,5 @@
     }
   ],
   "tags": ["editor", "codeEditor", "theme"],
-  "enabledByDefault": false,
-  "l10n": true
+  "enabledByDefault": false
 }

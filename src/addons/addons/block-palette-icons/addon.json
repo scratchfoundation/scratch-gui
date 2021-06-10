@@ -11,7 +11,6 @@
       "matches": ["https://scratch.mit.edu/projects/*"]
     }
   ],
-  "l10n": true,
   "versionAdded": "1.11.0",
   "credits": [
     { "name": "--Explosion--", "link": "https://scratch.mit.edu/users/--Explosion--/" },

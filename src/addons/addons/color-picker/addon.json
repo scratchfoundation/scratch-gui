@@ -24,6 +24,5 @@
   ],
   "versionAdded": "1.6.0",
   "libraries": ["tinycolor2"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

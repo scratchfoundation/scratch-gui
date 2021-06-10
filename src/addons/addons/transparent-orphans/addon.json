@@ -48,6 +48,5 @@
       "url": "userstyle.css",
       "matches": ["projects"]
     }
-  ],
-  "l10n": true
+  ]
 }

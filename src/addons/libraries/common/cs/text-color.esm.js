@@ -55,4 +55,32 @@ function brighten(hex, c) {
   });
 }
 
-export { textColor, multiply, brighten };
+function alphaBlend(opaqueHex, transparentHex) {
+  const { r: r1, g: g1, b: b1 } = parseHex(opaqueHex);
+  const { r: r2, g: g2, b: b2, a } = parseHex(transparentHex);
+  return convertToHex({
+    r: (1 - a) * r1 + a * r2,
+    g: (1 - a) * g1 + a * g2,
+    b: (1 - a) * b1 + a * b2,
+  });
+}
+
+function recolorFilter(hex) {
+  const { r, g, b } = parseHex(hex);
+  return `url("data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg'>
+      <filter id='recolor'>
+        <feColorMatrix values='
+          0 0 0 0 ${r / 255}
+          0 0 0 0 ${g / 255}
+          0 0 0 0 ${b / 255}
+          0 0 0 1 0
+        '/>
+      </filter>
+    </svg>#recolor
+  ")`
+    .split("\n")
+    .join("");
+}
+
+export { textColor, multiply, brighten, alphaBlend, recolorFilter };

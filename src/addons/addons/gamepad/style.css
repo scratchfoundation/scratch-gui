@@ -1,3 +1,7 @@
+.sa-gamepad-container {
+  margin-right: 0.2rem;
+}
+
 .sa-gamepad-spacer {
   display: flex;
   width: 100%;
@@ -33,19 +37,37 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 9999;
   user-select: none;
   pointer-events: none;
   will-change: transform;
-}
-.sa-gamepad-cursor-image {
-  display: block;
-  transform: translate(-50%, -50%);
   image-rendering: optimizeSpeed;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
 .sa-gamepad-cursor-down {
   filter: invert(100%);
+}
+
+.sa-gamepad-small .sa-gamepad-container[data-editor-mode="editor"] {
+  display: none !important;
+}
+
+.sa-gamepad-hide-cursor [class^="stage_stage_"] {
+  cursor: none;
+}
+
+.sa-gamepad-browser-support-warning {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sa-gamepad-store-settings {
+  display: none;
+}
+.sa-gamepad-store-settings > input {
+  margin-right: 4px;
+}
+.sa-gamepad-has-controller .sa-gamepad-store-settings {
+  display: block;
 }

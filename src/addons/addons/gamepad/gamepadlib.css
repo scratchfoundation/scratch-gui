@@ -41,7 +41,7 @@
 .gamepadlib-keyinput[data-accepting-input="true"] {
   background: #d6fff9;
 }
-.gamepadlib-keyinput[data-type="none"]:not([data-accepting-input="true"]) {
+.gamepadlib-keyinput[data-empty="true"]:not([data-accepting-input="true"]) {
   color: #aaa;
   font-style: italic;
 }
@@ -65,7 +65,39 @@
   width: 8px;
   height: 8px;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .gamepadlib-axis-mapping {
   width: 100%;
+}
+
+.gamepadlib-axis-circle-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.gamepadlib-axis-circle-overlay > .gamepadlib-axis-mapper {
+  position: absolute;
+}
+.gamepadlib-axis-circle-overlay > .gamepadlib-axis-mapper:nth-of-type(1) {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.gamepadlib-axis-circle-overlay > .gamepadlib-axis-mapper:nth-of-type(2) {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.gamepadlib-axis-circle-overlay > .gamepadlib-axis-mapper:nth-of-type(3) {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.gamepadlib-axis-circle-overlay > .gamepadlib-axis-mapper:nth-of-type(4) {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
 }

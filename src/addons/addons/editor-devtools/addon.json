@@ -50,6 +50,5 @@
   ],
   "versionAdded": "1.0.0",
   "tags": ["editor", "codeEditor", "costumeEditor", "recommended"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

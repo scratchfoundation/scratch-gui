@@ -90,6 +90,5 @@
       "default": "default",
       "reloadRequired": false
     }
-  ],
-  "l10n": true
+  ]
 }

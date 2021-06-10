@@ -20,6 +20,5 @@
   ],
   "versionAdded": "1.12.0",
   "tags": ["editor", "recommended"],
-  "enabledByDefault": true,
-  "l10n": true
+  "enabledByDefault": true
 }

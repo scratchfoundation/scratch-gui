@@ -242,6 +242,7 @@ a:active, a:focus {
 
 .addon-operations {
     margin-left: auto;
+    padding-left: 4px;
     display: flex;
     align-items: center;
 }

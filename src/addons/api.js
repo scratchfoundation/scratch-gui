@@ -331,7 +331,6 @@ class AddonRunner {
         this.stylesheets = [];
         this.disabledStylesheet = null;
 
-        this.msg.locale = language;
         this.publicAPI = {
             global,
             console,

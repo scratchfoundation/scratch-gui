@@ -3,6 +3,7 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import Box from '../box/box.jsx';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {isEvalSupported, isAudioContextSupported} from '../../lib/tw-environment-support-prober.js';
 
 import styles from './browser-modal.css';
 import unhappyBrowser from './unsupported-browser.svg';
@@ -12,16 +13,11 @@ const messages = defineMessages({
         id: 'gui.unsupportedBrowser.label',
         defaultMessage: 'Browser is not supported',
         description: ''
-    },
-    error: {
-        id: 'gui.unsupportedBrowser.errorLabel',
-        defaultMessage: 'An Error Occurred',
-        description: 'Heading shown when there is an unhandled exception in an unsupported browser'
     }
 });
 
 const BrowserModal = ({intl, ...props}) => {
-    const label = props.error ? messages.error : messages.label;
+    const label = messages.label;
     return (
         <ReactModal
             isOpen
@@ -39,56 +35,33 @@ const BrowserModal = ({intl, ...props}) => {
                     <h2>
                         <FormattedMessage {...label} />
                     </h2>
-                    <p>
-                        { /* eslint-disable max-len */ }
-                        {
-                            props.error ? <FormattedMessage
-                                defaultMessage="We are very sorry, but it looks like you are using a browser version that Scratch does not support. We recommend updating to the latest version of a supported browser such as Google Chrome, Mozilla Firefox, Microsoft Edge, or Apple Safari. "
-                                description="Error message when the browser does not meet our minimum requirements"
-                                id="gui.unsupportedBrowser.notRecommended"
-                            /> : <FormattedMessage
-                                defaultMessage="We are very sorry, but Scratch does not support this browser. We recommend updating to the latest version of a supported browser such as Google Chrome, Mozilla Firefox, Microsoft Edge, or Apple Safari."
-                                description="Error message when the browser does not work at all (IE)"
-                                id="gui.unsupportedBrowser.description"
-                            />
-                        }
-                        { /* eslint-enable max-len */ }
-                    </p>
-
-                    <Box className={styles.buttonRow}>
-                        <button
-                            className={styles.backButton}
-                            onClick={props.onBack}
-                        >
+                    {/* eslint-disable max-len */}
+                    {isEvalSupported() ? null : (
+                        <p>
                             <FormattedMessage
-                                defaultMessage="Back"
-                                description="Button to go back in unsupported browser modal"
-                                id="gui.unsupportedBrowser.back"
+                                defaultMessage="A browser extension is interfering with TurboWarp's ability to compile scripts. Try turning off your adblocker and refreshing. This site does not contain advertisements."
+                                description="A message that can appear in the browser not supported modal"
+                                id="tw.browserModal.eval"
                             />
-                        </button>
-
-                    </Box>
-                    <div className={styles.faqLinkText}>
+                        </p>
+                    )}
+                    {isAudioContextSupported() ? null : (
+                        <p>
+                            <FormattedMessage
+                                defaultMessage="This browser does not support features that this app requires. If you're using a &quot;privacy&quot; browser, try switching to a normal browser."
+                                description="A message that can appear in the browser not supported modal"
+                                id="tw.browserModal.audio"
+                            />
+                        </p>
+                    )}
+                    <p>
                         <FormattedMessage
-                            defaultMessage="To learn more, go to the {previewFaqLink}."
-                            description="Invitation to try 3.0 preview"
-                            id="gui.unsupportedBrowser.previewfaq"
-                            values={{
-                                previewFaqLink: (
-                                    <a
-                                        className={styles.faqLink}
-                                        href="//scratch.mit.edu/3faq"
-                                    >
-                                        <FormattedMessage
-                                            defaultMessage="FAQ"
-                                            description="link to Scratch 3.0 FAQ page"
-                                            id="gui.unsupportedBrowser.previewfaqlinktext"
-                                        />
-                                    </a>
-                                )
-                            }}
+                            defaultMessage="Make sure you're using a recent version of Google Chrome, Mozilla Firefox, Microsoft Edge, or Apple Safari."
+                            description="A message that appears in the browser not supported modal"
+                            id="tw.browserModal.desc"
                         />
-                    </div>
+                    </p>
+                    {/* eslint-enable max-len */}
                 </Box>
             </div>
         </ReactModal>
@@ -96,14 +69,9 @@ const BrowserModal = ({intl, ...props}) => {
 };
 
 BrowserModal.propTypes = {
-    error: PropTypes.bool,
     intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
     onBack: PropTypes.func.isRequired
-};
-
-BrowserModal.defaultProps = {
-    error: false
 };
 
 const WrappedBrowserModal = injectIntl(BrowserModal);

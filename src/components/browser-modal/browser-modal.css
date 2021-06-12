@@ -80,3 +80,7 @@
     color: $motion-primary;
     text-decoration: none;
 }
+
+.body p {
+    margin-bottom: 1em;
+}

@@ -21,3 +21,7 @@ export const isEvalSupported = () => {
     }
     return _isEvalSupported;
 };
+
+export const isAudioContextSupported = () => !!(window.AudioContext || window.webkitAudioContext);
+
+export const isBrowserSupported = () => isEvalSupported() && isAudioContextSupported();

@@ -37,9 +37,9 @@ import ProjectInput from '../components/tw-project-input/project-input.jsx';
 import FeaturedProjects from '../components/tw-featured-projects/featured-projects.jsx';
 import Description from '../components/tw-description/description.jsx';
 import WebGlModal from '../containers/webgl-modal.jsx';
-import TWEvalModal from '../components/webgl-modal/tw-eval-modal.jsx';
+import BrowserModal from '../components/browser-modal/browser-modal.jsx';
 import CloudVariableBadge from '../components/tw-cloud-variable-badge/cloud-variable-badge.jsx';
-import {isRendererSupported, isEvalSupported} from '../lib/tw-environment-support-prober';
+import {isRendererSupported, isBrowserSupported} from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
 import loadServiceWorker from './load-service-worker';
 
@@ -242,8 +242,8 @@ class Interface extends React.Component {
                             {isRendererSupported() ? null : (
                                 <WebGlModal isRtl={isRtl} />
                             )}
-                            {isEvalSupported() ? null : (
-                                <TWEvalModal isRtl={isRtl} />
+                            {isBrowserSupported() ? null : (
+                                <BrowserModal isRtl={isRtl} />
                             )}
                             <div className={styles.section}>
                                 <ProjectInput />

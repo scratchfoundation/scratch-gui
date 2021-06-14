@@ -1,1 +1,1 @@
-{"pause/pause":"Pausar","pause/@name":"Botón de pausa","pause/@description":"Agrega un botón de pausa al lado de la bandera verde.","pause/@info-programpause":"También puedes programáticamente pausar un proyecto (breakpoints) si creas un bloque propio con el nombre \"sa-pause\" y usas ese bloque."}
+{"pause/pause":"Pausar","pause/@name":"Botón de pausa","pause/@description":"Agrega un botón de pausa al lado de la bandera verde.","pause/@info-programpause":"Para pausar programáticamente un proyecto, use el bloque \"breakpoint\" provisto por el addon \"depurador\"."}

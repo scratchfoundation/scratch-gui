@@ -1287,7 +1287,7 @@ export default class DevTools {
 
     let ctrlKey = e.ctrlKey || e.metaKey;
 
-    if (e.key === "f" && ctrlKey) {
+    if (e.key === "f" && ctrlKey && !e.shiftKey) {
       // Ctrl + F (Override default Ctrl+F find)
       this.findInp.focus();
       this.findInp.select();
@@ -1443,7 +1443,7 @@ export default class DevTools {
 
               html += `
                   <div
-                    id="s3devPaste" 
+                    id="s3devPaste"
                     class="goog-menuitem s3dev-mi ${this.addon.tab.direction === "rtl" ? "goog-menuitem-rtl" : ""}"
                     role="menuitem"
                     style="user-select: none;"

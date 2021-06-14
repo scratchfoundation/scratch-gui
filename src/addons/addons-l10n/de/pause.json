@@ -1,1 +1,1 @@
-{"pause/@name":"Pausetaste","pause/@description":"Fügt eine Pausetaste neben der grünen Flagge hinzu.","pause/@info-programpause":"Du kannst auch programmatisch ein Scratch-Projekt pausieren (genannt Breakpoint), indem du einen neuen Block mit dem Namen \"sa-pause\" erstellst und ihn dann benutzt."}
+{"pause/@name":"Pausetaste","pause/@description":"Fügt eine Pausetaste neben der grünen Flagge hinzu.","pause/@info-programpause":"Um ein Projekt via Code zu pausieren ( auch als Breakpoint bekannt), verwende den \"Breakpoint\"-Block, den du im \"Debugger\"-Addon findest."}

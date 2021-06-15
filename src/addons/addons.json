@@ -32,5 +32,6 @@
     "blocks2image",
     "remove-curved-stage-border",
     "transparent-orphans",
+    "debugger",
     "tw-interface-customization"
 ]

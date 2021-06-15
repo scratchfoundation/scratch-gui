@@ -1,0 +1,30 @@
+{
+  "name": "Debugger",
+  "description": "Adds a new \"debugger\" block category and a \"logs\" window to the editor. The \"log\", \"warn\" and \"error\" blocks will print the specified message into the logs window. The \"breakpoint\" block will pause the project when executed.",
+  "credits": [
+    {
+      "name": "GrahamSH"
+    },
+    {
+      "name": "TheColaber"
+    },
+    {
+      "name": "retronbv"
+    }
+  ],
+  "userscripts": [
+    {
+      "url": "userscript.js",
+      "matches": ["projects"]
+    }
+  ],
+  "userstyles": [
+    {
+      "url": "style.css",
+      "matches": ["projects"]
+    }
+  ],
+  "tags": ["editor", "beta"],
+  "enabledByDefault": false,
+  "versionAdded": "1.16.0"
+}

@@ -1,0 +1,136 @@
+.sa-debugger-container {
+  margin-right: 0.2rem;
+}
+
+.debug {
+  display: none;
+}
+.debug {
+  position: absolute;
+  z-index: 492;
+  background-color: white;
+  width: 400px;
+  height: 25rem;
+}
+
+.debug h1 {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  color: #fff !important;
+  width: calc(100% - 20px);
+  font-size: 20px;
+}
+
+.sa-debugger-unpause {
+  animation: unpauseBackground 2s infinite alternate;
+}
+@keyframes unpauseBackground /* Firefox */ {
+  0% {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+.sa-debugger-unpause > img {
+  width: 20px;
+  height: 20px;
+}
+
+.log {
+  --message-border-color: rgba(0, 0, 0, 0.15);
+  --warning-border-color: hsl(50deg 100% 88%);
+  --error-border-color: hsl(0deg 100% 92%);
+  --error-text-color: red;
+  --monospace-font-size: 12px;
+  --monospace-font-family: consolas, lucida console, courier new, monospace;
+  --source-code-font-size: 12px;
+  --source-code-font-family: consolas, lucida console, courier new, monospace;
+  font-family: var(--monospace-font-family);
+  font-size: var(--monospace-font-size) !important;
+  word-wrap: break-word;
+  user-select: text;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  border-top: 1px solid var(--message-border-color);
+  border-bottom: 1px solid var(--message-border-color);
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  flex: auto;
+  line-height: 1.2;
+  border-top-right-radius: revert;
+  border-top-left-radius: revert;
+  cursor: text;
+  align-items: center;
+  padding: 3px;
+  content-visibility: auto;
+  contain-intrinsic-size: 1.2rem;
+}
+.warn {
+  border-color: var(--warning-border-color);
+  color: hsl(39deg 100% 18%);
+  background-color: hsl(50deg 100% 95%);
+}
+.error {
+  border-color: var(--error-border-color);
+  color: var(--error-text-color);
+  background-color: hsl(0deg 100% 95%);
+}
+.log:not(.warn):not(.error) + .log:not(.warn):not(.error),
+.warn + .warn,
+.error + .error {
+  border-top-color: transparent;
+}
+.logs {
+  border-radius: 0;
+  padding: 0;
+}
+.extra-log-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex: 1;
+  cursor: default;
+  width: 100%;
+}
+.console-variable {
+  padding: 4px;
+  border-radius: 10px;
+  color: white;
+  margin-right: 5px;
+}
+.log > span:not(.console-variable) {
+  flex-grow: 1;
+}
+.log a {
+  color: inherit;
+  opacity: 0.5;
+  text-decoration: underline;
+  float: right;
+  text-align: right;
+  max-width: 100%;
+  padding-left: 4px;
+  margin-right: 4px;
+  margin-left: auto;
+}
+.log a:hover {
+  color: #4d97ff;
+  opacity: 1;
+}
+
+.logLink.deletedTarget {
+  pointer-events: none;
+}
+
+.logIcon {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.25rem;
+}
+
+.log:not(.warn):not(.error) {
+  margin-left: 1.5rem;
+}

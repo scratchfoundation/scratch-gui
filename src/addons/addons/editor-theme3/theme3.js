@@ -94,7 +94,11 @@ function updateSettings(addon, newStyle) {
       }
       #s3devIDD > li.${prop} {
         background-color: var(--editorTheme3-${settingName}Color);
-      }`;
+      }
+      .console-variable[data-category="${prop}"] {
+        background-color: var(--editorTheme3-${settingName}Color) !important;
+      }
+      `;
       if (prop === "custom") {
         stylesheet += `path.blocklyBlockBackground[fill="#FF6680"] {
           fill: var(--editorTheme3-${prop}Color);

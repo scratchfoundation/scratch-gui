@@ -39,7 +39,12 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
 
     // Lists can contain booleans, which should also be turned to strings
     if (Array.isArray(value)) {
-        value = value.map(item => item.toString());
+        for (let i = 0; i < value.length; i++) {
+            const item = value[i];
+            if (typeof item === 'boolean') {
+                value[i] = item.toString();
+            }
+        }
     }
 
     return {id, label, category, value};

@@ -1,1 +1,1 @@
-{"pause/pause":"일시정지","pause/@name":"일시정지 버튼","pause/@description":"초록 깃발 옆에 일시 정지 버튼을 추가합니다."}
+{"pause/pause":"일시정지","pause/@name":"일시정지 버튼","pause/@description":"초록 깃발 옆에 일시 정지 버튼을 추가합니다.","pause/@info-programpause":"중단점이라고도 하는, 스크래치에서 프로젝트를 프로그래밍적으로 일시 중지하는 기능을 사용하려면 \"디버거\" 애드온에서 제공하는 \"중단점\" 블록을 사용하세요."}

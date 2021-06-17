@@ -66,6 +66,7 @@
   cursor: text;
   align-items: center;
   padding: 3px;
+  color: #575e75;
   content-visibility: auto;
   contain-intrinsic-size: 1.2rem;
 }

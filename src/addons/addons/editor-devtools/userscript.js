@@ -63,7 +63,7 @@ export default async function ({ addon, global, console, msg, safeMsg: m }) {
 <hr />
 <p>${m(
     "youtube"
-  )} -&nbsp;<a target="_blank" rel="noreferrer noopener" href="https://www.youtube.com/griffpatch">https://www.youtube.com/user/griffpatch</a></p>
+  )} -&nbsp;<a target="_blank" href="https://www.youtube.com/griffpatch" rel="noopener noreferrer">https://www.youtube.com/user/griffpatch</a></p>
 </div>
 </div>
 </div>

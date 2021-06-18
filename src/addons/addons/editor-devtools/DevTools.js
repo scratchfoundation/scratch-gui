@@ -1250,6 +1250,7 @@ export default class DevTools {
         // console.log("I found a new block!!! - " + block.id);
         // todo: move the block to the mouse pointer?
         let mouseXYClone = { x: this.mouseXY.x, y: this.mouseXY.y };
+        block.setIntersects(true); // fixes offscreen block pasting in TurboWarp
         this.domHelpers.triggerDragAndDrop(block.svgPath_, null, mouseXYClone);
       }
     }

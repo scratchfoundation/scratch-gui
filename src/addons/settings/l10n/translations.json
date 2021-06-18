@@ -40,10 +40,15 @@
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
     },
     "fr": {
+        "tw.addons.settings.addonFeedback": "Commentaires sur le module complémentaire",
+        "tw.addons.settings.confirmResetAll": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres des addons à leurs valeurs par défaut ?",
         "tw.addons.settings.credits": "Crédits :",
+        "tw.addons.settings.dirty": "Rechargez TurboWarp pour appliquer les paramètres.",
+        "tw.addons.settings.dirtyButton": "Recharger maintenant",
         "tw.addons.settings.export": "Exporter les paramètres",
         "tw.addons.settings.import": "Importer les paramètres",
         "tw.addons.settings.noResults": "Aucuns résultats",
+        "tw.addons.settings.presets": "Préconfigurations",
         "tw.addons.settings.reset": "Réinitialiser",
         "tw.addons.settings.resetAll": "Tout réinitialiser",
         "tw.addons.settings.search": "Rechercher",

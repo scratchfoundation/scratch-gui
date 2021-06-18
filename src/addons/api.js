@@ -270,6 +270,7 @@ class Tab extends EventTargetShim {
                             this.colour_ = '#29beb8';
                             this.colourSecondary_ = '#3aa8a4';
                             this.colourTertiary_ = '#3aa8a4';
+                            this.customContextMenu = null;
                         }
                     }
                     return oldUpdateColour.call(this, ...args2);

@@ -96,6 +96,8 @@ export default async function ({ addon, global, console, msg }) {
         type: "scratch-gui/navigation/ACTIVATE_TAB",
         activeTabIndex: 0,
       });
+      setTimeout(() => goToBlock(targetId, blockId), 0);
+      return;
     }
 
     // Copied from devtools. If it's code gets improved for this function, bring those changes here too.
@@ -277,8 +279,8 @@ export default async function ({ addon, global, console, msg }) {
   function dragConsole(x, y) {
     lastX = x;
     lastY = y;
-    const width = document.documentElement.clientWidth || document.body.clientWidth;
-    const height = document.documentElement.clientHeight || document.body.clientHeight;
+    const width = (document.documentElement.clientWidth || document.body.clientWidth) - 1;
+    const height = (document.documentElement.clientHeight || document.body.clientHeight) - 1;
     const clampedX = Math.max(0, Math.min(x - mouseOffsetX, width - consoleWrapper.offsetWidth));
     const clampedY = Math.max(0, Math.min(y - mouseOffsetY, height - consoleWrapper.offsetHeight));
     consoleWrapper.style.left = clampedX + "px";
@@ -400,9 +402,11 @@ export default async function ({ addon, global, console, msg }) {
           inputSpan.textContent = text;
           inputSpan.className = "console-variable";
           inputSpan.dataset.category = category === "list" ? "data-lists" : category;
-          inputSpan.style.backgroundColor =
-            ScratchBlocks.Colours[category === "list" ? "data_lists" : category].primary;
-          wrapper.append(inputSpan);
+          const blocklyColor = ScratchBlocks.Colours[category === "list" ? "data_lists" : category];
+          if (blocklyColor) {
+            inputSpan.style.backgroundColor = blocklyColor.primary;
+            wrapper.append(inputSpan);
+          }
         }
       }
     }

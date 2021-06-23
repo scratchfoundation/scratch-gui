@@ -372,7 +372,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
+                                <TabPanel className={[tabClassNames.tabPanel, styles["tab-panel-height-100"]].join(" ")} >
                                     {saveLoadTabVisible ? <SaveLoadTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>

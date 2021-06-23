@@ -156,7 +156,7 @@ class SaveLoad extends React.Component {
                 </div>
                 { fileNames.length > 0 &&
                     <div
-                        className={styles.block}
+                        className={[styles.block, styles['block-100']].join(" ")}
                         style={{flex: 1}}
                     >
                         <div>Your Files:</div>

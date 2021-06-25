@@ -96,16 +96,17 @@
 }
 
 .button {
-    color: #000;
-    background: $ui-secondary;
-    border: 1px solid $ui-tertiary;
-    color: $text-primary;
-    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: $motion-primary;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0;
     border-radius: 4px;
-    outline: none;
-    height: 32px;
-    display: flex;
-    align-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
 }
 .button:active, .button:focus-within {
     box-shadow: 0 0 0 3px $motion-transparent;

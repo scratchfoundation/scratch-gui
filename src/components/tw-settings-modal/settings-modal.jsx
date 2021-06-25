@@ -123,9 +123,24 @@ const HighQualityPen = props => (
         help={
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="High Quality Pen allows pen projects to render at a higher resolution and disables some coordinate rounding in the editor. Not all projects benefit from this setting, and it may impact performance."
+                defaultMessage="High Quality Pen allows pen projects to render at a higher resolution and disables some coordinate rounding in the editor. Not all projects benefit from this setting, and it may impact performance. {comparison}."
                 description="High quality pen setting help"
                 id="tw.settingsModal.highQualityPenHelp"
+                values={{
+                    comparison: (
+                        <a
+                            href="https://github.com/TurboWarp/scratch-gui/wiki/Advanced-Settings#high-quality-pen"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <FormattedMessage
+                                defaultMessage="See comparison"
+                                description="Link to high quality pen comparison"
+                                id="tw.settingsModal.highQualityPenHelp.comparison"
+                            />
+                        </a>
+                    )
+                }}
             />
         }
     />
@@ -185,7 +200,7 @@ const Interpolation = props => (
         help={
             <FormattedMessage
                 // eslint-disable-next-line max-len
-                defaultMessage="Interpolation makes projects appear smoother by interpolating sprite motion. Interpolation should not be used on 3D projects, raytracers, other pen projects, and other projects that are prone to lag as it will only make them run slower."
+                defaultMessage="Interpolation makes projects appear smoother by interpolating sprite motion. Interpolation should not be used on 3D projects, raytracers, pen projects, and laggy projects as interpolation will make them run slower without making them appear smoother."
                 description="Interpolation setting help"
                 id="tw.settingsModal.interpolationHelp"
             />

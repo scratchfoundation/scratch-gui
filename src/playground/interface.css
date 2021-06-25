@@ -1,5 +1,33 @@
+/* Base styles used by Scratch https://github.com/LLK/scratch-www/blob/develop/src/main.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
 p {
     margin: 0;
+    padding: 0;
+    border: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: bold;
+    line-height: 1.7em;
+}
+h1 {
+    font-weight: 2.5rem;
+}
+h2 {
+    font-weight: 2rem;
+}
+h3 {
+    font-size: 1.4rem;
+}
+h4 {
+    font-size: 1rem;
 }
 a {
     color: #25d;

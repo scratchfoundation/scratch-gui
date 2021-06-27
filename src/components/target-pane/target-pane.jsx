@@ -107,8 +107,6 @@ const TargetPane = ({
 
 const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({
-        // asset is defined in scratch-storage's Asset.js
-        asset: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         url: PropTypes.string,
         name: PropTypes.string.isRequired,
         asset: PropTypes.instanceOf(storage.Asset),

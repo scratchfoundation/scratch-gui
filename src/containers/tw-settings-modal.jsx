@@ -104,12 +104,12 @@ class UsernameModal extends React.Component {
     }
     handleStageWidthChange (value) {
         this.setState({
-            stageWidth: value
+            stageWidth: Math.round(value)
         });
     }
     handleStageHeightChange (value) {
         this.setState({
-            stageHeight: value
+            stageHeight: Math.round(value)
         });
     }
     applyChangesThatNeedReload () {

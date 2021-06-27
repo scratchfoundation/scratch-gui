@@ -1,46 +1,40 @@
-const MIN_WIDTH = 0;
-const MIN_HEIGHT = 0;
-
-const MAX_WIDTH = 4096;
-const MAX_HEIGHT = 4096;
-
-const DEFAULT_WIDTH = 480;
-const DEFAULT_HEIGHT = 360;
+import paintStageSize from 'scratch-paint/src/lib/tw-stage-size';
 
 const PARAM = 'size';
 
 const getDimensions = () => {
     // Running in node.js
     if (typeof URLSearchParams === 'undefined') {
-        return {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
-        };
+        return null;
     }
 
     const urlParameters = new URLSearchParams(location.search);
-    if (!urlParameters.has(PARAM)) {
-        return {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
-        };
-    }
-
     const dimensionsQuery = urlParameters.get(PARAM);
-    const [_, widthText, heightText] = dimensionsQuery.match(/^(\d+)[^\d]+(\d+)$/);
+    if (dimensionsQuery === null) {
+        return null;
+    }
+    const match = dimensionsQuery.match(/^(\d+)[^\d]+(\d+)$/);
+    if (!match) {
+        // eslint-disable-next-line no-alert
+        alert('Could not parse custom stage size');
+        return null;
+    }
+    const [_, widthText, heightText] = match;
     if (!widthText || !heightText) {
-        return {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
-        };
+        return null;
     }
 
-    const width = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, +widthText));
-    const height = Math.max(MIN_HEIGHT, Math.min(MAX_HEIGHT, +heightText));
+    const width = Math.max(0, Math.min(4096, +widthText));
+    const height = Math.max(0, Math.min(4096, +heightText));
+    paintStageSize.width = width;
+    paintStageSize.height = height;
     return {
         width,
         height
     };
 };
 
-export default getDimensions();
+export default getDimensions() || {
+    width: 480,
+    height: 360
+};

@@ -738,9 +738,7 @@ const turbowarpCategory = `<category
     name="TurboWarp"
     id="tw"
     colour="#FF4C4C"
-    secondaryColour="#FF3D3D">
-    <button text="The other blocks have moved" callbackKey="TW_MIGRATION"></button>
-    ${turbowarpIsCompiledBlock}</category>`;
+    secondaryColour="#FF3D3D">${turbowarpIsCompiledBlock}</category>`;
 /* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';

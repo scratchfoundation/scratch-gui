@@ -19,6 +19,12 @@ const messages = defineMessages({
         defaultMessage: 'Enter the URL of the extension',
         description: 'Prompt for unoffical extension url',
         id: 'gui.extensionLibrary.extensionUrl'
+    },
+    incompatible: {
+        // eslint-disable-next-line max-len
+        defaultMessage: 'This extension is incompatible with Scratch. Projects made with it cannot be uploaded to the Scratch website. Are you sure you want to enable it?',
+        description: 'Confirm loading Scratch-incompatible extension',
+        id: 'tw.confirmIncompatibleExtension'
     }
 });
 
@@ -30,6 +36,10 @@ class ExtensionLibrary extends React.PureComponent {
         ]);
     }
     handleItemSelect (item) {
+        // eslint-disable-next-line no-alert
+        if (item.incompatibleWithScratch && !confirm(this.props.intl.formatMessage(messages.incompatible))) {
+            return;
+        }
         const id = item.extensionId;
         let url = item.extensionURL ? item.extensionURL : id;
         const isCustomURL = !item.disabled && !id;

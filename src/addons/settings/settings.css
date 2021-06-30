@@ -113,7 +113,7 @@ a:active, a:focus {
     color: inherit;
     width: 150px;
     height: 16px;
-    padding: 10px 15px;
+    padding: 10px 0 10px 15px;
     border: none;
     outline: none;
     background-color: transparent;

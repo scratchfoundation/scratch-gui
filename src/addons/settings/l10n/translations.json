@@ -39,6 +39,15 @@
         "tw.addons.settings.title": "Ajustes de Addons",
         "tw.addons.settings.unsupported": "Algunos addons no están disponibles en este navegador:"
     },
+    "fi": {
+        "tw.addons.settings.dirtyButton": "Uppdatio sivuu nyt",
+        "tw.addons.settings.noResults": "Ei mikää trääfit",
+        "tw.addons.settings.reset": "Reseti",
+        "tw.addons.settings.resetAll": "Resset kaaiki",
+        "tw.addons.settings.search": "Etssi",
+        "tw.addons.settings.tags.new": "Uusi!",
+        "tw.addons.settings.tags.recommended": "Rekkommendiootuu"
+    },
     "fr": {
         "tw.addons.settings.addonFeedback": "Commentaires sur le module complémentaire",
         "tw.addons.settings.confirmResetAll": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres des addons à leurs valeurs par défaut ?",

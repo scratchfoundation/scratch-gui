@@ -14,6 +14,14 @@
       "sizes": "512x512"
     }
   ],
+  "file_handlers": [
+    {
+      "action": "/editor.html",
+      "accept": {
+        "application/x.scratch.sb3": [".sb3"]
+      }
+    }
+  ],
   "start_url": "editor",
   "background_color": "#333333",
   "display": "standalone",

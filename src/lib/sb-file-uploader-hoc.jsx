@@ -13,7 +13,8 @@ import {
     getIsLoadingUpload,
     getIsShowingWithoutId,
     onLoadedProject,
-    requestProjectUpload
+    requestProjectUpload,
+    getIsShowingProject
 } from '../reducers/project-state';
 import {setProjectTitle} from '../reducers/project-title';
 import {
@@ -31,6 +32,9 @@ const messages = defineMessages({
         description: 'An error that displays when a local project file fails to load.'
     }
 });
+
+let hasDefinedLaunchQueueConsumer = false;
+let hasConsumedFile = false;
 
 /**
  * Higher Order Component to provide behavior for loading local project files into editor.
@@ -60,6 +64,29 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         componentDidUpdate (prevProps) {
             if (this.props.isLoadingUpload && !prevProps.isLoadingUpload && this.expectingFileUploadFinish) {
                 this.handleFinishedLoadingUpload(); // cue step 5 below
+            }
+            if (
+                this.props.isShowingProject &&
+                !prevProps.isShowingProject &&
+                'launchQueue' in window
+            ) {
+                launchQueue.setConsumer(async launchParams => {
+                    if (!launchParams.files.length) return;
+                    if (hasConsumedFile) return;
+                    hasConsumedFile = true;
+                    const [handle] = launchParams.files;
+                    this.props.onLoadingStarted();
+                    const file = await handle.getFile();
+                    this.expectingFileUploadFinish = true;
+                    this.fileReader = new FileReader();
+                    this.fileReader.onload = this.onload;
+                    this.handleChange({
+                        target: {
+                            files: [file]
+                        }
+                    });
+                    this.props.onSetFileHandle(handle);
+                });
             }
         }
         componentWillUnmount () {
@@ -251,6 +278,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         closeFileMenu: PropTypes.func,
         intl: intlShape.isRequired,
         isLoadingUpload: PropTypes.bool,
+        isShowingProject: PropTypes.bool,
         isShowingWithoutId: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         onLoadingFinished: PropTypes.func,
@@ -270,6 +298,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         const user = state.session && state.session.session && state.session.session.user;
         return {
             isLoadingUpload: getIsLoadingUpload(loadingState),
+            isShowingProject: getIsShowingProject(loadingState),
             isShowingWithoutId: getIsShowingWithoutId(loadingState),
             loadingState: loadingState,
             projectChanged: state.scratchGui.projectChanged,

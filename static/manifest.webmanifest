@@ -17,9 +17,16 @@
   "file_handlers": [
     {
       "action": "/editor.html",
+      "name": "Scratch 3 Project",
       "accept": {
         "application/x.scratch.sb3": [".sb3"]
-      }
+      },
+      "icons": [
+        {
+          "src": "images/512.png",
+          "sizes": "512x512"
+        }
+      ]
     }
   ],
   "start_url": "editor",

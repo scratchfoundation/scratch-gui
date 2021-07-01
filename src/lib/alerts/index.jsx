@@ -130,7 +130,7 @@ const alerts = [
             'createRemixSuccess', 'creatingRemix', 'saveSuccess', 'saving'],
         showDownload: true,
         // showSaveNow: true,
-        closeButton: false,
+        closeButton: true,
         content: (
             <FormattedMessage
                 defaultMessage="Project could not save."

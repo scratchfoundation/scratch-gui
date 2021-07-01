@@ -194,13 +194,18 @@ class Interface extends React.Component {
     }
     render () {
         const {
+            /* eslint-disable no-unused-vars */
+            intl,
             hasCloudVariables,
             description,
             isFullScreen,
+            isLoading,
             isPlayerOnly,
             isRtl,
             onClickTheme,
-            projectId
+            projectId,
+            /* eslint-enable no-unused-vars */
+            ...props
         } = this.props;
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
@@ -236,6 +241,7 @@ class Interface extends React.Component {
                         onUpdateProjectTitle={this.handleUpdateProjectTitle}
                         backpackVisible
                         backpackHost="_local_"
+                        {...props}
                     />
                     {isHomepage ? (
                         <React.Fragment>

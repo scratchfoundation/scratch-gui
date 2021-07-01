@@ -24,4 +24,21 @@ import Interface from './render-interface.jsx';
 import appTarget from './app-target';
 
 setAppElement(appTarget);
-ReactDOM.render(<Interface enableCommunity={false} />, appTarget);
+ReactDOM.render(<Interface
+    routingStyle="hash"
+    enableCommunity={false}
+    onClickAbout={[
+        {
+            title: 'Privacy Policy',
+            onClick: () => {
+                window.open('https://turbowarp.org/privacy.html');
+            }
+        },
+        {
+            title: 'Source Code',
+            onClick: () => {
+                window.open('https://github.com/TurboWarp/');
+            }
+        }
+    ]}
+/>, appTarget);

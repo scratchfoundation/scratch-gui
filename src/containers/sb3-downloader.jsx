@@ -74,9 +74,12 @@ class SB3Downloader extends React.Component {
             this.handleSaveError(e);
         }
     }
-    saveToLastFile () {
-        return this.saveToHandle(this.props.fileHandle)
-            .catch(e => this.handleSaveError(e));
+    async saveToLastFile () {
+        try {
+            await this.saveToHandle(this.props.fileHandle);
+        } catch (e) {
+            this.handleSaveError(e);
+        }
     }
     saveToLastFileOrNew () {
         if (this.props.fileHandle) {

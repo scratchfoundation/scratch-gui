@@ -262,6 +262,9 @@
         "tw.addons.settings.title": "Nastavitve dodatkov",
         "tw.addons.settings.unsupported": "Nekateri dodatki v tem brskalniku niso na voljo:"
     },
+    "sv": {
+        "tw.addons.settings.reset": "Starta om"
+    },
     "tr": {
         "tw.addons.settings.addonFeedback": "Eklenti geribildirim",
         "tw.addons.settings.confirmResetAll": "Sen bütün eklenti ayarlarını sıfarlamaya eminmisin?",

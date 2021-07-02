@@ -286,7 +286,8 @@ class Stage extends React.Component {
             // Immediately update the color picker info
             this.setState({colorInfo: this.getColorInfo(this.pickX, this.pickY)});
         } else {
-            if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
+            const isTouchEvent = window.TouchEvent && e instanceof TouchEvent;
+            if (e.button === 0 || isTouchEvent) {
                 this.setState({
                     mouseDown: true,
                     mouseDownPosition: mousePosition,
@@ -305,7 +306,7 @@ class Stage extends React.Component {
                 canvasHeight: this.rect.height
             };
             this.props.vm.postIOData('mouse', data);
-            if (e.preventDefault) {
+            if (isTouchEvent && e.preventDefault) {
                 // Prevent default to prevent touch from dragging page
                 e.preventDefault();
                 // But we do want any active input to be blurred

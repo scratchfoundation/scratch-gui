@@ -1,6 +1,18 @@
 # scratch-gui
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
+## Raspberry Pi Foundation customisation
+
+[![CircleCI status of RaspberryPiFoundation/scratch-gui](https://circleci.com/gh/RaspberryPiFoundation/scratch-gui.svg?style=shield&circle-token=d6d268de56c55a3e520e59195047105029345eaf)](https://app.circleci.com/pipelines/github/RaspberryPiFoundation/scratch-gui?branch=code-club-world)
+
+* This is a fork of [the canonical repo](https://github.com/LLK/scratch-gui.git) to allow us to customise it for the [Code Club World app](https://github.com/RaspberryPiFoundation/codeclubworld).
+
+* The default branch of the canonical repo is `develop`, but the default branch of this repo is `code-club-world`. This is to make it clear that the latter is where we should be making changes, to make it easier to bring in changes from the upstream repo, and so we can have our own CircleCI configuration to automatically build the app.
+
+* Commits pushed to the forked repo on GitHub trigger [builds on CircleCI](https://app.circleci.com/pipelines/github/RaspberryPiFoundation/scratch-gui) and a successful build results in the build output being deployed to GitHub Pages for this repo. The deployment makes use of an SSH key with write access to this repo.
+
+* The deployment adds the build output to the `gh-pages` branch in a sub-directory with the same name as the current branch. Thus the app is available at a URL including that sub-directory, e.g. https://raspberrypifoundation.github.io/scratch-gui/code-club-world/ for the default `code-club-world` branch.
+
 ## Installation
 This requires you to have Git and Node.js installed.
 

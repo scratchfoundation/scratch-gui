@@ -97,6 +97,11 @@ class CloudProvider {
             this.onInvalidUsername();
             return;
         }
+        // tw: code 4004 is "Project Unavailable" -- do not try to reconnect
+        if (e && e.code === 4004) {
+            log.info('Cloud project is unavailable. Not reconnect.');
+            return;
+        }
         log.info(`Closed connection to websocket`);
         const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
         this.setTimeout(this.openConnection.bind(this), randomizedTimeout);

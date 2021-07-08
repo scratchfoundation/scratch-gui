@@ -68,6 +68,9 @@
         "tw.addons.settings.title": "Paramètres des addons",
         "tw.addons.settings.unsupported": "Certains addons ne sont pas disponibles sur ce navigateur "
     },
+    "ga": {
+        "tw.addons.settings.title": "socruithe addon"
+    },
     "it": {
         "tw.addons.settings.addonFeedback": "Feedback sull'Addon",
         "tw.addons.settings.confirmResetAll": "Sei sicuro di voler riportare tutte le impostazioni dell'addon al loro valore iniziale?",
@@ -288,8 +291,8 @@
     "zh-cn": {
         "tw.addons.settings.addonFeedback": "插件反馈",
         "tw.addons.settings.confirmResetAll": "你确定要将所有加载项设置重置为其默认值吗？",
-        "tw.addons.settings.credits": "作者：",
-        "tw.addons.settings.dirty": "重新加载TurboWarp以生效设置。",
+        "tw.addons.settings.credits": "鸣谢：",
+        "tw.addons.settings.dirty": "重新加载 TurboWarp 以生效设置。",
         "tw.addons.settings.dirtyButton": "立即重新加载",
         "tw.addons.settings.export": "导出设置",
         "tw.addons.settings.import": "导入设置",

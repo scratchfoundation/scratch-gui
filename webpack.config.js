@@ -114,7 +114,6 @@ module.exports = [
     defaultsDeep({}, base, {
         entry: {
             'editor': './src/playground/editor.jsx',
-            'editoronly': './src/playground/editoronly.jsx',
             'player': './src/playground/player.jsx',
             'fullscreen': './src/playground/fullscreen.jsx',
             'embed': './src/playground/embed.jsx',
@@ -158,13 +157,6 @@ module.exports = [
                 chunks: ['editor'],
                 template: 'src/playground/index.ejs',
                 filename: 'editor.html',
-                title: 'TurboWarp - Run Scratch projects faster',
-                ...htmlWebpackPluginCommon
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['editoronly'],
-                template: 'src/playground/index.ejs',
-                filename: 'editoronly.html',
                 title: 'TurboWarp - Run Scratch projects faster',
                 ...htmlWebpackPluginCommon
             }),

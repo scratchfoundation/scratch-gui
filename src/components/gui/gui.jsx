@@ -89,6 +89,7 @@ const GUIComponent = props => {
         isTelemetryEnabled,
         loading,
         logo,
+        menuBarHidden,
         renderLogin,
         onClickAbout,
         onClickAccountNav,
@@ -140,6 +141,9 @@ const GUIComponent = props => {
 
     return (<MediaQuery minWidth={layout.fullSizeMinWidth}>{isFullSize => {
         const stageSize = resolveStageSize(stageSizeMode, isFullSize);
+        const boxStyles = classNames(styles.bodyWrapper, {
+            [styles.bodyWrapperWithoutMenuBar]: menuBarHidden
+        });
 
         return isPlayerOnly ? (
             <StageWrapper
@@ -206,38 +210,40 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
-                    accountNavOpen={accountNavOpen}
-                    authorId={authorId}
-                    authorThumbnailUrl={authorThumbnailUrl}
-                    authorUsername={authorUsername}
-                    canChangeLanguage={canChangeLanguage}
-                    canCreateCopy={canCreateCopy}
-                    canCreateNew={canCreateNew}
-                    canEditTitle={canEditTitle}
-                    canManageFiles={canManageFiles}
-                    canRemix={canRemix}
-                    canSave={canSave}
-                    canShare={canShare}
-                    className={styles.menuBarPosition}
-                    enableCommunity={enableCommunity}
-                    isShared={isShared}
-                    logo={logo}
-                    renderLogin={renderLogin}
-                    showComingSoon={showComingSoon}
-                    onClickAbout={onClickAbout}
-                    onClickAccountNav={onClickAccountNav}
-                    onClickLogo={onClickLogo}
-                    onCloseAccountNav={onCloseAccountNav}
-                    onLogOut={onLogOut}
-                    onOpenRegistration={onOpenRegistration}
-                    onProjectTelemetryEvent={onProjectTelemetryEvent}
-                    onSeeCommunity={onSeeCommunity}
-                    onShare={onShare}
-                    onStartSelectingFileUpload={onStartSelectingFileUpload}
-                    onToggleLoginOpen={onToggleLoginOpen}
-                />
-                <Box className={styles.bodyWrapper}>
+                {!menuBarHidden &&
+                    <MenuBar
+                        accountNavOpen={accountNavOpen}
+                        authorId={authorId}
+                        authorThumbnailUrl={authorThumbnailUrl}
+                        authorUsername={authorUsername}
+                        canChangeLanguage={canChangeLanguage}
+                        canCreateCopy={canCreateCopy}
+                        canCreateNew={canCreateNew}
+                        canEditTitle={canEditTitle}
+                        canManageFiles={canManageFiles}
+                        canRemix={canRemix}
+                        canSave={canSave}
+                        canShare={canShare}
+                        className={styles.menuBarPosition}
+                        enableCommunity={enableCommunity}
+                        isShared={isShared}
+                        logo={logo}
+                        renderLogin={renderLogin}
+                        showComingSoon={showComingSoon}
+                        onClickAbout={onClickAbout}
+                        onClickAccountNav={onClickAccountNav}
+                        onClickLogo={onClickLogo}
+                        onCloseAccountNav={onCloseAccountNav}
+                        onLogOut={onLogOut}
+                        onOpenRegistration={onOpenRegistration}
+                        onProjectTelemetryEvent={onProjectTelemetryEvent}
+                        onSeeCommunity={onSeeCommunity}
+                        onShare={onShare}
+                        onStartSelectingFileUpload={onStartSelectingFileUpload}
+                        onToggleLoginOpen={onToggleLoginOpen}
+                    />
+                }
+                <Box className={boxStyles}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
                             <Tabs
@@ -395,6 +401,7 @@ GUIComponent.propTypes = {
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
+    menuBarHidden: PropTypes.bool,
     onActivateCostumesTab: PropTypes.func,
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
@@ -442,6 +449,7 @@ GUIComponent.defaultProps = {
     isCreating: false,
     isShared: false,
     loading: false,
+    menuBarHidden: false,
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };

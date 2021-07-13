@@ -7,8 +7,12 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
     background-color: $ui-primary;
+    height: calc(100% - $menu-bar-height);
+}
+
+.body-wrapper-without-menu-bar {
+    height: 100%;
 }
 
 .body-wrapper * {

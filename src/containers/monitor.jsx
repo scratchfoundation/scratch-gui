@@ -232,8 +232,8 @@ Monitor.propTypes = {
     min: PropTypes.number,
     mode: PropTypes.oneOf(['default', 'slider', 'large', 'list']),
     monitorLayout: PropTypes.shape({
-        monitors: PropTypes.object,
-        savedMonitorPositions: PropTypes.object
+        monitors: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        savedMonitorPositions: PropTypes.object // eslint-disable-line react/forbid-prop-types
     }).isRequired,
     onDragEnd: PropTypes.func.isRequired,
     opcode: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types

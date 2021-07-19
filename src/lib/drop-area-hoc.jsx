@@ -78,7 +78,7 @@ const DropAreaHOC = function (dragTypes) {
                 }
             }
             render () {
-                const componentProps = omit(this.props, ['onDrop', 'dragInfo']);
+                const componentProps = omit(this.props, ['onDrop', 'dragInfo', 'componentRef']);
                 return (
                     <WrappedComponent
                         containerRef={this.setRef}

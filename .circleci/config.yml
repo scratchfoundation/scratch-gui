@@ -51,6 +51,7 @@ jobs:
       - checkout
       - *restore_npm_cache
       - run: npm install
+      - run: cd node_modules/scratch-paint && npm --production=false install && cd -
       - *save_git_cache
       - *save_npm_cache
   lint:

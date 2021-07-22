@@ -41,6 +41,6 @@
     cursor: pointer;
 }
 
-.menu-section {
+.menu-section:not(.menu-item:first-child) {
     border-top: 1px solid $ui-black-transparent;
 }

@@ -76,7 +76,9 @@ describe('Loading scratch gui', () => {
             await expect(logs).toEqual([]);
         });
 
-        test('Creating new project resets active tab to Code tab', async () => {
+        // skipping because this test fails frequently on CI; might need "wait(until.elementLocated" or similar
+        // error message is "stale element reference: element is not attached to the page document"
+        test.skip('Creating new project resets active tab to Code tab', async () => {
             await loadUri(uri);
             await findByXpath('//*[span[text()="Costumes"]]');
             await clickText('Costumes');

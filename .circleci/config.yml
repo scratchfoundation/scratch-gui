@@ -50,7 +50,7 @@ jobs:
       - *restore_git_cache
       - checkout
       - *restore_npm_cache
-      - run: npm install
+      - run: npm ci
       - *save_git_cache
       - *save_npm_cache
   lint:

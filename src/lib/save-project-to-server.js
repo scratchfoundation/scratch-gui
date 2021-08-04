@@ -12,15 +12,14 @@ import storage from '../lib/storage';
  * @property {?boolean} params.isCopy a flag indicating if this save is creating a copy.
  * @property {?boolean} params.isRemix a flag indicating if this save is creating a remix.
  * @property {?string} params.title the title of the project.
+ * @param {object} headers extra HTTP request headers.
  * @return {Promise} A promise that resolves when the network request resolves.
  */
-export default function (projectId, vmState, params) {
+export default function (projectId, vmState, params, headers) {
     const opts = {
         body: vmState,
         // If we set json:true then the body is double-stringified, so don't
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: Object.assign({'Content-Type': 'application/json'}, headers),
         withCredentials: true
     };
     const creatingProject = projectId === null || typeof projectId === 'undefined';

@@ -1,5 +1,5 @@
 {
-  "name": "scratch-gui",
+  "name": "@raspberrypifoundation/scratch-gui",
   "version": "0.1.0",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "main": "./dist/scratch-gui.js",

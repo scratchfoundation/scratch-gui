@@ -20,10 +20,10 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": "https://github.com/RaspberryPiFoundation/scratch-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
+    "url": "git+ssh://git@github.com/RaspberryPiFoundation/scratch-gui.git"
   },
   "dependencies": {
     "arraybuffer-loader": "^1.0.6",

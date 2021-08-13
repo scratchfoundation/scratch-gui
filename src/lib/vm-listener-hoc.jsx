@@ -126,7 +126,12 @@ const vmListenerHOC = function (WrappedComponent) {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
                         false, this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null, null, null);
+                        null, null)
+                        .then(responseBodyObject => {
+                            if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
+
+                            }
+                        });
 
                     if(this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
@@ -140,7 +145,12 @@ const vmListenerHOC = function (WrappedComponent) {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
                         false, this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null, null, this.props.onArtieHelpReceived, null);
+                        null, null)
+                        .then(responseBodyObject => {
+                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                                this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
+                            }
+                        });
                     if(this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
                     }
@@ -154,7 +164,12 @@ const vmListenerHOC = function (WrappedComponent) {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false,
                         this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null, null, this.props.onArtieHelpReceived, null);
+                        null, null)
+                        .then(responseBodyObject => {
+                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                                this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
+                            }
+                        });
                     if(this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
                     }

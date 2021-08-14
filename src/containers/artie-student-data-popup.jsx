@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages, injectIntl} from "react-intl";
-import {compose} from "redux";
-import {connect} from "react-redux";
+import {defineMessages, injectIntl} from 'react-intl';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 import ArtieStudentDataPopupComponent from '../components/artie-student-data/artie-student-data-popup.jsx';
-import {updateStudentData} from "../lib/artie-api";
-import {artieSetCurrentStudent} from "../reducers/artie-login";
+import {updateStudentData} from '../lib/artie-api';
+import {artieSetCurrentStudent} from '../reducers/artie-login';
 
 const gender = defineMessages({
     boy: {
@@ -36,7 +36,6 @@ const motherTongue = defineMessages({
 });
 
 
-
 class ArtieStudentDataPopup extends React.Component {
 
     constructor (props) {
@@ -55,46 +54,49 @@ class ArtieStudentDataPopup extends React.Component {
             'handleOnCancelClick'
         ]);
 
-        this.responsesGender = [{id: 1,  value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
+        this.responsesGender = [{id: 1, value: this.props.intl.formatMessage(gender.boy)}, {id: 2, value: this.props.intl.formatMessage(gender.girl)}];
         this.responsesMotherTongue = [{id: 2, value: this.props.intl.formatMessage(motherTongue.yes)}, {id: 1, value: this.props.intl.formatMessage(motherTongue.no)}];
     }
 
-    //Handler when the gender has been changed
-    handleOnGenderChange(e){
+    // Handler when the gender has been changed
+    handleOnGenderChange (e){
         this.state.gender = e.target.value;
     }
 
-    //Handler when the mother tongue has been changed
-    handleOnMotherTongueChange(e){
+    // Handler when the mother tongue has been changed
+    handleOnMotherTongueChange (e){
         this.state.motherTongue = e.target.value;
     }
 
-    //Handler when the age has been changed
-    handleOnAgeChange(e){
+    // Handler when the age has been changed
+    handleOnAgeChange (e){
         this.state.age = e.target.value;
     }
 
-    handleOnOkClick(){
-        if(this.state.gender !== null || this.state.motherTongue !== null) {
-            updateStudentData(this.props.student.id, this.state.gender, this.state.motherTongue, this.state.age, this.handleStudentUpdated);
+    handleOnOkClick (){
+        if (this.state.gender !== null || this.state.motherTongue !== null) {
+            updateStudentData(this.props.student.id, this.state.gender, this.state.motherTongue, this.state.age)
+                .then(() => {
+                    this.handleStudentUpdated();
+                });
         }
     }
-    handleStudentUpdated(){
+    handleStudentUpdated (){
         this.props.student.gender = this.state.gender;
         this.props.student.motherTongue = this.state.motherTongue;
         this.props.student.age = this.state.age;
         this.props.onArtieSetCurrentStudent(this.props.student);
     }
 
-    handleOnCancelClick(){}
+    handleOnCancelClick (){}
 
     render () {
 
-        let showGender = (this.props.student !== null && (this.props.student.gender === undefined || this.props.student.gender === 0));
-        let showMotherTongue = (this.props.student !== null && (this.props.student.motherTongue === undefined  || this.props.student.motherTongue === 0));
-        let showAge = (this.props.student !== null && (this.props.student.age === undefined || this.props.student.age === 0));
+        const showGender = (this.props.student !== null && (this.props.student.gender === undefined || this.props.student.gender === 0));
+        const showMotherTongue = (this.props.student !== null && (this.props.student.motherTongue === undefined || this.props.student.motherTongue === 0));
+        const showAge = (this.props.student !== null && (this.props.student.age === undefined || this.props.student.age === 0));
 
-        if(showGender || showMotherTongue || showAge) {
+        if (showGender || showMotherTongue || showAge) {
             return (
                 <ArtieStudentDataPopupComponent
                     onOk={this.handleOnOkClick}
@@ -107,23 +109,23 @@ class ArtieStudentDataPopup extends React.Component {
                     onMotherTongueChange={this.handleOnMotherTongueChange}
                     showAge={showAge}
                     onAgeChange={this.handleOnAgeChange}
-                    title='Student Data'
+                    title="Student Data"
                 />
             );
-        }else{
-            return null;
         }
+        return null;
+
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    onArtieSetCurrentStudent: (currentStudent) => dispatch(artieSetCurrentStudent(currentStudent))
+    onArtieSetCurrentStudent: currentStudent => dispatch(artieSetCurrentStudent(currentStudent))
 });
 
 
 ArtieStudentDataPopup.propTypes = {
     student: PropTypes.object.isRequired
-}
+};
 
 export default compose(
     injectIntl,

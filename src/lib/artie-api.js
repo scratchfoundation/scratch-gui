@@ -274,13 +274,13 @@ const getAllArtieExercises = (userName, password) => new Promise((resolve) => {
 
 });
 
-const updateStudentCompetence = (studentId, competence, callback) => new Promise(() => {
+const updateStudentCompetence = (studentId, competence) => new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
-                callback(json.body.object);
+                resolve(json.body.object);
             }
         }
     });
@@ -291,14 +291,14 @@ const updateStudentCompetence = (studentId, competence, callback) => new Promise
 
 });
 
-const updateStudentData = (studentId, gender, motherTongue, age, callback) => new Promise(() => {
+const updateStudentData = (studentId, gender, motherTongue, age) => new Promise((resolve) => {
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
-                callback(json.body.object);
+                resolve(json.body.object);
             }
         }
     });

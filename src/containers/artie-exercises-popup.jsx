@@ -301,9 +301,10 @@ class ArtieExercisePopup extends React.Component {
         let competence = (this.props.artieLogin.currentStudent.competence === 0 ? 1 : this.props.artieLogin.currentStudent.competence);
 
         //Updates the student competence
-        updateStudentCompetence(this.props.artieLogin.currentStudent.id,
-                                competence,
-                                this.onStudentCompetenceIsUpdated);
+        updateStudentCompetence(this.props.artieLogin.currentStudent.id, competence)
+            .then(response => {
+                this.onStudentCompetenceIsUpdated(response);
+            });
     }
 
     onStudentCompetenceIsUpdated(response){

@@ -298,9 +298,12 @@ class ArtieFlow extends React.Component {
         this.props.onArtieLogged(user, date);
 
         // If the user role is admin, we load all the exercises (evaluations and normals)
-        if (user.role !== null && user.role == 1){
+        if (user.role !== null && user.role === 1){
             // Get all the exercises
-            getAllArtieExercises(userLogin, passwordLogin, this.props.onArtieSetExercises);
+            getAllArtieExercises(userLogin, passwordLogin)
+                .then(exercises => {
+                    this.props.onArtieSetExercises(exercises);
+                });
         }
 
         // If the user is read only, we check for the students

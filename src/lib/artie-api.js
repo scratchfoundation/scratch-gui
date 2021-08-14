@@ -257,13 +257,13 @@ const getArtieExercises = (userName, password, isEvaluation) => new Promise((res
 });
 
 
-const getAllArtieExercises = (userName, password, callback) => new Promise(() => {
+const getAllArtieExercises = (userName, password) => new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
-                callback(json.body.object);
+                resolve(json.body.object);
             }
         }
     });

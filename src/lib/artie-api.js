@@ -119,7 +119,7 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, binary) => new Promise((resolve, reject) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, binary) => new Promise((resolve) => {
 
     const spriteElements = [];
 
@@ -163,7 +163,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary) => new Promise((resolve) => {
 
     const spriteElements = []
 
@@ -196,19 +196,19 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary) => new
     xhr.send(params);
 });
 
-const loginArtie = (userName, password, callback, errorCallback) => new Promise(() => {
+const loginArtie = (userName, password) => new Promise((resolve, reject) => {
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
-            if (xhr.status === 302 && xhr.response != null) {
+            if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
 
                 // We check if there are no errors
-                if (json.body.object !== null){
-                    callback(json.body.object);
+                if (json.body.object === null){
+                    reject(json.body.message);
                 } else {
-                    errorCallback(json.body.message);
+                    resolve(json.body.object);
                 }
             }
         }
@@ -225,7 +225,7 @@ const getArtieStudents = (userName, password, callback) => new Promise(() => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
-            if (xhr.status === 302 && xhr.response != null) {
+            if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
                 callback(json.body.object);
             }

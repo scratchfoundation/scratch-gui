@@ -163,7 +163,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
     xhr.send(params);
 });
 
-const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary, callback, callbackPopup) => new Promise((resolve, reject) => {
+const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary) => new Promise((resolve, reject) => {
 
     const spriteElements = []
 
@@ -179,13 +179,13 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary, callba
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response !== null) {
+                if (xhr.response !== '') {
+                    const json = JSON.parse(xhr.response);
 
-                // If the callback of the popup is not undefined and is not null, we show the popup
-                if (callbackPopup !== undefined && callbackPopup !== null){
-                    callbackPopup(true);
+                    if (json !== null && json.body !== null) {
+                        resolve(json.body);
+                    }
                 }
-
-                callback(false, true);
             }
         }
     });

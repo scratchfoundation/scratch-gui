@@ -377,7 +377,11 @@ class MenuBar extends React.Component {
                 binary = reader.result;
                 html2canvas(body).then(canvas => {
                     canvasUrl = canvas.toDataURL('image/png');
-                    sendSolutionArtie(userId, sprites, currentExercise, canvasUrl, binary, fOnArtieLoadingSolution, fOnArtieExerciseSentPopupOpen);
+                    sendSolutionArtie(userId, sprites, currentExercise, canvasUrl, binary)
+                        .then(() => {
+                            fOnArtieLoadingSolution(false, true);
+                            fOnArtieExerciseSentPopupOpen(true);
+                        });
                 });
             };
         });

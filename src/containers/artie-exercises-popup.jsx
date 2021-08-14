@@ -308,7 +308,10 @@ class ArtieExercisePopup extends React.Component {
 
     onStudentCompetenceIsUpdated(response){
         //Updates the list of exercises, the current student and resets the current exercise
-        getArtieExercises(this.props.userLogin, this.props.passwordLogin, false, this.onArtieExercisesLoaded);
+        getArtieExercises(this.props.userLogin, this.props.passwordLogin, false)
+            .then(exercises => {
+                this.onArtieExercisesLoaded(exercises);
+            });
         this.props.onArtieSetCurrentStudent(response);
     }
 
@@ -348,7 +351,10 @@ class ArtieExercisePopup extends React.Component {
                     this.props.onArtiePopupEvaluation(true);
                 }else{
                     //If we haven't next evaluations, we get all the exercises
-                    getArtieExercises(this.props.userLogin, this.props.passwordLogin, false, this.props.onArtieSetExercises);
+                    getArtieExercises(this.props.userLogin, this.props.passwordLogin, false)
+                        .then(exercises => {
+                            this.props.onArtieSetExercises(exercises);
+                        });
                 }
             }
         }

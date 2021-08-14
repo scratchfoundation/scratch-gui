@@ -261,12 +261,20 @@ class ArtieFlow extends React.Component {
                 this.props.onArtieSetCurrentStudent(tempStudent);
 
                 // If the current user is not null and the competence is already set, we show the exercises
-                if (tempStudent.competence !== undefined && tempStudent.competence !== null && tempStudent.competence > 0){
+                if (tempStudent.competence !== undefined && tempStudent.competence !== null &&
+                    tempStudent.competence > 0){
+
                     // Get the exercises
-                    getArtieExercises(userLogin, passwordLogin, false, this.props.onArtieSetExercises);
+                    getArtieExercises(userLogin, passwordLogin, false)
+                        .then(exercises => {
+                            this.props.onArtieSetExercises(exercises);
+                        });
                 } else {
                     // Get the evaluations
-                    getArtieExercises(userLogin, passwordLogin, true, this.props.onArtieSetExercises);
+                    getArtieExercises(userLogin, passwordLogin, true)
+                        .then(exercises => {
+                            this.props.onArtieSetExercises(exercises);
+                        });
                 }
             }
 

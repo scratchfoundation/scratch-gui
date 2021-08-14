@@ -220,14 +220,14 @@ const loginArtie = (userName, password) => new Promise((resolve, reject) => {
 
 });
 
-const getArtieStudents = (userName, password, callback) => new Promise(() => {
+const getArtieStudents = (userName, password) => new Promise((resolve) => {
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 302 && xhr.response !== null) {
                 const json = JSON.parse(xhr.response);
-                callback(json.body.object);
+                resolve(json.body.object);
             }
         }
     });

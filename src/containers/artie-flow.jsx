@@ -298,8 +298,11 @@ class ArtieFlow extends React.Component {
         // If the user is read only, we check for the students
         if (user !== null && user.role === 0){
             // We get the students
-            getArtieStudents(userLogin, passwordLogin, this.props.onArtieSetStudents);
-        } else if (user !== null && user.role == 1){
+            getArtieStudents(userLogin, passwordLogin)
+                .then(students => {
+                    this.props.onArtieSetStudents(students);
+                });
+        } else if (user !== null && user.role === 1){
             // We close the login window
             this.props.onDeactivateArtieLogin();
         }

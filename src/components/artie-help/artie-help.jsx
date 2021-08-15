@@ -18,78 +18,16 @@ const messages = defineMessages({
 
 class ArtieHelpComponent extends React.Component {
 
-    constructor(props){
+    constructor (props){
         super(props);
     }
 
-    render(){
+    render (){
 
-        if(this.props.help !== undefined && this.props.help.nextSteps !== null &&
-            (this.props.help.nextSteps.addBlocks.length >0 || this.props.help.nextSteps.deleteBlocks.length > 0))
-        {
+        if (this.props.help !== undefined && this.props.help.nextSteps !== null &&
+            (this.props.help.nextSteps.addBlocks.length > 0 || this.props.help.nextSteps.deleteBlocks.length > 0)) {
 
-            return(
-                <Modal
-                        className={styles.modalContent}
-                        onRequestClose={this.props.onCancel}
-                        id="ArtieHelp"
-                        contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
-                    >
-                        <Box
-                            className={styles.label}
-                        >
-                            <FormattedMessage
-                                    defaultMessage="List of blocks to add:"
-                                    description="List of blocks to add:"
-                                    id="gui.menuBar.artie.help.addBlocks"
-                                />
-                        </Box>
-                        <Box
-                            className={styles.workspace}
-                            componentRef={this.props.componentRefAdd}
-                        />
-                        <Box
-                            className={styles.label}
-                        >
-                            <FormattedMessage
-                                    defaultMessage="List of blocks to delete:"
-                                    description="List of blocks to delete:"
-                                    id="gui.menuBar.artie.help.delBlocks"
-                                />
-                        </Box>
-                        <Box
-                            className={styles.workspace}
-                            componentRef={this.props.componentRefDel}
-                        />
-                    </Modal>
-            );
-        }
-        else if(this.props.help !== undefined && this.props.help.nextSteps !== null && this.props.help.nextSteps.replacePositions !== null && this.props.help.nextSteps.replacePositions.length > 0){
-            return(
-                <Modal
-                        className={styles.modalContent}
-                        onRequestClose={this.props.onCancel}
-                        id="ArtieHelp"
-                        contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
-                    >
-                        <Box
-                            className={styles.label}
-                        >
-                            <FormattedMessage
-                                    defaultMessage="List of misplaced items:"
-                                    description="List of misplaced items:"
-                                    id="gui.menuBar.artie.help.mispacedElements"
-                                />
-                        </Box>
-                        <Box
-                            className={styles.workspaceFull}
-                            componentRef={this.props.componentRefMisplaced}
-                        />
-                    </Modal>
-            );
-        }
-        else if(this.props.help !== undefined && this.props.help.nextSteps !== null && this.props.help.nextSteps.replaceInputs !== null && this.props.help.nextSteps.replaceInputs.length > 0){
-            return(
+            return (
                 <Modal
                     className={styles.modalContent}
                     onRequestClose={this.props.onCancel}
@@ -100,10 +38,73 @@ class ArtieHelpComponent extends React.Component {
                         className={styles.label}
                     >
                         <FormattedMessage
-                                defaultMessage="List of elements with incorrect input values:"
-                                description="List of elements with incorrect input values:"
-                                id="gui.menuBar.artie.help.elementsIncorrectInput"
-                            />
+                            defaultMessage="List of blocks to add:"
+                            description="List of blocks to add:"
+                            id="gui.menuBar.artie.help.addBlocks"
+                        />
+                    </Box>
+                    <Box
+                        className={styles.workspace}
+                        componentRef={this.props.componentRefAdd}
+                    />
+                    <Box
+                        className={styles.label}
+                    >
+                        <FormattedMessage
+                            defaultMessage="List of blocks to delete:"
+                            description="List of blocks to delete:"
+                            id="gui.menuBar.artie.help.delBlocks"
+                        />
+                    </Box>
+                    <Box
+                        className={styles.workspace}
+                        componentRef={this.props.componentRefDel}
+                    />
+                </Modal>
+            );
+        } else if (this.props.help !== undefined && this.props.help.nextSteps !== null &&
+            this.props.help.nextSteps.replacePositions !== null &&
+            this.props.help.nextSteps.replacePositions.length > 0){
+            return (
+                <Modal
+                    className={styles.modalContent}
+                    onRequestClose={this.props.onCancel}
+                    id="ArtieHelp"
+                    contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
+                >
+                    <Box
+                        className={styles.label}
+                    >
+                        <FormattedMessage
+                            defaultMessage="List of misplaced items:"
+                            description="List of misplaced items:"
+                            id="gui.menuBar.artie.help.mispacedElements"
+                        />
+                    </Box>
+                    <Box
+                        className={styles.workspaceFull}
+                        componentRef={this.props.componentRefMisplaced}
+                    />
+                </Modal>
+            );
+        } else if (this.props.help !== undefined && this.props.help.nextSteps !== null &&
+                    this.props.help.nextSteps.replaceInputs !== null &&
+                    this.props.help.nextSteps.replaceInputs.length > 0){
+            return (
+                <Modal
+                    className={styles.modalContent}
+                    onRequestClose={this.props.onCancel}
+                    id="ArtieHelp"
+                    contentLabel={this.props.intl.formatMessage(messages.artieHelpModalTitle)}
+                >
+                    <Box
+                        className={styles.label}
+                    >
+                        <FormattedMessage
+                            defaultMessage="List of elements with incorrect input values:"
+                            description="List of elements with incorrect input values:"
+                            id="gui.menuBar.artie.help.elementsIncorrectInput"
+                        />
                     </Box>
                     <Box
                         className={styles.workspace}
@@ -113,10 +114,10 @@ class ArtieHelpComponent extends React.Component {
                         className={styles.label}
                     >
                         <FormattedMessage
-                                defaultMessage="List of values to replace:"
-                                description="List of values to replace:"
-                                id="gui.menuBar.artie.help.incorrectInputValues"
-                            />
+                            defaultMessage="List of values to replace:"
+                            description="List of values to replace:"
+                            id="gui.menuBar.artie.help.incorrectInputValues"
+                        />
                     </Box>
                     <Box
                         className={styles.table}
@@ -128,15 +129,15 @@ class ArtieHelpComponent extends React.Component {
                 </Modal>
             );
         }
-        else{
-            return null;
-        }
+
+        return null;
+
     }
 
-};
+}
 
 ArtieHelpComponent.propTypes = {
-    onCancel: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired
 };
 
 export default injectIntl(ArtieHelpComponent);

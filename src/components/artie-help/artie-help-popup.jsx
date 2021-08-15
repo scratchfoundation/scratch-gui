@@ -16,8 +16,8 @@ const messages = defineMessages({
 const ArtieHelpPopupComponent = props => (
     <Modal
         className={styles.modalContent}
-        onRequestClose={props.onNo}
-        id="ArtieHelp"
+        onRequestClose={props.onSelectOption(false)}
+        id="ArtieHelpPopup"
         contentLabel={props.intl.formatMessage(messages.artieHelpModalTitle)}
     >
         <Box
@@ -32,7 +32,7 @@ const ArtieHelpPopupComponent = props => (
         <Box className={styles.buttonRow}>
             <button
                 className={styles.yesButton}
-                onClick={props.onYes}
+                onClick={props.onSelectOption(true)}
             >
                 <FormattedMessage
                     defaultMessage="Yes"
@@ -42,7 +42,7 @@ const ArtieHelpPopupComponent = props => (
             </button>
             <button
                 className={styles.noButton}
-                onClick={props.onNo}
+                onClick={props.onSelectOption(false)}
             >
                 <FormattedMessage
                     defaultMessage="No"
@@ -55,8 +55,7 @@ const ArtieHelpPopupComponent = props => (
 );
 
 ArtieHelpPopupComponent.propTypes = {
-    onYes: PropTypes.func,
-    onNo: PropTypes.func
+    onSelectOption: PropTypes.func
 };
 
 export default injectIntl(ArtieHelpPopupComponent);

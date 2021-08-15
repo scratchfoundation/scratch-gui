@@ -23,7 +23,7 @@ const initialState = {
     exercises: [],
     currentExercise: null,
     blocks: null,
-    active : false,
+    active: false,
     help: null,
     timeHelpReceived: null,
     secondsHelpOpen: 0,
@@ -36,108 +36,108 @@ const initialState = {
     popupEvaluation: false,
     popupStatement: false,
     evaluationStop: false
-}
+};
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
 
-        case ACTIVATE_ARTIE_EXERCISES:
-            return Object.assign({}, state, {
-                active: true
-            });
-        case DEACTIVATE_ARTIE_EXERCISES:
-            return Object.assign({}, state, {
-                active: false
-            });
-        case ARTIE_SET_CURRENT_EXERCISE:
-            return Object.assign({}, state, {
-                currentExercise: action.currentExercise
-            });
-        case ARTIE_SET_EXERCISES:
-            return Object.assign({}, state, {
-                exercises: action.exercises
-            });
-        case ARTIE_CLEAR_EXERCISES:
-            return Object.assign({}, state, {
-                exercises: [],
-                currentExercise: null,
-                needUpdate: false,
-                blocks: null
-            });
-        case ARTIE_RESET_SECONDS_HELP_OPEN:
-            return Object.assign({}, state, {
-                secondsHelpOpen: 0
-            });
-        case ARTIE_BLOCKS_UPDATED:
-            return Object.assign({}, state, {
-                blocks: action.blocks
-            });
-        case ARTIE_HELP_RECEIVED:
-            return Object.assign({}, state, {
-                help: action.help,
-                timeHelpReceived: action.timeHelpReceived,
-                secondsHelpOpen: 0
-            });
-        case ARTIE_CLEAR_HELP:
-            return Object.assign({}, state, {
-                help: null,
-                secondsHelpOpen: (action.timeHelpClosed - state.timeHelpReceived) / 1000,
-                timeHelpReceived: null,
-            });
-        case ARTIE_SENDING_SOLUTION:
-            return Object.assign({}, state, {
-                loadingSolution: action.loadingSolution,
-                informationSent: action.informationSent
-            });
-        case ARTIE_SENDING_EXERCISE:
-            return Object.assign({}, state, {
-                loadingExercise: action.loadingExercise,
-                informationSent: action.informationSent
-            });
-        case ARTIE_SENDING_HELP:
-            return Object.assign({}, state, {
-                loadingHelp: action.loadingHelp
-            });
-        case ARTIE_POPUP_SENT_SOLUTION:
-            return Object.assign({}, state, {
-                popupSolution: action.popupSolution
-            });
-        case ARTIE_POPUP_SENT_EXERCISE:
-            return Object.assign({}, state, {
-                popupExercise: action.popupExercise
-            });
-        case ARTIE_EVALUATION_STOP:
-            return Object.assign({}, state, {
-                evaluationStop: action.evaluationStop
-            });
-        case ARTIE_POPUP_EVALUATION:
-            return Object.assign({}, state, {
-                popupEvaluation: action.popupEvaluation
-            });
-        case ARTIE_POPUP_STATEMENT:
-            return Object.assign({}, state, {
-                popupStatement: action.popupStatement
-            });
-        default:
-            return state;
+    case ACTIVATE_ARTIE_EXERCISES:
+        return Object.assign({}, state, {
+            active: true
+        });
+    case DEACTIVATE_ARTIE_EXERCISES:
+        return Object.assign({}, state, {
+            active: false
+        });
+    case ARTIE_SET_CURRENT_EXERCISE:
+        return Object.assign({}, state, {
+            currentExercise: action.currentExercise
+        });
+    case ARTIE_SET_EXERCISES:
+        return Object.assign({}, state, {
+            exercises: action.exercises
+        });
+    case ARTIE_CLEAR_EXERCISES:
+        return Object.assign({}, state, {
+            exercises: [],
+            currentExercise: null,
+            needUpdate: false,
+            blocks: null
+        });
+    case ARTIE_RESET_SECONDS_HELP_OPEN:
+        return Object.assign({}, state, {
+            secondsHelpOpen: 0
+        });
+    case ARTIE_BLOCKS_UPDATED:
+        return Object.assign({}, state, {
+            blocks: action.blocks
+        });
+    case ARTIE_HELP_RECEIVED:
+        return Object.assign({}, state, {
+            help: action.help,
+            timeHelpReceived: action.timeHelpReceived,
+            secondsHelpOpen: 0
+        });
+    case ARTIE_CLEAR_HELP:
+        return Object.assign({}, state, {
+            help: null,
+            secondsHelpOpen: (action.timeHelpClosed - state.timeHelpReceived) / 1000,
+            timeHelpReceived: null
+        });
+    case ARTIE_SENDING_SOLUTION:
+        return Object.assign({}, state, {
+            loadingSolution: action.loadingSolution,
+            informationSent: action.informationSent
+        });
+    case ARTIE_SENDING_EXERCISE:
+        return Object.assign({}, state, {
+            loadingExercise: action.loadingExercise,
+            informationSent: action.informationSent
+        });
+    case ARTIE_SENDING_HELP:
+        return Object.assign({}, state, {
+            loadingHelp: action.loadingHelp
+        });
+    case ARTIE_POPUP_SENT_SOLUTION:
+        return Object.assign({}, state, {
+            popupSolution: action.popupSolution
+        });
+    case ARTIE_POPUP_SENT_EXERCISE:
+        return Object.assign({}, state, {
+            popupExercise: action.popupExercise
+        });
+    case ARTIE_EVALUATION_STOP:
+        return Object.assign({}, state, {
+            evaluationStop: action.evaluationStop
+        });
+    case ARTIE_POPUP_EVALUATION:
+        return Object.assign({}, state, {
+            popupEvaluation: action.popupEvaluation
+        });
+    case ARTIE_POPUP_STATEMENT:
+        return Object.assign({}, state, {
+            popupStatement: action.popupStatement
+        });
+    default:
+        return state;
     }
-}
+};
 
-const activateArtieExercises= () =>({
+const activateArtieExercises = () => ({
     type: ACTIVATE_ARTIE_EXERCISES
 });
 
-const deactivateArtieExercises = () =>({
+const deactivateArtieExercises = () => ({
     type: DEACTIVATE_ARTIE_EXERCISES
 });
 
-const artieSetExercises = (exercises) => ({
+const artieSetExercises = exercises => ({
     type: ARTIE_SET_EXERCISES,
     exercises: exercises
 });
 
-const artieSetCurrentExercise = (currentExercise) => ({
+const artieSetCurrentExercise = currentExercise => ({
     type: ARTIE_SET_CURRENT_EXERCISE,
     currentExercise: currentExercise
 });
@@ -147,10 +147,10 @@ const artieClearExercises = () => ({
 });
 
 const artieResetSecondsHelpOpen = () => ({
-   type: ARTIE_RESET_SECONDS_HELP_OPEN
+    type: ARTIE_RESET_SECONDS_HELP_OPEN
 });
 
-const artieBlocksUpdated = (blocks) => ({
+const artieBlocksUpdated = blocks => ({
     type: ARTIE_BLOCKS_UPDATED,
     blocks: blocks,
     needUpdate: false
@@ -162,7 +162,7 @@ const artieHelpReceived = (help, date) => ({
     timeHelpReceived: date
 });
 
-const artieClearHelp = (timeHelpClosed) => ({
+const artieClearHelp = timeHelpClosed => ({
     type: ARTIE_CLEAR_HELP,
     timeHelpClosed: timeHelpClosed
 });
@@ -179,32 +179,32 @@ const artieLoadingExercise = (loading, informationSent) => ({
     informationSent: informationSent
 });
 
-const artieLoadingHelp = (loading) => ({
+const artieLoadingHelp = loading => ({
     type: ARTIE_SENDING_HELP,
     loadingHelp: loading
 });
 
-const artiePopupSolution = (active) => ({
+const artiePopupSolution = active => ({
     type: ARTIE_POPUP_SENT_SOLUTION,
     popupSolution: active
 });
 
-const artiePopupExercise = (active) => ({
+const artiePopupExercise = active => ({
     type: ARTIE_POPUP_SENT_EXERCISE,
     popupExercise: active
 });
 
-const artiePopupEvaluation = (active) => ({
+const artiePopupEvaluation = active => ({
     type: ARTIE_POPUP_EVALUATION,
     popupEvaluation: active
 });
 
-const artiePopupStatement = (active) => ({
+const artiePopupStatement = active => ({
     type: ARTIE_POPUP_STATEMENT,
     popupStatement: active
 });
 
-const artieEvaluationStop = (stop) => ({
+const artieEvaluationStop = stop => ({
     type: ARTIE_EVALUATION_STOP,
     evaluationStop: stop
 });

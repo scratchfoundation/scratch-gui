@@ -145,13 +145,13 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState === 4) {
             if (xhr.status === 201 && xhr.response !== null) {
-                if (xhr.response !== '') {
+                if (xhr.response === '') {
+                    resolve(null);
+                } else {
                     const json = JSON.parse(xhr.response);
 
                     // If the response is not null, we send the parsed response
                     resolve(json.body.object);
-                } else {
-                    resolve(null);
                 }
             }
         }

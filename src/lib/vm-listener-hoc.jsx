@@ -14,6 +14,7 @@ import {setRunningState, setTurboState, setStartedState} from '../reducers/vm-st
 import {showExtensionAlert} from '../reducers/alerts';
 import {updateMicIndicator} from '../reducers/mic-indicator';
 import {artieBlocksUpdated, artieHelpReceived, artieResetSecondsHelpOpen} from '../reducers/artie-exercises';
+import {artieShowHelpPopup} from '../reducers/artie-help';
 import {sendBlockArtie} from '../lib/artie-api';
 
 /*
@@ -121,7 +122,7 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         handleBlockArtieUpdate (areBlocksOverGui) {
-            if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
+            if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
@@ -129,18 +130,18 @@ const vmListenerHOC = function (WrappedComponent) {
                         null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
-
+                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
                             }
                         });
 
-                    if(this.props.artieExercises.secondsHelpOpen > 0) {
+                    if (this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
                     }
                 }, 500);
             }
         }
-        handleProjectRunStart(){
-            if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
+        handleProjectRunStart (){
+            if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
@@ -148,18 +149,22 @@ const vmListenerHOC = function (WrappedComponent) {
                         null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                                // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
+                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
+                                // We show the help popup
+                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
                             }
                         });
-                    if(this.props.artieExercises.secondsHelpOpen > 0) {
+                    if (this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
                     }
                 }, 500);
             }
             this.props.onProjectRunStart();
         }
-        handleGreenFlag(){
-            if(this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
+        handleGreenFlag (){
+            if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
                     sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false,
@@ -167,10 +172,14 @@ const vmListenerHOC = function (WrappedComponent) {
                         null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                                // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
+                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
+                                // We show the help popup
+                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
                             }
                         });
-                    if(this.props.artieExercises.secondsHelpOpen > 0) {
+                    if (this.props.artieExercises.secondsHelpOpen > 0) {
                         this.props.onArtieResetSecondsHelpOpen();
                     }
                 }, 500);
@@ -200,9 +209,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 onTurboModeOff,
                 onTurboModeOn,
                 onShowExtensionAlert,
-                onArtieBlocksUpdated,
-                onArtieHelpReceived,
-                onArtieResetSecondsHelpOpen,
 
                 /* eslint-enable no-unused-vars */
                 ...props
@@ -252,6 +258,7 @@ const vmListenerHOC = function (WrappedComponent) {
         projectTitle: state.scratchGui.projectTitle,
         artieLogin: state.scratchGui.artieLogin,
         artieExercises: state.scratchGui.artieExercises,
+        artieHelp: state.scratchGui.artieHelp,
         sprites: state.scratchGui.targets.sprites
     });
     const mapDispatchToProps = dispatch => ({
@@ -264,15 +271,16 @@ const vmListenerHOC = function (WrappedComponent) {
         onBlockDragUpdate: (blocks, areBlocksOverGui) => {
             dispatch(updateBlockDrag(areBlocksOverGui));
         },
-        onArtieBlocksUpdated: (blocks) => {
+        onArtieBlocksUpdated: blocks => {
             dispatch(artieBlocksUpdated(blocks));
         },
-        onArtieHelpReceived: (help) => {
+        onArtieHelpReceived: help => {
             dispatch(artieHelpReceived(help, new Date()));
         },
-        onArtieResetSecondsHelpOpen: () =>{
+        onArtieResetSecondsHelpOpen: () => {
             dispatch(artieResetSecondsHelpOpen());
         },
+        onArtieShowHelpPopup: showHelpPopup => dispatch(artieShowHelpPopup(showHelpPopup)),
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onProjectChanged: () => dispatch(setProjectChanged()),

@@ -7,7 +7,9 @@ import ArtieLogin from '../components/artie-login/artie-login.jsx';
 import ArtieStudentData from './artie-student-data-popup.jsx';
 import ArtieExercises from '../components/artie-exercises/artie-exercises.jsx';
 import ArtieHelp from './artie-help.jsx';
+import ArtieHelpPopup from './artie-help-popup.jsx';
 import ArtieExercisePopup from './artie-exercises-popup.jsx';
+
 import {
     artieError,
     artieLogged,
@@ -25,6 +27,7 @@ import {
     artieHelpReceived,
     artiePopupStatement
 } from '../reducers/artie-exercises';
+import lastHelpRequest, {artieShowHelpPopup} from '../reducers/artie-help.js';
 import {compose} from 'redux';
 import {injectIntl} from 'react-intl';
 
@@ -44,7 +47,8 @@ class ArtieFlow extends React.Component {
             artieStudentDataComponent: false,
             artieExercisesComponent: false,
             artieHelpComponent: false,
-            artiePopupComponent: false
+            artiePopupComponent: false,
+            artieHelpPopupComponent: false
         };
         bindAll(this, [
             'flow',
@@ -76,6 +80,7 @@ class ArtieFlow extends React.Component {
         let artieStudentDataComponent = nextState.artieStudentDataComponent;
         let artieExercisesComponent = nextState.artieExercisesComponent;
         let artieHelpComponent = nextState.artieHelpComponent;
+        let artieHelpPopupComponent = nextState.artieHelpPopupComponent;
         let artiePopupComponent = nextState.artiePopupComponent;
         let changes = false;
 
@@ -89,10 +94,12 @@ class ArtieFlow extends React.Component {
             if (nextProps.artieLogin !== undefined &&
                 (nextProps.artieLogin.user === undefined || nextProps.artieLogin.user === null ||
                     (nextProps.artieLogin.user.role === 0 && nextProps.artieLogin.students === []))) {
+
                 artieLoginComponent = true;
                 artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
+                artieHelpPopupComponent = false;
                 artiePopupComponent = false;
                 changes = true;
             }
@@ -109,10 +116,12 @@ class ArtieFlow extends React.Component {
             if (currentStudent !== null && currentStudent !== undefined &&
                 (currentStudent.gender === undefined || currentStudent.gender === 0 || currentStudent.motherTongue === 0 ||
                  currentStudent.age === undefined || currentStudent.age === 0)){
+
                 artieLoginComponent = false;
                 artieStudentDataComponent = true;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
+                artieHelpPopupComponent = false;
                 artiePopupComponent = false;
                 changes = true;
             }
@@ -132,6 +141,7 @@ class ArtieFlow extends React.Component {
                 artieStudentDataComponent = false;
                 artieExercisesComponent = true;
                 artieHelpComponent = false;
+                artieHelpPopupComponent = false;
                 artiePopupComponent = false;
                 changes = true;
             }
@@ -151,6 +161,7 @@ class ArtieFlow extends React.Component {
                 artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = true;
+                artieHelpPopupComponent = false;
                 artiePopupComponent = false;
                 changes = true;
             }
@@ -163,13 +174,59 @@ class ArtieFlow extends React.Component {
             }
         }
 
-        // 5- Checks if we must show the popup component or not
-        if (!nextState.artiePopupComponent && !nextState.artieExercisesComponent && !nextState.artieHelpComponent && !nextState.artieStudentDataComponent){
-            if ((currentStudent !== null && (currentStudent.competence === undefined || currentStudent.competence === 0)) || popupActivation) {
+        // 5- Checks if we must show the help popup or not
+        if (!nextState.artieHelpPopupComponent && !nextState.artieHelpComponent){
+            // If we must show the help and there are any last answer, we show the help popup
+            if (nextProps.artieHelp !== null &&
+                nextProps.artieHelp.showHelpPopup &&
+                nextProps.artieHelp.lastHelpRequest === null){
+
                 artieLoginComponent = false;
                 artieStudentDataComponent = false;
                 artieExercisesComponent = false;
                 artieHelpComponent = false;
+                artieHelpPopupComponent = true;
+                artiePopupComponent = false;
+                changes = true;
+            } else if (nextProps.artieHelp !== null &&
+                        nextProps.artieHelp.showHelpPopup){
+
+                // If the must show the help and there are a last answer, we calculate the time before the last answer
+                const currentDate = new Date();
+                const lastAnswerDate = new Date(nextProps.artieHelp.lastHelpRequest);
+                const diffInMinutes = Math.abs(currentDate - lastAnswerDate) / (1000 * 60);
+
+                // If the difference are over 2 minutes, we show the help popup component
+                if (diffInMinutes > 2) {
+                    artieLoginComponent = false;
+                    artieStudentDataComponent = false;
+                    artieExercisesComponent = false;
+                    artieHelpComponent = false;
+                    artieHelpPopupComponent = true;
+                    artiePopupComponent = false;
+                    changes = true;
+                }
+            }
+        } else if (nextState.artieHelpPopupComponent){
+            if (!nextProps.artieHelp.showHelpPopup) {
+                artieHelpPopupComponent = false;
+                changes = true;
+            }
+        }
+
+        // 6- Checks if we must show the popup component or not
+        if (!nextState.artiePopupComponent && !nextState.artieExercisesComponent &&
+            !nextState.artieHelpPopupComponent && !nextState.artieHelpComponent &&
+            !nextState.artieStudentDataComponent){
+            if ((currentStudent !== null &&
+                (currentStudent.competence === undefined || currentStudent.competence === 0)) ||
+                popupActivation) {
+
+                artieLoginComponent = false;
+                artieStudentDataComponent = false;
+                artieExercisesComponent = false;
+                artieHelpComponent = false;
+                artieHelpPopupComponent = false;
                 artiePopupComponent = true;
                 changes = true;
 
@@ -186,6 +243,7 @@ class ArtieFlow extends React.Component {
                 artieStudentDataComponent: artieStudentDataComponent,
                 artieExercisesComponent: artieExercisesComponent,
                 artieHelpComponent: artieHelpComponent,
+                artieHelpPopupComponent: artieHelpPopupComponent,
                 artiePopupComponent: artiePopupComponent
             });
         }
@@ -198,8 +256,8 @@ class ArtieFlow extends React.Component {
         if (artieLogin !== undefined && artieLogin !== null){
             return artieLogin.currentStudent;
         }
-        return null;
 
+        return null;
     }
 
     /**
@@ -388,6 +446,12 @@ class ArtieFlow extends React.Component {
                 passwordLogin={passwordLogin}
             />);
         }
+
+        // 6- Checks if the component must show the help popup or not
+        if (this.state.artieHelpComponent){
+            return (<ArtieHelpPopup />);
+        }
+
         return null;
 
     }
@@ -395,7 +459,8 @@ class ArtieFlow extends React.Component {
 
 const mapStateToProps = state => ({
     artieLogin: state.scratchGui.artieLogin,
-    artieExercises: state.scratchGui.artieExercises
+    artieExercises: state.scratchGui.artieExercises,
+    artieHelp: state.scratchGui.artieHelp
 });
 
 const mapDispatchToProps = dispatch => ({

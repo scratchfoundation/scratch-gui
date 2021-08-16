@@ -4,7 +4,7 @@ const ANSWER_ARTIE_HELP_POPUP = 'scratch-gui/artie-exercises/ANSWER_ARTIE_HELP_P
 const initialState = {
     showHelpPopup: false,
     answerHelpPopup: null,
-    lastAnswer: null
+    lastHelpRequest: null
 };
 
 const reducer = function (state, action) {
@@ -17,7 +17,7 @@ const reducer = function (state, action) {
     case ANSWER_ARTIE_HELP_POPUP:
         return Object.assign({}, state, {
             answerHelpPopup: action.answerHelpPopup,
-            lastAnswer: action.lastAnswer
+            lastHelpRequest: action.lastHelpRequest
         });
     default:
         return state;
@@ -28,9 +28,9 @@ const artieShowHelpPopup = showHelpPopup => ({
     showHelpPopup: showHelpPopup
 });
 
-const artieAnswerHelpPopup = (answerHelp, lastAnswer) => ({
+const artieAnswerHelpPopup = (answerHelp, lastHelpRequest) => ({
     answerHelp: answerHelp,
-    lastAnswer: lastAnswer
+    lastHelpRequest: lastHelpRequest
 });
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '../../containers/modal.jsx';
 import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
 import styles from './artie-help.css';
-import Box from '../box/box';
+import Box from '../box/box.jsx';
 import PropTypes from 'prop-types';
 
 const messages = defineMessages({

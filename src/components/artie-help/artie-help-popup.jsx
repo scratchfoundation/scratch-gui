@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../../containers/modal.jsx';
 import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
-import styles from './artie-help.css';
+import styles from './artie-help-popup.css';
 import Box from '../box/box.jsx';
 import PropTypes from 'prop-types';
 
@@ -20,36 +20,38 @@ const ArtieHelpPopupComponent = props => (
         id="ArtieHelpPopup"
         contentLabel={props.intl.formatMessage(messages.artieHelpModalTitle)}
     >
-        <Box
-            className={styles.label}
-        >
-            <FormattedMessage
-                defaultMessage="Do you need help?"
-                description="Do you need help?"
-                id="gui.artie.help.question"
-            />
-        </Box>
-        <Box className={styles.buttonRow}>
-            <button
-                className={styles.yesButton}
-                onClick={props.onYesClick}
+        <Box className={styles.body}>
+            <Box
+                className={styles.label}
             >
                 <FormattedMessage
-                    defaultMessage="Yes"
-                    description="Yes"
-                    id="gui.artie.yes"
+                    defaultMessage="Do you need help?"
+                    description="Do you need help?"
+                    id="gui.artie.help.question"
                 />
-            </button>
-            <button
-                className={styles.noButton}
-                onClick={props.onNoClick}
-            >
-                <FormattedMessage
-                    defaultMessage="No"
-                    description="No"
-                    id="gui.artie.no"
-                />
-            </button>
+            </Box>
+            <Box className={styles.buttonRow}>
+                <button
+                    className={styles.yesButton}
+                    onClick={props.onYesClick}
+                >
+                    <FormattedMessage
+                        defaultMessage="Yes"
+                        description="Yes"
+                        id="gui.artie.yes"
+                    />
+                </button>
+                <button
+                    className={styles.noButton}
+                    onClick={props.onNoClick}
+                >
+                    <FormattedMessage
+                        defaultMessage="No"
+                        description="No"
+                        id="gui.artie.no"
+                    />
+                </button>
+            </Box>
         </Box>
     </Modal>
 );

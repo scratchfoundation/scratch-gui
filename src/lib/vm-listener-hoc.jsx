@@ -148,7 +148,8 @@ const vmListenerHOC = function (WrappedComponent) {
                         false, this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
                         null, null)
                         .then(responseBodyObject => {
-                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
+                                responseBodyObject.needHelp){
                                 // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
                             } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
@@ -171,7 +172,8 @@ const vmListenerHOC = function (WrappedComponent) {
                         this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
                         null, null)
                         .then(responseBodyObject => {
-                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null){
+                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
+                                responseBodyObject.needHelp){
                                 // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
                             } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){

@@ -25,10 +25,12 @@ const reducer = function (state, action) {
 };
 
 const artieShowHelpPopup = showHelpPopup => ({
+    type: SHOW_ARTIE_HELP_POPUP,
     showHelpPopup: showHelpPopup
 });
 
 const artieAnswerHelpPopup = (answerHelp, lastHelpRequest) => ({
+    type: ANSWER_ARTIE_HELP_POPUP,
     answerHelp: answerHelp,
     lastHelpRequest: lastHelpRequest
 });

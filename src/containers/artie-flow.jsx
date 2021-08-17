@@ -456,7 +456,7 @@ class ArtieFlow extends React.Component {
         }
 
         // 6- Checks if the component must show the help popup or not
-        if (this.state.artieHelpComponent){
+        if (this.state.artieHelpPopupComponent){
             return (<ArtieHelpPopup />);
         }
 

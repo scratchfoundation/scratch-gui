@@ -1,5 +1,5 @@
 import ArtieHelpPopupComponent from '../components/artie-help/artie-help-popup.jsx';
-import artieShowHelpPopup, {artieAnswerHelpPopup} from '../reducers/artie-help.js';
+import {artieShowHelpPopup, artieAnswerHelpPopup} from '../reducers/artie-help.js';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import {compose} from 'redux';
@@ -14,13 +14,21 @@ class ArtieHelpPopup extends React.Component {
             currentDateTime: Date().toLocaleString()
         };
         bindAll(this, [
-            'handleAnswerHelpPopup'
+            'handleAnswerYes',
+            'handleAnswerNo'
         ]);
     }
 
-    handleAnswerHelpPopup (answer){
+    handleAnswerYes () {
         // We register the user option
-        this.props.onAnswerHelpPopup(answer, this.state.currentDateTime);
+        this.props.onAnswerHelpPopup(true, this.state.currentDateTime);
+        // We hide the popup once the user has been selected the desired option
+        this.props.onHideHelpPopup();
+    }
+
+    handleAnswerNo () {
+        // We register the user option
+        this.props.onAnswerHelpPopup(false, this.state.currentDateTime);
         // We hide the popup once the user has been selected the desired option
         this.props.onHideHelpPopup();
     }
@@ -28,7 +36,8 @@ class ArtieHelpPopup extends React.Component {
     render () {
         return (
             <ArtieHelpPopupComponent
-                onSelectOption={this.handleAnswerHelpPopup}
+                onYesClick={this.handleAnswerYes}
+                onNoClick={this.handleAnswerNo}
             />
         );
     }

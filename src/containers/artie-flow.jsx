@@ -179,7 +179,7 @@ class ArtieFlow extends React.Component {
         }
 
         // 5- Checks if we must show the help popup or not
-        if (!nextState.artieHelpPopupComponent && !nextState.artieHelpComponent){
+        if (!nextState.artieHelpPopupComponent && !artieHelpComponent && artieExercisesComponent){
             // If we must show the help and there are any last answer, we show the help popup
             if (nextProps.artieHelp !== null &&
                 nextProps.artieHelp.showHelpPopup &&
@@ -289,8 +289,8 @@ class ArtieFlow extends React.Component {
                     (
                         artieExercises.evaluationStop ||
                         artieExercises.popupEvaluation || artieExercises.popupExercise ||
-                        artieExercises.popupSolution || (artieExercises.help !== null &&
-                                                            artieExercises.help.totalDistance === 0) ||
+                        artieExercises.popupSolution ||
+                        (artieExercises.help !== null && artieExercises.help.totalDistance === 0) ||
                         artieExercises.popupStatement
                     )
         );

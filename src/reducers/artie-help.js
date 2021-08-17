@@ -29,9 +29,9 @@ const artieShowHelpPopup = showHelpPopup => ({
     showHelpPopup: showHelpPopup
 });
 
-const artieAnswerHelpPopup = (answerHelp, lastHelpRequest) => ({
+const artieAnswerHelpPopup = (answerHelpPopup, lastHelpRequest) => ({
     type: ANSWER_ARTIE_HELP_POPUP,
-    answerHelp: answerHelp,
+    answerHelpPopup: answerHelpPopup,
     lastHelpRequest: lastHelpRequest
 });
 

@@ -25,15 +25,16 @@ class ArtieLoginComponent extends React.Component {
             });
         }
 
-        if(this.state.students !== newProps.artieLogin.students){
+        if (this.state.students !== newProps.artieLogin.students){
 
-            var students = [{id: "", value: ""}]
+            const students = [{id: '', value: ''}];
             newProps.artieLogin.students.forEach(student => {
 
-                if(student.studentNumber !== undefined && student.studentNumber !== null && student.studentNumber !== "" ){
-                    students.push({id: student.id, value: student.studentNumber})
-                }else{
-                    students.push({id: student.id, value: student.name.concat(" ", student.lastName)})
+                if (student.studentNumber !== undefined && student.studentNumber !== null &&
+                    student.studentNumber !== ''){
+                    students.push({id: student.id, value: student.studentNumber});
+                } else {
+                    students.push({id: student.id, value: student.name.concat(' ', student.lastName)});
                 }
             });
 
@@ -49,11 +50,13 @@ class ArtieLoginComponent extends React.Component {
         }
     }
 
-    render(){
+    render (){
 
-        if(this.props.artieLogin === null || this.props.artieLogin === undefined || this.props.artieLogin.user===null || 
-            (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) || this.props.artieLogin.active){
-            return(
+        // eslint-disable-next-line max-len
+        if (this.props.artieLogin === null || this.props.artieLogin === undefined || this.props.artieLogin.user === null ||
+            (this.props.artieLogin.user.role === 0 && this.props.artieLogin.currentStudent === null) ||
+            this.props.artieLogin.active){
+            return (
                 <Modal
                     onRequestClose={this.props.onCancel}
                     className={styles.modalContent}
@@ -62,12 +65,11 @@ class ArtieLoginComponent extends React.Component {
                 >
                     <Box className={styles.body}>
                         <Box>
-                            {this.state.error !== "" ?
+                            {this.state.error === '' ?
+                                null :
                                 <div className={styles.statusMessage}>
                                     {this.state.error}
                                 </div>
-                            :
-                                null
                             }
                         </Box>
                         <Box>
@@ -110,37 +112,42 @@ class ArtieLoginComponent extends React.Component {
                                         id="gui.menuBar.artie.login.student"
                                     />
                                     <Select
-                                        autofocus={true}
+                                        autofocus
                                         data={this.state.students}
                                         onChange={this.props.onStudentChange}
                                     />
                                 </label>
-                            </Box>
-                        :
+                            </Box> :
                             null
                         }
                         <Box className={styles.buttonRow}>
-                            <button className={styles.cancelButton} onClick={this.props.onCancel}>
+                            <button
+                                className={styles.cancelButton}
+                                onClick={this.props.onCancel}
+                            >
                                 <FormattedMessage
-                                        defaultMessage="Cancel"
-                                        description="Button in prompt for cancelling the dialog"
-                                        id="gui.menuBar.artie.login.cancel"
-                                    />
+                                    defaultMessage="Cancel"
+                                    description="Button in prompt for cancelling the dialog"
+                                    id="gui.menuBar.artie.login.cancel"
+                                />
                             </button>
-                            <button className={styles.okButton} onClick={this.props.onOk}>
+                            <button
+                                className={styles.okButton}
+                                onClick={this.props.onOk}
+                            >
                                 <FormattedMessage
-                                        defaultMessage="OK"
-                                        description="Button in prompt for confirming the dialog"
-                                        id="gui.menuBar.artie.login.ok"
-                                    />
+                                    defaultMessage="OK"
+                                    description="Button in prompt for confirming the dialog"
+                                    id="gui.menuBar.artie.login.ok"
+                                />
                             </button>
                         </Box>
                     </Box>
                 </Modal>
             );
-        }else{
-            return null;
         }
+        return null;
+
     }
 }
 
@@ -149,9 +156,6 @@ ArtieLoginComponent.propTypes = {
     onUserChange: PropTypes.func,
     onPasswordChange: PropTypes.func,
     onStudentChange: PropTypes.func,
-    title: PropTypes.string.isRequired,
-    students: PropTypes.array,
-    artieLogin: PropTypes.object,
-    error: PropTypes.string
+    title: PropTypes.string.isRequired
 };
 export default ArtieLoginComponent;

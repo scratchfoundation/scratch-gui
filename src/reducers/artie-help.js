@@ -2,6 +2,7 @@ const SHOW_ARTIE_HELP_POPUP = 'scratch-gui/artie-help/SHOW_ARTIE_HELP_POPUP';
 const ANSWER_ARTIE_HELP_POPUP = 'scratch-gui/artie-exercises/ANSWER_ARTIE_HELP_POPUP';
 
 const initialState = {
+    id: null,
     showHelpPopup: false,
     answerHelpPopup: null,
     lastHelpRequest: null
@@ -12,6 +13,7 @@ const reducer = function (state, action) {
     switch (action.type) {
     case SHOW_ARTIE_HELP_POPUP:
         return Object.assign({}, state, {
+            id: action.id,
             showHelpPopup: action.showHelpPopup
         });
     case ANSWER_ARTIE_HELP_POPUP:
@@ -24,8 +26,9 @@ const reducer = function (state, action) {
     }
 };
 
-const artieShowHelpPopup = showHelpPopup => ({
+const artieShowHelpPopup = (id, showHelpPopup) => ({
     type: SHOW_ARTIE_HELP_POPUP,
+    id: id,
     showHelpPopup: showHelpPopup
 });
 

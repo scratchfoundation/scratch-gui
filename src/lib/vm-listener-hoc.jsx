@@ -130,7 +130,7 @@ const vmListenerHOC = function (WrappedComponent) {
                         null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
-                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
+                                this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
                             }
                         });
 
@@ -154,7 +154,7 @@ const vmListenerHOC = function (WrappedComponent) {
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
                             } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
                                 // We show the help popup
-                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
+                                this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
                             }
                         });
                     if (this.props.artieExercises.secondsHelpOpen > 0) {
@@ -178,7 +178,7 @@ const vmListenerHOC = function (WrappedComponent) {
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
                             } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
                                 // We show the help popup
-                                this.props.onArtieShowHelpPopup(responseBodyObject.predictedNeedHelp);
+                                this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
                             }
                         });
                     if (this.props.artieExercises.secondsHelpOpen > 0) {
@@ -282,7 +282,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onArtieResetSecondsHelpOpen: () => {
             dispatch(artieResetSecondsHelpOpen());
         },
-        onArtieShowHelpPopup: showHelpPopup => dispatch(artieShowHelpPopup(showHelpPopup)),
+        onArtieShowHelpPopup: (id, showHelpPopup) => dispatch(artieShowHelpPopup(id, showHelpPopup)),
         onProjectRunStart: () => dispatch(setRunningState(true)),
         onProjectRunStop: () => dispatch(setRunningState(false)),
         onProjectChanged: () => dispatch(setProjectChanged()),

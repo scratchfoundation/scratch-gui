@@ -196,6 +196,24 @@ const sendSolutionArtie = (userId, sprites, exercise, screenShot, binary) => new
     xhr.send(params);
 });
 
+const updateAnsweredNeedHelp = (id, answeredNeedHelp) => new Promise((resolve) => {
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 202 && xhr.response !== null) {
+                const json = JSON.parse(xhr.response);
+                resolve(json.body.message);
+            }
+        }
+    });
+
+    xhr.open('PUT', `${_pedagogialWebUrl}/api/v1/pedagogicalsoftware/update/answeredNeedHelp?id=${id}&answeredNeedHelp=${answeredNeedHelp}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
+    xhr.send();
+});
+
+
 const loginArtie = (userName, password) => new Promise((resolve, reject) => {
 
     const xhr = new XMLHttpRequest();
@@ -308,6 +326,6 @@ const updateStudentData = (studentId, gender, motherTongue, age) => new Promise(
     xhr.send();
 });
 
-export {sendBlockArtie, sendSolutionArtie, loginArtie, getArtieStudents,
-    getArtieExercises, getAllArtieExercises, updateStudentCompetence,
+export {sendBlockArtie, sendSolutionArtie, updateAnsweredNeedHelp, loginArtie,
+    getArtieStudents, getArtieExercises, getAllArtieExercises, updateStudentCompetence,
     updateStudentData};

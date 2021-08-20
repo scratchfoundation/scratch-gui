@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Alerts/Check</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Alerts/Check" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M15.224782,4.51424732 C15.8244301,3.86519582 16.8367012,3.82514645 17.4857527,4.42479455 C18.1348042,5.02444265 18.1748535,6.03671368 17.5752055,6.68576518 L9.4450369,15.4857566 C8.81157357,16.1714093 7.72807682,16.1714093 7.09461349,15.4857566 L2.42479455,10.4312037 C1.82514645,9.78215224 1.86519582,8.76988121 2.51424732,8.17023311 C3.16329883,7.57058501 4.17556986,7.61063439 4.77521796,8.25968589 L8.26982519,12.0422045 L15.224782,4.51424732 Z" id="Check" fill="#0EBD8C" fill-rule="nonzero"></path>
+    </g>
+</svg>

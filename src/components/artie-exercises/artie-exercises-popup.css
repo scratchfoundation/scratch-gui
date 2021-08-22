@@ -103,6 +103,7 @@
     border: 1px solid $ui-black-transparent;
     font-weight: 600;
     font-size: 0.85rem;
+    cursor: pointer;
 }
 
 .button-row button.ok-button {

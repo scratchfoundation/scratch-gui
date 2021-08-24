@@ -35,7 +35,8 @@ const initialState = {
     popupExercise: false,
     popupEvaluation: false,
     popupStatement: false,
-    evaluationStop: false
+    evaluationStop: false,
+    lastExerciseChange: null
 };
 
 const reducer = function (state, action) {
@@ -52,7 +53,8 @@ const reducer = function (state, action) {
         });
     case ARTIE_SET_CURRENT_EXERCISE:
         return Object.assign({}, state, {
-            currentExercise: action.currentExercise
+            currentExercise: action.currentExercise,
+            lastExerciseChange: action.lastExerciseChange
         });
     case ARTIE_SET_EXERCISES:
         return Object.assign({}, state, {
@@ -137,9 +139,10 @@ const artieSetExercises = exercises => ({
     exercises: exercises
 });
 
-const artieSetCurrentExercise = currentExercise => ({
+const artieSetCurrentExercise = (currentExercise, lastExerciseChange) => ({
     type: ARTIE_SET_CURRENT_EXERCISE,
-    currentExercise: currentExercise
+    currentExercise: currentExercise,
+    lastExerciseChange: lastExerciseChange
 });
 
 const artieClearExercises = () => ({

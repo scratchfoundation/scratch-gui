@@ -274,7 +274,7 @@ class ArtieExercisePopup extends React.Component {
         const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
 
         // Updating the store to set the current exercise
-        this.props.onArtieSetCurrentExercise(nextExercise);
+        this.props.onArtieSetCurrentExercise(nextExercise, Date.now());
 
         // Closing this popup and showing the next one
         this.props.onArtiePopupEvaluation(true);
@@ -308,7 +308,7 @@ class ArtieExercisePopup extends React.Component {
     onArtieExercisesLoaded (exercises){
         this.props.onArtieSetExercises(exercises);
         this.props.onArtieEvaluationStop(false);
-        this.props.onArtieSetCurrentExercise(null);
+        this.props.onArtieSetCurrentExercise(null, null);
     }
 
     handleEvaluationStopCancelClick (){
@@ -335,7 +335,7 @@ class ArtieExercisePopup extends React.Component {
                     this.props.artieExercises.exercises);
 
                 // Updating the store to set the current exercise
-                this.props.onArtieSetCurrentExercise(nextExercise);
+                this.props.onArtieSetCurrentExercise(nextExercise, Date.now());
 
                 // If we have a next evaluations
                 if (nextExercise === null) {
@@ -443,7 +443,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onCloseSentSolution: () => dispatch(artiePopupSolution(false)),
     onCloseSentExercise: () => dispatch(artiePopupExercise(false)),
-    onArtieSetCurrentExercise: currentExercise => dispatch(artieSetCurrentExercise(currentExercise)),
+    onArtieSetCurrentExercise: (currentExercise, date) => dispatch(artieSetCurrentExercise(currentExercise, date)),
     onArtiePopupEvaluation: active => dispatch(artiePopupEvaluation(active)),
     onArtieEvaluationStop: stop => dispatch(artieEvaluationStop(stop)),
     onArtieSetCurrentStudent: currentStudent => dispatch(artieSetCurrentStudent(currentStudent)),

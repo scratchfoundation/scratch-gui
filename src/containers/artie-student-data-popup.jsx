@@ -85,7 +85,7 @@ class ArtieStudentDataPopup extends React.Component {
         this.props.student.gender = this.state.gender;
         this.props.student.motherTongue = this.state.motherTongue;
         this.props.student.age = this.state.age;
-        this.props.onArtieSetCurrentStudent(this.props.student);
+        this.props.onArtieSetCurrentStudent(this.props.student, Date.now());
     }
 
     handleOnCancelClick (){}

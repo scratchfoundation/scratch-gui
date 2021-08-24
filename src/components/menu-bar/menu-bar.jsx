@@ -85,15 +85,14 @@ import sharedMessages from '../../lib/shared-messages';
 
 import {sendSolutionArtie, sendBlockArtie} from '../../lib/artie-api';
 import {activateArtieLogin, artieLogout} from '../../reducers/artie-login';
-import {activateArtieExercises, artieSetCurrentExercise, artieClearExercises,
+import {activateArtieExercises, artieClearExercises,
     artieHelpReceived, artieLoadingSolution, artieLoadingExercise, artieLoadingHelp,
-    artiePopupExercise, artiePopupSolution, artieEvaluationStop, artiePopupStatement, artieResetSecondsHelpOpen} from '../../reducers/artie-exercises';
+    artiePopupExercise, artieEvaluationStop, artiePopupStatement, artieResetSecondsHelpOpen} from '../../reducers/artie-exercises';
 import ArtieFlow from '../../containers/artie-flow.jsx';
 import {ArtieExerciseStatementTooltip} from '../artie-exercises/artie-exercises-statement.jsx';
 
 import html2canvas from 'html2canvas';
 import Spinner from '../spinner/spinner.jsx';
-import downloadBlob from '../../lib/download-blob';
 
 const ariaMessages = defineMessages({
     language: {
@@ -1205,14 +1204,12 @@ const mapDispatchToProps = dispatch => ({
     onArtieLogout: () => dispatch(artieLogout()),
     onArtieClearExercises: () => dispatch(artieClearExercises()),
     onArtieResetSecondsHelpOpen: () => dispatch(artieResetSecondsHelpOpen()),
-    onArtieSetCurrentExercise: currentExercise => dispatch(artieSetCurrentExercise(currentExercise)),
     onActivateArtieExercises: () => dispatch(activateArtieExercises()),
     onArtieHelpReceived: help => dispatch(artieHelpReceived(help, new Date())),
     onArtieLoadingSolution: (loading, sent) => dispatch(artieLoadingSolution(loading, sent)),
     onArtieLoadingExercise: (loading, sent) => dispatch(artieLoadingExercise(loading, sent)),
     onArtieLoadingHelp: loading => dispatch(artieLoadingHelp(loading)),
     onArtieExerciseSentPopupOpen: active => dispatch(artiePopupExercise(active)),
-    onArtieSolutionSentPopupOpen: active => dispatch(artiePopupSolution(active)),
     onArtieEvaluationStop: stop => dispatch(artieEvaluationStop(stop)),
     onArtiePopupStatement: active => dispatch(artiePopupStatement(active))
 });

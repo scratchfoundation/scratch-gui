@@ -394,7 +394,7 @@ class ArtieFlow extends React.Component {
     handleClickArtieExercisesOk (){
         // Searches for the exercise object in base of the exerciseId selected
         const exercise = this.props.artieExercises.exercises.filter(e => e.id == exerciseId)[0];
-        this.props.onArtieSetCurrentExercise(exercise);
+        this.props.onArtieSetCurrentExercise(exercise, Date.now());
         this.props.onDeactivateArtieExercises();
 
         // Shows the popup with the statement
@@ -484,7 +484,7 @@ const mapDispatchToProps = dispatch => ({
     // 2- Exercises properties
     onArtieSetExercises: exercises => dispatch(artieSetExercises(exercises)),
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
-    onArtieSetCurrentExercise: currentExercise => dispatch(artieSetCurrentExercise(currentExercise)),
+    onArtieSetCurrentExercise: (currentExercise, date) => dispatch(artieSetCurrentExercise(currentExercise, date)),
     onArtiePopupStatement: active => dispatch(artiePopupStatement(active)),
 
     // 3- Help properties

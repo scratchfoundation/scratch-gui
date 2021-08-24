@@ -394,7 +394,16 @@ class ArtieFlow extends React.Component {
     handleClickArtieExercisesOk (){
         // Searches for the exercise object in base of the exerciseId selected
         const exercise = this.props.artieExercises.exercises.filter(e => e.id == exerciseId)[0];
-        this.props.onArtieSetCurrentExercise(exercise, Date.now());
+        const options = {year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'UTC',
+            timeZoneName: 'short'};
+        const date = new Date().toLocaleDateString('es-ES', options);
+        this.props.onArtieSetCurrentExercise(exercise, date);
         this.props.onDeactivateArtieExercises();
 
         // Shows the popup with the statement

@@ -274,7 +274,16 @@ class ArtieExercisePopup extends React.Component {
         const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
 
         // Updating the store to set the current exercise
-        this.props.onArtieSetCurrentExercise(nextExercise, Date.now());
+        const options = {year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'UTC',
+            timeZoneName: 'short'};
+        const date = new Date().toLocaleDateString('es-ES', options);
+        this.props.onArtieSetCurrentExercise(nextExercise, date);
 
         // Closing this popup and showing the next one
         this.props.onArtiePopupEvaluation(true);
@@ -335,7 +344,16 @@ class ArtieExercisePopup extends React.Component {
                     this.props.artieExercises.exercises);
 
                 // Updating the store to set the current exercise
-                this.props.onArtieSetCurrentExercise(nextExercise, Date.now());
+                const options = {year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    timeZone: 'UTC',
+                    timeZoneName: 'short'};
+                const date = new Date().toLocaleDateString('es-ES', options);
+                this.props.onArtieSetCurrentExercise(nextExercise, date);
 
                 // If we have a next evaluations
                 if (nextExercise === null) {

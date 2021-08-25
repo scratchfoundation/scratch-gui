@@ -119,7 +119,8 @@ const _nestedInputsHandler = (parent, inputId, inputName, blocks) => {
     return artieParent;
 }
 
-const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin, screenShot, binary) => new Promise((resolve) => {
+const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen, finishedExercise, lastLogin,
+    lastExerciseChange, screenShot, binary) => new Promise((resolve) => {
 
     const spriteElements = [];
 
@@ -136,6 +137,7 @@ const sendBlockArtie = (student, sprites, exercise, requestHelp, secondsHelpOpen
         secondsHelpOpen: secondsHelpOpen,
         finishedExercise: finishedExercise,
         lastLogin: lastLogin,
+        lastExerciseChange: lastExerciseChange,
         screenShot: screenShot,
         binary: binary,
         elements: spriteElements};

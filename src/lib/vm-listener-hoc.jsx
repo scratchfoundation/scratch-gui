@@ -125,9 +125,10 @@ const vmListenerHOC = function (WrappedComponent) {
             if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
-                        false, this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null)
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites,
+                        this.props.artieExercises.currentExercise, false,
+                        this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
+                        this.props.artieExercises.lastExerciseChange,null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
                                 this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
@@ -144,9 +145,10 @@ const vmListenerHOC = function (WrappedComponent) {
             if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise,
-                        false, this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null)
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites,
+                        this.props.artieExercises.currentExercise,false,
+                        this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
+                        this.props.artieExercises.lastExerciseChange,null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
                                 responseBodyObject.needHelp){
@@ -168,9 +170,10 @@ const vmListenerHOC = function (WrappedComponent) {
             if (this.props.artieLogin.currentStudent !== null && this.props.artieExercises.currentExercise !== null){
                 setTimeout(() => {
                     this.props.onArtieBlocksUpdated(this.props.vm.editingTarget.blocks._blocks);
-                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, false,
+                    sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites,
+                        this.props.artieExercises.currentExercise, false,
                         this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-                        null, null)
+                        this.props.artieExercises.lastExerciseChange, null, null)
                         .then(responseBodyObject => {
                             if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
                                 responseBodyObject.needHelp){

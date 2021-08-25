@@ -393,9 +393,10 @@ class MenuBar extends React.Component {
     }
     handleClickRequestHelp (){
         this.props.onArtieLoadingHelp(true);
-        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites, this.props.artieExercises.currentExercise, true,
+        sendBlockArtie(this.props.artieLogin.currentStudent, this.props.sprites,
+            this.props.artieExercises.currentExercise, true,
             this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
-            null, null)
+            this.props.artieExercises.lastExerciseChange, null, null)
             .then(responseBodyObject => {
 
                 // Stops the loading help
@@ -425,6 +426,7 @@ class MenuBar extends React.Component {
             const currentExercise = this.props.artieExercises.currentExercise;
             const secondsHelpOpen = this.props.artieExercises.secondsHelpOpen;
             const lastLogin = this.props.artieLogin.lastLogin;
+            const lastExerciseChange = this.props.artieExercises.lastExerciseChange;
             const fOnArtieLoadingExercise = this.props.onArtieLoadingExercise;
             const fOnArtieExerciseSentPopupOpen = this.props.onArtieExerciseSentPopupOpen;
             const fOnArtieResetSecondsHelpOpen = this.props.onArtieResetSecondsHelpOpen;
@@ -434,8 +436,8 @@ class MenuBar extends React.Component {
                 binary = reader.result;
                 html2canvas(body).then(canvas => {
                     canvasUrl = canvas.toDataURL('image/png');
-                    sendBlockArtie(currentStudent, sprites, currentExercise, false, secondsHelpOpen, true, lastLogin,
-                        canvasUrl, binary)
+                    sendBlockArtie(currentStudent, sprites, currentExercise, false, secondsHelpOpen,
+                        true, lastLogin, lastExerciseChange, canvasUrl, binary)
                         .then(() => {
 
                             // Stops the loading help and shows the popup

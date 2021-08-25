@@ -10,6 +10,7 @@ class AutoScanningStep extends React.Component {
         bindAll(this, [
             'handlePeripheralListUpdate',
             'handlePeripheralScanTimeout',
+            'handleUserPickedPeripheral',
             'handleStartScan',
             'handleRefresh'
         ]);
@@ -40,11 +41,15 @@ class AutoScanningStep extends React.Component {
         this.props.vm.on(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.on(
+            'USER_PICKED_PERIPHERAL', this.handlePeripheralListUpdate);
+        this.props.vm.on(
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }
     unbindPeripheralUpdates () {
         this.props.vm.removeListener(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
+        this.props.vm.removeListener(
+            'USER_PICKED_PERIPHERAL', this.handlePeripheralListUpdate);
         this.props.vm.removeListener(
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }

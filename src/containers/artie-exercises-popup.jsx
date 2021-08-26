@@ -134,18 +134,18 @@ const exitFromEvaluation = defineMessages({
     }
 });
 
-const statementComponent = (onCancel, type, statementMessages, customBodyMessage) => (
+const statementComponent = (onCancel, type, statementMsg, customBodyMessage) => (
     <ArtiePopupComponent
         onCancel={onCancel}
         type={type}
-        messages={statementMessages}
+        messages={statementMsg}
         okButton={false}
         cancelButton={false}
         customBodyMessage={customBodyMessage}
     />
 );
 
-const exerciseComponent = (onCancel, type) => (
+const exerciseComponent = (onCancel, type) => (
     <ArtiePopupComponent
         onCancel={onCancel}
         type={type}
@@ -219,7 +219,8 @@ class ArtieExercisePopup extends React.Component {
     }
 
     getCurrentStudent (login){
-        if (login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !== null){
+        if (login !== undefined && login !== null && login.currentStudent !== undefined &&
+            login.currentStudent !== null){
             return login.currentStudent;
         }
         return null;
@@ -231,7 +232,8 @@ class ArtieExercisePopup extends React.Component {
 
         if (exercises !== undefined && exercises !== null && exercises.evaluationStop){
             return 'evaluationStop';
-        } else if (login !== undefined && login !== null && login.currentStudent !== undefined && login.currentStudent !== null &&
+        } else if (login !== undefined && login !== null && login.currentStudent !== undefined &&
+            login.currentStudent !== null &&
             (login.currentStudent.competence === undefined || login.currentStudent.competence === 0) &&
             (exercises === undefined || exercises === null || exercises.currentExercise === null)) {
             return 'initialEvaluation';
@@ -271,7 +273,8 @@ class ArtieExercisePopup extends React.Component {
     }
 
     handleEvaluationOKClick (){
-        const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise, this.props.artieExercises.exercises);
+        const nextExercise = this.nextExercise(this.props.artieExercises.currentExercise,
+            this.props.artieExercises.exercises);
 
         // Updating the store to set the current exercise
         const options = {year: 'numeric',
@@ -296,7 +299,8 @@ class ArtieExercisePopup extends React.Component {
 
     handleEvaluationStopOKClick (){
 
-        const competence = (this.props.artieLogin.currentStudent.competence === 0 ? 1 : this.props.artieLogin.currentStudent.competence);
+        const competence = (this.props.artieLogin.currentStudent.competence === 0 ? 1 :
+            this.props.artieLogin.currentStudent.competence);
 
         // Updates the student competence
         updateStudentCompetence(this.props.artieLogin.currentStudent.id, competence)
@@ -398,7 +402,8 @@ class ArtieExercisePopup extends React.Component {
             return solutionComponent(this.props.onCloseSentSolution, type);
         } else if (type === 'initialEvaluation'){
             image = require('../../static/ThreeJedi.jpg');
-            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image, initialEvaluationMessages, null);
+            return evaluationComponent(this.handleEvaluationOKClick, this.handleEvaluationOKClick, type, image,
+                initialEvaluationMessages, null);
         } else if (type === 'evaluation'){
 
             // Checking if the current exercise is level 1, 2 or 3
@@ -423,13 +428,17 @@ class ArtieExercisePopup extends React.Component {
             let level = '';
 
             // Checks the level of the student
-            if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence === 0){
+            if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
+                this.props.artieLogin.currentStudent.competence === 0){
                 level = 'Padawan';
-            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence === 1){
+            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
+                this.props.artieLogin.currentStudent.competence === 1){
                 level = 'Padawan';
-            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence === 2){
+            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
+                this.props.artieLogin.currentStudent.competence === 2){
                 level = 'Jedi';
-            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null && this.props.artieLogin.currentStudent.competence === 3){
+            } else if (this.props.artieLogin !== null && this.props.artieLogin.currentStudent !== null &&
+                this.props.artieLogin.currentStudent.competence === 3){
                 level = 'Maestro Jedi';
             }
 

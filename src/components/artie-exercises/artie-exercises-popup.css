@@ -17,6 +17,11 @@
     width: 600px;
 }
 
+.modal-content-statement {
+    margin: 50px auto;
+    width: 400px;
+}
+
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
@@ -42,7 +47,7 @@
     padding-bottom: 20px;
     padding-left: 5px;
 }
-.modal-content-congrats .body {
+.modal-content-congrats .body{
     color: green;
     background-color: $ui-white;
     text-align: center;
@@ -55,7 +60,7 @@
 }
 
 
-.modal-content-evaluation .body {
+.modal-content-evaluation .body{
     background-color: $ui-white;
 }
 .modal-content-evaluation .text-body{
@@ -71,8 +76,8 @@
     margin: 15px;
     text-align: left;
 }
-.modal-content-evaluation .custom-text-body {
-    color: green;
+.modal-content-evaluation .custom-text-body{
+    color: blue;
     background-color: $ui-white;
     text-align: left;
     font-size: 0.85rem;
@@ -80,7 +85,7 @@
     display:flex;
     margin: 15px;
 }
-.modal-content-evaluation .image {
+.modal-content-evaluation .image{
     width: 130px;
     height: 130px;
     border-radius: 50%;
@@ -88,6 +93,28 @@
     object-fit: cover;
     object-position: center right;
 }
+
+
+.modal-content-statement.body{
+    background-color: $ui-white;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display:flex;
+    height: 400px;
+}
+.modal-content-statement .text-body .main-text{
+    margin: 15px;
+    text-align: left;
+    color: black;
+}
+.modal-content-statement .custom-text-body{
+    color: blue;
+    background-color: $ui-white;
+    text-align: left;
+    display:flex;
+    margin: 15px;
+}
+
 
 /* Buttons */
 .button-row {

@@ -150,13 +150,19 @@ const vmListenerHOC = function (WrappedComponent) {
                         this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
                         this.props.artieExercises.lastExerciseChange,null, null)
                         .then(responseBodyObject => {
-                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
-                                responseBodyObject.needHelp){
+                            if ((responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
+                                responseBodyObject.needHelp) ||
+                                (responseBodyObject.solutionDistance !== null &&
+                                    responseBodyObject.solutionDistance.totalDistance === 0 &&
+                                    !responseBodyObject.predictedNeedHelp)){
+
                                 // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
-                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
+
+                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp){
                                 // We show the help popup
-                                this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
+                                this.props.onArtieShowHelpPopup(responseBodyObject.id,
+                                    responseBodyObject.predictedNeedHelp);
                             }
                         });
                     if (this.props.artieExercises.secondsHelpOpen > 0) {
@@ -175,13 +181,19 @@ const vmListenerHOC = function (WrappedComponent) {
                         this.props.artieExercises.secondsHelpOpen, false, this.props.artieLogin.lastLogin,
                         this.props.artieExercises.lastExerciseChange, null, null)
                         .then(responseBodyObject => {
-                            if (responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
-                                responseBodyObject.needHelp){
+                            if ((responseBodyObject !== null && responseBodyObject.solutionDistance !== null &&
+                                    responseBodyObject.needHelp) ||
+                                (responseBodyObject.solutionDistance !== null &&
+                                    responseBodyObject.solutionDistance.totalDistance === 0 &&
+                                    !responseBodyObject.predictedNeedHelp)){
+
                                 // We show the help received
                                 this.props.onArtieHelpReceived(responseBodyObject.solutionDistance);
-                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp !== null){
+
+                            } else if (responseBodyObject !== null && responseBodyObject.predictedNeedHelp){
                                 // We show the help popup
-                                this.props.onArtieShowHelpPopup(responseBodyObject.id, responseBodyObject.predictedNeedHelp);
+                                this.props.onArtieShowHelpPopup(responseBodyObject.id,
+                                    responseBodyObject.predictedNeedHelp);
                             }
                         });
                     if (this.props.artieExercises.secondsHelpOpen > 0) {

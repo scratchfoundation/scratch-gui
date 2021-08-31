@@ -230,4 +230,5 @@ workflows:
             branches:
               ignore:
                 - /^dependabot/.*/
+                - /^renovate/.*/
                 - /^pull/.*/ # don't deploy to  gh pages on PRs.

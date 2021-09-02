@@ -298,6 +298,22 @@ const getAllArtieExercises = (userName, password) => new Promise((resolve) => {
 
 });
 
+const getFinishedExercisesByStudentId = (studentId) => new Promise((resolve) => {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 302 && xhr.response !== null) {
+                const json = JSON.parse(xhr.response);
+                resolve(json);
+            }
+        }
+    });
+
+    xhr.open('GET', `${_pedagogicalInterventionWebServiceUrl}/api/v1/pedagogicalsoftware/finishedExercisesByStudentId?studentId=${studentId}`, true);
+    xhr.setRequestHeader('apiKey', _apiKey);
+    xhr.send();
+});
+
 const updateStudentCompetence = (studentId, competence) => new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', () => {
@@ -334,4 +350,4 @@ const updateStudentData = (studentId, gender, motherTongue, age) => new Promise(
 
 export {sendBlockArtie, sendSolutionArtie, updateAnsweredNeedHelp, loginArtie,
     getArtieStudents, getArtieExercises, getAllArtieExercises, updateStudentCompetence,
-    updateStudentData};
+    updateStudentData, getFinishedExercisesByStudentId};

@@ -18,8 +18,15 @@ import {
     artieSetStudents,
     deactivateArtieLogin
 } from '../reducers/artie-login';
-import {getAllArtieExercises, getArtieExercises, getArtieStudents, loginArtie} from '../lib/artie-api';
 import {
+    getAllArtieExercises,
+    getArtieExercises,
+    getArtieStudents,
+    getFinishedExercisesByStudentId,
+    loginArtie
+} from '../lib/artie-api';
+import {
+    artieSetFinishedExercises,
     artieSetExercises,
     deactivateArtieExercises,
     artieSetCurrentExercise,
@@ -330,6 +337,12 @@ class ArtieFlow extends React.Component {
                 if (tempStudent.competence !== undefined && tempStudent.competence !== null &&
                     tempStudent.competence > 0){
 
+                    // Updates the list of exercises that the student has completed
+                    getFinishedExercisesByStudentId(tempStudent.id)
+                        .then(finishedExercises => {
+                            this.props.onArtieSetFinishedExercises(finishedExercises);
+                        });
+
                     // Get the exercises
                     getArtieExercises(userLogin, passwordLogin, false)
                         .then(exercises => {
@@ -492,6 +505,7 @@ const mapDispatchToProps = dispatch => ({
 
     // 2- Exercises properties
     onArtieSetExercises: exercises => dispatch(artieSetExercises(exercises)),
+    onArtieSetFinishedExercises: finishedExercises => dispatch(artieSetFinishedExercises(finishedExercises)),
     onDeactivateArtieExercises: () => dispatch(deactivateArtieExercises()),
     onArtieSetCurrentExercise: (currentExercise, date) => dispatch(artieSetCurrentExercise(currentExercise, date)),
     onArtiePopupStatement: active => dispatch(artiePopupStatement(active)),

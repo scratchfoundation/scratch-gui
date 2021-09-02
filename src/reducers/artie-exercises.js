@@ -3,6 +3,7 @@ const DEACTIVATE_ARTIE_EXERCISES = 'scratch-gui/artie-exercises/DEACTIVATE_ARTIE
 const ARTIE_SET_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_SET_EXERCISES';
 const ARTIE_SET_CURRENT_EXERCISE = 'scratch-gui/artie-exercises/ARTIE_SET_CURRENT_EXERCISE';
 const ARTIE_CLEAR_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_CLEAR_EXERCISES';
+const ARTIE_SET_FINISHED_EXERCISES = 'scratch-gui/artie-exercises/ARTIE_SET_FINISHED_EXERCISES';
 const ARTIE_BLOCKS_UPDATED = 'scratch-gui/artie-exercises/ARTIE_BLOCKS_UPDATED';
 const ARTIE_HELP_RECEIVED = 'scratch-gui/artie-exercises/ARTIE_HELP_RECEIVED';
 const ARTIE_CLEAR_HELP = 'scratch-gui/artie-exercises/ARTIE_CLEAR_HELP';
@@ -21,6 +22,7 @@ const ARTIE_EVALUATION_STOP = 'scratch-gui/artie-exercises/ARTIE_EVALUATION_STOP
 
 const initialState = {
     exercises: [],
+    finishedExercises: [],
     currentExercise: null,
     blocks: null,
     active: false,
@@ -60,9 +62,14 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             exercises: action.exercises
         });
+    case ARTIE_SET_FINISHED_EXERCISES:
+        return Object.assign({}, state, {
+            finishedExercises: action.finishedExercises
+        });
     case ARTIE_CLEAR_EXERCISES:
         return Object.assign({}, state, {
             exercises: [],
+            finishedExercises: [],
             currentExercise: null,
             needUpdate: false,
             blocks: null
@@ -145,6 +152,11 @@ const artieSetCurrentExercise = (currentExercise, lastExerciseChange) => ({
     lastExerciseChange: lastExerciseChange
 });
 
+const artieSetFinishedExercises = finishedExercises => ({
+    type: ARTIE_SET_FINISHED_EXERCISES,
+    finishedExercises: finishedExercises
+});
+
 const artieClearExercises = () => ({
     type: ARTIE_CLEAR_EXERCISES
 });
@@ -219,6 +231,7 @@ export {
     deactivateArtieExercises,
     artieSetExercises,
     artieSetCurrentExercise,
+    artieSetFinishedExercises,
     artieClearExercises,
     artieResetSecondsHelpOpen,
     artieBlocksUpdated,

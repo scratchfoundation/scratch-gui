@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ArtiePopupComponent from '../components/artie-exercises/artie-exercises-popup.jsx';
-import {updateStudentCompetence, getArtieExercises} from '../lib/artie-api';
+import {updateStudentCompetence, getArtieExercises, getFinishedExercisesByStudentId} from '../lib/artie-api';
 import {defineMessages, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {compose} from 'redux';
@@ -12,6 +12,7 @@ import {
     artiePopupSolution,
     artieSetCurrentExercise,
     artieSetExercises,
+    artieSetFinishedExercises,
     artiePopupStatement,
     activateArtieExercises
 } from '../reducers/artie-exercises';
@@ -310,6 +311,13 @@ class ArtieExercisePopup extends React.Component {
     }
 
     onStudentCompetenceIsUpdated (response){
+
+        // Updates the list of exercises that the student has completed
+        getFinishedExercisesByStudentId(this.props.artieLogin.currentStudent.id)
+            .then(finishedExercises => {
+                this.props.onArtieSetFinishedExercises(finishedExercises);
+            });
+
         // Updates the list of exercises, the current student and resets the current exercise
         getArtieExercises(this.props.userLogin, this.props.passwordLogin, false)
             .then(exercises => {
@@ -361,6 +369,13 @@ class ArtieExercisePopup extends React.Component {
 
                 // If we have a next evaluations
                 if (nextExercise === null) {
+
+                    // Updates the list of exercises that the student has completed
+                    getFinishedExercisesByStudentId(this.props.artieLogin.currentStudent.id)
+                        .then(finishedExercises => {
+                            this.props.onArtieSetFinishedExercises(finishedExercises);
+                        });
+
                     // If we haven't next evaluations, we get all the exercises
                     getArtieExercises(this.props.userLogin, this.props.passwordLogin, false)
                         .then(exercises => {
@@ -459,7 +474,16 @@ class ArtieExercisePopup extends React.Component {
 
 ArtieExercisePopup.propTypes = {
     userLogin: PropTypes.string,
-    passwordLogin: PropTypes.string
+    passwordLogin: PropTypes.string,
+    onArtieSetCurrentStudent: PropTypes.func,
+    onArtieActivateExercises: PropTypes.func,
+    onArtieSetExercises: PropTypes.func,
+    onArtieSetCurrentExercise: PropTypes.func,
+    onArtieSetFinishedExercises: PropTypes.func,
+    onArtieClearHelp: PropTypes.func,
+    onArtiePopupStatement: PropTypes.func,
+    onArtiePopupEvaluation: PropTypes.func,
+    onArtieEvaluationStop: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -475,6 +499,7 @@ const mapDispatchToProps = dispatch => ({
     onArtieEvaluationStop: stop => dispatch(artieEvaluationStop(stop)),
     onArtieSetCurrentStudent: currentStudent => dispatch(artieSetCurrentStudent(currentStudent)),
     onArtieSetExercises: exercises => dispatch(artieSetExercises(exercises)),
+    onArtieSetFinishedExercises: finishedExercises => dispatch(artieSetFinishedExercises(finishedExercises)),
     onArtieClearHelp: () => dispatch(artieClearHelp(new Date())),
     onArtiePopupStatement: active => dispatch(artiePopupStatement(active)),
     onArtieActivateExercises: () => dispatch(activateArtieExercises())

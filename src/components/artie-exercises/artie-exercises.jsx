@@ -54,6 +54,7 @@ class ArtieExercisesComponent extends React.Component {
                                 <Select
                                     autofocus={true}
                                     data={exercises}
+                                    starred={this.props.artieExercises.finishedExercises}
                                     onChange={this.props.onExerciseChange}
                                 />
                             </label>

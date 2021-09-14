@@ -134,7 +134,7 @@ class LoaderComponent extends React.Component {
     }
     chooseRandomMessage () {
         let messageNumber;
-        const sum = messages.reduce((acc, m) => acc + m.weight, 0);
+        const sum = messages.reduce((acc, m) => acc + m.weight);
         let rand = sum * Math.random();
         for (let i = 0; i < messages.length; i++) {
             rand -= messages[i].weight;
@@ -175,7 +175,7 @@ class LoaderComponent extends React.Component {
                             className={styles.messageContainerInner}
                             style={{transform: `translate(0, -${this.state.messageNumber * 25}px)`}}
                         >
-                            {messages.map((m, i) => (
+                            {messages.forEach((m, i) => (
                                 <div
                                     className={styles.message}
                                     key={i}

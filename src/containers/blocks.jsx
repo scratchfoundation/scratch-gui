@@ -494,11 +494,22 @@ class Blocks extends React.Component {
         this.setState({prompt: null});
     }
     handleCustomProceduresClose (data) {
+
+        if(data){
+            this.logicommonCloseCustomProceduresNotifi();
+        }
+
         this.props.onRequestCloseCustomProcedures(data);
         const ws = this.workspace;
         ws.refreshToolboxSelection_();
         ws.toolbox_.scrollToCategoryById('myBlocks');
     }
+
+    logicommonCloseCustomProceduresNotifi(){
+        console.log("ブロック定義作成");
+    }
+
+
     handleDrop (dragInfo) {
         fetch(dragInfo.payload.bodyUrl)
             .then(response => response.json())

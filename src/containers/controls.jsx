@@ -15,6 +15,7 @@ class Controls extends React.Component {
         ]);
     }
     handleGreenFlagClick (e) {
+        console.log("hanataba-hello");
         e.preventDefault();
         if (e.shiftKey) {
             this.props.vm.setTurboMode(!this.props.turbo);

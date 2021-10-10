@@ -7955,6 +7955,7 @@
             "animals",
             "bird",
             "cold",
+            "winter",
             "north pole",
             "south pole",
             "ice",
@@ -7976,6 +7977,7 @@
             "penguin",
             "bird",
             "cold",
+            "winter",
             "north pole",
             "south pole",
             "ice",
@@ -7997,6 +7999,7 @@
             "penguin",
             "bird",
             "cold",
+            "winter",
             "north pole",
             "south pole",
             "ice",
@@ -8015,9 +8018,15 @@
         "name": "Penguin2-a",
         "tags": [
             "animals",
+            "penguin",
             "bird",
+            "cold",
             "winter",
-            "antarctica"
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic"
         ],
         "assetId": "428772307d90f4b347d6cc3c0d8e76ef",
         "bitmapResolution": 1,
@@ -8030,9 +8039,15 @@
         "name": "Penguin2-b",
         "tags": [
             "animals",
+            "penguin",
             "bird",
+            "cold",
             "winter",
-            "antarctica"
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic"
         ],
         "assetId": "d485f5620d2dde69a6aa1cda7c897d12",
         "bitmapResolution": 1,
@@ -8045,9 +8060,15 @@
         "name": "Penguin2-c",
         "tags": [
             "animals",
+            "penguin",
             "bird",
+            "cold",
             "winter",
-            "antarctica"
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic"
         ],
         "assetId": "280d2aa13f0c6774cc8828dc177aaf60",
         "bitmapResolution": 1,
@@ -8060,9 +8081,15 @@
         "name": "Penguin2-d",
         "tags": [
             "animals",
+            "penguin",
             "bird",
+            "cold",
             "winter",
-            "antarctica"
+            "north pole",
+            "south pole",
+            "ice",
+            "antarctica",
+            "arctic"
         ],
         "assetId": "780467f3d173dcb37fd65834841babc6",
         "bitmapResolution": 1,

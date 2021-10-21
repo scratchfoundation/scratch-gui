@@ -84,20 +84,26 @@ class AutoScanningStep extends React.Component {
     render () {
         return (
             <ScanningStepComponent
+                connectionIconURL={this.props.connectionIconURL}
                 connectionTipIconURL={this.props.connectionTipIconURL}
                 phase={this.state.phase}
                 title={this.props.extensionId}
                 onRefresh={this.handleRefresh}
                 onStartScan={this.handleStartScan}
+                prescanMessage={this.props.prescanMessage}
+                scanBeginMessage={this.props.scanBeginMessage}
             />
         );
     }
 }
 
 AutoScanningStep.propTypes = {
+    connectionIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,
     extensionId: PropTypes.string.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    prescanMessage: PropTypes.node,
+    scanBeginMessage: PropTypes.node,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

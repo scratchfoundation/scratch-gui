@@ -21,22 +21,41 @@ const PHASES = keyMirror({
     notfound: null
 });
 
+const defaultPrescanMessage = (<FormattedMessage
+    defaultMessage="Have your device nearby, then begin searching."
+    description="Prompt for beginning the search"
+    id="gui.connection.auto-scanning.prescan"
+/>);
+
+const defaultScanBeginMessage = (<FormattedMessage
+    defaultMessage="Press the button on your device."
+    description="Prompt for pushing the button on the device"
+    id="gui.connection.auto-scanning.scanBeginMessage"
+/>);
+
 const AutoScanningStep = props => (
     <Box className={styles.body}>
         <Box className={styles.activityArea}>
             <div className={styles.activityAreaInfo}>
                 <div className={styles.centeredRow}>
                     {props.phase === PHASES.prescan && (
-                        <React.Fragment>
+                        props.connectionIconURL ? (
                             <img
                                 className={styles.radarBig}
-                                src={radarIcon}
+                                src={props.connectionIconURL}
                             />
-                            <img
-                                className={styles.bluetoothCenteredIcon}
-                                src={bluetoothIcon}
-                            />
-                        </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <img
+                                    className={styles.radarBig}
+                                    src={radarIcon}
+                                />
+                                <img
+                                    className={styles.bluetoothCenteredIcon}
+                                    src={bluetoothIcon}
+                                />
+                            </React.Fragment>
+                        )
                     )}
                     {props.phase === PHASES.pressbutton && (
                         <React.Fragment>
@@ -64,20 +83,8 @@ const AutoScanningStep = props => (
         </Box>
         <Box className={styles.bottomArea}>
             <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
-                {props.phase === PHASES.prescan && (
-                    <FormattedMessage
-                        defaultMessage="Have your device nearby, then begin searching."
-                        description="Prompt for beginning the search"
-                        id="gui.connection.auto-scanning.prescan"
-                    />
-                )}
-                {props.phase === PHASES.pressbutton && (
-                    <FormattedMessage
-                        defaultMessage="Press the button on your device."
-                        description="Prompt for pushing the button on the device"
-                        id="gui.connection.auto-scanning.pressbutton"
-                    />
-                )}
+                {props.phase === PHASES.prescan && props.prescanMessage}
+                {props.phase === PHASES.pressbutton && props.scanBeginMessage}
             </Box>
             <Dots
                 className={styles.bottomAreaItem}
@@ -142,14 +149,19 @@ const AutoScanningStep = props => (
 );
 
 AutoScanningStep.propTypes = {
+    connectionIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,
     onRefresh: PropTypes.func,
     onStartScan: PropTypes.func,
-    phase: PropTypes.oneOf(Object.keys(PHASES))
+    phase: PropTypes.oneOf(Object.keys(PHASES)),
+    prescanMessage: PropTypes.node,
+    scanBeginMessage: PropTypes.node
 };
 
 AutoScanningStep.defaultProps = {
-    phase: PHASES.prescan
+    phase: PHASES.prescan,
+    prescanMessage: defaultPrescanMessage,
+    scanBeginMessage: defaultScanBeginMessage
 };
 
 export {

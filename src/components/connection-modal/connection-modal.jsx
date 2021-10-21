@@ -59,12 +59,15 @@ const ConnectionModalComponent = props => {
 
 ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
+    connectionIconURL: PropTypes.string,
     connectionSmallIconURL: PropTypes.string,
     connectionTipIconURL: PropTypes.string,
     name: PropTypes.node,
     onCancel: PropTypes.func.isRequired,
     onHelp: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
+    prescanMessage: PropTypes.node,
+    scanBeginMessage: PropTypes.node,
     title: PropTypes.string.isRequired,
     useAutoScan: PropTypes.bool.isRequired,
     useExternalPeripheralList: PropTypes.bool

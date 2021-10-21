@@ -187,6 +187,20 @@ export default [
         useAutoScan: false,
         connectionIconURL: microbitConnectionIconURL,
         connectionSmallIconURL: microbitConnectionSmallIconURL,
+        prescanMessage: (
+            <FormattedMessage
+                defaultMessage="Turn on your micro:bit, then press the button below to start searching for your device."
+                description="Prompt before searching for a micro:bit"
+                id="gui.extension.microbit.prescanMessage"
+            />
+        ),
+        scanBeginMessage: (
+            <FormattedMessage
+                defaultMessage="Keep your micro:bit on and nearby."
+                description="Information shown while searching for a micro:bit, before one is found"
+                id="gui.extension.microbit.scanBeginMessage"
+            />
+        ),
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -217,6 +231,20 @@ export default [
         useAutoScan: false,
         connectionIconURL: ev3ConnectionIconURL,
         connectionSmallIconURL: ev3ConnectionSmallIconURL,
+        prescanMessage: (
+            <FormattedMessage
+                defaultMessage="Turn on your LEGO EV3, then press the button below to start searching for your device."
+                description="Prompt before searching for a LEGO EV3"
+                id="gui.extension.ev3.prescanMessage"
+            />
+        ),
+        scanBeginMessage: (
+            <FormattedMessage
+                defaultMessage="Keep your LEGO EV3 on and nearby."
+                description="Information shown while searching for a LEGO EV3, before one is found"
+                id="gui.extension.ev3.scanBeginMessage"
+            />
+        ),
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
@@ -309,6 +337,20 @@ export default [
         useAutoScan: false,
         connectionIconURL: gdxforConnectionIconURL,
         connectionSmallIconURL: gdxforConnectionSmallIconURL,
+        prescanMessage: (
+            <FormattedMessage
+                defaultMessage="Turn on your Go Direct, then press the button below to start searching for your device."
+                description="Prompt before searching for a Vernier Go Direct device"
+                id="gui.extension.gdxfor.prescanMessage"
+            />
+        ),
+        scanBeginMessage: (
+            <FormattedMessage
+                defaultMessage="Keep your Vernier Go Direct on and nearby."
+                description="Information shown while searching for a Vernier Go Direct, before one is found"
+                id="gui.extension.gdxfor.scanBeginMessage"
+            />
+        ),
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

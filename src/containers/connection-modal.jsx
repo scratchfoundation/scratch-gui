@@ -116,6 +116,7 @@ class ConnectionModal extends React.Component {
                 phase={this.state.phase}
                 title={this.props.extensionId}
                 useAutoScan={this.state.extension && this.state.extension.useAutoScan}
+                useExternalPeripheralList={this.props.useExternalPeripheralList}
                 vm={this.props.vm}
                 onCancel={this.handleCancel}
                 onConnected={this.handleConnected}
@@ -131,6 +132,7 @@ class ConnectionModal extends React.Component {
 ConnectionModal.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
+    useExternalPeripheralList: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

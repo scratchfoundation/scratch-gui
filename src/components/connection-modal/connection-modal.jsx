@@ -22,8 +22,23 @@ const PHASES = keyMirror({
     unavailable: null
 });
 
-const ConnectionModalComponent = props => (
-    <Modal
+const ConnectionModalComponent = props => {
+    // ScanningStep allows the user to choose a peripheral from a list.
+    // AutoScanningStep connects to the first peripheral found.
+    // Also, AutoScanningStep adds "prescan" and "pressbutton" phases before the actual scan.
+    // When useExternalPeripheralList is true, force the use of AutoScanningStep:
+    // - We want to automatically connect to the first peripheral "found" since it's actually the one selected by the
+    //   user from the external list.
+    // - We want to show the "prescan" phase to inform the user before the external list appears.
+    // - The "pressbutton" phase doesn't hurt: it might be hidden behind the external list (especially with Android
+    //   CDM) or it might help the user to keep the peripheral device awake.
+    // TODO: does forcing AutoScanningStep mean we can eliminate the `USER_PICKED_PERIPHERAL` message?
+    const ScanningStepContainer = (
+        (props.useAutoScan || props.useExternalPeripheralList) ?
+            AutoScanningStep :
+            ScanningStep
+    );
+    return (<Modal
         className={styles.modalContent}
         contentLabel={props.name}
         headerClassName={styles.header}
@@ -33,15 +48,14 @@ const ConnectionModalComponent = props => (
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            {props.phase === PHASES.scanning && !props.useAutoScan && <ScanningStep {...props} />}
-            {props.phase === PHASES.scanning && props.useAutoScan && <AutoScanningStep {...props} />}
+            {props.phase === PHASES.scanning && <ScanningStepContainer {...props} />}
             {props.phase === PHASES.connecting && <ConnectingStep {...props} />}
             {props.phase === PHASES.connected && <ConnectedStep {...props} />}
             {props.phase === PHASES.error && <ErrorStep {...props} />}
             {props.phase === PHASES.unavailable && <UnavailableStep {...props} />}
         </Box>
-    </Modal>
-);
+    </Modal>);
+};
 
 ConnectionModalComponent.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
@@ -52,7 +66,8 @@ ConnectionModalComponent.propTypes = {
     onHelp: PropTypes.func.isRequired,
     phase: PropTypes.oneOf(Object.keys(PHASES)).isRequired,
     title: PropTypes.string.isRequired,
-    useAutoScan: PropTypes.bool.isRequired
+    useAutoScan: PropTypes.bool.isRequired,
+    useExternalPeripheralList: PropTypes.bool
 };
 
 ConnectionModalComponent.defaultProps = {

@@ -4,6 +4,10 @@ import bindAll from 'lodash.bindall';
 import ScanningStepComponent from '../components/connection-modal/scanning-step.jsx';
 import VM from 'scratch-vm';
 
+/**
+ * Scan for a peripheral and allow the user to choose from a list of those discovered.
+ * Does not support "prescan" and "pressbutton" phases.
+ */
 class ScanningStep extends React.Component {
     constructor (props) {
         super(props);

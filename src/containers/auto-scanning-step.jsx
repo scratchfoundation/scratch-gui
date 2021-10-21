@@ -4,6 +4,14 @@ import bindAll from 'lodash.bindall';
 import ScanningStepComponent, {PHASES} from '../components/connection-modal/auto-scanning-step.jsx';
 import VM from 'scratch-vm';
 
+/**
+ * Scan for a peripheral and automatically connect to the first one found.
+ * Supports "prescan" and "pressbutton" phases.
+ * The "prescan" phase displays a message like "Have your device nearby, then begin searching" and waits for the user
+ * to choose to continue.
+ * The "pressbutton" phase displays a message like "Press the button on your device" until the scan finds a result,
+ * which in the case of an external peripheral list is when the user has chosen a peripheral.
+ */
 class AutoScanningStep extends React.Component {
     constructor (props) {
         super(props);

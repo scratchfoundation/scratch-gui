@@ -276,6 +276,21 @@ export default [
         connectionIconURL: boostConnectionIconURL,
         connectionSmallIconURL: boostConnectionSmallIconURL,
         connectionTipIconURL: boostConnectionTipIconURL,
+        prescanMessage: (
+            <FormattedMessage
+                // eslint-disable-next-line max-len
+                defaultMessage="Press the button on your LEGO BOOST, then press the button below to start searching for your device."
+                description="Prompt before searching for a LEGO BOOST"
+                id="gui.extension.boost.prescanMessage"
+            />
+        ),
+        scanBeginMessage: (
+            <FormattedMessage
+                defaultMessage="Keep your LEGO BOOST awake and nearby."
+                description="Information shown while searching for a LEGO BOOST, before one is found"
+                id="gui.extension.boost.scanBeginMessage"
+            />
+        ),
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"
@@ -307,6 +322,21 @@ export default [
         connectionIconURL: wedo2ConnectionIconURL,
         connectionSmallIconURL: wedo2ConnectionSmallIconURL,
         connectionTipIconURL: wedo2ConnectionTipIconURL,
+        prescanMessage: (
+            <FormattedMessage
+                // eslint-disable-next-line max-len
+                defaultMessage="Press the button on your LEGO WeDo 2.0, then press the button below to start searching for your device."
+                description="Prompt before searching for a LEGO WeDo 2.0"
+                id="gui.extension.wedo2.prescanMessage"
+            />
+        ),
+        scanBeginMessage: (
+            <FormattedMessage
+                defaultMessage="Keep your LEGO WeDo 2.0 awake and nearby."
+                description="Information shown while searching for a LEGO WeDo 2.0, before one is found"
+                id="gui.extension.wedo2.scanBeginMessage"
+            />
+        ),
         connectingMessage: (
             <FormattedMessage
                 defaultMessage="Connecting"

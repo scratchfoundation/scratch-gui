@@ -40,7 +40,7 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:16-browsers
     working_directory: ~/repo
 
 jobs:

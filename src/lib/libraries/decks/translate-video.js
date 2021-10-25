@@ -39,6 +39,9 @@ const videos = {
         'tr': 'p3g8ek3cuh',
         'vi': 'fetjky76s4'
     },
+    'intro-getting-started-ASL': {
+        'en': 'i2g46ikddf'
+    },
     'animate-a-name': {
         'en': 'pyur30ho05',
         'it': 'c8zcrk6w09',

@@ -121,6 +121,7 @@ const GUIComponent = props => {
         targetIsStage,
         telemetryModalVisible,
         tipsLibraryVisible,
+        useExternalPeripheralList,
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
@@ -194,6 +195,7 @@ const GUIComponent = props => {
                 ) : null}
                 {connectionModalVisible ? (
                     <ConnectionModal
+                        useExternalPeripheralList={useExternalPeripheralList}
                         vm={vm}
                     />
                 ) : null}
@@ -433,8 +435,10 @@ GUIComponent.propTypes = {
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
+    useExternalPeripheralList: PropTypes.bool, // true for CDM, false for normal Scratch Link
     vm: PropTypes.instanceOf(VM).isRequired
 };
+
 GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
@@ -453,7 +457,8 @@ GUIComponent.defaultProps = {
     isShared: false,
     loading: false,
     showComingSoon: false,
-    stageSizeMode: STAGE_SIZE_MODES.large
+    stageSizeMode: STAGE_SIZE_MODES.large,
+    useExternalPeripheralList: false
 };
 
 const mapStateToProps = state => ({

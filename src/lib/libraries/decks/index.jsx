@@ -124,7 +124,7 @@ export default {
                 id="gui.howtos.intro-getting-started-ASL.name"
             />
         ),
-        tags: ['help', 'stuck', 'how', 'can', 'say','asl','deaf','accessibile','hear'],
+        tags: ['help', 'stuck', 'how', 'can', 'say', 'asl', 'deaf', 'accessibile', 'hear'],
         img: libraryGettingStartedASL,
         steps: [{
             video: 'intro-getting-started-ASL'

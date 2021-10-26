@@ -26,7 +26,7 @@ const getBackpackContents = ({
         json: true
     }, (error, response) => {
         if (error || response.statusCode !== 200) {
-            return reject();
+            return reject(new Error(response.status));
         }
         return resolve(response.body.map(item => includeFullUrls(item, host)));
     });
@@ -49,7 +49,7 @@ const saveBackpackObject = ({
         json: {type, mime, name, body, thumbnail}
     }, (error, response) => {
         if (error || response.statusCode !== 200) {
-            return reject();
+            return reject(new Error(response.status));
         }
         return resolve(includeFullUrls(response.body, host));
     });
@@ -67,7 +67,7 @@ const deleteBackpackObject = ({
         headers: {'x-token': token}
     }, (error, response) => {
         if (error || response.statusCode !== 200) {
-            return reject();
+            return reject(new Error(response.status));
         }
         return resolve(response.body);
     });
@@ -78,7 +78,7 @@ const deleteBackpackObject = ({
 const fetchAs = (responseType, uri) => new Promise((resolve, reject) => {
     xhr({uri, responseType}, (error, response) => {
         if (error || response.statusCode !== 200) {
-            return reject();
+            return reject(new Error(response.status));
         }
         return resolve(response.body);
     });

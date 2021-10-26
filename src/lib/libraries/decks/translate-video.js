@@ -11,7 +11,33 @@ const videos = {
         'pt': 'ngdfp8xg4x',
         'pt-br': 'ngdfp8xg4x',
         'ja': 'v2c2f3y2sc',
-        'ja-Hira': 'v2c2f3y2sc'
+        'ja-Hira': 'v2c2f3y2sc',
+        'es': 'htk2m9o65l',
+        'es-419': 'htk2m9o65l',
+        'sw': 'fd4bn2nli5',
+        'fr': 'dt015ouls8',
+        'am': 'e06wlsebqy',
+        'zu': 'st2x0emdx7',
+        'uk': '1ith4m4f8u',
+        'ar': 's53zuo93o7',
+        'ca': '4tb26s73x7',
+        'zh-cn': '9i01bspmyx',
+        'zh-tw': 'hr374tlx9t',
+        'da': 'z9bns5dgiy',
+        'nl': '9wleha9s1e',
+        'de': '9lljmutx8m',
+        'ht': '7pyjz25tvf',
+        'he': '5rusa2qb6q',
+        'id': 'zpzl7nqcyf',
+        'km': 'zhq0596ewo',
+        'ko': '9u7cr4pwsc',
+        'ku': 'jzwwqih2im',
+        'fa': 'c15wlv18tt',
+        'pl': 'ijhn36nicy',
+        'ru': '437odiewml',
+        'th': 'zy7suscqn2',
+        'tr': 'p3g8ek3cuh',
+        'vi': 'fetjky76s4'
     },
     'animate-a-name': {
         'en': 'pyur30ho05',
@@ -23,6 +49,7 @@ const videos = {
     },
     'Make-Music': {
         'en': 'ir0j8ljsgm',
+        'ar': 'gqlmfqx1g4',
         'it': '8nm1v1m9zx',
         'pt': '9v4zl8504z',
         'pt-br': '9v4zl8504z',
@@ -31,6 +58,7 @@ const videos = {
     },
     'Make-A-Game': {
         'en': '5rp47ys13g',
+        'ar': 'dx5pqpaqsy',
         'it': 'vrs1e38944',
         'pt': 'rjst5ng61s',
         'pt-br': 'rjst5ng61s',
@@ -39,6 +67,7 @@ const videos = {
     },
     'Chase-Game': {
         'en': 'kusyx9thl5',
+        'ar': 'qapon34gsw',
         'it': '899b2jmjlu',
         'pt': 'rw6kr9e37n',
         'pt-br': 'rw6kr9e37n',
@@ -47,6 +76,7 @@ const videos = {
     },
     'add-a-backdrop': {
         'en': 'nict6zdzlx',
+        'ar': 'ompj13t33k',
         'it': 'vrrfpm5grh',
         'pt': 'wq7sm038pq',
         'pt-br': 'wq7sm038pq',
@@ -55,6 +85,7 @@ const videos = {
     },
     'change-size': {
         'en': 'p8va85hh61',
+        'ar': 'acceih3x6k',
         'it': '1xb1jztsvr',
         'pt': '1ad1ip3ly7',
         'pt-br': '1ad1ip3ly7',
@@ -63,12 +94,14 @@ const videos = {
     },
     'glide-around': {
         'en': 'sh9j978rg8',
+        'ar': '8c4b4jb2se',
         'it': 'nvdhpgiebe',
         'ja': 'jsat4vhu48',
         'ja-Hira': 'jsat4vhu48'
     },
     'record-a-sound': {
         'en': 'ulzl1fbzny',
+        'ar': 'vx60cuwzo9',
         'it': 'ncr9lqk7bt',
         'pt': 'aavagpvh5w',
         'pt-br': 'aavagpvh5w',
@@ -77,6 +110,7 @@ const videos = {
     },
     'spin-video': {
         'en': '07fed5hhpv',
+        'ar': '5hl1dq3byk',
         'it': 'obmrphhobt',
         'pt': 'jxqksu6zcw',
         'pt-br': 'jxqksu6zcw',
@@ -85,6 +119,7 @@ const videos = {
     },
     'hide-and-show': {
         'en': 'g479ahobo9',
+        'ar': 'r25otzahzi',
         'it': 'v0vbx3l5uk',
         'pt': 'ibtmwb58y8',
         'pt-br': 'ibtmwb58y8',
@@ -93,6 +128,7 @@ const videos = {
     },
     'switch-costume': {
         'en': '1ocp6a1ejn',
+        'ar': '2tz31cmeaq',
         'it': 'nty4xjtqcj',
         'pt': 'pnlmmv2hs7',
         'pt-br': 'pnlmmv2hs7',
@@ -101,6 +137,7 @@ const videos = {
     },
     'move-around-with-arrow-keys': {
         'en': 'yetrmk4iuu',
+        'ar': '270xh1zb1s',
         'it': 'jse0g0uddw',
         'pt': 'erv6eff78p',
         'pt-br': 'erv6eff78p',
@@ -109,6 +146,7 @@ const videos = {
     },
     'add-effects': {
         'en': '3jvl8zgjo2',
+        'ar': 'fp4y3aumie',
         'it': 'q3cjjyfju9',
         'pt': 'dz6jzpf7hm',
         'pt-br': 'dz6jzpf7hm',

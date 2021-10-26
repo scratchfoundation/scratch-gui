@@ -69,10 +69,10 @@ class StageSelector extends React.Component {
     addBackdropFromLibraryItem (item, shouldActivateTab = true) {
         const vmBackdrop = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX: item.info[0] && item.info[0] / 2,
-            rotationCenterY: item.info[1] && item.info[1] / 2,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewBackdrop(vmBackdrop, shouldActivateTab);

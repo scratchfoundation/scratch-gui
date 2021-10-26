@@ -2,8 +2,7 @@
 
 /* eslint-env jest */
 import {AlertTypes, AlertLevels} from '../../../src/lib/alerts/index.jsx';
-import alertsReducer from '../../../src/reducers/alerts';
-import {
+import alertsReducer, {
     closeAlert,
     closeAlertWithId,
     filterInlineAlerts,

@@ -19,6 +19,7 @@ class SeleniumHelper {
             'clickText',
             'clickButton',
             'clickXpath',
+            'clickBlocksCategory',
             'elementIsVisible',
             'findByText',
             'findByXpath',
@@ -122,6 +123,17 @@ class SeleniumHelper {
 
     clickText (text, scope) {
         return this.findByText(text, scope).then(el => el.click());
+    }
+
+    async clickBlocksCategory (categoryText) {
+        // The toolbox is destroyed and recreated several times, so avoid clicking on a nonexistent element and erroring
+        // out. First we wait for the block pane itself to appear, then wait 100ms for the toolbox to finish refreshing,
+        // then finally click the toolbox text.
+
+        await this.findByXpath('//div[contains(@class, "blocks_blocks")]');
+        await this.driver.sleep(100);
+        await this.clickText(categoryText, 'div[contains(@class, "blocks_blocks")]');
+        await this.driver.sleep(500); // Wait for scroll to finish
     }
 
     rightClickText (text, scope) {

@@ -35,7 +35,7 @@ describe('Sound Editor Container', () => {
                 }
             }
         };
-        store = mockStore({scratchGui: {vm: vm}});
+        store = mockStore({scratchGui: {vm: vm, mode: {isFullScreen: false}}});
     });
 
     test('should pass the correct data to the component from the store', () => {

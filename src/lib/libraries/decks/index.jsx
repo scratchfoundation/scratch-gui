@@ -120,7 +120,7 @@ export default {
         name: (
             <FormattedMessage
                 defaultMessage="Getting Started - ASL"
-                description="Name for the 'Getting Started ASL' how-to"
+                description="Name for the 'Getting Started ASL (American Sign Language)' how-to"
                 id="gui.howtos.intro-getting-started-ASL.name"
             />
         ),

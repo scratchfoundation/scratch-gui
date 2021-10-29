@@ -108,7 +108,7 @@ export default {
             image: 'introGreenFlag'
         }, {
             deckIds: [
-                'intro-getting-started-ASL',
+                'add-a-backdrop',
                 'add-sprite'
             ]
         }

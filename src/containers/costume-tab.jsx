@@ -6,7 +6,6 @@ import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
-import CameraModal from './camera-modal.jsx';
 import {connect} from 'react-redux';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -16,8 +15,6 @@ import sharedMessages from '../lib/shared-messages';
 import downloadBlob from '../lib/download-blob';
 
 import {
-    closeCameraCapture,
-    openCameraCapture,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';
@@ -34,7 +31,6 @@ import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
 import fileUploadIcon from '../components/action-menu/icon--file-upload.svg';
 import paintIcon from '../components/action-menu/icon--paint.svg';
-import cameraIcon from '../components/action-menu/icon--camera.svg';
 import surpriseIcon from '../components/action-menu/icon--surprise.svg';
 import searchIcon from '../components/action-menu/icon--search.svg';
 
@@ -71,11 +67,6 @@ let messages = defineMessages({
         defaultMessage: 'Upload Costume',
         description: 'Button to add a costume by uploading a file in the editor tab',
         id: 'gui.costumeTab.addFileCostume'
-    },
-    addCameraCostumeMsg: {
-        defaultMessage: 'Camera',
-        description: 'Button to use the camera to create a costume costume in the editor tab',
-        id: 'gui.costumeTab.addCameraCostume'
     }
 });
 
@@ -95,7 +86,6 @@ class CostumeTab extends React.Component {
             'handleSurpriseBackdrop',
             'handleFileUploadClick',
             'handleCostumeUpload',
-            'handleCameraBuffer',
             'handleDrop',
             'setFileInput'
         ]);
@@ -158,14 +148,17 @@ class CostumeTab extends React.Component {
         const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
-    handleNewCostume (costume, fromCostumeLibrary) {
+    handleNewCostume (costume, fromCostumeLibrary, targetId) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
         return Promise.all(costumes.map(c => {
             if (fromCostumeLibrary) {
                 return this.props.vm.addCostumeFromLibrary(c.md5, c);
             }
-            return this.props.vm.addCostume(c.md5, c);
+            // If targetId is falsy, VM should default it to editingTarget.id
+            // However, targetId should be provided to prevent #5876,
+            // if making new costume takes a while
+            return this.props.vm.addCostume(c.md5, c, targetId);
         }));
     }
     handleNewBlankCostume () {
@@ -176,16 +169,12 @@ class CostumeTab extends React.Component {
     }
     handleSurpriseCostume () {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
-        const split = item.md5.split('.');
-        const type = split.length > 1 ? split[1] : null;
-        const rotationCenterX = type === 'svg' ? item.info[0] : item.info[0] / 2;
-        const rotationCenterY = type === 'svg' ? item.info[1] : item.info[1] / 2;
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX,
-            rotationCenterY,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
@@ -194,36 +183,30 @@ class CostumeTab extends React.Component {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
-            md5: item.md5,
-            rotationCenterX: item.info[0] && item.info[0] / 2,
-            rotationCenterY: item.info[1] && item.info[1] / 2,
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            md5: item.md5ext,
+            rotationCenterX: item.rotationCenterX,
+            rotationCenterY: item.rotationCenterY,
+            bitmapResolution: item.bitmapResolution,
             skinId: null
         };
         this.handleNewCostume(vmCostume);
     }
     handleCostumeUpload (e) {
         const storage = this.props.vm.runtime.storage;
+        const targetId = this.props.vm.editingTarget.id;
         this.props.onShowImporting();
         handleFileUpload(e.target, (buffer, fileType, fileName, fileIndex, fileCount) => {
             costumeUpload(buffer, fileType, storage, vmCostumes => {
                 vmCostumes.forEach((costume, i) => {
                     costume.name = `${fileName}${i ? i + 1 : ''}`;
                 });
-                this.handleNewCostume(vmCostumes).then(() => {
+                this.handleNewCostume(vmCostumes, false, targetId).then(() => {
                     if (fileIndex === fileCount - 1) {
                         this.props.onCloseImporting();
                     }
                 });
             }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
-    }
-    handleCameraBuffer (buffer) {
-        const storage = this.props.vm.runtime.storage;
-        costumeUpload(buffer, 'image/png', storage, vmCostumes => {
-            vmCostumes[0].name = this.props.intl.formatMessage(messages.costume, {index: 1});
-            this.handleNewCostume(vmCostumes);
-        });
     }
     handleFileUploadClick () {
         this.fileInput.click();
@@ -263,11 +246,8 @@ class CostumeTab extends React.Component {
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
             isRtl,
-            onNewCostumeFromCameraClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
-            cameraModalVisible,
-            onRequestCloseCameraModal,
             vm
         } = this.props;
 
@@ -299,15 +279,10 @@ class CostumeTab extends React.Component {
                         onClick: addLibraryFunc
                     },
                     {
-                        title: intl.formatMessage(messages.addCameraCostumeMsg),
-                        img: cameraIcon,
-                        onClick: onNewCostumeFromCameraClick
-                    },
-                    {
                         title: intl.formatMessage(addFileMessage),
                         img: fileUploadIcon,
                         onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .jpg, .jpeg, .gif',
+                        fileAccept: '.svg, .png, .bmp, .jpg, .jpeg, .gif',
                         fileChange: this.handleCostumeUpload,
                         fileInput: this.setFileInput,
                         fileMultiple: true
@@ -345,29 +320,20 @@ class CostumeTab extends React.Component {
                     /> :
                     null
                 }
-                {cameraModalVisible ? (
-                    <CameraModal
-                        onClose={onRequestCloseCameraModal}
-                        onNewCostume={this.handleCameraBuffer}
-                    />
-                ) : null}
             </AssetPanel>
         );
     }
 }
 
 CostumeTab.propTypes = {
-    cameraModalVisible: PropTypes.bool,
     dispatchUpdateRestore: PropTypes.func,
     editingTarget: PropTypes.string,
     intl: intlShape,
     isRtl: PropTypes.bool,
     onActivateSoundsTab: PropTypes.func.isRequired,
     onCloseImporting: PropTypes.func.isRequired,
-    onNewCostumeFromCameraClick: PropTypes.func.isRequired,
     onNewLibraryBackdropClick: PropTypes.func.isRequired,
     onNewLibraryCostumeClick: PropTypes.func.isRequired,
-    onRequestCloseCameraModal: PropTypes.func.isRequired,
     onShowImporting: PropTypes.func.isRequired,
     sprites: PropTypes.shape({
         id: PropTypes.shape({
@@ -391,8 +357,7 @@ const mapStateToProps = state => ({
     isRtl: state.locales.isRtl,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
-    dragging: state.scratchGui.assetDrag.dragging,
-    cameraModalVisible: state.scratchGui.modals.cameraCapture
+    dragging: state.scratchGui.assetDrag.dragging
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -404,12 +369,6 @@ const mapDispatchToProps = dispatch => ({
     onNewLibraryCostumeClick: e => {
         e.preventDefault();
         dispatch(openCostumeLibrary());
-    },
-    onNewCostumeFromCameraClick: () => {
-        dispatch(openCameraCapture());
-    },
-    onRequestCloseCameraModal: () => {
-        dispatch(closeCameraCapture());
     },
     dispatchUpdateRestore: restoreState => {
         dispatch(setRestore(restoreState));

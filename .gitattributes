@@ -20,6 +20,7 @@
 *.js text eol=lf
 *.js.map text eol=lf
 *.json text eol=lf
+*.json5 text eol=lf
 *.jsx text eol=lf
 *.md text eol=lf
 *.vert text eol=lf

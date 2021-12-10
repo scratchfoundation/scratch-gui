@@ -86,6 +86,10 @@ class SoundEditor extends React.Component {
             // Ignore keyboard shortcuts if a text input field is focused
             return;
         }
+        if (this.props.isFullScreen) {
+            // Ignore keyboard shortcuts if the stage is fullscreen mode
+            return;
+        }
         if (event.key === ' ') {
             event.preventDefault();
             if (this.state.playhead) {
@@ -161,7 +165,7 @@ class SoundEditor extends React.Component {
             )
             .catch(e => {
                 // Encoding failed, or the sound was too large to save so edit is rejected
-                log.error(`Encountered error while trying to encode sound update: ${e}`);
+                log.error(`Encountered error while trying to encode sound update: ${e.message}`);
                 return false; // Edit was not applied
             });
     }
@@ -345,7 +349,7 @@ class SoundEditor extends React.Component {
                 if (newRate === buffer.sampleRate / 2) {
                     return resolve(dropEveryOtherSample(buffer));
                 }
-                return reject('Could not resample');
+                return reject(new Error('Could not resample'));
             }
             const source = offlineContext.createBufferSource();
             const audioBuffer = offlineContext.createBuffer(1, buffer.samples.length, buffer.sampleRate);
@@ -465,6 +469,7 @@ class SoundEditor extends React.Component {
 }
 
 SoundEditor.propTypes = {
+    isFullScreen: PropTypes.bool,
     name: PropTypes.string.isRequired,
     sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
@@ -483,6 +488,7 @@ const mapStateToProps = (state, {soundIndex}) => {
         soundId: sound.soundId,
         sampleRate: audioBuffer.sampleRate,
         samples: audioBuffer.getChannelData(0),
+        isFullScreen: state.scratchGui.mode.isFullScreen,
         name: sound.name,
         vm: state.scratchGui.vm
     };

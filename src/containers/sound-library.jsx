@@ -149,11 +149,11 @@ class SoundLibrary extends React.PureComponent {
         // @todo need to use this hack to avoid library using md5 for image
         const soundLibraryThumbnailData = soundLibraryContent.map(sound => {
             const {
-                md5,
+                md5ext,
                 ...otherData
             } = sound;
             return {
-                _md5: md5,
+                _md5: md5ext,
                 rawURL: this.props.isRtl ? soundIconRtl : soundIcon,
                 ...otherData
             };

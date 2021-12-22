@@ -64,13 +64,13 @@ const PromptComponent = props => (
                 <div>
                     {props.isStage ?
                         <div className={styles.infoMessage}>
-                            {props.isVariable ? (
+                            {props.showListMessage ? (
                                 <FormattedMessage
-                                    {...messages.availableToAllSpritesMessage}
+                                    {...messages.listAvailableToAllSpritesMessage}
                                 />
                             ) : (
                                 <FormattedMessage
-                                    {...messages.listAvailableToAllSpritesMessage}
+                                    {...messages.availableToAllSpritesMessage}
                                 />
                             )}
                         </div> :
@@ -153,7 +153,7 @@ PromptComponent.propTypes = {
     defaultValue: PropTypes.string,
     globalSelected: PropTypes.bool.isRequired,
     isStage: PropTypes.bool.isRequired,
-    isVariable: PropTypes.bool.isRequired,
+    showListMessage: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,

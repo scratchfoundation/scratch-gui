@@ -70,9 +70,9 @@ jobs:
       NODE_ENV: production
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
-      <<: *setup_steps
-      <<: *test_steps
-      <<: *build_steps
+    <<: *setup_steps
+    <<: *test_steps
+    <<: *build_steps
   setup:
     <<: *defaults
     steps:

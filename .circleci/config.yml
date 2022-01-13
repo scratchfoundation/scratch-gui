@@ -226,7 +226,7 @@ workflows:
                 - /^hotfix\/.*/
   build-test-deploy:
     jobs:
-      - setup
+      - setup:
           filters:
             branches:
               only:

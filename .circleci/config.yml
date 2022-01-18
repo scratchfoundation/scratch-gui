@@ -40,7 +40,7 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: cimg/node:16.13-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/repo
 
 jobs:
@@ -52,9 +52,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run:
-          name: NPM Clean Install
-          command: npm ci
+      - run: npm ci
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit

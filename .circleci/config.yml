@@ -53,10 +53,12 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      # - run: npm ci
       - run:
           name: Lint
-          command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit
+          command: |
+            npm ci
+            npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit
       - run:
           name: Unit
           environment:

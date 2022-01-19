@@ -44,6 +44,37 @@ aliases:
     working_directory: ~/repo
 
 jobs:
+  build-test-no-cache:
+    <<: *defaults
+    environment:
+      JEST_JUNIT_OUTPUT_DIR: test-results
+      NODE_OPTIONS: --max-old-space-size=4000
+    steps:
+      - *restore_git_cache
+      - checkout
+      - run: npm ci
+      - run:
+          name: Lint
+          command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit
+      - run:
+          name: Unit
+          environment:
+            JEST_JUNIT_OUTPUT_NAME: unit-results.xml
+          command: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov --maxWorkers="2"
+      - run:
+          name: Build
+          environment:
+            NODE_ENV: production
+          command: npm run build
+      - run:
+          name: Integration
+          environment:
+              JEST_JUNIT_OUTPUT_NAME: integration-results.xml
+          command: npm run test:integration -- --reporters="default" --reporters="jest-junit"
+      - store_artifacts:
+          path: coverage
+      - store_test_results:
+          path: test-results
   setup:
     <<: *defaults
     steps:
@@ -186,9 +217,24 @@ workflows:
           requires:
               - setup
 
+  build-test-no-deploy:
+    jobs:
+      - build-test-no-cache:
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+                - /^hotfix\/.*/
   build-test-deploy:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - /^hotfix\/.*/
       - lint:
           requires:
             - setup

@@ -69,7 +69,7 @@ jobs:
       - run:
           name: Integration
           environment:
-              JEST_JUNIT_OUTPUT_NAME: integration-results
+              JEST_JUNIT_OUTPUT_NAME: integration-results.xml
           command: |
             export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
             $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit" --runInBand

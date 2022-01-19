@@ -70,8 +70,7 @@ jobs:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_NAME: integration-results.xml
-          command: |
-            $(npm bin)/jest test/integration/*.test.js --reporters="default" --reporters="jest-junit" --runInBand
+          command: npm run test:integration -- --reporters="default" --reporters="jest-junit"
       - store_artifacts:
           path: coverage
       - store_test_results:

@@ -49,7 +49,6 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - *restore_npm_cache
       - run: npm ci
       - *save_git_cache
       - *save_npm_cache
@@ -205,9 +204,21 @@ workflows:
       - store_build:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - /^hotfix\/.*/
       - store_dist:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - /^hotfix\/.*/
       - deploy-npm:
           requires:
             - lint

@@ -44,6 +44,7 @@ const videos = {
     },
     'animate-a-name': {
         'en': 'pyur30ho05',
+        'ar': 'bz5vgtroxs',
         'it': 'c8zcrk6w09',
         'pt': 't49tfrukyf',
         'pt-br': 't49tfrukyf',

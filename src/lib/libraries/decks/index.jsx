@@ -6,6 +6,9 @@ import {FormattedMessage} from 'react-intl';
 // Intro
 import libraryIntro from './thumbnails/getting-started.jpg';
 
+// Getting Started ASL
+import libraryGettingStartedASL from './thumbnails/getting-started-asl.png';
+
 // Text to Speech
 import libraryTXTSpeech from './thumbnails/text-to-speech.jpg';
 
@@ -111,6 +114,28 @@ export default {
         }
         ],
         urlId: 'getStarted'
+    },
+
+    'intro-getting-started-ASL': {
+        name: (
+            <FormattedMessage
+                defaultMessage="Getting Started - ASL"
+                description="Name for the 'Getting Started ASL (American Sign Language)' how-to"
+                id="gui.howtos.intro-getting-started-ASL.name"
+            />
+        ),
+        tags: ['help', 'stuck', 'how', 'can', 'say', 'asl', 'deaf', 'accessibile', 'hear'],
+        img: libraryGettingStartedASL,
+        steps: [{
+            video: 'intro-getting-started-ASL'
+        }, {
+            deckIds: [
+                'add-a-backdrop',
+                'add-sprite'
+            ]
+        }
+        ],
+        urlId: 'getting-started-ASL'
     },
 
     'animate-a-name': {

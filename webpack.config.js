@@ -27,10 +27,6 @@ const base = {
         filename: '[name].js',
         chunkFilename: 'chunks/[name].js'
     },
-    externals: {
-        React: 'react',
-        ReactDOM: 'react-dom'
-    },
     resolve: {
         symlinks: false
     },
@@ -112,10 +108,6 @@ module.exports = [
         output: {
             path: path.resolve(__dirname, 'build'),
             filename: '[name].js'
-        },
-        externals: {
-            React: 'react',
-            ReactDOM: 'react-dom'
         },
         module: {
             rules: base.module.rules.concat([
@@ -200,8 +192,8 @@ module.exports = [
                 publicPath: `${STATIC_PATH}/`
             },
             externals: {
-                React: 'react',
-                ReactDOM: 'react-dom'
+                'react': 'react',
+                'react-dom': 'react-dom'
             },
             module: {
                 rules: base.module.rules.concat([

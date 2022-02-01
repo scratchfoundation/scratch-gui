@@ -109,13 +109,13 @@ const MonitorComponent = props => (
                         />
                     </MenuItem>}
                 {props.onHide &&
-                    <MenuItem onClick={props.onHide}>
+                    <BorderedMenuItem onClick={props.onHide}>
                         <FormattedMessage
                             defaultMessage="hide"
                             description="Menu item to hide the monitor"
                             id="gui.monitor.contextMenu.hide"
                         />
-                    </MenuItem>}
+                    </BorderedMenuItem>}
             </ContextMenu>
         ), document.body)}
     </ContextMenuTrigger>

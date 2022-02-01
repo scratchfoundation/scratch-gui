@@ -15,6 +15,7 @@
     padding-right: 1rem;
     margin-bottom: 7px;
     min-height: 1.5rem;
+    pointer-events: all;
 }
 
 .alert.warn {

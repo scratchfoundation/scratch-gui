@@ -12,6 +12,7 @@
 *.svg binary
 
 # Prefer LF for most file types
+*.css text eol=lf
 *.frag text eol=lf
 *.htm text eol=lf
 *.html text eol=lf
@@ -19,6 +20,7 @@
 *.js text eol=lf
 *.js.map text eol=lf
 *.json text eol=lf
+*.json5 text eol=lf
 *.jsx text eol=lf
 *.md text eol=lf
 *.vert text eol=lf

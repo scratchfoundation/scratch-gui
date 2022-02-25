@@ -53,6 +53,7 @@ jobs:
       - *restore_git_cache
       - checkout
       - run: npm ci
+      - run: cd node_modules/cat-blocks && ln -s $(npm root)/google-closure-library ../closure-library --force && npm --production=false install && cd -
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit

@@ -1,12 +1,11 @@
-import ScratchBlocks from 'scratch-blocks';
 
 /**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
  * @return {ScratchBlocks} ScratchBlocks connected with the vm
  */
-export default function (vm) {
-
+export default function (vm, useCatBlocks) {
+    const ScratchBlocks = useCatBlocks ? require('cat-blocks') : require('scratch-blocks');
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',

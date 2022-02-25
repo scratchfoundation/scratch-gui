@@ -31,6 +31,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
+import {setTimeTravel2020, setTimeTravelNow} from '../../reducers/time-travel';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -549,15 +550,12 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseMode}
                             >
                                 <MenuSection>
-                                    <TurboMode>{(toggleTurboMode, {turboMode}) => (
-                                        <MenuItem onClick={toggleTurboMode}>
-                                            {turboMode ? (
-                                                'Put away the cats'
-                                            ) : (
-                                                'Show me cats'
-                                            )}
-                                        </MenuItem>
-                                    )}</TurboMode>
+                                    <MenuItem onClick={this.props.onClickCatBlocks}>
+                                        {'Show me cats'}
+                                    </MenuItem>
+                                    <MenuItem onClick={this.props.onClickTimeNow}>
+                                        {'Put away the cats'}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -826,6 +824,8 @@ MenuBar.propTypes = {
         )
     ]),
     onClickAccount: PropTypes.func,
+    onClickCatBlocks: PropTypes.func,
+    onClickTimeNow: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
@@ -912,7 +912,9 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onClickCatBlocks: () => dispatch(setTimeTravel2020()),
+    onClickTimeNow: () => dispatch(setTimeTravelNow())
 });
 
 export default compose(

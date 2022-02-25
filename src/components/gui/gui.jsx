@@ -64,6 +64,7 @@ const GUIComponent = props => {
         backdropLibraryVisible,
         backpackHost,
         backpackVisible,
+        blocksId,
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
@@ -300,6 +301,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
+                                            key={blocksId}
                                             canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
@@ -373,6 +375,7 @@ GUIComponent.propTypes = {
     backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    blocksId: PropTypes.string,
     canChangeLanguage: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
@@ -429,6 +432,7 @@ GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
+    blocksId: 'original',
     canChangeLanguage: true,
     canCreateNew: false,
     canEditTitle: false,
@@ -448,7 +452,8 @@ GUIComponent.defaultProps = {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    blocksId: state.scratchGui.vmStatus.turbo.toString()
 });
 
 export default injectIntl(connect(

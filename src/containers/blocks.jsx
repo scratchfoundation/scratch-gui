@@ -48,7 +48,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
-        this.ScratchBlocks = VMScratchBlocks(props.vm, true);
+        this.ScratchBlocks = VMScratchBlocks(props.vm, false);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -87,6 +87,12 @@ class Blocks extends React.Component {
         this.toolboxUpdateQueue = [];
     }
     componentDidMount () {
+        console.log('mount the blocks!');
+        this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.useCatBlocks);
+        this.ScratchBlocks.prompt = this.handlePromptStart;
+        this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
+        this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
+
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
@@ -150,6 +156,7 @@ class Blocks extends React.Component {
         );
     }
     componentDidUpdate (prevProps) {
+
         // If any modals are open, call hideChaff to close z-indexed field editors
         if (this.props.anyModalVisible && !prevProps.anyModalVisible) {
             this.ScratchBlocks.hideChaff();
@@ -635,6 +642,7 @@ Blocks.propTypes = {
     toolboxXML: PropTypes.string,
     updateMetrics: PropTypes.func,
     updateToolboxState: PropTypes.func,
+    useCatBlocks: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     workspaceMetrics: PropTypes.shape({
         targets: PropTypes.objectOf(PropTypes.object)
@@ -670,6 +678,7 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
+    blockType: 'default',
     isVisible: true,
     options: Blocks.defaultOptions
 };
@@ -685,7 +694,8 @@ const mapStateToProps = state => ({
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
-    workspaceMetrics: state.scratchGui.workspaceMetrics
+    workspaceMetrics: state.scratchGui.workspaceMetrics,
+    useCatBlocks: state.scratchGui.vmStatus.turbo
 });
 
 const mapDispatchToProps = dispatch => ({

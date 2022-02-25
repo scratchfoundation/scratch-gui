@@ -512,17 +512,9 @@ class MenuBar extends React.Component {
                                     <TurboMode>{(toggleTurboMode, {turboMode}) => (
                                         <MenuItem onClick={toggleTurboMode}>
                                             {turboMode ? (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn off Turbo Mode"
-                                                    description="Menu bar item for turning off turbo mode"
-                                                    id="gui.menuBar.turboModeOff"
-                                                />
+                                                'Put away the cats'
                                             ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Turn on Turbo Mode"
-                                                    description="Menu bar item for turning on turbo mode"
-                                                    id="gui.menuBar.turboModeOn"
-                                                />
+                                                'Show me cats'
                                             )}
                                         </MenuItem>
                                     )}</TurboMode>

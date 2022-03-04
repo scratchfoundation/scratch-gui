@@ -31,7 +31,12 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
-import {setTimeTravel2020, setTimeTravelNow} from '../../reducers/time-travel';
+import {
+    isTimeTravel2019,
+    isTimeTravel2020,
+    isTimeTravelNow,
+    setTimeTravel
+} from '../../reducers/time-travel';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -171,6 +176,7 @@ class MenuBar extends React.Component {
             'handleClickSaveAsCopy',
             'handleClickSeeCommunity',
             'handleClickShare',
+            'handleSetMode',
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
@@ -231,6 +237,16 @@ class MenuBar extends React.Component {
                 waitForUpdate(false); // immediately transition to project page
             }
         }
+    }
+    handleSetMode (mode) {
+        return () => {
+            if (mode === '2019') {
+                this.props.vm.setWorldStageMode(true);
+            } else {
+                this.props.vm.setWorldStageMode(false);
+            }
+            this.props.onSetTimeTravelMode(mode);
+        };
     }
     handleRestoreOption (restoreFun) {
         return () => {
@@ -550,11 +566,14 @@ class MenuBar extends React.Component {
                                 onRequestClose={this.props.onRequestCloseMode}
                             >
                                 <MenuSection>
-                                    <MenuItem onClick={this.props.onClickCatBlocks}>
-                                        {'Show me cats'}
+                                    <MenuItem onClick={this.handleSetMode('NOW')}>
+                                        {this.props.modeNow && '✅'}{'Normal mode'}
                                     </MenuItem>
-                                    <MenuItem onClick={this.props.onClickTimeNow}>
-                                        {'Put away the cats'}
+                                    <MenuItem onClick={this.handleSetMode('2020')}>
+                                        {this.props.mode2020 && '✅'}{'Show me cats'}
+                                    </MenuItem>
+                                    <MenuItem onClick={this.handleSetMode('2019')}>
+                                        {this.props.mode2019 && '✅'}{'All the world is a stage'}
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
@@ -813,6 +832,9 @@ MenuBar.propTypes = {
     loginMenuOpen: PropTypes.bool,
     logo: PropTypes.string,
     modeMenuOpen: PropTypes.bool,
+    modeNow: PropTypes.bool,
+    mode2019: PropTypes.bool,
+    mode2020: PropTypes.bool,
 
     onClickAbout: PropTypes.oneOfType([
         PropTypes.func, // button mode: call this callback when the About button is clicked
@@ -824,8 +846,7 @@ MenuBar.propTypes = {
         )
     ]),
     onClickAccount: PropTypes.func,
-    onClickCatBlocks: PropTypes.func,
-    onClickTimeNow: PropTypes.func,
+    onSetTimeTravelMode: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
@@ -887,7 +908,10 @@ const mapStateToProps = (state, ownProps) => {
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        mode2019: isTimeTravel2019(state),
+        mode2020: isTimeTravel2020(state),
+        modeNow: isTimeTravelNow(state)
     };
 };
 
@@ -913,8 +937,7 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onClickCatBlocks: () => dispatch(setTimeTravel2020()),
-    onClickTimeNow: () => dispatch(setTimeTravelNow())
+    onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode))
 });
 
 export default compose(

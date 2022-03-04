@@ -27,7 +27,7 @@ class TurboMode extends React.Component {
         ]);
     }
     toggleTurboMode () {
-        console.log('toggle cat blocks');
+        // console.log('toggle cat blocks');
 
         this.props.vm.setTurboMode(!this.props.turboMode);
     }

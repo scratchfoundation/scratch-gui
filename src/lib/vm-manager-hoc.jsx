@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 
 import VM from 'scratch-vm';
 import AudioEngine from 'scratch-audio';
+import AudioContext from 'audio-context';
+
 
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
@@ -13,6 +15,8 @@ import {
     onLoadedProject,
     projectError
 } from '../reducers/project-state';
+import {isTimeTravel2020} from '../reducers/time-travel';
+
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -26,11 +30,31 @@ const vmManagerHOC = function (WrappedComponent) {
             bindAll(this, [
                 'loadProject'
             ]);
+
+            // Initialize custom audio engine with echo effect
+            this.audioContext = new AudioContext();
+
+            const inputNode = this.audioContext.createGain();
+            inputNode.connect(this.audioContext.destination);
+            
+            this.audioContext.createGain();
+            const delay = this.audioContext.createDelay(1);
+            delay.delayTime.value = 0.25;
+            const decay = this.audioContext.createGain();
+            decay.gain.value = 0.3;
+
+            inputNode.connect(delay);
+            delay.connect(decay);
+            decay.connect(delay);
+            decay.connect(this.audioContext.destination);
+
+            this.customAudioEngine = new AudioEngine(this.audioContext, decay);
         }
         componentDidMount () {
             if (!this.props.vm.initialized) {
-                this.audioEngine = new AudioEngine();
-                this.props.vm.attachAudioEngine(this.audioEngine);
+
+                const audioEngine = this.props.isTimeTravel2020 ? this.customAudioEngine : new AudioEngine();
+                this.props.vm.attachAudioEngine(audioEngine);
                 this.props.vm.setCompatibilityMode(true);
                 this.props.vm.initialized = true;
                 this.props.vm.setLocale(this.props.locale, this.props.messages);
@@ -50,6 +74,14 @@ const vmManagerHOC = function (WrappedComponent) {
             if (!this.props.isPlayerOnly && !this.props.isStarted) {
                 this.props.vm.start();
             }
+
+            if (this.props.isTimeTravel2020 !== prevProps.isTimeTravel2020) {
+                this.props.vm.attachAudioEngine(this.props.isTimeTravel2020 ?
+                    this.customAudioEngine :
+                    new AudioEngine()
+                );
+            }
+
         }
         loadProject () {
             return this.props.vm.loadProject(this.props.projectData)
@@ -108,6 +140,7 @@ const vmManagerHOC = function (WrappedComponent) {
         isLoadingWithId: PropTypes.bool,
         isPlayerOnly: PropTypes.bool,
         isStarted: PropTypes.bool,
+        isTimeTravel2020: PropTypes.bool,
         loadingState: PropTypes.oneOf(LoadingStates),
         locale: PropTypes.string,
         messages: PropTypes.objectOf(PropTypes.string),
@@ -131,7 +164,8 @@ const vmManagerHOC = function (WrappedComponent) {
             projectId: state.scratchGui.projectState.projectId,
             loadingState: loadingState,
             isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
-            isStarted: state.scratchGui.vmStatus.started
+            isStarted: state.scratchGui.vmStatus.started,
+            isTimeTravel2020: isTimeTravel2020(state)
         };
     };
 

@@ -575,16 +575,28 @@ class MenuBar extends React.Component {
                             >
                                 <MenuSection>
                                     <MenuItem onClick={this.handleSetMode('NOW')}>
-                                        {this.props.modeNow && '✅'}{'Normal mode'}
+                                        <span className={classNames({[styles.inactive]: !this.props.modeNow})}>
+                                            {'✓'}
+                                        </span>
+                                        {' Normal mode'}
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('2020')}>
-                                        {this.props.mode2020 && '✅'}{'Show me cats'}
+                                        <span className={classNames({[styles.inactive]: !this.props.mode2020})}>
+                                            {'✓'}
+                                        </span>
+                                        {' Show me cats'}
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('2019')}>
-                                        {this.props.mode2019 && '✅'}{'All the world is a stage'}
+                                        <span className={classNames({[styles.inactive]: !this.props.mode2019})}>
+                                            {'✓'}
+                                        </span>
+                                        {' All the world is a stage'}
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('1920')}>
-                                        {this.props.mode1920 && '✅'}{'Old timey'}
+                                        <span className={classNames({[styles.inactive]: !this.props.mode1920})}>
+                                            {'✓'}
+                                        </span>
+                                        {' Old timey'}
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>

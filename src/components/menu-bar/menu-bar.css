@@ -39,7 +39,9 @@
     align-items: center;
     flex-grow: 1;
 }
-
+.inactive {
+    opacity: 0;
+}
 .scratch-logo {
     height:  1.6rem;
     vertical-align: middle;

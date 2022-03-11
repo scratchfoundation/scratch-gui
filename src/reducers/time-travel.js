@@ -6,6 +6,7 @@ const initialState = {
 const NOW = 'NOW';
 const YEAR_2020 = '2020';
 const YEAR_2019 = '2019';
+const YEAR_1920 = '1920';
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
@@ -36,6 +37,16 @@ const setTimeTravel2020 = function () {
         year: YEAR_2020
     };
 };
+const isTimeTravel1920 = function (state) {
+    return state.scratchGui.timeTravel.year === YEAR_1920;
+};
+const setTimeTravel1920 = function () {
+    return {
+        type: SET_TIME_TRAVEL,
+        year: YEAR_1920
+    };
+};
+
 const isTimeTravel2020 = function (state) {
     return state.scratchGui.timeTravel.year === YEAR_2020;
 };
@@ -60,9 +71,11 @@ const setTimeTravel = function (mode) {
 export {
     reducer as default,
     initialState as timeTravelInitialState,
+    isTimeTravel1920,
     isTimeTravel2019,
     isTimeTravel2020,
     isTimeTravelNow,
+    setTimeTravel1920,
     setTimeTravel2019,
     setTimeTravel2020,
     setTimeTravelNow,

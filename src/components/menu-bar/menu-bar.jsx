@@ -32,6 +32,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
+    isTimeTravel1920,
     isTimeTravel2019,
     isTimeTravel2020,
     isTimeTravelNow,
@@ -245,6 +246,13 @@ class MenuBar extends React.Component {
             } else {
                 this.props.vm.setWorldStageMode(false);
             }
+            // Turn on/off filters for Oldtime mode.
+            if (mode === '1920') {
+                document.body.style.filter = 'brightness(.9)contrast(.8)sepia(1.0)';
+            } else {
+                document.body.style.filter = '';
+            }
+
             this.props.onSetTimeTravelMode(mode);
         };
     }
@@ -575,6 +583,9 @@ class MenuBar extends React.Component {
                                     <MenuItem onClick={this.handleSetMode('2019')}>
                                         {this.props.mode2019 && '✅'}{'All the world is a stage'}
                                     </MenuItem>
+                                    <MenuItem onClick={this.handleSetMode('1920')}>
+                                        {this.props.mode1920 && '✅'}{'Old timey'}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -833,6 +844,7 @@ MenuBar.propTypes = {
     logo: PropTypes.string,
     modeMenuOpen: PropTypes.bool,
     modeNow: PropTypes.bool,
+    mode1920: PropTypes.bool,
     mode2019: PropTypes.bool,
     mode2020: PropTypes.bool,
 
@@ -909,6 +921,7 @@ const mapStateToProps = (state, ownProps) => {
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm,
+        mode1920: isTimeTravel1920(state),
         mode2019: isTimeTravel2019(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state)

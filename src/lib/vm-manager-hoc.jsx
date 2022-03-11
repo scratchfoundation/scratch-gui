@@ -46,7 +46,6 @@ const vmManagerHOC = function (WrappedComponent) {
             inputNode.connect(delay);
             delay.connect(decay);
             decay.connect(delay);
-            decay.connect(this.audioContext.destination);
 
             this.customAudioEngine = new AudioEngine(this.audioContext, decay);
         }

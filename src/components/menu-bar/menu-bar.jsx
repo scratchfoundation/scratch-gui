@@ -33,6 +33,7 @@ import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
     isTimeTravel1920,
+    isTimeTravel1990,
     isTimeTravel2019,
     isTimeTravel2020,
     isTimeTravelNow,
@@ -84,6 +85,7 @@ import languageIcon from '../language-selector/language-icon.svg';
 import aboutIcon from './icon--about.svg';
 
 import scratchLogo from './scratch-logo.svg';
+import ninetiesLogo from './nineties_logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
@@ -246,11 +248,20 @@ class MenuBar extends React.Component {
             } else {
                 this.props.vm.setWorldStageMode(false);
             }
-            // Turn on/off filters for Oldtime mode.
+            // Turn on/off filters for modes.
             if (mode === '1920') {
                 document.body.style.filter = 'brightness(.9)contrast(.8)sepia(1.0)';
+            } else if (mode === '1990') {
+                document.body.style.filter = 'hue-rotate(40deg)';
             } else {
                 document.body.style.filter = '';
+            }
+
+            // Change logo for modes
+            if (mode === '1990') {
+                document.getElementById('logo_img').src = ninetiesLogo;
+            } else {
+                document.getElementById('logo_img').src = this.props.logo;
             }
 
             this.props.onSetTimeTravelMode(mode);
@@ -418,6 +429,7 @@ class MenuBar extends React.Component {
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
                             <img
+                                id="logo_img"
                                 alt="Scratch"
                                 className={classNames(styles.scratchLogo, {
                                     [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
@@ -597,6 +609,12 @@ class MenuBar extends React.Component {
                                             {'✓'}
                                         </span>
                                         {' Old timey'}
+                                    </MenuItem>
+                                    <MenuItem onClick={this.handleSetMode('1990')}>
+                                        <span className={classNames({[styles.inactive]: !this.props.mode1990})}>
+                                            {'✓'}
+                                        </span>
+                                        {' 90s mode'}
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
@@ -857,6 +875,7 @@ MenuBar.propTypes = {
     modeMenuOpen: PropTypes.bool,
     modeNow: PropTypes.bool,
     mode1920: PropTypes.bool,
+    mode1990: PropTypes.bool,
     mode2019: PropTypes.bool,
     mode2020: PropTypes.bool,
 
@@ -934,6 +953,7 @@ const mapStateToProps = (state, ownProps) => {
             (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm,
         mode1920: isTimeTravel1920(state),
+        mode1990: isTimeTravel1990(state),
         mode2019: isTimeTravel2019(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state)

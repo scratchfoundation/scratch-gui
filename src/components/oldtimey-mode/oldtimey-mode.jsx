@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './oldtimey-mode.css';
-import oldtimeySound from './projector.wav';
+import oldtimeySound from './projector2.mp3';
 import {connect} from 'react-redux';
 import {isTimeTravel1920} from '../../reducers/time-travel';
 
@@ -11,7 +11,9 @@ const OldTimeyMode = props => {
         <div className={styles.oldtimeyMode}>
             <audio
                 src={oldtimeySound}
-                ref={audio => {audio && (audio.volume = 0.1)}}
+                ref={audio => {
+                    audio && (audio.volume = 0.1); // eslint-disable-line no-unused-expressions
+                }}
                 autoPlay
                 loop
             />

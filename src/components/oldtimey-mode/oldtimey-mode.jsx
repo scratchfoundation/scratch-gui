@@ -1,12 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './oldtimey-mode.css';
+import oldtimeySound from './projector.wav';
 import {connect} from 'react-redux';
 import {isTimeTravel1920} from '../../reducers/time-travel';
 
 const OldTimeyMode = props => {
     if (!props.show) return null;
-    return <div className={styles.oldtimeyMode} />;
+    return (
+        <div className={styles.oldtimeyMode}>
+            <audio
+                src={oldtimeySound}
+                autoPlay
+                loop
+            />
+        </div>
+    );
 };
 
 OldTimeyMode.propTypes = {

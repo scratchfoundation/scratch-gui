@@ -4,6 +4,6 @@
     height: 100%;
     background: transparent url('./oldtimey.png') center center;
     background-size: 100% 100%;
-    z-index: 50;
+    z-index: 500;
     pointer-events: none;
 }

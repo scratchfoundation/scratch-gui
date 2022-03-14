@@ -11,6 +11,7 @@ const OldTimeyMode = props => {
         <div className={styles.oldtimeyMode}>
             <audio
                 src={oldtimeySound}
+                ref={audio => {audio && (audio.volume = 0.1)}}
                 autoPlay
                 loop
             />

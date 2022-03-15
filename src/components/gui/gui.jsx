@@ -23,6 +23,7 @@ import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
 import OldTimeyMode from '../oldtimey-mode/oldtimey-mode.jsx';
 import NinetiesMode from '../nineties-mode/nineties-mode.jsx';
+import PrehistoricMode from '../prehistoric-mode/prehistoric-mode.jsx';
 
 import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
@@ -165,6 +166,7 @@ const GUIComponent = props => {
             >
                 <OldTimeyMode />
                 <NinetiesMode />
+                <PrehistoricMode />
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}

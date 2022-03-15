@@ -32,6 +32,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
+    isTimeTravel220022BC,
     isTimeTravel1920,
     isTimeTravel1990,
     isTimeTravel2019,
@@ -616,6 +617,12 @@ class MenuBar extends React.Component {
                                         </span>
                                         {' 90s mode'}
                                     </MenuItem>
+                                    <MenuItem onClick={this.handleSetMode('220022BC')}>
+                                        <span className={classNames({[styles.inactive]: !this.props.mode220022BC})}>
+                                            {'✓'}
+                                        </span>
+                                        {' Prehistoric mode'}
+                                    </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
@@ -874,6 +881,7 @@ MenuBar.propTypes = {
     logo: PropTypes.string,
     modeMenuOpen: PropTypes.bool,
     modeNow: PropTypes.bool,
+    mode220022BC: PropTypes.bool,
     mode1920: PropTypes.bool,
     mode1990: PropTypes.bool,
     mode2019: PropTypes.bool,
@@ -952,6 +960,7 @@ const mapStateToProps = (state, ownProps) => {
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
         vm: state.scratchGui.vm,
+        mode220022BC: isTimeTravel220022BC(state),
         mode1920: isTimeTravel1920(state),
         mode1990: isTimeTravel1990(state),
         mode2019: isTimeTravel2019(state),

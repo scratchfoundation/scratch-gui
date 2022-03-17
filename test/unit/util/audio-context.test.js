@@ -1,7 +1,15 @@
 import 'web-audio-test-api';
 import SharedAudioContext from '../../../src/lib/audio/shared-audio-context';
 
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    console.log(reason.stack);
+});
+
 describe('Shared Audio Context', () => {
+    WebAudioTestAPI.setState({
+        "AudioContext#resume": "enabled",
+    });
     const audioContext = new AudioContext();
 
     test('returns empty object without user gesture', () => {

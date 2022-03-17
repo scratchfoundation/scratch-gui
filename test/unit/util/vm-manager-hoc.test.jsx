@@ -8,6 +8,13 @@ import {LoadingState} from '../../../src/reducers/project-state';
 
 import vmManagerHOC from '../../../src/lib/vm-manager-hoc.jsx';
 
+process.on('unhandledRejection', (reason, p) => {
+    // eslint-disable-next-line no-console
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // eslint-disable-next-line no-console
+    console.log(reason.stack);
+});
+
 // eslint-disable-next-line no-undef
 WebAudioTestAPI.setState({
     'AudioContext#resume': 'enabled'

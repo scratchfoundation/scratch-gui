@@ -1,11 +1,7 @@
-import 'web-audio-test-api';
 import SharedAudioContext from '../../../src/lib/audio/shared-audio-context';
+import '../../helpers/audio-context-setup';
 
 describe('Shared Audio Context', () => {
-    // eslint-disable-next-line no-undef
-    WebAudioTestAPI.setState({
-        'AudioContext#resume': 'enabled'
-    });
     const audioContext = new AudioContext();
 
     test('returns empty object without user gesture', () => {

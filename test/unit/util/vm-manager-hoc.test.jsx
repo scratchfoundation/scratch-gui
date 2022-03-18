@@ -1,4 +1,4 @@
-import 'web-audio-test-api';
+import '../../helpers/audio-context-setup';
 
 import React from 'react';
 import configureStore from 'redux-mock-store';
@@ -7,11 +7,6 @@ import VM from 'scratch-vm';
 import {LoadingState} from '../../../src/reducers/project-state';
 
 import vmManagerHOC from '../../../src/lib/vm-manager-hoc.jsx';
-
-// eslint-disable-next-line no-undef
-WebAudioTestAPI.setState({
-    'AudioContext#resume': 'enabled'
-});
 
 describe('VMManagerHOC', () => {
     const mockStore = configureStore();

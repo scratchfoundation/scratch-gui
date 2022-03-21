@@ -35,7 +35,7 @@ class PrehistoricMode extends React.Component {
             <div
                 className={styles.prehistoricMode}
                 style={{
-                    backgroundPosition: `${this.state.x + 1990}px ${this.state.y + 1900}px`
+                    backgroundPosition: `${this.state.x + 2000}px ${this.state.y + 2000}px`
                 }}
             />
         );

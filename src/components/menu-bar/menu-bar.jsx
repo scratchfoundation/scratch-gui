@@ -593,23 +593,13 @@ class MenuBar extends React.Component {
                                         </span>
                                         {' Normal mode'}
                                     </MenuItem>
+                                </MenuSection>
+                                <MenuSection>
                                     <MenuItem onClick={this.handleSetMode('2020')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode2020})}>
                                             {'✓'}
                                         </span>
-                                        {' Show me cats'}
-                                    </MenuItem>
-                                    <MenuItem onClick={this.handleSetMode('2019')}>
-                                        <span className={classNames({[styles.inactive]: !this.props.mode2019})}>
-                                            {'✓'}
-                                        </span>
-                                        {' All the world is a stage'}
-                                    </MenuItem>
-                                    <MenuItem onClick={this.handleSetMode('1920')}>
-                                        <span className={classNames({[styles.inactive]: !this.props.mode1920})}>
-                                            {'✓'}
-                                        </span>
-                                        {' Old timey'}
+                                        {' Caturday mode'}
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('1990')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode1990})}>
@@ -617,11 +607,25 @@ class MenuBar extends React.Component {
                                         </span>
                                         {' 90s mode'}
                                     </MenuItem>
+                                    <MenuItem onClick={this.handleSetMode('1920')}>
+                                        <span className={classNames({[styles.inactive]: !this.props.mode1920})}>
+                                            {'✓'}
+                                        </span>
+                                        {' Old timey mode'}
+                                    </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('220022BC')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode220022BC})}>
                                             {'✓'}
                                         </span>
                                         {' Prehistoric mode'}
+                                    </MenuItem>
+                                </MenuSection>
+                                <MenuSection>
+                                    <MenuItem onClick={this.handleSetMode('2019')}>
+                                        <span className={classNames({[styles.inactive]: !this.props.mode2019})}>
+                                            {'✓'}
+                                        </span>
+                                        {' All the world is a stage'}
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>

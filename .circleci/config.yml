@@ -70,7 +70,9 @@ jobs:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_NAME: integration-results.xml
-          command: npm run test:integration -- --reporters="default" --reporters="jest-junit"
+          command: |
+              npm install chromedriver --detect_chromedriver_version
+              npm run test:integration -- --reporters="default" --reporters="jest-junit"
       - store_artifacts:
           path: coverage
       - store_test_results:
@@ -152,6 +154,7 @@ jobs:
           environment:
               JEST_JUNIT_OUTPUT_DIR: test-results/integration
           command: |
+            npm install chromedriver --detect_chromedriver_version
             export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
             $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit" --runInBand
       - store_test_results:

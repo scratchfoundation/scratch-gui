@@ -43,6 +43,9 @@ export default appTarget => {
     const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
     const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
 
+    const totallyNormalMatches = window.location.href.match(/[?&]totallyNormal=([^&]*)&?/);
+    const isTotallyNormal = totallyNormalMatches ? totallyNormalMatches[1] === 'true' : false;
+
     const scratchDesktopMatches = window.location.href.match(/[?&]isScratchDesktop=([^&]+)/);
     let simulateScratchDesktop;
     if (scratchDesktopMatches) {
@@ -68,6 +71,7 @@ export default appTarget => {
                 canEditTitle
                 isScratchDesktop
                 showTelemetryModal
+                isTotallyNormal={isTotallyNormal}
                 canSave={false}
                 onTelemetryModalCancel={handleTelemetryModalCancel}
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
@@ -77,6 +81,7 @@ export default appTarget => {
                 canEditTitle
                 backpackVisible
                 showComingSoon
+                isTotallyNormal={isTotallyNormal}
                 backpackHost={backpackHost}
                 canSave={false}
                 onClickLogo={onClickLogo}

@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+    browser-tools: circleci/browser-tools@1.2.4
 aliases:
   - &save_git_cache
     save_cache:
@@ -66,12 +68,15 @@ jobs:
           environment:
             NODE_ENV: production
           command: npm run build
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_NAME: integration-results.xml
           command: |
-              npm install chromedriver --detect_chromedriver_version
+              google-chrome --version
+              chromedriver --version
               npm run test:integration -- --reporters="default" --reporters="jest-junit"
       - store_artifacts:
           path: coverage
@@ -149,12 +154,15 @@ jobs:
       - checkout
       - *restore_npm_cache
       - *restore_build_cache
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_DIR: test-results/integration
           command: |
-            npm install chromedriver --detect_chromedriver_version
+            google-chrome --version
+            chromedriver --version
             export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
             $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit" --runInBand
       - store_test_results:

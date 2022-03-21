@@ -584,7 +584,11 @@ class MenuBar extends React.Component {
                             onMouseUp={this.props.onClickMode}
                         >
                             <div className={classNames(styles.editMenu)}>
-                                {'Mode'}
+                                <FormattedMessage
+                                    defaultMessage="Mode"
+                                    description="Mode menu item in the menu bar"
+                                    id="gui.menuBar.modeMenu"
+                                />
                             </div>
                             <MenuBarMenu
                                 className={classNames(styles.menuBarMenu)}
@@ -597,7 +601,12 @@ class MenuBar extends React.Component {
                                         <span className={classNames({[styles.inactive]: !this.props.modeNow})}>
                                             {'✓'}
                                         </span>
-                                        {' Normal mode'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="Normal mode"
+                                            description="April fools: resets editor to not have any pranks"
+                                            id="gui.menuBar.normalMode"
+                                        />
                                     </MenuItem>
                                 </MenuSection>
                                 <MenuSection>
@@ -605,25 +614,45 @@ class MenuBar extends React.Component {
                                         <span className={classNames({[styles.inactive]: !this.props.mode2020})}>
                                             {'✓'}
                                         </span>
-                                        {' Caturday mode'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="Caturday mode"
+                                            description="April fools: Cat blocks mode"
+                                            id="gui.menuBar.caturdayMode"
+                                        />
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('1990')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode1990})}>
                                             {'✓'}
                                         </span>
-                                        {' 90s mode'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="90s mode"
+                                            description="April fools: Makes the editor look like the 1990s"
+                                            id="gui.menuBar.1990sMode"
+                                        />
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('1920')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode1920})}>
                                             {'✓'}
                                         </span>
-                                        {' Old timey mode'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="Old timey mode"
+                                            description="April fools: Makes the editor look like an old movie projector"
+                                            id="gui.menuBar.oldTimeyMode"
+                                        />
                                     </MenuItem>
                                     <MenuItem onClick={this.handleSetMode('220022BC')}>
                                         <span className={classNames({[styles.inactive]: !this.props.mode220022BC})}>
                                             {'✓'}
                                         </span>
-                                        {' Prehistoric mode'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="Prehistoric mode"
+                                            description="April fools: Makes the editor look like inside a cave"
+                                            id="gui.menuBar.prehistoricMode"
+                                        />
                                     </MenuItem>
                                 </MenuSection>
                                 <MenuSection>
@@ -631,7 +660,12 @@ class MenuBar extends React.Component {
                                         <span className={classNames({[styles.inactive]: !this.props.mode2019})}>
                                             {'✓'}
                                         </span>
-                                        {' All the world is a stage'}
+                                        {' '}
+                                        <FormattedMessage
+                                            defaultMessage="All the world is a stage"
+                                            description="April fools: Graphic effects on the stage take effect everywhere"
+                                            id="gui.menuBar.worldStageMode"
+                                        />
                                     </MenuItem>
                                 </MenuSection>
                             </MenuBarMenu>

@@ -640,7 +640,7 @@ class MenuBar extends React.Component {
                                             {' '}
                                             <FormattedMessage
                                                 defaultMessage="Old timey mode"
-                                                description="April fools: Makes the editor look like an old movie projector"
+                                                description="April fools: Makes the editor look like an old movie projector" // eslint-disable-line max-len
                                                 id="gui.menuBar.oldTimeyMode"
                                             />
                                         </MenuItem>
@@ -920,6 +920,7 @@ MenuBar.propTypes = {
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
     isShowingProject: PropTypes.bool,
+    isTotallyNormal: PropTypes.bool,
     isUpdating: PropTypes.bool,
     languageMenuOpen: PropTypes.bool,
     locale: PropTypes.string.isRequired,

@@ -88,6 +88,7 @@ import aboutIcon from './icon--about.svg';
 import scratchLogo from './scratch-logo.svg';
 import ninetiesLogo from './nineties_logo.svg';
 import catLogo from './cat_logo.svg';
+import prehistoricLogo from './prehistoric-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
@@ -264,6 +265,8 @@ class MenuBar extends React.Component {
                 document.getElementById('logo_img').src = ninetiesLogo;
             } else if (mode === '2020') {
                 document.getElementById('logo_img').src = catLogo;
+            } else if (mode === '220022BC') {
+                document.getElementById('logo_img').src = prehistoricLogo;
             } else {
                 document.getElementById('logo_img').src = this.props.logo;
             }

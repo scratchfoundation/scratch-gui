@@ -42,7 +42,7 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: cimg/node:12.22.11-browsers
+      - image: cimg/node:17.7.2-browsers
     working_directory: ~/repo
 
 jobs:

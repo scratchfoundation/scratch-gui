@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DirectionPicker matches snapshot 1`] = `
+<label
+  className={undefined}
+>
+  <span
+    className={undefined}
+  >
+    <span>
+      Direction
+    </span>
+  </span>
+  <input
+    className="undefined"
+    disabled={false}
+    label={
+      <FormattedMessage
+        defaultMessage="Direction"
+        id="gui.SpriteInfo.direction"
+        values={Object {}}
+      />
+    }
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    onSubmit={[Function]}
+    tabIndex="0"
+    type="text"
+    value={undefined}
+  />
+</label>
+`;

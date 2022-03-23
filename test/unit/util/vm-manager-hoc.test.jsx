@@ -1,4 +1,4 @@
-import 'web-audio-test-api';
+import '../../helpers/audio-context-setup';
 
 import React from 'react';
 import configureStore from 'redux-mock-store';

@@ -57,7 +57,7 @@ const guiInitialState = {
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
     timeout: timeoutInitialState,
-    timeTravelMode: timeTravelInitialState,
+    timeTravel: timeTravelInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,

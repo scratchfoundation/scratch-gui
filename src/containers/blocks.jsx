@@ -558,6 +558,7 @@ class Blocks extends React.Component {
             onRequestCloseCustomProcedures,
             toolboxXML,
             updateMetrics: updateMetricsProp,
+            useCatBlocks,
             workspaceMetrics,
             ...props
         } = this.props;
@@ -680,7 +681,6 @@ Blocks.defaultOptions = {
 };
 
 Blocks.defaultProps = {
-    blockType: 'default',
     isVisible: true,
     options: Blocks.defaultOptions
 };

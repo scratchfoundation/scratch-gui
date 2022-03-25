@@ -35,7 +35,6 @@ import {
     isTimeTravel220022BC,
     isTimeTravel1920,
     isTimeTravel1990,
-    isTimeTravel2019,
     isTimeTravel2020,
     isTimeTravelNow,
     setTimeTravel
@@ -247,11 +246,6 @@ class MenuBar extends React.Component {
     }
     handleSetMode (mode) {
         return () => {
-            if (mode === '2019') {
-                this.props.vm.setWorldStageMode(true);
-            } else {
-                this.props.vm.setWorldStageMode(false);
-            }
             // Turn on/off filters for modes.
             if (mode === '1920') {
                 document.documentElement.style.filter = 'brightness(.9)contrast(.8)sepia(1.0)';
@@ -659,19 +653,6 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     </MenuSection>
-                                    <MenuSection>
-                                        <MenuItem onClick={this.handleSetMode('2019')}>
-                                            <span className={classNames({[styles.inactive]: !this.props.mode2019})}>
-                                                {'✓'}
-                                            </span>
-                                            {' '}
-                                            <FormattedMessage
-                                                defaultMessage="All the world is a stage"
-                                                description="April fools: Graphic effects on the stage take effect everywhere" // eslint-disable-line max-len
-                                                id="gui.menuBar.worldStageMode"
-                                            />
-                                        </MenuItem>
-                                    </MenuSection>
                                 </MenuBarMenu>
                             </div>
                         )}
@@ -934,7 +915,6 @@ MenuBar.propTypes = {
     mode220022BC: PropTypes.bool,
     mode1920: PropTypes.bool,
     mode1990: PropTypes.bool,
-    mode2019: PropTypes.bool,
     mode2020: PropTypes.bool,
 
     onClickAbout: PropTypes.oneOfType([
@@ -1013,7 +993,6 @@ const mapStateToProps = (state, ownProps) => {
         mode220022BC: isTimeTravel220022BC(state),
         mode1920: isTimeTravel1920(state),
         mode1990: isTimeTravel1990(state),
-        mode2019: isTimeTravel2019(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state)
     };

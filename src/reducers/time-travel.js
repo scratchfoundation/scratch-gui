@@ -5,7 +5,6 @@ const initialState = {
 
 const NOW = 'NOW';
 const YEAR_2020 = '2020';
-const YEAR_2019 = '2019';
 const YEAR_1990 = '1990';
 const YEAR_1920 = '1920';
 const YEAR_220022BC = '220022BC';
@@ -52,16 +51,6 @@ const setTimeTravel1990 = function () {
     };
 };
 
-const isTimeTravel2019 = function (state) {
-    return state.scratchGui.timeTravel.year === YEAR_2019;
-};
-const setTimeTravel2019 = function () {
-    window.localStorage.worldStage = true;
-    return {
-        type: SET_TIME_TRAVEL,
-        year: YEAR_2019
-    };
-};
 
 const isTimeTravel2020 = function (state) {
     return state.scratchGui.timeTravel.year === YEAR_2020;
@@ -96,13 +85,11 @@ export {
     isTimeTravel220022BC,
     isTimeTravel1920,
     isTimeTravel1990,
-    isTimeTravel2019,
     isTimeTravel2020,
     isTimeTravelNow,
     setTimeTravel220022BC,
     setTimeTravel1920,
     setTimeTravel1990,
-    setTimeTravel2019,
     setTimeTravel2020,
     setTimeTravelNow,
     setTimeTravel

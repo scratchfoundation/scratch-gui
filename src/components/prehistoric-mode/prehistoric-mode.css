@@ -3,7 +3,14 @@
     width: 100%;
     height: 100%;
     opacity: 90%;
-    background: transparent url('./prehistoric.png') center center;
+    background: transparent url('./background.png') center center;
     z-index: 50;
     pointer-events: none;
+    overflow: hidden;
+}
+
+.torch {
+    position: absolute;
+    pointer-events: none;
+    opacity: 80%;
 }

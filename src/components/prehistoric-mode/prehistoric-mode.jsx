@@ -4,6 +4,7 @@ import bindAll from 'lodash.bindall';
 import styles from './prehistoric-mode.css';
 import {connect} from 'react-redux';
 import {isTimeTravel220022BC} from '../../reducers/time-travel';
+import torch from './torch.gif';
 
 class PrehistoricMode extends React.Component {
     constructor (props) {
@@ -37,7 +38,16 @@ class PrehistoricMode extends React.Component {
                 style={{
                     backgroundPosition: `${this.state.x + 2000}px ${this.state.y + 2000}px`
                 }}
-            />
+            >
+                <img
+                    className={styles.torch}
+                    style={{
+                        left: `${this.state.x-35}px`,
+                        top: `${this.state.y-220}px`
+                    }}
+                    src={torch}
+                />
+            </div>
         );
     }
 }

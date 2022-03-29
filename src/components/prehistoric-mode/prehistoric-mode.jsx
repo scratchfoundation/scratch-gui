@@ -35,11 +35,13 @@ class PrehistoricMode extends React.Component {
         return (
             <div
                 className={styles.prehistoricMode}
-                style={{
-                    backgroundPosition: `${this.state.x + 2000}px ${this.state.y + 2000}px`
-                }}
             >
-                <img
+                <div
+                    className={styles.prehistoricBackground}
+                    style={{
+                        backgroundPosition: `${this.state.x + 2000}px ${this.state.y + 2000}px`
+                    }}
+                /><img
                     className={styles.torch}
                     style={{
                         left: `${this.state.x - 35}px`,

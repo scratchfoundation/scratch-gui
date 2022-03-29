@@ -42,8 +42,8 @@ class PrehistoricMode extends React.Component {
                 <img
                     className={styles.torch}
                     style={{
-                        left: `${this.state.x-35}px`,
-                        top: `${this.state.y-220}px`
+                        left: `${this.state.x - 35}px`,
+                        top: `${this.state.y - 220}px`
                     }}
                     src={torch}
                 />

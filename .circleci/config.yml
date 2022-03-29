@@ -43,6 +43,9 @@ aliases:
   - &defaults
     docker:
       - image: cimg/node:12.22.11-browsers
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     working_directory: ~/repo
 
 jobs:
@@ -223,14 +226,20 @@ workflows:
               only:
                 - develop
     jobs:
-      - setup
+      - setup:
+          context:
+            - dockerhub-credentials
       - push-translations:
+          context:
+            - dockerhub-credentials
           requires:
               - setup
 
   build-test-no-deploy:
     jobs:
       - build-test-no-cache:
+          context:
+            - dockerhub-credentials
           filters:
             branches:
               ignore:
@@ -240,6 +249,8 @@ workflows:
   build-test-deploy:
     jobs:
       - setup:
+          context:
+            - dockerhub-credentials
           filters:
             branches:
               only:
@@ -247,18 +258,28 @@ workflows:
                 - develop
                 - /^hotfix\/.*/
       - lint:
+          context:
+            - dockerhub-credentials
           requires:
             - setup
       - unit:
+          context:
+            - dockerhub-credentials
           requires:
             - setup
       - build:
+          context:
+            - dockerhub-credentials
           requires:
             - setup
       - integration:
+          context:
+            - dockerhub-credentials
           requires:
             - build
       - store_build:
+          context:
+            - dockerhub-credentials
           requires:
             - build
           filters:
@@ -268,6 +289,8 @@ workflows:
                 - develop
                 - /^hotfix\/.*/
       - store_dist:
+          context:
+            - dockerhub-credentials
           requires:
             - build
           filters:
@@ -277,6 +300,8 @@ workflows:
                 - develop
                 - /^hotfix\/.*/
       - deploy-npm:
+          context:
+            - dockerhub-credentials
           requires:
             - lint
             - unit
@@ -289,6 +314,8 @@ workflows:
                 - develop
                 - /^hotfix\/.*/
       - deploy-gh-pages:
+          context:
+            - dockerhub-credentials
           requires:
             - lint
             - unit

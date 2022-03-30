@@ -19,11 +19,11 @@ class PrehistoricMode extends React.Component {
     }
 
     componentDidMount () {
-        document.addEventListener('mousemove', this.handleMouseMove);
+        document.addEventListener('pointermove', this.handleMouseMove);
     }
 
     componentWillUnmount () {
-        document.removeEventListener('mousemove', this.handleMouseMove);
+        document.removeEventListener('pointermove', this.handleMouseMove);
     }
 
     handleMouseMove (event) {

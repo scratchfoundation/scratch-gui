@@ -192,4 +192,16 @@ describe('Working with sprites', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Load a sprite3 with a missing svg costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-svg.sprite3'));
+        const tile = await findByText('Blue Square Guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
 });

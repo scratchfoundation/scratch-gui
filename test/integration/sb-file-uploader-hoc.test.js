@@ -43,7 +43,7 @@ describe('Loading scratch gui', () => {
         await clickXpath('//input[@value="project1"]');
     });
 
-    test('Load project with missing costume', async () => {
+    test('Load project with a missing svg costume', async () => {
         await loadUri(uri);
         await clickText('File');
         await clickText('Load from your computer');
@@ -53,4 +53,16 @@ describe('Loading scratch gui', () => {
         const tileVisible = await spriteTile.isDisplayed();
         expect(tileVisible).toBe(true);
     });
+
+    test('Load project with an invalid svg costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sb3'));
+        const spriteTile = await findByText('Blue Square Guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
 });

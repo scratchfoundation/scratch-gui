@@ -42,7 +42,7 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: cimg/node:12.22.11-browsers
+      - image: cimg/node:12.22.12-browsers
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD

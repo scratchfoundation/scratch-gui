@@ -113,7 +113,7 @@
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jest": "22.17.0",
     "eslint-plugin-react": "7.24.0",
-    "gh-pages": "github:rschamp/gh-pages#publish-branch-to-subfolder",
+    "gh-pages": "3.2.3",
     "html-webpack-plugin": "3.2.0",
     "jest": "21.2.1",
     "jest-junit": "7.0.0",

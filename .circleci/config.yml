@@ -57,7 +57,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      - run: npm install
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit

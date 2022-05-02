@@ -183,14 +183,6 @@ module.exports = [
                         context: 'src/examples'
                     }
                 ]
-            }),
-            new CopyWebpackPlugin({
-                patterns: [
-                    {
-                        from: 'extension-worker.{js,js.map}',
-                        context: 'node_modules/scratch-vm/dist/web'
-                    }
-                ]
             })
         ])
     })

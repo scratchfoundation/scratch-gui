@@ -252,5 +252,10 @@ Here's what will happen in the project state machine:
 6. When loading is done, src/lib/vm-manager-hoc.jsx dispatches the `DONE_LOADING_VM_WITH_ID` action. This transitions the state from `LOADING_VM_WITH_ID` to `SHOWING_WITH_ID`
 7. The `SHOWING_WITH_ID` state. Now the project appears normally and is playable and editable.
 
+## Licensing
+Original code is licensed under BSD 3-Clause "New" or "Revised" License.
+Any modification in this repository is under GPL license.
+
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
+

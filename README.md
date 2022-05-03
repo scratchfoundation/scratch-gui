@@ -1,31 +1,32 @@
-# scratch-gui
+# Scratch for Mobile
+
+We're modifying the https://github.com/LLK/scratch-gui repository to make Scratch gui work for small screen. Kindly help with the issues to make this a success for all the learners.
+
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
 ## Installation
 This requires you to have Git and Node.js installed.
+Please use Node.js `16.13.0` for setting up and running the same. If you are using a higher version, use nvm.
 
-In your own node environment/application:
 ```bash
-npm install https://github.com/LLK/scratch-gui.git
-```
-If you want to edit/play yourself:
-```bash
-git clone https://github.com/LLK/scratch-gui.git
+git clone https://github.com/navgurukul/scratch.git --depth=1
 cd scratch-gui
 npm install
 ```
-
-**You may want to add `--depth=1` to the `git clone` command because there are some [large files in the git repository history](https://github.com/LLK/scratch-gui/issues/5140).**
-
-## Getting started
-Running the project requires Node.js to be installed.
 
 ## Running
 Open a Command Prompt or Terminal in the repository and run:
 ```bash
 npm start
 ```
+
+#### Using `npm run watch`
+
+Instead of `BUILD_MODE=dist npm run build`, you can use `BUILD_MODE=dist npm run watch` instead. This will watch for changes to your `scratch-gui` code, and automatically rebuild when there are changes. Sometimes this has been unreliable; if you are having problems, try going back to `BUILD_MODE=dist npm run build` until you resolve them.
+
 Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
+
+--- 
 
 ## Developing alongside other Scratch repositories
 
@@ -49,10 +50,6 @@ Here's how to link your local `scratch-gui` code to another project's `node_modu
     1. Make sure you have run `npm install`
     2. Run `npm link scratch-gui`
     3. Build or run the repository
-
-#### Using `npm run watch`
-
-Instead of `BUILD_MODE=dist npm run build`, you can use `BUILD_MODE=dist npm run watch` instead. This will watch for changes to your `scratch-gui` code, and automatically rebuild when there are changes. Sometimes this has been unreliable; if you are having problems, try going back to `BUILD_MODE=dist npm run build` until you resolve them.
 
 #### Oh no! It didn't work!
 

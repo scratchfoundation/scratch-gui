@@ -1,18 +1,18 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
+import { defineMessages, intlShape, injectIntl, FormattedMessage } from 'react-intl';
 
 import Box from '../box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import styles from './stage-selector.css';
-import {isRtl} from 'scratch-l10n';
+import { isRtl } from 'scratch-l10n';
 
 import backdropIcon from '../action-menu/icon--backdrop.svg';
 import fileUploadIcon from '../action-menu/icon--file-upload.svg';
 import paintIcon from '../action-menu/icon--paint.svg';
 import surpriseIcon from '../action-menu/icon--surprise.svg';
-import searchIcon from '../action-menu/icon--search.svg';
+import searchIcon from '../action-menu/add-background.svg';
 
 const messages = defineMessages({
     addBackdropFromLibrary: {
@@ -71,7 +71,7 @@ const StageSelector = props => {
             onMouseLeave={onMouseLeave}
             {...componentProps}
         >
-            <div className={styles.header}>
+            {/* <div className={styles.header}>
                 <div className={styles.headerTitle}>
                     <FormattedMessage
                         defaultMessage="Stage"
@@ -79,22 +79,43 @@ const StageSelector = props => {
                         id="gui.stageSelector.stage"
                     />
                 </div>
+            </div> */}
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '228px' }}>
+                <div style={{
+                    marginRight: '5px',
+                    marginLeft: '5px'
+                }}>
+                    <img
+                        className={styles.costumeCanvas}
+                        src={searchIcon}
+                        style={{
+                            height: '48px',
+                            width: '48px',
+                            position: 'absolute',
+                            bottom: '0px'
+                        }}
+                        onClick={onNewBackdropClick}
+                    />
+                </div>
+                <div >
+                    {url ? (
+                        <img
+                            className={styles.costumeCanvas}
+                            src={url}
+                        />
+                    ) : null}
+                </div>
             </div>
-            {url ? (
-                <img
-                    className={styles.costumeCanvas}
-                    src={url}
-                />
-            ) : null}
-            <div className={styles.label}>
+
+            {/* <div className={styles.label}>
                 <FormattedMessage
                     defaultMessage="Backdrops"
                     description="Label for the backdrops in the stage selector"
                     id="gui.stageSelector.backdrops"
                 />
-            </div>
-            <div className={styles.count}>{backdropCount}</div>
-            <ActionMenu
+            </div> */}
+            {/* <div className={styles.count}>{backdropCount}</div> */}
+            {/* <ActionMenu
                 className={styles.addButton}
                 img={backdropIcon}
                 moreButtons={[
@@ -124,7 +145,7 @@ const StageSelector = props => {
                 title={intl.formatMessage(messages.addBackdropFromLibrary)}
                 tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewBackdropClick}
-            />
+            /> */}
         </Box>
     );
 };

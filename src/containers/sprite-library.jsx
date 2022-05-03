@@ -48,7 +48,7 @@ class SpriteLibrary extends React.PureComponent {
 
 SpriteLibrary.propTypes = {
     intl: intlShape.isRequired,
-    onActivateBlocksTab: PropTypes.func.isRequired,
+    onActivateBlocksTab: PropTypes.func,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

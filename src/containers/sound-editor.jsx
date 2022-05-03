@@ -490,7 +490,8 @@ const mapStateToProps = (state, {soundIndex}) => {
         samples: audioBuffer.getChannelData(0),
         isFullScreen: state.scratchGui.mode.isFullScreen,
         name: sound.name,
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        selectedSoundIndex: state.scratchGui.modals.data? (state.scratchGui.modals.data.soundIndex || 0) : 0,
     };
 };
 

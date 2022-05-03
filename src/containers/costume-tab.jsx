@@ -1,31 +1,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
-import {defineMessages, intlShape, injectIntl} from 'react-intl';
+import { defineMessages, intlShape, injectIntl } from 'react-intl';
 import VM from 'scratch-vm';
 
 import AssetPanel from '../components/asset-panel/asset-panel.jsx';
 import PaintEditorWrapper from './paint-editor-wrapper.jsx';
-import {connect} from 'react-redux';
-import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
+import { connect } from 'react-redux';
+import { handleFileUpload, costumeUpload } from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
-import {emptyCostume} from '../lib/empty-assets';
+import { emptyCostume } from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
 import downloadBlob from '../lib/download-blob';
+import CostumeControls from '../components/controls/costume-controls.jsx';
 
 import {
+    openCostumeEdit,
     openCostumeLibrary,
     openBackdropLibrary
-} from '../reducers/modals';
+} from '../reducers/modals';           
 
 import {
     activateTab,
-    SOUNDS_TAB_INDEX
+    SOUNDS_TAB_INDEX,
+    COSTUMES_TAB_INDEX,
+    SETTINGS
 } from '../reducers/editor-tab';
 
-import {setRestore} from '../reducers/restore-deletion';
-import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
+import { setRestore } from '../reducers/restore-deletion';
+import { showStandardAlert, closeAlertWithId } from '../reducers/alerts';
 
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg';
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg';
@@ -70,12 +74,13 @@ let messages = defineMessages({
     }
 });
 
-messages = {...messages, ...sharedMessages};
+messages = { ...messages, ...sharedMessages };
 
 class CostumeTab extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
+            'addAndEditCostume',
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
@@ -87,21 +92,25 @@ class CostumeTab extends React.Component {
             'handleFileUploadClick',
             'handleCostumeUpload',
             'handleDrop',
-            'setFileInput'
+            'setFileInput',
+            'handleCostumeEdit'
         ]);
+        
         const {
             editingTarget,
             sprites,
             stage
         } = props;
+
         const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage;
         if (target && target.currentCostume) {
-            this.state = {selectedCostumeIndex: target.currentCostume};
+            this.state = { selectedCostumeIndex: target.currentCostume };
         } else {
-            this.state = {selectedCostumeIndex: 0};
+            this.state = { selectedCostumeIndex: 0 };
         }
     }
-    componentWillReceiveProps (nextProps) {
+
+    componentWillReceiveProps(nextProps) {
         const {
             editingTarget,
             sprites,
@@ -122,33 +131,33 @@ class CostumeTab extends React.Component {
             // https://github.com/LLK/scratch-vm/issues/967
             // Right now, you can land on the wrong costume if a costume changing script is running.
             if (oldTarget.costumeCount !== target.costumeCount) {
-                this.setState({selectedCostumeIndex: target.currentCostume});
+                this.setState({ selectedCostumeIndex: target.currentCostume });
             }
         } else {
             // If switching editing targets, update the costume index
-            this.setState({selectedCostumeIndex: target.currentCostume});
+            this.setState({ selectedCostumeIndex: target.currentCostume });
         }
     }
-    handleSelectCostume (costumeIndex) {
+    handleSelectCostume(costumeIndex) {
         this.props.vm.editingTarget.setCostume(costumeIndex);
-        this.setState({selectedCostumeIndex: costumeIndex});
+        this.setState({ selectedCostumeIndex: costumeIndex });
     }
-    handleDeleteCostume (costumeIndex) {
+    handleDeleteCostume(costumeIndex) {
         const restoreCostumeFun = this.props.vm.deleteCostume(costumeIndex);
         this.props.dispatchUpdateRestore({
             restoreFun: restoreCostumeFun,
             deletedItem: 'Costume'
         });
     }
-    handleDuplicateCostume (costumeIndex) {
+    handleDuplicateCostume(costumeIndex) {
         this.props.vm.duplicateCostume(costumeIndex);
     }
-    handleExportCostume (costumeIndex) {
+    handleExportCostume(costumeIndex) {
         const item = this.props.vm.editingTarget.sprite.costumes[costumeIndex];
-        const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
+        const blob = new Blob([item.asset.data], { type: item.asset.assetType.contentType });
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
-    handleNewCostume (costume, fromCostumeLibrary, targetId) {
+    handleNewCostume(costume, fromCostumeLibrary, targetId) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
         return Promise.all(costumes.map(c => {
@@ -161,13 +170,21 @@ class CostumeTab extends React.Component {
             return this.props.vm.addCostume(c.md5, c, targetId);
         }));
     }
-    handleNewBlankCostume () {
+    handleNewBlankCostume() {
         const name = this.props.vm.editingTarget.isStage ?
-            this.props.intl.formatMessage(messages.backdrop, {index: 1}) :
-            this.props.intl.formatMessage(messages.costume, {index: 1});
+            this.props.intl.formatMessage(messages.backdrop, { index: 1 }) :
+            this.props.intl.formatMessage(messages.costume, { index: 1 });
         this.handleNewCostume(emptyCostume(name));
     }
-    handleSurpriseCostume () {
+    addAndEditCostume() {
+        const name = this.props.vm.editingTarget.isStage ?
+            this.props.intl.formatMessage(messages.backdrop, { index: 1 }) :
+            this.props.intl.formatMessage(messages.costume, { index: 1 });
+        this.handleNewCostume(emptyCostume(name));
+        const index = this.props.vm.editingTarget.sprite.costumes.length;
+        this.props.onCostumeEditClick(index)
+    }
+    handleSurpriseCostume() {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
         const vmCostume = {
             name: item.name,
@@ -179,7 +196,7 @@ class CostumeTab extends React.Component {
         };
         this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
     }
-    handleSurpriseBackdrop () {
+    handleSurpriseBackdrop() {
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
             name: item.name,
@@ -191,7 +208,7 @@ class CostumeTab extends React.Component {
         };
         this.handleNewCostume(vmCostume);
     }
-    handleCostumeUpload (e) {
+    handleCostumeUpload(e) {
         const storage = this.props.vm.runtime.storage;
         const targetId = this.props.vm.editingTarget.id;
         this.props.onShowImporting();
@@ -208,32 +225,33 @@ class CostumeTab extends React.Component {
             }, this.props.onCloseImporting);
         }, this.props.onCloseImporting);
     }
-    handleFileUploadClick () {
+    handleFileUploadClick() {
         this.fileInput.click();
     }
-    handleDrop (dropInfo) {
+    handleDrop(dropInfo) {
         if (dropInfo.dragType === DragConstants.COSTUME) {
             const sprite = this.props.vm.editingTarget.sprite;
             const activeCostume = sprite.costumes[this.state.selectedCostumeIndex];
             this.props.vm.reorderCostume(this.props.vm.editingTarget.id,
                 dropInfo.index, dropInfo.newIndex);
-            this.setState({selectedCostumeIndex: sprite.costumes.indexOf(activeCostume)});
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.vm.addCostume(dropInfo.payload.body, {
-                name: dropInfo.payload.name
-            });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.onActivateSoundsTab();
-            this.props.vm.addSound({
-                md5: dropInfo.payload.body,
-                name: dropInfo.payload.name
-            });
-        }
+            this.setState({ selectedCostumeIndex: sprite.costumes.indexOf(activeCostume) });
+        } 
+        // else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+        //     this.props.vm.addCostume(dropInfo.payload.body, {
+        //         name: dropInfo.payload.name
+        //     });
+        // } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+        //     this.props.onActivateSoundsTab();
+        //     this.props.vm.addSound({
+        //         md5: dropInfo.payload.body,
+        //         name: dropInfo.payload.name
+        //     });
+        // }
     }
-    setFileInput (input) {
+    setFileInput(input) {
         this.fileInput = input;
     }
-    formatCostumeDetails (size, optResolution) {
+    formatCostumeDetails(size, optResolution) {
         // If no resolution is given, assume that the costume is an SVG
         const resolution = optResolution ? optResolution : 1;
         // Convert size to stage units by dividing by resolution
@@ -241,14 +259,21 @@ class CostumeTab extends React.Component {
         // https://github.com/LLK/scratch-flash/blob/9fbac92ef3d09ceca0c0782f8a08deaa79e4df69/src/ui/media/MediaInfo.as#L224-L237
         return `${Math.ceil(size[0] / resolution)} x ${Math.ceil(size[1] / resolution)}`;
     }
-    render () {
+    handleCostumeEdit(e) {
+        e.preventDefault();
+        this.props.onCostumeEditClick(this.state.selectedCostumeIndex)
+    }
+
+    render() {
         const {
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
             isRtl,
+            onCostumeEditClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
-            vm
+            vm,
+            costumesTabVisible
         } = this.props;
 
         if (!vm.editingTarget) {
@@ -268,59 +293,67 @@ class CostumeTab extends React.Component {
             name: costume.name,
             asset: costume.asset,
             details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null,
-            dragPayload: costume
+            // dragPayload: costume
         })) : [];
         return (
-            <AssetPanel
-                buttons={[
-                    {
-                        title: intl.formatMessage(addLibraryMessage),
-                        img: addLibraryIcon,
-                        onClick: addLibraryFunc
-                    },
-                    {
-                        title: intl.formatMessage(addFileMessage),
-                        img: fileUploadIcon,
-                        onClick: this.handleFileUploadClick,
-                        fileAccept: '.svg, .png, .bmp, .jpg, .jpeg, .gif',
-                        fileChange: this.handleCostumeUpload,
-                        fileInput: this.setFileInput,
-                        fileMultiple: true
-                    },
-                    {
-                        title: intl.formatMessage(messages.addSurpriseCostumeMsg),
-                        img: surpriseIcon,
-                        onClick: addSurpriseFunc
-                    },
-                    {
-                        title: intl.formatMessage(messages.addBlankCostumeMsg),
-                        img: paintIcon,
-                        onClick: this.handleNewBlankCostume
-                    },
-                    {
-                        title: intl.formatMessage(addLibraryMessage),
-                        img: searchIcon,
-                        onClick: addLibraryFunc
-                    }
-                ]}
-                dragType={DragConstants.COSTUME}
-                isRtl={isRtl}
-                items={costumeData}
-                selectedItemIndex={this.state.selectedCostumeIndex}
-                onDeleteClick={target && target.costumes && target.costumes.length > 1 ?
-                    this.handleDeleteCostume : null}
-                onDrop={this.handleDrop}
-                onDuplicateClick={this.handleDuplicateCostume}
-                onExportClick={this.handleExportCostume}
-                onItemClick={this.handleSelectCostume}
-            >
-                {target.costumes ?
-                    <PaintEditorWrapper
-                        selectedCostumeIndex={this.state.selectedCostumeIndex}
-                    /> :
-                    null
-                }
-            </AssetPanel>
+            <div style={{width: '100%'}}>
+
+                <AssetPanel
+                    buttons={[
+                        {
+                            title: intl.formatMessage(addLibraryMessage),
+                            img: addLibraryIcon,
+                            onClick: addLibraryFunc
+                        },
+                        {
+                            title: intl.formatMessage(addFileMessage),
+                            img: fileUploadIcon,
+                            onClick: this.handleFileUploadClick,
+                            fileAccept: '.svg, .png, .bmp, .jpg, .jpeg, .gif',
+                            fileChange: this.handleCostumeUpload,
+                            fileInput: this.setFileInput,
+                            fileMultiple: true
+                        },
+                        {
+                            title: intl.formatMessage(messages.addSurpriseCostumeMsg),
+                            img: surpriseIcon,
+                            onClick: addSurpriseFunc
+                        },
+                        {
+                            title: intl.formatMessage(messages.addBlankCostumeMsg),
+                            img: paintIcon,
+                            onClick: this.handleNewBlankCostume
+                        },
+                        {
+                            title: intl.formatMessage(addLibraryMessage),
+                            img: searchIcon,
+                            onClick: addLibraryFunc
+                        }
+                    ]}
+                    dragType={DragConstants.COSTUME}
+                    isRtl={isRtl}
+                    items={costumeData}
+                    selectedItemIndex={this.state.selectedCostumeIndex}
+                    onDeleteClick={target && target.costumes && target.costumes.length > 1 ?
+                        this.handleDeleteCostume : null}
+                    onDrop={this.handleDrop}
+                    onDuplicateClick={this.handleDuplicateCostume}
+                    onExportClick={this.handleExportCostume}
+                    onItemClick={this.handleSelectCostume}
+                >
+                    {/* {target.costumes ?
+                        <PaintEditorWrapper
+                            selectedCostumeIndex={this.state.selectedCostumeIndex}
+                        /> :
+                        null
+                    } */}
+                </AssetPanel>
+                <div style={{margin: '5px'}}>
+                    {costumesTabVisible ? <CostumeControls addCostume={this.addAndEditCostume} openLibrary={addLibraryFunc} editCostume={this.handleCostumeEdit}/> : null}    
+              </div>
+
+            </div>
+
         );
     }
 }
@@ -357,11 +390,16 @@ const mapStateToProps = state => ({
     isRtl: state.locales.isRtl,
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
-    dragging: state.scratchGui.assetDrag.dragging
+    dragging: state.scratchGui.assetDrag.dragging,
+    costumesTabVisible: state.scratchGui.editorTab?.[SETTINGS]?.activeTabIndex === COSTUMES_TAB_INDEX,
+
 });
 
 const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
+    onCostumeEditClick: (costumeIndex) => {
+        dispatch(openCostumeEdit(costumeIndex))
+    },
     onNewLibraryBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());

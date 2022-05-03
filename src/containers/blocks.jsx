@@ -26,6 +26,7 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {updateMetrics} from '../reducers/workspace-metrics';
+import Stage from './stage.jsx';
 
 import {
     activateTab,
@@ -146,7 +147,8 @@ class Blocks extends React.Component {
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
             this.props.locale !== nextProps.locale ||
             this.props.anyModalVisible !== nextProps.anyModalVisible ||
-            this.props.stageSize !== nextProps.stageSize
+            this.props.stageSize !== nextProps.stageSize 
+            // this.props.stageVisible !== nextProps.stageVisible
         );
     }
     componentDidUpdate (prevProps) {
@@ -162,13 +164,13 @@ class Blocks extends React.Component {
             this.requestToolboxUpdate();
         }
 
-        if (this.props.isVisible === prevProps.isVisible) {
-            if (this.props.stageSize !== prevProps.stageSize) {
-                // force workspace to redraw for the new stage size
-                window.dispatchEvent(new Event('resize'));
-            }
-            return;
-        }
+        // if (this.props.isVisible === prevProps.isVisible) {
+        //     if (this.props.stageSize !== prevProps.stageSize) {
+        //         // force workspace to redraw for the new stage size
+        //         window.dispatchEvent(new Event('resize'));
+        //     }
+        //     return;
+        // }
         // @todo hack to resize blockly manually in case resize happened while hidden
         // @todo hack to reload the workspace due to gui bug #413
         if (this.props.isVisible) { // Scripts tab
@@ -537,7 +539,7 @@ class Blocks extends React.Component {
             customProceduresVisible,
             extensionLibraryVisible,
             options,
-            stageSize,
+            // stageSize,
             vm,
             isRtl,
             isVisible,
@@ -551,6 +553,9 @@ class Blocks extends React.Component {
             toolboxXML,
             updateMetrics: updateMetricsProp,
             workspaceMetrics,
+            // stageVisible,
+            isFullScreen,
+            isRendererSupported,
             ...props
         } = this.props;
         /* eslint-enable no-unused-vars */
@@ -590,6 +595,21 @@ class Blocks extends React.Component {
                         onRequestClose={this.handleCustomProceduresClose}
                     />
                 ) : null}
+                {
+                    // !stageVisible? (
+                    //     <div style={{ 
+                    //         position: 'absolute',
+                    //         top: '0',
+                    //         right: '0',
+                    //         }}>
+                    //     <Stage
+                    //         isFullScreen={false}
+                    //         stageSize={stageSize}
+                    //         vm={vm}
+                    //     />
+                    //     </div>
+                    // ): null
+                }
             </React.Fragment>
         );
     }
@@ -632,7 +652,10 @@ Blocks.propTypes = {
         comments: PropTypes.bool,
         collapse: PropTypes.bool
     }),
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    isFullScreen: PropTypes.bool,
+    // stageVisible: PropTypes.bool,
+    isRendererSupported: PropTypes.bool,
+    // stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
     updateMetrics: PropTypes.func,
     updateToolboxState: PropTypes.func,
@@ -686,7 +709,7 @@ const mapStateToProps = state => ({
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
-    workspaceMetrics: state.scratchGui.workspaceMetrics
+    workspaceMetrics: state.scratchGui.workspaceMetrics,
 });
 
 const mapDispatchToProps = dispatch => ({

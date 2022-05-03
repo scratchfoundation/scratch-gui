@@ -45,11 +45,13 @@ $fade-out-distance: 100px;
 
 .list-area {
     /* Must have some height (recalculated by flex-grow) in order to scroll */
-    height: 0;
+    height:100%;
     flex-grow: 1;
     overflow-y: scroll;
+    overflow-x: scroll;
+    width: calc(100vw - $standard-stage-width - 25px);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .list-area:after {
@@ -57,7 +59,7 @@ $fade-out-distance: 100px;
     content: '';
     display: block;
     height: 70px;
-    width: 100%;
+    width: 25px;
     flex-shrink: 0;
     order: 99999999;
 }
@@ -65,12 +67,12 @@ $fade-out-distance: 100px;
 .list-item {
     width: 5rem;
     height: 5rem;
-    margin: 0.5rem auto;
+    margin: 0.75rem;
 }
 
 @media only screen and (max-width: $full-size-paint) {
     .wrapper {
-        width: 80px;
+        width: 100%;
     }
 
     .list-item {

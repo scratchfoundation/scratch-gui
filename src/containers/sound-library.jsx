@@ -179,7 +179,7 @@ class SoundLibrary extends React.PureComponent {
 SoundLibrary.propTypes = {
     intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
-    onNewSound: PropTypes.func.isRequired,
+    // onNewSound: PropTypes.func.isRequired,
     onRequestClose: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };

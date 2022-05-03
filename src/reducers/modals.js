@@ -1,6 +1,8 @@
 const OPEN_MODAL = 'scratch-gui/modals/OPEN_MODAL';
 const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
+const MODAL_COSTUME_EDIT = 'costumeEdit';
+const MODAL_SOUND_EDIT = 'soundEdit';
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
@@ -11,8 +13,12 @@ const MODAL_SPRITE_LIBRARY = 'spriteLibrary';
 const MODAL_SOUND_RECORDER = 'soundRecorder';
 const MODAL_CONNECTION = 'connectionModal';
 const MODAL_TIPS_LIBRARY = 'tipsLibrary';
+const MODAL_SPRITE_SETTINGS = 'spriteSettings';
+const MODAL_FULLSCREEN_PREVIEW = 'fullScreenPreview';
+const MODAL_BACKDROP_SETTINGS = 'backdropSettings';
 
 const initialState = {
+    [MODAL_COSTUME_EDIT]: false,
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
@@ -22,7 +28,11 @@ const initialState = {
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
     [MODAL_CONNECTION]: false,
-    [MODAL_TIPS_LIBRARY]: false
+    [MODAL_TIPS_LIBRARY]: false,
+    [MODAL_SPRITE_SETTINGS]: false,
+    [MODAL_FULLSCREEN_PREVIEW]: false,
+    [MODAL_BACKDROP_SETTINGS]: false,
+    data: null
 };
 
 const reducer = function (state, action) {
@@ -30,20 +40,23 @@ const reducer = function (state, action) {
     switch (action.type) {
     case OPEN_MODAL:
         return Object.assign({}, state, {
-            [action.modal]: true
+            [action.modal]: true,
+            data: action.data
         });
     case CLOSE_MODAL:
         return Object.assign({}, state, {
-            [action.modal]: false
+            [action.modal]: false,
+            data: null
         });
     default:
         return state;
     }
 };
-const openModal = function (modal) {
+const openModal = function (modal, data = null) {
     return {
         type: OPEN_MODAL,
-        modal: modal
+        modal: modal,
+        data
     };
 };
 const closeModal = function (modal) {
@@ -52,6 +65,13 @@ const closeModal = function (modal) {
         modal: modal
     };
 };
+
+const openSoundEdit = function (soundIndex) {
+    return openModal(MODAL_SOUND_EDIT, { soundIndex })
+}
+const openCostumeEdit = function (costumeIndex) {
+    return openModal(MODAL_COSTUME_EDIT, { costumeIndex })
+}
 const openBackdropLibrary = function () {
     return openModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -81,6 +101,15 @@ const openConnectionModal = function () {
 };
 const openTipsLibrary = function () {
     return openModal(MODAL_TIPS_LIBRARY);
+};
+const openSpriteSettings = function () {
+    return openModal(MODAL_SPRITE_SETTINGS)
+};
+const openfullScreenPreview = function () {
+    return openModal(MODAL_FULLSCREEN_PREVIEW)
+};
+const openBackdropSettings = function () {
+    return openModal(MODAL_BACKDROP_SETTINGS)
 };
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
@@ -112,9 +141,27 @@ const closeTipsLibrary = function () {
 const closeConnectionModal = function () {
     return closeModal(MODAL_CONNECTION);
 };
+const closeCostumeEdit = function () {
+    return closeModal(MODAL_COSTUME_EDIT)
+};
+const closeSpriteSettings = function () {
+    return closeModal(MODAL_SPRITE_SETTINGS)
+};
+const closeFullScreenPreview = function () {
+    return closeModal(MODAL_FULLSCREEN_PREVIEW)
+};
+const closeBackdropSettings = function () {
+    return closeModal(MODAL_BACKDROP_SETTINGS)
+};
+const closeSoundEdit = function () {
+    return closeModal(MODAL_SOUND_EDIT)
+};
+
 export {
     reducer as default,
     initialState as modalsInitialState,
+    openSoundEdit,
+    openCostumeEdit,
     openBackdropLibrary,
     openCostumeLibrary,
     openExtensionLibrary,
@@ -125,6 +172,9 @@ export {
     openTelemetryModal,
     openTipsLibrary,
     openConnectionModal,
+    openSpriteSettings,
+    openfullScreenPreview,
+    openBackdropSettings,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
@@ -134,5 +184,10 @@ export {
     closeSoundRecorder,
     closeTelemetryModal,
     closeTipsLibrary,
-    closeConnectionModal
+    closeConnectionModal,
+    closeCostumeEdit,
+    closeSpriteSettings,
+    closeFullScreenPreview,
+    closeBackdropSettings,
+    closeSoundEdit
 };

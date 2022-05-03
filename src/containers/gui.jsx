@@ -13,16 +13,25 @@ import {
 } from '../reducers/project-state';
 import {
     activateTab,
+    BLOCK,
     BLOCKS_TAB_INDEX,
-    COSTUMES_TAB_INDEX,
-    SOUNDS_TAB_INDEX
+    // COSTUMES_TAB_INDEX,
+    // SOUNDS_TAB_INDEX,
+    SETTINGS_TAB_INDEX
 } from '../reducers/editor-tab';
 
 import {
     closeCostumeLibrary,
     closeBackdropLibrary,
     closeTelemetryModal,
-    openExtensionLibrary
+    openExtensionLibrary,
+    closeCostumeEdit,
+    closeSpriteLibrary,
+    closeSpriteSettings,
+    closeFullScreenPreview,
+    closeBackdropSettings,
+    closeSoundLibrary,
+    closeSoundEdit
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
@@ -39,14 +48,35 @@ import cloudManagerHOC from '../lib/cloud-manager-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
+import { hideStage, unhideStage } from '../reducers/stage-size.js';
 
 class GUI extends React.Component {
+
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
     }
     componentDidUpdate (prevProps) {
+        if(
+            this.props.soundLibraryVisible ||
+            this.props.soundEditVisible ||
+            this.props.cardsVisible ||
+            this.props.connectionModalVisible || 
+            this.props.loadingStateVisible || 
+            this.props.telemetryModalVisible || 
+            this.props.costumeLibraryVisible || 
+            this.props.constumeEditVisible || 
+            this.props.tipsLibraryVisible || 
+            this.props.spriteLibraryVisible || 
+            this.props.loadingStateVisible  || 
+            this.props.backdropLibraryVisible ||
+            !this.props.isShowingProject
+            ) {
+                this.props.onRequestCloseStagePreview()
+            } else {
+                this.props.onRequestOpenStagePreview()
+            }
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
             this.props.onUpdateProjectId(this.props.projectId);
         }
@@ -80,6 +110,8 @@ class GUI extends React.Component {
             fetchingProject,
             isLoading,
             loadingStateVisible,
+            onRequestCloseStagePreview,
+            onRequestOpenStagePreview,
             ...componentProps
         } = this.props;
         return (
@@ -113,7 +145,11 @@ GUI.propTypes = {
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     telemetryModalVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    onRequestOpenStagePreview: PropTypes.func,
+    onRequestCloseStagePreview: PropTypes.func,
+    onRequestCloseBackdropSettings: PropTypes.func,
+    backdropSettingsVisible: PropTypes.bool,
 };
 
 GUI.defaultProps = {
@@ -127,14 +163,16 @@ GUI.defaultProps = {
 const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
-        activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
+        activeTabIndex: state.scratchGui.editorTab?.[BLOCK].activeTabIndex,
         alertsVisible: state.scratchGui.alerts.visible,
         backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
-        blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
+        blocksTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === BLOCKS_TAB_INDEX,
         cardsVisible: state.scratchGui.cards.visible,
         connectionModalVisible: state.scratchGui.modals.connectionModal,
+        spriteSettingsModalVisible: state.scratchGui.modals.spriteSettings,
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
-        costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
+        constumeEditVisible: state.scratchGui.modals.costumeEdit,
+        // costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
         error: state.scratchGui.projectState.error,
         isError: getIsError(loadingState),
         isFullScreen: state.scratchGui.mode.isFullScreen,
@@ -143,25 +181,43 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
-        soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
+        settingsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SETTINGS_TAB_INDEX,
+        // soundsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SOUNDS_TAB_INDEX,
+        spriteLibraryVisible: state.scratchGui.modals.spriteLibrary,
         targetIsStage: (
             state.scratchGui.targets.stage &&
             state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
         ),
         telemetryModalVisible: state.scratchGui.modals.telemetryModal,
         tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
-        vm: state.scratchGui.vm
+        spriteSettingsVisible: state.scratchGui.modals.spriteSettings,
+        fullScreenPreviewVisible: state.scratchGui.modals.fullScreenPreview,
+        backdropSettingsVisible: state.scratchGui.modals.backdropSettings,
+        vm: state.scratchGui.vm,
+        soundLibraryVisible: state.scratchGui.modals.soundLibrary,
+        soundEditVisible: state.scratchGui.modals.soundEdit,
+        // stageVisible: state.scratchGui.stage.stageVisible
     };
 };
 
 const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary()),
-    onActivateTab: tab => dispatch(activateTab(tab)),
-    onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
-    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
+    onActivateTab: tab => dispatch(activateTab(tab, BLOCK)),
+    // onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX, BLOCK)),
+    onActivateSettingsTab: () => dispatch(activateTab(SETTINGS_TAB_INDEX, BLOCK)),
+    // onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX, BLOCK)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())
+    onRequestCloseSpriteLibrary: () => dispatch(closeSpriteLibrary()),
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
+    onRequestCloseCostumeEdit: () => dispatch(closeCostumeEdit()),
+    onRequestCloseSpriteSettings: () => dispatch(closeSpriteSettings()),
+    onRequestCloseFullScreenPreview: () => dispatch(closeFullScreenPreview()),
+    onRequestOpenStagePreview: () => dispatch(unhideStage()),
+    onRequestCloseStagePreview: () => dispatch(hideStage()),
+    onRequestCloseBackdropSettings: () => dispatch(closeBackdropSettings()),
+    onRequestCloseSoundLibrary: () => dispatch(closeSoundLibrary()),
+    onRequestCloseSoundEdit: () => dispatch(closeSoundEdit())
 });
 
 const ConnectedGUI = injectIntl(connect(

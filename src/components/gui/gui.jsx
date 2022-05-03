@@ -11,19 +11,23 @@ import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.jsx';
-import CostumeTab from '../../containers/costume-tab.jsx';
-import TargetPane from '../../containers/target-pane.jsx';
-import SoundTab from '../../containers/sound-tab.jsx';
+// import CostumeTab from '../../containers/costume-tab.jsx';
+// import TargetPane from '../../containers/target-pane.jsx';
+// import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
+
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
+import CostumeEdit from '../../containers/costume-edit.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
-import Watermark from '../../containers/watermark.jsx';
+// import Watermark from '../../containers/watermark.jsx';
 
-import Backpack from '../../containers/backpack.jsx';
+// import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import SpriteLibrary from '../../containers/sprite-library.jsx'
+import SoundLibrary from '../../containers/sound-library.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
@@ -39,6 +43,14 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+
+import StageHeader from '../../containers/stage-header.jsx';
+import StageActionWrapper from '../../containers/stage-action-wrapper.jsx';
+import stageWrapperStyles from '../stage-wrapper/stage-wrapper.css';
+import SpriteSetting from '../../containers/sprite-setting.jsx';
+import Preview from '../../containers/preview.jsx'
+import BackdropSettings from '../../containers/backdrop-wrapper.jsx'
+import SoundEdit from '../../containers/sound-edit.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -62,8 +74,8 @@ const GUIComponent = props => {
         authorUsername,
         basePath,
         backdropLibraryVisible,
-        backpackHost,
-        backpackVisible,
+        // backpackHost,
+        // backpackVisible,
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
@@ -77,8 +89,9 @@ const GUIComponent = props => {
         canUseCloud,
         children,
         connectionModalVisible,
+        spriteLibraryVisible,
         costumeLibraryVisible,
-        costumesTabVisible,
+        // costumesTabVisible,
         enableCommunity,
         intl,
         isCreating,
@@ -96,14 +109,17 @@ const GUIComponent = props => {
         onLogOut,
         onOpenRegistration,
         onToggleLoginOpen,
-        onActivateCostumesTab,
-        onActivateSoundsTab,
+        // onActivateCostumesTab,
+        // onActivateSoundsTab,
+        onActivateSettingsTab,
         onActivateTab,
+        onActivateBlocksTab,
         onClickLogo,
         onExtensionButtonClick,
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestCloseSpriteLibrary,
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
@@ -113,12 +129,28 @@ const GUIComponent = props => {
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
         showComingSoon,
-        soundsTabVisible,
+        // soundsTabVisible,
+        settingsTabVisible,
+        spriteSettingsModalVisible,
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
         tipsLibraryVisible,
         vm,
+        soundEditVisible,
+        onRequestCloseSoundEdit,
+        constumeEditVisible,
+        onRequestCloseCostumeEdit,
+        spriteSettingsVisible,
+        onRequestCloseSpriteSettings,
+        fullScreenPreviewVisible,
+        onRequestCloseFullScreenPreview,
+        onRequestCloseBackdropSettings,
+        backdropSettingsVisible,
+        soundLibraryVisible,
+        onRequestCloseSoundLibrary,
+        selectedSoundIndex,
+        // stageVisible,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -160,6 +192,7 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                {/* <div>{stageVisible}</div> */}
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}
@@ -180,6 +213,13 @@ const GUIComponent = props => {
                 {isRendererSupported ? null : (
                     <WebGlModal isRtl={isRtl} />
                 )}
+                {spriteLibraryVisible ? (
+                    <SpriteLibrary
+                        vm={vm}
+                        // onActivateBlocksTab={handleActivateBlocksTab}
+                        onRequestClose={onRequestCloseSpriteLibrary}
+                    />
+                ) : null}
                 {tipsLibraryVisible ? (
                     <TipsLibrary />
                 ) : null}
@@ -200,67 +240,130 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseCostumeLibrary}
                     />
                 ) : null}
+                 {soundLibraryVisible ? (
+                    <SoundLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseSoundLibrary}
+                    />
+                ) : null}
                 {backdropLibraryVisible ? (
                     <BackdropLibrary
                         vm={vm}
                         onRequestClose={onRequestCloseBackdropLibrary}
                     />
                 ) : null}
-                <MenuBar
-                    accountNavOpen={accountNavOpen}
-                    authorId={authorId}
-                    authorThumbnailUrl={authorThumbnailUrl}
-                    authorUsername={authorUsername}
-                    canChangeLanguage={canChangeLanguage}
-                    canCreateCopy={canCreateCopy}
-                    canCreateNew={canCreateNew}
-                    canEditTitle={canEditTitle}
-                    canManageFiles={canManageFiles}
-                    canRemix={canRemix}
-                    canSave={canSave}
-                    canShare={canShare}
-                    className={styles.menuBarPosition}
-                    enableCommunity={enableCommunity}
-                    isShared={isShared}
-                    logo={logo}
-                    renderLogin={renderLogin}
-                    showComingSoon={showComingSoon}
-                    onClickAbout={onClickAbout}
-                    onClickAccountNav={onClickAccountNav}
-                    onClickLogo={onClickLogo}
-                    onCloseAccountNav={onCloseAccountNav}
-                    onLogOut={onLogOut}
-                    onOpenRegistration={onOpenRegistration}
-                    onProjectTelemetryEvent={onProjectTelemetryEvent}
-                    onSeeCommunity={onSeeCommunity}
-                    onShare={onShare}
-                    onStartSelectingFileUpload={onStartSelectingFileUpload}
-                    onToggleLoginOpen={onToggleLoginOpen}
-                />
+                {constumeEditVisible ? (
+                    <CostumeEdit
+                        vm={vm}
+                        onRequestClose={onRequestCloseCostumeEdit}
+                    />
+                ) : null}
+                {
+                    soundEditVisible? (
+                        <SoundEdit
+                            soundIndex={selectedSoundIndex}
+                            onRequestClose={onRequestCloseSoundEdit}
+                        />
+                ): null}
+                {spriteSettingsVisible ? (
+                    <SpriteSetting 
+                        stageSize={stageSize} 
+                        vm={vm} 
+                        isRendererSupported={isRendererSupported} 
+                        isRtl={isRtl} 
+                        onRequestClose={onRequestCloseSpriteSettings}
+                    /> 
+                ) : null}
+                {fullScreenPreviewVisible ? (
+                    <Preview 
+                        vm={vm} 
+                        onRequestClose={onRequestCloseFullScreenPreview}
+                    /> 
+                ) : null}
+                {backdropSettingsVisible?(
+                    <BackdropSettings 
+                        intl={intl}
+                        onRequestClose={onRequestCloseBackdropSettings}
+                    />
+                ): null}
+                {(spriteSettingsModalVisible || spriteLibraryVisible || backdropLibraryVisible || backdropSettingsVisible || fullScreenPreviewVisible) ? null:(
+                    <MenuBar
+                        accountNavOpen={accountNavOpen}
+                        authorId={authorId}
+                        authorThumbnailUrl={authorThumbnailUrl}
+                        authorUsername={authorUsername}
+                        canChangeLanguage={canChangeLanguage}
+                        canCreateCopy={canCreateCopy}
+                        canCreateNew={canCreateNew}
+                        canEditTitle={canEditTitle}
+                        canManageFiles={canManageFiles}
+                        canRemix={canRemix}
+                        canSave={canSave}
+                        canShare={canShare}
+                        className={styles.menuBarPosition}
+                        enableCommunity={enableCommunity}
+                        isShared={isShared}
+                        logo={logo}
+                        renderLogin={renderLogin}
+                        showComingSoon={showComingSoon}
+                        onClickAbout={onClickAbout}
+                        onClickAccountNav={onClickAccountNav}
+                        onClickLogo={onClickLogo}
+                        onCloseAccountNav={onCloseAccountNav}
+                        onLogOut={onLogOut}
+                        onOpenRegistration={onOpenRegistration}
+                        onProjectTelemetryEvent={onProjectTelemetryEvent}
+                        onSeeCommunity={onSeeCommunity}
+                        onShare={onShare}
+                        onStartSelectingFileUpload={onStartSelectingFileUpload}
+                        onToggleLoginOpen={onToggleLoginOpen}
+                        onActivateBlocksTab={onActivateTab}
+                    />)}
+                 {/* <Box className={stageWrapperStyles.stageMenuWrapper}>
+                    <StageHeader
+                        stageSize={stageSiåze}
+                        vm={vm}
+                    />
+                </Box> */}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
-                            <Tabs
+                          <Blocks
+                                    canUseCloud={canUseCloud}
+                                    grow={1}
+                                    isVisible={blocksTabVisible}
+                                    options={{
+                                        media: `${basePath}static/blocks-media/`
+                                    }}
+                                    // stageSize={stageSize}
+                                    // stageVisible={stageVisible}
+                                    isRtl={isRtl}
+                                    isRendererSupported={isRendererSupported}
+                                    isFullScreen={isFullScreen}
+                                    vm={vm}
+                            />
+
+                            {/* <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}
                                 selectedIndex={activeTabIndex}
                                 selectedTabClassName={tabClassNames.tabSelected}
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
-                            >
-                                <TabList className={tabClassNames.tabList}>
-                                    <Tab className={tabClassNames.tab}>
+                            > */}
+                                {/* <TabList className={tabClassNames.tabList}> */}
+                                    {/* <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
                                             src={codeIcon}
                                         />
                                         <FormattedMessage
-                                            defaultMessage="Code"
+                                            // defaultMessage="Code"
                                             description="Button to get to the code panel"
                                             id="gui.gui.codeTab"
                                         />
-                                    </Tab>
-                                    <Tab
+                                    </Tab> */}
+                                    {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateCostumesTab}
                                     >
@@ -281,8 +384,8 @@ const GUIComponent = props => {
                                                 id="gui.gui.costumesTab"
                                             />
                                         )}
-                                    </Tab>
-                                    <Tab
+                                    </Tab> */}
+                                    {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateSoundsTab}
                                     >
@@ -295,10 +398,24 @@ const GUIComponent = props => {
                                             description="Button to get to the sounds panel"
                                             id="gui.gui.soundsTab"
                                         />
-                                    </Tab>
-                                </TabList>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    <Box className={styles.blocksWrapper}>
+                                    </Tab> */}
+                                     {/* <Tab
+                                        className={tabClassNames.tab}
+                                        onClick={onActivateSettingsTab}
+                                    >
+                                        <img
+                                            draggable={false}
+                                            src={soundsIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Settings"
+                                            description="Button to get to the sounds panel"
+                                            id="gui.gui.settingsTab"
+                                        />
+                                    </Tab> */}
+                                {/* </TabList> */}
+                                {/* <TabPanel className={tabClassNames.tabPanel}> */}
+                                    {/* <Box className={styles.blocksWrapper}>
                                         <Blocks
                                             canUseCloud={canUseCloud}
                                             grow={1}
@@ -306,7 +423,11 @@ const GUIComponent = props => {
                                             options={{
                                                 media: `${basePath}static/blocks-media/`
                                             }}
-                                            stageSize={stageSize}
+                                            // stageSize={stageSize}
+                                            // stageVisible={stageVisible}
+                                            isRtl={isRtl}
+                                            isRendererSupported={isRendererSupported}
+                                            isFullScreen={isFullScreen}
                                             vm={vm}
                                         />
                                     </Box>
@@ -322,37 +443,63 @@ const GUIComponent = props => {
                                                 src={addExtensionIcon}
                                             />
                                         </button>
-                                    </Box>
-                                    <Box className={styles.watermark}>
+                                    </Box> */}
+                                    {/* <Box className={styles.watermark}>
                                         <Watermark />
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
+                                    </Box> */}
+                                {/* </TabPanel> */}
+                                {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                                </TabPanel>
-                            </Tabs>
-                            {backpackVisible ? (
+                                </TabPanel> */}
+                                {/* <TabPanel className={tabClassNames.tabPanel}>
+                                    {
+                                        settingsTabVisible 
+                                        ? <SpriteSetting vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> 
+                                        : null
+                                    }
+                                </TabPanel> */}
+                            {/* </Tabs> */}
+
+                            {
+                                // !stageVisible 
+                                // ? (
+                                    <StageWrapper
+                                        isFullScreen={false}
+                                        isRendererSupported={isRendererSupported}
+                                        isRtl={isRtl}
+                                        stageSize={stageSizeMode}
+                                        vm={vm}
+                                    />
+                                // ): null 
+                            }
+
+                            {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
-                            ) : null}
+                            ) : null} */}
                         </Box>
 
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
-                            <StageWrapper
+                        {/* <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}> */}
+                            {/* <StageWrapper
                                 isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
                                 stageSize={stageSize}
                                 vm={vm}
-                            />
-                            <Box className={styles.targetWrapper}>
+                            /> */}
+                            {/* <Box className={styles.targetWrapper}>
                                 <TargetPane
                                     stageSize={stageSize}
                                     vm={vm}
                                 />
-                            </Box>
+                            </Box> */}
+                        {/* </Box> */}
+                        <Box className={classNames(styles.stageActionWrapper)}>
+                            <StageActionWrapper 
+                                stageSize={stageSize}
+                                vm={vm}/>
                         </Box>
                     </Box>
                 </Box>
@@ -369,8 +516,8 @@ GUIComponent.propTypes = {
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
-    backpackHost: PropTypes.string,
-    backpackVisible: PropTypes.bool,
+    // backpackHost: PropTypes.string,
+    // backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     canChangeLanguage: PropTypes.bool,
@@ -385,7 +532,8 @@ GUIComponent.propTypes = {
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
-    costumesTabVisible: PropTypes.bool,
+    soundLibraryVisible: PropTypes.bool,
+    // costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
@@ -395,8 +543,10 @@ GUIComponent.propTypes = {
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
-    onActivateCostumesTab: PropTypes.func,
-    onActivateSoundsTab: PropTypes.func,
+    // onActivateBlocksTab: PropTypes.func.isRequired,
+    // onActivateCostumesTab: PropTypes.func,
+    // onActivateSoundsTab: PropTypes.func,
+    onActivateSettingsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onClickAccountNav: PropTypes.func,
     onClickLogo: PropTypes.func,
@@ -406,6 +556,8 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseSoundLibrary: PropTypes.func,
+    onRequestCloseSpriteLibrary: PropTypes.func,
     onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
@@ -418,16 +570,27 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
-    soundsTabVisible: PropTypes.bool,
+    settingsTabVisible: PropTypes.bool,
+    spriteSettingsVisible: PropTypes.bool,
+    // soundsTabVisible: PropTypes.bool,
+    spriteLibraryVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    constumeEditVisible: PropTypes.bool,
+    onRequestCloseCostumeEdit: PropTypes.func,
+    onRequestCloseSpriteSettings: PropTypes.func,
+    onRequestCloseBackdropSettings: PropTypes.func,
+    backdropSettingsVisible: PropTypes.bool,
+    soundEditVisible: PropTypes.bool,
+    onRequestCloseSoundEdit: PropTypes.func
+    // stageVisible: PropTypes.bool,
 };
 GUIComponent.defaultProps = {
-    backpackHost: null,
-    backpackVisible: false,
+    // backpackHost: null,
+    // backpackVisible: false,
     basePath: './',
     canChangeLanguage: true,
     canCreateNew: false,
@@ -448,7 +611,8 @@ GUIComponent.defaultProps = {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    selectedSoundIndex: state.scratchGui.modals.data? (state.scratchGui.modals.data.soundIndex || 0) : 0,
 });
 
 export default injectIntl(connect(

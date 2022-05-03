@@ -15,13 +15,14 @@ $z-index-stage-question: 49; /* "ask" block text input goes above monitors */
 $z-index-card: 480;
 $z-index-alerts: 490;
 $z-index-menu-bar: 491; /* menu-bar should go over monitors, alerts and tutorials */
-$z-index-loader: 500;
 $z-index-modal: 510;
 
 $z-index-drag-layer: 1000;
 /* Block drag z-index: 1000; default 50 is overriden in blocks.css */
 $z-index-monitor-dragging: 1010;
 $z-index-dragging-sprite: 1020; /* so it is draggable into other panes */
+
+$z-index-loader: 1500;
 
 $z-index-stage-color-picker-background: 2000;
 $z-index-stage-with-color-picker: 2010;

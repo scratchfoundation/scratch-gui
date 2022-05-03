@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
+  
 
     /*
         For most things, we shouldn't explicitly set height, and let the
@@ -41,7 +42,7 @@
 }
 
 .scratch-logo {
-    height:  1.6rem;
+    height: 1.6rem;
     vertical-align: middle;
 }
 
@@ -50,12 +51,12 @@
 }
 
 .language-icon {
-    height:  1.5rem;
+    height: 1.5rem;
     vertical-align: middle;
 }
 
 .language-caret {
-    margin: 0 .125rem;
+    margin: 0 0.125rem;
 }
 
 .language-menu {
@@ -68,22 +69,29 @@
     display: flex;
     padding: 0 0.25rem;
     text-decoration: none;
-    color: $ui-white;
+    /* color: $ui-white; */
     user-select: none;
     align-self: center;
     position: relative;
     align-items: center;
     white-space: nowrap;
     height: $menu-bar-height;
+     
 }
 
 .menu-bar-item.hoverable {
     cursor: pointer;
 }
 
+.menu-icons {
+    margin-right: 10px;
+}
+
 .menu-bar-item.active,
 .menu-bar-item.hoverable:hover {
-    background-color: $ui-black-transparent;
+    border-radius: 15px 15px 0px 0px;
+    background-color: $ui-primary-dim;
+    
 }
 
 .menu-bar-item.growable {
@@ -126,13 +134,13 @@
 }
 
 .divider {
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
     height: 34px;
 }
 
 .author-info {
-    margin-left: .25rem;
-    margin-right: .6875rem;
+    margin-left: 0.25rem;
+    margin-right: 0.6875rem;
 }
 
 .menu-bar-button {
@@ -140,14 +148,14 @@
 }
 
 .remix-button {
-    background-color: $pen-primary
+    background-color: $pen-primary;
 }
 
 .remix-button-icon {
     height: 1.25rem;
 }
 
-.coming-soon >:not(.coming-soon-tooltip) {
+.coming-soon > :not(.coming-soon-tooltip) {
     opacity: 0.5;
 }
 
@@ -157,28 +165,33 @@
     align-items: center;
 }
 
-.account-info-group .menu-bar-item {
+/* .account-info-group .menu-bar-item {
     padding: 0 0.75rem;
-}
+} */
 
 .mystuff-icon {
-    margin: 0 .25rem;
+    margin: 0 0.25rem;
     height: 1rem;
 }
 
 .help-icon {
     margin-right: 0.35rem;
+    /* margin-left: 7.35rem; */
+    width: 32px;
 }
 
-.account-nav-menu, .mystuff-button {
-    padding: 0 .25rem;
+
+
+.account-nav-menu,
+.mystuff-button {
+    padding: 0 0.25rem;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .profile-icon {
-    margin: 0 .25rem;
+    margin: 0 0.25rem;
     width: $menu-bar-button-size;
     border-radius: $form-radius;
 }
@@ -189,11 +202,11 @@
 }
 
 [dir="ltr"] .dropdown-caret-icon {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
 }
 
 [dir="rtl"] .dropdown-caret-icon {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .disabled {
@@ -201,26 +214,33 @@
 }
 
 .mystuff > a {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 45%;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 30px;
-  overflow: hidden;
-  text-indent: 50px;
-  white-space: nowrap;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 45%;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 30px;
+    overflow: hidden;
+    text-indent: 50px;
+    white-space: nowrap;
 }
 .mystuff > a:hover {
-  background-size: 50%;
+    background-size: 50%;
 }
 
 .mystuff > a {
-  background-image: url("/images/mystuff.png");
+    background-image: url("/images/mystuff.png");
 }
 
 .about-icon {
     height: 1.25rem;
     margin: 0.5rem;
     vertical-align: middle;
+}
+
+.sprite-image {
+    user-select: none;
+    pointer-events: none;
+    max-width: 32px;
+    max-height: 32px;
 }

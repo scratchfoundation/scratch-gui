@@ -1,20 +1,34 @@
-import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants.js';
+import { set } from 'core-js/core/dict';
+import { STAGE_DISPLAY_SIZES } from '../lib/layout-constants.js';
 
 const SET_STAGE_SIZE = 'scratch-gui/StageSize/SET_STAGE_SIZE';
+const TOGGLE_STAGE = 'scratch-gui/StageSize/TOGGLE_STAGE';
 
 const initialState = {
-    stageSize: STAGE_DISPLAY_SIZES.large
+    stageSize: STAGE_DISPLAY_SIZES.large,
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
+
     switch (action.type) {
-    case SET_STAGE_SIZE:
-        return {
-            stageSize: action.stageSize
-        };
-    default:
-        return state;
+        case SET_STAGE_SIZE:
+            return {
+                ...state,
+                stageSize: action.stageSize
+            };
+        case TOGGLE_STAGE:
+            if (state.stageSize === STAGE_DISPLAY_SIZES.large) {
+                return {
+                    stageSize: STAGE_DISPLAY_SIZES.small
+                };
+            } else {
+                return {
+                    stageSize: STAGE_DISPLAY_SIZES.large
+                };
+            }
+        default:
+            return state;
     }
 };
 
@@ -25,8 +39,25 @@ const setStageSize = function (stageSize) {
     };
 };
 
+const toggleStage = function () {
+    console.log('this was called')
+    return {
+        type: TOGGLE_STAGE
+    };
+};
+
+const hideStage = function () {
+    return setStageSize(STAGE_DISPLAY_SIZES.small)
+}
+
+const unhideStage = function () {
+    return setStageSize(STAGE_DISPLAY_SIZES.large)
+}
 export {
     reducer as default,
     initialState as stageSizeInitialState,
-    setStageSize
+    setStageSize,
+    toggleStage,
+    hideStage,
+    unhideStage
 };

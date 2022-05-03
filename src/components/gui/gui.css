@@ -7,7 +7,8 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
+    height: calc(100% - 3rem);
+    /* height: calc(100% - $menu-bar-height); */
     background-color: $ui-primary;
 }
 
@@ -44,11 +45,11 @@
         much better ways to solve that (e.g. undo #2124, remove this flex-basis entirely). However, they run their own
         risks of breaking things, so let's just leave this as-is for the time being.
     */
-    flex-basis: calc(1024px - 408px - (($space + $stage-standard-border-width) * 2));
+    flex-basis: calc(100vw - 408px - (($space + $stage-standard-border-width) * 2));
     flex-grow: 1;
     flex-shrink: 0;
     position: relative;
-
+    background-color:$motion-primary;
     display: flex;
     flex-direction: column;
 }
@@ -212,6 +213,15 @@
     flex-basis: 0;
 }
 
+.stage-action-wrapper {
+    position: fixed;
+    z-index: 100;
+    /* height:30px; */
+    /* width:60px; */
+    right:10px;
+    bottom:10px;
+}
+
 .target-wrapper {
     display: flex;
     flex-grow: 1;
@@ -296,7 +306,8 @@ $fade-out-distance: 15px;
 
 .menu-bar-position {
     position: relative;
-    z-index: $z-index-menu-bar;
+    z-index: 1015; 
+    /* $z-index-menu-bar; */
 }
 /* Alerts */
 

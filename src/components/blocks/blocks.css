@@ -2,6 +2,8 @@
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
 
+@namespace svg url("http://www.w3.org/2000/svg");
+
 .blocks {
     height: 100%;
 }
@@ -44,7 +46,7 @@
     border-right: 1px solid $ui-black-transparent;
     border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
-    height: calc(100% - 3.25rem) !important;
+    height: calc(100vh - 3.25rem) !important;
 
     /*
         For now, the layout cannot support scrollbars in the category menu.
@@ -96,4 +98,24 @@
 .blocks :global(.blocklyMinimalBody) {
     min-width: auto;
     min-height: auto;
+}
+
+:global(.blocklyZoom image ){
+    width: 30px !important;
+}
+
+:global(image[y="88"]) {
+    transform: translate(14px, 10px);  
+}
+
+:global(image[y="44"]) {
+    transform: translate(14px, 20px);   
+}
+
+:global(image[y="0"]) {
+    transform: translate(14px, 30px);   
+}
+
+:global(.blocklyFlyout) {
+    width: 190px !important;
 }

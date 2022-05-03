@@ -41,6 +41,9 @@ class DOMElementRenderer extends React.Component {
             this.props.domElement.style.cssText = Style.string(this.props.style);
         }
 
+        this.props.domElement.width = this.props.style.width;
+        this.props.domElement.height = this.props.style.height
+
         return <div ref={this.setContainer} />;
     }
 }

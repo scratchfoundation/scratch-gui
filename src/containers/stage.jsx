@@ -83,9 +83,10 @@ class Stage extends React.Component {
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
-            this.props.isStarted !== nextProps.isStarted;
+            this.props.isStarted !== nextProps.isStarted
     }
     componentDidUpdate (prevProps) {
+        this.props.vm.renderer.draw();
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
             this.startColorPickingLoop();
         } else if (!this.props.isColorPicking && prevProps.isColorPicking) {
@@ -173,7 +174,9 @@ class Stage extends React.Component {
     }
     onMouseMove (e) {
         const {x, y} = getEventXY(e);
-        const mousePosition = [x - this.rect.left, y - this.rect.top];
+        // const mousePosition = [x - this.rect.left, y - this.rect.top];
+        //TODO : Hack to fix position.
+        const mousePosition = [x, y];
 
         if (this.props.isColorPicking) {
             // Set the pickX/Y for the color picker loop to pick up
@@ -211,6 +214,7 @@ class Stage extends React.Component {
             canvasWidth: this.rect.width,
             canvasHeight: this.rect.height
         };
+
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {
@@ -426,6 +430,7 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
+    stageVisible: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     isStarted: PropTypes.bool,

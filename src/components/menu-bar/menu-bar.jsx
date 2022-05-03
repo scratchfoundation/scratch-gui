@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { defineMessages, FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
@@ -13,13 +13,13 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CommunityButton from './community-button.jsx';
 import ShareButton from './share-button.jsx';
-import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
+import { ComingSoonTooltip } from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
 import SaveStatus from './save-status.jsx';
 import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
-import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import { MenuItem, MenuSection } from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
 import AuthorInfo from './author-info.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
@@ -28,9 +28,14 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
+import { spriteShape } from '../target-pane/target-pane.jsx'
+import { openTipsLibrary, openSpriteLibrary, openSpriteSettings, openBackdropSettings } from '../../reducers/modals';
+import { setPlayer } from '../../reducers/mode';
+import { setRestore } from '../../reducers/restore-deletion';
 
-import {openTipsLibrary} from '../../reducers/modals';
-import {setPlayer} from '../../reducers/mode';
+import spriteIcon from '../action-menu/icon--sprite.svg';
+import backIcon from '../../lib/assets/icon--back.svg';
+
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -40,6 +45,7 @@ import {
     remixProject,
     saveProjectAsCopy
 } from '../../reducers/project-state';
+
 import {
     openAboutMenu,
     closeAboutMenu,
@@ -58,30 +64,48 @@ import {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    spriteMenuOpen,
+    backdropMenuOpen,
+    openSpriteMenu,
+    closeSpriteMenu,
+    closeBackdropMenu,
+    openBackdropMenu
 } from '../../reducers/menus';
 
 import collectMetadata from '../../lib/collect-metadata';
 
 import styles from './menu-bar.css';
-
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
 import profileIcon from './icon--profile.png';
 import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
-import languageIcon from '../language-selector/language-icon.svg';
+import languageIcon from '../language-selector/background.svg';
 import aboutIcon from './icon--about.svg';
 
-import scratchLogo from './scratch-logo.svg';
-
 import sharedMessages from '../../lib/shared-messages';
+import {
+    activateTab,
+    BLOCK,
+    BLOCKS_TAB_INDEX,
+    SETTINGS_TAB_INDEX
+} from '../../reducers/editor-tab';
+import { highlightTarget } from '../../reducers/targets';
+
+import { STAGE_DISPLAY_SIZES } from '../../lib/layout-constants.js';
+import { setStageSize } from '../../reducers/stage-size.js';
 
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
         defaultMessage: 'language selector',
         description: 'accessibility text for the language selection menu'
+    },
+    addSpriteFromLibrary: {
+        id: 'gui.spriteSelector.addSpriteFromLibrary',
+        description: 'Button to add a sprite in the target pane from library',
+        defaultMessage: 'Add'
     },
     tutorials: {
         id: 'gui.menuBar.tutorialsLibrary',
@@ -125,7 +149,7 @@ MenuBarItemTooltip.propTypes = {
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
 
-const MenuItemTooltip = ({id, isRtl, children, className}) => (
+const MenuItemTooltip = ({ id, isRtl, children, className }) => (
     <ComingSoonTooltip
         className={classNames(styles.comingSoon, className)}
         isRtl={isRtl}
@@ -158,7 +182,7 @@ AboutButton.propTypes = {
 };
 
 class MenuBar extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
             'handleClickNew',
@@ -171,16 +195,83 @@ class MenuBar extends React.Component {
             'handleLanguageMouseUp',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickSpriteSettings',
+            'handleClickSprite',
+            'handleSelectStage',
+            'handleDuplicateSprite',
+            'handleClickBackdropSettings'
         ]);
     }
-    componentDidMount () {
+    componentDidMount() {
         document.addEventListener('keydown', this.handleKeyPress);
     }
-    componentWillUnmount () {
+    componentWillUnmount() {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
-    handleClickNew () {
+
+    handleClickSpriteSettings() {
+        this.props.onSetStageSize(STAGE_DISPLAY_SIZES.large);
+        this.props.onActivateSettingsTab()
+    }
+
+    handleClickBackdropSettings() {
+        this.props.onSetStageSize(STAGE_DISPLAY_SIZES.large);
+        this.props.onActivateBackdropSettingsTab()
+    }
+
+    handleClickSprite(id) {
+        this.props.onActivateBlocksTab()
+        if (this.props.editingTarget === id) {
+            this.props.onClickSprite(id)
+        } else {
+            this.props.vm.setEditingTarget(id);
+        }
+        // todo
+        if (this.props.stage && id !== this.props.stage.id) {
+            this.props.onHighlightTarget(id);
+        }
+    }
+
+    handleSelectStage(id) {
+        if (this.props.editingTarget === id) {
+            this.props.onClickStage(id)
+        } else {
+            this.props.vm.setEditingTarget(id);
+        }
+        if (this.props.stage && id !== this.props.stage.id) {
+            this.props.onHighlightTarget(id);
+        }
+
+
+    }
+
+
+
+    handleDeleteSprite(id) {
+        const restoreSprite = this.props.vm.deleteSprite(id);
+        const restoreFun = () => restoreSprite().then(this.props.onActivateBlocksTab)
+
+        this.props.dispatchUpdateRestore({
+            restoreFun: restoreFun,
+            deletedItem: 'Sprite'
+        });
+
+        // const restoreSprite = this.props.vm.deleteSprite(id);
+        // const restoreFun = () => restoreSprite().then(this.props.onActivateBlocksTab);
+
+        // this.props.dispatchUpdateRestore({
+        //     restoreFun: restoreFun,
+        //     deletedItem: 'Sprite'
+        // });
+
+    }
+
+    handleDuplicateSprite(id) {
+        this.props.vm.duplicateSprite(id);
+    }
+
+    handleClickNew() {
         // if the project is dirty, and user owns the project, we will autosave.
         // but if they are not logged in and can't save, user should consider
         // downloading or logging in first.
@@ -195,19 +286,19 @@ class MenuBar extends React.Component {
         }
         this.props.onRequestCloseFile();
     }
-    handleClickRemix () {
+    handleClickRemix() {
         this.props.onClickRemix();
         this.props.onRequestCloseFile();
     }
-    handleClickSave () {
+    handleClickSave() {
         this.props.onClickSave();
         this.props.onRequestCloseFile();
     }
-    handleClickSaveAsCopy () {
+    handleClickSaveAsCopy() {
         this.props.onClickSaveAsCopy();
         this.props.onRequestCloseFile();
     }
-    handleClickSeeCommunity (waitForUpdate) {
+    handleClickSeeCommunity(waitForUpdate) {
         if (this.props.shouldSaveBeforeTransition()) {
             this.props.autoUpdateProject(); // save before transitioning to project page
             waitForUpdate(true); // queue the transition to project page
@@ -215,7 +306,7 @@ class MenuBar extends React.Component {
             waitForUpdate(false); // immediately transition to project page
         }
     }
-    handleClickShare (waitForUpdate) {
+    handleClickShare(waitForUpdate) {
         if (!this.props.isShared) {
             if (this.props.canShare) { // save before transitioning to project page
                 this.props.onShare();
@@ -228,20 +319,20 @@ class MenuBar extends React.Component {
             }
         }
     }
-    handleRestoreOption (restoreFun) {
+    handleRestoreOption(restoreFun) {
         return () => {
             restoreFun();
             this.props.onRequestCloseEdit();
         };
     }
-    handleKeyPress (event) {
+    handleKeyPress(event) {
         const modifier = bowser.mac ? event.metaKey : event.ctrlKey;
         if (modifier && event.key === 's') {
             this.props.onClickSave();
             event.preventDefault();
         }
     }
-    getSaveToComputerHandler (downloadProjectCallback) {
+    getSaveToComputerHandler(downloadProjectCallback) {
         return () => {
             this.props.onRequestCloseFile();
             downloadProjectCallback();
@@ -251,41 +342,41 @@ class MenuBar extends React.Component {
             }
         };
     }
-    handleLanguageMouseUp (e) {
+    handleLanguageMouseUp(e) {
         if (!this.props.languageMenuOpen) {
             this.props.onClickLanguage(e);
         }
     }
-    restoreOptionMessage (deletedItem) {
+    restoreOptionMessage(deletedItem) {
         switch (deletedItem) {
-        case 'Sprite':
-            return (<FormattedMessage
-                defaultMessage="Restore Sprite"
-                description="Menu bar item for restoring the last deleted sprite."
-                id="gui.menuBar.restoreSprite"
-            />);
-        case 'Sound':
-            return (<FormattedMessage
-                defaultMessage="Restore Sound"
-                description="Menu bar item for restoring the last deleted sound."
-                id="gui.menuBar.restoreSound"
-            />);
-        case 'Costume':
-            return (<FormattedMessage
-                defaultMessage="Restore Costume"
-                description="Menu bar item for restoring the last deleted costume."
-                id="gui.menuBar.restoreCostume"
-            />);
-        default: {
-            return (<FormattedMessage
-                defaultMessage="Restore"
-                description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
-                id="gui.menuBar.restore"
-            />);
-        }
+            case 'Sprite':
+                return (<FormattedMessage
+                    defaultMessage="Restore Sprite"
+                    description="Menu bar item for restoring the last deleted sprite."
+                    id="gui.menuBar.restoreSprite"
+                />);
+            case 'Sound':
+                return (<FormattedMessage
+                    defaultMessage="Restore Sound"
+                    description="Menu bar item for restoring the last deleted sound."
+                    id="gui.menuBar.restoreSound"
+                />);
+            case 'Costume':
+                return (<FormattedMessage
+                    defaultMessage="Restore Costume"
+                    description="Menu bar item for restoring the last deleted costume."
+                    id="gui.menuBar.restoreCostume"
+                />);
+            default: {
+                return (<FormattedMessage
+                    defaultMessage="Restore"
+                    description="Menu bar item for restoring the last deleted item in its disabled state." /* eslint-disable-line max-len */
+                    id="gui.menuBar.restore"
+                />);
+            }
         }
     }
-    buildAboutMenu (onClickAbout) {
+    buildAboutMenu(onClickAbout) {
         if (!onClickAbout) {
             // hide the button
             return null;
@@ -329,13 +420,13 @@ class MenuBar extends React.Component {
             </div>
         );
     }
-    wrapAboutMenuCallback (callback) {
+    wrapAboutMenuCallback(callback) {
         return () => {
             callback();
             this.props.onRequestCloseAbout();
         };
     }
-    render () {
+    render() {
         const saveNowMessage = (
             <FormattedMessage
                 defaultMessage="Save now"
@@ -379,6 +470,7 @@ class MenuBar extends React.Component {
         );
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
+
         return (
             <Box
                 className={classNames(
@@ -390,16 +482,16 @@ class MenuBar extends React.Component {
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
                             <img
-                                alt="Scratch"
-                                className={classNames(styles.scratchLogo, {
-                                    [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
-                                })}
+                                alt="Back Button"
+                                // className={classNames(styles.scratchLogo, {
+                                // [styles.clickable]: typeof this.props.onClickLogo !== 'undefined'
+                                // })}
                                 draggable={false}
-                                src={this.props.logo}
+                                src={backIcon}
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
-                        {(this.props.canChangeLanguage) && (<div
+                        {/* {(this.props.canChangeLanguage) && (<div
                             className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
                         >
                             <div>
@@ -413,8 +505,8 @@ class MenuBar extends React.Component {
                                 />
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
-                        </div>)}
-                        {(this.props.canManageFiles) && (
+                        </div>)} */}
+                        {/* {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.fileMenuOpen
@@ -480,7 +572,125 @@ class MenuBar extends React.Component {
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>
-                        )}
+                        )} */}
+                        <div style={{ marginLeft: "25px" }}>
+                            <div
+                                key={this.props.stage.id}
+                                className={classNames(styles.menuBarItem, styles.hoverable, {
+                                    [styles.active]: this.props.backdropMenuOpen
+                                })}
+                                onMouseUp={() => this.handleSelectStage(this.props.stage.id)}
+                            >
+                                <img
+                                    className={styles.spriteImage}
+                                    draggable={false}
+                                    src={this.props.stage?.costume?.asset?.data.length < 1000 ? languageIcon : this.props.stage?.costume?.asset?.encodeDataURI()}
+                                />
+                                <MenuBarMenu
+                                    className={classNames(styles.menuBarMenu)}
+                                    open={!!this.props.backdropMenuOpen}
+                                    place={this.props.isRtl ? 'left' : 'right'}
+                                    onRequestClose={this.props.onRequestCloseBackdrop}
+                                >
+                                    <MenuSection>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleClickBackdropSettings}
+                                        >
+                                            <img src={require("./assets/edit.svg")} />
+                                        </MenuItem>
+                                    </MenuSection>
+                                </MenuBarMenu>
+                            </div>
+                        </div>
+
+                        <div
+                            aria-label={this.props.intl.formatMessage(ariaMessages.addSpriteFromLibrary)}
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            onClick={this.props.onNewSpriteClick}
+                        >
+                            <img
+                                className={styles.helpIcon}
+                                src={spriteIcon}
+                            />
+                            {/* <FormattedMessage {...ariaMessages.addSpriteFromLibrary} /> */}
+                        </div>
+
+                        {/* <Divider className={classNames(styles.divider)} /> */}
+                            {Object.keys(this.props.sprites).map(id => (
+
+                                <div
+                                    key={id}
+                                    className={classNames(styles.menuBarItem, styles.hoverable, {
+                                        [styles.active]: this.props.spriteMenuOpen[id]
+                                    })}
+                                    onMouseUp={() => this.handleClickSprite(id)}
+                                >
+                                    <img
+                                        className={styles.spriteImage}
+                                        draggable={false}
+                                        src={this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
+                                    />
+                                    <MenuBarMenu
+                                        className={classNames(styles.menuBarMenu)}
+                                        open={!!this.props.spriteMenuOpen[id]}
+                                        place={this.props.isRtl ? 'left' : 'right'}
+                                        onRequestClose={() => this.props.onRequestCloseSprite(id)}
+                                    >
+                                        <MenuSection>
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={this.handleClickSpriteSettings}
+                                            >
+                                                <img src={require("./assets/edit.svg")} />
+                                            </MenuItem>
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={() => this.handleDuplicateSprite(id)}
+                                            >
+                                                <img src={require("./assets/copy.svg")} />
+                                            </MenuItem>
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={() => this.handleDeleteSprite(id)}
+                                            >
+                                                <img src={require("./assets/delete.svg")} />
+                                            </MenuItem>
+                                        </MenuSection>
+                                    </MenuBarMenu>
+                                </div>
+
+
+                            ))
+                            }
+
+
+                        {/* <div
+                        aria-label={this.props.intl.formatMessage(ariaMessages.addSpriteFromLibrary)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        onClick={this.props.onNewSpriteClick}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={spriteIcon}
+                        />
+                    </div>
+
+                    <SB3Downloader>{(className, downloadProjectCallback) => (
+                        <div
+                            className={className}
+                            onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                        >
+                            <FormattedMessage
+                                defaultMessage="Save"
+                                description="Save option for downloading the project to your mobile" // eslint-disable-line max-len
+                                id="gui.menuBar.saveToComputer"
+                            />
+                        </div>
+                    )}</SB3Downloader> */}
+
+
+                        {/* 
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
@@ -500,16 +710,16 @@ class MenuBar extends React.Component {
                                 place={this.props.isRtl ? 'left' : 'right'}
                                 onRequestClose={this.props.onRequestCloseEdit}
                             >
-                                <DeletionRestorer>{(handleRestore, {restorable, deletedItem}) => (
+                                <DeletionRestorer>{(handleRestore, { restorable, deletedItem }) => (
                                     <MenuItem
-                                        className={classNames({[styles.disabled]: !restorable})}
+                                        className={classNames({ [styles.disabled]: !restorable })}
                                         onClick={this.handleRestoreOption(handleRestore)}
                                     >
                                         {this.restoreOptionMessage(deletedItem)}
                                     </MenuItem>
                                 )}</DeletionRestorer>
                                 <MenuSection>
-                                    <TurboMode>{(toggleTurboMode, {turboMode}) => (
+                                    <TurboMode>{(toggleTurboMode, { turboMode }) => (
                                         <MenuItem onClick={toggleTurboMode}>
                                             {turboMode ? (
                                                 <FormattedMessage
@@ -528,10 +738,11 @@ class MenuBar extends React.Component {
                                     )}</TurboMode>
                                 </MenuSection>
                             </MenuBarMenu>
-                        </div>
+                        </div> */}
                     </div>
-                    <Divider className={classNames(styles.divider)} />
-                    <div
+
+                    {/* <Divider className={classNames(styles.divider)} /> */}
+                    {/* <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onClick={this.props.onOpenTipLibrary}
@@ -541,8 +752,9 @@ class MenuBar extends React.Component {
                             src={helpIcon}
                         />
                         <FormattedMessage {...ariaMessages.tutorials} />
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
+                    </div> */}
+
+                    {/* <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
@@ -562,8 +774,8 @@ class MenuBar extends React.Component {
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
                         />
-                    ) : null)}
-                    <div className={classNames(styles.menuBarItem)}>
+                    ) : null)} */}
+                    {/* <div className={classNames(styles.menuBarItem)}>
                         {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
@@ -572,11 +784,9 @@ class MenuBar extends React.Component {
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
-                                                /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
                                                     this.handleClickShare(waitForUpdate);
                                                 }}
-                                                /* eslint-enable react/jsx-no-bind */
                                             />
                                         )
                                     }
@@ -590,8 +800,8 @@ class MenuBar extends React.Component {
                             ) : []
                         )}
                         {this.props.canRemix ? remixButton : []}
-                    </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
+                    </div> */}
+                    {/* <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
@@ -599,11 +809,9 @@ class MenuBar extends React.Component {
                                         waitForUpdate => (
                                             <CommunityButton
                                                 className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
                                                     this.handleClickSeeCommunity(waitForUpdate);
                                                 }}
-                                                /* eslint-enable react/jsx-no-bind */
                                             />
                                         )
                                     }
@@ -614,18 +822,30 @@ class MenuBar extends React.Component {
                                 <CommunityButton className={styles.menuBarButton} />
                             </MenuBarItemTooltip>
                         ) : [])}
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoGroup}>
+                    {/* -----------Save Button------------- */}
+                    <div className={styles.menuIcons}>
+                        <SB3Downloader>{(className, downloadProjectCallback) => (
+                            <div
+                                className={className}
+                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                            >
+                                <img src={require("./assets/saveIcon.svg")} />
+                            </div>
+                        )}</SB3Downloader>
+                    </div>
+
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
                         )}
                     </div>
-                    {this.props.sessionExists ? (
+                    {/* {this.props.sessionExists ? (
                         this.props.username ? (
                             // ************ user is logged in ************
                             <React.Fragment>
@@ -744,8 +964,14 @@ class MenuBar extends React.Component {
                                 </React.Fragment>
                             ) : []}
                         </React.Fragment>
-                    )}
+                    )} */}
                 </div>
+
+                {/* {["board", "bluetooth", "settings",].map((imageArr, index) => (
+                    <div className={styles.menuIcons}>
+                        <img src={require("./assets/" + imageArr + ".svg")} />
+                    </div>
+                ))} */}
 
                 {aboutButton}
             </Box>
@@ -791,6 +1017,7 @@ MenuBar.propTypes = {
             })
         )
     ]),
+    onActivateBlocksTab: PropTypes.func,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
@@ -802,6 +1029,7 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onLogOut: PropTypes.func,
+    onNewSpriteClick: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onProjectTelemetryEvent: PropTypes.func,
@@ -823,12 +1051,20 @@ MenuBar.propTypes = {
     showComingSoon: PropTypes.bool,
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    spriteMenuOpen: PropTypes.object,
+    backdropMenuOpen: PropTypes.bool,
+    onClickSprite: PropTypes.func,
+    onRequestCloseSprite: PropTypes.func,
+    onClickBackdrop: PropTypes.func,
+    onRequestCloseBackdrop: PropTypes.func,
+    sprites: PropTypes.objectOf(spriteShape),
+    dispatchUpdateRestore: PropTypes.func,
+    onActivateBackdropSettingsTab: PropTypes.func
 };
 
 MenuBar.defaultProps = {
-    logo: scratchLogo,
-    onShare: () => {}
+    onShare: () => { }
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -850,11 +1086,17 @@ const mapStateToProps = (state, ownProps) => {
         username: user ? user.username : null,
         userOwnsProject: ownProps.authorUsername && user &&
             (ownProps.authorUsername === user.username),
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        spriteMenuOpen: spriteMenuOpen(state),
+        backdropMenuOpen: backdropMenuOpen(state),
+        sprites: state.scratchGui.targets.sprites,
+        editingTarget: state.scratchGui.targets.editingTarget,
+        stage: state.scratchGui.targets.stage,
     };
 };
 
 const mapDispatchToProps = dispatch => ({
+    onNewSpriteClick: () => { dispatch(openSpriteLibrary()) },
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
@@ -873,7 +1115,17 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onClickSprite: (id) => dispatch(openSpriteMenu(id)),
+    onRequestCloseSprite: (id) => dispatch(closeSpriteMenu(id)),
+    onRequestCloseBackdrop: () => dispatch(closeBackdropMenu()),
+    onActivateSettingsTab: () => dispatch(openSpriteSettings()),
+    onActivateBackdropSettingsTab: () => dispatch(openBackdropSettings()),
+    onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX, BLOCK)),
+    onHighlightTarget: id => { dispatch(highlightTarget(id)) },
+    onSetStageSize: stageSize => { dispatch(setStageSize(stageSize)) },
+    dispatchUpdateRestore: restoreState => { dispatch(setRestore(restoreState)) },
+    onClickStage: () => dispatch(openBackdropMenu()),
 });
 
 export default compose(

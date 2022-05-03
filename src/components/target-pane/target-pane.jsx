@@ -21,7 +21,11 @@ const TargetPane = ({
     fileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
+    onActivateTab,
     onActivateBlocksTab,
+    onActivateParametersTab,
+    onActivateCostumesTab,
+    onActivateSoundsTab,
     onChangeSpriteDirection,
     onChangeSpriteName,
     onChangeSpriteRotationStyle,
@@ -42,24 +46,30 @@ const TargetPane = ({
     onSurpriseSpriteClick,
     raiseSprites,
     stage,
-    stageSize,
+    // stageSize,
     sprites,
     vm,
+    activeTabIndex,
+    costumesTabVisible,
+    soundsTabVisible,
+    parametersTabVisible,
     ...componentProps
 }) => (
+    <div>
     <div
         className={styles.targetPane}
         {...componentProps}
     >
 
         <SpriteSelectorComponent
+            vm={vm}
             editingTarget={editingTarget}
             hoveredTarget={hoveredTarget}
             raised={raiseSprites}
             selectedId={editingTarget}
             spriteFileInput={fileInputRef}
             sprites={sprites}
-            stageSize={stageSize}
+            // stageSize={stageSize}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
             onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
@@ -77,8 +87,17 @@ const TargetPane = ({
             onSelectSprite={onSelectSprite}
             onSpriteUpload={onSpriteUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
+            activeTabIndex={activeTabIndex}
+            onActivateCostumesTab={onActivateCostumesTab}
+            onActivateSoundsTab={onActivateSoundsTab}
+            onActivateTab={onActivateTab}
+            parametersTabVisible={parametersTabVisible}
+            costumesTabVisible={costumesTabVisible}
+            soundsTabVisible={soundsTabVisible}
         />
-        <div className={styles.stageSelectorWrapper}>
+
+        {/* Stage Selector */}
+        {/* <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
                 asset={
                     stage.costume &&
@@ -98,11 +117,12 @@ const TargetPane = ({
                     />
                 ) : null}
             </div>
-        </div>
+        </div> */}
+    </div>
     </div>
 );
 
-const spriteShape = PropTypes.shape({
+export const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({
         // asset is defined in scratch-storage's Asset.js
         asset: PropTypes.object, // eslint-disable-line react/forbid-prop-types
@@ -134,6 +154,10 @@ TargetPane.propTypes = {
         receivedBlocks: PropTypes.bool
     }),
     onActivateBlocksTab: PropTypes.func.isRequired,
+    onActivateTab: PropTypes.func.isRequired,
+    onActivateParametersTab: PropTypes.func.isRequired,
+    onActivateSoundsTab: PropTypes.func.isRequired,
+    onActivateCostumesTab: PropTypes.func.isRequired,
     onChangeSpriteDirection: PropTypes.func,
     onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,
@@ -157,8 +181,12 @@ TargetPane.propTypes = {
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    vm: PropTypes.instanceOf(VM)
+    // stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    vm: PropTypes.instanceOf(VM),
+    parametersTabVisible: PropTypes.bool,
+    costumesTabVisible: PropTypes.bool,
+    soundsTabVisible: PropTypes.bool,
+    activeTabIndex: PropTypes.number
 };
 
 export default TargetPane;

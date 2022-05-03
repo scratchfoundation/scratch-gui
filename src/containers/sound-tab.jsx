@@ -22,10 +22,12 @@ import {handleFileUpload, soundUpload} from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
 import downloadBlob from '../lib/download-blob';
+import SoundControls from '../components/controls/sound-controls.jsx';
 
 import {connect} from 'react-redux';
 
 import {
+    openSoundEdit,
     closeSoundLibrary,
     openSoundLibrary,
     openSoundRecorder
@@ -33,7 +35,8 @@ import {
 
 import {
     activateTab,
-    COSTUMES_TAB_INDEX
+    COSTUMES_TAB_INDEX,
+    SETTINGS
 } from '../reducers/editor-tab';
 
 import {setRestore} from '../reducers/restore-deletion';
@@ -52,7 +55,9 @@ class SoundTab extends React.Component {
             'handleFileUploadClick',
             'handleSoundUpload',
             'handleDrop',
-            'setFileInput'
+            'setFileInput',
+            'handleAddNewSound',
+            'handleSoundEdit'
         ]);
         this.state = {selectedSoundIndex: 0};
     }
@@ -154,21 +159,31 @@ class SoundTab extends React.Component {
                 dropInfo.index, dropInfo.newIndex);
 
             this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.onActivateCostumesTab();
-            this.props.vm.addCostume(dropInfo.payload.body, {
-                name: dropInfo.payload.name
-            });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.vm.addSound({
-                md5: dropInfo.payload.body,
-                name: dropInfo.payload.name
-            }).then(this.handleNewSound);
-        }
+        } 
+        // else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+        //     this.props.onActivateCostumesTab();
+        //     this.props.vm.addCostume(dropInfo.payload.body, {
+        //         name: dropInfo.payload.name
+        //     });
+        // } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+        //     this.props.vm.addSound({
+        //         md5: dropInfo.payload.body,
+        //         name: dropInfo.payload.name
+        //     }).then(this.handleNewSound);
+        // }
     }
 
     setFileInput (input) {
         this.fileInput = input;
+    }
+
+    handleAddNewSound(e) {
+        this.props.onNewSoundFromLibraryClick(e)
+    }
+
+    handleSoundEdit(e) {
+        e.preventDefault();
+        this.props.onSoundEditClick(this.state.selectedSoundIndex)
     }
 
     render () {
@@ -178,7 +193,8 @@ class SoundTab extends React.Component {
             isRtl,
             vm,
             onNewSoundFromLibraryClick,
-            onNewSoundFromRecordingClick
+            onNewSoundFromRecordingClick,
+            soundsTabVisible
         } = this.props;
 
         if (!vm.editingTarget) {
@@ -192,7 +208,7 @@ class SoundTab extends React.Component {
                 url: isRtl ? soundIconRtl : soundIcon,
                 name: sound.name,
                 details: (sound.sampleCount / sound.rate).toFixed(2),
-                dragPayload: sound
+                // dragPayload: sound
             }
         )) : [];
 
@@ -220,6 +236,7 @@ class SoundTab extends React.Component {
         });
 
         return (
+            <div style={{width: '100%'}}>
             <AssetPanel
                 buttons={[{
                     title: intl.formatMessage(messages.addSound),
@@ -256,22 +273,31 @@ class SoundTab extends React.Component {
                 onExportClick={this.handleExportSound}
                 onItemClick={this.handleSelectSound}
             >
-                {sprite.sounds && sprite.sounds[this.state.selectedSoundIndex] ? (
+                {/* {sprite.sounds && sprite.sounds[this.state.selectedSoundIndex] ? (
                     <SoundEditor soundIndex={this.state.selectedSoundIndex} />
-                ) : null}
+                ) : null} */}
                 {this.props.soundRecorderVisible ? (
                     <RecordModal
                         onNewSound={this.handleNewSound}
                     />
                 ) : null}
-                {this.props.soundLibraryVisible ? (
-                    <SoundLibrary
+                {/* {!this.props.soundLibraryVisible ? (
+                    <SoundLibrary style={{zIndex:1000}}
                         vm={this.props.vm}
                         onNewSound={this.handleNewSound}
                         onRequestClose={this.props.onRequestCloseSoundLibrary}
                     />
-                ) : null}
+                ) : null} */}
             </AssetPanel>
+                 <div style={{margin: '5px'}}>
+                    {
+                        !soundsTabVisible
+                        ? <SoundControls addSound={this.handleAddNewSound} editSound={this.handleSoundEdit}/> 
+                        : null 
+
+                    }
+                 </div>
+                 </div>
         );
     }
 }
@@ -310,11 +336,15 @@ const mapStateToProps = state => ({
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     soundLibraryVisible: state.scratchGui.modals.soundLibrary,
-    soundRecorderVisible: state.scratchGui.modals.soundRecorder
+    soundRecorderVisible: state.scratchGui.modals.soundRecorder,
+    soundsTabVisible: state.scratchGui.editorTab?.[SETTINGS]?.activeTabIndex === COSTUMES_TAB_INDEX,
 });
 
 const mapDispatchToProps = dispatch => ({
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
+    onSoundEditClick: (soundIndex) => {
+        dispatch(openSoundEdit(soundIndex))
+    },
     onNewSoundFromLibraryClick: e => {
         e.preventDefault();
         dispatch(openSoundLibrary());

@@ -54,6 +54,7 @@ const StageHeaderComponent = function (props) {
         onKeyPress,
         onSetStageLarge,
         onSetStageSmall,
+        onStageToggle,
         onSetStageFull,
         onSetStageUnFull,
         showBranding,
@@ -68,7 +69,7 @@ const StageHeaderComponent = function (props) {
         const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
                 <a
-                    href="https://scratch.mit.edu"
+                    href="/"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
@@ -117,7 +118,7 @@ const StageHeaderComponent = function (props) {
                                 styles.stageButtonFirst,
                                 (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonToggledOff
                             )}
-                            onClick={onSetStageSmall}
+                            onClick={onStageToggle}
                         >
                             <img
                                 alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
@@ -127,7 +128,7 @@ const StageHeaderComponent = function (props) {
                             />
                         </Button>
                     </div>
-                    <div>
+                    {/* <div>
                         <Button
                             className={classNames(
                                 styles.stageButton,
@@ -143,7 +144,7 @@ const StageHeaderComponent = function (props) {
                                 src={largeStageIcon}
                             />
                         </Button>
-                    </div>
+                    </div> */}
                 </div>
             );
         header = (
@@ -189,6 +190,7 @@ StageHeaderComponent.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
+    onStageToggle: PropTypes.func.isRequired,
     showBranding: PropTypes.bool.isRequired,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired

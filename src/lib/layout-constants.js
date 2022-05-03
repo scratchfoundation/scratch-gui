@@ -38,18 +38,19 @@ const STAGE_DISPLAY_SIZES = keyMirror({
 });
 
 // zoom level to start with
-const BLOCKS_DEFAULT_SCALE = 0.675;
+const BLOCKS_DEFAULT_SCALE = 0.55;
 
 const STAGE_DISPLAY_SCALES = {};
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)
-STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
-STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 1; // large mode but narrow browser
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0; // small mode, regardless of browser size
 
 export default {
-    standardStageWidth: 480,
-    standardStageHeight: 360,
-    fullSizeMinWidth: 1096,
-    fullSizePaintMinWidth: 1250
+    standardStageWidth: 250,
+    standardStageWidthWithRightMargin: 265,
+    standardStageHeight: 180,
+    fullSizeMinWidth: 250,
+    fullSizePaintMinWidth: 250
 };
 
 export {

@@ -8,7 +8,7 @@
         of the element, which messes up the chrome padding consistency
     */
     display: block;
-
+    right: 10px;
     border-radius: $space;
     border: $stage-standard-border-width solid $ui-black-transparent;
     overflow: hidden;
@@ -27,7 +27,11 @@
 }
 
 .stage.full-screen {
-    border: $stage-full-screen-border-width solid rgb(126, 133, 151);
+    /* border: $stage-full-screen-border-width solid rgb(126, 133, 151); */
+    left: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center; /* For now, a preview has been given center. */
 }
 
 .with-color-picker {
@@ -84,7 +88,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
 }
 
-.stage-bottom-wrapper {
+/* .stage-bottom-wrapper {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -93,7 +97,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     left: 0;
     overflow: hidden;
     pointer-events: none;
-}
+} */
 
 .mic-indicator {
     transform-origin: bottom right;
@@ -122,7 +126,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 0.5rem;
     pointer-events: all;
     cursor: pointer;
@@ -131,7 +135,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
 .green-flag-overlay {
     padding: 1rem;
     border-radius: 100%;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255, 255, 255, 0.75);
     border: 3px solid $ui-white;
     display: flex;
     justify-content: center;
@@ -146,9 +150,11 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     object-fit: contain;
 }
 
-
-
 @keyframes flash {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

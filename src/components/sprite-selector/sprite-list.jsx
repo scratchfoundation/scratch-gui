@@ -27,24 +27,32 @@ const SpriteList = function (props) {
         onSelectSprite,
         onAddSortable,
         onRemoveSortable,
+        onNewSprite,
         ordering,
         raised,
         selectedId,
-        items
+        items,
     } = props;
 
     const isSpriteDrag = draggingType === DragConstants.SPRITE;
 
     return (
         <Box
-            className={classNames(styles.scrollWrapper, {
-                [styles.scrollWrapperDragging]: draggingType === DragConstants.BACKPACK_SPRITE
-            })}
+            className={classNames(styles.scrollWrapper, 
+                // {
+                //     [styles.scrollWrapperDragging]: draggingType === DragConstants.BACKPACK_SPRITE
+                // }
+            )}
             componentRef={containerRef}
         >
             <Box
                 className={styles.itemsWrapper}
             >
+                {/* <SpriteSelectorItem
+                    name="Add Sprite"
+                    selected={false}
+                    onClick={onNewSprite}
+                /> */}
                 {items.map((sprite, index) => {
 
                     // If the sprite has just received a block drop, used for green highlight
@@ -64,9 +72,10 @@ const SpriteList = function (props) {
                     isRaised = isRaised || [
                         DragConstants.COSTUME,
                         DragConstants.SOUND,
-                        DragConstants.BACKPACK_COSTUME,
-                        DragConstants.BACKPACK_SOUND,
-                        DragConstants.BACKPACK_CODE].includes(draggingType);
+                        // DragConstants.BACKPACK_COSTUME,
+                        // DragConstants.BACKPACK_SOUND,
+                        // DragConstants.BACKPACK_CODE
+                    ].includes(draggingType);
 
                     return (
                         <SortableAsset
@@ -83,8 +92,8 @@ const SpriteList = function (props) {
                                     [styles.raised]: isRaised,
                                     [styles.receivedBlocks]: receivedBlocks
                                 })}
-                                dragPayload={sprite.id}
-                                dragType={DragConstants.SPRITE}
+                                // dragPayload={sprite.id}
+                                // dragType={DragConstants.SPRITE}
                                 id={sprite.id}
                                 index={index}
                                 key={sprite.id}
@@ -111,7 +120,7 @@ SpriteList.propTypes = {
     hoveredTarget: PropTypes.shape({
         hoveredSprite: PropTypes.string,
         receivedBlocks: PropTypes.bool,
-        sprite: PropTypes.string
+        sprite: PropTypes.any
     }),
     items: PropTypes.arrayOf(PropTypes.shape({
         costume: PropTypes.shape({
@@ -130,6 +139,7 @@ SpriteList.propTypes = {
     onExportSprite: PropTypes.func,
     onRemoveSortable: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onNewSprite: PropTypes.func,
     ordering: PropTypes.arrayOf(PropTypes.number),
     raised: PropTypes.bool,
     selectedId: PropTypes.string

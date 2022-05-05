@@ -35,8 +35,11 @@ class Storage extends ScratchStorage {
     setProjectHost (projectHost) {
         this.projectHost = projectHost;
     }
+    setProjectToken (projectToken) {
+        this.projectToken = projectToken;
+    }
     getProjectGetConfig (projectAsset) {
-        return `${this.projectHost}/${projectAsset.assetId}`;
+        return `${this.projectHost}/${projectAsset.assetId}?token=${this.projectToken}`;
     }
     getProjectCreateConfig () {
         return {
@@ -46,7 +49,7 @@ class Storage extends ScratchStorage {
     }
     getProjectUpdateConfig (projectAsset) {
         return {
-            url: `${this.projectHost}/${projectAsset.assetId}`,
+            url: `${this.projectHost}/${projectAsset.assetId}?token=${this.projectToken}`,
             withCredentials: true
         };
     }

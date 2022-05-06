@@ -36,6 +36,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 'fetchProject'
             ]);
             storage.setProjectHost(props.projectHost);
+            storage.setProjectToken(props.projectToken);
             storage.setAssetHost(props.assetHost);
             storage.setTranslatorFunction(props.intl.formatMessage);
             // props.projectId might be unset, in which case we use our default;
@@ -53,6 +54,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         componentDidUpdate (prevProps) {
             if (prevProps.projectHost !== this.props.projectHost) {
                 storage.setProjectHost(this.props.projectHost);
+            }
+            if (prevProps.projectToken !== this.props.projectToken) {
+                storage.setProjectToken(this.props.projectToken);
             }
             if (prevProps.assetHost !== this.props.assetHost) {
                 storage.setAssetHost(this.props.assetHost);
@@ -125,6 +129,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onFetchedProjectData: PropTypes.func,
         onProjectUnchanged: PropTypes.func,
         projectHost: PropTypes.string,
+        projectToken: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func

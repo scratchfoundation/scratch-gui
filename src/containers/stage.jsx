@@ -77,6 +77,7 @@ class Stage extends React.Component {
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
     }
     shouldComponentUpdate (nextProps, nextState) {
+        console.log('#####')
         return this.props.stageSize !== nextProps.stageSize ||
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
@@ -86,6 +87,7 @@ class Stage extends React.Component {
             this.props.isStarted !== nextProps.isStarted;
     }
     componentDidUpdate (prevProps) {
+        this.props.vm.renderer.draw();
         if (this.props.isColorPicking && !prevProps.isColorPicking) {
             this.startColorPickingLoop();
         } else if (!this.props.isColorPicking && prevProps.isColorPicking) {

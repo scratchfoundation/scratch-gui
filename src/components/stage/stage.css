@@ -84,7 +84,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     filter: drop-shadow(5px 5px 5px $ui-black-transparent);
 }
 
-.stage-bottom-wrapper {
+/* .stage-bottom-wrapper {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -93,7 +93,7 @@ stage doesn't "spill" out from under its rounded corners. instead, shift these o
     left: 0;
     overflow: hidden;
     pointer-events: none;
-}
+} */
 
 .mic-indicator {
     transform-origin: bottom right;

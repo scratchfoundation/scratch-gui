@@ -42,6 +42,7 @@ import soundsIcon from './icon--sounds.svg';
 
 import StageHeader from '../../containers/stage-header.jsx';
 import stageWrapperStyles from '../stage-wrapper/stage-wrapper.css';
+import SpriteSetting from '../../containers/sprite-setting.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -257,7 +258,7 @@ const GUIComponent = props => {
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
                             >
-                                {/* <TabList className={tabClassNames.tabList}>
+                                <TabList className={tabClassNames.tabList}>
                                     <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
@@ -305,7 +306,7 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
-                                </TabList> */}
+                                </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
@@ -339,8 +340,11 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                                 </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
+                                {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                </TabPanel> */}
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {soundsTabVisible ? <SpriteSetting stageSize={stageSize} vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> : null}
                                 </TabPanel>
                             </Tabs>
                             {/* {backpackVisible ? (

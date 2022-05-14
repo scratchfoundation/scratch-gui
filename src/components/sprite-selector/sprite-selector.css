@@ -74,7 +74,7 @@
 
 .add-button {
     position: absolute;
-    bottom: 0.75rem;
+    top: 0.75rem;
 }
 
 [dir="ltr"] .add-button {

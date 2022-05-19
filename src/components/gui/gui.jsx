@@ -11,18 +11,18 @@ import VM from 'scratch-vm';
 import Renderer from 'scratch-render';
 
 import Blocks from '../../containers/blocks.jsx';
-import CostumeTab from '../../containers/costume-tab.jsx';
-import TargetPane from '../../containers/target-pane.jsx';
-import SoundTab from '../../containers/sound-tab.jsx';
+// import CostumeTab from '../../containers/costume-tab.jsx';
+// import TargetPane from '../../containers/target-pane.jsx';
+// import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 // import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
-import Watermark from '../../containers/watermark.jsx';
+// import Watermark from '../../containers/watermark.jsx';
 
-import Backpack from '../../containers/backpack.jsx';
+// import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
@@ -42,6 +42,7 @@ import soundsIcon from './icon--sounds.svg';
 
 import StageHeader from '../../containers/stage-header.jsx';
 import stageWrapperStyles from '../stage-wrapper/stage-wrapper.css';
+import SpriteSetting from '../../containers/sprite-setting.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -81,7 +82,7 @@ const GUIComponent = props => {
         children,
         connectionModalVisible,
         costumeLibraryVisible,
-        costumesTabVisible,
+        // costumesTabVisible,
         enableCommunity,
         intl,
         isCreating,
@@ -99,8 +100,9 @@ const GUIComponent = props => {
         onLogOut,
         onOpenRegistration,
         onToggleLoginOpen,
-        onActivateCostumesTab,
-        onActivateSoundsTab,
+        // onActivateCostumesTab,
+        // onActivateSoundsTab,
+        onActivateSettingsTab,
         onActivateTab,
         onClickLogo,
         onExtensionButtonClick,
@@ -116,7 +118,8 @@ const GUIComponent = props => {
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
         showComingSoon,
-        soundsTabVisible,
+        // soundsTabVisible,
+        settingsTabVisible,
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
@@ -257,7 +260,7 @@ const GUIComponent = props => {
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
                             >
-                                {/* <TabList className={tabClassNames.tabList}>
+                                <TabList className={tabClassNames.tabList}>
                                     <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
@@ -269,7 +272,7 @@ const GUIComponent = props => {
                                             id="gui.gui.codeTab"
                                         />
                                     </Tab>
-                                    <Tab
+                                    {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateCostumesTab}
                                     >
@@ -290,8 +293,8 @@ const GUIComponent = props => {
                                                 id="gui.gui.costumesTab"
                                             />
                                         )}
-                                    </Tab>
-                                    <Tab
+                                    </Tab> */}
+                                    {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateSoundsTab}
                                     >
@@ -304,8 +307,22 @@ const GUIComponent = props => {
                                             description="Button to get to the sounds panel"
                                             id="gui.gui.soundsTab"
                                         />
+                                    </Tab> */}
+                                     <Tab
+                                        className={tabClassNames.tab}
+                                        onClick={onActivateSettingsTab}
+                                    >
+                                        <img
+                                            draggable={false}
+                                            src={soundsIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Sounds"
+                                            description="Button to get to the sounds panel"
+                                            id="gui.gui.soundsTab"
+                                        />
                                     </Tab>
-                                </TabList> */}
+                                </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
@@ -336,11 +353,18 @@ const GUIComponent = props => {
                                         <Watermark />
                                     </Box> */}
                                 </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
+                                {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                </TabPanel> */}
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {
+                                        settingsTabVisible 
+                                        ? <SpriteSetting stageSize={stageSize} vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> 
+                                        : null
+                                    }
                                 </TabPanel>
                             </Tabs>
                             {/* {backpackVisible ? (
@@ -394,7 +418,7 @@ GUIComponent.propTypes = {
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
-    costumesTabVisible: PropTypes.bool,
+    // costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
@@ -404,8 +428,9 @@ GUIComponent.propTypes = {
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
-    onActivateCostumesTab: PropTypes.func,
-    onActivateSoundsTab: PropTypes.func,
+    // onActivateCostumesTab: PropTypes.func,
+    // onActivateSoundsTab: PropTypes.func,
+    onActivateSettingsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onClickAccountNav: PropTypes.func,
     onClickLogo: PropTypes.func,
@@ -427,7 +452,8 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
-    soundsTabVisible: PropTypes.bool,
+    settingsTabVisible: PropTypes.bool,
+    // soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,

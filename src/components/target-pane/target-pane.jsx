@@ -78,7 +78,7 @@ const TargetPane = ({
             onSpriteUpload={onSpriteUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
         />
-        <div className={styles.stageSelectorWrapper}>
+        {/* <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
                 asset={
                     stage.costume &&
@@ -98,7 +98,7 @@ const TargetPane = ({
                     />
                 ) : null}
             </div>
-        </div>
+        </div> */}
     </div>
 );
 

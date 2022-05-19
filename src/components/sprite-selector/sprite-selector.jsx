@@ -80,6 +80,18 @@ const SpriteSelectorComponent = function (props) {
             className={styles.spriteSelector}
             {...componentProps}
         >
+            <SpriteList
+                editingTarget={editingTarget}
+                hoveredTarget={hoveredTarget}
+                items={Object.keys(sprites).map(id => sprites[id])}
+                raised={raised}
+                selectedId={selectedId}
+                onDeleteSprite={onDeleteSprite}
+                onDrop={onDrop}
+                onDuplicateSprite={onDuplicateSprite}
+                onExportSprite={onExportSprite}
+                onSelectSprite={onSelectSprite}
+            />
 
             <SpriteInfo
                 direction={selectedSprite.direction}
@@ -100,18 +112,7 @@ const SpriteSelectorComponent = function (props) {
                 onChangeY={onChangeSpriteY}
             />
 
-            <SpriteList
-                editingTarget={editingTarget}
-                hoveredTarget={hoveredTarget}
-                items={Object.keys(sprites).map(id => sprites[id])}
-                raised={raised}
-                selectedId={selectedId}
-                onDeleteSprite={onDeleteSprite}
-                onDrop={onDrop}
-                onDuplicateSprite={onDuplicateSprite}
-                onExportSprite={onExportSprite}
-                onSelectSprite={onSelectSprite}
-            />
+            
             <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}

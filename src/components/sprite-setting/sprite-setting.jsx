@@ -50,49 +50,6 @@ const SpriteSetting = props => {
                     vm={vm}
                 />
             </Box>
-            <Box className={styles.editorWrapper}>
-                <Tabs
-                    forceRenderTabPanel
-                    className={tabClassNames.tabs}
-                    selectedIndex={activeTabIndex}
-                    selectedTabClassName={tabClassNames.tabSelected}
-                    selectedTabPanelClassName={tabClassNames.tabPanelSelected}
-                    onSelect={onActivateTab}
-                >
-                    <TabList className={tabClassNames.tabList}>
-                        <Tab className={tabClassNames.tab}>
-                            <FormattedMessage
-                                defaultMessage="Parameters"
-                                description="Button to get to the code panel"
-                                id="gui.gui.codeTab"
-                            />
-                        </Tab>
-                        <Tab className={tabClassNames.tab} onClick={onActivateCostumesTab}>
-                            <FormattedMessage
-                                defaultMessage="Costumes"
-                                description="Button to get to the costumes panel"
-                                id="gui.gui.costumesTab"
-                            />
-                        </Tab>
-                        <Tab className={tabClassNames.tab} onClick={onActivateSoundsTab}>
-                            <FormattedMessage
-                                defaultMessage="Sounds"
-                                description="Button to get to the sounds panel"
-                                id="gui.gui.soundsTab"
-                            />
-                        </Tab>
-                    </TabList>
-                    <TabPanel className={tabClassNames.tabPanel}>
-                        {/**  Parameters, Sprite Info */}
-                    </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
-                        {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
-                    </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
-                        {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                    </TabPanel>
-                </Tabs>
-            </Box>
         </div>
     );
 }
@@ -114,3 +71,49 @@ SpriteSetting.propTypes = {
 // });
 
 export default SpriteSetting
+
+
+
+// <Box className={styles.editorWrapper}>
+//                 <Tabs
+//                     forceRenderTabPanel
+//                     className={tabClassNames.tabs}
+//                     selectedIndex={activeTabIndex}
+//                     selectedTabClassName={tabClassNames.tabSelected}
+//                     selectedTabPanelClassName={tabClassNames.tabPanelSelected}
+//                     onSelect={onActivateTab}
+//                 >
+//                     <TabList className={tabClassNames.tabList}>
+//                         <Tab className={tabClassNames.tab}>
+//                             <FormattedMessage
+//                                 defaultMessage="Parameters"
+//                                 description="Button to get to the code panel"
+//                                 id="gui.gui.codeTab"
+//                             />
+//                         </Tab>
+//                         <Tab className={tabClassNames.tab} onClick={onActivateCostumesTab}>
+//                             <FormattedMessage
+//                                 defaultMessage="Costumes"
+//                                 description="Button to get to the costumes panel"
+//                                 id="gui.gui.costumesTab"
+//                             />
+//                         </Tab>
+//                         <Tab className={tabClassNames.tab} onClick={onActivateSoundsTab}>
+//                             <FormattedMessage
+//                                 defaultMessage="Sounds"
+//                                 description="Button to get to the sounds panel"
+//                                 id="gui.gui.soundsTab"
+//                             />
+//                         </Tab>
+//                     </TabList>
+//                     <TabPanel className={tabClassNames.tabPanel}>
+//                         {/**  Parameters, Sprite Info */}
+//                     </TabPanel>
+//                     <TabPanel className={tabClassNames.tabPanel}>
+//                         {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
+//                     </TabPanel>
+//                     <TabPanel className={tabClassNames.tabPanel}>
+//                         {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+//                     </TabPanel>
+//                 </Tabs>
+//             </Box>

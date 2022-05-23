@@ -314,12 +314,12 @@ class CostumeTab extends React.Component {
                 onExportClick={this.handleExportCostume}
                 onItemClick={this.handleSelectCostume}
             >
-                {/* {target.costumes ?
+                {target.costumes ?
                     <PaintEditorWrapper
                         selectedCostumeIndex={this.state.selectedCostumeIndex}
                     /> :
                     null
-                } */}
+                }
             </AssetPanel>
         );
     }

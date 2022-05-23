@@ -85,7 +85,7 @@ const Selector = props => {
                     </SortableAsset>
                 ))}
             </Box>
-            {newButtonSection}
+            {/* {newButtonSection} */}
         </Box>
     );
 };

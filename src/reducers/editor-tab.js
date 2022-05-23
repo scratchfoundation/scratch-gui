@@ -49,6 +49,7 @@ export {
     activateTab,
     SETTINGS_TAB_INDEX,
     BLOCKS_TAB_INDEX,
+    PARAMETERS_TAB_INDEX,
     COSTUMES_TAB_INDEX,
     SOUNDS_TAB_INDEX,
     BLOCK,

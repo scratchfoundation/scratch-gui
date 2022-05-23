@@ -10,9 +10,9 @@ const AssetPanel = props => (
             className={styles.selector}
             {...props}
         />
-        <Box className={styles.detailArea}>
+        {/* <Box className={styles.detailArea}>
             {props.children}
-        </Box>
+        </Box> */}
     </Box>
 );
 

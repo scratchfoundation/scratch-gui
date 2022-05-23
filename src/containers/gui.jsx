@@ -146,6 +146,7 @@ const mapStateToProps = state => {
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
         settingsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SETTINGS_TAB_INDEX,
+        // soundsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SOUNDS_TAB_INDEX,
         targetIsStage: (
             state.scratchGui.targets.stage &&
             state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
@@ -159,8 +160,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     onExtensionButtonClick: () => dispatch(openExtensionLibrary()),
     onActivateTab: tab => dispatch(activateTab(tab, BLOCK)),
-    onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX, BLOCK)),
-    onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX, BLOCK)),
+    // onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX, BLOCK)),
+    onActivateSettingsTab: () => dispatch(activateTab(SETTINGS_TAB_INDEX, BLOCK)),
+    // onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX, BLOCK)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
     onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())

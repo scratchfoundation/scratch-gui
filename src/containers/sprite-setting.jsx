@@ -33,8 +33,8 @@ class SpriteSettingWrapper extends React.Component {
     render() {
 
         return (
-            <div style={{ height: '80%', width: '100%', background: 'yellow', display: 'flex' }}>
-                <div style={{ width: '50%', background: 'red', margin: '0.5%' }}>
+            <div style={{ height: '80%', width: '100%', display: 'flex' }}>
+                <div style={{ width: '50%',  margin: '0.5%' }}>
                     <SpriteSetting
                         vm={this.props.vm}
                         stageSize={this.props.stageSize}
@@ -46,7 +46,7 @@ class SpriteSettingWrapper extends React.Component {
                         soundsTabVisible={this.props.soundsTabVisible}
                     />
                 </div>
-                <div style={{  width: '50%', background: 'green', margin: '0.5%' }}>
+                <div style={{  width: '50%', margin: '0.5%' }}>
 
                     <Stage
                         isFullScreen={true}

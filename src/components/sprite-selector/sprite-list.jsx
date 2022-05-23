@@ -27,10 +27,11 @@ const SpriteList = function (props) {
         onSelectSprite,
         onAddSortable,
         onRemoveSortable,
+        onNewSprite,
         ordering,
         raised,
         selectedId,
-        items
+        items,
     } = props;
 
     const isSpriteDrag = draggingType === DragConstants.SPRITE;
@@ -45,6 +46,11 @@ const SpriteList = function (props) {
             <Box
                 className={styles.itemsWrapper}
             >
+                {/* <SpriteSelectorItem
+                    name="Add Sprite"
+                    selected={false}
+                    onClick={onNewSprite}
+                /> */}
                 {items.map((sprite, index) => {
 
                     // If the sprite has just received a block drop, used for green highlight
@@ -130,6 +136,7 @@ SpriteList.propTypes = {
     onExportSprite: PropTypes.func,
     onRemoveSortable: PropTypes.func,
     onSelectSprite: PropTypes.func,
+    onNewSprite: PropTypes.func,
     ordering: PropTypes.arrayOf(PropTypes.number),
     raised: PropTypes.bool,
     selectedId: PropTypes.string

@@ -117,6 +117,7 @@ const SpriteSelectorComponent = function (props) {
                 onDuplicateSprite={onDuplicateSprite}
                 onExportSprite={onExportSprite}
                 onSelectSprite={onSelectSprite}
+                onNewSprite={onNewSpriteClick}
             />
 
 
@@ -189,7 +190,7 @@ const SpriteSelectorComponent = function (props) {
             </Box>
 
 
-            <ActionMenu
+            {/* <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}
                 moreButtons={[
@@ -218,7 +219,8 @@ const SpriteSelectorComponent = function (props) {
                 title={intl.formatMessage(messages.addSpriteFromLibrary)}
                 tooltipPlace={isRtl(intl.locale) ? 'right' : 'left'}
                 onClick={onNewSpriteClick}
-            />
+            /> */}
+            
         </Box>
     );
 };

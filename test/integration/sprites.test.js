@@ -290,7 +290,7 @@ describe('Working with sprites', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sprite3'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-bmp.sprite3'));
         const tile = await findByText('green-bmp-guy', scope.spriteTile);
         const tileVisible = await tile.isDisplayed();
         await expect(tileVisible).toBe(true);
@@ -303,7 +303,7 @@ describe('Working with sprites', () => {
             .perform();
         await driver.sleep(500); // Wait for thermometer menu to come up
         const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-from-scratch3.bmp'));
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-from-scratch3.png'));
         const tile = await findByText('corrupt-from-scratch3', scope.spriteTile);
         const tileVisible = await tile.isDisplayed();
         await expect(tileVisible).toBe(true);

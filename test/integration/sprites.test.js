@@ -296,17 +296,6 @@ describe('Working with sprites', () => {
         await expect(tileVisible).toBe(true);
     });
 
-    test('Load a scratch3 corrupt bmp as a sprite', async () => {
-        await loadUri(uri);
-        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
-        await driver.actions().mouseMove(el)
-            .perform();
-        await driver.sleep(500); // Wait for thermometer menu to come up
-        const input = await findByXpath('//input[@type="file"]');
-        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-from-scratch3.png'));
-        const tile = await findByText('corrupt-from-scratch3', scope.spriteTile);
-        const tileVisible = await tile.isDisplayed();
-        await expect(tileVisible).toBe(true);
-    });
+    // TODO: uploading a corrupt bmp as a sprite should throw an error and not add a gray question mark
 
 });

@@ -154,17 +154,18 @@ class SoundTab extends React.Component {
                 dropInfo.index, dropInfo.newIndex);
 
             this.setState({selectedSoundIndex: sprite.sounds.indexOf(activeSound)});
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.onActivateCostumesTab();
-            this.props.vm.addCostume(dropInfo.payload.body, {
-                name: dropInfo.payload.name
-            });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.vm.addSound({
-                md5: dropInfo.payload.body,
-                name: dropInfo.payload.name
-            }).then(this.handleNewSound);
-        }
+        } 
+        // else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+        //     this.props.onActivateCostumesTab();
+        //     this.props.vm.addCostume(dropInfo.payload.body, {
+        //         name: dropInfo.payload.name
+        //     });
+        // } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+        //     this.props.vm.addSound({
+        //         md5: dropInfo.payload.body,
+        //         name: dropInfo.payload.name
+        //     }).then(this.handleNewSound);
+        // }
     }
 
     setFileInput (input) {
@@ -192,7 +193,7 @@ class SoundTab extends React.Component {
                 url: isRtl ? soundIconRtl : soundIcon,
                 name: sound.name,
                 details: (sound.sampleCount / sound.rate).toFixed(2),
-                dragPayload: sound
+                // dragPayload: sound
             }
         )) : [];
 

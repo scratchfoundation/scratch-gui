@@ -21,7 +21,6 @@ const TargetPane = ({
     fileInputRef,
     hoveredTarget,
     spriteLibraryVisible,
-    onActivateTab,
     onActivateBlocksTab,
     onActivateParametersTab,
     onActivateCostumesTab,
@@ -49,10 +48,6 @@ const TargetPane = ({
     stageSize,
     sprites,
     vm,
-    activeTabIndex,
-    costumesTabVisible,
-    soundsTabVisible,
-    parametersTabVisible,
     ...componentProps
 }) => (
     <div>
@@ -62,7 +57,6 @@ const TargetPane = ({
     >
 
         <SpriteSelectorComponent
-            vm={vm}
             editingTarget={editingTarget}
             hoveredTarget={hoveredTarget}
             raised={raiseSprites}
@@ -87,13 +81,6 @@ const TargetPane = ({
             onSelectSprite={onSelectSprite}
             onSpriteUpload={onSpriteUpload}
             onSurpriseSpriteClick={onSurpriseSpriteClick}
-            activeTabIndex={activeTabIndex}
-            onActivateCostumesTab={onActivateCostumesTab}
-            onActivateSoundsTab={onActivateSoundsTab}
-            onActivateTab={onActivateTab}
-            parametersTabVisible={parametersTabVisible}
-            costumesTabVisible={costumesTabVisible}
-            soundsTabVisible={soundsTabVisible}
         />
 
         {/* Stage Selector */}
@@ -154,7 +141,6 @@ TargetPane.propTypes = {
         receivedBlocks: PropTypes.bool
     }),
     onActivateBlocksTab: PropTypes.func.isRequired,
-    onActivateTab: PropTypes.func.isRequired,
     onActivateParametersTab: PropTypes.func.isRequired,
     onActivateSoundsTab: PropTypes.func.isRequired,
     onActivateCostumesTab: PropTypes.func.isRequired,
@@ -182,11 +168,7 @@ TargetPane.propTypes = {
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    vm: PropTypes.instanceOf(VM),
-    parametersTabVisible: PropTypes.bool,
-    costumesTabVisible: PropTypes.bool,
-    soundsTabVisible: PropTypes.bool,
-    activeTabIndex: PropTypes.number
+    vm: PropTypes.instanceOf(VM)
 };
 
 export default TargetPane;

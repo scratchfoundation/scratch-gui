@@ -8,7 +8,7 @@ import {
     openSpriteLibrary,
     closeSpriteLibrary
 } from '../reducers/modals';
-import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
+import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX, SETTINGS, SOUNDS_TAB_INDEX, PARAMETERS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
@@ -28,7 +28,11 @@ class TargetPane extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
+            'handleActivateTab',
             'handleActivateBlocksTab',
+            'handleActivateParametersTab',
+            'handleActivateSoundsTab',
+            'handleActivateCostumesTab',
             'handleBlockDragEnd',
             'handleChangeSpriteRotationStyle',
             'handleChangeSpriteDirection',
@@ -128,7 +132,19 @@ class TargetPane extends React.Component {
         });
     }
     handleActivateBlocksTab () {
-        this.props.onActivateTab(BLOCKS_TAB_INDEX);
+        this.props.onActivateTab(BLOCKS_TAB_INDEX, BLOCK);
+    }
+    handleActivateTab (tab) {
+        this.props.onActivateTab(tab, SETTINGS)
+    }
+    handleActivateParametersTab () {
+        this.props.onActivateTab(PARAMETERS_TAB_INDEX, SETTINGS);
+    }
+    handleActivateCostumesTab () {  
+        this.props.onActivateTab(COSTUMES_TAB_INDEX, SETTINGS);
+    }
+    handleActivateSoundsTab () {    
+        this.props.onActivateTab(SOUNDS_TAB_INDEX, SETTINGS);
     }
     handleNewSprite (spriteJSONString) {
         return this.props.vm.addSprite(spriteJSONString)
@@ -214,23 +230,24 @@ class TargetPane extends React.Component {
                 this.props.vm.shareCostumeToTarget(dragInfo.index, targetId);
             } else if (targetId && dragInfo.dragType === DragConstants.SOUND) {
                 this.props.vm.shareSoundToTarget(dragInfo.index, targetId);
-            } else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-                // In scratch 2, this only creates a new sprite from the costume.
-                // We may be able to handle both kinds of drops, depending on where
-                // the drop happens. For now, just add the costume.
-                this.props.vm.addCostume(dragInfo.payload.body, {
-                    name: dragInfo.payload.name
-                }, targetId);
-            } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
-                this.props.vm.addSound({
-                    md5: dragInfo.payload.body,
-                    name: dragInfo.payload.name
-                }, targetId);
-            } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
-                fetchCode(dragInfo.payload.bodyUrl)
-                    .then(blocks => this.shareBlocks(blocks, targetId))
-                    .then(() => this.props.vm.refreshWorkspace());
-            }
+            } 
+            // else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+            //     // In scratch 2, this only creates a new sprite from the costume.
+            //     // We may be able to handle both kinds of drops, depending on where
+            //     // the drop happens. For now, just add the costume.
+            //     this.props.vm.addCostume(dragInfo.payload.body, {
+            //         name: dragInfo.payload.name
+            //     }, targetId);
+            // } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
+            //     this.props.vm.addSound({
+            //         md5: dragInfo.payload.body,
+            //         name: dragInfo.payload.name
+            //     }, targetId);
+            // } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
+            //     fetchCode(dragInfo.payload.bodyUrl)
+            //         .then(blocks => this.shareBlocks(blocks, targetId))
+            //         .then(() => this.props.vm.refreshWorkspace());
+            // }
         }
     }
     render () {
@@ -252,6 +269,10 @@ class TargetPane extends React.Component {
                 {...componentProps}
                 fileInputRef={this.setFileInput}
                 onActivateBlocksTab={this.handleActivateBlocksTab}
+                onActivateTab={this.handleActivateTab}
+                onActivateParametersTab = {this.handleActivateParametersTab}
+                onActivateCostumesTab = {this.handleActivateCostumesTab}
+                onActivateSoundsTab = {this.handleActivateSoundsTab}
                 onChangeSpriteDirection={this.handleChangeSpriteDirection}
                 onChangeSpriteName={this.handleChangeSpriteName}
                 onChangeSpriteRotationStyle={this.handleChangeSpriteRotationStyle}
@@ -276,6 +297,9 @@ class TargetPane extends React.Component {
 const {
     onSelectSprite, // eslint-disable-line no-unused-vars
     onActivateBlocksTab, // eslint-disable-line no-unused-vars
+    onActivateParametersTab, // eslint-disable-line no-unused-vars
+    onActivateCostumesTab, // eslint-disable-line no-unused-vars
+    onActivateSoundsTab, // eslint-disable-line no-unused-vars
     ...targetPaneProps
 } = TargetPaneComponent.propTypes;
 
@@ -294,19 +318,24 @@ const mapStateToProps = state => ({
     sprites: state.scratchGui.targets.sprites,
     stage: state.scratchGui.targets.stage,
     raiseSprites: state.scratchGui.blockDrag,
-    workspaceMetrics: state.scratchGui.workspaceMetrics
+    workspaceMetrics: state.scratchGui.workspaceMetrics,
+    activeTabIndex: state.scratchGui.editorTab?.[SETTINGS].activeTabIndex || 0,
+    parametersTabVisible: state.scratchGui.editorTab?.[SETTINGS]?.activeTabIndex === PARAMETERS_TAB_INDEX, 
+    costumesTabVisible: state.scratchGui.editorTab?.[SETTINGS]?.activeTabIndex === COSTUMES_TAB_INDEX,
+    soundsTabVisible: state.scratchGui.editorTab?.[SETTINGS]?.activeTabIndex === SOUNDS_TAB_INDEX,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onNewSpriteClick: e => {
-        e.preventDefault();
+    onNewSpriteClick: () => {
+        // e.preventDefault();
+        console.log('okokok')
         dispatch(openSpriteLibrary());
     },
     onRequestCloseSpriteLibrary: () => {
         dispatch(closeSpriteLibrary());
     },
-    onActivateTab: tabIndex => {
-        dispatch(activateTab(tabIndex));
+    onActivateTab: (tabIndex, screen) => {
+        dispatch(activateTab(tabIndex, screen));
     },
     onReceivedBlocks: receivedBlocks => {
         dispatch(setReceivedBlocks(receivedBlocks));

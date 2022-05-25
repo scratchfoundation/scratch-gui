@@ -24,7 +24,7 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
         case ACTIVATE_TAB:
-            console.log({ ...state, [action.screenType]: { activeTabIndex: action.activeTabIndex } })
+            // console.log({ ...state, [action.screenType]: { activeTabIndex: action.activeTabIndex } })
             return { ...state, [action.screenType]: { activeTabIndex: action.activeTabIndex } }
         // return Object.assign({}, state, {
         //     activeTabIndex: action.activeTabIndex

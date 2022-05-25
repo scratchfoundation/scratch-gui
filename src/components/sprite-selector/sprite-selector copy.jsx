@@ -113,6 +113,8 @@ const SpriteSelectorComponent = function (props) {
             />
 
             
+
+            
             <ActionMenu
                 className={styles.addButton}
                 img={spriteIcon}

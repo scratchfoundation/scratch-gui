@@ -136,7 +136,7 @@ const SpriteSelectorComponent = function (props) {
                             <FormattedMessage
                                 defaultMessage="Parameters"
                                 description="Button to get to the code panel"
-                                id="gui.gui.codeTab"
+                                id="gui.gui.parameterTab"
                             />
                         </Tab>
                         <Tab className={tabClassNames.tab} onClick={onActivateCostumesTab}>
@@ -156,7 +156,7 @@ const SpriteSelectorComponent = function (props) {
                     </TabList>
                     <TabPanel className={tabClassNames.tabPanel}>
                         {
-                            parametersTabVisible
+                            activeTabIndex == 0
                             ? (<SpriteInfo
                             direction={selectedSprite.direction}
                             disabled={spriteInfoDisabled}

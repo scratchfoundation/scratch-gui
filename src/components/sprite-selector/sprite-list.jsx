@@ -38,9 +38,11 @@ const SpriteList = function (props) {
 
     return (
         <Box
-            className={classNames(styles.scrollWrapper, {
-                [styles.scrollWrapperDragging]: draggingType === DragConstants.BACKPACK_SPRITE
-            })}
+            className={classNames(styles.scrollWrapper, 
+                // {
+                //     [styles.scrollWrapperDragging]: draggingType === DragConstants.BACKPACK_SPRITE
+                // }
+            )}
             componentRef={containerRef}
         >
             <Box
@@ -70,9 +72,10 @@ const SpriteList = function (props) {
                     isRaised = isRaised || [
                         DragConstants.COSTUME,
                         DragConstants.SOUND,
-                        DragConstants.BACKPACK_COSTUME,
-                        DragConstants.BACKPACK_SOUND,
-                        DragConstants.BACKPACK_CODE].includes(draggingType);
+                        // DragConstants.BACKPACK_COSTUME,
+                        // DragConstants.BACKPACK_SOUND,
+                        // DragConstants.BACKPACK_CODE
+                    ].includes(draggingType);
 
                     return (
                         <SortableAsset
@@ -89,8 +92,8 @@ const SpriteList = function (props) {
                                     [styles.raised]: isRaised,
                                     [styles.receivedBlocks]: receivedBlocks
                                 })}
-                                dragPayload={sprite.id}
-                                dragType={DragConstants.SPRITE}
+                                // dragPayload={sprite.id}
+                                // dragType={DragConstants.SPRITE}
                                 id={sprite.id}
                                 index={index}
                                 key={sprite.id}

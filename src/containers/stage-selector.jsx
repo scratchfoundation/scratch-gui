@@ -25,9 +25,9 @@ import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 const dragTypes = [
     DragConstants.COSTUME,
     DragConstants.SOUND,
-    DragConstants.BACKPACK_COSTUME,
-    DragConstants.BACKPACK_SOUND,
-    DragConstants.BACKPACK_CODE
+    // DragConstants.BACKPACK_COSTUME,
+    // DragConstants.BACKPACK_SOUND,
+    // DragConstants.BACKPACK_CODE
 ];
 
 const DroppableThrottledStage = DropAreaHOC(dragTypes)(
@@ -133,22 +133,23 @@ class StageSelector extends React.Component {
             this.props.vm.shareCostumeToTarget(dragInfo.index, this.props.id);
         } else if (dragInfo.dragType === DragConstants.SOUND) {
             this.props.vm.shareSoundToTarget(dragInfo.index, this.props.id);
-        } else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.vm.addCostume(dragInfo.payload.body, {
-                name: dragInfo.payload.name
-            }, this.props.id);
-        } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.vm.addSound({
-                md5: dragInfo.payload.body,
-                name: dragInfo.payload.name
-            }, this.props.id);
-        } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
-            fetchCode(dragInfo.payload.bodyUrl)
-                .then(blocks => {
-                    this.props.vm.shareBlocksToTarget(blocks, this.props.id);
-                    this.props.vm.refreshWorkspace();
-                });
-        }
+        } 
+        // else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+        //     this.props.vm.addCostume(dragInfo.payload.body, {
+        //         name: dragInfo.payload.name
+        //     }, this.props.id);
+        // } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
+        //     this.props.vm.addSound({
+        //         md5: dragInfo.payload.body,
+        //         name: dragInfo.payload.name
+        //     }, this.props.id);
+        // } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
+        //     fetchCode(dragInfo.payload.bodyUrl)
+        //         .then(blocks => {
+        //             this.props.vm.shareBlocksToTarget(blocks, this.props.id);
+        //             this.props.vm.refreshWorkspace();
+        //         });
+        // }
     }
     setFileInput (input) {
         this.fileInput = input;

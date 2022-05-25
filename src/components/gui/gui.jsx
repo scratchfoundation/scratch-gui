@@ -66,8 +66,8 @@ const GUIComponent = props => {
         authorUsername,
         basePath,
         backdropLibraryVisible,
-        backpackHost,
-        backpackVisible,
+        // backpackHost,
+        // backpackVisible,
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
@@ -267,7 +267,7 @@ const GUIComponent = props => {
                                             src={codeIcon}
                                         />
                                         <FormattedMessage
-                                            defaultMessage="Code"
+                                            // defaultMessage="Code"
                                             description="Button to get to the code panel"
                                             id="gui.gui.codeTab"
                                         />
@@ -317,9 +317,9 @@ const GUIComponent = props => {
                                             src={soundsIcon}
                                         />
                                         <FormattedMessage
-                                            defaultMessage="Sounds"
+                                            defaultMessage="Settings"
                                             description="Button to get to the sounds panel"
-                                            id="gui.gui.soundsTab"
+                                            id="gui.gui.settingsTab"
                                         />
                                     </Tab>
                                 </TabList>
@@ -402,8 +402,8 @@ GUIComponent.propTypes = {
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
-    backpackHost: PropTypes.string,
-    backpackVisible: PropTypes.bool,
+    // backpackHost: PropTypes.string,
+    // backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     canChangeLanguage: PropTypes.bool,
@@ -461,8 +461,8 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    backpackHost: null,
-    backpackVisible: false,
+    // backpackHost: null,
+    // backpackVisible: false,
     basePath: './',
     canChangeLanguage: true,
     canCreateNew: false,

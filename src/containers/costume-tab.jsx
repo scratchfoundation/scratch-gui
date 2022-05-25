@@ -224,17 +224,18 @@ class CostumeTab extends React.Component {
             this.props.vm.reorderCostume(this.props.vm.editingTarget.id,
                 dropInfo.index, dropInfo.newIndex);
             this.setState({ selectedCostumeIndex: sprite.costumes.indexOf(activeCostume) });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
-            this.props.vm.addCostume(dropInfo.payload.body, {
-                name: dropInfo.payload.name
-            });
-        } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
-            this.props.onActivateSoundsTab();
-            this.props.vm.addSound({
-                md5: dropInfo.payload.body,
-                name: dropInfo.payload.name
-            });
-        }
+        } 
+        // else if (dropInfo.dragType === DragConstants.BACKPACK_COSTUME) {
+        //     this.props.vm.addCostume(dropInfo.payload.body, {
+        //         name: dropInfo.payload.name
+        //     });
+        // } else if (dropInfo.dragType === DragConstants.BACKPACK_SOUND) {
+        //     this.props.onActivateSoundsTab();
+        //     this.props.vm.addSound({
+        //         md5: dropInfo.payload.body,
+        //         name: dropInfo.payload.name
+        //     });
+        // }
     }
     setFileInput(input) {
         this.fileInput = input;
@@ -275,7 +276,7 @@ class CostumeTab extends React.Component {
             name: costume.name,
             asset: costume.asset,
             details: costume.size ? this.formatCostumeDetails(costume.size, costume.bitmapResolution) : null,
-            dragPayload: costume
+            // dragPayload: costume
         })) : [];
         return (
             <div style={{width: '100%'}}>

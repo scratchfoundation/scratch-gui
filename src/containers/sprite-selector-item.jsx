@@ -70,7 +70,7 @@ class SpriteSelectorItem extends React.PureComponent {
             dragging: true,
             dragType: this.props.dragType,
             index: this.props.index,
-            payload: this.props.dragPayload
+            // payload: this.props.dragPayload
         });
         this.noClick = true;
     }
@@ -122,7 +122,7 @@ class SpriteSelectorItem extends React.PureComponent {
             onDeleteButtonClick,
             onDuplicateButtonClick,
             onExportButtonClick,
-            dragPayload,
+            // dragPayload,
             receivedBlocks,
             costumeURL,
             vm,
@@ -151,7 +151,7 @@ SpriteSelectorItem.propTypes = {
     asset: PropTypes.instanceOf(storage.Asset),
     costumeURL: PropTypes.string,
     dispatchSetHoveredSprite: PropTypes.func.isRequired,
-    dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     dragType: PropTypes.string,
     dragging: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -70,8 +70,8 @@ const Selector = props => {
                             })}
                             costumeURL={item.url}
                             details={item.details}
-                            dragPayload={item.dragPayload}
-                            dragType={dragType}
+                            // dragPayload={item.dragPayload}
+                            // dragType={dragType}
                             id={index}
                             index={index}
                             name={item.name}

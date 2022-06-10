@@ -1,6 +1,7 @@
 const OPEN_MODAL = 'scratch-gui/modals/OPEN_MODAL';
 const CLOSE_MODAL = 'scratch-gui/modals/CLOSE_MODAL';
 
+const MODAL_COSTUME_EDIT = 'costumeEdit';
 const MODAL_BACKDROP_LIBRARY = 'backdropLibrary';
 const MODAL_COSTUME_LIBRARY = 'costumeLibrary';
 const MODAL_EXTENSION_LIBRARY = 'extensionLibrary';
@@ -13,6 +14,7 @@ const MODAL_CONNECTION = 'connectionModal';
 const MODAL_TIPS_LIBRARY = 'tipsLibrary';
 
 const initialState = {
+    [MODAL_COSTUME_EDIT]: false,
     [MODAL_BACKDROP_LIBRARY]: false,
     [MODAL_COSTUME_LIBRARY]: false,
     [MODAL_EXTENSION_LIBRARY]: false,
@@ -22,7 +24,8 @@ const initialState = {
     [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
     [MODAL_CONNECTION]: false,
-    [MODAL_TIPS_LIBRARY]: false
+    [MODAL_TIPS_LIBRARY]: false,
+    data: null
 };
 
 const reducer = function (state, action) {
@@ -30,20 +33,23 @@ const reducer = function (state, action) {
     switch (action.type) {
     case OPEN_MODAL:
         return Object.assign({}, state, {
-            [action.modal]: true
+            [action.modal]: true,
+            data: action.data
         });
     case CLOSE_MODAL:
         return Object.assign({}, state, {
-            [action.modal]: false
+            [action.modal]: false,
+            data: null
         });
     default:
         return state;
     }
 };
-const openModal = function (modal) {
+const openModal = function (modal, data = null) {
     return {
         type: OPEN_MODAL,
-        modal: modal
+        modal: modal,
+        data
     };
 };
 const closeModal = function (modal) {
@@ -52,6 +58,10 @@ const closeModal = function (modal) {
         modal: modal
     };
 };
+
+const openCostumeEdit = function (costumeIndex) {
+    return openModal(MODAL_COSTUME_EDIT, { costumeIndex })
+}
 const openBackdropLibrary = function () {
     return openModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -112,9 +122,14 @@ const closeTipsLibrary = function () {
 const closeConnectionModal = function () {
     return closeModal(MODAL_CONNECTION);
 };
+const closeCostumeEdit = function () {
+    return closeModal(MODAL_COSTUME_EDIT)
+}
+
 export {
     reducer as default,
     initialState as modalsInitialState,
+    openCostumeEdit,
     openBackdropLibrary,
     openCostumeLibrary,
     openExtensionLibrary,
@@ -134,5 +149,6 @@ export {
     closeSoundRecorder,
     closeTelemetryModal,
     closeTipsLibrary,
-    closeConnectionModal
+    closeConnectionModal,
+    closeCostumeEdit
 };

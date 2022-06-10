@@ -18,6 +18,7 @@ import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 // import MenuBar from '../menu-bar/menu-bar.jsx';
+import CostumeEdit from '../../containers/costume-edit.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 // import Watermark from '../../containers/watermark.jsx';
@@ -125,6 +126,8 @@ const GUIComponent = props => {
         telemetryModalVisible,
         tipsLibraryVisible,
         vm,
+        constumeEditVisible,
+        onRequestCloseCostumeEdit,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -210,6 +213,12 @@ const GUIComponent = props => {
                     <BackdropLibrary
                         vm={vm}
                         onRequestClose={onRequestCloseBackdropLibrary}
+                    />
+                ) : null}
+                {constumeEditVisible ? (
+                    <CostumeEdit
+                        vm={vm}
+                        onRequestClose={onRequestCloseCostumeEdit}
                     />
                 ) : null}
                 {/* <MenuBar
@@ -458,7 +467,9 @@ GUIComponent.propTypes = {
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     tipsLibraryVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    constumeEditVisible: PropTypes.bool,
+    onRequestCloseCostumeEdit: PropTypes.func
 };
 GUIComponent.defaultProps = {
     // backpackHost: null,

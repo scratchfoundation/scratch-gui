@@ -1,0 +1,70 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.library-scroll-grid {
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    background: $ui-secondary;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: auto;
+    padding: 0.5rem;
+    height: calc(100% - $library-header-height);
+}
+
+.library-scroll-grid.withFilterBar {
+    height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: calc($library-filter-bar-height + 2rem); /* padding */
+    background-color: $motion-transparent;
+    padding: 0 1rem;
+    font-size: .875rem;
+}
+
+.filter-bar-item {
+    margin-right: .75rem;
+}
+
+.filter {
+    flex-grow: 0;
+}
+
+.filter-input {
+    width: 11.5rem;
+    transition: .2s;
+}
+
+.filter-input:focus,
+.filter-input:not([value=""]) {
+    width: 18.75rem;
+}
+
+.divider {
+    transform: scaleY(1.39);
+    height: $library-filter-bar-height;
+}
+
+.tag-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: $library-filter-bar-height;
+    overflow: hidden;
+}
+
+.spinner-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

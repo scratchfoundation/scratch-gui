@@ -16,6 +16,7 @@ import downloadBlob from '../lib/download-blob';
 import ConstumeControls from '../components/controls/costume-controls.jsx';
 
 import {
+    openCostumeEdit,
     openCostumeLibrary,
     openBackdropLibrary
 } from '../reducers/modals';           
@@ -90,7 +91,8 @@ class CostumeTab extends React.Component {
             'handleFileUploadClick',
             'handleCostumeUpload',
             'handleDrop',
-            'setFileInput'
+            'setFileInput',
+            'handleCostumeEdit'
         ]);
         
         const {
@@ -248,11 +250,17 @@ class CostumeTab extends React.Component {
         // https://github.com/LLK/scratch-flash/blob/9fbac92ef3d09ceca0c0782f8a08deaa79e4df69/src/ui/media/MediaInfo.as#L224-L237
         return `${Math.ceil(size[0] / resolution)} x ${Math.ceil(size[1] / resolution)}`;
     }
+    handleCostumeEdit(e) {
+        e.preventDefault();
+        this.props.onCostumeEditClick(this.state.selectedCostumeIndex)
+    }
+
     render() {
         const {
             dispatchUpdateRestore, // eslint-disable-line no-unused-vars
             intl,
             isRtl,
+            onCostumeEditClick,
             onNewLibraryBackdropClick,
             onNewLibraryCostumeClick,
             vm,
@@ -324,15 +332,15 @@ class CostumeTab extends React.Component {
                     onExportClick={this.handleExportCostume}
                     onItemClick={this.handleSelectCostume}
                 >
-                    {target.costumes ?
+                    {/* {target.costumes ?
                         <PaintEditorWrapper
                             selectedCostumeIndex={this.state.selectedCostumeIndex}
                         /> :
                         null
-                    }
+                    } */}
                 </AssetPanel>
                 <div style={{margin: '5px'}}>
-                    {costumesTabVisible ? <ConstumeControls addCostume={this.handleNewBlankCostume} openLibrary={addLibraryFunc}/> : null}    
+                    {costumesTabVisible ? <ConstumeControls addCostume={this.handleNewBlankCostume} openLibrary={addLibraryFunc} editCostume={this.handleCostumeEdit}/> : null}    
               </div>
 
             </div>
@@ -380,6 +388,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
+    onCostumeEditClick: (costumeIndex) => {
+        dispatch(openCostumeEdit(costumeIndex))
+    },
     onNewLibraryBackdropClick: e => {
         e.preventDefault();
         dispatch(openBackdropLibrary());

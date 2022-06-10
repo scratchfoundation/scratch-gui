@@ -12,7 +12,8 @@ const CostumeControl = props => {
 
     const {
         addCostume,
-        openLibrary
+        openLibrary,
+        editCostume
     } = props
 
     return (
@@ -24,7 +25,7 @@ const CostumeControl = props => {
                 <button onClick={addCostume}>Add</button>
             </ControlItem>
             <ControlItem>
-                <button>Edit</button>
+                <button onClick={editCostume}>Edit</button>
             </ControlItem>
         </div>
     )
@@ -32,7 +33,8 @@ const CostumeControl = props => {
 
 CostumeControl.propTypes = {
     addCostume: PropTypes.func,
-    openLibrary: PropTypes.func
+    openLibrary: PropTypes.func,
+    editCostume: PropTypes.func
 }
 
 export default injectIntl(CostumeControl);

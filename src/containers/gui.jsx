@@ -24,7 +24,8 @@ import {
     closeCostumeLibrary,
     closeBackdropLibrary,
     closeTelemetryModal,
-    openExtensionLibrary
+    openExtensionLibrary,
+    closeCostumeEdit
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
@@ -115,7 +116,8 @@ GUI.propTypes = {
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     telemetryModalVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+
 };
 
 GUI.defaultProps = {
@@ -136,6 +138,7 @@ const mapStateToProps = state => {
         cardsVisible: state.scratchGui.cards.visible,
         connectionModalVisible: state.scratchGui.modals.connectionModal,
         costumeLibraryVisible: state.scratchGui.modals.costumeLibrary,
+        constumeEditVisible: state.scratchGui.modals.costumeEdit,
         // costumesTabVisible: state.scratchGui.editorTab.activeTabIndex === COSTUMES_TAB_INDEX,
         error: state.scratchGui.projectState.error,
         isError: getIsError(loadingState),
@@ -165,7 +168,8 @@ const mapDispatchToProps = dispatch => ({
     // onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX, BLOCK)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
+    onRequestCloseCostumeEdit: () => dispatch(closeCostumeEdit())
 });
 
 const ConnectedGUI = injectIntl(connect(

@@ -7,7 +7,8 @@
 }
 
 .body-wrapper {
-    height: calc(100% - $menu-bar-height);
+    height: calc(100%);
+    /* height: calc(100% - $menu-bar-height); */
     background-color: $ui-primary;
 }
 
@@ -210,6 +211,15 @@
 
     /* this will only ever be as wide as the stage */
     flex-basis: 0;
+}
+
+.stage-action-wrapper {
+    position: fixed;
+    z-index: 100;
+    /* height:30px; */
+    width:60px;
+    right:10%;
+    bottom:2%;
 }
 
 .target-wrapper {

@@ -1,0 +1,96 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.stage-header-wrapper {
+    position: relative;
+}
+
+.stage-header-wrapper-overlay {
+    position: fixed;
+    background-color: rgb(232, 237, 241);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-stage-header;
+}
+
+.stage-menu-wrapper {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    flex-shrink: 0;
+    align-items: center;
+    height: $stage-menu-height;
+    padding-top: $space;
+    padding-bottom: $space;
+}
+
+.embed-scratch-logo img {
+    height:  1.6rem;
+    vertical-align: middle;
+    opacity: .6;
+}
+
+.stage-size-row {
+    display: flex;
+}
+
+.stage-size-toggle-group {
+    display: flex;
+}
+
+[dir="ltr"] .stage-size-toggle-group {
+    margin-right: .2rem;
+}
+
+[dir="rtl"] .stage-size-toggle-group {
+    margin-left: .2rem;
+}
+
+.stage-button {
+    display: block;
+    border: 1px solid $ui-black-transparent;
+    border-radius: $form-radius;
+    width: calc(2rem + 2px);
+    height: calc(2rem + 2px);
+    background: $ui-white;
+    padding: 0.375rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.stage-button-icon {
+    width: 100%;
+    height: 100%;
+}
+
+[dir="rtl"] .stage-button-icon {
+    transform: scaleX(-1);
+}
+
+[dir="ltr"] .stage-button-first {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+[dir="ltr"] .stage-button-last {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+[dir="rtl"] .stage-button-first {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+[dir="rtl"] .stage-button-last {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.stage-button-toggled-off {
+    filter: saturate(0);
+}

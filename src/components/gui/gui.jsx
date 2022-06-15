@@ -42,6 +42,7 @@ import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 
 import StageHeader from '../../containers/stage-header.jsx';
+import StageActionWrapper from '../../containers/stage-action-wrapper.jsx';
 import stageWrapperStyles from '../stage-wrapper/stage-wrapper.css';
 import SpriteSetting from '../../containers/sprite-setting.jsx';
 
@@ -252,12 +253,12 @@ const GUIComponent = props => {
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
                 /> */}
-                 <Box className={stageWrapperStyles.stageMenuWrapper}>
+                 {/* <Box className={stageWrapperStyles.stageMenuWrapper}>
                     <StageHeader
                         stageSize={stageSize}
                         vm={vm}
                     />
-                </Box>
+                </Box> */}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
@@ -395,6 +396,11 @@ const GUIComponent = props => {
                                     vm={vm}
                                 />
                             </Box> */}
+                        </Box>
+                        <Box className={classNames(styles.stageActionWrapper)}>
+                            <StageActionWrapper 
+                                stageSize={stageSize}
+                                vm={vm}/>
                         </Box>
                     </Box>
                 </Box>

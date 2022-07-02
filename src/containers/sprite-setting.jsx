@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import VM from 'scratch-vm';
 import Stage from './stage.jsx';
 import SpriteSetting from '../components/sprite-setting/sprite-setting.jsx';
-import StageWrapper from './stage-wrapper.jsx';
 
 import {
     activateTab,
@@ -47,13 +46,6 @@ class SpriteSettingWrapper extends React.Component {
                     />
                 </div>
                 <div style={{  width: '50%', margin: '0.5%' }}>
-                    {/* <StageWrapper
-                                isFullScreen={this.props.isFullScreen}
-                                isRendererSupported={this.props.isRendererSupported}
-                                isRtl={this.props.isRtl}
-                                stageSize={this.props.stageSize}
-                                // vm={this.props.vm}
-                                /> */}
                     <Stage
                         isFullScreen={false}
                         stageSize={STAGE_SIZE_MODES.large}

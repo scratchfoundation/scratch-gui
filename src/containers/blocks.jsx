@@ -189,11 +189,11 @@ class Blocks extends React.Component {
             this.workspace.setVisible(false);
         }
     }
-    // componentWillUnmount () {
-    //     this.detachVM();
-    //     this.workspace.dispose();
-    //     clearTimeout(this.toolboxUpdateTimeout);
-    // }
+    componentWillUnmount () {
+        this.detachVM();
+        this.workspace.dispose();
+        clearTimeout(this.toolboxUpdateTimeout);
+    }
     requestToolboxUpdate () {
         clearTimeout(this.toolboxUpdateTimeout);
         this.toolboxUpdateTimeout = setTimeout(() => {

@@ -3,8 +3,9 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import {STAGE_SIZE_MODES} from '../lib/layout-constants';
-import {setStageSize} from '../reducers/stage-size';
-import {toggleStage} from '../reducers/stage-size';
+import {BLOCK, SETTINGS_TAB_INDEX} from '../reducers/editor-tab';
+// import {setStageSize} from '../reducers/stage-size';
+import {toggleStage} from '../reducers/stage';
 import {setFullScreen} from '../reducers/mode';
 
 import {connect} from 'react-redux';
@@ -48,20 +49,25 @@ StageActionWrapper.propTypes = {
     isPlayerOnly: PropTypes.bool,
     onSetStageUnFull: PropTypes.func.isRequired,
     showBranding: PropTypes.bool,
+    stageVisible: PropTypes.bool,
+    settingsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({
+    stageVisible: state.scratchGui.stage.stageVisible,
     stageSizeMode: state.scratchGui.stageSize.stageSize,
     showBranding: state.scratchGui.mode.showBranding,
     isFullScreen: state.scratchGui.mode.isFullScreen,
-    isPlayerOnly: state.scratchGui.mode.isPlayerOnly
+    isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
+    settingsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SETTINGS_TAB_INDEX,
+
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZE_MODES.large)),
-    onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZE_MODES.small)),
+    // onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZE_MODES.large)),
+    // onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZE_MODES.small)),
     onSetStageFull: () => dispatch(setFullScreen(true)),
     onSetStageUnFull: () => dispatch(setFullScreen(false)),
     onStageToggle: () => dispatch(toggleStage())

@@ -26,6 +26,7 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {updateMetrics} from '../reducers/workspace-metrics';
+import StageWrapper from './stage-wrapper.jsx';
 
 import {
     activateTab,
@@ -146,7 +147,8 @@ class Blocks extends React.Component {
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
             this.props.locale !== nextProps.locale ||
             this.props.anyModalVisible !== nextProps.anyModalVisible ||
-            this.props.stageSize !== nextProps.stageSize
+            this.props.stageSize !== nextProps.stageSize || 
+            this.props.stageVisible !== nextProps.stageVisible
         );
     }
     componentDidUpdate (prevProps) {
@@ -187,11 +189,11 @@ class Blocks extends React.Component {
             this.workspace.setVisible(false);
         }
     }
-    componentWillUnmount () {
-        this.detachVM();
-        this.workspace.dispose();
-        clearTimeout(this.toolboxUpdateTimeout);
-    }
+    // componentWillUnmount () {
+    //     this.detachVM();
+    //     this.workspace.dispose();
+    //     clearTimeout(this.toolboxUpdateTimeout);
+    // }
     requestToolboxUpdate () {
         clearTimeout(this.toolboxUpdateTimeout);
         this.toolboxUpdateTimeout = setTimeout(() => {
@@ -551,6 +553,9 @@ class Blocks extends React.Component {
             toolboxXML,
             updateMetrics: updateMetricsProp,
             workspaceMetrics,
+            stageVisible,
+            isFullScreen,
+            isRendererSupported,
             ...props
         } = this.props;
         /* eslint-enable no-unused-vars */
@@ -590,6 +595,23 @@ class Blocks extends React.Component {
                         onRequestClose={this.handleCustomProceduresClose}
                     />
                 ) : null}
+                {
+                    !stageVisible? (
+                        <div style={{ 
+                            position: 'absolute',
+                            top: '0',
+                            right: '0',
+                            background: 'red'}}>
+                        <StageWrapper
+                                isFullScreen={isFullScreen}
+                                isRendererSupported={isRendererSupported}
+                                isRtl={isRtl}
+                                stageSize={stageSize}
+                                vm={vm}
+                                />
+                        </div>
+                    ): null
+                }
             </React.Fragment>
         );
     }
@@ -632,6 +654,9 @@ Blocks.propTypes = {
         comments: PropTypes.bool,
         collapse: PropTypes.bool
     }),
+    isFullScreen: PropTypes.bool,
+    stageVisible: PropTypes.bool,
+    isRendererSupported: PropTypes.bool,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     toolboxXML: PropTypes.string,
     updateMetrics: PropTypes.func,
@@ -686,7 +711,7 @@ const mapStateToProps = state => ({
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
-    workspaceMetrics: state.scratchGui.workspaceMetrics
+    workspaceMetrics: state.scratchGui.workspaceMetrics,
 });
 
 const mapDispatchToProps = dispatch => ({

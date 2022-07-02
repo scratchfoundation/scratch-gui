@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import Controls from '../../containers/controls.jsx';
-import {getStageDimensions} from '../../lib/screen-utils';
-import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
+import { getStageDimensions } from '../../lib/screen-utils';
+import { STAGE_SIZE_MODES } from '../../lib/layout-constants';
 
 import fullScreenIcon from './icon--fullscreen.svg';
 import largeStageIcon from './icon--large-stage.svg';
@@ -59,6 +59,8 @@ const StageHeaderComponent = function (props) {
         onSetStageUnFull,
         showBranding,
         stageSizeMode,
+        stageVisible,
+        settingsTabVisible,
         vm
     } = props;
 
@@ -98,7 +100,7 @@ const StageHeaderComponent = function (props) {
             <Box className={styles.stageHeaderWrapperOverlay}>
                 <Box
                     className={styles.stageMenuWrapper}
-                    style={{width: stageDimensions.width}}
+                    style={{ width: stageDimensions.width }}
                 >
                     <Controls vm={vm} />
                     {stageButton}
@@ -112,21 +114,28 @@ const StageHeaderComponent = function (props) {
             ) : (
                 <div className={styles.stageSizeToggleGroup}>
                     <div>
-                        <Button
-                            className={classNames(
-                                styles.stageButton,
-                                styles.stageButtonFirst,
-                                (stageSizeMode === STAGE_SIZE_MODES.small) ? null : styles.stageButtonToggledOff
-                            )}
-                            onClick={onStageToggle}
-                        >
-                            <img
-                                alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
-                                className={styles.stageButtonIcon}
-                                draggable={false}
-                                src={smallStageIcon}
-                            />
-                        </Button>
+                        {
+                            !settingsTabVisible
+                            && (
+                                <Button
+                                    className={classNames(
+                                        styles.stageButton,
+                                        styles.stageButtonFirst,
+                                        (stageVisible) ? null : styles.stageButtonToggledOff
+                                    )}
+                                    onClick={onStageToggle}
+                                >
+                                    <img
+                                        alt={props.intl.formatMessage(messages.smallStageSizeMessage)}
+                                        className={styles.stageButtonIcon}
+                                        draggable={false}
+                                        src={smallStageIcon}
+                                    />
+                                </Button>
+                            )
+
+                        }
+
                     </div>
                     {/* <div>
                         <Button
@@ -183,15 +192,17 @@ const mapStateToProps = state => ({
 
 StageHeaderComponent.propTypes = {
     intl: intlShape,
+    settingsTabVisible: PropTypes.bool.isRequired,
     isFullScreen: PropTypes.bool.isRequired,
     isPlayerOnly: PropTypes.bool.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     onSetStageFull: PropTypes.func.isRequired,
-    onSetStageLarge: PropTypes.func.isRequired,
-    onSetStageSmall: PropTypes.func.isRequired,
+    // onSetStageLarge: PropTypes.func.isRequired,
+    // onSetStageSmall: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
     onStageToggle: PropTypes.func.isRequired,
     showBranding: PropTypes.bool.isRequired,
+    stageVisible: PropTypes.bool.isRequired,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };

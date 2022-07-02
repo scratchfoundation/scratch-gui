@@ -26,7 +26,7 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {updateMetrics} from '../reducers/workspace-metrics';
-import StageWrapper from './stage-wrapper.jsx';
+import Stage from './stage.jsx';
 
 import {
     activateTab,
@@ -600,15 +600,13 @@ class Blocks extends React.Component {
                         <div style={{ 
                             position: 'absolute',
                             top: '0',
-                            right: '0',
-                            background: 'red'}}>
-                        <StageWrapper
-                                isFullScreen={isFullScreen}
-                                isRendererSupported={isRendererSupported}
-                                isRtl={isRtl}
-                                stageSize={stageSize}
-                                vm={vm}
-                                />
+                            right: '0'
+                            }}>
+                        <Stage
+                            isFullScreen={false}
+                            stageSize={stageSize}
+                            vm={vm}
+                        />
                         </div>
                     ): null
                 }

@@ -46,7 +46,7 @@ const TargetPane = ({
     onSurpriseSpriteClick,
     raiseSprites,
     stage,
-    stageSize,
+    // stageSize,
     sprites,
     vm,
     activeTabIndex,
@@ -69,7 +69,7 @@ const TargetPane = ({
             selectedId={editingTarget}
             spriteFileInput={fileInputRef}
             sprites={sprites}
-            stageSize={stageSize}
+            // stageSize={stageSize}
             onChangeSpriteDirection={onChangeSpriteDirection}
             onChangeSpriteName={onChangeSpriteName}
             onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
@@ -181,7 +181,7 @@ TargetPane.propTypes = {
     spriteLibraryVisible: PropTypes.bool,
     sprites: PropTypes.objectOf(spriteShape),
     stage: spriteShape,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    // stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM),
     parametersTabVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,

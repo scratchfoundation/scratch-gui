@@ -84,7 +84,7 @@ const SpriteSelectorComponent = function (props) {
         selectedId,
         spriteFileInput,
         sprites,
-        stageSize,
+        // stageSize,
         vm,
         activeTabIndex,
         onActivateTab,
@@ -163,7 +163,7 @@ const SpriteSelectorComponent = function (props) {
                             name={selectedSprite.name}
                             rotationStyle={selectedSprite.rotationStyle}
                             size={selectedSprite.size}
-                            stageSize={stageSize}
+                            // stageSize={stageSize}
                             visible={selectedSprite.visible}
                             x={selectedSprite.x}
                             y={selectedSprite.y}
@@ -265,7 +265,7 @@ SpriteSelectorComponent.propTypes = {
             order: PropTypes.number.isRequired
         })
     }),
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    // stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     activeTabIndex: PropTypes.number,
     parametersTabVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,

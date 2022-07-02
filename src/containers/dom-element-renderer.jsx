@@ -19,13 +19,10 @@ class DOMElementRenderer extends React.Component {
         this.setContainer = this.setContainer.bind(this);
     }
     componentDidMount () {
-        console.log(this.props.domElement);
         this.container.appendChild(this.props.domElement);
     }
     componentWillUnmount () {
-        // TODO: this shouldn't have been called in the first place
-        console.log(this.props.domElement);
-        // this.container.removeChild(this.props.domElement);
+        this.container.removeChild(this.props.domElement);
     }
     setContainer (c) {
         this.container = c;
@@ -43,6 +40,9 @@ class DOMElementRenderer extends React.Component {
         if (this.props.style) {
             this.props.domElement.style.cssText = Style.string(this.props.style);
         }
+
+        this.props.domElement.width = this.props.style.width;
+        this.props.domElement.height = this.props.style.height
 
         return <div ref={this.setContainer} />;
     }

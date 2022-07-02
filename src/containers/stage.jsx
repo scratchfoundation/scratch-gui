@@ -52,14 +52,12 @@ class Stage extends React.Component {
             question: null
         };
         if (this.props.vm.renderer) {
-            console.log('vm renderer', this.props.vm.renderer)
             this.renderer = this.props.vm.renderer;
             this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);
             this.props.vm.attachRenderer(this.renderer);
-            console.log('ELSE vm renderer', this.props.vm.renderer)
 
             // Only attach a video provider once because it is stateful
             this.props.vm.setVideoProvider(new VideoProvider());
@@ -177,7 +175,9 @@ class Stage extends React.Component {
     }
     onMouseMove (e) {
         const {x, y} = getEventXY(e);
-        const mousePosition = [x - this.rect.left, y - this.rect.top];
+        // const mousePosition = [x - this.rect.left, y - this.rect.top];
+        //TODO : Hack to fix position.
+        const mousePosition = [x, y];
 
         if (this.props.isColorPicking) {
             // Set the pickX/Y for the color picker loop to pick up
@@ -215,6 +215,7 @@ class Stage extends React.Component {
             canvasWidth: this.rect.width,
             canvasHeight: this.rect.height
         };
+
         this.props.vm.postIOData('mouse', coordinates);
     }
     onMouseUp (e) {

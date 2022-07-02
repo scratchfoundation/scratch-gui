@@ -46,7 +46,6 @@ const SpriteSetting = props => {
         <div>
             <Box >
                 <TargetPane
-                    stageSize={stageSize}
                     vm={vm}
                 />
             </Box>

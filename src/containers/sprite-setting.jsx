@@ -34,7 +34,7 @@ class SpriteSettingWrapper extends React.Component {
 
         return (
             <div style={{ height: '80%', width: '100%', display: 'flex' }}>
-                <div style={{ width: `calc(100vw - ${layout.standardStageWidth})`,  margin: '0.5%' }}>
+                <div style={{ width: `calc(100vw - ${layout.standardStagePendingWidth}px)`,  margin: '0.5%' }}>
                     <SpriteSetting
                         vm={this.props.vm}
                         stageSize={this.props.stageSize}

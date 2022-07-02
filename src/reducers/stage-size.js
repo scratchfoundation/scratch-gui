@@ -4,7 +4,8 @@ const SET_STAGE_SIZE = 'scratch-gui/StageSize/SET_STAGE_SIZE';
 const TOGGLE_STAGE = 'scratch-gui/StageSize/TOGGLE_STAGE';
 
 const initialState = {
-    stageSize: STAGE_DISPLAY_SIZES.large
+    stageSize: STAGE_DISPLAY_SIZES.large,
+    stageVisible: false
 };
 
 const reducer = function (state, action) {
@@ -12,15 +13,18 @@ const reducer = function (state, action) {
     switch (action.type) {
         case SET_STAGE_SIZE:
             return {
+                ...state,
                 stageSize: action.stageSize
             };
         case TOGGLE_STAGE:
             if (state.stageSize === STAGE_DISPLAY_SIZES.large) {
                 return {
+                    stageVisible: false,
                     stageSize: STAGE_DISPLAY_SIZES.small
                 };
             } else {
                 return {
+                    stageVisible: true,
                     stageSize: STAGE_DISPLAY_SIZES.large
                 };
             }

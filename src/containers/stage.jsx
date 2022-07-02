@@ -52,12 +52,14 @@ class Stage extends React.Component {
             question: null
         };
         if (this.props.vm.renderer) {
+            console.log('vm renderer', this.props.vm.renderer)
             this.renderer = this.props.vm.renderer;
             this.canvas = this.renderer.canvas;
         } else {
             this.canvas = document.createElement('canvas');
             this.renderer = new Renderer(this.canvas);
             this.props.vm.attachRenderer(this.renderer);
+            console.log('ELSE vm renderer', this.props.vm.renderer)
 
             // Only attach a video provider once because it is stateful
             this.props.vm.setVideoProvider(new VideoProvider());
@@ -74,6 +76,7 @@ class Stage extends React.Component {
         this.attachRectEvents();
         this.attachMouseEvents(this.canvas);
         this.updateRect();
+        console.log('okokoko')
         this.props.vm.runtime.addListener('QUESTION', this.questionListener);
     }
     shouldComponentUpdate (nextProps, nextState) {
@@ -83,7 +86,8 @@ class Stage extends React.Component {
             this.props.isFullScreen !== nextProps.isFullScreen ||
             this.state.question !== nextState.question ||
             this.props.micIndicator !== nextProps.micIndicator ||
-            this.props.isStarted !== nextProps.isStarted;
+            this.props.isStarted !== nextProps.isStarted || 
+            this.props.stageVisible !== nextProps.stageVisible ;
     }
     componentDidUpdate (prevProps) {
         this.props.vm.renderer.draw();
@@ -427,6 +431,7 @@ class Stage extends React.Component {
 }
 
 Stage.propTypes = {
+    stageVisible: PropTypes.bool,
     isColorPicking: PropTypes.bool,
     isFullScreen: PropTypes.bool.isRequired,
     isStarted: PropTypes.bool,
@@ -447,6 +452,7 @@ const mapStateToProps = state => ({
     isFullScreen: state.scratchGui.mode.isFullScreen,
     isStarted: state.scratchGui.vmStatus.started,
     micIndicator: state.scratchGui.micIndicator,
+    // stageVisible: state.scratchGui.stage.stageVisible,
     // Do not use editor drag style in fullscreen or player mode.
     useEditorDragStyle: !(state.scratchGui.mode.isFullScreen || state.scratchGui.mode.isPlayerOnly)
 });

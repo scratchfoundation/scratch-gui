@@ -129,6 +129,7 @@ const GUIComponent = props => {
         vm,
         constumeEditVisible,
         onRequestCloseCostumeEdit,
+        stageVisible,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -170,6 +171,7 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
+                <div>{stageVisible}</div>
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}
@@ -343,6 +345,10 @@ const GUIComponent = props => {
                                                 media: `${basePath}static/blocks-media/`
                                             }}
                                             stageSize={stageSize}
+                                            stageVisible={stageVisible}
+                                            isRtl={isRtl}
+                                            isRendererSupported={isRendererSupported}
+                                            isFullScreen={isFullScreen}
                                             vm={vm}
                                         />
                                     </Box>
@@ -382,21 +388,21 @@ const GUIComponent = props => {
                             ) : null} */}
                         </Box>
 
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
-                            <StageWrapper
+                        {/* <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}> */}
+                            {/* <StageWrapper
                                 isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
                                 stageSize={stageSize}
                                 vm={vm}
-                            />
+                            /> */}
                             {/* <Box className={styles.targetWrapper}>
                                 <TargetPane
                                     stageSize={stageSize}
                                     vm={vm}
                                 />
                             </Box> */}
-                        </Box>
+                        {/* </Box> */}
                         <Box className={classNames(styles.stageActionWrapper)}>
                             <StageActionWrapper 
                                 stageSize={stageSize}
@@ -475,7 +481,8 @@ GUIComponent.propTypes = {
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     constumeEditVisible: PropTypes.bool,
-    onRequestCloseCostumeEdit: PropTypes.func
+    onRequestCloseCostumeEdit: PropTypes.func,
+    stageVisible: PropTypes.bool,
 };
 GUIComponent.defaultProps = {
     // backpackHost: null,

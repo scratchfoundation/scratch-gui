@@ -15,6 +15,7 @@ import Blocks from '../../containers/blocks.jsx';
 // import TargetPane from '../../containers/target-pane.jsx';
 // import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
+
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
@@ -369,8 +370,8 @@ const GUIComponent = props => {
                                             options={{
                                                 media: `${basePath}static/blocks-media/`
                                             }}
-                                            stageSize={stageSize}
-                                            stageVisible={stageVisible}
+                                            // stageSize={stageSize}
+                                            // stageVisible={stageVisible}
                                             isRtl={isRtl}
                                             isRendererSupported={isRendererSupported}
                                             isFullScreen={isFullScreen}
@@ -403,7 +404,7 @@ const GUIComponent = props => {
                                 {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {
                                         settingsTabVisible 
-                                        ? <SpriteSetting stageSize={stageSize} vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> 
+                                        ? <SpriteSetting vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> 
                                         : null
                                     }
                                 </TabPanel> */}
@@ -411,6 +412,18 @@ const GUIComponent = props => {
                             {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
                             ) : null} */}
+                            {
+                                !stageVisible 
+                                ? (
+                                    <StageWrapper
+                                        isFullScreen={false}
+                                        isRendererSupported={isRendererSupported}
+                                        isRtl={isRtl}
+                                        stageSize={STAGE_SIZE_MODES.small}
+                                        vm={vm}
+                                    />
+                                ): null 
+                            }
                         </Box>
 
                         {/* <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}> */}

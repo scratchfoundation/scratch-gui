@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import VM from 'scratch-vm';
 import Stage from './stage.jsx';
 import SpriteSetting from '../components/sprite-setting/sprite-setting.jsx';
-import StageWrapper from './stage-wrapper.jsx';
+import layout from '../lib/layout-constants';
 
 import {
     activateTab,
@@ -34,7 +34,7 @@ class SpriteSettingWrapper extends React.Component {
 
         return (
             <div style={{ height: '80%', width: '100%', display: 'flex' }}>
-                <div style={{ width: '50%',  margin: '0.5%' }}>
+                <div style={{ width: `calc(100vw - ${layout.standardStagePendingWidth}px)`,  margin: '0.5%' }}>
                     <SpriteSetting
                         vm={this.props.vm}
                         stageSize={this.props.stageSize}
@@ -46,20 +46,13 @@ class SpriteSettingWrapper extends React.Component {
                         soundsTabVisible={this.props.soundsTabVisible}
                     />
                 </div>
-                <div style={{  width: '50%', margin: '0.5%' }}>
-                    {/* <StageWrapper
-                                isFullScreen={this.props.isFullScreen}
-                                isRendererSupported={this.props.isRendererSupported}
-                                isRtl={this.props.isRtl}
-                                stageSize={this.props.stageSize}
-                                // vm={this.props.vm}
-                                /> */}
+                {/* <div style={{  width: '40%', margin: '0.5%' }}>
                     <Stage
                         isFullScreen={false}
                         stageSize={STAGE_SIZE_MODES.large}
                         vm={this.props.vm}
                     />
-                </div>
+                </div> */}
             </div>
         )
     }

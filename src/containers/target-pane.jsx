@@ -328,7 +328,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onNewSpriteClick: () => {
         // e.preventDefault();
-        console.log('okokok')
         dispatch(openSpriteLibrary());
     },
     onRequestCloseSpriteLibrary: () => {

@@ -5,7 +5,7 @@ const TOGGLE_STAGE = 'scratch-gui/StageSize/TOGGLE_STAGE';
 
 const initialState = {
     stageSize: STAGE_DISPLAY_SIZES.large,
-    stageVisible: false
+    stageVisible: true
 };
 
 const reducer = function (state, action) {

@@ -5,7 +5,7 @@
 .stage-wrapper * {
     box-sizing: border-box;
     position: fixed;
-    right: 5px;
+    right: 10px;
     top: 3.25rem;
     z-index: $z-index-card;
     /* background-color: $ui-white; */

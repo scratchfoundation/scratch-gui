@@ -7,6 +7,8 @@ const MENU_FILE = 'fileMenu';
 const MENU_EDIT = 'editMenu';
 const MENU_LANGUAGE = 'languageMenu';
 const MENU_LOGIN = 'loginMenu';
+const MENU_SPRITE = 'spriteMenu';
+const MENU_BACKDROP = 'backdropMenu';
 
 
 const initialState = {
@@ -15,31 +17,60 @@ const initialState = {
     [MENU_FILE]: false,
     [MENU_EDIT]: false,
     [MENU_LANGUAGE]: false,
-    [MENU_LOGIN]: false
+    [MENU_LOGIN]: false,
+    [MENU_SPRITE]: {},
+    [MENU_BACKDROP]: false
 };
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case OPEN_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: true
-        });
-    case CLOSE_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: false
-        });
+    case OPEN_MENU: {
+        if(action.id !== undefined) {
+            return {
+                ...state,
+                [action.menu]: {
+                    ...state[action.menu],
+                    [action.id]: true
+                }
+            }
+           
+        } else {
+            return Object.assign({}, state, {
+                [action.menu]: true
+            });
+        }
+    }
+    case CLOSE_MENU: {
+        if(action.id !== undefined) {
+            return {
+                ...state,
+                [action.menu]: {
+                    ...state[action.menu],
+                    [action.id]: false
+                }
+            }
+           
+        } else {
+            return Object.assign({}, state, {
+                [action.menu]: false
+            });
+        }
+    }
     default:
         return state;
     }
 };
-const openMenu = menu => ({
+const openMenu = (menu, id) => {
+  return {
     type: OPEN_MENU,
-    menu: menu
-});
-const closeMenu = menu => ({
+    menu: menu,
+    id
+}};
+const closeMenu = (menu, id) => ({
     type: CLOSE_MENU,
-    menu: menu
+    menu: menu,
+    id
 });
 const openAboutMenu = () => openMenu(MENU_ABOUT);
 const closeAboutMenu = () => closeMenu(MENU_ABOUT);
@@ -59,6 +90,12 @@ const languageMenuOpen = state => state.scratchGui.menus[MENU_LANGUAGE];
 const openLoginMenu = () => openMenu(MENU_LOGIN);
 const closeLoginMenu = () => closeMenu(MENU_LOGIN);
 const loginMenuOpen = state => state.scratchGui.menus[MENU_LOGIN];
+const openSpriteMenu = (id) => openMenu(MENU_SPRITE, id);
+const closeSpriteMenu = (id) => closeMenu(MENU_SPRITE, id);
+const spriteMenuOpen = state => state.scratchGui.menus[MENU_SPRITE];
+const openBackdropMenu = () => openMenu(MENU_BACKDROP);
+const closeBackdropMenu = () => closeMenu(MENU_BACKDROP);
+const backdropMenuOpen = state => state.scratchGui.menus[MENU_BACKDROP];
 
 export {
     reducer as default,
@@ -80,5 +117,11 @@ export {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    openSpriteMenu,
+    closeSpriteMenu,
+    openBackdropMenu,
+    closeBackdropMenu,
+    backdropMenuOpen,
+    spriteMenuOpen
 };

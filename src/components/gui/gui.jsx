@@ -17,7 +17,7 @@ import Blocks from '../../containers/blocks.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
-// import MenuBar from '../menu-bar/menu-bar.jsx';
+import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeEdit from '../../containers/costume-edit.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
@@ -224,7 +224,7 @@ const GUIComponent = props => {
                         onRequestClose={onRequestCloseCostumeEdit}
                     />
                 ) : null}
-                {/* <MenuBar
+                <MenuBar
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
@@ -254,26 +254,51 @@ const GUIComponent = props => {
                     onShare={onShare}
                     onStartSelectingFileUpload={onStartSelectingFileUpload}
                     onToggleLoginOpen={onToggleLoginOpen}
-                /> */}
+                />
                  {/* <Box className={stageWrapperStyles.stageMenuWrapper}>
                     <StageHeader
-                        stageSize={stageSize}
+                        stageSize={stageSiåze}
                         vm={vm}
                     />
                 </Box> */}
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
-                            <Tabs
+                            {
+                                activeTabIndex === 0
+                                ? (
+                                    <Blocks
+                                    canUseCloud={canUseCloud}
+                                    grow={1}
+                                    isVisible={blocksTabVisible}
+                                    options={{
+                                        media: `${basePath}static/blocks-media/`
+                                    }}
+                                    stageSize={stageSize}
+                                    stageVisible={stageVisible}
+                                    isRtl={isRtl}
+                                    isRendererSupported={isRendererSupported}
+                                    isFullScreen={isFullScreen}
+                                    vm={vm}
+                                />) 
+                                : <></>
+                            }
+                            {
+                                settingsTabVisible
+                                ? (<SpriteSetting stageSize={stageSize} vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> ) 
+                                : <></>
+                            }
+
+                            {/* <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}
                                 selectedIndex={activeTabIndex}
                                 selectedTabClassName={tabClassNames.tabSelected}
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
-                            >
-                                <TabList className={tabClassNames.tabList}>
-                                    <Tab className={tabClassNames.tab}>
+                            > */}
+                                {/* <TabList className={tabClassNames.tabList}> */}
+                                    {/* <Tab className={tabClassNames.tab}>
                                         <img
                                             draggable={false}
                                             src={codeIcon}
@@ -283,7 +308,7 @@ const GUIComponent = props => {
                                             description="Button to get to the code panel"
                                             id="gui.gui.codeTab"
                                         />
-                                    </Tab>
+                                    </Tab> */}
                                     {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateCostumesTab}
@@ -320,7 +345,7 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab> */}
-                                     <Tab
+                                     {/* <Tab
                                         className={tabClassNames.tab}
                                         onClick={onActivateSettingsTab}
                                     >
@@ -333,10 +358,10 @@ const GUIComponent = props => {
                                             description="Button to get to the sounds panel"
                                             id="gui.gui.settingsTab"
                                         />
-                                    </Tab>
-                                </TabList>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    <Box className={styles.blocksWrapper}>
+                                    </Tab> */}
+                                {/* </TabList> */}
+                                {/* <TabPanel className={tabClassNames.tabPanel}> */}
+                                    {/* <Box className={styles.blocksWrapper}>
                                         <Blocks
                                             canUseCloud={canUseCloud}
                                             grow={1}
@@ -364,25 +389,25 @@ const GUIComponent = props => {
                                                 src={addExtensionIcon}
                                             />
                                         </button>
-                                    </Box>
+                                    </Box> */}
                                     {/* <Box className={styles.watermark}>
                                         <Watermark />
                                     </Box> */}
-                                </TabPanel>
+                                {/* </TabPanel> */}
                                 {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel> */}
-                                <TabPanel className={tabClassNames.tabPanel}>
+                                {/* <TabPanel className={tabClassNames.tabPanel}>
                                     {
                                         settingsTabVisible 
                                         ? <SpriteSetting stageSize={stageSize} vm={vm} isRendererSupported={isRendererSupported} isRtl={isRtl} /> 
                                         : null
                                     }
-                                </TabPanel>
-                            </Tabs>
+                                </TabPanel> */}
+                            {/* </Tabs> */}
                             {/* {backpackVisible ? (
                                 <Backpack host={backpackHost} />
                             ) : null} */}

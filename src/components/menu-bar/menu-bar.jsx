@@ -88,6 +88,8 @@ import {
     BLOCKS_TAB_INDEX,
     SETTINGS_TAB_INDEX
 } from '../../reducers/editor-tab';
+import {highlightTarget} from '../../reducers/targets';
+
 
 const ariaMessages = defineMessages({
     language: {
@@ -209,9 +211,9 @@ class MenuBar extends React.Component {
         }
 
         // todo
-        // if (this.props.stage && id !== this.props.stage.id) {
-        //     this.props.onHighlightTarget(id);
-        // }
+        if (this.props.stage && id !== this.props.stage.id) {
+            this.props.onHighlightTarget(id);
+        }
     }
 
     handleClickNew() {
@@ -933,6 +935,7 @@ const mapStateToProps = (state, ownProps) => {
         backdropMenuOpen: backdropMenuOpen(state),
         sprites: state.scratchGui.targets.sprites,
         editingTarget: state.scratchGui.targets.editingTarget,
+        stage: state.scratchGui.targets.stage,
     };
 };
 
@@ -962,6 +965,9 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseBackdrop: () => dispatch(closeBackdropMenu()),
     onActivateSettingsTab: () => dispatch(activateTab(SETTINGS_TAB_INDEX, BLOCK)),
     onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX, BLOCK)),
+    onHighlightTarget: id => {
+        dispatch(highlightTarget(id));
+    },
 });
 
 export default compose(

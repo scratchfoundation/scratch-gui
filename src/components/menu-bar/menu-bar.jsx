@@ -542,15 +542,11 @@ class MenuBar extends React.Component {
                                     })}
                                     onMouseUp={() => {console.log(this.props.sprites[id]); this.handleClickSprite(id)}}
                                 >
-                                <img
-                                    className={styles.spriteImage}
-                                    draggable={false}
-                                    src = {this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
-                                    // src={`data:image/png;base64,${this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset}`}
-                                />
-                                {/* <div className={classNames(styles.editMenu)}>
-                                    {this.props.sprites[id].name}
-                                </div> */}
+                                    <img
+                                        className={styles.spriteImage}
+                                        draggable={false}
+                                        src = {this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
+                                    />
                                     <MenuBarMenu
                                         className={classNames(styles.menuBarMenu)}
                                         open={!!this.props.spriteMenuOpen[id]}

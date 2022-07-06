@@ -51,7 +51,7 @@ SpriteLibrary.propTypes = {
     intl: intlShape.isRequired,
     onActivateBlocksTab: PropTypes.func,
     onRequestClose: PropTypes.func,
-    vm: PropTypes.instanceOf(VM)
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 export default injectIntl(SpriteLibrary);

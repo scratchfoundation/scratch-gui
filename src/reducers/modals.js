@@ -21,7 +21,7 @@ const initialState = {
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_TELEMETRY]: false,
     [MODAL_SOUND_LIBRARY]: false,
-    [MODAL_SPRITE_LIBRARY]: true,
+    [MODAL_SPRITE_LIBRARY]: false,
     [MODAL_SOUND_RECORDER]: false,
     [MODAL_CONNECTION]: false,
     [MODAL_TIPS_LIBRARY]: false,

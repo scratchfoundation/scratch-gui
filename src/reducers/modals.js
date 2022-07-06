@@ -21,7 +21,7 @@ const initialState = {
     [MODAL_LOADING_PROJECT]: false,
     [MODAL_TELEMETRY]: false,
     [MODAL_SOUND_LIBRARY]: false,
-    [MODAL_SPRITE_LIBRARY]: false,
+    [MODAL_SPRITE_LIBRARY]: true,
     [MODAL_SOUND_RECORDER]: false,
     [MODAL_CONNECTION]: false,
     [MODAL_TIPS_LIBRARY]: false,
@@ -32,6 +32,10 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case OPEN_MODAL:
+        console.log({
+            [action.modal]: true,
+            data: action.data
+        }, 'open_modal')
         return Object.assign({}, state, {
             [action.modal]: true,
             data: action.data

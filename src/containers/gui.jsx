@@ -25,7 +25,8 @@ import {
     closeBackdropLibrary,
     closeTelemetryModal,
     openExtensionLibrary,
-    closeCostumeEdit
+    closeCostumeEdit,
+    closeSpriteLibrary
 } from '../reducers/modals';
 
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
@@ -151,6 +152,7 @@ const mapStateToProps = state => {
         projectId: state.scratchGui.projectState.projectId,
         settingsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SETTINGS_TAB_INDEX,
         // soundsTabVisible: state.scratchGui.editorTab?.[BLOCK].activeTabIndex === SOUNDS_TAB_INDEX,
+        spriteLibraryVisible: state.scratchGui.modals.spriteLibrary,
         targetIsStage: (
             state.scratchGui.targets.stage &&
             state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
@@ -170,6 +172,7 @@ const mapDispatchToProps = dispatch => ({
     // onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX, BLOCK)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
+    onRequestCloseSpriteLibrary: () => dispatch(closeSpriteLibrary()),
     onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
     onRequestCloseCostumeEdit: () => dispatch(closeCostumeEdit())
 });

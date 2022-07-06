@@ -26,6 +26,7 @@ import BackdropLibrary from '../../containers/backdrop-library.jsx';
 
 // import Backpack from '../../containers/backpack.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
+import SpriteLibrary from '../../containers/sprite-library.jsx'
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
@@ -107,11 +108,13 @@ const GUIComponent = props => {
         // onActivateSoundsTab,
         onActivateSettingsTab,
         onActivateTab,
+        onActivateBlocksTab,
         onClickLogo,
         onExtensionButtonClick,
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestCloseSpriteLibrary,
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
@@ -123,6 +126,7 @@ const GUIComponent = props => {
         showComingSoon,
         // soundsTabVisible,
         settingsTabVisible,
+        spriteLibraryVisible,
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
@@ -193,6 +197,13 @@ const GUIComponent = props => {
                 {isRendererSupported ? null : (
                     <WebGlModal isRtl={isRtl} />
                 )}
+                {spriteLibraryVisible ? (
+                    <SpriteLibrary
+                        vm={vm}
+                        // onActivateBlocksTab={handleActivateBlocksTab}
+                        onRequestClose={onRequestCloseSpriteLibrary}
+                    />
+                ) : null}
                 {tipsLibraryVisible ? (
                     <TipsLibrary />
                 ) : null}
@@ -487,6 +498,7 @@ GUIComponent.propTypes = {
     isShared: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
+    // onActivateBlocksTab: PropTypes.func.isRequired,
     // onActivateCostumesTab: PropTypes.func,
     // onActivateSoundsTab: PropTypes.func,
     onActivateSettingsTab: PropTypes.func,
@@ -499,6 +511,7 @@ GUIComponent.propTypes = {
     onOpenRegistration: PropTypes.func,
     onRequestCloseBackdropLibrary: PropTypes.func,
     onRequestCloseCostumeLibrary: PropTypes.func,
+    onRequestCloseSpriteLibrary: PropTypes.func,
     onRequestCloseTelemetryModal: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
@@ -513,6 +526,7 @@ GUIComponent.propTypes = {
     showComingSoon: PropTypes.bool,
     settingsTabVisible: PropTypes.bool,
     // soundsTabVisible: PropTypes.bool,
+    spriteLibraryVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,

@@ -275,7 +275,7 @@ const GUIComponent = props => {
                                     options={{
                                         media: `${basePath}static/blocks-media/`
                                     }}
-                                    stageSize={stageSize}
+                                    // stageSize={stageSize}
                                     stageVisible={stageVisible}
                                     isRtl={isRtl}
                                     isRendererSupported={isRendererSupported}

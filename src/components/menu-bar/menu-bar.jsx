@@ -457,7 +457,7 @@ class MenuBar extends React.Component {
                             </div>
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>)} */}
-                        {(this.props.canManageFiles) && (
+                        {/* {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.fileMenuOpen
@@ -523,7 +523,7 @@ class MenuBar extends React.Component {
                                     </MenuSection>
                                 </MenuBarMenu>
                             </div>
-                        )}
+                        )} */}
                         {
                             Object.keys(this.props.sprites).map(id => (
                                 <div
@@ -533,9 +533,9 @@ class MenuBar extends React.Component {
                                     })}
                                     onMouseUp={() => this.handleClickSprite(id)}
                                 >
-                                    <div className={classNames(styles.editMenu)}>
-                                        {this.props.sprites[id].name}
-                                    </div>
+                                <div className={classNames(styles.editMenu)}>
+                                    {this.props.sprites[id].name}
+                                </div>
                                     <MenuBarMenu
                                         className={classNames(styles.menuBarMenu)}
                                         open={!!this.props.spriteMenuOpen[id]}
@@ -554,6 +554,7 @@ class MenuBar extends React.Component {
                                 </div>
                             ))
                         }
+                        {/* 
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
@@ -601,9 +602,10 @@ class MenuBar extends React.Component {
                                     )}</TurboMode>
                                 </MenuSection>
                             </MenuBarMenu>
-                        </div>
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
+                        </div> */}
+                    </div> 
+                    
+                    {/* <Divider className={classNames(styles.divider)} /> */}
                     <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}

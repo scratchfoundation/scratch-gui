@@ -216,9 +216,7 @@ class MenuBar extends React.Component {
             this.props.onClickSprite(id)   
         } else {
             this.props.vm.setEditingTarget(id);
-
         }
-
         // todo
         if (this.props.stage && id !== this.props.stage.id) {
             this.props.onHighlightTarget(id);
@@ -540,7 +538,7 @@ class MenuBar extends React.Component {
                                     className={classNames(styles.menuBarItem, styles.hoverable, {
                                         [styles.active]: this.props.spriteMenuOpen[id]
                                     })}
-                                    onMouseUp={() => {console.log(this.props.sprites[id]); this.handleClickSprite(id)}}
+                                    onMouseUp={() => this.handleClickSprite(id)}
                                 >
                                     <img
                                         className={styles.spriteImage}

@@ -29,8 +29,11 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import { spriteShape } from '../target-pane/target-pane.jsx'
-import { openTipsLibrary } from '../../reducers/modals';
+import { openTipsLibrary, openSpriteLibrary } from '../../reducers/modals';
 import { setPlayer } from '../../reducers/mode';
+
+import spriteIcon from '../action-menu/icon--sprite.svg';
+
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -40,6 +43,7 @@ import {
     remixProject,
     saveProjectAsCopy
 } from '../../reducers/project-state';
+
 import {
     openAboutMenu,
     closeAboutMenu,
@@ -96,6 +100,11 @@ const ariaMessages = defineMessages({
         id: 'gui.menuBar.LanguageSelector',
         defaultMessage: 'language selector',
         description: 'accessibility text for the language selection menu'
+    },
+    addSpriteFromLibrary: {
+        id: 'gui.spriteSelector.addSpriteFromLibrary',
+        description: 'Button to add a sprite in the target pane from library',
+        defaultMessage: 'Add'
     },
     tutorials: {
         id: 'gui.menuBar.tutorialsLibrary',
@@ -402,7 +411,7 @@ class MenuBar extends React.Component {
         );      
         const spriteSettingMessage = (
             <FormattedMessage
-                defaultMessage="Settings"
+                defaultMessage="Edit"
                 description="Menu bar item for opening sprite settings"
                 id="gui.menuBar.spriteSetting"
             />
@@ -554,6 +563,19 @@ class MenuBar extends React.Component {
                                 </div>
                             ))
                         }
+
+                    <div
+                        aria-label={this.props.intl.formatMessage(ariaMessages.addSpriteFromLibrary)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        onClick={this.props.onNewSpriteClick}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={spriteIcon}
+                        />
+                        {/* <FormattedMessage {...ariaMessages.addSpriteFromLibrary} /> */}
+                    </div>
+
                         {/* 
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -877,6 +899,7 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onLogOut: PropTypes.func,
+    onNewSpriteClick: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onProjectTelemetryEvent: PropTypes.func,
@@ -942,6 +965,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
+    onNewSpriteClick: () => {dispatch(openSpriteLibrary())},
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
@@ -967,9 +991,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseBackdrop: () => dispatch(closeBackdropMenu()),
     onActivateSettingsTab: () => dispatch(activateTab(SETTINGS_TAB_INDEX, BLOCK)),
     onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX, BLOCK)),
-    onHighlightTarget: id => {
-        dispatch(highlightTarget(id));
-    },
+    onHighlightTarget: id => {dispatch(highlightTarget(id))},
 });
 
 export default compose(

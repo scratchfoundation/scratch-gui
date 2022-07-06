@@ -46,6 +46,7 @@ const reducer = function (state, action) {
     }
 };
 const openModal = function (modal, data = null) {
+    console.log(modal, data)
     return {
         type: OPEN_MODAL,
         modal: modal,
@@ -81,6 +82,7 @@ const openSoundLibrary = function () {
     return openModal(MODAL_SOUND_LIBRARY);
 };
 const openSpriteLibrary = function () {
+    console.log("hello");
     return openModal(MODAL_SPRITE_LIBRARY);
 };
 const openSoundRecorder = function () {
@@ -90,6 +92,7 @@ const openConnectionModal = function () {
     return openModal(MODAL_CONNECTION);
 };
 const openTipsLibrary = function () {
+    console.log("hi")
     return openModal(MODAL_TIPS_LIBRARY);
 };
 const closeBackdropLibrary = function () {

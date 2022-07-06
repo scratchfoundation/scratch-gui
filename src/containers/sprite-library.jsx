@@ -33,6 +33,7 @@ class SpriteLibrary extends React.PureComponent {
         });
     }
     render () {
+        console.log('ok')
         return (
             <LibraryComponent
                 data={spriteLibraryContent}

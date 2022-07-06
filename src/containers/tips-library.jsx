@@ -61,6 +61,8 @@ class TipsLibrary extends React.PureComponent {
         this.props.onActivateDeck(item.id);
     }
     render () {
+        console.log("pok");
+        
         const decksLibraryThumbnailData = Object.keys(decksLibraryContent)
             .filter(id => {
                 if (notScratchDesktop()) return true; // Do not filter anything in online editor

@@ -2,6 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
+import Edit from './edit.svg';
+import Paint from './paint.svg';
+import Plus from './plus.svg';
+
+import styles from './controls.css';
+
 const ControlItem = props => (
     <div style={{marginRight: '4%'}}>
         {props.children}
@@ -17,15 +23,32 @@ const CostumeControl = props => {
     } = props
 
     return (
-        <div style={{display: 'flex', direction: 'row'}}>
+        <div style={{display: 'flex', direction: 'row', marginTop: 15}}>
             <ControlItem>
-                <button onClick={openLibrary}>Library</button>
+                <div onClick={openLibrary}>
+                    <img
+                        className={styles.costumeIcon}
+                        src={Plus}
+                    />
+                    {/* Library */}
+                </div>
             </ControlItem>
             <ControlItem>
-                <button onClick={addCostume}>Add</button>
+                <div onClick={addCostume}>
+                    <img
+                        className={styles.costumeIcon}
+                        src={Edit} />
+                    {/* Add */}
+                </div>
+
             </ControlItem>
             <ControlItem>
-                <button onClick={editCostume}>Edit</button>
+                <div onClick={editCostume}>
+                    <img
+                        className={styles.costumeIcon}
+                        src={Paint} />
+                    {/* Edit */}
+                </div>
             </ControlItem>
         </div>
     )

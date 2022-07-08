@@ -13,7 +13,7 @@ import DragConstants from '../lib/drag-constants';
 import { emptyCostume } from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
 import downloadBlob from '../lib/download-blob';
-import ConstumeControls from '../components/controls/costume-controls.jsx';
+import CostumeControls from '../components/controls/costume-controls.jsx';
 
 import {
     openCostumeEdit,
@@ -80,6 +80,7 @@ class CostumeTab extends React.Component {
     constructor(props) {
         super(props);
         bindAll(this, [
+            'addAndEditCostume',
             'handleSelectCostume',
             'handleDeleteCostume',
             'handleDuplicateCostume',
@@ -174,6 +175,14 @@ class CostumeTab extends React.Component {
             this.props.intl.formatMessage(messages.backdrop, { index: 1 }) :
             this.props.intl.formatMessage(messages.costume, { index: 1 });
         this.handleNewCostume(emptyCostume(name));
+    }
+    addAndEditCostume() {
+        const name = this.props.vm.editingTarget.isStage ?
+            this.props.intl.formatMessage(messages.backdrop, { index: 1 }) :
+            this.props.intl.formatMessage(messages.costume, { index: 1 });
+        this.handleNewCostume(emptyCostume(name));
+        const index = this.props.vm.editingTarget.sprite.costumes.length;
+        this.props.onCostumeEditClick(index)
     }
     handleSurpriseCostume() {
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
@@ -340,7 +349,7 @@ class CostumeTab extends React.Component {
                     } */}
                 </AssetPanel>
                 <div style={{margin: '5px'}}>
-                    {costumesTabVisible ? <ConstumeControls addCostume={this.handleNewBlankCostume} openLibrary={addLibraryFunc} editCostume={this.handleCostumeEdit}/> : null}    
+                    {costumesTabVisible ? <CostumeControls addCostume={this.addAndEditCostume} openLibrary={addLibraryFunc} editCostume={this.handleCostumeEdit}/> : null}    
               </div>
 
             </div>

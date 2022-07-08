@@ -558,6 +558,18 @@ class MenuBar extends React.Component {
                                             >
                                                 {spriteSettingMessage}
                                             </MenuItem>
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={this.handleClickSpriteSettings}
+                                            >
+                                                Duplicate
+                                            </MenuItem>
+                                            <MenuItem
+                                                isRtl={this.props.isRtl}
+                                                onClick={this.handleClickSpriteSettings}
+                                            >
+                                                Delete
+                                            </MenuItem>
                                         </MenuSection>
                                     </MenuBarMenu>
                                 </div>

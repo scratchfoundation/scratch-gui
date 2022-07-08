@@ -1,3 +1,7 @@
 .controls-container {
     display: flex;
 }
+
+.costume-icon{
+    height: 38px
+}

@@ -588,6 +588,20 @@ class MenuBar extends React.Component {
                         {/* <FormattedMessage {...ariaMessages.addSpriteFromLibrary} /> */}
                     </div>
 
+                    <SB3Downloader>{(className, downloadProjectCallback) => (
+                        <div
+                            className={className}
+                            onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                        >
+                            <FormattedMessage
+                                defaultMessage="Save"
+                                description="Save option for downloading the project to your mobile" // eslint-disable-line max-len
+                                id="gui.menuBar.saveToComputer"
+                            />
+                        </div>
+                    )}</SB3Downloader>
+
+
                         {/* 
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {

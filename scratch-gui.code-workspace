@@ -1,0 +1,29 @@
+{
+  "folders": [
+    {
+      "name": "scratch-gui",
+      "path": "."
+    },
+    {
+      "name": "scratch-paint",
+      "path": "../scratch-paint"
+    },
+    {
+      "name": "scratch-render",
+      "path": "../scratch-render"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave":{
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "[javascript]": {
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    }
+  }
+}

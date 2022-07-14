@@ -18,6 +18,8 @@ const messages = defineMessages({
     }
 });
 
+
+
 class SpriteLibrary extends React.PureComponent {
     constructor (props) {
         super(props);

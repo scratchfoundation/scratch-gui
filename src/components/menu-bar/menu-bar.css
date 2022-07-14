@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
-
+  
     /*
         For most things, we shouldn't explicitly set height, and let the
         content push the element to whatever fits. Using a fixed height
@@ -38,6 +38,8 @@
     flex-wrap: nowrap;
     align-items: center;
     flex-grow: 1;
+
+    
 }
 
 .scratch-logo {
@@ -75,6 +77,11 @@
     align-items: center;
     white-space: nowrap;
     height: $menu-bar-height;
+}
+
+.menu-icons{
+    margin-right: 10px;
+
 }
 
 .menu-bar-item.hoverable {
@@ -167,7 +174,8 @@
 }
 
 .help-icon {
-    margin-right: 0.35rem;
+    margin-left: 7.35rem;
+    width: 32px
 }
 
 .account-nav-menu, .mystuff-button {

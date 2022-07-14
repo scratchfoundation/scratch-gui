@@ -92,7 +92,7 @@ import {
     BLOCKS_TAB_INDEX,
     SETTINGS_TAB_INDEX
 } from '../../reducers/editor-tab';
-import {highlightTarget} from '../../reducers/targets';
+import { highlightTarget } from '../../reducers/targets';
 
 
 const ariaMessages = defineMessages({
@@ -205,15 +205,15 @@ class MenuBar extends React.Component {
     componentWillUnmount() {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
-    
-    handleClickSpriteSettings(){
+
+    handleClickSpriteSettings() {
         this.props.onActivateSettingsTab()
     }
-    
+
     handleClickSprite(id) {
         this.props.onActivateBlocksTab()
-        if(this.props.editingTarget === id){
-            this.props.onClickSprite(id)   
+        if (this.props.editingTarget === id) {
+            this.props.onClickSprite(id)
         } else {
             this.props.vm.setEditingTarget(id);
         }
@@ -406,7 +406,7 @@ class MenuBar extends React.Component {
                 description="Menu bar item for creating a new project"
                 id="gui.menuBar.new"
             />
-        );      
+        );
         const spriteSettingMessage = (
             <FormattedMessage
                 defaultMessage="Edit"
@@ -531,6 +531,19 @@ class MenuBar extends React.Component {
                                 </MenuBarMenu>
                             </div>
                         )} */}
+
+
+                        <div
+                            aria-label={this.props.intl.formatMessage(ariaMessages.addSpriteFromLibrary)}
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            onClick={this.props.onNewSpriteClick}
+                        >
+                            <img
+                                className={styles.helpIcon}
+                                src={spriteIcon}
+                            />
+                            {/* <FormattedMessage {...ariaMessages.addSpriteFromLibrary} /> */}
+                        </div>
                         {
                             Object.keys(this.props.sprites).map(id => (
                                 <div
@@ -543,7 +556,7 @@ class MenuBar extends React.Component {
                                     <img
                                         className={styles.spriteImage}
                                         draggable={false}
-                                        src = {this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
+                                        src={this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
                                     />
                                     <MenuBarMenu
                                         className={classNames(styles.menuBarMenu)}
@@ -575,32 +588,6 @@ class MenuBar extends React.Component {
                                 </div>
                             ))
                         }
-
-                    <div
-                        aria-label={this.props.intl.formatMessage(ariaMessages.addSpriteFromLibrary)}
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onClick={this.props.onNewSpriteClick}
-                    >
-                        <img
-                            className={styles.helpIcon}
-                            src={spriteIcon}
-                        />
-                        {/* <FormattedMessage {...ariaMessages.addSpriteFromLibrary} /> */}
-                    </div>
-
-                    <SB3Downloader>{(className, downloadProjectCallback) => (
-                        <div
-                            className={className}
-                            onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
-                        >
-                            <FormattedMessage
-                                defaultMessage="Save"
-                                description="Save option for downloading the project to your mobile" // eslint-disable-line max-len
-                                id="gui.menuBar.saveToComputer"
-                            />
-                        </div>
-                    )}</SB3Downloader>
-
 
                         {/* 
                         <div
@@ -651,10 +638,10 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div> */}
-                    </div> 
-                    
+                    </div>
+
                     {/* <Divider className={classNames(styles.divider)} /> */}
-                    <div
+                    {/* <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
                         onClick={this.props.onOpenTipLibrary}
@@ -664,9 +651,9 @@ class MenuBar extends React.Component {
                             src={helpIcon}
                         />
                         <FormattedMessage {...ariaMessages.tutorials} />
-                    </div>
+                    </div> */}
                     <Divider className={classNames(styles.divider)} />
-                    {this.props.canEditTitle ? (
+                    {/* {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
                                 enable
@@ -685,21 +672,22 @@ class MenuBar extends React.Component {
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
                         />
-                    ) : null)}
+                    ) : null)} */}
                     <div className={classNames(styles.menuBarItem)}>
-                        {this.props.canShare ? (
+
+                        {/* {this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
                                     {
-                                        waitForUpdate => (
+                                    waitForUpdate => (
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
-                                                /* eslint-disable react/jsx-no-bind */
+                                                eslint-disable react/jsx-no-bind 
                                                 onClick={() => {
                                                     this.handleClickShare(waitForUpdate);
                                                 }}
-                                            /* eslint-enable react/jsx-no-bind */
+                                            eslint-enable react/jsx-no-bind 
                                             />
                                         )
                                     }
@@ -711,22 +699,28 @@ class MenuBar extends React.Component {
                                     <ShareButton className={styles.menuBarButton} />
                                 </MenuBarItemTooltip>
                             ) : []
-                        )}
-                        {this.props.canRemix ? remixButton : []}
+                        )} */}
+                        {/* {this.props.canRemix ? remixButton : []} */}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ? (
+
+
+
+
+
+
+                        {/* {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
                                     {
                                         waitForUpdate => (
                                             <CommunityButton
                                                 className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
+                                                 eslint-disable react/jsx-no-bind 
                                                 onClick={() => {
                                                     this.handleClickSeeCommunity(waitForUpdate);
                                                 }}
-                                            /* eslint-enable react/jsx-no-bind */
+                                            eslint-enable react/jsx-no-bind 
                                             />
                                         )
                                     }
@@ -734,9 +728,9 @@ class MenuBar extends React.Component {
                             )
                         ) : (this.props.showComingSoon ? (
                             <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
+                                <CommunityButton classNamMenuBarItemTooltipe={styles.menuBarButton} />
                             </MenuBarItemTooltip>
-                        ) : [])}
+                        ) : [])} */}
                     </div>
                 </div>
 
@@ -748,6 +742,27 @@ class MenuBar extends React.Component {
                             <SaveStatus />
                         )}
                     </div>
+
+
+                    {/* -----------Save Button------------- */}
+                    <div className={styles.menuIcons}>
+                        <SB3Downloader>{(className, downloadProjectCallback) => (
+                            <div
+                                className={className}
+                                onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
+                            >
+                                <img src={require("./assets/saveIcon.svg")} />
+                            </div>
+                        )}</SB3Downloader>
+                    </div>
+
+                    {["board", "bluetooth", "settings",].map((imageArr, index) => (
+                        <div className={styles.menuIcons}>
+                            <img src={require("./assets/" + imageArr + ".svg")} />
+                        </div>
+                    ))}
+
+
                     {/* {this.props.sessionExists ? (
                         this.props.username ? (
                             // ************ user is logged in ************
@@ -991,7 +1006,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    onNewSpriteClick: () => {dispatch(openSpriteLibrary())},
+    onNewSpriteClick: () => { dispatch(openSpriteLibrary()) },
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
@@ -1017,7 +1032,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseBackdrop: () => dispatch(closeBackdropMenu()),
     onActivateSettingsTab: () => dispatch(activateTab(SETTINGS_TAB_INDEX, BLOCK)),
     onActivateBlocksTab: () => dispatch(activateTab(BLOCKS_TAB_INDEX, BLOCK)),
-    onHighlightTarget: id => {dispatch(highlightTarget(id))},
+    onHighlightTarget: id => { dispatch(highlightTarget(id)) },
 });
 
 export default compose(

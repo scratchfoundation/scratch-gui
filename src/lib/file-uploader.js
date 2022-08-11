@@ -2,6 +2,31 @@ import {BitmapAdapter} from 'scratch-svg-renderer';
 import randomizeSpritePosition from './randomize-sprite-position.js';
 import bmpConverter from './bmp-converter';
 import gifDecoder from './gif-decoder';
+import DOMPurify from 'dompurify';
+
+let _TextDecoder;
+let _TextEncoder;
+if (typeof TextDecoder === 'undefined' || typeof TextEncoder === 'undefined') {
+    // Wait to require the text encoding polyfill until we know it's needed.
+    // eslint-disable-next-line global-require
+    const encoding = require('fastestsmallesttextencoderdecoder');
+    _TextDecoder = encoding.TextDecoder;
+    _TextEncoder = encoding.TextEncoder;
+} else {
+    _TextDecoder = TextDecoder;
+    _TextEncoder = TextEncoder;
+}
+
+DOMPurify.addHook(
+    'beforeSanitizeAttributes',
+    currentNode => {
+        if (currentNode?.href?.baseVal && currentNode.href.baseVal.replace(/\s/g, '').slice(0, 5) !== 'data:'){
+            currentNode.attributes.removeNamedItem('href');
+            delete currentNode.href;
+        }
+        return currentNode;
+    }
+);
 
 /**
  * Extract the file name given a string of the form fileName + ext
@@ -102,6 +127,16 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
     let assetType = null;
     switch (fileType) {
     case 'image/svg+xml': {
+
+        const decoder = new _TextDecoder();
+        const encoder = new _TextEncoder();
+
+        const sanitizedValue = DOMPurify.sanitize(decoder.decode(fileData), {
+            USE_PROFILES: {svg: true}
+        });
+
+        fileData = encoder.encode(sanitizedValue);
+
         costumeFormat = storage.DataFormat.SVG;
         assetType = storage.AssetType.ImageVector;
         break;

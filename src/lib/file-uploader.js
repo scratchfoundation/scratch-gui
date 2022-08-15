@@ -102,7 +102,7 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
     let assetType = null;
     switch (fileType) {
     case 'image/svg+xml': {
-
+        // run svg bytes through scratch-svg-renderer's sanitization code
         fileData = sanitizeSvg.sanitizeByteStream(fileData);
 
         costumeFormat = storage.DataFormat.SVG;

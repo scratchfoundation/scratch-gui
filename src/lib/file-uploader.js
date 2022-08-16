@@ -1,4 +1,4 @@
-import {BitmapAdapter} from 'scratch-svg-renderer';
+import {BitmapAdapter, sanitizeSvg} from 'scratch-svg-renderer';
 import randomizeSpritePosition from './randomize-sprite-position.js';
 import bmpConverter from './bmp-converter';
 import gifDecoder from './gif-decoder';
@@ -102,6 +102,9 @@ const costumeUpload = function (fileData, fileType, storage, handleCostume, hand
     let assetType = null;
     switch (fileType) {
     case 'image/svg+xml': {
+        // run svg bytes through scratch-svg-renderer's sanitization code
+        fileData = sanitizeSvg.sanitizeByteStream(fileData);
+
         costumeFormat = storage.DataFormat.SVG;
         assetType = storage.AssetType.ImageVector;
         break;

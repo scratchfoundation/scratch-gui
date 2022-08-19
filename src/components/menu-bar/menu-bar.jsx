@@ -247,6 +247,11 @@ class MenuBar extends React.Component {
     }
 
 
+    closeWindow() {
+        window.open("https://www.google.com/", "_self", "");
+        window.close()
+    }
+
 
     handleDeleteSprite(id) {
         const restoreSprite = this.props.vm.deleteSprite(id);
@@ -488,7 +493,8 @@ class MenuBar extends React.Component {
                                 // })}
                                 draggable={false}
                                 src={backIcon}
-                                onClick={this.props.onClickLogo}
+                                onClick={this.closeWindow}
+                            // onClick={this.props.onClickLogo}
                             />
                         </div>
                         {/* {(this.props.canChangeLanguage) && (<div
@@ -617,52 +623,52 @@ class MenuBar extends React.Component {
                         </div>
 
                         {/* <Divider className={classNames(styles.divider)} /> */}
-                            {Object.keys(this.props.sprites).map(id => (
+                        {Object.keys(this.props.sprites).map(id => (
 
-                                <div
-                                    key={id}
-                                    className={classNames(styles.menuBarItem, styles.hoverable, {
-                                        [styles.active]: this.props.spriteMenuOpen[id]
-                                    })}
-                                    onMouseUp={() => this.handleClickSprite(id)}
+                            <div
+                                key={id}
+                                className={classNames(styles.menuBarItem, styles.hoverable, {
+                                    [styles.active]: this.props.spriteMenuOpen[id]
+                                })}
+                                onMouseUp={() => this.handleClickSprite(id)}
+                            >
+                                <img
+                                    className={styles.spriteImage}
+                                    draggable={false}
+                                    src={this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
+                                />
+                                <MenuBarMenu
+                                    className={classNames(styles.menuBarMenu)}
+                                    open={!!this.props.spriteMenuOpen[id]}
+                                    place={this.props.isRtl ? 'left' : 'right'}
+                                    onRequestClose={() => this.props.onRequestCloseSprite(id)}
                                 >
-                                    <img
-                                        className={styles.spriteImage}
-                                        draggable={false}
-                                        src={this.props.sprites[id].costumes[this.props.sprites[id].currentCostume].asset.encodeDataURI()}
-                                    />
-                                    <MenuBarMenu
-                                        className={classNames(styles.menuBarMenu)}
-                                        open={!!this.props.spriteMenuOpen[id]}
-                                        place={this.props.isRtl ? 'left' : 'right'}
-                                        onRequestClose={() => this.props.onRequestCloseSprite(id)}
-                                    >
-                                        <MenuSection>
-                                            <MenuItem
-                                                isRtl={this.props.isRtl}
-                                                onClick={this.handleClickSpriteSettings}
-                                            >
-                                                <img src={require("./assets/edit.svg")} />
-                                            </MenuItem>
-                                            <MenuItem
-                                                isRtl={this.props.isRtl}
-                                                onClick={() => this.handleDuplicateSprite(id)}
-                                            >
-                                                <img src={require("./assets/copy.svg")} />
-                                            </MenuItem>
-                                            <MenuItem
-                                                isRtl={this.props.isRtl}
-                                                onClick={() => this.handleDeleteSprite(id)}
-                                            >
-                                                <img src={require("./assets/delete.svg")} />
-                                            </MenuItem>
-                                        </MenuSection>
-                                    </MenuBarMenu>
-                                </div>
+                                    <MenuSection>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleClickSpriteSettings}
+                                        >
+                                            <img src={require("./assets/edit.svg")} />
+                                        </MenuItem>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={() => this.handleDuplicateSprite(id)}
+                                        >
+                                            <img src={require("./assets/copy.svg")} />
+                                        </MenuItem>
+                                        <MenuItem
+                                            isRtl={this.props.isRtl}
+                                            onClick={() => this.handleDeleteSprite(id)}
+                                        >
+                                            <img src={require("./assets/delete.svg")} />
+                                        </MenuItem>
+                                    </MenuSection>
+                                </MenuBarMenu>
+                            </div>
 
 
-                            ))
-                            }
+                        ))
+                        }
 
 
                         {/* <div

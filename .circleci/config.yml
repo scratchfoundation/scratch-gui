@@ -1,5 +1,6 @@
 version: 2.1
 orbs:
+    node: circleci/node@5.0.2
     browser-tools: circleci/browser-tools@1.2.4
 aliases:
   - &save_git_cache
@@ -42,10 +43,12 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: cimg/node:12.22.11-browsers
+      # TODO: fix scratch-audio and change this to `cimg/node:lts-browsers`
+      - image: cimg/node:14.20-browsers
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
+    executor: node/default
     working_directory: ~/repo
 
 jobs:
@@ -57,7 +60,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      - node/install-packages
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit
@@ -90,7 +93,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      - node/install-packages
       - *save_git_cache
       - *save_npm_cache
   lint:

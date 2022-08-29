@@ -196,7 +196,7 @@ class SpriteInfo extends React.Component {
                                         [styles.isDisabled]: this.props.disabled
                                     }
                                 )}
-                                tabIndex="0"
+                                tabIndex={this.props.disabled ? null : 0}
                                 onClick={this.props.onClickVisible}
                                 onKeyPress={this.props.onPressVisible}
                             >
@@ -215,7 +215,7 @@ class SpriteInfo extends React.Component {
                                         [styles.isDisabled]: this.props.disabled
                                     }
                                 )}
-                                tabIndex="0"
+                                tabIndex={this.props.disabled ? null : 0}
                                 onClick={this.props.onClickNotVisible}
                                 onKeyPress={this.props.onPressNotVisible}
                             >

@@ -80,7 +80,7 @@
     "scratch-render": "0.1.0-prerelease.20211028200436",
     "scratch-render-fonts": "1.0.0-prerelease.20210401210003",
     "scratch-storage": "2.0.2",
-    "scratch-svg-renderer": "0.2.0-prerelease.20220817124220",
+    "scratch-svg-renderer": "0.2.0-prerelease.20220912180225",
     "scratch-vm": "1.2.4",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",

@@ -1,7 +1,8 @@
 version: 2.1
 orbs:
-    node: circleci/node@5.0.2
-    browser-tools: circleci/browser-tools@1.2.4
+  browser-tools: circleci/browser-tools@1.2.4
+  commitlint: conventional-changelog/commitlint@1.0.0
+  node: circleci/node@5.0.2
 aliases:
   - &save_git_cache
     save_cache:
@@ -220,6 +221,10 @@ jobs:
 
 workflows:
   version: 2
+  commitlint:
+    jobs:
+      - commitlint/lint:
+          target-branch: develop
   push-translations:
     triggers:
       - schedule:

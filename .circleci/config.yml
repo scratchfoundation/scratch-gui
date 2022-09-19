@@ -177,27 +177,19 @@ jobs:
 
   deploy-npm:
     <<: *defaults
-    environment:
-      NODE_OPTIONS: --max-old-space-size=4000
     steps:
       - *restore_git_cache
-      - *restore_dist_cache
       - checkout
-      - run: |
-          echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
-          echo export NPM_TAG=latest >> $BASH_ENV
-          if [ "$CIRCLE_BRANCH" == "master" ]
-            then echo export NPM_TAG=stable >> $BASH_ENV
-          fi
-          if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
-            then echo export NPM_TAG=hotfix >> $BASH_ENV
-          fi
-      - run: npm version --no-git-tag-version $RELEASE_VERSION
-      - run: |
-          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish --tag $NPM_TAG
-      - run: git tag $RELEASE_VERSION
-      - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
+      - *restore_npm_cache
+      - *restore_dist_cache
+      - run:
+          name: adjust config for hotfix if necessary
+          command: |
+            # double brackets are important for matching the wildcard
+            if [[ "$CIRCLE_BRANCH" == hotfix/* ]]; then
+              sed -e "s|hotfix/REPLACE|${CIRCLE_BRANCH}|" --in-place release.config.js
+            fi
+      - run: npx semantic-release
 
   deploy-gh-pages:
     <<: *defaults

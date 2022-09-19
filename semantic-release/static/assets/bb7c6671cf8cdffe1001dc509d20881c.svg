@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>curved-point</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="curved-point">
+            <path d="M2,15 C2,10.5818452 5.58151214,7 10.000744,7 C14.4184879,7 18,10.5818452 18,15" id="Stroke-3" stroke="#4C97FF" stroke-width="0.75" fill-opacity="0.25" fill="#4C97FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M3,7 L17,7" id="Stroke-7" stroke="#4C97FF" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="Oval-4" fill-opacity="0.25" fill="#4C97FF" cx="10" cy="7" r="3"></circle>
+            <circle id="Oval-4" fill="#4C97FF" cx="10" cy="7" r="2"></circle>
+            <circle id="Oval-5" fill="#4C97FF" cx="3" cy="7" r="1"></circle>
+            <circle id="Oval-5-Copy" fill="#4C97FF" cx="17" cy="7" r="1"></circle>
+        </g>
+    </g>
+</svg>

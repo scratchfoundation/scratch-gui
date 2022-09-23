@@ -81,7 +81,7 @@
     "scratch-render-fonts": "1.0.0-prerelease.20210401210003",
     "scratch-storage": "2.0.2",
     "scratch-svg-renderer": "0.2.0-prerelease.20220912180225",
-    "scratch-vm": "1.2.14",
+    "scratch-vm": "1.2.15",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",
     "text-encoding": "0.7.0",

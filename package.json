@@ -75,7 +75,7 @@
     "redux-throttle": "0.1.1",
     "scratch-audio": "0.1.0-prerelease.20200528195344",
     "scratch-blocks": "0.1.0-prerelease.20220925052803",
-    "scratch-l10n": "3.15.20220925031619",
+    "scratch-l10n": "3.15.20220926031626",
     "scratch-paint": "1.1.11",
     "scratch-render": "0.1.0-prerelease.20211028200436",
     "scratch-render-fonts": "1.0.0-prerelease.20210401210003",

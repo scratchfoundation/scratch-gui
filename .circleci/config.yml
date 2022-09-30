@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
-    browser-tools: circleci/browser-tools@1.2.4
+  browser-tools: circleci/browser-tools@1.2.4
+  commitlint: conventional-changelog/commitlint@1.0.0
+  node: circleci/node@5.0.2
 aliases:
   - &save_git_cache
     save_cache:
@@ -42,10 +44,12 @@ aliases:
         - v3-npm-
   - &defaults
     docker:
-      - image: cimg/node:12.22.11-browsers
+      # TODO: fix scratch-audio and change this to `cimg/node:lts-browsers`
+      - image: cimg/node:14.20-browsers
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
+    executor: node/default
     working_directory: ~/repo
 
 jobs:
@@ -57,7 +61,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      - node/install-packages
       - run:
           name: Lint
           command: npm run test:lint -- --quiet --output-file test-results/eslint-results.xml --format junit
@@ -90,7 +94,7 @@ jobs:
     steps:
       - *restore_git_cache
       - checkout
-      - run: npm ci
+      - node/install-packages
       - *save_git_cache
       - *save_npm_cache
   lint:
@@ -173,27 +177,19 @@ jobs:
 
   deploy-npm:
     <<: *defaults
-    environment:
-      NODE_OPTIONS: --max-old-space-size=4000
     steps:
       - *restore_git_cache
-      - *restore_dist_cache
       - checkout
-      - run: |
-          echo export RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')" >> $BASH_ENV
-          echo export NPM_TAG=latest >> $BASH_ENV
-          if [ "$CIRCLE_BRANCH" == "master" ]
-            then echo export NPM_TAG=stable >> $BASH_ENV
-          fi
-          if [[ "$CIRCLE_BRANCH" == hotfix/* ]] # double brackets are important for matching the wildcard
-            then echo export NPM_TAG=hotfix >> $BASH_ENV
-          fi
-      - run: npm version --no-git-tag-version $RELEASE_VERSION
-      - run: |
-          npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish --tag $NPM_TAG
-      - run: git tag $RELEASE_VERSION
-      - run: git push $CIRCLE_REPOSITORY_URL $RELEASE_VERSION
+      - *restore_npm_cache
+      - *restore_dist_cache
+      - run:
+          name: adjust config for hotfix if necessary
+          command: |
+            # double brackets are important for matching the wildcard
+            if [[ "$CIRCLE_BRANCH" == hotfix/* ]]; then
+              sed -e "s|hotfix/REPLACE|${CIRCLE_BRANCH}|" --in-place release.config.js
+            fi
+      - run: npx semantic-release
 
   deploy-gh-pages:
     <<: *defaults
@@ -217,6 +213,10 @@ jobs:
 
 workflows:
   version: 2
+  commitlint:
+    jobs:
+      - commitlint/lint:
+          target-branch: develop
   push-translations:
     triggers:
       - schedule:

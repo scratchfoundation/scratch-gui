@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.42](https://github.com/LLK/scratch-gui/compare/v1.0.41...v1.0.42) (2022-10-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-vm to v1.2.48 ([872cdc6](https://github.com/LLK/scratch-gui/commit/872cdc6cf05b6d463eeb53eccf1f7d499b26d9df))
+
 ## [1.0.41](https://github.com/LLK/scratch-gui/compare/v1.0.40...v1.0.41) (2022-10-23)
 
 

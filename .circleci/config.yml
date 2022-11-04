@@ -56,11 +56,13 @@ jobs:
   build-test-no-cache:
     <<: *defaults
     environment:
+      DETECT_CHROMEDRIVER_VERSION: "true"
       JEST_JUNIT_OUTPUT_DIR: test-results
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
       - *restore_git_cache
       - checkout
+      - browser-tools/install-chrome # must be before node/install-packages
       - node/install-packages
       - run:
           name: Lint
@@ -75,15 +77,13 @@ jobs:
           environment:
             NODE_ENV: production
           command: npm run build
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
       - run:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_NAME: integration-results.xml
           command: |
               google-chrome --version
-              chromedriver --version
+              npx --no -- chromedriver --version
               npm run test:integration -- --reporters="default" --reporters="jest-junit"
       - store_artifacts:
           path: coverage
@@ -91,9 +91,12 @@ jobs:
           path: test-results
   setup:
     <<: *defaults
+    environment:
+      DETECT_CHROMEDRIVER_VERSION: "true"
     steps:
       - *restore_git_cache
       - checkout
+      - browser-tools/install-chrome # must be before node/install-packages
       - node/install-packages
       - *save_git_cache
       - *save_npm_cache
@@ -162,14 +165,13 @@ jobs:
       - *restore_npm_cache
       - *restore_build_cache
       - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
       - run:
           name: Integration
           environment:
               JEST_JUNIT_OUTPUT_DIR: test-results/integration
           command: |
             google-chrome --version
-            chromedriver --version
+            npx --no -- chromedriver --version
             export TESTFILES=$(circleci tests glob "test/integration/*.test.js" | circleci tests split --split-by=timings)
             $(npm bin)/jest ${TESTFILES} --reporters="default" --reporters="jest-junit" --runInBand
       - store_test_results:

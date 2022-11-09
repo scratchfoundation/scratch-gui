@@ -57,7 +57,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
                 props.isShowingWithId && props.vm.runtime.hasCloudData() &&
-                props.canModifyCloudData;
+                props.canModifyCloudData && !props.vm.extensionManager.isExtensionLoaded('videoSensing');
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&

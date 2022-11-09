@@ -50,6 +50,9 @@ describe('CloudManagerHOC', () => {
         vm.runtime = {
             hasCloudData: jest.fn(() => true)
         };
+        vm.extensionManager = {
+            isExtensionLoaded: jest.fn(() => false)
+        };
         CloudProvider.mockClear();
         mockCloudProviderInstance.requestCloseConnection.mockClear();
     });
@@ -130,6 +133,25 @@ describe('CloudManagerHOC', () => {
             <WrappedComponent
                 cloudHost="nonEmpty"
                 hasCloudPermission={false}
+                store={store}
+                username="user"
+                vm={vm}
+            />
+        );
+
+        expect(vm.setCloudProvider.mock.calls.length).toBe(0);
+        expect(CloudProvider).not.toHaveBeenCalled();
+    });
+
+    test('when videoSensing extension is active, the cloud provider is not set on the vm', () => {
+        const Component = () => <div />;
+        const WrappedComponent = cloudManagerHOC(Component);
+        vm.extensionManager.isExtensionLoaded = jest.fn(extension => extension === 'videoSensing');
+
+        mount(
+            <WrappedComponent
+                hasCloudPermission
+                cloudHost="nonEmpty"
                 store={store}
                 username="user"
                 vm={vm}

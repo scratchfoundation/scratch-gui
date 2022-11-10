@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/LLK/scratch-gui/compare/v1.0.48...v1.1.0) (2022-11-10)
+
+
+### Features
+
+* prevent cloud vars connection if project uses videoSensing extension ([63cac48](https://github.com/LLK/scratch-gui/commit/63cac483e9e0a4986d21cfbc33b7b5501eb8a2ab))
+
 ## [1.0.48](https://github.com/LLK/scratch-gui/compare/v1.0.47...v1.0.48) (2022-10-25)
 
 

@@ -3,6 +3,8 @@
 @import "../../css/z-index.css";
 
 .sprite-selector {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     position: relative;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

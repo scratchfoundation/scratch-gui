@@ -25,10 +25,12 @@ const cloudManagerHOC = function (WrappedComponent) {
             super(props);
             this.cloudProvider = null;
             bindAll(this, [
-                'handleCloudDataUpdate'
+                'handleCloudDataUpdate',
+                'handleExtensionAdded'
             ]);
 
             this.props.vm.on('HAS_CLOUD_DATA_UPDATE', this.handleCloudDataUpdate);
+            this.props.vm.on('EXTENSION_ADDED', this.handleExtensionAdded);
         }
         componentDidMount () {
             if (this.shouldConnect(this.props)) {
@@ -57,7 +59,7 @@ const cloudManagerHOC = function (WrappedComponent) {
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
                 props.isShowingWithId && props.vm.runtime.hasCloudData() &&
-                props.canModifyCloudData && !props.vm.extensionManager.isExtensionLoaded('videoSensing');
+                props.canModifyCloudData;
         }
         shouldDisconnect (props, prevProps) {
             return this.isConnected() &&
@@ -94,6 +96,11 @@ const cloudManagerHOC = function (WrappedComponent) {
             } else if (this.shouldConnect(this.props)) {
                 this.props.onShowCloudInfo();
                 this.connectToCloud();
+            }
+        }
+        handleExtensionAdded (categoryInfo) {
+            if (categoryInfo.id === 'videoSensing' && this.isConnected()) {
+                this.disconnectFromCloud();
             }
         }
         render () {
@@ -144,7 +151,9 @@ const cloudManagerHOC = function (WrappedComponent) {
             isShowingWithId: getIsShowingWithId(loadingState),
             projectId: state.scratchGui.projectState.projectId,
             // if you're editing someone else's project, you can't modify cloud data
-            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave)
+            canModifyCloudData: (!state.scratchGui.mode.hasEverEnteredEditor || ownProps.canSave) &&
+                // possible security concern if the program attempts to encode webcam data over cloud variables
+                !ownProps.vm.extensionManager.isExtensionLoaded('videoSensing')
         };
     };
 

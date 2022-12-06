@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.39](https://github.com/LLK/scratch-gui/compare/v1.1.38...v1.1.39) (2022-12-06)
+
+
+### Bug Fixes
+
+* update extension monitors after locale change ([2916d9c](https://github.com/LLK/scratch-gui/commit/2916d9c1a8115896661af8137cbf131d19fbfa0f))
+
 ## [1.1.38](https://github.com/LLK/scratch-gui/compare/v1.1.37...v1.1.38) (2022-12-06)
 
 

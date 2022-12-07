@@ -1,7 +1,7 @@
 {
   "name": "scratch-gui",
   "version": "1.1.42",
-  "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
+  "description": "Graphical User Interface for creating and running Scratch 3.0 projects",
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
   "homepage": "https://github.com/LLK/scratch-gui#readme",

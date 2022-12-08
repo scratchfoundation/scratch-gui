@@ -99,6 +99,8 @@ const cloudManagerHOC = function (WrappedComponent) {
             }
         }
         handleExtensionAdded (categoryInfo) {
+            // Note that props.vm.extensionManager.isExtensionLoaded('videoSensing') is still false
+            // at the point of this callback, so it is difficult to reuse the canModifyCloudData logic.
             if (categoryInfo.id === 'videoSensing' && this.isConnected()) {
                 this.disconnectFromCloud();
             }

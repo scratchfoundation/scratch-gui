@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/LLK/scratch-gui/compare/v1.1.42...v1.2.0) (2022-12-08)
+
+
+### Features
+
+* disconnect from cloud variables immediately after adding video sensing to a project ([7279c8b](https://github.com/LLK/scratch-gui/commit/7279c8b54212a0e7f478ef5c17bb0aaee73ae3f4))
+
 ## [1.1.42](https://github.com/LLK/scratch-gui/compare/v1.1.41...v1.1.42) (2022-12-07)
 
 

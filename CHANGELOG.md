@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/LLK/scratch-gui/compare/v1.2.4...v1.2.5) (2022-12-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20221220032336 ([02c3ccc](https://github.com/LLK/scratch-gui/commit/02c3ccc76bec3bc8e0f0a2f9b77b009f1fe67864))
+
+## [1.2.4](https://github.com/LLK/scratch-gui/compare/v1.2.3...v1.2.4) (2022-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20221219032131 ([c10e801](https://github.com/LLK/scratch-gui/commit/c10e8012c51b7ff97ade45d938650427b185325d))
+
+## [1.2.3](https://github.com/LLK/scratch-gui/compare/v1.2.2...v1.2.3) (2022-12-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20221217032100 ([96f3862](https://github.com/LLK/scratch-gui/commit/96f3862d5bca38a49006f26f9c8f5849c5185121))
+
+## [1.2.2](https://github.com/LLK/scratch-gui/compare/v1.2.1...v1.2.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20221213032135 ([9192dc9](https://github.com/LLK/scratch-gui/commit/9192dc9f555f1f989a30e4790b0e5ad57173d750))
+
+## [1.2.1](https://github.com/LLK/scratch-gui/compare/v1.2.0...v1.2.1) (2022-12-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20221211032111 ([a384f19](https://github.com/LLK/scratch-gui/commit/a384f192ab16b61b0f86feb7beefb9d740ac8efe))
+
+# [1.2.0](https://github.com/LLK/scratch-gui/compare/v1.1.42...v1.2.0) (2022-12-08)
+
+
+### Features
+
+* disconnect from cloud variables immediately after adding video sensing to a project ([7279c8b](https://github.com/LLK/scratch-gui/commit/7279c8b54212a0e7f478ef5c17bb0aaee73ae3f4))
+
 ## [1.1.42](https://github.com/LLK/scratch-gui/compare/v1.1.41...v1.1.42) (2022-12-07)
 
 

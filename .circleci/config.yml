@@ -219,6 +219,12 @@ workflows:
     jobs:
       - commitlint/lint:
           target-branch: develop
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+                - /^hotfix\/.*/
   push-translations:
     triggers:
       - schedule:

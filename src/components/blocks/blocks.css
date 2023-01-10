@@ -74,6 +74,13 @@
     border-left: 1px solid $ui-black-transparent;
 }
 
+.blocks :global(.blocklyFlyout:hover) {
+    overflow: unset;
+}
+
+.blocks :global(.blocklyFlyout:hover) :global(.blocklyWorkspace) {
+    clip-path: none;
+}
 
 .blocks :global(.blocklyBlockDragSurface) {
     /*

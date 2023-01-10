@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/LLK/scratch-gui/compare/v1.3.3...v1.3.4) (2023-01-10)
+
+
+### Bug Fixes
+
+* load flyout correctly when switching languages ([2fa0880](https://github.com/LLK/scratch-gui/commit/2fa0880f9028dbdffc4f01919fc3e8ef3cd0ffcc))
+
 ## [1.3.3](https://github.com/LLK/scratch-gui/compare/v1.3.2...v1.3.3) (2023-01-10)
 
 

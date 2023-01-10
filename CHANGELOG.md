@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/LLK/scratch-gui/compare/v1.3.2...v1.3.3) (2023-01-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230107045212 ([ad5e6c8](https://github.com/LLK/scratch-gui/commit/ad5e6c842eb950681e8ba61481b37166fd7f1c86))
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230107072727 ([546ddc3](https://github.com/LLK/scratch-gui/commit/546ddc36b8f86fe7ccc360c5754d661fd68c1b39))
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230108070914 ([d8ed2a0](https://github.com/LLK/scratch-gui/commit/d8ed2a00975b9cc2f3c0e0622152548367bbbb05))
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230109074106 ([5f7f42c](https://github.com/LLK/scratch-gui/commit/5f7f42c4a0b53e9051ea4998a580a67064babf88))
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230110085824 ([7783595](https://github.com/LLK/scratch-gui/commit/77835955269431158594254ba1007b79bb542c51))
+* **deps:** update dependency scratch-l10n to v3.15.20230107032059 ([a5fbba1](https://github.com/LLK/scratch-gui/commit/a5fbba1b7586ac03f3a8ff360cee6b91e321de0f))
+* **deps:** update dependency scratch-l10n to v3.15.20230108032105 ([517979c](https://github.com/LLK/scratch-gui/commit/517979c91338983649fd29f8efa74354374b2010))
+* **deps:** update dependency scratch-l10n to v3.15.20230109032112 ([8ad340b](https://github.com/LLK/scratch-gui/commit/8ad340b8239af1109a42ee42edbedc24049632ab))
+* **deps:** update dependency scratch-l10n to v3.15.20230110032123 ([c913a6f](https://github.com/LLK/scratch-gui/commit/c913a6fa7161cdf28b9cdb18ae9fc2c1413689dc))
+* **deps:** update dependency scratch-vm to v1.3.10 ([2b84e0f](https://github.com/LLK/scratch-gui/commit/2b84e0fb67941bc9f2216007a6b278cb9f434453))
+* **deps:** update dependency scratch-vm to v1.3.12 ([552d6af](https://github.com/LLK/scratch-gui/commit/552d6af5e84639170d95736d3882d8f1fe128e3e))
+* **deps:** update dependency scratch-vm to v1.3.13 ([c13df68](https://github.com/LLK/scratch-gui/commit/c13df688e1592b1b04dcc567477f2701edf669fa))
+* **deps:** update dependency scratch-vm to v1.3.8 ([3232c49](https://github.com/LLK/scratch-gui/commit/3232c4951222a33ee7c545d514ef6d53d9c62b7f))
+* **deps:** update dependency scratch-vm to v1.3.9 ([3aeafff](https://github.com/LLK/scratch-gui/commit/3aeafffb041c624ec6ebc46083454d34d89ab5f7))
+
 ## [1.3.2](https://github.com/LLK/scratch-gui/compare/v1.3.1...v1.3.2) (2023-01-04)
 
 

@@ -424,6 +424,7 @@ class MenuBar extends React.Component {
                                 <LanguageSelector
                                     label={this.props.intl.formatMessage(ariaMessages.language)}
                                     isRtl={this.props.isRtl}
+                                    vm={this.props.vm}
                                 />
                             </MenuBarMenu>
                         </div>)}

@@ -213,6 +213,7 @@ class LibraryComponent extends React.Component {
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
                             description={dataItem.description}
+                            dependencies={dataItem.dependencies}
                             disabled={dataItem.disabled}
                             extensionId={dataItem.extensionId}
                             featured={dataItem.featured}
@@ -227,6 +228,7 @@ class LibraryComponent extends React.Component {
                             key={typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL}
                             name={dataItem.name}
                             showPlayButton={this.props.showPlayButton}
+                            usbConnectionRequired={dataItem.usbConnectionRequired}
                             onMouseEnter={this.handleMouseEnter}
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}

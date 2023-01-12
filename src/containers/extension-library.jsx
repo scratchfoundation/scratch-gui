@@ -1,13 +1,15 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
-
-import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
-
+import extensionTags from '../lib/libraries/extension-tags';
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/action-menu/icon--sprite.svg';
+import {loadExtensionLibraryContent} from '../reducers/extension-library.js';
+import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 
 const messages = defineMessages({
     extensionTitle: {
@@ -29,6 +31,9 @@ class ExtensionLibrary extends React.PureComponent {
             'handleItemSelect'
         ]);
     }
+    componentDidMount () {
+        this.props.onLoadExtensionLibraryContent(this.props.intl.locale);
+    }
     handleItemSelect (item) {
         const id = item.extensionId;
         let url = item.extensionURL ? item.extensionURL : id;
@@ -37,25 +42,35 @@ class ExtensionLibrary extends React.PureComponent {
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         }
         if (id && !item.disabled) {
-            if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
+            if (this.props.vm.extensionManager.isExtensionLoaded(id)) {
                 this.props.onCategorySelected(id);
             } else {
-                this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
+                this.props.onShowImporting();
+                const loaders = (item.dependencies || [])
+                    .filter(dependency =>
+                        !this.props.vm.extensionManager.isExtensionLoaded(dependency[0])
+                    )
+                    .map(dependency =>
+                        this.props.vm.extensionManager.loadExtensionURL(dependency[2] || dependency[0])
+                    );
+                loaders.push(this.props.vm.extensionManager.loadExtensionURL(url));
+                Promise.all(loaders).then(() => {
+                    this.props.onCloseImporting();
                     this.props.onCategorySelected(id);
                 });
             }
         }
     }
     render () {
-        const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({
+        const extensionLibraryThumbnailData = this.props.extensionLibraryContent.map(extension => ({
             rawURL: extension.iconURL || extensionIcon,
             ...extension
         }));
         return (
             <LibraryComponent
                 data={extensionLibraryThumbnailData}
-                filterable={false}
                 id="extensionLibrary"
+                tags={extensionTags}
                 title={this.props.intl.formatMessage(messages.extensionTitle)}
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
@@ -66,11 +81,31 @@ class ExtensionLibrary extends React.PureComponent {
 }
 
 ExtensionLibrary.propTypes = {
+    extensionLibraryContent: PropTypes.arrayOf(PropTypes.shape({})),
     intl: intlShape.isRequired,
     onCategorySelected: PropTypes.func,
+    onLoadExtensionLibraryContent: PropTypes.func,
     onRequestClose: PropTypes.func,
+    onCloseImporting: PropTypes.func,
+    onShowImporting: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
-export default injectIntl(ExtensionLibrary);
+const mapStateToProps = state => ({
+    extensionLibraryContent: state.scratchGui.extensionLibrary.extensions
+});
+
+const mapDispatchToProps = dispatch => ({
+    onLoadExtensionLibraryContent: lang => loadExtensionLibraryContent(lang).then(dispatch),
+    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
+});
+
+export default compose(
+    injectIntl,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(ExtensionLibrary);

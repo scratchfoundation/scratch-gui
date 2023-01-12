@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 import bluetoothIconURL from './bluetooth.svg';
 import internetConnectionIconURL from './internet-connection.svg';
+import usbConnectionIconURL from './usb-connection.svg';
 
 /* eslint-disable react/prefer-stateless-function */
 class LibraryItemComponent extends React.PureComponent {
@@ -58,10 +59,10 @@ class LibraryItemComponent extends React.PureComponent {
                     <br />
                     <span className={styles.featuredDescription}>{this.props.description}</span>
                 </div>
-                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.collaborator ? (
+                {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.usbConnectionRequired || this.props.collaborator ? (
                     <div className={styles.featuredExtensionMetadata}>
                         <div className={styles.featuredExtensionRequirement}>
-                            {this.props.bluetoothRequired || this.props.internetConnectionRequired ? (
+                            {this.props.bluetoothRequired || this.props.internetConnectionRequired || this.props.usbConnectionRequired ? (
                                 <div>
                                     <div>
                                         <FormattedMessage
@@ -73,6 +74,9 @@ class LibraryItemComponent extends React.PureComponent {
                                     <div
                                         className={styles.featuredExtensionMetadataDetail}
                                     >
+                                        {this.props.usbConnectionRequired ? (
+                                            <img src={usbConnectionIconURL} />
+                                        ) : null}
                                         {this.props.bluetoothRequired ? (
                                             <img src={bluetoothIconURL} />
                                         ) : null}
@@ -100,6 +104,26 @@ class LibraryItemComponent extends React.PureComponent {
                                     </div>
                                 </div>
                             ) : null}
+                        </div>
+                    </div>
+                ) : null}
+                {this.props.dependencies && this.props.dependencies.length > 0 ? (
+                    <div className={styles.featuredExtensionMetadata}>
+                        <div className={styles.featuredExtensionRequirement}>
+                            <div>
+                                <FormattedMessage
+                                    defaultMessage="Dependencies"
+                                    id="gui.extensionLibrary.dependencies"
+                                />
+                                <span style={{paddingLeft: '0.4rem', fontWeight: 'bold'}}>
+                                    {this.props.dependencies.map(([id, name], i) => (
+                                        <span key={id}>
+                                            {i > 1 ? ', ' : ''}
+                                            {name}
+                                        </span>
+                                    ))}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 ) : null}
@@ -151,6 +175,14 @@ class LibraryItemComponent extends React.PureComponent {
 LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
+    dependencies: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ])
+        )
+    ),
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -175,7 +207,8 @@ LibraryItemComponent.propTypes = {
     onMouseLeave: PropTypes.func.isRequired,
     onPlay: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
-    showPlayButton: PropTypes.bool
+    showPlayButton: PropTypes.bool,
+    usbConnectionRequired: PropTypes.bool
 };
 
 LibraryItemComponent.defaultProps = {

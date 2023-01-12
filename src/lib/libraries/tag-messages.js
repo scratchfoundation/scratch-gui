@@ -125,5 +125,45 @@ export default defineMessages({
         defaultMessage: 'Letters',
         description: 'Tag for filtering a library for letters',
         id: 'gui.libraryTags.letters'
+    },
+    stage: {
+        defaultMessage: 'Stage',
+        description: 'Tag for filtering a library for stage',
+        id: 'gui.libraryTags.stage'
+    },
+    hardware: {
+        defaultMessage: 'Hardware',
+        description: 'Tag for filtering a library for hardware',
+        id: 'gui.libraryTags.hardware'
+    },
+    sensing: {
+        defaultMessage: 'Sensing',
+        description: 'Tag for filtering a library for sensing',
+        id: 'gui.libraryTags.sensing'
+    },
+    media: {
+        defaultMessage: 'Media',
+        description: 'Tag for filtering a library for media',
+        id: 'gui.libraryTags.media'
+    },
+    iot: {
+        defaultMessage: 'IoT',
+        description: 'Tag for filtering a library for IoT',
+        id: 'gui.libraryTags.iot'
+    },
+    ai: {
+        defaultMessage: 'AI',
+        description: 'Tag for filtering a library for AI',
+        id: 'gui.libraryTags.ai'
+    },
+    data: {
+        defaultMessage: 'Data',
+        description: 'Tag for filtering a library for data',
+        id: 'gui.libraryTags.data'
+    },
+    utility: {
+        defaultMessage: 'Utility',
+        description: 'Tag for filtering a library for utility',
+        id: 'gui.libraryTags.utility'
     }
 });

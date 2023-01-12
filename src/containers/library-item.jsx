@@ -113,6 +113,7 @@ class LibraryItem extends React.PureComponent {
                 bluetoothRequired={this.props.bluetoothRequired}
                 collaborator={this.props.collaborator}
                 description={this.props.description}
+                dependencies={this.props.dependencies}
                 disabled={this.props.disabled}
                 extensionId={this.props.extensionId}
                 featured={this.props.featured}
@@ -125,6 +126,7 @@ class LibraryItem extends React.PureComponent {
                 isPlaying={this.props.isPlaying}
                 name={this.props.name}
                 showPlayButton={this.props.showPlayButton}
+                usbConnectionRequired={this.props.usbConnectionRequired}
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
                 onFocus={this.handleFocus}
@@ -141,6 +143,14 @@ class LibraryItem extends React.PureComponent {
 LibraryItem.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
+    dependencies: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ])
+        )
+    ),
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -168,7 +178,8 @@ LibraryItem.propTypes = {
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
-    showPlayButton: PropTypes.bool
+    showPlayButton: PropTypes.bool,
+    usbConnectionRequired: PropTypes.bool
 };
 
 export default injectIntl(LibraryItem);

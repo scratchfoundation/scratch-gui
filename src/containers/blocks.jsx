@@ -191,6 +191,9 @@ class Blocks extends React.Component {
         this.detachVM();
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
+
+        // Clear the flyout blocks so that they can be recreated on mount.
+        this.props.vm.clearFlyoutBlocks();
     }
     requestToolboxUpdate () {
         clearTimeout(this.toolboxUpdateTimeout);

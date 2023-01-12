@@ -89,6 +89,7 @@ jobs:
           path: coverage
       - store_test_results:
           path: test-results
+      - run: npx --no -- semantic-release --dry-run
   setup:
     <<: *defaults
     environment:
@@ -191,7 +192,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" == hotfix/* ]]; then
               sed -e "s|hotfix/REPLACE|${CIRCLE_BRANCH}|" --in-place release.config.js
             fi
-      - run: npx semantic-release
+      - run: npx --no -- semantic-release
 
   deploy-gh-pages:
     <<: *defaults
@@ -219,6 +220,12 @@ workflows:
     jobs:
       - commitlint/lint:
           target-branch: develop
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+                - /^hotfix\/.*/
   push-translations:
     triggers:
       - schedule:

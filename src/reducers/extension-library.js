@@ -1,7 +1,7 @@
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const EXTENSION_LIBRARY_KEY = 'extensionLibrary';
+const EXTENSION_LIBRARY = 'scratch-gui/library/EXTENSION_LIBRARY';
 const REMOTE_URL = IS_PRODUCTION ? 'https://kankungyip.github.io/scratch-x/' : 'http://localhost:8018';
 const REMOTE_EXPIRED = IS_PRODUCTION ? 1000 * 60 * 60 * 24 * 5 : 1000;
 
@@ -14,9 +14,14 @@ export const initialState = {
 
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
-    return action.type === EXTENSION_LIBRARY_KEY ? Object.assign({}, state, {
-        extensions: action.extensions
-    }) : state;
+    switch (action.type) {
+    case EXTENSION_LIBRARY:
+        return Object.assign({}, state, {
+            extensions: action.extensions
+        });
+    default:
+        return state;
+    }
 }
 
 const extensionConnectionConfig = (extension, remoteUrl) => (
@@ -63,12 +68,12 @@ const remoteExtensionLibrary = (remoteExtensions, lang, resolve) => {
         expired: Date.now() + REMOTE_EXPIRED
     } : {};
     try {
-        localStorage.setItem(EXTENSION_LIBRARY_KEY, JSON.stringify(storage));
+        localStorage.setItem(EXTENSION_LIBRARY, JSON.stringify(storage));
     } catch (e) { /* ignore */ }
 
     const remoteExtensionLibraryContent = storage ? (storage.extensions || []) : [];
     resolve({
-        type: EXTENSION_LIBRARY_KEY,
+        type: EXTENSION_LIBRARY,
         extensions: [].concat(extensionLibraryContent, remoteExtensionLibraryContent)
     });
 }
@@ -77,13 +82,13 @@ const loadExtensionLibraryContent = lang => {
     return new Promise((resolve, reject) => {
         let storage;
         try {
-            storage = JSON.parse(localStorage.getItem(EXTENSION_LIBRARY_KEY));
+            storage = JSON.parse(localStorage.getItem(EXTENSION_LIBRARY));
         } catch (e) { /* ignore */ }
 
         if (storage && Date.now() < storage.expired) {
             const storageExtensionLibraryContent = storage.extensions || [];
             resolve({
-                type: EXTENSION_LIBRARY_KEY,
+                type: EXTENSION_LIBRARY,
                 extensions: [].concat(extensionLibraryContent, storageExtensionLibraryContent)
             });
         }

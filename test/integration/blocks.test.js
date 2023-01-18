@@ -291,4 +291,45 @@ describe('Working with the blocks', () => {
         await clickButton('OK');
         await clickText('list1', scope.blocksTab);
     });
+
+    test('Use variable blocks after switching languages', async () => {
+        const myVariable = 'my\u00A0variable';
+        const changeVariableByScope = "*[@data-id='data_changevariableby']";
+
+        await loadUri(uri);
+
+        await clickText('Code');
+        await clickBlocksCategory('Variables');
+
+        // change "my variable" by 1
+        await clickText('change', changeVariableByScope);
+
+        // check reported value 1
+        await clickText(myVariable, scope.blocksTab);
+        await findByText('1', scope.reportedValue);
+
+        // change language
+        await clickXpath('//*[@aria-label="language selector"]');
+        await clickText('Deutsch');
+
+        await clickText('Skripte');
+        await clickBlocksCategory('Variablen');
+
+        // make sure "my variable" is still 1
+        await clickText(myVariable);
+        await findByText('1', scope.reportedValue);
+
+        // change step from 1 to 10
+        await clickText('1', changeVariableByScope);
+        await driver.actions()
+            .sendKeys('10')
+            .perform();
+
+        // change "my variable" by 10
+        await clickText('ändere', changeVariableByScope);
+
+        // check it is turned up to 11
+        await clickText(myVariable);
+        await findByText('11', scope.reportedValue);
+    });
 });

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.10](https://github.com/LLK/scratch-gui/compare/v1.3.9...v1.3.10) (2023-01-30)
+
+
+### Bug Fixes
+
+* fix unused 'action' property in ErrorBoundary ([e1e0a8d](https://github.com/LLK/scratch-gui/commit/e1e0a8d3e7af85ba3025a7f8473ead3a68abac8e))
+* remove Sentry and add ErrorBoundary tests ([79a25ff](https://github.com/LLK/scratch-gui/commit/79a25ff5d3a0ed517c9ed341ced69bf714e6148c))
+
 ## [1.3.9](https://github.com/LLK/scratch-gui/compare/v1.3.8...v1.3.9) (2023-01-14)
 
 

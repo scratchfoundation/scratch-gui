@@ -1,0 +1,106 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.item-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-wrapper {
+    width: $menu-bar-button-size;
+    height: 100%;
+}
+
+.checkbox {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%) scale(0.675);
+}
+
+.checkbox > rect {
+    fill: $ui-white;
+    stroke: #c8c8c8;
+}
+
+.checkbox.is-checked > rect {
+    fill: $motion-primary;
+    stroke: $motion-tertiary;
+}
+
+.checkbox > path {
+    fill: transparent;
+    stroke: $ui-white;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.chart-selector-item {
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    color: $text-primary;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $ui-black-transparent;
+    border-radius: $space;
+
+    text-align: left;
+    overflow: hidden;
+}
+
+.chart-selector-item.is-selected {
+    box-shadow: 0px 0px 0px 4px $motion-transparent;
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+}
+
+.chart-selector-item:hover {
+    border: 2px solid $motion-primary;
+    background: $ui-white;
+}
+
+.chart-selector-item:hover .is-selected {
+    filter: drop-shadow(0px 0px 2px  $ui-black-transparent);
+}
+
+.chart-info {
+    font-size: 0.625rem;
+    color: $text-primary;
+}
+
+.chart-color, .chart-label {
+    min-width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.chart-color {
+    width: $menu-bar-button-size;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.chart-label {
+    padding: $space;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chart-name {
+    font-weight: bold;
+}

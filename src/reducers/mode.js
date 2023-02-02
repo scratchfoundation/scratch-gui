@@ -1,10 +1,12 @@
 const SET_FULL_SCREEN = 'scratch-gui/mode/SET_FULL_SCREEN';
 const SET_PLAYER = 'scratch-gui/mode/SET_PLAYER';
+const TOGGLE_ANALYSER = 'scratch-gui/mode/TOGGLE_ANALYSER';
 
 const initialState = {
     showBranding: false,
     isFullScreen: false,
     isPlayerOnly: false,
+    analyserVisible: false,
     hasEverEnteredEditor: true
 };
 
@@ -19,6 +21,10 @@ const reducer = function (state, action) {
         return Object.assign({}, state, {
             isPlayerOnly: action.isPlayerOnly,
             hasEverEnteredEditor: state.hasEverEnteredEditor || !action.isPlayerOnly
+        });
+    case TOGGLE_ANALYSER:
+        return Object.assign({}, state, {
+            analyserVisible: !state.analyserVisible,
         });
     default:
         return state;
@@ -37,10 +43,16 @@ const setPlayer = function (isPlayerOnly) {
         isPlayerOnly: isPlayerOnly
     };
 };
+const toggleAnalyser = function () {
+    return {
+        type: TOGGLE_ANALYSER
+    };
+};
 
 export {
     reducer as default,
     initialState as modeInitialState,
     setFullScreen,
-    setPlayer
+    setPlayer,
+    toggleAnalyser
 };

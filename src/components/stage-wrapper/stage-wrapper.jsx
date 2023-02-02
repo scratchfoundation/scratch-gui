@@ -7,12 +7,14 @@ import Box from '../box/box.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
+import Analyser from '../../containers/analyser.jsx';
 import Loader from '../loader/loader.jsx';
 
 import styles from './stage-wrapper.css';
 
 const StageWrapperComponent = function (props) {
     const {
+        analyserVisible,
         isFullScreen,
         isRtl,
         isRendererSupported,
@@ -37,8 +39,16 @@ const StageWrapperComponent = function (props) {
             </Box>
             <Box className={styles.stageCanvasWrapper}>
                 {
-                    isRendererSupported ?
+                    isRendererSupported && !analyserVisible ?
                         <Stage
+                            stageSize={stageSize}
+                            vm={vm}
+                        /> :
+                        null
+                }
+                {
+                    analyserVisible ?
+                        <Analyser
                             stageSize={stageSize}
                             vm={vm}
                         /> :
@@ -53,6 +63,7 @@ const StageWrapperComponent = function (props) {
 };
 
 StageWrapperComponent.propTypes = {
+    analyserVisible: PropTypes.bool,
     isFullScreen: PropTypes.bool,
     isRendererSupported: PropTypes.bool.isRequired,
     isRtl: PropTypes.bool.isRequired,

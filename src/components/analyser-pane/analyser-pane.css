@@ -1,0 +1,8 @@
+@import "../../css/units.css";
+
+.analyser-pane {
+    /* Makes columns for the sprite library selector + and the stage selector */
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}

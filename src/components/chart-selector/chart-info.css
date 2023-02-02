@@ -1,0 +1,27 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.chart-info {
+    padding: 0.75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: white;
+    color: $text-primary;
+    border-top-left-radius: $space;
+    border-top-right-radius: $space;
+    border-bottom: 1px solid $ui-black-transparent;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row-primary {
+    margin-bottom: 0.5rem;
+}
+
+.header-title {
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: $text-primary;
+}

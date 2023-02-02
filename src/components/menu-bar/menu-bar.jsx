@@ -30,7 +30,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
-import {setPlayer} from '../../reducers/mode';
+import {setPlayer, toggleAnalyser} from '../../reducers/mode';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -541,6 +541,23 @@ class MenuBar extends React.Component {
                                         </MenuItem>
                                     )}</TurboMode>
                                 </MenuSection>
+                                <MenuSection>
+                                    <MenuItem onClick={this.props.onToggleAnalyser}>
+                                        {this.props.analyserVisible ? (
+                                            <FormattedMessage
+                                                defaultMessage="Turn off Data Analyser"
+                                                description="Menu bar item for turning off data analyser"
+                                                id="gui.menuBar.analyserModeOff"
+                                            />
+                                        ) : (
+                                            <FormattedMessage
+                                                defaultMessage="Turn on Data Analyser"
+                                                description="Menu bar item for turning on data analyser"
+                                                id="gui.menuBar.analyserModeOn"
+                                            />
+                                        )}
+                                    </MenuItem>
+                                </MenuSection>
                             </MenuBarMenu>
                         </div>
                     </div>
@@ -770,6 +787,7 @@ class MenuBar extends React.Component {
 MenuBar.propTypes = {
     aboutMenuOpen: PropTypes.bool,
     accountMenuOpen: PropTypes.bool,
+    analyserVisible: PropTypes.bool,
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -887,7 +905,8 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onToggleAnalyser: () => dispatch(toggleAnalyser()),
 });
 
 export default compose(

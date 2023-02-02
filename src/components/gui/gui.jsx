@@ -30,6 +30,7 @@ import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
+import AnalyserPane from '../../containers/analyser-pane.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -57,6 +58,7 @@ const GUIComponent = props => {
         accountNavOpen,
         activeTabIndex,
         alertsVisible,
+        analyserVisible,
         authorId,
         authorThumbnailUrl,
         authorUsername,
@@ -208,6 +210,7 @@ const GUIComponent = props => {
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}
+                    analyserVisible={analyserVisible}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
@@ -341,6 +344,7 @@ const GUIComponent = props => {
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
+                                analyserVisible={analyserVisible}
                                 isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
@@ -348,10 +352,20 @@ const GUIComponent = props => {
                                 vm={vm}
                             />
                             <Box className={styles.targetWrapper}>
-                                <TargetPane
-                                    stageSize={stageSize}
-                                    vm={vm}
-                                />
+                            {
+                                analyserVisible ? null :
+                                    <TargetPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    />
+                            }
+                            {
+                                analyserVisible ?
+                                    <AnalyserPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    /> : null
+                            }
                             </Box>
                         </Box>
                     </Box>
@@ -365,6 +379,7 @@ const GUIComponent = props => {
 GUIComponent.propTypes = {
     accountNavOpen: PropTypes.bool,
     activeTabIndex: PropTypes.number,
+    analyserVisible: PropTypes.bool,
     authorId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
@@ -426,6 +441,7 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
+    analyserVisible: false,
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
@@ -447,6 +463,7 @@ GUIComponent.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    analyserVisible: state.scratchGui.mode.analyserVisible,
     // This is the button's mode, as opposed to the actual current state
     stageSizeMode: state.scratchGui.stageSize.stageSize
 });

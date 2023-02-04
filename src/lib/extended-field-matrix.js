@@ -135,7 +135,7 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
             const rows = rowObjects.length;
             const cols = rowObjects[0].length;
             this.setMatrixSize(rows, cols);
-            matrix = matrix.replace(':', '');
+            matrix = matrix.replaceAll(':', '');
         }
         if (matrix === this.matrix_) {
             return; // No change

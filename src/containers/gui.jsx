@@ -25,6 +25,11 @@ import {
     openExtensionLibrary
 } from '../reducers/modals';
 
+import {
+    showStandardAlert,
+    closeAlertWithId
+} from '../reducers/alerts';
+
 import FontLoaderHOC from '../lib/font-loader-hoc.jsx';
 import LocalizationHOC from '../lib/localization-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
@@ -45,6 +50,8 @@ class GUI extends React.Component {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
+        this.props.vm.runtime.on('showAlert', this.props.onShowAlert);
+        this.props.vm.runtime.on('closeAlert', this.props.onCloseAlert);
     }
     componentDidUpdate (prevProps) {
         if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
@@ -69,7 +76,9 @@ class GUI extends React.Component {
             isError,
             isScratchDesktop,
             isShowingProject,
+            onCloseAlert,
             onProjectLoaded,
+            onShowAlert,
             onStorageInit,
             onUpdateProjectId,
             onVmInit,
@@ -161,7 +170,9 @@ const mapDispatchToProps = dispatch => ({
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
     onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal())
+    onRequestCloseTelemetryModal: () => dispatch(closeTelemetryModal()),
+    onShowAlert: alertId => dispatch(showStandardAlert(alertId)),
+    onCloseAlert: alertId => dispatch(closeAlertWithId(alertId))
 });
 
 const ConnectedGUI = injectIntl(connect(

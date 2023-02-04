@@ -116,8 +116,8 @@ class LibraryItemComponent extends React.PureComponent {
                                     id="gui.extensionLibrary.dependencies"
                                 />
                                 <span style={{paddingLeft: '0.4rem', fontWeight: 'bold'}}>
-                                    {this.props.dependencies.map(([id, name], i) => (
-                                        <span key={id}>
+                                    {this.props.dependencies.map((name, i) => (
+                                        <span key={i}>
                                             {i > 1 ? ', ' : ''}
                                             {name}
                                         </span>
@@ -175,14 +175,10 @@ class LibraryItemComponent extends React.PureComponent {
 LibraryItemComponent.propTypes = {
     bluetoothRequired: PropTypes.bool,
     collaborator: PropTypes.string,
-    dependencies: PropTypes.arrayOf(
-        PropTypes.arrayOf(
-            PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.node
-            ])
-        )
-    ),
+    dependencies: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ])),
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node

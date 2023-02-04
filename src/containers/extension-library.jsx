@@ -9,7 +9,6 @@ import extensionTags from '../lib/libraries/extension-tags';
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/action-menu/icon--sprite.svg';
 import {loadExtensionLibraryContent} from '../reducers/extension-library.js';
-import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 
 const messages = defineMessages({
     extensionTitle: {
@@ -42,20 +41,10 @@ class ExtensionLibrary extends React.PureComponent {
             url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         }
         if (id && !item.disabled) {
-            if (this.props.vm.extensionManager.isExtensionLoaded(id)) {
+            if (this.props.vm.extensionManager.isExtensionLoaded(url)) {
                 this.props.onCategorySelected(id);
             } else {
-                this.props.onShowImporting();
-                const loaders = (item.dependencies || [])
-                    .filter(dependency =>
-                        !this.props.vm.extensionManager.isExtensionLoaded(dependency[0])
-                    )
-                    .map(dependency =>
-                        this.props.vm.extensionManager.loadExtensionURL(dependency[2] || dependency[0])
-                    );
-                loaders.push(this.props.vm.extensionManager.loadExtensionURL(url));
-                Promise.all(loaders).then(() => {
-                    this.props.onCloseImporting();
+                this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
                     this.props.onCategorySelected(id);
                 });
             }
@@ -86,8 +75,6 @@ ExtensionLibrary.propTypes = {
     onCategorySelected: PropTypes.func,
     onLoadExtensionLibraryContent: PropTypes.func,
     onRequestClose: PropTypes.func,
-    onCloseImporting: PropTypes.func,
-    onShowImporting: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types
 };
@@ -97,9 +84,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onLoadExtensionLibraryContent: lang => loadExtensionLibraryContent(lang).then(dispatch),
-    onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
-    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
+    onLoadExtensionLibraryContent: lang => loadExtensionLibraryContent(lang).then(dispatch)
 });
 
 export default compose(

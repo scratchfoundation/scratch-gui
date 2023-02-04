@@ -36,11 +36,9 @@ const extensionConnectionConfig = (extension, remoteUrl) => (
 const extensionDependencyConfig = (dependencies, remoteExtensions) => (
     dependencies ? {
         dependencies: dependencies.map(extensionId => (
-            builtinExtensions[extensionId] ? [
-                extensionId, builtinExtensions[extensionId].name
-            ] : [
-                extensionId, remoteExtensions[extensionId].name, `${REMOTE_URL}/extensions/${extensionId}/index.js`
-            ]
+            builtinExtensions[extensionId] ?
+                builtinExtensions[extensionId].name :
+                remoteExtensions[extensionId].name
         ))
     } : {}
 );

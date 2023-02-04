@@ -1,6 +1,13 @@
 import ScratchBlocks from 'scratch-blocks';
 
 /**
+ * Extendeds blocks.
+ */
+import ExtendedFieldMatrix from './extended-field-matrix.js';
+
+ScratchBlocks.FieldMatrix = ExtendedFieldMatrix;
+
+/**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
  * @return {ScratchBlocks} ScratchBlocks connected with the vm

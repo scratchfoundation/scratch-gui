@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import VM from 'scratch-vm';
 import {selectLocale} from '../reducers/locales';
 import {closeLanguageMenu} from '../reducers/menus';
 
@@ -20,7 +19,6 @@ class LanguageSelector extends React.Component {
         const newLocale = e.target.value;
         if (this.props.messagesByLocale[newLocale]) {
             this.props.onChangeLanguage(newLocale);
-            this.props.vm.extensionManager.refreshBlocks(newLocale);
             document.documentElement.lang = newLocale;
         }
     }
@@ -47,7 +45,6 @@ LanguageSelector.propTypes = {
     currentLocale: PropTypes.string.isRequired,
     // Only checking key presence for messagesByLocale, no need to be more specific than object
     messagesByLocale: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    vm: PropTypes.instanceOf(VM).isRequired,
     onChangeLanguage: PropTypes.func.isRequired
 };
 

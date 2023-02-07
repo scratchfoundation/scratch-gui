@@ -424,7 +424,6 @@ class MenuBar extends React.Component {
                                 <LanguageSelector
                                     label={this.props.intl.formatMessage(ariaMessages.language)}
                                     isRtl={this.props.isRtl}
-                                    vm={this.props.vm}
                                 />
                             </MenuBarMenu>
                         </div>)}
@@ -446,14 +445,12 @@ class MenuBar extends React.Component {
                                     place={this.props.isRtl ? 'left' : 'right'}
                                     onRequestClose={this.props.onRequestCloseFile}
                                 >
-                                    {/* <MenuSection> */}
-                                        <MenuItem
-                                            isRtl={this.props.isRtl}
-                                            onClick={this.handleClickNew}
-                                        >
-                                            {newProjectMessage}
-                                        </MenuItem>
-                                    {/* </MenuSection> */}
+                                    <MenuItem
+                                        isRtl={this.props.isRtl}
+                                        onClick={this.handleClickNew}
+                                    >
+                                        {newProjectMessage}
+                                    </MenuItem>
                                     {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
                                         <MenuSection>
                                             {this.props.canSave && (

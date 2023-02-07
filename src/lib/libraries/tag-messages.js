@@ -146,6 +146,16 @@ export default defineMessages({
         description: 'Tag for filtering a library for media',
         id: 'gui.libraryTags.media'
     },
+    kit: {
+        defaultMessage: 'Kit',
+        description: 'Tag for filtering a library for kit',
+        id: 'gui.libraryTags.kit'
+    },
+    robot: {
+        defaultMessage: 'Robot',
+        description: 'Tag for filtering a library for robot',
+        id: 'gui.libraryTags.robot'
+    },
     iot: {
         defaultMessage: 'IoT',
         description: 'Tag for filtering a library for IoT',

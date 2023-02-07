@@ -1,6 +1,7 @@
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
+import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 import SB3Downloader from './sb3-downloader.jsx';
 import AlertComponent from '../components/alerts/alert.jsx';
@@ -21,6 +22,7 @@ class Alert extends React.Component {
     }
     handleOnReconnect () {
         this.props.onOpenConnectionModal(this.props.extensionId);
+        this.props.vm.scanForPeripheral(this.props.extensionId);
         this.handleOnCloseAlert();
     }
     render () {
@@ -66,7 +68,7 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({
     onOpenConnectionModal: id => {
         dispatch(setConnectionModalExtensionId(id));
-        dispatch(openConnectionModal());
+        // dispatch(openConnectionModal());
     },
     onSaveNow: () => {
         dispatch(manualUpdateProject());
@@ -88,7 +90,8 @@ Alert.propTypes = {
     onSaveNow: PropTypes.func,
     showDownload: PropTypes.bool,
     showReconnect: PropTypes.bool,
-    showSaveNow: PropTypes.bool
+    showSaveNow: PropTypes.bool,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 export default connect(

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {
@@ -12,20 +13,23 @@ import AlertsComponent from '../components/alerts/alerts.jsx';
 const Alerts = ({
     alertsList,
     className,
-    onCloseAlert
+    onCloseAlert,
+    vm
 }) => (
     <AlertsComponent
         // only display standard and extension alerts here
         alertsList={filterPopupAlerts(alertsList)}
         className={className}
         onCloseAlert={onCloseAlert}
+        vm={vm}
     />
 );
 
 Alerts.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
-    onCloseAlert: PropTypes.func
+    onCloseAlert: PropTypes.func,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 const mapStateToProps = state => ({

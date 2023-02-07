@@ -26,6 +26,7 @@ const vmListenerHOC = function (WrappedComponent) {
                 'handleKeyDown',
                 'handleKeyUp',
                 'handleProjectChanged',
+                'handleShowExtensionAlert',
                 'handleTargetsUpdate'
             ]);
             // We have to start listening to the vm here rather than in
@@ -44,7 +45,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('PROJECT_CHANGED', this.handleProjectChanged);
             this.props.vm.on('RUNTIME_STARTED', this.props.onRuntimeStarted);
             this.props.vm.on('PROJECT_START', this.props.onGreenFlag);
-            this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
+            this.props.vm.on('PERIPHERAL_CONNECTION_LOST_ERROR', this.handleShowExtensionAlert);
             this.props.vm.on('MIC_LISTENING', this.props.onMicListeningUpdate);
 
         }
@@ -67,11 +68,15 @@ const vmListenerHOC = function (WrappedComponent) {
             }
         }
         componentWillUnmount () {
-            this.props.vm.removeListener('PERIPHERAL_CONNECTION_LOST_ERROR', this.props.onShowExtensionAlert);
+            this.props.vm.removeListener('PERIPHERAL_CONNECTION_LOST_ERROR', this.handleShowExtensionAlert);
             if (this.props.attachKeyboardEvents) {
                 document.removeEventListener('keydown', this.handleKeyDown);
                 document.removeEventListener('keyup', this.handleKeyUp);
             }
+        }
+        handleShowExtensionAlert (data) {
+            data.extension = this.props.extensionData.find(ext => ext.extensionId === data.extensionId);
+            this.props.onShowExtensionAlert(data);
         }
         handleProjectChanged () {
             if (this.props.shouldUpdateProjectChanged && !this.props.projectChanged) {
@@ -117,6 +122,7 @@ const vmListenerHOC = function (WrappedComponent) {
             const {
                 /* eslint-disable no-unused-vars */
                 attachKeyboardEvents,
+                extensionData,
                 projectChanged,
                 shouldUpdateTargets,
                 shouldUpdateProjectChanged,
@@ -143,6 +149,7 @@ const vmListenerHOC = function (WrappedComponent) {
     }
     VMListener.propTypes = {
         attachKeyboardEvents: PropTypes.bool,
+        extensionData: PropTypes.arrayOf(PropTypes.object).isRequired,
         onBlockDragUpdate: PropTypes.func.isRequired,
         onGreenFlag: PropTypes.func,
         onKeyDown: PropTypes.func,
@@ -169,6 +176,7 @@ const vmListenerHOC = function (WrappedComponent) {
         onGreenFlag: () => ({})
     };
     const mapStateToProps = state => ({
+        extensionData: state.scratchGui.extensionLibrary.extensions,
         projectChanged: state.scratchGui.projectChanged,
         // Do not emit target or project updates in fullscreen or player only mode
         // or when recording sounds (it leads to garbled recordings on low-power machines)

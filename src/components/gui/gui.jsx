@@ -153,7 +153,10 @@ const GUIComponent = props => {
                 vm={vm}
             >
                 {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
+                    <Alerts
+                        className={styles.alertsContainer}
+                        vm={vm}
+                    />
                 ) : null}
             </StageWrapper>
         ) : (
@@ -189,7 +192,10 @@ const GUIComponent = props => {
                     <Cards />
                 ) : null}
                 {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
+                    <Alerts
+                        className={styles.alertsContainer}
+                        vm={vm}
+                    />
                 ) : null}
                 {connectionModalVisible ? (
                     <ConnectionModal
@@ -352,20 +358,18 @@ const GUIComponent = props => {
                                 vm={vm}
                             />
                             <Box className={styles.targetWrapper}>
-                            {
-                                analyserVisible ? null :
+                                {analyserVisible ? null : (
                                     <TargetPane
                                         stageSize={stageSize}
                                         vm={vm}
                                     />
-                            }
-                            {
-                                analyserVisible ?
+                                )}
+                                {analyserVisible ? (
                                     <AnalyserPane
                                         stageSize={stageSize}
                                         vm={vm}
-                                    /> : null
-                            }
+                                    />
+                                ) : null}
                             </Box>
                         </Box>
                     </Box>

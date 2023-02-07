@@ -11,7 +11,6 @@ import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
-import extensionData from '../lib/libraries/extensions/index.jsx';
 import CustomProcedures from './custom-procedures.jsx';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {BLOCKS_DEFAULT_SCALE, STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
@@ -467,7 +466,7 @@ class Blocks extends React.Component {
         this.handleExtensionAdded(categoryInfo);
     }
     handleCategorySelected (categoryId) {
-        const extension = extensionData.find(ext => ext.extensionId === categoryId);
+        const extension = this.props.extensionData.find(ext => ext.extensionId === categoryId);
         if (extension && extension.launchPeripheralConnectionFlow) {
             this.handleConnectionModalStart(categoryId);
         }
@@ -494,6 +493,7 @@ class Blocks extends React.Component {
     }
     handleConnectionModalStart (extensionId) {
         this.props.onOpenConnectionModal(extensionId);
+        this.props.vm.scanForPeripheral(extensionId);
     }
     handleStatusButtonUpdate () {
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
@@ -538,6 +538,7 @@ class Blocks extends React.Component {
             anyModalVisible,
             canUseCloud,
             customProceduresVisible,
+            extensionData,
             extensionLibraryVisible,
             options,
             stageSize,
@@ -602,6 +603,7 @@ Blocks.propTypes = {
     anyModalVisible: PropTypes.bool,
     canUseCloud: PropTypes.bool,
     customProceduresVisible: PropTypes.bool,
+    extensionData: PropTypes.arrayOf(PropTypes.object).isRequired,
     extensionLibraryVisible: PropTypes.bool,
     isRtl: PropTypes.bool,
     isVisible: PropTypes.bool,
@@ -683,6 +685,7 @@ const mapStateToProps = state => ({
         Object.keys(state.scratchGui.modals).some(key => state.scratchGui.modals[key]) ||
         state.scratchGui.mode.isFullScreen
     ),
+    extensionData: state.scratchGui.extensionLibrary.extensions,
     extensionLibraryVisible: state.scratchGui.modals.extensionLibrary,
     isRtl: state.locales.isRtl,
     locale: state.locales.locale,
@@ -697,7 +700,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
     onOpenConnectionModal: id => {
         dispatch(setConnectionModalExtensionId(id));
-        dispatch(openConnectionModal());
+        // dispatch(openConnectionModal());
     },
     onOpenSoundRecorder: () => {
         dispatch(activateTab(SOUNDS_TAB_INDEX));

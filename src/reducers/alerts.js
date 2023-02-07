@@ -1,5 +1,4 @@
 import alertsData, {AlertTypes, AlertLevels} from '../lib/alerts/index.jsx';
-import extensionData from '../lib/libraries/extensions/index.jsx';
 
 const SHOW_ALERT = 'scratch-gui/alerts/SHOW_ALERT';
 const SHOW_EXTENSION_ALERT = 'scratch-gui/alerts/SHOW_EXTENSION_ALERT';
@@ -76,26 +75,23 @@ const reducer = function (state, action) {
         return state; // if alert not found, show nothing
     }
     case SHOW_EXTENSION_ALERT: {
-        const extensionId = action.data.extensionId;
-        if (extensionId) {
-            const extension = extensionData.find(ext => ext.extensionId === extensionId);
-            if (extension) {
-                const newList = state.alertsList.slice();
-                const newAlert = {
-                    alertType: AlertTypes.EXTENSION,
-                    closeButton: true,
-                    extensionId: extensionId,
-                    extensionName: extension.name,
-                    iconURL: extension.connectionSmallIconURL,
-                    level: AlertLevels.WARN,
-                    showReconnect: true
-                };
-                newList.push(newAlert);
+        const extension = action.data.extension;
+        if (extension) {
+            const newList = state.alertsList.slice();
+            const newAlert = {
+                alertType: AlertTypes.EXTENSION,
+                closeButton: true,
+                extensionId: extension.extensionId,
+                extensionName: extension.name,
+                iconURL: extension.connectionSmallIconURL,
+                level: AlertLevels.WARN,
+                showReconnect: true
+            };
+            newList.push(newAlert);
 
-                return Object.assign({}, state, {
-                    alertsList: newList
-                });
-            }
+            return Object.assign({}, state, {
+                alertsList: newList
+            });
         }
         return state; // if alert not found, show nothing
     }

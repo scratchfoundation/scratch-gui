@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
 import Alert from '../../containers/alert.jsx';
@@ -9,7 +10,8 @@ import styles from './alerts.css';
 const AlertsComponent = ({
     alertsList,
     className,
-    onCloseAlert
+    onCloseAlert,
+    vm
 }) => (
     <Box
         bounds="parent"
@@ -32,6 +34,7 @@ const AlertsComponent = ({
                     showReconnect={a.showReconnect}
                     showSaveNow={a.showSaveNow}
                     onCloseAlert={onCloseAlert}
+                    vm={vm}
                 />
             ))}
         </Box>
@@ -41,7 +44,8 @@ const AlertsComponent = ({
 AlertsComponent.propTypes = {
     alertsList: PropTypes.arrayOf(PropTypes.object),
     className: PropTypes.string,
-    onCloseAlert: PropTypes.func
+    onCloseAlert: PropTypes.func,
+    vm: PropTypes.instanceOf(VM).isRequired
 };
 
 export default AlertsComponent;

@@ -65,6 +65,7 @@
 }
 
 .blocks :global(.blocklyFlyout) {
+    padding-right: 2px;
     border-right: 1px solid $ui-black-transparent;
     box-sizing: content-box;
 }
@@ -78,8 +79,12 @@
     overflow: unset;
 }
 
-.blocks :global(.blocklyFlyout:hover) :global(.blocklyWorkspace) {
+.blocks :global(.blocklyFlyout) :global(.blocklyWorkspace) {
     clip-path: none;
+}
+
+.blocks [style="overflow: visible;"] :global(.blocklyFlyout:hover) {
+    overflow: hidden;
 }
 
 .blocks :global(.blocklyBlockDragSurface) {

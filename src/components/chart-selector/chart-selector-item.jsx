@@ -11,72 +11,84 @@ import styles from './chart-selector-item.css';
 // react-contextmenu requires unique id to match trigger and context menu
 let contextMenuId = 0;
 
-const ChartSelectorItemComponent = props => (
-    <ContextMenuTrigger
-        attributes={{
-            className: classNames(props.className, styles.itemWrapper),
-            onClick: e => {
-                e.stopPropagation();
-                props.onClick(props.id);
-            }
-        }}
-        id={`${props.id}-${contextMenuId}`}
-    >
-        <div
-            className={styles.checkboxWrapper}
-            onClick={() => props.onVisibleCheckboxClick(props.id)}
-        >
-            <svg
-                className={classNames(styles.checkbox, {
-                    [styles.isChecked]: props.visible
-                })}
-            >
-                <rect
-                    height="25"
-                    width="25"
-                    rx="5"
-                    ry="5"
-                />
-                <path
-                    d="M6.25 12.5L10.416666666666666 16.666666666666668L18.75 8.333333333333334"
-                />
-            </svg>
-        </div>
-        <div
-            className={classNames(styles.chartSelectorItem, {
-                [styles.isSelected]: props.selected
-            })}
-            style={props.selected ? {} : {
-                borderColor: props.color
+const ChartSelectorItemComponent = props => {
+    const handleVisibleCheckboxClick = () => {
+        props.onVisibleCheckboxClick(props.id);
+    };
+    const handleExportButtonClick = () => {
+        props.onExportButtonClick(props.id);
+    };
+    return (
+        <ContextMenuTrigger
+            attributes={{
+                className: classNames(props.className, styles.itemWrapper),
+                onClick: e => {
+                    e.stopPropagation();
+                    props.onClick(props.id);
+                }
             }}
+            id={`${props.id}-${contextMenuId}`}
         >
-            <div className={styles.chartInfo}>
-                <div
-                    className={styles.chartColor}
-                    style={{
-                        backgroundColor: props.color,
-                        borderColor: props.color
-                    }}
-                />
-                <div className={classNames(styles.chartLabel, styles.chartName)}>{props.label}</div>
+            <div
+                className={styles.checkboxWrapper}
+                // eslint-disable-next-line react/jsx-no-bind
+                onClick={handleVisibleCheckboxClick}
+            >
+                <svg
+                    className={classNames(styles.checkbox, {
+                        [styles.isChecked]: props.visible
+                    })}
+                >
+                    <rect
+                        height="25"
+                        width="25"
+                        rx="5"
+                        ry="5"
+                    />
+                    <path
+                        d="M6.25 12.5L10.416666666666666 16.666666666666668L18.75 8.333333333333334"
+                    />
+                </svg>
             </div>
-            <div className={styles.chartInfo}>
-                <div className={styles.chartLabel}>{props.data.at(-1)}</div>
+            <div
+                className={classNames(styles.chartSelectorItem, {
+                    [styles.isSelected]: props.selected
+                })}
+                style={props.selected ? {} : {
+                    borderColor: props.color
+                }}
+            >
+                <div className={styles.chartInfo}>
+                    <div
+                        className={styles.chartColor}
+                        style={{
+                            backgroundColor: props.color,
+                            borderColor: props.color
+                        }}
+                    />
+                    <div className={classNames(styles.chartLabel, styles.chartName)}>{props.label}</div>
+                </div>
+                <div className={styles.chartInfo}>
+                    <div className={styles.chartLabel}>{`${props.data.at(-1)}`}</div>
+                </div>
+                {props.onExportButtonClick ? (
+                    <ContextMenu id={`${props.id}-${contextMenuId++}`}>
+                        <MenuItem
+                            // eslint-disable-next-line react/jsx-no-bind
+                            onClick={handleExportButtonClick}
+                        >
+                            <FormattedMessage
+                                defaultMessage="export"
+                                description="Menu item to export the selected item"
+                                id="gui.spriteSelectorItem.contextMenuExport"
+                            />
+                        </MenuItem>
+                    </ContextMenu>
+                ) : null}
             </div>
-            {props.onExportButtonClick ? (
-                <ContextMenu id={`${props.id}-${contextMenuId++}`}>
-                    <MenuItem onClick={() => props.onExportButtonClick(props.id)}>
-                        <FormattedMessage
-                            defaultMessage="export"
-                            description="Menu item to export the selected item"
-                            id="gui.spriteSelectorItem.contextMenuExport"
-                        />
-                    </MenuItem>
-                </ContextMenu>
-            ) : null}
-        </div>
-    </ContextMenuTrigger>
-);
+        </ContextMenuTrigger>
+    )
+};
 
 ChartSelectorItemComponent.propTypes = {
     className: PropTypes.string,

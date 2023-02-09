@@ -2,13 +2,14 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import VM from 'scratch-vm';
-import {connect} from 'react-redux';
 import Chart from 'chart.js/auto';
+import {connect} from 'react-redux';
+import {OrderedMap} from 'immutable';
 
 import AnalyserComponent from '../components/analyser/analyser.jsx';
 import monitorAdapter from '../lib/monitor-adapter.js';
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
-import { updateCharts } from '../reducers/charts';
+import {updateCharts} from '../reducers/charts';
 
 const NOT_FOUND = -1;
 const DATA_CACHE_LENGTH = 2 ** 10;
@@ -16,7 +17,7 @@ const DATA_CACHE_LENGTH = 2 ** 10;
 const CHART_CONFIG = {
     animation: false,
     interaction: {
-        intersect: false,
+        intersect: false
     },
     scales: {
         x: {
@@ -26,10 +27,10 @@ const CHART_CONFIG = {
             suggestedMin: 0,
             suggestedMax: 1,
             grid: {
-                color: ctx => ctx.tick.value === 0 ?
+                color: ctx => (ctx.tick.value === 0 ?
                     Chart.defaults.color :
-                    Chart.defaults.borderColor
-            },
+                    Chart.defaults.borderColor)
+            }
         }
     },
     layout: {
@@ -63,6 +64,7 @@ class Analyser extends React.Component {
         super(props);
         bindAll(this, [
             'handleProjectStart',
+            'update'
         ]);
         this.canvas = document.createElement('canvas');
         this._usedColors = [];
@@ -71,18 +73,18 @@ class Analyser extends React.Component {
         this._chart = this.newChart();
         this.props.vm.runtime.on('PROJECT_START', this.handleProjectStart);
         this.props.vm.runtime.on('PROJECT_LOADED', this.handleProjectStart);
+        this.props.vm.runtime.on('RUNTIME_STEP', this.update);
         this.update(true);
-        this.start();
     }
-    componentWillUnmount() {
-        this.stop();
-        this.props.vm.runtime.on('PROJECT_LOADED', this.handleProjectStart);
-        this.props.vm.runtime.off('PROJECT_LOADED', this.handleProjectStart);
-        this._chart.destroy();
-    }
-    shouldComponentUpdate (nextProps, nextState) {
+    shouldComponentUpdate (nextProps) {
         return this.props.stageSize !== nextProps.stageSize ||
             this.props.isFullScreen !== nextProps.isFullScreen;
+    }
+    componentWillUnmount () {
+        this.props.vm.runtime.off('PROJECT_START', this.handleProjectStart);
+        this.props.vm.runtime.off('PROJECT_LOADED', this.handleProjectStart);
+        this.props.vm.runtime.off('RUNTIME_STEP', this.update);
+        this._chart.destroy();
     }
     _randomColor () {
         const h = randomInt(0, 24) * 15;
@@ -98,19 +100,6 @@ class Analyser extends React.Component {
     handleProjectStart () {
         this.update(true);
     }
-    start () {
-        const step = typeof this.props.vm.runtime._step['@original'] === 'function' ?
-            this.props.vm.runtime._step['@original'] :
-            this.props.vm.runtime._step.bind(this.props.vm.runtime);
-        this.props.vm.runtime._step = () => {
-            step();
-            this.update();
-        }
-        this.props.vm.runtime._step['@original'] = step;
-    }
-    stop () {
-        this.props.vm.runtime._step = this.props.vm.runtime._step['@original'];
-    }
     newChart () {
         if (this._chart) {
             return this._chart;
@@ -118,11 +107,10 @@ class Analyser extends React.Component {
 
         this._analyserWidth = this.props.vm.runtime.constructor.STAGE_WIDTH;
 
-        this.props.onChartsUpdate(this.props.charts
-            .map(analyserData => {
-                analyserData.index = NOT_FOUND;
-                return analyserData;
-            }));
+        this.props.onChartsUpdate(this.props.charts.map(analyserData => {
+            analyserData.index = NOT_FOUND;
+            return analyserData;
+        }));
 
         return new Chart(this.canvas, {
             type: 'line',
@@ -136,69 +124,68 @@ class Analyser extends React.Component {
     update (renew) {
         if (!this._chart) return;
 
-        this.props.onChartsUpdate(this.props.monitors
-            .map(monitorData => {
-                const monitorProps = monitorAdapter({
-                    id: monitorData.id,
-                    opcode: monitorData.opcode,
-                    params: monitorData.params,
-                    spriteName: monitorData.spriteName,
-                    value: monitorData.value,
-                    vm: this.props.vm
-                });
+        this.props.onChartsUpdate(this.props.monitors.map(monitorData => {
+            const monitorProps = monitorAdapter({
+                id: monitorData.id,
+                opcode: monitorData.opcode,
+                params: monitorData.params,
+                spriteName: monitorData.spriteName,
+                value: monitorData.value,
+                vm: this.props.vm
+            });
 
-                const analyserData = this.props.charts.get(monitorProps.id) || {
-                    color: this._randomColor(),
-                    chart: new Array(this._analyserWidth).fill(NaN),
-                    data: new Array(),
-                    id: monitorProps.id,
-                    index: NOT_FOUND,
-                    label: monitorProps.label,
-                    visible: monitorData.visible
-                };
-                analyserData.enable = monitorData.visible;
+            const analyserData = this.props.charts.get(monitorProps.id) || {
+                color: this._randomColor(),
+                chart: new Array(this._analyserWidth).fill(NaN),
+                data: new Array(),
+                id: monitorProps.id,
+                index: NOT_FOUND,
+                label: monitorProps.label,
+                visible: monitorData.visible
+            };
+            analyserData.enable = monitorData.visible;
 
-                if (renew || !monitorData.visible) {
-                    analyserData.chart.fill(NaN);
-                    analyserData.data.length = 0;
-                } else {
-                    analyserData.chart.shift();
-                    analyserData.chart.push(monitorProps.value);
-                    analyserData.data.push(monitorProps.value);
-                    if (analyserData.data.length > DATA_CACHE_LENGTH) {
-                        analyserData.data.shift();
-                    }
+            if (renew || !monitorData.visible) {
+                analyserData.chart.fill(NaN);
+                analyserData.data.length = 0;
+            } else {
+                analyserData.chart.shift();
+                analyserData.chart.push(monitorProps.value);
+                analyserData.data.push(monitorProps.value);
+                if (analyserData.data.length > DATA_CACHE_LENGTH) {
+                    analyserData.data.shift();
                 }
+            }
 
-                if (analyserData.index === NOT_FOUND) {
-                    analyserData.index = this._chart.data.datasets.push({
-                        backgroundColor: analyserData.color,
-                        borderColor: analyserData.color,
-                        data: analyserData.chart,
-                        label: analyserData.label,
-                        ...LINE_CONFIG
-                    }) - 1;
-                }
+            if (analyserData.index === NOT_FOUND) {
+                analyserData.index = this._chart.data.datasets.push({
+                    backgroundColor: analyserData.color,
+                    borderColor: analyserData.color,
+                    data: analyserData.chart,
+                    label: analyserData.label,
+                    ...LINE_CONFIG
+                }) - 1;
+            }
 
-                this._chart.data.datasets[analyserData.index].hidden =
-                    !(analyserData.enable && analyserData.visible);
-                this._chart.data.datasets[analyserData.index].borderWidth =
-                    this.props.isFullScreen ? 3 : (this.props.stageSize === 'large' ? 2 : 1);
+            this._chart.data.datasets[analyserData.index].hidden =
+                !(analyserData.enable && analyserData.visible);
+            this._chart.data.datasets[analyserData.index].borderWidth =
+                this.props.isFullScreen ? 3 : (this.props.stageSize === 'large' ? 2 : 1);
 
-                if (analyserData.selected) {
-                    this._chart.data.datasets[analyserData.index].borderWidth += 1;
-                }
+            if (analyserData.selected) {
+                this._chart.data.datasets[analyserData.index].borderWidth += 1;
+            }
 
-                return analyserData;
-            }));
+            return analyserData;
+        }));
 
         this._chart.update();
     }
     render () {
         const {
-            onChartsUpdate,
+            onChartsUpdate, // eslint-disable-line no-unused-vars
             ...componentProps
-        } = this.props
+        } = this.props;
         return (
             <AnalyserComponent
                 canvas={this.canvas}
@@ -209,6 +196,8 @@ class Analyser extends React.Component {
 }
 
 Analyser.propTypes = {
+    charts: PropTypes.instanceOf(OrderedMap),
+    monitors: PropTypes.instanceOf(OrderedMap),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     isFullScreen: PropTypes.bool.isRequired,
     onChartsUpdate: PropTypes.func,

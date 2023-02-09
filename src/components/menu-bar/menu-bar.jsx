@@ -30,7 +30,10 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
-import {setPlayer, toggleAnalyser} from '../../reducers/mode';
+import {
+    setPlayer,
+    toggleAnalyser
+} from '../../reducers/mode';
 import {
     autoUpdateProject,
     getIsUpdating,
@@ -170,15 +173,35 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
+            'getAddonMenuItemHandler',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'setAddonMenuItems'
         ]);
+        this.state = {
+            addonMenuItems: {
+                fileMenu: new Map(),
+                editMenu: new Map()
+            }
+        };
     }
     componentDidMount () {
         document.addEventListener('keydown', this.handleKeyPress);
+        this.props.vm.runtime.on('ADDON_MENU_ITEMS', this.setAddonMenuItems);
     }
     componentWillUnmount () {
         document.removeEventListener('keydown', this.handleKeyPress);
+        this.props.vm.runtime.off('ADDON_MENU_ITEMS', this.setAddonMenuItems);
+    }
+    setAddonMenuItems (options) {
+        const addonMenuItems = this.state.addonMenuItems;
+        options.forEach(item => {
+            const {type, name, eventName} = item;
+            const menuItems = addonMenuItems[`${type}Menu`];
+            if (!menuItems || menuItems.has(name)) return;
+            menuItems.set(name, eventName);
+        });
+        this.setState(addonMenuItems);
     }
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
@@ -241,6 +264,17 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
+    getAddonMenuItemHandler (eventName, type) {
+        return () => {
+            this.props.vm.runtime.emit(eventName);
+            if (type === 'file') {
+                this.props.onRequestCloseFile();
+            }
+            if (type === 'edit') {
+                this.props.onRequestCloseEdit();
+            }
+        };
+    }
     getSaveToComputerHandler (downloadProjectCallback) {
         return () => {
             this.props.onRequestCloseFile();
@@ -284,6 +318,25 @@ class MenuBar extends React.Component {
             />);
         }
         }
+    }
+    buildAddonMenuItems (type) {
+        const addonMenuItems = this.state.addonMenuItems;
+        const menuItems = Array.from(addonMenuItems[`${type}Menu`].entries());
+        if (menuItems.length === 0) {
+            return null;
+        }
+        return (
+            <MenuSection>
+                {menuItems.map(([itemName, eventName], index) => (
+                    <MenuItem
+                        key={index}
+                        onClick={this.getAddonMenuItemHandler(eventName, type)}
+                    >
+                        {itemName}
+                    </MenuItem>
+                ))}
+            </MenuSection>
+        );
     }
     buildAboutMenu (onClickAbout) {
         if (!onClickAbout) {
@@ -489,6 +542,7 @@ class MenuBar extends React.Component {
                                             </MenuItem>
                                         )}</SB3Downloader>
                                     </MenuSection>
+                                    {this.buildAddonMenuItems('file')}
                                 </MenuBarMenu>
                             </div>
                         )}
@@ -555,6 +609,7 @@ class MenuBar extends React.Component {
                                         )}
                                     </MenuItem>
                                 </MenuSection>
+                                {this.buildAddonMenuItems('edit')}
                             </MenuBarMenu>
                         </div>
                     </div>
@@ -903,7 +958,7 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onToggleAnalyser: () => dispatch(toggleAnalyser()),
+    onToggleAnalyser: () => dispatch(toggleAnalyser())
 });
 
 export default compose(

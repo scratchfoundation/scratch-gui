@@ -183,6 +183,7 @@ class Analyser extends React.Component {
         const {
             /* eslint-disable no-unused-vars */
             charts,
+            monitors,
             onChartsUpdate,
             /* eslint-enable no-unused-vars */
             ...componentProps
@@ -197,8 +198,8 @@ class Analyser extends React.Component {
 }
 
 Analyser.propTypes = {
-    charts: PropTypes.instanceOf(OrderedMap),
-    monitors: PropTypes.instanceOf(OrderedMap),
+    charts: PropTypes.objectOf(OrderedMap),
+    monitors: PropTypes.objectOf(OrderedMap),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     isFullScreen: PropTypes.bool.isRequired,
     onChartsUpdate: PropTypes.func,

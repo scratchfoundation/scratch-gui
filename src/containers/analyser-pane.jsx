@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import {OrderedMap} from 'immutable';
 
 import AnalyserPaneComponent from '../components/analyser-pane/analyser-pane.jsx';
 import downloadBlob from '../lib/download-blob';
@@ -50,9 +51,11 @@ class AnalyserPane extends React.Component {
     }
     render () {
         const {
+            /* eslint-disable no-unused-vars */
             onChartsUpdate,
+            /* eslint-enable no-unused-vars */
             ...componentProps
-        } = this.props
+        } = this.props;
         return (
             <AnalyserPaneComponent
                 {...componentProps}
@@ -65,6 +68,7 @@ class AnalyserPane extends React.Component {
 }
 
 AnalyserPane.propTypes = {
+    charts: PropTypes.objectOf(OrderedMap),
     onChartsUpdate: PropTypes.func,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired
 };

@@ -53,7 +53,7 @@ const AnalyserPaneComponent = function (props) {
 };
 
 AnalyserPaneComponent.propTypes = {
-    charts: PropTypes.instanceOf(OrderedMap),
+    charts: PropTypes.objectOf(OrderedMap),
     onExportChart: PropTypes.func,
     onSelectChart: PropTypes.func,
     onToggleVisible: PropTypes.func,

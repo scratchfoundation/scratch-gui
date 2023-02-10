@@ -147,6 +147,19 @@ MenuItemTooltip.propTypes = {
     isRtl: PropTypes.bool
 };
 
+const AddonMenuItem = props => (
+    <MenuItem
+        onClick={props.onClick}
+    >
+        {`${props.text}`}
+    </MenuItem>
+);
+
+AddonMenuItem.propTypes = {
+    text: PropTypes.string,
+    onClick: PropTypes.func
+};
+
 const AboutButton = props => (
     <Button
         className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -196,12 +209,11 @@ class MenuBar extends React.Component {
     setAddonMenuItems (options) {
         const addonMenuItems = this.state.addonMenuItems;
         options.forEach(item => {
-            const {type, name, eventName} = item;
-            const menuItems = addonMenuItems[`${type}Menu`];
-            if (!menuItems || menuItems.has(name)) return;
-            menuItems.set(name, eventName);
+            const menuItems = addonMenuItems[`${item.type}Menu`];
+            if (!menuItems || menuItems.has(item.id)) return;
+            menuItems.set(item.id, item);
         });
-        this.setState(addonMenuItems);
+        this.setState(Object.assign({}, addonMenuItems));
     }
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
@@ -264,13 +276,16 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
-    getAddonMenuItemHandler (eventName, type) {
+    getAddonMenuItemHandler (options) {
         return () => {
-            this.props.vm.runtime.emit(eventName);
-            if (type === 'file') {
+            if (options.isComingSoon) {
+                return;
+            }
+            this.props.vm.runtime.emit(options.id);
+            if (options.type === 'file') {
                 this.props.onRequestCloseFile();
             }
-            if (type === 'edit') {
+            if (options.type === 'edit') {
                 this.props.onRequestCloseEdit();
             }
         };
@@ -321,19 +336,31 @@ class MenuBar extends React.Component {
     }
     buildAddonMenuItems (type) {
         const addonMenuItems = this.state.addonMenuItems;
-        const menuItems = Array.from(addonMenuItems[`${type}Menu`].entries());
+        const menuItems = Array.from(addonMenuItems[`${type}Menu`].values());
         if (menuItems.length === 0) {
             return null;
         }
         return (
             <MenuSection>
-                {menuItems.map(([itemName, eventName], index) => (
-                    <MenuItem
-                        key={index}
-                        onClick={this.getAddonMenuItemHandler(eventName, type)}
-                    >
-                        {itemName}
-                    </MenuItem>
+                {menuItems.map(options => (
+                    options.isComingSoon ? (
+                        <MenuItemTooltip
+                            key={options.id}
+                            id={options.id}
+                            isRtl={this.props.isRtl}
+                        >
+                            <AddonMenuItem
+                                text={options.text}
+                                onClick={this.getAddonMenuItemHandler(options)}
+                            />
+                        </MenuItemTooltip>
+                    ) : (
+                        <AddonMenuItem
+                            key={options.id}
+                            text={options.text}
+                            onClick={this.getAddonMenuItemHandler(options)}
+                        />
+                    )
                 ))}
             </MenuSection>
         );

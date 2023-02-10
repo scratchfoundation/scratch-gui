@@ -70,11 +70,11 @@ class Analyser extends React.Component {
         this._usedColors = [];
     }
     componentDidMount () {
-        this._chart = this.newChart();
+        this.newChart();
+        this.update(true);
         this.props.vm.runtime.on('PROJECT_START', this.handleProjectStart);
         this.props.vm.runtime.on('PROJECT_LOADED', this.handleProjectStart);
         this.props.vm.runtime.on('RUNTIME_STEP', this.update);
-        this.update(true);
     }
     shouldComponentUpdate (nextProps) {
         return this.props.stageSize !== nextProps.stageSize ||
@@ -101,9 +101,7 @@ class Analyser extends React.Component {
         this.update(true);
     }
     newChart () {
-        if (this._chart) {
-            return this._chart;
-        }
+        if (this._chart) return;
 
         this._analyserWidth = this.props.vm.runtime.constructor.STAGE_WIDTH;
 
@@ -112,7 +110,7 @@ class Analyser extends React.Component {
             return analyserData;
         }));
 
-        return new Chart(this.canvas, {
+        this._chart = new Chart(this.canvas, {
             type: 'line',
             options: CHART_CONFIG,
             data: {
@@ -183,7 +181,10 @@ class Analyser extends React.Component {
     }
     render () {
         const {
-            onChartsUpdate, // eslint-disable-line no-unused-vars
+            /* eslint-disable no-unused-vars */
+            charts,
+            onChartsUpdate,
+            /* eslint-enable no-unused-vars */
             ...componentProps
         } = this.props;
         return (

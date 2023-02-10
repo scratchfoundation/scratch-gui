@@ -16,7 +16,7 @@ const AnalyserComponent = props => {
         ...boxProps
     } = props;
 
-    const analyserDimensions = getStageDimensions(stageSize, isFullScreen);
+    const stageDimensions = getStageDimensions(stageSize, isFullScreen);
 
     return (
         <React.Fragment>
@@ -27,15 +27,15 @@ const AnalyserComponent = props => {
                         {[styles.fullScreen]: isFullScreen}
                     )}
                     style={{
-                        height: analyserDimensions.height,
-                        width: analyserDimensions.width
+                        height: stageDimensions.height,
+                        width: stageDimensions.width
                     }}
                 >
                     <DOMElementRenderer
                         domElement={canvas}
                         style={{
-                            height: analyserDimensions.height,
-                            width: analyserDimensions.width
+                            height: stageDimensions.height,
+                            width: stageDimensions.width
                         }}
                         {...boxProps}
                     />
@@ -47,6 +47,6 @@ const AnalyserComponent = props => {
 AnalyserComponent.propTypes = {
     canvas: PropTypes.instanceOf(Element).isRequired,
     isFullScreen: PropTypes.bool.isRequired,
-    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
+    stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired
 };
 export default AnalyserComponent;

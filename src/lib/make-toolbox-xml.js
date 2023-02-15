@@ -1,17 +1,19 @@
 import ScratchBlocks from 'scratch-blocks';
+import {defaultColors} from './themes';
 
 const categorySeparator = '<sep gap="36"/>';
 
 const blockSeparator = '<sep gap="36"/>'; // At default scale, about 28px
 
 /* eslint-disable no-unused-vars */
-const motion = function (isInitialSetup, isStage, targetId) {
+const motion = function (isInitialSetup, isStage, targetId, colors) {
     const stageSelected = ScratchBlocks.ScratchMsgs.translate(
         'MOTION_STAGE_SELECTED',
         'Stage selected: no motion blocks'
     );
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="#4C97FF" secondaryColour="#3373CC">
+    <category name="%{BKY_CATEGORY_MOTION}" id="motion" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         ${isStage ? `
         <label text="${stageSelected}"></label>
         ` : `
@@ -151,11 +153,12 @@ const xmlEscape = function (unsafe) {
     });
 };
 
-const looks = function (isInitialSetup, isStage, targetId, costumeName, backdropName) {
+const looks = function (isInitialSetup, isStage, targetId, costumeName, backdropName, colors) {
     const hello = ScratchBlocks.ScratchMsgs.translate('LOOKS_HELLO', 'Hello!');
     const hmm = ScratchBlocks.ScratchMsgs.translate('LOOKS_HMM', 'Hmm...');
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="#9966FF" secondaryColour="#774DCB">
+    <category name="%{BKY_CATEGORY_LOOKS}" id="looks" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         ${isStage ? '' : `
         <block type="looks_sayforsecs">
             <value name="MESSAGE">
@@ -288,9 +291,10 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
     `;
 };
 
-const sound = function (isInitialSetup, isStage, targetId, soundName) {
+const sound = function (isInitialSetup, isStage, targetId, soundName, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="#D65CD6" secondaryColour="#BD42BD">
+    <category name="%{BKY_CATEGORY_SOUND}" id="sound" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         <block id="${targetId}_sound_playuntildone" type="sound_playuntildone">
             <value name="SOUND_MENU">
                 <shadow type="sound_sounds_menu">
@@ -343,9 +347,10 @@ const sound = function (isInitialSetup, isStage, targetId, soundName) {
     `;
 };
 
-const events = function (isInitialSetup, isStage) {
+const events = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="#FFD500" secondaryColour="#CC9900">
+    <category name="%{BKY_CATEGORY_EVENTS}" id="events" colour="${colors.primary}" secondaryColour="${colors.tertiary}">
         <block type="event_whenflagclicked"/>
         <block type="event_whenkeypressed">
         </block>
@@ -382,9 +387,14 @@ const events = function (isInitialSetup, isStage) {
     `;
 };
 
-const control = function (isInitialSetup, isStage) {
+const control = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_CONTROL}" id="control" colour="#FFAB19" secondaryColour="#CF8B17">
+    <category
+        name="%{BKY_CATEGORY_CONTROL}"
+        id="control"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
         <block type="control_wait">
             <value name="DURATION">
                 <shadow type="math_positive_number">
@@ -429,10 +439,15 @@ const control = function (isInitialSetup, isStage) {
     `;
 };
 
-const sensing = function (isInitialSetup, isStage) {
+const sensing = function (isInitialSetup, isStage, targetId, colors) {
     const name = ScratchBlocks.ScratchMsgs.translate('SENSING_ASK_TEXT', 'What\'s your name?');
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
+    <category
+        name="%{BKY_CATEGORY_SENSING}"
+        id="sensing"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
         ${isStage ? '' : `
             <block type="sensing_touchingobject">
                 <value name="TOUCHINGOBJECTMENU">
@@ -504,12 +519,17 @@ const sensing = function (isInitialSetup, isStage) {
     `;
 };
 
-const operators = function (isInitialSetup) {
+const operators = function (isInitialSetup, isStage, targetId, colors) {
     const apple = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_APPLE', 'apple');
     const banana = ScratchBlocks.ScratchMsgs.translate('OPERATORS_JOIN_BANANA', 'banana');
     const letter = ScratchBlocks.ScratchMsgs.translate('OPERATORS_LETTEROF_APPLE', 'a');
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="%{BKY_CATEGORY_OPERATORS}" id="operators" colour="#40BF4A" secondaryColour="#389438">
+    <category
+        name="%{BKY_CATEGORY_OPERATORS}"
+        id="operators"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
         <block type="operator_add">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -691,25 +711,27 @@ const operators = function (isInitialSetup) {
     `;
 };
 
-const variables = function () {
+const variables = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
     <category
         name="%{BKY_CATEGORY_VARIABLES}"
         id="variables"
-        colour="#FF8C1A"
-        secondaryColour="#DB6E00"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}"
         custom="VARIABLE">
     </category>
     `;
 };
 
-const myBlocks = function () {
+const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
     <category
         name="%{BKY_CATEGORY_MYBLOCKS}"
         id="myBlocks"
-        colour="#FF6680"
-        secondaryColour="#FF4D6A"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}"
         custom="PROCEDURE">
     </category>
     `;
@@ -732,10 +754,11 @@ const xmlClose = '</xml>';
  * @param {?string} costumeName - The name of the default selected costume dropdown.
  * @param {?string} backdropName - The name of the default selected backdrop dropdown.
  * @param {?string} soundName -  The name of the default selected sound dropdown.
+ * @param {?object} colors - The colors for the theme.
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categoriesXML = [],
-    costumeName = '', backdropName = '', soundName = '') {
+    costumeName = '', backdropName = '', soundName = '', colors = defaultColors) {
     isStage = isInitialSetup || isStage;
     const gap = [categorySeparator];
 
@@ -753,15 +776,16 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         }
         // return `undefined`
     };
-    const motionXML = moveCategory('motion') || motion(isInitialSetup, isStage, targetId);
-    const looksXML = moveCategory('looks') || looks(isInitialSetup, isStage, targetId, costumeName, backdropName);
-    const soundXML = moveCategory('sound') || sound(isInitialSetup, isStage, targetId, soundName);
-    const eventsXML = moveCategory('event') || events(isInitialSetup, isStage, targetId);
-    const controlXML = moveCategory('control') || control(isInitialSetup, isStage, targetId);
-    const sensingXML = moveCategory('sensing') || sensing(isInitialSetup, isStage, targetId);
-    const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId);
-    const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId);
-    const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId);
+    const motionXML = moveCategory('motion') || motion(isInitialSetup, isStage, targetId, colors.motion);
+    const looksXML = moveCategory('looks') ||
+        looks(isInitialSetup, isStage, targetId, costumeName, backdropName, colors.looks);
+    const soundXML = moveCategory('sound') || sound(isInitialSetup, isStage, targetId, soundName, colors.sounds);
+    const eventsXML = moveCategory('event') || events(isInitialSetup, isStage, targetId, colors.event);
+    const controlXML = moveCategory('control') || control(isInitialSetup, isStage, targetId, colors.control);
+    const sensingXML = moveCategory('sensing') || sensing(isInitialSetup, isStage, targetId, colors.sensing);
+    const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId, colors.operators);
+    const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data);
+    const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more);
 
     const everything = [
         xmlOpen,

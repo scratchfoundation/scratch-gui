@@ -73,8 +73,8 @@ const blockColors = {
     // For productionizing: we should look into making this field be the color of the text on the blocks
     // e.g. move and steps in move (10) steps, and rename this property below for controlling the text inside
     // of inputs e.g. 10
-    text: '#000000', // Text inside of inputs e.g. 90 in [point in direction (90)]
-
+    text: '#000000',
+    textFieldText: '#000000', // Text inside of inputs e.g. 90 in [point in direction (90)]
     toolboxText: '#000000', // Toolbox text, color picker text (used to be #575E75)
     // The color that the category menu label (e.g. 'motion', 'looks', etc.) changes to on hover
     toolboxHover: '#3373CC',

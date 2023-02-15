@@ -54,7 +54,8 @@ const blockColors = {
         secondary: '#4C4C4C',
         tertiary: '#FF6680'
     },
-    text: '#E5E5E5',
+    text: 'rgba(255, 255, 255, .7)',
+    textFieldText: '#E5E5E5',
     workspace: '#121212',
     toolboxSelected: '#4C4C4C',
     toolboxText: '#E5E5E5',

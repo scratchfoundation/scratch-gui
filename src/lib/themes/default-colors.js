@@ -56,7 +56,7 @@ const blockColors = {
         secondary: '#FF4D6A',
         tertiary: '#FF3355'
     },
-    text: '#575E75',
+    text: '#FFFFFF',
     workspace: '#F9F9F9',
     toolboxHover: '#4C97FF',
     toolboxSelected: '#E9EEF2',
@@ -66,6 +66,7 @@ const blockColors = {
     scrollbar: '#CECDCE',
     scrollbarHover: '#CECDCE',
     textField: '#FFFFFF',
+    textFieldText: '#575E75',
     insertionMarker: '#000000',
     insertionMarkerOpacity: 0.2,
     dragShadowOpacity: 0.6,

@@ -11,6 +11,9 @@ describe('MonitorListComponent', () => {
             monitors: {},
             savedMonitorPositions: {}
         },
+        theme: {
+            theme: 'standard'
+        },
         toolbox: {
             toolboxXML: ''
         },

@@ -4,12 +4,13 @@ import darkMode from './dark-mode';
 import highContrast from './high-contrast';
 import defaultColors from './default-colors';
 
+const DEFAULT_THEME = 'standard';
 const mergeWithDefaults = colors => defaultsDeep({}, colors, defaultColors);
 
 const themeMap = {
     'dark-mode': mergeWithDefaults(darkMode),
     'high-contrast': mergeWithDefaults(highContrast),
-    'standard': defaultColors
+    [DEFAULT_THEME]: defaultColors
 };
 
 const getColorsForTheme = theme => {
@@ -25,6 +26,7 @@ const getColorsForTheme = theme => {
 const themes = Object.keys(themeMap);
 
 export {
+    DEFAULT_THEME,
     defaultColors,
     getColorsForTheme,
     themes

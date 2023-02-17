@@ -1,7 +1,9 @@
+import {DEFAULT_THEME} from '../lib/themes';
+
 const SET_THEME = 'scratch-gui/theme/SET_THEME';
 
 const initialState = {
-    theme: 'standard'
+    theme: DEFAULT_THEME
 };
 
 const reducer = (state = initialState, action) => {

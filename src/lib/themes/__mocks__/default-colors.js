@@ -4,6 +4,11 @@ const blockColors = {
         secondary: '#222222',
         tertiary: '#333333'
     },
+    pen: {
+        primary: '#121212',
+        secondary: '#232323',
+        tertiary: '#343434'
+    },
     text: '#444444',
     workspace: '#555555'
 };

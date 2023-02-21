@@ -121,7 +121,7 @@
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jest": "22.17.0",
     "eslint-plugin-react": "7.24.0",
-    "gh-pages": "3.2.3",
+    "gh-pages": "5.0.0",
     "html-webpack-plugin": "3.2.0",
     "husky": "8.0.1",
     "jest": "21.2.1",

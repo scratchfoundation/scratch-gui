@@ -70,9 +70,6 @@ const blockColors = {
         tertiary: '#FF3355',
         quaternary: '#FFE5EA'
     },
-    // For productionizing: we should look into making this field be the color of the text on the blocks
-    // e.g. move and steps in move (10) steps, and rename this property below for controlling the text inside
-    // of inputs e.g. 10
     text: '#000000',
     textFieldText: '#000000', // Text inside of inputs e.g. 90 in [point in direction (90)]
     toolboxText: '#000000', // Toolbox text, color picker text (used to be #575E75)

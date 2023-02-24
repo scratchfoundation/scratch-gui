@@ -42,7 +42,6 @@
     align-items: center;
     min-width: 40px;
     text-align: center;
-    color: white;
     margin: 0 5px;
     border-radius: calc($space / 2);
     padding: 0 2px;
@@ -55,7 +54,6 @@
     min-width: 3rem;
     padding: 0.1rem 0.25rem;
     text-align: center;
-    color: white;
     font-size: 1rem;
     white-space: pre-wrap;
     transform: translateZ(0); /* Fixes flickering in Safari */
@@ -115,7 +113,6 @@
 .list-value {
     min-width: 40px;
     text-align: left;
-    color: white;
     margin: 0 3px;
     border-radius: calc($space / 2);
     border: 1px solid $ui-black-transparent;
@@ -161,7 +158,6 @@
     padding: 3px 5px;
     border: 0;
     background: none;
-    color: $ui-white;
     outline: none;
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -174,7 +170,6 @@
     padding: 0;
     padding-right: 5px;
     cursor: pointer;
-    color: $ui-white;
 }
 
 .add-button {

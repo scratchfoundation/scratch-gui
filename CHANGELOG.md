@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.20](https://github.com/LLK/scratch-gui/compare/v1.3.19...v1.3.20) (2023-02-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-svg-renderer to v0.2.0-prerelease.20230224194137 ([ba8312c](https://github.com/LLK/scratch-gui/commit/ba8312cff65c6c75aa192c18c28bdc744fb837c8))
+
 ## [1.3.19](https://github.com/LLK/scratch-gui/compare/v1.3.18...v1.3.19) (2023-02-24)
 
 

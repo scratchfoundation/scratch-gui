@@ -1,10 +1,20 @@
 import {defaultColors, DEFAULT_THEME, getColorsForTheme} from '../../../src/lib/themes';
-import {injectExtensionBlockColors} from '../../../src/lib/themes/blockHelpers';
+import {injectExtensionBlockColors, injectExtensionCategoryColors} from '../../../src/lib/themes/blockHelpers';
 
 jest.mock('../../../src/lib/themes/default-colors');
 jest.mock('../../../src/lib/themes/dark-mode');
 
 describe('themes', () => {
+    let serializeToString;
+
+    beforeEach(() => {
+        serializeToString = jest.fn(() => 'mocked xml');
+
+        global.XMLSerializer = () => ({
+            serializeToString
+        });
+    });
+
     test('provides the default theme colors', () => {
         expect(defaultColors.motion.primary).toEqual('#111111');
     });
@@ -57,5 +67,21 @@ describe('themes', () => {
             colourSecondary: '#0DA57A',
             colourTertiary: '#0B8E69'
         });
+    });
+
+    test('updates extension category based on theme', () => {
+        const dynamicBlockXML = [
+            {
+                id: 'pen',
+                xml: '<category name="Pen" id="pen" colour="#0FBD8C" secondaryColour="#0DA57A"></category>'
+            }
+        ];
+
+        injectExtensionCategoryColors(dynamicBlockXML, 'dark-mode');
+
+        // XMLSerializer is not available outside the browser.
+        // Verify the mocked XMLSerializer.serializeToString is called with updated colors.
+        expect(serializeToString.mock.calls[0][0].documentElement.getAttribute('colour')).toBe('#FFFFFF');
+        expect(serializeToString.mock.calls[0][0].documentElement.getAttribute('secondaryColour')).toBe('#DDDDDD');
     });
 });

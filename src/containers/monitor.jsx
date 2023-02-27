@@ -9,6 +9,7 @@ import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect
 import {getVariable, setVariableValue} from '../lib/variable-utils';
 import importCSV from '../lib/import-csv';
 import downloadBlob from '../lib/download-blob';
+import {DEFAULT_THEME} from '../lib/themes';
 import SliderPrompt from './slider-prompt.jsx';
 
 import {connect} from 'react-redux';
@@ -267,7 +268,7 @@ Monitor.propTypes = {
     y: PropTypes.number
 };
 Monitor.defaultProps = {
-    theme: 'standard'
+    theme: DEFAULT_THEME
 };
 const mapStateToProps = state => ({
     monitorLayout: state.scratchGui.monitorLayout,

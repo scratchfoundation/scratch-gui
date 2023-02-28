@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.23](https://github.com/LLK/scratch-gui/compare/v1.3.22...v1.3.23) (2023-02-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230228032200 ([9c69282](https://github.com/LLK/scratch-gui/commit/9c692829bf6c124d06effe0a74e82250b8e35084))
+
 ## [1.3.22](https://github.com/LLK/scratch-gui/compare/v1.3.21...v1.3.22) (2023-02-27)
 
 

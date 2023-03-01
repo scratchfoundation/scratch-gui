@@ -32,7 +32,8 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import {openTipsLibrary} from '../../reducers/modals';
 import {
     setPlayer,
-    toggleAnalyser
+    toggleAnalyser,
+    toggleSerialMonitor
 } from '../../reducers/mode';
 import {
     autoUpdateProject,
@@ -635,6 +636,21 @@ class MenuBar extends React.Component {
                                             />
                                         )}
                                     </MenuItem>
+                                    <MenuItem onClick={this.props.onToggleSerialMonitor}>
+                                        {this.props.serialMonitorVisible ? (
+                                            <FormattedMessage
+                                                defaultMessage="Turn off Serial Monitor"
+                                                description="Menu bar item for turning off serial monitor"
+                                                id="gui.menuBar.serialMonitorModeOff"
+                                            />
+                                        ) : (
+                                            <FormattedMessage
+                                                defaultMessage="Turn on Serial Monitor"
+                                                description="Menu bar item for turning on serial monitor"
+                                                id="gui.menuBar.serialMonitorModeOn"
+                                            />
+                                        )}
+                                    </MenuItem>
                                 </MenuSection>
                                 {this.buildAddonMenuItems('edit')}
                             </MenuBarMenu>
@@ -927,8 +943,11 @@ MenuBar.propTypes = {
     onShare: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
+    onToggleAnalyser: PropTypes.func,
+    onToggleSerialMonitor: PropTypes.func,
     projectTitle: PropTypes.string,
     renderLogin: PropTypes.func,
+    serialMonitorVisible: PropTypes.bool,
     sessionExists: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
     showComingSoon: PropTypes.bool,
@@ -985,7 +1004,8 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onToggleAnalyser: () => dispatch(toggleAnalyser())
+    onToggleAnalyser: () => dispatch(toggleAnalyser()),
+    onToggleSerialMonitor: () => dispatch(toggleSerialMonitor())
 });
 
 export default compose(

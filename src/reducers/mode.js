@@ -1,12 +1,14 @@
 const SET_FULL_SCREEN = 'scratch-gui/mode/SET_FULL_SCREEN';
 const SET_PLAYER = 'scratch-gui/mode/SET_PLAYER';
 const TOGGLE_ANALYSER = 'scratch-gui/mode/TOGGLE_ANALYSER';
+const TOGGLE_SERIAL_MONITOR = 'scratch-gui/mode/TOGGLE_SERIAL_MONITOR';
 
 const initialState = {
     showBranding: false,
     isFullScreen: false,
     isPlayerOnly: false,
     analyserVisible: false,
+    serialMonitorVisible: false,
     hasEverEnteredEditor: true
 };
 
@@ -25,6 +27,12 @@ const reducer = function (state, action) {
     case TOGGLE_ANALYSER:
         return Object.assign({}, state, {
             analyserVisible: !state.analyserVisible,
+            serialMonitorVisible: false
+        });
+    case TOGGLE_SERIAL_MONITOR:
+        return Object.assign({}, state, {
+            serialMonitorVisible: !state.serialMonitorVisible,
+            analyserVisible: false
         });
     default:
         return state;
@@ -48,11 +56,17 @@ const toggleAnalyser = function () {
         type: TOGGLE_ANALYSER
     };
 };
+const toggleSerialMonitor = function () {
+    return {
+        type: TOGGLE_SERIAL_MONITOR
+    };
+};
 
 export {
     reducer as default,
     initialState as modeInitialState,
     setFullScreen,
     setPlayer,
-    toggleAnalyser
+    toggleAnalyser,
+    toggleSerialMonitor
 };

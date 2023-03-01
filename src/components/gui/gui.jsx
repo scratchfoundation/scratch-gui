@@ -31,6 +31,7 @@ import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import AnalyserPane from '../../containers/analyser-pane.jsx';
+import SerialPane from '../../containers/serial-pane.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -114,6 +115,7 @@ const GUIComponent = props => {
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
+        serialMonitorVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeMode,
@@ -233,6 +235,7 @@ const GUIComponent = props => {
                     isShared={isShared}
                     logo={logo}
                     renderLogin={renderLogin}
+                    serialMonitorVisible={serialMonitorVisible}
                     showComingSoon={showComingSoon}
                     onClickAbout={onClickAbout}
                     onClickAccountNav={onClickAccountNav}
@@ -354,11 +357,12 @@ const GUIComponent = props => {
                                 isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
                                 isRtl={isRtl}
+                                serialMonitorVisible={serialMonitorVisible}
                                 stageSize={stageSize}
                                 vm={vm}
                             />
                             <Box className={styles.targetWrapper}>
-                                {analyserVisible ? null : (
+                                {analyserVisible || serialMonitorVisible ? null : (
                                     <TargetPane
                                         stageSize={stageSize}
                                         vm={vm}
@@ -366,6 +370,12 @@ const GUIComponent = props => {
                                 )}
                                 {analyserVisible ? (
                                     <AnalyserPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    />
+                                ) : null}
+                                {serialMonitorVisible ? (
+                                    <SerialPane
                                         stageSize={stageSize}
                                         vm={vm}
                                     />
@@ -436,6 +446,7 @@ GUIComponent.propTypes = {
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
+    serialMonitorVisible: PropTypes.bool,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
@@ -462,12 +473,14 @@ GUIComponent.defaultProps = {
     isCreating: false,
     isShared: false,
     loading: false,
+    serialMonitorVisible: false,
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 
 const mapStateToProps = state => ({
     analyserVisible: state.scratchGui.mode.analyserVisible,
+    serialMonitorVisible: state.scratchGui.mode.serialMonitorVisible,
     // This is the button's mode, as opposed to the actual current state
     stageSizeMode: state.scratchGui.stageSize.stageSize
 });

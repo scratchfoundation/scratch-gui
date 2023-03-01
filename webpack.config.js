@@ -56,6 +56,7 @@ const base = {
         },
         {
             test: /\.css$/,
+            exclude: [/xterm.css/],
             use: [{
                 loader: 'style-loader'
             }, {
@@ -66,6 +67,27 @@ const base = {
                     localIdentName: '[name]_[local]_[hash:base64:5]',
                     camelCase: true
                 }
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    ident: 'postcss',
+                    plugins: function () {
+                        return [
+                            postcssImport,
+                            postcssVars,
+                            autoprefixer
+                        ];
+                    }
+                }
+            }]
+        },
+        {
+            test: /\.css$/,
+            include: [/xterm.css/],
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader'
             }, {
                 loader: 'postcss-loader',
                 options: {

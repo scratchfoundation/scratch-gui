@@ -8,6 +8,7 @@ import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 import Analyser from '../../containers/analyser.jsx';
+import SerialMonitor from '../../containers/serial-monitor.jsx';
 import Loader from '../loader/loader.jsx';
 
 import styles from './stage-wrapper.css';
@@ -19,6 +20,7 @@ const StageWrapperComponent = function (props) {
         isRtl,
         isRendererSupported,
         loading,
+        serialMonitorVisible,
         stageSize,
         vm
     } = props;
@@ -39,7 +41,7 @@ const StageWrapperComponent = function (props) {
             </Box>
             <Box className={styles.stageCanvasWrapper}>
                 {
-                    isRendererSupported && !analyserVisible ?
+                    isRendererSupported && !(analyserVisible || serialMonitorVisible) ?
                         <Stage
                             stageSize={stageSize}
                             vm={vm}
@@ -49,6 +51,14 @@ const StageWrapperComponent = function (props) {
                 {
                     analyserVisible ?
                         <Analyser
+                            stageSize={stageSize}
+                            vm={vm}
+                        /> :
+                        null
+                }
+                {
+                    serialMonitorVisible ?
+                        <SerialMonitor
                             stageSize={stageSize}
                             vm={vm}
                         /> :
@@ -68,6 +78,7 @@ StageWrapperComponent.propTypes = {
     isRendererSupported: PropTypes.bool.isRequired,
     isRtl: PropTypes.bool.isRequired,
     loading: PropTypes.bool,
+    serialMonitorVisible: PropTypes.bool,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     vm: PropTypes.instanceOf(VM).isRequired
 };

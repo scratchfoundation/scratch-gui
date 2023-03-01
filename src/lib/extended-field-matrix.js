@@ -3,12 +3,28 @@ import ScratchBlocks from 'scratch-blocks';
 const FieldMatrix = ScratchBlocks.FieldMatrix;
 
 export default class ExtendedFieldMatrix extends FieldMatrix {
+    static get MIN_ROWS () {
+        return 3;
+    }
+
     static get MAX_ROWS () {
         return 10;
     }
 
+    static get DEFAULT_ROWS () {
+        return 5;
+    }
+
+    static get MIN_COLS () {
+        return 3;
+    }
+
     static get MAX_COLS () {
         return 24;
+    }
+
+    static get DEFAULT_COLS () {
+        return 5;
     }
 
     get ZEROS () {
@@ -29,14 +45,26 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
         super(matrix);
 
         // default 5 x 5 matrix of cells
-        this.rows = 5;
-        this.cols = 5;
+        this.rows = ExtendedFieldMatrix.DEFAULT_ROWS;
+        this.cols = ExtendedFieldMatrix.DEFAULT_COLS;
     }
 
     setMatrixSize (rows, cols) {
-        rows = rows && (rows < 1 || rows > ExtendedFieldMatrix.MAX_ROWS) ? 5 : rows;
-        cols = cols && (cols < 1 || cols > ExtendedFieldMatrix.MAX_COLS) ? 5 : cols;
-        if (rows * cols > 1) {
+        rows = rows || ExtendedFieldMatrix.DEFAULT_ROWS;
+        if (rows < ExtendedFieldMatrix.MIN_ROWS) {
+            rows = ExtendedFieldMatrix.MIN_ROWS;
+        }
+        if (rows > ExtendedFieldMatrix.MAX_ROWS) {
+            rows = ExtendedFieldMatrix.MAX_ROWS;
+        }
+        cols = cols || ExtendedFieldMatrix.DEFAULT_COLS;
+        if (cols < ExtendedFieldMatrix.MIN_COLS) {
+            cols = ExtendedFieldMatrix.MIN_COLS;
+        }
+        if (cols > ExtendedFieldMatrix.MAX_COLS) {
+            cols = ExtendedFieldMatrix.MAX_COLS;
+        }
+        if (this.rows !== rows || this.rows !== cols) {
             this.rows = rows;
             this.cols = cols;
             this.init();
@@ -129,13 +157,16 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
         if (!matrix) {
             return;
         }
-        // set matrix rows and cols
-        if (!this.matrix_ && matrix.indexOf(':') !== -1) {
-            const rowObjects = matrix.split(':');
-            const rows = rowObjects.length;
-            const cols = rowObjects[0].length;
-            this.setMatrixSize(rows, cols);
-            matrix = matrix.replaceAll(':', '');
+        if (!matrix.includes(':')) {
+            const image = [];
+            for (let i = 0; i < this.rows; i++) {
+                image.push(matrix.slice(i * this.cols, (i + 1) * this.cols));
+            }
+            matrix = image.join(':');
+        } else if (!this.matrix_) {
+            // set matrix rows and cols
+            const rows = matrix.split(':');
+            this.setMatrixSize(rows.length, rows[0].length);
         }
         if (matrix === this.matrix_) {
             return; // No change
@@ -145,7 +176,7 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
                 this.sourceBlock_, 'field', this.name, this.matrix_, matrix));
         }
         const length = this.ZEROS.length;
-        matrix = matrix + this.ZEROS.substr(0, length - matrix.length);
+        matrix = matrix + this.ZEROS.substring(0, length - matrix.length);
         this.matrix_ = matrix;
         this.updateMatrix_();
     }
@@ -262,26 +293,26 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
 
 
     setLEDNode_ (led, state) {
-        const leds = this.rows * this.cols;
+        const leds = this.matrix_.length;
         if (led < 0 || led > leds - 1) return;
-        const matrix = this.matrix_.substr(0, led) + state + this.matrix_.substr(led + 1);
+        const matrix = this.matrix_.substring(0, led) + state + this.matrix_.substring(led + 1);
         this.setValue(matrix);
     }
 
     fillLEDNode_ (led) {
-        const leds = this.rows * this.cols;
+        const leds = this.matrix_.length;
         if (led < 0 || led > leds - 1) return;
         this.setLEDNode_(led, '1');
     }
 
     clearLEDNode_ (led) {
-        const leds = this.rows * this.cols;
+        const leds = this.matrix_.length;
         if (led < 0 || led > leds - 1) return;
         this.setLEDNode_(led, '0');
     }
 
     toggleLEDNode_ (led) {
-        const leds = this.rows * this.cols;
+        const leds = this.matrix_.length;
         if (led < 0 || led > leds - 1) return;
         if (this.matrix_.charAt(led) === '0') {
             this.setLEDNode_(led, '1');
@@ -304,6 +335,19 @@ export default class ExtendedFieldMatrix extends FieldMatrix {
         }
         const xDiv = Math.trunc((dx - (nodePad / 2)) / (nodeSize + nodePad));
         const yDiv = Math.trunc((dy - (nodePad / 2)) / (nodeSize + nodePad));
-        return xDiv + (yDiv * this.cols);
+        return (xDiv + yDiv) + (yDiv * this.cols);
+    }
+
+    updateMatrix_ () {
+        const matrix = this.matrix_.replace(/:/g, '');
+        for (let i = 0; i < matrix.length; i++) {
+            if (matrix[i] === '0') {
+                this.fillMatrixNode_(this.ledButtons_, i, this.sourceBlock_.colourSecondary_);
+                this.fillMatrixNode_(this.ledThumbNodes_, i, this.sourceBlock_.colour_);
+            } else {
+                this.fillMatrixNode_(this.ledButtons_, i, '#FFFFFF');
+                this.fillMatrixNode_(this.ledThumbNodes_, i, '#FFFFFF');
+            }
+        }
     }
 }

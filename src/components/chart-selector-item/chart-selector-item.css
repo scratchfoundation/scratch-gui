@@ -11,7 +11,6 @@
 
 .checkbox-wrapper {
     width: $menu-bar-button-size;
-    height: 100%;
 }
 
 .checkbox {

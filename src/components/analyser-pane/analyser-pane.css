@@ -18,6 +18,7 @@
 .chart-wrapper {
     box-sizing: border-box;
     width: 100%;
+    height: min-content;
     margin: calc($space / 2);
 }
 
@@ -31,6 +32,6 @@
     padding-right: calc($space / 2);
     padding-bottom: $space;
 
-    overflow-x: hidden;
+    height: calc(100% - 2.7rem);
     overflow-y: auto;
 }

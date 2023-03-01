@@ -87,6 +87,18 @@
     overflow: hidden;
 }
 
+.blocks :global(.blocklyFlyoutScrollbar) {
+    margin-left: 6px;
+}
+
+.blocks :global(.blocklyMainWorkspaceScrollbar.blocklyScrollbarHorizontal) {
+    margin-left: 2px;
+}
+
+.blocks :global(.blocklyMainWorkspaceScrollbar.blocklyScrollbarVertical) {
+    margin-top: 2px;
+}
+
 .blocks :global(.blocklyBlockDragSurface) {
     /*
         Fix an issue where the drag surface was preventing hover events for sharing blocks.

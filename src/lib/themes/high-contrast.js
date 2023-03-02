@@ -3,8 +3,6 @@ const blockColors = {
         primary: '#80B5FF',
         secondary: '#B3D2FF',
         tertiary: '#3373CC',
-        // this field is not used in the "classic" Scratch 3 color scheme
-        // If we add "modes" we'd have to handle what happens when this field is not defined.
         quaternary: '#CCE1FF'
     },
     looks: {
@@ -78,7 +76,8 @@ const blockColors = {
     insertionMarker: '#000000',
     insertionMarkerOpacity: 0.2,
     fieldShadow: 'rgba(255, 255, 255, 0.3)',
-    dragShadowOpacity: 0.6
+    dragShadowOpacity: 0.6,
+    menuHover: 'rgba(255, 255, 255, 0.3)'
 };
 
 export default blockColors;

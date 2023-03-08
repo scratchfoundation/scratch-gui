@@ -7,6 +7,7 @@ const MENU_FILE = 'fileMenu';
 const MENU_EDIT = 'editMenu';
 const MENU_LANGUAGE = 'languageMenu';
 const MENU_LOGIN = 'loginMenu';
+const MENU_THEME = 'themeMenu';
 
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     [MENU_FILE]: false,
     [MENU_EDIT]: false,
     [MENU_LANGUAGE]: false,
-    [MENU_LOGIN]: false
+    [MENU_LOGIN]: false,
+    [MENU_THEME]: false
 };
 
 const reducer = function (state, action) {
@@ -59,6 +61,9 @@ const languageMenuOpen = state => state.scratchGui.menus[MENU_LANGUAGE];
 const openLoginMenu = () => openMenu(MENU_LOGIN);
 const closeLoginMenu = () => closeMenu(MENU_LOGIN);
 const loginMenuOpen = state => state.scratchGui.menus[MENU_LOGIN];
+const openThemeMenu = () => openMenu(MENU_THEME);
+const closeThemeMenu = () => closeMenu(MENU_THEME);
+const themeMenuOpen = state => state.scratchGui.menus[MENU_THEME];
 
 export {
     reducer as default,
@@ -80,5 +85,8 @@ export {
     languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
-    loginMenuOpen
+    loginMenuOpen,
+    openThemeMenu,
+    closeThemeMenu,
+    themeMenuOpen
 };

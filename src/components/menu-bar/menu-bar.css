@@ -27,7 +27,8 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $motion-primary;
+    /* background-color: $motion-primary; */
+    background-color: #774DCB;
     color: $ui-white;
 }
 
@@ -52,16 +53,17 @@
 .language-icon {
     height:  1.5rem;
     vertical-align: middle;
-}
-
-.language-caret {
-    margin: 0 .125rem;
+    margin-inline-end: .125rem;
 }
 
 .language-menu {
     box-sizing: border-box;
     display: inline-flex;
-    width: $language-selector-width;
+}
+
+.language-label {
+    margin-inline-start: .25rem;
+    margin-inline-end: .5rem;
 }
 
 .menu-bar-item {
@@ -104,10 +106,6 @@
 
 .file-group .menu-bar-item {
     padding: 0 0.75rem;
-}
-
-.menu-bar-item.language-menu {
-    padding: 0 0.5rem;
 }
 
 .menu-bar-menu {
@@ -223,4 +221,14 @@
     height: 1.25rem;
     margin: 0.5rem;
     vertical-align: middle;
+}
+
+@media only screen and (max-width: 1024px) {
+    .language-label, .tutorials-label {
+        display: none;
+    }
+
+    .help-icon {
+        margin-right: 0;
+    }
 }

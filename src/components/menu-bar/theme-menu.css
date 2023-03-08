@@ -1,0 +1,28 @@
+@import "../../css/colors.css";
+
+.theme-label {
+    margin-inline-start: .25rem;
+    margin-inline-end: .5rem;
+}
+
+.theme-icon {
+    height:  1.5rem;
+    vertical-align: middle;
+    margin-inline-end: .25rem;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.theme-active {
+    background-color: $ui-black-transparent;
+}
+
+@media only screen and (max-width: 1024px) {
+    .theme-label {
+        display: none;
+    }
+}

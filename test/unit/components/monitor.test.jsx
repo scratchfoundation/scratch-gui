@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import DefaultMonitor from '../../../src/components/monitor/default-monitor';
 import Monitor from '../../../src/components/monitor/monitor';
+import {DARK_THEME, DEFAULT_THEME} from '../../../src/lib/themes';
 
 jest.mock('../../../src/lib/themes/default-colors');
 jest.mock('../../../src/lib/themes/dark-mode');
@@ -21,7 +22,7 @@ describe('Monitor Component', () => {
             onDragEnd={noop}
             // eslint-disable-next-line react/jsx-no-bind
             onNextMode={noop}
-            theme="standard"
+            theme={DEFAULT_THEME}
         />);
 
         const defaultMonitor = wrapper.find(DefaultMonitor);
@@ -44,7 +45,7 @@ describe('Monitor Component', () => {
             onDragEnd={noop}
             // eslint-disable-next-line react/jsx-no-bind
             onNextMode={noop}
-            theme="dark-mode"
+            theme={DARK_THEME}
         />);
 
         const defaultMonitor = wrapper.find(DefaultMonitor);

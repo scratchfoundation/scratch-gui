@@ -82,7 +82,7 @@ import aboutIcon from './icon--about.svg';
 import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
-import {DEFAULT_THEME, HIGH_CONTRAST_THEME} from '../../lib/themes/index.js';
+import {persistTheme} from '../../lib/themes/themePersistance';
 
 const ariaMessages = defineMessages({
     language: {
@@ -267,15 +267,7 @@ class MenuBar extends React.Component {
     handleChangeTheme (theme) {
         this.props.onChangeTheme(theme);
         this.props.onRequestCloseTheme();
-
-        let systemPreferencesTheme = DEFAULT_THEME;
-        const prefersHighContrastQuery = '(prefers-contrast: more)';
-        if (window.matchMedia(prefersHighContrastQuery).matches) {
-            systemPreferencesTheme = HIGH_CONTRAST_THEME;
-        }
-
-        // Remove the cookie if it matches the system preferences. Otherwise store the theme in the cookie.
-        document.cookie = `scratchtheme=${systemPreferencesTheme === theme ? '' : theme}`;
+        persistTheme(theme);
     }
     restoreOptionMessage (deletedItem) {
         switch (deletedItem) {
@@ -435,7 +427,6 @@ class MenuBar extends React.Component {
                             <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>)}
                         {(this.props.canChangeTheme) && (<ThemeMenu
-
                             isRtl={this.props.isRtl}
                             onRequestClose={this.props.onRequestCloseTheme}
                             onRequestOpen={this.props.onRequestOpenTheme}

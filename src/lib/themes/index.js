@@ -8,9 +8,9 @@ import defaultColors from './default-colors';
 import defaultIcon from './standard.svg';
 import highContrastIcon from './high-contrast.svg';
 
-const DEFAULT_THEME = 'standard';
+const DEFAULT_THEME = 'default';
 const HIGH_CONTRAST_THEME = 'high-contrast';
-const DARK_THEME = 'dark-mode';
+const DARK_THEME = 'dark';
 
 const mergeWithDefaults = colors => defaultsDeep({}, colors, defaultColors);
 
@@ -59,15 +59,11 @@ const getColorsForTheme = theme => {
     return themeInfo.colors;
 };
 
-const themes = Object.keys(themeMap);
-
 export {
     DEFAULT_THEME,
     DARK_THEME,
     HIGH_CONTRAST_THEME,
     defaultColors,
     getColorsForTheme,
-    messages,
-    themes,
     themeMap
 };

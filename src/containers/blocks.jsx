@@ -18,7 +18,7 @@ import {BLOCKS_DEFAULT_SCALE, STAGE_DISPLAY_SIZES} from '../lib/layout-constants
 import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
 import defineDynamicBlock from '../lib/define-dynamic-block';
-import {DEFAULT_THEME, getColorsForTheme, themes} from '../lib/themes';
+import {DEFAULT_THEME, getColorsForTheme, themeMap} from '../lib/themes';
 import {injectExtensionBlockColors, injectExtensionCategoryColors} from '../lib/themes/blockHelpers';
 
 import {connect} from 'react-redux';
@@ -630,7 +630,7 @@ Blocks.propTypes = {
         collapse: PropTypes.bool
     }),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    theme: PropTypes.oneOf(themes),
+    theme: PropTypes.oneOf(Object.keys(themeMap)),
     toolboxXML: PropTypes.string,
     updateMetrics: PropTypes.func,
     updateToolboxState: PropTypes.func,

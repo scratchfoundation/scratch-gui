@@ -3,11 +3,11 @@ import {mountWithIntl} from '../../helpers/intl-helpers';
 import MenuBar from '../../../src/components/menu-bar/menu-bar';
 import {menuInitialState} from '../../../src/reducers/menus';
 import {LoadingState} from '../../../src/reducers/project-state';
+import {DEFAULT_THEME} from '../../../src/lib/themes';
 
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import VM from 'scratch-vm';
-
 
 describe('MenuBar Component', () => {
     const store = configureStore()({
@@ -19,6 +19,9 @@ describe('MenuBar Component', () => {
             menus: menuInitialState,
             projectState: {
                 loadingState: LoadingState.NOT_LOADED
+            },
+            theme: {
+                theme: DEFAULT_THEME
             },
             vm: new VM()
         }

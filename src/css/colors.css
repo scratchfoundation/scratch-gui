@@ -19,6 +19,8 @@ $motion-tertiary: hsla(215, 60%, 50%, 1); /* #3373CC */
 $motion-transparent: hsla(215, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
 $motion-light-transparent: hsla(215, 100%, 65%, 0.15); /* 15% transparent version of motion-primary */
 
+$looks-tertiary: hsla(260, 54%, 54%, 1); /* #774DCB */
+
 $red-primary: hsla(20, 100%, 55%, 1); /* #FF661A */
 $red-tertiary: hsla(20, 100%, 45%, 1); /* #E64D00 */
 

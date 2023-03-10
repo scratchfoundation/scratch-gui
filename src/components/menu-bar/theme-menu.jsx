@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import classNames from 'classnames';
 
 import MenuBarMenu from './menu-bar-menu.jsx';
@@ -11,6 +11,14 @@ import dropdownCaret from './dropdown-caret.svg';
 
 import styles from './theme-menu.css';
 import menuBarStyles from './menu-bar.css';
+
+const messages = defineMessages({
+    colorTheme: {
+        id: 'gui.theme.colorTheme',
+        defaultMessage: 'Color theme',
+        description: 'label for selecting the site\'s color theme'
+    }
+});
 
 const ThemeMenuItem = props => {
     const themeInfo = themeMap[props.theme];
@@ -46,6 +54,7 @@ const ThemeMenu = props => {
         onMouseUp={props.onRequestOpen}
     >
         <img
+            alt={props.intl.formatMessage(messages.colorTheme)}
             className={styles.themeIcon}
             src={themeInfo.icon}
         />
@@ -80,6 +89,7 @@ const ThemeMenu = props => {
 
 ThemeMenu.propTypes = {
     className: PropTypes.string,
+    intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
     onChange: PropTypes.func,
     onRequestClose: PropTypes.func,
@@ -88,4 +98,4 @@ ThemeMenu.propTypes = {
     themeMenuOpen: PropTypes.bool
 };
 
-export default ThemeMenu;
+export default injectIntl(ThemeMenu);

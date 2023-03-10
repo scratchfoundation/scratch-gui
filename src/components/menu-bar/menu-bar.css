@@ -27,8 +27,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    /* background-color: $motion-primary; */
-    background-color: #774DCB;
+    background-color: $looks-tertiary;
     color: $ui-white;
 }
 
@@ -53,7 +52,11 @@
 .language-icon {
     height:  1.5rem;
     vertical-align: middle;
-    margin-inline-end: .125rem;
+    margin: 0 .125rem 0 0;
+}
+
+[dir="rtl"] .language-icon {
+    margin: 0 0 0 .125rem;
 }
 
 .language-menu {
@@ -62,8 +65,15 @@
 }
 
 .language-label {
-    margin-inline-start: .25rem;
-    margin-inline-end: .5rem;
+    max-width: 7rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 .5rem 0 .25rem;
+}
+
+[dir="rtl"] .language-label {
+    margin: 0 .25rem 0 .5rem;
 }
 
 .menu-bar-item {

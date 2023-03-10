@@ -1,34 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import cookie from 'cookie';
 
-import {DEFAULT_THEME} from './themes';
 import {setTheme} from '../reducers/theme';
+import {detectTheme} from './themes/themePersistance';
 
 // Dark mode is not yet supported
 // const prefersDarkQuery = '(prefers-color-scheme: dark)';
 const prefersHighContrastQuery = '(prefers-contrast: more)';
 
-const getTheme = () => {
-    if (window.matchMedia(prefersHighContrastQuery).matches) return 'high-contrast';
-
-    return DEFAULT_THEME;
-};
-
 const systemPreferencesHOC = function (WrappedComponent) {
     class SystemPreferences extends React.Component {
         componentDidMount () {
-            // this.props.onSetTheme(getTheme());
-            this.preferencesListener = () => {
-                const obj = cookie.parse(document.cookie) || {};
-                const themeCookie = obj.scratchtheme;
+            this.preferencesListener = () => this.props.onSetTheme(detectTheme());
 
-                // Only use system preferences if there is not a specified cookie.
-                if (themeCookie) return;
-
-                this.props.onSetTheme(getTheme());
-            }
             this.highContrastMatchMedia = window.matchMedia(prefersHighContrastQuery);
             this.highContrastMatchMedia.addEventListener('change', this.preferencesListener);
         }

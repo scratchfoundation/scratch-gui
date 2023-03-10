@@ -101,7 +101,6 @@ $(npm bin)/jest --runInBand test/unit/components/button.test.jsx
 ```
 
 #### Running integration tests
-
 Integration tests use a headless browser to manipulate the actual HTML and javascript that the repo
 produces. You will not see this activity (though you can hear it when sounds are played!).
 
@@ -127,6 +126,12 @@ If you want to watch the browser as it runs the test, rather than running headle
 
 ```bash
 USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
+```
+
+_Note: If you are seeing failed tests related to `chromedriver` being incompatible with your version of Chrome, you may need to update `chromedriver` with:_
+
+```bash
+npm install chromedriver@{version}
 ```
 
 ## Troubleshooting

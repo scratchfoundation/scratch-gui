@@ -101,6 +101,7 @@ $(npm bin)/jest --runInBand test/unit/components/button.test.jsx
 ```
 
 #### Running integration tests
+
 Integration tests use a headless browser to manipulate the actual HTML and javascript that the repo
 produces. You will not see this activity (though you can hear it when sounds are played!).
 

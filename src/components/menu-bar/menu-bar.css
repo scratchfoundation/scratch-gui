@@ -115,6 +115,7 @@
 }
 
 .file-group .menu-bar-item {
+    margin: 0 .25rem;
     padding: 0 0.75rem;
 }
 
@@ -166,6 +167,7 @@
 }
 
 .account-info-group .menu-bar-item {
+    margin: 0 .25rem;
     padding: 0 0.75rem;
 }
 
@@ -175,7 +177,11 @@
 }
 
 .help-icon {
-    margin-right: 0.35rem;
+    margin: 0 .25rem 0 0;
+}
+
+[dir="rtl"] .help-icon {
+    margin: 0 0 0 .25rem;
 }
 
 .account-nav-menu, .mystuff-button {

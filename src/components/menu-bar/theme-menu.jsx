@@ -8,6 +8,7 @@ import {DEFAULT_THEME, HIGH_CONTRAST_THEME, themeMap} from '../../lib/themes';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
 
 import dropdownCaret from './dropdown-caret.svg';
+import check from './check.svg';
 
 import styles from './theme-menu.css';
 import menuBarStyles from './menu-bar.css';
@@ -27,9 +28,12 @@ const ThemeMenuItem = props => {
         <MenuItem
             isRtl={props.isRtl}
             onClick={props.onClick}
-            className={classNames({[styles.themeActive]: props.isSelected})}
         >
             <div className={styles.themeOption}>
+                <img
+                    src={check}
+                    className={classNames(styles.check, {[styles.selected]: props.isSelected})}
+                />
                 <img src={themeInfo.icon} />
                 <FormattedMessage {...themeInfo.label} />
             </div>

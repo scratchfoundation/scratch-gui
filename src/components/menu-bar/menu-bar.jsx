@@ -434,6 +434,7 @@ class MenuBar extends React.Component {
                             theme={this.props.theme}
                             themeMenuOpen={this.props.themeMenuOpen}
                         />)}
+                        <Divider className={classNames(styles.divider)} />
                         {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -623,20 +624,21 @@ class MenuBar extends React.Component {
                         ) : [])}
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    <div
-                        aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
-                        className={classNames(styles.menuBarItem, styles.hoverable)}
-                        onClick={this.props.onOpenTipLibrary}
-                    >
-                        <img
-                            className={styles.helpIcon}
-                            src={helpIcon}
-                        />
-                        <span className={styles.tutorialsLabel}>
-                            <FormattedMessage {...ariaMessages.tutorials} />
-                        </span>
+                    <div className={styles.fileGroup}>
+                        <div
+                            aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            onClick={this.props.onOpenTipLibrary}
+                        >
+                            <img
+                                className={styles.helpIcon}
+                                src={helpIcon}
+                            />
+                            <span className={styles.tutorialsLabel}>
+                                <FormattedMessage {...ariaMessages.tutorials} />
+                            </span>
+                        </div>
                     </div>
-                    <Divider className={classNames(styles.divider)} />
                 </div>
 
                 {/* show the proper UI in the account menu, given whether the user is

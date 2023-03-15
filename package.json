@@ -110,7 +110,7 @@
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.3",
+    "@babel/eslint-parser": "7.11.0",
     "babel-loader": "8.2.2",
     "chromedriver": "107.0.3",
     "enzyme": "3.10.0",

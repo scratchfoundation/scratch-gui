@@ -33,6 +33,7 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
+import {themeMap} from '../../lib/themes';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -308,7 +309,7 @@ const GUIComponent = props => {
                                             isVisible={blocksTabVisible}
                                             key={theme}
                                             options={{
-                                                media: `${basePath}static/blocks-media/`
+                                                media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
                                             }}
                                             stageSize={stageSize}
                                             theme={theme}

@@ -10,4 +10,9 @@ const blockColors = {
     text: '#BBBBBB'
 };
 
-export default blockColors;
+const extensions = {};
+
+export {
+    blockColors,
+    extensions
+}

@@ -171,6 +171,15 @@ module.exports = [
                     {
                         from: 'node_modules/scratch-blocks/media',
                         to: 'static/blocks-media'
+                    },
+                    {
+                        from: 'node_modules/scratch-blocks/media',
+                        to: 'static/blocks-media-high-contrast'
+                    },
+                    {
+                        from: 'static/blocks-media-high-contrast',
+                        to: 'static/blocks-media-high-contrast',
+                        force: true
                     }
                 ]
             }),

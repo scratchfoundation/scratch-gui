@@ -100,4 +100,6 @@ const blockColors = {
     menuHover: 'rgba(0, 0, 0, 0.2)'
 };
 
-export default blockColors;
+export {
+    blockColors
+};

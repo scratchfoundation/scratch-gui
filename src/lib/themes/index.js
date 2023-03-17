@@ -1,9 +1,15 @@
 import defaultsDeep from 'lodash.defaultsdeep';
 import {defineMessages} from 'react-intl';
 
-import darkMode from './dark-mode';
-import highContrast from './high-contrast';
-import defaultColors from './default-colors';
+import {
+    blockColors as darkModeBlockColors,
+    extensions as darkModeExtensions
+} from './dark-mode';
+import {
+    blockColors as highContrastBlockColors,
+    extensions as highContrastExtensions
+} from './high-contrast';
+import {blockColors as defaultColors} from './default-colors';
 
 import defaultIcon from './standard.svg';
 import highContrastIcon from './high-contrast.svg';
@@ -34,16 +40,22 @@ const messages = defineMessages({
 
 const themeMap = {
     [DEFAULT_THEME]: {
+        blocksMediaFolder: 'blocks-media',
         colors: defaultColors,
+        extensions: {},
         label: messages[DEFAULT_THEME],
         icon: defaultIcon
     },
     [DARK_THEME]: {
-        colors: mergeWithDefaults(darkMode),
+        blocksMediaFolder: 'blocks-media',
+        colors: mergeWithDefaults(darkModeBlockColors),
+        extensions: darkModeExtensions,
         label: messages[DARK_THEME]
     },
     [HIGH_CONTRAST_THEME]: {
-        colors: mergeWithDefaults(highContrast),
+        blocksMediaFolder: 'blocks-media-high-contrast',
+        colors: mergeWithDefaults(highContrastBlockColors),
+        extensions: highContrastExtensions,
         label: messages[HIGH_CONTRAST_THEME],
         icon: highContrastIcon
     }

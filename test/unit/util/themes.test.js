@@ -5,7 +5,7 @@ import {
     getColorsForTheme,
     HIGH_CONTRAST_THEME
 } from '../../../src/lib/themes';
-import {injectExtensionBlockColors, injectExtensionCategoryColors} from '../../../src/lib/themes/blockHelpers';
+import {injectExtensionBlockTheme, injectExtensionCategoryTheme} from '../../../src/lib/themes/blockHelpers';
 import {detectTheme, persistTheme} from '../../../src/lib/themes/themePersistance';
 
 jest.mock('../../../src/lib/themes/default-colors');
@@ -49,7 +49,7 @@ describe('themes', () => {
                 colourTertiary: '#0B8E69'
             };
 
-            const updated = injectExtensionBlockColors(blockInfoJson, DARK_THEME);
+            const updated = injectExtensionBlockTheme(blockInfoJson, DARK_THEME);
 
             expect(updated).toEqual({
                 type: 'dummy_block',
@@ -69,7 +69,7 @@ describe('themes', () => {
                 colourTertiary: '#0B8E69'
             };
 
-            const updated = injectExtensionBlockColors(blockInfoJson, DEFAULT_THEME);
+            const updated = injectExtensionBlockTheme(blockInfoJson, DEFAULT_THEME);
 
             expect(updated).toEqual({
                 type: 'dummy_block',
@@ -87,7 +87,7 @@ describe('themes', () => {
                 }
             ];
 
-            injectExtensionCategoryColors(dynamicBlockXML, DARK_THEME);
+            injectExtensionCategoryTheme(dynamicBlockXML, DARK_THEME);
 
             // XMLSerializer is not available outside the browser.
             // Verify the mocked XMLSerializer.serializeToString is called with updated colors.

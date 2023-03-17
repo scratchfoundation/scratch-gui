@@ -13,4 +13,6 @@ const blockColors = {
     workspace: '#555555'
 };
 
-export default blockColors;
+export {
+    blockColors
+};

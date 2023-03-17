@@ -10,9 +10,13 @@ const blockColors = {
     text: '#BBBBBB'
 };
 
-const extensions = {};
+const extensions = {
+    pen: {
+        blockIconURI: 'darkPenIcon'
+    }
+};
 
 export {
     blockColors,
     extensions
-}
+};

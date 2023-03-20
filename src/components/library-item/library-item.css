@@ -29,7 +29,7 @@
 
 .library-item:hover {
     border-width: 2px;
-    border-color: $motion-primary;
+    border-color: $looks-tertiary;
 }
 
 .hidden {

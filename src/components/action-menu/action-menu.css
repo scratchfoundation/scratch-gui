@@ -19,7 +19,7 @@ $more-button-size: 2.25rem;
     justify-content: center;
     cursor: pointer;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: $motion-primary;
+    background: $looks-tertiary;
     outline: none;
     border: none;
     transition: background-color 0.2s;
@@ -45,14 +45,14 @@ button::-moz-focus-inner {
     border-radius: 100%;
     width: $main-button-size;
     height: $main-button-size;
-    box-shadow: 0 0 0 4px $motion-transparent;
+    box-shadow: 0 0 0 4px $looks-transparent;
     z-index: $z-index-add-button;
     transition: transform, box-shadow 0.5s;
 }
 
 .main-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 0 6px $motion-transparent;
+  box-shadow: 0 0 0 6px $looks-transparent;
 }
 
 .main-icon {
@@ -72,7 +72,8 @@ button::-moz-focus-inner {
     */
     overflow-y: hidden;
 
-    background: $motion-tertiary;
+    background: $looks-tertiary-dark;
+
     border-top-left-radius: $more-button-size;
     border-top-right-radius: $more-button-size;
     width: $more-button-size;
@@ -115,7 +116,7 @@ button::-moz-focus-inner {
 .more-button {
     width: $more-button-size;
     height: $more-button-size;
-    background: $motion-tertiary;
+    background: $looks-tertiary-dark;
 }
 
 .more-icon {

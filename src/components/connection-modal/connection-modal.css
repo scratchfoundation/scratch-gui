@@ -80,8 +80,8 @@
     border-radius: 0.25rem;
     font-weight: 600;
     font-size: 0.85rem;
-    background: $motion-primary;
-    border: $motion-primary;
+    background: $looks-tertiary;
+    border: $looks-tertiary;
     color: white;
     cursor: pointer;
 }
@@ -172,9 +172,9 @@
     right: -15px;
     left: -15px;
     padding: 5px 5px;
-    background-color: $motion-primary;
+    background-color: $looks-tertiary;
     border-radius: 100%;
-    box-shadow: 0px 0px 0px 4px $motion-transparent;
+    box-shadow: 0px 0px 0px 4px $looks-transparent;
     /* animation: pulse-blue-ring 1s infinite ease-in-out alternate; */
     animation: wiggle 0.5s infinite ease-in-out alternate;
 
@@ -182,7 +182,7 @@
 
 @keyframes pulse-blue-ring {
     100% {
-        box-shadow: 0px 0px 0px 8px $motion-light-transparent;
+        box-shadow: 0px 0px 0px 8px $looks-light-transparent;
     }
 }
 
@@ -208,9 +208,9 @@
 .bluetooth-centered-icon {
     position: absolute;
     padding: 5px 5px;
-    background-color: $motion-primary;
+    background-color: $looks-tertiary;
     border-radius: 100%;
-    box-shadow: 0px 0px 0px 2px $motion-transparent;
+    box-shadow: 0px 0px 0px 2px $looks-transparent;
 }
 
 .peripheral-tile-widgets {
@@ -220,7 +220,7 @@
 
 .activityArea {
     height: 165px;
-    background-color: $motion-light-transparent;
+    background-color: $looks-light-transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -297,7 +297,7 @@
 .connection-button {
     padding: 0.6rem 0.75rem;
     border-radius: 0.5rem;
-    background: $motion-primary;
+    background: $looks-tertiary;
     color: white;
     font-weight: 600;
     font-size: 0.85rem;
@@ -309,7 +309,7 @@
 }
 
 .connection-button:disabled {
-    background: $motion-transparent;
+    background: $looks-transparent;
 }
 
 .segmented-button {
@@ -390,7 +390,7 @@
     display: flex;
     padding: 0.25rem 0.1rem;
     border-radius: 1rem;
-    background: $motion-light-transparent;
+    background: $looks-light-transparent;
 }
 
 .dots-holder-success {
@@ -409,11 +409,11 @@
 }
 
 .inactive-step-dot {
-    background: $motion-transparent;
+    background: $looks-transparent;
 }
 
 .active-step-dot {
-    background: $motion-primary;
+    background: $looks-tertiary;
 }
 
 .success-dot {

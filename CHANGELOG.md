@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/LLK/scratch-gui/compare/v1.5.21...v1.6.0) (2023-03-21)
+
+
+### Features
+
+* bring back cat blocks ([c1064d5](https://github.com/LLK/scratch-gui/commit/c1064d5381a5df905df0ff506ab817faa2d4ef3a))
+
 ## [1.5.21](https://github.com/LLK/scratch-gui/compare/v1.5.20...v1.5.21) (2023-03-21)
 
 

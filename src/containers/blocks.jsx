@@ -26,6 +26,7 @@ import {closeExtensionLibrary, openSoundRecorder, openConnectionModal} from '../
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {updateMetrics} from '../reducers/workspace-metrics';
+import {isTimeTravel2020} from '../reducers/time-travel';
 
 import {
     activateTab,
@@ -48,7 +49,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor (props) {
         super(props);
-        this.ScratchBlocks = VMScratchBlocks(props.vm);
+        this.ScratchBlocks = VMScratchBlocks(props.vm, false);
         bindAll(this, [
             'attachVM',
             'detachVM',
@@ -87,6 +88,11 @@ class Blocks extends React.Component {
         this.toolboxUpdateQueue = [];
     }
     componentDidMount () {
+        this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.useCatBlocks);
+        this.ScratchBlocks.prompt = this.handlePromptStart;
+        this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
+        this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
+
         this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
@@ -553,6 +559,7 @@ class Blocks extends React.Component {
             onRequestCloseCustomProcedures,
             toolboxXML,
             updateMetrics: updateMetricsProp,
+            useCatBlocks,
             workspaceMetrics,
             ...props
         } = this.props;
@@ -639,6 +646,7 @@ Blocks.propTypes = {
     toolboxXML: PropTypes.string,
     updateMetrics: PropTypes.func,
     updateToolboxState: PropTypes.func,
+    useCatBlocks: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     workspaceMetrics: PropTypes.shape({
         targets: PropTypes.objectOf(PropTypes.object)
@@ -689,7 +697,8 @@ const mapStateToProps = state => ({
     messages: state.locales.messages,
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
-    workspaceMetrics: state.scratchGui.workspaceMetrics
+    workspaceMetrics: state.scratchGui.workspaceMetrics,
+    useCatBlocks: isTimeTravel2020(state)
 });
 
 const mapDispatchToProps = dispatch => ({

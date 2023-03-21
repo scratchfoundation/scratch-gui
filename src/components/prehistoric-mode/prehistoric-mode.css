@@ -1,0 +1,49 @@
+.prehistoric-mode {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.prehistoric-background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 90%;
+    z-index: 50;
+    pointer-events: none;
+    background: transparent url('./background.png') center center;
+	animation:jitter 2.5s linear infinite;
+}
+
+
+@keyframes jitter{
+    0%{transform:scale(1.0385841106898348);}
+    5% {transform:scale(1.045596657989466);}
+	10% {transform:scale(1.029923116529907);}
+    15% {transform:scale(1.059010318189378);}
+	20% {transform:scale(1.0868915738701577);}
+    25% {transform:scale(1.0771183924324506);}
+	30% {transform:scale(1.0780695942284886);}
+    35% {transform:scale(1.081268381642509);}
+	40% {transform:scale(1.0446864380239975);}
+    45% {transform:scale(1.0822226558561991);}
+	50% {transform:scale(1.0703574969484024);}
+    55% {transform:scale(1.0131626458532954);}
+	60% {transform:scale(1.0638351688496082);}
+    65% {transform:scale(1.0254684750877292);}
+	70% {transform:scale(1.0409969735315965);}
+    75% {transform:scale(1.029863208069294);}
+	80% {transform:scale(1.043175299252114);}
+    85% {transform:scale(1.022196668538089);}
+	90% {transform:scale(1.042465864842523);}
+    95% {transform:scale(1.04090035265691);}
+    100% {transform:scale(1.0385841106898348);}
+}
+
+.torch {
+    position: absolute;
+    pointer-events: none;
+    opacity: 80%;
+    z-index: 50;
+}

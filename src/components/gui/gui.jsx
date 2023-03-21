@@ -64,6 +64,7 @@ const GUIComponent = props => {
         backdropLibraryVisible,
         backpackHost,
         backpackVisible,
+        blocksId,
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
@@ -87,6 +88,7 @@ const GUIComponent = props => {
         isRtl,
         isShared,
         isTelemetryEnabled,
+        isTotallyNormal,
         loading,
         logo,
         renderLogin,
@@ -222,6 +224,7 @@ const GUIComponent = props => {
                     className={styles.menuBarPosition}
                     enableCommunity={enableCommunity}
                     isShared={isShared}
+                    isTotallyNormal={isTotallyNormal}
                     logo={logo}
                     renderLogin={renderLogin}
                     showComingSoon={showComingSoon}
@@ -300,6 +303,7 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
+                                            key={blocksId}
                                             canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
@@ -373,6 +377,7 @@ GUIComponent.propTypes = {
     backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
+    blocksId: PropTypes.string,
     canChangeLanguage: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
@@ -393,6 +398,7 @@ GUIComponent.propTypes = {
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
+    isTotallyNormal: PropTypes.bool,
     loading: PropTypes.bool,
     logo: PropTypes.string,
     onActivateCostumesTab: PropTypes.func,
@@ -429,6 +435,7 @@ GUIComponent.defaultProps = {
     backpackHost: null,
     backpackVisible: false,
     basePath: './',
+    blocksId: 'original',
     canChangeLanguage: true,
     canCreateNew: false,
     canEditTitle: false,
@@ -441,6 +448,7 @@ GUIComponent.defaultProps = {
     enableCommunity: false,
     isCreating: false,
     isShared: false,
+    isTotallyNormal: false,
     loading: false,
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large
@@ -448,7 +456,8 @@ GUIComponent.defaultProps = {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
-    stageSizeMode: state.scratchGui.stageSize.stageSize
+    stageSizeMode: state.scratchGui.stageSize.stageSize,
+    blocksId: state.scratchGui.timeTravel.year.toString()
 });
 
 export default injectIntl(connect(

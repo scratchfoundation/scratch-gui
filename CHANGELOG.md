@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/LLK/scratch-gui/compare/v1.7.1...v1.7.2) (2023-03-22)
+
+
+### Bug Fixes
+
+* tell renovate to ignore cat-blocks ([5e43dc4](https://github.com/LLK/scratch-gui/commit/5e43dc4e2c5c1419c0eb3bb2fd2c93e52b1d875d))
+
 ## [1.7.1](https://github.com/LLK/scratch-gui/compare/v1.7.0...v1.7.1) (2023-03-22)
 
 

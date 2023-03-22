@@ -97,4 +97,31 @@ describe('Menu bar settings', () => {
             .accept();
         await findByText('project1-sprite');
     });
+
+    test('Theme picker shows themes', async () => {
+        await loadUri(uri);
+        await clickXpath('//img[@alt="Color theme"]');
+
+        await findByText('Default', scope.menuBar);
+        await findByText('High Text Contrast', scope.menuBar);
+    });
+
+    test('Theme picker switches to high text contrast', async () => {
+        await loadUri(uri);
+        await clickXpath('//img[@alt="Color theme"]');
+        await clickText('High Text Contrast', scope.menuBar);
+
+        // There is a tiny delay for the color theme to be applied to the categories.
+        await driver.wait(async () => {
+            const motionCategoryDiv = await findByXpath(
+                '//div[contains(@class, "scratchCategoryMenuItem") and ' +
+                'contains(@class, "scratchCategoryId-motion")]/*[1]');
+            const color = await motionCategoryDiv.getCssValue('background-color');
+
+            // Documentation for getCssValue says it depends on how the browser
+            // returns the value. Locally I am seeing 'rgba(128, 181, 255, 1)',
+            // but this is a bit flexible just in case.
+            return /128,\s?181,\s?255/.test(color) || color.includes('80B5FF');
+        }, 5000, 'Motion category color does not match high text contrast theme');
+    });
 });

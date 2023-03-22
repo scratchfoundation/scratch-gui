@@ -129,6 +129,12 @@ If you want to watch the browser as it runs the test, rather than running headle
 USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
 ```
 
+_Note: If you are seeing failed tests related to `chromedriver` being incompatible with your version of Chrome, you may need to update `chromedriver` with:_
+
+```bash
+npm install chromedriver@{version}
+```
+
 ## Troubleshooting
 
 ### Ignoring optional dependencies

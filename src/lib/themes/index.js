@@ -4,15 +4,15 @@ import {defineMessages} from 'react-intl';
 import {
     blockColors as darkModeBlockColors,
     extensions as darkModeExtensions
-} from './dark-mode';
+} from './dark';
 import {
     blockColors as highContrastBlockColors,
     extensions as highContrastExtensions
 } from './high-contrast';
-import {blockColors as defaultColors} from './default-colors';
+import {blockColors as defaultColors} from './default';
 
-import defaultIcon from './standard.svg';
-import highContrastIcon from './high-contrast.svg';
+import defaultIcon from './default/icon.svg';
+import highContrastIcon from './high-contrast/icon.svg';
 
 const DEFAULT_THEME = 'default';
 const HIGH_CONTRAST_THEME = 'high-contrast';

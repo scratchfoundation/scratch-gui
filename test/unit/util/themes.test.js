@@ -8,8 +8,8 @@ import {
 import {injectExtensionBlockTheme, injectExtensionCategoryTheme} from '../../../src/lib/themes/blockHelpers';
 import {detectTheme, persistTheme} from '../../../src/lib/themes/themePersistance';
 
-jest.mock('../../../src/lib/themes/default-colors');
-jest.mock('../../../src/lib/themes/dark-mode');
+jest.mock('../../../src/lib/themes/default');
+jest.mock('../../../src/lib/themes/dark');
 
 describe('themes', () => {
     let serializeToString;

@@ -73,7 +73,6 @@ button::-moz-focus-inner {
     overflow-y: hidden;
 
     background: $looks-tertiary-dark;
-
     border-top-left-radius: $more-button-size;
     border-top-right-radius: $more-button-size;
     width: $more-button-size;

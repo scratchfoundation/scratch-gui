@@ -32,12 +32,12 @@
 }
 
 .input-form:hover {
-    border-color: $motion-primary;
+    border-color: $looks-tertiary;
 }
 
 .input-form:focus {
-    border-color: $motion-primary;
-    box-shadow: 0 0 0 0.25rem $motion-transparent;
+    border-color: $looks-tertiary;
+    box-shadow: 0 0 0 0.25rem $looks-transparent;
 }
 
 .input-small {

@@ -3,7 +3,7 @@
 
 .tag-button {
     padding: .625rem 1rem;
-    background: $motion-primary;
+    background: $looks-tertiary;
     border-radius: 1.375rem;
     color: $ui-white;
     height: $library-filter-bar-height;

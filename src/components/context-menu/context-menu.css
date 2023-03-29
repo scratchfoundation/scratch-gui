@@ -25,7 +25,7 @@
 }
 
 .menu-item:hover {
-    background: $motion-primary;
+    background: $looks-tertiary;
     color: white;
 }
 

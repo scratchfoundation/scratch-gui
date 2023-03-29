@@ -124,7 +124,7 @@
 
 .tab.is-selected {
     height: 90%;
-    color: $motion-primary;
+    color: $looks-tertiary;
     background-color: $ui-white;
     z-index: 4; /* Make sure selected is always above */
 }
@@ -236,9 +236,9 @@
     left: 0;
     right: 0;
     z-index: $z-index-extension-button;
-    background: $motion-primary;
+    background: $looks-tertiary;
 
-    border: 1px solid $motion-primary;
+    border: 1px solid $looks-tertiary;
     box-sizing: content-box; /* To match scratch-block vertical toolbox borders */
 }
 

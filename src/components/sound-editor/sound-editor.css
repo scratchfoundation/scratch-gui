@@ -95,7 +95,7 @@ $border-radius: 0.25rem;
     height: 3rem;
     width: 3rem;
     outline: none;
-    background: $motion-primary;
+    background: $looks-tertiary;
     border-radius: 100%;
     border: 4px solid $ui-white-dim;
     cursor: pointer;

@@ -83,7 +83,7 @@
 }
 
 .radio-first:focus {
-    border-color: $motion-primary;
+    border-color: $looks-tertiary;
     box-shadow: inset 0 0 0 -2px $ui-black-transparent;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .radio-last:focus {
-    border-color: $motion-primary;
+    border-color: $looks-tertiary;
     box-shadow: inset 0 0 0 -2px $ui-black-transparent;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .rotation-select:focus {
-    border-color: $motion-primary;
+    border-color: $looks-tertiary;
     box-shadow: inset 0 0 0 1px $ui-black-transparent);
 }
 

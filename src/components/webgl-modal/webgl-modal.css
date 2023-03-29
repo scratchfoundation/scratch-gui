@@ -29,7 +29,7 @@
 .illustration {
     width: 100%;
     height: 208px;
-    background-color: $motion-primary;
+    background-color: $looks-tertiary;
     background-image: url('./unsupported.png');
     background-size: cover;
 }
@@ -54,10 +54,10 @@
 }
 
 .button-row button {
-    border: 1px solid $motion-primary;
+    border: 1px solid $looks-tertiary;
     border-radius: 0.25rem;
     padding: 0.5rem 2rem;
-    background: $motion-primary;
+    background: $looks-tertiary;
     color: white;
     font-weight: bold;
     font-size: 0.875rem;
@@ -70,6 +70,6 @@
 }
 
 .faq-link {
-    color: $motion-primary;
+    color: $looks-tertiary;
     text-decoration: none;
 }

@@ -12,10 +12,16 @@ const SelectionHandle = props => (
         onTouchStart={props.onMouseDown}
     >
         <Box className={classNames(styles.trimHandle, styles.topTrimHandle)}>
-            <img src={handleIcon} />
+            <img
+                src={handleIcon}
+                draggable={false}
+            />
         </Box>
         <Box className={classNames(styles.trimHandle, styles.bottomTrimHandle)}>
-            <img src={handleIcon} />
+            <img
+                src={handleIcon}
+                draggable={false}
+            />
         </Box>
     </Box>
 );

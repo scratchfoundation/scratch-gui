@@ -20,6 +20,9 @@ describe('MenuBar Component', () => {
             projectState: {
                 loadingState: LoadingState.NOT_LOADED
             },
+            timeTravel: {
+                year: 'NOW'
+            },
             vm: new VM()
         }
     });

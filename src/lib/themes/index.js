@@ -23,8 +23,8 @@ const mergeWithDefaults = colors => defaultsDeep({}, colors, defaultColors);
 const messages = defineMessages({
     [DEFAULT_THEME]: {
         id: 'gui.theme.default',
-        defaultMessage: 'Default',
-        description: 'label for default theme'
+        defaultMessage: 'Original',
+        description: 'label for original theme'
     },
     [DARK_THEME]: {
         id: 'gui.theme.dark',
@@ -33,8 +33,8 @@ const messages = defineMessages({
     },
     [HIGH_CONTRAST_THEME]: {
         id: 'gui.theme.highContrast',
-        defaultMessage: 'High Text Contrast',
-        description: 'label for high constast theme'
+        defaultMessage: 'High Contrast',
+        description: 'label for high theme'
     }
 });
 

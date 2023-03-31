@@ -102,14 +102,14 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath('//img[@alt="Color theme"]');
 
-        await findByText('Default', scope.menuBar);
-        await findByText('High Text Contrast', scope.menuBar);
+        await findByText('Original', scope.menuBar);
+        await findByText('High Contrast', scope.menuBar);
     });
 
-    test('Theme picker switches to high text contrast', async () => {
+    test('Theme picker switches to high contrast', async () => {
         await loadUri(uri);
         await clickXpath('//img[@alt="Color theme"]');
-        await clickText('High Text Contrast', scope.menuBar);
+        await clickText('High Contrast', scope.menuBar);
 
         // There is a tiny delay for the color theme to be applied to the categories.
         await driver.wait(async () => {
@@ -122,6 +122,6 @@ describe('Menu bar settings', () => {
             // returns the value. Locally I am seeing 'rgba(128, 181, 255, 1)',
             // but this is a bit flexible just in case.
             return /128,\s?181,\s?255/.test(color) || color.includes('80B5FF');
-        }, 5000, 'Motion category color does not match high text contrast theme');
+        }, 5000, 'Motion category color does not match high contrast theme');
     });
 });

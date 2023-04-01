@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.8](https://github.com/LLK/scratch-gui/compare/v1.8.7...v1.8.8) (2023-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-blocks to v0.1.0-prerelease.20230331212014 ([277e6b1](https://github.com/LLK/scratch-gui/commit/277e6b16276941361f8abbacaf0ebbe3513e5492))
+
 ## [1.8.7](https://github.com/LLK/scratch-gui/compare/v1.8.6...v1.8.7) (2023-03-31)
 
 

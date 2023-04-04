@@ -4,8 +4,8 @@ import DefaultMonitor from '../../../src/components/monitor/default-monitor';
 import Monitor from '../../../src/components/monitor/monitor';
 import {DARK_THEME, DEFAULT_THEME} from '../../../src/lib/themes';
 
-jest.mock('../../../src/lib/themes/default-colors');
-jest.mock('../../../src/lib/themes/dark-mode');
+jest.mock('../../../src/lib/themes/default');
+jest.mock('../../../src/lib/themes/dark');
 
 describe('Monitor Component', () => {
     test('it selects the correct colors based on default theme', () => {

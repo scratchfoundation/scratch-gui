@@ -5,11 +5,11 @@ import {
     getColorsForTheme,
     HIGH_CONTRAST_THEME
 } from '../../../src/lib/themes';
-import {injectExtensionBlockColors, injectExtensionCategoryColors} from '../../../src/lib/themes/blockHelpers';
+import {injectExtensionBlockTheme, injectExtensionCategoryTheme} from '../../../src/lib/themes/blockHelpers';
 import {detectTheme, persistTheme} from '../../../src/lib/themes/themePersistance';
 
-jest.mock('../../../src/lib/themes/default-colors');
-jest.mock('../../../src/lib/themes/dark-mode');
+jest.mock('../../../src/lib/themes/default');
+jest.mock('../../../src/lib/themes/dark');
 
 describe('themes', () => {
     let serializeToString;
@@ -41,7 +41,7 @@ describe('themes', () => {
             });
         });
 
-        test('updates extension blocks based on theme', () => {
+        test('updates extension block colors based on theme', () => {
             const blockInfoJson = {
                 type: 'dummy_block',
                 colour: '#0FBD8C',
@@ -49,7 +49,7 @@ describe('themes', () => {
                 colourTertiary: '#0B8E69'
             };
 
-            const updated = injectExtensionBlockColors(blockInfoJson, DARK_THEME);
+            const updated = injectExtensionBlockTheme(blockInfoJson, DARK_THEME);
 
             expect(updated).toEqual({
                 type: 'dummy_block',
@@ -61,6 +61,38 @@ describe('themes', () => {
             expect(blockInfoJson.colour).toBe('#0FBD8C');
         });
 
+        test('updates extension block icon based on theme', () => {
+            const blockInfoJson = {
+                type: 'pen_block',
+                args0: [
+                    {
+                        type: 'field_image',
+                        src: 'original'
+                    }
+                ],
+                colour: '#0FBD8C',
+                colourSecondary: '#0DA57A',
+                colourTertiary: '#0B8E69'
+            };
+
+            const updated = injectExtensionBlockTheme(blockInfoJson, DARK_THEME);
+
+            expect(updated).toEqual({
+                type: 'pen_block',
+                args0: [
+                    {
+                        type: 'field_image',
+                        src: 'darkPenIcon'
+                    }
+                ],
+                colour: '#FFFFFF',
+                colourSecondary: '#EEEEEE',
+                colourTertiary: '#DDDDDD'
+            });
+            // The original value was not modified
+            expect(blockInfoJson.args0[0].src).toBe('original');
+        });
+
         test('bypasses updates if using the default theme', () => {
             const blockInfoJson = {
                 type: 'dummy_block',
@@ -69,7 +101,7 @@ describe('themes', () => {
                 colourTertiary: '#0B8E69'
             };
 
-            const updated = injectExtensionBlockColors(blockInfoJson, DEFAULT_THEME);
+            const updated = injectExtensionBlockTheme(blockInfoJson, DEFAULT_THEME);
 
             expect(updated).toEqual({
                 type: 'dummy_block',
@@ -87,12 +119,13 @@ describe('themes', () => {
                 }
             ];
 
-            injectExtensionCategoryColors(dynamicBlockXML, DARK_THEME);
+            injectExtensionCategoryTheme(dynamicBlockXML, DARK_THEME);
 
             // XMLSerializer is not available outside the browser.
             // Verify the mocked XMLSerializer.serializeToString is called with updated colors.
             expect(serializeToString.mock.calls[0][0].documentElement.getAttribute('colour')).toBe('#FFFFFF');
             expect(serializeToString.mock.calls[0][0].documentElement.getAttribute('secondaryColour')).toBe('#DDDDDD');
+            expect(serializeToString.mock.calls[0][0].documentElement.getAttribute('iconURI')).toBe('darkPenIcon');
         });
     });
 

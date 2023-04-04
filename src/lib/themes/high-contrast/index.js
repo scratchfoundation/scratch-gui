@@ -1,3 +1,9 @@
+import musicIcon from './extensions/musicIcon.svg';
+import penIcon from './extensions/penIcon.svg';
+import text2speechIcon from './extensions/text2speechIcon.svg';
+import translateIcon from './extensions/translateIcon.svg';
+import videoSensingIcon from './extensions/videoSensingIcon.svg';
+
 const blockColors = {
     motion: {
         primary: '#80B5FF',
@@ -80,4 +86,25 @@ const blockColors = {
     menuHover: 'rgba(255, 255, 255, 0.3)'
 };
 
-export default blockColors;
+const extensions = {
+    music: {
+        blockIconURI: musicIcon
+    },
+    pen: {
+        blockIconURI: penIcon
+    },
+    text2speech: {
+        blockIconURI: text2speechIcon
+    },
+    translate: {
+        blockIconURI: translateIcon
+    },
+    videoSensing: {
+        blockIconURI: videoSensingIcon
+    }
+};
+
+export {
+    blockColors,
+    extensions
+};

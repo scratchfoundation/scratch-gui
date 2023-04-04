@@ -113,8 +113,9 @@ module.exports = [
             rules: base.module.rules.concat([
                 {
                     test: /\.(svg|png|wav|gif|jpg)$/,
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
+                        limit: 2048,
                         outputPath: 'static/assets/'
                     }
                 }
@@ -171,6 +172,15 @@ module.exports = [
                     {
                         from: 'node_modules/scratch-blocks/media',
                         to: 'static/blocks-media'
+                    },
+                    {
+                        from: 'node_modules/scratch-blocks/media',
+                        to: 'static/blocks-media-high-contrast'
+                    },
+                    {
+                        from: 'src/lib/themes/high-contrast/blocks-media',
+                        to: 'static/blocks-media-high-contrast',
+                        force: true
                     }
                 ]
             }),
@@ -214,8 +224,9 @@ module.exports = [
                 rules: base.module.rules.concat([
                     {
                         test: /\.(svg|png|wav|gif|jpg)$/,
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
+                            limit: 2048,
                             outputPath: 'static/assets/',
                             publicPath: `${STATIC_PATH}/assets/`
                         }

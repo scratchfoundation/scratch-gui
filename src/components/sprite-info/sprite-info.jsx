@@ -201,7 +201,10 @@ class SpriteInfo extends React.Component {
                                 onKeyPress={this.props.onPressVisible}
                             >
                                 <img
-                                    className={styles.icon}
+                                    className={classNames(styles.icon, {
+                                        [styles.isActive]: this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    })}
                                     src={showIcon}
                                 />
                             </div>
@@ -220,7 +223,10 @@ class SpriteInfo extends React.Component {
                                 onKeyPress={this.props.onPressNotVisible}
                             >
                                 <img
-                                    className={styles.icon}
+                                    className={classNames(styles.icon, {
+                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
+                                        [styles.isDisabled]: this.props.disabled
+                                    })}
                                     src={hideIcon}
                                 />
                             </div>

@@ -42,4 +42,70 @@ describe('Loading scratch gui', () => {
         await findByText('project1-sprite');
         await clickXpath('//input[@value="project1"]');
     });
+
+    test('Load sb3 project with a missing svg costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-sprite-svg.sb3'));
+        const spriteTile = await findByText('Blue Square Guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
+    test('Load sb3 project with an invalid svg costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sb3'));
+        const spriteTile = await findByText('Blue Square Guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
+    test('Load sb2 project with a missing svg costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-svg.sb2'));
+        const spriteTile = await findByText('Blue Guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
+    test('Load sb2 project with an invalid svg costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sb2'));
+        const spriteTile = await findByText('Blue Guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
+    test('Load sb3 project with a missing bmp costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-bmp.sb3'));
+        const spriteTile = await findByText('green-bmp-guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
+
+    test('Load sb3 project with an invalid bmp costume', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        await clickText('Load from your computer');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-bmp.sb3'));
+        const spriteTile = await findByText('green-bmp-guy');
+        const tileVisible = await spriteTile.isDisplayed();
+        expect(tileVisible).toBe(true);
+    });
 });

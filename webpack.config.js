@@ -112,7 +112,7 @@ module.exports = [
         module: {
             rules: base.module.rules.concat([
                 {
-                    test: /\.(svg|png|wav|gif|jpg)$/,
+                    test: /\.(svg|png|wav|mp3|gif|jpg)$/,
                     loader: 'file-loader',
                     options: {
                         outputPath: 'static/assets/'
@@ -138,8 +138,7 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
                 template: 'src/playground/index.ejs',
-                title: 'Scratch 3.0 GUI',
-                sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
+                title: 'Scratch 3.0 GUI'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'blocksonly'],
@@ -159,23 +158,40 @@ module.exports = [
                 filename: 'player.html',
                 title: 'Scratch 3.0 GUI: Player Example'
             }),
-            new CopyWebpackPlugin([{
-                from: 'static',
-                to: 'static'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-blocks/media',
-                to: 'static/blocks-media'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extensions/**',
-                to: 'static',
-                context: 'src/examples'
-            }]),
-            new CopyWebpackPlugin([{
-                from: 'extension-worker.{js,js.map}',
-                context: 'node_modules/scratch-vm/dist/web'
-            }])
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'static',
+                        to: 'static'
+                    }
+                ]
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'node_modules/scratch-blocks/media',
+                        to: 'static/blocks-media'
+                    }
+                ]
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'extensions/**',
+                        to: 'static',
+                        context: 'src/examples'
+                    }
+                ]
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'extension-worker.{js,js.map}',
+                        context: 'node_modules/scratch-vm/dist/web',
+                        noErrorOnMissing: true
+                    }
+                ]
+            })
         ])
     })
 ].concat(
@@ -198,7 +214,7 @@ module.exports = [
             module: {
                 rules: base.module.rules.concat([
                     {
-                        test: /\.(svg|png|wav|gif|jpg)$/,
+                        test: /\.(svg|png|wav|mp3|gif|jpg)$/,
                         loader: 'file-loader',
                         options: {
                             outputPath: 'static/assets/',
@@ -208,20 +224,33 @@ module.exports = [
                 ])
             },
             plugins: base.plugins.concat([
-                new CopyWebpackPlugin([{
-                    from: 'node_modules/scratch-blocks/media',
-                    to: 'static/blocks-media'
-                }]),
-                new CopyWebpackPlugin([{
-                    from: 'extension-worker.{js,js.map}',
-                    context: 'node_modules/scratch-vm/dist/web'
-                }]),
+                new CopyWebpackPlugin({
+                    patterns: [
+                        {
+                            from: 'node_modules/scratch-blocks/media',
+                            to: 'static/blocks-media'
+                        }
+                    ]
+                }),
+                new CopyWebpackPlugin({
+                    patterns: [
+                        {
+                            from: 'extension-worker.{js,js.map}',
+                            context: 'node_modules/scratch-vm/dist/web',
+                            noErrorOnMissing: true
+                        }
+                    ]
+                }),
                 // Include library JSON files for scratch-desktop to use for downloading
-                new CopyWebpackPlugin([{
-                    from: 'src/lib/libraries/*.json',
-                    to: 'libraries',
-                    flatten: true
-                }])
+                new CopyWebpackPlugin({
+                    patterns: [
+                        {
+                            from: 'src/lib/libraries/*.json',
+                            to: 'libraries',
+                            flatten: true
+                        }
+                    ]
+                })
             ])
         })) : []
 );

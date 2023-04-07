@@ -10,37 +10,39 @@ class ErrorBoundary extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            hasError: false,
-            errorId: null
+            error: null,
+            errorInfo: null
         };
     }
 
-    componentDidCatch (error, info) {
-        // Error object may be undefined (IE?)
+    /**
+     * Handle an error caught by this ErrorBoundary component.
+     * @param {Error} error - the error that was caught.
+     * @param {React.ErrorInfo} errorInfo - the React error info associated with the error.
+     */
+    componentDidCatch (error, errorInfo) {
         error = error || {
             stack: 'Unknown stack',
             message: 'Unknown error'
         };
+        errorInfo = errorInfo || {
+            componentStack: 'Unknown component stack'
+        };
 
-        // Log errors to analytics, leaving out browsers that are not in our recommended set
-        if (recommendedBrowser() && window.Sentry) {
-            window.Sentry.withScope(scope => {
-                Object.keys(info).forEach(key => {
-                    scope.setExtra(key, info[key]);
-                });
-                scope.setExtra('action', this.props.action);
-                window.Sentry.captureException(error);
+        // only remember the first error: later errors might just be side effects of that first one
+        if (!this.state.error) {
+            // store error & errorInfo for debugging
+            this.setState({
+                error,
+                errorInfo
             });
         }
 
-        // Display fallback UI
-        this.setState({
-            hasError: true,
-            errorId: window.Sentry ? window.Sentry.lastEventId() : null
-        });
-
-        // Log error locally for debugging as well.
-        log.error(`Unhandled Error: ${error.stack}\nComponent stack: ${info.componentStack}`);
+        // report every error in the console
+        log.error([
+            `Unhandled Error with action='${this.props.action}': ${error.stack}`,
+            `Component stack: ${errorInfo.componentStack}`
+        ].join('\n'));
     }
 
     handleBack () {
@@ -52,11 +54,10 @@ class ErrorBoundary extends React.Component {
     }
 
     render () {
-        if (this.state.hasError) {
+        if (this.state.error) {
             if (recommendedBrowser()) {
                 return (
                     <CrashMessageComponent
-                        eventId={this.state.errorId}
                         onReload={this.handleReload}
                     />
                 );

@@ -219,12 +219,13 @@ workflows:
   commitlint:
     jobs:
       - commitlint/lint:
-          target-branch: develop
+          target-branch: native # for Android branch only!
           filters:
             branches:
               ignore:
                 - master
                 - develop
+                - native # for Android branch only!
                 - /^hotfix\/.*/
   push-translations:
     triggers:

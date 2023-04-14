@@ -79,9 +79,16 @@ $border-radius: 0.25rem;
     border: 1px solid $ui-black-transparent;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: 0.2s;
     user-select: none;
     margin: 0px;
+}
+
+.button:active {
+    background: $looks-transparent;
+}
+
+.button:focus {
+    border-color: $looks-tertiary;
 }
 
 .button > img {

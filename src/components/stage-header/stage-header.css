@@ -40,6 +40,12 @@
     display: flex;
 }
 
+.stage-size-row > *, .unselect-wrapper {
+    /* Use a white background so semi-transparent selection states look correct */
+    background-color: $ui-white;
+    border-radius: $form-radius;
+}
+
 [dir="ltr"] .stage-size-toggle-group {
     margin-right: .2rem;
 }
@@ -67,30 +73,4 @@
 
 [dir="rtl"] .stage-button-icon {
     transform: scaleX(-1);
-}
-
-[dir="ltr"] .stage-button-first {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-[dir="ltr"] .stage-button-last {
-    border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-[dir="rtl"] .stage-button-first {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-[dir="rtl"] .stage-button-last {
-    border-right: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.stage-button-toggled-off {
-    filter: saturate(0);
 }

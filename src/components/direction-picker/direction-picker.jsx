@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Popover from 'react-popover';
 import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
 
@@ -8,6 +7,7 @@ import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import Dial from './dial.jsx';
+import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
 
 import styles from './direction-picker.css';
 
@@ -62,44 +62,29 @@ const DirectionPicker = props => (
                         direction={props.direction}
                         onChange={props.onChangeDirection}
                     />
-                    <div className={styles.buttonRow}>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.ALL_AROUND
-                            })}
-                            title={props.intl.formatMessage(messages.allAround)}
-                            onClick={props.onClickAllAround}
-                        >
-                            <img
-                                draggable={false}
-                                src={allAroundIcon}
-                            />
-                        </button>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.LEFT_RIGHT
-                            })}
-                            title={props.intl.formatMessage(messages.leftRight)}
-                            onClick={props.onClickLeftRight}
-                        >
-                            <img
-                                draggable={false}
-                                src={leftRightIcon}
-                            />
-                        </button>
-                        <button
-                            className={classNames(styles.iconButton, {
-                                [styles.active]: props.rotationStyle === RotationStyles.DONT_ROTATE
-                            })}
-                            title={props.intl.formatMessage(messages.dontRotate)}
-                            onClick={props.onClickDontRotate}
-                        >
-                            <img
-                                draggable={false}
-                                src={dontRotateIcon}
-                            />
-                        </button>
-                    </div>
+                    <ToggleButtons
+                        className={styles.buttonRow}
+                        buttons={[
+                            {
+                                handleClick: props.onClickAllAround,
+                                icon: allAroundIcon,
+                                isSelected: props.rotationStyle === RotationStyles.ALL_AROUND,
+                                title: props.intl.formatMessage(messages.allAround)
+                            },
+                            {
+                                handleClick: props.onClickLeftRight,
+                                icon: leftRightIcon,
+                                isSelected: props.rotationStyle === RotationStyles.LEFT_RIGHT,
+                                title: props.intl.formatMessage(messages.leftRight)
+                            },
+                            {
+                                handleClick: props.onClickDontRotate,
+                                icon: dontRotateIcon,
+                                isSelected: props.rotationStyle === RotationStyles.DONT_ROTATE,
+                                title: props.intl.formatMessage(messages.dontRotate)
+                            }
+                        ]}
+                    />
                 </div>
             }
             isOpen={props.popoverOpen}

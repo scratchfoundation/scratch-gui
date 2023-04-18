@@ -66,6 +66,10 @@
     cursor: pointer;
 }
 
+.stage-button:active {
+    background-color: $looks-transparent;
+}
+
 .stage-button-icon {
     width: 100%;
     height: 100%;

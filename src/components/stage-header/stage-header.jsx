@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
+import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
 import Controls from '../../containers/controls.jsx';
 import {getStageDimensions} from '../../lib/screen-utils';
 import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -17,7 +18,6 @@ import unFullScreenIcon from './icon--unfullscreen.svg';
 
 import scratchLogo from '../menu-bar/scratch-logo.svg';
 import styles from './stage-header.css';
-import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
 
 const messages = defineMessages({
     largeStageSizeMessage: {

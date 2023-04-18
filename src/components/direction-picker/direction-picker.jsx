@@ -6,8 +6,8 @@ import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-int
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
-import Dial from './dial.jsx';
 import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
+import Dial from './dial.jsx';
 
 import styles from './direction-picker.css';
 

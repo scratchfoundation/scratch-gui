@@ -22,6 +22,7 @@ const ToggleButtons = ({buttons, className, disabled}) => (
                 aria-label={button.title}
                 aria-pressed={button.isSelected}
                 onClick={button.handleClick}
+                disabled={disabled}
             >
                 <img
                     src={button.icon}

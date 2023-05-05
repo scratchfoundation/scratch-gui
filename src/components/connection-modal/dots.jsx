@@ -5,6 +5,20 @@ import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import styles from './connection-modal.css';
 
+const Dot = props => (
+    <div
+        className={classNames(
+            styles.dot,
+            {
+                [styles.inactiveStepDot]: props.type === 'inactive',
+                [styles.activeStepDot]: props.type === 'active',
+                [styles.successDot]: props.type === 'success',
+                [styles.errorDot]: props.type === 'error'
+            }
+        )}
+    />
+);
+
 const Dots = props => (
     <Box
         className={classNames(
@@ -43,20 +57,6 @@ Dots.propTypes = {
     success: PropTypes.bool,
     total: PropTypes.number
 };
-
-const Dot = props => (
-    <div
-        className={classNames(
-            styles.dot,
-            {
-                [styles.inactiveStepDot]: props.type === 'inactive',
-                [styles.activeStepDot]: props.type === 'active',
-                [styles.successDot]: props.type === 'success',
-                [styles.errorDot]: props.type === 'error'
-            }
-        )}
-    />
-);
 
 Dot.propTypes = {
     type: PropTypes.string

@@ -1,4 +1,4 @@
-var ExampleExtension = function () {
+const ExampleExtension = function () {
 };
 
 /**

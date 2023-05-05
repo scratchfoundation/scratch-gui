@@ -13,7 +13,6 @@ const defaultProject = translator => {
     if (typeof TextEncoder === 'undefined') {
         _TextEncoder = require('text-encoding').TextEncoder;
     } else {
-        /* global TextEncoder */
         _TextEncoder = TextEncoder;
     }
     const encoder = new _TextEncoder();

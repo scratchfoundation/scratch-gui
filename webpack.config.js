@@ -28,10 +28,16 @@ const base = {
         chunkFilename: 'chunks/[name].js'
     },
     resolve: {
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
         symlinks: false
     },
     module: {
         rules: [{
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            exclude: /\bnode_modules\b/
+        },
+        {
             test: /\.jsx?$/,
             loader: 'babel-loader',
             include: [

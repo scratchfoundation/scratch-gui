@@ -7,7 +7,7 @@
     cursor: pointer;
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: $looks-tertiary;
+    color: $looks-secondary;
     border-radius: 0.5rem;
 }
 

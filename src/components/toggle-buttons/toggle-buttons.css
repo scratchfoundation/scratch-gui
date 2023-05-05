@@ -43,7 +43,7 @@
     right: -1px;
     bottom: -1px;
     left: -1px;
-    border: 1px solid $looks-tertiary;
+    border: 1px solid $looks-secondary;
 }
 
 /* round corners for first and last buttons */

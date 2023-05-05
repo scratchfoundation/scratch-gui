@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: space-around;
     padding: 0.75rem 0;
-    color: $looks-tertiary;
+    color: $looks-secondary;
     text-align: center;
     background: none;
 }

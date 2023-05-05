@@ -47,7 +47,7 @@
 }
 
 .playing-text {
-    color: $looks-tertiary;
+    color: $looks-secondary;
 }
 
 .recording-text {
@@ -89,12 +89,12 @@
     border: 1px solid $ui-black-transparent;
     font-weight: 600;
     font-size: 0.85rem;
-    color: $looks-tertiary;
+    color: $looks-secondary;
 }
 
 .button-row button.ok-button {
-    background: $looks-tertiary;
-    border: $looks-tertiary;
+    background: $looks-secondary;
+    border: $looks-secondary;
     color: white;
 }
 

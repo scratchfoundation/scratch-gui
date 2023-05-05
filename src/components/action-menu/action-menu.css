@@ -19,7 +19,7 @@ $more-button-size: 2.25rem;
     justify-content: center;
     cursor: pointer;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: $looks-tertiary;
+    background: $looks-secondary;
     outline: none;
     border: none;
     transition: background-color 0.2s;
@@ -72,7 +72,7 @@ button::-moz-focus-inner {
     */
     overflow-y: hidden;
 
-    background: $looks-tertiary-dark;
+    background: $looks-secondary-dark;
     border-top-left-radius: $more-button-size;
     border-top-right-radius: $more-button-size;
     width: $more-button-size;
@@ -115,7 +115,7 @@ button::-moz-focus-inner {
 .more-button {
     width: $more-button-size;
     height: $more-button-size;
-    background: $looks-tertiary-dark;
+    background: $looks-secondary-dark;
 }
 
 .more-icon {

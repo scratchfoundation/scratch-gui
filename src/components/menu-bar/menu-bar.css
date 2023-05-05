@@ -27,7 +27,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $looks-tertiary;
+    background-color: $looks-secondary;
     color: $ui-white;
 }
 
@@ -125,7 +125,7 @@
 }
 
 .feedback-link {
-    color: $looks-tertiary;
+    color: $looks-secondary;
     text-decoration: none;
 }
 

@@ -214,7 +214,7 @@
 }
 
 .deck-name {
-    color: $looks-tertiary;
+    color: $looks-secondary;
     font-weight: bold;
     font-size: 0.85rem;
     margin: .625rem 0px;
@@ -260,7 +260,7 @@
 .see-all-button {
     cursor: pointer;
     padding: 0.5rem 1rem;
-    background-color: $looks-tertiary;
+    background-color: $looks-secondary;
     color: white;
     font-weight: bold;
     border-radius: 0.25rem;

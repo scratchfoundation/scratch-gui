@@ -86,5 +86,5 @@
     border-color: $looks-transparent;
 }
 .spinner.primary::after {
-    border-top-color: $looks-tertiary;
+    border-top-color: $looks-secondary;
 }

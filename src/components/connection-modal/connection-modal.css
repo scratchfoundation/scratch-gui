@@ -80,8 +80,8 @@
     border-radius: 0.25rem;
     font-weight: 600;
     font-size: 0.85rem;
-    background: $looks-tertiary;
-    border: $looks-tertiary;
+    background: $looks-secondary;
+    border: $looks-secondary;
     color: white;
     cursor: pointer;
 }
@@ -172,7 +172,7 @@
     right: -15px;
     left: -15px;
     padding: 5px 5px;
-    background-color: $looks-tertiary;
+    background-color: $looks-secondary;
     border-radius: 100%;
     box-shadow: 0px 0px 0px 4px $looks-transparent;
     /* animation: pulse-blue-ring 1s infinite ease-in-out alternate; */
@@ -208,7 +208,7 @@
 .bluetooth-centered-icon {
     position: absolute;
     padding: 5px 5px;
-    background-color: $looks-tertiary;
+    background-color: $looks-secondary;
     border-radius: 100%;
     box-shadow: 0px 0px 0px 2px $looks-transparent;
 }
@@ -297,7 +297,7 @@
 .connection-button {
     padding: 0.6rem 0.75rem;
     border-radius: 0.5rem;
-    background: $looks-tertiary;
+    background: $looks-secondary;
     color: white;
     font-weight: 600;
     font-size: 0.85rem;
@@ -413,7 +413,7 @@
 }
 
 .active-step-dot {
-    background: $looks-tertiary;
+    background: $looks-secondary;
 }
 
 .success-dot {

@@ -53,7 +53,7 @@
 }
 
 .option-card:hover {
-    border: 2px solid $looks-tertiary;
+    border: 2px solid $looks-secondary;
     box-shadow: 0px 0px 0px 4px $looks-transparent;
 }
 
@@ -92,8 +92,8 @@
 }
 
 .button-row button.ok-button {
-    background: $looks-tertiary;
-    border: $looks-tertiary;
+    background: $looks-secondary;
+    border: $looks-secondary;
     color: white;
 }
 

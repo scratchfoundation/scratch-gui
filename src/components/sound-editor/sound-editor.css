@@ -95,7 +95,7 @@ $border-radius: 0.25rem;
     right: -1px;
     bottom: -1px;
     left: -1px;
-    border: 1px solid $looks-tertiary;
+    border: 1px solid $looks-secondary;
     z-index: 1;
 }
 
@@ -110,7 +110,7 @@ $border-radius: 0.25rem;
     height: 3rem;
     width: 3rem;
     outline: none;
-    background: $looks-tertiary;
+    background: $looks-secondary;
     border-radius: 100%;
     border: 4px solid $ui-white-dim;
     cursor: pointer;

@@ -64,8 +64,8 @@
 }
 
 .button-row button.ok-button {
-    background: $looks-tertiary;
-    border: $looks-tertiary;
+    background: $looks-secondary;
+    border: $looks-secondary;
     color: white;
 }
 

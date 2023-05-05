@@ -34,7 +34,7 @@
     border-radius: 100%;
 
     color: white;
-    background: $looks-tertiary;
+    background: $looks-secondary;
 }
 
 [dir="ltr"] .question-submit-button {

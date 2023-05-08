@@ -2,6 +2,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 
 import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
+import makePromiseBarrier from '../../helpers/promise-barrier';
 
 import ProjectFetcherHOC from '../../../src/lib/project-fetcher-hoc.jsx';
 import storage from '../../../src/lib/storage';
@@ -34,8 +35,9 @@ describe('ProjectFetcherHOC', () => {
         );
         expect(mockSetProjectIdFunc.mock.calls[0][0]).toBe('100');
     });
-    test('when there is a reduxProjectId and isFetchingWithProjectId is true, it loads the project', () => {
-        const mockedOnFetchedProject = jest.fn();
+    test('when there is a reduxProjectId and isFetchingWithProjectId is true, it loads the project', async () => {
+        const projectDidLoad = makePromiseBarrier();
+        const mockedOnFetchedProject = jest.fn(() => projectDidLoad.resolve());
         const originalLoad = storage.load;
         storage.load = jest.fn((type, id) => Promise.resolve({data: id}));
         const Component = ({projectId}) => <div>{projectId}</div>;
@@ -55,10 +57,8 @@ describe('ProjectFetcherHOC', () => {
             storage.AssetType.Project, '100', storage.DataFormat.JSON
         );
         storage.load = originalLoad;
-        // nextTick needed since storage.load is async, and onFetchedProject is called in its then()
-        process.nextTick(
-            () => expect(mockedOnFetchedProject)
-                .toHaveBeenLastCalledWith('100', LoadingState.FETCHING_WITH_ID)
-        );
+        await projectDidLoad;
+        expect(mockedOnFetchedProject)
+            .toHaveBeenLastCalledWith('100', LoadingState.FETCHING_WITH_ID);
     });
 });

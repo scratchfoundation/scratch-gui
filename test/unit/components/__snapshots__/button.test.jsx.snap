@@ -3,11 +3,9 @@
 exports[`ButtonComponent matches snapshot 1`] = `
 <span
   className=""
-  onClick={[Function]}
+  onClick={[MockFunction]}
   role="button"
 >
-  <div
-    className={undefined}
-  />
+  <div />
 </span>
 `;

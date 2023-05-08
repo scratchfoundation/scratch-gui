@@ -1,4 +1,4 @@
-import 'web-audio-test-api';
+import WebAudioTestAPI from 'web-audio-test-api';
 
 import React from 'react';
 import configureStore from 'redux-mock-store';
@@ -7,6 +7,7 @@ import VM from 'scratch-vm';
 import {LoadingState} from '../../../src/reducers/project-state';
 
 import vmManagerHOC from '../../../src/lib/vm-manager-hoc.jsx';
+import makePromiseBarrier from '../../helpers/promise-barrier';
 
 describe('VMManagerHOC', () => {
     const mockStore = configureStore();
@@ -32,6 +33,7 @@ describe('VMManagerHOC', () => {
         vm.start = jest.fn();
     });
     test('when it mounts in player mode, the vm is initialized but not started', () => {
+        WebAudioTestAPI.setState({'AudioContext#resume': 'enabled'});
         const Component = () => (<div />);
         const WrappedComponent = vmManagerHOC(Component);
         mount(
@@ -124,9 +126,10 @@ describe('VMManagerHOC', () => {
         });
         expect(vm.start).not.toHaveBeenCalled();
     });
-    test('if the isLoadingWithId prop becomes true, it loads project data into the vm', () => {
+    test('if the isLoadingWithId prop becomes true, it loads project data into the vm', async () => {
+        const projectDidLoad = makePromiseBarrier();
         vm.loadProject = jest.fn(() => Promise.resolve());
-        const mockedOnLoadedProject = jest.fn();
+        const mockedOnLoadedProject = jest.fn(() => projectDidLoad.resolve());
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
@@ -138,21 +141,22 @@ describe('VMManagerHOC', () => {
                 onLoadedProject={mockedOnLoadedProject}
             />
         );
+        expect(vm.loadProject).toHaveBeenCalledTimes(0);
         mounted.setProps({
             canSave: true,
             isLoadingWithId: true,
             loadingState: LoadingState.LOADING_VM_WITH_ID,
             projectData: '100'
         });
+        await projectDidLoad;
         expect(vm.loadProject).toHaveBeenLastCalledWith('100');
         // nextTick needed since vm.loadProject is async, and we have to wait for it :/
-        process.nextTick(() => (
-            expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, true)
-        ));
+        expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, true);
     });
-    test('if the fontsLoaded prop becomes true, it loads project data into the vm', () => {
+    test('if the fontsLoaded prop becomes true, it loads project data into the vm', async () => {
+        const projectDidLoad = makePromiseBarrier();
         vm.loadProject = jest.fn(() => Promise.resolve());
-        const mockedOnLoadedProject = jest.fn();
+        const mockedOnLoadedProject = jest.fn(() => projectDidLoad.resolve());
         const Component = () => <div />;
         const WrappedComponent = vmManagerHOC(Component);
         const mounted = mount(
@@ -163,17 +167,17 @@ describe('VMManagerHOC', () => {
                 onLoadedProject={mockedOnLoadedProject}
             />
         );
+        expect(vm.loadProject).toHaveBeenCalledTimes(0);
         mounted.setProps({
             canSave: false,
             fontsLoaded: true,
             loadingState: LoadingState.LOADING_VM_WITH_ID,
             projectData: '100'
         });
+        await projectDidLoad;
         expect(vm.loadProject).toHaveBeenLastCalledWith('100');
         // nextTick needed since vm.loadProject is async, and we have to wait for it :/
-        process.nextTick(() => (
-            expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, false)
-        ));
+        expect(mockedOnLoadedProject).toHaveBeenLastCalledWith(LoadingState.LOADING_VM_WITH_ID, false);
     });
     test('if the fontsLoaded prop is false, project data is never loaded', () => {
         vm.loadProject = jest.fn(() => Promise.resolve());

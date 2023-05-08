@@ -23,6 +23,12 @@ module.exports = {
             'allowParens': true
         }],
         'comma-dangle': 'off',
+        'react/jsx-filename-extension': [
+            'error',
+            {
+                'extensions': ['.jsx', '.tsx']
+            }
+        ],
         'no-prototype-builtins': 'off', // relatively new rule that we don't comply with yet
         'no-use-before-define': 'off', // doesn't work correctly with TS parser
         '@typescript-eslint/no-use-before-define': 'error', // replacement for plain 'no-use-before-define'

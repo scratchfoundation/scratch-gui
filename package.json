@@ -21,7 +21,7 @@
     "start": "webpack-dev-server",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --maxWorkers=4 test[\\\\/]integration",
-    "test:lint": "eslint . --ext .js,.jsx",
+    "test:lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "test:unit": "jest test[\\\\/]unit",
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --colors --watch"

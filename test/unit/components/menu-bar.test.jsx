@@ -23,6 +23,9 @@ describe('MenuBar Component', () => {
             theme: {
                 theme: DEFAULT_THEME
             },
+            timeTravel: {
+                year: 'NOW'
+            },
             vm: new VM()
         }
     });

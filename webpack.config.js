@@ -112,7 +112,7 @@ module.exports = [
         module: {
             rules: base.module.rules.concat([
                 {
-                    test: /\.(svg|png|wav|gif|jpg)$/,
+                    test: /\.(svg|png|wav|mp3|gif|jpg)$/,
                     loader: 'url-loader',
                     options: {
                         limit: 2048,
@@ -197,7 +197,8 @@ module.exports = [
                 patterns: [
                     {
                         from: 'extension-worker.{js,js.map}',
-                        context: 'node_modules/scratch-vm/dist/web'
+                        context: 'node_modules/scratch-vm/dist/web',
+                        noErrorOnMissing: true
                     }
                 ]
             })
@@ -223,7 +224,7 @@ module.exports = [
             module: {
                 rules: base.module.rules.concat([
                     {
-                        test: /\.(svg|png|wav|gif|jpg)$/,
+                        test: /\.(svg|png|wav|mp3|gif|jpg)$/,
                         loader: 'url-loader',
                         options: {
                             limit: 2048,
@@ -246,7 +247,8 @@ module.exports = [
                     patterns: [
                         {
                             from: 'extension-worker.{js,js.map}',
-                            context: 'node_modules/scratch-vm/dist/web'
+                            context: 'node_modules/scratch-vm/dist/web',
+                            noErrorOnMissing: true
                         }
                     ]
                 }),

@@ -311,6 +311,7 @@ workflows:
       - deploy-npm:
           context:
             - dockerhub-credentials
+            - scratch-npm-creds
           requires:
             - lint
             - unit

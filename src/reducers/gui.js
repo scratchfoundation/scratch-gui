@@ -23,6 +23,7 @@ import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
 import themeReducer, {themeInitialState} from './theme';
 import timeoutReducer, {timeoutInitialState} from './timeout';
+import timeTravelReducer, {timeTravelInitialState} from './time-travel';
 import toolboxReducer, {toolboxInitialState} from './toolbox';
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
@@ -58,6 +59,7 @@ const guiInitialState = {
     targets: targetsInitialState,
     theme: themeInitialState,
     timeout: timeoutInitialState,
+    timeTravel: timeTravelInitialState,
     toolbox: toolboxInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
@@ -158,6 +160,7 @@ const guiReducer = combineReducers({
     targets: targetReducer,
     theme: themeReducer,
     timeout: timeoutReducer,
+    timeTravel: timeTravelReducer,
     toolbox: toolboxReducer,
     vm: vmReducer,
     vmStatus: vmStatusReducer,

@@ -307,11 +307,10 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
-                                            key={blocksId}
+                                            key={`${blocksId}/${theme}`}
                                             canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
-                                            key={theme}
                                             options={{
                                                 media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
                                             }}

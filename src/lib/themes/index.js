@@ -40,20 +40,20 @@ const messages = defineMessages({
 
 const themeMap = {
     [DEFAULT_THEME]: {
-        blocksMediaFolder: 'blocks-media',
+        blocksMediaFolder: 'blocks-media/default',
         colors: defaultColors,
         extensions: {},
         label: messages[DEFAULT_THEME],
         icon: defaultIcon
     },
     [DARK_THEME]: {
-        blocksMediaFolder: 'blocks-media',
+        blocksMediaFolder: 'blocks-media/default',
         colors: mergeWithDefaults(darkModeBlockColors),
         extensions: darkModeExtensions,
         label: messages[DARK_THEME]
     },
     [HIGH_CONTRAST_THEME]: {
-        blocksMediaFolder: 'blocks-media-high-contrast',
+        blocksMediaFolder: 'blocks-media/high-contrast',
         colors: mergeWithDefaults(highContrastBlockColors),
         extensions: highContrastExtensions,
         label: messages[HIGH_CONTRAST_THEME],

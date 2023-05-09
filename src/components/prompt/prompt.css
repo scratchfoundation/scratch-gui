@@ -64,8 +64,8 @@
 }
 
 .button-row button.ok-button {
-    background: $motion-primary;
-    border: $motion-primary;
+    background: $looks-secondary;
+    border: $looks-secondary;
     color: white;
 }
 

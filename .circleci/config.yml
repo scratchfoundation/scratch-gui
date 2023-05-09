@@ -225,6 +225,7 @@ workflows:
               ignore:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
   push-translations:
     triggers:
@@ -254,6 +255,7 @@ workflows:
               ignore:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
   build-test-deploy:
     jobs:
@@ -265,6 +267,7 @@ workflows:
               only:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
       - lint:
           context:
@@ -296,6 +299,7 @@ workflows:
               only:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
       - store_dist:
           context:
@@ -307,6 +311,7 @@ workflows:
               only:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
       - deploy-npm:
           context:
@@ -322,6 +327,7 @@ workflows:
               only:
                 - master
                 - develop
+                - beta
                 - /^hotfix\/.*/
       - deploy-gh-pages:
           context:

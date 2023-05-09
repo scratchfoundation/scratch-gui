@@ -23,6 +23,7 @@ export default function (vm, useCatBlocks) {
             colour: colors.secondary,
             colourSecondary: colors.secondary,
             colourTertiary: colors.tertiary,
+            colourQuaternary: colors.quaternary,
             outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
         };
     };
@@ -42,6 +43,7 @@ export default function (vm, useCatBlocks) {
             colour: colors.primary,
             colourSecondary: colors.secondary,
             colourTertiary: colors.tertiary,
+            colourQuaternary: colors.quaternary,
             extensions: ['shape_hat']
         };
     };
@@ -68,6 +70,7 @@ export default function (vm, useCatBlocks) {
             colour: ScratchBlocks.Colours.sensing.primary,
             colourSecondary: ScratchBlocks.Colours.sensing.secondary,
             colourTertiary: ScratchBlocks.Colours.sensing.tertiary,
+            colourQuaternary: ScratchBlocks.Colours.sensing.quaternary,
             outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
         };
     };

@@ -41,7 +41,10 @@ class ListMonitorScroller extends React.Component {
                 <div
                     className={styles.listValue}
                     dataIndex={index}
-                    style={{background: this.props.categoryColor}}
+                    style={{
+                        background: this.props.categoryColor.background,
+                        color: this.props.categoryColor.text
+                    }}
                     onClick={this.props.draggable ? this.handleEventFactory(index) : null}
                 >
                     {this.props.draggable && this.props.activeIndex === index ? (
@@ -51,6 +54,7 @@ class ListMonitorScroller extends React.Component {
                                 autoComplete={false}
                                 className={classNames(styles.listInput, 'no-drag')}
                                 spellCheck={false}
+                                style={{color: this.props.categoryColor.text}}
                                 type="text"
                                 value={this.props.activeValue}
                                 onBlur={this.props.onDeactivate}
@@ -97,7 +101,10 @@ class ListMonitorScroller extends React.Component {
 ListMonitorScroller.propTypes = {
     activeIndex: PropTypes.number,
     activeValue: PropTypes.string,
-    categoryColor: PropTypes.string,
+    categoryColor: PropTypes.shape({
+        background: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+    }).isRequired,
     draggable: PropTypes.bool,
     height: PropTypes.number,
     onActivate: PropTypes.func,

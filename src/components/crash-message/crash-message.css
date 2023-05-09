@@ -10,10 +10,16 @@
     justify-content: center;
     align-items: center;
 }
+
 .body {
     width: 35%;
     color: white;
     text-align: center;
+}
+
+/* scratch-www was overriding the colors */
+.body p, .body h2 {
+    color: inherit;
 }
 
 .reloadButton {

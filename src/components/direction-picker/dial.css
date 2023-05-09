@@ -35,7 +35,7 @@ $dial-size: 40px;
 }
 
 .gauge-path {
-    fill: $motion-transparent;
-    stroke: $motion-primary;
+    fill: $looks-transparent;
+    stroke: $looks-secondary;
     stroke-width: 1px;
 }

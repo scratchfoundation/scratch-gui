@@ -18,8 +18,8 @@
   overflow: hidden;  /* Mask the icon animation */
   width: 1.75rem;
   height: 1.75rem;
-  box-shadow: 0px 0px 0px 2px $motion-transparent;
-  background-color: $motion-primary;
+  box-shadow: 0px 0px 0px 2px $looks-transparent;
+  background-color: $looks-secondary;
   color: $ui-white;
   border-radius: 50%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

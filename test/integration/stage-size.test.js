@@ -35,10 +35,10 @@ describe('Loading scratch gui', () => {
         await clickText('delete', scope.spriteTile);
 
         // Go to small stage mode
-        await clickXpath('//img[@alt="Switch to small stage"]');
+        await clickXpath('//button[@title="Switch to small stage"]');
 
         // Confirm app still working
-        await clickXpath('//img[@alt="Switch to large stage"]');
+        await clickXpath('//button[@title="Switch to large stage"]');
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

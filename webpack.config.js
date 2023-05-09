@@ -88,7 +88,25 @@ const base = {
             })
         ]
     },
-    plugins: []
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'node_modules/scratch-blocks/media',
+                    to: 'static/blocks-media/default'
+                },
+                {
+                    from: 'node_modules/scratch-blocks/media',
+                    to: 'static/blocks-media/high-contrast'
+                },
+                {
+                    from: 'src/lib/themes/high-contrast/blocks-media',
+                    to: 'static/blocks-media/high-contrast',
+                    force: true
+                }
+            ]
+        })
+    ]
 };
 
 if (!process.env.CI) {
@@ -113,8 +131,9 @@ module.exports = [
             rules: base.module.rules.concat([
                 {
                     test: /\.(svg|png|wav|mp3|gif|jpg)$/,
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
+                        limit: 2048,
                         outputPath: 'static/assets/'
                     }
                 }
@@ -169,14 +188,6 @@ module.exports = [
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: 'node_modules/scratch-blocks/media',
-                        to: 'static/blocks-media'
-                    }
-                ]
-            }),
-            new CopyWebpackPlugin({
-                patterns: [
-                    {
                         from: 'extensions/**',
                         to: 'static',
                         context: 'src/examples'
@@ -215,8 +226,9 @@ module.exports = [
                 rules: base.module.rules.concat([
                     {
                         test: /\.(svg|png|wav|mp3|gif|jpg)$/,
-                        loader: 'file-loader',
+                        loader: 'url-loader',
                         options: {
+                            limit: 2048,
                             outputPath: 'static/assets/',
                             publicPath: `${STATIC_PATH}/assets/`
                         }
@@ -224,14 +236,6 @@ module.exports = [
                 ])
             },
             plugins: base.plugins.concat([
-                new CopyWebpackPlugin({
-                    patterns: [
-                        {
-                            from: 'node_modules/scratch-blocks/media',
-                            to: 'static/blocks-media'
-                        }
-                    ]
-                }),
                 new CopyWebpackPlugin({
                     patterns: [
                         {

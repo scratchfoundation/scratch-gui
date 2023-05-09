@@ -18,7 +18,7 @@
                 <g id="Play-/-Record-/-Stop" transform="translate(623.000000, 307.000000)">
                     <g id="play" transform="translate(21.849131, 22.002656) rotate(90.000000) translate(-21.849131, -22.002656) ">
                         <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                        <use stroke="#4280D7" stroke-width="1" fill="#4C97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <use stroke="#6736B5" stroke-width="1" fill="#855CD6" fill-rule="evenodd" xlink:href="#path-1"></use>
                     </g>
                 </g>
             </g>

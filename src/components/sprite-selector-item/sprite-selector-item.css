@@ -23,13 +23,13 @@
 }
 
 .sprite-selector-item.is-selected {
-    box-shadow: 0px 0px 0px 4px $motion-transparent;
-    border: 2px solid $motion-primary;
+    box-shadow: 0px 0px 0px 4px $looks-transparent;
+    border: 2px solid $looks-secondary;
     background: $ui-white;
 }
 
 .sprite-selector-item:hover {
-    border: 2px solid $motion-primary;
+    border: 2px solid $looks-secondary;
     background: $ui-white;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .is-selected .sprite-info {
-    background: $motion-primary;
+    background: $looks-secondary;
     color: $ui-white;
 }
 

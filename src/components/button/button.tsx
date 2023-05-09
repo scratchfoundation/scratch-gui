@@ -4,18 +4,26 @@ import React from 'react';
 
 import styles from './button.css';
 
-const ButtonComponent = ({
-    className,
-    disabled,
-    iconClassName,
-    iconSrc,
-    onClick,
-    children,
-    ...props
-}) => {
+const ButtonComponent = (
+    {
+        className,
+        disabled,
+        iconClassName,
+        iconSrc,
+        onClick,
+        children,
+        ...props
+    }: {
+        className: string,
+        disabled: boolean,
+        iconClassName: string,
+        iconSrc: string,
+        onClick: React.MouseEventHandler,
+        children: React.ReactNode
+    }) => {
 
     if (disabled) {
-        onClick = function () {};
+        onClick = function () { /* do nothing */ };
     }
 
     const icon = iconSrc && (

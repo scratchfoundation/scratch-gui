@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Button from '../button/button.jsx';
+import Button from '../button/button.tsx';
 
 import styles from './share-button.css';
 

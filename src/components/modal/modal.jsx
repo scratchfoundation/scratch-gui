@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import {FormattedMessage} from 'react-intl';
 
 import Box from '../box/box.jsx';
-import Button from '../button/button.jsx';
+import Button from '../button/button.tsx';
 import CloseButton from '../close-button/close-button.jsx';
 
 import backIcon from '../../lib/assets/icon--back.svg';

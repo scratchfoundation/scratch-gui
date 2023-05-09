@@ -1,3 +1,4 @@
+/* eslint-disable import/no-commonjs */
 module.exports = {
     extends: 'scratch-semantic-release-config',
     branches: [

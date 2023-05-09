@@ -21,7 +21,7 @@
     "start": "webpack-dev-server",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --maxWorkers=4 test[\\\\/]integration",
-    "test:lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "test:lint": "eslint . --ext .cjs,.mjs,.js,.jsx,.ts,.tsx",
     "test:unit": "jest test[\\\\/]unit",
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --colors --watch"
@@ -162,10 +162,12 @@
       "src/test.js"
     ],
     "moduleFileExtensions": [
-      "ts",
-      "tsx",
+      "cjs",
       "js",
-      "jsx"
+      "jsx",
+      "mjs",
+      "ts",
+      "tsx"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
@@ -175,7 +177,7 @@
     "testEnvironment": "jest-environment-jsdom",
     "transform": {
       "^.+\\.tsx?$": "ts-jest",
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.(c|m)?jsx?$": "babel-jest"
     }
   }
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-const {mountWithIntl} = require('../../helpers/intl-helpers.jsx');
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 
 import configureStore from 'redux-mock-store';
 
 import CrashMessageComponent from '../../../src/components/crash-message/crash-message.jsx';
 import ErrorBoundary from '../../../src/containers/error-boundary.jsx';
 
-const ChildComponent = () => <div>hello</div>;
+const ChildComponent = () => <div>{'hello'}</div>;
 
 describe('ErrorBoundary', () => {
     const mockStore = configureStore();

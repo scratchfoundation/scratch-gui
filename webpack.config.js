@@ -86,6 +86,15 @@ const base = {
                     }
                 }
             }]
+        },
+        {
+            test: /\.hex$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 16 * 1024
+                }
+            }]
         }]
     },
     optimization: {

@@ -1,8 +1,9 @@
 const path = require('path');
 module.exports = {
     root: true,
-    extends: ['scratch', 'scratch/es6', 'scratch/react', 'plugin:import/errors'],
+    extends: ['eslint:recommended'],
     env: {
+        es6: true,
         node: true,
     },
     rules: {
@@ -16,10 +17,6 @@ module.exports = {
         ],
         'import/no-mutable-exports': 'error',
         'import/no-amd': 'error',
-        'no-confusing-arrow': ['error', {
-            allowParens: true
-        }],
-        'comma-dangle': 'off',
     },
     settings: {
         'import/extensions': [
@@ -47,8 +44,20 @@ module.exports = {
             }
         },
         {
+            // "legacy" rules for JS
+            files: ['*.cjs', '*.js', '*.jsx', '*.mjs'],
+            extends: ['scratch', 'scratch/es6', 'scratch/react', 'plugin:import/errors'],
+            rules: {
+                'comma-dangle': 'off',
+                'no-confusing-arrow': ['error', {
+                    allowParens: true
+                }],
+            }
+        },
+        {
+            // "new" rules for TypeScript
             files: ['*.ts', '*.tsx'],
-            extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+            extends: ['plugin:@typescript-eslint/recommended'],
             parser: '@typescript-eslint/parser',
             plugins: [
                 '@typescript-eslint',

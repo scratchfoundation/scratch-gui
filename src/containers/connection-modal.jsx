@@ -18,7 +18,9 @@ class ConnectionModal extends React.Component {
             'handleConnecting',
             'handleDisconnect',
             'handleError',
-            'handleHelp'
+            'handleHelp',
+            'handleUpdateFirmware',
+            'handleSendFirmware'
         ]);
         this.state = {
             extension: extensionData.find(ext => ext.extensionId === props.extensionId),
@@ -104,7 +106,33 @@ class ConnectionModal extends React.Component {
             label: this.props.extensionId
         });
     }
+    handleUpdateFirmware () {
+        this.setState({
+            phase: PHASES.updateFirmware
+        });
+        analytics.event({
+            category: 'extensions',
+            action: 'update firmware',
+            label: this.props.extensionId
+        });
+    }
+    handleSendFirmware (progressCallback) {
+        // TODO: get this functionality from the extension
+        // TODO: actually send firmware to the device
+        let progress = 0;
+        return new Promise(resolve => {
+            const interval = setInterval(() => {
+                progress += 0.01;
+                if (progress >= 1) {
+                    clearInterval(interval);
+                    resolve({success: true});
+                }
+                progressCallback(progress);
+            }, 100);
+        });
+    }
     render () {
+        const canSendFirmware = this.props.extensionId === 'microbit';
         return (
             <ConnectionModalComponent
                 connectingMessage={this.state.extension && this.state.extension.connectingMessage}
@@ -123,6 +151,8 @@ class ConnectionModal extends React.Component {
                 onDisconnect={this.handleDisconnect}
                 onHelp={this.handleHelp}
                 onScanning={this.handleScanning}
+                onUpdateFirmware={this.handleUpdateFirmware}
+                onSendFirmware={canSendFirmware ? this.handleSendFirmware : null}
             />
         );
     }

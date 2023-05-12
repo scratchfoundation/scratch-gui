@@ -51,6 +51,25 @@ const ScanningStep = props => (
                         description="Text shown when no devices could be found"
                         id="gui.connection.scanning.noPeripheralsFound"
                     />
+                    {
+                        props.onSendFirmware && <p>
+                            <FormattedMessage
+                                defaultMessage="Need to update your device to work with Scratch?"
+                                description="Prompt for updating firmware"
+                                id="gui.connection.scanning.updateFirmwarePrompt"
+                            />
+                            <button
+                                className={classNames(styles.bottomAreaItem, styles.connectionButton)}
+                                onClick={props.onUpdateFirmware}
+                            >
+                                <FormattedMessage
+                                    defaultMessage="Update my Device"
+                                    description="Button in prompt for starting a search"
+                                    id="gui.connection.scanning.updateFirmwareButton"
+                                />
+                            </button>
+                        </p>
+                    }
                 </Box>
             )}
         </Box>
@@ -89,6 +108,8 @@ ScanningStep.propTypes = {
     connectionSmallIconURL: PropTypes.string,
     onConnecting: PropTypes.func,
     onRefresh: PropTypes.func,
+    onSendFirmware: PropTypes.func,
+    onUpdateFirmware: PropTypes.func,
     peripheralList: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string,
         rssi: PropTypes.number,

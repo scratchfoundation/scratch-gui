@@ -16,6 +16,11 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
+const FILE_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "menu-bar_collapsible-label")]//*[text()="File"]]';
+const SETTINGS_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "settings-menu_dropdown-label")]//*[text()="Settings"]]';
+
 describe('Menu bar settings', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -27,28 +32,19 @@ describe('Menu bar settings', () => {
 
     test('File->New should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath(
-            '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
-            'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
-        );
+        await clickXpath(FILE_MENU_XPATH);
         await findByXpath('//*[li[span[text()="New"]] and not(@data-tip="tooltip")]');
     });
 
     test('File->Load should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath(
-            '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
-            'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
-        );
+        await clickXpath(FILE_MENU_XPATH);
         await findByXpath('//*[li[text()="Load from your computer"] and not(@data-tip="tooltip")]');
     });
 
     test('File->Save should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath(
-            '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
-            'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
-        );
+        await clickXpath(FILE_MENU_XPATH);
         await findByXpath('//*[li[span[text()="Save to your computer"]] and not(@data-tip="tooltip")]');
     });
 
@@ -74,7 +70,7 @@ describe('Menu bar settings', () => {
 
     test('User is not warned before uploading project file over a fresh project', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
@@ -89,7 +85,7 @@ describe('Menu bar settings', () => {
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
 
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
@@ -100,15 +96,17 @@ describe('Menu bar settings', () => {
 
     test('Theme picker shows themes', async () => {
         await loadUri(uri);
-        await clickXpath('//img[@alt="Color theme"]');
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Color Mode', scope.menuBar);
 
-        await findByText('Original', scope.menuBar);
-        await findByText('High Contrast', scope.menuBar);
+        expect(await (await findByText('Original', scope.menuBar)).isDisplayed()).toBe(true);
+        expect(await (await findByText('High Contrast', scope.menuBar)).isDisplayed()).toBe(true);
     });
 
     test('Theme picker switches to high contrast', async () => {
         await loadUri(uri);
-        await clickXpath('//img[@alt="Color theme"]');
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Color Mode', scope.menuBar);
         await clickText('High Contrast', scope.menuBar);
 
         // There is a tiny delay for the color theme to be applied to the categories.
@@ -123,5 +121,52 @@ describe('Menu bar settings', () => {
             // but this is a bit flexible just in case.
             return /128,\s?181,\s?255/.test(color) || color.includes('80B5FF');
         }, 5000, 'Motion category color does not match high contrast theme');
+    });
+
+    test('Settings menu switches between submenus', async () => {
+        await loadUri(uri);
+        await clickXpath(SETTINGS_MENU_XPATH);
+
+        // Language and theme options not visible yet
+        expect(await (await findByText('High Contrast', scope.menuBar)).isDisplayed()).toBe(false);
+        expect(await (await findByText('Esperanto', scope.menuBar)).isDisplayed()).toBe(false);
+
+        await clickText('Color Mode', scope.menuBar);
+
+        // Only theme options visible
+        expect(await (await findByText('High Contrast', scope.menuBar)).isDisplayed()).toBe(true);
+        expect(await (await findByText('Esperanto', scope.menuBar)).isDisplayed()).toBe(false);
+
+        await clickText('Language', scope.menuBar);
+
+        // Only language options visible
+        expect(await (await findByText('High Contrast', scope.menuBar)).isDisplayed()).toBe(false);
+        expect(await (await findByText('Esperanto', scope.menuBar)).isDisplayed()).toBe(true);
+    });
+
+    test('Menu labels hidden when width is equal to 1024', async () => {
+        await loadUri(uri);
+        await driver.manage()
+            .window()
+            .setSize(1024, 768);
+
+        const collapsibleMenus = ['Settings', 'File', 'Edit', 'Tutorials'];
+        for (const menu of collapsibleMenus) {
+            const settingsMenu = await findByText(menu, scope.menuBar);
+            expect(await settingsMenu.isDisplayed()).toBe(false);
+        }
+    });
+
+    test('Menu labels shown when width is greater than 1024', async () => {
+        await loadUri(uri);
+        await driver.manage()
+            .window()
+            .setSize(1200, 768);
+
+        const collapsibleMenus = ['Settings', 'File', 'Edit', 'Tutorials'];
+        for (const menu of collapsibleMenus) {
+            const settingsMenu = await findByText(menu, scope.menuBar);
+            expect(await settingsMenu.isDisplayed()).toBe(true);
+        }
     });
 });

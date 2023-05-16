@@ -15,37 +15,48 @@ import styles from './connection-modal.css';
 /** @enum{string} UPDATE_ACTIVITY */
 const UPDATE_ACTIVITY = keyMirror({
     getReady: null,
-    sendFirmware: null,
+    sendUpdate: null,
     results: null
 });
 
-class UpdateFirmwareStep extends React.Component {
+class UpdatePeripheralStep extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleUpdateFirmware'
+            'handleSendUpdate'
         ]);
         this.state = {
             /**
              * @type {UPDATE_ACTIVITY}
              */
             activity: UPDATE_ACTIVITY.getReady,
-            progress: 0
+            progress: 0,
+            err: null,
+            res: null
         };
     }
 
-    async handleUpdateFirmware () {
+    async handleSendUpdate () {
         this.setState({
-            activity: UPDATE_ACTIVITY.sendFirmware,
-            progress: 0
+            activity: UPDATE_ACTIVITY.sendUpdate,
+            progress: 0,
+            err: null,
+            res: null
         });
-        const results = await this.props.onSendFirmware(progress => {
-            this.setState({progress});
-        });
-        this.setState({
-            activity: UPDATE_ACTIVITY.results,
-            results
-        });
+        try {
+            const res = await this.props.onSendPeripheralUpdate(progress => {
+                this.setState({progress});
+            });
+            this.setState({
+                activity: UPDATE_ACTIVITY.results,
+                res
+            });
+        } catch (err) {
+            this.setState({
+                activity: UPDATE_ACTIVITY.results,
+                err
+            });
+        }
     }
 
     renderGetReady () {
@@ -53,8 +64,8 @@ class UpdateFirmwareStep extends React.Component {
             <Box className={styles.centeredRow}>
                 <FormattedMessage
                     defaultMessage="This will update your {extensionName} to work with Scratch."
-                    description="Introduction to the firmware update process for a peripheral"
-                    id="gui.connection.updateFirmware.introduction"
+                    description="Introduction to the peripheral update process"
+                    id="gui.connection.updatePeripheral.introduction"
                     values={{
                         extensionName: this.props.name
                     }}
@@ -67,8 +78,8 @@ class UpdateFirmwareStep extends React.Component {
                 }
                 <FormattedMessage
                     defaultMessage="Please connect your {extensionName} to this device using a USB cable."
-                    description="Instructions to connect the micro:bit to the computer for the firmware update process"
-                    id="gui.connection.updateFirmware.microBitConnect"
+                    description="Instructions to connect the micro:bit to the computer for the update process"
+                    id="gui.connection.updatePeripheral.microBitConnect"
                     values={{
                         extensionName: this.props.name
                     }}
@@ -77,8 +88,8 @@ class UpdateFirmwareStep extends React.Component {
             <Box className={styles.centeredRow}>
                 <FormattedMessage
                     defaultMessage="Please don't disconnect, reset, or turn off your {extensionName} during the update."
-                    description="Notice to not disrupt the firmware update process"
-                    id="gui.connection.updateFirmware.doNotDisconnect"
+                    description="Notice to not disrupt the peripheral update process"
+                    id="gui.connection.updatePeripheral.doNotDisconnect"
                     values={{
                         extensionName: this.props.name
                     }}
@@ -87,7 +98,7 @@ class UpdateFirmwareStep extends React.Component {
         </Box>);
     }
 
-    renderSendFirmware () {
+    renderSendUpdate () {
         return (<Box className={styles.activityArea}>
             <p>{'Sending update...'}</p>
             <progress
@@ -107,7 +118,7 @@ class UpdateFirmwareStep extends React.Component {
         return (
             <Box className={styles.body}>
                 {(this.state.activity === UPDATE_ACTIVITY.getReady) && this.renderGetReady()}
-                {(this.state.activity === UPDATE_ACTIVITY.sendFirmware) && this.renderSendFirmware()}
+                {(this.state.activity === UPDATE_ACTIVITY.sendUpdate) && this.renderSendUpdate()}
                 {(this.state.activity === UPDATE_ACTIVITY.results) && this.renderResults()}
                 <Box className={styles.bottomArea}>
                     <Dots
@@ -118,7 +129,7 @@ class UpdateFirmwareStep extends React.Component {
                         <button
                             className={styles.connectionButton}
                             onClick={this.props.onScanning}
-                            disabled={this.state.activity === UPDATE_ACTIVITY.sendFirmware}
+                            disabled={this.state.activity === UPDATE_ACTIVITY.sendUpdate}
                         >
                             <img
                                 className={classNames(styles.buttonIconLeft, styles.buttonIconBack)}
@@ -126,19 +137,19 @@ class UpdateFirmwareStep extends React.Component {
                             />
                             <FormattedMessage
                                 defaultMessage="Go back"
-                                description="Button to leave the firmware update process"
-                                id="gui.connection.updateFirmware.goBackButton"
+                                description="Button to leave the peripheral update process"
+                                id="gui.connection.updatePeripheral.goBackButton"
                             />
                         </button>
                         <button
                             className={styles.connectionButton}
-                            onClick={this.handleUpdateFirmware}
+                            onClick={this.handleSendUpdate}
                             disabled={this.state.activity !== UPDATE_ACTIVITY.getReady}
                         >
                             <FormattedMessage
                                 defaultMessage="Update now"
-                                description="Button to start the firmware update"
-                                id="gui.connection.updateFirmware.updateNowButton"
+                                description="Button to start the peripheral update"
+                                id="gui.connection.updatePeripheral.updateNowButton"
                             />
                         </button>
                     </Box>
@@ -148,10 +159,10 @@ class UpdateFirmwareStep extends React.Component {
     }
 }
 
-UpdateFirmwareStep.propTypes = {
+UpdatePeripheralStep.propTypes = {
     name: PropTypes.string.isRequired,
     onScanning: PropTypes.func.isRequired,
-    onSendFirmware: PropTypes.func.isRequired
+    onSendPeripheralUpdate: PropTypes.func.isRequired
 };
 
-export default UpdateFirmwareStep;
+export default UpdatePeripheralStep;

@@ -6,7 +6,9 @@ import VM from 'scratch-vm';
 import analytics from '../lib/analytics';
 import extensionData from '../lib/libraries/extensions/index.jsx';
 import {connect} from 'react-redux';
+
 import {closeConnectionModal} from '../reducers/modals';
+import {isMicroBitUpdateSupported, selectAndUpdateMicroBit} from '../lib/microbit-update';
 
 class ConnectionModal extends React.Component {
     constructor (props) {
@@ -19,8 +21,8 @@ class ConnectionModal extends React.Component {
             'handleDisconnect',
             'handleError',
             'handleHelp',
-            'handleUpdateFirmware',
-            'handleSendFirmware'
+            'handleSendUpdate',
+            'handleUpdatePeripheral'
         ]);
         this.state = {
             extension: extensionData.find(ext => ext.extensionId === props.extensionId),
@@ -106,33 +108,33 @@ class ConnectionModal extends React.Component {
             label: this.props.extensionId
         });
     }
-    handleUpdateFirmware () {
+    handleUpdatePeripheral () {
         this.setState({
             phase: PHASES.updateFirmware
         });
         analytics.event({
             category: 'extensions',
-            action: 'update firmware',
+            action: 'enter peripheral update flow',
             label: this.props.extensionId
         });
     }
-    handleSendFirmware (progressCallback) {
-        // TODO: get this functionality from the extension
-        // TODO: actually send firmware to the device
-        let progress = 0;
-        return new Promise(resolve => {
-            const interval = setInterval(() => {
-                progress += 0.01;
-                if (progress >= 1) {
-                    clearInterval(interval);
-                    resolve({success: true});
-                }
-                progressCallback(progress);
-            }, 100);
+    /**
+     * Handle sending an update to the peripheral.
+     * @param {function(number): void} [progressCallback] Optional callback for progress updates in the range of [0..1].
+     * @returns {Promise} Resolves when the update is complete.
+     */
+    handleSendUpdate (progressCallback) {
+        analytics.event({
+            category: 'extensions',
+            action: 'send update to peripheral',
+            label: this.props.extensionId
         });
+
+        // TODO: get this functionality from the extension
+        return selectAndUpdateMicroBit(progressCallback);
     }
     render () {
-        const canSendFirmware = this.props.extensionId === 'microbit';
+        const canUpdatePeripheral = (this.props.extensionId === 'microbit') && isMicroBitUpdateSupported();
         return (
             <ConnectionModalComponent
                 connectingMessage={this.state.extension && this.state.extension.connectingMessage}
@@ -151,8 +153,8 @@ class ConnectionModal extends React.Component {
                 onDisconnect={this.handleDisconnect}
                 onHelp={this.handleHelp}
                 onScanning={this.handleScanning}
-                onUpdateFirmware={this.handleUpdateFirmware}
-                onSendFirmware={canSendFirmware ? this.handleSendFirmware : null}
+                onSendPeripheralUpdate={canUpdatePeripheral ? this.handleSendUpdate : null}
+                onUpdatePeripheral={canUpdatePeripheral ? this.handleUpdatePeripheral : null}
             />
         );
     }

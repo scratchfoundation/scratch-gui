@@ -19,6 +19,8 @@ const UPDATE_ACTIVITY = keyMirror({
     results: null
 });
 
+const microBitFirmwareUrl = 'https://microbit.org/get-started/user-guide/firmware/';
+
 class UpdatePeripheralStep extends React.Component {
     constructor (props) {
         super(props);
@@ -26,12 +28,16 @@ class UpdatePeripheralStep extends React.Component {
             'handleSendUpdate'
         ]);
         this.state = {
-            /**
-             * @type {UPDATE_ACTIVITY}
-             */
+            /** @type {UPDATE_ACTIVITY} */
             activity: UPDATE_ACTIVITY.getReady,
+
+            /** @type {number} */
             progress: 0,
+
+            /** @type {Error?} */
             err: null,
+
+            /** @type {any} */
             res: null
         };
     }
@@ -109,8 +115,41 @@ class UpdatePeripheralStep extends React.Component {
     }
 
     renderResults () {
+        let resultsContent;
+        if (this.state.err === null) {
+            resultsContent = (<FormattedMessage
+                defaultMessage="Update successful!"
+                description="Message to indicate that the peripheral update was successful"
+                id="gui.connection.updatePeripheral.updateSuccessful"
+            />);
+        } else if (this.state.err.message === 'No valid interfaces found.') {
+            // this is a special case where the micro:bit's communication firmware is too old to support WebUSB
+            resultsContent = (<FormattedMessage
+                defaultMessage="Please visit {microBitFirmwareLink} to update your micro:bit firmware."
+                description="Message to indicate that the special micro:bit interface firmware needs to be updated"
+                id="gui.connection.updatePeripheral.updateMicroBitFirmware"
+                values={{
+                    microBitFirmwareLink: <a
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href={microBitFirmwareUrl}
+                    >
+                        {microBitFirmwareUrl}
+                    </a>
+                }}
+            />);
+        } else {
+            resultsContent = (<FormattedMessage
+                defaultMessage="Update failed. Error: {errorMessage}"
+                description="Message to indicate that the peripheral update failed"
+                id="gui.connection.updatePeripheral.updateFailed"
+                values={{
+                    errorMessage: this.state.err.message
+                }}
+            />);
+        }
         return (<Box className={styles.activityArea}>
-            <p>{'Results'}</p>
+            {resultsContent}
         </Box>);
     }
 

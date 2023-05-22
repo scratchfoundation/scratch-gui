@@ -1,105 +1,118 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
-import classNames from 'classnames';
+import {FormattedMessage} from 'react-intl';
+import {connect} from 'react-redux';
 
-import MenuBarMenu from './menu-bar-menu.jsx';
+import check from './check.svg';
+import {MenuItem, Submenu} from '../menu/menu.jsx';
 import {DEFAULT_THEME, HIGH_CONTRAST_THEME, themeMap} from '../../lib/themes';
-import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import {persistTheme} from '../../lib/themes/themePersistance';
+import {openThemeMenu, themeMenuOpen} from '../../reducers/menus.js';
+import {setTheme} from '../../reducers/theme.js';
+
+import styles from './settings-menu.css';
 
 import dropdownCaret from './dropdown-caret.svg';
-import check from './check.svg';
-
-import styles from './theme-menu.css';
-import menuBarStyles from './menu-bar.css';
-
-const messages = defineMessages({
-    colorTheme: {
-        id: 'gui.theme.colorTheme',
-        defaultMessage: 'Color theme',
-        description: 'label for selecting the site\'s color theme'
-    }
-});
 
 const ThemeMenuItem = props => {
     const themeInfo = themeMap[props.theme];
 
     return (
-        <MenuItem
-            isRtl={props.isRtl}
-            onClick={props.onClick}
-        >
-            <div className={styles.themeOption}>
+        <MenuItem onClick={props.onClick}>
+            <div className={styles.option}>
                 <img
-                    src={check}
                     className={classNames(styles.check, {[styles.selected]: props.isSelected})}
+                    src={check}
                 />
-                <img src={themeInfo.icon} />
+                <img
+                    className={styles.icon}
+                    src={themeInfo.icon}
+                />
                 <FormattedMessage {...themeInfo.label} />
             </div>
         </MenuItem>);
 };
 
 ThemeMenuItem.propTypes = {
-    isRtl: PropTypes.bool,
     isSelected: PropTypes.bool,
     onClick: PropTypes.func,
     theme: PropTypes.string
 };
 
-const ThemeMenu = props => {
+const ThemeMenu = ({
+    isRtl,
+    menuOpen,
+    onChangeTheme,
+    onRequestOpen,
+    theme
+}) => {
     const enabledThemes = [DEFAULT_THEME, HIGH_CONTRAST_THEME];
-    const themeInfo = themeMap[props.theme];
+    const themeInfo = themeMap[theme];
 
-    return (<div
-        className={classNames(menuBarStyles.menuBarItem, menuBarStyles.hoverable, menuBarStyles.themeMenu, {
-            [menuBarStyles.active]: props.themeMenuOpen
-        })}
-        onMouseUp={props.onRequestOpen}
-    >
-        <img
-            alt={props.intl.formatMessage(messages.colorTheme)}
-            className={styles.themeIcon}
-            src={themeInfo.icon}
-        />
-        <span className={styles.themeLabel}>
-            <FormattedMessage {...themeInfo.label} />
-        </span>
-        <img
-            className={styles.themeCaret}
-            src={dropdownCaret}
-        />
-        <MenuBarMenu
-            className={menuBarStyles.menuBarMenu}
-            open={props.themeMenuOpen}
-            place={props.isRtl ? 'left' : 'right'}
-            onRequestClose={props.onRequestClose}
-        >
-            <MenuSection>
+    return (
+        <MenuItem expanded={menuOpen}>
+            <div
+                className={styles.option}
+                onClick={onRequestOpen}
+            >
+                <img
+                    src={themeInfo.icon}
+                    style={{width: 24}}
+                />
+                <span className={styles.submenuLabel}>
+                    <FormattedMessage
+                        defaultMessage="Color Mode"
+                        description="Color mode sub-menu"
+                        id="gui.menuBar.colorMode"
+                    />
+                </span>
+                <img
+                    className={styles.expandCaret}
+                    src={dropdownCaret}
+                />
+            </div>
+            <Submenu place={isRtl ? 'left' : 'right'}>
                 {enabledThemes.map(enabledTheme => (
                     <ThemeMenuItem
                         key={enabledTheme}
-                        isRtl={props.isRtl}
-                        isSelected={props.theme === enabledTheme}
+                        isSelected={theme === enabledTheme}
                         // eslint-disable-next-line react/jsx-no-bind
-                        onClick={() => props.onChange(enabledTheme)}
+                        onClick={() => onChangeTheme(enabledTheme)}
                         theme={enabledTheme}
                     />)
                 )}
-            </MenuSection>
-        </MenuBarMenu>
-    </div>);
+            </Submenu>
+        </MenuItem>
+    );
 };
 
 ThemeMenu.propTypes = {
-    className: PropTypes.string,
-    intl: intlShape.isRequired,
     isRtl: PropTypes.bool,
-    onChange: PropTypes.func,
-    onRequestClose: PropTypes.func,
+    menuOpen: PropTypes.bool,
+    onChangeTheme: PropTypes.func,
+    // eslint-disable-next-line react/no-unused-prop-types
+    onRequestCloseSettings: PropTypes.func,
     onRequestOpen: PropTypes.func,
-    theme: PropTypes.string,
-    themeMenuOpen: PropTypes.bool
+    theme: PropTypes.string
 };
 
-export default injectIntl(ThemeMenu);
+const mapStateToProps = state => ({
+    isRtl: state.locales.isRtl,
+    menuOpen: themeMenuOpen(state),
+    theme: state.scratchGui.theme.theme
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    onChangeTheme: theme => {
+        dispatch(setTheme(theme));
+        ownProps.onRequestCloseSettings();
+        persistTheme(theme);
+    },
+    onRequestOpen: () => dispatch(openThemeMenu())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ThemeMenu);

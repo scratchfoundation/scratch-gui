@@ -1,0 +1,14 @@
+@import "../../css/colors.css";
+
+.progress-ring {
+    fill: transparent;
+}
+
+.progress-ring .progress-ring-ring {
+    stroke: $motion-light-transparent;
+}
+
+.progress-ring .progress-ring-value {
+    stroke: $motion-primary;
+    stroke-linecap: round;
+}

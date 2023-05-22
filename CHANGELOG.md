@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-05-22)
+
+
+### Features
+
+* move language and theme to submenu ([dd8b6fa](https://github.com/LLK/scratch-gui/commit/dd8b6faf6601783e6db853683e5eb33300e5f062))
+
 # [2.0.0-beta.1](https://github.com/LLK/scratch-gui/compare/v1.8.53...v2.0.0-beta.1) (2023-05-09)
 
 

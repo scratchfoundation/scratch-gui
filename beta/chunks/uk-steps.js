@@ -1,6 +1,6 @@
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[13],{
 
-/***/ 1351:
+/***/ 1349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25,7 +25,7 @@ __webpack_require__.d(__webpack_exports__, "ukImages", function() { return /* bi
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-move-around.uk.png
 /* harmony default export */ var speech_move_around_uk = (__webpack_require__.p + "static/assets/954e0d72548823e8fe61319c910a8e36.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pick-backdrop.LTR.gif
-var pick_backdrop_LTR = __webpack_require__(233);
+var pick_backdrop_LTR = __webpack_require__(232);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/speech-add-sprite.LTR.gif
 var speech_add_sprite_LTR = __webpack_require__(373);

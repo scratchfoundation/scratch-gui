@@ -1,6 +1,6 @@
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[10],{
 
-/***/ 1347:
+/***/ 1345:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25,7 +25,7 @@ __webpack_require__.d(__webpack_exports__, "ptBrImages", function() { return /* 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-move-around.pt_BR.png
 /* harmony default export */ var speech_move_around_pt_BR = (__webpack_require__.p + "static/assets/4210e9847dcb6b6d4886a33867bc7206.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pick-backdrop.LTR.gif
-var pick_backdrop_LTR = __webpack_require__(233);
+var pick_backdrop_LTR = __webpack_require__(232);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/speech-add-sprite.LTR.gif
 var speech_add_sprite_LTR = __webpack_require__(373);

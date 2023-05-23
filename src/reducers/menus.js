@@ -58,6 +58,7 @@ const rootMenu = new Menu('root')
     .addChild(new Menu(MENU_MODE))
     .addChild(new Menu(MENU_SETTINGS))
     .addChild(new Menu(MENU_LOGIN))
+    .addChild(new Menu(MENU_ACCOUNT))
     .addChild(new Menu(MENU_ABOUT));
 
 const initialState = {

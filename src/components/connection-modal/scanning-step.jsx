@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
+import BalancedFormattedMessage from '../../containers/balanced-formatted-message.jsx';
 import Box from '../box/box.jsx';
 import PeripheralTile from './peripheral-tile.jsx';
 import Dots from './dots.jsx';
@@ -76,7 +77,7 @@ const ScanningStep = props => {
                     // Show this message if we're done scanning AND we can update
                     // Note that it's possible the list includes devices but does not include the desired device,
                     // so don't limit this message to the (props.peripheralList.length === 0) case
-                    <FormattedMessage
+                    <BalancedFormattedMessage
                         defaultMessage="If you don't see your device, you may need to update it to work with Scratch."
                         description="Prompt for updating a peripheral device"
                         id="gui.connection.scanning.updatePeripheralPrompt"

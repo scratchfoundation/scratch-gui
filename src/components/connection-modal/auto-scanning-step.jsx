@@ -4,6 +4,7 @@ import React from 'react';
 import keyMirror from 'keymirror';
 import classNames from 'classnames';
 
+import BalancedFormattedMessage from '../../containers/balanced-formatted-message.jsx';
 import Box from '../box/box.jsx';
 import Dots from './dots.jsx';
 
@@ -93,7 +94,7 @@ const AutoScanningStep = props => {
             </Box>
             {showUpdate && (
                 <Box className={classNames(styles.bottomAreaItem, styles.instructions)}>
-                    <FormattedMessage
+                    <BalancedFormattedMessage
                         defaultMessage="If you don't see your device, you may need to update it to work with Scratch."
                         description="Prompt for updating a peripheral device"
                         id="gui.connection.auto-scanning.updatePeripheralPrompt"

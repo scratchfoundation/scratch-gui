@@ -6,13 +6,15 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 import keyMirror from 'keymirror';
 
+import BalancedFormattedMessage from '../../containers/balanced-formatted-message.jsx';
 import Box from '../box/box.jsx';
+import ProgressRingComponent from '../progress-ring/progress-ring.jsx';
+
 import backIcon from './icons/back.svg';
 import sendUpdateIcon from './icons/send-update.svg';
 import sendUpdateGlyph from './icons/send-update-white.svg';
 
 import styles from './connection-modal.css';
-import ProgressRingComponent from '../progress-ring/progress-ring.jsx';
 
 /** @enum{string} UPDATE_ACTIVITY */
 const UPDATE_ACTIVITY = keyMirror({
@@ -141,8 +143,8 @@ class UpdatePeripheralStep extends React.Component {
             />);
         } else if (this.state.err.message === 'No valid interfaces found.') {
             // this is a special case where the micro:bit's communication firmware is too old to support WebUSB
-            resultsContent = (<FormattedMessage
-                defaultMessage="Please visit {microBitFirmwareLink} to update your micro:bit firmware."
+            resultsContent = (<BalancedFormattedMessage
+                defaultMessage="Please visit this link to update your micro:bit firmware: {microBitFirmwareLink}"
                 description="Message to indicate that the special micro:bit interface firmware needs to be updated"
                 id="gui.connection.updatePeripheral.updateMicroBitFirmware"
                 values={{
@@ -190,8 +192,8 @@ class UpdatePeripheralStep extends React.Component {
                 {showResults && this.renderResults()}
                 <Box className={styles.bottomArea}>
                     {!showResults &&
-                        <FormattedMessage
-                            className={styles.bottomAreaItem}
+                        <BalancedFormattedMessage
+                            classname={styles.bottomAreaItem}
                             defaultMessage={'Do not leave or reload Scratch or disconnect your {extensionName} ' +
                                 'until the update is complete.'}
                             description="Notice to not disrupt the peripheral update process"

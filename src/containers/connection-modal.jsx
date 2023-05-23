@@ -110,7 +110,7 @@ class ConnectionModal extends React.Component {
     }
     handleUpdatePeripheral () {
         this.setState({
-            phase: PHASES.updateFirmware
+            phase: PHASES.updatePeripheral
         });
         analytics.event({
             category: 'extensions',

@@ -45,7 +45,7 @@ const ProgressRingComponent = ({
             {...props}
         >
             <svg
-                className={classNames(styles.progressRing, className)}
+                className={classNames(styles.progressRingSvg, className)}
                 viewBox={`0 0 ${sizePx} ${sizePx}`}
             >
                 <circle

@@ -21,7 +21,7 @@ const PHASES = keyMirror({
     connected: null,
     error: null,
     unavailable: null,
-    updateFirmware: null
+    updatePeripheral: null
 });
 
 const ConnectionModalComponent = props => (
@@ -41,7 +41,7 @@ const ConnectionModalComponent = props => (
             {props.phase === PHASES.connected && <ConnectedStep {...props} />}
             {props.phase === PHASES.error && <ErrorStep {...props} />}
             {props.phase === PHASES.unavailable && <UnavailableStep {...props} />}
-            {props.phase === PHASES.updateFirmware && <UpdatePeripheralStep {...props} />}
+            {props.phase === PHASES.updatePeripheral && <UpdatePeripheralStep {...props} />}
         </Box>
     </Modal>
 );

@@ -1,6 +1,10 @@
 @import "../../css/colors.css";
 
 .progress-ring {
+    margin: 0.5rem;
+}
+
+.progress-ring-svg {
     fill: transparent;
 }
 

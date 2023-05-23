@@ -7,10 +7,12 @@ import bindAll from 'lodash.bindall';
 import keyMirror from 'keymirror';
 
 import Box from '../box/box.jsx';
-import Dots from './dots.jsx';
 import backIcon from './icons/back.svg';
+import sendUpdateIcon from './icons/send-update.svg';
+import sendUpdateGlyph from './icons/send-update-white.svg';
 
 import styles from './connection-modal.css';
+import ProgressRingComponent from '../progress-ring/progress-ring.jsx';
 
 /** @enum{string} UPDATE_ACTIVITY */
 const UPDATE_ACTIVITY = keyMirror({
@@ -32,7 +34,7 @@ class UpdatePeripheralStep extends React.Component {
             activity: UPDATE_ACTIVITY.getReady,
 
             /** @type {number} */
-            progress: 0,
+            progressPercentage: 0,
 
             /** @type {Error?} */
             err: null,
@@ -51,7 +53,10 @@ class UpdatePeripheralStep extends React.Component {
         });
         try {
             const res = await this.props.onSendPeripheralUpdate(progress => {
-                this.setState({progress});
+                // On my computer, I get a progress update every 0.005% or so.
+                // Rendering the progress ring is a little expensive, so filtering updates here reduces the CPU load.
+                // Updating every 1% doesn't look very smooth, but 0.5% (1/200) looks good to me.
+                this.setState({progressPercentage: Math.floor(progress * 200) / 2});
             });
             this.setState({
                 activity: UPDATE_ACTIVITY.results,
@@ -67,49 +72,61 @@ class UpdatePeripheralStep extends React.Component {
 
     renderGetReady () {
         return (<Box className={styles.activityArea}>
-            <Box className={styles.centeredRow}>
-                <FormattedMessage
-                    defaultMessage="This will update your {extensionName} to work with Scratch."
-                    description="Introduction to the peripheral update process"
-                    id="gui.connection.updatePeripheral.introduction"
-                    values={{
-                        extensionName: this.props.name
-                    }}
-                />
-            </Box>
-            <Box className={styles.centeredRow}>
-                {
-                    // The instructions for getting the peripheral ready for the update process will vary depending on
-                    // the peripheral. Should we get this from the extension somehow?
-                }
-                <FormattedMessage
-                    defaultMessage="Please connect your {extensionName} to this device using a USB cable."
-                    description="Instructions to connect the micro:bit to the computer for the update process"
-                    id="gui.connection.updatePeripheral.microBitConnect"
-                    values={{
-                        extensionName: this.props.name
-                    }}
-                />
-            </Box>
-            <Box className={styles.centeredRow}>
-                <FormattedMessage
-                    defaultMessage="Please don't disconnect, reset, or turn off your {extensionName} during the update."
-                    description="Notice to not disrupt the peripheral update process"
-                    id="gui.connection.updatePeripheral.doNotDisconnect"
-                    values={{
-                        extensionName: this.props.name
-                    }}
-                />
+            <Box className={styles.scratchLinkHelp}>
+                <Box className={styles.scratchLinkHelpStep}>
+                    <Box className={styles.helpStepNumber}>
+                        {'1'}
+                    </Box>
+                    <img
+                        className={styles.helpStepImage}
+                        src={this.props.connectionSmallIconURL}
+                    />
+                    {
+                        // The instructions for getting the peripheral ready for the update process will vary
+                        // depending on the peripheral. Should we get this from the extension somehow?
+                    }
+                    <FormattedMessage
+                        className={styles.helpStepText}
+                        defaultMessage="Connect your {extensionName} to this device using a USB cable."
+                        description="Instructions to connect the micro:bit to the computer for the update process"
+                        id="gui.connection.updatePeripheral.microBitConnect"
+                        values={{
+                            extensionName: this.props.name
+                        }}
+                    />
+                </Box>
+                <Box className={styles.scratchLinkHelpStep}>
+                    <Box className={styles.helpStepNumber}>
+                        {'2'}
+                    </Box>
+                    <img
+                        className={styles.helpStepImage}
+                        src={sendUpdateIcon}
+                    />
+                    <FormattedMessage
+                        defaultMessage="Press &quot;Do Update&quot; and allow the update to complete."
+                        description="Instructions to press the button to begin the update process"
+                        id="gui.connection.updatePeripheral.pressUpdate"
+                    />
+                </Box>
             </Box>
         </Box>);
     }
 
     renderSendUpdate () {
         return (<Box className={styles.activityArea}>
-            <p>{'Sending update...'}</p>
-            <progress
-                max="1"
-                value={this.state.progress}
+            <ProgressRingComponent
+                sizePx={36}
+                value={this.state.progressPercentage}
+                max={100}
+            />
+            <FormattedMessage
+                defaultMessage="Updating {progressPercentage}%"
+                description="Progress message while updating the peripheral"
+                id="gui.connection.updatePeripheral.progress"
+                values={{
+                    progressPercentage: Math.floor(this.state.progressPercentage)
+                }}
             />
         </Box>);
     }
@@ -139,14 +156,22 @@ class UpdatePeripheralStep extends React.Component {
                 }}
             />);
         } else {
-            resultsContent = (<FormattedMessage
-                defaultMessage="Update failed. Error: {errorMessage}"
-                description="Message to indicate that the peripheral update failed"
-                id="gui.connection.updatePeripheral.updateFailed"
-                values={{
-                    errorMessage: this.state.err.message
-                }}
-            />);
+            resultsContent = (
+                <Box className={styles.scratchLinkError}>
+                    <FormattedMessage
+                        className={styles.centeredRow}
+                        defaultMessage="Update failed."
+                        description="Message to indicate that the peripheral update failed"
+                        id="gui.connection.updatePeripheral.updateFailed"
+                    />
+                    <textarea
+                        className={styles.scratchLinkErrorDetails}
+                        readOnly
+                    >
+                        {this.state.err.message}
+                    </textarea>
+                </Box>
+            );
         }
         return (<Box className={styles.activityArea}>
             {resultsContent}
@@ -154,44 +179,71 @@ class UpdatePeripheralStep extends React.Component {
     }
 
     render () {
+        const showGetReady = this.state.activity === UPDATE_ACTIVITY.getReady;
+        const showSendUpdate = this.state.activity === UPDATE_ACTIVITY.sendUpdate;
+        const showResults = this.state.activity === UPDATE_ACTIVITY.results;
+        const showBadResults = showResults && !!this.state.err;
         return (
             <Box className={styles.body}>
-                {(this.state.activity === UPDATE_ACTIVITY.getReady) && this.renderGetReady()}
-                {(this.state.activity === UPDATE_ACTIVITY.sendUpdate) && this.renderSendUpdate()}
-                {(this.state.activity === UPDATE_ACTIVITY.results) && this.renderResults()}
+                {showGetReady && this.renderGetReady()}
+                {showSendUpdate && this.renderSendUpdate()}
+                {showResults && this.renderResults()}
                 <Box className={styles.bottomArea}>
-                    <Dots
-                        className={styles.bottomAreaItem}
-                        total={3}
-                    />
-                    <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
-                        <button
-                            className={styles.connectionButton}
-                            onClick={this.props.onScanning}
-                            disabled={this.state.activity === UPDATE_ACTIVITY.sendUpdate}
-                        >
-                            <img
-                                className={classNames(styles.buttonIconLeft, styles.buttonIconBack)}
-                                src={backIcon}
-                            />
-                            <FormattedMessage
-                                defaultMessage="Go back"
-                                description="Button to leave the peripheral update process"
-                                id="gui.connection.updatePeripheral.goBackButton"
-                            />
-                        </button>
-                        <button
-                            className={styles.connectionButton}
-                            onClick={this.handleSendUpdate}
-                            disabled={this.state.activity !== UPDATE_ACTIVITY.getReady}
-                        >
-                            <FormattedMessage
-                                defaultMessage="Update now"
-                                description="Button to start the peripheral update"
-                                id="gui.connection.updatePeripheral.updateNowButton"
-                            />
-                        </button>
-                    </Box>
+                    {!showResults &&
+                        <FormattedMessage
+                            className={styles.bottomAreaItem}
+                            defaultMessage={'Do not leave or reload Scratch or disconnect your {extensionName} ' +
+                                'until the update is complete.'}
+                            description="Notice to not disrupt the peripheral update process"
+                            id="gui.connection.updatePeripheral.doNotDisconnect"
+                            values={{
+                                extensionName: this.props.name
+                            }}
+                        />
+                    }
+                    {!showSendUpdate &&
+                        <Box className={classNames(styles.bottomAreaItem, styles.buttonRow)}>
+                            <button
+                                className={styles.connectionButton}
+                                onClick={this.props.onScanning}
+                            >
+                                <img
+                                    className={classNames(styles.buttonIconLeft, styles.buttonIconBack)}
+                                    src={backIcon}
+                                />
+                                <FormattedMessage
+                                    defaultMessage="Go Back"
+                                    description="Button to leave the peripheral update process"
+                                    id="gui.connection.updatePeripheral.goBackButton"
+                                />
+                            </button>
+                            {(showGetReady || showBadResults) &&
+                                <button
+                                    className={styles.connectionButton}
+                                    onClick={this.handleSendUpdate}
+                                >
+                                    {showGetReady &&
+                                        <FormattedMessage
+                                            defaultMessage="Do Update"
+                                            description="Button to start the peripheral update"
+                                            id="gui.connection.updatePeripheral.updateNowButton"
+                                        />
+                                    }
+                                    {showBadResults &&
+                                        <FormattedMessage
+                                            defaultMessage="Try Again"
+                                            description="Button to try the peripheral update again"
+                                            id="gui.connection.updatePeripheral.updateAgainButton"
+                                        />
+                                    }
+                                    <img
+                                        className={styles.buttonIconRight}
+                                        src={sendUpdateGlyph}
+                                    />
+                                </button>
+                            }
+                        </Box>
+                    }
                 </Box>
             </Box>
         );
@@ -199,6 +251,7 @@ class UpdatePeripheralStep extends React.Component {
 }
 
 UpdatePeripheralStep.propTypes = {
+    connectionSmallIconURL: PropTypes.string,
     name: PropTypes.string.isRequired,
     onScanning: PropTypes.func.isRequired,
     onSendPeripheralUpdate: PropTypes.func.isRequired

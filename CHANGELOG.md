@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2023-05-24)
+
+
+### Bug Fixes
+
+* fix broken account menu ([aaab5d6](https://github.com/LLK/scratch-gui/commit/aaab5d62ad5a4a5e1ad9c1e33004e4b698752d00))
+
 # [2.0.0-beta.2](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-05-22)
 
 

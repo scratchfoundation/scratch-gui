@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.97](https://github.com/LLK/scratch-gui/compare/v1.8.96...v1.8.97) (2023-05-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v1.1.66 ([f04f180](https://github.com/LLK/scratch-gui/commit/f04f1809de3d312060627f89657946b380f7738b))
+
 ## [1.8.96](https://github.com/LLK/scratch-gui/compare/v1.8.95...v1.8.96) (2023-05-24)
 
 

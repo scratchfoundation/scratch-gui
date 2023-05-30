@@ -193,7 +193,7 @@ class UpdatePeripheralStep extends React.Component {
                 <Box className={styles.bottomArea}>
                     {!showResults &&
                         <BalancedFormattedMessage
-                            classname={styles.bottomAreaItem}
+                            className={styles.bottomAreaItem}
                             defaultMessage={'Do not leave or reload Scratch or disconnect your {extensionName} ' +
                                 'until the update is complete.'}
                             description="Notice to not disrupt the peripheral update process"

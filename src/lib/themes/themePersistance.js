@@ -31,11 +31,12 @@ const persistTheme = theme => {
 
     if (systemPreferencesTheme() === theme) {
         // Clear the cookie to represent using the system preferences
-        document.cookie = `${COOKIE_KEY}=`;
+        document.cookie = `${COOKIE_KEY}=;path=/`;
         return;
     }
 
-    document.cookie = `${COOKIE_KEY}=${theme}`;
+    const expires = new Date(new Date().setYear(new Date().getFullYear() + 1)).toUTCString();
+    document.cookie = `${COOKIE_KEY}=${theme};expires=${expires};path=/`;
 };
 
 export {

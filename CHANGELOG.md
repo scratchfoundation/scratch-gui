@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2023-05-31)
+
+
+### Bug Fixes
+
+* expire theme cookie in 1 year ([44eb578](https://github.com/LLK/scratch-gui/commit/44eb5781cde3a4d7a304e24f1b6591f2cbab7d50))
+
 # [2.0.0-beta.3](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2023-05-24)
 
 

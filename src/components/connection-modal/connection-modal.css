@@ -6,7 +6,7 @@
 }
 
 .header {
-    background-color: $pen-primary;
+    background-color: $pen-tertiary;
 }
 
 .body {
@@ -264,7 +264,7 @@
 }
 
 .help-step-number {
-    background: $pen-primary;
+    background: $pen-tertiary;
     border-radius: 100%;
     display: flex;
     justify-content: center;

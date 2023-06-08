@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.5](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2023-06-08)
+
+
+### Bug Fixes
+
+* update extension title bar color ([4a348d0](https://github.com/LLK/scratch-gui/commit/4a348d0d1adde60e4fd4320dc290a6944f2126b5))
+
 # [2.0.0-beta.4](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2023-05-31)
 
 

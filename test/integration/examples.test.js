@@ -1,5 +1,3 @@
-/* globals Promise */
-
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
 

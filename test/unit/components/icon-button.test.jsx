@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 describe('IconButtonComponent', () => {
     test('matches snapshot', () => {
         const onClick = jest.fn();
-        const title = <div>Text</div>;
+        const title = <div>{'Text'}</div>;
         const imgSrc = 'imgSrc';
         const className = 'custom-class-name';
         const component = renderer.create(
@@ -22,7 +22,7 @@ describe('IconButtonComponent', () => {
 
     test('triggers callback when clicked', () => {
         const onClick = jest.fn();
-        const title = <div>Text</div>;
+        const title = <div>{'Text'}</div>;
         const imgSrc = 'imgSrc';
         const componentShallowWrapper = shallow(
             <IconButton

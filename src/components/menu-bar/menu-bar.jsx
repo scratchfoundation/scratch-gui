@@ -10,7 +10,7 @@ import React from 'react';
 import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
-import Button from '../button/button.jsx';
+import Button from '../button/button.tsx';
 import CommunityButton from './community-button.jsx';
 import ShareButton from './share-button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';

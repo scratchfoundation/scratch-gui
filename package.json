@@ -21,7 +21,7 @@
     "start": "webpack-dev-server",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --maxWorkers=4 test[\\\\/]integration",
-    "test:lint": "eslint . --ext .js,.jsx",
+    "test:lint": "eslint . --ext .cjs,.mjs,.js,.jsx,.ts,.tsx",
     "test:unit": "jest test[\\\\/]unit",
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
     "watch": "webpack --colors --watch"
@@ -108,24 +108,33 @@
     "@babel/plugin-transform-async-to-generator": "7.14.5",
     "@babel/preset-env": "7.14.8",
     "@babel/preset-react": "7.14.5",
+    "@babel/preset-typescript": "7.21.5",
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
+    "@types/classnames": "2.2.6",
+    "@types/react": "16.14.41",
+    "@types/react-redux": "5.0.24",
+    "@typescript-eslint/eslint-plugin": "5.59.2",
+    "@typescript-eslint/parser": "5.59.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
+    "babel-jest": "29.5.0",
     "babel-loader": "8.2.2",
     "chromedriver": "112.0.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.7",
-    "eslint": "5.16.0",
+    "eslint": "7.32.0",
     "eslint-config-scratch": "6.0.0",
     "eslint-import-resolver-webpack": "0.11.1",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jest": "22.17.0",
     "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-tsdoc": "0.2.17",
     "gh-pages": "3.2.3",
     "html-webpack-plugin": "3.2.0",
     "husky": "8.0.1",
-    "jest": "21.2.1",
+    "jest": "29.5.0",
+    "jest-environment-jsdom": "29.5.0",
     "jest-junit": "7.0.0",
     "mkdirp": "1.0.3",
     "raf": "3.4.1",
@@ -135,6 +144,9 @@
     "scratch-semantic-release-config": "1.0.7",
     "selenium-webdriver": "3.6.0",
     "semantic-release": "19.0.5",
+    "ts-jest": "29.1.0",
+    "ts-loader": "8.4.0",
+    "typescript": "5.0.4",
     "uglifyjs-webpack-plugin": "1.3.0",
     "web-audio-test-api": "0.5.2",
     "webpack": "4.46.0",
@@ -149,10 +161,23 @@
     "testPathIgnorePatterns": [
       "src/test.js"
     ],
+    "moduleFileExtensions": [
+      "cjs",
+      "js",
+      "jsx",
+      "mjs",
+      "ts",
+      "tsx"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js",
       "editor-msgs(\\.js)?$": "<rootDir>/test/__mocks__/editor-msgs-mock.js"
+    },
+    "testEnvironment": "jest-environment-jsdom",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.(c|m)?jsx?$": "babel-jest"
     }
   }
 }

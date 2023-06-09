@@ -1,22 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sound Editor Component matches snapshot 1`] = `
-<div
-  className={undefined}
-  onMouseDown={undefined}
->
-  <div
-    className={undefined}
-  >
-    <div
-      className={undefined}
-    >
-      <label
-        className={undefined}
-      >
-        <span
-          className={undefined}
-        >
+<div>
+  <div>
+    <div>
+      <label>
+        <span>
           Sound
         </span>
         <input
@@ -24,125 +13,96 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           onBlur={[Function]}
           onChange={[Function]}
           onKeyPress={[Function]}
-          onSubmit={[Function]}
+          onSubmit={[MockFunction]}
           tabIndex="1"
           type="text"
           value="sound name"
         />
       </label>
-      <div
-        className={undefined}
-      >
+      <div>
         <button
-          className={undefined}
           disabled={false}
-          onClick={[Function]}
+          onClick={[MockFunction]}
           title="Undo"
         >
           <img
-            className={undefined}
             draggable={false}
             src="test-file-stub"
           />
         </button>
         <button
-          className={undefined}
           disabled={true}
-          onClick={[Function]}
+          onClick={[MockFunction]}
           title="Redo"
         >
           <img
-            className={undefined}
             draggable={false}
             src="test-file-stub"
           />
         </button>
       </div>
     </div>
-    <div
-      className={undefined}
-    >
+    <div>
       <div
         className=""
-        onClick={undefined}
         role="button"
       >
         <img
-          className={undefined}
           draggable={false}
           src="test-file-stub"
         />
-        <div
-          className={undefined}
-        >
+        <div>
           Copy
         </div>
       </div>
       <div
         className=""
-        onClick={undefined}
         role="button"
       >
         <img
-          className={undefined}
           draggable={false}
           src="test-file-stub"
         />
-        <div
-          className={undefined}
-        >
+        <div>
           Paste
         </div>
       </div>
       <div
         className=""
-        onClick={undefined}
         role="button"
       >
         <img
-          className={undefined}
           draggable={false}
           src="test-file-stub"
         />
-        <div
-          className={undefined}
-        >
+        <div>
           Copy to New
         </div>
       </div>
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         Delete
       </div>
     </div>
   </div>
-  <div
-    className={undefined}
-  >
-    <div
-      className={undefined}
-    >
+  <div>
+    <div>
       <svg
-        className={undefined}
         viewBox="0 0 600 160"
       >
         <g
           transform="scale(1, -1) translate(0, -80)"
         >
           <path
-            className={undefined}
             d="M0 0Q0 80 150 120 Q300 160 450 200 Q600 240 600 0 Q600 -240 450 -200 Q300 -160 150 -120 Q0 -80 0 0Z"
             strokeLinejoin="round"
             strokeWidth={1}
@@ -157,7 +117,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         <div
           className=""
           style={
-            Object {
+            {
               "alignContent": undefined,
               "alignItems": undefined,
               "alignSelf": undefined,
@@ -176,7 +136,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
           <div
             className=""
             style={
-              Object {
+              {
                 "alignContent": undefined,
                 "alignItems": undefined,
                 "alignSelf": undefined,
@@ -196,7 +156,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             onMouseDown={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "alignContent": undefined,
                 "alignItems": undefined,
                 "alignSelf": undefined,
@@ -214,7 +174,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             <div
               className=""
               style={
-                Object {
+                {
                   "alignContent": undefined,
                   "alignItems": undefined,
                   "alignSelf": undefined,
@@ -237,7 +197,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             <div
               className=""
               style={
-                Object {
+                {
                   "alignContent": undefined,
                   "alignItems": undefined,
                   "alignSelf": undefined,
@@ -263,7 +223,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             onMouseDown={[Function]}
             onTouchStart={[Function]}
             style={
-              Object {
+              {
                 "alignContent": undefined,
                 "alignItems": undefined,
                 "alignSelf": undefined,
@@ -281,7 +241,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             <div
               className=""
               style={
-                Object {
+                {
                   "alignContent": undefined,
                   "alignItems": undefined,
                   "alignSelf": undefined,
@@ -304,7 +264,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             <div
               className=""
               style={
-                Object {
+                {
                   "alignContent": undefined,
                   "alignItems": undefined,
                   "alignSelf": undefined,
@@ -326,13 +286,11 @@ exports[`Sound Editor Component matches snapshot 1`] = `
             </div>
           </div>
         </div>
-        <div
-          className={undefined}
-        >
+        <div>
           <div
             className=""
             style={
-              Object {
+              {
                 "transform": "translateX(50%)",
               }
             }
@@ -344,12 +302,10 @@ exports[`Sound Editor Component matches snapshot 1`] = `
   <div
     className=""
   >
-    <div
-      className={undefined}
-    >
+    <div>
       <button
         className=""
-        onClick={[Function]}
+        onClick={[MockFunction]}
         title="Stop"
       >
         <img
@@ -360,17 +316,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Faster
         </span>
@@ -378,17 +331,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Slower
         </span>
@@ -396,17 +346,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Louder
         </span>
@@ -414,17 +361,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Softer
         </span>
@@ -432,17 +376,13 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Mute
         </span>
@@ -450,17 +390,13 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Fade in
         </span>
@@ -468,17 +404,13 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={undefined}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Fade out
         </span>
@@ -486,17 +418,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Reverse
         </span>
@@ -504,17 +433,14 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     </div>
     <div
       className=""
-      onClick={[Function]}
+      onClick={[MockFunction]}
       role="button"
     >
       <img
-        className={undefined}
         draggable={false}
         src="test-file-stub"
       />
-      <div
-        className={undefined}
-      >
+      <div>
         <span>
           Robot
         </span>

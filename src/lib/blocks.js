@@ -1,4 +1,6 @@
 import ScratchBlocks from 'scratch-blocks';
+import {getRunningThread} from './libraries/module';
+import Highlighter from './libraries/highlighter';
 
 /**
  * Connect scratch blocks with the vm
@@ -184,6 +186,7 @@ export default function (vm) {
     };
 
     ScratchBlocks.Blocks.motion_goto_menu.init = function () {
+        console.log('1');
         const random = ScratchBlocks.ScratchMsgs.translate('MOTION_GOTO_RANDOM', 'random position');
         const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_GOTO_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('TO', spriteMenu, motionColors, [
@@ -351,6 +354,16 @@ export default function (vm) {
     // first loading the Scratch editor.
     ScratchBlocks.utils.is3dSupported = function () {
         return true;
+    };
+    const highlighter = new Highlighter(0, 'red');
+    const oldStep = vm.runtime._step;
+    vm.runtime._step = function (...args) {
+        oldStep.call(this, ...args);
+        const runningThread = getRunningThread();
+        const threads = vm.runtime.threads.filter(
+            thread => thread !== runningThread && !thread.target.blocks.forceNoGlow
+        );
+        highlighter.setGlowingThreads(threads);
     };
 
     return ScratchBlocks;

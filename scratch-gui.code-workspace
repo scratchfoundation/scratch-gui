@@ -5,12 +5,12 @@
       "path": "."
     },
     {
-      "name": "scratch-paint",
-      "path": "../scratch-paint"
+      "name": "scratch-blocks",
+      "path": "../packages/scratch-blocks"
     },
     {
-      "name": "scratch-render",
-      "path": "../scratch-render"
+      "name": "scratch-vm",
+      "path": "../packages/scratch-vm"
     }
   ],
   "settings": {

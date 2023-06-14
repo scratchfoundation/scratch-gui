@@ -1,16 +1,16 @@
 const defaultsDeep = require('lodash.defaultsdeep');
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 // Plugins
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // PostCss
-var autoprefixer = require('autoprefixer');
-var postcssVars = require('postcss-simple-vars');
-var postcssImport = require('postcss-import');
+const autoprefixer = require('autoprefixer');
+const postcssVars = require('postcss-simple-vars');
+const postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
 
@@ -79,6 +79,15 @@ const base = {
                     }
                 }
             }]
+        },
+        {
+            test: /\.hex$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 16 * 1024
+                }
+            }]
         }]
     },
     optimization: {
@@ -131,9 +140,9 @@ module.exports = [
         },
         plugins: base.plugins.concat([
             new webpack.DefinePlugin({
-                'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"',
+                'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
                 'process.env.DEBUG': Boolean(process.env.DEBUG),
-                'process.env.GA_ID': '"' + (process.env.GA_ID || 'UA-000000-01') + '"'
+                'process.env.GA_ID': `"${process.env.GA_ID || 'UA-000000-01'}"`
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],

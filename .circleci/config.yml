@@ -38,12 +38,12 @@ aliases:
         - node_modules
         - src/generated
         - static/microbit
-      key: v3-npm-{{ checksum "package-lock.json" }}
+      key: v4-npm-{{ checksum "package-lock.json" }}
   - &restore_npm_cache
     restore_cache:
       keys:
-        - v3-npm-{{ checksum "package-lock.json" }}
-        - v3-npm-
+        - v4-npm-{{ checksum "package-lock.json" }}
+        - v4-npm-
   - &defaults
     docker:
       # TODO: fix scratch-audio and change this to `cimg/node:lts-browsers`

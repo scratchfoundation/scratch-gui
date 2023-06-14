@@ -56,6 +56,7 @@ const DirectionPicker = props => (
         text={directionLabel}
     >
         <Popover
+            className={styles.popover}
             body={
                 <div>
                     <Dial

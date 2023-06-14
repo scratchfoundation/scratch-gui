@@ -11,6 +11,7 @@ $z-index-add-button: 46;
 $z-index-tooltip: 47; /* tooltips should go over add buttons if they overlap */
 $z-index-monitor: 48; /* monitors go over add buttons */
 $z-index-stage-question: 49; /* "ask" block text input goes above monitors */
+$z-index-direction-picker: 50; /* sprite direction picker goes above other stage elements */
 
 $z-index-card: 480;
 $z-index-alerts: 490;

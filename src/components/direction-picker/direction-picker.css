@@ -1,4 +1,9 @@
 @import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.popover {
+    z-index: $z-index-direction-picker;
+}
 
 .button-row {
     display: flex;

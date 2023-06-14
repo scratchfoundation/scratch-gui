@@ -36,6 +36,8 @@ aliases:
     save_cache:
       paths:
         - node_modules
+        - src/generated
+        - static/microbit
       key: v3-npm-{{ checksum "package-lock.json" }}
   - &restore_npm_cache
     restore_cache:

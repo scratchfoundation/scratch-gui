@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/LLK/scratch-gui/compare/v1.8.109...v1.9.0) (2023-06-14)
+
+
+### Bug Fixes
+
+* balance wrapped text where appropriate in connection flow ([369b483](https://github.com/LLK/scratch-gui/commit/369b483356fc23333c615c642017c3b9ee38fe07))
+* implement the majority of the micro:bit update UX design ([b6c2c9f](https://github.com/LLK/scratch-gui/commit/b6c2c9ffdfe65b52b8e4c46396ef7b066bc3bf86))
+* increase distance between lines of text in the connection modal ([b4ebe87](https://github.com/LLK/scratch-gui/commit/b4ebe8746c876cb9cbf8f754e8fd3ea3542b945a))
+* reduced svg files ([90850e8](https://github.com/LLK/scratch-gui/commit/90850e849b3df0d14e1903b2ecbd1ca8d9e5a6e2))
+
+
+### Features
+
+* actually update micro:bit, avoid 'firmware' term ([7a94d61](https://github.com/LLK/scratch-gui/commit/7a94d619a4fe2b30bf3a5535540f140f8d185872))
+* handle errors during micro:bit update ([9c323bf](https://github.com/LLK/scratch-gui/commit/9c323bf8ffdee63ec8ddf9c323fcf7c460fbb25c))
+* rough in a firmware update flow ([3b2b013](https://github.com/LLK/scratch-gui/commit/3b2b013cacc8cb979e353d07a3459695db6fb7d7))
+
 ## [1.8.109](https://github.com/LLK/scratch-gui/compare/v1.8.108...v1.8.109) (2023-06-07)
 
 

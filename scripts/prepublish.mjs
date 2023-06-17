@@ -6,13 +6,14 @@
 
 import fs from 'fs';
 import path from 'path';
-
-import crossFetch from 'cross-fetch';
 import yauzl from 'yauzl';
 import {fileURLToPath} from 'url';
+import fetch from './fetch.mjs';
 
 /** @typedef {import('yauzl').Entry} ZipEntry */
 /** @typedef {import('yauzl').ZipFile} ZipFile */
+/** @typedef {import('node-fetch'.Response)} Response */
+/** @typedef {import('node-fetch').RequestInit} RequestInit */
 
 // these aren't set in ESM mode
 const __filename = fileURLToPath(import.meta.url);
@@ -79,7 +80,7 @@ const extractFirstMatchingFile = (filter, relativeDestDir, zipBuffer) => new Pro
 const downloadMicrobitHex = async () => {
     const url = 'https://downloads.scratch.mit.edu/microbit/scratch-microbit.hex.zip';
     console.info(`Downloading ${url}`);
-    const response = await crossFetch(url);
+    const response = await fetch(url);
     const zipBuffer = Buffer.from(await response.arrayBuffer());
     const relativeHexDir = path.join('static', 'microbit');
     const hexFileName = await extractFirstMatchingFile(

@@ -12,8 +12,6 @@ import fetch from './fetch.mjs';
 
 /** @typedef {import('yauzl').Entry} ZipEntry */
 /** @typedef {import('yauzl').ZipFile} ZipFile */
-/** @typedef {import('node-fetch'.Response)} Response */
-/** @typedef {import('node-fetch').RequestInit} RequestInit */
 
 // these aren't set in ESM mode
 const __filename = fileURLToPath(import.meta.url);

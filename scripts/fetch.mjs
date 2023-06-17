@@ -1,6 +1,10 @@
 import _fetch from 'node-fetch';
 import {HttpProxyAgent} from 'http-proxy-agent';
 import {HttpsProxyAgent} from 'https-proxy-agent';
+
+/** @typedef {import('node-fetch'.Response)} Response */
+/** @typedef {import('node-fetch').RequestInit} RequestInit */
+
 /**
  * A wrapper for node-fetch that adds preset options for every requests.
  * @param {string} url the request's url passed to node-fetch.

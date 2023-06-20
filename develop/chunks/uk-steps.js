@@ -1,1036 +1,346 @@
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[13],{
 
-/***/ 1663:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/bd2d7b2437946f1add631d2a55997b2f.gif";
-
-/***/ }),
-
-/***/ 1676:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/173e52e04ff6f2036add0558812948e6.gif";
-
-/***/ }),
-
-/***/ 2746:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/9a2b4738446648557be6ffc033a6985e.gif";
-
-/***/ }),
-
-/***/ 2747:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/e54636902d4b5c31f52aa582c0bac0f0.gif";
-
-/***/ }),
-
-/***/ 2748:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7a564b316d8659a75be31b3bde89ba34.gif";
-
-/***/ }),
-
-/***/ 2749:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/063892ef24eec57459ee932cec7e12e5.png";
-
-/***/ }),
-
-/***/ 2750:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/738a69d73a36644e21fc17a00b1bf3c8.png";
-
-/***/ }),
-
-/***/ 2751:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7a6a5c794d6fe77611613ddfdf905506.png";
-
-/***/ }),
-
-/***/ 2752:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/3aec74140126f59247a5513ff0541125.png";
-
-/***/ }),
-
-/***/ 2753:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0d34c80e3919306cb722380e920cffac.png";
-
-/***/ }),
-
-/***/ 2754:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7e9fd4a23990a7a8f94c59c2671ecd62.png";
-
-/***/ }),
-
-/***/ 2755:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/85ba8d8493db6a87cd9b0010cfe09400.png";
-
-/***/ }),
-
-/***/ 2756:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/236f257f6b85917b5ba65dc9e4bb75df.png";
-
-/***/ }),
-
-/***/ 2757:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/93241021a13aa20da27f50e661016310.png";
-
-/***/ }),
-
-/***/ 2758:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/a318b0c2bc41661e56b5dbb614ccd0f5.png";
-
-/***/ }),
-
-/***/ 2759:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ef9ad7d985162ed527aca819ad691267.png";
-
-/***/ }),
-
-/***/ 2760:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/69e164fac0cca66c053ecb31c9c2aa64.png";
-
-/***/ }),
-
-/***/ 2761:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/237bf42c437b2886b3e3097b078d6369.png";
-
-/***/ }),
-
-/***/ 2762:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d0705bad64076830636cdca02585a718.png";
-
-/***/ }),
-
-/***/ 2763:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0eab6235a1e9d8ff5beb1ecd80559ff5.png";
-
-/***/ }),
-
-/***/ 2764:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/edd3014da582ab3635dca5a05669a3f9.png";
-
-/***/ }),
-
-/***/ 2765:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d527a686da1975e039bf23e523bf1987.png";
-
-/***/ }),
-
-/***/ 2766:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/82be34b98c2cdc3b0a96e05484ccbc2b.png";
-
-/***/ }),
-
-/***/ 2767:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/8075fd8604b9a5ba15f5ff83abf61357.png";
-
-/***/ }),
-
-/***/ 2768:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/c6a87046d9f91f59c572d486f146a05f.png";
-
-/***/ }),
-
-/***/ 2769:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/80c7503180eff7feac884ffc8dc49dcf.png";
-
-/***/ }),
-
-/***/ 2770:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/53feb95d87a0cabdba0602df4b2c7abd.png";
-
-/***/ }),
-
-/***/ 2771:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d96fb43b5556759fae6433eecb5215cd.png";
-
-/***/ }),
-
-/***/ 2772:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/421e794b57e9d8a55f61dea8acbaf122.png";
-
-/***/ }),
-
-/***/ 2773:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/24609c50afb138ad00a7027f23265783.png";
-
-/***/ }),
-
-/***/ 2774:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/b526b27033d326971504252c8a64799f.png";
-
-/***/ }),
-
-/***/ 2775:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/f6156ddbd0164c7960a2d4c4f96f7342.png";
-
-/***/ }),
-
-/***/ 2776:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ff604ee848c4601eed6cdba13c6b461f.png";
-
-/***/ }),
-
-/***/ 2777:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/2ccece2ca30002d265c673e1445b59c2.png";
-
-/***/ }),
-
-/***/ 2778:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/c5849636045196cf49c2a738e7a002a5.png";
-
-/***/ }),
-
-/***/ 2779:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/e28586864d5b4f6d48afbf833f8e0ec2.png";
-
-/***/ }),
-
-/***/ 2780:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7bd01b358fbe4512260286183d477685.png";
-
-/***/ }),
-
-/***/ 2781:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/2b0b532fda25919c2ea7ff2129ae9271.png";
-
-/***/ }),
-
-/***/ 2782:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/9c2e8fc66ddf257858ee277af88a7e45.png";
-
-/***/ }),
-
-/***/ 2783:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/64764c0e8dd11a31d0141c93ccb48a70.png";
-
-/***/ }),
-
-/***/ 2784:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/de056df8d895f6eb4e1992bc43c0c5e3.png";
-
-/***/ }),
-
-/***/ 2785:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/14ff0e9e964d43617c7298df4b888d10.png";
-
-/***/ }),
-
-/***/ 2786:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7da192543f5921c1d541937198c0afa9.gif";
-
-/***/ }),
-
-/***/ 2787:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/8c07dca0e3f9f9c84b2fd70f4f1fbff9.png";
-
-/***/ }),
-
-/***/ 2788:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/adb3d064c06ba450a7c6da5ca21c7527.png";
-
-/***/ }),
-
-/***/ 2789:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/315a5675d1738c029b0f55817c249627.png";
-
-/***/ }),
-
-/***/ 2790:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0aed289656b9305b500b0e3efe867a5a.png";
-
-/***/ }),
-
-/***/ 2791:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/797c3df806ec50cd823c2e44d8671144.gif";
-
-/***/ }),
-
-/***/ 2792:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/2737cd28da062447446bc93240e17270.png";
-
-/***/ }),
-
-/***/ 2793:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/3cac0342b766442b1fbc630983c13950.png";
-
-/***/ }),
-
-/***/ 2794:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d1893578e9f1038e5b70b19465f7b58b.png";
-
-/***/ }),
-
-/***/ 2795:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/30a425e0a95db6048c84483c5cced06d.png";
-
-/***/ }),
-
-/***/ 2796:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/a89ad1d0754a6ca305a1011dad503c96.png";
-
-/***/ }),
-
-/***/ 2797:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/4bfa4db4f366febfd0a820b1655623dc.png";
-
-/***/ }),
-
-/***/ 2798:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/b1efa4237175d3c78052aa209a7ded25.png";
-
-/***/ }),
-
-/***/ 2799:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/82b7f01c0e0f7966c9a2bb4c1bcc6298.png";
-
-/***/ }),
-
-/***/ 2800:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7fcbbbf879415d8bd7703b7560c08c28.png";
-
-/***/ }),
-
-/***/ 2801:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/06f3b7203e7424adb8a255f708d690b1.png";
-
-/***/ }),
-
-/***/ 2802:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d2c646eaa2c55f306468b28d7cedd554.png";
-
-/***/ }),
-
-/***/ 2803:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ef4b2066ab53d4f2b3e8fc62709f9014.png";
-
-/***/ }),
-
-/***/ 2804:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/8bdce73195bf475057ff606ab3f6fffb.png";
-
-/***/ }),
-
-/***/ 2805:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/874e7dd6003137b73a9fbbdc7e34a27d.png";
-
-/***/ }),
-
-/***/ 2806:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0bf5e11621789f54a2ffbd7df4876ab2.png";
-
-/***/ }),
-
-/***/ 2807:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/340f5a3d6ae326f22b9707104adf6bb9.png";
-
-/***/ }),
-
-/***/ 2808:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/70a73e9b3fadba285a6d68db9a91cbb3.png";
-
-/***/ }),
-
-/***/ 2809:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/6f8099642bca2cac1893f944dd47d330.png";
-
-/***/ }),
-
-/***/ 2810:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/6522710dad0e4d577f33e159dc0207ef.png";
-
-/***/ }),
-
-/***/ 2811:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/40bdb123f50c303bc8471cf1b50e52a5.png";
-
-/***/ }),
-
-/***/ 2812:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/439cddb83c09b2be056ed9587a26ccf6.png";
-
-/***/ }),
-
-/***/ 2813:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/e35418134f3ccf0992dae078ad213084.png";
-
-/***/ }),
-
-/***/ 2814:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/17a70f3f8ca6b0bb83834780b30d12d6.png";
-
-/***/ }),
-
-/***/ 2815:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/dbd143918003892a87ae09758a5243e4.png";
-
-/***/ }),
-
-/***/ 2816:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/58f20bb3e3aa666fb36a27ba5a0f746f.png";
-
-/***/ }),
-
-/***/ 2817:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/140a12db35626907175324712db456a7.gif";
-
-/***/ }),
-
-/***/ 2818:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/2946d5a288356584985cf180be715a9a.png";
-
-/***/ }),
-
-/***/ 2819:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/96edc964e2954ef3166a77f87a6cc045.png";
-
-/***/ }),
-
-/***/ 2820:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/40d59a6d36dd479f7934cc35c3f6f795.png";
-
-/***/ }),
-
-/***/ 2821:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/a23ddf472c2139e0c0361f74eb4da16e.png";
-
-/***/ }),
-
-/***/ 2822:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0b0662d4fa04471ec5b47ffd617bf5d3.png";
-
-/***/ }),
-
-/***/ 2823:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/30739a9d6fe024c005411f96dfbdfcd1.png";
-
-/***/ }),
-
-/***/ 2824:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7bb02f9c6e8c77206d09ff672bfaf9ec.png";
-
-/***/ }),
-
-/***/ 2825:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/e71dba2ccaa69d866c3a022104e7bfad.png";
-
-/***/ }),
-
-/***/ 2826:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ebfac3f168323b5a72aa7562064b5e4c.png";
-
-/***/ }),
-
-/***/ 2827:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/c73b30a718ff08201d4e75846d14d97c.png";
-
-/***/ }),
-
-/***/ 2828:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d78173077f3d3114ca769ae1b6671098.png";
-
-/***/ }),
-
-/***/ 2829:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/e02b47da60ad2adf5b94b2633fe859c3.png";
-
-/***/ }),
-
-/***/ 2830:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/277cf108a773b6a4aa2c3b73c33d8227.png";
-
-/***/ }),
-
-/***/ 2831:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/10a6d6ad8a07826fa2cfa3f251619ba2.png";
-
-/***/ }),
-
-/***/ 2832:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ae64635916e1ddc8b0ac6bfd73c5cdf1.png";
-
-/***/ }),
-
-/***/ 2833:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/faef218a10693525eaa087f8c26fe2aa.png";
-
-/***/ }),
-
-/***/ 2834:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/91f2e12fe429965b5b219f289cf6aa31.png";
-
-/***/ }),
-
-/***/ 2835:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/721b68b3daef0cdc09dd1c06bab83334.png";
-
-/***/ }),
-
-/***/ 2836:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/0e92716afebebbcf027802e341220ca0.png";
-
-/***/ }),
-
-/***/ 2837:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/642fb2f987bf8b54f176af13746c04cb.png";
-
-/***/ }),
-
-/***/ 2838:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/ae564de8d4f7ca1a034180221227e91b.png";
-
-/***/ }),
-
-/***/ 2839:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/edf5571fc769a213bbbac59c1d03340f.png";
-
-/***/ }),
-
-/***/ 2840:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/7d3dd7098c7f0f16ebd370cfeb1161e9.png";
-
-/***/ }),
-
-/***/ 2841:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/6b4c7434da0f872e47f75f8b90b1c81d.png";
-
-/***/ }),
-
-/***/ 2842:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/5ae26aa80ec6d5f2e99aa90ee1a3a5cd.png";
-
-/***/ }),
-
-/***/ 2843:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/181b5fac890880865e9131cde17e3d49.png";
-
-/***/ }),
-
-/***/ 2844:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/8c6be33fc9a8eadffa880c9fe0ca6340.png";
-
-/***/ }),
-
-/***/ 2845:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d04305129eadebdbd60bbbcefd876177.png";
-
-/***/ }),
-
-/***/ 2846:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/c019f6ed0fc028c1f003f1fb6eecaf8e.gif";
-
-/***/ }),
-
-/***/ 2847:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/d3c86f1466ceed6f4ebd972e49e9c348.png";
-
-/***/ }),
-
-/***/ 2848:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/assets/1c78a936bf640a0c11b21af1330d15df.png";
-
-/***/ }),
-
-/***/ 2962:
+/***/ 1357:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ukImages", function() { return ukImages; });
-/* harmony import */ var _steps_intro_1_move_uk_gif__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2746);
-/* harmony import */ var _steps_intro_1_move_uk_gif__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_steps_intro_1_move_uk_gif__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _steps_intro_2_say_uk_gif__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2747);
-/* harmony import */ var _steps_intro_2_say_uk_gif__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_steps_intro_2_say_uk_gif__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _steps_intro_3_green_flag_uk_gif__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2748);
-/* harmony import */ var _steps_intro_3_green_flag_uk_gif__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_steps_intro_3_green_flag_uk_gif__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _steps_speech_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1676);
-/* harmony import */ var _steps_speech_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _steps_speech_say_something_uk_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2749);
-/* harmony import */ var _steps_speech_say_something_uk_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_say_something_uk_png__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _steps_speech_set_voice_uk_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2750);
-/* harmony import */ var _steps_speech_set_voice_uk_png__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_set_voice_uk_png__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _steps_speech_move_around_uk_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2751);
-/* harmony import */ var _steps_speech_move_around_uk_png__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_move_around_uk_png__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _steps_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(242);
-/* harmony import */ var _steps_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_steps_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _steps_speech_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(410);
-/* harmony import */ var _steps_speech_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _steps_speech_song_uk_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2752);
-/* harmony import */ var _steps_speech_song_uk_png__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_song_uk_png__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _steps_speech_change_color_uk_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2753);
-/* harmony import */ var _steps_speech_change_color_uk_png__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_change_color_uk_png__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _steps_speech_spin_uk_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2754);
-/* harmony import */ var _steps_speech_spin_uk_png__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_spin_uk_png__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _steps_speech_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2755);
-/* harmony import */ var _steps_speech_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_steps_speech_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _steps_cn_show_character_LTR_gif__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(409);
-/* harmony import */ var _steps_cn_show_character_LTR_gif__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_show_character_LTR_gif__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _steps_cn_say_uk_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(2756);
-/* harmony import */ var _steps_cn_say_uk_png__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_say_uk_png__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _steps_cn_glide_uk_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(2757);
-/* harmony import */ var _steps_cn_glide_uk_png__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_glide_uk_png__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _steps_cn_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(411);
-/* harmony import */ var _steps_cn_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _steps_cn_collect_uk_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(2758);
-/* harmony import */ var _steps_cn_collect_uk_png__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_collect_uk_png__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1663);
-/* harmony import */ var _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _steps_cn_score_uk_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(2759);
-/* harmony import */ var _steps_cn_score_uk_png__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_score_uk_png__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _steps_cn_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(2760);
-/* harmony import */ var _steps_cn_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_steps_cn_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _steps_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(412);
-/* harmony import */ var _steps_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_steps_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var _steps_name_pick_letter_LTR_gif__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(413);
-/* harmony import */ var _steps_name_pick_letter_LTR_gif__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_steps_name_pick_letter_LTR_gif__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var _steps_name_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(2761);
-/* harmony import */ var _steps_name_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_steps_name_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _steps_name_pick_letter2_LTR_gif__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(414);
-/* harmony import */ var _steps_name_pick_letter2_LTR_gif__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_steps_name_pick_letter2_LTR_gif__WEBPACK_IMPORTED_MODULE_24__);
-/* harmony import */ var _steps_name_change_color_uk_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(2762);
-/* harmony import */ var _steps_name_change_color_uk_png__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_steps_name_change_color_uk_png__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var _steps_name_spin_uk_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(2763);
-/* harmony import */ var _steps_name_spin_uk_png__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_steps_name_spin_uk_png__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var _steps_name_grow_uk_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(2764);
-/* harmony import */ var _steps_name_grow_uk_png__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(_steps_name_grow_uk_png__WEBPACK_IMPORTED_MODULE_27__);
-/* harmony import */ var _steps_music_pick_instrument_LTR_gif__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(415);
-/* harmony import */ var _steps_music_pick_instrument_LTR_gif__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_steps_music_pick_instrument_LTR_gif__WEBPACK_IMPORTED_MODULE_28__);
-/* harmony import */ var _steps_music_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(2765);
-/* harmony import */ var _steps_music_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(_steps_music_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_29__);
-/* harmony import */ var _steps_music_make_song_uk_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(2766);
-/* harmony import */ var _steps_music_make_song_uk_png__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(_steps_music_make_song_uk_png__WEBPACK_IMPORTED_MODULE_30__);
-/* harmony import */ var _steps_music_make_beat_uk_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(2767);
-/* harmony import */ var _steps_music_make_beat_uk_png__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(_steps_music_make_beat_uk_png__WEBPACK_IMPORTED_MODULE_31__);
-/* harmony import */ var _steps_music_make_beatbox_uk_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(2768);
-/* harmony import */ var _steps_music_make_beatbox_uk_png__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(_steps_music_make_beatbox_uk_png__WEBPACK_IMPORTED_MODULE_32__);
-/* harmony import */ var _steps_chase_game_add_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(416);
-/* harmony import */ var _steps_chase_game_add_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_33___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_add_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_33__);
-/* harmony import */ var _steps_chase_game_add_sprite1_LTR_gif__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(417);
-/* harmony import */ var _steps_chase_game_add_sprite1_LTR_gif__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_add_sprite1_LTR_gif__WEBPACK_IMPORTED_MODULE_34__);
-/* harmony import */ var _steps_chase_game_right_left_uk_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(2769);
-/* harmony import */ var _steps_chase_game_right_left_uk_png__WEBPACK_IMPORTED_MODULE_35___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_right_left_uk_png__WEBPACK_IMPORTED_MODULE_35__);
-/* harmony import */ var _steps_chase_game_up_down_uk_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(2770);
-/* harmony import */ var _steps_chase_game_up_down_uk_png__WEBPACK_IMPORTED_MODULE_36___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_up_down_uk_png__WEBPACK_IMPORTED_MODULE_36__);
-/* harmony import */ var _steps_chase_game_add_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(418);
-/* harmony import */ var _steps_chase_game_add_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_37___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_add_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_37__);
-/* harmony import */ var _steps_chase_game_move_randomly_uk_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(2771);
-/* harmony import */ var _steps_chase_game_move_randomly_uk_png__WEBPACK_IMPORTED_MODULE_38___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_move_randomly_uk_png__WEBPACK_IMPORTED_MODULE_38__);
-/* harmony import */ var _steps_chase_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(2772);
-/* harmony import */ var _steps_chase_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_39___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_39__);
-/* harmony import */ var _steps_chase_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(2773);
-/* harmony import */ var _steps_chase_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_40___default = /*#__PURE__*/__webpack_require__.n(_steps_chase_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_40__);
-/* harmony import */ var _steps_pop_game_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(419);
-/* harmony import */ var _steps_pop_game_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_41___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_41__);
-/* harmony import */ var _steps_pop_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(2774);
-/* harmony import */ var _steps_pop_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_42___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_42__);
-/* harmony import */ var _steps_pop_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(2775);
-/* harmony import */ var _steps_pop_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_43___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_43__);
-/* harmony import */ var _steps_pop_game_random_position_uk_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(2776);
-/* harmony import */ var _steps_pop_game_random_position_uk_png__WEBPACK_IMPORTED_MODULE_44___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_random_position_uk_png__WEBPACK_IMPORTED_MODULE_44__);
-/* harmony import */ var _steps_pop_game_change_color_uk_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(2777);
-/* harmony import */ var _steps_pop_game_change_color_uk_png__WEBPACK_IMPORTED_MODULE_45___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_change_color_uk_png__WEBPACK_IMPORTED_MODULE_45__);
-/* harmony import */ var _steps_pop_game_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(2778);
-/* harmony import */ var _steps_pop_game_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_46___default = /*#__PURE__*/__webpack_require__.n(_steps_pop_game_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_46__);
-/* harmony import */ var _steps_animate_char_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(420);
-/* harmony import */ var _steps_animate_char_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_47___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_47__);
-/* harmony import */ var _steps_animate_char_say_something_uk_png__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(2779);
-/* harmony import */ var _steps_animate_char_say_something_uk_png__WEBPACK_IMPORTED_MODULE_48___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_say_something_uk_png__WEBPACK_IMPORTED_MODULE_48__);
-/* harmony import */ var _steps_animate_char_add_sound_uk_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(2780);
-/* harmony import */ var _steps_animate_char_add_sound_uk_png__WEBPACK_IMPORTED_MODULE_49___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_add_sound_uk_png__WEBPACK_IMPORTED_MODULE_49__);
-/* harmony import */ var _steps_animate_char_talk_uk_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(2781);
-/* harmony import */ var _steps_animate_char_talk_uk_png__WEBPACK_IMPORTED_MODULE_50___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_talk_uk_png__WEBPACK_IMPORTED_MODULE_50__);
-/* harmony import */ var _steps_animate_char_move_uk_png__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(2782);
-/* harmony import */ var _steps_animate_char_move_uk_png__WEBPACK_IMPORTED_MODULE_51___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_move_uk_png__WEBPACK_IMPORTED_MODULE_51__);
-/* harmony import */ var _steps_animate_char_jump_uk_png__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(2783);
-/* harmony import */ var _steps_animate_char_jump_uk_png__WEBPACK_IMPORTED_MODULE_52___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_jump_uk_png__WEBPACK_IMPORTED_MODULE_52__);
-/* harmony import */ var _steps_animate_char_change_color_uk_png__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(2784);
-/* harmony import */ var _steps_animate_char_change_color_uk_png__WEBPACK_IMPORTED_MODULE_53___default = /*#__PURE__*/__webpack_require__.n(_steps_animate_char_change_color_uk_png__WEBPACK_IMPORTED_MODULE_53__);
-/* harmony import */ var _steps_story_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(421);
-/* harmony import */ var _steps_story_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_54___default = /*#__PURE__*/__webpack_require__.n(_steps_story_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_54__);
-/* harmony import */ var _steps_story_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(422);
-/* harmony import */ var _steps_story_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_55___default = /*#__PURE__*/__webpack_require__.n(_steps_story_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_55__);
-/* harmony import */ var _steps_story_say_something_uk_png__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(2785);
-/* harmony import */ var _steps_story_say_something_uk_png__WEBPACK_IMPORTED_MODULE_56___default = /*#__PURE__*/__webpack_require__.n(_steps_story_say_something_uk_png__WEBPACK_IMPORTED_MODULE_56__);
-/* harmony import */ var _steps_story_pick_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(423);
-/* harmony import */ var _steps_story_pick_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_57___default = /*#__PURE__*/__webpack_require__.n(_steps_story_pick_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_57__);
-/* harmony import */ var _steps_story_flip_uk_gif__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(2786);
-/* harmony import */ var _steps_story_flip_uk_gif__WEBPACK_IMPORTED_MODULE_58___default = /*#__PURE__*/__webpack_require__.n(_steps_story_flip_uk_gif__WEBPACK_IMPORTED_MODULE_58__);
-/* harmony import */ var _steps_story_conversation_uk_png__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(2787);
-/* harmony import */ var _steps_story_conversation_uk_png__WEBPACK_IMPORTED_MODULE_59___default = /*#__PURE__*/__webpack_require__.n(_steps_story_conversation_uk_png__WEBPACK_IMPORTED_MODULE_59__);
-/* harmony import */ var _steps_story_pick_backdrop2_LTR_gif__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(424);
-/* harmony import */ var _steps_story_pick_backdrop2_LTR_gif__WEBPACK_IMPORTED_MODULE_60___default = /*#__PURE__*/__webpack_require__.n(_steps_story_pick_backdrop2_LTR_gif__WEBPACK_IMPORTED_MODULE_60__);
-/* harmony import */ var _steps_story_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(2788);
-/* harmony import */ var _steps_story_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_61___default = /*#__PURE__*/__webpack_require__.n(_steps_story_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_61__);
-/* harmony import */ var _steps_story_hide_character_uk_png__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(2789);
-/* harmony import */ var _steps_story_hide_character_uk_png__WEBPACK_IMPORTED_MODULE_62___default = /*#__PURE__*/__webpack_require__.n(_steps_story_hide_character_uk_png__WEBPACK_IMPORTED_MODULE_62__);
-/* harmony import */ var _steps_story_show_character_uk_png__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(2790);
-/* harmony import */ var _steps_story_show_character_uk_png__WEBPACK_IMPORTED_MODULE_63___default = /*#__PURE__*/__webpack_require__.n(_steps_story_show_character_uk_png__WEBPACK_IMPORTED_MODULE_63__);
-/* harmony import */ var _steps_video_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(2791);
-/* harmony import */ var _steps_video_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_64___default = /*#__PURE__*/__webpack_require__.n(_steps_video_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_64__);
-/* harmony import */ var _steps_video_pet_uk_png__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(2792);
-/* harmony import */ var _steps_video_pet_uk_png__WEBPACK_IMPORTED_MODULE_65___default = /*#__PURE__*/__webpack_require__.n(_steps_video_pet_uk_png__WEBPACK_IMPORTED_MODULE_65__);
-/* harmony import */ var _steps_video_animate_uk_png__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(2793);
-/* harmony import */ var _steps_video_animate_uk_png__WEBPACK_IMPORTED_MODULE_66___default = /*#__PURE__*/__webpack_require__.n(_steps_video_animate_uk_png__WEBPACK_IMPORTED_MODULE_66__);
-/* harmony import */ var _steps_video_pop_uk_png__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(2794);
-/* harmony import */ var _steps_video_pop_uk_png__WEBPACK_IMPORTED_MODULE_67___default = /*#__PURE__*/__webpack_require__.n(_steps_video_pop_uk_png__WEBPACK_IMPORTED_MODULE_67__);
-/* harmony import */ var _steps_fly_choose_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(425);
-/* harmony import */ var _steps_fly_choose_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_68___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_choose_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_68__);
-/* harmony import */ var _steps_fly_choose_character_LTR_png__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(426);
-/* harmony import */ var _steps_fly_choose_character_LTR_png__WEBPACK_IMPORTED_MODULE_69___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_choose_character_LTR_png__WEBPACK_IMPORTED_MODULE_69__);
-/* harmony import */ var _steps_fly_say_something_uk_png__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(2795);
-/* harmony import */ var _steps_fly_say_something_uk_png__WEBPACK_IMPORTED_MODULE_70___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_say_something_uk_png__WEBPACK_IMPORTED_MODULE_70__);
-/* harmony import */ var _steps_fly_make_interactive_uk_png__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(2796);
-/* harmony import */ var _steps_fly_make_interactive_uk_png__WEBPACK_IMPORTED_MODULE_71___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_make_interactive_uk_png__WEBPACK_IMPORTED_MODULE_71__);
-/* harmony import */ var _steps_fly_object_to_collect_LTR_png__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(427);
-/* harmony import */ var _steps_fly_object_to_collect_LTR_png__WEBPACK_IMPORTED_MODULE_72___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_object_to_collect_LTR_png__WEBPACK_IMPORTED_MODULE_72__);
-/* harmony import */ var _steps_fly_flying_heart_uk_png__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(2797);
-/* harmony import */ var _steps_fly_flying_heart_uk_png__WEBPACK_IMPORTED_MODULE_73___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_flying_heart_uk_png__WEBPACK_IMPORTED_MODULE_73__);
-/* harmony import */ var _steps_fly_select_flyer_LTR_png__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(428);
-/* harmony import */ var _steps_fly_select_flyer_LTR_png__WEBPACK_IMPORTED_MODULE_74___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_select_flyer_LTR_png__WEBPACK_IMPORTED_MODULE_74__);
-/* harmony import */ var _steps_fly_keep_score_uk_png__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(2798);
-/* harmony import */ var _steps_fly_keep_score_uk_png__WEBPACK_IMPORTED_MODULE_75___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_keep_score_uk_png__WEBPACK_IMPORTED_MODULE_75__);
-/* harmony import */ var _steps_fly_choose_scenery_LTR_gif__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(429);
-/* harmony import */ var _steps_fly_choose_scenery_LTR_gif__WEBPACK_IMPORTED_MODULE_76___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_choose_scenery_LTR_gif__WEBPACK_IMPORTED_MODULE_76__);
-/* harmony import */ var _steps_fly_move_scenery_uk_png__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(2799);
-/* harmony import */ var _steps_fly_move_scenery_uk_png__WEBPACK_IMPORTED_MODULE_77___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_move_scenery_uk_png__WEBPACK_IMPORTED_MODULE_77__);
-/* harmony import */ var _steps_fly_switch_costume_uk_png__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(2800);
-/* harmony import */ var _steps_fly_switch_costume_uk_png__WEBPACK_IMPORTED_MODULE_78___default = /*#__PURE__*/__webpack_require__.n(_steps_fly_switch_costume_uk_png__WEBPACK_IMPORTED_MODULE_78__);
-/* harmony import */ var _steps_pong_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(430);
-/* harmony import */ var _steps_pong_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_79___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_79__);
-/* harmony import */ var _steps_pong_add_ball_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(431);
-/* harmony import */ var _steps_pong_add_ball_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_80___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_add_ball_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_80__);
-/* harmony import */ var _steps_pong_bounce_around_uk_png__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(2801);
-/* harmony import */ var _steps_pong_bounce_around_uk_png__WEBPACK_IMPORTED_MODULE_81___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_bounce_around_uk_png__WEBPACK_IMPORTED_MODULE_81__);
-/* harmony import */ var _steps_pong_add_a_paddle_LTR_gif__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(432);
-/* harmony import */ var _steps_pong_add_a_paddle_LTR_gif__WEBPACK_IMPORTED_MODULE_82___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_add_a_paddle_LTR_gif__WEBPACK_IMPORTED_MODULE_82__);
-/* harmony import */ var _steps_pong_move_the_paddle_uk_png__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(2802);
-/* harmony import */ var _steps_pong_move_the_paddle_uk_png__WEBPACK_IMPORTED_MODULE_83___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_move_the_paddle_uk_png__WEBPACK_IMPORTED_MODULE_83__);
-/* harmony import */ var _steps_pong_select_ball_LTR_png__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(433);
-/* harmony import */ var _steps_pong_select_ball_LTR_png__WEBPACK_IMPORTED_MODULE_84___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_select_ball_LTR_png__WEBPACK_IMPORTED_MODULE_84__);
-/* harmony import */ var _steps_pong_add_code_to_ball_uk_png__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(2803);
-/* harmony import */ var _steps_pong_add_code_to_ball_uk_png__WEBPACK_IMPORTED_MODULE_85___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_add_code_to_ball_uk_png__WEBPACK_IMPORTED_MODULE_85__);
-/* harmony import */ var _steps_pong_choose_score_uk_png__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(2804);
-/* harmony import */ var _steps_pong_choose_score_uk_png__WEBPACK_IMPORTED_MODULE_86___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_choose_score_uk_png__WEBPACK_IMPORTED_MODULE_86__);
-/* harmony import */ var _steps_pong_insert_change_score_uk_png__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(2805);
-/* harmony import */ var _steps_pong_insert_change_score_uk_png__WEBPACK_IMPORTED_MODULE_87___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_insert_change_score_uk_png__WEBPACK_IMPORTED_MODULE_87__);
-/* harmony import */ var _steps_pong_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(2806);
-/* harmony import */ var _steps_pong_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_88___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_88__);
-/* harmony import */ var _steps_pong_add_line_LTR_gif__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(434);
-/* harmony import */ var _steps_pong_add_line_LTR_gif__WEBPACK_IMPORTED_MODULE_89___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_add_line_LTR_gif__WEBPACK_IMPORTED_MODULE_89__);
-/* harmony import */ var _steps_pong_game_over_uk_png__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(2807);
-/* harmony import */ var _steps_pong_game_over_uk_png__WEBPACK_IMPORTED_MODULE_90___default = /*#__PURE__*/__webpack_require__.n(_steps_pong_game_over_uk_png__WEBPACK_IMPORTED_MODULE_90__);
-/* harmony import */ var _steps_imagine_type_what_you_want_uk_png__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(2808);
-/* harmony import */ var _steps_imagine_type_what_you_want_uk_png__WEBPACK_IMPORTED_MODULE_91___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_type_what_you_want_uk_png__WEBPACK_IMPORTED_MODULE_91__);
-/* harmony import */ var _steps_imagine_click_green_flag_uk_png__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(2809);
-/* harmony import */ var _steps_imagine_click_green_flag_uk_png__WEBPACK_IMPORTED_MODULE_92___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_click_green_flag_uk_png__WEBPACK_IMPORTED_MODULE_92__);
-/* harmony import */ var _steps_imagine_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(435);
-/* harmony import */ var _steps_imagine_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_93___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_93__);
-/* harmony import */ var _steps_imagine_choose_any_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(436);
-/* harmony import */ var _steps_imagine_choose_any_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_94___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_choose_any_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_94__);
-/* harmony import */ var _steps_imagine_fly_around_uk_png__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(2810);
-/* harmony import */ var _steps_imagine_fly_around_uk_png__WEBPACK_IMPORTED_MODULE_95___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_fly_around_uk_png__WEBPACK_IMPORTED_MODULE_95__);
-/* harmony import */ var _steps_imagine_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(437);
-/* harmony import */ var _steps_imagine_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_96___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_96__);
-/* harmony import */ var _steps_imagine_left_right_uk_png__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(2811);
-/* harmony import */ var _steps_imagine_left_right_uk_png__WEBPACK_IMPORTED_MODULE_97___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_left_right_uk_png__WEBPACK_IMPORTED_MODULE_97__);
-/* harmony import */ var _steps_imagine_up_down_uk_png__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(2812);
-/* harmony import */ var _steps_imagine_up_down_uk_png__WEBPACK_IMPORTED_MODULE_98___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_up_down_uk_png__WEBPACK_IMPORTED_MODULE_98__);
-/* harmony import */ var _steps_imagine_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(2813);
-/* harmony import */ var _steps_imagine_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_99___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_99__);
-/* harmony import */ var _steps_imagine_glide_to_point_uk_png__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(2814);
-/* harmony import */ var _steps_imagine_glide_to_point_uk_png__WEBPACK_IMPORTED_MODULE_100___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_glide_to_point_uk_png__WEBPACK_IMPORTED_MODULE_100__);
-/* harmony import */ var _steps_imagine_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(2815);
-/* harmony import */ var _steps_imagine_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_101___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_101__);
-/* harmony import */ var _steps_imagine_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(438);
-/* harmony import */ var _steps_imagine_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_102___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_102__);
-/* harmony import */ var _steps_imagine_switch_backdrops_uk_png__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(2816);
-/* harmony import */ var _steps_imagine_switch_backdrops_uk_png__WEBPACK_IMPORTED_MODULE_103___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_switch_backdrops_uk_png__WEBPACK_IMPORTED_MODULE_103__);
-/* harmony import */ var _steps_imagine_record_a_sound_uk_gif__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(2817);
-/* harmony import */ var _steps_imagine_record_a_sound_uk_gif__WEBPACK_IMPORTED_MODULE_104___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_record_a_sound_uk_gif__WEBPACK_IMPORTED_MODULE_104__);
-/* harmony import */ var _steps_imagine_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(2818);
-/* harmony import */ var _steps_imagine_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_105___default = /*#__PURE__*/__webpack_require__.n(_steps_imagine_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_105__);
-/* harmony import */ var _steps_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(439);
-/* harmony import */ var _steps_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_106___default = /*#__PURE__*/__webpack_require__.n(_steps_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_106__);
-/* harmony import */ var _steps_add_effects_uk_png__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(2819);
-/* harmony import */ var _steps_add_effects_uk_png__WEBPACK_IMPORTED_MODULE_107___default = /*#__PURE__*/__webpack_require__.n(_steps_add_effects_uk_png__WEBPACK_IMPORTED_MODULE_107__);
-/* harmony import */ var _steps_hide_show_uk_png__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(2820);
-/* harmony import */ var _steps_hide_show_uk_png__WEBPACK_IMPORTED_MODULE_108___default = /*#__PURE__*/__webpack_require__.n(_steps_hide_show_uk_png__WEBPACK_IMPORTED_MODULE_108__);
-/* harmony import */ var _steps_switch_costumes_uk_png__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(2821);
-/* harmony import */ var _steps_switch_costumes_uk_png__WEBPACK_IMPORTED_MODULE_109___default = /*#__PURE__*/__webpack_require__.n(_steps_switch_costumes_uk_png__WEBPACK_IMPORTED_MODULE_109__);
-/* harmony import */ var _steps_change_size_uk_png__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(2822);
-/* harmony import */ var _steps_change_size_uk_png__WEBPACK_IMPORTED_MODULE_110___default = /*#__PURE__*/__webpack_require__.n(_steps_change_size_uk_png__WEBPACK_IMPORTED_MODULE_110__);
-/* harmony import */ var _steps_spin_turn_uk_png__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(2823);
-/* harmony import */ var _steps_spin_turn_uk_png__WEBPACK_IMPORTED_MODULE_111___default = /*#__PURE__*/__webpack_require__.n(_steps_spin_turn_uk_png__WEBPACK_IMPORTED_MODULE_111__);
-/* harmony import */ var _steps_spin_point_in_direction_uk_png__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(2824);
-/* harmony import */ var _steps_spin_point_in_direction_uk_png__WEBPACK_IMPORTED_MODULE_112___default = /*#__PURE__*/__webpack_require__.n(_steps_spin_point_in_direction_uk_png__WEBPACK_IMPORTED_MODULE_112__);
-/* harmony import */ var _steps_record_a_sound_sounds_tab_uk_png__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(2825);
-/* harmony import */ var _steps_record_a_sound_sounds_tab_uk_png__WEBPACK_IMPORTED_MODULE_113___default = /*#__PURE__*/__webpack_require__.n(_steps_record_a_sound_sounds_tab_uk_png__WEBPACK_IMPORTED_MODULE_113__);
-/* harmony import */ var _steps_record_a_sound_click_record_uk_png__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(2826);
-/* harmony import */ var _steps_record_a_sound_click_record_uk_png__WEBPACK_IMPORTED_MODULE_114___default = /*#__PURE__*/__webpack_require__.n(_steps_record_a_sound_click_record_uk_png__WEBPACK_IMPORTED_MODULE_114__);
-/* harmony import */ var _steps_record_a_sound_press_record_button_uk_png__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(2827);
-/* harmony import */ var _steps_record_a_sound_press_record_button_uk_png__WEBPACK_IMPORTED_MODULE_115___default = /*#__PURE__*/__webpack_require__.n(_steps_record_a_sound_press_record_button_uk_png__WEBPACK_IMPORTED_MODULE_115__);
-/* harmony import */ var _steps_record_a_sound_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(2828);
-/* harmony import */ var _steps_record_a_sound_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_116___default = /*#__PURE__*/__webpack_require__.n(_steps_record_a_sound_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_116__);
-/* harmony import */ var _steps_record_a_sound_play_your_sound_uk_png__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(2829);
-/* harmony import */ var _steps_record_a_sound_play_your_sound_uk_png__WEBPACK_IMPORTED_MODULE_117___default = /*#__PURE__*/__webpack_require__.n(_steps_record_a_sound_play_your_sound_uk_png__WEBPACK_IMPORTED_MODULE_117__);
-/* harmony import */ var _steps_move_arrow_keys_left_right_uk_png__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(2830);
-/* harmony import */ var _steps_move_arrow_keys_left_right_uk_png__WEBPACK_IMPORTED_MODULE_118___default = /*#__PURE__*/__webpack_require__.n(_steps_move_arrow_keys_left_right_uk_png__WEBPACK_IMPORTED_MODULE_118__);
-/* harmony import */ var _steps_move_arrow_keys_up_down_uk_png__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(2831);
-/* harmony import */ var _steps_move_arrow_keys_up_down_uk_png__WEBPACK_IMPORTED_MODULE_119___default = /*#__PURE__*/__webpack_require__.n(_steps_move_arrow_keys_up_down_uk_png__WEBPACK_IMPORTED_MODULE_119__);
-/* harmony import */ var _steps_glide_around_back_and_forth_uk_png__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(2832);
-/* harmony import */ var _steps_glide_around_back_and_forth_uk_png__WEBPACK_IMPORTED_MODULE_120___default = /*#__PURE__*/__webpack_require__.n(_steps_glide_around_back_and_forth_uk_png__WEBPACK_IMPORTED_MODULE_120__);
-/* harmony import */ var _steps_glide_around_point_uk_png__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(2833);
-/* harmony import */ var _steps_glide_around_point_uk_png__WEBPACK_IMPORTED_MODULE_121___default = /*#__PURE__*/__webpack_require__.n(_steps_glide_around_point_uk_png__WEBPACK_IMPORTED_MODULE_121__);
-/* harmony import */ var _steps_code_cartoon_01_say_something_uk_png__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(2834);
-/* harmony import */ var _steps_code_cartoon_01_say_something_uk_png__WEBPACK_IMPORTED_MODULE_122___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_01_say_something_uk_png__WEBPACK_IMPORTED_MODULE_122__);
-/* harmony import */ var _steps_code_cartoon_02_animate_uk_png__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(2835);
-/* harmony import */ var _steps_code_cartoon_02_animate_uk_png__WEBPACK_IMPORTED_MODULE_123___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_02_animate_uk_png__WEBPACK_IMPORTED_MODULE_123__);
-/* harmony import */ var _steps_code_cartoon_03_select_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(440);
-/* harmony import */ var _steps_code_cartoon_03_select_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_124___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_03_select_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_124__);
-/* harmony import */ var _steps_code_cartoon_04_use_minus_sign_uk_png__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(2836);
-/* harmony import */ var _steps_code_cartoon_04_use_minus_sign_uk_png__WEBPACK_IMPORTED_MODULE_125___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_04_use_minus_sign_uk_png__WEBPACK_IMPORTED_MODULE_125__);
-/* harmony import */ var _steps_code_cartoon_05_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(2837);
-/* harmony import */ var _steps_code_cartoon_05_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_126___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_05_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_126__);
-/* harmony import */ var _steps_code_cartoon_06_select_another_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(441);
-/* harmony import */ var _steps_code_cartoon_06_select_another_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_127___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_06_select_another_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_127__);
-/* harmony import */ var _steps_code_cartoon_07_jump_uk_png__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(2838);
-/* harmony import */ var _steps_code_cartoon_07_jump_uk_png__WEBPACK_IMPORTED_MODULE_128___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_07_jump_uk_png__WEBPACK_IMPORTED_MODULE_128__);
-/* harmony import */ var _steps_code_cartoon_08_change_scenes_uk_png__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(2839);
-/* harmony import */ var _steps_code_cartoon_08_change_scenes_uk_png__WEBPACK_IMPORTED_MODULE_129___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_08_change_scenes_uk_png__WEBPACK_IMPORTED_MODULE_129__);
-/* harmony import */ var _steps_code_cartoon_09_glide_around_uk_png__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(2840);
-/* harmony import */ var _steps_code_cartoon_09_glide_around_uk_png__WEBPACK_IMPORTED_MODULE_130___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_09_glide_around_uk_png__WEBPACK_IMPORTED_MODULE_130__);
-/* harmony import */ var _steps_code_cartoon_10_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(2841);
-/* harmony import */ var _steps_code_cartoon_10_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_131___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_10_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_131__);
-/* harmony import */ var _steps_code_cartoon_11_choose_more_characters_LTR_png__WEBPACK_IMPORTED_MODULE_132__ = __webpack_require__(442);
-/* harmony import */ var _steps_code_cartoon_11_choose_more_characters_LTR_png__WEBPACK_IMPORTED_MODULE_132___default = /*#__PURE__*/__webpack_require__.n(_steps_code_cartoon_11_choose_more_characters_LTR_png__WEBPACK_IMPORTED_MODULE_132__);
-/* harmony import */ var _steps_talking_2_choose_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_133__ = __webpack_require__(443);
-/* harmony import */ var _steps_talking_2_choose_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_133___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_2_choose_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_133__);
-/* harmony import */ var _steps_talking_3_say_something_uk_png__WEBPACK_IMPORTED_MODULE_134__ = __webpack_require__(2842);
-/* harmony import */ var _steps_talking_3_say_something_uk_png__WEBPACK_IMPORTED_MODULE_134___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_3_say_something_uk_png__WEBPACK_IMPORTED_MODULE_134__);
-/* harmony import */ var _steps_talking_4_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_135__ = __webpack_require__(444);
-/* harmony import */ var _steps_talking_4_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_135___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_4_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_135__);
-/* harmony import */ var _steps_talking_5_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_136__ = __webpack_require__(2843);
-/* harmony import */ var _steps_talking_5_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_136___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_5_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_136__);
-/* harmony import */ var _steps_talking_6_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_137__ = __webpack_require__(445);
-/* harmony import */ var _steps_talking_6_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_137___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_6_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_137__);
-/* harmony import */ var _steps_talking_7_move_around_uk_png__WEBPACK_IMPORTED_MODULE_138__ = __webpack_require__(2844);
-/* harmony import */ var _steps_talking_7_move_around_uk_png__WEBPACK_IMPORTED_MODULE_138___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_7_move_around_uk_png__WEBPACK_IMPORTED_MODULE_138__);
-/* harmony import */ var _steps_talking_8_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_139__ = __webpack_require__(446);
-/* harmony import */ var _steps_talking_8_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_139___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_8_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_139__);
-/* harmony import */ var _steps_talking_9_animate_uk_png__WEBPACK_IMPORTED_MODULE_140__ = __webpack_require__(2845);
-/* harmony import */ var _steps_talking_9_animate_uk_png__WEBPACK_IMPORTED_MODULE_140___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_9_animate_uk_png__WEBPACK_IMPORTED_MODULE_140__);
-/* harmony import */ var _steps_talking_10_choose_third_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_141__ = __webpack_require__(447);
-/* harmony import */ var _steps_talking_10_choose_third_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_141___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_10_choose_third_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_141__);
-/* harmony import */ var _steps_talking_11_choose_sound_uk_gif__WEBPACK_IMPORTED_MODULE_142__ = __webpack_require__(2846);
-/* harmony import */ var _steps_talking_11_choose_sound_uk_gif__WEBPACK_IMPORTED_MODULE_142___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_11_choose_sound_uk_gif__WEBPACK_IMPORTED_MODULE_142__);
-/* harmony import */ var _steps_talking_12_dance_moves_uk_png__WEBPACK_IMPORTED_MODULE_143__ = __webpack_require__(2847);
-/* harmony import */ var _steps_talking_12_dance_moves_uk_png__WEBPACK_IMPORTED_MODULE_143___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_12_dance_moves_uk_png__WEBPACK_IMPORTED_MODULE_143__);
-/* harmony import */ var _steps_talking_13_ask_and_answer_uk_png__WEBPACK_IMPORTED_MODULE_144__ = __webpack_require__(2848);
-/* harmony import */ var _steps_talking_13_ask_and_answer_uk_png__WEBPACK_IMPORTED_MODULE_144___default = /*#__PURE__*/__webpack_require__.n(_steps_talking_13_ask_and_answer_uk_png__WEBPACK_IMPORTED_MODULE_144__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "ukImages", function() { return /* binding */ ukImages; });
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/intro-1-move.uk.gif
+/* harmony default export */ var intro_1_move_uk = (__webpack_require__.p + "static/assets/d7948b6bddcc0ee8d9ba0688f0c84ee9.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/intro-2-say.uk.gif
+/* harmony default export */ var intro_2_say_uk = (__webpack_require__.p + "static/assets/92796921e3fe375332bbb98a511b446c.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/intro-3-green-flag.uk.gif
+/* harmony default export */ var intro_3_green_flag_uk = (__webpack_require__.p + "static/assets/fcfc6bb44275aace4f50f9b7d2059838.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-add-extension.uk.gif
+/* harmony default export */ var speech_add_extension_uk = (__webpack_require__.p + "static/assets/0d35c31d738bd318ce1ee693047f346f.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-say-something.uk.png
+/* harmony default export */ var speech_say_something_uk = (__webpack_require__.p + "static/assets/a4581128d36b9b4c6c77197d6c686a0e.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-set-voice.uk.png
+/* harmony default export */ var speech_set_voice_uk = (__webpack_require__.p + "static/assets/94dc155e150b9d7166183e4dc2b8d082.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-move-around.uk.png
+/* harmony default export */ var speech_move_around_uk = (__webpack_require__.p + "static/assets/954e0d72548823e8fe61319c910a8e36.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pick-backdrop.LTR.gif
+var pick_backdrop_LTR = __webpack_require__(233);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/speech-add-sprite.LTR.gif
+var speech_add_sprite_LTR = __webpack_require__(375);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-song.uk.png
+/* harmony default export */ var speech_song_uk = (__webpack_require__.p + "static/assets/ac5fb1690cd3f9dc7ca7cd5f23a54617.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-change-color.uk.png
+/* harmony default export */ var speech_change_color_uk = (__webpack_require__.p + "static/assets/cffe531d6cf719e6ac62afed3543eaa3.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-spin.uk.png
+/* harmony default export */ var speech_spin_uk = (__webpack_require__.p + "static/assets/bad2da46f583d39a5cb2d0456583490c.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-grow-shrink.uk.png
+/* harmony default export */ var speech_grow_shrink_uk = (__webpack_require__.p + "static/assets/344ce96fc7f3f9383d0e1ee86c2cc07f.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/cn-show-character.LTR.gif
+var cn_show_character_LTR = __webpack_require__(374);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-say.uk.png
+/* harmony default export */ var cn_say_uk = (__webpack_require__.p + "static/assets/15ca248321936da071f7b72ef46c5ed6.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-glide.uk.png
+/* harmony default export */ var cn_glide_uk = (__webpack_require__.p + "static/assets/4dbf193f124d15ee779a593562372981.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/cn-pick-sprite.LTR.gif
+var cn_pick_sprite_LTR = __webpack_require__(376);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-collect.uk.png
+/* harmony default export */ var cn_collect_uk = (__webpack_require__.p + "static/assets/8b1a3f57febc62ad1c1de5fd77f3471b.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/add-variable.uk.gif
+/* harmony default export */ var add_variable_uk = (__webpack_require__.p + "static/assets/9ef84817963eb1f9198aff088a68f8d8.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-score.uk.png
+/* harmony default export */ var cn_score_uk = (__webpack_require__.p + "static/assets/a1ed27d1faabcd9c18fe23ad9461bbd1.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-backdrop.uk.png
+/* harmony default export */ var cn_backdrop_uk = (__webpack_require__.p + "static/assets/36fecbf6f94b7141558366f777874b11.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/add-sprite.LTR.gif
+var add_sprite_LTR = __webpack_require__(377);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/name-pick-letter.LTR.gif
+var name_pick_letter_LTR = __webpack_require__(378);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-play-sound.uk.png
+/* harmony default export */ var name_play_sound_uk = (__webpack_require__.p + "static/assets/78ba3646e91d1a2dde1040c7b882b238.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/name-pick-letter2.LTR.gif
+var name_pick_letter2_LTR = __webpack_require__(379);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-change-color.uk.png
+/* harmony default export */ var name_change_color_uk = (__webpack_require__.p + "static/assets/2af8f9f4d939c2e5fdf55d84375fb352.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-spin.uk.png
+/* harmony default export */ var name_spin_uk = (__webpack_require__.p + "static/assets/cdd10e97053d817c52bdd0c73c7d1e64.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-grow.uk.png
+/* harmony default export */ var name_grow_uk = (__webpack_require__.p + "static/assets/241c5c6dbcc388e1746ecf26771372cd.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/music-pick-instrument.LTR.gif
+var music_pick_instrument_LTR = __webpack_require__(380);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-play-sound.uk.png
+/* harmony default export */ var music_play_sound_uk = (__webpack_require__.p + "static/assets/eafa48a95ef8e5b61f07dbf4b97843bd.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-make-song.uk.png
+/* harmony default export */ var music_make_song_uk = (__webpack_require__.p + "static/assets/4397ec21e30601694cda35c60a577c00.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-make-beat.uk.png
+/* harmony default export */ var music_make_beat_uk = (__webpack_require__.p + "static/assets/ca4a0af1ce8f5a5445d4fefc25df4964.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-make-beatbox.uk.png
+/* harmony default export */ var music_make_beatbox_uk = (__webpack_require__.p + "static/assets/5790e46ed839b5f97c7ac7f4afe0b906.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-backdrop.LTR.gif
+var chase_game_add_backdrop_LTR = __webpack_require__(381);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-sprite1.LTR.gif
+var chase_game_add_sprite1_LTR = __webpack_require__(382);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-right-left.uk.png
+/* harmony default export */ var chase_game_right_left_uk = (__webpack_require__.p + "static/assets/d465de61c073d5e2321df79580a1302f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-up-down.uk.png
+/* harmony default export */ var chase_game_up_down_uk = (__webpack_require__.p + "static/assets/2a0f55e01995c7d0db45c723edad39ab.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-sprite2.LTR.gif
+var chase_game_add_sprite2_LTR = __webpack_require__(383);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-move-randomly.uk.png
+/* harmony default export */ var chase_game_move_randomly_uk = (__webpack_require__.p + "static/assets/32fa532448286324ea7a938392260cab.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-play-sound.uk.png
+/* harmony default export */ var chase_game_play_sound_uk = (__webpack_require__.p + "static/assets/44e78658bfe342cea23b55ac5930fa6e.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-change-score.uk.png
+/* harmony default export */ var chase_game_change_score_uk = (__webpack_require__.p + "static/assets/8f71a0fc2644eb75722cef486ec6c077.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pop-game-pick-sprite.LTR.gif
+var pop_game_pick_sprite_LTR = __webpack_require__(384);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-play-sound.uk.png
+/* harmony default export */ var pop_game_play_sound_uk = (__webpack_require__.p + "static/assets/02cc2daed2464e8e28007431b857db46.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-change-score.uk.png
+/* harmony default export */ var pop_game_change_score_uk = (__webpack_require__.p + "static/assets/fe4173d0f411d877294923b704a5b8f4.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-random-position.uk.png
+/* harmony default export */ var pop_game_random_position_uk = (__webpack_require__.p + "static/assets/29e0823f71e711ac17e08dd881ba0df4.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-change-color.uk.png
+/* harmony default export */ var pop_game_change_color_uk = (__webpack_require__.p + "static/assets/4adebae762a8dceb8584bca3cbeb4514.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-reset-score.uk.png
+/* harmony default export */ var pop_game_reset_score_uk = (__webpack_require__.p + "static/assets/dbc51a7dda0a8919c5b0105444f4612b.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/animate-char-pick-sprite.LTR.gif
+var animate_char_pick_sprite_LTR = __webpack_require__(385);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-say-something.uk.png
+/* harmony default export */ var animate_char_say_something_uk = (__webpack_require__.p + "static/assets/f78323ce212db4530d2deb9e52d90a02.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-add-sound.uk.png
+/* harmony default export */ var animate_char_add_sound_uk = (__webpack_require__.p + "static/assets/67e12e4addaa47e94517d5e9e7161d57.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-talk.uk.png
+/* harmony default export */ var animate_char_talk_uk = (__webpack_require__.p + "static/assets/35efc518753dbf20c1f4c8f6ca79cee4.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-move.uk.png
+/* harmony default export */ var animate_char_move_uk = (__webpack_require__.p + "static/assets/b13242ce4e564333bc64fa1b3b3089ca.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-jump.uk.png
+/* harmony default export */ var animate_char_jump_uk = (__webpack_require__.p + "static/assets/1d90dc1580d27bd11dcd82a8cd4d321f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-change-color.uk.png
+/* harmony default export */ var animate_char_change_color_uk = (__webpack_require__.p + "static/assets/61b84a2068c6d3fd01031d8156208a5e.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-backdrop.LTR.gif
+var story_pick_backdrop_LTR = __webpack_require__(386);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-sprite.LTR.gif
+var story_pick_sprite_LTR = __webpack_require__(387);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-say-something.uk.png
+/* harmony default export */ var story_say_something_uk = (__webpack_require__.p + "static/assets/6114af00b78d5012e98964ce7e9ee2fe.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-sprite2.LTR.gif
+var story_pick_sprite2_LTR = __webpack_require__(388);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-flip.uk.gif
+/* harmony default export */ var story_flip_uk = (__webpack_require__.p + "static/assets/b93c90b8d8c60e4a519e5eeadbf53bd7.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-conversation.uk.png
+/* harmony default export */ var story_conversation_uk = (__webpack_require__.p + "static/assets/d23d2d17b64104cc14c928a930a4164b.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-backdrop2.LTR.gif
+var story_pick_backdrop2_LTR = __webpack_require__(389);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-switch-backdrop.uk.png
+/* harmony default export */ var story_switch_backdrop_uk = (__webpack_require__.p + "static/assets/e97779f20b45a270a3e39429d7f3a0ef.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-hide-character.uk.png
+/* harmony default export */ var story_hide_character_uk = (__webpack_require__.p + "static/assets/28f7efe11961de668aca1825c07c597f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-show-character.uk.png
+/* harmony default export */ var story_show_character_uk = (__webpack_require__.p + "static/assets/ca85d0fd606c86eef984449449c754ee.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/video-add-extension.uk.gif
+/* harmony default export */ var video_add_extension_uk = (__webpack_require__.p + "static/assets/dcd6ad9c5d4ec9aeb13d9d9fe2589f67.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/video-pet.uk.png
+/* harmony default export */ var video_pet_uk = (__webpack_require__.p + "static/assets/b8b3efe075e282da47423b56f8a1fcd1.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/video-animate.uk.png
+/* harmony default export */ var video_animate_uk = (__webpack_require__.p + "static/assets/cdfae6c99d7226bbafcd29fdb418179d.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/video-pop.uk.png
+/* harmony default export */ var video_pop_uk = (__webpack_require__.p + "static/assets/21481583a923ad98dbb259e3d4fff38d.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-backdrop.LTR.gif
+var fly_choose_backdrop_LTR = __webpack_require__(390);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-character.LTR.png
+var fly_choose_character_LTR = __webpack_require__(391);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-say-something.uk.png
+/* harmony default export */ var fly_say_something_uk = (__webpack_require__.p + "static/assets/a2ac05b3e06bad0cb5ad9f3ff530601f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-make-interactive.uk.png
+/* harmony default export */ var fly_make_interactive_uk = (__webpack_require__.p + "static/assets/3d0a9d9970181e24e02900289c3b04bb.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-object-to-collect.LTR.png
+var fly_object_to_collect_LTR = __webpack_require__(392);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-flying-heart.uk.png
+/* harmony default export */ var fly_flying_heart_uk = (__webpack_require__.p + "static/assets/daacb273e5303b34cb4fb4e163763365.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-select-flyer.LTR.png
+var fly_select_flyer_LTR = __webpack_require__(393);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-keep-score.uk.png
+/* harmony default export */ var fly_keep_score_uk = (__webpack_require__.p + "static/assets/c2663b19382495ae0b1b6e4bfcb347e7.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-scenery.LTR.gif
+var fly_choose_scenery_LTR = __webpack_require__(394);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-move-scenery.uk.png
+/* harmony default export */ var fly_move_scenery_uk = (__webpack_require__.p + "static/assets/7a531faa0e924927c9f6d2e223b399e2.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-switch-costume.uk.png
+/* harmony default export */ var fly_switch_costume_uk = (__webpack_require__.p + "static/assets/be40023f687cc767e594a1d9a65dea50.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-backdrop.LTR.png
+var pong_add_backdrop_LTR = __webpack_require__(395);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-ball-sprite.LTR.png
+var pong_add_ball_sprite_LTR = __webpack_require__(396);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-bounce-around.uk.png
+/* harmony default export */ var pong_bounce_around_uk = (__webpack_require__.p + "static/assets/24673d5a468ba3eb3a2024afb9260770.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-a-paddle.LTR.gif
+var pong_add_a_paddle_LTR = __webpack_require__(397);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-move-the-paddle.uk.png
+/* harmony default export */ var pong_move_the_paddle_uk = (__webpack_require__.p + "static/assets/48c134ac3e3fc101318d347fc54c2721.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-select-ball.LTR.png
+var pong_select_ball_LTR = __webpack_require__(398);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-add-code-to-ball.uk.png
+/* harmony default export */ var pong_add_code_to_ball_uk = (__webpack_require__.p + "static/assets/0457d08835830b40f792cd941a22ed7f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-choose-score.uk.png
+/* harmony default export */ var pong_choose_score_uk = (__webpack_require__.p + "static/assets/b66623c9c293f3d487b50391e0e092a0.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-insert-change-score.uk.png
+/* harmony default export */ var pong_insert_change_score_uk = (__webpack_require__.p + "static/assets/83b356f35dd8ff1d98b4a796ef4815d0.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-reset-score.uk.png
+/* harmony default export */ var pong_reset_score_uk = (__webpack_require__.p + "static/assets/cd8bb013a1565fcfa36f4e938c1dd3e0.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-line.LTR.gif
+var pong_add_line_LTR = __webpack_require__(399);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-game-over.uk.png
+/* harmony default export */ var pong_game_over_uk = (__webpack_require__.p + "static/assets/b2c17b03d4cf9948eb78fb6fbb61a338.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-type-what-you-want.uk.png
+/* harmony default export */ var imagine_type_what_you_want_uk = (__webpack_require__.p + "static/assets/0be7eae64e9220e4241f5c9f49fb9906.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-click-green-flag.uk.png
+/* harmony default export */ var imagine_click_green_flag_uk = (__webpack_require__.p + "static/assets/100789a628b417e1f94a1a959e7c4c5e.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-backdrop.LTR.png
+var imagine_choose_backdrop_LTR = __webpack_require__(400);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-any-sprite.LTR.png
+var imagine_choose_any_sprite_LTR = __webpack_require__(401);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-fly-around.uk.png
+/* harmony default export */ var imagine_fly_around_uk = (__webpack_require__.p + "static/assets/ae22d013dc18b5308f6ea2ab4cb30c75.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-another-sprite.LTR.png
+var imagine_choose_another_sprite_LTR = __webpack_require__(402);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-left-right.uk.png
+/* harmony default export */ var imagine_left_right_uk = (__webpack_require__.p + "static/assets/84d8745fc1a66f4b5164a6cc00b63fbb.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-up-down.uk.png
+/* harmony default export */ var imagine_up_down_uk = (__webpack_require__.p + "static/assets/759075d1ea57860d2e920436d1a5d060.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-change-costumes.uk.png
+/* harmony default export */ var imagine_change_costumes_uk = (__webpack_require__.p + "static/assets/05490c47911bb50d3ef8e6ca363ee50f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-glide-to-point.uk.png
+/* harmony default export */ var imagine_glide_to_point_uk = (__webpack_require__.p + "static/assets/c38d6fbd153a8159459f0789723a1fca.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-grow-shrink.uk.png
+/* harmony default export */ var imagine_grow_shrink_uk = (__webpack_require__.p + "static/assets/b2ed9bba4db08fd9e09e7605505fae3d.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-another-backdrop.LTR.png
+var imagine_choose_another_backdrop_LTR = __webpack_require__(403);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-switch-backdrops.uk.png
+/* harmony default export */ var imagine_switch_backdrops_uk = (__webpack_require__.p + "static/assets/6875a243f888cefa12827a7e5290fd7e.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-record-a-sound.uk.gif
+/* harmony default export */ var imagine_record_a_sound_uk = (__webpack_require__.p + "static/assets/f918745e272b030fd3b4ab246525855f.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-choose-sound.uk.png
+/* harmony default export */ var imagine_choose_sound_uk = (__webpack_require__.p + "static/assets/82ef4148a604d1ef92937b86d8eb74da.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/add-backdrop.LTR.png
+var add_backdrop_LTR = __webpack_require__(404);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/add-effects.uk.png
+/* harmony default export */ var add_effects_uk = (__webpack_require__.p + "static/assets/c2b62dd36325a596856e0e8e8f12cac2.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/hide-show.uk.png
+/* harmony default export */ var hide_show_uk = (__webpack_require__.p + "static/assets/8cc90b64879f7b4ced1f7922b466b48a.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/switch-costumes.uk.png
+/* harmony default export */ var switch_costumes_uk = (__webpack_require__.p + "static/assets/3cdf316f1ee50d96742ef50324c07aaa.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/change-size.uk.png
+/* harmony default export */ var change_size_uk = (__webpack_require__.p + "static/assets/6eb9e5aa59a00c67e4dec32ab36bc90d.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/spin-turn.uk.png
+/* harmony default export */ var spin_turn_uk = (__webpack_require__.p + "static/assets/42f705bdc78f0372899fa9f46ef10056.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/spin-point-in-direction.uk.png
+/* harmony default export */ var spin_point_in_direction_uk = (__webpack_require__.p + "static/assets/3cc1be3962195faf0f99889bb3c61345.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/record-a-sound-sounds-tab.uk.png
+/* harmony default export */ var record_a_sound_sounds_tab_uk = (__webpack_require__.p + "static/assets/69c95ec93d5523cffe83f5171cf23a56.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/record-a-sound-click-record.uk.png
+/* harmony default export */ var record_a_sound_click_record_uk = (__webpack_require__.p + "static/assets/3d226e638179df14ea114e8053cf0fa2.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/record-a-sound-press-record-button.uk.png
+/* harmony default export */ var record_a_sound_press_record_button_uk = (__webpack_require__.p + "static/assets/c0c2ef3549fb174de4a78d7fe6858932.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/record-a-sound-choose-sound.uk.png
+/* harmony default export */ var record_a_sound_choose_sound_uk = (__webpack_require__.p + "static/assets/a6150d2399c3dfbd57e6827a85efec7c.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/record-a-sound-play-your-sound.uk.png
+/* harmony default export */ var record_a_sound_play_your_sound_uk = (__webpack_require__.p + "static/assets/35c6c45d0aedb1289002dd1606a93efc.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/move-arrow-keys-left-right.uk.png
+/* harmony default export */ var move_arrow_keys_left_right_uk = (__webpack_require__.p + "static/assets/da5cc6c5ffafff1cbe3ccad3fb52419a.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/move-arrow-keys-up-down.uk.png
+/* harmony default export */ var move_arrow_keys_up_down_uk = (__webpack_require__.p + "static/assets/4d3bd2d50c411daf1b69f6a2abbeaa1f.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/glide-around-back-and-forth.uk.png
+/* harmony default export */ var glide_around_back_and_forth_uk = (__webpack_require__.p + "static/assets/24e8c822c499c86cc6e5edaf5fe96631.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/glide-around-point.uk.png
+/* harmony default export */ var glide_around_point_uk = (__webpack_require__.p + "static/assets/e9c87bbd1d7774180c66a27d6ba65506.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-01-say-something.uk.png
+/* harmony default export */ var code_cartoon_01_say_something_uk = (__webpack_require__.p + "static/assets/4f768bc7501b6e41972810bac44676f3.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-02-animate.uk.png
+/* harmony default export */ var code_cartoon_02_animate_uk = (__webpack_require__.p + "static/assets/c2d1f725c9540846e64f765efa6325b6.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-03-select-different-character.LTR.png
+var code_cartoon_03_select_different_character_LTR = __webpack_require__(405);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-04-use-minus-sign.uk.png
+/* harmony default export */ var code_cartoon_04_use_minus_sign_uk = (__webpack_require__.p + "static/assets/d0d19bfa3f22f3e8be98a9666a900236.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-05-grow-shrink.uk.png
+/* harmony default export */ var code_cartoon_05_grow_shrink_uk = (__webpack_require__.p + "static/assets/25616ca76e37bde7719f5df00624c979.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-06-select-another-different-character.LTR.png
+var code_cartoon_06_select_another_different_character_LTR = __webpack_require__(406);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-07-jump.uk.png
+/* harmony default export */ var code_cartoon_07_jump_uk = (__webpack_require__.p + "static/assets/7a4e715caf9b0bf93446b1ea0024cd0e.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-08-change-scenes.uk.png
+/* harmony default export */ var code_cartoon_08_change_scenes_uk = (__webpack_require__.p + "static/assets/cdc165a11ee3a7808097a17a335a1fa6.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-09-glide-around.uk.png
+/* harmony default export */ var code_cartoon_09_glide_around_uk = (__webpack_require__.p + "static/assets/a20d77e0206232c0092b8cb9763fc50e.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-10-change-costumes.uk.png
+/* harmony default export */ var code_cartoon_10_change_costumes_uk = (__webpack_require__.p + "static/assets/a7a2bbd749eb8129ffed26bfd663fb3a.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-11-choose-more-characters.LTR.png
+var code_cartoon_11_choose_more_characters_LTR = __webpack_require__(407);
+
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-2-choose-sprite.LTR.png
+var talking_2_choose_sprite_LTR = __webpack_require__(408);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-3-say-something.uk.png
+/* harmony default export */ var talking_3_say_something_uk = (__webpack_require__.p + "static/assets/38c159a9bc485d41bb0f878ebba5a519.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-4-choose-backdrop.LTR.png
+var talking_4_choose_backdrop_LTR = __webpack_require__(409);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-5-switch-backdrop.uk.png
+/* harmony default export */ var talking_5_switch_backdrop_uk = (__webpack_require__.p + "static/assets/51dd331c9bca2be33a1eb72eae97b7f8.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-6-choose-another-sprite.LTR.png
+var talking_6_choose_another_sprite_LTR = __webpack_require__(410);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-7-move-around.uk.png
+/* harmony default export */ var talking_7_move_around_uk = (__webpack_require__.p + "static/assets/8caadeda9da229fe0c523c4a71620c7b.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-8-choose-another-backdrop.LTR.png
+var talking_8_choose_another_backdrop_LTR = __webpack_require__(411);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-9-animate.uk.png
+/* harmony default export */ var talking_9_animate_uk = (__webpack_require__.p + "static/assets/7205a80d8353561badb5558d51803bbb.png");
+// EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-10-choose-third-backdrop.LTR.png
+var talking_10_choose_third_backdrop_LTR = __webpack_require__(412);
+
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-11-choose-sound.uk.gif
+/* harmony default export */ var talking_11_choose_sound_uk = (__webpack_require__.p + "static/assets/4bd411c9fb061c709025660864a1f188.gif");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-12-dance-moves.uk.png
+/* harmony default export */ var talking_12_dance_moves_uk = (__webpack_require__.p + "static/assets/c2b9300e984e719399390f8e66d8195c.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-13-ask-and-answer.uk.png
+/* harmony default export */ var talking_13_ask_and_answer_uk = (__webpack_require__.p + "static/assets/e6ca21000cc8ec57d150919252bfbaf3.png");
+// CONCATENATED MODULE: ./src/lib/libraries/decks/uk-steps.js
 // Intro
 
 
@@ -1209,181 +519,181 @@ __webpack_require__.r(__webpack_exports__);
 
 var ukImages = {
   // Intro
-  introMove: _steps_intro_1_move_uk_gif__WEBPACK_IMPORTED_MODULE_0___default.a,
-  introSay: _steps_intro_2_say_uk_gif__WEBPACK_IMPORTED_MODULE_1___default.a,
-  introGreenFlag: _steps_intro_3_green_flag_uk_gif__WEBPACK_IMPORTED_MODULE_2___default.a,
+  introMove: intro_1_move_uk,
+  introSay: intro_2_say_uk,
+  introGreenFlag: intro_3_green_flag_uk,
   // Text to Speech
-  speechAddExtension: _steps_speech_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_3___default.a,
-  speechSaySomething: _steps_speech_say_something_uk_png__WEBPACK_IMPORTED_MODULE_4___default.a,
-  speechSetVoice: _steps_speech_set_voice_uk_png__WEBPACK_IMPORTED_MODULE_5___default.a,
-  speechMoveAround: _steps_speech_move_around_uk_png__WEBPACK_IMPORTED_MODULE_6___default.a,
-  speechAddBackdrop: _steps_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_7___default.a,
-  speechAddSprite: _steps_speech_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_8___default.a,
-  speechSong: _steps_speech_song_uk_png__WEBPACK_IMPORTED_MODULE_9___default.a,
-  speechChangeColor: _steps_speech_change_color_uk_png__WEBPACK_IMPORTED_MODULE_10___default.a,
-  speechSpin: _steps_speech_spin_uk_png__WEBPACK_IMPORTED_MODULE_11___default.a,
-  speechGrowShrink: _steps_speech_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_12___default.a,
+  speechAddExtension: speech_add_extension_uk,
+  speechSaySomething: speech_say_something_uk,
+  speechSetVoice: speech_set_voice_uk,
+  speechMoveAround: speech_move_around_uk,
+  speechAddBackdrop: pick_backdrop_LTR["a" /* default */],
+  speechAddSprite: speech_add_sprite_LTR["a" /* default */],
+  speechSong: speech_song_uk,
+  speechChangeColor: speech_change_color_uk,
+  speechSpin: speech_spin_uk,
+  speechGrowShrink: speech_grow_shrink_uk,
   // Cartoon Network
-  cnShowCharacter: _steps_cn_show_character_LTR_gif__WEBPACK_IMPORTED_MODULE_13___default.a,
-  cnSay: _steps_cn_say_uk_png__WEBPACK_IMPORTED_MODULE_14___default.a,
-  cnGlide: _steps_cn_glide_uk_png__WEBPACK_IMPORTED_MODULE_15___default.a,
-  cnPickSprite: _steps_cn_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_16___default.a,
-  cnCollect: _steps_cn_collect_uk_png__WEBPACK_IMPORTED_MODULE_17___default.a,
-  cnVariable: _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default.a,
-  cnScore: _steps_cn_score_uk_png__WEBPACK_IMPORTED_MODULE_19___default.a,
-  cnBackdrop: _steps_cn_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_20___default.a,
+  cnShowCharacter: cn_show_character_LTR["a" /* default */],
+  cnSay: cn_say_uk,
+  cnGlide: cn_glide_uk,
+  cnPickSprite: cn_pick_sprite_LTR["a" /* default */],
+  cnCollect: cn_collect_uk,
+  cnVariable: add_variable_uk,
+  cnScore: cn_score_uk,
+  cnBackdrop: cn_backdrop_uk,
   // Add sprite
-  addSprite: _steps_add_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_21___default.a,
+  addSprite: add_sprite_LTR["a" /* default */],
   // Animate a name
-  namePickLetter: _steps_name_pick_letter_LTR_gif__WEBPACK_IMPORTED_MODULE_22___default.a,
-  namePlaySound: _steps_name_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_23___default.a,
-  namePickLetter2: _steps_name_pick_letter2_LTR_gif__WEBPACK_IMPORTED_MODULE_24___default.a,
-  nameChangeColor: _steps_name_change_color_uk_png__WEBPACK_IMPORTED_MODULE_25___default.a,
-  nameSpin: _steps_name_spin_uk_png__WEBPACK_IMPORTED_MODULE_26___default.a,
-  nameGrow: _steps_name_grow_uk_png__WEBPACK_IMPORTED_MODULE_27___default.a,
+  namePickLetter: name_pick_letter_LTR["a" /* default */],
+  namePlaySound: name_play_sound_uk,
+  namePickLetter2: name_pick_letter2_LTR["a" /* default */],
+  nameChangeColor: name_change_color_uk,
+  nameSpin: name_spin_uk,
+  nameGrow: name_grow_uk,
   // Make-Music
-  musicPickInstrument: _steps_music_pick_instrument_LTR_gif__WEBPACK_IMPORTED_MODULE_28___default.a,
-  musicPlaySound: _steps_music_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_29___default.a,
-  musicMakeSong: _steps_music_make_song_uk_png__WEBPACK_IMPORTED_MODULE_30___default.a,
-  musicMakeBeat: _steps_music_make_beat_uk_png__WEBPACK_IMPORTED_MODULE_31___default.a,
-  musicMakeBeatbox: _steps_music_make_beatbox_uk_png__WEBPACK_IMPORTED_MODULE_32___default.a,
+  musicPickInstrument: music_pick_instrument_LTR["a" /* default */],
+  musicPlaySound: music_play_sound_uk,
+  musicMakeSong: music_make_song_uk,
+  musicMakeBeat: music_make_beat_uk,
+  musicMakeBeatbox: music_make_beatbox_uk,
   // Chase-Game
-  chaseGameAddBackdrop: _steps_chase_game_add_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_33___default.a,
-  chaseGameAddSprite1: _steps_chase_game_add_sprite1_LTR_gif__WEBPACK_IMPORTED_MODULE_34___default.a,
-  chaseGameRightLeft: _steps_chase_game_right_left_uk_png__WEBPACK_IMPORTED_MODULE_35___default.a,
-  chaseGameUpDown: _steps_chase_game_up_down_uk_png__WEBPACK_IMPORTED_MODULE_36___default.a,
-  chaseGameAddSprite2: _steps_chase_game_add_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_37___default.a,
-  chaseGameMoveRandomly: _steps_chase_game_move_randomly_uk_png__WEBPACK_IMPORTED_MODULE_38___default.a,
-  chaseGamePlaySound: _steps_chase_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_39___default.a,
-  chaseGameAddVariable: _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default.a,
-  chaseGameChangeScore: _steps_chase_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_40___default.a,
+  chaseGameAddBackdrop: chase_game_add_backdrop_LTR["a" /* default */],
+  chaseGameAddSprite1: chase_game_add_sprite1_LTR["a" /* default */],
+  chaseGameRightLeft: chase_game_right_left_uk,
+  chaseGameUpDown: chase_game_up_down_uk,
+  chaseGameAddSprite2: chase_game_add_sprite2_LTR["a" /* default */],
+  chaseGameMoveRandomly: chase_game_move_randomly_uk,
+  chaseGamePlaySound: chase_game_play_sound_uk,
+  chaseGameAddVariable: add_variable_uk,
+  chaseGameChangeScore: chase_game_change_score_uk,
   // Make-A-Pop/Clicker Game
-  popGamePickSprite: _steps_pop_game_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_41___default.a,
-  popGamePlaySound: _steps_pop_game_play_sound_uk_png__WEBPACK_IMPORTED_MODULE_42___default.a,
-  popGameAddScore: _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default.a,
-  popGameChangeScore: _steps_pop_game_change_score_uk_png__WEBPACK_IMPORTED_MODULE_43___default.a,
-  popGameRandomPosition: _steps_pop_game_random_position_uk_png__WEBPACK_IMPORTED_MODULE_44___default.a,
-  popGameChangeColor: _steps_pop_game_change_color_uk_png__WEBPACK_IMPORTED_MODULE_45___default.a,
-  popGameResetScore: _steps_pop_game_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_46___default.a,
+  popGamePickSprite: pop_game_pick_sprite_LTR["a" /* default */],
+  popGamePlaySound: pop_game_play_sound_uk,
+  popGameAddScore: add_variable_uk,
+  popGameChangeScore: pop_game_change_score_uk,
+  popGameRandomPosition: pop_game_random_position_uk,
+  popGameChangeColor: pop_game_change_color_uk,
+  popGameResetScore: pop_game_reset_score_uk,
   // Animate A Character
-  animateCharPickBackdrop: _steps_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_7___default.a,
-  animateCharPickSprite: _steps_animate_char_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_47___default.a,
-  animateCharSaySomething: _steps_animate_char_say_something_uk_png__WEBPACK_IMPORTED_MODULE_48___default.a,
-  animateCharAddSound: _steps_animate_char_add_sound_uk_png__WEBPACK_IMPORTED_MODULE_49___default.a,
-  animateCharTalk: _steps_animate_char_talk_uk_png__WEBPACK_IMPORTED_MODULE_50___default.a,
-  animateCharMove: _steps_animate_char_move_uk_png__WEBPACK_IMPORTED_MODULE_51___default.a,
-  animateCharJump: _steps_animate_char_jump_uk_png__WEBPACK_IMPORTED_MODULE_52___default.a,
-  animateCharChangeColor: _steps_animate_char_change_color_uk_png__WEBPACK_IMPORTED_MODULE_53___default.a,
+  animateCharPickBackdrop: pick_backdrop_LTR["a" /* default */],
+  animateCharPickSprite: animate_char_pick_sprite_LTR["a" /* default */],
+  animateCharSaySomething: animate_char_say_something_uk,
+  animateCharAddSound: animate_char_add_sound_uk,
+  animateCharTalk: animate_char_talk_uk,
+  animateCharMove: animate_char_move_uk,
+  animateCharJump: animate_char_jump_uk,
+  animateCharChangeColor: animate_char_change_color_uk,
   // Tell A Story
-  storyPickBackdrop: _steps_story_pick_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_54___default.a,
-  storyPickSprite: _steps_story_pick_sprite_LTR_gif__WEBPACK_IMPORTED_MODULE_55___default.a,
-  storySaySomething: _steps_story_say_something_uk_png__WEBPACK_IMPORTED_MODULE_56___default.a,
-  storyPickSprite2: _steps_story_pick_sprite2_LTR_gif__WEBPACK_IMPORTED_MODULE_57___default.a,
-  storyFlip: _steps_story_flip_uk_gif__WEBPACK_IMPORTED_MODULE_58___default.a,
-  storyConversation: _steps_story_conversation_uk_png__WEBPACK_IMPORTED_MODULE_59___default.a,
-  storyPickBackdrop2: _steps_story_pick_backdrop2_LTR_gif__WEBPACK_IMPORTED_MODULE_60___default.a,
-  storySwitchBackdrop: _steps_story_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_61___default.a,
-  storyHideCharacter: _steps_story_hide_character_uk_png__WEBPACK_IMPORTED_MODULE_62___default.a,
-  storyShowCharacter: _steps_story_show_character_uk_png__WEBPACK_IMPORTED_MODULE_63___default.a,
+  storyPickBackdrop: story_pick_backdrop_LTR["a" /* default */],
+  storyPickSprite: story_pick_sprite_LTR["a" /* default */],
+  storySaySomething: story_say_something_uk,
+  storyPickSprite2: story_pick_sprite2_LTR["a" /* default */],
+  storyFlip: story_flip_uk,
+  storyConversation: story_conversation_uk,
+  storyPickBackdrop2: story_pick_backdrop2_LTR["a" /* default */],
+  storySwitchBackdrop: story_switch_backdrop_uk,
+  storyHideCharacter: story_hide_character_uk,
+  storyShowCharacter: story_show_character_uk,
   // Video Sensing
-  videoAddExtension: _steps_video_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_64___default.a,
-  videoPet: _steps_video_pet_uk_png__WEBPACK_IMPORTED_MODULE_65___default.a,
-  videoAnimate: _steps_video_animate_uk_png__WEBPACK_IMPORTED_MODULE_66___default.a,
-  videoPop: _steps_video_pop_uk_png__WEBPACK_IMPORTED_MODULE_67___default.a,
+  videoAddExtension: video_add_extension_uk,
+  videoPet: video_pet_uk,
+  videoAnimate: video_animate_uk,
+  videoPop: video_pop_uk,
   // Make it Fly
-  flyChooseBackdrop: _steps_fly_choose_backdrop_LTR_gif__WEBPACK_IMPORTED_MODULE_68___default.a,
-  flyChooseCharacter: _steps_fly_choose_character_LTR_png__WEBPACK_IMPORTED_MODULE_69___default.a,
-  flySaySomething: _steps_fly_say_something_uk_png__WEBPACK_IMPORTED_MODULE_70___default.a,
-  flyMoveArrows: _steps_fly_make_interactive_uk_png__WEBPACK_IMPORTED_MODULE_71___default.a,
-  flyChooseObject: _steps_fly_object_to_collect_LTR_png__WEBPACK_IMPORTED_MODULE_72___default.a,
-  flyFlyingObject: _steps_fly_flying_heart_uk_png__WEBPACK_IMPORTED_MODULE_73___default.a,
-  flySelectFlyingSprite: _steps_fly_select_flyer_LTR_png__WEBPACK_IMPORTED_MODULE_74___default.a,
-  flyAddScore: _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default.a,
-  flyKeepScore: _steps_fly_keep_score_uk_png__WEBPACK_IMPORTED_MODULE_75___default.a,
-  flyAddScenery: _steps_fly_choose_scenery_LTR_gif__WEBPACK_IMPORTED_MODULE_76___default.a,
-  flyMoveScenery: _steps_fly_move_scenery_uk_png__WEBPACK_IMPORTED_MODULE_77___default.a,
-  flySwitchLooks: _steps_fly_switch_costume_uk_png__WEBPACK_IMPORTED_MODULE_78___default.a,
+  flyChooseBackdrop: fly_choose_backdrop_LTR["a" /* default */],
+  flyChooseCharacter: fly_choose_character_LTR["a" /* default */],
+  flySaySomething: fly_say_something_uk,
+  flyMoveArrows: fly_make_interactive_uk,
+  flyChooseObject: fly_object_to_collect_LTR["a" /* default */],
+  flyFlyingObject: fly_flying_heart_uk,
+  flySelectFlyingSprite: fly_select_flyer_LTR["a" /* default */],
+  flyAddScore: add_variable_uk,
+  flyKeepScore: fly_keep_score_uk,
+  flyAddScenery: fly_choose_scenery_LTR["a" /* default */],
+  flyMoveScenery: fly_move_scenery_uk,
+  flySwitchLooks: fly_switch_costume_uk,
   // Pong
-  pongAddBackdrop: _steps_pong_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_79___default.a,
-  pongAddBallSprite: _steps_pong_add_ball_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_80___default.a,
-  pongBounceAround: _steps_pong_bounce_around_uk_png__WEBPACK_IMPORTED_MODULE_81___default.a,
-  pongAddPaddle: _steps_pong_add_a_paddle_LTR_gif__WEBPACK_IMPORTED_MODULE_82___default.a,
-  pongMoveThePaddle: _steps_pong_move_the_paddle_uk_png__WEBPACK_IMPORTED_MODULE_83___default.a,
-  pongSelectBallSprite: _steps_pong_select_ball_LTR_png__WEBPACK_IMPORTED_MODULE_84___default.a,
-  pongAddMoreCodeToBall: _steps_pong_add_code_to_ball_uk_png__WEBPACK_IMPORTED_MODULE_85___default.a,
-  pongAddAScore: _steps_add_variable_uk_gif__WEBPACK_IMPORTED_MODULE_18___default.a,
-  pongChooseScoreFromMenu: _steps_pong_choose_score_uk_png__WEBPACK_IMPORTED_MODULE_86___default.a,
-  pongInsertChangeScoreBlock: _steps_pong_insert_change_score_uk_png__WEBPACK_IMPORTED_MODULE_87___default.a,
-  pongResetScore: _steps_pong_reset_score_uk_png__WEBPACK_IMPORTED_MODULE_88___default.a,
-  pongAddLineSprite: _steps_pong_add_line_LTR_gif__WEBPACK_IMPORTED_MODULE_89___default.a,
-  pongGameOver: _steps_pong_game_over_uk_png__WEBPACK_IMPORTED_MODULE_90___default.a,
+  pongAddBackdrop: pong_add_backdrop_LTR["a" /* default */],
+  pongAddBallSprite: pong_add_ball_sprite_LTR["a" /* default */],
+  pongBounceAround: pong_bounce_around_uk,
+  pongAddPaddle: pong_add_a_paddle_LTR["a" /* default */],
+  pongMoveThePaddle: pong_move_the_paddle_uk,
+  pongSelectBallSprite: pong_select_ball_LTR["a" /* default */],
+  pongAddMoreCodeToBall: pong_add_code_to_ball_uk,
+  pongAddAScore: add_variable_uk,
+  pongChooseScoreFromMenu: pong_choose_score_uk,
+  pongInsertChangeScoreBlock: pong_insert_change_score_uk,
+  pongResetScore: pong_reset_score_uk,
+  pongAddLineSprite: pong_add_line_LTR["a" /* default */],
+  pongGameOver: pong_game_over_uk,
   // Imagine a World
-  imagineTypeWhatYouWant: _steps_imagine_type_what_you_want_uk_png__WEBPACK_IMPORTED_MODULE_91___default.a,
-  imagineClickGreenFlag: _steps_imagine_click_green_flag_uk_png__WEBPACK_IMPORTED_MODULE_92___default.a,
-  imagineChooseBackdrop: _steps_imagine_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_93___default.a,
-  imagineChooseSprite: _steps_imagine_choose_any_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_94___default.a,
-  imagineFlyAround: _steps_imagine_fly_around_uk_png__WEBPACK_IMPORTED_MODULE_95___default.a,
-  imagineChooseAnotherSprite: _steps_imagine_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_96___default.a,
-  imagineLeftRight: _steps_imagine_left_right_uk_png__WEBPACK_IMPORTED_MODULE_97___default.a,
-  imagineUpDown: _steps_imagine_up_down_uk_png__WEBPACK_IMPORTED_MODULE_98___default.a,
-  imagineChangeCostumes: _steps_imagine_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_99___default.a,
-  imagineGlideToPoint: _steps_imagine_glide_to_point_uk_png__WEBPACK_IMPORTED_MODULE_100___default.a,
-  imagineGrowShrink: _steps_imagine_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_101___default.a,
-  imagineChooseAnotherBackdrop: _steps_imagine_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_102___default.a,
-  imagineSwitchBackdrops: _steps_imagine_switch_backdrops_uk_png__WEBPACK_IMPORTED_MODULE_103___default.a,
-  imagineRecordASound: _steps_imagine_record_a_sound_uk_gif__WEBPACK_IMPORTED_MODULE_104___default.a,
-  imagineChooseSound: _steps_imagine_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_105___default.a,
+  imagineTypeWhatYouWant: imagine_type_what_you_want_uk,
+  imagineClickGreenFlag: imagine_click_green_flag_uk,
+  imagineChooseBackdrop: imagine_choose_backdrop_LTR["a" /* default */],
+  imagineChooseSprite: imagine_choose_any_sprite_LTR["a" /* default */],
+  imagineFlyAround: imagine_fly_around_uk,
+  imagineChooseAnotherSprite: imagine_choose_another_sprite_LTR["a" /* default */],
+  imagineLeftRight: imagine_left_right_uk,
+  imagineUpDown: imagine_up_down_uk,
+  imagineChangeCostumes: imagine_change_costumes_uk,
+  imagineGlideToPoint: imagine_glide_to_point_uk,
+  imagineGrowShrink: imagine_grow_shrink_uk,
+  imagineChooseAnotherBackdrop: imagine_choose_another_backdrop_LTR["a" /* default */],
+  imagineSwitchBackdrops: imagine_switch_backdrops_uk,
+  imagineRecordASound: imagine_record_a_sound_uk,
+  imagineChooseSound: imagine_choose_sound_uk,
   // Add a Backdrop
-  addBackdrop: _steps_add_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_106___default.a,
+  addBackdrop: add_backdrop_LTR["a" /* default */],
   // Add Effects
-  addEffects: _steps_add_effects_uk_png__WEBPACK_IMPORTED_MODULE_107___default.a,
+  addEffects: add_effects_uk,
   // Hide and Show
-  hideAndShow: _steps_hide_show_uk_png__WEBPACK_IMPORTED_MODULE_108___default.a,
+  hideAndShow: hide_show_uk,
   // Switch Costumes
-  switchCostumes: _steps_switch_costumes_uk_png__WEBPACK_IMPORTED_MODULE_109___default.a,
+  switchCostumes: switch_costumes_uk,
   // Change Size
-  changeSize: _steps_change_size_uk_png__WEBPACK_IMPORTED_MODULE_110___default.a,
+  changeSize: change_size_uk,
   // Spin
-  spinTurn: _steps_spin_turn_uk_png__WEBPACK_IMPORTED_MODULE_111___default.a,
-  spinPointInDirection: _steps_spin_point_in_direction_uk_png__WEBPACK_IMPORTED_MODULE_112___default.a,
+  spinTurn: spin_turn_uk,
+  spinPointInDirection: spin_point_in_direction_uk,
   // Record a Sound
-  recordASoundSoundsTab: _steps_record_a_sound_sounds_tab_uk_png__WEBPACK_IMPORTED_MODULE_113___default.a,
-  recordASoundClickRecord: _steps_record_a_sound_click_record_uk_png__WEBPACK_IMPORTED_MODULE_114___default.a,
-  recordASoundPressRecordButton: _steps_record_a_sound_press_record_button_uk_png__WEBPACK_IMPORTED_MODULE_115___default.a,
-  recordASoundChooseSound: _steps_record_a_sound_choose_sound_uk_png__WEBPACK_IMPORTED_MODULE_116___default.a,
-  recordASoundPlayYourSound: _steps_record_a_sound_play_your_sound_uk_png__WEBPACK_IMPORTED_MODULE_117___default.a,
+  recordASoundSoundsTab: record_a_sound_sounds_tab_uk,
+  recordASoundClickRecord: record_a_sound_click_record_uk,
+  recordASoundPressRecordButton: record_a_sound_press_record_button_uk,
+  recordASoundChooseSound: record_a_sound_choose_sound_uk,
+  recordASoundPlayYourSound: record_a_sound_play_your_sound_uk,
   // Use Arrow Keys
-  moveArrowKeysLeftRight: _steps_move_arrow_keys_left_right_uk_png__WEBPACK_IMPORTED_MODULE_118___default.a,
-  moveArrowKeysUpDown: _steps_move_arrow_keys_up_down_uk_png__WEBPACK_IMPORTED_MODULE_119___default.a,
+  moveArrowKeysLeftRight: move_arrow_keys_left_right_uk,
+  moveArrowKeysUpDown: move_arrow_keys_up_down_uk,
   // Glide Around
-  glideAroundBackAndForth: _steps_glide_around_back_and_forth_uk_png__WEBPACK_IMPORTED_MODULE_120___default.a,
-  glideAroundPoint: _steps_glide_around_point_uk_png__WEBPACK_IMPORTED_MODULE_121___default.a,
+  glideAroundBackAndForth: glide_around_back_and_forth_uk,
+  glideAroundPoint: glide_around_point_uk,
   // Code a Cartoon
-  codeCartoonSaySomething: _steps_code_cartoon_01_say_something_uk_png__WEBPACK_IMPORTED_MODULE_122___default.a,
-  codeCartoonAnimate: _steps_code_cartoon_02_animate_uk_png__WEBPACK_IMPORTED_MODULE_123___default.a,
-  codeCartoonSelectDifferentCharacter: _steps_code_cartoon_03_select_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_124___default.a,
-  codeCartoonUseMinusSign: _steps_code_cartoon_04_use_minus_sign_uk_png__WEBPACK_IMPORTED_MODULE_125___default.a,
-  codeCartoonGrowShrink: _steps_code_cartoon_05_grow_shrink_uk_png__WEBPACK_IMPORTED_MODULE_126___default.a,
-  codeCartoonSelectDifferentCharacter2: _steps_code_cartoon_06_select_another_different_character_LTR_png__WEBPACK_IMPORTED_MODULE_127___default.a,
-  codeCartoonJump: _steps_code_cartoon_07_jump_uk_png__WEBPACK_IMPORTED_MODULE_128___default.a,
-  codeCartoonChangeScenes: _steps_code_cartoon_08_change_scenes_uk_png__WEBPACK_IMPORTED_MODULE_129___default.a,
-  codeCartoonGlideAround: _steps_code_cartoon_09_glide_around_uk_png__WEBPACK_IMPORTED_MODULE_130___default.a,
-  codeCartoonChangeCostumes: _steps_code_cartoon_10_change_costumes_uk_png__WEBPACK_IMPORTED_MODULE_131___default.a,
-  codeCartoonChooseMoreCharacters: _steps_code_cartoon_11_choose_more_characters_LTR_png__WEBPACK_IMPORTED_MODULE_132___default.a,
+  codeCartoonSaySomething: code_cartoon_01_say_something_uk,
+  codeCartoonAnimate: code_cartoon_02_animate_uk,
+  codeCartoonSelectDifferentCharacter: code_cartoon_03_select_different_character_LTR["a" /* default */],
+  codeCartoonUseMinusSign: code_cartoon_04_use_minus_sign_uk,
+  codeCartoonGrowShrink: code_cartoon_05_grow_shrink_uk,
+  codeCartoonSelectDifferentCharacter2: code_cartoon_06_select_another_different_character_LTR["a" /* default */],
+  codeCartoonJump: code_cartoon_07_jump_uk,
+  codeCartoonChangeScenes: code_cartoon_08_change_scenes_uk,
+  codeCartoonGlideAround: code_cartoon_09_glide_around_uk,
+  codeCartoonChangeCostumes: code_cartoon_10_change_costumes_uk,
+  codeCartoonChooseMoreCharacters: code_cartoon_11_choose_more_characters_LTR["a" /* default */],
   // Talking Tales
-  talesAddExtension: _steps_speech_add_extension_uk_gif__WEBPACK_IMPORTED_MODULE_3___default.a,
-  talesChooseSprite: _steps_talking_2_choose_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_133___default.a,
-  talesSaySomething: _steps_talking_3_say_something_uk_png__WEBPACK_IMPORTED_MODULE_134___default.a,
-  talesAskAnswer: _steps_talking_13_ask_and_answer_uk_png__WEBPACK_IMPORTED_MODULE_144___default.a,
-  talesChooseBackdrop: _steps_talking_4_choose_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_135___default.a,
-  talesSwitchBackdrop: _steps_talking_5_switch_backdrop_uk_png__WEBPACK_IMPORTED_MODULE_136___default.a,
-  talesChooseAnotherSprite: _steps_talking_6_choose_another_sprite_LTR_png__WEBPACK_IMPORTED_MODULE_137___default.a,
-  talesMoveAround: _steps_talking_7_move_around_uk_png__WEBPACK_IMPORTED_MODULE_138___default.a,
-  talesChooseAnotherBackdrop: _steps_talking_8_choose_another_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_139___default.a,
-  talesAnimateTalking: _steps_talking_9_animate_uk_png__WEBPACK_IMPORTED_MODULE_140___default.a,
-  talesChooseThirdBackdrop: _steps_talking_10_choose_third_backdrop_LTR_png__WEBPACK_IMPORTED_MODULE_141___default.a,
-  talesChooseSound: _steps_talking_11_choose_sound_uk_gif__WEBPACK_IMPORTED_MODULE_142___default.a,
-  talesDanceMoves: _steps_talking_12_dance_moves_uk_png__WEBPACK_IMPORTED_MODULE_143___default.a
+  talesAddExtension: speech_add_extension_uk,
+  talesChooseSprite: talking_2_choose_sprite_LTR["a" /* default */],
+  talesSaySomething: talking_3_say_something_uk,
+  talesAskAnswer: talking_13_ask_and_answer_uk,
+  talesChooseBackdrop: talking_4_choose_backdrop_LTR["a" /* default */],
+  talesSwitchBackdrop: talking_5_switch_backdrop_uk,
+  talesChooseAnotherSprite: talking_6_choose_another_sprite_LTR["a" /* default */],
+  talesMoveAround: talking_7_move_around_uk,
+  talesChooseAnotherBackdrop: talking_8_choose_another_backdrop_LTR["a" /* default */],
+  talesAnimateTalking: talking_9_animate_uk,
+  talesChooseThirdBackdrop: talking_10_choose_third_backdrop_LTR["a" /* default */],
+  talesChooseSound: talking_11_choose_sound_uk,
+  talesDanceMoves: talking_12_dance_moves_uk
 };
 
 

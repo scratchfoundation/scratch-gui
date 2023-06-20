@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/LLK/scratch-gui/compare/v1.9.11...v2.0.0) (2023-06-20)
+
+
+### Bug Fixes
+
+* expire theme cookie in 1 year ([44eb578](https://github.com/LLK/scratch-gui/commit/44eb5781cde3a4d7a304e24f1b6591f2cbab7d50))
+* fix broken account menu ([aaab5d6](https://github.com/LLK/scratch-gui/commit/aaab5d62ad5a4a5e1ad9c1e33004e4b698752d00))
+* update extension title bar color ([4a348d0](https://github.com/LLK/scratch-gui/commit/4a348d0d1adde60e4fd4320dc290a6944f2126b5))
+* use looks secondary rather than tertiary for purple accent ([068e249](https://github.com/LLK/scratch-gui/commit/068e24989ead3a23e6bad18bbd8d47e4d6e30787))
+
+
+### Features
+
+* apply color theme to extension categories and blocks ([63d43fb](https://github.com/LLK/scratch-gui/commit/63d43fbc7865bb943f299d15d43dc8b4a1a30549))
+* color theming for monitors based on block category ([563dffb](https://github.com/LLK/scratch-gui/commit/563dffb34ae831c8cfaeed1dbbf27644c520aca8))
+* move language and theme to submenu ([dd8b6fa](https://github.com/LLK/scratch-gui/commit/dd8b6faf6601783e6db853683e5eb33300e5f062))
+* prepare for color theme beta release ([cfab4a2](https://github.com/LLK/scratch-gui/commit/cfab4a2c9eb1fbbc3aecd4422b027b773246cecd))
+* show theme picker in menu ([11560b8](https://github.com/LLK/scratch-gui/commit/11560b84376e9803713684f4bf5399bbda3908f1))
+* store color theme in state ([b2d4021](https://github.com/LLK/scratch-gui/commit/b2d4021455dedc85eb222f323c086f293fd6998b))
+* switch color theme based on operating system preferences ([5b6903c](https://github.com/LLK/scratch-gui/commit/5b6903c7f03d8d3775b51e758e7cfc7c118e94d1))
+* update button styles ([bb00935](https://github.com/LLK/scratch-gui/commit/bb00935e14169e936212d08be5ae3b4b6f26dc32))
+* update to purple accent color ([4139974](https://github.com/LLK/scratch-gui/commit/413997483ffc794a81970af7376b04e816ab7610))
+* use high contrast icons ([0dca3bf](https://github.com/LLK/scratch-gui/commit/0dca3bfe28676158202044947a7f8f6896a7a06e))
+* use updated names for text colors ([9af1272](https://github.com/LLK/scratch-gui/commit/9af1272530147d6b009182ca8fc4c5b6d00617b1))
+
+
+### BREAKING CHANGES
+
+* use purple as accent color across the editor
+
 # [2.0.0-beta.5](https://github.com/LLK/scratch-gui/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2023-06-08)
 
 

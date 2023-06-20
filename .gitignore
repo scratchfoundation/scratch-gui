@@ -17,3 +17,9 @@ npm-*
 # Generated translation files
 /translations
 /locale
+
+# Other generated source
+/src/generated
+
+# Downloaded during "npm install"
+/static/microbit

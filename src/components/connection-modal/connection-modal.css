@@ -3,6 +3,7 @@
 
 .modal-content {
     width: 480px;
+    line-height: 1.75;
 }
 
 .header {
@@ -255,6 +256,10 @@
     max-width: 50px;
 }
 
+.help-step-image {
+    max-width: 40px;
+}
+
 [dir="ltr"] .help-step-image {
     margin-right: 0.5rem;
 }
@@ -422,4 +427,22 @@
 
 .error-dot {
     background: $error-primary;
+}
+
+.scratch-link-error {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    width: 90%;
+}
+
+.scratch-link-error-details {
+    display: flex;
+    resize: none;
+    height: 60%;
+    width: inherit;
 }

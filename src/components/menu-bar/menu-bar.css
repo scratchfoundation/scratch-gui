@@ -27,7 +27,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $motion-primary;
+    background-color: $looks-secondary;
     color: $ui-white;
 }
 
@@ -49,21 +49,6 @@
 
 .scratch-logo.clickable {
     cursor: pointer;
-}
-
-.language-icon {
-    height:  1.5rem;
-    vertical-align: middle;
-}
-
-.language-caret {
-    margin: 0 .125rem;
-}
-
-.language-menu {
-    box-sizing: border-box;
-    display: inline-flex;
-    width: $language-selector-width;
 }
 
 .menu-bar-item {
@@ -105,11 +90,8 @@
 }
 
 .file-group .menu-bar-item {
+    margin: 0 .25rem;
     padding: 0 0.75rem;
-}
-
-.menu-bar-item.language-menu {
-    padding: 0 0.5rem;
 }
 
 .menu-bar-menu {
@@ -118,7 +100,7 @@
 }
 
 .feedback-link {
-    color: $motion-primary;
+    color: $looks-secondary;
     text-decoration: none;
 }
 
@@ -160,6 +142,7 @@
 }
 
 .account-info-group .menu-bar-item {
+    margin: 0 .25rem;
     padding: 0 0.75rem;
 }
 
@@ -169,7 +152,11 @@
 }
 
 .help-icon {
-    margin-right: 0.35rem;
+    margin: 0 .25rem 0 0;
+}
+
+[dir="rtl"] .help-icon {
+    margin: 0 0 0 .25rem;
 }
 
 .account-nav-menu, .mystuff-button {
@@ -225,4 +212,22 @@
     height: 1.25rem;
     margin: 0.5rem;
     vertical-align: middle;
+}
+
+.collapsible-label {
+    margin: 0 .5rem 0 .25rem;
+}
+
+[dir="rtl"] .collapsible-label {
+    margin: 0 0.25rem 0 0.5rem;
+}
+
+@media only screen and (max-width: 1024px) {
+    .tutorials-label, .collapsible-label {
+        display: none;
+    }
+
+    .help-icon {
+        margin-right: 0;
+    }
 }

@@ -14,6 +14,9 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
+const FILE_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "menu-bar_collapsible-label")]//*[text()="File"]]';
+
 describe('Loading scratch gui', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -25,7 +28,7 @@ describe('Loading scratch gui', () => {
 
     test('Loading project file from computer succeeds, without opening failure alert', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
@@ -35,7 +38,7 @@ describe('Loading scratch gui', () => {
 
     test('Loading project file from computer gives project the filename from file', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
@@ -45,7 +48,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb3 project with a missing svg costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-sprite-svg.sb3'));
@@ -56,7 +59,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb3 project with an invalid svg costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sb3'));
@@ -67,7 +70,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb2 project with a missing svg costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-svg.sb2'));
@@ -78,7 +81,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb2 project with an invalid svg costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sb2'));
@@ -89,7 +92,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb3 project with a missing bmp costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-bmp.sb3'));
@@ -100,7 +103,7 @@ describe('Loading scratch gui', () => {
 
     test('Load sb3 project with an invalid bmp costume', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-bmp.sb3'));

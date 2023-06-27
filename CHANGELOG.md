@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.12](https://github.com/LLK/scratch-gui/compare/v2.0.11...v2.0.12) (2023-06-27)
+
+
+### Bug Fixes
+
+* correct localization integration test due to translated label ([f74bdeb](https://github.com/LLK/scratch-gui/commit/f74bdeb233ffbb3cbdef4f7d141c4398429b48f1))
+* **deps:** update dependency scratch-l10n to v3.15.20230627032203 ([d93806e](https://github.com/LLK/scratch-gui/commit/d93806e72602ec17abcdccc03f5abb86dedfe04d))
+
 ## [2.0.11](https://github.com/LLK/scratch-gui/compare/v2.0.10...v2.0.11) (2023-06-27)
 
 

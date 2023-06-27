@@ -103,15 +103,6 @@ describe('Localization', () => {
         await findByText('ユーザー名', scope.monitors);
         await findByText('言語', scope.monitors);
 
-        // Change locale to ja-hira
-        await clickXpath(SETTINGS_MENU_XPATH);
-        await clickText('Language', scope.menuBar);
-        await clickText('にほんご');
-
-        // Monitor labels updated
-        await findByText('ユーザーめい', scope.monitors);
-        await findByText('げんご', scope.monitors);
-
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });

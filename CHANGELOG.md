@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.41](https://github.com/LLK/scratch-gui/compare/v2.0.40...v2.0.41) (2023-07-05)
+
+
+### Bug Fixes
+
+* support browsers that don't implement 'prefers-contrast' media query ([04a8de2](https://github.com/LLK/scratch-gui/commit/04a8de21bb895d3b5515939d4da5475b2c3fdb3d))
+
 ## [2.0.40](https://github.com/LLK/scratch-gui/compare/v2.0.39...v2.0.40) (2023-07-04)
 
 

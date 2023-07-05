@@ -14,12 +14,18 @@ const systemPreferencesHOC = function (WrappedComponent) {
         componentDidMount () {
             this.preferencesListener = () => this.props.onSetTheme(detectTheme());
 
-            this.highContrastMatchMedia = window.matchMedia(prefersHighContrastQuery);
-            this.highContrastMatchMedia.addEventListener('change', this.preferencesListener);
+            if (window.matchMedia) {
+                this.highContrastMatchMedia = window.matchMedia(prefersHighContrastQuery);
+                if (this.highContrastMatchMedia) {
+                    this.highContrastMatchMedia.addEventListener('change', this.preferencesListener);
+                }
+            }
         }
 
         componentWillUnmount () {
-            this.highContrastMatchMedia.removeEventListener('change', this.preferencesListener);
+            if (this.highContrastMatchMedia) {
+                this.highContrastMatchMedia.removeEventListener('change', this.preferencesListener);
+            }
         }
 
         render () {

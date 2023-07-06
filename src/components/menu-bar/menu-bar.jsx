@@ -7,7 +7,7 @@ import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
 import React from 'react';
 
-import VM from 'scratch-vm';
+import VM from 'oeg-stem-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';

@@ -1,0 +1,6 @@
+[submodule "oeg-stem-blocks"]
+	path = oeg-stem-blocks
+	url = https://github.com/OEG-STEM/oeg-stem-blocks.git
+[submodule "oeg-stem-vm"]
+	path = oeg-stem-vm
+	url = https://github.com/OEG-STEM/oeg-stem-vm.git

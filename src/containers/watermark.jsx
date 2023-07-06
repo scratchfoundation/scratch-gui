@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import ThrottledPropertyHOC from '../lib/throttled-property-hoc.jsx';
 
-import VM from 'scratch-vm';
+import VM from 'oeg-stem-vm';
 import storage from '../lib/storage';
 import getCostumeUrl from '../lib/get-costume-url';
 

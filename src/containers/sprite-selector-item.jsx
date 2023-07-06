@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
 import storage from '../lib/storage';
-import VM from 'scratch-vm';
+import VM from 'oeg-stem-vm';
 import getCostumeUrl from '../lib/get-costume-url';
 import DragRecognizer from '../lib/drag-recognizer';
 import {getEventXY} from '../lib/touch-utils';

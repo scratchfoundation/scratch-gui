@@ -36,6 +36,7 @@ const base = {
             loader: 'babel-loader',
             include: [
                 path.resolve(__dirname, 'src'),
+                /node_modules[\\/]oeg-stem-[^\\/]+[\\/]src/,
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
                 /node_modules[\\/]pify/,
                 /node_modules[\\/]@vernier[\\/]godirect/
@@ -101,11 +102,11 @@ const base = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-blocks/media',
+                    from: 'node_modules/oeg-stem/media',
                     to: 'static/blocks-media/default'
                 },
                 {
-                    from: 'node_modules/scratch-blocks/media',
+                    from: 'node_modules/oeg-stem/media',
                     to: 'static/blocks-media/high-contrast'
                 },
                 {
@@ -166,25 +167,25 @@ module.exports = [
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'gui'],
                 template: 'src/playground/index.ejs',
-                title: 'Scratch 3.0 GUI'
+                title: 'OEG STEM GUI'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'blocksonly'],
                 template: 'src/playground/index.ejs',
                 filename: 'blocks-only.html',
-                title: 'Scratch 3.0 GUI: Blocks Only Example'
+                title: 'OEG STEM GUI: Blocks Only Example'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'compatibilitytesting'],
                 template: 'src/playground/index.ejs',
                 filename: 'compatibility-testing.html',
-                title: 'Scratch 3.0 GUI: Compatibility Testing'
+                title: 'OEG STEM GUI: Compatibility Testing'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'player'],
                 template: 'src/playground/index.ejs',
                 filename: 'player.html',
-                title: 'Scratch 3.0 GUI: Player Example'
+                title: 'OEG STEM GUI: Player Example'
             }),
             new CopyWebpackPlugin({
                 patterns: [
@@ -207,7 +208,7 @@ module.exports = [
                 patterns: [
                     {
                         from: 'extension-worker.{js,js.map}',
-                        context: 'node_modules/scratch-vm/dist/web',
+                        context: 'node_modules/oeg-stem-vm/dist/web',
                         noErrorOnMissing: true
                     }
                 ]
@@ -249,7 +250,7 @@ module.exports = [
                     patterns: [
                         {
                             from: 'extension-worker.{js,js.map}',
-                            context: 'node_modules/scratch-vm/dist/web',
+                            context: 'node_modules/oeg-stem-vm/dist/web',
                             noErrorOnMissing: true
                         }
                     ]

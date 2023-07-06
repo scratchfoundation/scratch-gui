@@ -3,7 +3,7 @@ import 'web-audio-test-api';
 import React from 'react';
 import configureStore from 'redux-mock-store';
 import {mount} from 'enzyme';
-import VM from 'scratch-vm';
+import VM from 'oeg-stem-vm';
 import {LoadingState} from '../../../src/reducers/project-state';
 import CloudProvider from '../../../src/lib/cloud-provider';
 const mockCloudProviderInstance = {

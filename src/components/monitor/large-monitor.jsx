@@ -6,7 +6,10 @@ const LargeMonitor = ({categoryColor, value}) => (
     <div className={styles.largeMonitor}>
         <div
             className={styles.largeValue}
-            style={{background: categoryColor}}
+            style={{
+                background: categoryColor.background,
+                color: categoryColor.text
+            }}
         >
             {value}
         </div>
@@ -14,7 +17,10 @@ const LargeMonitor = ({categoryColor, value}) => (
 );
 
 LargeMonitor.propTypes = {
-    categoryColor: PropTypes.string,
+    categoryColor: PropTypes.shape({
+        background: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+    }).isRequired,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

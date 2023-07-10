@@ -21,6 +21,9 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
+const SETTINGS_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "settings-menu_dropdown-label")]//*[text()="Settings"]]';
+
 describe('Working with the blocks', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -309,7 +312,8 @@ describe('Working with the blocks', () => {
         await findByText('1', scope.reportedValue);
 
         // change language
-        await clickXpath('//*[@aria-label="language selector"]');
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Language', scope.menuBar);
         await clickText('Deutsch');
 
         await clickText('Skripte');

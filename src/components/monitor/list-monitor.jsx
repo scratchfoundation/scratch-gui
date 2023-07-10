@@ -54,7 +54,10 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
 
 ListMonitor.propTypes = {
     activeIndex: PropTypes.number,
-    categoryColor: PropTypes.string.isRequired,
+    categoryColor: PropTypes.shape({
+        background: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+    }).isRequired,
     draggable: PropTypes.bool.isRequired,
     height: PropTypes.number,
     label: PropTypes.string.isRequired,

@@ -90,6 +90,7 @@ class AutoScanningStep extends React.Component {
                 title={this.props.extensionId}
                 onRefresh={this.handleRefresh}
                 onStartScan={this.handleStartScan}
+                onUpdatePeripheral={this.props.onUpdatePeripheral}
                 prescanMessage={this.props.prescanMessage}
                 scanBeginMessage={this.props.scanBeginMessage}
             />
@@ -102,6 +103,7 @@ AutoScanningStep.propTypes = {
     connectionTipIconURL: PropTypes.string,
     extensionId: PropTypes.string.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    onUpdatePeripheral: PropTypes.func,
     prescanMessage: PropTypes.node,
     scanBeginMessage: PropTypes.node,
     vm: PropTypes.instanceOf(VM).isRequired

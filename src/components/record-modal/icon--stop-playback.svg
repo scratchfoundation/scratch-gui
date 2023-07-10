@@ -18,8 +18,8 @@
                 <g id="Play-/-Record-/-Stop" transform="translate(623.000000, 307.000000)">
                     <g id="stop-playback">
                         <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                        <use fill="#4C97FF" fill-rule="evenodd" xlink:href="#path-1"></use>
-                        <rect stroke="#4280D7" stroke-width="1" x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
+                        <use fill="#855CD6" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke="#6736B5" stroke-width="1" x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
                     </g>
                 </g>
             </g>

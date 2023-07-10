@@ -33,6 +33,7 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
+import {themeMap} from '../../lib/themes';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -68,6 +69,7 @@ const GUIComponent = props => {
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
+        canChangeTheme,
         canCreateNew,
         canEditTitle,
         canManageFiles,
@@ -122,6 +124,7 @@ const GUIComponent = props => {
         stageSizeMode,
         targetIsStage,
         telemetryModalVisible,
+        theme,
         tipsLibraryVisible,
         useExternalPeripheralList,
         vm,
@@ -219,6 +222,7 @@ const GUIComponent = props => {
                     authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
                     canChangeLanguage={canChangeLanguage}
+                    canChangeTheme={canChangeTheme}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canEditTitle={canEditTitle}
@@ -308,14 +312,15 @@ const GUIComponent = props => {
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
                                         <Blocks
-                                            key={blocksId}
+                                            key={`${blocksId}/${theme}`}
                                             canUseCloud={canUseCloud}
                                             grow={1}
                                             isVisible={blocksTabVisible}
                                             options={{
-                                                media: `${basePath}static/blocks-media/`
+                                                media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
                                             }}
                                             stageSize={stageSize}
+                                            theme={theme}
                                             vm={vm}
                                         />
                                     </Box>
@@ -390,6 +395,7 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     blocksId: PropTypes.string,
     canChangeLanguage: PropTypes.bool,
+    canChangeTheme: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
@@ -440,6 +446,7 @@ GUIComponent.propTypes = {
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
+    theme: PropTypes.string,
     tipsLibraryVisible: PropTypes.bool,
     useExternalPeripheralList: PropTypes.bool, // true for CDM, false for normal Scratch Link
     vm: PropTypes.instanceOf(VM).isRequired
@@ -451,6 +458,7 @@ GUIComponent.defaultProps = {
     basePath: './',
     blocksId: 'original',
     canChangeLanguage: true,
+    canChangeTheme: true,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: true,
@@ -471,8 +479,9 @@ GUIComponent.defaultProps = {
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
+    blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    blocksId: state.scratchGui.timeTravel.year.toString()
+    theme: state.scratchGui.theme.theme
 });
 
 export default injectIntl(connect(

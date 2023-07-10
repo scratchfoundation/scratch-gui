@@ -1,0 +1,85 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    margin: 0;
+    border: 1px solid $ui-black-transparent;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button > img {
+    display: block;
+    transition: transform 0.1s;
+    filter: grayscale(100%) opacity(.5);
+}
+
+.button:not(:last-child) {
+    border-right: none;
+}
+
+[dir="rtl"] .button:not(:last-child) {
+    border-left: none;
+    border-right: 1px solid $ui-black-transparent;
+}
+
+.button:focus::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid $looks-secondary;
+}
+
+/* round corners for first and last buttons */
+
+.button:first-child,
+[dir="rtl"] .button:last-child,
+.button:first-child:focus::before,
+[dir="rtl"] .button:last-child:focus::before {
+    border-radius: $form-radius 0 0 $form-radius;
+}
+
+.button:last-child,
+[dir="rtl"] .button:first-child,
+.button:last-child:focus::before,
+[dir="rtl"] .button:first-child:focus::before {
+    border-radius: 0 $form-radius $form-radius 0;
+}
+
+/* selected button styling */
+
+.button[aria-pressed='true'] {
+    background-color: $looks-light-transparent;
+}
+
+.button[aria-pressed='true'] > img {
+    filter: none;
+}
+
+/* pressed button styling */
+
+.button:active {
+    background-color: $looks-transparent;
+}
+
+/* disabled styling */
+
+.disabled .button {
+    cursor: default;
+}

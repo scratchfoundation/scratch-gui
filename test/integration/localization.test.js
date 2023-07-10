@@ -17,6 +17,11 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
+const FILE_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "menu-bar_collapsible-label")]//*[text()="File"]]';
+const SETTINGS_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "settings-menu_dropdown-label")]//*[text()="Settings"]]';
+
 describe('Localization', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -33,7 +38,8 @@ describe('Localization', () => {
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         await clickText('Apple', scope.modal); // Closes modal
 
-        await clickXpath('//*[@aria-label="language selector"]');
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Language', scope.menuBar);
         await clickText('Deutsch');
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait for blocks refresh
 
@@ -79,7 +85,7 @@ describe('Localization', () => {
     // Regression test for ENA-142, monitor can lag behind language selection
     test('Monitor labels update on locale change', async () => {
         await loadUri(uri);
-        await clickText('File');
+        await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
         const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/monitor-variable.sb3'));
@@ -89,19 +95,13 @@ describe('Localization', () => {
         await findByText('language', scope.monitors);
 
         // Change locale to ja
-        await clickXpath('//*[@aria-label="language selector"]');
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Language', scope.menuBar);
         await clickText('日本語');
 
         // Monitor labels updated
         await findByText('ユーザー名', scope.monitors);
         await findByText('言語', scope.monitors);
-
-        // Change locale to ja-hira
-        await clickText('にほんご');
-
-        // Monitor labels updated
-        await findByText('ユーザーめい', scope.monitors);
-        await findByText('げんご', scope.monitors);
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);

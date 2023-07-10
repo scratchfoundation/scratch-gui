@@ -80,6 +80,7 @@ class ScanningStep extends React.Component {
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
                 onRefresh={this.handleRefresh}
+                onUpdatePeripheral={this.props.onUpdatePeripheral}
             />
         );
     }
@@ -90,6 +91,7 @@ ScanningStep.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onConnected: PropTypes.func.isRequired,
     onConnecting: PropTypes.func.isRequired,
+    onUpdatePeripheral: PropTypes.func,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

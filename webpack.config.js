@@ -102,11 +102,11 @@ const base = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/oeg-stem/media',
+                    from: 'node_modules/oeg-stem-blocks/media',
                     to: 'static/blocks-media/default'
                 },
                 {
-                    from: 'node_modules/oeg-stem/media',
+                    from: 'node_modules/oeg-stem-blocks/media',
                     to: 'static/blocks-media/high-contrast'
                 },
                 {

@@ -14,11 +14,13 @@ import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
 import TargetPane from '../../containers/target-pane.jsx';
 import SoundTab from '../../containers/sound-tab.jsx';
+import DeviceTab from '../../containers/device-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
+import DeviceLibrary from '../../containers/device-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
 
@@ -40,6 +42,8 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import deviceIcon from './icon--device.svg';
+
 
 const messages = defineMessages({
     addExtension: {
@@ -82,6 +86,8 @@ const GUIComponent = props => {
         connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
+        deviceTabVisible,
+        deviceLibraryVisible,
         enableCommunity,
         intl,
         isCreating,
@@ -108,6 +114,7 @@ const GUIComponent = props => {
         onProjectTelemetryEvent,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
+        onRequestCloseDeviceLibrary,
         onRequestCloseTelemetryModal,
         onSeeCommunity,
         onShare,
@@ -203,6 +210,12 @@ const GUIComponent = props => {
                     <CostumeLibrary
                         vm={vm}
                         onRequestClose={onRequestCloseCostumeLibrary}
+                    />
+                ) : null}
+                {deviceLibraryVisible ? (
+                    <DeviceLibrary
+                        vm={vm}
+                        onRequestClose={onRequestCloseDeviceLibrary}
                     />
                 ) : null}
                 {backdropLibraryVisible ? (
@@ -303,6 +316,17 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
+                                    <Tab className={tabClassNames.tab}>
+                                        <img
+                                            draggable={false}
+                                            src={deviceIcon}
+                                        />
+                                        <FormattedMessage
+                                            defaultMessage="Device"
+                                            description="Button to get to the device panel"
+                                            id="gui.gui.deviceTab"
+                                        />
+                                    </Tab>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -341,6 +365,9 @@ const GUIComponent = props => {
                                 </TabPanel>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
+                                </TabPanel>
+                                <TabPanel className={tabClassNames.tabPanel}>
+                                    {deviceTabVisible ? <DeviceTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
                             {backpackVisible ? (
@@ -434,6 +461,8 @@ GUIComponent.propTypes = {
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
+    deviceTabVisible: PropTypes.bool,
+    deviceLibraryVisible: PropTypes.bool,
     theme: PropTypes.string,
     tipsLibraryVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired

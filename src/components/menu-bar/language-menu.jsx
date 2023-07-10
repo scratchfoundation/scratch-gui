@@ -74,7 +74,8 @@ class LanguageMenu extends React.PureComponent {
                     place={this.props.isRtl ? 'left' : 'right'}
                 >
                     {
-                        Object.keys(locales)
+                        // TODO: need to custom oeg-stem-l10n later
+                        Object.keys(locales).filter(v => ['en', 'vi'].includes(v)) // tmp only available vi + en
                             .map(locale => (
                                 <MenuItem
                                     key={locale}

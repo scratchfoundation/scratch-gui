@@ -1,4 +1,6 @@
 @import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
 
 .target-pane {
     /* Makes columns for the sprite library selector + and the stage selector */
@@ -19,4 +21,177 @@
 
 [dir="rtl"] .stage-selector-wrapper {
     margin-right: calc($space / 2);
+}
+
+/* [ -- TABS -- ] */
+.flex-wrapper {
+    display: flex;
+
+    /*
+        Make 2 columns:
+        a) for the blocks + workspace panes, and
+        b) for combined stage menu + stage + sprite/stage selectors
+    */
+    flex-direction: row;
+    height: 100%;
+
+    /*
+        Stop scrollbar popping in and out from scratch-blocks border issue
+        https://github.com/LLK/scratch-gui/issues/318
+    */
+    overflow-y: hidden;
+}
+
+.editor-wrapper {
+    /*
+        This is carefully balanced--  the minimum width at which the GUI will be displayed is 1024px.
+        At that size, the stage pane is 408px wide, with $space of padding to each side.
+        However, we must also add the border width to the stage pane. All-in-all, the stage pane's final width is
+        408px + ($space + $stage-standard-border-width * 2) (one border & padding per left/right side).
+
+        @todo This is in place to prevent "doubling up" of horizontal scrollbars in narrow windows, but there are likely
+        much better ways to solve that (e.g. undo #2124, remove this flex-basis entirely). However, they run their own
+        risks of breaking things, so let's just leave this as-is for the time being.
+    */
+    flex-basis: calc(1024px - 408px - (($space + $stage-standard-border-width) * 2));
+    flex-grow: 1;
+    flex-shrink: 0;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-list {
+    height: calc($stage-menu-height - 2px);
+    width: 250px; /* Match width of the toolbox */
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.80rem;
+
+    /* Overrides for react-tabs styling */
+    margin: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.tab {
+    flex-grow: 1;
+    height: 100%;
+    margin-bottom: 0;
+
+    border-radius: 1rem 1rem 0 0;
+    border: 1px solid $ui-black-transparent;
+
+    padding: 0.125rem 1.25rem 0;
+    font-size: 0.75rem;
+
+    background-color: $ui-tertiary;
+    color: $text-primary-transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+    white-space: nowrap;
+}
+
+[dir="ltr"] .tab {
+    margin-left: -0.5rem;
+}
+
+[dir="rtl"] .tab {
+    margin-right: -0.5rem;
+}
+
+[dir="ltr"] .tab:nth-of-type(1) {
+    margin-left: 0;
+}
+
+[dir="rtl"] .tab:nth-of-type(1) {
+    margin-right: 0;
+}
+
+/* Use z-indices to force left-on-top for tabs */
+.tab:nth-of-type(1) {
+    z-index: 3;
+}
+.tab:nth-of-type(2) {
+    z-index: 2;
+}
+.tab:nth-of-type(3) {
+    z-index: 1;
+}
+
+.tab:hover {
+    background-color: $ui-primary;
+}
+
+.tab.is-selected {
+    color: $looks-secondary;
+    background-color: $ui-white;
+    z-index: 4; /* Make sure selected is always above */
+}
+
+.tab img {
+    width: 1.375rem;
+    filter: grayscale(100%);
+}
+
+[dir="ltr"] .tab img {
+    margin-right: 0.125rem;
+}
+
+[dir="rtl"] .tab img {
+    margin-left: 0.125rem;
+}
+
+/* mirror blocks and sound tab icons */
+[dir="rtl"] .tab:nth-of-type(1) img {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .tab:nth-of-type(3) img {
+    transform: scaleX(-1);
+}
+
+.tab.is-selected img {
+    filter: none;
+}
+
+/* Tab style overrides from react-tabs */
+.tab.is-selected:after {
+    display: none;
+}
+
+.tab.is-selected:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: $ui-black-transparent;
+}
+
+.tab.is-selected:focus:after {
+    display: none;
+}
+
+/* Body of the tabs */
+.tabs {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-panel {
+    position: relative;
+    flex-grow: 1;
+    display: none;
+}
+
+.tab-panel.is-selected {
+    display: flex;
 }

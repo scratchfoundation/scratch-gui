@@ -5,10 +5,14 @@ import VM from 'oeg-stem-vm';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
 import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
+import DeviceSelectorComponent from '../device-selector/device-selector.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
 
 import styles from './target-pane.css';
+import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
+import tabStyles from 'react-tabs/style/react-tabs.css';
+import classNames from 'classnames';
 
 /*
  * Pane that contains the sprite selector, sprite info, stage selector,
@@ -46,61 +50,103 @@ const TargetPane = ({
     sprites,
     vm,
     ...componentProps
-}) => (
-    <div
-        className={styles.targetPane}
-        {...componentProps}
-    >
+}) => {
+    const tabClassNames = {
+        tabs: styles.tabs,
+        tab: classNames(tabStyles.reactTabsTab, styles.tab),
+        tabList: classNames(tabStyles.reactTabsTabList, styles.tabList),
+        tabPanel: classNames(tabStyles.reactTabsTabPanel, styles.tabPanel),
+        tabPanelSelected: classNames(tabStyles.reactTabsTabPanelSelected, styles.isSelected),
+        tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
+    };
+    return (
+        <div
+            className={styles.targetPane}
+            {...componentProps}
+        >
+            <Tabs
+                forceRenderTabPanel
+                className={tabClassNames.tabs}
+                // selectedIndex={activeTabIndex}
+                selectedTabClassName={tabClassNames.tabSelected}
+                selectedTabPanelClassName={tabClassNames.tabPanelSelected}
+                // onSelect={onActivateTab}
+            >
+                <TabList className={tabClassNames.tabList}>
+                    <Tab className={tabClassNames.tab}>Sprites</Tab>
+                    <Tab className={tabClassNames.tab}>Devices</Tab>
+                </TabList>
 
-        <SpriteSelectorComponent
-            editingTarget={editingTarget}
-            hoveredTarget={hoveredTarget}
-            raised={raiseSprites}
-            selectedId={editingTarget}
-            spriteFileInput={fileInputRef}
-            sprites={sprites}
-            stageSize={stageSize}
-            onChangeSpriteDirection={onChangeSpriteDirection}
-            onChangeSpriteName={onChangeSpriteName}
-            onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
-            onChangeSpriteSize={onChangeSpriteSize}
-            onChangeSpriteVisibility={onChangeSpriteVisibility}
-            onChangeSpriteX={onChangeSpriteX}
-            onChangeSpriteY={onChangeSpriteY}
-            onDeleteSprite={onDeleteSprite}
-            onDrop={onDrop}
-            onDuplicateSprite={onDuplicateSprite}
-            onExportSprite={onExportSprite}
-            onFileUploadClick={onFileUploadClick}
-            onNewSpriteClick={onNewSpriteClick}
-            onPaintSpriteClick={onPaintSpriteClick}
-            onSelectSprite={onSelectSprite}
-            onSpriteUpload={onSpriteUpload}
-            onSurpriseSpriteClick={onSurpriseSpriteClick}
-        />
-        <div className={styles.stageSelectorWrapper}>
-            {stage.id && <StageSelector
-                asset={
-                    stage.costume &&
-                    stage.costume.asset
-                }
-                backdropCount={stage.costumeCount}
-                id={stage.id}
-                selected={stage.id === editingTarget}
-                onSelect={onSelectSprite}
-            />}
-            <div>
-                {spriteLibraryVisible ? (
-                    <SpriteLibrary
-                        vm={vm}
-                        onActivateBlocksTab={onActivateBlocksTab}
-                        onRequestClose={onRequestCloseSpriteLibrary}
+                <TabPanel className={tabClassNames.tabPanel}>
+                    <SpriteSelectorComponent
+                        editingTarget={editingTarget}
+                        hoveredTarget={hoveredTarget}
+                        raised={raiseSprites}
+                        selectedId={editingTarget}
+                        spriteFileInput={fileInputRef}
+                        sprites={sprites}
+                        stageSize={stageSize}
+                        onChangeSpriteDirection={onChangeSpriteDirection}
+                        onChangeSpriteName={onChangeSpriteName}
+                        onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
+                        onChangeSpriteSize={onChangeSpriteSize}
+                        onChangeSpriteVisibility={onChangeSpriteVisibility}
+                        onChangeSpriteX={onChangeSpriteX}
+                        onChangeSpriteY={onChangeSpriteY}
+                        onDeleteSprite={onDeleteSprite}
+                        onDrop={onDrop}
+                        onDuplicateSprite={onDuplicateSprite}
+                        onExportSprite={onExportSprite}
+                        onFileUploadClick={onFileUploadClick}
+                        onNewSpriteClick={onNewSpriteClick}
+                        onPaintSpriteClick={onPaintSpriteClick}
+                        onSelectSprite={onSelectSprite}
+                        onSpriteUpload={onSpriteUpload}
+                        onSurpriseSpriteClick={onSurpriseSpriteClick}
                     />
-                ) : null}
+                </TabPanel>
+                <TabPanel className={tabClassNames.tabPanel}>
+                    <DeviceSelectorComponent
+                        editingTarget={editingTarget}
+                        hoveredTarget={hoveredTarget}
+                        raised={raiseSprites}
+                        selectedId={editingTarget}
+                        sprites={sprites}
+                        stageSize={stageSize}
+                        onChangeSpriteName={onChangeSpriteName}
+                        onDeleteSprite={onDeleteSprite}
+                        onDrop={onDrop}
+                        onDuplicateSprite={onDuplicateSprite}
+                        onNewSpriteClick={onNewSpriteClick}
+                        onSelectSprite={onSelectSprite}
+                    />
+                </TabPanel>
+            </Tabs>
+
+            <div className={styles.stageSelectorWrapper}>
+                {stage.id && <StageSelector
+                    asset={
+                        stage.costume &&
+                        stage.costume.asset
+                    }
+                    backdropCount={stage.costumeCount}
+                    id={stage.id}
+                    selected={stage.id === editingTarget}
+                    onSelect={onSelectSprite}
+                />}
+                <div>
+                    {spriteLibraryVisible ? (
+                        <SpriteLibrary
+                            vm={vm}
+                            onActivateBlocksTab={onActivateBlocksTab}
+                            onRequestClose={onRequestCloseSpriteLibrary}
+                        />
+                    ) : null}
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 const spriteShape = PropTypes.shape({
     costume: PropTypes.shape({

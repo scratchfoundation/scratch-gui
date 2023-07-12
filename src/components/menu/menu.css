@@ -4,7 +4,7 @@
     position: absolute;
     border: 1px solid $ui-black-transparent;
     border-radius: 0 0 8px 8px;
-    background-color: $motion-primary;
+    background-color: $looks-secondary;
     padding: 0;
     margin: 0;
     min-width: 186px;
@@ -30,10 +30,12 @@
     font-size: .75rem;
     margin: 0;
     font-weight: bold;
+    position: relative;
 }
 
 .menu-item.active,
-.menu-item:hover {
+.menu-item:hover,
+.menu-item.expanded {
     background-color: $ui-black-transparent;
 }
 
@@ -43,4 +45,55 @@
 
 .menu-section {
     border-top: 1px solid $ui-black-transparent;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: -1px;
+    min-width: 186px;
+    max-width: 260px;
+    height: max-content;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.submenu.right {
+    left: 100%;
+}
+
+.submenu.left {
+    right: 100%;
+}
+
+.submenu > .menu {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: $ui-black-transparent $looks-secondary;
+    border-radius: 8px;
+}
+
+.menu-item.expanded > .submenu {
+    display: block;
+}
+
+:not(:has(> .menu-item.expanded)) > .menu-item:hover > .submenu {
+    display: block;
+}
+
+/* Fallback styling for webkit browsers that don't support scrollbar-color */
+
+.submenu > .menu::-webkit-scrollbar {
+    width: 12px;
+}
+
+.submenu > .menu::-webkit-scrollbar-track {
+    background: $looks-secondary;
+}
+
+.submenu > .menu::-webkit-scrollbar-thumb {
+    background-color: $ui-black-transparent;
+    border-radius: 12px;
+    border: 3px solid $looks-secondary;
 }

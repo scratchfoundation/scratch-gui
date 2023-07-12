@@ -13,6 +13,9 @@ const {
     scope
 } = new SeleniumHelper();
 
+// The costumes library is slow to load. Increase the timeout for these tests.
+jest.setTimeout(60_000);
+
 const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;

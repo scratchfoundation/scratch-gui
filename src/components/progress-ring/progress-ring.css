@@ -1,0 +1,18 @@
+@import "../../css/colors.css";
+
+.progress-ring {
+    margin: 0.5rem;
+}
+
+.progress-ring-svg {
+    fill: transparent;
+}
+
+.progress-ring .progress-ring-ring {
+    stroke: $looks-light-transparent;
+}
+
+.progress-ring .progress-ring-value {
+    stroke: $looks-secondary;
+    stroke-linecap: round;
+}

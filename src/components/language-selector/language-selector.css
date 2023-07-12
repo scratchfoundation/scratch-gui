@@ -4,7 +4,7 @@
 /* Position the language select over the language icon, and make it transparent */
 .language-select {
     position: absolute;
-    width: $language-selector-width;
+    width: 100%;
     height: $menu-bar-height;
     opacity: 0;
     user-select: none;

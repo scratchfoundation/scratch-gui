@@ -35,7 +35,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 .illustration {
     width: 100%;
     height: 123px;
-    background-color: $motion-primary;
+    background-color: $looks-secondary;
     background-image: url('./telemetry-modal-header.png');
     background-size: cover;
 }
@@ -46,7 +46,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 }
 
 .privacy-policy-link {
-    color: $motion-primary;
+    color: $looks-secondary;
     text-decoration: none;
 }
 
@@ -92,14 +92,14 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 .radio-buttons input[type="radio"]:checked {
     transition: all .25s ease;
     background-color: $ui-white;
-    border: 1px solid $motion-primary;
+    border: 1px solid $looks-secondary;
 }
 
 .radio-buttons input[type="radio"]:checked::after {
     display: block;
     margin: 0.125rem;
     border-radius: 50%;
-    background-color: $motion-primary;
+    background-color: $looks-secondary;
     width: .625rem;
     height: .625rem;
     content: "";
@@ -127,11 +127,11 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 }
 
 .button-row button {
-    border: 1px solid $motion-primary;
+    border: 1px solid $looks-secondary;
     border-radius: 0.25rem;
     padding: 0.5rem 1.5rem;
     color: white;
-    background: $motion-primary;
+    background: $looks-secondary;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
@@ -139,7 +139,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 
 .button-row button:hover {
     background: $extensions-primary;
-    box-shadow: 0 0 0 6px $motion-transparent;
+    box-shadow: 0 0 0 6px $looks-transparent;
 }
 
 .button-row button:disabled {

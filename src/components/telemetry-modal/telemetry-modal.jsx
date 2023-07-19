@@ -1,7 +1,8 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, injectIntl, FormattedMessage} from 'react-intl';
+import intlShape from '../../lib/intl-shape.js';
 import ReactModal from 'react-modal';
 
 import Box from '../box/box.jsx';

@@ -1,7 +1,8 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {injectIntl, intlShape} from 'react-intl';
+import {injectIntl} from 'react-intl';
+import intlShape from '../lib/intl-shape';
 
 import {connect} from 'react-redux';
 import {moveMonitorRect} from '../reducers/monitor-layout';

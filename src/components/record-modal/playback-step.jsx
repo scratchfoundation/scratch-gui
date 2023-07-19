@@ -4,7 +4,8 @@ import Box from '../box/box.jsx';
 import Waveform from '../waveform/waveform.jsx';
 import Meter from '../meter/meter.jsx';
 import AudioTrimmer from '../../containers/audio-trimmer.jsx';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, injectIntl} from 'react-intl';
+import intlShape from '../../lib/intl-shape.js';
 
 import styles from './record-modal.css';
 import backIcon from './icon--back.svg';

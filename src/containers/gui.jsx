@@ -4,7 +4,8 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import VM from 'scratch-vm';
-import {injectIntl, intlShape} from 'react-intl';
+import {injectIntl} from 'react-intl';
+import intlShape from '../lib/intl-shape.js';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {

@@ -25,12 +25,15 @@ class Menu extends React.Component {
         this.removeListeners();
     }
     addListeners () {
+        console.log('added listener');
         document.addEventListener('mouseup', this.handleClick);
     }
     removeListeners () {
+        console.log('removed listener');
         document.removeEventListener('mouseup', this.handleClick);
     }
     handleClick (e) {
+        console.log('handleClick', this.menu, e.target);
         if (this.props.open && !this.menu.contains(e.target)) {
             this.props.onRequestClose();
         }
@@ -39,6 +42,7 @@ class Menu extends React.Component {
         this.menu = c;
     }
     render () {
+        console.log('render', this.props);
         const {
             open,
             children,

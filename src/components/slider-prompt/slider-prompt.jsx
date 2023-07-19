@@ -1,4 +1,5 @@
-import {defineMessages, FormattedMessage, intlShape, injectIntl} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
+import intlShape from '../../lib/intl-shape.js';
 import PropTypes from 'prop-types';
 import React from 'react';
 

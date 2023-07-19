@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
@@ -48,6 +48,7 @@ class PaintEditorWrapper extends React.Component {
         } = this.props;
 
         return (
+            // <Placeholder />
             <PaintEditor
                 {...componentProps}
                 image={vm.getCostume(selectedCostumeIndex)}
@@ -89,6 +90,13 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         zoomLevelId: targetId
     };
 };
+
+const Placeholder = () => {
+    const myMemo = useMemo(() => 'hello world', []);
+    return (
+        <div>Placeholder v2: {myMemo}</div>
+    );
+}
 
 export default connect(
     mapStateToProps

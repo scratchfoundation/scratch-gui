@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
+import intlShape from '../../lib/intl-shape.js';
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
@@ -449,7 +450,7 @@ class MenuBar extends React.Component {
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.fileMenuOpen
                                 })}
-                                onMouseUp={this.props.onClickFile}
+                                onClick={this.props.onClickFile}
                             >
                                 <img src={fileIcon} />
                                 <span className={styles.collapsibleLabel}>
@@ -965,8 +966,15 @@ const mapDispatchToProps = dispatch => ({
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),
-    onClickFile: () => dispatch(openFileMenu()),
-    onRequestCloseFile: () => dispatch(closeFileMenu()),
+    onClickFile: (event) => {
+        console.log('onClickFile');
+        dispatch(openFileMenu());
+        // event.stopPropagation();
+    },
+    onRequestCloseFile: () => {
+        // debugger;
+        dispatch(closeFileMenu());
+    },
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),

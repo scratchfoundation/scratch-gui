@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, FormattedMessage, injectIntl} from 'react-intl';
+import intlShape from '../../lib/intl-shape.js';
 
 import Waveform from '../waveform/waveform.jsx';
 import Label from '../forms/label.jsx';

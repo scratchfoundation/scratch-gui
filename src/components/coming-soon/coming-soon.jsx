@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import classNames from 'classnames';
-import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
+import {defineMessages, injectIntl, FormattedMessage} from 'react-intl';
+import intlShape from '../../lib/intl-shape';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';

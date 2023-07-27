@@ -395,6 +395,21 @@ All notable changes to this project will be documented in this file. See
 
 * **deps:** update dependency scratch-paint to v2.0.8 ([d6779f7](https://github.com/LLK/scratch-gui/commit/d6779f7da3758dff217f6d75f8b7e41b8a66a9db))
 
+## [2.0.23-hotfix.2](https://github.com/LLK/scratch-gui/compare/v2.0.23-hotfix.1...v2.0.23-hotfix.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* support both addListener and addEventListener ([aeb7617](https://github.com/LLK/scratch-gui/commit/aeb7617fdfa971027f78039b1694355f71463dfa))
+
+## [2.0.23-hotfix.1](https://github.com/LLK/scratch-gui/compare/v2.0.22...v2.0.23-hotfix.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* attempt to fix semantic-release hotfix handling ([d9518c6](https://github.com/LLK/scratch-gui/commit/d9518c6841ba45d11dce7ecb177fac1ed5db6543))
+* support browsers that don't implement 'prefers-contrast' media query ([f21814b](https://github.com/LLK/scratch-gui/commit/f21814b11ea31c8b74d01dc9564bb504a987c71e))
+
 ## [2.0.22](https://github.com/LLK/scratch-gui/compare/v2.0.21...v2.0.22) (2023-06-30)
 
 

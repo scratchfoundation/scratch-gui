@@ -91,15 +91,12 @@ class SpriteSelectorItem extends React.PureComponent {
         }
     }
     handleDelete (e) {
-        e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDeleteButtonClick(this.props.id);
     }
     handleDuplicate (e) {
-        e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDuplicateButtonClick(this.props.id);
     }
     handleExport (e) {
-        e.stopPropagation();
         this.props.onExportButtonClick(this.props.id);
     }
     handleMouseLeave () {

@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {createPortal} from 'react-dom';
 import classNames from 'classnames';
 
 import styles from './context-menu.css';
@@ -100,8 +101,12 @@ const useContextMenu = contextMenuContent => {
         });
     };
 
+    // Use a portal to render the context menu outside the flow to avoid positioning conflicts between the monitor's
+    // `transform: scale` and the context menu's `position: fixed`. For more details, see
+    // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+    // This also prevents the menu from being affected by a parent with `overflow: hidden`.
     const contextMenu = contextMenuPosition ?
-        (<nav
+        (createPortal(<nav
             onClick={closeContextMenu} // close the menu as the click bubbles out from the menu item
 
             className={styles.contextMenu}
@@ -111,7 +116,7 @@ const useContextMenu = contextMenuContent => {
                 left: contextMenuPosition.x,
                 top: contextMenuPosition.y
             }}
-        >{contextMenuContent}</nav>) : null;
+        >{contextMenuContent}</nav>, document.body)) : null;
 
     return [handleContextMenu, contextMenu];
 };

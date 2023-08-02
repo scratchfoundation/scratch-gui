@@ -106,7 +106,7 @@ const useContextMenu = contextMenuContent => {
     // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
     // This also prevents the menu from being affected by a parent with `overflow: hidden`.
     const contextMenu = contextMenuPosition ?
-        (createPortal(<nav
+        (<>{createPortal(<nav
             onClick={closeContextMenu} // close the menu as the click bubbles out from the menu item
 
             className={styles.contextMenu}
@@ -116,7 +116,7 @@ const useContextMenu = contextMenuContent => {
                 left: contextMenuPosition.x,
                 top: contextMenuPosition.y
             }}
-        >{contextMenuContent}</nav>, document.body)) : null;
+        >{contextMenuContent}</nav>, document.body)}</>) : null;
 
     return [handleContextMenu, contextMenu];
 };

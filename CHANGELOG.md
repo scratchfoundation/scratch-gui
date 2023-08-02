@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.83](https://github.com/LLK/scratch-gui/compare/v2.0.82...v2.0.83) (2023-08-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-vm to v1.5.93 ([16224e9](https://github.com/LLK/scratch-gui/commit/16224e9fb73cdeaef3730ddbb9a7651410ce5d1d))
+
+## [2.0.82](https://github.com/LLK/scratch-gui/compare/v2.0.81...v2.0.82) (2023-08-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v2.0.24 ([5639afb](https://github.com/LLK/scratch-gui/commit/5639afbad2108a7bb0790171d9a9f3ab0d88b57d))
+
+## [2.0.81](https://github.com/LLK/scratch-gui/compare/v2.0.80...v2.0.81) (2023-08-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230802032213 ([8b4f1d0](https://github.com/LLK/scratch-gui/commit/8b4f1d0392e71c62cbfc310c93256e2e4e374070))
+
+## [2.0.80](https://github.com/LLK/scratch-gui/compare/v2.0.79...v2.0.80) (2023-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230801032207 ([3d0f575](https://github.com/LLK/scratch-gui/commit/3d0f5750431e084edf86ba2d9cb8a6761ab018f1))
+* **deps:** update dependency scratch-paint to v2.0.23 ([669d58a](https://github.com/LLK/scratch-gui/commit/669d58a04f013ba87d9e7bda4fa7327b78f8e342))
+* **deps:** update dependency scratch-vm to v1.5.92 ([bbfefa8](https://github.com/LLK/scratch-gui/commit/bbfefa8b77ebd0bf9c2e02f5dd013cc46c0fc5c0))
+
+## [2.0.79](https://github.com/LLK/scratch-gui/compare/v2.0.78...v2.0.79) (2023-08-01)
+
+
+### Bug Fixes
+
+* attempt to fix semantic-release hotfix handling ([d9518c6](https://github.com/LLK/scratch-gui/commit/d9518c6841ba45d11dce7ecb177fac1ed5db6543))
+* **deps:** update dependency scratch-vm to v1.5.91 ([a816d8c](https://github.com/LLK/scratch-gui/commit/a816d8c0bec05edbff2d5238cb32f98176a58e72))
+* support both addListener and addEventListener ([aeb7617](https://github.com/LLK/scratch-gui/commit/aeb7617fdfa971027f78039b1694355f71463dfa))
+* support browsers that don't implement 'prefers-contrast' media query ([f21814b](https://github.com/LLK/scratch-gui/commit/f21814b11ea31c8b74d01dc9564bb504a987c71e))
+* update prepublish script to use correct path separator ([216beb0](https://github.com/LLK/scratch-gui/commit/216beb02da36e0883cf118fdbf68c65b5bd50799))
+
+## [2.0.78](https://github.com/LLK/scratch-gui/compare/v2.0.77...v2.0.78) (2023-07-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v2.0.22 ([3369e7c](https://github.com/LLK/scratch-gui/commit/3369e7c1f86f5578e274d4b4145a90ff7e08b287))
+
+## [2.0.77](https://github.com/LLK/scratch-gui/compare/v2.0.76...v2.0.77) (2023-07-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-blocks to v0.2.0-prerelease.20230718081157 ([c3d4adb](https://github.com/LLK/scratch-gui/commit/c3d4adbd4aa6ada4a2f3759e9c5753f1201fe37e))
+
+## [2.0.76](https://github.com/LLK/scratch-gui/compare/v2.0.75...v2.0.76) (2023-07-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230718032211 ([8091436](https://github.com/LLK/scratch-gui/commit/8091436df164b47fd37392759494627d6d4b1d79))
+
+## [2.0.75](https://github.com/LLK/scratch-gui/compare/v2.0.74...v2.0.75) (2023-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v2.0.21 ([9ecc654](https://github.com/LLK/scratch-gui/commit/9ecc65412bf40366a2b7b5c22c1b849ee77c67a8))
+
+## [2.0.74](https://github.com/LLK/scratch-gui/compare/v2.0.73...v2.0.74) (2023-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-blocks to v0.2.0-prerelease.20230717081644 ([9d8ebd6](https://github.com/LLK/scratch-gui/commit/9d8ebd62a96a60977e3658a55d698388d1342f4a))
+
+## [2.0.73](https://github.com/LLK/scratch-gui/compare/v2.0.72...v2.0.73) (2023-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-vm to v1.5.90 ([e0aedff](https://github.com/LLK/scratch-gui/commit/e0aedff9471e684570d094f0f5f0f4a1579fbf25))
+
+## [2.0.72](https://github.com/LLK/scratch-gui/compare/v2.0.71...v2.0.72) (2023-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230717032228 ([bf1b178](https://github.com/LLK/scratch-gui/commit/bf1b178a8d7781b65e8966cf2c5d0b90b53cfcd9))
+
+## [2.0.71](https://github.com/LLK/scratch-gui/compare/v2.0.70...v2.0.71) (2023-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-vm to v1.5.89 ([064114e](https://github.com/LLK/scratch-gui/commit/064114e834266c7e3d4aabc4e508ce8dc9d311e9))
+
+## [2.0.70](https://github.com/LLK/scratch-gui/compare/v2.0.69...v2.0.70) (2023-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v2.0.20 ([72ba8ec](https://github.com/LLK/scratch-gui/commit/72ba8ec4ba248c3c714d4ca271e4c6863d0192fb))
+
+## [2.0.69](https://github.com/LLK/scratch-gui/compare/v2.0.68...v2.0.69) (2023-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-blocks to v0.2.0-prerelease.20230714070613 ([aad0cc8](https://github.com/LLK/scratch-gui/commit/aad0cc8c73f10807a1e9a0b9579621a1cd409645))
+
+## [2.0.68](https://github.com/LLK/scratch-gui/compare/v2.0.67...v2.0.68) (2023-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-l10n to v3.15.20230714032252 ([c06999b](https://github.com/LLK/scratch-gui/commit/c06999b12cc23a027a97e7e5068c0710b6cf27b6))
+
 ## [2.0.67](https://github.com/LLK/scratch-gui/compare/v2.0.66...v2.0.67) (2023-07-13)
 
 
@@ -317,6 +435,21 @@ All notable changes to this project will be documented in this file. See
 ### Bug Fixes
 
 * **deps:** update dependency scratch-paint to v2.0.8 ([d6779f7](https://github.com/LLK/scratch-gui/commit/d6779f7da3758dff217f6d75f8b7e41b8a66a9db))
+
+## [2.0.23-hotfix.2](https://github.com/LLK/scratch-gui/compare/v2.0.23-hotfix.1...v2.0.23-hotfix.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* support both addListener and addEventListener ([aeb7617](https://github.com/LLK/scratch-gui/commit/aeb7617fdfa971027f78039b1694355f71463dfa))
+
+## [2.0.23-hotfix.1](https://github.com/LLK/scratch-gui/compare/v2.0.22...v2.0.23-hotfix.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* attempt to fix semantic-release hotfix handling ([d9518c6](https://github.com/LLK/scratch-gui/commit/d9518c6841ba45d11dce7ecb177fac1ed5db6543))
+* support browsers that don't implement 'prefers-contrast' media query ([f21814b](https://github.com/LLK/scratch-gui/commit/f21814b11ea31c8b74d01dc9564bb504a987c71e))
 
 ## [2.0.22](https://github.com/LLK/scratch-gui/compare/v2.0.21...v2.0.22) (2023-06-30)
 

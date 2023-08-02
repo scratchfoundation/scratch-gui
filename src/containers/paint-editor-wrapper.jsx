@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React from 'react';
 import bindAll from 'lodash.bindall';
 import VM from 'scratch-vm';
 import PaintEditor from 'scratch-paint';
@@ -90,13 +90,6 @@ const mapStateToProps = (state, {selectedCostumeIndex}) => {
         zoomLevelId: targetId
     };
 };
-
-const Placeholder = () => {
-    const myMemo = useMemo(() => 'hello world', []);
-    return (
-        <div>Placeholder v2: {myMemo}</div>
-    );
-}
 
 export default connect(
     mapStateToProps

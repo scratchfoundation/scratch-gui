@@ -17,14 +17,22 @@ const systemPreferencesHOC = function (WrappedComponent) {
             if (window.matchMedia) {
                 this.highContrastMatchMedia = window.matchMedia(prefersHighContrastQuery);
                 if (this.highContrastMatchMedia) {
-                    this.highContrastMatchMedia.addEventListener('change', this.preferencesListener);
+                    if (this.highContrastMatchMedia.addEventListener) {
+                        this.highContrastMatchMedia.addEventListener('change', this.preferencesListener);
+                    } else {
+                        this.highContrastMatchMedia.addListener(this.preferencesListener);
+                    }
                 }
             }
         }
 
         componentWillUnmount () {
             if (this.highContrastMatchMedia) {
-                this.highContrastMatchMedia.removeEventListener('change', this.preferencesListener);
+                if (this.highContrastMatchMedia.removeEventListener) {
+                    this.highContrastMatchMedia.removeEventListener('change', this.preferencesListener);
+                } else {
+                    this.highContrastMatchMedia.removeListener(this.preferencesListener);
+                }
             }
         }
 

@@ -1,4 +1,4 @@
-import 'web-audio-test-api';
+import '../../helpers/web-audio-setup';
 import SharedAudioContext from '../../../src/lib/audio/shared-audio-context';
 
 describe('Shared Audio Context', () => {

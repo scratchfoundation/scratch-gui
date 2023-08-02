@@ -62,6 +62,18 @@ jobs:
       JEST_JUNIT_OUTPUT_DIR: test-results
       NODE_OPTIONS: --max-old-space-size=4000
     steps:
+      - run:
+          name: Test some things, then fail
+          command: |
+            echo pipeline.id: << pipeline.id >>
+            echo pipeline.number: << pipeline.number >>
+            echo pipeline.project.git_url: << pipeline.project.git_url >>
+            echo pipeline.project.type: << pipeline.project.type >>
+            echo pipeline.git.tag: << pipeline.git.tag >>
+            echo pipeline.git.branch: << pipeline.git.branch >>
+            echo pipeline.git.revision: << pipeline.git.revision >>
+            echo pipeline.git.base_revision: << pipeline.git.base_revision >>
+            false
       - *restore_git_cache
       - checkout
       - browser-tools/install-chrome # must be before node/install-packages

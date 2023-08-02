@@ -47,10 +47,10 @@ class SeleniumHelper {
             modal: '*[@class="ReactModalPortal"]',
             reportedValue: '*[@class="blocklyDropDownContent"]',
             soundsTab: "*[@id='react-tabs-5']",
-            spriteTile: '*[starts-with(@class,"react-contextmenu-wrapper")]',
+            spriteTile: '*[starts-with(@class,"sprite-selector_sprite-wrapper")]',
             menuBar: '*[contains(@class,"menu-bar_menu-bar_")]',
             monitors: '*[starts-with(@class,"stage_monitor-wrapper")]',
-            contextMenu: '*[starts-with(@class,"react-contextmenu")]'
+            contextMenu: '*[starts-with(@class,"context-menu_context-menu")]'
         };
     }
 

@@ -1,6 +1,4 @@
-import {addLocaleData} from 'react-intl';
-
-import {localeData, isRtl} from 'scratch-l10n';
+import {isRtl} from 'scratch-l10n';
 import editorMessages from 'scratch-l10n/locales/editor-msgs';
 
 const UPDATE_LOCALES = 'scratch-gui/locales/UPDATE_LOCALES';

@@ -966,8 +966,8 @@ const mapDispatchToProps = dispatch => ({
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
     onClickAccount: () => dispatch(openAccountMenu()),
     onRequestCloseAccount: () => dispatch(closeAccountMenu()),
-    onClickFile: (event) => {
-        console.log('onClickFile');
+    onClickFile: (/* event */) => {
+        // console.log('onClickFile');
         dispatch(openFileMenu());
         // event.stopPropagation();
     },

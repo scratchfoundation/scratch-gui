@@ -126,7 +126,6 @@ MonitorComponent.propTypes = {
     category: PropTypes.oneOf(Object.keys(categoryColorMap)),
     componentRef: PropTypes.func.isRequired,
     draggable: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(monitorModes),
     onDragEnd: PropTypes.func.isRequired,
     onExport: PropTypes.func,

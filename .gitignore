@@ -23,3 +23,8 @@ npm-*
 
 # Downloaded during "npm install"
 /static/microbit
+
+# Generated during "yarn install" or "yarn start"
+.yarn
+.yarnrc
+yarn.lock

@@ -251,7 +251,7 @@ const GUIComponent = props => {
                         <Box className={styles.editorWrapper}>
 
                             <WorkbookQuestion
-                                question="ひだりのネコをみぎに１０だけうごかして"
+                                question="ネコをみぎに１０だけうごかして"
                                 vm={vm}
                             />
 
@@ -263,48 +263,37 @@ const GUIComponent = props => {
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
                             >
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    <Box className={styles.blocksWrapper}>
-                                        <Blocks
-                                            key={`${blocksId}/${theme}`}
-                                            canUseCloud={canUseCloud}
-                                            grow={1}
-                                            isVisible={blocksTabVisible}
-                                            options={{
-                                                media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
-                                            }}
-                                            stageSize={stageSize}
-                                            theme={theme}
-                                            vm={vm}
+                                <Box className={styles.blocksWrapper}>
+                                    <Blocks
+                                        key={`${blocksId}/${theme}`}
+                                        canUseCloud={canUseCloud}
+                                        grow={1}
+                                        isVisible={blocksTabVisible}
+                                        options={{
+                                            media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
+                                        }}
+                                        stageSize={stageSize}
+                                        theme={theme}
+                                        vm={vm}
+                                    />
+                                </Box>
+                                <Box className={styles.extensionButtonContainer}>
+                                    <button
+                                        className={styles.extensionButton}
+                                        title={intl.formatMessage(messages.addExtension)}
+                                        onClick={onExtensionButtonClick}
+                                    >
+                                        <img
+                                            className={styles.extensionButtonIcon}
+                                            draggable={false}
+                                            src={addExtensionIcon}
                                         />
-                                    </Box>
-                                    <Box className={styles.extensionButtonContainer}>
-                                        <button
-                                            className={styles.extensionButton}
-                                            title={intl.formatMessage(messages.addExtension)}
-                                            onClick={onExtensionButtonClick}
-                                        >
-                                            <img
-                                                className={styles.extensionButtonIcon}
-                                                draggable={false}
-                                                src={addExtensionIcon}
-                                            />
-                                        </button>
-                                    </Box>
-                                    <Box className={styles.watermark}>
-                                        <Watermark />
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                                </TabPanel>
+                                    </button>
+                                </Box>
+                                <Box className={styles.watermark}>
+                                    <Watermark />
+                                </Box>
                             </Tabs>
-                            {backpackVisible ? (
-                                <Backpack host={backpackHost} />
-                            ) : null}
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>

@@ -31,6 +31,8 @@ import DragLayer from '../../containers/drag-layer.jsx';
 import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
+import WorkbookQuestion from '../../containers/workbook-question.jsx';
+
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
 import {themeMap} from '../../lib/themes';
@@ -247,6 +249,12 @@ const GUIComponent = props => {
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
                         <Box className={styles.editorWrapper}>
+
+                            <WorkbookQuestion
+                                question="ひだりのネコをみぎに１０だけうごかして"
+                                vm={vm}
+                            />
+
                             <Tabs
                                 forceRenderTabPanel
                                 className={tabClassNames.tabs}

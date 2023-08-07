@@ -1,0 +1,21 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.workbook-question-container {
+    display: flex;
+    padding: 6px;
+    margin-bottom: $space;
+    background-color: $ui-white;
+    border-bottom-right-radius: $space;
+    border: $stage-standard-border-width solid $ui-black-transparent;
+}
+
+.title {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.question {
+    color: $text-primary;
+}

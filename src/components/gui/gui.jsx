@@ -447,7 +447,7 @@ GUIComponent.defaultProps = {
     canChangeTheme: true,
     canCreateNew: false,
     canEditTitle: false,
-    canManageFiles: true,
+    canManageFiles: false,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,

@@ -6,6 +6,7 @@ import mockAudioEffects from '../../__mocks__/audio-effects.js';
 
 import SoundEditor from '../../../src/containers/sound-editor';
 import SoundEditorComponent from '../../../src/components/sound-editor/sound-editor';
+import {act} from 'react-test-renderer';
 
 jest.mock('react-ga');
 jest.mock('../../../src/lib/audio/audio-buffer-player', () => mockAudioBufferPlayer);
@@ -20,22 +21,24 @@ describe('Sound Editor Container', () => {
     let vm;
 
     beforeEach(() => {
-        soundIndex = 0;
-        soundBuffer = {
-            sampleRate: 0,
-            getChannelData: jest.fn(() => samples)
-        };
-        vm = {
-            getSoundBuffer: jest.fn(() => soundBuffer),
-            renameSound: jest.fn(),
-            updateSoundBuffer: jest.fn(),
-            editingTarget: {
-                sprite: {
-                    sounds: [{name: 'first name', id: 'first id'}]
+        act(() => {
+            soundIndex = 0;
+            soundBuffer = {
+                sampleRate: 0,
+                getChannelData: jest.fn(() => samples)
+            };
+            vm = {
+                getSoundBuffer: jest.fn(() => soundBuffer),
+                renameSound: jest.fn(),
+                updateSoundBuffer: jest.fn(),
+                editingTarget: {
+                    sprite: {
+                        sounds: [{name: 'first name', id: 'first id'}]
+                    }
                 }
-            }
-        };
-        store = mockStore({scratchGui: {vm: vm, mode: {isFullScreen: false}}});
+            };
+            store = mockStore({scratchGui: {vm: vm, mode: {isFullScreen: false}}});
+        });
     });
 
     test('should pass the correct data to the component from the store', () => {
@@ -69,17 +72,23 @@ describe('Sound Editor Container', () => {
         expect(mockAudioBufferPlayer.instance.play.mock.calls).toEqual([]);
         expect(mockAudioBufferPlayer.instance.stop.mock.calls).toEqual([]);
 
-        component.props().onPlay();
+        act(() => {
+            component.props().onPlay();
+        });
         expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
 
         // Mock the audio buffer player calling onUpdate
-        mockAudioBufferPlayer.instance.onUpdate(0.5);
-        wrapper.update();
+        act(() => {
+            mockAudioBufferPlayer.instance.onUpdate(0.5);
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.props().playhead).toEqual(0.5);
 
-        component.props().onStop();
-        wrapper.update();
+        act(() => {
+            component.props().onStop();
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(mockAudioBufferPlayer.instance.stop).toHaveBeenCalled();
         expect(component.props().playhead).toEqual(null);
@@ -105,8 +114,10 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onReverse(); // Could be any of the effects, just testing the end result
-        await mockAudioEffects.instance._finishProcessing(soundBuffer);
+        await act(async () => {
+            component.props().onReverse(); // Could be any of the effects, just testing the end result
+            await mockAudioEffects.instance._finishProcessing(soundBuffer);
+        });
         expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
     });
@@ -119,7 +130,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onReverse();
+        act(() => {
+            component.props().onReverse();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.REVERSE);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -132,7 +145,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onLouder();
+        act(() => {
+            component.props().onLouder();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.LOUDER);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -145,7 +160,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onSofter();
+        act(() => {
+            component.props().onSofter();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.SOFTER);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -158,7 +175,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onFaster();
+        act(() => {
+            component.props().onFaster();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.FASTER);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -171,7 +190,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onSlower();
+        act(() => {
+            component.props().onSlower();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.SLOWER);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -184,7 +205,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onEcho();
+        act(() => {
+            component.props().onEcho();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.ECHO);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -197,7 +220,9 @@ describe('Sound Editor Container', () => {
             />
         );
         const component = wrapper.find(SoundEditorComponent);
-        component.props().onRobot();
+        act(() => {
+            component.props().onRobot();
+        });
         expect(mockAudioEffects.instance.name).toEqual(mockAudioEffects.effectTypes.ROBOT);
         expect(mockAudioEffects.instance.process).toHaveBeenCalled();
     });
@@ -215,36 +240,46 @@ describe('Sound Editor Container', () => {
         expect(component.prop('canRedo')).toEqual(false);
 
         // Submitting new samples should make it possible to undo
-        component.props().onFaster();
-        await mockAudioEffects.instance._finishProcessing(soundBuffer);
-        wrapper.update();
+        await act(async () => {
+            component.props().onFaster();
+            await mockAudioEffects.instance._finishProcessing(soundBuffer);
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(true);
         expect(component.prop('canRedo')).toEqual(false);
 
         // Undoing should make it possible to redo and not possible to undo again
-        await component.props().onUndo();
-        wrapper.update();
+        await act(async () => {
+            await component.props().onUndo();
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(false);
         expect(component.prop('canRedo')).toEqual(true);
 
         // Redoing should make it possible to undo and not possible to redo again
-        await component.props().onRedo();
-        wrapper.update();
+        await act(async () => {
+            await component.props().onRedo();
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canUndo')).toEqual(true);
         expect(component.prop('canRedo')).toEqual(false);
 
         // New submission should clear the redo stack
-        await component.props().onUndo(); // Undo to go back to a state where redo is enabled
-        wrapper.update();
+        await act(async () => {
+            await component.props().onUndo(); // Undo to go back to a state where redo is enabled
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(true);
-        component.props().onFaster();
-        await mockAudioEffects.instance._finishProcessing(soundBuffer);
+        await act(async () => {
+            component.props().onFaster();
+            await mockAudioEffects.instance._finishProcessing(soundBuffer);
 
-        wrapper.update();
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
         expect(component.prop('canRedo')).toEqual(false);
     });
@@ -259,13 +294,17 @@ describe('Sound Editor Container', () => {
         let component = wrapper.find(SoundEditorComponent);
 
         // Set up an undoable state
-        component.props().onFaster();
-        await mockAudioEffects.instance._finishProcessing(soundBuffer);
-        wrapper.update();
+        await act(async () => {
+            component.props().onFaster();
+            await mockAudioEffects.instance._finishProcessing(soundBuffer);
+            wrapper.update();
+        });
         component = wrapper.find(SoundEditorComponent);
 
         // Undo should update the sound buffer and play the new samples
-        await component.props().onUndo();
+        await act(async () => {
+            await component.props().onUndo();
+        });
         expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
 
@@ -274,7 +313,9 @@ describe('Sound Editor Container', () => {
         mockAudioBufferPlayer.instance.play.mockClear();
 
         // Undo should update the sound buffer and play the new samples
-        await component.props().onRedo();
+        await act(async () => {
+            await component.props().onRedo();
+        });
         expect(mockAudioBufferPlayer.instance.play).toHaveBeenCalled();
         expect(vm.updateSoundBuffer).toHaveBeenCalled();
     });

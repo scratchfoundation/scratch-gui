@@ -85,22 +85,22 @@ describe('Sound Editor Component', () => {
             <SoundEditor {...props} />
         );
 
-        wrapper.find('[children="Reverse"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.reverse'}).simulate('click');
         expect(props.onReverse).toHaveBeenCalled();
 
-        wrapper.find('[children="Robot"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.robot'}).simulate('click');
         expect(props.onRobot).toHaveBeenCalled();
 
-        wrapper.find('[children="Faster"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.faster'}).simulate('click');
         expect(props.onFaster).toHaveBeenCalled();
 
-        wrapper.find('[children="Slower"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.slower'}).simulate('click');
         expect(props.onSlower).toHaveBeenCalled();
 
-        wrapper.find('[children="Louder"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.louder'}).simulate('click');
         expect(props.onLouder).toHaveBeenCalled();
 
-        wrapper.find('[children="Softer"]').simulate('click');
+        wrapper.find({id: 'gui.soundEditor.softer'}).simulate('click');
         expect(props.onSofter).toHaveBeenCalled();
     });
 

@@ -52,7 +52,7 @@ describe('SaveStatus container', () => {
         expect(wrapper.contains('Save Now')).toBe(true);
 
         // Clicking save now should dispatch the manualUpdateProject action (stubbed above)
-        wrapper.find('[children="Save Now"]').simulate('click');
+        wrapper.find({id: 'gui.menuBar.saveNowLink'}).simulate('click');
         expect(store.getActions()[0].type).toEqual('stubbed');
     });
 

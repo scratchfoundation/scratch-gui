@@ -2,7 +2,7 @@ import 'web-audio-test-api';
 
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import {mountWithIntl, shallowWithIntl} from '../../helpers/intl-helpers.jsx';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
 import {LoadingState} from '../../../src/reducers/project-state';
 import VM from 'scratch-vm';
 
@@ -19,14 +19,10 @@ describe('SBFileUploaderHOC', () => {
         return SBFileUploaderHOC(Component);
     };
 
-    const shallowMountWithContext = component => (
-        shallowWithIntl(component, {context: {store}})
-    );
-
     const unwrappedInstance = () => {
         const WrappedComponent = getContainer();
         // default starting state: looking at a project you created, not logged in
-        const wrapper = shallowMountWithContext(
+        const wrapper = mountWithIntl(
             <WrappedComponent
                 projectChanged
                 canSave={false}
@@ -34,6 +30,7 @@ describe('SBFileUploaderHOC', () => {
                 closeFileMenu={jest.fn()}
                 requestProjectUpload={jest.fn()}
                 userOwnsProject={false}
+                store={store}
                 vm={vm}
                 onLoadingFinished={jest.fn()}
                 onLoadingStarted={jest.fn()}
@@ -41,8 +38,8 @@ describe('SBFileUploaderHOC', () => {
             />
         );
         return wrapper
-            .dive() // unwrap intl
-            .dive() // unwrap redux Connect(SBFileUploaderComponent)
+            .childAt(0) // unwrap intl
+            .childAt(0) // unwrap redux Connect(SBFileUploaderComponent)
             .instance(); // SBFileUploaderComponent
     };
 

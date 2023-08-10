@@ -102,7 +102,7 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
             } = this.props;
             return (
                 <Provider store={this.store}>
-                    <ConnectedIntlProvider>
+                    <ConnectedIntlProvider textComponent="span">
                         <WrappedComponent
                             {...componentProps}
                         />

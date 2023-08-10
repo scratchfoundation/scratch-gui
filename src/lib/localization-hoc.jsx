@@ -25,7 +25,7 @@ const LocalizationHOC = function (WrappedComponent) {
                 ...componentProps
             } = this.props;
             return (
-                <ConnectedIntlProvider>
+                <ConnectedIntlProvider textComponent="span">
                     <WrappedComponent {...componentProps} />
                 </ConnectedIntlProvider>
             );

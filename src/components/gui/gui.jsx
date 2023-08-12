@@ -32,6 +32,7 @@ import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import WorkbookQuestion from '../../containers/workbook-question.jsx';
+import WorkbookAnswer from '../../containers/workbook-answer.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -251,7 +252,7 @@ const GUIComponent = props => {
                         <Box className={styles.editorWrapper}>
 
                             <WorkbookQuestion
-                                question="ネコをみぎに１０だけうごかして"
+                                question="ひだりのネコをみぎに１０だけうごかして"
                                 vm={vm}
                             />
 
@@ -294,6 +295,12 @@ const GUIComponent = props => {
                                     <Watermark />
                                 </Box>
                             </Tabs>
+
+                            <WorkbookAnswer
+                                description="はじめに、ネコのブロックをせってい。つぎに、みぎ。１０ぽうごかす。"
+                                vm={vm}
+                            />
+
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -392,7 +399,7 @@ GUIComponent.defaultProps = {
     basePath: './',
     blocksId: 'original',
     canChangeLanguage: true,
-    canChangeTheme: true,
+    canChangeTheme: false,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: false,

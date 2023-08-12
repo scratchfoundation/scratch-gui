@@ -32,6 +32,7 @@ import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 
 import WorkbookQuestion from '../../containers/workbook-question.jsx';
+import WorkbookAnswer from '../../containers/workbook-answer.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 import {resolveStageSize} from '../../lib/screen-utils';
@@ -263,48 +264,43 @@ const GUIComponent = props => {
                                 selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                                 onSelect={onActivateTab}
                             >
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    <Box className={styles.blocksWrapper}>
-                                        <Blocks
-                                            key={`${blocksId}/${theme}`}
-                                            canUseCloud={canUseCloud}
-                                            grow={1}
-                                            isVisible={blocksTabVisible}
-                                            options={{
-                                                media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
-                                            }}
-                                            stageSize={stageSize}
-                                            theme={theme}
-                                            vm={vm}
+                                <Box className={styles.blocksWrapper}>
+                                    <Blocks
+                                        key={`${blocksId}/${theme}`}
+                                        canUseCloud={canUseCloud}
+                                        grow={1}
+                                        isVisible={blocksTabVisible}
+                                        options={{
+                                            media: `${basePath}static/${themeMap[theme].blocksMediaFolder}/`
+                                        }}
+                                        stageSize={stageSize}
+                                        theme={theme}
+                                        vm={vm}
+                                    />
+                                </Box>
+                                <Box className={styles.extensionButtonContainer}>
+                                    <button
+                                        className={styles.extensionButton}
+                                        title={intl.formatMessage(messages.addExtension)}
+                                        onClick={onExtensionButtonClick}
+                                    >
+                                        <img
+                                            className={styles.extensionButtonIcon}
+                                            draggable={false}
+                                            src={addExtensionIcon}
                                         />
-                                    </Box>
-                                    <Box className={styles.extensionButtonContainer}>
-                                        <button
-                                            className={styles.extensionButton}
-                                            title={intl.formatMessage(messages.addExtension)}
-                                            onClick={onExtensionButtonClick}
-                                        >
-                                            <img
-                                                className={styles.extensionButtonIcon}
-                                                draggable={false}
-                                                src={addExtensionIcon}
-                                            />
-                                        </button>
-                                    </Box>
-                                    <Box className={styles.watermark}>
-                                        <Watermark />
-                                    </Box>
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
-                                </TabPanel>
-                                <TabPanel className={tabClassNames.tabPanel}>
-                                    {soundsTabVisible ? <SoundTab vm={vm} /> : null}
-                                </TabPanel>
+                                    </button>
+                                </Box>
+                                <Box className={styles.watermark}>
+                                    <Watermark />
+                                </Box>
                             </Tabs>
-                            {backpackVisible ? (
-                                <Backpack host={backpackHost} />
-                            ) : null}
+
+                            <WorkbookAnswer
+                                description="はじめに、ネコのブロックをせってい。つぎに、みぎ。１０ぽうごかす。"
+                                vm={vm}
+                            />
+
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -403,7 +399,7 @@ GUIComponent.defaultProps = {
     basePath: './',
     blocksId: 'original',
     canChangeLanguage: true,
-    canChangeTheme: true,
+    canChangeTheme: false,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: false,

@@ -1,0 +1,17 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.workbook-report {
+    background-color: $ui-white;
+    padding: $space;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: $space;
+}
+
+.items {
+    margin-left: $space;
+}

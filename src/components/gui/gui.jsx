@@ -43,6 +43,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
+import WorkbookResult from '../../containers/workbook-result.jsx';
 
 const messages = defineMessages({
     addExtension: {
@@ -311,11 +312,9 @@ const GUIComponent = props => {
                                 stageSize={stageSize}
                                 vm={vm}
                             />
+                            {/* TODO: Use stageSize */}
                             <Box className={styles.targetWrapper}>
-                                <TargetPane
-                                    stageSize={stageSize}
-                                    vm={vm}
-                                />
+                                <WorkbookResult />
                             </Box>
                         </Box>
                     </Box>

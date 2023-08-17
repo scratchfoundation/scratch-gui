@@ -1,0 +1,37 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+@import "../../css/z-index.css";
+
+.workbook-score {
+    background-color: $ui-white;
+    padding: $space;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.score {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: $space;
+    padding: $space;
+}
+
+.scoreBar {
+    width: 70%;
+}
+
+.scoreText {
+    margin-left: $space;
+}
+
+.scoreTextRed {
+    color: $motion-primary;
+}
+
+.scoreTextBlue {
+    color: $data-primary;
+}

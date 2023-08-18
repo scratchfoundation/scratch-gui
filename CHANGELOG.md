@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.8](https://github.com/LLK/scratch-gui/compare/v2.3.7...v2.3.8) (2023-08-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-render to v0.1.0-prerelease.20230817222155 ([c888c7f](https://github.com/LLK/scratch-gui/commit/c888c7fb41af6b7fa74b162a18f6651c448b1869))
+
 ## [2.3.7](https://github.com/LLK/scratch-gui/compare/v2.3.6...v2.3.7) (2023-08-18)
 
 

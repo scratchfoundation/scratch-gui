@@ -17,7 +17,7 @@ const WorkbookQuestion = function(props) {
             className={classNames(styles.workbookQuestionContainer, className)}
         >
             <div className={classNames(styles.title)}>
-                もんだい：
+                もんだい
             </div>
             <div className={classNames(styles.question)}>
                 {question}

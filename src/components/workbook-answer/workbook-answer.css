@@ -9,6 +9,55 @@
     background-color: $ui-white;
     border-top-right-radius: $space;
     border: $stage-standard-border-width solid $ui-black-transparent;
+    font-size: 1.2rem;
+}
+
+.answering-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: $space;
+}
+
+.button {
+    min-height: 2rem;
+    width: 6.5rem;
+    padding: 0.55rem 0.9rem;
+    background: $motion-primary;
+    color: white;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    outline-style:none;
+}
+
+.run-button {
+    background: $motion-primary;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.surrender-button {
+    background: $data-primary;
+}
+
+.answered-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.explanation-container {
+    margin-right: $space;
 }
 
 .title {
@@ -20,66 +69,13 @@
     color: $text-primary;
 }
 
-.buttons-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: $space;
-}
-
-.run-button {
-    min-height: 2rem;
-    width: 6.5rem;
-    padding: 0.55rem 0.9rem;
-    border-radius: 0.35rem;
-    background: $motion-primary;
-    color: white;
-    font-weight: 700;
-    font-size: 0.77rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    outline-style:none;
-    margin-right: $space;
-}
-
-.surrender-button {
-    min-height: 2rem;
-    width: 6.5rem;
-    padding: 0.55rem 0.9rem;
-    border-radius: 0.35rem;
-    background: $data-primary;
-    color: white;
-    font-weight: 700;
-    font-size: 0.77rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    outline-style:none;
+.next-button-container {
+    margin-right: 0;
+    margin-left: auto;
+    margin-bottom: 0;
+    margin-top: auto;
 }
 
 .next-button {
-    min-height: 2rem;
-    width: 6.5rem;
-    padding: 0.55rem 0.9rem;
-    border-radius: 0.35rem;
     background: $motion-primary;
-    color: white;
-    font-weight: 700;
-    font-size: 0.77rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    outline-style:none;
-    margin-right: 0;
-    margin-left: auto;
 }

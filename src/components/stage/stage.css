@@ -9,7 +9,8 @@
     */
     display: block;
 
-    border-radius: $space;
+    border-bottom-left-radius: $space;
+    border-bottom-right-radius: $space;
     border: $stage-standard-border-width solid $ui-black-transparent;
     overflow: hidden;
 

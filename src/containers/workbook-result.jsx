@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VM from "scratch-vm";
 
 import WorkbookResultComponent from "../components/workbook-result/workbook-result.jsx";
+import { connect } from "react-redux";
 
 class WorkbookResult extends React.Component {
     constructor(props) {
@@ -10,10 +10,22 @@ class WorkbookResult extends React.Component {
     };
 
     render() {
-        return (
+        const {
+            isAnswered,
+        } = this.props;
+
+        return ( isAnswered ? (
             <WorkbookResultComponent />
-        );
+        ) : null);
     }
 }
 
-export default WorkbookResult;
+WorkbookResult.propTypes = {
+    isAnswered: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+    isAnswered: !state.scratchGui.workbook.answering,
+});
+
+export default connect(mapStateToProps)(WorkbookResult);

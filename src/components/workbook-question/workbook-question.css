@@ -3,12 +3,12 @@
 @import "../../css/z-index.css";
 
 .workbook-question-container {
-    display: flex;
     padding: 6px;
     margin-bottom: $space;
     background-color: $ui-white;
     border-bottom-right-radius: $space;
     border: $stage-standard-border-width solid $ui-black-transparent;
+    font-size: 1.2rem;
 }
 
 .title {

@@ -5,6 +5,7 @@
 .workbook-score {
     background-color: $ui-white;
     padding: $space;
+    font-size: 1.2rem;
 }
 
 .title {
@@ -14,7 +15,6 @@
 .score {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
     align-items: center;
     margin: $space;
     padding: $space;

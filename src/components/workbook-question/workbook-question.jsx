@@ -2,6 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import { defineMessages, injectIntl, intlShape } from "react-intl";
+import { connect } from 'react-redux';
 
 import styles from "./workbook-question.css";
 
@@ -31,4 +32,10 @@ WorkbookQuestion.propTypes = {
     className: PropTypes.string,
 };
 
-export default injectIntl(WorkbookQuestion);
+const mapStateToProps = state => ({
+    question: state.scratchGui.workbook.question.question,
+});
+
+export default injectIntl(connect(
+    mapStateToProps,
+)(WorkbookQuestion));

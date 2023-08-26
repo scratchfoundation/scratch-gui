@@ -35,6 +35,7 @@ WorkbookAnswer.propTypes = {
     description: PropTypes.string,
     vm: PropTypes.instanceOf(VM),
     isAnswering: PropTypes.bool.isRequired,
+    questionIndex: PropTypes.number.isRequired,
     onSurrender: PropTypes.func.isRequired,
     onAnswer: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,
@@ -42,6 +43,8 @@ WorkbookAnswer.propTypes = {
 
 const mapStateToProps = state => ({
     isAnswering: state.scratchGui.workbook.answering,
+    questionIndex: state.scratchGui.workbook.questionIndex,
+    description: state.scratchGui.workbook.question.explanation,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

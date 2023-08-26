@@ -253,7 +253,6 @@ const GUIComponent = props => {
                         <Box className={styles.editorWrapper}>
 
                             <WorkbookQuestion
-                                question="ひだりのネコをみぎに１０だけうごかして"
                                 vm={vm}
                             />
 
@@ -298,7 +297,6 @@ const GUIComponent = props => {
                             </Tabs>
 
                             <WorkbookAnswer
-                                description="はじめに、ネコのブロックをせってい。つぎに、みぎ。１０ぽうごかす。"
                                 vm={vm}
                             />
 

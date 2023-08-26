@@ -397,7 +397,7 @@ GUIComponent.defaultProps = {
     backpackVisible: false,
     basePath: './',
     blocksId: 'original',
-    canChangeLanguage: true,
+    canChangeLanguage: false,
     canChangeTheme: false,
     canCreateNew: false,
     canEditTitle: false,

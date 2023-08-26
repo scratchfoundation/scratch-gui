@@ -12,7 +12,7 @@ const initialState = {
     isRtl: false,
     locale: 'ja-Hira',
     messagesByLocale: editorMessages,
-    messages: editorMessages.en
+    messages: editorMessages['ja-Hira']
 };
 
 const reducer = function (state, action) {

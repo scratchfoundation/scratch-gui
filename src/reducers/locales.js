@@ -10,7 +10,7 @@ const SELECT_LOCALE = 'scratch-gui/locales/SELECT_LOCALE';
 
 const initialState = {
     isRtl: false,
-    locale: 'en',
+    locale: 'ja-Hira',
     messagesByLocale: editorMessages,
     messages: editorMessages.en
 };

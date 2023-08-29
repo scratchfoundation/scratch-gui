@@ -363,7 +363,8 @@ class Blocks extends React.Component {
                 targetCostumes[targetCostumes.length - 1].name,
                 stageCostumes[stageCostumes.length - 1].name,
                 targetSounds.length > 0 ? targetSounds[targetSounds.length - 1].name : '',
-                getColorsForTheme(this.props.theme)
+                getColorsForTheme(this.props.theme),
+                this.props.toolboxBlocksVisibilities,
             );
         } catch {
             return null;
@@ -645,7 +646,8 @@ Blocks.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired,
     workspaceMetrics: PropTypes.shape({
         targets: PropTypes.objectOf(PropTypes.object)
-    })
+    }),
+    toolboxBlocksVisibilities: PropTypes.object.isRequired,
 };
 
 Blocks.defaultOptions = {
@@ -682,7 +684,8 @@ const mapStateToProps = state => ({
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
     workspaceMetrics: state.scratchGui.workspaceMetrics,
-    useCatBlocks: isTimeTravel2020(state)
+    useCatBlocks: isTimeTravel2020(state),
+    toolboxBlocksVisibilities: state.scratchGui.workbook.question.toolboxBlocks ?? {},
 });
 
 const mapDispatchToProps = dispatch => ({

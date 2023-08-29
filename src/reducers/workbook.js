@@ -4,10 +4,16 @@ const SET_NEXT_QUESTION = 'workbook/SET_NEXT_QUESTION';
 const QUESTIONS = [
     {
         question: 'もんだい１です。ねこをみぎに１０ぽ、うごかしてください。',
+        toolboxBlocks: {
+            motion: { movesteps: true, turnright: true, pointindirection: true },
+        },
         explanation: 'もんだい１のせつめいです。ねこをみぎに１０ぽ、うごかせば、もんだいをとくことができます。',
     },
     {
         question: 'もんだい２です。ねこをみぎに２０ぽ、うごかしてください。',
+        toolboxBlocks: {
+            motion: { movesteps: true, turnleft: true, sety: true },
+        },
         explanation: 'もんだい２のせつめいです。ねこをみぎに２０ぽ、うごかせば、もんだいをとくことができます。',
     },
 ]

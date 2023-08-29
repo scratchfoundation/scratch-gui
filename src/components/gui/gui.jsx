@@ -82,6 +82,7 @@ const GUIComponent = props => {
         canCreateCopy,
         canShare,
         canUseCloud,
+        canUseExtensions,
         children,
         connectionModalVisible,
         costumeLibraryVisible,
@@ -278,19 +279,21 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
-                                <Box className={styles.extensionButtonContainer}>
-                                    <button
-                                        className={styles.extensionButton}
-                                        title={intl.formatMessage(messages.addExtension)}
-                                        onClick={onExtensionButtonClick}
-                                    >
-                                        <img
-                                            className={styles.extensionButtonIcon}
-                                            draggable={false}
-                                            src={addExtensionIcon}
-                                        />
-                                    </button>
-                                </Box>
+                                { canUseExtensions ? (
+                                    <Box className={styles.extensionButtonContainer}>
+                                        <button
+                                            className={styles.extensionButton}
+                                            title={intl.formatMessage(messages.addExtension)}
+                                            onClick={onExtensionButtonClick}
+                                        >
+                                            <img
+                                                className={styles.extensionButtonIcon}
+                                                draggable={false}
+                                                src={addExtensionIcon}
+                                            />
+                                        </button>
+                                    </Box>
+                                ) : null }
                                 <Box className={styles.watermark}>
                                     <Watermark />
                                 </Box>
@@ -345,6 +348,7 @@ GUIComponent.propTypes = {
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
     canUseCloud: PropTypes.bool,
+    canUseExtensions: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -405,6 +409,7 @@ GUIComponent.defaultProps = {
     canCreateCopy: false,
     canShare: false,
     canUseCloud: false,
+    canUseExtensions: false,
     enableCommunity: false,
     isCreating: false,
     isShared: false,

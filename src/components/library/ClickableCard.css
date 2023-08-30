@@ -1,0 +1,67 @@
+/* ClickableCard.module.css */
+
+.card {
+    background-color: #a7e3ed;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    height: 200px;
+    overflow: hidden;
+    position: relative; /* Add this to create a positioning context */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .deleteButton {
+    position: relative;
+    bottom: 3.5rem; /* Adjust the distance from the bottom */
+    left: 14rem; /* Adjust the distance from the right */
+    padding: 5px 10px;                                                                                                              
+    background-color: #f44336;
+    color: #fff;                                                                                    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;                                                      
+  }
+  
+  .deleteButton:hover {
+    background-color: #d32f2f;
+  }
+
+  .container {
+    position: relative;
+}
+
+.blur {
+    filter: blur(0px); /* Apply a blur effect to the background */
+}
+    
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+  .modal button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  

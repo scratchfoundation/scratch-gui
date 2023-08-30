@@ -10,8 +10,13 @@ import Divider from '../divider/divider.jsx';
 import Filter from '../filter/filter.jsx';
 import TagButton from '../../containers/tag-button.jsx';
 import Spinner from '../spinner/spinner.jsx';
+import CardsProjects from './cards-projects.jsx';
 
 import styles from './library.css';
+
+
+const baseURL1 = "https://ai.myqubit.co/api/scratch";
+
 
 const messages = defineMessages({
     filterPlaceholder: {
@@ -41,22 +46,59 @@ class LibraryComponent extends React.Component {
             'handlePlayingEnd',
             'handleSelect',
             'handleTagClick',
-            'setFilteredDataRef'
+            'setFilteredDataRef',
+            "getProjectsData"
         ]);
         this.state = {
             playingItem: null,
             filterQuery: '',
             selectedTag: ALL_TAG.tag,
-            loaded: false
+            loaded: false,
+            products: [],
+            gotProducts:[],
+            selectedProduct: '',
+            isLoaded: false,
         };
+
+        // this.handleProductChange = this.handleProductChange.bind(this);
     }
     componentDidMount () {
         // Allow the spinner to display before loading the content
+       this.getProjectsData();
+
+
         setTimeout(() => {
             this.setState({loaded: true});
         });
         if (this.props.setStopHandler) this.props.setStopHandler(this.handlePlayingEnd);
     }
+
+    getProjectsData() {
+        this.setState({isLoaded: true});
+        fetch(baseURL1, {
+            method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-moodle-session-key": "f0e9bgfmtp01f2gid6j6n9q2l9",
+                        },
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response?.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            this.setState({ products: data?.data });
+            this.setState({isLoaded: false});
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+            
+          });
+    }
+
+
     componentDidUpdate (prevProps, prevState) {
         if (prevState.filterQuery !== this.state.filterQuery ||
             prevState.selectedTag !== this.state.selectedTag) {
@@ -165,8 +207,11 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
-                {(this.props.filterable || this.props.tags) && (
+                
+                {(this.props.filterable || this.props.tags) && !(this.props.id == 'tipsLibrary') &&
+                (
                     <div className={styles.filterBar}>
+                  
                         {this.props.filterable && (
                             <Filter
                                 className={classNames(
@@ -201,14 +246,31 @@ class LibraryComponent extends React.Component {
                             </div>
                         }
                     </div>
-                )}
+                )  }
                 <div
-                    className={classNames(styles.libraryScrollGrid, {
+                    className={classNames(styles.libraryScrollGrid, styles?.cardContainer,{
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
                     ref={this.setFilteredDataRef}
-                >
-                    {this.state.loaded ? this.getFilteredData().map((dataItem, index) => (
+                >     
+                {this?.props?.id == 'tipsLibrary' && 
+                   !(this?.state?.products) && 
+                       <p>No cards</p>}   
+
+                      {this?.state?.isLoaded && (
+                    <div className={styles.spinnerWrapper}>
+                     <Spinner
+                        large
+                        level="primary"
+                          />
+                   </div>)}
+                    {this.props.id == 'tipsLibrary'? this.state?.products?.map((dataItem, index) => (
+                         <CardsProjects 
+                         projectData={dataItem} 
+                         onRequestCardClose={this.handleClose}                   
+                         refreshApiData={this.getProjectsData} 
+                         key={index}/> 
+                    )) : this.state.loaded? this.getFilteredData().map((dataItem, index) => (
                         <LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
                             collaborator={dataItem.collaborator}
@@ -231,14 +293,14 @@ class LibraryComponent extends React.Component {
                             onMouseLeave={this.handleMouseLeave}
                             onSelect={this.handleSelect}
                         />
+                        
                     )) : (
-                        <div className={styles.spinnerWrapper}>
-                            <Spinner
-                                large
-                                level="primary"
-                            />
-                        </div>
-                    )}
+                    <div className={styles.spinnerWrapper}>
+                     <Spinner
+                        large
+                        level="primary"
+                          />
+                   </div>)}
                 </div>
             </Modal>
         );

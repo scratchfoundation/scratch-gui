@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
+
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -14,23 +15,28 @@ import downloadBlob from '../lib/download-blob';
  * <SB3Downloader>{(downloadProject, props) => (
  *     <MyCoolComponent
  *         onClick={downloadProject}
- *         {...props}
+ *         {...props}+
  *     />
  * )}</SB3Downloader>
  */
 class SB3Downloader extends React.Component {
     constructor (props) {
         super(props);
+       
         bindAll(this, [
             'downloadProject'
+            
         ]);
     }
+ 
+
     downloadProject () {
         this.props.saveProjectSb3().then(content => {
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
             }
-            downloadBlob(this.props.projectFilename, content);
+            
+            downloadBlob(this?.props?.projectFilename, content, this?.props?.fileId);
         });
     }
     render () {
@@ -39,7 +45,10 @@ class SB3Downloader extends React.Component {
         } = this.props;
         return children(
             this.props.className,
-            this.downloadProject
+            this.downloadProject,
+            this.captureScreenshot,
+            this.props.isToggled,
+            this.props.fileId
         );
     }
 }
@@ -57,18 +66,29 @@ SB3Downloader.propTypes = {
     className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
-    saveProjectSb3: PropTypes.func
+    saveProjectSb3: PropTypes.func,
+    isToggled : PropTypes.bool,
+    fileId: PropTypes.string,
 };
 SB3Downloader.defaultProps = {
     className: ''
 };
 
+
+const mapDispatchToProps = dispatch => ({
+    switchToggle: () => dispatch({type: "SWITCHTOGGLE"})
+    
+});
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
-    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
+    projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
+    isToggled: state.toggleReducer.isToggled,
+    fileId: state?.uploadReducer?.items?.id,
 });
+
+
 
 export default connect(
     mapStateToProps,
-    () => ({}) // omit dispatch prop
+    mapDispatchToProps // omit dispatch prop
 )(SB3Downloader);

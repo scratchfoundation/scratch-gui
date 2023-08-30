@@ -69,7 +69,7 @@ const GUIComponent = props => {
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
-        canChangeTheme,
+        canFileUpload,
         canCreateNew,
         canEditTitle,
         canManageFiles,
@@ -217,7 +217,7 @@ const GUIComponent = props => {
                     authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
                     canChangeLanguage={canChangeLanguage}
-                    canChangeTheme={canChangeTheme}
+                    canFileUpload={canFileUpload}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canEditTitle={canEditTitle}
@@ -384,7 +384,7 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     blocksId: PropTypes.string,
     canChangeLanguage: PropTypes.bool,
-    canChangeTheme: PropTypes.bool,
+    canFileUpload: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
@@ -444,7 +444,7 @@ GUIComponent.defaultProps = {
     basePath: './',
     blocksId: 'original',
     canChangeLanguage: true,
-    canChangeTheme: true,
+    canFileUpload: true,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: true,

@@ -1,5 +1,5 @@
 import bindAll from 'lodash.bindall';
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {intlShape, injectIntl} from 'react-intl';
@@ -10,6 +10,7 @@ import {
 } from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
+import {setAutoSave} from '../reducers/toggleReducer';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
@@ -240,13 +241,21 @@ class TargetPane extends React.Component {
             isRtl,
             onActivateTab,
             onCloseImporting,
+            onSetAutoSave,
             onHighlightTarget,
             onReceivedBlocks,
             onShowImporting,
             workspaceMetrics,
+            setAutoSave,
             ...componentProps
         } = this.props;
         /* eslint-enable no-unused-vars */
+        // const booleanValue = onReceivedBlocks? true : false;                                                                                                                                                                                    
+        
+        // if(booleanValue){
+        //     this.props.toggle();
+        //     console.log(booleanValue,  this.props.toggle());
+        // }
         return (
             <TargetPaneComponent
                 {...componentProps}
@@ -283,6 +292,7 @@ TargetPane.propTypes = {
     intl: intlShape.isRequired,
     onCloseImporting: PropTypes.func,
     onShowImporting: PropTypes.func,
+    onSetAutoSave: PropTypes.func,
     ...targetPaneProps
 };
 
@@ -318,7 +328,9 @@ const mapDispatchToProps = dispatch => ({
         dispatch(highlightTarget(id));
     },
     onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
-    onShowImporting: () => dispatch(showStandardAlert('importingAsset'))
+    onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+    toggle: () => dispatch({type: "TOGGLE"})
+    
 });
 
 export default injectIntl(connect(

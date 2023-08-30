@@ -23,7 +23,7 @@ import {
 
 const messages = defineMessages({
     tipsLibraryTitle: {
-        defaultMessage: 'Choose a Tutorial',
+        defaultMessage: 'Choose a Project',
         description: 'Heading for the help/tutorials library',
         id: 'gui.tipsLibrary.tutorials'
     }
@@ -90,7 +90,7 @@ class TipsLibrary extends React.PureComponent {
                 data={decksLibraryThumbnailData}
                 id="tipsLibrary"
                 tags={tutorialTags}
-                title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
+                title="Choose a Project"
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

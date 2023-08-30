@@ -92,11 +92,13 @@ import prehistoricLogo from './prehistoric-logo.svg';
 import oldtimeyLogo from './oldtimey-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
+import FileUploadSelector from '../../containers/file-upload-selector.jsx';
+import {updateStateToOne} from '../../containers/newProjectSwitch.js'
 
 const ariaMessages = defineMessages({
     tutorials: {
         id: 'gui.menuBar.tutorialsLibrary',
-        defaultMessage: 'Tutorials',
+        defaultMessage: 'Save Projects',
         description: 'accessibility text for the tutorials button'
     }
 });
@@ -171,6 +173,9 @@ AboutButton.propTypes = {
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            screenshotDataUrl: null,
+          };
         bindAll(this, [
             'handleClickNew',
             'handleClickRemix',
@@ -182,10 +187,14 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+          
+           
+            
         ]);
+        
     }
-    componentDidMount () {
+    componentDidMount () {                                                                                                                                                                                  
         document.addEventListener('keydown', this.handleKeyPress);
     }
     componentWillUnmount () {
@@ -205,6 +214,8 @@ class MenuBar extends React.Component {
             this.props.onClickNew(this.props.canSave && this.props.canCreateNew);
         }
         this.props.onRequestCloseFile();
+       this.props.updateStateToOne(true);
+        
     }
     handleClickRemix () {
         this.props.onClickRemix();
@@ -218,6 +229,8 @@ class MenuBar extends React.Component {
         this.props.onClickSaveAsCopy();
         this.props.onRequestCloseFile();
     }
+
+  
     handleClickSeeCommunity (waitForUpdate) {
         if (this.props.shouldSaveBeforeTransition()) {
             this.props.autoUpdateProject(); // save before transitioning to project page
@@ -282,7 +295,9 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
+    
     getSaveToComputerHandler (downloadProjectCallback) {
+       
         return () => {
             this.props.onRequestCloseFile();
             downloadProjectCallback();
@@ -292,6 +307,16 @@ class MenuBar extends React.Component {
             }
         };
     }
+<<<<<<< Updated upstream
+=======
+
+   
+    handleLanguageMouseUp (e) {
+        if (!this.props.languageMenuOpen) {
+            this.props.onClickLanguage(e);
+        }
+    }
+>>>>>>> Stashed changes
     restoreOptionMessage (deletedItem) {
         switch (deletedItem) {
         case 'Sprite':
@@ -335,6 +360,7 @@ class MenuBar extends React.Component {
         // generate a menu with items for each object in the array
         return (
             <div
+            
                 className={classNames(styles.menuBarItem, styles.hoverable, {
                     [styles.active]: this.props.aboutMenuOpen
                 })}
@@ -422,7 +448,7 @@ class MenuBar extends React.Component {
                     styles.menuBar
                 )}
             >
-                <div className={styles.mainMenu}>
+                <div className={styles.mainMenu} id='container'>
                     <div className={styles.fileGroup}>
                         <div className={classNames(styles.menuBarItem)}>
                             <img
@@ -436,14 +462,27 @@ class MenuBar extends React.Component {
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
-                        {(this.props.canChangeTheme || this.props.canChangeLanguage) && (<SettingsMenu
-                            canChangeLanguage={this.props.canChangeLanguage}
-                            canChangeTheme={this.props.canChangeTheme}
-                            isRtl={this.props.isRtl}
-                            onRequestClose={this.props.onRequestCloseSettings}
-                            onRequestOpen={this.props.onClickSettings}
-                            settingsMenuOpen={this.props.settingsMenuOpen}
-                        />)}
+                        {(this.props.canChangeLanguage) && (<div
+                            className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
+                        >
+                            <div>
+                                <img
+                                    className={styles.languageIcon}
+                                    src={languageIcon}
+                                />
+                                <img
+                                    className={styles.languageCaret}
+                                    src={dropdownCaret}
+                                />
+                            </div>
+                            <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
+                        </div>)}
+                        {/* {(this.props.canFileUpload) && (<div
+                            className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
+                        >
+                            
+                            <FileUploadSelector  />
+                        </div>)} */}
                         {(this.props.canManageFiles) && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -466,6 +505,7 @@ class MenuBar extends React.Component {
                                     place={this.props.isRtl ? 'left' : 'right'}
                                     onRequestClose={this.props.onRequestCloseFile}
                                 >
+                                    
                                     <MenuSection>
                                         <MenuItem
                                             isRtl={this.props.isRtl}
@@ -491,6 +531,7 @@ class MenuBar extends React.Component {
                                                     {remixMessage}
                                                 </MenuItem>
                                             )}
+                                            
                                         </MenuSection>
                                     )}
                                     <MenuSection>
@@ -504,17 +545,21 @@ class MenuBar extends React.Component {
                                                 className={className}
                                                 onClick={this.getSaveToComputerHandler(downloadProjectCallback)}
                                             >
-                                                <FormattedMessage
+                                              {this?.props?.findId?.id ? "Update the Project" : (  <FormattedMessage
                                                     defaultMessage="Save to your computer"
                                                     description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
                                                     id="gui.menuBar.downloadToComputer"
-                                                />
+                                                />)
+                                        }
+                                          
                                             </MenuItem>
-                                        )}</SB3Downloader>
-                                    </MenuSection>
+                                        )}
+                                        </SB3Downloader>
+                                        </MenuSection>
                                 </MenuBarMenu>
                             </div>
                         )}
+
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
                                 [styles.active]: this.props.editMenuOpen
@@ -614,6 +659,31 @@ class MenuBar extends React.Component {
                             </div>
                         )}
                     </div>
+                    <Divider className={classNames(styles.divider)} />
+                   
+                    <div
+                        aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}
+                        onClick={this.props.onOpenTipLibrary}
+                    >
+                        <img
+                            className={styles.helpIcon}
+                            src={helpIcon}
+                        />
+                        {/* <FormattedMessage {...ariaMessages.tutorials} /> */}
+                        Saved projects
+                    </div>
+                    <Divider className={classNames(styles.divider)} />
+                              <div   aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
+                        className={classNames(styles.menuBarItem, styles.hoverable)}>
+                                        <div
+                                            isRtl={this.props.isRtl}
+                                            onClick={this.handleClickNew}
+                                        >
+                                            {newProjectMessage}
+                                        </div>
+                                    </div>
+                                    <Divider className={classNames(styles.divider)} />
                     {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
@@ -631,7 +701,7 @@ class MenuBar extends React.Component {
                             imageUrl={this.props.authorThumbnailUrl}
                             projectTitle={this.props.projectTitle}
                             userId={this.props.authorId}
-                            username={this.props.authorUsername}
+                            username={this.props.authorUsername}    
                         />
                     ) : null)}
                     <div className={classNames(styles.menuBarItem)}>
@@ -848,7 +918,7 @@ MenuBar.propTypes = {
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     autoUpdateProject: PropTypes.func,
     canChangeLanguage: PropTypes.bool,
-    canChangeTheme: PropTypes.bool,
+    canFileUpload: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
@@ -889,6 +959,8 @@ MenuBar.propTypes = {
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
+    onClickLanguage: PropTypes.func,
+
     onClickLogin: PropTypes.func,
     onClickLogo: PropTypes.func,
     onClickMode: PropTypes.func,
@@ -919,6 +991,7 @@ MenuBar.propTypes = {
     sessionExists: PropTypes.bool,
     settingsMenuOpen: PropTypes.bool,
     shouldSaveBeforeTransition: PropTypes.func,
+    updateStateToOne: PropTypes.func,
     showComingSoon: PropTypes.bool,
     username: PropTypes.string,
     userOwnsProject: PropTypes.bool,
@@ -946,6 +1019,7 @@ const mapStateToProps = (state, ownProps) => {
         loginMenuOpen: loginMenuOpen(state),
         modeMenuOpen: modeMenuOpen(state),
         projectTitle: state.scratchGui.projectTitle,
+        findId: state?.uploadReducer?.items,
         sessionExists: state.session && typeof state.session.session !== 'undefined',
         settingsMenuOpen: settingsMenuOpen(state),
         username: user ? user.username : null,
@@ -982,7 +1056,8 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode))
+    onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode)),
+    updateStateToOne: (stateUp) => dispatch(updateStateToOne(stateUp)),
 });
 
 export default compose(

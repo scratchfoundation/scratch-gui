@@ -1,6 +1,13 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
+
+.cardContainer {
+    display: flex;
+    gap: 20px; /* Add gap between cards */
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  }
+
 .library-scroll-grid {
     display: flex;
     justify-content: flex-start;

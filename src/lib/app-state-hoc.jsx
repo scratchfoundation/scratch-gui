@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers, compose} from 'redux';
 import ConnectedIntlProvider from './connected-intl-provider.jsx';
-
+import toggleReducer from "../reducers/toggleReducer";
+import uploadReducer from '../reducers/uploadReducer';
+import fileReducer from '../reducers/fileUploader';
+import fileUploadFunc from '../reducers/fileUploadFunc';
+import switchProjectReducer from '../reducers/switchProjectReducer';
 import localesReducer, {initLocale, localesInitialState} from '../reducers/locales';
+
 
 import {setPlayer, setFullScreen} from '../reducers/mode.js';
 
@@ -69,7 +74,12 @@ const AppStateHOC = function (WrappedComponent, localesOnly) {
                 reducers = {
                     locales: localesReducer,
                     scratchGui: guiReducer,
-                    scratchPaint: ScratchPaintReducer
+                    scratchPaint: ScratchPaintReducer,
+                    uploadReducer: uploadReducer,
+                    toggleReducer : toggleReducer,
+                    fileReducer: fileReducer,
+                    fileUploadFunc : fileUploadFunc,
+                    switchProjectReducer: switchProjectReducer
                 };
                 initialState = {
                     locales: initializedLocales,

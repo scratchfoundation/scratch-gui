@@ -980,7 +980,14 @@ const xmlClose = '</xml>';
  */
 
 const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categoriesXML = [],
-    costumeName = '', backdropName = '', soundName = '', colors = defaultColors, blockVisibilities = {}) {
+    costumeName = '', backdropName = '', soundName = '', colors = defaultColors,
+    blockVisibilities = {motion: {}}, // If the number of categories is zero, an error will occur.
+) {
+
+    // TODO: debug
+    console.log('>>> makeToolboxXML');
+    console.log('blockVisibilities', blockVisibilities);
+
     isStage = isInitialSetup || isStage;
     const gap = [categorySeparator];
 
@@ -1008,6 +1015,9 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId, colors.operators, blockVisibilities.operators);
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data, blockVisibilities.data);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more, blockVisibilities.more);
+
+    // TODO: debug
+    console.log(motionXML);
 
     const everything = [
         xmlOpen,

@@ -69,9 +69,10 @@ const GUIComponent = props => {
         blocksTabVisible,
         cardsVisible,
         canChangeLanguage,
-        canFileUpload,
+        canChangeTheme,
         canCreateNew,
         canEditTitle,
+        canFileUpload,
         canManageFiles,
         canRemix,
         canSave,
@@ -217,10 +218,11 @@ const GUIComponent = props => {
                     authorThumbnailUrl={authorThumbnailUrl}
                     authorUsername={authorUsername}
                     canChangeLanguage={canChangeLanguage}
-                    canFileUpload={canFileUpload}
+                    canChangeTheme={canChangeTheme}
                     canCreateCopy={canCreateCopy}
                     canCreateNew={canCreateNew}
                     canEditTitle={canEditTitle}
+                    canFileUpload={canFileUpload}
                     canManageFiles={canManageFiles}
                     canRemix={canRemix}
                     canSave={canSave}
@@ -384,10 +386,11 @@ GUIComponent.propTypes = {
     blocksTabVisible: PropTypes.bool,
     blocksId: PropTypes.string,
     canChangeLanguage: PropTypes.bool,
-    canFileUpload: PropTypes.bool,
+    canChangeTheme: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
+    canFileUpload: PropTypes.bool,
     canManageFiles: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
@@ -444,7 +447,7 @@ GUIComponent.defaultProps = {
     basePath: './',
     blocksId: 'original',
     canChangeLanguage: true,
-    canFileUpload: true,
+    canChangeTheme: true,
     canCreateNew: false,
     canEditTitle: false,
     canManageFiles: true,
@@ -459,6 +462,7 @@ GUIComponent.defaultProps = {
     isTotallyNormal: false,
     loading: false,
     showComingSoon: false,
+    canFileUpload: true,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

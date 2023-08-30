@@ -5,14 +5,6 @@ import {connect} from 'react-redux';
 import {selectLocale} from '../reducers/locales';
 import {closeLanguageMenu} from '../reducers/menus';
 import axios from 'axios';
-import { saveAs } from 'file-saver';
-import { addUpload } from './action';
-import { fileUpload } from './fileAction';
-import { setFunction} from './setFunction';
-import { findIndex } from 'core-js/fn/array';
-import Modal from '../containers/modal.jsx';
-
-
 const baseURL = "https://ai.myqubit.co/api/scratch";
 
 class FileUploadSelector extends Component {
@@ -24,25 +16,31 @@ class FileUploadSelector extends Component {
             selectedProduct: '' // Default selected product
         };
         this.handleProductChange = this.handleProductChange.bind(this);
-
-        // this.handleConvertAndSave = this.handleConvertAndSave.bind(this);
     }
     componentDidMount () {
+        // axios.get(`${baseURL}`)
+        //     .then(response => {
+        //         this.setState({ products: response.data });
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching data:', error);
+        //     });
 
         fetch(baseURL, {
             method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            "x-moodle-session-key": "f0e9bgfmtp01f2gid6j6n9q2l9",
+                            "x-moodle-session-key": "5hmvj5vuk0qupd0t1ntnps3ag8",
                         },
           })
           .then(response => {
             if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response?.status}`);
+              throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.json();
           })
           .then(data => {
+            console.log('datas',data);
             this.setState({ products: data?.data });
           })
           .catch(error => {
@@ -52,48 +50,64 @@ class FileUploadSelector extends Component {
 
     }
     handleProductChange = event => {
+        // eslint-disable-next-line no-invalid-this
+        this.setState({ selectedProduct: event.target.value });
+        // axios.get(`https://fakestoreapi.com/products/${event.target.value}`)
+            //     axios.get(`https://ai.myqubit.co/api/scratch/${event.target.value}`)
         
-              const findId = this?.state?.products?.find((product) => product?.id == event.target.value);
-               console.log("findId:", findId);
+            // .then(response => {
+            //     this.setState({ gotProducts: response.data });
+            // })
+            // .catch(error => {
+            //     console.error('Error fetching data:', error);
+            // });
 
-               if (findId && findId) {
-                this.props.addUpload(findId);
-                this.props.setFunction(findId);
-              }
-    };  
 
+            fetch(`https://ai.myqubit.co/api/scratch/${event.target.value}`, {
+                method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "x-moodle-session-key": "5hmvj5vuk0qupd0t1ntnps3ag8",
+                            },
+              })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+              })
+              .then(data => {
+                console.log('datas',data);
+                this.setState({ gotProducts: data?.data });
+        })
+              .catch(error => {
+                console.error('Fetch error:', error);
+              });
+
+
+    };
+
+    
     render () {
         const { products, selectedProduct } = this.state;
 
         return (
             <div>
-          
+            
             <select style={{width: "51px"}} value={selectedProduct} onChange={this.handleProductChange}>
                
-                {products?.map(product => (
+                {products.map(product => (
                     <option 
-                     key={product?.id} 
-                     value={product?.id}>
+                     key={product.id} 
+                     value={product.id}>
                      {product.name}
                     </option> 
                 ))}
             </select>
           
         </div>
-
-        // <Modal fullScreen
-        // contentLabel={this.props.title}
-        // id={this.props.id}
-        // onRequestClose={this.handleClose}>
-
-        // </Modal>
         );
     }
 }
-const mapDispatchToProps = dispatch => ({
-    addUpload: (todo) => dispatch(addUpload(todo)),
-    fileUpload: (files)=> dispatch (fileUpload(files)),                                                                                                                                                                     
-    setFunction : (findId) => dispatch(setFunction(findId))                                                                                                                           
-  });
 
-export default connect(null, mapDispatchToProps)(FileUploadSelector);
+export default FileUploadSelector;

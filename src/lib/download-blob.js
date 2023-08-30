@@ -2,6 +2,7 @@
 
 // import axios from 'axios';
 import Cookies from 'js-cookie';
+import html2canvas from 'html2canvas';
 
 export default (filename, blob, id) => {
     
@@ -70,11 +71,21 @@ export default (filename, blob, id) => {
                     console.error("POST error:", error);
                 });
            } else {
+            
+
+            const targetElement = document.body; // You can select the desired element here
+
+            // Capture screenshot using html2canvas
+            html2canvas(targetElement).then(canvas => {
+              // Convert canvas to Base64-encoded image
+              const screenshotDataUrl = canvas.toDataURL('image/png');
+          console.log('<<<<', screenshotDataUrl)
+
             fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "x-moodle-session-key": "f0e9bgfmtp01f2gid6j6n9q2l9",
+                    "x-moodle-session-key": "q03cv91l0v9bqc1p2bktc5lldk",
                 },
                 body: JSON.stringify({
                     name: filename,
@@ -83,11 +94,73 @@ export default (filename, blob, id) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("POST success:", data);
+                    // console.log("POST success:", data);
+
+
+
+                    function createSuccessMessage(message) {
+                                            const successMessage = document.createElement('div');
+                                            successMessage.classList.add('success-popup');
+                                            successMessage.textContent = message;
+                                            document.body.appendChild(successMessage);
+                                          
+                                            setTimeout(() => {
+                                              document.body.removeChild(successMessage);
+                                            }, 3000);
+                                          }
+                                          
+                                          function performPostCall() {
+                                            // Replace this with your actual POST call using fetch or another method
+                                            // For demonstration purposes, I'm using a timeout to simulate the call
+                                            setTimeout(() => {
+                                              // Simulate a successful response
+                                              const response = {
+                                                message: "Your Project has been saved successfully"
+                                              };
+                                              
+                                              // Check if the response status indicates success
+                                              if (data.status === 'success') {
+                                                // Create and display a styled success message
+                                                createSuccessMessage(response.message);
+                                              } else {
+                                                // Handle the case where the response status is not successful
+                                                console.error("POST request failed.");
+                                              }
+                                            }, 2000); // Simulate the call after 2 seconds
+                                          }
+                                          
+                                          // Call the function to simulate the POST call and display the styled pop-up
+                                          performPostCall();
+                                          
+                                          
+                                          const styles = `
+                                          .success-popup {
+                                            position: fixed;
+                                            top: 10%;
+                                            right: 10%;
+                                            transform: translate(-50%, -50%);
+                                            padding: 10px 20px;
+                                            background-color: #4CAF50;
+                                            color: #fff;
+                                            border-radius: 5px;
+                                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+                                            z-index: 1000;
+                                            
+                                          }
+                                          `;
+                                          
+                                          const styleElement = document.createElement('style');
+                                          styleElement.innerHTML = styles;
+                                          document.head.appendChild(styleElement);
+
+                                        })
+
+
                 })
                 .catch((error) => {
                     console.error("POST error:", error);
                 });
+
            }
            
 

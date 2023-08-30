@@ -317,3 +317,6 @@ $fade-out-distance: 15px;
 :global(.ReactModal__Body--open) {
     overflow: hidden;
 }
+.tool-select-base_mod-tool-select_8BmWU.tool-select-base_is-selected_2pt0e{
+    background-color: red !important;
+}

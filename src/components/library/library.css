@@ -4,8 +4,9 @@
 
 .cardContainer {
     display: flex;
-    gap: 20px; /* Add gap between cards */
-    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    gap: 20px; 
+    flex-wrap: wrap; 
+    
   }
 
 .library-scroll-grid {
@@ -18,21 +19,21 @@
     flex-wrap: wrap;
     overflow-y: auto;
     height: auto;
-    padding: 0.5rem;
+    padding: 40px;
     height: calc(100% - $library-header-height);
 }
 
-.library-scroll-grid.withFilterBar {
+/* .library-scroll-grid.withFilterBar {
     height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
-}
+} */
 
 .filter-bar {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    height: calc($library-filter-bar-height + 2rem); /* padding */
-    background-color: $looks-transparent;
+    height: calc($library-filter-bar-height + 2rem); 
+    /* background-color: $motion-transparent; */
     padding: 0 1rem;
     font-size: .875rem;
 }
@@ -75,3 +76,18 @@
     align-items: center;
     justify-content: center;
 }
+
+@media only screen and (max-width: 768px) {
+    .cardContainer {
+        display: flex;
+        gap: 45px; 
+        flex-wrap: wrap; 
+      }
+      
+}
+
+@media screen and (max-width: 420px) {
+    .library-scroll-grid {
+        padding: 20px;
+      }
+ }

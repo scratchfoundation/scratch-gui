@@ -56,8 +56,7 @@ class LibraryComponent extends React.Component {
             loaded: false,
             products: [],
             gotProducts:[],
-            selectedProduct: '',
-            isLoaded: false,
+            selectedProduct: ''
         };
 
         // this.handleProductChange = this.handleProductChange.bind(this);
@@ -74,12 +73,11 @@ class LibraryComponent extends React.Component {
     }
 
     getProjectsData() {
-        this.setState({isLoaded: true});
         fetch(baseURL1, {
             method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            "x-moodle-session-key": "f0e9bgfmtp01f2gid6j6n9q2l9",
+                            "x-moodle-session-key": "q03cv91l0v9bqc1p2bktc5lldk",
                         },
           })
           .then(response => {
@@ -90,11 +88,9 @@ class LibraryComponent extends React.Component {
           })
           .then(data => {
             this.setState({ products: data?.data });
-            this.setState({isLoaded: false});
           })
           .catch(error => {
             console.error('Fetch error:', error);
-            
           });
     }
 
@@ -208,10 +204,8 @@ class LibraryComponent extends React.Component {
                 onRequestClose={this.handleClose}
             >
                 
-                {(this.props.filterable || this.props.tags) && !(this.props.id == 'tipsLibrary') &&
-                (
+                {(this.props.filterable || this.props.tags) && !(this.props.id == 'tipsLibrary') && (
                     <div className={styles.filterBar}>
-                  
                         {this.props.filterable && (
                             <Filter
                                 className={classNames(
@@ -246,30 +240,20 @@ class LibraryComponent extends React.Component {
                             </div>
                         }
                     </div>
-                )  }
+                )}
                 <div
                     className={classNames(styles.libraryScrollGrid, styles?.cardContainer,{
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
                     ref={this.setFilteredDataRef}
-                >     
-                {this?.props?.id == 'tipsLibrary' && 
-                   !(this?.state?.products) && 
-                       <p>No cards</p>}   
+                >                                                                                                                                                                                                                                           
+                    {this.props.id == 'tipsLibrary'? this.state.products.map((dataItem, index) => (
+                       
+                        <CardsProjects projectData={dataItem} 
+                        onRequestCardClose={this.handleClose} 
+                        refreshApiData={this.getProjectsData} 
+                        key={index}/>
 
-                      {this?.state?.isLoaded && (
-                    <div className={styles.spinnerWrapper}>
-                     <Spinner
-                        large
-                        level="primary"
-                          />
-                   </div>)}
-                    {this.props.id == 'tipsLibrary'? this.state?.products?.map((dataItem, index) => (
-                         <CardsProjects 
-                         projectData={dataItem} 
-                         onRequestCardClose={this.handleClose}                   
-                         refreshApiData={this.getProjectsData} 
-                         key={index}/> 
                     )) : this.state.loaded? this.getFilteredData().map((dataItem, index) => (
                         <LibraryItem
                             bluetoothRequired={dataItem.bluetoothRequired}
@@ -309,7 +293,6 @@ class LibraryComponent extends React.Component {
 
 LibraryComponent.propTypes = {
     data: PropTypes.arrayOf(
-        /* eslint-disable react/no-unused-prop-types, lines-around-comment */
         // An item in the library
         PropTypes.shape({
             // @todo remove md5/rawURL prop from library, refactor to use storage
@@ -320,7 +303,6 @@ LibraryComponent.propTypes = {
             ]),
             rawURL: PropTypes.string
         })
-        /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
     filterable: PropTypes.bool,
     id: PropTypes.string.isRequired,

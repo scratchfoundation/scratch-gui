@@ -456,7 +456,7 @@ class MenuBar extends React.Component {
                                 })}
                                 draggable={false}
                                 src={this.props.logo}
-                                onClick={this.props.onClickLogo}
+                                
                             />
                         </div>
                         {/* {(this.props.canChangeTheme || this.props.canChangeLanguage) && (<SettingsMenu

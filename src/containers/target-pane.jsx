@@ -10,7 +10,6 @@ import {
 } from '../reducers/modals';
 import {activateTab, COSTUMES_TAB_INDEX, BLOCKS_TAB_INDEX} from '../reducers/editor-tab';
 import {setReceivedBlocks} from '../reducers/hovered-target';
-import {setAutoSave} from '../reducers/toggleReducer';
 import {showStandardAlert, closeAlertWithId} from '../reducers/alerts';
 import {setRestore} from '../reducers/restore-deletion';
 import DragConstants from '../lib/drag-constants';
@@ -249,13 +248,7 @@ class TargetPane extends React.Component {
             setAutoSave,
             ...componentProps
         } = this.props;
-        /* eslint-enable no-unused-vars */
-        // const booleanValue = onReceivedBlocks? true : false;                                                                                                                                                                                    
-        
-        // if(booleanValue){
-        //     this.props.toggle();
-        //     console.log(booleanValue,  this.props.toggle());
-        // }
+       
         return (
             <TargetPaneComponent
                 {...componentProps}
@@ -329,7 +322,6 @@ const mapDispatchToProps = dispatch => ({
     },
     onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
     onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
-    toggle: () => dispatch({type: "TOGGLE"})
     
 });
 

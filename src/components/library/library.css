@@ -91,3 +91,12 @@
         padding: 20px;
       }
  }
+
+ .error {
+    margin: auto;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 13px 50px;
+    border-radius: 5px;
+ }

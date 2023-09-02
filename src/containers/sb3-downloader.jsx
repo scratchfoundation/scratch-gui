@@ -5,20 +5,7 @@ import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
 
-/**
- * Project saver component passes a downloadProject function to its child.
- * It expects this child to be a function with the signature
- *     function (downloadProject, props) {}
- * The component can then be used to attach project saving functionality
- * to any other component:
- *
- * <SB3Downloader>{(downloadProject, props) => (
- *     <MyCoolComponent
- *         onClick={downloadProject}
- *         {...props}+
- *     />
- * )}</SB3Downloader>
- */
+
 class SB3Downloader extends React.Component {
     constructor (props) {
         super(props);
@@ -68,7 +55,7 @@ SB3Downloader.propTypes = {
     projectFilename: PropTypes.string,
     saveProjectSb3: PropTypes.func,
     isToggled : PropTypes.bool,
-    fileId: PropTypes.string,
+    fileId: PropTypes.number,
 };
 SB3Downloader.defaultProps = {
     className: ''

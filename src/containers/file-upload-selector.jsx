@@ -40,7 +40,6 @@ class FileUploadSelector extends Component {
             return response.json();
           })
           .then(data => {
-            console.log('datas',data);
             this.setState({ products: data?.data });
           })
           .catch(error => {
@@ -77,7 +76,6 @@ class FileUploadSelector extends Component {
                 return response.json();
               })
               .then(data => {
-                console.log('datas',data);
                 this.setState({ gotProducts: data?.data });
         })
               .catch(error => {

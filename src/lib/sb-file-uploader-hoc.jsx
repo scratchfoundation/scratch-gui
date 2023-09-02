@@ -1,6 +1,7 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
+import apiServeice from '../../apiService';
 import  {
         defineMessages, 
         intlShape, 
@@ -70,15 +71,14 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 this.handleFinishedLoadingUpload(); // cue step 5 below
             }
             
-            if(this?.props?.fileId?.id && this.props.swapeState === false)  {                                                                                                                                                                           
+            if(this?.props?.fileId?.id && this.props.swapestate === false)  {                                                                                                                                                                           
                 this.getProjectsToOpen(this?.props?.fileId?.id);
                 this.props.updateStateTofalse(false)
 
-            }else if(this.props.swapeState === true){
+            }else if(this.props.swapestate === true){
                 this.props.addUpload(null);
                 this.props.updateStateTofalse(false)
                 // this.getProjectsToOpen();
-                console.log("first")
              } else return 'null'
             
         }
@@ -86,27 +86,9 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         
 
         
-getProjectsToOpen (id){
-    const requestOptions = {
-        method: 'GET',
-        headers: {  "Accept": "<MIME_type>/*",
-        "x-moodle-session-key": "f0e9bgfmtp01f2gid6j6n9q2l9", }
-        };
-
-        fetch(`https://ai.myqubit.co/api/scratch/${id}`, requestOptions)
-        .then((res) => {
-           return res.blob();
-        })
-        .then((blob) => {
-            return blob.arrayBuffer();
-        }).then((arrayBuffer)=> {
-           this.onload(arrayBuffer);
-         
-          console.log("Loaded " +  typeof(arrayBuffer));
-        })
-        .catch((err) => {
-            return Promise.reject({ Error: 'Something Went Wrong', err });
-        })
+async getProjectsToOpen (id){
+    const data = await apiServeice.getProject(id)
+        this.onload(data);
 }
        
         componentWillUnmount () {
@@ -125,7 +107,6 @@ getProjectsToOpen (id){
             this.removeFileObjects();
             // create fileReader
             this.fileReader = new FileReader();
-            console.log("FileReader", this.fileReader)
             this.fileReader.onload = this.onload;
             // create <input> element and add it to DOM
             this.inputElement = document.createElement('input');
@@ -150,8 +131,6 @@ getProjectsToOpen (id){
             const thisFileInput = e.target;
             if (thisFileInput.files) { // Don't attempt to load if no file was selected
                 this.fileToUpload = thisFileInput.files[0];
-                console.log("first", thisFileInput.files[0]);
-                console.log("Projected", projectChanged,isShowingWithoutId);
 
                 // If user owns the project, or user has changed the project,
                 // we must confirm with the user that they really intend to
@@ -159,7 +138,6 @@ getProjectsToOpen (id){
                 // changed it, no need to confirm.)
                 let uploadAllowed = true;
                 if (userOwnsProject || (projectChanged && isShowingWithoutId)) {
-                       console.log("Projected", projectChanged,isShowingWithoutId);
 
                     uploadAllowed = confirm( // eslint-disable-line no-alert
                         intl.formatMessage(sharedMessages.replaceProjectWarning)    
@@ -187,7 +165,6 @@ getProjectsToOpen (id){
                 // begin to read data from the file. When finished,
                 // cues step 6 using the reader's onload callback
               this.fileReader.readAsArrayBuffer(this.fileToUpload);
-              console.log("done reading", this.fileToUpload, this.fileReader)
               
             } else {
                 this.props.cancelFileUpload(this.props.loadingState);
@@ -208,7 +185,6 @@ getProjectsToOpen (id){
                 
                 const filename = this.props.fileId?.name;
                 let loadingSuccess = false;
-               console.log("arrayBuffer",typeof(arrayBuffer))
                 this.props.vm.loadProject(arrayBuffer)
                     .then(() => {
                         if (filename) {
@@ -254,6 +230,9 @@ getProjectsToOpen (id){
                 requestProjectUpload: requestProjectUploadProp,
                 userOwnsProject,
                 fileId,
+                addUpload,
+                updateStateTofalse,
+                swapestate,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
             } = this.props;
@@ -299,7 +278,7 @@ getProjectsToOpen (id){
             loadingState: loadingState,
             projectChanged: state.scratchGui.projectChanged,
             fileId: state.uploadReducer.items,
-            swapeState: state.switchProjectReducer.switchState,
+            swapestate: state.switchProjectReducer.switchState,
             userOwnsProject: ownProps.authorUsername && user &&
                 (ownProps.authorUsername === user.username),
             vm: state.scratchGui.vm
@@ -313,7 +292,7 @@ getProjectsToOpen (id){
         // transition project state from loading to regular, and close
         // loading screen and file menu
         onLoadingFinished: (loadingState, success) => {
-            dispatch(onLoadedProject(loadingState, ownProps.canSave, success));
+            // dispatch(onLoadedProject(loadingState, ownProps.canSave, success));
             dispatch(closeLoadingProject());
             dispatch(closeFileMenu());
         },

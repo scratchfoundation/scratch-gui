@@ -13,9 +13,11 @@ import Spinner from '../spinner/spinner.jsx';
 import CardsProjects from './cards-projects.jsx';
 
 import styles from './library.css';
+import styles1 from'./ClickableCard.css';
+import apiService from '../../../apiService.js';
+import 'regenerator-runtime/runtime';
 
 
-const baseURL1 = "https://ai.myqubit.co/api/scratch";
 
 
 const messages = defineMessages({
@@ -47,7 +49,9 @@ class LibraryComponent extends React.Component {
             'handleSelect',
             'handleTagClick',
             'setFilteredDataRef',
-            "getProjectsData"
+            "getProjectsData",
+            'deleteIds',
+            'closeModal'
         ]);
         this.state = {
             playingItem: null,
@@ -56,7 +60,11 @@ class LibraryComponent extends React.Component {
             loaded: false,
             products: [],
             gotProducts:[],
-            selectedProduct: ''
+            selectedProduct: '',
+            isModalOpen: false,
+            selectedId: null,
+            selectedName:'',
+            isLoadedSpinner: false
         };
 
         // this.handleProductChange = this.handleProductChange.bind(this);
@@ -72,26 +80,18 @@ class LibraryComponent extends React.Component {
         if (this.props.setStopHandler) this.props.setStopHandler(this.handlePlayingEnd);
     }
 
-    getProjectsData() {
-        fetch(baseURL1, {
-            method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "x-moodle-session-key": "q03cv91l0v9bqc1p2bktc5lldk",
-                        },
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response?.status}`);
-            }
-            return response.json();
-          })
-          .then(data => {
-            this.setState({ products: data?.data });
-          })
-          .catch(error => {
-            console.error('Fetch error:', error);
-          });
+   async getProjectsData() {
+    this.setState({isLoadedSpinner: true});
+        const data = await apiService.get()
+        if(data?.status == 'success') {
+            this.setState({isLoadedSpinner: false})
+            this.setState({ products: data?.data })
+        }
+        else {
+            this.setState({isLoadedSpinner: false})
+        }
+        
+        
     }
 
 
@@ -100,7 +100,36 @@ class LibraryComponent extends React.Component {
             prevState.selectedTag !== this.state.selectedTag) {
             this.scrollToTop();
         }
+        this.state.products;
     }
+
+    deleteIds(id, name){
+        this.setState({ isModalOpen: true });
+        this.setState({ selectedId: id });
+        this.setState({ selectedName: name});
+    }
+
+    
+
+
+       handleDelete = async (id) =>{
+        this.setState({isLoadedSpinner: true});
+        const deletedItem = await apiService.delete(id); // Make a DELETE request
+        if(deletedItem?.status == "204") {
+            this.setState({isLoadedSpinner: false});
+            this.getProjectsData()
+            this.closeModal();
+        }
+        
+   
+    }
+
+    closeModal () {
+        this.setState({ isModalOpen: false });  
+    }
+
+
+
     handleSelect (id) {
         this.handleClose();
         this.props.onItemSelected(this.getFilteredData()[id]);
@@ -246,10 +275,40 @@ class LibraryComponent extends React.Component {
                         [styles.withFilterBar]: this.props.filterable || this.props.tags
                     })}
                     ref={this.setFilteredDataRef}
-                >                                                                                                                                                                                                                                           
-                    {this.props.id == 'tipsLibrary'? this.state.products.map((dataItem, index) => (
+                >         
+                 {this?.state?.isLoadedSpinner && (
+                    <div className={styles.spinnerWrapper}>
+                     <Spinner           
+                        large
+                        level="primary"
+                          />
+                   </div>)}    
+
+                   {this?.state?.isModalOpen && (
+                        <>
+                        <div className={styles1?.modal}>
+                        <h5>Are you sure you want to delete {this.state.selectedName}?</h5>
+                        <div className={styles1.buttonFlex} >
+                            <button className={styles1.buttonCancel} 
+                                             onClick={this.closeModal}>
+                                             Cancel</button>
+                            <button className={styles1.buttonConfirm} 
+                                        onClick={()=>this.handleDelete(this.state.selectedId)}>
+                                        Confirm Delete</button>
+                        </div>
+                        
+                    </div>
+                   
+                    </>
+                
+            )} 
+
+{this?.props?.id == 'tipsLibrary' && this?.state?.isLoadedSpinner === false && this?.state?.products?.length < 1  && <p className={styles.error}>Projects are empty</p>}
+                    {this.props.id == 'tipsLibrary'? this?.state?.products?.map((dataItem, index) => (
                        
                         <CardsProjects projectData={dataItem} 
+                        deleteId ={this.deleteIds}
+                        onClose = {this.closeModal}
                         onRequestCardClose={this.handleClose} 
                         refreshApiData={this.getProjectsData} 
                         key={index}/>
@@ -309,6 +368,7 @@ LibraryComponent.propTypes = {
     intl: intlShape.isRequired,
     onItemMouseEnter: PropTypes.func,
     onItemMouseLeave: PropTypes.func,
+    isLoadedSpinner: PropTypes.bool,
     onItemSelected: PropTypes.func,
     onRequestClose: PropTypes.func,
     setStopHandler: PropTypes.func,

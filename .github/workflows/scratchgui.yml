@@ -1,0 +1,34 @@
+name: ScratchTest
+on:
+  push:
+    
+  pull_request:
+    
+jobs:
+  setup:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: npm 8
+        run: npm install
+      
+
+
+      - name: Unit test
+        run: npm run test:unit
+      
+      - name: Build
+        run: npm run build 
+      
+      - name: Run Integration
+        run: npm run test:integration

@@ -144,6 +144,7 @@ class Blocks extends React.Component {
         if (this.props.isVisible) {
             this.setLocale();
         }
+        this.loadExtension('pen');
     }
     shouldComponentUpdate (nextProps, nextState) {
         return (
@@ -154,7 +155,8 @@ class Blocks extends React.Component {
             this.props.customProceduresVisible !== nextProps.customProceduresVisible ||
             this.props.locale !== nextProps.locale ||
             this.props.anyModalVisible !== nextProps.anyModalVisible ||
-            this.props.stageSize !== nextProps.stageSize
+            this.props.stageSize !== nextProps.stageSize ||
+            this.props.visibilities !== nextProps.visibilities
         );
     }
     componentDidUpdate (prevProps) {
@@ -168,6 +170,13 @@ class Blocks extends React.Component {
         // Do not check against prevProps.toolboxXML because that may not have been rendered.
         if (this.props.isVisible && this.props.toolboxXML !== this._renderedToolboxXML) {
             this.requestToolboxUpdate();
+        }
+
+        if (this.props.visibilities !== prevProps.visibilities) {
+            const toolboxXML = this.getToolboxXML();
+            if (toolboxXML) {
+                this.props.updateToolboxState(toolboxXML);
+            }
         }
 
         if (this.props.isVisible === prevProps.isVisible) {
@@ -343,6 +352,11 @@ class Blocks extends React.Component {
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
     }
+    loadExtension (id) {
+        if (!this.props.vm.extensionManager.isExtensionLoaded(id)) {
+            this.props.vm.extensionManager.loadExtensionURL(id);
+        }
+    }
     getToolboxXML () {
         // Use try/catch because this requires digging pretty deep into the VM
         // Code inside intentionally ignores several error situations (no stage, etc.)
@@ -356,7 +370,7 @@ class Blocks extends React.Component {
             const targetCostumes = target.getCostumes();
             const targetSounds = target.getSounds();
             const dynamicBlocksXML = injectExtensionCategoryTheme(
-                this.props.vm.runtime.getBlocksXML(target),
+                this.props.vm.runtime.getBlocksXML(target, this.props.visibilities),
                 this.props.theme
             );
             return makeToolboxXML(false, target.isStage, target.id, dynamicBlocksXML,
@@ -364,7 +378,7 @@ class Blocks extends React.Component {
                 stageCostumes[stageCostumes.length - 1].name,
                 targetSounds.length > 0 ? targetSounds[targetSounds.length - 1].name : '',
                 getColorsForTheme(this.props.theme),
-                this.props.toolboxBlocksVisibilities,
+                this.props.visibilities,
             );
         } catch {
             return null;
@@ -479,6 +493,7 @@ class Blocks extends React.Component {
         // @todo Later we should replace this to avoid all the warnings from redefining blocks.
         this.handleExtensionAdded(categoryInfo);
     }
+    // TODO: 👀 ❌ This function does not add the new category to the toolbox
     handleCategorySelected (categoryId) {
         const extension = extensionData.find(ext => ext.extensionId === categoryId);
         if (extension && extension.launchPeripheralConnectionFlow) {
@@ -647,7 +662,7 @@ Blocks.propTypes = {
     workspaceMetrics: PropTypes.shape({
         targets: PropTypes.objectOf(PropTypes.object)
     }),
-    toolboxBlocksVisibilities: PropTypes.object.isRequired,
+    visibilities: PropTypes.object,
 };
 
 Blocks.defaultOptions = {
@@ -685,7 +700,7 @@ const mapStateToProps = state => ({
     customProceduresVisible: state.scratchGui.customProcedures.active,
     workspaceMetrics: state.scratchGui.workspaceMetrics,
     useCatBlocks: isTimeTravel2020(state),
-    toolboxBlocksVisibilities: state.scratchGui.workbook.question.toolboxBlocks ?? {},
+    visibilities: state.scratchGui.workbook.question.toolboxBlocks ?? {},
 });
 
 const mapDispatchToProps = dispatch => ({

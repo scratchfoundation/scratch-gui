@@ -76,13 +76,14 @@ const GUIComponent = props => {
         canChangeTheme,
         canCreateNew,
         canEditTitle,
+        canManageExtensions,
         canManageFiles,
+        canManageSprites,
         canRemix,
         canSave,
         canCreateCopy,
         canShare,
         canUseCloud,
-        canUseExtensions,
         children,
         connectionModalVisible,
         costumeLibraryVisible,
@@ -129,6 +130,7 @@ const GUIComponent = props => {
         theme,
         tipsLibraryVisible,
         vm,
+        isWorkbookAnswering,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
@@ -279,7 +281,7 @@ const GUIComponent = props => {
                                         vm={vm}
                                     />
                                 </Box>
-                                { canUseExtensions ? (
+                                { canManageExtensions ? (
                                     <Box className={styles.extensionButtonContainer}>
                                         <button
                                             className={styles.extensionButton}
@@ -313,9 +315,15 @@ const GUIComponent = props => {
                                 stageSize={stageSize}
                                 vm={vm}
                             />
-                            {/* TODO: Use stageSize */}
                             <Box className={styles.targetWrapper}>
-                                <WorkbookResult />
+                                { canManageSprites && isWorkbookAnswering ? (
+                                    <TargetPane
+                                        stageSize={stageSize}
+                                        vm={vm}
+                                    />
+                                ) : (
+                                    <WorkbookResult />
+                                )}
                             </Box>
                         </Box>
                     </Box>
@@ -343,12 +351,13 @@ GUIComponent.propTypes = {
     canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
+    canManageExtensions: PropTypes.bool,
     canManageFiles: PropTypes.bool,
+    canManageSprites: PropTypes.bool,
     canRemix: PropTypes.bool,
     canSave: PropTypes.bool,
     canShare: PropTypes.bool,
     canUseCloud: PropTypes.bool,
-    canUseExtensions: PropTypes.bool,
     cardsVisible: PropTypes.bool,
     children: PropTypes.node,
     costumeLibraryVisible: PropTypes.bool,
@@ -392,7 +401,8 @@ GUIComponent.propTypes = {
     telemetryModalVisible: PropTypes.bool,
     theme: PropTypes.string,
     tipsLibraryVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    isWorkbookAnswering: PropTypes.bool,
 };
 GUIComponent.defaultProps = {
     backpackHost: null,
@@ -403,27 +413,30 @@ GUIComponent.defaultProps = {
     canChangeTheme: false,
     canCreateNew: false,
     canEditTitle: false,
+    canManageExtensions: false,
     canManageFiles: false,
+    canManageSprites: false,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,
     canShare: false,
     canUseCloud: false,
-    canUseExtensions: false,
     enableCommunity: false,
     isCreating: false,
     isShared: false,
     isTotallyNormal: false,
     loading: false,
     showComingSoon: false,
-    stageSizeMode: STAGE_SIZE_MODES.large
+    stageSizeMode: STAGE_SIZE_MODES.large,
+    isWorkbookAnswering: true,
 };
 
 const mapStateToProps = state => ({
     // This is the button's mode, as opposed to the actual current state
     blocksId: state.scratchGui.timeTravel.year.toString(),
     stageSizeMode: state.scratchGui.stageSize.stageSize,
-    theme: state.scratchGui.theme.theme
+    theme: state.scratchGui.theme.theme,
+    isWorkbookAnswering: state.scratchGui.workbook.answering,
 });
 
 export default injectIntl(connect(

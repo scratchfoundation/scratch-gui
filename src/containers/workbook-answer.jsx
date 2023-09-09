@@ -2,7 +2,6 @@ import bindAll from "lodash.bindall";
 import PropTypes from "prop-types"
 import React from "react";
 import VM from 'scratch-vm'
-import makeToolboxXML from '../lib/make-toolbox-xml';
 
 import { connect } from 'react-redux'
 import { surrender, answer, next } from "../reducers/workbook.js"
@@ -40,22 +39,6 @@ class WorkbookAnswer extends React.Component {
     onNextClick (e) {
         e.preventDefault();
         this.props.onNext();
-
-        const toolboxXML = this.getToolboxXML();
-        this.props.updateToolboxState(toolboxXML);
-    }
-    getToolboxXML () {
-        // Use try/catch because this requires digging pretty deep into the VM
-        // Code inside intentionally ignores several error situations (no stage, etc.)
-        // Because they would get caught by this try/catch
-        try {
-            let {editingTarget: target, runtime} = this.props.vm;
-            const stage = runtime.getTargetForStage();
-            if (!target) target = stage; // If no editingTarget, use the stage
-            return makeToolboxXML(false, target.isStage, target.id, undefined, undefined, undefined, undefined, undefined, this.props.toolboxBlocksVisibilities);
-        } catch (e) {
-            return null;
-        }
     }
     render() {
         const {

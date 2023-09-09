@@ -1016,9 +1016,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data, blockVisibilities.data);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more, blockVisibilities.more);
 
-    // TODO: debug
-    console.log(motionXML);
-
     const everything = [
         xmlOpen,
         motionXML, gap,

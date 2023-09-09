@@ -3,18 +3,29 @@ const SET_NEXT_QUESTION = 'workbook/SET_NEXT_QUESTION';
 
 const QUESTIONS = [
     {
-        question: 'もんだい１です。ねこをみぎに１０ぽ、うごかしてください。',
+        question: '正三角形をかいてください。',
+        toolboxBlocks: {
+            motion: { movesteps: true, turnright: true, gotoxy: true },
+            control: { repeat: true },
+            pen: { clear: true, penDown: true, penUp: true },
+        },
+        explanation: '正多角形は、辺の長さが全て等しく、角の大きさが全て等しい図形です。...'
+    },
+    {
+        question: 'ねこをみぎに１０ぽ、うごかしてください。',
         toolboxBlocks: {
             motion: { movesteps: true, turnright: true, pointindirection: true },
         },
         explanation: 'もんだい１のせつめいです。ねこをみぎに１０ぽ、うごかせば、もんだいをとくことができます。',
     },
     {
-        question: 'もんだい２です。ねこをみぎに２０ぽ、うごかしてください。',
+        question: '正八角形をかいてください。',
         toolboxBlocks: {
-            motion: { movesteps: true, turnleft: true, sety: true },
+            motion: { movesteps: true, turnright: true, setx: true, sety: true },
+            control: { repeat: true },
+            pen: { clear: true, penDown: true, penUp: true },
         },
-        explanation: 'もんだい２のせつめいです。ねこをみぎに２０ぽ、うごかせば、もんだいをとくことができます。',
+        explanation: '正多角形は、辺の長さが全て等しく、角の大きさが全て等しい図形です。...'
     },
 ]
 

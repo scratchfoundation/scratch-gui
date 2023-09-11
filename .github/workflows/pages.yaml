@@ -1,0 +1,72 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - prototype
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout scratch-workbook-gui repository
+        uses: actions/checkout@v4
+        with:
+          repository: scratch-workbook/scratch-workbook-gui
+          ref: prototype
+          path: scratch-workbook-gui
+      
+      - name: Checkout scratch-workbook-vm repository
+        uses: actions/checkout@v4
+        with:
+          repository: scratch-workbook/scratch-workbook-vm
+          ref: prototype
+          path: scratch-workbook-vm
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup vm
+        run: |
+          cd scratch-workbook-vm
+          npm install
+          npm pack
+          cd ..
+
+      - name: Setup gui
+        run: |
+          cd scratch-workbook-gui
+          npm install ../scratch-workbook-vm/scratch-vm-*.tgz
+          export NODE_OPTIONS=--openssl-legacy-provider
+          npm install
+          npm run build
+          cd ..
+
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v2
+        with:
+          name: github-pages
+          path: ./scratch-workbook-gui/build
+          if-no-files-found: error
+
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.36](https://github.com/LLK/scratch-gui/compare/v2.3.35...v2.3.36) (2023-09-13)
+
+
+### Bug Fixes
+
+* adjust autosave interval ([9d4c5aa](https://github.com/LLK/scratch-gui/commit/9d4c5aa66cc356f8c29431a6145bdc7d1c59aace))
+
 ## [2.3.35](https://github.com/LLK/scratch-gui/compare/v2.3.34...v2.3.35) (2023-09-10)
 
 

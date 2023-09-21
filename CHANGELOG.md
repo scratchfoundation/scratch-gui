@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.66](https://github.com/LLK/scratch-gui/compare/v2.3.65...v2.3.66) (2023-09-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency arraybuffer-loader to v1.0.8 ([acc4924](https://github.com/LLK/scratch-gui/commit/acc49242e92be09647172a2674559e0a8f502707))
+
 ## [2.3.65](https://github.com/LLK/scratch-gui/compare/v2.3.64...v2.3.65) (2023-09-20)
 
 

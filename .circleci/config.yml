@@ -47,7 +47,7 @@ aliases:
   - &defaults
     docker:
       # TODO: fix scratch-audio and change this to `cimg/node:lts-browsers`
-      - image: cimg/node:14.20-browsers
+      - image: cimg/node:14.21-browsers
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD

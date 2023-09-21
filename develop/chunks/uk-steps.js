@@ -344,9 +344,9 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 // Intro
 
 
- // Text to Speech
 
 
+// Text to Speech
 
 
 
@@ -355,41 +355,40 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
- // Cartoon Network
 
 
 
+// Cartoon Network
 
 
 
 
 
- // Add sprite
 
- // Animate a name
 
 
 
+// Add sprite
 
 
+// Animate a name
 
- // Make Music
 
 
 
 
 
- // Chase-Game
 
+// Make Music
 
 
 
 
 
 
+// Chase-Game
 
 
- // Clicker-Game (Pop Game)
 
 
 
@@ -397,8 +396,8 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
- // Animate A Character
 
+// Clicker-Game (Pop Game)
 
 
 
@@ -406,8 +405,8 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
- // Tell A Story
 
+// Animate A Character
 
 
 
@@ -417,12 +416,11 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
- // Video Sensing
+// Tell A Story
 
 
 
 
- // Make it Fly
 
 
 
@@ -430,12 +428,13 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
+// Video Sensing
 
 
 
 
 
- // Pong
+// Make it Fly
 
 
 
@@ -449,7 +448,7 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
- // Imagine a World
+// Pong
 
 
 
@@ -464,46 +463,71 @@ var talking_10_choose_third_backdrop_LTR = __webpack_require__(423);
 
 
 
+// Imagine a World
 
- // Add a Backdrop
 
- // Add Effects
 
- // Hide and Show
 
- // Switch Costumes
 
- // Change Size
 
- // Spin
 
 
- // Record a Sound
 
 
 
 
 
- // Use Arrow Keys
 
 
- // Glide Around
 
+// Add a Backdrop
 
- // Code a Cartoon
 
+// Add Effects
 
 
+// Hide and Show
 
 
+// Switch Costumes
 
 
+// Change Size
 
 
+// Spin
 
 
- // Talking Tales
 
+// Record a Sound
+
+
+
+
+
+
+// Use Arrow Keys
+
+
+
+// Glide Around
+
+
+
+// Code a Cartoon
+
+
+
+
+
+
+
+
+
+
+
+
+// Talking Tales
 
 
 

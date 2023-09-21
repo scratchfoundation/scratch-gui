@@ -35,8 +35,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
 
-
-
 if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) === 'object') {
   // Warn before navigating away
   window.onbeforeunload = function () {
@@ -44,12 +42,10 @@ if ( true && (typeof window === "undefined" ? "undefined" : _typeof(window)) ===
   };
 }
 
-
-
 var Player = function Player(_ref) {
   var isPlayerOnly = _ref.isPlayerOnly,
-      onSeeInside = _ref.onSeeInside,
-      projectId = _ref.projectId;
+    onSeeInside = _ref.onSeeInside,
+    projectId = _ref.projectId;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_box_box_jsx__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(isPlayerOnly ? _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.stageOnly : _player_css__WEBPACK_IMPORTED_MODULE_11___default.a.editor)
   }, isPlayerOnly && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("button", {
@@ -61,19 +57,16 @@ var Player = function Player(_ref) {
     projectId: projectId
   }));
 };
-
 Player.propTypes = {
   isPlayerOnly: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   onSeeInside: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   projectId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
-
 var mapStateToProps = function mapStateToProps(state) {
   return {
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly
   };
 };
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onSeeInside: function onSeeInside() {
@@ -81,11 +74,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     }
   };
 };
+var ConnectedPlayer = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__[/* connect */ "b"])(mapStateToProps, mapDispatchToProps)(Player);
 
-var ConnectedPlayer = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__[/* connect */ "b"])(mapStateToProps, mapDispatchToProps)(Player); // note that redux's 'compose' function is just being used as a general utility to make
+// note that redux's 'compose' function is just being used as a general utility to make
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
-
 var WrappedPlayer = Object(redux__WEBPACK_IMPORTED_MODULE_5__[/* compose */ "d"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"], _lib_hash_parser_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(ConnectedPlayer);
 var appTarget = document.createElement('div');
 document.body.appendChild(appTarget);

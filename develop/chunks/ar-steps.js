@@ -305,9 +305,9 @@ var cn_show_character_LTR = __webpack_require__(385);
 // Intro
 
 
- // Text to Speech
 
 
+// Text to Speech
 
 
 
@@ -316,41 +316,40 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
- // Cartoon Network
 
 
 
+// Cartoon Network
 
 
 
 
 
- // Add sprite
 
- // Animate a name
 
 
 
+// Add sprite
 
 
+// Animate a name
 
- // Make Music
 
 
 
 
 
- // Chase-Game
 
+// Make Music
 
 
 
 
 
 
+// Chase-Game
 
 
- // Clicker-Game (Pop Game)
 
 
 
@@ -358,8 +357,8 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
- // Animate A Character
 
+// Clicker-Game (Pop Game)
 
 
 
@@ -367,8 +366,8 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
- // Tell A Story
 
+// Animate A Character
 
 
 
@@ -378,12 +377,11 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
- // Video Sensing
+// Tell A Story
 
 
 
 
- // Make it Fly
 
 
 
@@ -391,12 +389,13 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
+// Video Sensing
 
 
 
 
 
- // Pong
+// Make it Fly
 
 
 
@@ -410,7 +409,7 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
- // Imagine a World
+// Pong
 
 
 
@@ -425,46 +424,71 @@ var cn_show_character_LTR = __webpack_require__(385);
 
 
 
+// Imagine a World
 
- // Add a Backdrop
 
- // Add Effects
 
- // Hide and Show
 
- // Switch Costumes
 
- // Change Size
 
- // Spin
 
 
- // Record a Sound
 
 
 
 
 
- // Use Arrow Keys
 
 
- // Glide Around
 
+// Add a Backdrop
 
- // Code a Cartoon
 
+// Add Effects
 
 
+// Hide and Show
 
 
+// Switch Costumes
 
 
+// Change Size
 
 
+// Spin
 
 
- // Talking Tales
 
+// Record a Sound
+
+
+
+
+
+
+// Use Arrow Keys
+
+
+
+// Glide Around
+
+
+
+// Code a Cartoon
+
+
+
+
+
+
+
+
+
+
+
+
+// Talking Tales
 
 
 

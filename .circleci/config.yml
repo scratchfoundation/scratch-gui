@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.4
   commitlint: conventional-changelog/commitlint@1.0.0
-  node: circleci/node@5.0.2
+  node: circleci/node@5.1.0
 aliases:
   - &save_git_cache
     save_cache:

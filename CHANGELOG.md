@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.67](https://github.com/LLK/scratch-gui/compare/v2.3.66...v2.3.67) (2023-09-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v9.8.8 ([fff426e](https://github.com/LLK/scratch-gui/commit/fff426e9ffdd0e9846f5544ce7c45818994ed16f))
+
 ## [2.3.66](https://github.com/LLK/scratch-gui/compare/v2.3.65...v2.3.66) (2023-09-21)
 
 

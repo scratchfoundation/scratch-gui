@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.68](https://github.com/LLK/scratch-gui/compare/v2.3.67...v2.3.68) (2023-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to v16.14.0 ([f71c7e6](https://github.com/LLK/scratch-gui/commit/f71c7e63b50f16b8d915863ea698c28ce0eafad7))
+
 ## [2.3.67](https://github.com/LLK/scratch-gui/compare/v2.3.66...v2.3.67) (2023-09-21)
 
 

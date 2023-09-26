@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/LLK/scratch-gui/compare/v2.3.74...v3.0.0) (2023-09-26)
+
+
+### Features
+
+* use scratchFetch ([76f869b](https://github.com/LLK/scratch-gui/commit/76f869b7a2ee927cbbd04939904e8fa281aa35e0))
+
+
+### BREAKING CHANGES
+
+* servers must accept new header x-projectid
+
 ## [2.3.74](https://github.com/LLK/scratch-gui/compare/v2.3.73...v2.3.74) (2023-09-25)
 
 

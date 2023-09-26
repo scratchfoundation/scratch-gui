@@ -41,15 +41,31 @@ import systemPreferencesHOC from '../lib/system-preferences-hoc.jsx';
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
 
+const {RequestMetadata, setMetadata, unsetMetadata} = storage.scratchFetch;
+
+const setProjectIdMetadata = projectId => {
+    // If project ID is '0' or zero, it's not a real project ID. In that case, remove the project ID metadata.
+    // Same if it's null undefined.
+    if (projectId && projectId !== '0') {
+        setMetadata(RequestMetadata.ProjectId, projectId);
+    } else {
+        unsetMetadata(RequestMetadata.ProjectId);
+    }
+};
+
 class GUI extends React.Component {
     componentDidMount () {
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.props.onStorageInit(storage);
         this.props.onVmInit(this.props.vm);
+        setProjectIdMetadata(this.props.projectId);
     }
     componentDidUpdate (prevProps) {
-        if (this.props.projectId !== prevProps.projectId && this.props.projectId !== null) {
-            this.props.onUpdateProjectId(this.props.projectId);
+        if (this.props.projectId !== prevProps.projectId) {
+            if (this.props.projectId !== null) {
+                this.props.onUpdateProjectId(this.props.projectId);
+            }
+            setProjectIdMetadata(this.props.projectId);
         }
         if (this.props.isShowingProject && !prevProps.isShowingProject) {
             // this only notifies container when a project changes from not yet loaded to loaded

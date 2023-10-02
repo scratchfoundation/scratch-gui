@@ -41,16 +41,17 @@ import systemPreferencesHOC from '../lib/system-preferences-hoc.jsx';
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
 
-const {RequestMetadata, setMetadata, unsetMetadata} = storage.scratchFetch;
+// const {RequestMetadata, setMetadata, unsetMetadata} = storage.scratchFetch;
 
-const setProjectIdMetadata = projectId => {
+// TODO: re-enable metadata
+const setProjectIdMetadata = projectId => { // eslint-disable-line no-unused-vars
     // If project ID is '0' or zero, it's not a real project ID. In that case, remove the project ID metadata.
     // Same if it's null undefined.
-    if (projectId && projectId !== '0') {
-        setMetadata(RequestMetadata.ProjectId, projectId);
-    } else {
-        unsetMetadata(RequestMetadata.ProjectId);
-    }
+//     if (projectId && projectId !== '0') {
+//         setMetadata(RequestMetadata.ProjectId, projectId);
+//     } else {
+//         unsetMetadata(RequestMetadata.ProjectId);
+//     }
 };
 
 class GUI extends React.Component {

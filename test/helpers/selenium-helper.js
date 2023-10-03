@@ -4,7 +4,7 @@ import bindAll from 'lodash.bindall';
 import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
-const {By, until, Button} = webdriver;
+const {Button, By, until} = webdriver;
 
 const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
 
@@ -12,6 +12,27 @@ const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
 // if we hit the Jasmine default timeout then we get a terse message that we can't control.
 // The Jasmine default timeout is 30 seconds so make sure this is lower.
 const DEFAULT_TIMEOUT_MILLISECONDS = 20 * 1000;
+
+/**
+ * Embed a causal error into an outer error, and add its message to the outer error's message.
+ * This compensates for the loss of context caused by `regenerator-runtime`.
+ * @param {Error} outerError The error to embed the cause into.
+ * @param {Error} cause The "inner" error to embed.
+ * @returns {Error} The outerError, with the cause embedded.
+ */
+const embedCause = (outerError, cause) => {
+    if (cause) {
+        // This is the official way to nest errors in modern Node.js, but Jest ignores this field.
+        // It's here in case a future version uses it, or in case the caller does.
+        outerError.cause = cause;
+    }
+    if (cause && cause.message) {
+        outerError.message += `\n${['Cause:', ...cause.message.split('\n')].join('\n    ')}`;
+    } else {
+        outerError.message += '\nCause: unknown';
+    }
+    return outerError;
+};
 
 class SeleniumHelper {
     constructor () {
@@ -33,14 +54,41 @@ class SeleniumHelper {
         ]);
 
         this.Key = webdriver.Key; // map Key constants, for sending special keys
+
+        // this type declaration suppresses IDE type warnings throughout this file
+        /** @type {webdriver.ThenableWebDriver} */
+        this.driver = null;
     }
 
-    elementIsVisible (element, timeoutMessage = 'elementIsVisible timed out') {
-        return this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage);
+    /**
+     * Set the browser window title. Useful for debugging.
+     * @param {string} title The title to set.
+     * @returns {Promise<void>} A promise that resolves when the title is set.
+     */
+    async setTitle (title) {
+        await this.driver.executeScript(`document.title = arguments[0];`, title);
     }
 
+    /**
+     * Wait for an element to be visible.
+     * @param {webdriver.WebElement} element The element to wait for.
+     * @returns {Promise<void>} A promise that resolves when the element is visible.
+     */
+    async elementIsVisible (element) {
+        const outerError = new Error('elementIsVisible failed');
+        try {
+            await this.setTitle(`elementIsVisible ${await element.getId()}`);
+            await this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT_MILLISECONDS);
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
+    }
+
+    /**
+     * List of useful xpath scopes for finding elements.
+     * @returns {object} An object mapping names to xpath strings.
+     */
     get scope () {
-        // List of useful xpath scopes for finding elements
         return {
             blocksTab: "*[@id='react-tabs-1']",
             costumesTab: "*[@id='react-tabs-3']",
@@ -54,6 +102,10 @@ class SeleniumHelper {
         };
     }
 
+    /**
+     * Instantiate a new Selenium driver.
+     * @returns {webdriver.ThenableWebDriver} The new driver.
+     */
     getDriver () {
         const chromeCapabilities = webdriver.Capabilities.chrome();
         const args = [];
@@ -79,6 +131,16 @@ class SeleniumHelper {
         return this.driver;
     }
 
+    /**
+     * Instantiate a new Selenium driver for Sauce Labs.
+     * @param {string} username The Sauce Labs username.
+     * @param {string} accessKey The Sauce Labs access key.
+     * @param {object} configs The Sauce Labs configuration.
+     * @param {string} configs.browserName The name of the desired browser.
+     * @param {string} configs.platform The name of the desired platform.
+     * @param {string} configs.version The desired browser version.
+     * @returns {webdriver.ThenableWebDriver} The new driver.
+     */
     getSauceDriver (username, accessKey, configs) {
         this.driver = new webdriver.Builder()
             .withCapabilities({
@@ -88,98 +150,211 @@ class SeleniumHelper {
                 username: username,
                 accessKey: accessKey
             })
-            .usingServer(`http://${username}:${accessKey
-            }@ondemand.saucelabs.com:80/wd/hub`)
+            .usingServer(`http://${username}:${accessKey}@ondemand.saucelabs.com:80/wd/hub`)
             .build();
         return this.driver;
     }
 
-    findByXpath (xpath, timeoutMessage = `findByXpath timed out for path: ${xpath}`) {
-        return this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS, timeoutMessage)
-            .then(el => (
-                this.driver.wait(el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS, `${xpath} is not visible`)
-                    .then(() => el)
-            ));
+    /**
+     * Find an element by xpath.
+     * @param {string} xpath The xpath to search for.
+     * @returns {Promise<webdriver.WebElement>} A promise that resolves to the element.
+     */
+    async findByXpath (xpath) {
+        const outerError = new Error(`findByXpath failed with arguments:\n\txpath: ${xpath}`);
+        try {
+            await this.setTitle(`findByXpath ${xpath}`);
+            const el = await this.driver.wait(until.elementLocated(By.xpath(xpath)), DEFAULT_TIMEOUT_MILLISECONDS);
+            // await this.driver.wait(() => el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS);
+            return el;
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 
+    /**
+     * Generate an xpath that finds an element by its text.
+     * @param {string} text The text to search for.
+     * @param {string} [scope] An optional xpath scope to search within.
+     * @returns {string} The xpath.
+     */
     textToXpath (text, scope) {
         return `//body//${scope || '*'}//*[contains(text(), '${text}')]`;
     }
 
+    /**
+     * Find an element by its text.
+     * @param {string} text The text to search for.
+     * @param {string} [scope] An optional xpath scope to search within.
+     * @returns {Promise<webdriver.WebElement>} A promise that resolves to the element.
+     */
     findByText (text, scope) {
         return this.findByXpath(this.textToXpath(text, scope));
     }
 
-    textExists (text, scope) {
-        return this.driver.findElements(By.xpath(this.textToXpath(text, scope)))
-            .then(elements => elements.length > 0);
+    /**
+     * Check if an element exists by its text.
+     * @param {string} text The text to search for.
+     * @param {string} [scope] An optional xpath scope to search within.
+     * @returns {Promise<boolean>} A promise that resolves to true if the element exists.
+     */
+    async textExists (text, scope) {
+        const outerError = new Error(`textExists failed with arguments:\n\ttext: ${text}\n\tscope: ${scope}`);
+        try {
+            await this.setTitle(`textExists ${text}`);
+            const elements = await this.driver.findElements(By.xpath(this.textToXpath(text, scope)));
+            return elements.length > 0;
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 
-    loadUri (uri) {
-        const WINDOW_WIDTH = 1024;
-        const WINDOW_HEIGHT = 768;
-        return this.driver
-            .get(`file://${uri}`)
-            .then(() => (
-                this.driver.executeScript('window.onbeforeunload = undefined;')
-            ))
-            .then(() => (
-                this.driver.manage()
-                    .window()
-                    .setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-            ));
+    /**
+     * Load a URI in the driver.
+     * @param {string} uri The URI to load.
+     * @returns {Promise} A promise that resolves when the URI is loaded.
+     */
+    async loadUri (uri) {
+        const outerError = new Error(`loadUri failed with arguments:\n\turi: ${uri}`);
+        try {
+            await this.setTitle(`loadUri ${uri}`);
+            const WINDOW_WIDTH = 1024;
+            const WINDOW_HEIGHT = 768;
+            await this.driver
+                .get(`file://${uri}`);
+            await this.driver
+                .executeScript('window.onbeforeunload = undefined;');
+            await this.driver.manage().window()
+                .setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+            await this.driver.wait(
+                async () => await this.driver.executeScript('return document.readyState;') === 'complete',
+                DEFAULT_TIMEOUT_MILLISECONDS
+            );
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 
-    clickXpath (xpath) {
-        return this.findByXpath(xpath).then(el => el.click());
+    /**
+     * Click an element by xpath.
+     * @param {string} xpath The xpath to click.
+     * @returns {Promise<void>} A promise that resolves when the element is clicked.
+     */
+    async clickXpath (xpath) {
+        const outerError = new Error(`clickXpath failed with arguments:\n\txpath: ${xpath}`);
+        try {
+            await this.setTitle(`clickXpath ${xpath}`);
+            const el = await this.findByXpath(xpath);
+            return el.click();
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 
-    clickText (text, scope) {
-        return this.findByText(text, scope).then(el => el.click());
+    /**
+     * Click an element by its text.
+     * @param {string} text The text to click.
+     * @param {string} [scope] An optional xpath scope to search within.
+     * @returns {Promise<void>} A promise that resolves when the element is clicked.
+     */
+    async clickText (text, scope) {
+        const outerError = new Error(`clickText failed with arguments:\n\ttext: ${text}\n\tscope: ${scope}`);
+        try {
+            await this.setTitle(`clickText ${text}`);
+            const el = await this.findByText(text, scope);
+            return el.click();
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 
+    /**
+     * Click a category in the blocks pane.
+     * @param {string} categoryText The text of the category to click.
+     * @returns {Promise<void>} A promise that resolves when the category is clicked.
+     */
     async clickBlocksCategory (categoryText) {
+        const outerError = new Error(`clickBlocksCategory failed with arguments:\n\tcategoryText: ${categoryText}`);
         // The toolbox is destroyed and recreated several times, so avoid clicking on a nonexistent element and erroring
         // out. First we wait for the block pane itself to appear, then wait 100ms for the toolbox to finish refreshing,
         // then finally click the toolbox text.
-
-        await this.findByXpath('//div[contains(@class, "blocks_blocks")]');
-        await this.driver.sleep(100);
-        await this.clickText(categoryText, 'div[contains(@class, "blocks_blocks")]');
-        await this.driver.sleep(500); // Wait for scroll to finish
-    }
-
-    rightClickText (text, scope) {
-        return this.findByText(text, scope).then(el => this.driver.actions()
-            .click(el, Button.RIGHT)
-            .perform());
-    }
-
-    clickButton (text) {
-        return this.clickXpath(`//button//*[contains(text(), '${text}')]`);
-    }
-
-    getLogs (whitelist) {
-        if (!whitelist) {
-            // Default whitelist
-            whitelist = [
-                'The play() request was interrupted by a call to pause()'
-            ];
+        try {
+            await this.setTitle(`clickBlocksCategory ${categoryText}`);
+            await this.findByXpath('//div[contains(@class, "blocks_blocks")]');
+            await this.driver.sleep(100);
+            await this.clickText(categoryText, 'div[contains(@class, "blocks_blocks")]');
+            await this.driver.sleep(500); // Wait for scroll to finish
+        } catch (cause) {
+            throw embedCause(outerError, cause);
         }
-        return this.driver.manage()
-            .logs()
-            .get('browser')
-            .then(entries => entries.filter(entry => {
+    }
+
+    /**
+     * Right click an element by its text.
+     * @param {string} text The text to right click.
+     * @param {string} [scope] An optional xpath scope to search within.
+     * @returns {Promise<void>} A promise that resolves when the element is right clicked.
+     */
+    async rightClickText (text, scope) {
+        const outerError = new Error(`rightClickText failed with arguments:\n\ttext: ${text}\n\tscope: ${scope}`);
+        try {
+            await this.setTitle(`rightClickText ${text}`);
+            const el = await this.findByText(text, scope);
+            return this.driver.actions()
+                .click(el, Button.RIGHT)
+                .perform();
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
+    }
+
+    /**
+     * Click a button by its text.
+     * @param {string} text The text to click.
+     * @returns {Promise<void>} A promise that resolves when the button is clicked.
+     */
+    async clickButton (text) {
+        const outerError = new Error(`clickButton failed with arguments:\n\ttext: ${text}`);
+        try {
+            await this.setTitle(`clickButton ${text}`);
+            await this.clickXpath(`//button//*[contains(text(), '${text}')]`);
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
+    }
+
+    /**
+     * Get selected browser log entries.
+     * @param {Array.<string>} [whitelist] An optional list of log strings to allow. Default: see implementation.
+     * @returns {Promise<Array.<webdriver.logging.Entry>>} A promise that resolves to the log entries.
+     */
+    async getLogs (whitelist) {
+        const outerError = new Error(`getLogs failed with arguments:\n\twhitelist: ${whitelist}`);
+        try {
+            await this.setTitle(`getLogs ${whitelist}`);
+            if (!whitelist) {
+                // Default whitelist
+                whitelist = [
+                    'The play() request was interrupted by a call to pause()'
+                ];
+            }
+            const entries = await this.driver.manage()
+                .logs()
+                .get('browser');
+            return entries.filter(entry => {
                 const message = entry.message;
-                for (let i = 0; i < whitelist.length; i++) {
-                    if (message.indexOf(whitelist[i]) !== -1) {
+                for (const element of whitelist) {
+                    if (message.indexOf(element) !== -1) {
                         return false;
-                    } else if (entry.level !== 'SEVERE') {
+                    } else if (entry.level !== 'SEVERE') { // WARNING: this doesn't do what it looks like it does!
                         return false;
                     }
                 }
                 return true;
-            }));
+            });
+        } catch (cause) {
+            throw embedCause(outerError, cause);
+        }
     }
 }
 

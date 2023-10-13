@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/LLK/scratch-gui/compare/v3.0.39...v3.1.0) (2023-10-13)
+
+
+### Features
+
+* **deps:** update dependency scratch-storage to v2.3.1 ([c5dc88c](https://github.com/LLK/scratch-gui/commit/c5dc88cef9ff60bb8e83fa5cdccdd10987233f83))
+
 ## [3.0.39](https://github.com/LLK/scratch-gui/compare/v3.0.38...v3.0.39) (2023-10-13)
 
 

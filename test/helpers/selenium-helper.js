@@ -14,13 +14,17 @@ const USE_HEADLESS = process.env.USE_HEADLESS !== 'no';
 const DEFAULT_TIMEOUT_MILLISECONDS = 20 * 1000;
 
 /**
- * Embed a causal error into an outer error, and add its message to the outer error's message.
- * This compensates for the loss of context caused by `regenerator-runtime`.
+ * Add more debug information to an error:
+ * - Merge a causal error into an outer error with valuable stack information
+ * - Add the causal error's message to the outer error's message.
+ * - Add debug information from the web driver, if available.
+ * The outerError compensates for the loss of context caused by `regenerator-runtime`.
  * @param {Error} outerError The error to embed the cause into.
  * @param {Error} cause The "inner" error to embed.
- * @returns {Error} The outerError, with the cause embedded.
+ * @param {webdriver.ThenableWebDriver} [driver] Optional driver to capture debug info from.
+ * @returns {Promise<Error>} The outerError, with the cause embedded.
  */
-const embedCause = (outerError, cause) => {
+const enhanceError = async (outerError, cause, driver) => {
     if (cause) {
         // This is the official way to nest errors in modern Node.js, but Jest ignores this field.
         // It's here in case a future version uses it, or in case the caller does.
@@ -30,6 +34,19 @@ const embedCause = (outerError, cause) => {
         outerError.message += `\n${['Cause:', ...cause.message.split('\n')].join('\n    ')}`;
     } else {
         outerError.message += '\nCause: unknown';
+    }
+    if (driver) {
+        const url = await driver.getCurrentUrl();
+        const title = await driver.getTitle();
+        const pageSource = await driver.getPageSource();
+        const browserLogEntries = await driver.manage()
+            .logs()
+            .get('browser');
+        const browserLogText = browserLogEntries.map(entry => entry.message).join('\n');
+        outerError.message += `\nBrowser URL: ${url}`;
+        outerError.message += `\nBrowser title: ${title}`;
+        outerError.message += `\nBrowser logs:\n*****\n${browserLogText}\n*****\n`;
+        outerError.message += `\nBrowser page source:\n*****\n${pageSource}\n*****\n`;
     }
     return outerError;
 };
@@ -80,7 +97,7 @@ class SeleniumHelper {
             await this.setTitle(`elementIsVisible ${await element.getId()}`);
             await this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT_MILLISECONDS);
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -168,7 +185,7 @@ class SeleniumHelper {
             // await this.driver.wait(() => el.isDisplayed(), DEFAULT_TIMEOUT_MILLISECONDS);
             return el;
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -205,7 +222,7 @@ class SeleniumHelper {
             const elements = await this.driver.findElements(By.xpath(this.textToXpath(text, scope)));
             return elements.length > 0;
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -231,7 +248,7 @@ class SeleniumHelper {
                 DEFAULT_TIMEOUT_MILLISECONDS
             );
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -247,7 +264,7 @@ class SeleniumHelper {
             const el = await this.findByXpath(xpath);
             return el.click();
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -264,7 +281,7 @@ class SeleniumHelper {
             const el = await this.findByText(text, scope);
             return el.click();
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -285,7 +302,7 @@ class SeleniumHelper {
             await this.clickText(categoryText, 'div[contains(@class, "blocks_blocks")]');
             await this.driver.sleep(500); // Wait for scroll to finish
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause);
         }
     }
 
@@ -304,7 +321,7 @@ class SeleniumHelper {
                 .click(el, Button.RIGHT)
                 .perform();
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -319,7 +336,7 @@ class SeleniumHelper {
             await this.setTitle(`clickButton ${text}`);
             await this.clickXpath(`//button//*[contains(text(), '${text}')]`);
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause, this.driver);
         }
     }
 
@@ -353,7 +370,7 @@ class SeleniumHelper {
                 return true;
             });
         } catch (cause) {
-            throw embedCause(outerError, cause);
+            throw await enhanceError(outerError, cause);
         }
     }
 }

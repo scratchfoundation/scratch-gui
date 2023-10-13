@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.39](https://github.com/LLK/scratch-gui/compare/v3.0.38...v3.0.39) (2023-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-audio to v0.1.0-prerelease.20231013154641 ([de5423a](https://github.com/LLK/scratch-gui/commit/de5423a114659a4aa9d72878cfbf8964c4edafbb))
+
 ## [3.0.38](https://github.com/LLK/scratch-gui/compare/v3.0.37...v3.0.38) (2023-10-13)
 
 

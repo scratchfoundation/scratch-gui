@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.12](https://github.com/LLK/scratch-gui/compare/v3.2.11...v3.2.12) (2023-10-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-render-fonts to v1.0.0-prerelease.20231017225105 ([e9b0ee6](https://github.com/LLK/scratch-gui/commit/e9b0ee63916379dde975a9c4158d5d8690e73a04))
+
 ## [3.2.11](https://github.com/LLK/scratch-gui/compare/v3.2.10...v3.2.11) (2023-10-17)
 
 

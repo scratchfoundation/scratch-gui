@@ -19,7 +19,7 @@ const QUESTIONS = [
             pen: { clear: true, penDown: true, penUp: true },
         },
         explanation: '正三角形は、４本の辺の長さがすべておなじで、４つの角の大きさがすべて９０度の図形です。「長さ１００すすむ（線をひく）」、「左に９０度まがる」を４回くり返すと正四角形がかけます。'
-    }, 
+    },
     // {
     //     question: 'ねこをみぎに１０ぽ、うごかしてください。',
     //     toolboxBlocks: {

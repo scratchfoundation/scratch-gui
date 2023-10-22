@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { surrender, answer, next } from "../reducers/workbook.js"
 import { updateToolbox } from "../reducers/toolbox.js"
 import WorkbookAnswerComponent from "../components/workbook-answer/workbook-answer.jsx"
+import randomizeSpritePosition from '../lib/randomize-sprite-position';
 
 class WorkbookAnswer extends React.Component {
     constructor(props) {
@@ -20,6 +21,9 @@ class WorkbookAnswer extends React.Component {
     onAnswerClick (e) {
         e.preventDefault();
 
+        this.__deleteAllSprites();
+        this.__addMouseSprite();
+
         const targets = this.props.vm.runtime.executableTargets;
         for (let t = targets.length - 1; t >= 0; t--) {
             const target = targets[t];
@@ -31,6 +35,72 @@ class WorkbookAnswer extends React.Component {
         }
 
         this.props.onAnswer();
+    }
+    // TODO: 👀 add mouse sprite
+    __addMouseSprite() {
+        const item = {
+            "name": "Mouse1",
+            "tags": [
+                "animals",
+                "mammals",
+                "rodents"
+            ],
+            "isStage": false,
+            "variables": {},
+            "costumes": [
+                {
+                    "assetId": "c5f76b65e30075c12d49ea8a8f7d6bad",
+                    "name": "mouse1-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "c5f76b65e30075c12d49ea8a8f7d6bad.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 50,
+                    "rotationCenterY": 27
+                },
+                {
+                    "assetId": "8a7da35c473972f88896ca73b7df2188",
+                    "name": "mouse1-b",
+                    "bitmapResolution": 1,
+                    "md5ext": "8a7da35c473972f88896ca73b7df2188.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 65,
+                    "rotationCenterY": 21
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "blocks": {}
+        }
+        randomizeSpritePosition(item);
+        this.props.vm.addSprite(JSON.stringify(item)).then(() => {
+            // this.props.onActivateBlocksTab();
+        });
+    }
+    // TODO: 👀 remove all sprites
+    __deleteAllSprites () {
+        // TODO: 👀 
+        console.log("@@@ __deleteAllSprites");
+        console.log("this.props.sprites: ", this.props.sprites);
+
+        for (const id of Object.keys(this.props.sprites)) {
+            const restoreSprite = this.props.vm.deleteSprite(id);
+            console.log("restoreSprite: ", restoreSprite);
+            // const restoreFun = () => restoreSprite().then(this.handleActivateBlocksTab);
+    
+            // this.props.dispatchUpdateRestore({
+            //     restoreFun: restoreFun,
+            //     deletedItem: 'Sprite'
+            // });
+        }
     }
     onSurrenderClick (e) {
         e.preventDefault();
@@ -72,6 +142,7 @@ WorkbookAnswer.propTypes = {
     onAnswer: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,
     toolboxBlocksVisibilities: PropTypes.object.isRequired,
+    sprites: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
@@ -79,6 +150,7 @@ const mapStateToProps = state => ({
     isAnswering: state.scratchGui.workbook.answering,
     description: state.scratchGui.workbook.question.explanation,
     toolboxBlocksVisibilities: state.scratchGui.workbook.question.toolboxBlocks ?? {},
+    sprites: state.scratchGui.targets.sprites,
 });
 
 const mapDispatchToProps = (dispatch) => ({

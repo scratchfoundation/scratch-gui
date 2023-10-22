@@ -47,6 +47,10 @@ const SpriteList = function (props) {
             >
                 {items.map((sprite, index) => {
 
+                    // TODO: 👀 debug
+                    // TODO: 👀 今表示しているスプライトたち
+                    console.log("sprite: ", sprite);
+
                     // If the sprite has just received a block drop, used for green highlight
                     const receivedBlocks = (
                         hoveredTarget.sprite === sprite.id &&

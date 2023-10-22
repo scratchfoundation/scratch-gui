@@ -415,7 +415,7 @@ GUIComponent.defaultProps = {
     canEditTitle: false,
     canManageExtensions: false,
     canManageFiles: false,
-    canManageSprites: false,
+    canManageSprites: true,
     canRemix: false,
     canSave: false,
     canCreateCopy: false,

@@ -8,6 +8,7 @@ import { surrender, answer, next } from "../reducers/workbook.js"
 import { updateToolbox } from "../reducers/toolbox.js"
 import WorkbookAnswerComponent from "../components/workbook-answer/workbook-answer.jsx"
 import randomizeSpritePosition from '../lib/randomize-sprite-position';
+import spriteLibraryContent from '../lib/libraries/sprites.json';
 
 class WorkbookAnswer extends React.Component {
     constructor(props) {
@@ -21,9 +22,6 @@ class WorkbookAnswer extends React.Component {
     onAnswerClick (e) {
         e.preventDefault();
 
-        this.__deleteAllSprites();
-        this.__addMouseSprite();
-
         const targets = this.props.vm.runtime.executableTargets;
         for (let t = targets.length - 1; t >= 0; t--) {
             const target = targets[t];
@@ -36,79 +34,42 @@ class WorkbookAnswer extends React.Component {
 
         this.props.onAnswer();
     }
-    // TODO: 👀 add mouse sprite
-    __addMouseSprite() {
-        const item = {
-            "name": "Mouse1",
-            "tags": [
-                "animals",
-                "mammals",
-                "rodents"
-            ],
-            "isStage": false,
-            "variables": {},
-            "costumes": [
-                {
-                    "assetId": "c5f76b65e30075c12d49ea8a8f7d6bad",
-                    "name": "mouse1-a",
-                    "bitmapResolution": 1,
-                    "md5ext": "c5f76b65e30075c12d49ea8a8f7d6bad.svg",
-                    "dataFormat": "svg",
-                    "rotationCenterX": 50,
-                    "rotationCenterY": 27
-                },
-                {
-                    "assetId": "8a7da35c473972f88896ca73b7df2188",
-                    "name": "mouse1-b",
-                    "bitmapResolution": 1,
-                    "md5ext": "8a7da35c473972f88896ca73b7df2188.svg",
-                    "dataFormat": "svg",
-                    "rotationCenterX": 65,
-                    "rotationCenterY": 21
-                }
-            ],
-            "sounds": [
-                {
-                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
-                    "name": "pop",
-                    "dataFormat": "wav",
-                    "format": "",
-                    "rate": 44100,
-                    "sampleCount": 1032,
-                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
-                }
-            ],
-            "blocks": {}
-        }
-        randomizeSpritePosition(item);
-        this.props.vm.addSprite(JSON.stringify(item)).then(() => {
-            // this.props.onActivateBlocksTab();
-        });
-    }
-    // TODO: 👀 remove all sprites
-    __deleteAllSprites () {
-        // TODO: 👀 
-        console.log("@@@ __deleteAllSprites");
-        console.log("this.props.sprites: ", this.props.sprites);
-
-        for (const id of Object.keys(this.props.sprites)) {
-            const restoreSprite = this.props.vm.deleteSprite(id);
-            console.log("restoreSprite: ", restoreSprite);
-            // const restoreFun = () => restoreSprite().then(this.handleActivateBlocksTab);
-    
-            // this.props.dispatchUpdateRestore({
-            //     restoreFun: restoreFun,
-            //     deletedItem: 'Sprite'
-            // });
-        }
-    }
     onSurrenderClick (e) {
         e.preventDefault();
         this.props.onSurrender();
     }
     onNextClick (e) {
         e.preventDefault();
+
+        this.removeAllSprites();
+        this.addQuestionSprites();
+
         this.props.onNext();
+    }
+    removeAllSprites () {
+        for (const id of Object.keys(this.props.sprites)) {
+            this.props.vm.deleteSprite(id);
+        }
+    }
+    addQuestionSprites () {
+        if (this.props.nextQuestionSprites.length <= 0) return;
+
+        // Select a sprite who will be added first.
+        const targetName = this.props.nextQuestionSprites[0].name;
+
+        for (const spriteInfo of this.props.nextQuestionSprites) {
+            const name = spriteInfo.name;
+            const item = spriteLibraryContent.find(sprite => sprite.name === name);
+            randomizeSpritePosition(item);
+            item.x = spriteInfo.x ?? item.x;
+            item.y = spriteInfo.y ?? item.y;
+            this.props.vm.addSprite(JSON.stringify(item)).then(() => {
+                const target = Object.values(this.props.sprites).find(sprite => sprite.name === targetName);
+                if (target) {
+                    this.props.vm.setEditingTarget(target.id);
+                }
+            });
+        }
     }
     render() {
         const {
@@ -143,6 +104,7 @@ WorkbookAnswer.propTypes = {
     onNext: PropTypes.func.isRequired,
     toolboxBlocksVisibilities: PropTypes.object.isRequired,
     sprites: PropTypes.object,
+    nextQuestionSprites: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -150,6 +112,7 @@ const mapStateToProps = state => ({
     isAnswering: state.scratchGui.workbook.answering,
     description: state.scratchGui.workbook.question.explanation,
     toolboxBlocksVisibilities: state.scratchGui.workbook.question.toolboxBlocks ?? {},
+    nextQuestionSprites: state.scratchGui.workbook.nextQuestion?.sprites ?? [],
     sprites: state.scratchGui.targets.sprites,
 });
 

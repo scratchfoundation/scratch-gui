@@ -3,29 +3,72 @@ const SET_NEXT_QUESTION = 'workbook/SET_NEXT_QUESTION';
 
 const QUESTIONS = [
     {
-        question: '正三角形をかいてみよう。',
+        question: '',
         toolboxBlocks: {
-            motion: { movesteps: true, turnright: true, gotoxy: true },
-            control: { repeat: true },
-            pen: { clear: true, penDown: true, penUp: true },
+            motion: { movesteps: true },
         },
-        explanation: '正三角形は、３本の辺の長さがすべておなじで、３つの角の大きさがすべて６０度の図形です。「長さ１００すすむ（線をひく）」、「左に１２０度まがる」を３回くり返すと正三角形がかけます。'
+        explanation: '',
+        sprites: [
+            { name: 'Cat' },
+        ],
     },
     {
-        question: '正四角形をかいてみよう。',
+        question: '① ねこをうごかして、ねずみをおいかけよう。ねことねずみは、２００ぽはなれているよ。',
         toolboxBlocks: {
-            motion: { movesteps: true, turnright: true, setx: true, sety: true },
-            control: { repeat: true },
-            pen: { clear: true, penDown: true, penUp: true },
+            motion: { movesteps: true },
         },
-        explanation: '正三角形は、４本の辺の長さがすべておなじで、４つの角の大きさがすべて９０度の図形です。「長さ１００すすむ（線をひく）」、「左に９０度まがる」を４回くり返すと正四角形がかけます。'
+        explanation: 'ねこを２００ぽ、うごかしてみよう。',
+        sprites: [
+            { name: "Cat", x: -100, y: 0 },
+            { name: "Mouse1", x: 100, y: 0 },
+        ],
     },
+    {
+        question: '② ねこをうごかして、ねずみをおいかけよう。ねことねずみは、たてに２００ぽ、よこに２００ぽはなれているよ。',
+        toolboxBlocks: {
+            motion: { movesteps: true, turnright: true, turnleft: true },
+        },
+        explanation: 'ねこをよこに２００ぽうごかしたあと、ねこがうえにうごかせるように、９０どひだりまわして、また２００ぽうごかしてみよう。',
+        sprites: [
+            { name: "Cat", x: -100, y: -100 },
+            { name: "Mouse1", x: 100, y: 100 },
+        ],
+    },
+    {
+        question: '③ ねこをうごかして、ねずみをおいかけよう。ねことねずみは、たてに１００ぽ、よこに２００ぽはなれているよ。ねずみはねこのうしろにいるよ。',
+        toolboxBlocks: {
+            motion: { movesteps: true, turnright: true, turnleft: true },
+        },
+        explanation: 'マイナスをあたいをつかうと、ねこがうしろにうごけるよ。また、１８０どまわしても、ねこははんたいほうこうにうごけるよ。',
+        sprites: [
+            { name: "Cat", x: 100, y: 50 },
+            { name: "Mouse1", x: -100, y: -50 },
+        ],
+    },
+    // TODO: ペンで書いた線を消す方法が分からない
     // {
-    //     question: 'ねこをみぎに１０ぽ、うごかしてください。',
+    //     question: '正三角形をかいてみよう。',
     //     toolboxBlocks: {
-    //         motion: { movesteps: true, turnright: true, pointindirection: true },
+    //         motion: { movesteps: true, turnright: true, gotoxy: true },
+    //         control: { repeat: true },
+    //         pen: { clear: true, penDown: true, penUp: true },
     //     },
-    //     explanation: 'もんだい１のせつめいです。ねこをみぎに１０ぽ、うごかせば、もんだいをとくことができます。',
+    //     explanation: '正三角形は、３本の辺の長さがすべておなじで、３つの角の大きさがすべて６０度の図形です。「長さ１００すすむ（線をひく）」、「左に１２０度まがる」を３回くり返すと正三角形がかけます。',
+    //     sprites: [
+    //         { name: "Pencil", x: 0, y: 0 },
+    //     ],
+    // },
+    // {
+    //     question: '正四角形をかいてみよう。',
+    //     toolboxBlocks: {
+    //         motion: { movesteps: true, turnright: true, setx: true, sety: true },
+    //         control: { repeat: true },
+    //         pen: { clear: true, penDown: true, penUp: true },
+    //     },
+    //     explanation: '正三角形は、４本の辺の長さがすべておなじで、４つの角の大きさがすべて９０度の図形です。「長さ１００すすむ（線をひく）」、「左に９０度まがる」を４回くり返すと正四角形がかけます。',
+    //     sprites: [
+    //         { name: "Pencil", x: 0, y: 0 },
+    //     ],
     // },
 ]
 
@@ -33,6 +76,7 @@ const initialState = {
     answering: true,
     questionIndex: 0,
     question: QUESTIONS[0],
+    nextQuestion: QUESTIONS[1],
 };
 
 const reducer = function (state, action) {
@@ -48,6 +92,7 @@ const reducer = function (state, action) {
             answering: true,
             questionIndex: nextQuestionIndex,
             question: QUESTIONS[nextQuestionIndex % QUESTIONS.length],
+            nextQuestion: QUESTIONS[(nextQuestionIndex + 1) % QUESTIONS.length],
         });
     default:
         return state;
@@ -57,7 +102,7 @@ const reducer = function (state, action) {
 const surrender = function () {
     return {
         type: SET_ANSWERING_STATE,
-        answering: false    
+        answering: false
     };
 }
 

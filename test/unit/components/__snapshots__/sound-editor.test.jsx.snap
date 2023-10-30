@@ -13,6 +13,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
     >
       <label
         className={undefined}
+        htmlFor="sound name"
       >
         <span
           className={undefined}
@@ -21,6 +22,7 @@ exports[`Sound Editor Component matches snapshot 1`] = `
         </span>
         <input
           className=""
+          id="sound name"
           onBlur={[Function]}
           onChange={[Function]}
           onKeyPress={[Function]}

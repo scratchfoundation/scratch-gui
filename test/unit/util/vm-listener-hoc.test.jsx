@@ -134,48 +134,83 @@ describe('VMListenerHOC', () => {
         expect(actions.length).toEqual(0);
     });
 
-    test('keypresses go to the vm', () => {
-        const Component = () => (<div />);
-        const WrappedComponent = vmListenerHOC(Component);
-
-        // Mock document.addEventListener so we can trigger keypresses manually
-        // Cannot use the enzyme simulate method because that only works on synthetic events
-        const eventTriggers = {};
-        document.addEventListener = jest.fn((event, cb) => {
-            eventTriggers[event] = cb;
+    describe('keypresses go to the vm', () => {
+        let eventTriggers = {};
+        beforeEach(() => {
+            const Component = () => (<div />);
+            const WrappedComponent = vmListenerHOC(Component);
+    
+            // Mock document.addEventListener so we can trigger keypresses manually
+            // Cannot use the enzyme simulate method because that only works on synthetic events
+            eventTriggers = {};
+            document.addEventListener = jest.fn((event, cb) => {
+                eventTriggers[event] = cb;
+            });
+    
+            vm.postIOData = jest.fn();
+    
+            store = mockStore({
+                scratchGui: {
+                    mode: {isFullScreen: true},
+                    modals: {soundRecorder: true},
+                    vm: vm
+                }
+            });
+            mount(
+                <WrappedComponent
+                    attachKeyboardEvents
+                    store={store}
+                    vm={vm}
+                />
+            );
         });
 
-        vm.postIOData = jest.fn();
-
-        store = mockStore({
-            scratchGui: {
-                mode: {isFullScreen: true},
-                modals: {soundRecorder: true},
-                vm: vm
-            }
+        test('keypresses handled by the VM', () => {
+            // keyboard events that do not target the document or body are ignored
+            eventTriggers.keydown({key: 'A', target: null});
+            expect(vm.postIOData).not.toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: true});
+    
+            // keydown/up with target as the document are sent to the vm via postIOData
+            eventTriggers.keydown({key: 'A', target: document});
+            expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: true});
+    
+            eventTriggers.keyup({key: 'A', target: document});
+            expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: false});
+    
+            // When key is 'Dead' e.g. bluetooth keyboards on iOS, it sends keyCode instead
+            // because the VM can process both named keys or keyCodes as the `key` property
+            eventTriggers.keyup({key: 'Dead', keyCode: 10, target: document});
+            expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 10, isDown: false});
         });
-        mount(
-            <WrappedComponent
-                attachKeyboardEvents
-                store={store}
-                vm={vm}
-            />
-        );
 
-        // keyboard events that do not target the document or body are ignored
-        eventTriggers.keydown({key: 'A', target: null});
-        expect(vm.postIOData).not.toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: true});
-
-        // keydown/up with target as the document are sent to the vm via postIOData
-        eventTriggers.keydown({key: 'A', target: document});
-        expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: true});
-
-        eventTriggers.keyup({key: 'A', target: document});
-        expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 'A', isDown: false});
-
-        // When key is 'Dead' e.g. bluetooth keyboards on iOS, it sends keyCode instead
-        // because the VM can process both named keys or keyCodes as the `key` property
-        eventTriggers.keyup({key: 'Dead', keyCode: 10, target: document});
-        expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 10, isDown: false});
+        describe('block keypresses from scrolling', () => {
+            test('space key', () => {
+                const e = {keyCode: 32, target: document, preventDefault: jest.fn()};
+                eventTriggers.keydown(e);
+                expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 32, isDown: true});
+                expect(e.preventDefault).toHaveBeenCalled();
+            });
+    
+            [
+                {keyCode: 37, direction: 'left'},
+                {keyCode: 38, direction: 'up'},
+                {keyCode: 39, direction: 'right'},
+                {keyCode: 40, direction: 'down'}
+            ].forEach(({keyCode, direction}) => {
+                test(`${direction} arrow`, () => {
+                    const e = {keyCode: keyCode, target: document, preventDefault: jest.fn()};
+                    eventTriggers.keydown(e);
+                    expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: keyCode, isDown: true});
+                    expect(e.preventDefault).toHaveBeenCalled();
+                });
+            });
+    
+            test("doesn't block alt+left arrow back navigation", () => {
+                const e = {keyCode: 37, target: document, altKey: true, preventDefault: jest.fn()};
+                eventTriggers.keydown(e);
+                expect(vm.postIOData).toHaveBeenLastCalledWith('keyboard', {key: 37, isDown: true});
+                expect(e.preventDefault).toHaveBeenCalledTimes(0);
+            });
+        });
     });
 });

@@ -95,7 +95,7 @@ const vmListenerHOC = function (WrappedComponent) {
 
             // Prevent space/arrow key from scrolling the page.
             if (e.keyCode === 32 || // 32=space
-                (e.keyCode >= 37 && e.keyCode <= 40)) { // 37, 38, 39, 40 are arrows
+                (e.keyCode >= 37 && e.keyCode <= 40 && !e.altKey)) { // 37, 38, 39, 40 are arrows
                 e.preventDefault();
             }
         }

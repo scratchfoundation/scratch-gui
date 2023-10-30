@@ -1,0 +1,85 @@
+name: CI/CD
+
+on:
+    workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+    pull_request: # Runs whenever a pull request is created or updated
+    push: # Runs whenever a commit is pushed to the repository
+        branches: [master, develop, beta, hotfix/*]
+
+concurrency:
+    group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+    cancel-in-progress: true
+
+permissions:
+    contents: write # publish a GitHub release
+    pages: write # deploy to GitHub Pages
+    issues: write # comment on released issues
+    pull-requests: write # comment on released pull requests
+
+jobs:
+    ci-cd:
+        runs-on: ubuntu-latest
+        env:
+            TRIGGER_DEPLOY: ${{ startsWith(github.ref, 'refs/heads/master') }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: wagoid/commitlint-github-action@v5
+              if: github.event_name == 'pull_request'
+            - uses: actions/setup-node@v3
+              with:
+                  cache: "npm"
+                  node-version-file: ".nvmrc"
+
+            - name: Info
+              run: |
+                  cat <<EOF
+                  Node version: $(node --version)
+                  NPM version: $(npm --version)
+                  GitHub ref: ${{ github.ref }}
+                  GitHub head ref: ${{ github.head_ref }}
+                  EOF
+
+            - name: Install Google Chrome
+              uses: browser-actions/setup-chrome@v1
+              with:
+                  chrome-version: beta
+              id: setup-chrome
+
+            - name: Chrome Info
+              run: |
+                  echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
+                  ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Setup & Test
+              run: |
+                  mkdir -p ./test/results
+                  npm test
+
+            - name: Generate release version
+              run: |
+                  export RELEASE_TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+                  export VPKG=$($(npm bin)/json -f package.json version)
+                  export VERSION=${VPKG}-prerelease.${RELEASE_TIMESTAMP}
+
+                  echo "RELEASE_VERSION=${VERSION}" >> $GITHUB_ENV
+
+                  if [[ "${GITHUB_REF##*/}" == hotfix/* ]]; then
+                    echo "NPM_TAG=hotfix" >> $GITHUB_ENV
+                  else
+                    echo "NPM_TAG=latest" >> $GITHUB_ENV
+                  fi
+
+            - name: Build
+              run: |
+                  npm run build
+                  npm --no-git-tag-version version $RELEASE_VERSION
+
+            - name: Semantic release (configured to run dry if branch is other than 'master')
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  npx --no -- semantic-release $([[ "$TRIGGER_DEPLOY" == "false" ]] && echo "--dry-run")

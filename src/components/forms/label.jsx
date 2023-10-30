@@ -4,7 +4,10 @@ import React from 'react';
 import styles from './label.css';
 
 const Label = props => (
-    <label className={props.above ? styles.inputGroupColumn : styles.inputGroup}>
+    <label
+        htmlFor={props.for}
+        className={props.above ? styles.inputGroupColumn : styles.inputGroup}
+    >
         <span className={props.secondary ? styles.inputLabelSecondary : styles.inputLabel}>
             {props.text}
         </span>
@@ -13,6 +16,7 @@ const Label = props => (
 );
 
 Label.propTypes = {
+    for: PropTypes.string,
     above: PropTypes.bool,
     children: PropTypes.node,
     secondary: PropTypes.bool,

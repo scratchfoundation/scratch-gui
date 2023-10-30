@@ -51,6 +51,7 @@ const messages = defineMessages({
 
 const DirectionPicker = props => (
     <Label
+        for={directionLabel.props.defaultMessage}
         secondary
         above={props.labelAbove}
         text={directionLabel}
@@ -92,9 +93,9 @@ const DirectionPicker = props => (
             onOuterAction={props.onClosePopover}
         >
             <BufferedInput
+                id={directionLabel.props.defaultMessage}
                 small
                 disabled={props.disabled}
-                label={directionLabel}
                 tabIndex="0"
                 type="text"
                 value={props.disabled ? '' : props.direction}

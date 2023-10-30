@@ -219,11 +219,12 @@ class SpriteInfo extends React.Component {
                             secondary
                             above={labelAbove}
                             text={sizeLabel}
+                            for={sizeLabel.props.defaultMessage}
                         >
                             <BufferedInput
+                                id={sizeLabel.props.defaultMessage}
                                 small
                                 disabled={this.props.disabled}
-                                label={sizeLabel}
                                 tabIndex="0"
                                 type="text"
                                 value={this.props.disabled ? '' : Math.round(this.props.size)}

@@ -9,6 +9,7 @@ module.exports = {
         process: true
     },
     rules: {
+        'no-warning-comments': 'off',
         'import/no-mutable-exports': 'error',
         'import/no-commonjs': 'error',
         'import/no-amd': 'error',

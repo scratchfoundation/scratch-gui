@@ -1,54 +1,56 @@
-import classNames from 'classnames';
-import {defineMessages, FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
-import React from 'react';
+import classNames from "classnames";
+import { defineMessages, FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
+import React from "react";
 
-import Box from '../box/box.jsx';
-import Modal from '../../containers/modal.jsx';
+import Box from "../box/box.jsx";
+import Modal from "../../containers/modal.jsx";
 
-import styles from './prompt.css';
-
+import styles from "./prompt.css";
 
 const messages = defineMessages({
     forAllSpritesMessage: {
-        defaultMessage: 'For all sprites',
-        description: 'Option message when creating a variable for making it available to all sprites',
-        id: 'gui.gui.variableScopeOptionAllSprites'
+        defaultMessage: "For all sprites",
+        description:
+            "Option message when creating a variable for making it available to all sprites",
+        id: "gui.gui.variableScopeOptionAllSprites",
     },
     forThisSpriteMessage: {
-        defaultMessage: 'For this sprite only',
-        description: 'Option message when creating a varaible for making it only available to the current sprite',
-        id: 'gui.gui.variableScopeOptionSpriteOnly'
+        defaultMessage: "For this sprite only",
+        description:
+            "Option message when creating a varaible for making it only available to the current sprite",
+        id: "gui.gui.variableScopeOptionSpriteOnly",
     },
     cloudVarOptionMessage: {
-        defaultMessage: 'Cloud variable (stored on server)',
-        description: 'Option message when creating a variable for making it a cloud variable, a variable that is stored on the server', /* eslint-disable-line max-len */
-        id: 'gui.gui.cloudVariableOption'
+        defaultMessage: "Cloud variable (stored on server)",
+        description:
+            "Option message when creating a variable for making it a cloud variable, a variable that is stored on the server" /* eslint-disable-line max-len */,
+        id: "gui.gui.cloudVariableOption",
     },
     availableToAllSpritesMessage: {
-        defaultMessage: 'This variable will be available to all sprites.',
-        description: 'A message that displays in a variable modal when the stage is selected indicating ' +
-            'that the variable being created will available to all sprites.',
-        id: 'gui.gui.variablePromptAllSpritesMessage'
+        defaultMessage: "This variable will be available to all sprites.",
+        description:
+            "A message that displays in a variable modal when the stage is selected indicating " +
+            "that the variable being created will available to all sprites.",
+        id: "gui.gui.variablePromptAllSpritesMessage",
     },
     listAvailableToAllSpritesMessage: {
-        defaultMessage: 'This list will be available to all sprites.',
-        description: 'A message that displays in a list modal when the stage is selected indicating ' +
-            'that the list being created will available to all sprites.',
-        id: 'gui.gui.listPromptAllSpritesMessage'
-    }
+        defaultMessage: "This list will be available to all sprites.",
+        description:
+            "A message that displays in a list modal when the stage is selected indicating " +
+            "that the list being created will available to all sprites.",
+        id: "gui.gui.listPromptAllSpritesMessage",
+    },
 });
 
-const PromptComponent = props => (
+const PromptComponent = (props) => (
     <Modal
         className={styles.modalContent}
         contentLabel={props.title}
         onRequestClose={props.onCancel}
     >
         <Box className={styles.body}>
-            <Box className={styles.label}>
-                {props.label}
-            </Box>
+            <Box className={styles.label}>{props.label}</Box>
             <Box>
                 <input
                     autoFocus
@@ -60,9 +62,9 @@ const PromptComponent = props => (
                     onKeyPress={props.onKeyPress}
                 />
             </Box>
-            {props.showVariableOptions ?
+            {props.showVariableOptions ? (
                 <div>
-                    {props.isStage ?
+                    {props.isStage ? (
                         <div className={styles.infoMessage}>
                             {props.showListMessage ? (
                                 <FormattedMessage
@@ -73,7 +75,8 @@ const PromptComponent = props => (
                                     {...messages.availableToAllSpritesMessage}
                                 />
                             )}
-                        </div> :
+                        </div>
+                    ) : (
                         <Box className={styles.optionsRow}>
                             <label>
                                 <input
@@ -88,7 +91,9 @@ const PromptComponent = props => (
                                 />
                             </label>
                             <label
-                                className={classNames({[styles.disabledLabel]: props.cloudSelected})}
+                                className={classNames({
+                                    [styles.disabledLabel]: props.cloudSelected,
+                                })}
                             >
                                 <input
                                     checked={!props.globalSelected}
@@ -102,14 +107,21 @@ const PromptComponent = props => (
                                     {...messages.forThisSpriteMessage}
                                 />
                             </label>
-                        </Box>}
-                    {props.showCloudOption ?
+                        </Box>
+                    )}
+                    {props.showCloudOption ? (
                         <Box className={classNames(styles.cloudOption)}>
                             <label
-                                className={classNames({[styles.disabledLabel]: !props.canAddCloudVariable})}
+                                className={classNames({
+                                    [styles.disabledLabel]:
+                                        !props.canAddCloudVariable,
+                                })}
                             >
                                 <input
-                                    checked={props.cloudSelected && props.canAddCloudVariable}
+                                    checked={
+                                        props.cloudSelected &&
+                                        props.canAddCloudVariable
+                                    }
                                     disabled={!props.canAddCloudVariable}
                                     type="checkbox"
                                     onChange={props.onCloudVarOptionChange}
@@ -117,9 +129,17 @@ const PromptComponent = props => (
                                 <FormattedMessage
                                     {...messages.cloudVarOptionMessage}
                                 />
+                                <br></br>
+                                <sub>
+                                    Cloud variables will not work in the
+                                    Scratch++ editor, but will work when
+                                    compiled to normal Scratch.
+                                </sub>
                             </label>
-                        </Box> : null}
-                </div> : null}
+                        </Box>
+                    ) : null}
+                </div>
+            ) : null}
 
             <Box className={styles.buttonRow}>
                 <button
@@ -132,10 +152,7 @@ const PromptComponent = props => (
                         id="gui.prompt.cancel"
                     />
                 </button>
-                <button
-                    className={styles.okButton}
-                    onClick={props.onOk}
-                >
+                <button className={styles.okButton} onClick={props.onOk}>
                     <FormattedMessage
                         defaultMessage="OK"
                         description="Button in prompt for confirming the dialog"
@@ -164,7 +181,7 @@ PromptComponent.propTypes = {
     onScopeOptionSelection: PropTypes.func.isRequired,
     showCloudOption: PropTypes.bool.isRequired,
     showVariableOptions: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
 };
 
 export default PromptComponent;

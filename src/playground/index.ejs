@@ -1,12 +1,163 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google" value="notranslate">
-    <link rel="shortcut icon" href="static/favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google" value="notranslate" />
+        <link rel="shortcut icon" href="static/favicon.png" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <style>
+            .popAnim {
+                transform: scale(1.2);
+            }
+            .splashHidden {
+                display: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            window.addEventListener("keyup", (ev) => {
+                if (
+                    ev.target &&
+                    ev.target.value &&
+                    ev.target.value.startsWith("$rt.")
+                ) {
+                    ev.target.value = ev.target.value.substring("$rt.".length);
+                }
+            });
+            window.addEventListener("load", ()=>{
+                if(!(localStorage.getItem("alreadyShowedSplash") === "true")) {
+                    document.getElementById("splash").classList.remove("splashHidden");
+                }
+            });
+        </script>
+        <div id="splash"
+            style="
+                background-color: lightgray;
+                border: 2px solid black;
+                padding: 1rem;
+                position: fixed;
+                width: 75%;
+                height: 75%;
+                top: 12.5%;
+                left: 12.5%;
+                z-index: 9999;
+                border-radius: 1rem;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            "
+            class="splashHidden"
+        >
+            <h2>
+                Welcome to Scratch++!
+                <button
+                    style="
+                        border: 0;
+                        background-color: transparent;
+                        text-decoration: underline;
+                        color: red;
+                        font-weight: bold;
+                        cursor: pointer;
+                    "
+                    onclick="localStorage.setItem('alreadyShowedSplash', 'true'); document.getElementById('splash').classList.add('splashHidden')"
+                    style="cursor: pointer"
+                >
+                    <h2>[X]</h2>
+                </button>
+            </h2>
+            <p>
+                Scratch++ is a Scratch mod that adds new features like fencing
+                controls and the power operator. However, unlike other scratch
+                mods, it also adds the ability to compile the project for use in
+                normal Scratch!<br><br>
+
+                For example, try using a disable fencing block (or any modded block). Then, convert your project to a regular Scratch project by clicking on <code>File > Compile to Scratch</code>. It should be able to load and work in normal Scratch! Just make sure your remember that all the custom blocks have Scratch definitions, so things will likely run slower in normal Scratch.
+
+                Credits:
+                <ul>
+                    <li>ZXMushroom63 - Scratch++ concept, compiler, GUI, and many custom block definitions.</li>
+                    <li>DadOfMrLog - Power script</li>
+                    <li>NitroCipher - Decimal Color at X Y calculator</li>
+                    <li>EncloCreations - Decimal to Hexadecimal</li>
+                </ul>
+            </p>
+        </div>
+        <div id="sppsettings"
+            style="
+                background-color: lightgray;
+                border: 2px solid black;
+                padding: 1rem;
+                position: fixed;
+                width: 75%;
+                height: 75%;
+                top: 12.5%;
+                left: 12.5%;
+                z-index: 9999;
+                border-radius: 1rem;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            "
+            class="splashHidden"
+        >
+            <h2 style="padding: 0; margin: 0;">
+                Scratch++ Settings
+                <button
+                    style="
+                        border: 0;
+                        background-color: transparent;
+                        text-decoration: underline;
+                        color: red;
+                        font-weight: bold;
+                        cursor: pointer;
+                    "
+                    onclick="document.getElementById('sppsettings').classList.add('splashHidden')"
+                    style="cursor: pointer"
+                >
+                    <h2>[X]</h2>
+                </button>
+            </h2>
+            <p>Changing these settings requires a reload.</p>
+            <table>
+                <tr>
+                    <td>
+                        Cat Blocks
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('catblocks', this.checked)" id="catblocks">
+                        <script>if (localStorage.getItem("catblocks") === "true"){document.querySelector("#catblocks").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Brings back the 2020 cat blocks.</small></td>
+                </tr>
+                <tr>
+                    <td>
+                        Blocks2Image
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('blocks2image', this.checked)" id="blocks2image">
+                        <script>if (localStorage.getItem("blocks2image") === "true"){document.querySelector("#blocks2image").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Adds export to image options to the right-click menu.</small></td>
+                </tr>
+                <tr>
+                    <td>
+                        Numberpad
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('numberpad', this.checked)" id="numberpad">
+                        <script>if (localStorage.getItem("numberpad") === "true"){document.querySelector("#numberpad").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Force shows the number pad on number inputs.</small></td>
+                </tr>
+                <tr>
+                    <td>
+                        Cherry Picking
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('cherrypicking', this.checked)" id="cherrypicking">
+                        <script>if (localStorage.getItem("cherrypicking") === "true"){document.querySelector("#cherrypicking").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Grab single blocks by dragging with the Ctrl key.</small></td>
+                </tr>
+            </table>
+        </div>
+    </body>
 </html>

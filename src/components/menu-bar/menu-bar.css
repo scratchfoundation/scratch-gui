@@ -48,6 +48,7 @@
 }
 
 .scratch-logo.clickable {
+    transition: 0.125s;
     cursor: pointer;
 }
 

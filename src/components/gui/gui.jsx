@@ -343,9 +343,11 @@ const GUIComponent = props => {
                                     {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                 </TabPanel>
                             </Tabs>
+                            {/*/
                             {backpackVisible ? (
                                 <Backpack host={backpackHost} />
                             ) : null}
+                            /*/}
                         </Box>
 
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -452,7 +454,7 @@ GUIComponent.defaultProps = {
     canSave: false,
     canCreateCopy: false,
     canShare: false,
-    canUseCloud: false,
+    canUseCloud: true,
     enableCommunity: false,
     isCreating: false,
     isShared: false,

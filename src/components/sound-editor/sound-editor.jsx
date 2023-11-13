@@ -22,6 +22,7 @@ import slowerIcon from './icon--slower.svg';
 import louderIcon from './icon--louder.svg';
 import softerIcon from './icon--softer.svg';
 import robotIcon from './icon--robot.svg';
+import echoIcon from './icon--echo.svg';
 import reverseIcon from './icon--reverse.svg';
 import fadeOutIcon from './icon--fade-out.svg';
 import fadeInIcon from './icon--fade-in.svg';
@@ -307,6 +308,12 @@ const SoundEditor = props => (
                 title={<FormattedMessage {...messages.robot} />}
                 onClick={props.onRobot}
             />
+            <IconButton
+                className={styles.effectButton}
+                img={echoIcon}
+                title={<FormattedMessage {...messages.echo} />}
+                onClick={props.onEcho}
+            />
         </div>
     </div>
 );
@@ -345,5 +352,4 @@ SoundEditor.propTypes = {
     trimEnd: PropTypes.number,
     trimStart: PropTypes.number
 };
-
 export default injectIntl(SoundEditor);

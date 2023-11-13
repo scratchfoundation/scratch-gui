@@ -87,7 +87,7 @@ describe('Localization', () => {
         await loadUri(uri);
         await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
-        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3,.sbpp"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/monitor-variable.sb3'));
 
         // Monitors are present

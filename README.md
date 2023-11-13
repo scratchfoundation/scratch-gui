@@ -1,66 +1,74 @@
-# scratch-gui
-#### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
+# Scratch++
+#### Scratch++ is a Scratch mod that adds new blocks which can compile to normal Scratch.
+
+## How to use
+Example:
+In the editor, write a script with a new block (like the power operator).
+```scratchblocks
+when 🏳️ clicked
+say ( 5 ^ 3 )
+```
+Then, click on `File` > `Compile to Scratch (.sb3)`. It should download an sb3 file that is fully compatible with normal Scratch.
 
 ## Installation
+Go to the [releases tab](https://github.com/ZXMushroom63/scratch-gui/releases/latest), and download the zip file from the assets section.
+Create a new folder on your computer, naming it whateverr you want.
+Extract the zip file to this folder.
+Open index.html in Chrome or your preferred browser!
+
+
+## Building
 This requires you to have Git and Node.js installed.
 
-In your own node environment/application:
+
 ```bash
-npm install https://github.com/LLK/scratch-gui.git
-```
-If you want to edit/play yourself:
-```bash
-git clone https://github.com/LLK/scratch-gui.git
+cd scratchplusplus #Folder dedicated to Scratch++
+
+git clone --depth=1 https://github.com/ZXMushroom63/scratch-gui.git
 cd scratch-gui
 npm install
-```
 
-**You may want to add `--depth=1` to the `git clone` command because there are some [large files in the git repository history](https://github.com/LLK/scratch-gui/issues/5140).**
+cd ..
+git clone --depth=1 https://github.com/ZXMushroom63/scratch-vm.git
+cd scratch-vm
+npm install
 
-## Getting started
-Running the project requires Node.js to be installed.
+cd ..
+git clone --depth=1 https://github.com/ZXMushroom63/scratch-blocks.git
+cd scratch-blocks
+npm install
+npm run translate
+sudo npm run prepublish #Requires python 2 and Java installed!!!
 
-## Running
-Open a Command Prompt or Terminal in the repository and run:
-```bash
+cd ../scratch-gui
+npm link ../scratch-blocks ../scratch-vm #Might also need sudo
+
+# Now, to run it in localhost:
 npm start
+
+# Or, to make a build:
+npm run build
+# Outputs to the build folder
 ```
-Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
-
-## Developing alongside other Scratch repositories
-
-### Getting another repo to point to this code
-
-
-If you wish to develop `scratch-gui` alongside other scratch repositories that depend on it, you may wish
-to have the other repositories use your local `scratch-gui` build instead of fetching the current production
-version of the scratch-gui that is found by default using `npm install`.
-
-Here's how to link your local `scratch-gui` code to another project's `node_modules/scratch-gui`.
-
-#### Configuration
-
-1. In your local `scratch-gui` repository's top level:
-    1. Make sure you have run `npm install`
-    2. Build the `dist` directory by running `BUILD_MODE=dist npm run build`
-    3. Establish a link to this repository by running `npm link`
-
-2. From the top level of each repository (such as `scratch-www`) that depends on `scratch-gui`:
-    1. Make sure you have run `npm install`
-    2. Run `npm link scratch-gui`
-    3. Build or run the repository
-
-#### Using `npm run watch`
-
-Instead of `BUILD_MODE=dist npm run build`, you can use `BUILD_MODE=dist npm run watch` instead. This will watch for changes to your `scratch-gui` code, and automatically rebuild when there are changes. Sometimes this has been unreliable; if you are having problems, try going back to `BUILD_MODE=dist npm run build` until you resolve them.
-
-#### Oh no! It didn't work!
-
-If you can't get linking to work right, try:
-* Follow the recipe above step by step and don't change the order. It is especially important to run `npm install` _before_ `npm link` as installing after the linking will reset the linking.
-* Make sure the repositories are siblings on your machine's file tree, like `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-gui/` and `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-www/`.
-* Consistent node.js version: If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.
-* If nothing else works, unlink the repositories by running `npm unlink` in both, and start over.
+## Current feature list
+- fencing control blocks
+- power operator
+- previous costume & previous backdrop
+- force set size
+- point to X Y
+- min operator
+- max operator
+- if operator
+- replace x with y in z operator
+- newline reporter
+- decimal to hexadecimal operator
+- color at my position reporter
+- set list to x split by y
+- Network extension
+- fastpower
+- letters x to y of string
+- starts with
+- ends with
 
 ## Testing
 ### Documentation

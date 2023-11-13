@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import keyMirror from 'keymirror';
 
 import successImage from '../assets/icon--success.svg';
+import { showAlertWithTimeout } from '../../reducers/alerts';
 
 const AlertTypes = keyMirror({
     STANDARD: null,
@@ -212,6 +213,19 @@ const alerts = [
         ),
         iconSpinner: true,
         level: AlertLevels.SUCCESS
+    },
+    {
+        alertId: 'sppInfo',
+        alertType: AlertTypes.STANDARD,
+        clearList: ['sppInfo'],
+        content: (
+            <div>
+                Welcome to Scratch++!
+            </div>
+        ),
+        closeButton: true,
+        level: AlertLevels.INFO,
+        maxDisplaySecs: 9999999
     }
 ];
 
@@ -220,3 +234,4 @@ export {
     AlertLevels,
     AlertTypes
 };
+

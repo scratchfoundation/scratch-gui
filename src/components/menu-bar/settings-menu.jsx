@@ -6,7 +6,7 @@ import {FormattedMessage} from 'react-intl';
 import LanguageMenu from './language-menu.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import ThemeMenu from './theme-menu.jsx';
-import {MenuSection} from '../menu/menu.jsx';
+import {MenuItem, MenuSection} from '../menu/menu.jsx';
 
 import menuBarStyles from './menu-bar.css';
 import styles from './settings-menu.css';
@@ -48,6 +48,12 @@ const SettingsMenu = ({
             <MenuSection>
                 {canChangeLanguage && <LanguageMenu onRequestCloseSettings={onRequestClose} />}
                 {canChangeTheme && <ThemeMenu onRequestCloseSettings={onRequestClose} />}
+                <MenuItem onClick={()=>{document.getElementById("splash").classList.remove("splashHidden")}}>Show splash</MenuItem>
+            </MenuSection>
+            <MenuSection>
+                {canChangeLanguage && <LanguageMenu onRequestCloseSettings={onRequestClose} />}
+                {canChangeTheme && <ThemeMenu onRequestCloseSettings={onRequestClose} />}
+                <MenuItem onClick={()=>{document.getElementById("sppsettings").classList.remove("splashHidden")}}>Open Scratch++ settings</MenuItem>
             </MenuSection>
         </MenuBarMenu>
     </div>

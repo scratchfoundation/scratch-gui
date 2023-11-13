@@ -45,7 +45,7 @@ describe('Menu bar settings', () => {
     test('File->Save should be enabled', async () => {
         await loadUri(uri);
         await clickXpath(FILE_MENU_XPATH);
-        await findByXpath('//*[li[span[text()="Save to your computer"]] and not(@data-tip="tooltip")]');
+        await findByXpath('//*[li[span[text()="Save to your computer (.sbpp)"]] and not(@data-tip="tooltip")]');
     });
 
     test('Share button should NOT be enabled', async () => {
@@ -72,7 +72,7 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
-        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3,.sbpp"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
         // No replace alert since no changes were made
         await findByText('project1-sprite');
@@ -87,7 +87,7 @@ describe('Menu bar settings', () => {
 
         await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');
-        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3,.sbpp"]');
         await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
         await driver.switchTo().alert()
             .accept();

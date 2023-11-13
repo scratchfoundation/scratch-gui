@@ -99,6 +99,18 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        <block type="motion_pointtoxy">
+            <value name="X">
+                <shadow id="x" type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+            <value name="Y">
+                <shadow id="y" type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="motion_changexby">
             <value name="DX">
@@ -128,6 +140,9 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
+        <block type="motion_fencing_enable"/>
+        <block type="motion_fencing_disable"/>
         ${blockSeparator}
         <block type="motion_ifonedgebounce"/>
         ${blockSeparator}
@@ -216,6 +231,7 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                 </value>
             </block>
             <block type="looks_nextbackdrop"/>
+            <block type="looks_previousbackdrop"/>
         ` : `
             <block id="${targetId}_switchcostumeto" type="looks_switchcostumeto">
                 <value name="COSTUME">
@@ -225,6 +241,7 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                 </value>
             </block>
             <block type="looks_nextcostume"/>
+            <block type="looks_previouscostume"/>
             <block type="looks_switchbackdropto">
                 <value name="BACKDROP">
                     <shadow type="looks_backdrops">
@@ -233,6 +250,7 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                 </value>
             </block>
             <block type="looks_nextbackdrop"/>
+            <block type="looks_previousbackdrop"/>
             ${blockSeparator}
             <block type="looks_changesizeby">
                 <value name="CHANGE">
@@ -242,6 +260,13 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                 </value>
             </block>
             <block type="looks_setsizeto">
+                <value name="SIZE">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="looks_forcesizeto">
                 <value name="SIZE">
                     <shadow type="math_number">
                         <field name="NUM">100</field>
@@ -459,6 +484,8 @@ const sensing = function (isInitialSetup, isStage, targetId, colors) {
                     <shadow type="colour_picker"/>
                 </value>
             </block>
+            <block type="sensing_color">
+            </block>
             <block type="sensing_coloristouchingcolor">
                 <value name="COLOR">
                     <shadow type="colour_picker"/>
@@ -578,6 +605,30 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        <block type="operator_power">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_fastpower">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="operator_random">
             <value name="FROM">
@@ -633,6 +684,9 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
         <block type="operator_or"/>
         <block type="operator_not"/>
         ${blockSeparator}
+        <block type="operator_true"/>
+        <block type="operator_false"/>
+        ${blockSeparator}
         ${isInitialSetup ? '' : `
             <block type="operator_join">
                 <value name="STRING1">
@@ -646,10 +700,42 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                     </shadow>
                 </value>
             </block>
+            <block type="operator_newline"/>
+            <block type="operator_if">
+              <value name="OPERAND">
+              </value>
+              <value name="STRING1">
+                <shadow type="text">
+                  <field name="TEXT">${apple}</field>
+                </shadow>
+              </value>
+              <value name="STRING2">
+                <shadow type="text">
+                  <field name="TEXT">${banana}</field>
+                </shadow>
+              </value>
+            </block>
             <block type="operator_letter_of">
                 <value name="LETTER">
                     <shadow type="math_whole_number">
                         <field name="NUM">1</field>
+                    </shadow>
+                </value>
+                <value name="STRING">
+                    <shadow type="text">
+                        <field name="TEXT">${apple}</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="operator_substring">
+                <value name="LETTER1">
+                    <shadow type="math_whole_number">
+                        <field name="NUM">3</field>
+                    </shadow>
+                </value>
+                <value name="LETTER2">
+                    <shadow type="math_whole_number">
+                        <field name="NUM">5</field>
                     </shadow>
                 </value>
                 <value name="STRING">
@@ -677,8 +763,73 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
               </value>
             </block>
+            <block type="operator_startswith">
+              <value name="STRING1">
+                <shadow type="text">
+                  <field name="TEXT">${apple}</field>
+                </shadow>
+              </value>
+              <value name="STRING2">
+                <shadow type="text">
+                  <field name="TEXT">${letter}</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="operator_endswith">
+              <value name="STRING1">
+                <shadow type="text">
+                  <field name="TEXT">${apple}</field>
+                </shadow>
+              </value>
+              <value name="STRING2">
+                <shadow type="text">
+                  <field name="TEXT">e</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="operator_replace">
+              <value name="X">
+                <shadow type="text">
+                  <field name="TEXT">a</field>
+                </shadow>
+              </value>
+              <value name="Y">
+                <shadow type="text">
+                  <field name="TEXT">y</field>
+                </shadow>
+              </value>
+              <value name="STRING">
+                <shadow type="text">
+                  <field name="TEXT">${banana}</field>
+                </shadow>
+              </value>
+            </block>
         `}
         ${blockSeparator}
+        <block type="operator_min">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_max">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_mod">
             <value name="NUM1">
                 <shadow type="math_number">
@@ -686,6 +837,13 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
             <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_hex">
+            <value name="NUM">
                 <shadow type="math_number">
                     <field name="NUM"/>
                 </shadow>

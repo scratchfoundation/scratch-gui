@@ -54,7 +54,8 @@ const cloudManagerHOC = function (WrappedComponent) {
             this.disconnectFromCloud();
         }
         canUseCloud (props) {
-            return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
+            // return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
+            return true;
         }
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
@@ -142,7 +143,7 @@ const cloudManagerHOC = function (WrappedComponent) {
 
     CloudManager.defaultProps = {
         cloudHost: null,
-        hasCloudPermission: false,
+        hasCloudPermission: true,
         onShowCloudInfo: () => {},
         username: null
     };

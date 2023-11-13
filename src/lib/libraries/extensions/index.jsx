@@ -1,6 +1,9 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import networkInsetIconURL from './network/network.svg';
+import networkIconURL from './network/networkBig.png';
+
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
@@ -47,6 +50,25 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 export default [
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Network"
+                description="Name for the 'Network' extension"
+                id="gui.extension.network.name"
+            />
+        ),
+        extensionId: 'network',
+        iconURL: networkIconURL,
+        insetIconURL: networkInsetIconURL,
+        description: 
+            <span>
+                Easily send messages with cloud variables.<br></br>
+                <sub style={{lineHeight: "0 !important"}}>Note: Cloud variables are not used while in Scratch++, and Scratch will deny any sent cloud messages with less than a tenth of a second between each other.</sub>
+            </span>
+        ,
+        featured: true
+    },
     {
         name: (
             <FormattedMessage

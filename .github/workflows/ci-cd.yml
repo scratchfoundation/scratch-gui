@@ -91,7 +91,7 @@ jobs:
                 name: unit-test-output
                 path: ./test-results/*
     build:
-        needs: setup
+        needs: [setup, test-unit]
         env: 
             NODE_OPTIONS: --max-old-space-size=4000
             DETECT_CHROMEDRIVER_VERSION: "true"
@@ -139,6 +139,11 @@ jobs:
               with:
                 name: build-output
                 path: ./build
+            - name: Store Dist Output
+              uses: actions/upload-artifact@v3
+              with:
+                name: dist-output
+                path: ./dist
     test-integration:
         needs: build
         runs-on: ubuntu-latest

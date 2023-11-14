@@ -2,10 +2,9 @@ name: CI/CD
 
 on:
     workflow_dispatch:
-    push: # Runs whenever a commit is pushed to the repository
-
+    push:
 concurrency:
-    group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+    group: "${{ github.workflow }} @ ${{ github.head_ref || github.ref }}"
     cancel-in-progress: true
 
 permissions:
@@ -14,18 +13,18 @@ permissions:
     issues: write # comment on released issues
     pull-requests: write # comment on released pull requests
 
+
 jobs:
     setup:
         runs-on: ubuntu-latest
-        env:
-            TRIGGER_DEPLOY: ${{ startsWith(github.ref, 'refs/heads/master') }}
+        env:    
             DETECT_CHROMEDRIVER_VERSION: "true"
             JEST_JUNIT_OUTPUT_DIR: test-results
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
             - uses: actions/checkout@v4
             - uses: wagoid/commitlint-github-action@v5
-              if: github.event_name == 'pull_request'
+              if: github.ref_name == 'develop' 
             - uses: actions/setup-node@v3
               with:
                   cache: "npm"
@@ -184,6 +183,7 @@ jobs:
                 path: ./test-results/*
     deploy-npm:
         needs: [test-integration, test-unit]
+        if: ${{ startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/beta') }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -204,12 +204,14 @@ jobs:
                 sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js
                 fi
             - name: Semantic Release
+        
               env:
                 NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: npx --no -- semantic-release
     deploy-gh-pages:
         needs: [test-integration, test-unit]
+        if: ${{ startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/beta') }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -226,6 +228,7 @@ jobs:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Deploy playground to GitHub Pages
+              
               uses: peaceiris/actions-gh-pages@v3
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}

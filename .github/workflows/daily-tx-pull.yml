@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #     ref: 'develop'
+        with:
+            ref: 'develop'
       - uses: actions/setup-node@v3
         with:
           cache: 'npm'

@@ -38,7 +38,7 @@ jobs:
                   GitHub head ref: ${{ github.head_ref }}
                   EOF
             - name: Install Dependencies
-              run: npm install
+              run: npm ci
             - name: Lint
               run: |
                 npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
@@ -120,6 +120,8 @@ jobs:
                     static/microbit
                 key: ${{ runner.os }}-microbit-${{ hashFiles('package-lock.json') }}
             - name: Run Build
+              env:
+                NODE_ENV: production
               run: npm run build
             - name: Cache Build Directory
               uses: actions/cache@v3

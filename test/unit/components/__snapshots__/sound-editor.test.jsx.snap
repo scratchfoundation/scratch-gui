@@ -3,7 +3,7 @@
 exports[`Sound Editor Component matches snapshot 1`] = `
 <div
   className={undefined}
-  onMouseDown={undefined}
+  onMouseDown={[Function]}
 >
   <div
     className={undefined}

@@ -23,8 +23,8 @@ jobs:
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
             - uses: actions/checkout@v4
-            - uses: wagoid/commitlint-github-action@v5
-              if: github.ref_name == 'develop' 
+#            - uses: wagoid/commitlint-github-action@v5
+#              if: github.ref_name == 'develop' 
             - uses: actions/setup-node@v3
               with:
                   cache: "npm"

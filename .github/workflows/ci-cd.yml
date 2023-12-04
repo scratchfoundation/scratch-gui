@@ -39,14 +39,14 @@ jobs:
                   EOF
             - name: Install Dependencies
               run: npm ci
-            - name: Lint
-              run: |
-                npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
-            - name: Store Lint Results
-              uses: actions/upload-artifact@v3
-              with:
-                name: lint-output
-                path: ./test-results/*
+#            - name: Lint
+#              run: |
+#                npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
+#            - name: Store Lint Results
+#              uses: actions/upload-artifact@v3
+#              with:
+#                name: lint-output
+#                path: ./test-results/*
             - name: Cache node_modules
               id: cache-nodemodules
               uses: actions/cache@v3

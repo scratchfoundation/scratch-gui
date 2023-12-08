@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import Box from '../box/box.jsx';
 import Monitor from '../../containers/monitor.jsx';
 import PropTypes from 'prop-types';
-import {OrderedMap} from 'immutable';
-import {stageSizeToTransform} from '../../lib/screen-utils';
+import { OrderedMap } from 'immutable';
+import { stageSizeToTransform } from '../../lib/screen-utils';
 
 import styles from './monitor-list.css';
 
@@ -26,7 +26,7 @@ const MonitorList = props => (
                     <Monitor
                         draggable={props.draggable}
                         height={monitorData.height}
-                        id={monitorData.id}
+                        id={monitorData.id || `fallbackId_${index}`}
                         isDiscrete={monitorData.isDiscrete}
                         key={monitorData.id}
                         max={monitorData.sliderMax}

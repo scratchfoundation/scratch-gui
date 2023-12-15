@@ -311,6 +311,10 @@ const SoundEditor = props => (
     </div>
 );
 
+SoundEditor.defaultProps = {
+    onContainerClick: () => {}
+  };
+
 SoundEditor.propTypes = {
     canPaste: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,

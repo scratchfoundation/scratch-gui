@@ -20,11 +20,22 @@ module.exports = {
         'import/no-nodejs-modules': 'error',
         'react/jsx-no-literals': 'error',
         'no-confusing-arrow': ['error', {
-            'allowParens': true
+            allowParens: true
         }]
     },
+    overrides: [
+        {
+            files: ['**/.eslintrc.js'],
+            env: {
+                node: true
+            },
+            rules: {
+                'import/no-commonjs': 'off'
+            }
+        }
+    ],
     settings: {
-        react: {
+        'react': {
             version: '16.2' // Prevent 16.3 lifecycle method errors
         },
         'import/resolver': {

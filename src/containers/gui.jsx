@@ -185,7 +185,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ConnectedGUI = injectIntl(connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(GUI));
 
 // note that redux's 'compose' function is just being used as a general utility to make

@@ -4,6 +4,9 @@ import {FormattedMessage} from 'react-intl';
 import networkInsetIconURL from './network/network.svg';
 import networkIconURL from './network/networkBig.png';
 
+import impulseInsetIconURL from './impulse/impulse.svg';
+import impulseIconURL from './impulse/impulseBig.png';
+
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
@@ -65,6 +68,25 @@ export default [
             <span>
                 Easily send messages with cloud variables.<br></br>
                 <sub style={{lineHeight: "0 !important"}}>Note: Cloud variables are not used while in Scratch++, and Scratch will deny any sent cloud messages with less than a tenth of a second between each other.</sub>
+            </span>
+        ,
+        featured: true
+    },
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Impulse"
+                description="Name for the 'Impulse' extension"
+                id="gui.extension.impulse.name"
+            />
+        ),
+        extensionId: 'impulse',
+        iconURL: impulseIconURL,
+        insetIconURL: impulseInsetIconURL,
+        description: 
+            <span>
+                Distilled version of griffpatch's Impulse2D engine.<br></br>
+                <sub style={{lineHeight: "0 !important"}}></sub>
             </span>
         ,
         featured: true

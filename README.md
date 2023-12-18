@@ -69,6 +69,7 @@ npm run build
 - letters x to y of string
 - starts with
 - ends with
+- Physics extension
 
 ## Testing
 ### Documentation

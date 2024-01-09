@@ -17,14 +17,12 @@ permissions:
 jobs:
     setup:
         runs-on: ubuntu-latest
-        env:    
+        env:
             DETECT_CHROMEDRIVER_VERSION: "true"
             JEST_JUNIT_OUTPUT_DIR: test-results
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
             - uses: actions/checkout@v4
-            - uses: wagoid/commitlint-github-action@v5
-              if: github.ref_name == 'develop' 
             - uses: actions/setup-node@v3
               with:
                   cache: "npm"
@@ -51,21 +49,21 @@ jobs:
               id: cache-nodemodules
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Cache src/generated
               id: cache-generated
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Cache static/microbit
               id: cache-static
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     static/microbit
                 key: ${{ runner.os }}-microbit-${{ hashFiles('package-lock.json') }}
     test-unit:
@@ -79,7 +77,7 @@ jobs:
             - name: Cache NPM dependencies
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Run Unit Tests
@@ -91,7 +89,7 @@ jobs:
                 path: ./test-results/*
     build:
         needs: [setup, test-unit]
-        env: 
+        env:
             NODE_OPTIONS: --max-old-space-size=4000
             DETECT_CHROMEDRIVER_VERSION: "true"
         runs-on: ubuntu-latest
@@ -104,19 +102,19 @@ jobs:
             - name: Retrieve node_modules
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve src/generated
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Retireve static/microbit
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     static/microbit
                 key: ${{ runner.os }}-microbit-${{ hashFiles('package-lock.json') }}
             - name: Run Build
@@ -126,13 +124,13 @@ jobs:
             - name: Cache Build Directory
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Cache Dist Directory
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     ./dist
                 key: ${{ runner.os }}-dist-${{ hashFiles('package-lock.json') }}
             - name: Store Build Output
@@ -160,13 +158,13 @@ jobs:
             - name: Retrieve npm dependencies
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - uses: browser-actions/setup-chrome@v1
@@ -185,20 +183,20 @@ jobs:
                 path: ./test-results/*
     deploy-npm:
         needs: [test-integration, test-unit]
-        if: ${{ startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/beta') }}
+        if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/develop') || (github.ref == 'refs/heads/beta') || startsWith(github.ref, 'refs/heads/hotfix')
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - name: Retrieve npm dependencies
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Dist Directory
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     ./dist
                 key: ${{ runner.os }}-dist-${{ hashFiles('package-lock.json') }}
             - run: |
@@ -206,31 +204,29 @@ jobs:
                 sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js
                 fi
             - name: Semantic Release
-        
               env:
                 NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: npx --no -- semantic-release
     deploy-gh-pages:
         needs: [test-integration, test-unit]
-        if: ${{ startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/hotfix') || startsWith(github.ref, 'refs/heads/beta') }}
+        if: (!(startsWith(github.ref, 'refs/heads/dependabot/') || startsWith(github.ref, 'refs/heads/renovate/')))
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - name: Retrieve npm dependencies
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build Directory
               uses: actions/cache@v3
               with:
-                path: 
+                path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Deploy playground to GitHub Pages
-              
               uses: peaceiris/actions-gh-pages@v3
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}

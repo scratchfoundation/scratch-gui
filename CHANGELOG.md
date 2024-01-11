@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.49](https://github.com/LLK/scratch-gui/compare/v3.2.48...v3.2.49) (2024-01-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-paint to v2.1.69 ([ad2a5ed](https://github.com/LLK/scratch-gui/commit/ad2a5edd7334ae56df3e35106f00f0bd67dfb3df))
+
 ## [3.2.48](https://github.com/LLK/scratch-gui/compare/v3.2.47...v3.2.48) (2024-01-11)
 
 

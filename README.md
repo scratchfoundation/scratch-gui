@@ -1,5 +1,5 @@
 # Scratch++
-#### Scratch++ is a Scratch mod that adds new blocks which can compile to normal Scratch.
+#### Scratch++ is a Scratch mod that adds new blocks which can compile to normal Scratch. This allows for easily building advanced Scratch projects, which you can share normally.
 
 ## How to use
 Example:

@@ -47,21 +47,21 @@ jobs:
                 path: ./test-results/*
             - name: Cache node_modules
               id: cache-nodemodules
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Cache src/generated
               id: cache-generated
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Cache static/microbit
               id: cache-static
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     static/microbit
@@ -75,7 +75,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Cache NPM dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
@@ -100,19 +100,19 @@ jobs:
                 cache: "npm"
                 node-version-file: ".nvmrc"
             - name: Retrieve node_modules
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve src/generated
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Retireve static/microbit
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     static/microbit
@@ -122,13 +122,13 @@ jobs:
                 NODE_ENV: production
               run: npm run build
             - name: Cache Build Directory
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Cache Dist Directory
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     ./dist
@@ -156,13 +156,13 @@ jobs:
                 sudo apt-get update
                 sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     ./build
@@ -188,13 +188,13 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Dist Directory
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     ./dist
@@ -215,13 +215,13 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build Directory
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                 path:
                     ./build

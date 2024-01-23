@@ -441,6 +441,7 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
         <block type="control_if_else"/>
         <block id="wait_until" type="control_wait_until"/>
         <block id="repeat_until" type="control_repeat_until"/>
+        <block id="launch" type="control_launch"/>
         ${blockSeparator}
         <block type="control_stop"/>
         ${blockSeparator}
@@ -787,6 +788,18 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
               </value>
             </block>
+            <block type="operator_else">
+              <value name="CASE">
+                <shadow type="text">
+                  <field name="TEXT"></field>
+                </shadow>
+              </value>
+              <value name="DEFAULT">
+                <shadow type="text">
+                  <field name="TEXT">default</field>
+                </shadow>
+              </value>
+            </block>
             <block type="operator_replace">
               <value name="X">
                 <shadow type="text">
@@ -837,6 +850,23 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
             <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_clamp">
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="MIN">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="MAX">
                 <shadow type="math_number">
                     <field name="NUM"/>
                 </shadow>

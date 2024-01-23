@@ -127,13 +127,23 @@
             <table>
                 <tr>
                     <td>
+                        [NEW] Blockly Dev Tools
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('blocklydevtools', this.checked)" id="blocklydevtools">
+                        <script>if (localStorage.getItem("blocklydevtools") === "true"){document.querySelector("#blocklydevtools").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Allows in-editor modification of block XML, as well as collapsing blocks and force-delete. (By ZXMushroom63)</small></td>
+                </tr>
+                <tr>
+                    <td>
                         Cat Blocks
                     </td>
                     <td>
                         <input type="checkbox" oninput="localStorage.setItem('catblocks', this.checked)" id="catblocks">
                         <script>if (localStorage.getItem("catblocks") === "true"){document.querySelector("#catblocks").setAttribute("checked", "")}</script>
                     </td>
-                    <td><small>Brings back the 2020 cat blocks.</small></td>
+                    <td><small>Brings back the 2020 cat blocks. (By TheColaber, GarboMuffin)</small></td>
                 </tr>
                 <tr>
                     <td>
@@ -143,7 +153,7 @@
                         <input type="checkbox" oninput="localStorage.setItem('blocks2image', this.checked)" id="blocks2image">
                         <script>if (localStorage.getItem("blocks2image") === "true"){document.querySelector("#blocks2image").setAttribute("checked", "")}</script>
                     </td>
-                    <td><small>Adds export to image options to the right-click menu.</small></td>
+                    <td><small>Adds export to image options to the right-click menu. (By summerscar)</small></td>
                 </tr>
                 <tr>
                     <td>
@@ -153,7 +163,7 @@
                         <input type="checkbox" oninput="localStorage.setItem('numberpad', this.checked)" id="numberpad">
                         <script>if (localStorage.getItem("numberpad") === "true"){document.querySelector("#numberpad").setAttribute("checked", "")}</script>
                     </td>
-                    <td><small>Force shows the number pad on number inputs.</small></td>
+                    <td><small>Force shows the number pad on number inputs. (By GarboMuffin)</small></td>
                 </tr>
                 <tr>
                     <td>
@@ -163,7 +173,7 @@
                         <input type="checkbox" oninput="localStorage.setItem('cherrypicking', this.checked)" id="cherrypicking">
                         <script>if (localStorage.getItem("cherrypicking") === "true"){document.querySelector("#cherrypicking").setAttribute("checked", "")}</script>
                     </td>
-                    <td><small>Grab single blocks by dragging with the Ctrl key.</small></td>
+                    <td><small>Grab single blocks by dragging with the Ctrl key. (By lisa_wolfgang, GarboMuffin)</small></td>
                 </tr>
             </table>
         </div>

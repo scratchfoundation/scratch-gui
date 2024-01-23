@@ -75,3 +75,4 @@ require("./catblocks").func();
 require("./numberpad").func();
 require("./blocks2image").func(createBlockContextMenu);
 require("./cherrypicking").func();
+require("./blocklydevtools").func();

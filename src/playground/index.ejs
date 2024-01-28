@@ -137,6 +137,16 @@
                 </tr>
                 <tr>
                     <td>
+                        Clean Up+
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('cleanupplus', this.checked)" id="cleanupplus">
+                        <script>if (localStorage.getItem("cleanupplus") === "true"){document.querySelector("#cleanupplus").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Enhances Scratch's clean up function. (By griffpatch)</small></td>
+                </tr>
+                <tr>
+                    <td>
                         Cat Blocks
                     </td>
                     <td>

@@ -11,10 +11,11 @@ say ( 5 ^ 3 )
 Then, click on `File` > `Compile to Scratch (.sb3)`. It should download an sb3 file that is fully compatible with normal Scratch.
 
 ## Installation
-Go to the [releases tab](https://github.com/ZXMushroom63/scratch-gui/releases/latest), and download the zip file from the assets section.
-Create a new folder on your computer, naming it whateverr you want.
-Extract the zip file to this folder.
-Open index.html in Chrome or your preferred browser!
+
+1. Go to the [releases tab](https://github.com/ZXMushroom63/scratch-gui/releases/latest), and download the zip file from the assets section.
+2. Create a new folder on your computer, naming it whatever you want.
+3. Extract the zip file to this folder.
+4. Open index.html in Chrome or your preferred browser!
 
 
 ## Building

@@ -21,9 +21,9 @@
                 if (
                     ev.target &&
                     ev.target.value &&
-                    ev.target.value.startsWith("$rt.")
+                    ev.target.value.startsWith("$rt")
                 ) {
-                    ev.target.value = ev.target.value.substring("$rt.".length);
+                    ev.target.value = ev.target.value.substring("$rt".length);
                 }
             });
             window.addEventListener("load", ()=>{

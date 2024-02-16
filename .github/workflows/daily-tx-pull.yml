@@ -12,10 +12,10 @@ jobs:
   daily-tx-pull:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
         with:
             ref: 'develop'
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
           cache: 'npm'
           node-version-file: '.nvmrc'

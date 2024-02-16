@@ -116,7 +116,7 @@
     "babel-core": "7.0.0-bridge.0",
     "@babel/eslint-parser": "7.23.10",
     "babel-loader": "8.3.0",
-    "chromedriver": "119.0.1",
+    "chromedriver": "121.0.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.7",
     "eslint": "8.56.0",

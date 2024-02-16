@@ -8,7 +8,11 @@ import HashParserHOC from '../lib/hash-parser-hoc.jsx';
 import log from '../lib/log.js';
 
 const onClickLogo = () => {
-    window.location = 'https://scratch.mit.edu';
+    // Under normal circumstances, clicking the logo should navigate to our homepage.
+    // For the purposes of testing, we'll navigate to a special URL that:
+    // - does not depend on the network
+    // - can be detected by the menu-bar test
+    window.location = 'about:blank#onClickLogo';
 };
 
 const handleTelemetryModalCancel = () => {

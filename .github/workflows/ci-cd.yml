@@ -91,7 +91,6 @@ jobs:
         needs: [setup, test-unit]
         env:
             NODE_OPTIONS: --max-old-space-size=4000
-            DETECT_CHROMEDRIVER_VERSION: "true"
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4

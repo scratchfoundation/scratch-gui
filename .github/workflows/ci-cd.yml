@@ -22,8 +22,8 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: test-results
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
               with:
                   cache: "npm"
                   node-version-file: ".nvmrc"
@@ -41,27 +41,27 @@ jobs:
               run: |
                 npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
             - name: Store Lint Results
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
                 name: lint-output
                 path: ./test-results/*
             - name: Cache node_modules
               id: cache-nodemodules
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Cache src/generated
               id: cache-generated
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Cache static/microbit
               id: cache-static
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     static/microbit
@@ -73,9 +73,9 @@ jobs:
             JEST_JUNIT_OUTPUT_NAME: unit-results.xml
             JEST_JUNIT_OUTPUT_DIR: test-results/unit
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
             - name: Cache NPM dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
@@ -83,7 +83,7 @@ jobs:
             - name: Run Unit Tests
               run: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov --maxWorkers="2"
             - name: Store Unit Test Results
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
                 name: unit-test-output
                 path: ./test-results/*
@@ -94,25 +94,25 @@ jobs:
             DETECT_CHROMEDRIVER_VERSION: "true"
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
               with:
                 cache: "npm"
                 node-version-file: ".nvmrc"
             - name: Retrieve node_modules
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve src/generated
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     src/generated
                 key: ${{ runner.os }}-generated-${{ hashFiles('package-lock.json') }}
             - name: Retireve static/microbit
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     static/microbit
@@ -122,24 +122,24 @@ jobs:
                 NODE_ENV: production
               run: npm run build
             - name: Cache Build Directory
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Cache Dist Directory
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     ./dist
                 key: ${{ runner.os }}-dist-${{ hashFiles('package-lock.json') }}
             - name: Store Build Output
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
                 name: build-output
                 path: ./build
             - name: Store Dist Output
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
                 name: dist-output
                 path: ./dist
@@ -150,24 +150,24 @@ jobs:
             JEST_JUNIT_OUTPUT_NAME: results.txt
             JEST_JUNIT_OUTPUT_DIR: test-results/integration
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
             - name: Install Chrome Dependencies
               run: |
                 sudo apt-get update
                 sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-            - uses: browser-actions/setup-chrome@v1
+            - uses: browser-actions/setup-chrome@97349de5c98094d4fc9412f31c524d7697115ad8 # v1
               with:
                 chrome-version: stable
               id: setup-chrome
@@ -177,7 +177,7 @@ jobs:
             - name: Run Integration Tests
               run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
             - name: Store Integration Test Results
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
                 name: integration-test-output
                 path: ./test-results/*
@@ -186,15 +186,15 @@ jobs:
         if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/develop') || (github.ref == 'refs/heads/beta') || startsWith(github.ref, 'refs/heads/hotfix')
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Dist Directory
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     ./dist
@@ -213,21 +213,21 @@ jobs:
         if: (!(startsWith(github.ref, 'refs/heads/dependabot/') || startsWith(github.ref, 'refs/heads/renovate/')))
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
             - name: Retrieve npm dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
             - name: Retrieve Build Directory
-              uses: actions/cache@v3
+              uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
                 path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
             - name: Deploy playground to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
+              uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
                 publish_dir: ./build

@@ -1,7 +1,6 @@
 jest.setTimeout(30000); // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
-import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
 const {Button, By, until} = webdriver;

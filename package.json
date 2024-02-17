@@ -117,7 +117,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "8.3.0",
     "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.7",
+    "enzyme-adapter-react-16": "1.15.8",
     "eslint": "8.56.0",
     "eslint-config-scratch": "9.0.3",
     "eslint-import-resolver-webpack": "0.11.1",

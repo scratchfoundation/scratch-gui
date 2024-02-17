@@ -13,7 +13,6 @@ permissions:
     issues: write # comment on released issues
     pull-requests: write # comment on released pull requests
 
-
 jobs:
     setup:
         runs-on: ubuntu-latest
@@ -150,10 +149,6 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: test-results/integration
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-            - name: Install Chrome Dependencies
-              run: |
-                sudo apt-get update
-                sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
             - name: Retrieve npm dependencies
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
@@ -166,13 +161,10 @@ jobs:
                 path:
                     ./build
                 key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-            - uses: browser-actions/setup-chrome@97349de5c98094d4fc9412f31c524d7697115ad8 # v1
-              with:
-                chrome-version: stable
-              id: setup-chrome
             - run: |
-                echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
-                ${{ steps.setup-chrome.outputs.chrome-path }} --version
+                for F in chrome chromium chromedriver; do
+                    which $F && $F --version || echo Not found: $F
+                done
             - name: Run Integration Tests
               run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
             - name: Store Integration Test Results

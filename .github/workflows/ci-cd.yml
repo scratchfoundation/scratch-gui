@@ -40,7 +40,7 @@ jobs:
               run: |
                 npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
             - name: Store Lint Results
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
               with:
                 name: lint-output
                 path: ./test-results/*
@@ -82,7 +82,7 @@ jobs:
             - name: Run Unit Tests
               run: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov --maxWorkers="2"
             - name: Store Unit Test Results
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
               with:
                 name: unit-test-output
                 path: ./test-results/*
@@ -132,12 +132,12 @@ jobs:
                     ./dist
                 key: ${{ runner.os }}-dist-${{ hashFiles('package-lock.json') }}
             - name: Store Build Output
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
               with:
                 name: build-output
                 path: ./build
             - name: Store Dist Output
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
               with:
                 name: dist-output
                 path: ./dist
@@ -168,7 +168,7 @@ jobs:
             - name: Run Integration Tests
               run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
             - name: Store Integration Test Results
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
               with:
                 name: integration-test-output
                 path: ./test-results/*

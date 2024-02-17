@@ -41,11 +41,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 
 
 var onClickLogo = function onClickLogo() {
-  // Under normal circumstances, clicking the logo should navigate to our homepage.
-  // For the purposes of testing, we'll navigate to a special URL that:
-  // - does not depend on the network
-  // - can be detected by the menu-bar test
-  window.location = 'about:blank#onClickLogo';
+  window.location = 'https://scratch.mit.edu';
 };
 var handleTelemetryModalCancel = function handleTelemetryModalCancel() {
   Object(_lib_log_js__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])('User canceled telemetry modal');

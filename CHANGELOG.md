@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.7](https://github.com/LLK/scratch-gui/compare/v3.6.6...v3.6.7) (2024-02-17)
+
+
+### Bug Fixes
+
+* **deps:** don't use NPM chromedriver package ([9dd81cb](https://github.com/LLK/scratch-gui/commit/9dd81cb3946410943860ee6f2c82d78f21c64993))
+* **deps:** unpin non-dev dependencies ([f94b201](https://github.com/LLK/scratch-gui/commit/f94b20158ca9de96e36c3719dff0dd212b37273c))
+* **deps:** update dependency scratch-blocks to v1.1.6 ([a5f81a8](https://github.com/LLK/scratch-gui/commit/a5f81a884569a45b2968db03ba5db7e1eb0a803d))
+
 ## [3.6.6](https://github.com/LLK/scratch-gui/compare/v3.6.5...v3.6.6) (2024-01-29)
 
 

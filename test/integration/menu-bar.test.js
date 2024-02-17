@@ -57,7 +57,7 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath('//img[@alt="Scratch"]');
         const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).toEqual('about:blank#onClickLogo'); // see playground/render-gui.jsx
+        await expect(currentUrl).toEqual('https://scratch.mit.edu/');
     });
 
     test('(GH#4064) Project name should be editable', async () => {

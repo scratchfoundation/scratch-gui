@@ -144,7 +144,7 @@
     "webpack": "4.47.0",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.2",
-    "yauzl": "2.10.0"
+    "yauzl": "3.0.0"
   },
   "jest": {
     "setupFiles": [

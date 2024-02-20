@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
 
   "extends": [
-    "github>scratchfoundation/scratch-renovate-config"
+    "github>scratchfoundation/scratch-renovate-config:js-lib"
   ],
 
   "ignoreDeps": [

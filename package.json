@@ -43,7 +43,7 @@
     "computed-style-to-inline-style": "^3.0.0",
     "cookie": "^0.5.0",
     "copy-webpack-plugin": "^6.4.1",
-    "core-js": "^2.5.7",
+    "core-js": "^3.0.0",
     "css-loader": "^1.0.0",
     "dapjs": "^2.3.0",
     "es6-object-assign": "^1.1.0",

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.8](https://github.com/LLK/scratch-gui/compare/v3.6.7...v3.6.8) (2024-02-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-config-scratch to v9.0.4 ([02cf4db](https://github.com/LLK/scratch-gui/commit/02cf4db778b9a9792c4cb1021b64eadad08e09dd))
+* **deps:** update dependency scratch-render-fonts to ^1.0.2 ([4f2df45](https://github.com/LLK/scratch-gui/commit/4f2df45ceb893c87bfe2063d331be17244455d9a))
+
 ## [3.6.7](https://github.com/LLK/scratch-gui/compare/v3.6.6...v3.6.7) (2024-02-17)
 
 

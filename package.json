@@ -88,7 +88,7 @@
     "scratch-l10n": "^3.18.3",
     "scratch-paint": "^2.2.2",
     "scratch-render": "^1.0.0",
-    "scratch-render-fonts": "^1.0.0-prerelease.20231017225105",
+    "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
     "scratch-svg-renderer": "^0.2.0",
     "scratch-vm": "^2.3.4",

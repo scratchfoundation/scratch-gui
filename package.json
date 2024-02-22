@@ -119,7 +119,7 @@
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.8",
     "eslint": "8.56.0",
-    "eslint-config-scratch": "9.0.4",
+    "eslint-config-scratch": "9.0.5",
     "eslint-import-resolver-webpack": "0.11.1",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jest": "22.17.0",

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.10](https://github.com/LLK/scratch-gui/compare/v3.6.9...v3.6.10) (2024-02-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-config-scratch to v9.0.5 ([8c7e516](https://github.com/LLK/scratch-gui/commit/8c7e5168e7c13ec457d71f0305a0a7aec1fa299c))
+
 ## [3.6.9](https://github.com/LLK/scratch-gui/compare/v3.6.8...v3.6.9) (2024-02-22)
 
 

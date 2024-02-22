@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.11](https://github.com/LLK/scratch-gui/compare/v3.6.10...v3.6.11) (2024-02-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-semantic-release-config to v1.0.12 ([6f6415b](https://github.com/LLK/scratch-gui/commit/6f6415bdd9097b595391e76f6c2f07b4cc680bfc))
+
 ## [3.6.10](https://github.com/LLK/scratch-gui/compare/v3.6.9...v3.6.10) (2024-02-22)
 
 

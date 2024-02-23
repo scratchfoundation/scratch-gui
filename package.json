@@ -4,10 +4,10 @@
   "description": "Graphical User Interface for creating and running Scratch 3.0 projects",
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": "https://github.com/scratchfoundation/scratch-gui#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LLK/scratch-gui.git"
+    "url": "https://github.com/scratchfoundation/scratch-gui.git"
   },
   "main": "./dist/scratch-gui.js",
   "scripts": {

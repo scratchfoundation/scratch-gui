@@ -138,7 +138,7 @@
     "scratch-semantic-release-config": "1.0.14",
     "selenium-webdriver": "3.6.0",
     "semantic-release": "19.0.5",
-    "terser-webpack-plugin": "1.4.5",
+    "terser-webpack-plugin": "4.2.3",
     "url-loader": "4.1.1",
     "web-audio-test-api": "0.5.2",
     "webpack": "4.47.0",

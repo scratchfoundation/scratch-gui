@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.15](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.14...v3.6.15) (2024-02-28)
+
+
+### Bug Fixes
+
+* **deps:** use terser-webpack-plugin instead of uglifyjs-webpack-plugin ([05b1266](https://github.com/scratchfoundation/scratch-gui/commit/05b126656f1ee71f25f489d3f179860a3f7a71cd))
+
 ## [3.6.14](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.13...v3.6.14) (2024-02-24)
 
 

@@ -1,7 +1,8 @@
-jest.setTimeout(30000); // eslint-disable-line no-undef
+// some server-side things don't fully fail until a 90-second timeout
+// allow time for that so we get a more specific error message
+jest.setTimeout(95000); // eslint-disable-line no-undef
 
 import bindAll from 'lodash.bindall';
-import 'chromedriver'; // register path
 import webdriver from 'selenium-webdriver';
 
 const {Button, By, until} = webdriver;

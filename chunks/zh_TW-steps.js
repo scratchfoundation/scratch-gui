@@ -1,6 +1,6 @@
 (window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[15],{
 
-/***/ 1238:
+/***/ 1248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25,10 +25,10 @@ __webpack_require__.d(__webpack_exports__, "zhTwImages", function() { return /* 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-move-around.zh_TW.png
 /* harmony default export */ var speech_move_around_zh_TW = (__webpack_require__.p + "static/assets/8b7e06c27e7b3b299b08150ad3002da3.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pick-backdrop.LTR.gif
-var pick_backdrop_LTR = __webpack_require__(218);
+var pick_backdrop_LTR = __webpack_require__(217);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/speech-add-sprite.LTR.gif
-var speech_add_sprite_LTR = __webpack_require__(340);
+var speech_add_sprite_LTR = __webpack_require__(341);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-song.zh_TW.png
 /* harmony default export */ var speech_song_zh_TW = (__webpack_require__.p + "static/assets/a4241bd84cb4e711582f9206f8a3675c.png");
@@ -39,14 +39,14 @@ var speech_add_sprite_LTR = __webpack_require__(340);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/speech-grow-shrink.zh_TW.png
 /* harmony default export */ var speech_grow_shrink_zh_TW = (__webpack_require__.p + "static/assets/26a03611a8f8dae94c1e0e52bf21af11.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/cn-show-character.LTR.gif
-var cn_show_character_LTR = __webpack_require__(339);
+var cn_show_character_LTR = __webpack_require__(340);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-say.zh_TW.png
 /* harmony default export */ var cn_say_zh_TW = (__webpack_require__.p + "static/assets/fc29691223692f6d1fb6c62b249f3e80.png");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-glide.zh_TW.png
 /* harmony default export */ var cn_glide_zh_TW = (__webpack_require__.p + "static/assets/e3a422c99d5ef0216b41804056020e43.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/cn-pick-sprite.LTR.gif
-var cn_pick_sprite_LTR = __webpack_require__(341);
+var cn_pick_sprite_LTR = __webpack_require__(342);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-collect.zh_TW.png
 /* harmony default export */ var cn_collect_zh_TW = (__webpack_require__.p + "static/assets/d5e8220cb80ab27e2e32b37986b3cd1a.png");
@@ -57,15 +57,15 @@ var cn_pick_sprite_LTR = __webpack_require__(341);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/cn-backdrop.zh_TW.png
 /* harmony default export */ var cn_backdrop_zh_TW = (__webpack_require__.p + "static/assets/19915ee99b3d778d3af8af8c8f1a98fb.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/add-sprite.LTR.gif
-var add_sprite_LTR = __webpack_require__(342);
+var add_sprite_LTR = __webpack_require__(343);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/name-pick-letter.LTR.gif
-var name_pick_letter_LTR = __webpack_require__(343);
+var name_pick_letter_LTR = __webpack_require__(344);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-play-sound.zh_TW.png
 /* harmony default export */ var name_play_sound_zh_TW = (__webpack_require__.p + "static/assets/83f44459cce0a54f55dce78d15bef639.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/name-pick-letter2.LTR.gif
-var name_pick_letter2_LTR = __webpack_require__(344);
+var name_pick_letter2_LTR = __webpack_require__(345);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-change-color.zh_TW.png
 /* harmony default export */ var name_change_color_zh_TW = (__webpack_require__.p + "static/assets/9293a1cd36b1f23e780fe888fad8ca74.png");
@@ -74,7 +74,7 @@ var name_pick_letter2_LTR = __webpack_require__(344);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/name-grow.zh_TW.png
 /* harmony default export */ var name_grow_zh_TW = (__webpack_require__.p + "static/assets/cce811081543121ce407819b230949b3.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/music-pick-instrument.LTR.gif
-var music_pick_instrument_LTR = __webpack_require__(345);
+var music_pick_instrument_LTR = __webpack_require__(346);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-play-sound.zh_TW.png
 /* harmony default export */ var music_play_sound_zh_TW = (__webpack_require__.p + "static/assets/96b190922d4bf4328760b80295e236dc.png");
@@ -85,17 +85,17 @@ var music_pick_instrument_LTR = __webpack_require__(345);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/music-make-beatbox.zh_TW.png
 /* harmony default export */ var music_make_beatbox_zh_TW = (__webpack_require__.p + "static/assets/071a555ff068d14003e6cd9c5917c420.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-backdrop.LTR.gif
-var chase_game_add_backdrop_LTR = __webpack_require__(346);
+var chase_game_add_backdrop_LTR = __webpack_require__(347);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-sprite1.LTR.gif
-var chase_game_add_sprite1_LTR = __webpack_require__(347);
+var chase_game_add_sprite1_LTR = __webpack_require__(348);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-right-left.zh_TW.png
 /* harmony default export */ var chase_game_right_left_zh_TW = (__webpack_require__.p + "static/assets/1831727004215abcb8e39f2ccb742b99.png");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-up-down.zh_TW.png
 /* harmony default export */ var chase_game_up_down_zh_TW = (__webpack_require__.p + "static/assets/56a717d956be4ae4ac3822ffbd8f585f.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/chase-game-add-sprite2.LTR.gif
-var chase_game_add_sprite2_LTR = __webpack_require__(348);
+var chase_game_add_sprite2_LTR = __webpack_require__(349);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-move-randomly.zh_TW.png
 /* harmony default export */ var chase_game_move_randomly_zh_TW = (__webpack_require__.p + "static/assets/66a898118caee81deb077d9340794c3b.png");
@@ -104,7 +104,7 @@ var chase_game_add_sprite2_LTR = __webpack_require__(348);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/chase-game-change-score.zh_TW.png
 /* harmony default export */ var chase_game_change_score_zh_TW = (__webpack_require__.p + "static/assets/464150ecfe023beb254516b0199c06ff.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pop-game-pick-sprite.LTR.gif
-var pop_game_pick_sprite_LTR = __webpack_require__(349);
+var pop_game_pick_sprite_LTR = __webpack_require__(350);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-play-sound.zh_TW.png
 /* harmony default export */ var pop_game_play_sound_zh_TW = (__webpack_require__.p + "static/assets/18e5ea4a042d141f32f11c81d01be386.png");
@@ -117,7 +117,7 @@ var pop_game_pick_sprite_LTR = __webpack_require__(349);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pop-game-reset-score.zh_TW.png
 /* harmony default export */ var pop_game_reset_score_zh_TW = (__webpack_require__.p + "static/assets/27b038d710b5fad8762d8445da7c0de2.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/animate-char-pick-sprite.LTR.gif
-var animate_char_pick_sprite_LTR = __webpack_require__(350);
+var animate_char_pick_sprite_LTR = __webpack_require__(351);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-say-something.zh_TW.png
 /* harmony default export */ var animate_char_say_something_zh_TW = (__webpack_require__.p + "static/assets/75627010eed079c445e2c0757c9bc708.png");
@@ -132,22 +132,22 @@ var animate_char_pick_sprite_LTR = __webpack_require__(350);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/animate-char-change-color.zh_TW.png
 /* harmony default export */ var animate_char_change_color_zh_TW = (__webpack_require__.p + "static/assets/d3d016edf5e34a14435898dff25fb008.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-backdrop.LTR.gif
-var story_pick_backdrop_LTR = __webpack_require__(351);
+var story_pick_backdrop_LTR = __webpack_require__(352);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-sprite.LTR.gif
-var story_pick_sprite_LTR = __webpack_require__(352);
+var story_pick_sprite_LTR = __webpack_require__(353);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-say-something.zh_TW.png
 /* harmony default export */ var story_say_something_zh_TW = (__webpack_require__.p + "static/assets/cdd5806fc6c5dd27ad93b3868932b8e7.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-sprite2.LTR.gif
-var story_pick_sprite2_LTR = __webpack_require__(353);
+var story_pick_sprite2_LTR = __webpack_require__(354);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-flip.zh_TW.gif
 /* harmony default export */ var story_flip_zh_TW = (__webpack_require__.p + "static/assets/36a49eb4a79fc38502d4cf7e70f6beb3.gif");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-conversation.zh_TW.png
 /* harmony default export */ var story_conversation_zh_TW = (__webpack_require__.p + "static/assets/11de93d86fb577c8ad0036ad473cebfd.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/story-pick-backdrop2.LTR.gif
-var story_pick_backdrop2_LTR = __webpack_require__(354);
+var story_pick_backdrop2_LTR = __webpack_require__(355);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/story-switch-backdrop.zh_TW.png
 /* harmony default export */ var story_switch_backdrop_zh_TW = (__webpack_require__.p + "static/assets/ea332396e72d6c01b5bc5ad3372a80f7.png");
@@ -164,47 +164,47 @@ var story_pick_backdrop2_LTR = __webpack_require__(354);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/video-pop.zh_TW.png
 /* harmony default export */ var video_pop_zh_TW = (__webpack_require__.p + "static/assets/8846edfe6bdc171bff8f002bd80a086a.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-backdrop.LTR.gif
-var fly_choose_backdrop_LTR = __webpack_require__(355);
+var fly_choose_backdrop_LTR = __webpack_require__(356);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-character.LTR.png
-var fly_choose_character_LTR = __webpack_require__(356);
+var fly_choose_character_LTR = __webpack_require__(357);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-say-something.zh_TW.png
 /* harmony default export */ var fly_say_something_zh_TW = (__webpack_require__.p + "static/assets/adb0c333e75aa1fe824f6a529e2d8013.png");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-make-interactive.zh_TW.png
 /* harmony default export */ var fly_make_interactive_zh_TW = (__webpack_require__.p + "static/assets/a1b964901d7187a5c186e721b2ebc54f.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-object-to-collect.LTR.png
-var fly_object_to_collect_LTR = __webpack_require__(357);
+var fly_object_to_collect_LTR = __webpack_require__(358);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-flying-heart.zh_TW.png
 /* harmony default export */ var fly_flying_heart_zh_TW = (__webpack_require__.p + "static/assets/a5863cb9c5ba71cbcb1f95b995fe4629.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-select-flyer.LTR.png
-var fly_select_flyer_LTR = __webpack_require__(358);
+var fly_select_flyer_LTR = __webpack_require__(359);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-keep-score.zh_TW.png
 /* harmony default export */ var fly_keep_score_zh_TW = (__webpack_require__.p + "static/assets/8399904bc854594a50bff82be8bce7fd.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/fly-choose-scenery.LTR.gif
-var fly_choose_scenery_LTR = __webpack_require__(359);
+var fly_choose_scenery_LTR = __webpack_require__(360);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-move-scenery.zh_TW.png
 /* harmony default export */ var fly_move_scenery_zh_TW = (__webpack_require__.p + "static/assets/71b2b457f51bc33ca17f709f18a089ce.png");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/fly-switch-costume.zh_TW.png
 /* harmony default export */ var fly_switch_costume_zh_TW = (__webpack_require__.p + "static/assets/05d3aee049853b3adf7fdf4cf79b975d.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-backdrop.LTR.png
-var pong_add_backdrop_LTR = __webpack_require__(360);
+var pong_add_backdrop_LTR = __webpack_require__(361);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-ball-sprite.LTR.png
-var pong_add_ball_sprite_LTR = __webpack_require__(361);
+var pong_add_ball_sprite_LTR = __webpack_require__(362);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-bounce-around.zh_TW.png
 /* harmony default export */ var pong_bounce_around_zh_TW = (__webpack_require__.p + "static/assets/a935f2bb7107d03a1c27c83ee42afafb.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-a-paddle.LTR.gif
-var pong_add_a_paddle_LTR = __webpack_require__(362);
+var pong_add_a_paddle_LTR = __webpack_require__(363);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-move-the-paddle.zh_TW.png
 /* harmony default export */ var pong_move_the_paddle_zh_TW = (__webpack_require__.p + "static/assets/51b2adeb606b360662cc9b58efa5a8f9.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-select-ball.LTR.png
-var pong_select_ball_LTR = __webpack_require__(363);
+var pong_select_ball_LTR = __webpack_require__(364);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-add-code-to-ball.zh_TW.png
 /* harmony default export */ var pong_add_code_to_ball_zh_TW = (__webpack_require__.p + "static/assets/b6f72ed095cf10daffc6e29d4a1fb005.png");
@@ -215,7 +215,7 @@ var pong_select_ball_LTR = __webpack_require__(363);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-reset-score.zh_TW.png
 /* harmony default export */ var pong_reset_score_zh_TW = (__webpack_require__.p + "static/assets/b865901de7aceb252abee0b22b3fe417.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/pong-add-line.LTR.gif
-var pong_add_line_LTR = __webpack_require__(364);
+var pong_add_line_LTR = __webpack_require__(365);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/pong-game-over.zh_TW.png
 /* harmony default export */ var pong_game_over_zh_TW = (__webpack_require__.p + "static/assets/7558a5e9e02b55fc0b3e7214ee419318.png");
@@ -224,15 +224,15 @@ var pong_add_line_LTR = __webpack_require__(364);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-click-green-flag.zh_TW.png
 /* harmony default export */ var imagine_click_green_flag_zh_TW = (__webpack_require__.p + "static/assets/eeb3db86fc6790787f7540ffae1b255c.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-backdrop.LTR.png
-var imagine_choose_backdrop_LTR = __webpack_require__(365);
+var imagine_choose_backdrop_LTR = __webpack_require__(366);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-any-sprite.LTR.png
-var imagine_choose_any_sprite_LTR = __webpack_require__(366);
+var imagine_choose_any_sprite_LTR = __webpack_require__(367);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-fly-around.zh_TW.png
 /* harmony default export */ var imagine_fly_around_zh_TW = (__webpack_require__.p + "static/assets/b464ca5a01fbc7381cadb422ce161455.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-another-sprite.LTR.png
-var imagine_choose_another_sprite_LTR = __webpack_require__(367);
+var imagine_choose_another_sprite_LTR = __webpack_require__(368);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-left-right.zh_TW.png
 /* harmony default export */ var imagine_left_right_zh_TW = (__webpack_require__.p + "static/assets/e527fb8cb54bab16c497c4d948a20d04.png");
@@ -245,7 +245,7 @@ var imagine_choose_another_sprite_LTR = __webpack_require__(367);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-grow-shrink.zh_TW.png
 /* harmony default export */ var imagine_grow_shrink_zh_TW = (__webpack_require__.p + "static/assets/5bc5639ad096fd2e8b434a19284cb092.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/imagine-choose-another-backdrop.LTR.png
-var imagine_choose_another_backdrop_LTR = __webpack_require__(368);
+var imagine_choose_another_backdrop_LTR = __webpack_require__(369);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-switch-backdrops.zh_TW.png
 /* harmony default export */ var imagine_switch_backdrops_zh_TW = (__webpack_require__.p + "static/assets/8bd548e179a3e677d4a4fa760e8679b2.png");
@@ -254,7 +254,7 @@ var imagine_choose_another_backdrop_LTR = __webpack_require__(368);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/imagine-choose-sound.zh_TW.png
 /* harmony default export */ var imagine_choose_sound_zh_TW = (__webpack_require__.p + "static/assets/cfd8260729f101d878a14ce5dca5986d.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/add-backdrop.LTR.png
-var add_backdrop_LTR = __webpack_require__(369);
+var add_backdrop_LTR = __webpack_require__(370);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/add-effects.zh_TW.png
 /* harmony default export */ var add_effects_zh_TW = (__webpack_require__.p + "static/assets/4bcc17e8b7488cf7ed841ab7203ea986.png");
@@ -291,14 +291,14 @@ var add_backdrop_LTR = __webpack_require__(369);
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-02-animate.zh_TW.png
 /* harmony default export */ var code_cartoon_02_animate_zh_TW = (__webpack_require__.p + "static/assets/39febbc51fe949c1f5068fddd9e939d2.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-03-select-different-character.LTR.png
-var code_cartoon_03_select_different_character_LTR = __webpack_require__(370);
+var code_cartoon_03_select_different_character_LTR = __webpack_require__(371);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-04-use-minus-sign.zh_TW.png
 /* harmony default export */ var code_cartoon_04_use_minus_sign_zh_TW = (__webpack_require__.p + "static/assets/fc4de40c6e016303b54749ffcda0ac99.png");
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-05-grow-shrink.zh_TW.png
 /* harmony default export */ var code_cartoon_05_grow_shrink_zh_TW = (__webpack_require__.p + "static/assets/3b546231061406fbcbb14726672b5a4d.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-06-select-another-different-character.LTR.png
-var code_cartoon_06_select_another_different_character_LTR = __webpack_require__(371);
+var code_cartoon_06_select_another_different_character_LTR = __webpack_require__(372);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-07-jump.zh_TW.png
 /* harmony default export */ var code_cartoon_07_jump_zh_TW = (__webpack_require__.p + "static/assets/17c42848210c5bbbc290532dce3cf4de.png");
@@ -309,30 +309,30 @@ var code_cartoon_06_select_another_different_character_LTR = __webpack_require__
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/code-cartoon-10-change-costumes.zh_TW.png
 /* harmony default export */ var code_cartoon_10_change_costumes_zh_TW = (__webpack_require__.p + "static/assets/070471f10aa47c66776006d28677b708.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/code-cartoon-11-choose-more-characters.LTR.png
-var code_cartoon_11_choose_more_characters_LTR = __webpack_require__(372);
+var code_cartoon_11_choose_more_characters_LTR = __webpack_require__(373);
 
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-2-choose-sprite.LTR.png
-var talking_2_choose_sprite_LTR = __webpack_require__(373);
+var talking_2_choose_sprite_LTR = __webpack_require__(374);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-3-say-something.zh_TW.png
 /* harmony default export */ var talking_3_say_something_zh_TW = (__webpack_require__.p + "static/assets/928bce1e9b35febd0e53a985444fa4e4.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-4-choose-backdrop.LTR.png
-var talking_4_choose_backdrop_LTR = __webpack_require__(374);
+var talking_4_choose_backdrop_LTR = __webpack_require__(375);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-5-switch-backdrop.zh_TW.png
 /* harmony default export */ var talking_5_switch_backdrop_zh_TW = (__webpack_require__.p + "static/assets/a0378bcd7aaedb924173bb1e1e334bc7.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-6-choose-another-sprite.LTR.png
-var talking_6_choose_another_sprite_LTR = __webpack_require__(375);
+var talking_6_choose_another_sprite_LTR = __webpack_require__(376);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-7-move-around.zh_TW.png
 /* harmony default export */ var talking_7_move_around_zh_TW = (__webpack_require__.p + "static/assets/7f41ca99c9ed331e83a0bca42a2197da.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-8-choose-another-backdrop.LTR.png
-var talking_8_choose_another_backdrop_LTR = __webpack_require__(376);
+var talking_8_choose_another_backdrop_LTR = __webpack_require__(377);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-9-animate.zh_TW.png
 /* harmony default export */ var talking_9_animate_zh_TW = (__webpack_require__.p + "static/assets/b0221432d5e2f5cf7b1136236d5ea2ca.png");
 // EXTERNAL MODULE: ./src/lib/libraries/decks/steps/talking-10-choose-third-backdrop.LTR.png
-var talking_10_choose_third_backdrop_LTR = __webpack_require__(377);
+var talking_10_choose_third_backdrop_LTR = __webpack_require__(378);
 
 // CONCATENATED MODULE: ./src/lib/libraries/decks/steps/talking-11-choose-sound.zh_TW.gif
 /* harmony default export */ var talking_11_choose_sound_zh_TW = (__webpack_require__.p + "static/assets/c9f5c0492a71d15bec31cf006b4ed5af.gif");

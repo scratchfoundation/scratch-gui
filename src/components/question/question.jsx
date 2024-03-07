@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './question.css';
 import Input from '../forms/input.jsx';
-import enterIcon from './icon--enter.svg';
 
 const QuestionComponent = props => {
     const {
@@ -29,13 +28,7 @@ const QuestionComponent = props => {
                     <button
                         className={styles.questionSubmitButton}
                         onClick={onClick}
-                    >
-                        <img
-                            className={styles.questionSubmitButtonIcon}
-                            draggable={false}
-                            src={enterIcon}
-                        />
-                    </button>
+                    />
                 </div>
             </div>
         </div>

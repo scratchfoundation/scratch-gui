@@ -37,13 +37,7 @@ jobs:
             - name: Install Dependencies
               run: npm ci
             - name: Lint
-              run: |
-                npm run test:lint -- --quiet --output-file test-results/eslint/results.xml --format junit
-            - name: Store Lint Results
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
-              with:
-                name: lint-output
-                path: ./test-results/*
+              run: npm run test:lint
             - name: Cache node_modules
               id: cache-nodemodules
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3

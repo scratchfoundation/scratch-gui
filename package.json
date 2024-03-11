@@ -143,7 +143,7 @@
     "web-audio-test-api": "0.5.2",
     "webpack": "5.90.3",
     "webpack-cli": "5.1.4",
-    "webpack-dev-server": "3.11.3",
+    "webpack-dev-server": "5.0.2",
     "yauzl": "2.10.0"
   },
   "jest": {

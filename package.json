@@ -141,7 +141,7 @@
     "terser-webpack-plugin": "4.2.3",
     "url-loader": "4.1.1",
     "web-audio-test-api": "0.5.2",
-    "webpack": "4.47.0",
+    "webpack": "5.90.3",
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "3.11.3",
     "yauzl": "2.10.0"

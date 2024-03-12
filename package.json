@@ -126,7 +126,7 @@
     "eslint-plugin-react": "7.34.0",
     "file-loader": "6.2.0",
     "gh-pages": "3.2.3",
-    "html-webpack-plugin": "4.5.2",
+    "html-webpack-plugin": "5.6.0",
     "husky": "8.0.3",
     "jest": "21.2.1",
     "jest-junit": "7.0.0",

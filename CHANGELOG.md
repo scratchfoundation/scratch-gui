@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.18](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.17...v3.6.18) (2024-03-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency raw-loader to v4 ([a0ca82c](https://github.com/scratchfoundation/scratch-gui/commit/a0ca82ca1c4b3bc0749fa28f8135699ab037e35f))
+
 ## [3.6.17](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.16...v3.6.17) (2024-03-04)
 
 

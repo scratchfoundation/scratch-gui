@@ -11,9 +11,9 @@
   },
   "main": "./dist/scratch-gui.js",
   "scripts": {
-    "build": "npm run clean && webpack",
-    "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
-    "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"[skip ci] Build for $(git log --pretty=format:%H -n1)\"",
+    "build": "npm run clean && mkdirp dist && webpack",
+    "clean": "rimraf ./dist",
+    "deploy": "touch build/.nojekyll && gh-pages -t -d dist -m \"[skip ci] Build for $(git log --pretty=format:%H -n1)\"",
     "prepublish": "node scripts/prepublish.mjs",
     "prune": "./prune-gh-pages.sh",
     "i18n:push": "tx-push-src scratch-editor interface translations/en.json",
@@ -136,9 +136,9 @@
     "redux-mock-store": "1.5.4",
     "rimraf": "2.7.1",
     "scratch-semantic-release-config": "1.0.14",
+    "scratch-webpack-configuration": "1.1.0",
     "selenium-webdriver": "3.6.0",
     "semantic-release": "19.0.5",
-    "terser-webpack-plugin": "4.2.3",
     "url-loader": "4.1.1",
     "web-audio-test-api": "0.5.2",
     "webpack": "5.90.3",
@@ -158,6 +158,9 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js",
       "editor-msgs(\\.js)?$": "<rootDir>/test/__mocks__/editor-msgs-mock.js"
+    },
+    "transform": {
+      "^.+\\.[cm]?jsx?$": "babel-jest"
     }
   }
 }

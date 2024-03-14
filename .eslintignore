@@ -1,4 +1,5 @@
-node_modules/*
-dist/*
-test/*
-src/examples/*
+/node_modules/
+/build/
+/dist/
+/test/
+/src/examples/

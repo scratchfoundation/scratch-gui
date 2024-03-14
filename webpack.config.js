@@ -51,7 +51,8 @@ const configBuilder = new ScratchWebpackConfigBuilder(
         },
         resolve: {
             fallback: {
-                Buffer: require.resolve('buffer/')
+                Buffer: require.resolve('buffer/'),
+                stream: require.resolve('stream-browserify')
             }
         },
         optimization: {

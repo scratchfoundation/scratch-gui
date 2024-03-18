@@ -23,7 +23,6 @@ const baseConfig = new ScratchWebpackConfigBuilder(
     .merge({
         output: {
             assetModuleFilename: 'static/assets/[name].[hash][ext][query]',
-            chunkFilename: 'chunks/[name].js',
             library: {
                 name: 'GUI',
                 type: 'umd2'
@@ -37,8 +36,7 @@ const baseConfig = new ScratchWebpackConfigBuilder(
         },
         optimization: {
             splitChunks: {
-                chunks: 'all',
-                filename: 'chunks/[name].js'
+                chunks: 'all'
             },
             mergeDuplicateChunks: true,
             runtimeChunk: 'single'
@@ -79,30 +77,6 @@ const baseConfig = new ScratchWebpackConfigBuilder(
         test: /\.(svg|png|wav|mp3|gif|jpg)$/,
         resourceQuery: /^$/, // reject any query string
         type: 'asset' // let webpack decide on the best type of asset
-    })
-    .addModuleRule({
-        // `asset` automatically chooses between exporting a data URI and emitting a separate file.
-        // Previously achievable by using `url-loader` with asset size limit.
-        resourceQuery: /^\?asset$/,
-        type: 'asset'
-    })
-    .addModuleRule({
-        // `asset/resource` emits a separate file and exports the URL.
-        // Previously achievable by using `file-loader`.
-        resourceQuery: /^\?(resource|file)$/,
-        type: 'asset/resource'
-    })
-    .addModuleRule({
-        // `asset/inline` exports a data URI of the asset.
-        // Previously achievable by using `url-loader`.
-        resourceQuery: /^\?(inline|url)$/,
-        type: 'asset/inline'
-    })
-    .addModuleRule({
-        // `asset/source` exports the source code of the asset.
-        // Previously achievable by using `raw-loader`.
-        resourceQuery: /^\?(source|raw)$/,
-        type: 'asset/source'
     })
     .addModuleRule({
         test: /\.hex$/,
@@ -159,14 +133,8 @@ const distConfig = baseConfig.clone()
 
 // build the examples and debugging tools in `build/`
 const buildConfig = baseConfig.clone()
+    .enableDevServer(process.env.PORT || 8602)
     .merge({
-        devServer: {
-            client: {
-                progress: true
-            },
-            hot: true,
-            port: process.env.PORT || 8602
-        },
         entry: {
             gui: './src/playground/index.jsx',
             blocksonly: './src/playground/blocks-only.jsx',

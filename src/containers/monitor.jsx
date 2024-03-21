@@ -213,6 +213,7 @@ class Monitor extends React.Component {
                     max={this.props.max}
                     min={this.props.min}
                     mode={this.props.mode}
+                    opcode={this.props.opcode}
                     targetId={this.props.targetId}
                     theme={this.props.theme}
                     width={this.props.width}

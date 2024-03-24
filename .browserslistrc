@@ -1,3 +1,7 @@
-last 3 versions
-Safari >= 8
-iOS >= 8
+# See https://scratch.mit.edu/faq
+Chrome >= 63
+Edge >= 15
+Firefox >= 57
+Safari >= 11
+Android >= 63
+iOS >= 11

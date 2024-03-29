@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.18...v4.0.0) (2024-03-29)
+
+
+### Bug Fixes
+
+* **build:** add exports field to package.json ([43a1e8f](https://github.com/scratchfoundation/scratch-gui/commit/43a1e8f0c32c5e188209521bd20c67fa1a75e47d))
+* **build:** bring back BUILD_MODE now that the dust is settling ([3b89677](https://github.com/scratchfoundation/scratch-gui/commit/3b8967756c6ef650749b1c005be987e5832d167f))
+* **deps:** update dependency scratch-vm to v4 ([bfb634d](https://github.com/scratchfoundation/scratch-gui/commit/bfb634d487df35d861aefe5223a5409a6e254f37))
+* **deps:** update scratch-{svg-renderer,vm,webpack-configuration} ([48fb28a](https://github.com/scratchfoundation/scratch-gui/commit/48fb28a685fd9427e1c2e256b25da1ac3ff1a0d2))
+* remove unnecessary babel-jest transform config ([df34896](https://github.com/scratchfoundation/scratch-gui/commit/df3489619af9918ca54172817d1c886205c2182f))
+
+
+* build!: use scratch-webpack-configuration ([f1438f7](https://github.com/scratchfoundation/scratch-gui/commit/f1438f73e3f7aa9fe423c0f01c0db12e76645026))
+
+
+### BREAKING CHANGES
+
+* changes layout of output files and browser compatibility
+
 ## [3.6.18](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.17...v3.6.18) (2024-03-12)
 
 

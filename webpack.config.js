@@ -191,3 +191,12 @@ const buildDist = process.env.NODE_ENV === 'production' || process.env.BUILD_MOD
 module.exports = buildDist ?
     [buildConfig.get(), distConfig.get()] :
     buildConfig.get();
+
+    module.exports = {
+        // Other configurations...
+        output: {
+          path: path.resolve(__dirname, 'public'), // Output directory set to 'public'
+          filename: '[name].bundle.js',
+        },
+        // Other configurations...
+      };

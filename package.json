@@ -127,7 +127,7 @@
     "eslint-config-scratch": "9.0.8",
     "eslint-import-resolver-webpack": "0.11.1",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jest": "22.21.0",
+    "eslint-plugin-jest": "28.0.0",
     "eslint-plugin-react": "7.34.1",
     "file-loader": "6.2.0",
     "gh-pages": "3.2.3",

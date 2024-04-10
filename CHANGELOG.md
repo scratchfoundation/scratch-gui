@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.0...v4.0.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cookie to ^0.6.0 ([ebb4b6f](https://github.com/scratchfoundation/scratch-gui/commit/ebb4b6f89f36fc714ad5f54b2c2a338a97d5dd97))
+
 # [4.0.0](https://github.com/scratchfoundation/scratch-gui/compare/v3.6.18...v4.0.0) (2024-03-29)
 
 

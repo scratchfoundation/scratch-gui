@@ -168,7 +168,6 @@ jobs:
                 path: ./test-results/*
     deploy-npm:
         needs: [test-integration, test-unit]
-        if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/develop') || (github.ref == 'refs/heads/beta') || startsWith(github.ref, 'refs/heads/hotfix')
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -188,6 +187,10 @@ jobs:
                 if [[ ${{contains(github.ref, 'hotfix')}}  ]]; then
                 sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js
                 fi
+            - name: Deduplicate files
+              run: |
+                sudo snap install fclones
+                fclones group --min 128 --no-ignore . | fclones link
             - name: Semantic Release
               env:
                 NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

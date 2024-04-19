@@ -5,7 +5,7 @@
  * @return {ScratchBlocks} ScratchBlocks connected with the vm
  */
 export default function (vm, useCatBlocks) {
-    const ScratchBlocks = useCatBlocks ? require('cat-blocks') : require('scratch-blocks');
+    const {ScratchBlocks} = useCatBlocks ? require('cat-blocks') : require('scratch-blocks');
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',
@@ -82,7 +82,7 @@ export default function (vm, useCatBlocks) {
         }
         menu.push([
             ScratchBlocks.ScratchMsgs.translate('SOUND_RECORD', 'record...'),
-            ScratchBlocks.recordSoundCallback
+            'SOUND_RECORD'
         ]);
         return menu;
     };
@@ -158,6 +158,16 @@ export default function (vm, useCatBlocks) {
     ScratchBlocks.Blocks.sound_sounds_menu.init = function () {
         const json = jsonForMenuBlock('SOUND_MENU', soundsMenu, soundColors, []);
         this.jsonInit(json);
+        this.inputList[0].removeField('SOUND_MENU');
+        this.inputList[0].appendField(new ScratchBlocks.FieldDropdown(() => {
+            return soundsMenu();
+        }, (newValue) => {
+            if (newValue === 'SOUND_RECORD') {
+                  ScratchBlocks.recordSoundCallback();
+                  return null;
+            }
+            return newValue;
+        }), 'SOUND_MENU');
     };
 
     ScratchBlocks.Blocks.looks_costume.init = function () {
@@ -323,16 +333,16 @@ export default function (vm, useCatBlocks) {
         return monitoredBlock ? monitoredBlock.isMonitored : false;
     };
 
-    ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
-        if (vm.getPeripheralIsConnected(extensionId)) {
-            return ScratchBlocks.StatusButtonState.READY;
-        }
-        return ScratchBlocks.StatusButtonState.NOT_READY;
-    };
-
-    ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
-        vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
-    };
+    // ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
+    //     if (vm.getPeripheralIsConnected(extensionId)) {
+    //         return ScratchBlocks.StatusButtonState.READY;
+    //     }
+    //     return ScratchBlocks.StatusButtonState.NOT_READY;
+    // };
+    //
+    // ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
+    //     vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
+    // };
 
     // Use a collator's compare instead of localeCompare which internally
     // creates a collator. Using this is a lot faster in browsers that create a
@@ -341,9 +351,9 @@ export default function (vm, useCatBlocks) {
         sensitivity: 'base',
         numeric: true
     });
-    ScratchBlocks.scratchBlocksUtils.compareStrings = function (str1, str2) {
-        return collator.compare(str1, str2);
-    };
+    // ScratchBlocks.scratchBlocksUtils.compareStrings = function (str1, str2) {
+    //     return collator.compare(str1, str2);
+    // };
 
     // Blocks wants to know if 3D CSS transforms are supported. The cross
     // section of browsers Scratch supports and browsers that support 3D CSS

@@ -95,14 +95,24 @@ class Blocks extends React.Component {
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
-        this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
+        // this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
         this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
+        const theme = this.ScratchBlocks.Theme.defineTheme('Scratch', {
+           'base': this.ScratchBlocks.Themes.Zelos,
+           'startHats': true
+        });
         const workspaceConfig = defaultsDeep({},
             Blocks.defaultOptions,
             this.props.options,
-            {rtl: this.props.isRtl, toolbox: this.props.toolboxXML, colours: getColorsForTheme(this.props.theme)}
+            {
+                rtl: this.props.isRtl,
+                toolbox: this.props.toolboxXML,
+                colours: getColorsForTheme(this.props.theme),
+                renderer: 'zelos',
+                theme: theme,
+            }
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
 
@@ -129,10 +139,11 @@ class Blocks extends React.Component {
         // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
         // componentDidUpdate so the toolbox will still correctly be updated
-        this.setToolboxRefreshEnabled = this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
-        this.workspace.setToolboxRefreshEnabled = () => {
-            this.setToolboxRefreshEnabled(false);
-        };
+        this.setToolboxRefreshEnabled = () => {};
+        // this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
+        // this.workspace.setToolboxRefreshEnabled = () => {
+        //     this.setToolboxRefreshEnabled(false);
+        // };
 
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
@@ -213,11 +224,11 @@ class Blocks extends React.Component {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
-                this.workspace.getFlyout().setRecyclingEnabled(false);
+                // this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
                 this.requestToolboxUpdate();
                 this.withToolboxUpdates(() => {
-                    this.workspace.getFlyout().setRecyclingEnabled(true);
+                    // this.workspace.getFlyout().setRecyclingEnabled(true);
                 });
             });
     }
@@ -225,8 +236,8 @@ class Blocks extends React.Component {
     updateToolbox () {
         this.toolboxUpdateTimeout = false;
 
-        const categoryId = this.workspace.toolbox_.getSelectedCategoryId();
-        const offset = this.workspace.toolbox_.getCategoryScrollOffset();
+        // const categoryId = this.workspace.toolbox_.getSelectedItem().getId();
+        // const offset = this.workspace.toolbox_.getCategoryScrollOffset();
         this.workspace.updateToolbox(this.props.toolboxXML);
         this._renderedToolboxXML = this.props.toolboxXML;
 
@@ -235,13 +246,13 @@ class Blocks extends React.Component {
         // Using the setter function will rerender the entire toolbox which we just rendered.
         this.workspace.toolboxRefreshEnabled_ = true;
 
-        const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionById(categoryId);
-        const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthById(categoryId);
-        if (offset < currentCategoryLen) {
-            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
-        } else {
-            this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
-        }
+        // const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionById(categoryId);
+        // const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthById(categoryId);
+        // if (offset < currentCategoryLen) {
+        //     this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
+        // } else {
+        //     this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
+        // }
 
         const queue = this.toolboxUpdateQueue;
         this.toolboxUpdateQueue = [];
@@ -329,16 +340,16 @@ class Blocks extends React.Component {
         }
     }
     onScriptGlowOn (data) {
-        this.workspace.glowStack(data.id, true);
+        // this.workspace.glowStack(data.id, true);
     }
     onScriptGlowOff (data) {
-        this.workspace.glowStack(data.id, false);
+        // this.workspace.glowStack(data.id, false);
     }
     onBlockGlowOn (data) {
-        this.workspace.glowBlock(data.id, true);
+        // this.workspace.glowBlock(data.id, true);
     }
     onBlockGlowOff (data) {
-        this.workspace.glowBlock(data.id, false);
+        // this.workspace.glowBlock(data.id, false);
     }
     onVisualReport (data) {
         this.workspace.reportValue(data.id, data.value);
@@ -382,7 +393,7 @@ class Blocks extends React.Component {
 
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
-        const dom = this.ScratchBlocks.Xml.textToDom(data.xml);
+        const dom = this.ScratchBlocks.utils.xml.textToDom(data.xml);
         try {
             this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(dom, this.workspace);
         } catch (error) {

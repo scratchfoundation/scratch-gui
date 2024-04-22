@@ -21,7 +21,7 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: test-results
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
               with:
                   cache: "npm"
@@ -66,7 +66,7 @@ jobs:
             JEST_JUNIT_OUTPUT_NAME: unit-results.xml
             JEST_JUNIT_OUTPUT_DIR: test-results/unit
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - name: Cache NPM dependencies
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
@@ -86,7 +86,7 @@ jobs:
             NODE_OPTIONS: --max-old-space-size=4000
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
               with:
                 cache: "npm"
@@ -142,7 +142,7 @@ jobs:
             JEST_JUNIT_OUTPUT_NAME: results.txt
             JEST_JUNIT_OUTPUT_DIR: test-results/integration
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - name: Retrieve npm dependencies
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
@@ -170,7 +170,7 @@ jobs:
         needs: [test-integration, test-unit]
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - name: Retrieve npm dependencies
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:
@@ -201,7 +201,7 @@ jobs:
         if: (!(startsWith(github.ref, 'refs/heads/dependabot/') || startsWith(github.ref, 'refs/heads/renovate/')))
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
             - name: Retrieve npm dependencies
               uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
               with:

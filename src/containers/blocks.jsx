@@ -148,6 +148,7 @@ class Blocks extends React.Component {
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
+        this.workspace.getToolbox().selectItemByPosition(0);
 
         this.attachVM();
         // Only update blocks/vm locale when visible to avoid sizing issues
@@ -224,11 +225,11 @@ class Blocks extends React.Component {
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
         this.props.vm.setLocale(this.props.locale, this.props.messages)
             .then(() => {
-                // this.workspace.getFlyout().setRecyclingEnabled(false);
+                this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
                 this.requestToolboxUpdate();
                 this.withToolboxUpdates(() => {
-                    // this.workspace.getFlyout().setRecyclingEnabled(true);
+                    this.workspace.getFlyout().setRecyclingEnabled(true);
                 });
             });
     }
@@ -239,6 +240,7 @@ class Blocks extends React.Component {
         // const categoryId = this.workspace.toolbox_.getSelectedItem().getId();
         // const offset = this.workspace.toolbox_.getCategoryScrollOffset();
         this.workspace.updateToolbox(this.props.toolboxXML);
+        this.workspace.refreshToolboxSelection();
         this._renderedToolboxXML = this.props.toolboxXML;
 
         // In order to catch any changes that mutate the toolbox during "normal runtime"

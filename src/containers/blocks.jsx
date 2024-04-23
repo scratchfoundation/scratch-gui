@@ -664,8 +664,11 @@ Blocks.propTypes = {
 Blocks.defaultOptions = {
     zoom: {
         controls: true,
-        wheel: true,
+        wheel: false,
         startScale: BLOCKS_DEFAULT_SCALE
+    },
+    move: {
+      wheel: true,
     },
     grid: {
         spacing: 40,
@@ -674,7 +677,8 @@ Blocks.defaultOptions = {
     },
     comments: true,
     collapse: false,
-    sounds: false
+    sounds: false,
+    trashcan: false,
 };
 
 Blocks.defaultProps = {

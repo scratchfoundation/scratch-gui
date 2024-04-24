@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.3...v4.0.4) (2024-04-24)
+
+
+### Bug Fixes
+
+* **deps:** bump scratch-paint from 2.2.2 to 2.2.151 ([898bbfd](https://github.com/scratchfoundation/scratch-gui/commit/898bbfdc445dae4a716c2cc9bf6cdb68594f8886))
+* **deps:** update dependency react-tooltip to v4 ([3c2afd1](https://github.com/scratchfoundation/scratch-gui/commit/3c2afd102a5c74c0b83f3b9654b926de235c31fc))
+
 ## [4.0.3](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.2...v4.0.3) (2024-04-12)
 
 

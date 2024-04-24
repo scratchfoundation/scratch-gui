@@ -79,7 +79,7 @@ class Blocks extends React.Component {
             'setBlocks',
             'setLocale'
         ]);
-        this.ScratchBlocks.prompt = this.handlePromptStart;
+        this.ScratchBlocks.dialog.setPrompt(this.handlePromptStart);
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
@@ -91,12 +91,12 @@ class Blocks extends React.Component {
     }
     componentDidMount () {
         this.ScratchBlocks = VMScratchBlocks(this.props.vm, this.props.useCatBlocks);
-        this.ScratchBlocks.prompt = this.handlePromptStart;
+        this.ScratchBlocks.dialog.setPrompt(this.handlePromptStart);
         this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
         // this.ScratchBlocks.FieldColourSlider.activateEyedropper_ = this.props.onActivateColorPicker;
-        this.ScratchBlocks.Procedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
+        this.ScratchBlocks.ScratchProcedures.externalProcedureDefCallback = this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
         const theme = this.ScratchBlocks.Theme.defineTheme('Scratch', {
@@ -115,6 +115,8 @@ class Blocks extends React.Component {
             }
         );
         this.workspace = this.ScratchBlocks.inject(this.blocks, workspaceConfig);
+        this.workspace.registerToolboxCategoryCallback('PROCEDURE',
+            this.ScratchBlocks.ScratchProcedures.getProceduresCategory);
 
         // Register buttons under new callback keys for creating variables,
         // lists, and procedures from extensions.
@@ -124,7 +126,7 @@ class Blocks extends React.Component {
         const varListButtonCallback = type =>
             (() => this.ScratchBlocks.Variables.createVariable(this.workspace, null, type));
         const procButtonCallback = () => {
-            this.ScratchBlocks.Procedures.createProcedureDefCallback_(this.workspace);
+            this.ScratchBlocks.ScratchProcedures.createProcedureDefCallback(this.workspace);
         };
 
         toolboxWorkspace.registerButtonCallback('MAKE_A_VARIABLE', varListButtonCallback(''));
@@ -545,8 +547,8 @@ class Blocks extends React.Component {
     handleCustomProceduresClose (data) {
         this.props.onRequestCloseCustomProcedures(data);
         const ws = this.workspace;
-        ws.refreshToolboxSelection_();
-        ws.toolbox_.scrollToCategoryById('myBlocks');
+        this.updateToolbox();
+        ws.getToolbox().selectCategoryByName('myBlocks');
     }
     handleDrop (dragInfo) {
         fetch(dragInfo.payload.bodyUrl)

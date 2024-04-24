@@ -3,7 +3,7 @@ import defaultsDeep from 'lodash.defaultsdeep';
 import PropTypes from 'prop-types';
 import React from 'react';
 import CustomProceduresComponent from '../components/custom-procedures/custom-procedures.jsx';
-import ScratchBlocks from 'scratch-blocks';
+import {ScratchBlocks} from 'scratch-blocks';
 import {connect} from 'react-redux';
 
 class CustomProcedures extends React.Component {
@@ -37,11 +37,13 @@ class CustomProcedures extends React.Component {
             {rtl: this.props.isRtl}
         );
 
-        // @todo This is a hack to make there be no toolbox.
-        const oldDefaultToolbox = ScratchBlocks.Blocks.defaultToolbox;
-        ScratchBlocks.Blocks.defaultToolbox = null;
+        const theme = ScratchBlocks.Theme.defineTheme('Scratch', {
+           'base': ScratchBlocks.Themes.Zelos,
+           'startHats': true
+        });
+        workspaceConfig.theme = theme;
+        workspaceConfig.renderer = 'zelos';
         this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
-        ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
 
         // Create the procedure declaration block for editing the mutation.
         this.mutationRoot = this.workspace.newBlock('procedures_declaration');

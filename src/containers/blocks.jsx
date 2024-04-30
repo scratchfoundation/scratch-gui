@@ -500,7 +500,8 @@ class Blocks extends React.Component {
         }
 
         this.withToolboxUpdates(() => {
-            this.workspace.toolbox_.setSelectedCategoryById(categoryId);
+            const toolbox = this.workspace.getToolbox();
+            toolbox.setSelectedItem(toolbox.getToolboxItemById(categoryId));
         });
     }
     setBlocks (blocks) {

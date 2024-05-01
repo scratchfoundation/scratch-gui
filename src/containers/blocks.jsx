@@ -239,8 +239,13 @@ class Blocks extends React.Component {
     updateToolbox () {
         this.toolboxUpdateTimeout = false;
 
-        // const categoryId = this.workspace.toolbox_.getSelectedItem().getId();
-        // const offset = this.workspace.toolbox_.getCategoryScrollOffset();
+        const scale = this.workspace.getFlyout().getWorkspace().scale;
+        const selectedCategoryName = this.workspace.getToolbox().getSelectedItem().getName();
+        const selectedCategoryScrollPosition = this.workspace.getFlyout().getCategoryScrollPosition(
+            selectedCategoryName).y * scale;
+        const offsetWithinCategory = (this.workspace.getFlyout().getWorkspace().getMetrics().viewTop
+            - selectedCategoryScrollPosition);
+
         this.workspace.updateToolbox(this.props.toolboxXML);
         this.workspace.refreshToolboxSelection();
         this._renderedToolboxXML = this.props.toolboxXML;
@@ -250,13 +255,10 @@ class Blocks extends React.Component {
         // Using the setter function will rerender the entire toolbox which we just rendered.
         this.workspace.toolboxRefreshEnabled_ = true;
 
-        // const currentCategoryPos = this.workspace.toolbox_.getCategoryPositionById(categoryId);
-        // const currentCategoryLen = this.workspace.toolbox_.getCategoryLengthById(categoryId);
-        // if (offset < currentCategoryLen) {
-        //     this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos + offset);
-        // } else {
-        //     this.workspace.toolbox_.setFlyoutScrollPos(currentCategoryPos);
-        // }
+        const newCategoryScrollPosition = this.workspace.getFlyout().getCategoryScrollPosition(
+            selectedCategoryName).y * scale;
+        this.workspace.getFlyout().getWorkspace().scrollbar.setY(
+        newCategoryScrollPosition + offsetWithinCategory);
 
         const queue = this.toolboxUpdateQueue;
         this.toolboxUpdateQueue = [];

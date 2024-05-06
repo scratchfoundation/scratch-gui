@@ -346,16 +346,16 @@ class Blocks extends React.Component {
         }
     }
     onScriptGlowOn (data) {
-        // this.workspace.glowStack(data.id, true);
+        this.ScratchBlocks.glowStack(data.id, true);
     }
     onScriptGlowOff (data) {
-        // this.workspace.glowStack(data.id, false);
+        this.ScratchBlocks.glowStack(data.id, false);
     }
     onBlockGlowOn (data) {
-        // this.workspace.glowBlock(data.id, true);
+        // No-op, support may be added in the future
     }
     onBlockGlowOff (data) {
-        // this.workspace.glowBlock(data.id, false);
+        // No-op, support may be added in the future
     }
     onVisualReport (data) {
         this.ScratchBlocks.reportValue(data.id, data.value);

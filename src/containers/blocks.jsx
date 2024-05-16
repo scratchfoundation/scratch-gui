@@ -138,15 +138,6 @@ class Blocks extends React.Component {
         // the xml can change while e.g. on the costumes tab.
         this._renderedToolboxXML = this.props.toolboxXML;
 
-        // we actually never want the workspace to enable "refresh toolbox" - this basically re-renders the
-        // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
-        // componentDidUpdate so the toolbox will still correctly be updated
-        this.setToolboxRefreshEnabled = () => {};
-        // this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
-        // this.workspace.setToolboxRefreshEnabled = () => {
-        //     this.setToolboxRefreshEnabled(false);
-        // };
-
         // @todo change this when blockly supports UI events
         addFunctionListener(this.workspace, 'translate', this.onWorkspaceMetricsChange);
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
@@ -247,13 +238,8 @@ class Blocks extends React.Component {
             - selectedCategoryScrollPosition);
 
         this.workspace.updateToolbox(this.props.toolboxXML);
-        this.workspace.refreshToolboxSelection();
+        this.workspace.getToolbox().forceRerender();
         this._renderedToolboxXML = this.props.toolboxXML;
-
-        // In order to catch any changes that mutate the toolbox during "normal runtime"
-        // (variable changes/etc), re-enable toolbox refresh.
-        // Using the setter function will rerender the entire toolbox which we just rendered.
-        this.workspace.toolboxRefreshEnabled_ = true;
 
         const newCategoryScrollPosition = this.workspace.getFlyout().getCategoryScrollPosition(
             selectedCategoryName).y * scale;

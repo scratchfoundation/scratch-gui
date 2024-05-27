@@ -1,0 +1,553 @@
+/*
+    object-assign
+    (c) Sindre Sorhus
+    @license MIT
+    */
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/* @license
+Papa Parse
+v5.3.0
+https://github.com/mholt/PapaParse
+License: MIT
+*/
+
+/*!
+
+JSZip v3.10.1 - A JavaScript class for generating and reading zip files
+<http://stuartk.com/jszip>
+
+(c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
+Dual licenced under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip/main/LICENSE.markdown.
+
+JSZip uses the library pako released under the MIT license :
+https://github.com/nodeca/pako/blob/main/LICENSE
+*/
+
+/*!
+                                                                     Copyright (c) 2016 Jed Watson.
+                                                                     Licensed under the MIT License (MIT), see
+                                                                     http://jedwatson.github.io/classnames
+                                                                     */
+
+/*!
+        * The buffer module from node.js, for the browser.
+        *
+        * @author   Feross Aboukhadijeh <http://feross.org>
+        * @license  MIT
+        */
+
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Based on code that is Copyright 2013-2015, Facebook, Inc.
+  All rights reserved.
+*/
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/*!
+ * @license twgl.js 4.4.0 Copyright (c) 2015, Gregg Tavares All Rights Reserved.
+ * Available via the MIT license.
+ * see: http://github.com/greggman/twgl.js for details
+ */
+
+/*!
+ * Adapted from jQuery UI core
+ *
+ * http://jqueryui.com
+ *
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/category/ui-core/
+ */
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*! !./node_modules/worker-loader/dist/workers/InlineWorker.js */
+
+/*! !webpack amd options */
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+/*! ../../common/transform.js */
+
+/*! ../../node_modules/arraybuffer-loader/lib/to-array-buffer.js */
+
+/*! ../common/minilog.js */
+
+/*! ../common/transform.js */
+
+/*! ./../../buffer/index.js */
+
+/*! ./../../process/browser.js */
+
+/*! ./../../webpack/buildin/global.js */
+
+/*! ./../node_modules/buffer/index.js */
+
+/*! ./../webpack/buildin/global.js */
+
+/*! ./Asset */
+
+/*! ./AssetType */
+
+/*! ./BuiltinHelper */
+
+/*! ./DataFormat */
+
+/*! ./FetchTool */
+
+/*! ./FetchWorkerTool */
+
+/*! ./Helper */
+
+/*! ./ProxyTool */
+
+/*! ./ScratchStorage */
+
+/*! ./WebHelper */
+
+/*! ./array.js */
+
+/*! ./arrayLikeToArray.js */
+
+/*! ./arrayWithHoles.js */
+
+/*! ./assertThisInitialized.js */
+
+/*! ./builtins/defaultBitmap.png */
+
+/*! ./builtins/defaultSound.wav */
+
+/*! ./builtins/defaultVector.svg */
+
+/*! ./console.js */
+
+/*! ./filter.js */
+
+/*! ./formatters/color.js */
+
+/*! ./formatters/minilog.js */
+
+/*! ./iterableToArrayLimit.js */
+
+/*! ./jquery_simple.js */
+
+/*! ./localstorage.js */
+
+/*! ./log */
+
+/*! ./nonIterableRest.js */
+
+/*! ./objectWithoutPropertiesLoose.js */
+
+/*! ./scratchFetch */
+
+/*! ./setPrototypeOf.js */
+
+/*! ./toPrimitive.js */
+
+/*! ./toPropertyKey.js */
+
+/*! ./transform.js */
+
+/*! ./typeof.js */
+
+/*! ./unsupportedIterableToArray.js */
+
+/*! ./util.js */
+
+/*! @babel/runtime/helpers/classCallCheck */
+
+/*! @babel/runtime/helpers/createClass */
+
+/*! @babel/runtime/helpers/getPrototypeOf */
+
+/*! @babel/runtime/helpers/inherits */
+
+/*! @babel/runtime/helpers/objectWithoutProperties */
+
+/*! @babel/runtime/helpers/possibleConstructorReturn */
+
+/*! @babel/runtime/helpers/slicedToArray */
+
+/*! @license DOMPurify 3.0.9 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.0.9/LICENSE */
+
+/*! @license DOMPurify | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.2.2/LICENSE */
+
+/*! @source http://purl.eligrey.com/github/canvas-toBlob.js/blob/master/canvas-toBlob.js */
+
+/*! base64-js */
+
+/*! cross-fetch */
+
+/*! fastestsmallesttextencoderdecoder */
+
+/*! https://mths.be/punycode v1.4.1 by @mathias */
+
+/*! ieee754 */
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/*! isarray */
+
+/*! js-md5 */
+
+/*! microee */
+
+/*! minilog */
+
+/*! no static exports found */
+
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/*! worker-loader?{"inline":true,"fallback":true}!./FetchWorkerTool.worker */
+
+/*!********************!*\
+      !*** ./src/log.js ***!
+      \********************/
+
+/*!**********************!*\
+      !*** ./src/Asset.js ***!
+      \**********************/
+
+/*!**********************!*\
+      !*** ./src/index.js ***!
+      \**********************/
+
+/*!***********************!*\
+      !*** ./src/Helper.js ***!
+      \***********************/
+
+/*!**************************!*\
+      !*** ./src/AssetType.js ***!
+      \**************************/
+
+/*!**************************!*\
+      !*** ./src/FetchTool.js ***!
+      \**************************/
+
+/*!**************************!*\
+      !*** ./src/ProxyTool.js ***!
+      \**************************/
+
+/*!**************************!*\
+      !*** ./src/WebHelper.js ***!
+      \**************************/
+
+/*!***************************!*\
+      !*** ./src/DataFormat.js ***!
+      \***************************/
+
+/*!*****************************!*\
+      !*** ./src/scratchFetch.js ***!
+      \*****************************/
+
+/*!******************************!*\
+      !*** ./src/BuiltinHelper.js ***!
+      \******************************/
+
+/*!*******************************!*\
+      !*** ./src/ScratchStorage.js ***!
+      \*******************************/
+
+/*!********************************!*\
+      !*** ./src/FetchWorkerTool.js ***!
+      \********************************/
+
+/*!***********************************!*\
+      !*** (webpack)/buildin/global.js ***!
+      \***********************************/
+
+/*!**************************************!*\
+      !*** ./node_modules/buffer/index.js ***!
+      \**************************************/
+
+/*!***************************************!*\
+      !*** ./node_modules/ieee754/index.js ***!
+      \***************************************/
+
+/*!***************************************!*\
+      !*** ./node_modules/microee/index.js ***!
+      \***************************************/
+
+/*!***************************************!*\
+      !*** ./src/builtins/defaultSound.wav ***!
+      \***************************************/
+
+/*!****************************************!*\
+      !*** (webpack)/buildin/amd-options.js ***!
+      \****************************************/
+
+/*!****************************************!*\
+      !*** ./node_modules/js-md5/src/md5.js ***!
+      \****************************************/
+
+/*!****************************************!*\
+      !*** ./src/builtins/defaultBitmap.png ***!
+      \****************************************/
+
+/*!****************************************!*\
+      !*** ./src/builtins/defaultVector.svg ***!
+      \****************************************/
+
+/*!*****************************************!*\
+      !*** ./node_modules/base64-js/index.js ***!
+      \*****************************************/
+
+/*!*****************************************!*\
+      !*** ./node_modules/process/browser.js ***!
+      \*****************************************/
+
+/*!***********************************************!*\
+      !*** ./node_modules/minilog/lib/web/array.js ***!
+      \***********************************************/
+
+/*!***********************************************!*\
+      !*** ./node_modules/minilog/lib/web/index.js ***!
+      \***********************************************/
+
+/*!*************************************************!*\
+      !*** ./node_modules/minilog/lib/web/console.js ***!
+      \*************************************************/
+
+/*!***************************************************!*\
+      !*** ./node_modules/minilog/lib/common/filter.js ***!
+      \***************************************************/
+
+/*!****************************************************!*\
+      !*** ./node_modules/minilog/lib/common/minilog.js ***!
+      \****************************************************/
+
+/*!******************************************************!*\
+      !*** ./node_modules/minilog/lib/common/transform.js ***!
+      \******************************************************/
+
+/*!******************************************************!*\
+      !*** ./node_modules/minilog/lib/web/localstorage.js ***!
+      \******************************************************/
+
+/*!*******************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+      \*******************************************************/
+
+/*!*******************************************************!*\
+      !*** ./node_modules/minilog/lib/web/jquery_simple.js ***!
+      \*******************************************************/
+
+/*!*********************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
+      \*********************************************************/
+
+/*!*********************************************************!*\
+      !*** ./node_modules/minilog/lib/web/formatters/util.js ***!
+      \*********************************************************/
+
+/*!**********************************************************!*\
+      !*** ./node_modules/minilog/lib/web/formatters/color.js ***!
+      \**********************************************************/
+
+/*!***********************************************************!*\
+      !*** ./node_modules/buffer/node_modules/isarray/index.js ***!
+      \***********************************************************/
+
+/*!***********************************************************!*\
+      !*** ./node_modules/cross-fetch/dist/browser-ponyfill.js ***!
+      \***********************************************************/
+
+/*!************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+      \************************************************************/
+
+/*!************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+      \************************************************************/
+
+/*!************************************************************!*\
+      !*** ./node_modules/minilog/lib/web/formatters/minilog.js ***!
+      \************************************************************/
+
+/*!**************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+      \**************************************************************/
+
+/*!**************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+      \**************************************************************/
+
+/*!***************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+      \***************************************************************/
+
+/*!***************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+      \***************************************************************/
+
+/*!***************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+      \***************************************************************/
+
+/*!***************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+      \***************************************************************/
+
+/*!****************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+      \****************************************************************/
+
+/*!****************************************************************!*\
+      !*** ./node_modules/arraybuffer-loader/lib/to-array-buffer.js ***!
+      \****************************************************************/
+
+/*!*****************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+      \*****************************************************************/
+
+/*!*****************************************************************!*\
+      !*** ./node_modules/worker-loader/dist/workers/InlineWorker.js ***!
+      \*****************************************************************/
+
+/*!*********************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+      \*********************************************************************/
+
+/*!**********************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+      \**********************************************************************/
+
+/*!************************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
+      \************************************************************************/
+
+/*!**************************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+      \**************************************************************************/
+
+/*!***************************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+      \***************************************************************************/
+
+/*!*****************************************************************************!*\
+      !*** ./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
+      \*****************************************************************************/
+
+/*!**************************************************************************************!*\
+      !*** ./node_modules/fastestsmallesttextencoderdecoder/EncoderDecoderTogether.min.js ***!
+      \**************************************************************************************/
+
+/*!****************************************************************************************************************!*\
+      !*** ./node_modules/worker-loader/dist/cjs.js?{"inline":true,"fallback":true}!./src/FetchWorkerTool.worker.js ***!
+      \****************************************************************************************************************/
+
+/**
+                                           * [js-md5]{@link https://github.com/emn178/js-md5}
+                                           *
+                                           * @namespace md5
+                                           * @version 0.7.3
+                                           * @author Chen, Yi-Cyuan [emn178@gmail.com]
+                                           * @copyright Chen, Yi-Cyuan 2014-2017
+                                           * @license MIT
+                                           */
+
+/**
+    * CSS Vendor prefix detection and property feature testing.
+    *
+    * @copyright Oleg Slobodskoi 2015
+    * @website https://github.com/jsstyles/css-vendor
+    * @license MIT
+    */
+
+/**
+ *  StartAudioContext.js
+ *  @author Yotam Mann
+ *  @license http://opensource.org/licenses/MIT MIT License
+ *  @copyright 2016 Yotam Mann
+ */
+
+/**
+ * [js-md5]{@link https://github.com/emn178/js-md5}
+ *
+ * @namespace md5
+ * @version 0.7.3
+ * @author Chen, Yi-Cyuan [emn178@gmail.com]
+ * @copyright Chen, Yi-Cyuan 2014-2017
+ * @license MIT
+ */
+
+/** @license React v0.19.1
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.14.0
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.14.0
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+//!! Deliberately using an API that's deprecated in node.js because
+
+//!! Discussion: github.com/node-browser-compat/atob/pull/9
+
+//!! this file is for browsers and we expect them to cope with it.

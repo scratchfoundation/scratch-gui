@@ -924,6 +924,28 @@ const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
     </category>
     `;
 };
+
+const hackedBlocks = function (isInitialSetup, isStage, targetId, colors) {
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
+    return `
+    <category name="Hacked Blocks" id="hacks" colour="#000000" secondaryColour="#00FF00">
+        <block type="event_whentouchingobject" id="${targetId}_whentouchingobject">
+            <value name="TOUCHINGOBJECTMENU">
+                <shadow type="sensing_touchingobjectmenu">
+                    <field name="TOUCHINGOBJECTMENU">_mouse_</field>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="control_while" id="${targetId}_while"></block>
+        ${blockSeparator}
+        <block type="control_get_counter" id="${targetId}_get_counter"></block>
+        <block type="control_incr_counter" id="${targetId}_incr_counter"></block>
+        <block type="control_clear_counter" id="${targetId}_clear_counter"></block>
+        ${categorySeparator}
+    </category>
+    `;
+};
 /* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';
@@ -974,6 +996,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId, colors.operators);
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more);
+    const hackedBlocksXML = moveCategory('hacks') || hackedBlocks(isInitialSetup, isStage, targetId, colors.more);
 
     const everything = [
         xmlOpen,
@@ -985,7 +1008,8 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         sensingXML, gap,
         operatorsXML, gap,
         variablesXML, gap,
-        myBlocksXML
+        myBlocksXML, gap,
+        hackedBlocksXML
     ];
 
     for (const extensionCategory of categoriesXML) {

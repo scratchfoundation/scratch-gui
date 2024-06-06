@@ -928,7 +928,8 @@ const myBlocks = function (isInitialSetup, isStage, targetId, colors) {
 const hackedBlocks = function (isInitialSetup, isStage, targetId, colors) {
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
     return `
-    <category name="Hacked Blocks" id="hacks" colour="#000000" secondaryColour="#00FF00">
+    <category name="Hidden Blocks" id="hacks" colour="#0fbd8c" secondaryColour="#0da57a">
+        <label text="- Events"></label>
         <block type="event_whentouchingobject" id="${targetId}_whentouchingobject">
             <value name="TOUCHINGOBJECTMENU">
                 <shadow type="sensing_touchingobjectmenu">
@@ -937,11 +938,72 @@ const hackedBlocks = function (isInitialSetup, isStage, targetId, colors) {
             </value>
         </block>
         ${blockSeparator}
+        <label text="- Loops"></label>
+        <block type="control_for_each" id="${targetId}_for_each">
+            <value name="VALUE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
         <block type="control_while" id="${targetId}_while"></block>
         ${blockSeparator}
+        <label text="- Counter blocks"></label>
         <block type="control_get_counter" id="${targetId}_get_counter"></block>
         <block type="control_incr_counter" id="${targetId}_incr_counter"></block>
         <block type="control_clear_counter" id="${targetId}_clear_counter"></block>
+        ${blockSeparator}
+        <label text="- Extracted reporters and menus"></label>
+        <block type="motion_goto_menu" id="${targetId}_goto_menu"></block>
+        <block type="motion_glideto_menu" id="${targetId}_glideto_menu"></block>
+        <block type="motion_pointtowards_menu" id="${targetId}_pointtowards_menu"></block>
+        <block type="looks_costume" id="${targetId}_costume"></block>
+        <block type="looks_backdrops" id="${targetId}_backdrops"></block>
+        <block type="sound_sounds_menu" id="${targetId}_sounds_menu"></block>
+        <block type="event_broadcast_menu" id="${targetId}_broadcast_menu"></block>
+        <block type="control_create_clone_of_menu" id="${targetId}_create_clone_of_menu"></block>
+        <block type="sensing_touchingobjectmenu" id="${targetId}_touchingobjectmenu"></block>
+        <block type="sensing_distancetomenu" id="${targetId}_distancetomenu"></block>
+        <block type="sensing_keyoptions" id="${targetId}_keyoptions"></block>
+        <block type="sensing_of_object_menu" id="${targetId}_of_object_menu"></block>
+        ${blockSeparator}
+        <label text="- No-op / removed"></label>
+        <block type="motion_scroll_right" id="${targetId}_scroll_right">
+            <value name="DISTANCE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_scroll_up" id="${targetId}_scroll_up">
+            <value name="DISTANCE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="motion_align_scene" id="${targetId}_align_scene"></block>
+        <block type="motion_xscroll" id="${targetId}_xscroll"></block>
+        <block type="motion_yscroll" id="${targetId}_yscroll"></block>
+        <block type="looks_hideallsprites" id="${targetId}_hideallsprites"></block>
+        <block type="looks_setstretchto" id="${targetId}_setstretchto">
+            <value name="STRETCH">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="looks_changestretchby" id="${targetId}_changestretchby">
+            <value name="CHANGE">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="control_all_at_once" id="${targetId}_all_at_once"></block>
+        <block type="sensing_loud" id="${targetId}_loud"></block>
+        <block type="sensing_userid" id="${targetId}_userid"></block>
+        <block type="procedures_prototype" id="${targetId}_prototype"></block>
         ${categorySeparator}
     </category>
     `;

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect x="30" y="30" width="440" height="190" style="stroke: rgb(0, 0, 0); stroke-linejoin: round; stroke-linecap: round; fill: rgba(216, 216, 216, 0); stroke-width: 10px;" rx="10.976" ry="10.976" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, -1.4210854715202004e-14)"/>
+  <rect x="30" y="280" width="440" height="190" style="stroke: rgb(0, 0, 0); stroke-linejoin: round; stroke-linecap: round; fill: rgba(216, 216, 216, 0); stroke-width: 10px;" rx="10.976" ry="10.976" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, -1.4210854715202004e-14)"/>
+  <ellipse style="stroke-width: 10px; stroke: rgb(0, 0, 0); fill: rgba(216, 216, 216, 0);" cx="125" rx="37.5" ry="37.5" cy="125" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, -1.4210854715202004e-14)"/>
+  <ellipse style="stroke-width: 10px; stroke: rgb(0, 0, 0); fill: rgba(216, 216, 216, 0);" cx="125" rx="37.5" ry="37.5" cy="375" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, -1.4210854715202004e-14)"/>
+</svg>

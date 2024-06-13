@@ -7,6 +7,9 @@ import networkIconURL from './network/networkBig.png';
 import impulseInsetIconURL from './impulse/impulse.svg';
 import impulseIconURL from './impulse/impulseBig.png';
 
+import tempvarsInsetIconURL from './tempvars/tempvars.svg';
+import tempvarsIconURL from './tempvars/tempvarsBig.png';
+
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
@@ -53,6 +56,25 @@ import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 export default [
+    {
+        name: (
+            <FormattedMessage
+                defaultMessage="Temp Vars"
+                description="Name for the 'Temp Vars' extension"
+                id="gui.extension.tempvars.name"
+            />
+        ),
+        extensionId: 'tempvars',
+        iconURL: tempvarsIconURL,
+        insetIconURL: tempvarsInsetIconURL,
+        description: 
+            <span>
+                Use temporary variables in code!<br></br>
+                <sub style={{lineHeight: "0 !important"}}></sub>
+            </span>
+        ,
+        featured: true
+    },
     {
         name: (
             <FormattedMessage

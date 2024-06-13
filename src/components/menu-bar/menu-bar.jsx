@@ -769,6 +769,7 @@ class MenuBar extends React.Component {
                                                     waitForUpdate
                                                 );
                                             }}
+                                            content={"Compile"}
                                             /* eslint-enable react/jsx-no-bind */
                                         />
                                     )}
@@ -776,48 +777,32 @@ class MenuBar extends React.Component {
                             )
                         ) : this.props.showComingSoon ? (
                             <MenuBarItemTooltip id="share-button">
-                                <ShareButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : (
-                            []
-                        )}
-                        {this.props.canRemix ? remixButton : []}
-                    </div>
-                    <div
-                        className={classNames(
-                            styles.menuBarItem,
-                            styles.communityButtonWrapper
-                        )}
-                    >
-                        {this.props.enableCommunity ? (
-                            (this.props.isShowingProject ||
-                                this.props.isUpdating) && (
-                                <ProjectWatcher
-                                    onDoneUpdating={this.props.onSeeCommunity}
-                                >
-                                    {(waitForUpdate) => (
-                                        <CommunityButton
-                                            className={styles.menuBarButton}
-                                            /* eslint-disable react/jsx-no-bind */
-                                            onClick={() => {
-                                                this.handleClickSeeCommunity(
-                                                    waitForUpdate
-                                                );
-                                            }}
-                                            /* eslint-enable react/jsx-no-bind */
-                                        />
-                                    )}
-                                </ProjectWatcher>
-                            )
-                        ) : this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton
+                                <ShareButton
                                     className={styles.menuBarButton}
+                                    content={
+                                        <SB3Downloader>
+                                            {(
+                                                className,
+                                                downloadProjectCallback,
+                                                downloadProjectOldCallback
+                                            ) => (
+                                                <MenuItem
+                                                    onClick={this.getSaveToComputerHandler(
+                                                        downloadProjectOldCallback
+                                                    )}
+                                                >
+                                                    Compile
+                                                </MenuItem>
+                                            )}
+                                        </SB3Downloader>
+                                    }
+                                    isShared={this.props.isShared}
                                 />
                             </MenuBarItemTooltip>
                         ) : (
                             []
                         )}
+                        {this.props.canRemix ? remixButton : []}
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
@@ -930,27 +915,17 @@ class MenuBar extends React.Component {
                         <React.Fragment>
                             {this.props.showComingSoon ? (
                                 <React.Fragment>
-                                    <MenuBarItemTooltip id="mystuff">
-                                        <div
-                                            className={classNames(
-                                                styles.menuBarItem,
-                                                styles.hoverable,
-                                                styles.mystuffButton
-                                            )}
-                                        >
-                                            <img
-                                                className={styles.mystuffIcon}
-                                                src={mystuffIcon}
-                                            />
-                                        </div>
-                                    </MenuBarItemTooltip>
                                     <MenuBarItemTooltip
                                         id="account-nav"
+                                        
                                         place={
                                             this.props.isRtl ? "right" : "left"
                                         }
                                     >
                                         <div
+                                            onClick={()=>{
+                                                window.open("https://scratch.mit.edu/users/ZXMushroom63/");
+                                            }}
                                             className={classNames(
                                                 styles.menuBarItem,
                                                 styles.hoverable,
@@ -965,14 +940,8 @@ class MenuBar extends React.Component {
                                                 {new URLSearchParams(
                                                     window.location.search
                                                 ).get("username") ||
-                                                    "scratch-cat"}
+                                                    "Made by ZXMushroom63"}
                                             </span>
-                                            <img
-                                                className={
-                                                    styles.dropdownCaretIcon
-                                                }
-                                                src={dropdownCaret}
-                                            />
                                         </div>
                                     </MenuBarItemTooltip>
                                 </React.Fragment>

@@ -464,7 +464,10 @@ module.exports = {
                         event.preventDefault();
                         if (element.hasAttribute("data-id")) {
                             blockId = element.getAttribute("data-id");
-                            workspace.getBlockById(blockId).dispose(false); //dispose(false) means "do not heal stack"
+                            var block = workspace.getBlockById(blockId);
+                            block.getDescendants(false, true).forEach((block) => {
+                                block.dispose(true); //Healing the stack is a good idea, previously I was not doing this and it was corrupting everything yay :]
+                            });
                             if (workspace.getToolbox() //If the blockly instance has a toolbox, it needs to be refreshed,
                             ) {
                                 workspace.getToolbox().refreshSelection();

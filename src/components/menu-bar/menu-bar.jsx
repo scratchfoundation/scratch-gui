@@ -924,7 +924,7 @@ class MenuBar extends React.Component {
                                     >
                                         <div
                                             onClick={()=>{
-                                                window.open("https://scratch.mit.edu/users/ZXMushroom63/");
+                                                window.open("https://github.com/ZXMushroom63/");
                                             }}
                                             className={classNames(
                                                 styles.menuBarItem,

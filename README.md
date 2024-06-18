@@ -39,7 +39,7 @@ Open a Command Prompt or Terminal in the repository and run:
 npm start
 ```
 
-Then go to [http://localhost:8601/](http://localhost:8601/) - the playground outputs the default GUI component
+Then go to [http://localhost:8602/](http://localhost:8602/) - the playground outputs the default GUI component
 
 ## Developing alongside other Scratch repositories
 

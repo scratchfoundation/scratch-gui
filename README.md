@@ -1,6 +1,10 @@
 # Scratch++
 #### Scratch++ is a Scratch mod that adds new blocks which can compile to normal Scratch. This allows for easily building advanced Scratch projects, which you can share normally.
 
+## NOTICE
+I have been banned off of Scratch for attemtping to encode .MP3s into scratch projects. Please use discussions and issues in this repo for feature request isntead of the Scratch forums.
+
+
 ## How to use
 Example:
 In the editor, write a script with a new block (like the power operator).

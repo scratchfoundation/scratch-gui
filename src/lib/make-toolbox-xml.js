@@ -894,6 +894,21 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        ${blockSeparator}
+        <block type="operator_color">
+            <value name="COLOR">
+                <shadow type="colour_picker">
+                    <field name="COLOUR">#a55b5b</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="operator_boolcast">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT">1</field>
+                </shadow>
+            </value>
+        </block>
         ${categorySeparator}
     </category>
     `;

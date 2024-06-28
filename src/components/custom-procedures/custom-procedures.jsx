@@ -6,6 +6,7 @@ import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-int
 
 import booleanInputIcon from './icon--boolean-input.svg';
 import textInputIcon from './icon--text-input.svg';
+import numberInputIcon from './icon--number-input.svg';
 import labelIcon from './icon--label.svg';
 
 import styles from './custom-procedures.css';
@@ -53,6 +54,27 @@ const CustomProcedures = props => (
                             description="Description of the number/text input type"
                             id="gui.customProcedures.numberTextType"
                         />
+                    </div>
+                </div>
+                <div
+                    className={styles.optionCard}
+                    role="button"
+                    tabIndex="0"
+                    onClick={props.onAddNumber}
+                >
+                    <img
+                        className={styles.optionIcon}
+                        src={numberInputIcon}
+                    />
+                    <div className={styles.optionTitle}>
+                        <FormattedMessage
+                            defaultMessage="Add an input"
+                            description="Label for button to add a number/text input"
+                            id="gui.customProcedures.addAnInputNumberText"
+                        />
+                    </div>
+                    <div className={styles.optionDescription}>
+                        number only
                     </div>
                 </div>
                 <div

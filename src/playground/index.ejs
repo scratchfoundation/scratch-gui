@@ -189,6 +189,26 @@
                     </td>
                     <td><small>Grab single blocks by dragging with the Ctrl key. (By lisa_wolfgang, GarboMuffin)</small></td>
                 </tr>
+                <tr>
+                    <td>
+                        Locator
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('locator', this.checked)" id="locator">
+                        <script>if (localStorage.getItem("locator") === "true"){document.querySelector("#locator").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Locate blocks by their id, opcode, proccode, or referenced variable ids using a search bar in the top-left. (By griffpatch, ZXMushroom63)</small></td>
+                </tr>
+                <tr>
+                    <td>
+                        Opacity Slider
+                    </td>
+                    <td>
+                        <input type="checkbox" oninput="localStorage.setItem('opacity', this.checked)" id="opacity">
+                        <script>if (localStorage.getItem("opacity") === "true"){document.querySelector("#opacity").setAttribute("checked", "")}</script>
+                    </td>
+                    <td><small>Adds an opacity slider to the costume editor color picker. (By itta611)</small></td>
+                </tr>
             </table>
         </div>
     </body>

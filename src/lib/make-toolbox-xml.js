@@ -909,6 +909,13 @@ const operators = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+        <block type="operator_string">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT">hello world</field>
+                </shadow>
+            </value>
+        </block>
         ${categorySeparator}
     </category>
     `;
@@ -1019,6 +1026,8 @@ const hackedBlocks = function (isInitialSetup, isStage, targetId, colors) {
         <block type="sensing_loud" id="${targetId}_loud"></block>
         <block type="sensing_userid" id="${targetId}_userid"></block>
         <block type="procedures_prototype" id="${targetId}_prototype"></block>
+        <block type="argument_editor_boolean" id="${targetId}_editor_boolean"></block>
+        <block type="argument_editor_string_number" id="${targetId}_editor_string_number"></block>
         ${categorySeparator}
     </category>
     `;

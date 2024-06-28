@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl';
+import { defineMessages } from 'react-intl';
 import sharedMessages from '../shared-messages';
 
 let messages = defineMessages({
@@ -14,7 +14,7 @@ let messages = defineMessages({
     }
 });
 
-messages = {...messages, ...sharedMessages};
+messages = { ...messages, ...sharedMessages };
 
 // use the default message if a translation function is not passed
 const defaultTranslator = msgObj => msgObj.defaultMessage;
@@ -37,6 +37,17 @@ const projectData = translateFunction => {
                         0
                     ]
                 },
+                comments: {
+                    "af16__spp_compile_cfg__::compileFlags": {
+                        "blockId": null,
+                        "x": 200,
+                        "y": 200,
+                        "width": 200,
+                        "height": 200,
+                        "minimized": false,
+                        "text": "$rt.__spp_compile_cfg__"
+                    }
+                },
                 lists: {},
                 broadcasts: {},
                 blocks: {},
@@ -44,7 +55,7 @@ const projectData = translateFunction => {
                 costumes: [
                     {
                         assetId: 'cd21514d0531fdffb22204e0ec5ed84a',
-                        name: translator(messages.backdrop, {index: 1}),
+                        name: translator(messages.backdrop, { index: 1 }),
                         md5ext: 'cd21514d0531fdffb22204e0ec5ed84a.svg',
                         dataFormat: 'svg',
                         rotationCenterX: 240,
@@ -66,7 +77,7 @@ const projectData = translateFunction => {
             },
             {
                 isStage: false,
-                name: translator(messages.sprite, {index: 1}),
+                name: translator(messages.sprite, { index: 1 }),
                 variables: {},
                 lists: {},
                 broadcasts: {},
@@ -75,7 +86,7 @@ const projectData = translateFunction => {
                 costumes: [
                     {
                         assetId: 'bcf454acf82e4504149f7ffe07081dbc',
-                        name: translator(messages.costume, {index: 1}),
+                        name: translator(messages.costume, { index: 1 }),
                         bitmapResolution: 1,
                         md5ext: 'bcf454acf82e4504149f7ffe07081dbc.svg',
                         dataFormat: 'svg',
@@ -84,7 +95,7 @@ const projectData = translateFunction => {
                     },
                     {
                         assetId: '0fb9be3e8397c983338cb71dc84d0b25',
-                        name: translator(messages.costume, {index: 2}),
+                        name: translator(messages.costume, { index: 2 }),
                         bitmapResolution: 1,
                         md5ext: '0fb9be3e8397c983338cb71dc84d0b25.svg',
                         dataFormat: 'svg',

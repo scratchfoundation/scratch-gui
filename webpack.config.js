@@ -5,11 +5,6 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// PostCss
-const autoprefixer = require('autoprefixer');
-const postcssVars = require('postcss-simple-vars');
-const postcssImport = require('postcss-import');
-
 const ScratchWebpackConfigBuilder = require('scratch-webpack-configuration');
 
 // const STATIC_PATH = process.env.STATIC_PATH || '/static';
@@ -52,22 +47,23 @@ const baseConfig = new ScratchWebpackConfigBuilder(
                 loader: 'css-loader',
                 options: {
                     modules: {
-                        localIdentName: '[name]_[local]_[hash:base64:5]'
+                        namedExport: false,
+                        localIdentName: '[name]_[local]_[hash:base64:5]',
+                        exportLocalsConvention: 'camelCase'
                     },
                     importLoaders: 1,
-                    localsConvention: 'camelCase'
+                    esModule: false
                 }
             },
             {
                 loader: 'postcss-loader',
                 options: {
-                    ident: 'postcss',
-                    plugins: function () {
-                        return [
-                            postcssImport,
-                            postcssVars,
-                            autoprefixer
-                        ];
+                    postcssOptions: {
+                        plugins: [
+                            'postcss-import',
+                            'postcss-simple-vars',
+                            'autoprefixer'
+                        ]
                     }
                 }
             }
@@ -80,7 +76,12 @@ const baseConfig = new ScratchWebpackConfigBuilder(
     })
     .addModuleRule({
         test: /\.hex$/,
-        type: 'asset/resource'
+        use: [{
+            loader: 'url-loader',
+            options: {
+                limit: 16 * 1024
+            }
+        }]
     })
     .addPlugin(new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer']
@@ -129,7 +130,18 @@ const distConfig = baseConfig.clone()
         output: {
             path: path.resolve(__dirname, 'dist')
         }
-    });
+    })
+    .addPlugin(
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'src/lib/libraries/*.json',
+                    to: 'libraries',
+                    flatten: true
+                }
+            ]
+        })
+    );
 
 // build the examples and debugging tools in `build/`
 const buildConfig = baseConfig.clone()

@@ -590,6 +590,17 @@ class MenuBar extends React.Component {
                                             )}
                                         </SB3Downloader>
                                     </MenuSection>
+                                    <MenuSection>
+                                    <MenuItem
+                                            onClick={
+                                                ()=>{
+                                                    document.getElementById("sppgenerators").classList.remove("splashHidden")
+                                                }
+                                            }
+                                        >
+                                            View Generators
+                                        </MenuItem>
+                                    </MenuSection>
                                 </MenuBarMenu>
                             </div>
                         )}

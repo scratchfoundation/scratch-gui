@@ -211,5 +211,47 @@
                 </tr>
             </table>
         </div>
+        <div id="sppgenerators"
+            style="
+                background-color: lightgray;
+                border: 2px solid black;
+                padding: 1rem;
+                position: fixed;
+                width: 75%;
+                height: 75%;
+                top: 12.5%;
+                left: 12.5%;
+                z-index: 9999;
+                border-radius: 1rem;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            "
+            class="splashHidden"
+        >
+            <h2 style="padding: 0; margin: 0;">
+                Scratch++ Generators
+                <button
+                    style="
+                        border: 0;
+                        background-color: transparent;
+                        text-decoration: underline;
+                        color: red;
+                        font-weight: bold;
+                        cursor: pointer;
+                    "
+                    onclick="document.getElementById('sppgenerators').classList.add('splashHidden')"
+                    style="cursor: pointer"
+                >
+                    <h2>[X]</h2>
+                </button>
+            </h2>
+            <a style="text-decoration: underline; color: blue; font-weight: bold;"
+             href="static/mp4_2_sb3.html"
+              target="_blank">.mp4 to .sb3 packager (and all other video file formats)</a>
+            <br><br><br>
+            <span>Use with caution! Uploading large generated projects to Scratch can trigger automated bans (usually the project will instantly fail to save, if that happens, do NOT press "Try Again")</span><br>
+            <span>These are mostly tech demos, I recommend testing them on TurboWarp or the offline Scratch editor, in order to not upload the large assets to Scratch's servers.</span>
+        </div>
     </body>
 </html>

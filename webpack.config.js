@@ -38,50 +38,9 @@ const baseConfig = new ScratchWebpackConfigBuilder(
         }
     })
     .addModuleRule({
-        test: /\.css$/,
-        use: [
-            {
-                loader: 'style-loader'
-            },
-            {
-                loader: 'css-loader',
-                options: {
-                    modules: {
-                        namedExport: false,
-                        localIdentName: '[name]_[local]_[hash:base64:5]',
-                        exportLocalsConvention: 'camelCase'
-                    },
-                    importLoaders: 1,
-                    esModule: false
-                }
-            },
-            {
-                loader: 'postcss-loader',
-                options: {
-                    postcssOptions: {
-                        plugins: [
-                            'postcss-import',
-                            'postcss-simple-vars',
-                            'autoprefixer'
-                        ]
-                    }
-                }
-            }
-        ]
-    })
-    .addModuleRule({
         test: /\.(svg|png|wav|mp3|gif|jpg)$/,
         resourceQuery: /^$/, // reject any query string
         type: 'asset' // let webpack decide on the best type of asset
-    })
-    .addModuleRule({
-        test: /\.hex$/,
-        use: [{
-            loader: 'url-loader',
-            options: {
-                limit: 16 * 1024
-            }
-        }]
     })
     .addPlugin(new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer']

@@ -58,6 +58,7 @@
                 imageFormatControls: document.querySelector("#imageFormat"),
                 resolutionControls: document.querySelector("#resolutionControls"),
                 stereoAudioCheckbox: document.querySelector("#stereoAudio"),
+                svgAbuseCheckbox: document.querySelector("#svgAbuse"),
             }
             elems.canvas.width = res[0];
             elems.canvas.height = res[1];
@@ -149,6 +150,7 @@
                 let video = document.createElement('video');
                 var stereoAudioEnabled = elems.stereoAudioCheckbox.checked || false;
                 let imageQuality = parseInt(elems.qualitySlider.value) / 100;
+                var svgAbuse = elems.svgAbuseCheckbox.checked || false;
                 var videoBuffer = await elems.videoInput.files[0].arrayBuffer();
                 var audioBuffer = await context.decodeAudioData(videoBuffer);
                 var mp3encoder = new lamejs.Mp3Encoder(1, audioBuffer.sampleRate, 128);

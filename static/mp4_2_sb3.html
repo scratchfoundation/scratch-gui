@@ -51,6 +51,7 @@
         Status: 
         Processed frames:
         Saved sheets:
+        Saved assets:
     </span>
     <br>
     <progress id="progressBar" min=0 max=100 value=0></progress><br>
@@ -59,7 +60,8 @@
         var progInfo = {
             status: "Awaiting input...",
             processedFrames: 0,
-            sheets: 0
+            sheets: 0,
+            assets: 0
         }
         function wait(d) {
             return new Promise((res, rej)=>{
@@ -94,7 +96,8 @@
                 elems.progInfo.innerHTML = `
                 Status: ${progInfo.status}<br>
                 Processed frames: ${progInfo.processedFrames}<br>
-                Saved spritesheets: ${progInfo.sheets} (try to keep this below 200 to avoid auto-bans. Hint: use tiling variable!)<br>
+                Saved spritesheets: ${progInfo.sheets}<br>
+                Saved assets: ${progInfo.assets} (try to keep this below 200 to avoid auto-bans. Hint: use tiling variable!)
                 `;
             }
             updateProgInfo();
@@ -184,6 +187,7 @@
                 }
                 progInfo.processedFrames = 0;
                 progInfo.sheets = 0;
+                progInfo.assets = 0;
                 progInfo.status = "Init";
                 updateProgInfo();
                 res = [480, 360].map((x)=>{return x * parseFloat(elems.resolutionControls.value)});
@@ -276,9 +280,11 @@
                             "sampleCount": saples,
                             "md5ext": storedAudio.fileName
                         });
+                        progInfo.assets += 1;
                         Object.assign(callbackStorageLoc, generateAudioCallback(positionInTime, "s"+i));
                         await new Promise(r => setTimeout(r, 9));
                         elems.progressBar.value = (i / audioEpochsToBePackaged) * 100;
+                        updateProgInfo();
                     }
                 }
 
@@ -319,6 +325,7 @@
                             "rotationCenterY": res[1] / 2 //360
                         });
                         progInfo.sheets += 1;
+                        progInfo.assets += 1;
                         tilingCtx.fillRect(0, 0, res[0], res[1]);
                     }
                     
@@ -806,7 +813,7 @@
                                                             1,
                                                             [
                                                                 10,
-                                                                "Packaged with MP4 2 SCRATCH\nhttps://github.com/ZXMushroom63/mp4-to-scratch"
+                                                                "Packaged with Scratch++ .mp4 converter\nhttps://github.com/ZXMushroom63/scratch-gui"
                                                             ]
                                                         ]
                                                     },

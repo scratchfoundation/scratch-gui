@@ -18,12 +18,12 @@
     <input id="audioInterval" type="number" value=30 min="1" max="240"><label> &lt;- Audio block size (s); decrease if using stereo</label><br>
     <input id="stereoAudio" type="checkbox"><label> &lt;- Stereo Audio</label><br>
     <select id="imageFormat">
-        <option selected value="webp|jpeg">disguised webp (mid quality, smallest size) [RECOMMENDED]</option>
-        <option value="jpeg">jpeg (low quality, small size)</option>
+        <option selected value="webp|jpg">disguised webp (mid quality, smallest size) [RECOMMENDED]</option>
+        <option value="jpg">jpeg (low quality, small size)</option>
         <option value="png|png">png (high quality, largest size)</option>
         <option value="gif|gif">gif (low quality, large size)</option>
     </select><label> &lt;- Image Format</label><br>
-    <input id="svgAbuse" type="checkbox" disabled><label>SVG Abuse (Credit to <a href="https://scratch.mit.edu/users/52525rr">@52525rr</a> on Scratch, coming soon)</label><br>
+    <input id="tiling" type="number" min="1" step="1" value="1" placeholder="1" max="16"><label> &lt;- Tiling (Inspiration from <a href="https://scratch.mit.edu/projects/627583842/">this project</a> by <a href="https://scratch.mit.edu/users/52525rr/">@52525rr</a> on Scratch)</label><br>
     <input id="imageQuality" type="range" step="5" min="0" max=100 value=95><label> &lt;- Processed Image Quality</label><br>
     <input id="bgColor" type="color" value="#000000"><label> &lt;- Rendered Background Color</label><br>
     <select id="aspectRatioControls">
@@ -32,14 +32,40 @@
         <option>Stretch</option>
     </select><label> &lt;- Aspect Ratio Maintainence</label><br>
     <select id="resolutionControls">
+        <option value=8>3840x2880</option>
+        <option value=6>2880x2160</option>
+        <option value=4>1920x1440</option>
+        <option value=3>1440x1080</option>
         <option value=2>960x720</option>
         <option selected value=1>480x360</option>
         <option value=0.5>240x180</option>
+        <option value=0.25>120x90</option>
+        <option value=0.125>60x45</option>
     </select><label> &lt;- Resolution</label><br>
-    <canvas style="background-color: black;" width="480" height="360">Canvas not supported by terrible browser choice.</canvas><br>
+
+    <canvas id="drawingCanvas" style="background-color: black; display: none;" width="480" height="360">Canvas not supported by terrible browser choice.</canvas>
+    <canvas id="tilingCanvas" style="background-color: black;" width="480" height="360"></canvas>
+
+    <br>
+    <span id="progInfo">
+        Status: 
+        Processed frames:
+        Saved sheets:
+    </span>
+    <br>
     <progress id="progressBar" min=0 max=100 value=0></progress><br>
     <button onclick="generate()">Package to .sb3</button><button id="saveButton" disabled onclick="saveButtonHandler()">Download</button>
     <script>
+        var progInfo = {
+            status: "Awaiting input...",
+            processedFrames: 0,
+            sheets: 0
+        }
+        function wait(d) {
+            return new Promise((res, rej)=>{
+                setTimeout(()=>{res()}, d*1000);
+            });
+        }
         var res = [480, 360];
         window.saveButtonHandler = ()=>{};
         window.addEventListener("load", ()=>{
@@ -49,7 +75,8 @@
                 videoInput: document.querySelector("input[type=file]#videoInput"),
                 framerateInput: document.querySelector("#framerate"),
                 audioIntervalInput: document.querySelector("#audioInterval"),
-                canvas: document.querySelector("canvas"),
+                canvas: document.querySelector("#drawingCanvas"),
+                tilingCanvas: document.querySelector("#tilingCanvas"),
                 saveButton: document.querySelector("#saveButton"),
                 qualitySlider: document.querySelector("#imageQuality"),
                 aspectRatioControls: document.querySelector("#aspectRatioControls"),
@@ -58,10 +85,19 @@
                 imageFormatControls: document.querySelector("#imageFormat"),
                 resolutionControls: document.querySelector("#resolutionControls"),
                 stereoAudioCheckbox: document.querySelector("#stereoAudio"),
-                svgAbuseCheckbox: document.querySelector("#svgAbuse"),
+                tilingControl: document.querySelector("#tiling"),
+                progInfo: document.querySelector("#progInfo"),
             }
             elems.canvas.width = res[0];
             elems.canvas.height = res[1];
+            function updateProgInfo() {
+                elems.progInfo.innerHTML = `
+                Status: ${progInfo.status}<br>
+                Processed frames: ${progInfo.processedFrames}<br>
+                Saved spritesheets: ${progInfo.sheets} (try to keep this below 200 to avoid auto-bans. Hint: use tiling variable!)<br>
+                `;
+            }
+            updateProgInfo();
             async function awaitVideoMetadata(video) {
                 return new Promise((res, rej)=>{
                     video.onloadedmetadata = ()=>{res()};
@@ -143,14 +179,23 @@
                 if (!elems.videoInput.files[0]) {
                     return;
                 }
+                if (!window.showSaveFilePicker) {
+                    alert("Your browser does not support the Web FileSystem API, and large generated projects may fail to save.");
+                }
+                progInfo.processedFrames = 0;
+                progInfo.sheets = 0;
+                progInfo.status = "Init";
+                updateProgInfo();
                 res = [480, 360].map((x)=>{return x * parseFloat(elems.resolutionControls.value)});
                 elems.canvas.width = res[0];
                 elems.canvas.height = res[1];
+                elems.tilingCanvas.width = res[0];
+                elems.tilingCanvas.height = res[1];
                 var sb3 = new JSZip();
                 let video = document.createElement('video');
                 var stereoAudioEnabled = elems.stereoAudioCheckbox.checked || false;
                 let imageQuality = parseInt(elems.qualitySlider.value) / 100;
-                var svgAbuse = elems.svgAbuseCheckbox.checked || false;
+                var tiling = Math.max(parseInt(elems.tilingControl.value), 1) || 1;
                 var videoBuffer = await elems.videoInput.files[0].arrayBuffer();
                 var audioBuffer = await context.decodeAudioData(videoBuffer);
                 var mp3encoder = new lamejs.Mp3Encoder(1, audioBuffer.sampleRate, 128);
@@ -176,6 +221,7 @@
                 await awaitVideoMetadata(video);
                 let projectJson = structuredClone(window.template);
                 let ctx = elems.canvas.getContext("2d");
+                let tilingCtx = elems.tilingCanvas.getContext("2d");
                 let fps = parseInt(elems.framerateInput.value || 30)
                 var framesToBePackaged = Math.floor(video.duration * fps);
                 var audioEpochsToBePackaged = Math.ceil(video.duration / audioInterval);
@@ -199,6 +245,7 @@
                 var audioSegmentsRight = [];
                 let aspectRatio = elems.aspectRatioControls.value || "Fit";
                 ctx.fillStyle = elems.bgColorInput.value;
+                tilingCtx.fillStyle = elems.bgColorInput.value;
 
                 async function processAudioChannel(samples, audioSegments, callbackStorageLoc) {
                     for (let i = 0; i < audioEpochsToBePackaged; i++) {
@@ -235,6 +282,9 @@
                     }
                 }
 
+                progInfo.status = "Processing images...";
+                updateProgInfo();
+
                 for (let i = 0; i < framesToBePackaged; i++) {
                     var positionInTime = i / fps;
                     await awaitVideoGotoTime(video, positionInTime);
@@ -250,22 +300,36 @@
                             ctx.drawImage(video, 0, 0, res[0], res[1]);
                             break;
                     }
-                    
 
-                    var frame = await storeCanvasInZip(elems.canvas, sb3, imageQuality, format, legalFormat);
-                    storedFrames.push(frame);
-                    costumes.push({
-                                    "name": "c"+i,
-                                    "bitmapResolution": 2,
-                                    "dataFormat": legalFormat,
-                                    "assetId": frame.string,
-                                    "md5ext": frame.fileName,
-                                    "rotationCenterX": res[0] / 2, //480
-                                    "rotationCenterY": res[1] / 2 //360
-                                });
+                    tilingCtx.drawImage(elems.canvas,
+                    (i % tiling) * res[0] / tiling,
+                    Math.floor((i % Math.pow(tiling, 2)) / tiling) * res[1] / tiling,
+                    res[0] / tiling, res[1] / tiling);
+
+                    if ((i + 1) % Math.pow(tiling, 2) === 0 || i === framesToBePackaged - 1) {
+                        var frame = await storeCanvasInZip(elems.tilingCanvas, sb3, imageQuality, format, legalFormat);
+                        storedFrames.push(frame);
+                        costumes.push({
+                            "name": "c"+ Math.floor(i / Math.pow(tiling, 2)),
+                            "bitmapResolution": 2,
+                            "dataFormat": legalFormat,
+                            "assetId": frame.string,
+                            "md5ext": frame.fileName,
+                            "rotationCenterX": res[0] / 2, //480
+                            "rotationCenterY": res[1] / 2 //360
+                        });
+                        progInfo.sheets += 1;
+                        tilingCtx.fillRect(0, 0, res[0], res[1]);
+                    }
+                    
+                    progInfo.processedFrames += 1;
                     elems.progressBar.value = (i / framesToBePackaged) * 100;
+                    updateProgInfo();
                 }
                 
+                progInfo.status = "Processing audio blocks...";
+                updateProgInfo();
+
                 await processAudioChannel(samplesLeft, audioSegmentsLeft, projectJson.targets[2].blocks);
                 if (stereoAudioEnabled) {
                     await processAudioChannel(samplesRight, audioSegmentsRight, projectJson.targets[3].blocks);
@@ -273,27 +337,35 @@
                     projectJson.targets[2].blocks[";m}v/r6-b`Og98,_Oe^X"].inputs.VALUE[1][1] = "0";
                 }
 
-                projectJson.targets[1].size = 960 / res[0] * 100;
+                projectJson.targets[1].size = (960 / res[0] * 100) * tiling;
                 projectJson.targets[1].costumes = costumes;
                 projectJson.targets[2].sounds = audioSegmentsLeft;
                 projectJson.targets[3].sounds = audioSegmentsRight;
                 projectJson.targets[1].blocks["pu7^,bJ!C{6a:S^50PdY"].inputs.VALUE[1][1] = fps;
                 projectJson.targets[1].blocks["M8Clz8tYbbJj$|3r?tXP"].inputs.VALUE[1][1] = framesToBePackaged;
+                projectJson.targets[1].blocks["tilingsetup"].inputs.VALUE[1][1] = tiling;
                 sb3.file("project.json", JSON.stringify(projectJson));
+                elems.progressBar.value = 100;
+                progInfo.status = "Complete! Press download to save the project file.";
+                updateProgInfo();
                 window.saveButtonHandler = async ()=>{
-                    const fileHandle = await window.showSaveFilePicker();
-                    const writableStream = await fileHandle.createWritable();
-                    const zipStream = sb3.generateInternalStream({ type: "uint8array" });
-                    zipStream.on("data", async function (chunk) {
-                        await writableStream.write(chunk);
-                    });
-                    zipStream.on("end", async function () {
-                        await writableStream.close();
-                    });
-                    zipStream.resume();
+                    if (window.showSaveFilePicker) {
+                        const fileHandle = await window.showSaveFilePicker();
+                        const writableStream = await fileHandle.createWritable();
+                        const zipStream = sb3.generateInternalStream({ type: "uint8array" });
+                        zipStream.on("data", async function (chunk) {
+                            await writableStream.write(chunk);
+                        });
+                        zipStream.on("end", async function () {
+                            await writableStream.close();
+                        });
+                        zipStream.resume();
+                    } else {
+                        var outFile = await sb3.generateAsync({type: "blob"});
+                        saveAs(outFile, elems.videoInput.files[0].name + ".sb3");
+                    }
                 }
-                //var outFile = await sb3.generateAsync({type: "blob"});
-                //saveAs(outFile, elems.videoInput.files[0].name + ".sb3");
+
                 URL.revokeObjectURL(elems.videoInput.files[0]);
 
                 elems.saveButton.removeAttribute("disabled");
@@ -321,6 +393,10 @@
                                                 "var_framecount": [
                                                     "FRAMECOUNT",
                                                     "%FRAMES%"
+                                                ],
+                                                "var_tiling": [
+                                                    "TILING",
+                                                    "%TILEW%"
                                                 ]
                                             },
                                             "lists": {},
@@ -388,7 +464,7 @@
                                                 },
                                                 "M8Clz8tYbbJj$|3r?tXP": {
                                                     "opcode": "data_setvariableto",
-                                                    "next": "J,h{0+lA3]QT2%X6/lez",
+                                                    "next": "tilingsetup",
                                                     "parent": "pu7^,bJ!C{6a:S^50PdY",
                                                     "inputs": {
                                                         "VALUE": [
@@ -408,10 +484,32 @@
                                                     "shadow": false,
                                                     "topLevel": false
                                                 },
+                                                "tilingsetup": {
+                                                    "opcode": "data_setvariableto",
+                                                    "next": "J,h{0+lA3]QT2%X6/lez",
+                                                    "parent": "pu7^,bJ!C{6a:S^50PdY",
+                                                    "inputs": {
+                                                        "VALUE": [
+                                                            1,
+                                                            [
+                                                                10,
+                                                                "%TILEW%"
+                                                            ]
+                                                        ]
+                                                    },
+                                                    "fields": {
+                                                        "VARIABLE": [
+                                                            "TILING",
+                                                            "var_tiling"
+                                                        ]
+                                                    },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
                                                 "J,h{0+lA3]QT2%X6/lez": {
                                                     "opcode": "motion_gotoxy",
                                                     "next": "patchfix",
-                                                    "parent": "M8Clz8tYbbJj$|3r?tXP",
+                                                    "parent": "tilingsetup",
                                                     "inputs": {
                                                         "X": [
                                                             1,
@@ -456,19 +554,23 @@
                                                     "topLevel": false
                                                 },
                                                 "|{L|BV*A{U|mTDW|(=~c": {
-                                                    "opcode": "looks_switchcostumeto",
                                                     "next": "ss]H?Lp%`$|,st.~[(y3",
                                                     "parent": "7t8L86;1!N!BZXtZvaZ@",
-                                                    "inputs": {
-                                                        "COSTUME": [
-                                                            3,
-                                                            "B;_I0lX@cge+G*iRD?u]",
-                                                            "@cXpEHY0}.1!QW=~@GpB"
-                                                        ]
-                                                    },
                                                     "fields": {},
                                                     "shadow": false,
-                                                    "topLevel": false
+                                                    "topLevel": false,
+                                                    "opcode": "procedures_call",
+                                                    "inputs": {
+                                                        "odn_ZrjCi4veutnOXs*.": [3, "tuZgNr)EB513k1]+ZBdI", [10, ""]]
+                                                    },
+                                                    "fields": {},
+                                                    "mutation": {
+                                                        "tagName": "mutation",
+                                                        "children": [],
+                                                        "proccode": "DispIdx %s",
+                                                        "argumentids": "[\"odn_ZrjCi4veutnOXs*.\"]",
+                                                        "warp": "true"
+                                                    }
                                                 },
                                                 "B;_I0lX@cge+G*iRD?u]": {
                                                     "opcode": "operator_join",
@@ -728,6 +830,334 @@
                                                     "fields": {},
                                                     "shadow": false,
                                                     "topLevel": false
+                                                },
+                                                "V?^;l@^9WFmFYt)tWnHC": {
+                                                    "opcode": "procedures_definition",
+                                                    "next": "qiaQ7[YqQ(s4-ZJvuKS;",
+                                                    "parent": null,
+                                                    "inputs": { "custom_block": [1, ",%c5Ow~FwXg9{%!q1^hi"] },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": true,
+                                                    "x": 37,
+                                                    "y": 37
+                                                },
+                                                ",%c5Ow~FwXg9{%!q1^hi": {
+                                                    "opcode": "procedures_prototype",
+                                                    "next": null,
+                                                    "parent": "V?^;l@^9WFmFYt)tWnHC",
+                                                    "inputs": { "odn_ZrjCi4veutnOXs*.": [1, "z/nTNp.?oQgsnVW8WxzG"] },
+                                                    "fields": {},
+                                                    "shadow": true,
+                                                    "topLevel": false,
+                                                    "mutation": {
+                                                        "tagName": "mutation",
+                                                        "children": [],
+                                                        "proccode": "DispIdx %s",
+                                                        "argumentids": "[\"odn_ZrjCi4veutnOXs*.\"]",
+                                                        "argumentnames": "[\"idx\"]",
+                                                        "argumentdefaults": "[\"\"]",
+                                                        "warp": "true"
+                                                    }
+                                                },
+                                                "z/nTNp.?oQgsnVW8WxzG": {
+                                                    "opcode": "argument_reporter_string_number",
+                                                    "next": null,
+                                                    "parent": ",%c5Ow~FwXg9{%!q1^hi",
+                                                    "inputs": {},
+                                                    "fields": { "VALUE": ["idx"] },
+                                                    "shadow": true,
+                                                    "topLevel": false
+                                                },
+                                                "qiaQ7[YqQ(s4-ZJvuKS;": {
+                                                    "opcode": "looks_switchcostumeto",
+                                                    "next": "#m@2,h*Fr1o-bP/JJ7/:",
+                                                    "parent": "V?^;l@^9WFmFYt)tWnHC",
+                                                    "inputs": {
+                                                        "COSTUME": [3, "x.BS!0GY2H)4BOsC^]=q", "H9RAP=MjXRhzUch,4oAH"]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "x.BS!0GY2H)4BOsC^]=q": {
+                                                    "opcode": "operator_join",
+                                                    "next": null,
+                                                    "parent": "qiaQ7[YqQ(s4-ZJvuKS;",
+                                                    "inputs": {
+                                                        "STRING1": [1, [10, "c"]],
+                                                        "STRING2": [3, "h5odaSH.c{AKuD@HHcw5", [10, "banana"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "h5odaSH.c{AKuD@HHcw5": {
+                                                    "opcode": "operator_mathop",
+                                                    "next": null,
+                                                    "parent": "x.BS!0GY2H)4BOsC^]=q",
+                                                    "inputs": { "NUM": [3, "h]P?_+KL)z#;kfJ`lr,k", [4, ""]] },
+                                                    "fields": { "OPERATOR": ["floor"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "h]P?_+KL)z#;kfJ`lr,k": {
+                                                    "opcode": "operator_divide",
+                                                    "next": null,
+                                                    "parent": "h5odaSH.c{AKuD@HHcw5",
+                                                    "inputs": {
+                                                        "NUM1": [3, "xT1XxP1yJ(Rr#a2Z}Xzr", [4, ""]],
+                                                        "NUM2": [3, "2RPJ~RC^M8I9KevzwTwu", [4, ""]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "xT1XxP1yJ(Rr#a2Z}Xzr": {
+                                                    "opcode": "argument_reporter_string_number",
+                                                    "next": null,
+                                                    "parent": "h]P?_+KL)z#;kfJ`lr,k",
+                                                    "inputs": {},
+                                                    "fields": { "VALUE": ["idx"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "2RPJ~RC^M8I9KevzwTwu": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "h]P?_+KL)z#;kfJ`lr,k",
+                                                    "inputs": {
+                                                        "NUM1": [3, [12, "TILING", "var_tiling"], [4, ""]],
+                                                        "NUM2": [3, [12, "TILING", "var_tiling"], [4, ""]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "H9RAP=MjXRhzUch,4oAH": {
+                                                    "opcode": "looks_costume",
+                                                    "next": null,
+                                                    "parent": "qiaQ7[YqQ(s4-ZJvuKS;",
+                                                    "inputs": {},
+                                                    "fields": { "COSTUME": ["c1"] },
+                                                    "shadow": true,
+                                                    "topLevel": false
+                                                },
+                                                "#m@2,h*Fr1o-bP/JJ7/:": {
+                                                    "opcode": "motion_setx",
+                                                    "next": "CyFt9]y-%jynedGQfr2z",
+                                                    "parent": "qiaQ7[YqQ(s4-ZJvuKS;",
+                                                    "inputs": { "X": [3, "*?{%EfxxU(}{6.lA6pjI", [4, "-240"]] },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "*?{%EfxxU(}{6.lA6pjI": {
+                                                    "opcode": "operator_subtract",
+                                                    "next": null,
+                                                    "parent": "#m@2,h*Fr1o-bP/JJ7/:",
+                                                    "inputs": {
+                                                        "NUM1": [3, "g}cAQ!Vy)HDYdJ^d|0fw", [4, "0"]],
+                                                        "NUM2": [3, ");vtZu?-pckIvRYu*@1(", [4, ""]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "g}cAQ!Vy)HDYdJ^d|0fw": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "*?{%EfxxU(}{6.lA6pjI",
+                                                    "inputs": {
+                                                        "NUM1": [3, "0s*/nS2aHVit}4?M1/0f", [4, ""]],
+                                                        "NUM2": [1, [4, "240"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "0s*/nS2aHVit}4?M1/0f": {
+                                                    "opcode": "operator_subtract",
+                                                    "next": null,
+                                                    "parent": "g}cAQ!Vy)HDYdJ^d|0fw",
+                                                    "inputs": {
+                                                        "NUM1": [3, [12, "TILING", "var_tiling"], [4, ""]],
+                                                        "NUM2": [1, [4, "1"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                ");vtZu?-pckIvRYu*@1(": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "*?{%EfxxU(}{6.lA6pjI",
+                                                    "inputs": {
+                                                        "NUM1": [3, "H_wsp!mLr+(!z]:8Fued", [4, ""]],
+                                                        "NUM2": [1, [4, "480"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "H_wsp!mLr+(!z]:8Fued": {
+                                                    "opcode": "operator_mathop",
+                                                    "next": null,
+                                                    "parent": ");vtZu?-pckIvRYu*@1(",
+                                                    "inputs": { "NUM": [3, "Q=`A|IWHrsp2@F2H!z;4", [4, ""]] },
+                                                    "fields": { "OPERATOR": ["floor"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "Q=`A|IWHrsp2@F2H!z;4": {
+                                                    "opcode": "operator_mod",
+                                                    "next": null,
+                                                    "parent": "H_wsp!mLr+(!z]:8Fued",
+                                                    "inputs": {
+                                                        "NUM1": [3, "OVuV8TyF~0|6J)CR{fOx", [4, "1"]],
+                                                        "NUM2": [3, [12, "TILING", "var_tiling"], [4, "2"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "OVuV8TyF~0|6J)CR{fOx": {
+                                                    "opcode": "argument_reporter_string_number",
+                                                    "next": null,
+                                                    "parent": "Q=`A|IWHrsp2@F2H!z;4",
+                                                    "inputs": {},
+                                                    "fields": { "VALUE": ["idx"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "CyFt9]y-%jynedGQfr2z": {
+                                                    "opcode": "motion_sety",
+                                                    "next": null,
+                                                    "parent": "#m@2,h*Fr1o-bP/JJ7/:",
+                                                    "inputs": { "Y": [3, "1#__Q`za[bI4o6y@S.`C", [4, "180"]] },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "1#__Q`za[bI4o6y@S.`C": {
+                                                    "opcode": "operator_subtract",
+                                                    "next": null,
+                                                    "parent": "CyFt9]y-%jynedGQfr2z",
+                                                    "inputs": {
+                                                        "NUM1": [3, "fF.y=IX)7]*7)1o(=A0f", [4, ""]],
+                                                        "NUM2": [3, "!w)`S4-aKC8y:P|]To{;", [4, "0"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "fF.y=IX)7]*7)1o(=A0f": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "1#__Q`za[bI4o6y@S.`C",
+                                                    "inputs": {
+                                                        "NUM1": [3, "dO(#~V7-|@@z!+J7G#M(", [4, ""]],
+                                                        "NUM2": [1, [4, "360"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "dO(#~V7-|@@z!+J7G#M(": {
+                                                    "opcode": "operator_mod",
+                                                    "next": null,
+                                                    "parent": "fF.y=IX)7]*7)1o(=A0f",
+                                                    "inputs": {
+                                                        "NUM1": [3, "],+vql:r4vMbjrd%9h;k", [4, "1"]],
+                                                        "NUM2": [3, [12, "TILING", "var_tiling"], [4, "4"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "],+vql:r4vMbjrd%9h;k": {
+                                                    "opcode": "operator_mathop",
+                                                    "next": null,
+                                                    "parent": "dO(#~V7-|@@z!+J7G#M(",
+                                                    "inputs": { "NUM": [3, "U3:aOXNG[}]}@i5@sGnZ", [4, ""]] },
+                                                    "fields": { "OPERATOR": ["floor"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "U3:aOXNG[}]}@i5@sGnZ": {
+                                                    "opcode": "operator_divide",
+                                                    "next": null,
+                                                    "parent": "],+vql:r4vMbjrd%9h;k",
+                                                    "inputs": {
+                                                        "NUM1": [3, "6/8d;tZ(B^raMC)IL,E+", [4, ""]],
+                                                        "NUM2": [3, [12, "TILING", "var_tiling"], [4, "2"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "6/8d;tZ(B^raMC)IL,E+": {
+                                                    "opcode": "argument_reporter_string_number",
+                                                    "next": null,
+                                                    "parent": "U3:aOXNG[}]}@i5@sGnZ",
+                                                    "inputs": {},
+                                                    "fields": { "VALUE": ["idx"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "!w)`S4-aKC8y:P|]To{;": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "1#__Q`za[bI4o6y@S.`C",
+                                                    "inputs": {
+                                                        "NUM1": [3, "ux~~KF|^|RDwCzyUr06z", [4, ""]],
+                                                        "NUM2": [1, [4, "180"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "ux~~KF|^|RDwCzyUr06z": {
+                                                    "opcode": "operator_subtract",
+                                                    "next": null,
+                                                    "parent": "!w)`S4-aKC8y:P|]To{;",
+                                                    "inputs": {
+                                                        "NUM1": [3, [12, "TILING", "var_tiling"], [4, ""]],
+                                                        "NUM2": [1, [4, "1"]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                "tuZgNr)EB513k1]+ZBdI": {
+                                                    "opcode": "operator_mathop",
+                                                    "next": null,
+                                                    "parent": "=h3_6q{a=u@(=y3t85,B",
+                                                    "inputs": { "NUM": [3, "js*YG7Q]GEzz7A`gVaK^", [4, ""]] },
+                                                    "fields": { "OPERATOR": ["floor"] },
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                    "js*YG7Q]GEzz7A`gVaK^": {
+                                                    "opcode": "operator_multiply",
+                                                    "next": null,
+                                                    "parent": "tuZgNr)EB513k1]+ZBdI",
+                                                    "inputs": {
+                                                        "NUM1": [3, "VX+yaGB(Wott2NP)~?vp", [4, ""]],
+                                                        "NUM2": [3, [12, "FRAMERATE", "var_framerate"], [4, ""]]
+                                                    },
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
+                                                },
+                                                    "VX+yaGB(Wott2NP)~?vp": {
+                                                    "opcode": "sensing_timer",
+                                                    "next": null,
+                                                    "parent": "js*YG7Q]GEzz7A`gVaK^",
+                                                    "inputs": {},
+                                                    "fields": {},
+                                                    "shadow": false,
+                                                    "topLevel": false
                                                 }
                                             },
                                             "comments": {},
@@ -847,7 +1277,7 @@
                                             "direction": 90,
                                             "draggable": false,
                                             "rotationStyle": "all around"
-                                        }
+                                        },
                                     ],
                                     "monitors": [
                                         {

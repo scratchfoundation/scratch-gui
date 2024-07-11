@@ -13,35 +13,54 @@
 <body>
     <h1>[Scratch++] .mp4 to .sb3 packager</h1>
     <p>Select video file: </p>
-    <input id="videoInput" type="file" accept="video/*"><label> &lt;- Choose a video</label><br>
-    <input id="framerate" type="number" value=12 min="1" max="60"><label> &lt;- Framerate (scratch runs at 30 fps, TurboWarp is required for greater speeds. Additionally, for large videos project files will be giant with large framerates.)</label><br>
-    <input id="audioInterval" type="number" value=30 min="1" max="240"><label> &lt;- Audio block size (s); decrease if using stereo</label><br>
-    <input id="stereoAudio" type="checkbox"><label> &lt;- Stereo Audio</label><br>
+    
+    <input id="videoInput" type="file" accept="video/*">
+    <label> &lt;- Choose a video</label><br>
+    
+    <input id="framerate" type="number" value=12 min="1" max="60">
+    <label> &lt;- Framerate (scratch runs at 30 fps, TurboWarp is required for greater speeds. Additionally, for large videos project files will be giant with large framerates.)</label><br>
+    
+    <input id="audioInterval" type="number" value=30 min="1" max="240">
+    <label> &lt;- Audio block size (s); decrease if using stereo</label><br>
+    
+    <input id="stereoAudio" type="checkbox">
+    <label> &lt;- Stereo Audio</label><br>
+    
     <select id="imageFormat">
         <option selected value="webp|jpg">disguised webp (mid quality, smallest size) [RECOMMENDED]</option>
         <option value="jpg">jpeg (low quality, small size)</option>
         <option value="png|png">png (high quality, largest size)</option>
         <option value="gif|gif">gif (low quality, large size)</option>
-    </select><label> &lt;- Image Format</label><br>
-    <input id="tiling" type="number" min="1" step="1" value="1" placeholder="1" max="16"><label> &lt;- Tiling (Inspiration from <a href="https://scratch.mit.edu/projects/627583842/">this project</a> by <a href="https://scratch.mit.edu/users/52525rr/">@52525rr</a> on Scratch)</label><br>
-    <input id="imageQuality" type="range" step="5" min="0" max=100 value=95><label> &lt;- Processed Image Quality</label><br>
+    </select>
+    <label> &lt;- Image Format</label><br>
+    
+    <input id="tiling" type="number" min="1" step="1" value="1" placeholder="1" max="16">
+    <label> &lt;- Tiling (Inspiration from <a href="https://scratch.mit.edu/projects/627583842/">this project</a> by <a href="https://scratch.mit.edu/users/52525rr/">@52525rr</a> on Scratch)</label><br>
+    
+    <input style="width: 16rem;" oninput="document.querySelector('#imageQualityLabel').innerHTML = ` &lt;- Processed Image Quality (${this.value}%)`" id="imageQuality" type="range" step="1" min="0" max=100 value=95>
+    <label id="imageQualityLabel"> &lt;- Processed Image Quality (95%)</label><br>
+
     <input id="bgColor" type="color" value="#000000"><label> &lt;- Rendered Background Color</label><br>
+
     <select id="aspectRatioControls">
         <option selected>Fit</option>
         <option>Fill</option>
         <option>Stretch</option>
-    </select><label> &lt;- Aspect Ratio Maintainence</label><br>
+    </select>
+    <label> &lt;- Aspect Ratio Maintainence</label><br>
+
     <select id="resolutionControls">
-        <option value=8>3840x2880</option>
-        <option value=6>2880x2160</option>
-        <option value=4>1920x1440</option>
-        <option value=3>1440x1080</option>
-        <option value=2>960x720</option>
+        <option value=8>3840x2880 (x8)</option>
+        <option value=6>2880x2160 (x6)</option>
+        <option value=4>1920x1440 (x4)</option>
+        <option value=3>1440x1080 (x3)</option>
+        <option value=2>960x720 (x2)</option>
         <option selected value=1>480x360</option>
-        <option value=0.5>240x180</option>
-        <option value=0.25>120x90</option>
-        <option value=0.125>60x45</option>
-    </select><label> &lt;- Resolution</label><br>
+        <option value=0.5>240x180 (÷2)</option>
+        <option value=0.25>120x90 (÷4)</option>
+        <option value=0.125>60x45 (÷8)</option>
+    </select>
+    <label> &lt;- Resolution</label><br>
 
     <canvas id="drawingCanvas" style="background-color: black; display: none;" width="480" height="360">Canvas not supported by terrible browser choice.</canvas>
     <canvas id="tilingCanvas" style="background-color: black;" width="480" height="360"></canvas>

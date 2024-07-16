@@ -5,11 +5,6 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// PostCss
-const autoprefixer = require('autoprefixer');
-const postcssVars = require('postcss-simple-vars');
-const postcssImport = require('postcss-import');
-
 const ScratchWebpackConfigBuilder = require('scratch-webpack-configuration');
 
 // const STATIC_PATH = process.env.STATIC_PATH || '/static';
@@ -40,44 +35,9 @@ const baseConfig = new ScratchWebpackConfigBuilder(
         }
     })
     .addModuleRule({
-        test: /\.css$/,
-        use: [
-            {
-                loader: 'style-loader'
-            },
-            {
-                loader: 'css-loader',
-                options: {
-                    modules: {
-                        localIdentName: '[name]_[local]_[hash:base64:5]'
-                    },
-                    importLoaders: 1,
-                    localsConvention: 'camelCase'
-                }
-            },
-            {
-                loader: 'postcss-loader',
-                options: {
-                    ident: 'postcss',
-                    plugins: function () {
-                        return [
-                            postcssImport,
-                            postcssVars,
-                            autoprefixer
-                        ];
-                    }
-                }
-            }
-        ]
-    })
-    .addModuleRule({
         test: /\.(svg|png|wav|mp3|gif|jpg)$/,
         resourceQuery: /^$/, // reject any query string
         type: 'asset' // let webpack decide on the best type of asset
-    })
-    .addModuleRule({
-        test: /\.hex$/,
-        type: 'asset/resource'
     })
     .addPlugin(new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer']
@@ -126,7 +86,18 @@ const distConfig = baseConfig.clone()
         output: {
             path: path.resolve(__dirname, 'dist')
         }
-    });
+    })
+    .addPlugin(
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'src/lib/libraries/*.json',
+                    to: 'libraries',
+                    flatten: true
+                }
+            ]
+        })
+    );
 
 // build the examples and debugging tools in `build/`
 const buildConfig = baseConfig.clone()

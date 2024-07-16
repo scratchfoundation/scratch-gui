@@ -12,7 +12,8 @@ const ScratchWebpackConfigBuilder = require('scratch-webpack-configuration');
 const baseConfig = new ScratchWebpackConfigBuilder(
     {
         rootPath: path.resolve(__dirname),
-        enableReact: true
+        enableReact: true,
+        shouldSplitChunks: true
     })
     .setTarget('browserslist')
     .merge({
@@ -30,10 +31,6 @@ const baseConfig = new ScratchWebpackConfigBuilder(
             }
         },
         optimization: {
-            splitChunks: {
-                chunks: 'all'
-            },
-            mergeDuplicateChunks: true,
             runtimeChunk: 'single'
         }
     })

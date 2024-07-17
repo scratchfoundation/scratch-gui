@@ -42,7 +42,7 @@
     "autoprefixer": "^9.0.1",
     "balance-text": "^3.3.1",
     "base64-loader": "^1.0.0",
-    "bowser": "^1.9.4",
+    "bowser": "^2.0.0",
     "cat-blocks": "npm:scratch-blocks@0.1.0-prerelease.20220318143026",
     "classnames": "^2.2.6",
     "computed-style-to-inline-style": "^3.0.0",

@@ -7,7 +7,8 @@ module.exports = {
         },
         {
             name: 'hotfix/REPLACE', // replace with actual hotfix branch name
-            channel: 'hotfix'
+            channel: 'hotfix',
+            prerelease: 'hotfix'
         },
         {
             name: 'beta',

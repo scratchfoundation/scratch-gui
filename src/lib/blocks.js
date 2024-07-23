@@ -118,7 +118,7 @@ export default function (vm, useCatBlocks) {
     const spriteMenu = function () {
         const sprites = [];
         for (const targetId in vm.runtime.targets) {
-            if (!vm.runtime.targets.hasOwnProperty(targetId)) continue;
+            if (!Object.prototype.hasOwnProperty.call(vm.runtime.targets, targetId)) continue;
             if (vm.runtime.targets[targetId].isOriginal) {
                 if (!vm.runtime.targets[targetId].isStage) {
                     if (vm.runtime.targets[targetId] === vm.editingTarget) {

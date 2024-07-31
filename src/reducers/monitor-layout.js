@@ -25,7 +25,7 @@ const _verifyRect = function (upperStart, lowerEnd) {
 };
 
 const _addMonitorRect = function (state, action) {
-    if (state.monitors.hasOwnProperty(action.monitorId)) {
+    if (Object.prototype.hasOwnProperty.call(state.monitors, action.monitorId)) {
         log.error(`Can't add monitor, monitor with id ${action.monitorId} already exists.`);
         return state;
     }
@@ -49,7 +49,7 @@ const _addMonitorRect = function (state, action) {
 };
 
 const _moveMonitorRect = function (state, action) {
-    if (!state.monitors.hasOwnProperty(action.monitorId)) {
+    if (!Object.prototype.hasOwnProperty.call(state.monitors, action.monitorId)) {
         log.error(`Can't move monitor, monitor with id ${action.monitorId} does not exist.`);
         return state;
     }
@@ -57,7 +57,7 @@ const _moveMonitorRect = function (state, action) {
         log.error(`Monitor rectangle not formatted correctly`);
         return state;
     }
-    
+
     const oldMonitor = state.monitors[action.monitorId];
     if (oldMonitor.upperStart.x === action.newX &&
             oldMonitor.upperStart.y === action.newY) {
@@ -81,7 +81,7 @@ const _moveMonitorRect = function (state, action) {
 };
 
 const _resizeMonitorRect = function (state, action) {
-    if (!state.monitors.hasOwnProperty(action.monitorId)) {
+    if (!Object.prototype.hasOwnProperty.call(state.monitors, action.monitorId)) {
         log.error(`Can't resize monitor, monitor with id ${action.monitorId} does not exist.`);
         return state;
     }
@@ -113,7 +113,7 @@ const _resizeMonitorRect = function (state, action) {
 };
 
 const _removeMonitorRect = function (state, action) {
-    if (!state.monitors.hasOwnProperty(action.monitorId)) {
+    if (!Object.prototype.hasOwnProperty.call(state.monitors, action.monitorId)) {
         log.error(`Can't remove monitor, monitor with id ${action.monitorId} does not exist.`);
         return state;
     }
@@ -160,7 +160,7 @@ const _rectsIntersect = function (rect1, rect2) {
 // We need to place a monitor with the given width and height. Return a rect defining where it should be placed.
 const getInitialPosition = function (state, monitorId, eltWidth, eltHeight) {
     // If this monitor was purposefully moved to a certain position before, put it back in that position
-    if (state.savedMonitorPositions.hasOwnProperty(monitorId)) {
+    if (Object.prototype.hasOwnProperty.call(state.savedMonitorPositions, monitorId)) {
         const saved = state.savedMonitorPositions[monitorId];
         return {
             upperStart: saved,

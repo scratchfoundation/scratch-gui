@@ -22,7 +22,7 @@ jobs:
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-            - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
+            - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4
               with:
                   cache: "npm"
                   node-version-file: ".nvmrc"
@@ -87,7 +87,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-            - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
+            - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4
               with:
                 cache: "npm"
                 node-version-file: ".nvmrc"

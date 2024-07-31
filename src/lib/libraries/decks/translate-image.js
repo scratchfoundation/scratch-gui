@@ -75,7 +75,7 @@ const translations = {
 };
 
 const loadImageData = locale => {
-    if (Object.prototype.hasOwnProperty.call(translations, locale)) {
+    if (translations.hasOwnProperty(locale)) {
         translations[locale]()
             .then(newImages => {
                 savedImages = newImages;
@@ -91,7 +91,7 @@ const loadImageData = locale => {
  * @return {string} image
  */
 const translateImage = (imageId, locale) => {
-    if (locale !== savedLocale || !Object.prototype.hasOwnProperty.call(savedImages, imageId)) {
+    if (locale !== savedLocale || !savedImages.hasOwnProperty(imageId)) {
         return defaultImages[imageId];
     }
     return savedImages[imageId];

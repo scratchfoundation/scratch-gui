@@ -36,13 +36,9 @@ describe('themes', () => {
         beforeEach(() => {
             serializeToString = jest.fn(() => 'mocked xml');
 
-            class XMLSerializer {
-                constructor () {
-                    this.serializeToString = serializeToString;
-                }
-            }
-
-            global.XMLSerializer = XMLSerializer;
+            global.XMLSerializer = () => ({
+                serializeToString
+            });
         });
 
         test('updates extension block colors based on theme', () => {

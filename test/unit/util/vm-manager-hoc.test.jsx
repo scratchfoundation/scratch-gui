@@ -1,8 +1,4 @@
-/* global WebAudioTestAPI */
 import 'web-audio-test-api';
-WebAudioTestAPI.setState({
-    'AudioContext#resume': 'enabled'
-});
 
 import React from 'react';
 import configureStore from 'redux-mock-store';

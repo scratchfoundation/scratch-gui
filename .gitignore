@@ -23,6 +23,3 @@ npm-*
 
 # Downloaded during "npm install"
 /static/microbit
-
-# for act
-.secrets

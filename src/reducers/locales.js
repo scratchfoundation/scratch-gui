@@ -51,7 +51,7 @@ const setLocales = function (localesMessages) {
     };
 };
 const initLocale = function (currentState, locale) {
-    if (Object.prototype.hasOwnProperty.call(currentState.messagesByLocale, locale)) {
+    if (currentState.messagesByLocale.hasOwnProperty(locale)) {
         return Object.assign(
             {},
             currentState,

@@ -50,7 +50,7 @@ const mapStateToProps = state => {
     if (currentTargetId) {
         if (targets.stage.id === currentTargetId) {
             asset = targets.stage.costume.asset;
-        } else if (targets.sprites.hasOwnProperty(currentTargetId)) {
+        } else if (Object.prototype.hasOwnProperty.call(targets.sprites, currentTargetId)) {
             const currentSprite = targets.sprites[currentTargetId];
             asset = currentSprite.costume.asset;
         }

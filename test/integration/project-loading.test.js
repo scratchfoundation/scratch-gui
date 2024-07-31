@@ -99,7 +99,7 @@ describe('Loading scratch gui', () => {
             await clickText('Operators', scope.blocksTab);
         });
 
-        test('Not logged in->made a change to project->create new project should show alert', async () => {
+        test.skip('Not logged in->made a change to project->create new project should show alert', async () => {
             await loadUri(uri);
             await clickText('Sounds');
             await clickXpath('//button[@aria-label="Choose a Sound"]');

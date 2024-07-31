@@ -1,0 +1,37 @@
+name: Daily Traslation Update
+on:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  schedule:
+    - cron: 0 0 * * * # daily at midnight UTC = 7-8pm US Eastern
+concurrency:
+  group: '${{ github.workflow }}'
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  daily-tx-pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+            ref: 'develop'
+      - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
+        with:
+          cache: 'npm'
+          node-version-file: '.nvmrc'
+      - name: Info
+        run: |
+          cat <<EOF
+          Node version: $(node --version)
+          NPM version: $(npm --version)
+          GitHub ref: ${{ github.ref }}
+          GitHub head ref: ${{ github.head_ref }}
+          EOF
+      - name: Setup
+        run: npm --production=false ci
+      - name: Extract translations
+        run: npm run i18n:src
+      - name: Push translations
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: npm run i18n:push

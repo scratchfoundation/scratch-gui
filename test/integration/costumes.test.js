@@ -30,10 +30,6 @@ describe('Working with costumes', () => {
     });
 
     test('Adding a costume through the library', async () => {
-        // This is needed when running the tests all at once or it just fails...
-        await driver.quit();
-        driver = getDriver();
-
         await loadUri(uri);
         await driver.sleep(500);
         await clickText('Costumes');

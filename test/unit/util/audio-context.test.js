@@ -1,4 +1,9 @@
+/* global WebAudioTestAPI */
 import 'web-audio-test-api';
+WebAudioTestAPI.setState({
+    'AudioContext#resume': 'enabled'
+});
+
 import SharedAudioContext from '../../../src/lib/audio/shared-audio-context';
 
 describe('Shared Audio Context', () => {

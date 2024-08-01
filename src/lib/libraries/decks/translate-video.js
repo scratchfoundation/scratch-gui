@@ -195,8 +195,8 @@ const videos = {
  */
 const translateVideo = (videoId, locale) => {
     // if the videoId is not recognized in the videos object, assume it's already a video id on wistia
-    if (!videos.hasOwnProperty(videoId)) return videoId;
-    if (videos[videoId].hasOwnProperty(locale)) {
+    if (!Object.prototype.hasOwnProperty.call(videos, videoId)) return videoId;
+    if (Object.prototype.hasOwnProperty.call(videos[videoId], locale)) {
         return videos[videoId][locale];
     }
     return videos[videoId].en;

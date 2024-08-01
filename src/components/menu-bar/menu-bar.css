@@ -205,7 +205,7 @@
 }
 
 .mystuff > a {
-  background-image: url("/images/mystuff.png");
+  background-image: url("./icon--mystuff.png");
 }
 
 .about-icon {

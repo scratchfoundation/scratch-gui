@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.6](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.5...v4.0.6) (2024-08-01)
+
+
+### Reverts
+
+* Revert "ci: reduce package size" ([1054259](https://github.com/scratchfoundation/scratch-gui/commit/105425909c92cb5c162be2d03434e4338ec8cfa5))
+* Revert "fix(package): don't omit src" ([d7c5f60](https://github.com/scratchfoundation/scratch-gui/commit/d7c5f60f808b5658457c9af2a3fe124d791aff9f))
+
 ## [4.0.5](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.4...v4.0.5) (2024-07-31)
 
 

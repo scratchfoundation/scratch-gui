@@ -6,8 +6,7 @@
 npm-*
 
 # Double copies of all the static assets and tutorial gifs
-# Commented out on this branch so that it can be built from source
-#/src
+/src
 
 # Testing
 /.nyc_output

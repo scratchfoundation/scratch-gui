@@ -371,6 +371,9 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+    handleClickCommunity() {  // 커뮤니티 버튼 클릭 핸들러 추가
+        window.location.href = "http://3.34.127.154/public/scratch.html";  // URL로 이동
+    }
     render () {
         const saveNowMessage = (
             <FormattedMessage
@@ -672,7 +675,7 @@ class MenuBar extends React.Component {
                                                 className={styles.menuBarButton}
                                                 /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
-                                                    this.handleClickSeeCommunity(waitForUpdate);
+                                                    this.handleClickCommunity(); // 커뮤니티 버튼 클릭 시 URL로 이동
                                                 }}
                                                 /* eslint-enable react/jsx-no-bind */
                                             />

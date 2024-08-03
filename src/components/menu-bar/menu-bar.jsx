@@ -79,11 +79,11 @@ import styles from './menu-bar.css';
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import mystuffIcon from './icon--mystuff.png';
 import profileIcon from './icon--profile.png';
-import remixIcon from './remix-icon.svg';
+import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
-import aboutIcon from './about-icon.svg';
-import fileIcon from './file-icon.svg';
-import editIcon from './edit-icon.svg';
+import aboutIcon from './icon--about.svg';
+import fileIcon from './icon--file.svg';
+import editIcon from './icon--edit.svg';
 
 import scratchLogo from './scratch-logo.svg';
 import ninetiesLogo from './nineties_logo.svg';
@@ -386,6 +386,7 @@ class MenuBar extends React.Component {
         window.location.href = "http://3.34.127.154/public/scratch.html";  // URL로 이동
     }
 
+    ```jsx
     render() {
         const saveNowMessage = (
             <FormattedMessage
@@ -410,7 +411,7 @@ class MenuBar extends React.Component {
         );
         const newProjectMessage = (
             <FormattedMessage
-                                defaultMessage="New"
+                defaultMessage="New"
                 description="Menu bar item for creating a new project"
                 id="gui.menuBar.new"
             />
@@ -659,7 +660,9 @@ class MenuBar extends React.Component {
                                                 isShared={this.props.isShared}
                                                 /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
-                                                    this.handleClickShare(waitForUpdate);
+                                                    this.handleClickShare(waitForUpdate
+
+);
                                                 }}
                                                 /* eslint-enable react/jsx-no-bind */
                                             />
@@ -685,7 +688,9 @@ class MenuBar extends React.Component {
                                             <CommunityButton
                                                 className={styles.menuBarButton}
                                                 /* eslint-disable react/jsx-no-bind */
-                                                onClick={this.handleClickCommunity}  // 클릭 핸들러 추가
+                                                onClick={() => {
+                                                    this.handleClickSeeCommunity(waitForUpdate);
+                                                }}
                                                 /* eslint-enable react/jsx-no-bind */
                                             />
                                         )
@@ -746,7 +751,7 @@ class MenuBar extends React.Component {
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable,
-                                        { [styles.active]: this.props.accountMenuOpen }
+                                        {[styles.active]: this.props.accountMenuOpen}
                                     )}
                                     isOpen={this.props.accountMenuOpen}
                                     isRtl={this.props.isRtl}
@@ -861,7 +866,7 @@ MenuBar.propTypes = {
     autoUpdateProject: PropTypes.func,
     canChangeLanguage: PropTypes.bool,
     canChangeTheme: PropTypes.bool,
-    canCreateCopy: PropTypes.bool,
+        canCreateCopy: PropTypes.bool,
     canCreateNew: PropTypes.bool,
     canEditTitle: PropTypes.bool,
     canManageFiles: PropTypes.bool,
@@ -1005,4 +1010,3 @@ export default compose(
         mapDispatchToProps
     )
 )(MenuBar);
-

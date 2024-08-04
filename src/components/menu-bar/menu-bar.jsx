@@ -378,6 +378,7 @@ class MenuBar extends React.Component {
         };
     }
     render () {
+        console.log('accountMenuOpen:', this.props.accountMenuOpen);
         const saveNowMessage = (
             <FormattedMessage
                 defaultMessage="Save now"
@@ -740,7 +741,10 @@ class MenuBar extends React.Component {
                                     isOpen={this.props.accountMenuOpen}
                                     isRtl={this.props.isRtl}
                                     menuBarMenuClassName={classNames(styles.menuBarMenu)}
-                                    onClick={this.props.onClickAccount}
+                                    onClick={() => {
+                                        console.log('AccountNav clicked');
+                                        this.props.onClickAccount();
+                                    }}
                                     onClose={this.props.onRequestCloseAccount}
                                     onLogOut={this.props.onLogOut}
                                 />
@@ -969,8 +973,14 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
-    onClickAccount: () => dispatch(openAccountMenu()),
-    onRequestCloseAccount: () => dispatch(closeAccountMenu()),
+    onClickAccount: () => {
+        console.log('openAccountMenu action dispatched');
+        dispatch(openAccountMenu());
+    },
+    onRequestCloseAccount: () => {
+        console.log('closeAccountMenu action dispatched');
+        dispatch(closeAccountMenu());
+    },
     onClickFile: () => dispatch(openFileMenu()),
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),

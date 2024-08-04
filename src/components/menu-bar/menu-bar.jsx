@@ -809,6 +809,7 @@ class MenuBar extends React.Component {
                                     <MenuBarItemTooltip
                                         id="account-nav"
                                         place={this.props.isRtl ? 'right' : 'left'}
+                                        enable={true}
                                     >
                                         <div
                                             className={classNames(

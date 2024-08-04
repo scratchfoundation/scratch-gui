@@ -148,7 +148,7 @@ const MenuItemTooltip = ({id, isRtl, children, className}) => (
     </ComingSoonTooltip>
 );
 
-handleClickCommunity = () => {
+handleClickCommunity() {
     window.location.href = "http://3.34.127.154/public/scratch.html";
 }
 

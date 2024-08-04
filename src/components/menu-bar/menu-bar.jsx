@@ -148,7 +148,7 @@ const MenuItemTooltip = ({id, isRtl, children, className}) => (
     </ComingSoonTooltip>
 );
 
-handleClickCommunity = () => {
+handleClickCommunity () {
     window.location.href = "http://3.34.127.154/public/scratch.html";
 }
 
@@ -667,22 +667,16 @@ class MenuBar extends React.Component {
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
+                   <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {
-                                        waitForUpdate => (
-                                            <CommunityButton
-                                                className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
-                                                onClick={() => {
-                                                    this.handleClickCommunity();
-                                                }}
-                                                /* eslint-enable react/jsx-no-bind */
-                                            />
-                                        )
-                                    }
+                                    {waitForUpdate => (
+                                        <CommunityButton
+                                            className={styles.menuBarButton}
+                                            onClick={this.handleClickCommunity} // 여기서 화살표 함수 대신 메서드를 직접 호출합니다.
+                                        />
+                                    )}
                                 </ProjectWatcher>
                             )
                         ) : (this.props.showComingSoon ? (

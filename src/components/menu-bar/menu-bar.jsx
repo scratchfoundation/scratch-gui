@@ -186,7 +186,8 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickCommunity' // 추가된 메서드
         ]);
     }
     componentDidMount () {

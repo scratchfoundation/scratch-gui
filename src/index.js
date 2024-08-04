@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     console.log('사용자 정보:', data.user);
                     // 사용자 정보를 리덕스 상태에 설정
-                    store.dispatch({ type: 'SET_USER', user: data.user });
+                    store.dispatch({ type: 'SET_USER_SESSION', user: data.user });
                 } else {
                     console.error('사용자 정보를 가져오지 못했습니다:', data.error);
                 }
@@ -63,4 +63,3 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 });
-

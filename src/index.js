@@ -1,11 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import Root from './containers/Root'; // Root 컴포넌트 가져오기
+
 import GUI from './containers/gui.jsx';
 import AppStateHOC from './lib/app-state-hoc.jsx';
-import GuiReducer, {guiInitialState, guiMiddleware, initEmbedded, initFullScreen, initPlayer} from './reducers/gui';
-import LocalesReducer, {localesInitialState, initLocale} from './reducers/locales';
-import {ScratchPaintReducer} from 'scratch-paint';
-import {setFullScreen, setPlayer} from './reducers/mode';
-import {remixProject} from './reducers/project-state';
-import {setAppElement} from 'react-modal';
+import GuiReducer, { guiInitialState, guiMiddleware, initEmbedded, initFullScreen, initPlayer } from './reducers/gui';
+import LocalesReducer, { localesInitialState, initLocale } from './reducers/locales';
+import { ScratchPaintReducer } from 'scratch-paint';
+import { setFullScreen, setPlayer } from './reducers/mode';
+import { remixProject } from './reducers/project-state';
+import { setAppElement } from 'react-modal';
 import VM from 'scratch-vm';
 
 // VM 인스턴스를 window 객체에 할당
@@ -41,6 +49,11 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+// 리덕스 스토어 생성
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
+// 초기 설정
 document.addEventListener('DOMContentLoaded', () => {
     const sessionId = getQueryParam('scratchSession');
     console.log('세션 ID:', sessionId);
@@ -62,4 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('사용자 정보를 가져오는 중 오류 발생:', error);
             });
     }
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <Root />
+        </Provider>,
+        document.getElementById('app')
+    );
 });

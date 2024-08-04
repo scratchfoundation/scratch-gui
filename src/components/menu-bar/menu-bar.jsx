@@ -148,10 +148,6 @@ const MenuItemTooltip = ({id, isRtl, children, className}) => (
     </ComingSoonTooltip>
 );
 
-handleClickCommunity () {
-    window.location.href = "http://3.34.127.154/public/scratch.html";
-}
-
 MenuItemTooltip.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -196,6 +192,11 @@ class MenuBar extends React.Component {
     componentWillUnmount () {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
+
+    handleClickCommunity () {
+    window.location.href = "http://3.34.127.154/public/scratch.html";
+    }
+    
     handleClickNew () {
         // if the project is dirty, and user owns the project, we will autosave.
         // but if they are not logged in and can't save, user should consider

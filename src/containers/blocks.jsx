@@ -90,6 +90,9 @@ class Blocks extends React.Component {
             "setLocale",
         ]);
         this.ScratchBlocks.dialog.setPrompt(this.handlePromptStart);
+        this.ScratchBlocks.ScratchVariables.setPromptHandler(
+            this.handlePromptStart
+        );
         this.ScratchBlocks.statusButtonCallback =
             this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;

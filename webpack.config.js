@@ -13,7 +13,7 @@ const baseConfig = new ScratchWebpackConfigBuilder(
     {
         rootPath: path.resolve(__dirname),
         enableReact: true,
-        shouldSplitChunks: true
+        shouldSplitChunks: false
     })
     .setTarget('browserslist')
     .merge({
@@ -29,9 +29,6 @@ const baseConfig = new ScratchWebpackConfigBuilder(
                 Buffer: require.resolve('buffer/'),
                 stream: require.resolve('stream-browserify')
             }
-        },
-        optimization: {
-            runtimeChunk: 'single'
         }
     })
     .addModuleRule({

@@ -151,7 +151,11 @@ class Blocks extends React.Component {
             if (
                 event.type === this.ScratchBlocks.Events.VAR_CREATE ||
                 event.type === this.ScratchBlocks.Events.VAR_RENAME ||
-                event.type === this.ScratchBlocks.Events.VAR_DELETE
+                event.type === this.ScratchBlocks.Events.VAR_DELETE ||
+                (event.type === this.ScratchBlocks.Events.BLOCK_DELETE &&
+                    event.oldJson.type === "procedures_definition") ||
+                (event.type === this.ScratchBlocks.Events.BLOCK_CREATE &&
+                    event.json.type === "procedures_definition")
             ) {
                 this.requestToolboxUpdate();
             }

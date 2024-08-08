@@ -1021,6 +1021,11 @@ const mapStateToProps = (state, ownProps) => {
     return {
         aboutMenuOpen: aboutMenuOpen(state),
         accountMenuOpen: accountMenuOpen(state),
+      accountMenuOpen: state.menus?.accountMenuOpen ?? false,
+    };
+  } catch (error) {
+    console.error('Error in mapStateToProps:', error);
+    return {
         currentLocale: state.locales.locale,
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),

@@ -382,6 +382,7 @@ class MenuBar extends React.Component {
 
     
     handleAccountClick() {             // 추가된 메서드
+        console.log('Account menu clicked');
         if (this.props.accountMenuOpen) {
             this.props.onRequestCloseAccountMenu();
         } else {

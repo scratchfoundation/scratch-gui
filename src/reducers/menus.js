@@ -1,3 +1,5 @@
+// src/reducers/menus.js
+
 const OPEN_MENU = 'scratch-gui/menus/OPEN_MENU';
 const CLOSE_MENU = 'scratch-gui/menus/CLOSE_MENU';
 
@@ -101,6 +103,7 @@ const reducer = function (state, action) {
         return state;
     }
 };
+
 const openMenu = menu => ({
     type: OPEN_MENU,
     menu: menu

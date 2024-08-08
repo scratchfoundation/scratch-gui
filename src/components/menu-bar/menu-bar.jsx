@@ -421,7 +421,14 @@ class MenuBar extends React.Component {
         this.props.onRequestCloseAccountMenu();
     }
 
-
+    AccountNav.propTypes = {     // 추가된 메서드
+    user: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        profileIcon: PropTypes.string.isRequired
+    }).isRequired,
+    isRtl: PropTypes.bool,
+    onLogOut: PropTypes.func.isRequired
+    };
 
 
 
@@ -732,46 +739,6 @@ class MenuBar extends React.Component {
                             ) : []
                         )}
                         {this.props.canRemix ? remixButton : []}
-                    </div>
-                    {/* 전두표가 추가하고 있는 작업들 */}
-                 <div className={classNames(styles.menuBarItem, styles.hoverable, {
-                        [styles.active]: this.props.accountMenuOpen
-                    })}
-                    onMouseUp={this.handleAccountClick}
-                    >
-                        <div className={styles.accountNavUserInfo}>
-                            <img
-                                className={styles.userAvatar}
-                                src={this.props.userAvatar}
-                            />
-                            <span>{this.props.username}</span>
-                            <div className={styles.dropdownCaret}>
-                                <img src={dropdownCaret} />
-                            </div>
-                        </div>
-                        {this.props.accountMenuOpen && (
-                            <MenuBarMenu
-                                className={styles.menuBarMenu}
-                                open={this.props.accountMenuOpen}
-                                place="right"
-                                onRequestClose={this.handleCloseAccountMenu}
-                            >
-                                <MenuSection>
-                                    <MenuItem onClick={this.props.onViewProfile}>
-                                        내 정보
-                                    </MenuItem>
-                                    <MenuItem onClick={this.props.onViewProjects}>
-                                        내 작업실
-                                    </MenuItem>
-                                    <MenuItem onClick={this.props.onAccountSettings}>
-                                        계정 설정
-                                    </MenuItem>
-                                    <MenuItem onClick={this.props.onLogout}>
-                                        로그아웃
-                                    </MenuItem>
-                                </MenuSection>
-                            </MenuBarMenu>
-                        )}
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
@@ -1089,6 +1056,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가
 });
 
+export default AccountNav;
 export default compose(
     injectIntl,
     MenuBarHOC,

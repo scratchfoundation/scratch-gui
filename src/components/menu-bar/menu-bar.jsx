@@ -188,43 +188,43 @@ class MenuBar extends React.Component {
             'handleCloseAccountMenu'
         ]);
     }
-    componentDidMount() {
-        // 기존 키보드 이벤트 리스너 추가
-        document.addEventListener('keydown', this.handleKeyPress);
-    
-        // 서버로부터 세션 정보 가져오기
-        const sessionId = this.getCookie('connect.sid'); // 쿠키에서 세션 ID를 가져오는 함수 필요
-        console.log('쿠키에서 가져온 세션 ID:', sessionId); // 쿠키 로그
-        if (sessionId) {
-            fetch(`/get-user-session?sessionId=${sessionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        this.setState({ user: data.user });
-                    } else {
-                        console.error('세션 조회 실패:', data.error); // 오류 로그
-                    }
-                })
-                .catch(error => console.error('Error fetching user session:', error));
-        } else {
-            console.error('Session ID not found in cookies');
-        }
+// 쿠키에서 특정 값을 가져오는 헬퍼 함수
+getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+        const cookieValue = parts.pop().split(';').shift();
+        console.log('가져온 쿠키 값:', cookieValue); // 쿠키 값 로그
+        return cookieValue;
+    } else {
+        console.log('쿠키에서 값을 찾을 수 없음:', name); // 쿠키 값 없음 로그
+        return null;
     }
-    
-    // 쿠키에서 특정 값을 가져오는 헬퍼 함수
-    getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            const cookieValue = parts.pop().split(';').shift();
-            const decodedValue = decodeURIComponent(cookieValue);
-            console.log('가져온 쿠키 값:', cookieValue); // 쿠키 값 로그
-            return cookieValue;
-        } else {
-            console.log('쿠키에서 값을 찾을 수 없음:', name); // 쿠키 값 없음 로그
-            return null;
-        }
+}
+
+componentDidMount() {
+    // 기존 키보드 이벤트 리스너 추가
+    document.addEventListener('keydown', this.handleKeyPress);
+
+    // 서버로부터 세션 정보 가져오기
+    const sessionId = this.getCookie('connect.sid'); // 쿠키에서 세션 ID를 가져오는 함수 필요
+    console.log('쿠키에서 가져온 세션 ID:', sessionId); // 쿠키 로그
+    if (sessionId) {
+        fetch(`/get-user-session?sessionId=${sessionId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.setState({ user: data.user });
+                } else {
+                    console.error('세션 조회 실패:', data.error); // 오류 로그
+                }
+            })
+            .catch(error => console.error('Error fetching user session:', error));
+    } else {
+        console.error('Session ID not found in cookies');
     }
+}
+
 
 
     componentWillUnmount () {

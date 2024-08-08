@@ -191,7 +191,7 @@ class MenuBar extends React.Component {
     componentDidMount() {
         // 기존 키보드 이벤트 리스너 추가
         document.addEventListener('keydown', this.handleKeyPress);
-    
+
         // 서버로부터 세션 정보 가져오기
         const sessionId = this.getCookie('sessionId'); // 쿠키에서 세션 ID를 가져오는 함수 필요
         if (sessionId) {
@@ -486,7 +486,7 @@ class MenuBar extends React.Component {
 
 
         
-        return (
+       return (
             <Box
                 className={classNames(
                     this.props.className,
@@ -507,15 +507,17 @@ class MenuBar extends React.Component {
                                 onClick={this.props.onClickLogo}
                             />
                         </div>
-                        {(this.props.canChangeTheme || this.props.canChangeLanguage) && (<SettingsMenu
-                            canChangeLanguage={this.props.canChangeLanguage}
-                            canChangeTheme={this.props.canChangeTheme}
-                            isRtl={this.props.isRtl}
-                            onRequestClose={this.props.onRequestCloseSettings}
-                            onRequestOpen={this.props.onClickSettings}
-                            settingsMenuOpen={this.props.settingsMenuOpen}
-                        />)}
-                        {(this.props.canManageFiles) && (
+                        {(this.props.canChangeTheme || this.props.canChangeLanguage) && (
+                            <SettingsMenu
+                                canChangeLanguage={this.props.canChangeLanguage}
+                                canChangeTheme={this.props.canChangeTheme}
+                                isRtl={this.props.isRtl}
+                                onRequestClose={this.props.onRequestCloseSettings}
+                                onRequestOpen={this.props.onClickSettings}
+                                settingsMenuOpen={this.props.settingsMenuOpen}
+                            />
+                        )}
+                        {this.props.canManageFiles && (
                             <div
                                 className={classNames(styles.menuBarItem, styles.hoverable, {
                                     [styles.active]: this.props.fileMenuOpen
@@ -565,9 +567,7 @@ class MenuBar extends React.Component {
                                         </MenuSection>
                                     )}
                                     <MenuSection>
-                                        <MenuItem
-                                            onClick={this.props.onStartSelectingFileUpload}
-                                        >
+                                        <MenuItem onClick={this.props.onStartSelectingFileUpload}>
                                             {this.props.intl.formatMessage(sharedMessages.loadFromComputerTitle)}
                                         </MenuItem>
                                         <SB3Downloader>{(className, downloadProjectCallback) => (
@@ -635,7 +635,6 @@ class MenuBar extends React.Component {
                                     )}</TurboMode>
                                 </MenuSection>
                             </MenuBarMenu>
-
                         </div>
                         {this.props.isTotallyNormal && (
                             <div
@@ -733,8 +732,8 @@ class MenuBar extends React.Component {
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
-                    // 전두표가 추가하고 있는 작업들
-                   <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
+                    {/* 전두표가 추가하고 있는 작업들 */}
+                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
@@ -752,8 +751,7 @@ class MenuBar extends React.Component {
                             </MenuBarItemTooltip>
                         ) : [])}
                     </div>
-                                <div className={styles.menuBar}>
-                {/* Other menu items */}
+                    <div className={styles.menuBar}>
                         <div className={styles.accountNavWrapper}>
                             <MenuBarItem
                                 className={styles.menuBarItem}
@@ -768,7 +766,7 @@ class MenuBar extends React.Component {
                                 />
                             ) : null}
                         </div>
-                   
+                    </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
                         <div
@@ -787,8 +785,6 @@ class MenuBar extends React.Component {
                     </div>
                 </div>
 
-                {/* show the proper UI in the account menu, given whether the user is
-                logged in, and whether a session is available to log in with */}
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
@@ -921,7 +917,6 @@ class MenuBar extends React.Component {
                         </React.Fragment>
                     )}
                 </div>
-
                 {aboutButton}
             </Box>
         );

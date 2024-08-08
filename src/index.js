@@ -5,6 +5,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import Root from './containers/Root'; // Root 컴포넌트 가져오기
+import store from './store';  // 전두표 추가
+import App from './App';   // 전두표 추가
 
 import GUI from './containers/gui.jsx';
 import AppStateHOC from './lib/app-state-hoc.jsx';
@@ -78,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ReactDOM.render(
         <Provider store={store}>
-            <Root />
+            <App />
         </Provider>,
-        document.getElementById('app')
+        document.getElementById('root')
     );
 });

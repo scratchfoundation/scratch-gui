@@ -188,9 +188,35 @@ class MenuBar extends React.Component {
             'handleCloseAccountMenu' // 추가된 메서드
         ]);
     }
-    componentDidMount () {
+    componentDidMount() {
+        // 기존 키보드 이벤트 리스너 추가
         document.addEventListener('keydown', this.handleKeyPress);
+    
+        // 서버로부터 세션 정보 가져오기
+        const sessionId = this.getCookie('sessionId'); // 쿠키에서 세션 ID를 가져오는 함수 필요
+        if (sessionId) {
+            fetch(`/get-user-session?sessionId=${sessionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.setState({ user: data.user });
+                    } else {
+                        // 세션이 없거나 로그인되지 않은 경우 처리
+                    }
+                })
+                .catch(error => console.error('Error fetching user session:', error));
+        } else {
+            console.error('Session ID not found in cookies');
+        }
     }
+    
+    // 쿠키에서 특정 값을 가져오는 헬퍼 함수
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
     componentWillUnmount () {
         document.removeEventListener('keydown', this.handleKeyPress);
     }

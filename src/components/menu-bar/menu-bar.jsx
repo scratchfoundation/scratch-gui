@@ -1076,9 +1076,9 @@ const mapDispatchToProps = dispatch => ({
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
-    onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode))
+    onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode)),
     onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()), // 전두표 추가
-    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가        
+    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가
 });
 
 export default compose(

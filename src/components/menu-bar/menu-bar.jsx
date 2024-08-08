@@ -1008,7 +1008,6 @@ MenuBar.propTypes = {
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     projectId: PropTypes.string // 추가된 부분
-    intl: intlShape //전두표 추가
 };
 
 MenuBar.defaultProps = {

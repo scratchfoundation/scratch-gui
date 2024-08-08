@@ -210,7 +210,9 @@ componentDidMount() {
     const sessionId = this.getCookie('connect.sid'); // 쿠키에서 세션 ID를 가져오는 함수 필요
     console.log('쿠키에서 가져온 세션 ID:', sessionId); // 쿠키 로그
     if (sessionId) {
-        fetch(`/get-user-session?sessionId=${sessionId}`)
+        fetch(`/get-user-session?sessionId=${sessionId}`, {
+          credentials: 'include'
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

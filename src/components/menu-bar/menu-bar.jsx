@@ -949,9 +949,11 @@ MenuBar.defaultProps = {
 const mapStateToProps = (state, ownProps) => {
     const loadingState = state.scratchGui.projectState.loadingState;
     const user = state.session && state.session.session && state.session.session.user;
+    const menusState = state.menus || {}; // state.menus가 정의되지 않은 경우를 대비한 초기화
+
     return {
         aboutMenuOpen: aboutMenuOpen(state),
-        accountMenuOpen: accountMenuOpen(state),
+        accountMenuOpen: menusState.accountMenuOpen, // 안전하게 참조
         currentLocale: state.locales.locale,
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
@@ -973,11 +975,12 @@ const mapStateToProps = (state, ownProps) => {
         mode1990: isTimeTravel1990(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state),
-        accountMenuOpen: state.menus.accountMenuOpen,
+        accountMenuOpen: menusState.accountMenuOpen, // 추가된 부분
         enableCommunity: state.scratchGui && state.scratchGui.projectState && state.scratchGui.projectState.projectId !== null,
         projectId: state.scratchGui && state.scratchGui.projectState ? state.scratchGui.projectState.projectId : null
     };
 };
+
 
 const mapDispatchToProps = dispatch => ({
     autoUpdateProject: () => dispatch(autoUpdateProject()),
@@ -1008,9 +1011,10 @@ const mapDispatchToProps = dispatch => ({
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode)),
-    onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()),
-    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())
+    onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()), // 전두표 추가
+    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가
 });
+
 
 export default compose(
     injectIntl,

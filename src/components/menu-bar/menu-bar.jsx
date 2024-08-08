@@ -219,6 +219,9 @@ class MenuBar extends React.Component {
             const cookieValue = parts.pop().split(';').shift();
             console.log('가져온 쿠키 값:', cookieValue); // 쿠키 값 로그
             return cookieValue;
+        } else {
+            console.log('쿠키에서 값을 찾을 수 없음:', name); // 쿠키 값 없음 로그
+            return null;
         }
     }
 

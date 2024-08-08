@@ -188,10 +188,11 @@ class MenuBar extends React.Component {
             'handleCloseAccountMenu'
         ]);
     }
-       componentDidMount() {
+    componentDidMount() {
         document.addEventListener('keydown', this.handleKeyPress);
     
-        const sessionId = this.getCookie('connect.sid'); // 기본 세션 쿠키 이름 사용
+        // 기본적으로 express-session의 세션 쿠키 이름은 'connect.sid'입니다.
+        const sessionId = this.getCookie('connect.sid');
         if (sessionId) {
             fetch(`/get-user-session?sessionId=${sessionId}`)
                 .then(response => response.json())
@@ -207,6 +208,7 @@ class MenuBar extends React.Component {
             console.error('Session ID not found in cookies');
         }
     }
+
     
     getCookie(name) {
         const value = `; ${document.cookie}`;

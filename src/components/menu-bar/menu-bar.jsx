@@ -1021,7 +1021,6 @@ const mapStateToProps = (state, ownProps) => {
     return {
         aboutMenuOpen: aboutMenuOpen(state),
         accountMenuOpen: accountMenuOpen(state),
-        accountMenuOpen: state.menus?.accountMenuOpen ?? false,
         currentLocale: state.locales.locale,
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
@@ -1043,9 +1042,11 @@ const mapStateToProps = (state, ownProps) => {
         mode1990: isTimeTravel1990(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state),
-        accountMenuOpen: state.menus.accountMenuOpen,
-        enableCommunity: state.scratchGui.projectState.projectId !== null, // 프로젝트가 있는 경우에만 활성화
-        projectId: state.scratchGui.projectState.projectId // 프로젝트 ID 전달
+        accountMenuOpen: state.menus?.accountMenuOpen ?? false,
+        enableCommunity: state.scratchGui && state.scratchGui.projectState && state.scratchGui.projectState.projectId !== null,
+        projectId: state.scratchGui && state.scratchGui.projectState ? state.scratchGui.projectState.projectId : null
+
+
     };
 };
 

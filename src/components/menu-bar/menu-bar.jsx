@@ -29,7 +29,6 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SettingsMenu from './settings-menu.jsx';
 
-
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
@@ -184,17 +183,15 @@ class MenuBar extends React.Component {
             'handleRestoreOption',
             'getSaveToComputerHandler',
             'restoreOptionMessage',
-            'handleClickCommunity', // 추가된 메서드
-            'handleAccountClick', // 추가된 메서드
-            'handleCloseAccountMenu' // 추가된 메서드
+            'handleClickCommunity',
+            'handleAccountClick',
+            'handleCloseAccountMenu'
         ]);
     }
     componentDidMount() {
-        // 기존 키보드 이벤트 리스너 추가
         document.addEventListener('keydown', this.handleKeyPress);
 
-        // 서버로부터 세션 정보 가져오기
-        const sessionId = this.getCookie('sessionId'); // 쿠키에서 세션 ID를 가져오는 함수 필요
+        const sessionId = this.getCookie('sessionId');
         if (sessionId) {
             fetch(`/get-user-session?sessionId=${sessionId}`)
                 .then(response => response.json())
@@ -211,7 +208,6 @@ class MenuBar extends React.Component {
         }
     }
     
-    // 쿠키에서 특정 값을 가져오는 헬퍼 함수
     getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -223,15 +219,10 @@ class MenuBar extends React.Component {
     }
 
     handleClickCommunity () {
-    window.location.href = "http://3.34.127.154/public/scratch.html";
+        window.location.href = "http://3.34.127.154/public/scratch.html";
     }
     
     handleClickNew () {
-        // if the project is dirty, and user owns the project, we will autosave.
-        // but if they are not logged in and can't save, user should consider
-        // downloading or logging in first.
-        // Note that if user is logged in and editing someone else's project,
-        // they'll lose their work.
         const readyToReplaceProject = this.props.confirmReadyToReplaceProject(
             this.props.intl.formatMessage(sharedMessages.replaceProjectWarning)
         );
@@ -255,28 +246,27 @@ class MenuBar extends React.Component {
     }
     handleClickSeeCommunity (waitForUpdate) {
         if (this.props.shouldSaveBeforeTransition()) {
-            this.props.autoUpdateProject(); // save before transitioning to project page
-            waitForUpdate(true); // queue the transition to project page
+            this.props.autoUpdateProject();
+            waitForUpdate(true);
         } else {
-            waitForUpdate(false); // immediately transition to project page
+            waitForUpdate(false);
         }
     }
     handleClickShare (waitForUpdate) {
         if (!this.props.isShared) {
-            if (this.props.canShare) { // save before transitioning to project page
+            if (this.props.canShare) {
                 this.props.onShare();
             }
-            if (this.props.canSave) { // save before transitioning to project page
+            if (this.props.canSave) {
                 this.props.autoUpdateProject();
-                waitForUpdate(true); // queue the transition to project page
+                waitForUpdate(true);
             } else {
-                waitForUpdate(false); // immediately transition to project page
+                waitForUpdate(false);
             }
         }
     }
     handleSetMode (mode) {
         return () => {
-            // Turn on/off filters for modes.
             if (mode === '1920') {
                 document.documentElement.style.filter = 'brightness(.9)contrast(.8)sepia(1.0)';
                 document.documentElement.style.height = '100%';
@@ -288,7 +278,6 @@ class MenuBar extends React.Component {
                 document.documentElement.style.height = '';
             }
 
-            // Change logo for modes
             if (mode === '1990') {
                 document.getElementById('logo_img').src = ninetiesLogo;
             } else if (mode === '2020') {
@@ -358,16 +347,11 @@ class MenuBar extends React.Component {
     }
     buildAboutMenu (onClickAbout) {
         if (!onClickAbout) {
-            // hide the button
             return null;
         }
         if (typeof onClickAbout === 'function') {
-            // make a button which calls a function
             return <AboutButton onClick={onClickAbout} />;
         }
-        // assume it's an array of objects
-        // each item must have a 'title' FormattedMessage and a 'handleClick' function
-        // generate a menu with items for each object in the array
         return (
             <div
                 className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -407,8 +391,7 @@ class MenuBar extends React.Component {
         };
     }
 
-    
-    handleAccountClick() {             // 추가된 메서드
+    handleAccountClick() {
         console.log('Account menu clicked');
         if (this.props.accountMenuOpen) {
             this.props.onRequestCloseAccountMenu();
@@ -417,22 +400,10 @@ class MenuBar extends React.Component {
         }
     }
 
-    handleCloseAccountMenu() {    // 추가된 메서드
+    handleCloseAccountMenu() {
         this.props.onRequestCloseAccountMenu();
     }
 
-    AccountNav.propTypes = {     // 추가된 메서드
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        profileIcon: PropTypes.string.isRequired
-    }).isRequired,
-    isRtl: PropTypes.bool,
-    onLogOut: PropTypes.func.isRequired
-    };
-
-
-
-    
     render () {
         console.log('accountMenuOpen:', this.props.accountMenuOpen);
         const saveNowMessage = (
@@ -476,25 +447,17 @@ class MenuBar extends React.Component {
                 {remixMessage}
             </Button>
         );
-        // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
 
         const {
-            user, // 사용자 정보를 props로 받습니다.
+            user,
             accountMenuOpen,
             onClickAccount,
             onRequestCloseAccount,
             onLogOut,
-            // other props...
         } = this.props;
 
-
-
-
-
-
-        
-       return (
+        return (
             <Box
                 className={classNames(
                     this.props.className,
@@ -721,11 +684,9 @@ class MenuBar extends React.Component {
                                             <ShareButton
                                                 className={styles.menuBarButton}
                                                 isShared={this.props.isShared}
-                                                /* eslint-disable react/jsx-no-bind */
                                                 onClick={() => {
                                                     this.handleClickShare(waitForUpdate);
                                                 }}
-                                                /* eslint-enable react/jsx-no-bind */
                                             />
                                         )
                                     }
@@ -791,11 +752,8 @@ class MenuBar extends React.Component {
                                     isOpen={this.props.accountMenuOpen}
                                     isRtl={this.props.isRtl}
                                     menuBarMenuClassName={classNames(styles.menuBarMenu)}
-                                    onClick={() => {
-                                        console.log('AccountNav clicked');
-                                        this.props.onClickAccount();
-                                    }}
-                                    onClose={this.props.onRequestCloseAccount}
+                                    onClick={this.handleAccountClick}
+                                    onClose={this.handleCloseAccountMenu}
                                     onLogOut={this.props.onLogOut}
                                     user={user} // 사용자 정보를 AccountNav로 전달
                                 />
@@ -934,11 +892,11 @@ MenuBar.propTypes = {
     modeMenuOpen: PropTypes.bool,
     modeNow: PropTypes.bool,
     onClickAbout: PropTypes.oneOfType([
-        PropTypes.func, // button mode: call this callback when the About button is clicked
-        PropTypes.arrayOf( // menu mode: list of items in the About menu
+        PropTypes.func,
+        PropTypes.arrayOf(
             PropTypes.shape({
-                title: PropTypes.string, // text for the menu item
-                onClick: PropTypes.func // call this callback when the menu item is clicked
+                title: PropTypes.string,
+                onClick: PropTypes.func
             })
         )
     ]),
@@ -964,7 +922,7 @@ MenuBar.propTypes = {
     onRequestCloseLogin: PropTypes.func,
     onRequestCloseMode: PropTypes.func,
     onRequestCloseSettings: PropTypes.func,
-    onRequestOpenAccountMenu: PropTypes.func,   // 전두표 추가          
+    onRequestOpenAccountMenu: PropTypes.func,
     onRequestOpenAbout: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onSetTimeTravelMode: PropTypes.func,
@@ -980,7 +938,7 @@ MenuBar.propTypes = {
     username: PropTypes.string,
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
-    projectId: PropTypes.string // 추가된 부분
+    projectId: PropTypes.string
 };
 
 MenuBar.defaultProps = {
@@ -1015,11 +973,9 @@ const mapStateToProps = (state, ownProps) => {
         mode1990: isTimeTravel1990(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state),
-        accountMenuOpen: state.menus?.accountMenuOpen ?? false,
+        accountMenuOpen: state.menus.accountMenuOpen,
         enableCommunity: state.scratchGui && state.scratchGui.projectState && state.scratchGui.projectState.projectId !== null,
         projectId: state.scratchGui && state.scratchGui.projectState ? state.scratchGui.projectState.projectId : null
-
-
     };
 };
 
@@ -1052,11 +1008,10 @@ const mapDispatchToProps = dispatch => ({
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode)),
-    onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()), // 전두표 추가
-    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가
+    onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()),
+    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())
 });
 
-export default AccountNav;
 export default compose(
     injectIntl,
     MenuBarHOC,

@@ -981,7 +981,6 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-
 const mapDispatchToProps = dispatch => ({
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),

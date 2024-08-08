@@ -194,6 +194,7 @@ getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) {
         const cookieValue = parts.pop().split(';').shift();
+        const decodedValue = decodeURIComponent(cookieValue);
         console.log('가져온 쿠키 값:', cookieValue); // 쿠키 값 로그
         return cookieValue;
     } else {
@@ -201,6 +202,7 @@ getCookie(name) {
         return null;
     }
 }
+
 
 componentDidMount() {
     // 기존 키보드 이벤트 리스너 추가

@@ -183,7 +183,9 @@ class MenuBar extends React.Component {
             'handleRestoreOption',
             'getSaveToComputerHandler',
             'restoreOptionMessage',
-            'handleClickCommunity' // 추가된 메서드
+            'handleClickCommunity', // 추가된 메서드
+            'handleAccountClick', // 추가된 메서드
+            'handleCloseAccountMenu' // 추가된 메서드
         ]);
     }
     componentDidMount () {
@@ -377,6 +379,25 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+
+    
+    handleAccountClick() {             // 추가된 메서드
+        if (this.props.accountMenuOpen) {
+            this.props.onRequestCloseAccountMenu();
+        } else {
+            this.props.onRequestOpenAccountMenu();
+        }
+    }
+
+    handleCloseAccountMenu() {    // 추가된 메서드
+        this.props.onRequestCloseAccountMenu();
+    }
+
+
+
+
+
+    
     render () {
         console.log('accountMenuOpen:', this.props.accountMenuOpen);
         const saveNowMessage = (
@@ -685,6 +706,7 @@ class MenuBar extends React.Component {
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
+                    // 전두표가 추가하고 있는 작업들
                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
                         {this.props.enableCommunity ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
@@ -703,7 +725,23 @@ class MenuBar extends React.Component {
                             </MenuBarItemTooltip>
                         ) : [])}
                     </div>
-
+                                <div className={styles.menuBar}>
+                {/* Other menu items */}
+                        <div className={styles.accountNavWrapper}>
+                            <MenuBarItem
+                                className={styles.menuBarItem}
+                                onClick={this.handleAccountClick}
+                            >
+                                Account
+                            </MenuBarItem>
+                            {this.props.accountMenuOpen ? (
+                                <AccountNav
+                                    className={styles.accountNav}
+                                    onRequestClose={this.handleCloseAccountMenu}
+                                />
+                            ) : null}
+                        </div>
+                   
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
                         <div
@@ -931,6 +969,7 @@ MenuBar.propTypes = {
     onRequestCloseLogin: PropTypes.func,
     onRequestCloseMode: PropTypes.func,
     onRequestCloseSettings: PropTypes.func,
+    onRequestOpenAccountMenu: PropTypes.func,   // 전두표 추가          
     onRequestOpenAbout: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onSetTimeTravelMode: PropTypes.func,
@@ -947,6 +986,7 @@ MenuBar.propTypes = {
     userOwnsProject: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired,
     projectId: PropTypes.string // 추가된 부분
+    intl: intlShape //전두표 추가
 };
 
 MenuBar.defaultProps = {
@@ -981,6 +1021,7 @@ const mapStateToProps = (state, ownProps) => {
         mode1990: isTimeTravel1990(state),
         mode2020: isTimeTravel2020(state),
         modeNow: isTimeTravelNow(state), 
+        accountMenuOpen: state.menus.accountMenuOpen
         enableCommunity: state.scratchGui.projectState.projectId !== null, // 프로젝트가 있는 경우에만 활성화
         projectId: state.scratchGui.projectState.projectId // 프로젝트 ID 전달
 
@@ -1016,6 +1057,8 @@ const mapDispatchToProps = dispatch => ({
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
     onSeeCommunity: () => dispatch(setPlayer(true)),
     onSetTimeTravelMode: mode => dispatch(setTimeTravel(mode))
+    onRequestCloseAccountMenu: () => dispatch(closeAccountMenu()), // 전두표 추가
+    onRequestOpenAccountMenu: () => dispatch(openAccountMenu())    // 전두표 추가        
 });
 
 export default compose(

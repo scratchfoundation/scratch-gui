@@ -188,10 +188,10 @@ class MenuBar extends React.Component {
             'handleCloseAccountMenu'
         ]);
     }
-    componentDidMount() {
+       componentDidMount() {
         document.addEventListener('keydown', this.handleKeyPress);
-
-        const sessionId = this.getCookie('sessionId');
+    
+        const sessionId = this.getCookie('connect.sid'); // 기본 세션 쿠키 이름 사용
         if (sessionId) {
             fetch(`/get-user-session?sessionId=${sessionId}`)
                 .then(response => response.json())
@@ -199,7 +199,7 @@ class MenuBar extends React.Component {
                     if (data.success) {
                         this.setState({ user: data.user });
                     } else {
-                        // 세션이 없거나 로그인되지 않은 경우 처리
+                        console.error('Failed to fetch user session');
                     }
                 })
                 .catch(error => console.error('Error fetching user session:', error));
@@ -212,6 +212,7 @@ class MenuBar extends React.Component {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
+        return null; // 쿠키가 없을 경우 null 반환
     }
 
     componentWillUnmount () {

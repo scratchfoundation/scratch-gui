@@ -422,6 +422,22 @@ class MenuBar extends React.Component {
         );
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
+
+        const {
+            user, // 사용자 정보를 props로 받습니다.
+            accountMenuOpen,
+            onClickAccount,
+            onRequestCloseAccount,
+            onLogOut,
+            // other props...
+        } = this.props;
+
+
+
+
+
+
+        
         return (
             <Box
                 className={classNames(
@@ -747,6 +763,7 @@ class MenuBar extends React.Component {
                                     }}
                                     onClose={this.props.onRequestCloseAccount}
                                     onLogOut={this.props.onLogOut}
+                                    user={user} // 사용자 정보를 AccountNav로 전달
                                 />
                             </React.Fragment>
                         ) : (

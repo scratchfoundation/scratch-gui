@@ -1041,11 +1041,10 @@ const mapStateToProps = (state, ownProps) => {
         mode1920: isTimeTravel1920(state),
         mode1990: isTimeTravel1990(state),
         mode2020: isTimeTravel2020(state),
-        modeNow: isTimeTravelNow(state), 
-        accountMenuOpen: state.menus.accountMenuOpen
+        modeNow: isTimeTravelNow(state),
+        accountMenuOpen: state.menus.accountMenuOpen,
         enableCommunity: state.scratchGui.projectState.projectId !== null, // 프로젝트가 있는 경우에만 활성화
         projectId: state.scratchGui.projectState.projectId // 프로젝트 ID 전달
-
     };
 };
 

@@ -734,39 +734,44 @@ class MenuBar extends React.Component {
                         {this.props.canRemix ? remixButton : []}
                     </div>
                     {/* 전두표가 추가하고 있는 작업들 */}
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ? (
-                            (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {waitForUpdate => (
-                                        <CommunityButton
-                                            className={styles.menuBarButton}
-                                            onClick={this.handleClickCommunity} // 여기서 화살표 함수 대신 메서드를 직접 호출합니다.
-                                        />
-                                    )}
-                                </ProjectWatcher>
-                            )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : [])}
-                    </div>
-                    <div className={styles.menuBar}>
-                        <div className={styles.accountNavWrapper}>
-                            <MenuBarItem
-                                className={styles.menuBarItem}
-                                onClick={this.handleAccountClick}
-                            >
-                                Account
-                            </MenuBarItem>
-                            {this.props.accountMenuOpen ? (
-                                <AccountNav
-                                    className={styles.accountNav}
-                                    onRequestClose={this.handleCloseAccountMenu}
-                                />
-                            ) : null}
+                 <div className={classNames(styles.menuBarItem, styles.hoverable, {
+                        [styles.active]: this.props.accountMenuOpen
+                    })}
+                    onMouseUp={this.handleAccountClick}
+                    >
+                        <div className={styles.accountNavUserInfo}>
+                            <img
+                                className={styles.userAvatar}
+                                src={this.props.userAvatar}
+                            />
+                            <span>{this.props.username}</span>
+                            <div className={styles.dropdownCaret}>
+                                <img src={dropdownCaret} />
+                            </div>
                         </div>
+                        {this.props.accountMenuOpen && (
+                            <MenuBarMenu
+                                className={styles.menuBarMenu}
+                                open={this.props.accountMenuOpen}
+                                place="right"
+                                onRequestClose={this.handleCloseAccountMenu}
+                            >
+                                <MenuSection>
+                                    <MenuItem onClick={this.props.onViewProfile}>
+                                        내 정보
+                                    </MenuItem>
+                                    <MenuItem onClick={this.props.onViewProjects}>
+                                        내 작업실
+                                    </MenuItem>
+                                    <MenuItem onClick={this.props.onAccountSettings}>
+                                        계정 설정
+                                    </MenuItem>
+                                    <MenuItem onClick={this.props.onLogout}>
+                                        로그아웃
+                                    </MenuItem>
+                                </MenuSection>
+                            </MenuBarMenu>
+                        )}
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>

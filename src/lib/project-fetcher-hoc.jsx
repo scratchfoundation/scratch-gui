@@ -72,21 +72,50 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             }
         }
         fetchProject (projectId, loadingState) {
-            return storage
-                .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
-                .then(projectAsset => {
-                    if (projectAsset) {
-                        this.props.onFetchedProjectData(projectAsset.data, loadingState);
-                    } else {
-                        // Treat failure to load as an error
-                        // Throw to be caught by catch later on
-                        throw new Error('Could not find project');
-                    }
-                })
-                .catch(err => {
-                    this.props.onError(err);
-                    log.error(err);
-                });
+            const urlHash = window.location.hash;
+
+            // Check if the URL hash contains an external project URL
+            if (urlHash.startsWith('#http')) {
+                const projectUrl = urlHash.substring(1); // Remove the '#' from the start
+                fetch(projectUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to load project from ${projectUrl}`);
+                        }
+                        return response.arrayBuffer();
+                    })
+                    .then(arrayBuffer => {
+                        this.props.onFetchedProjectData(arrayBuffer, loadingState);
+                        this.props.vm.loadProject(arrayBuffer)
+                            .then(() => {
+                                console.log(`Project loaded from ${projectUrl}`);
+                            })
+                            .catch(error => {
+                                console.error(`Error loading project from ${projectUrl}:`, error);
+                            });
+                    })
+                    .catch(error => {
+                        this.props.onError(error);
+                        log.error(`Failed to fetch project from ${projectUrl}: ${error}`);
+                    });
+            } else {
+                // Default project loading behavior
+                storage
+                    .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+                    .then(projectAsset => {
+                        if (projectAsset) {
+                            this.props.onFetchedProjectData(projectAsset.data, loadingState);
+                        } else {
+                            // Treat failure to load as an error
+                            // Throw to be caught by catch later on
+                            throw new Error('Could not find project');
+                        }
+                    })
+                    .catch(err => {
+                        this.props.onError(err);
+                        log.error(err);
+                    });
+            }
         }
         render () {
             const {

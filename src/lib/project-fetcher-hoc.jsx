@@ -73,10 +73,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
         fetchProject (projectId, loadingState) {
             const urlHash = window.location.hash;
-
-            // Check if the URL hash contains an external project URL
+            console.log('URL Hash:', urlHash); // 추가된 로그
+        
             if (urlHash.startsWith('#http')) {
-                const projectUrl = urlHash.substring(1); // Remove the '#' from the start
+                const projectUrl = urlHash.substring(1); 
+                console.log('Loading project from URL:', projectUrl); // 추가된 로그
                 fetch(projectUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -85,6 +86,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         return response.arrayBuffer();
                     })
                     .then(arrayBuffer => {
+                        console.log('Project arrayBuffer loaded'); // 추가된 로그
                         this.props.onFetchedProjectData(arrayBuffer, loadingState);
                         this.props.vm.loadProject(arrayBuffer)
                             .then(() => {

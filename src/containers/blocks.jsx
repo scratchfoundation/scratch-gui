@@ -119,10 +119,6 @@ class Blocks extends React.Component {
             this.props.onActivateCustomProcedures;
         this.ScratchBlocks.ScratchMsgs.setLocale(this.props.locale);
 
-        const theme = this.ScratchBlocks.Theme.defineTheme("Scratch", {
-            base: this.ScratchBlocks.Themes.Zelos,
-            startHats: true,
-        });
         const workspaceConfig = defaultsDeep(
             {},
             Blocks.defaultOptions,
@@ -131,8 +127,6 @@ class Blocks extends React.Component {
                 rtl: this.props.isRtl,
                 toolbox: this.props.toolboxXML,
                 colours: getColorsForTheme(this.props.theme),
-                renderer: "zelos",
-                theme: theme,
             }
         );
         this.workspace = this.ScratchBlocks.inject(

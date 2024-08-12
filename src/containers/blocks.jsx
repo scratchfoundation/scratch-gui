@@ -148,8 +148,12 @@ class Blocks extends React.Component {
                 event.type === this.ScratchBlocks.Events.VAR_DELETE ||
                 (event.type === this.ScratchBlocks.Events.BLOCK_DELETE &&
                     event.oldJson.type === "procedures_definition") ||
+                // Only refresh the toolbox when procedure block creations are
+                // triggered by undoing a deletion (implied by recordUndo being
+                // false on the event).
                 (event.type === this.ScratchBlocks.Events.BLOCK_CREATE &&
-                    event.json.type === "procedures_definition")
+                    event.json.type === "procedures_definition" &&
+                    !event.recordUndo)
             ) {
                 this.requestToolboxUpdate();
             }

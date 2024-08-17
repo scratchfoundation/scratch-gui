@@ -185,7 +185,9 @@ class MenuBar extends React.Component {
             'restoreOptionMessage',
             'handleClickCommunity',
             'handleAccountClick',
-            'handleCloseAccountMenu'
+            'handleCloseAccountMenu',
+            'getCookie', // 추가된 메서드
+            'componentDidMount' // 추가된 메서드
         ]);
     }
 // 쿠키에서 특정 값을 가져오는 헬퍼 함수
@@ -195,7 +197,7 @@ getCookie(name) {
     if (parts.length === 2) {
         const cookieValue = parts.pop().split(';').shift();
         const decodedValue = decodeURIComponent(cookieValue);
-        console.log('가져온 쿠키 값:', decodedValue); // 수정된 부분: 디코딩된 값 로그
+        console.log('가져온 쿠키 값:', decodedValue); // 디코딩된 값을 로그로 출력
         return decodedValue;
     } else {
         console.log('쿠키에서 값을 찾을 수 없음:', name);
@@ -221,6 +223,7 @@ componentDidMount() {
         console.error('Session ID not found in cookies');
     }
 }
+
 
 
 

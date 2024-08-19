@@ -59,9 +59,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             this.fetchSessionData(); // 새로 추가
         }
 
-        fetchSessionData() {
+             fetchSessionData() {
             fetch('/get-user-session', {
-                credentials: 'include'
+                credentials: 'include',
+                headers: {
+                    'Authorization': `Bearer ${document.cookie.split('token=')[1].split(';')[0]}`
+                }
             })
             .then(res => res.json())
             .then(sessionData => {

@@ -60,7 +60,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
 
         fetchSessionData() {
-            fetch('http://localhost:3000/get-user-session', {
+            fetch('/get-user-session', {
                 credentials: 'include'
             })
             .then(res => res.json())

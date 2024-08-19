@@ -170,7 +170,12 @@ AboutButton.propTypes = {
 
 class MenuBar extends React.Component {
     constructor (props) {
-        super(props);
+        super(props);        
+        this.state = {
+            username: null,
+            loading: true,
+            error: null
+        };
         bindAll(this, [
             'handleClickNew',
             'handleClickRemix',
@@ -198,27 +203,40 @@ class MenuBar extends React.Component {
     }
 
  componentDidMount() {
-        document.addEventListener('keydown', this.handleKeyPress);
-        
-        const sessionId = this.getCookie('connect.sid');
-        console.log('쿠키에서 가져온 세션 ID:', sessionId);
-        if (sessionId) {
-            fetch(`/get-user-session?sessionId=${sessionId}`, {
-                credentials: 'include'  // 쿠키를 포함하여 요청
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        this.setState({ user: data.user });
-                    } else {
-                        console.error('세션 조회 실패:', data.error);
-                    }
-                })
-                .catch(error => console.error('Error fetching user session:', error));
-        } else {
-            console.error('Session ID not found in cookies');
-        }
+        this.fetchUserSession();
     }
+        fetchUserSession() {
+        fetch('/get-user-session', {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.username) {
+                this.setState({username: data.username, loading: false});
+            } else {
+                this.setState({username: "로그인 정보 미확인", loading: false});
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching session data:', error);
+            this.setState({username: "로그인 정보 미확인", loading: false, error});
+        });
+    }
+
+    render() {
+        const {username, loading} = this.state;
+
+        return (
+            <div className="menu-bar">
+                <div className="menu-bar_account-nav-menu_3uu9p">
+                    <img className="menu-bar_profile-icon_2bJkI" src="static/assets/7808d3b49fdf33cb82e053f00a27ba33.png" />
+                    <span>{loading ? '로딩 중...' : username}</span>
+                    <img className="menu-bar_dropdown-caret-icon_FkdUe" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iOHB4IiBoZWlnaHQ9IjVweCIgdmlld0JveD0iMCAwIDggNSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNDguMiAoNDczMjcpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPmRyb3Bkb3duLWNhcmV0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImRyb3Bkb3duLWNhcmV0IiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHBhdGggZD0iTTQsNSBDMy43MjUyMDcwOCw1IDMuNDUxNjMwMDYsNC44OTY5NTA0NSAzLjI0MTI3OTczLDQuNjg5NjUzMTEgTDAuMzE0NjEzNTcyLDEuODA2NjYyMjcgQy0wLjEwNDg3MTE5MSwxLjM5MzI2NTgzIC0wLjEwNDg3MTE5MSwwLjcyNDY0MjAyMyAwLjMxNDYxMzU3MiwwLjMxMDA0NzMzMSBDMC43MzI4ODI0MzgsLTAuMTAzMzQ5MTEgNy4yNjcxMTc1NiwtMC4xMDMzNDkxMSA3LjY4NTM4NjQzLDAuMzEwMDQ3MzMxIEM4LjEwNDg3MTE5LDAuNzIzNDQzNzcyIDguMTA0ODcxMTksMS4zOTMyNjU4MyA3LjY4NTM4NjQzLDEuODA2NjYyMjcgTDQuNzU5OTM2MTcsNC42ODk2NTMxMSBDNC41NDk1ODU4Myw0Ljg5Njk1MDQ1IDQuMjc2MDA4ODIsNSA0LDUiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="/>
+                </div>
+            </div>
+        );
+    }
+}
 
 
 

@@ -191,38 +191,34 @@ class MenuBar extends React.Component {
         ]);
     }
 // 쿠키에서 특정 값을 가져오는 헬퍼 함수
-getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-        const cookieValue = parts.pop().split(';').shift();
-        const decodedValue = decodeURIComponent(cookieValue);
-        console.log('가져온 쿠키 값:', decodedValue); // 디코딩된 값을 로그로 출력
-        return decodedValue;
-    } else {
-        console.log('쿠키에서 값을 찾을 수 없음:', name);
-        return null;
+ getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
-}
 
-componentDidMount() {
-    const sessionId = this.getCookie('connect.sid');
-    console.log('쿠키에서 가져온 세션 ID:', sessionId);
-    if (sessionId) {
-        fetch(`/get-user-session?sessionId=${sessionId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    this.setState({ user: data.user });
-                } else {
-                    console.error('세션 조회 실패:', data.error);
-                }
+ componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyPress);
+        
+        const sessionId = this.getCookie('connect.sid');
+        console.log('쿠키에서 가져온 세션 ID:', sessionId);
+        if (sessionId) {
+            fetch(`/get-user-session?sessionId=${sessionId}`, {
+                credentials: 'include'  // 쿠키를 포함하여 요청
             })
-            .catch(error => console.error('Error fetching user session:', error));
-    } else {
-        console.error('Session ID not found in cookies');
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.setState({ user: data.user });
+                    } else {
+                        console.error('세션 조회 실패:', data.error);
+                    }
+                })
+                .catch(error => console.error('Error fetching user session:', error));
+        } else {
+            console.error('Session ID not found in cookies');
+        }
     }
-}
 
 
 
@@ -733,7 +729,7 @@ componentDidMount() {
                     </div>
                 </div>
 
-                <div className={styles.accountInfoGroup}>
+            <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
@@ -761,15 +757,15 @@ componentDidMount() {
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable,
-                                        {[styles.active]: this.props.accountMenuOpen}
+                                        {[styles.active]: this.state.accountMenuOpen}
                                     )}
-                                    isOpen={this.props.accountMenuOpen}
+                                    isOpen={this.state.accountMenuOpen}
                                     isRtl={this.props.isRtl}
                                     menuBarMenuClassName={classNames(styles.menuBarMenu)}
                                     onClick={this.handleAccountClick}
                                     onClose={this.handleCloseAccountMenu}
                                     onLogOut={this.props.onLogOut}
-                                    user={user} // 사용자 정보를 AccountNav로 전달
+                                    user={{username: this.props.username}}
                                 />
                             </React.Fragment>
                         ) : (
@@ -805,10 +801,10 @@ componentDidMount() {
                                     />
                                     <LoginDropdown
                                         className={classNames(styles.menuBarMenu)}
-                                        isOpen={this.props.loginMenuOpen}
+                                        isOpen={this.state.loginMenuOpen}
                                         isRtl={this.props.isRtl}
                                         renderLogin={this.props.renderLogin}
-                                        onClose={this.props.onRequestCloseLogin}
+                                        onClose={() => this.setState({loginMenuOpen: false})}
                                     />
                                 </div>
                             </React.Fragment>

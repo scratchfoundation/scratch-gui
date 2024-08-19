@@ -20,6 +20,8 @@ import {
     BLOCKS_TAB_INDEX
 } from '../reducers/editor-tab';
 
+import { setSessionData } from '../reducers/session'; // 새로 추가
+
 import log from './log';
 import storage from './storage';
 
@@ -33,7 +35,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
-                'fetchProject'
+                'fetchProject',
+                 'fetchSessionData' // 새로 추가
             ]);
             storage.setProjectHost(props.projectHost);
             storage.setProjectToken(props.projectToken);
@@ -51,6 +54,22 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 this.props.setProjectId(props.projectId.toString());
             }
         }
+
+        componentDidMount() {
+            this.fetchSessionData(); // 새로 추가
+        }
+
+        fetchSessionData() {
+            fetch('http://localhost:3000/get-user-session', {
+                credentials: 'include'
+            })
+            .then(res => res.json())
+            .then(sessionData => {
+                this.props.onSetSessionData(sessionData);
+            })
+            .catch(err => console.error('Failed to fetch session data:', err));
+        }
+        
         componentDidUpdate (prevProps) {
             if (prevProps.projectHost !== this.props.projectHost) {
                 storage.setProjectHost(this.props.projectHost);
@@ -159,6 +178,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
         onProjectUnchanged: PropTypes.func,
+        onSetSessionData: PropTypes.func, // 새로 추가
         projectHost: PropTypes.string,
         projectToken: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -183,6 +203,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
+        onSetSessionData: sessionData => dispatch(setSessionData(sessionData)), // 새로 추가
         setProjectId: projectId => dispatch(setProjectId(projectId)),
         onProjectUnchanged: () => dispatch(setProjectUnchanged())
     });

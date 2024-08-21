@@ -154,7 +154,7 @@ jobs:
               with:
                 path:
                     ./build
-                key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+                key: ${{ runner.os }}-build-${{ github.sha }}
             - run: |
                 for F in chrome chromium chromedriver; do
                     which $F && $F --version || echo Not found: $F
@@ -210,7 +210,7 @@ jobs:
               with:
                 path:
                     ./build
-                key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+                key: ${{ runner.os }}-build-${{ github.sha }}
             - name: Deploy playground to GitHub Pages
               uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
               with:

@@ -823,7 +823,8 @@ Blocks.propTypes = {
 Blocks.defaultOptions = {
     zoom: {
         controls: true,
-        wheel: false,
+        wheel: true,
+        pinch: true,
         startScale: BLOCKS_DEFAULT_SCALE,
     },
     move: {

@@ -242,7 +242,7 @@ class MenuBar extends React.Component {
 
 
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         document.removeEventListener('keydown', this.handleKeyPress);
     }
 

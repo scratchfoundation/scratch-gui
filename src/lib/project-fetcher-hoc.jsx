@@ -27,13 +27,6 @@ import storage from './storage';
 
 import jwt_decode from 'jwt-decode'; // JWT 디코딩을 위한 라이브러리
 
-
-class ProjectFetcherComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.fetchSessionData = this.fetchSessionData.bind(this);
-  }
-
   componentDidMount() {
     this.fetchSessionData();
   }
@@ -69,10 +62,18 @@ class ProjectFetcherComponent extends React.Component {
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
+
+class ProjectFetcherComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetchSessionData = this.fetchSessionData.bind(this);
+  }
+    
 const ProjectFetcherHOC = function (WrappedComponent) {
-    class ProjectFetcherComponent extends React.Component {
-        constructor (props) {
-            super(props);
+  class ProjectFetcherComponent extends React.Component {
+    constructor (props) {
+      super(props);
+      this.fetchSessionData = this.fetchSessionData.bind(this);
             bindAll(this, [
                 'fetchProject',
                  'fetchSessionData' // 새로 추가
@@ -253,11 +254,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
         {}, stateProps, dispatchProps, ownProps
     );
-    return injectIntl(connect(
-        mapStateToProps,
-        mapDispatchToProps,
-        mergeProps
-    )(ProjectFetcherComponent));
+  return injectIntl(connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ProjectFetcherComponent));
 };
 
 export {

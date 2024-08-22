@@ -25,6 +25,45 @@ import { setSessionData } from '../reducers/session'; // 새로 추가
 import log from './log';
 import storage from './storage';
 
+import jwt_decode from 'jwt-decode'; // JWT 디코딩을 위한 라이브러리
+
+
+class ProjectFetcherComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetchSessionData = this.fetchSessionData.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchSessionData();
+  }
+
+  fetchSessionData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (token) {
+      try {
+        const decodedToken = jwt_decode(token);
+        this.props.onSetSessionData(decodedToken);
+      } catch (error) {
+        console.error('Failed to decode token:', error);
+      }
+    } else {
+      fetch('/get-user-session', {
+        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${document.cookie.split('token=')[1].split(';')[0]}`
+        }
+      })
+      .then(res => res.json())
+      .then(sessionData => {
+        this.props.onSetSessionData(sessionData);
+      })
+      .catch(err => console.error('Failed to fetch session data:', err));
+    }
+  }
+
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
  * @param {React.Component} WrappedComponent component to receive projectData prop

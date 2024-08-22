@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
@@ -20,72 +21,23 @@ import {
     BLOCKS_TAB_INDEX
 } from '../reducers/editor-tab';
 
-import { setSessionData } from '../reducers/session'; // 새로 추가
+import { setSessionData } from '../reducers/session';
 
 import log from './log';
 import storage from './storage';
 
-import jwt_decode from 'jwt-decode'; // JWT 디코딩을 위한 라이브러리
-
-  componentDidMount() {
-    this.fetchSessionData();
-  }
-
-  fetchSessionData() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-
-    if (token) {
-      try {
-        const decodedToken = jwt_decode(token);
-        this.props.onSetSessionData(decodedToken);
-      } catch (error) {
-        console.error('Failed to decode token:', error);
-      }
-    } else {
-      fetch('/get-user-session', {
-        credentials: 'include',
-        headers: {
-          'Authorization': `Bearer ${document.cookie.split('token=')[1].split(';')[0]}`
-        }
-      })
-      .then(res => res.json())
-      .then(sessionData => {
-        this.props.onSetSessionData(sessionData);
-      })
-      .catch(err => console.error('Failed to fetch session data:', err));
-    }
-  }
-
-/* Higher Order Component to provide behavior for loading projects by id. If
- * there's no id, the default project is loaded.
- * @param {React.Component} WrappedComponent component to receive projectData prop
- * @returns {React.Component} component with project loading behavior
- */
-
-class ProjectFetcherComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.fetchSessionData = this.fetchSessionData.bind(this);
-  }
-    
 const ProjectFetcherHOC = function (WrappedComponent) {
-  class ProjectFetcherComponent extends React.Component {
-    constructor (props) {
-      super(props);
-      this.fetchSessionData = this.fetchSessionData.bind(this);
+    class ProjectFetcherComponent extends React.Component {
+        constructor (props) {
+            super(props);
             bindAll(this, [
                 'fetchProject',
-                 'fetchSessionData' // 새로 추가
+                'fetchSessionData'
             ]);
             storage.setProjectHost(props.projectHost);
             storage.setProjectToken(props.projectToken);
             storage.setAssetHost(props.assetHost);
             storage.setTranslatorFunction(props.intl.formatMessage);
-            // props.projectId might be unset, in which case we use our default;
-            // or it may be set by an even higher HOC, and passed to us.
-            // Either way, we now know what the initial projectId should be, so
-            // set it in the redux store.
             if (
                 props.projectId !== '' &&
                 props.projectId !== null &&
@@ -96,24 +48,36 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
 
         componentDidMount() {
-            this.fetchSessionData(); // 새로 추가
+            this.fetchSessionData();
         }
 
-             fetchSessionData() {
-            fetch('/get-user-session', {
-                credentials: 'include',
-                headers: {
-                    'Authorization': `Bearer ${document.cookie.split('token=')[1].split(';')[0]}`
+        fetchSessionData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+
+            if (token) {
+                try {
+                    const decodedToken = jwt_decode(token);
+                    this.props.onSetSessionData(decodedToken);
+                } catch (error) {
+                    console.error('Failed to decode token:', error);
                 }
-            })
-            .then(res => res.json())
-            .then(sessionData => {
-                this.props.onSetSessionData(sessionData);
-            })
-            .catch(err => console.error('Failed to fetch session data:', err));
+            } else {
+                fetch('/get-user-session', {
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${document.cookie.split('token=')[1].split(';')[0]}`
+                    }
+                })
+                .then(res => res.json())
+                .then(sessionData => {
+                    this.props.onSetSessionData(sessionData);
+                })
+                .catch(err => console.error('Failed to fetch session data:', err));
+            }
         }
-        
-        componentDidUpdate (prevProps) {
+
+        componentDidUpdate(prevProps) {
             if (prevProps.projectHost !== this.props.projectHost) {
                 storage.setProjectHost(this.props.projectHost);
             }
@@ -133,13 +97,14 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 this.props.onActivateTab(BLOCKS_TAB_INDEX);
             }
         }
-        fetchProject (projectId, loadingState) {
+
+        fetchProject(projectId, loadingState) {
             const urlHash = window.location.hash;
-            console.log('URL Hash:', urlHash); // 추가된 로그
+            console.log('URL Hash:', urlHash);
         
             if (urlHash.startsWith('#http')) {
                 const projectUrl = urlHash.substring(1); 
-                console.log('Loading project from URL:', projectUrl); // 추가된 로그
+                console.log('Loading project from URL:', projectUrl);
                 fetch(projectUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -148,7 +113,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         return response.arrayBuffer();
                     })
                     .then(arrayBuffer => {
-                        console.log('Project arrayBuffer loaded'); // 추가된 로그
+                        console.log('Project arrayBuffer loaded');
                         this.props.onFetchedProjectData(arrayBuffer, loadingState);
                         this.props.vm.loadProject(arrayBuffer)
                             .then(() => {
@@ -163,15 +128,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         log.error(`Failed to fetch project from ${projectUrl}: ${error}`);
                     });
             } else {
-                // Default project loading behavior
                 storage
                     .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                     .then(projectAsset => {
                         if (projectAsset) {
                             this.props.onFetchedProjectData(projectAsset.data, loadingState);
                         } else {
-                            // Treat failure to load as an error
-                            // Throw to be caught by catch later on
                             throw new Error('Could not find project');
                         }
                     })
@@ -181,7 +143,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     });
             }
         }
-        render () {
+
+        render() {
             const {
                 /* eslint-disable no-unused-vars */
                 assetHost,
@@ -208,6 +171,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             );
         }
     }
+
     ProjectFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
         canSave: PropTypes.bool,
@@ -221,13 +185,17 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         onError: PropTypes.func,
         onFetchedProjectData: PropTypes.func,
         onProjectUnchanged: PropTypes.func,
-        onSetSessionData: PropTypes.func, // 새로 추가
+        onSetSessionData: PropTypes.func,
         projectHost: PropTypes.string,
         projectToken: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        setProjectId: PropTypes.func
+        setProjectId: PropTypes.func,
+        vm: PropTypes.shape({
+            loadProject: PropTypes.func
+        })
     };
+
     ProjectFetcherComponent.defaultProps = {
         assetHost: 'https://assets.scratch.mit.edu',
         projectHost: 'https://projects.scratch.mit.edu'
@@ -241,25 +209,21 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         loadingState: state.scratchGui.projectState.loadingState,
         reduxProjectId: state.scratchGui.projectState.projectId
     });
+
     const mapDispatchToProps = dispatch => ({
         onActivateTab: tab => dispatch(activateTab(tab)),
         onError: error => dispatch(projectError(error)),
         onFetchedProjectData: (projectData, loadingState) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
-        onSetSessionData: sessionData => dispatch(setSessionData(sessionData)), // 새로 추가
+        onSetSessionData: sessionData => dispatch(setSessionData(sessionData)),
         setProjectId: projectId => dispatch(setProjectId(projectId)),
         onProjectUnchanged: () => dispatch(setProjectUnchanged())
     });
-    // Allow incoming props to override redux-provided props. Used to mock in tests.
-    const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
-        {}, stateProps, dispatchProps, ownProps
-    );
-  return injectIntl(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ProjectFetcherComponent));
+
+    return injectIntl(connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(ProjectFetcherComponent));
 };
 
-export {
-    ProjectFetcherHOC as default
-};
+export default ProjectFetcherHOC;

@@ -116,6 +116,7 @@
     "@commitlint/config-conventional": "17.8.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "8.3.0",
+    "babel-plugin-react-intl": "^x.x.x"  
     "chromedriver": "117.0.3",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.7",

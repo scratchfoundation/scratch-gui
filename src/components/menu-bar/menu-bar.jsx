@@ -242,9 +242,9 @@ class MenuBar extends React.Component {
 
 
 
-componentWillUnmount () {
-    document.removeEventListener('keydown', this.handleKeyPress); // 이 라인 끝에 세미콜론 추가
-}
+    componentWillUnmount () {
+        document.removeEventListener('keydown', this.handleKeyPress);
+    }
 
     handleClickCommunity () {
         window.location.href = "http://3.34.127.154/public/scratch.html";

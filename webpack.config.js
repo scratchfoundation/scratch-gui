@@ -13,7 +13,6 @@ const postcssVars = require('postcss-simple-vars');
 const postcssImport = require('postcss-import');
 
 const STATIC_PATH = process.env.STATIC_PATH || '/static';
-
 const base = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devtool: 'cheap-module-source-map',
@@ -28,6 +27,7 @@ const base = {
         chunkFilename: 'chunks/[name].js'
     },
     resolve: {
+        extensions: ['.js', '.jsx', '.json'],
         symlinks: false
     },
     module: {
@@ -38,7 +38,8 @@ const base = {
                 path.resolve(__dirname, 'src'),
                 /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
                 /node_modules[\\/]pify/,
-                /node_modules[\\/]@vernier[\\/]godirect/
+                /node_modules[\\/]@vernier[\\/]godirect/,
+                /node_modules[\\/]jwt-decode/ // jwt-decode를 위해 추가
             ],
             options: {
                 // Explicitly disable babelrc so we don't catch various config
@@ -50,7 +51,8 @@ const base = {
                     '@babel/plugin-proposal-object-rest-spread',
                     ['react-intl', {
                         messagesDir: './translations/messages/'
-                    }]],
+                    }]
+                ],
                 presets: ['@babel/preset-env', '@babel/preset-react']
             }
         },

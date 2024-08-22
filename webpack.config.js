@@ -133,9 +133,10 @@ module.exports = [
             'player': './src/playground/player.jsx'
         },
         output: {
-            path: path.resolve(__dirname, 'build'),
-            filename: '[name].js'
-        },
+	    path: path.resolve(__dirname, 'dist'),
+	    filename: '[name].js'
+	},
+
         module: {
             rules: base.module.rules.concat([
                 {

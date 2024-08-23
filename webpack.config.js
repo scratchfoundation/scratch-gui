@@ -5,7 +5,7 @@ const webpack = require('webpack');
 // Plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 // PostCss
 const autoprefixer = require('autoprefixer');
@@ -72,15 +72,14 @@ const base = {
                 loader: 'postcss-loader',
                 options: {
                     ident: 'postcss',
-                    plugins: function () {
-                        return [
+                    plugins: [
                             postcssImport,
                             postcssVars,
                             autoprefixer
-                        ];
+                        ]
                     }
                 }
-            }]
+            ]
         },
         {
             test: /\.hex$/,
@@ -94,7 +93,7 @@ const base = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 include: /\.min\.js$/
             })
         ]

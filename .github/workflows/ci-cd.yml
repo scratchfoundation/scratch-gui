@@ -1,8 +1,10 @@
 name: CI/CD
 
 on:
-    workflow_dispatch:
-    push:
+    pull_request: # Runs whenever a pull request is created or updated (including from another fork)
+    push: # Runs whenever a commit is pushed to the repository...
+        branches: [master, develop, hotfix/*] # ...on any of these branches
+    workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 concurrency:
     group: "${{ github.workflow }} @ ${{ github.head_ref || github.ref }}"
     cancel-in-progress: true

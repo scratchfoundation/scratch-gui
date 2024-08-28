@@ -45,11 +45,6 @@ jobs:
                   JEST_JUNIT_OUTPUT_NAME: unit-results.xml
                   JEST_JUNIT_OUTPUT_DIR: test-results/unit
               run: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov --maxWorkers="2"
-            - name: Store Unit Test Results
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
-              with:
-                name: unit-test-output
-                path: ./test-results/*
             - name: Run Build
               env:
                 NODE_OPTIONS: --max-old-space-size=4000
@@ -74,11 +69,12 @@ jobs:
                   JEST_JUNIT_OUTPUT_NAME: results.txt
                   JEST_JUNIT_OUTPUT_DIR: test-results/integration
               run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
-            - name: Store Integration Test Results
+            - name: Store Test Results
+              if: always() # Even if tests fail
               uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
               with:
-                name: integration-test-output
-                path: ./test-results/*
+                name: test-output
+                path: ./test-results/* # Both unit and integration test results
             - run: |
                 if [[ ${{contains(github.ref, 'hotfix')}}  ]]; then
                 sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js

@@ -119,7 +119,7 @@
     "cheerio": "1.0.0-rc.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.8",
-    "eslint": "8.57.0",
+    "eslint": "9.2.0",
     "eslint-config-scratch": "9.0.8",
     "eslint-import-resolver-webpack": "0.11.1",
     "eslint-plugin-import": "2.29.1",

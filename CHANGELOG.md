@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.19](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.18...v4.0.19) (2024-09-07)
+
+
+### Bug Fixes
+
+* update scratch-{vm,webpack-configuration} to fix music extension ([0741369](https://github.com/scratchfoundation/scratch-gui/commit/07413690bc334c670512cac33a6a74da9c94c38f))
+
 ## [4.0.18](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.17...v4.0.18) (2024-09-05)
 
 

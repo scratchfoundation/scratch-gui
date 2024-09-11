@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.22](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.21...v4.0.22) (2024-09-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency scratch-semantic-release-config to v1.0.16 ([11a0a8e](https://github.com/scratchfoundation/scratch-gui/commit/11a0a8ec76dbf3f57f0685ce6e9f9662f5743bff))
+
 ## [4.0.21](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.20...v4.0.21) (2024-09-10)
 
 

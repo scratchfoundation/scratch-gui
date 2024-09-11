@@ -1,105 +1,105 @@
+// This object is passed directly to Blockly, hence the colour* fields need to
+// be named exactly as they are, including the UK spelling of "colour".
 const blockColors = {
     motion: {
-        primary: '#4C97FF',
-        secondary: '#4280D7',
-        tertiary: '#3373CC',
-        quaternary: '#3373CC'
+        colourPrimary: "#4C97FF",
+        colourSecondary: "#4280D7",
+        colourTertiary: "#3373CC",
+        colourQuaternary: "#3373CC",
     },
     looks: {
-        primary: '#9966FF',
-        secondary: '#855CD6',
-        tertiary: '#774DCB',
-        quaternary: '#774DCB'
+        colourPrimary: "#9966FF",
+        colourSecondary: "#855CD6",
+        colourTertiary: "#774DCB",
+        colourQuaternary: "#774DCB",
     },
     sounds: {
-        primary: '#CF63CF',
-        secondary: '#C94FC9',
-        tertiary: '#BD42BD',
-        quaternary: '#BD42BD'
+        colourPrimary: "#CF63CF",
+        colourSecondary: "#C94FC9",
+        colourTertiary: "#BD42BD",
+        colourQuaternary: "#BD42BD",
     },
     control: {
-        primary: '#FFAB19',
-        secondary: '#EC9C13',
-        tertiary: '#CF8B17',
-        quaternary: '#CF8B17'
+        colourPrimary: "#FFAB19",
+        colourSecondary: "#EC9C13",
+        colourTertiary: "#CF8B17",
+        colourQuaternary: "#CF8B17",
     },
     event: {
-        primary: '#FFBF00',
-        secondary: '#E6AC00',
-        tertiary: '#CC9900',
-        quaternary: '#CC9900'
+        colourPrimary: "#FFBF00",
+        colourSecondary: "#E6AC00",
+        colourTertiary: "#CC9900",
+        colourQuaternary: "#CC9900",
     },
     sensing: {
-        primary: '#5CB1D6',
-        secondary: '#47A8D1',
-        tertiary: '#2E8EB8',
-        quaternary: '#2E8EB8'
+        colourPrimary: "#5CB1D6",
+        colourSecondary: "#47A8D1",
+        colourTertiary: "#2E8EB8",
+        colourQuaternary: "#2E8EB8",
     },
     pen: {
-        primary: '#0fBD8C',
-        secondary: '#0DA57A',
-        tertiary: '#0B8E69',
-        quaternary: '#0B8E69'
+        colourPrimary: "#0fBD8C",
+        colourSecondary: "#0DA57A",
+        colourTertiary: "#0B8E69",
+        colourQuaternary: "#0B8E69",
     },
     operators: {
-        primary: '#59C059',
-        secondary: '#46B946',
-        tertiary: '#389438',
-        quaternary: '#389438'
+        colourPrimary: "#59C059",
+        colourSecondary: "#46B946",
+        colourTertiary: "#389438",
+        colourQuaternary: "#389438",
     },
     data: {
-        primary: '#FF8C1A',
-        secondary: '#FF8000',
-        tertiary: '#DB6E00',
-        quaternary: '#DB6E00'
+        colourPrimary: "#FF8C1A",
+        colourSecondary: "#FF8000",
+        colourTertiary: "#DB6E00",
+        colourQuaternary: "#DB6E00",
     },
     // This is not a new category, but rather for differentiation
     // between lists and scalar variables.
     data_lists: {
-        primary: '#FF661A',
-        secondary: '#FF5500',
-        tertiary: '#E64D00',
-        quaternary: '#E64D00'
+        colourPrimary: "#FF661A",
+        colourSecondary: "#FF5500",
+        colourTertiary: "#E64D00",
+        colourQuaternary: "#E64D00",
     },
     more: {
-        primary: '#FF6680',
-        secondary: '#FF4D6A',
-        tertiary: '#FF3355',
-        quaternary: '#FF3355'
+        colourPrimary: "#FF6680",
+        colourSecondary: "#FF4D6A",
+        colourTertiary: "#FF3355",
+        colourQuaternary: "#FF3355",
     },
-    text: '#FFFFFF',
-    workspace: '#F9F9F9',
-    toolboxHover: '#4C97FF',
-    toolboxSelected: '#E9EEF2',
-    toolboxText: '#575E75',
-    toolbox: '#FFFFFF',
-    flyout: '#F9F9F9',
-    scrollbar: '#CECDCE',
-    scrollbarHover: '#CECDCE',
-    textField: '#FFFFFF',
-    textFieldText: '#575E75',
-    insertionMarker: '#000000',
+    text: "#FFFFFF",
+    workspace: "#F9F9F9",
+    toolboxHover: "#4C97FF",
+    toolboxSelected: "#E9EEF2",
+    toolboxText: "#575E75",
+    toolbox: "#FFFFFF",
+    flyout: "#F9F9F9",
+    scrollbar: "#CECDCE",
+    scrollbarHover: "#CECDCE",
+    textField: "#FFFFFF",
+    textFieldText: "#575E75",
+    insertionMarker: "#000000",
     insertionMarkerOpacity: 0.2,
     dragShadowOpacity: 0.6,
-    stackGlow: '#FFF200',
+    stackGlow: "#FFF200",
     stackGlowSize: 4,
     stackGlowOpacity: 1,
-    replacementGlow: '#FFFFFF',
+    replacementGlow: "#FFFFFF",
     replacementGlowSize: 2,
     replacementGlowOpacity: 1,
-    colourPickerStroke: '#FFFFFF',
+    colourPickerStroke: "#FFFFFF",
     // CSS colours: support RGBA
-    fieldShadow: 'rgba(255, 255, 255, 0.3)',
-    dropDownShadow: 'rgba(0, 0, 0, .3)',
-    numPadBackground: '#547AB2',
-    numPadBorder: '#435F91',
-    numPadActiveBackground: '#435F91',
-    numPadText: 'white', // Do not use hex here, it cannot be inlined with data-uri SVG
-    valueReportBackground: '#FFFFFF',
-    valueReportBorder: '#AAAAAA',
-    menuHover: 'rgba(0, 0, 0, 0.2)'
+    fieldShadow: "rgba(255, 255, 255, 0.3)",
+    dropDownShadow: "rgba(0, 0, 0, .3)",
+    numPadBackground: "#547AB2",
+    numPadBorder: "#435F91",
+    numPadActiveBackground: "#435F91",
+    numPadText: "white", // Do not use hex here, it cannot be inlined with data-uri SVG
+    valueReportBackground: "#FFFFFF",
+    valueReportBorder: "#AAAAAA",
+    menuHover: "rgba(0, 0, 0, 0.2)",
 };
 
-export {
-    blockColors
-};
+export { blockColors };

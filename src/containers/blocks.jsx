@@ -23,8 +23,9 @@ import DragConstants from "../lib/drag-constants";
 import defineDynamicBlock from "../lib/define-dynamic-block";
 import { DEFAULT_THEME, getColorsForTheme, themeMap } from "../lib/themes";
 import {
-    injectExtensionBlockTheme,
+    injectExtensionBlockIcons,
     injectExtensionCategoryTheme,
+    getExtensionColors,
 } from "../lib/themes/blockHelpers";
 
 import { connect } from "react-redux";
@@ -126,7 +127,10 @@ class Blocks extends React.Component {
             {
                 rtl: this.props.isRtl,
                 toolbox: this.props.toolboxXML,
-                colours: getColorsForTheme(this.props.theme),
+                theme: new this.ScratchBlocks.Theme(
+                    this.props.theme,
+                    getColorsForTheme(this.props.theme)
+                ),
             }
         );
         this.workspace = this.ScratchBlocks.inject(
@@ -580,7 +584,7 @@ class Blocks extends React.Component {
                         dynamicBlocksInfo.push(blockInfo);
                     } else if (blockInfo.json) {
                         staticBlocksJson.push(
-                            injectExtensionBlockTheme(
+                            injectExtensionBlockIcons(
                                 blockInfo.json,
                                 this.props.theme
                             )
@@ -617,7 +621,39 @@ class Blocks extends React.Component {
         );
         defineBlocks(categoryInfo.menus);
         defineBlocks(categoryInfo.blocks);
-
+        // Note that Blockly uses the UK spelling of "colour", so fields that
+        // interact directly with Blockly follow that convention, while Scratch
+        // code uses the US spelling of "color".
+        let colourPrimary = categoryInfo.color1;
+        let colourSecondary = categoryInfo.color2;
+        let colourTertiary = categoryInfo.color3;
+        let colourQuaternary = categoryInfo.color3;
+        if (this.props.theme !== DEFAULT_THEME) {
+            const colors = getExtensionColors(this.props.theme);
+            colourPrimary = colors.colourPrimary;
+            colourSecondary = colors.colourSecondary;
+            colourTertiary = colors.colourTertiary;
+            colourQuaternary = colors.colourQuaternary;
+        }
+        this.ScratchBlocks.getMainWorkspace()
+            .getTheme()
+            .setBlockStyle(categoryInfo.id, {
+                colourPrimary,
+                colourSecondary,
+                colourTertiary,
+                colourQuaternary,
+            });
+        this.ScratchBlocks.getMainWorkspace()
+            .getTheme()
+            .setBlockStyle(`${categoryInfo.id}_selected`, {
+                colourPrimary: colourQuaternary,
+                colourSecondary: colourQuaternary,
+                colourTertiary: colourQuaternary,
+                colourQuaternary: colourQuaternary,
+            });
+        this.ScratchBlocks.getMainWorkspace().setTheme(
+            this.ScratchBlocks.getMainWorkspace().getTheme()
+        );
         // Update the toolbox with new blocks if possible
         const toolboxXML = this.getToolboxXML();
         if (toolboxXML) {
@@ -734,6 +770,7 @@ class Blocks extends React.Component {
             updateMetrics: updateMetricsProp,
             useCatBlocks,
             workspaceMetrics,
+            theme,
             ...props
         } = this.props;
         /* eslint-enable no-unused-vars */
@@ -776,6 +813,7 @@ class Blocks extends React.Component {
                             media: options.media,
                         }}
                         onRequestClose={this.handleCustomProceduresClose}
+                        theme={theme}
                     />
                 ) : null}
             </React.Fragment>

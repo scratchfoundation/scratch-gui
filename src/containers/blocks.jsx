@@ -238,16 +238,6 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
-        // Only rerender the toolbox when the blocks are visible and the xml is
-        // different from the previously rendered toolbox xml.
-        // Do not check against prevProps.toolboxXML because that may not have been rendered.
-        if (
-            this.props.isVisible &&
-            this.props.toolboxXML !== this._renderedToolboxXML
-        ) {
-            this.requestToolboxUpdate();
-        }
-
         if (this.props.isVisible === prevProps.isVisible) {
             if (this.props.stageSize !== prevProps.stageSize) {
                 // force workspace to redraw for the new stage size
@@ -269,7 +259,6 @@ class Blocks extends React.Component {
                 this.setLocale();
             } else {
                 this.props.vm.refreshWorkspace();
-                this.requestToolboxUpdate();
             }
 
             window.dispatchEvent(new Event("resize"));
@@ -298,7 +287,6 @@ class Blocks extends React.Component {
             .then(() => {
                 this.workspace.getFlyout().setRecyclingEnabled(false);
                 this.props.vm.refreshWorkspace();
-                this.requestToolboxUpdate();
                 this.withToolboxUpdates(() => {
                     this.workspace.getFlyout().setRecyclingEnabled(true);
                 });
@@ -744,7 +732,6 @@ class Blocks extends React.Component {
             )
             .then(() => {
                 this.props.vm.refreshWorkspace();
-                this.updateToolbox(); // To show new variables/custom blocks
             });
     }
     render() {

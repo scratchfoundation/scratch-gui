@@ -238,6 +238,16 @@ class Blocks extends React.Component {
             this.ScratchBlocks.hideChaff();
         }
 
+        // Only rerender the toolbox when the blocks are visible and the xml is
+        // different from the previously rendered toolbox xml.
+        // Do not check against prevProps.toolboxXML because that may not have been rendered.
+        if (
+            this.props.isVisible &&
+            this.props.toolboxXML !== this._renderedToolboxXML
+        ) {
+            this.requestToolboxUpdate();
+        }
+
         if (this.props.isVisible === prevProps.isVisible) {
             if (this.props.stageSize !== prevProps.stageSize) {
                 // force workspace to redraw for the new stage size

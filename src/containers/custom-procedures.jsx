@@ -193,6 +193,7 @@ CustomProcedures.defaultOptions = {
     comments: false,
     collapse: false,
     scrollbars: true,
+    modalInputs: false,
 };
 
 CustomProcedures.defaultProps = {

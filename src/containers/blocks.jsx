@@ -145,7 +145,8 @@ class Blocks extends React.Component {
             "PROCEDURE",
             this.ScratchBlocks.ScratchProcedures.getProceduresCategory
         );
-        this.workspace.addChangeListener((event) => {
+
+        this.toolboxUpdateChangeListener = (event) => {
             if (
                 event.type === this.ScratchBlocks.Events.VAR_CREATE ||
                 event.type === this.ScratchBlocks.Events.VAR_RENAME ||
@@ -161,7 +162,8 @@ class Blocks extends React.Component {
             ) {
                 this.requestToolboxUpdate();
             }
-        });
+        };
+        this.workspace.addChangeListener(this.toolboxUpdateChangeListener);
 
         // Register buttons under new callback keys for creating variables,
         // lists, and procedures from extensions.
@@ -515,6 +517,7 @@ class Blocks extends React.Component {
 
         // Remove and reattach the workspace listener (but allow flyout events)
         this.workspace.removeChangeListener(this.props.vm.blockListener);
+        this.workspace.removeChangeListener(this.toolboxUpdateChangeListener);
         const dom = this.ScratchBlocks.utils.xml.textToDom(data.xml);
         try {
             this.ScratchBlocks.Xml.clearWorkspaceAndLoadFromXml(
@@ -556,6 +559,15 @@ class Blocks extends React.Component {
         // fresh workspace and we don't want any changes made to another sprites
         // workspace to be 'undone' here.
         this.workspace.clearUndo();
+        // Let events get flushed before readding the toolbox-updater listener
+        // to avoid unneeded refreshes.
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                this.workspace.addChangeListener(
+                    this.toolboxUpdateChangeListener
+                );
+            });
+        });
     }
     handleMonitorsUpdate(monitors) {
         // Update the checkboxes of the relevant monitors.

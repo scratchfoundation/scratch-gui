@@ -60,10 +60,10 @@
 }
 
 .button-row button {
-    border: 1px solid $motion-primary;
+    border: 1px solid $looks-secondary;
     border-radius: 0.25rem;
     padding: 0.5rem 2rem;
-    background: $motion-primary;
+    background: $looks-secondary;
     color: white;
     font-weight: bold;
     font-size: 0.875rem;
@@ -77,6 +77,6 @@
 }
 
 .faq-link {
-    color: $motion-primary;
+    color: $looks-secondary;
     text-decoration: none;
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="208" height="159" viewBox="0,0,208,159">
+  <here is some nonsense that will make this costume not valid svg>
+  <g transform="translate(-149.51562,-117.5)">
+    <g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill-rule="nonzero" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal">
+      <path d="M150.51563,275.5v-157h206v157z" fill="#66c1ff"/>
+      <path d="M231.51563,173.5c0,11.04569 -9.62588,20 -21.5,20c-11.87412,0 -21.5,-8.95431 -21.5,-20c0,-11.04569 9.62588,-20 21.5,-20c11.87412,0 21.5,8.95431 21.5,20z" fill="#ffffff"/>
+      <path d="M325.51563,179.5c0,8.83656 -11.6406,16 -26,16c-14.3594,0 -26,-7.16344 -26,-16c0,-8.83656 11.6406,-16 26,-16c14.3594,0 26,7.16344 26,16z" fill="#ffffff"/>
+      <path d="M211.51563,185.5c0,3.31371 -3.35786,6 -7.5,6c-4.14214,0 -7.5,-2.68629 -7.5,-6c0,-3.31371 3.35786,-6 7.5,-6c4.14214,0 7.5,2.68629 7.5,6z" fill="#000000"/>
+      <path d="M295.51563,187c0,3.58985 -3.13401,6.5 -7,6.5c-3.86599,0 -7,-2.91015 -7,-6.5c0,-3.58985 3.13401,-6.5 7,-6.5c3.86599,0 7,2.91015 7,6.5z" fill="#000000"/>
+      <path d="M250.51563,245c0,6.35127 -4.70101,11.5 -10.5,11.5c-5.79899,0 -10.5,-5.14873 -10.5,-11.5c0,-6.35127 4.70101,-11.5 10.5,-11.5c5.79899,0 10.5,5.14873 10.5,11.5z" fill="#000000"/>
+    </g>
+  </g>
+</svg>

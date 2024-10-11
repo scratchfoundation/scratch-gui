@@ -79,9 +79,24 @@ $border-radius: 0.25rem;
     border: 1px solid $ui-black-transparent;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: 0.2s;
     user-select: none;
     margin: 0px;
+    position: relative;
+}
+
+.button:active {
+    background: $looks-transparent;
+}
+
+.button:focus::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid $looks-secondary;
+    z-index: 1;
 }
 
 .button > img {
@@ -95,7 +110,7 @@ $border-radius: 0.25rem;
     height: 3rem;
     width: 3rem;
     outline: none;
-    background: $motion-primary;
+    background: $looks-secondary;
     border-radius: 100%;
     border: 4px solid $ui-white-dim;
     cursor: pointer;
@@ -191,33 +206,27 @@ $border-radius: 0.25rem;
     border-radius: 0;
 }
 
-[dir="ltr"] .button-group .button {
-    border-left: none;
-}
-[dir="rtl"] .button-group .button {
+.button:not(:last-child) {
     border-right: none;
 }
 
-[dir="ltr"] .button-group .button:last-of-type {
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-}
-
-[dir="ltr"] .button-group .button:first-of-type {
-    border-left: 1px solid $ui-black-transparent;
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
-}
-
-[dir="rtl"] .button-group .button:last-of-type {
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
-}
-
-[dir="rtl"] .button-group .button:first-of-type {
+[dir="rtl"] .button:not(:last-child) {
+    border-left: none;
     border-right: 1px solid $ui-black-transparent;
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+}
+
+.button-group .button:first-child,
+[dir="rtl"] .button-group .button:last-child,
+.button-group .button:first-child:focus::before,
+[dir="rtl"] .button-group .button:last-child:focus::before {
+    border-radius: $form-radius 0 0 $form-radius;
+}
+
+.button-group .button:last-child,
+[dir="rtl"] .button-group .button:first-child,
+.button-group .button:last-child:focus::before,
+[dir="rtl"] .button-group .button:first-child:focus::before {
+    border-radius: 0 $form-radius $form-radius 0;
 }
 
 .button:disabled > img {

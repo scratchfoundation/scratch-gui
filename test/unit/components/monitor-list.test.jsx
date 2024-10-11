@@ -1,15 +1,22 @@
 import React from 'react';
-import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
-import MonitorList from '../../../src/components/monitor-list/monitor-list.jsx';
 import {OrderedMap} from 'immutable';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
+import {mountWithIntl} from '../../helpers/intl-helpers.jsx';
+import MonitorList from '../../../src/components/monitor-list/monitor-list.jsx';
+import {DEFAULT_THEME} from '../../../src/lib/themes';
 
 describe('MonitorListComponent', () => {
     const store = configureStore()({scratchGui: {
         monitorLayout: {
             monitors: {},
             savedMonitorPositions: {}
+        },
+        theme: {
+            theme: DEFAULT_THEME
+        },
+        toolbox: {
+            toolboxXML: ''
         },
         vm: {
             runtime: {

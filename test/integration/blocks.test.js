@@ -8,6 +8,7 @@ const {
     clickXpath,
     findByText,
     findByXpath,
+    textExists,
     getDriver,
     getLogs,
     Key,
@@ -19,6 +20,9 @@ const {
 const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
+
+const SETTINGS_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "settings-menu_dropdown-label")]//*[text()="Settings"]]';
 
 describe('Working with the blocks', () => {
     beforeAll(() => {
@@ -90,6 +94,13 @@ describe('Working with the blocks', () => {
         await clickButton('OK');
         await findByXpath("//input[@step='0.01'][@max='100.1']");
 
+        // Hiding the monitor via context menu should work
+        await rightClickText('score', scope.monitors);
+        await clickText('hide', scope.contextMenu);
+        await driver.sleep(100);
+        const monitorExists = await textExists('score', scope.monitors);
+        await expect(monitorExists).toBeFalsy();
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
@@ -122,6 +133,13 @@ describe('Working with the blocks', () => {
         // Check that the list value has been propagated.
         await clickText('list1', scope.blocksTab);
         await findByText('thing thing thing thing2', scope.reportedValue); // Tooltip with result
+
+        // Hiding the monitor via context menu should work
+        await rightClickText('list1', scope.monitors);
+        await clickText('hide', scope.contextMenu);
+        await driver.sleep(100);
+        const monitorExists = await textExists('list1', scope.monitors);
+        await expect(monitorExists).toBeFalsy();
 
         const logs = await getLogs();
         await expect(logs).toEqual([]);
@@ -275,5 +293,47 @@ describe('Working with the blocks', () => {
         await el.sendKeys('list1');
         await clickButton('OK');
         await clickText('list1', scope.blocksTab);
+    });
+
+    test('Use variable blocks after switching languages', async () => {
+        const myVariable = 'my\u00A0variable';
+        const changeVariableByScope = "*[@data-id='data_changevariableby']";
+
+        await loadUri(uri);
+
+        await clickText('Code');
+        await clickBlocksCategory('Variables');
+
+        // change "my variable" by 1
+        await clickText('change', changeVariableByScope);
+
+        // check reported value 1
+        await clickText(myVariable, scope.blocksTab);
+        await findByText('1', scope.reportedValue);
+
+        // change language
+        await clickXpath(SETTINGS_MENU_XPATH);
+        await clickText('Language', scope.menuBar);
+        await clickText('Deutsch');
+
+        await clickText('Skripte');
+        await clickBlocksCategory('Variablen');
+
+        // make sure "my variable" is still 1
+        await clickText(myVariable);
+        await findByText('1', scope.reportedValue);
+
+        // change step from 1 to 10
+        await clickText('1', changeVariableByScope);
+        await driver.actions()
+            .sendKeys('10')
+            .perform();
+
+        // change "my variable" by 10
+        await clickText('ändere', changeVariableByScope);
+
+        // check it is turned up to 11
+        await clickText(myVariable);
+        await findByText('11', scope.reportedValue);
     });
 });

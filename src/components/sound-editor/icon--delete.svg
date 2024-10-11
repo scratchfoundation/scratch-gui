@@ -11,7 +11,7 @@
             <use xlink:href="#path-1"></use>
         </mask>
         <use id="Mask" fill="#575E75" xlink:href="#path-1"></use>
-        <g id="Blue/1_Blue" mask="url(#mask-2)" fill="#4D97FF">
+        <g id="Blue/1_Blue" mask="url(#mask-2)" fill="#855CD6">
             <rect id="Primary-Blue" x="0" y="0" width="20" height="20"></rect>
         </g>
     </g>

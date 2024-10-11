@@ -1,5 +1,7 @@
 import path from 'path';
 import SeleniumHelper from '../helpers/selenium-helper';
+import {StaleElementReferenceError} from 'selenium-webdriver/lib/error';
+import until from 'selenium-webdriver/lib/until';
 
 const {
     clickText,
@@ -152,20 +154,16 @@ describe('Working with sprites', () => {
     });
 
     test('Use browser back button to close library', async () => {
-        await driver.get('https://www.google.com');
         await loadUri(uri);
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         const abbyElement = await findByText('Abby'); // Should show editor for new costume
         await elementIsVisible(abbyElement);
         await driver.navigate().back();
-        try {
-            // should throw error because library is no longer visible
-            await elementIsVisible(abbyElement);
-            throw 'ShouldNotGetHere'; // eslint-disable-line no-throw-literal
-        } catch (e) {
-            expect(e.constructor.name).toEqual('StaleElementReferenceError');
-        }
+        // should throw error because library is no longer present
+        await expect(driver.wait(until.elementIsVisible(abbyElement)))
+            .rejects
+            .toBeInstanceOf(StaleElementReferenceError);
         const costumesElement = await findByText('Costumes'); // Should show editor for new costume
         await elementIsVisible(costumesElement);
         const logs = await getLogs();
@@ -191,5 +189,111 @@ describe('Working with sprites', () => {
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
+
+    test('Load a sprite3 with a missing svg costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-svg.sprite3'));
+        const tile = await findByText('Blue Square Guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a sprite3 with a currupt svg costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-svg.sprite3'));
+        const tile = await findByText('Blue Square Guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a scratch3 corrupt svg as a sprite', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-from-scratch3.svg'));
+        const tile = await findByText('corrupt-from-scratch3', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a sprite2 with a missing svg costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-svg.sprite2'));
+        const tile = await findByText('Blue Guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a sprite2 with a currupt svg costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupted-svg.sprite2'));
+        const tile = await findByText('Blue Guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a corrupt scratch2 svg as a sprite', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/scratch2-corrupted.svg'));
+        const tile = await findByText('scratch2-corrupted', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a sprite3 with a missing bmp costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/missing-bmp.sprite3'));
+        const tile = await findByText('green-bmp-guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    test('Load a sprite3 with a currupt bmp costume', async () => {
+        await loadUri(uri);
+        const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/corrupt-bmp.sprite3'));
+        const tile = await findByText('green-bmp-guy', scope.spriteTile);
+        const tileVisible = await tile.isDisplayed();
+        await expect(tileVisible).toBe(true);
+    });
+
+    // TODO: uploading a corrupt bmp as a sprite should throw an error and not add a gray question mark
 
 });

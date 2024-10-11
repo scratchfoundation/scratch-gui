@@ -1,0 +1,93 @@
+name: CI/CD
+
+on:
+    pull_request: # Runs whenever a pull request is created or updated (including from another fork)
+    push: # Runs whenever a commit is pushed to the repository...
+        branches: [master, develop, hotfix/*] # ...on any of these branches
+    workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+concurrency:
+    group: "${{ github.workflow }} @ ${{ github.head_ref || github.ref }}"
+    cancel-in-progress: true
+
+permissions:
+    contents: write # publish a GitHub release
+    pages: write # deploy to GitHub Pages
+    issues: write # comment on released issues
+    pull-requests: write # comment on released pull requests
+
+jobs:
+    ci-cd:
+        runs-on: ubuntu-latest
+        env:
+            DETECT_CHROMEDRIVER_VERSION: "true"
+            JEST_JUNIT_OUTPUT_DIR: test-results
+            NODE_OPTIONS: --max-old-space-size=4000
+        steps:
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4
+              with:
+                  cache: "npm"
+                  node-version-file: ".nvmrc"
+            - name: Info
+              run: |
+                  cat <<EOF
+                  Node version: $(node --version)
+                  NPM version: $(npm --version)
+                  GitHub ref: ${{ github.ref }}
+                  GitHub head ref: ${{ github.head_ref }}
+                  EOF
+            - name: Install Dependencies
+              run: npm ci
+            - name: Lint
+              run: npm run test:lint
+            - name: Run Unit Tests
+              env:
+                  JEST_JUNIT_OUTPUT_NAME: unit-results.xml
+                  JEST_JUNIT_OUTPUT_DIR: test-results/unit
+              run: npm run test:unit -- --reporters="default" --reporters="jest-junit" --coverage --coverageReporters=text --coverageReporters=lcov --maxWorkers="2"
+            - name: Run Build
+              env:
+                NODE_OPTIONS: --max-old-space-size=4000
+                NODE_ENV: production
+              run: npm run build
+            - name: Store Build Output
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              with:
+                name: build-output
+                path: ./build
+            - name: Store Dist Output
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              with:
+                name: dist-output
+                path: ./dist
+            - run: |
+                for F in chrome chromium chromedriver; do
+                    which $F && $F --version || echo Not found: $F
+                done
+            - name: Run Integration Tests
+              env:
+                  JEST_JUNIT_OUTPUT_NAME: results.txt
+                  JEST_JUNIT_OUTPUT_DIR: test-results/integration
+              run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
+            - name: Store Test Results
+              if: always() # Even if tests fail
+              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              with:
+                name: test-output
+                path: ./test-results/* # Both unit and integration test results
+            - run: |
+                if [[ ${{contains(github.ref, 'hotfix')}}  ]]; then
+                sed -e "s|hotfix/REPLACE|${{ github.ref_name }}|" --in-place release.config.js
+                fi
+            - name: Semantic Release
+              env:
+                NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx --no -- semantic-release
+            - name: Deploy playground to GitHub Pages
+              uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
+              if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./build
+                full_commit_message: "Build for ${{ github.sha }} ${{ github.event.head_commit.message }}"

@@ -7,7 +7,7 @@
     cursor: pointer;
     font-size: 0.75rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: $motion-primary;
+    color: $looks-secondary;
     border-radius: 0.5rem;
 }
 
@@ -26,5 +26,5 @@
 }
 
 .container:active {
-    background-color: $motion-light-transparent;
+    background-color: $looks-light-transparent;
 }

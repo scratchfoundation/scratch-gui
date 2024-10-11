@@ -25,7 +25,7 @@
     justify-content: flex-start;
     align-items: center;
     height: calc($library-filter-bar-height + 2rem); /* padding */
-    background-color: $motion-transparent;
+    background-color: $looks-transparent;
     padding: 0 1rem;
     font-size: .875rem;
 }

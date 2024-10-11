@@ -41,7 +41,7 @@ $hover-scale: 1.25;
 }
 
 .selection-background {
-    background: $motion-primary;
+    background: $looks-secondary;
     opacity: 0.5;
 }
 
@@ -64,7 +64,7 @@ $hover-scale: 1.25;
 }
 
 .selector .trim-line {
-    border: 1px solid $motion-tertiary;
+    border: 1px solid $looks-secondary;
 }
 
 .playhead-container {
@@ -83,7 +83,7 @@ $hover-scale: 1.25;
     */
     width: 100%;
     height: 100%;
-    border-left: 1px solid $motion-primary;
+    border-left: 1px solid $looks-secondary;
     border-top: none;
     border-bottom: none;
     border-right: none;
@@ -118,7 +118,7 @@ $hover-scale: 1.25;
 }
 
 .trimmer .trim-handle {
-    filter: hue-rotate(150deg);
+    filter: hue-rotate(-240deg) brightness(1.35);
 }
 
 .trim-handle img {

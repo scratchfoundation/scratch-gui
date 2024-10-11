@@ -14,6 +14,9 @@ const uri = path.resolve(__dirname, '../../build/index.html');
 
 let driver;
 
+const FILE_MENU_XPATH = '//div[contains(@class, "menu-bar_menu-bar-item")]' +
+    '[*[contains(@class, "menu-bar_collapsible-label")]//*[text()="File"]]';
+
 describe('Project state', () => {
     beforeAll(() => {
         driver = getDriver();
@@ -34,10 +37,7 @@ describe('Project state', () => {
         await clickText('Costumes'); // just to blur the input
         // verify that project title has changed
         await clickXpath('//input[@value="Changed title of project"]');
-        await clickXpath(
-            '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
-            'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
-        );
+        await clickXpath(FILE_MENU_XPATH);
         await clickXpath('//li[span[text()="New"]]');
         // project title should be default again
         await clickXpath(`//input[@value="${defaultProjectTitle}"]`);

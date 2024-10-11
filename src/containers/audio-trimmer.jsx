@@ -42,15 +42,11 @@ class AudioTrimmer extends React.Component {
         this.containerSize = this.containerElement.getBoundingClientRect().width;
         this.trimStartDragRecognizer.start(e);
         this.initialTrim = this.props.trimStart;
-        e.stopPropagation();
-        e.preventDefault();
     }
     handleTrimEndMouseDown (e) {
         this.containerSize = this.containerElement.getBoundingClientRect().width;
         this.trimEndDragRecognizer.start(e);
         this.initialTrim = this.props.trimEnd;
-        e.stopPropagation();
-        e.preventDefault();
     }
     storeRef (el) {
         this.containerElement = el;

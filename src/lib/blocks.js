@@ -1,12 +1,11 @@
-import ScratchBlocks from 'scratch-blocks';
-
 /**
  * Connect scratch blocks with the vm
  * @param {VirtualMachine} vm - The scratch vm
+ * @param {Bool} useCatBlocks - Whether to use cat blocks rendering of ScratchBlocks
  * @return {ScratchBlocks} ScratchBlocks connected with the vm
  */
-export default function (vm) {
-
+export default function (vm, useCatBlocks) {
+    const ScratchBlocks = useCatBlocks ? require('cat-blocks') : require('scratch-blocks');
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',
@@ -24,6 +23,7 @@ export default function (vm) {
             colour: colors.secondary,
             colourSecondary: colors.secondary,
             colourTertiary: colors.tertiary,
+            colourQuaternary: colors.quaternary,
             outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
         };
     };
@@ -43,6 +43,7 @@ export default function (vm) {
             colour: colors.primary,
             colourSecondary: colors.secondary,
             colourTertiary: colors.tertiary,
+            colourQuaternary: colors.quaternary,
             extensions: ['shape_hat']
         };
     };
@@ -69,6 +70,7 @@ export default function (vm) {
             colour: ScratchBlocks.Colours.sensing.primary,
             colourSecondary: ScratchBlocks.Colours.sensing.secondary,
             colourTertiary: ScratchBlocks.Colours.sensing.tertiary,
+            colourQuaternary: ScratchBlocks.Colours.sensing.quaternary,
             outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
         };
     };
@@ -116,7 +118,7 @@ export default function (vm) {
     const spriteMenu = function () {
         const sprites = [];
         for (const targetId in vm.runtime.targets) {
-            if (!vm.runtime.targets.hasOwnProperty(targetId)) continue;
+            if (!Object.prototype.hasOwnProperty.call(vm.runtime.targets, targetId)) continue;
             if (vm.runtime.targets[targetId].isOriginal) {
                 if (!vm.runtime.targets[targetId].isStage) {
                     if (vm.runtime.targets[targetId] === vm.editingTarget) {

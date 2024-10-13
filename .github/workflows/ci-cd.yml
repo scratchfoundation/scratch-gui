@@ -51,12 +51,12 @@ jobs:
                 NODE_ENV: production
               run: npm run build
             - name: Store Build Output
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3
               with:
                 name: build-output
                 path: ./build
             - name: Store Dist Output
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3
               with:
                 name: dist-output
                 path: ./dist
@@ -71,7 +71,7 @@ jobs:
               run: npm run test:integration -- --reporters="default" --reporters="jest-junit"
             - name: Store Test Results
               if: always() # Even if tests fail
-              uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+              uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3
               with:
                 name: test-output
                 path: ./test-results/* # Both unit and integration test results

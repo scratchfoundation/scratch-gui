@@ -16,7 +16,11 @@ const DeleteButton = props => (
         tabIndex={props.tabIndex}
         onClick={props.onClick}
     >
-        <div className={styles.deleteButtonVisible}>
+        <div
+            className={classNames(styles.deleteButtonVisible, {
+                [styles.deleteButtonClicked]: props.isConfirmationModalOpened
+            })}
+        >
             <img
                 className={styles.deleteIcon}
                 src={deleteIcon}
@@ -29,6 +33,7 @@ const DeleteButton = props => (
 DeleteButton.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
+    isConfirmationModalOpened: PropTypes.bool,
     tabIndex: PropTypes.number
 };
 

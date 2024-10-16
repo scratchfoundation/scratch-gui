@@ -68,6 +68,7 @@ describe('Working with sprites', () => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
+        await clickText('yes', scope.modal);
         // Confirm that the stage has been switched to
         await findByText('Stage selected: no motion blocks');
         const logs = await getLogs();
@@ -78,6 +79,7 @@ describe('Working with sprites', () => {
         await loadUri(uri);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for scroll animation
         await clickXpath('//*[@aria-label="Delete"]'); // Only visible close button is on the sprite
+        await clickText('yes', scope.modal);
         // Confirm that the stage has been switched to
         await findByText('Stage selected: no motion blocks');
         const logs = await getLogs();

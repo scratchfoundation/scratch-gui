@@ -84,6 +84,7 @@ describe('Menu bar settings', () => {
         // Change the project by deleting a sprite
         await rightClickText('Sprite1', scope.spriteTile);
         await clickText('delete', scope.spriteTile);
+        await clickText('yes', scope.modal);
 
         await clickXpath(FILE_MENU_XPATH);
         await clickText('Load from your computer');

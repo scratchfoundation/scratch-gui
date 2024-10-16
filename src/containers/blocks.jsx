@@ -94,7 +94,7 @@ class Blocks extends React.Component {
         this.ScratchBlocks.ScratchVariables.setPromptHandler(
             this.handlePromptStart
         );
-        this.ScratchBlocks.statusButtonCallback =
+        this.ScratchBlocks.StatusIndicatorLabel.statusButtonCallback =
             this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
@@ -110,7 +110,7 @@ class Blocks extends React.Component {
             this.props.useCatBlocks
         );
         this.ScratchBlocks.dialog.setPrompt(this.handlePromptStart);
-        this.ScratchBlocks.statusButtonCallback =
+        this.ScratchBlocks.StatusIndicatorLabel.statusButtonCallback =
             this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
@@ -716,7 +716,7 @@ class Blocks extends React.Component {
         this.props.onOpenConnectionModal(extensionId);
     }
     handleStatusButtonUpdate() {
-        this.ScratchBlocks.refreshStatusButtons(this.workspace);
+        this.workspace.getFlyout().refreshStatusButtons();
     }
     handleOpenSoundRecorder() {
         this.props.onOpenSoundRecorder();

@@ -72,6 +72,9 @@ class GUI extends React.Component {
             // At this time the project view in www doesn't need to know when a project is unloaded
             this.props.onProjectLoaded();
         }
+        if (this.props.shouldStopProject && !prevProps.shouldStopProject) {
+            this.props.vm.stopAll();
+        }
     }
     render () {
         if (this.props.isError) {
@@ -130,6 +133,7 @@ GUI.propTypes = {
     onVmInit: PropTypes.func,
     projectHost: PropTypes.string,
     projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    shouldStopProject: PropTypes.bool,
     telemetryModalVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };

@@ -19,6 +19,24 @@
     height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
 }
 
+.library-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.library-category-title {
+  padding-Left: .5rem;
+  font-weight: bold;
+  font-size: 2rem;
+  color: $text-primary;
+}
+
+.library-category-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+}
+
 .filter-bar {
     display: flex;
     flex-direction: row;

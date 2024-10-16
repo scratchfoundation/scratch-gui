@@ -396,19 +396,20 @@ export default function (vm, useCatBlocks) {
         this.jsonInit(json);
     };
 
-    ScratchBlocks.CheckableContinuousFlyout.prototype.getCheckboxState =
-        function (blockId) {
-            const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
-            return monitoredBlock ? monitoredBlock.isMonitored : false;
-        };
+    ScratchBlocks.CheckboxBubble.prototype.isChecked = function (blockId) {
+        const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
+        return monitoredBlock ? monitoredBlock.isMonitored : false;
+    };
 
-    // ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
-    //     if (vm.getPeripheralIsConnected(extensionId)) {
-    //         return ScratchBlocks.StatusButtonState.READY;
-    //     }
-    //     return ScratchBlocks.StatusButtonState.NOT_READY;
-    // };
-    //
+    ScratchBlocks.StatusIndicatorLabel.prototype.getExtensionState = function (
+        extensionId
+    ) {
+        if (vm.getPeripheralIsConnected(extensionId)) {
+            return ScratchBlocks.StatusButtonState.READY;
+        }
+        return ScratchBlocks.StatusButtonState.NOT_READY;
+    };
+
     // ScratchBlocks.FieldNote.playNote_ = function (noteNum, extensionId) {
     //     vm.runtime.emit('PLAY_NOTE', noteNum, extensionId);
     // };

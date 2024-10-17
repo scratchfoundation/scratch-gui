@@ -92,7 +92,7 @@
     "scratch-render-fonts": "^1.0.2",
     "scratch-storage": "^2.3.1",
     "scratch-svg-renderer": "^2.3.102",
-    "scratch-vm": "github:scratchfoundation/scratch-vm#da044d5d15aa915e5010878f23c8248ba8dbdbc4",
+    "scratch-vm": "github:scratchfoundation/scratch-vm#b9b5c41b2caf9036dff72d9f62487a17ce62e63f",
     "startaudiocontext": "^1.2.1",
     "style-loader": "4.0.0",
     "to-style": "^1.3.3",

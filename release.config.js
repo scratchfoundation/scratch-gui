@@ -11,8 +11,11 @@ module.exports = {
             prerelease: 'hotfix'
         },
         {
+            name: 'alpha',
+            prerelease: true
+        },
+        {
             name: 'beta',
-            channel: 'beta',
             prerelease: true
         }
     ]

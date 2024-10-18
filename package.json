@@ -116,7 +116,7 @@
     "@commitlint/config-conventional": "17.8.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "9.2.1",
-    "cheerio": "1.0.0-rc.3",
+    "cheerio": "1.0.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.8",
     "eslint": "8.57.1",

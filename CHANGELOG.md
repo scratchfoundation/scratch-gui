@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0-hotfix.1](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.38...v4.1.0-hotfix.1) (2024-10-19)
+
+
+### Bug Fixes
+
+* add pinch to zoom support ([#21](https://github.com/scratchfoundation/scratch-gui/issues/21)) ([a690749](https://github.com/scratchfoundation/scratch-gui/commit/a690749bfca170313f0a5facf3181cc138fff0d5))
+* add support for Scratch-style procedures ([#6](https://github.com/scratchfoundation/scratch-gui/issues/6)) ([df207e4](https://github.com/scratchfoundation/scratch-gui/commit/df207e42d18b4f24cbf8028803caf397e996c7f9))
+* adjust key event filtering to fix the when key pressed block ([#13](https://github.com/scratchfoundation/scratch-gui/issues/13)) ([06b011f](https://github.com/scratchfoundation/scratch-gui/commit/06b011fbd2c22a9e13bedce219a3b6d1c45ca818))
+* allow typing into comments ([#15](https://github.com/scratchfoundation/scratch-gui/issues/15)) ([668fbb9](https://github.com/scratchfoundation/scratch-gui/commit/668fbb90be3bfc7fd9566112c8ba6161cdae12a3))
+* avoid clearing the state of the sensing_of block by refreshing the toolbox ([#28](https://github.com/scratchfoundation/scratch-gui/issues/28)) ([9bd036b](https://github.com/scratchfoundation/scratch-gui/commit/9bd036b1ef32ba25bcb4e8eff651881c86293737))
+* call reportValue on the ScratchBlocks module instead of the workspace ([#11](https://github.com/scratchfoundation/scratch-gui/issues/11)) ([1898c52](https://github.com/scratchfoundation/scratch-gui/commit/1898c5281f8621c24d23c9066c5979d66ed32b77))
+* call the new glow methods on ScratchBlocks ([#12](https://github.com/scratchfoundation/scratch-gui/issues/12)) ([be4386d](https://github.com/scratchfoundation/scratch-gui/commit/be4386ddf26bcd6923274d7abfa46cfbc199c75b))
+* fix bug that prevented displaying the procedure editor modal on mobile ([#26](https://github.com/scratchfoundation/scratch-gui/issues/26)) ([8b1bf24](https://github.com/scratchfoundation/scratch-gui/commit/8b1bf240cefa0e457c874b69b642625b89d008b0))
+* make dropdown menu shadow block colors consistent ([#22](https://github.com/scratchfoundation/scratch-gui/issues/22)) ([45d4803](https://github.com/scratchfoundation/scratch-gui/commit/45d48031049274b50251a01b65370542d17414ee))
+* modify inject options to reflect Scratch behaviors ([#5](https://github.com/scratchfoundation/scratch-gui/issues/5)) ([59bf3c5](https://github.com/scratchfoundation/scratch-gui/commit/59bf3c577d9382d4f43c35a37714725623c53783))
+* only refresh the toolbox when procedures are created via undo ([#19](https://github.com/scratchfoundation/scratch-gui/issues/19)) ([f6dfd53](https://github.com/scratchfoundation/scratch-gui/commit/f6dfd537e39069e281b706429081638d7ed48c0e))
+* partially roll back flyout optimization ([#25](https://github.com/scratchfoundation/scratch-gui/issues/25)) ([1745c59](https://github.com/scratchfoundation/scratch-gui/commit/1745c59d1bbdb210c370e7eab2ca9cb97d3f8c56))
+* patch the getCheckboxState method in the new flyout ([#7](https://github.com/scratchfoundation/scratch-gui/issues/7)) ([dd98dd8](https://github.com/scratchfoundation/scratch-gui/commit/dd98dd843fe55baaa555bfd6c15149883e80e896))
+* preserve toolbox scroll position when switching between sprites/the stage ([#10](https://github.com/scratchfoundation/scratch-gui/issues/10)) ([c8bc880](https://github.com/scratchfoundation/scratch-gui/commit/c8bc88078361840eb9cc47762ebd1bb61a8b5075))
+* prevent exception when switching languages ([#27](https://github.com/scratchfoundation/scratch-gui/issues/27)) ([d174ae9](https://github.com/scratchfoundation/scratch-gui/commit/d174ae90bd49bc72c510ed113702869831a48bb0))
+* reenable the Scratch colour eyedropper ([a7b1a10](https://github.com/scratchfoundation/scratch-gui/commit/a7b1a10ce5a295277443bbb0b911340ab9532ff1))
+* select extension categories when added ([#8](https://github.com/scratchfoundation/scratch-gui/issues/8)) ([2d58403](https://github.com/scratchfoundation/scratch-gui/commit/2d58403d1fd1b9d4020445ffe02365e5374ade84))
+* show the correct toolbox based on sprites or the stage being selected ([#4](https://github.com/scratchfoundation/scratch-gui/issues/4)) ([dbbb251](https://github.com/scratchfoundation/scratch-gui/commit/dbbb251a33e134f43d0c47c57e680c05ac994b2c))
+* specify the function to be used for prompting about variables ([#17](https://github.com/scratchfoundation/scratch-gui/issues/17)) ([ee80f13](https://github.com/scratchfoundation/scratch-gui/commit/ee80f13f40d89f5fd1c8d12a3ddf8470f70891a9))
+* temporarily disable functionality in scratch-gui for compatibility with patched scratch-blocks ([#1](https://github.com/scratchfoundation/scratch-gui/issues/1)) ([905f043](https://github.com/scratchfoundation/scratch-gui/commit/905f043fec790596d3bd9fa1a5226098407da534))
+* update the toolbox in response to procedure deletion/creation ([#18](https://github.com/scratchfoundation/scratch-gui/issues/18)) ([505011d](https://github.com/scratchfoundation/scratch-gui/commit/505011d64c3fb60c3e75565035bdf8ec49c75bac))
+* Use toolboxitemid instead of id as the identifier attribute for toolbox categories ([#9](https://github.com/scratchfoundation/scratch-gui/issues/9)) ([077415b](https://github.com/scratchfoundation/scratch-gui/commit/077415b55fb767dd9f42206ea2bfc97160272a4b))
+
+
+### Features
+
+* plumb Scratch variable support into the UI ([#16](https://github.com/scratchfoundation/scratch-gui/issues/16)) ([c92f244](https://github.com/scratchfoundation/scratch-gui/commit/c92f244646c773c677cb5cb6db9a8cda16d0835a))
+
 ## [4.0.38](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.37...v4.0.38) (2024-10-15)
 
 

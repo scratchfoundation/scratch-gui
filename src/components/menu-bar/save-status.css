@@ -1,4 +1,6 @@
 .save-now {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

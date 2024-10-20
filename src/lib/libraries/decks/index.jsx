@@ -7,7 +7,7 @@ import {FormattedMessage} from 'react-intl';
 import libraryIntro from './thumbnails/getting-started.jpg';
 
 // Getting Started ASL
-import libraryGettingStartedASL from './thumbnails/getting-started-asl.png';
+import libraryGettingStartedASL from './thumbnails/getting-started-asl.jpg';
 
 // Text to Speech
 import libraryTXTSpeech from './thumbnails/text-to-speech.jpg';

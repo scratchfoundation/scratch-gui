@@ -27,8 +27,8 @@ describe('Working with the how-to library', () => {
         await loadUri(uri);
         await clickText('Costumes');
         await clickXpath('//*[@aria-label="Tutorials"]');
-        await clickText('Getting Started'); // Modal should close
-        // Make sure YouTube video on first card appears
+        await clickText('Add a Backdrop'); // Modal should close
+        // Make sure YouTube video on card appears
         await findByXpath('//div[contains(@class, "step-video")]');
         const logs = await getLogs();
         await expect(logs).toEqual([]);

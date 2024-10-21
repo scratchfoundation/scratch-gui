@@ -1,0 +1,74 @@
+@import "../../css/colors.css";
+@import "../../css/units.css";
+
+.modal-container {
+    display: flex;
+    flex-direction: row;
+    border: none;
+}
+
+.arrow-container {
+    display: flex;
+    align-items: center;
+    margin-right: -7px;
+}
+
+.arrow-container-left {
+    margin-right: -7px;
+}
+
+.arrow-container-right {
+    margin-left: -7px;
+}
+
+.body {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background: $looks-secondary;
+}
+
+.label {
+    color: $ui-white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 1rem 0 1.5rem;
+}
+
+.button-row {
+    font-weight: bolder;
+    display: flex;
+}
+
+.button-row button {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    width: 47%;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid $ui-black-transparent;
+    color: $looks-secondary;
+    background: $ui-white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin: auto;
+}
+
+.button-row button.ok-button {
+    margin-left: 0;
+}
+
+.button-row button.cancel-button {
+    margin-right: 0;
+}
+
+.message {
+    margin-top: 0.25rem;
+}
+
+.delete-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+

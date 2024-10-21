@@ -78,6 +78,7 @@ class TipsLibrary extends React.PureComponent {
                 name: decksLibraryContent[id].name,
                 featured: true,
                 tags: decksLibraryContent[id].tags,
+                category: decksLibraryContent[id].category,
                 urlId: decksLibraryContent[id].urlId,
                 requiredProjectId: decksLibraryContent[id].requiredProjectId,
                 hidden: decksLibraryContent[id].hidden || false
@@ -94,6 +95,7 @@ class TipsLibrary extends React.PureComponent {
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
+                withCategories
             />
         );
     }

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.41](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.40...v4.0.41) (2024-10-21)
+
+
+### Bug Fixes
+
+* uepr-8: fix library item selection ([c84caa2](https://github.com/scratchfoundation/scratch-gui/commit/c84caa24f137579610ce2fc1d92e7d6ec0f8c07a))
+* uepr-8: Fix test ([533f6f7](https://github.com/scratchfoundation/scratch-gui/commit/533f6f76165c8a9d27af52dad0ec4ad4e3658885))
+
 ## [4.0.40](https://github.com/scratchfoundation/scratch-gui/compare/v4.0.39...v4.0.40) (2024-10-21)
 
 

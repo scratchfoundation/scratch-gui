@@ -95,6 +95,7 @@ class TipsLibrary extends React.PureComponent {
                 visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
+                withCategories
             />
         );
     }

@@ -88,7 +88,8 @@ class LibraryComponent extends React.Component {
     }
     handleSelect (id) {
         this.handleClose();
-        this.props.onItemSelected(this.getFilteredData()[id]);
+        this.props.onItemSelected(this.getFilteredData()
+            .find(item => this.constructKey(item) === id));
     }
     handleClose () {
         this.props.onRequestClose();
@@ -100,7 +101,8 @@ class LibraryComponent extends React.Component {
                 selectedTag: tag.toLowerCase()
             });
         } else {
-            this.props.onItemMouseLeave(this.getFilteredData()[[this.state.playingItem]]);
+            this.props.onItemMouseLeave((this.getFilteredData()
+                .find(item => this.constructKey(item) === this.state.playingItem)));
             this.setState({
                 filterQuery: '',
                 playingItem: null,
@@ -111,7 +113,8 @@ class LibraryComponent extends React.Component {
     handleMouseEnter (id) {
         // don't restart if mouse over already playing item
         if (this.props.onItemMouseEnter && this.state.playingItem !== id) {
-            this.props.onItemMouseEnter(this.getFilteredData()[id]);
+            this.props.onItemMouseEnter(this.getFilteredData()
+                .find(item => this.constructKey(item) === id));
             this.setState({
                 playingItem: id
             });
@@ -119,7 +122,8 @@ class LibraryComponent extends React.Component {
     }
     handleMouseLeave (id) {
         if (this.props.onItemMouseLeave) {
-            this.props.onItemMouseLeave(this.getFilteredData()[id]);
+            this.props.onItemMouseLeave(this.getFilteredData()
+                .find(item => this.constructKey(item) === id));
             this.setState({
                 playingItem: null
             });
@@ -139,7 +143,8 @@ class LibraryComponent extends React.Component {
                 selectedTag: ALL_TAG.tag
             });
         } else {
-            this.props.onItemMouseLeave(this.getFilteredData()[[this.state.playingItem]]);
+            this.props.onItemMouseLeave(this.getFilteredData()
+                .find(item => this.constructKey(item) === this.state.playingItem));
             this.setState({
                 filterQuery: event.target.value,
                 playingItem: null,
@@ -174,13 +179,17 @@ class LibraryComponent extends React.Component {
                 .indexOf(this.state.selectedTag) !== -1
         ));
     }
+    constructKey (data) {
+        return typeof data.name === 'string' ? data.name : data.rawURL;
+    }
     scrollToTop () {
         this.filteredDataRef.scrollTop = 0;
     }
     setFilteredDataRef (ref) {
         this.filteredDataRef = ref;
     }
-    renderElement (data, index) {
+    renderElement (data) {
+        const key = this.constructKey(data);
         return (<LibraryItem
             bluetoothRequired={data.bluetoothRequired}
             collaborator={data.collaborator}
@@ -192,11 +201,11 @@ class LibraryComponent extends React.Component {
             iconMd5={data.costumes ? data.costumes[0].md5ext : data.md5ext}
             iconRawURL={data.rawURL}
             icons={data.costumes}
-            id={index}
+            id={key}
             insetIconURL={data.insetIconURL}
             internetConnectionRequired={data.internetConnectionRequired}
-            isPlaying={this.state.playingItem === index}
-            key={typeof data.name === 'string' ? data.name : data.rawURL}
+            isPlaying={this.state.playingItem === key}
+            key={key}
             name={data.name}
             showPlayButton={this.props.showPlayButton}
             onMouseEnter={this.handleMouseEnter}
@@ -205,8 +214,8 @@ class LibraryComponent extends React.Component {
         />);
     }
     renderData (data) {
-        if (this.state.selectedTag !== ALL_TAG.tag) {
-            return data.map((dataItem, index) => this.renderElement(dataItem, index));
+        if (this.state.selectedTag !== ALL_TAG.tag || !this.props.withCategories) {
+            return data.map(item => this.renderElement(item));
         }
 
         const dataByCategory = Object.groupBy(data, el => el.category);
@@ -228,7 +237,7 @@ class LibraryComponent extends React.Component {
                     <div
                         className={styles.libraryCategoryItems}
                     >
-                        {values.map((dataItem, index) => this.renderElement(dataItem, index))}
+                        {values.map(item => this.renderElement(item))}
                     </div>
                 </div>));
     }
@@ -313,6 +322,7 @@ LibraryComponent.propTypes = {
         /* eslint-enable react/no-unused-prop-types, lines-around-comment */
     ),
     filterable: PropTypes.bool,
+    withCategories: PropTypes.bool,
     id: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
     onItemMouseEnter: PropTypes.func,

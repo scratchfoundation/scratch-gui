@@ -14,6 +14,10 @@ module.exports = {
             prerelease: true
         },
         {
+            name: 'spork',
+            prerelease: true
+        },
+        {
             name: 'hotfix/REPLACE', // replace with actual hotfix branch name
             channel: 'hotfix',
             prerelease: 'hotfix'

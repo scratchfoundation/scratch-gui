@@ -156,9 +156,22 @@ class TargetPane extends React.Component {
         this.fileInput = input;
     }
     handleBlockDragEnd (blocks) {
-        if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
-            this.shareBlocks(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
-            this.props.onReceivedBlocks(true);
+        let canCopy = true;
+
+        for (let i = 0; i < blocks.length; i++) {
+            if (blocks[i].opcode.startsWith("procedures")) {
+                canCopy = false;
+                break;
+            }
+        }
+
+        if (canCopy) {
+            if (this.props.hoveredTarget.sprite && this.props.hoveredTarget.sprite !== this.props.editingTarget) {
+                this.shareBlocks(blocks, this.props.hoveredTarget.sprite, this.props.editingTarget);
+                this.props.onReceivedBlocks(true);
+            }
+        } else {
+            alert('Cannot duplicate custom block to another sprite!')
         }
     }
     shareBlocks (blocks, targetId, optFromTargetId) {

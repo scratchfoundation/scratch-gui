@@ -114,7 +114,14 @@ class CustomProcedures extends React.Component {
     }
     handleOk () {
         const newMutation = this.mutationRoot ? this.mutationRoot.mutationToDom(true) : null;
-        this.props.onRequestClose(newMutation);
+        if (newMutation.getAttribute('proccode')[0] == "%") {
+            newMutation.setAttribute('proccode', "\\" + newMutation.getAttribute('proccode'));
+        }
+        if (newMutation.getAttribute('proccode') == "") {
+            this.props.onRequestClose();
+        } else {
+            this.props.onRequestClose(newMutation);
+        }
     }
     handleAddLabel () {
         if (this.mutationRoot) {

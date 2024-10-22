@@ -408,6 +408,7 @@ class Blocks extends React.Component {
             this.workspace.scrollY = scrollY;
             this.workspace.scale = scale;
             this.workspace.resize();
+            this.workspace.setScale(scale);
         }
 
         // Clear the undo state of the workspace since this is a

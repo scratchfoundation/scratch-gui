@@ -98,7 +98,7 @@ class SoundEditor extends React.Component {
                 this.handlePlay();
             }
         }
-        if (event.key === 'Delete' || event.key === 'Backspace') {
+        if (event.key === 'Delete' || event.key === 'Backspace' || ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'x')) {
             event.preventDefault();
             if (event.shiftKey) {
                 this.handleDeleteInverse();

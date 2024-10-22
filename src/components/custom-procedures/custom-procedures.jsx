@@ -100,11 +100,12 @@ const CustomProcedures = props => (
                 </div>
             </div>
             <div className={styles.checkboxRow}>
-                <label>
+                <label style={{ cursor: 'pointer' }}>
                     <input
                         checked={props.warp}
                         type="checkbox"
                         onChange={props.onToggleWarp}
+                        style={{ cursor: 'pointer' }}
                     />
                     <FormattedMessage
                         defaultMessage="Run without screen refresh"

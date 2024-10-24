@@ -136,7 +136,7 @@
     "redux-mock-store": "1.5.5",
     "rimraf": "2.7.1",
     "scratch-semantic-release-config": "1.0.16",
-    "scratch-webpack-configuration": "1.5.1",
+    "scratch-webpack-configuration": "1.6.0",
     "selenium-webdriver": "3.6.0",
     "semantic-release": "19.0.5",
     "stream-browserify": "3.0.0",

@@ -17,6 +17,7 @@ import RecordModal from './record-modal.jsx'
 import SoundEditor from './sound-editor.jsx'
 import SoundLibrary from './sound-library.jsx'
 
+import {greenFlagClicked} from './../reducers/vm-status.js'
 import soundLibraryContent from '../lib/libraries/sounds.json'
 import { handleFileUpload, soundUpload } from '../lib/file-uploader.js'
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx'
@@ -46,6 +47,7 @@ class SoundTab extends React.Component {
       'handleSoundUpload',
       'handleDrop',
       'setFileInput',
+      'handleSuccessCallback',
     ])
     this.state = { selectedSoundIndex: 0 }
   }
@@ -117,6 +119,11 @@ class SoundTab extends React.Component {
     this.fileInput.click()
   }
 
+  handleSuccessCallback = () => {
+    console.log('oandoqwnd')
+    this.props.onGreenFlagClicked();
+  }
+
   handleSoundUpload(e) {
     const storage = this.props.vm.runtime.storage
     const targetId = this.props.vm.editingTarget.id
@@ -138,6 +145,7 @@ class SoundTab extends React.Component {
             })
           },
           this.props.onCloseImporting,
+          this.handleSuccessCallback,
         )
       },
       this.props.onCloseImporting,
@@ -336,6 +344,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
   onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+  onGreenFlagClicked: () => dispatch(greenFlagClicked()),
 })
 
 export default errorBoundaryHOC('Sound Tab')(

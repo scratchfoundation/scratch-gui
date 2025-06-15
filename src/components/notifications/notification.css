@@ -1,0 +1,76 @@
+.notification-container {
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.notification-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  /* padding-right: 0.5rem; */
+  background-color: #0b5094;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #1a1a1a;
+  animation: fadeIn 0.3s ease-in-out;
+  height: 32px;
+
+}
+
+.notification-bar.info {
+  background-color: #F1E8F2;
+}
+.notification-bar.success {
+  background-color: #C4EBD2;
+}
+.notification-bar.warning {
+  background-color: #FFE29D;
+}
+.notification-bar.error {
+  background-color: #FF9B9B;
+}
+.notification-bar.pending {
+  background-color: #9BC8FC;
+}
+
+.notification-icon {
+  margin-right: 7px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: fit-content;
+} 
+.notification-icon img {
+    height: 15px;
+} 
+.notification-message {
+  flex: 1;
+  color: #283B52;
+  font-weight: 400;
+  font-size: 12px;
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  align-items: center;
+  color: #283B52;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

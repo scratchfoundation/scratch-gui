@@ -20,6 +20,7 @@ import { activateTab, SOUNDS_TAB_INDEX } from '../reducers/editor-tab'
 
 import { setRestore } from '../reducers/restore-deletion'
 import { showStandardAlert, closeAlertWithId } from '../reducers/alerts'
+import {greenFlagClicked} from './../reducers/vm-status.js'
 
 import addLibraryBackdropIcon from '../components/asset-panel/icon--add-backdrop-lib.svg'
 import addLibraryCostumeIcon from '../components/asset-panel/icon--add-costume-lib.svg'
@@ -82,6 +83,7 @@ class CostumeTab extends React.Component {
       'handleCostumeUpload',
       'handleDrop',
       'setFileInput',
+      'handleSuccessCallback',
     ])
     const { editingTarget, sprites, stage } = props
     const target = editingTarget && sprites[editingTarget] ? sprites[editingTarget] : stage
@@ -180,6 +182,11 @@ class CostumeTab extends React.Component {
     }
     this.handleNewCostume(vmCostume)
   }
+
+  handleSuccessCallback = () => {
+    this.props.onGreenFlagClicked();
+  }
+
   handleCostumeUpload(e) {
     const storage = this.props.vm.runtime.storage
     const targetId = this.props.vm.editingTarget.id
@@ -201,11 +208,18 @@ class CostumeTab extends React.Component {
               }
             })
           },
-          this.props.onCloseImporting,
-        )
+          (error) => {
+            this.props.onCloseImporting();
+            console.error(error); 
+          },
+          this.handleSuccessCallback,
+        );
       },
-      this.props.onCloseImporting,
-    )
+      (error) => {
+        this.props.onCloseImporting();
+        console.error(error); 
+      }
+    );
   }
   handleFileUploadClick() {
     this.fileInput.click()
@@ -385,6 +399,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
   onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+  onGreenFlagClicked: () => dispatch(greenFlagClicked()),
 })
 
 export default errorBoundaryHOC('Costume Tab')(

@@ -5,8 +5,7 @@ import { connect } from 'react-redux'
 import { projectTitleInitialState } from '../reducers/project-title'
 import downloadBlob from '../lib/download-blob'
 import localforage from 'localforage'
-import { setIsSavingState, setIsScratchData, setIsSavingStateStatus, setIsPendingState, setProjectName } from './../reducers/vm-status.js'
-import { set } from 'core-js/core/dict'
+import { setIsSavingState, setIsScratchData, setIsSavingStateStatus, setIsPendingState, setProjectName, addNotification } from './../reducers/vm-status.js'
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -41,12 +40,10 @@ class SB3Downloader extends React.Component {
     const url = new URLSearchParams(window.location.search)
 
     const projectId = url.get('projectid')
-    const currentprojectName = url.get('projectname')
-    const inputLayout = url.get('inputLayout')
+    // const inputLayout = url.get('inputLayout')
+    const inputLayout = url.get('inputLayout') || 'myprojects'
     const fetchapiurl = url.get('fetchapiurl');
-    if(currentprojectName){
-      this.props.setProjectName(currentprojectName)
-    }
+
     if (inputLayout === 'myprojects') {
       if (this.props.isFirst) {
         return
@@ -62,13 +59,14 @@ class SB3Downloader extends React.Component {
 
         this.abortController = new AbortController()
         const signal = this.abortController?.signal
-
         this.props.saveProjectSb3().then((content) => {
+
           if (this.props.onSaveFinished) {
             this.props.onSaveFinished()
           }
 
           const reader = new FileReader()
+          
           reader.onloadend = async () => {
             const buffer = reader.result
             // const binaryString = Array.prototype.map
@@ -83,7 +81,18 @@ class SB3Downloader extends React.Component {
             }
             this.previousBase64 = base64blocks
 
-            console.log('scratch project name ',this.props.projectName)
+            if (typeof base64blocks === 'string') {
+              const base64Size = (base64blocks.length * 3) / 4 - (base64blocks.endsWith('==') ? 2 : base64blocks.endsWith('=') ? 1 : 0);  
+              if (base64Size > 10 * 1024 * 1024) {
+                this.props.setIsPendingState(false)
+                this.props.addNotification({
+                  type: 'error',
+                  icon: 'error',
+                  message: 'Unable to save. The project exceeds the size limit. Please reduce file quality or remove large files.',
+                  duration: 10000
+                });
+                return 
+            }}
 
             const structure = {
               name: this.props.projectName,
@@ -96,11 +105,15 @@ class SB3Downloader extends React.Component {
             const apiUrl = `${fetchapiurl}/projects/${projectId}`
       
             try {
-              if(!this.props.projectName || !currentprojectName) {
+              if(!projectId) {
                 return
               }
               this.props.setIsSavingState(true)
-              this.props.setIsSavingStateStatus('Saving project')
+              this.props.addNotification({
+                type: 'saving',
+                icon: 'saving',
+                message: 'Saving project… Please wait.',
+              });
               await fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
@@ -110,11 +123,21 @@ class SB3Downloader extends React.Component {
                 credentials: 'include',
                 signal,
               })
-              this.props.setIsSavingStateStatus('Project saved successfully')
+              this.props.addNotification({
+                type: 'success',
+                icon: 'success',
+                message: 'Project saved successfully',
+                duration: 3000
+              });
               this.props.setIsPendingState(false)
             } catch (error) {
-              this.props.setIsSavingStateStatus('Error saving project')
               this.props.setIsPendingState(false)
+              this.props.addNotification({
+                type: 'error',
+                icon: 'error',
+                message: 'Error!',
+                duration: 3000
+              });
             } finally {
               this.props.setIsSavingState(false)
               setTimeout(() => {
@@ -187,6 +210,7 @@ const mapDispatchToProps = {
   setIsSavingStateStatus,
   setIsPendingState,
   setProjectName,
+  addNotification,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SB3Downloader)

@@ -1,7 +1,7 @@
-import { BitmapAdapter, sanitizeSvg } from 'scratch-svg-renderer'
-import randomizeSpritePosition from './randomize-sprite-position.js'
-import bmpConverter from './bmp-converter'
-import gifDecoder from './gif-decoder'
+import { BitmapAdapter, sanitizeSvg } from "scratch-svg-renderer";
+import randomizeSpritePosition from "./randomize-sprite-position.js";
+import bmpConverter from "./bmp-converter";
+import gifDecoder from "./gif-decoder";
 
 /**
  * Extract the file name given a string of the form fileName + ext
@@ -10,10 +10,10 @@ import gifDecoder from './gif-decoder'
  * there was no '.' in the string (e.g. 'my_image')
  */
 const extractFileName = function (nameExt) {
-  // There could be multiple dots, but get the stuff before the first .
-  const nameParts = nameExt.split('.', 1) // we only care about the first .
-  return nameParts[0]
-}
+    // There could be multiple dots, but get the stuff before the first .
+    const nameParts = nameExt.split(".", 1); // we only care about the first .
+    return nameParts[0];
+};
 
 /**
  * Handle a file upload given the input element that contains the file,
@@ -23,27 +23,27 @@ const extractFileName = function (nameExt) {
  * @param {Function} onerror The function that handles any error loading the file
  */
 const handleFileUpload = function (fileInput, onload, onerror) {
-  const readFile = (i, files) => {
-    if (i === files.length) {
-      // Reset the file input value now that we have everything we need
-      // so that the user can upload the same sound multiple times if
-      // they choose
-      fileInput.value = null
-      return
-    }
-    const file = files[i]
-    const reader = new FileReader()
-    reader.onload = () => {
-      const fileType = file.type
-      const fileName = extractFileName(file.name)
-      onload(reader.result, fileType, fileName, i, files.length)
-      readFile(i + 1, files)
-    }
-    reader.onerror = onerror
-    reader.readAsArrayBuffer(file)
-  }
-  readFile(0, fileInput.files)
-}
+    const readFile = (i, files) => {
+        if (i === files.length) {
+            // Reset the file input value now that we have everything we need
+            // so that the user can upload the same sound multiple times if
+            // they choose
+            fileInput.value = null;
+            return;
+        }
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+            const fileType = file.type;
+            const fileName = extractFileName(file.name);
+            onload(reader.result, fileType, fileName, i, files.length);
+            readFile(i + 1, files);
+        };
+        reader.onerror = onerror;
+        reader.readAsArrayBuffer(file);
+    };
+    readFile(0, fileInput.files);
+};
 
 /**
  * @typedef VMAsset
@@ -69,22 +69,22 @@ const handleFileUpload = function (fileInput, onload, onerror) {
  * which can be used to look up the data in storage
  */
 const createVMAsset = function (storage, assetType, dataFormat, data) {
-  const asset = storage.createAsset(
-    assetType,
-    dataFormat,
-    data,
-    null,
-    true, // generate md5
-  )
+    const asset = storage.createAsset(
+        assetType,
+        dataFormat,
+        data,
+        null,
+        true // generate md5
+    );
 
-  return {
-    name: null, // Needs to be set by caller
-    dataFormat: dataFormat,
-    asset: asset,
-    md5: `${asset.assetId}.${dataFormat}`,
-    assetId: asset.assetId,
-  }
-}
+    return {
+        name: null, // Needs to be set by caller
+        dataFormat: dataFormat,
+        asset: asset,
+        md5: `${asset.assetId}.${dataFormat}`,
+        assetId: asset.assetId,
+    };
+};
 
 /**
  * Handles loading a costume or a backdrop using the provided, context-relevant information.
@@ -97,83 +97,188 @@ const createVMAsset = function (storage, assetType, dataFormat, data) {
  * adding the costume to the VM and handling other UI flow that should come after adding the costume
  * @param {Function} handleError The function to execute if there is an error parsing the costume
  */
-const costumeUpload = function (
-  fileData,
-  fileType,
-  storage,
-  handleCostume,
-  handleError = () => {},
+const costumeUpload = async function (
+    fileData,
+    fileType,
+    storage,
+    handleCostume,
+    handleError = () => {},
+    handleSuccessCallback = () => {}
 ) {
-  let costumeFormat = null
-  let assetType = null
-  switch (fileType) {
-    case 'image/svg+xml': {
-      // run svg bytes through scratch-svg-renderer's sanitization code
-      fileData = sanitizeSvg.sanitizeByteStream(fileData)
+    let costumeFormat = null;
+    let assetType = null;
 
-      costumeFormat = storage.DataFormat.SVG
-      assetType = storage.AssetType.ImageVector
-      break
-    }
-    case 'image/jpeg': {
-      costumeFormat = storage.DataFormat.JPG
-      assetType = storage.AssetType.ImageBitmap
-      break
-    }
-    case 'image/bmp': {
-      // Convert .bmp files to .png to compress them. .bmps are completely uncompressed,
-      // and would otherwise take up a lot of storage space and take much longer to upload and download.
-      bmpConverter(fileData).then((dataUrl) => {
-        costumeUpload(dataUrl, 'image/png', storage, handleCostume)
-      })
-      return // Return early because we're triggering another proper costumeUpload
-    }
-    case 'image/png': {
-      costumeFormat = storage.DataFormat.PNG
-      assetType = storage.AssetType.ImageBitmap
-      break
-    }
-    case 'image/gif': {
-      let costumes = []
-      gifDecoder(fileData, (frameNumber, dataUrl, numFrames) => {
-        costumeUpload(
-          dataUrl,
-          'image/png',
-          storage,
-          (costumes_) => {
-            costumes = costumes.concat(costumes_)
-            if (frameNumber === numFrames - 1) {
-              handleCostume(costumes)
+    const addCostumeFromBuffer = function (dataBuffer) {
+        try {
+            const vmCostume = createVMAsset(
+                storage,
+                assetType,
+                costumeFormat,
+                dataBuffer
+            );
+            handleCostume([vmCostume]);
+        } catch (error) {
+            handleError(`Costume creation failed: ${error.message}`);
+        }
+    };
+
+    const compressViaAPI = async (data, mimeType) => {
+        try {
+            const blob = new Blob([data], { type: mimeType });
+            const formData = new FormData();
+            formData.append("file", blob);
+
+            const response = await fetch(
+                "https://api.test.myqubit.co/projects/compress-files",
+                {
+                    method: "POST",
+                    body: formData,
+                    credentials: "include",
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `Compression API error: ${response.statusText}`
+                );
             }
-          },
-          handleError,
-        )
-      })
-      return // Abandon this load, do not try to load gif itself
+
+            const compressedBuffer = await response.arrayBuffer();
+            return new Uint8Array(compressedBuffer);
+        } catch (error) {
+            handleError(
+                `API compression failed for ${mimeType}: ${error.message}`
+            );
+            return data; // Fallback to original data if compression fails
+        } finally {
+            handleSuccessCallback();
+        }
+    };
+
+    const sanitizeAndCompress = async (data, mimeType, handleError) => {
+        try {
+            const sanitizedData = sanitizeSvg.sanitizeByteStream(data);
+            const compressedData = await compressViaAPI(
+                sanitizedData,
+                mimeType
+            );
+            if (!compressedData) {
+                return null;
+            }
+
+            try {
+                return sanitizeSvg.sanitizeByteStream(compressedData);
+            } catch (sanitizeError) {
+                handleError(
+                    `Compressed SVG sanitization failed: ${sanitizeError.message}`
+                );
+                return null;
+            }
+        } catch (sanitizeError) {
+            handleError(`SVG sanitization failed: ${sanitizeError.message}`);
+            return null;
+        }
+    };
+
+    switch (fileType) {
+        case "image/svg+xml": {
+            costumeFormat = storage.DataFormat.SVG;
+            assetType = storage.AssetType.ImageVector;
+
+            const processedData = await sanitizeAndCompress(
+                fileData,
+                fileType,
+                handleError
+            );
+            if (processedData) {
+                addCostumeFromBuffer(processedData);
+            }
+            return;
+        }
+
+        case "image/jpeg": {
+            costumeFormat = storage.DataFormat.JPG;
+            assetType = storage.AssetType.ImageBitmap;
+
+            const compressedData = await compressViaAPI(fileData, fileType);
+            if (compressedData) {
+                addCostumeFromBuffer(compressedData);
+            }
+            return;
+        }
+
+        case "image/png": {
+            costumeFormat = storage.DataFormat.PNG;
+            assetType = storage.AssetType.ImageBitmap;
+
+            const compressedData = await compressViaAPI(fileData, fileType);
+            if (compressedData) {
+                addCostumeFromBuffer(compressedData);
+            }
+            return;
+        }
+
+        case "image/bmp": {
+            costumeFormat = storage.DataFormat.PNG;
+            assetType = storage.AssetType.ImageBitmap;
+
+            const dataUrl = await bmpConverter(fileData);
+            const response = await fetch(dataUrl);
+            const blob = await response.blob();
+            const arrayBuffer = await blob.arrayBuffer();
+            const convertedData = new Uint8Array(arrayBuffer);
+
+            const compressedData = await compressViaAPI(
+                convertedData,
+                "image/bmp"
+            );
+            if (compressedData) {
+                addCostumeFromBuffer(compressedData);
+            }
+            return;
+        }
+
+        case "image/gif": {
+            let costumes = [];
+            gifDecoder(fileData, async (frameNumber, dataUrl, numFrames) => {
+                try {
+                    const response = await fetch(dataUrl);
+                    const blob = await response.blob();
+                    const arrayBuffer = await blob.arrayBuffer();
+                    const frameData = new Uint8Array(arrayBuffer);
+
+                    const compressedData = await compressViaAPI(
+                        frameData,
+                        "image/gif"
+                    );
+                    if (compressedData) {
+                        costumeFormat = storage.DataFormat.PNG;
+                        assetType = storage.AssetType.ImageBitmap;
+                        const vmCostume = createVMAsset(
+                            storage,
+                            assetType,
+                            costumeFormat,
+                            compressedData
+                        );
+                        costumes = costumes.concat([vmCostume]);
+                        if (frameNumber === numFrames - 1) {
+                            handleCostume(costumes);
+                        }
+                    }
+                } catch (error) {
+                    handleError(
+                        `GIF frame processing failed: ${error.message}`
+                    );
+                }
+            });
+            return;
+        }
+
+        default:
+            handleError(`Encountered unexpected file type: ${fileType}`);
+            return;
     }
-    default:
-      handleError(`Encountered unexpected file type: ${fileType}`)
-      return
-  }
-
-  const bitmapAdapter = new BitmapAdapter()
-  const addCostumeFromBuffer = function (dataBuffer) {
-    const vmCostume = createVMAsset(storage, assetType, costumeFormat, dataBuffer)
-    handleCostume([vmCostume])
-  }
-
-  if (costumeFormat === storage.DataFormat.SVG) {
-    // Must pass in file data as a Uint8Array,
-    // passing in an array buffer causes the sprite/costume
-    // thumbnails to not display because the data URI for the costume
-    // is invalid
-    addCostumeFromBuffer(new Uint8Array(fileData))
-  } else {
-    // otherwise it's a bitmap
-    bitmapAdapter.importBitmap(fileData, fileType).then(addCostumeFromBuffer).catch(handleError)
-  }
-}
-
+};
 /**
  * Handles loading a sound using the provided, context-relevant information.
  * @param {ArrayBuffer} fileData The sound data to load
@@ -185,94 +290,137 @@ const costumeUpload = function (
  * as well as handling other UI flow that should come after adding the sound
  * @param {Function} handleError The function to execute if there is an error parsing the sound
  */
-const soundUpload = function (fileData, fileType, storage, handleSound, handleError) {
-  let soundFormat
-  switch (fileType) {
-    case 'audio/mp3':
-    case 'audio/mpeg': {
-      soundFormat = storage.DataFormat.MP3
-      break
-    }
-    case 'audio/wav':
-    case 'audio/wave':
-    case 'audio/x-wav':
-    case 'audio/x-pn-wav': {
-      soundFormat = storage.DataFormat.WAV
-      break
-    }
-    default:
-      handleError(`Encountered unexpected file type: ${fileType}`)
-      return
-  }
-
-  const vmSound = createVMAsset(
+const soundUpload = async function (
+    fileData,
+    fileType,
     storage,
-    storage.AssetType.Sound,
-    soundFormat,
-    new Uint8Array(fileData),
-  )
+    handleSound,
+    handleError,
+    handleSuccessCallback = () => {}
+) {
+    let soundFormat;
 
-  handleSound(vmSound)
-}
+    try {
+        // Prepare and send API request
+        const blob = new Blob([fileData], { type: fileType });
+        const formData = new FormData();
+        formData.append("file", blob);
+
+        const response = await fetch(
+            "https://api.test.myqubit.co/projects/compress-files",
+            {
+                method: "POST",
+                body: formData,
+                credentials: "include",
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Compression API error: ${response.status} - ${response.statusText}`
+            );
+        }
+
+        const compressedData = await response.arrayBuffer();
+
+        // Determine sound format
+        switch (fileType) {
+            case "audio/mp3":
+            case "audio/mpeg": {
+                soundFormat = storage.DataFormat.MP3;
+                break;
+            }
+            case "audio/wav":
+            case "audio/wave":
+            case "audio/x-wav":
+            case "audio/x-pn-wav": {
+                soundFormat = storage.DataFormat.WAV;
+                break;
+            }
+            default:
+                throw new Error(
+                    `Encountered unexpected file type: ${fileType}`
+                );
+        }
+
+        // Create and store the sound asset
+        const vmSound = createVMAsset(
+            storage,
+            storage.AssetType.Sound,
+            soundFormat,
+            new Uint8Array(compressedData)
+        );
+
+        // Call the handleSound function to process the sound
+        handleSound(vmSound);
+
+        // Call the success callback with the created sound
+        handleSuccessCallback(vmSound);
+    } catch (error) {
+        handleError(`Sound upload failed: ${error.message}`);
+    } finally {
+        handleSuccessCallback();
+    }
+};
 
 const spriteUpload = function (
-  fileData,
-  fileType,
-  spriteName,
-  storage,
-  handleSprite,
-  handleError = () => {},
+    fileData,
+    fileType,
+    spriteName,
+    storage,
+    handleSprite,
+    handleError = () => {},
+    handleSuccessCallback = () => {}
 ) {
-  switch (fileType) {
-    case '':
-    case 'application/zip': {
-      // We think this is a .sprite2 or .sprite3 file
-      handleSprite(new Uint8Array(fileData))
-      return
+    switch (fileType) {
+        case "":
+        case "application/zip": {
+            handleSprite(new Uint8Array(fileData));
+            return;
+        }
+        case "image/svg+xml":
+        case "image/png":
+        case "image/bmp":
+        case "image/jpeg":
+        case "image/gif": {
+            costumeUpload(
+                fileData,
+                fileType,
+                storage,
+                (vmCostumes) => {
+                    vmCostumes.forEach((costume, i) => {
+                        costume.name = `${spriteName}${i ? i + 1 : ""}`;
+                    });
+                    const newSprite = {
+                        name: spriteName,
+                        isStage: false,
+                        x: 0, // x/y will be randomized below
+                        y: 0,
+                        visible: true,
+                        size: 100,
+                        rotationStyle: "all around",
+                        direction: 90,
+                        draggable: false,
+                        currentCostume: 0,
+                        blocks: {},
+                        variables: {},
+                        costumes: vmCostumes,
+                        sounds: [],
+                    };
+                    randomizeSpritePosition(newSprite);
+                    // TODO probably just want sprite upload to handle this object directly
+                    handleSprite(JSON.stringify(newSprite));
+                },
+                handleError,
+                handleSuccessCallback
+            );
+            return;
+        }
+        default: {
+            handleError(`Encountered unexpected file type: ${fileType}`);
+            return;
+        }
     }
-    case 'image/svg+xml':
-    case 'image/png':
-    case 'image/bmp':
-    case 'image/jpeg':
-    case 'image/gif': {
-      // Make a sprite from an image by making it a costume first
-      costumeUpload(
-        fileData,
-        fileType,
-        storage,
-        (vmCostumes) => {
-          vmCostumes.forEach((costume, i) => {
-            costume.name = `${spriteName}${i ? i + 1 : ''}`
-          })
-          const newSprite = {
-            name: spriteName,
-            isStage: false,
-            x: 0, // x/y will be randomized below
-            y: 0,
-            visible: true,
-            size: 100,
-            rotationStyle: 'all around',
-            direction: 90,
-            draggable: false,
-            currentCostume: 0,
-            blocks: {},
-            variables: {},
-            costumes: vmCostumes,
-            sounds: [], // TODO are all of these necessary?
-          }
-          randomizeSpritePosition(newSprite)
-          // TODO probably just want sprite upload to handle this object directly
-          handleSprite(JSON.stringify(newSprite))
-        },
-        handleError,
-      )
-      return
-    }
-    default: {
-      handleError(`Encountered unexpected file type: ${fileType}`)
-      return
-    }
-  }
-}
+};
 
-export { handleFileUpload, costumeUpload, soundUpload, spriteUpload }
+export { handleFileUpload, costumeUpload, soundUpload, spriteUpload };

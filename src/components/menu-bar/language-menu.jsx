@@ -47,7 +47,7 @@ class LanguageMenu extends React.PureComponent {
       <MenuItem expanded={this.props.menuOpen}>
         <div
           className={styles.option}
-          // onClick={this.props.onRequestOpen}
+          onClick={this.props.onRequestOpen}
           // onMouseOver={this.handleMouseOver}
         >
           {/* <img
@@ -67,7 +67,7 @@ class LanguageMenu extends React.PureComponent {
                         src={dropdownCaret}
                     /> */}
         </div>
-        <Submenu className={styles.languageSubmenu} place={this.props.isRtl ? 'left' : 'right'}>
+        <Submenu className={styles.languageSubmenu} place={this.props.isRtl ? 'left' : 'left'}>
           {Object.keys(locales).map((locale) => (
             <MenuItem
               key={locale}

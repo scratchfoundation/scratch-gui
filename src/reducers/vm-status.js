@@ -2,6 +2,8 @@ const SET_RUNNING_STATE = "scratch-gui/vm-status/SET_RUNNING_STATE";
 const SET_TURBO_STATE = "scratch-gui/vm-status/SET_TURBO_STATE";
 const SET_STARTED_STATE = "scratch-gui/vm-status/SET_STARTED_STATE";
 const SET_FLAG_CLICKED_STATE = "scratch-gui/vm-status/SET_FLAG_CLICKED_STATE";
+const SET_GREENFLAG_CLICKED_STATE =
+    "scratch-gui/vm-status/SET_GREENFLAG_CLICKED_STATE";
 const SET_IS_SAVING_STATE = "scratch-gui/vm-status/SET_IS_SAVING_STATE";
 const SET_IS_SAVING_STATE_STATUS =
     "scratch-gui/vm-status/SET_IS_SAVING_STATE_STATUS";
@@ -14,6 +16,8 @@ const SET_COSTUME_URL_STATE = "scratch-gui/vm-status/SET_COSTUME_URL_STATE";
 const SET_AUTO_SAVE_STATE = "scratch-gui/vm-status/SET_AUTO_SAVE_STATE";
 const SET_PROJECT_NAME = "scratch-gui/vm-status/SET_PROJECT_NAME";
 const SET_IS_PENDING_STATE = "scratch-gui/vm-status/SET_IS_PENDING_STATE";
+const ADD_NOTIFICATION = "scratch-gui/vm-status/ADD_NOTIFICATION";
+const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
 
 const initialState = {
     running: false,
@@ -21,6 +25,7 @@ const initialState = {
     turbo: false,
     flagClicked: false,
     spriteClicked: false,
+    greenFlagClicked: false,
     autoSave: false,
     costumeURLFax: "",
     isSaving: false,
@@ -30,6 +35,7 @@ const initialState = {
     isLoading: false,
     projectName: "",
     isPendingState: false,
+    notifications: [],
 };
 
 const reducer = function (state, action) {
@@ -91,6 +97,23 @@ const reducer = function (state, action) {
             return Object.assign({}, state, {
                 isPendingState: action.isPendingState,
             });
+        case SET_GREENFLAG_CLICKED_STATE:
+            return {
+                ...state,
+                greenFlagClicked: !state.greenFlagClicked,
+            };
+        case ADD_NOTIFICATION:
+            return {
+                ...state,
+                notifications: [...state.notifications, action.notification],
+            };
+        case REMOVE_NOTIFICATION:
+            return {
+                ...state,
+                notifications: state.notifications.filter(
+                    (n) => n.id !== action.id
+                ),
+            };
         default:
             return state;
     }
@@ -194,6 +217,29 @@ const setIsPendingState = function (isPendingState) {
     };
 };
 
+const addNotification = function (notification) {
+    return {
+        type: ADD_NOTIFICATION,
+        notification: {
+            ...notification,
+            id: notification.id || Date.now(), // Ensure unique ID
+        },
+    };
+};
+
+const removeNotification = function (id) {
+    return {
+        type: REMOVE_NOTIFICATION,
+        id,
+    };
+};
+
+const greenFlagClicked = function () {
+    return {
+        type: SET_GREENFLAG_CLICKED_STATE,
+    };
+};
+
 export {
     reducer as default,
     initialState as vmStatusInitialState,
@@ -211,4 +257,7 @@ export {
     setAutoSaveState,
     setProjectName,
     setIsPendingState,
+    addNotification,
+    removeNotification,
+    greenFlagClicked,
 };

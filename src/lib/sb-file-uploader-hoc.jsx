@@ -15,7 +15,7 @@ import {
 } from '../reducers/project-state'
 import { setProjectTitle } from '../reducers/project-title'
 import { openLoadingProject, closeLoadingProject } from '../reducers/modals'
-import { setProjectName } from '../reducers/vm-status.js'
+import { setProjectName, addNotification } from '../reducers/vm-status.js'
 import { closeFileMenu } from '../reducers/menus'
 
 const messages = defineMessages({
@@ -143,9 +143,12 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         let loadingSuccess = false
         this.props.vm
           .loadProject(this.fileReader.result)
-          .then(async() => {
+          .then(async () => {
             let base64blocks = btoa(
-              new Uint8Array(this.fileReader.result).reduce((data, byte) => data + String.fromCharCode(byte), ''),
+              new Uint8Array(this.fileReader.result).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                '',
+              ),
             )
             if (filename) {
               const uploadedProjectTitle = this.getProjectTitleFromFilename(filename)
@@ -155,17 +158,30 @@ const SBFileUploaderHOC = function (WrappedComponent) {
               const fetchapiurl = url.get('fetchapiurl')
               if (projectId) {
                 try {
-                  if(!uploadedProjectTitle){
+                  if (!uploadedProjectTitle) {
                     throw new Error('Project title is empty')
                   }
+                  const base64Size =
+                      (base64blocks.length * 3) / 4 -
+                      (base64blocks.endsWith('==') ? 2 : base64blocks.endsWith('=') ? 1 : 0);
+
+                    if (base64Size > 10 * 1024 * 1024) {
+                      this.props.addNotification({
+                        type: 'error',
+                        icon: 'error',
+                        message: 'Unable to save. The project exceeds the size limit. Please reduce file quality or remove large files.',
+                        duration: 10000
+                      });
+                      throw new Error('Project is too large to save (>10MB)');
+                    }
                   const updatedData = {
                     name: uploadedProjectTitle,
                     projectType: 'scratch',
                     content: base64blocks,
-                  };
-              
+                  }
+
                   const updateProjectById = async (id, data) => {
-                    const apiUrl = `${fetchapiurl}/projects/${id}`;
+                    const apiUrl = `${fetchapiurl}/projects/${id}`
                     try {
                       const response = await fetch(apiUrl, {
                         method: 'PUT',
@@ -174,28 +190,27 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                         },
                         body: JSON.stringify(data),
                         credentials: 'include',
-                      });
-              
+                      })
+
                       if (!response.ok) {
-                        throw new Error(`Failed to update project: ${response.statusText}`);
+                        throw new Error(`Failed to update project: ${response.statusText}`)
                       }
-                      const res =  await response.json()
-                      console.log('Response from updateProjectById:', res);
+                      const res = await response.json()
                       this.props.setProjectName(res?.name)
                     } catch (error) {
                       const updatedData = {
                         name: uploadedProjectTitle + '' + Math.floor(Math.random() * 1000),
                         projectType: 'scratch',
                         content: base64blocks,
-                      };
-                      await updateProjectById(projectId, updatedData);
-                      console.error('error error error', error.message, error);
+                      }
+                      await updateProjectById(projectId, updatedData)
+                      console.error('error error error', error.message, error)
                     }
-                  };
-            
-                  await updateProjectById(projectId, updatedData);
+                  }
+
+                  await updateProjectById(projectId, updatedData)
                 } catch (error) {
-                  console.error('Error updating project:', error);
+                  console.error('Error updating project:', error)
                 }
               }
             }
@@ -300,6 +315,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
     // noticed by componentDidUpdate()
     requestProjectUpload: (loadingState) => dispatch(requestProjectUpload(loadingState)),
     setProjectName: (name) => dispatch(setProjectName(name)),
+    addNotification: (notification) => dispatch(addNotification(notification)),
   })
   // Allow incoming props to override redux-provided props. Used to mock in tests.
   const mergeProps = (stateProps, dispatchProps, ownProps) =>

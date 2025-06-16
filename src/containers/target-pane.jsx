@@ -84,6 +84,8 @@ class TargetPane extends React.Component {
       restoreFun: restoreFun,
       deletedItem: 'Sprite',
     })
+
+    this.props.onGreenFlagClicked();
   }
   handleDuplicateSprite(id) {
     this.props.vm.duplicateSprite(id)
@@ -135,7 +137,6 @@ class TargetPane extends React.Component {
     this.fileInput.click()
   }
   handleSuccessCallback = () => {
-    console.log('asdkj asdi')
     this.props.onGreenFlagClicked();
   }
 

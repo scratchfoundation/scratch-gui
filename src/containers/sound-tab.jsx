@@ -78,6 +78,7 @@ class SoundTab extends React.Component {
       this.setState({ selectedSoundIndex: Math.max(0, soundIndex - 1) })
     }
     this.props.dispatchUpdateRestore({ restoreFun, deletedItem: 'Sound' })
+     this.props.onGreenFlagClicked();
   }
 
   handleExportSound(soundIndex) {
@@ -120,7 +121,6 @@ class SoundTab extends React.Component {
   }
 
   handleSuccessCallback = () => {
-    console.log('oandoqwnd')
     this.props.onGreenFlagClicked();
   }
 

@@ -128,6 +128,7 @@ class CostumeTab extends React.Component {
       restoreFun: restoreCostumeFun,
       deletedItem: 'Costume',
     })
+    this.props.onGreenFlagClicked();
   }
   handleDuplicateCostume(costumeIndex) {
     this.props.vm.duplicateCostume(costumeIndex)

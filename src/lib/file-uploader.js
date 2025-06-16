@@ -129,7 +129,7 @@ const costumeUpload = async function (
             formData.append("file", blob);
 
             const response = await fetch(
-                "https://api.test.myqubit.co/projects/compress-files",
+                "https://api.stage-uae.myqubit.co/projects/compress-file",
                 {
                     method: "POST",
                     body: formData,
@@ -144,14 +144,12 @@ const costumeUpload = async function (
             }
 
             const compressedBuffer = await response.arrayBuffer();
+            handleSuccessCallback();
             return new Uint8Array(compressedBuffer);
         } catch (error) {
             handleError(
                 `API compression failed for ${mimeType}: ${error.message}`
             );
-            return data; // Fallback to original data if compression fails
-        } finally {
-            handleSuccessCallback();
         }
     };
 
@@ -301,13 +299,12 @@ const soundUpload = async function (
     let soundFormat;
 
     try {
-        // Prepare and send API request
         const blob = new Blob([fileData], { type: fileType });
         const formData = new FormData();
         formData.append("file", blob);
 
         const response = await fetch(
-            "https://api.test.myqubit.co/projects/compress-files",
+            "https://api.stage-uae.myqubit.co/projects/compress-file",
             {
                 method: "POST",
                 body: formData,
@@ -323,7 +320,6 @@ const soundUpload = async function (
 
         const compressedData = await response.arrayBuffer();
 
-        // Determine sound format
         switch (fileType) {
             case "audio/mp3":
             case "audio/mpeg": {
@@ -343,7 +339,6 @@ const soundUpload = async function (
                 );
         }
 
-        // Create and store the sound asset
         const vmSound = createVMAsset(
             storage,
             storage.AssetType.Sound,
@@ -351,15 +346,10 @@ const soundUpload = async function (
             new Uint8Array(compressedData)
         );
 
-        // Call the handleSound function to process the sound
         handleSound(vmSound);
-
-        // Call the success callback with the created sound
-        handleSuccessCallback(vmSound);
+        handleSuccessCallback();
     } catch (error) {
         handleError(`Sound upload failed: ${error.message}`);
-    } finally {
-        handleSuccessCallback();
     }
 };
 

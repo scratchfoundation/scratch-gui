@@ -1,8 +1,10 @@
 .icon {
     width: 1.1rem;
-    color: #787878;
-    
-    /* background-color: gray; */
+    color: #801D80;
+    stroke-width: 2px;
+} 
+.icon:hover {
+    color: #252525;
 }
 
 .theme-label {
@@ -61,13 +63,11 @@
 
 .language-submenu {
     position: absolute;
-    top: 0;
-    left: 100%;
-    display: none;
-    z-index: 1000;
-    background-color: #fff;
+    height:40rem;
+    width: 20rem;
     border-radius: 0.25rem;
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+    top: 20px;
 }
 
 .language-submenu > ul {

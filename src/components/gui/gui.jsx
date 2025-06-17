@@ -22,6 +22,7 @@ import CostumeLibrary from '../../containers/costume-library.jsx'
 import BackdropLibrary from '../../containers/backdrop-library.jsx'
 import Watermark from '../../containers/watermark.jsx'
 
+
 import Backpack from '../../containers/backpack.jsx'
 import WebGlModal from '../../containers/webgl-modal.jsx'
 import TipsLibrary from '../../containers/tips-library.jsx'
@@ -40,7 +41,10 @@ import addExtensionIcon from './icon--extensions.svg'
 import codeIcon from './icon--code.svg'
 import costumesIcon from './icon--costumes.svg'
 import soundsIcon from './icon--sounds.svg'
-import { setSpriteClickedState } from './../../reducers/vm-status.js'
+import BackArrow from './icon--back-arrow.svg'
+import EditAction from './icon--edit-action.svg'
+import Cat from './icon--cat.svg'
+import { setSpriteClickedState, addNotification, removeNotification, setProjectName } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage';
 import { MenuItem, MenuSection } from '../menu/menu.jsx'
@@ -49,6 +53,7 @@ import SB3Downloader from '../../containers/sb3-downloader.jsx'
 
 import MenuBarGuiSub from '../menu-bar/menu-bar-gui-sub.jsx'
 import { connect as penpalConnect, WindowMessenger } from 'penpal';
+import NotificationStack from '../notifications/NotificationStack.jsx'
 
 const messages = defineMessages({
   addExtension: {
@@ -139,6 +144,7 @@ const GUIComponent = (props) => {
     isSaving,
     isPendingState,
     projectName,  
+    notifications,
     ...componentProps
   } = omit(props, 'dispatch')
   if (children) {
@@ -160,8 +166,6 @@ const GUIComponent = (props) => {
   const [currentLayout, setCurrentLayout] = React.useState('normal')
   const [remote, setRemote] = React.useState(null);
   const [connection, setConnection] = React.useState(null);
-  const [message, setMessage] = React.useState('');
-  const [value, setValue] = React.useState(0);
   
   useEffect(() => {
     const connectToParent = async () => {
@@ -175,9 +179,9 @@ const GUIComponent = (props) => {
           messenger,
           methods: {
             getScratchState(message) {
-              return message; 
+              console.log('Received message from parent:', message);
+              props.setProjectName(message);
             },
-
           },
           timeout: 5000,
         });
@@ -199,6 +203,7 @@ const GUIComponent = (props) => {
       }
     };
   }, []);
+  
 
   useEffect(() => {
     localforage.getItem('currentLayout').then(value => {
@@ -229,11 +234,17 @@ const GUIComponent = (props) => {
     }
   },[remote, isPendingState])
 
-  useEffect(()=>{
-    if(remote){
-      remote.updateProjectName?.(projectName)
+  function handleRemoteModal(remote) {
+    if (remote) {
+      remote.openModal?.();
     }
-  },[remote, projectName])
+  }
+  
+  function handlebacktomyprojects() {
+    if( remote) {
+      remote.handleBackButtonClick?.();
+    }
+  }
 
 
   return (
@@ -278,8 +289,28 @@ const GUIComponent = (props) => {
             {backdropLibraryVisible ? (
               <BackdropLibrary vm={vm} onRequestClose={onRequestCloseBackdropLibrary} />
             ) : null}
-            
-            <div className={styles.topNavIcons}>
+
+            <div className={styles.menuBarWithContent}>
+             {currentLayout === 'myprojects' && <div className={styles.backAndTitle}>
+                <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
+                   <img src={BackArrow} />
+                </button>
+                <div className={styles.projectnameEdit}>
+                  <div className={styles.catIcon}>
+                  <img src={Cat} />
+                  </div>
+                  <div className={styles.projectnameEdit}>
+                    Scratch - {projectName}
+                  </div>
+                  <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
+                    <img src={EditAction} />
+                  </div>
+                </div>
+                <div className={styles.projectNotifications}>
+                <NotificationStack notifications={notifications} />
+                </div>
+              </div>}
+              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>
               <div className={styles.languageRes}>
                 <LanguageMenu />
               </div>
@@ -320,6 +351,9 @@ const GUIComponent = (props) => {
                 />
               </div>
             </div>
+            </div>
+            
+            
 
             <Box className={styles.bodyWrapper}>
               <Box className={styles.flexWrapper}>
@@ -551,10 +585,14 @@ const mapStateToProps = (state) => ({
   isSaving: state.scratchGui.vmStatus.isSaving,
   isPendingState: state.scratchGui.vmStatus.isPendingState,
   projectName: state.scratchGui.vmStatus.projectName,
+  notifications: state.scratchGui.vmStatus.notifications,
 })
 
 const mapDispatchToProps = {
   setSpriteClickedState,
+  addNotification, 
+  removeNotification,
+  setProjectName,
 }
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(GUIComponent))

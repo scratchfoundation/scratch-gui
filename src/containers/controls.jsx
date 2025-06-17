@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import VM from 'scratch-vm'
 import { connect } from 'react-redux'
-import { setFlagClickedState, setSpriteClickedState } from './../reducers/vm-status.js'
+import { setFlagClickedState, setSpriteClickedState, greenFlagClicked } from './../reducers/vm-status.js'
 
 import ControlsComponent from '../components/controls/controls.jsx'
 
@@ -18,6 +18,7 @@ class Controls extends React.Component {
   }
   handleGreenFlagClick(e) {
     e.preventDefault()
+    this.props.greenFlagClicked()
     if (e.shiftKey) {
       this.props.vm.setTurboMode(!this.props.turbo)
     } else {
@@ -91,5 +92,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   setFlagClickedState,
   setSpriteClickedState,
+  greenFlagClicked,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Controls)

@@ -20,6 +20,7 @@ import { highlightTarget } from '../reducers/targets'
 import { fetchSprite, fetchCode } from '../lib/backpack-api'
 import randomizeSpritePosition from '../lib/randomize-sprite-position'
 import downloadBlob from '../lib/download-blob'
+import {greenFlagClicked} from './../reducers/vm-status.js'
 
 class TargetPane extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class TargetPane extends React.Component {
       'handleFileUploadClick',
       'handleSpriteUpload',
       'setFileInput',
+      'handleSuccessCallback',
     ])
   }
   componentDidMount() {
@@ -82,6 +84,8 @@ class TargetPane extends React.Component {
       restoreFun: restoreFun,
       deletedItem: 'Sprite',
     })
+
+    this.props.onGreenFlagClicked();
   }
   handleDuplicateSprite(id) {
     this.props.vm.duplicateSprite(id)
@@ -132,6 +136,10 @@ class TargetPane extends React.Component {
   handleFileUploadClick() {
     this.fileInput.click()
   }
+  handleSuccessCallback = () => {
+    this.props.onGreenFlagClicked();
+  }
+
   handleSpriteUpload(e) {
     const storage = this.props.vm.runtime.storage
     this.props.onShowImporting()
@@ -153,6 +161,7 @@ class TargetPane extends React.Component {
               .catch(this.props.onCloseImporting)
           },
           this.props.onCloseImporting,
+          this.handleSuccessCallback,
         )
       },
       this.props.onCloseImporting,
@@ -336,6 +345,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
   onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+  onGreenFlagClicked: () => dispatch(greenFlagClicked()),
 })
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(TargetPane))

@@ -142,7 +142,10 @@
 
 .menu-bar-menu {
     /* margin-top: $menu-bar-height; */
+    position: absolute;
+    top: 40px;
     z-index: $z-index-menu-bar;
+    
 }
 
 .feedback-link {
@@ -271,7 +274,8 @@
 
 .file-drop-down{
     width:1.1rem;
-    color: #787878;
+    color: #801D80;
+    stroke-width: 2.1px;
     padding-bottom: 0.2rem;
 }
 .file-drop-down:hover{

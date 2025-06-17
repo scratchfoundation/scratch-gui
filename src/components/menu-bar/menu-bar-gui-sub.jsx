@@ -28,6 +28,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx'
 import TurboMode from '../../containers/turbo-mode.jsx'
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx'
 import SettingsMenu from './settings-menu.jsx'
+import debounce from 'lodash.debounce'
 
 import { openTipsLibrary } from '../../reducers/modals'
 import { setPlayer } from '../../reducers/mode'
@@ -48,7 +49,7 @@ import {
   remixProject,
   saveProjectAsCopy,
 } from '../../reducers/project-state'
-import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName } from '../../reducers/vm-status.js'
+import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification } from '../../reducers/vm-status.js'
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -244,7 +245,11 @@ class MenuBarGuiSub extends React.Component {
 
   async fetchProjectData(projectId, fetchapiurl) {
     if (!projectId) return
-    this.props.onClickLoadingTrue()
+    this.props.addNotification({
+      type: 'saving',
+      icon: 'saving',
+      message: 'Fetching project please wait',
+    });
     this.props.setIsSavingStateTrue()
     try {
       const apiUrl = `${fetchapiurl}/projects/${projectId}`
@@ -256,13 +261,17 @@ class MenuBarGuiSub extends React.Component {
         credentials: 'include',
       })
       const data = await response.json()
-      console.log('Fetched project data:', data)
+      this.props.setProjectName(data.name)
+      this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching project please wait',
+        duration: 500
+      });
       return data
     } catch (error) {
-      this.props.onClickLoadingFalse()
       this.props.setIsSavingStateFalse()
     } finally {
-      this.props.onClickLoadingFalse()
       this.props.setIsSavingStateFalse()
     }
   }
@@ -425,8 +434,6 @@ class MenuBarGuiSub extends React.Component {
 
     this.setState({ currentLayout })
 
-    console.log('scratch console currenytLayout', currentLayout)
-
     try {
       if (currentLayout === 'teacher') {
         result = await this.fetchProjectDataTeacher(
@@ -460,7 +467,16 @@ class MenuBarGuiSub extends React.Component {
     }
   }
 
+  debouncedOnLocalStorageSave = debounce(() => {
+    this.onLocalStorageSave(this.state.downloadLocalStorageProject)();
+  }, 1000);
+
   componentDidUpdate(prevProps) {
+
+    if (this.props.greenFlagClicked !== prevProps.greenFlagClicked) {
+      this.debouncedOnLocalStorageSave();
+    }
+
     if (
       this.props.flagClicked !== prevProps.flagClicked ||
       this.props.autoSave !== prevProps.autoSave
@@ -489,7 +505,6 @@ class MenuBarGuiSub extends React.Component {
       bytes[i] = binaryString.charCodeAt(i)
     }
     await new Promise((resolve) => setTimeout(resolve, 500))
-    console.log('bytes', bytes, bytes.buffer)
     await this.props.vm.loadProject(bytes.buffer)
     this.props.onClickFirstFalse()
   }
@@ -655,7 +670,7 @@ class MenuBarGuiSub extends React.Component {
             <MenuBarMenu
               className={classNames(styles.menuBarMenu)}
               open={this.props.fileMenuOpen}
-              place={this.props.isRtl ? 'left' : 'right'}
+              place={this.props.isRtl ? 'right' : 'left'}
               onRequestClose={this.props.onRequestCloseFile}
             >
               <MenuSection>
@@ -711,17 +726,6 @@ class MenuBarGuiSub extends React.Component {
             </MenuBarMenu>
           </div>
         )}
-            {this.props.isSavingStatus && (
-                <span className={styles.savingState}>
-                  {this.props.isSavingStatus} {this.props.isSavingStatus === 'Saving project' && <div className={styles.loader}></div>}
-                </span>
-              )}
-        
-            {this.props.isLoading && (
-              <div className={styles.loadingState}>
-                Fetching data, please wait <div className={styles.loader}></div>
-              </div>
-            )}
       </Box>
     )
   }
@@ -753,6 +757,7 @@ const mapStateToProps = (state, ownProps) => {
     mode2020: isTimeTravel2020(state),
     modeNow: isTimeTravelNow(state),
     flagClicked: state.scratchGui.vmStatus.flagClicked,
+    greenFlagClicked: state.scratchGui.vmStatus.greenFlagClicked,
     isSaving: state.scratchGui.vmStatus.isSaving,
     isSavingStatus: state.scratchGui.vmStatus.isSavingStatus,
     isFirst: state.scratchGui.vmStatus.isFirst,
@@ -791,6 +796,7 @@ const mapDispatchToProps = (dispatch) => ({
   setIsSavingStateTrue: () => dispatch(setIsSavingState(true)),
   setIsSavingStateFalse: () => dispatch(setIsSavingState(false)),
   setProjectName: (name) => dispatch(setProjectName(name)),
+  addNotification: (notification) => dispatch(addNotification(notification)),
 })
 
 export default compose(

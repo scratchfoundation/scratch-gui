@@ -1,6 +1,7 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 @import "../../css/z-index.css";
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 html, body {
     overflow-x: scroll;
@@ -11,6 +12,96 @@ html, body {
     z-index: $z-index-menu-bar;
 }
 
+.menu-bar-with-content{
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    /* padding: 5px; */
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    align-items:center;
+    justify-content:space-between;
+    overflow: hidden;
+}
+.back-and-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    gap: 10px;
+}
+.back-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+.back-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.back-button img{
+    background-color: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    padding: 7px;
+    height: 32px;
+    width: 32px;
+    stroke-width: 2px;
+}
+.projectname-edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.cat-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.cat-icon img{
+    width: 17px;
+    height: 17px;
+}
+
+.projectname-edit {
+    color: #283B52;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: "Geist", sans-serif;
+    font-optical-sizing: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    stroke-width: 4px;
+}
+.edit-icon img{
+    width: 16x;
+    height: 16px;
+    cursor: pointer;
+    color: #801D80;
+    stroke-width: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 .page-wrapper {
     height: 100%;
     border-radius: 0.6rem;
@@ -428,27 +519,40 @@ $fade-out-distance: 15px;
 }
 
 .top-nav-icons{
-
+    width: 4.5rem;
     display: flex;
     flex-direction: row;
-    padding: 0.3rem 0 0.3rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    border-top: 0.4rem solid #f9f9f9;
-    background-color: white;
     align-items: center;
-    border-left: 2px solid #f9f9f9;
+    position: absolute;
+    right: 0;
+}
+
+.top-nav-icons-left{
+    width: 4.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    left: 0;
 }
 
 .setting-icon{
-    /* background-color: aquamarine; */
+    width: 1.5rem;
     padding-top: 4px;
     cursor: pointer;
-
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .language-res{
-    width: fit-content; 
-    color: #787878;
+    color: #c36a6a;
+    position: relative;
+    right: 0;
+    z-index: 99999 !important;
 }
+
 
 @media (max-width: 720px) {
   .flex-wrapper {

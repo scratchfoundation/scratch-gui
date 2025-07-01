@@ -67,7 +67,7 @@ class LanguageMenu extends React.PureComponent {
                         src={dropdownCaret}
                     /> */}
         </div>
-        <Submenu className={styles.languageSubmenu} place={this.props.isRtl ? 'left' : 'left'}>
+        <Submenu className={styles.languageSubmenu} place={this.props.isRtl || this.props.positionModal ? 'left' : 'right'}>
           {Object.keys(locales).map((locale) => (
             <MenuItem
               key={locale}
@@ -106,6 +106,7 @@ const mapStateToProps = (state) => ({
   isRtl: state.locales.isRtl,
   menuOpen: languageMenuOpen(state),
   messagesByLocale: state.locales.messagesByLocale,
+  positionModal: state.scratchGui.vmStatus.positionModal,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

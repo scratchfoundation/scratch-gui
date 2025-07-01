@@ -18,6 +18,7 @@ const SET_PROJECT_NAME = "scratch-gui/vm-status/SET_PROJECT_NAME";
 const SET_IS_PENDING_STATE = "scratch-gui/vm-status/SET_IS_PENDING_STATE";
 const ADD_NOTIFICATION = "scratch-gui/vm-status/ADD_NOTIFICATION";
 const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
+const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
 
 const initialState = {
     running: false,
@@ -36,6 +37,7 @@ const initialState = {
     projectName: "",
     isPendingState: false,
     notifications: [],
+    positionModal: false,
 };
 
 const reducer = function (state, action) {
@@ -107,6 +109,11 @@ const reducer = function (state, action) {
                 ...state,
                 notifications: [...state.notifications, action.notification],
             };
+        case POSITION_MODAL:
+            return {
+                ...state,
+                positionModal: action.positionModal,
+            };
         case REMOVE_NOTIFICATION:
             return {
                 ...state,
@@ -117,6 +124,13 @@ const reducer = function (state, action) {
         default:
             return state;
     }
+};
+
+const setPositionModal = function (positionModal) {
+    return {
+        type: POSITION_MODAL,
+        positionModal: positionModal,
+    };
 };
 
 const setStartedState = function (started) {
@@ -260,4 +274,5 @@ export {
     addNotification,
     removeNotification,
     greenFlagClicked,
+    setPositionModal,
 };

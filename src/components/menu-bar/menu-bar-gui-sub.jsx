@@ -601,7 +601,7 @@ class MenuBarGuiSub extends React.Component {
         <MenuBarMenu
           className={classNames(styles.menuBarMenu)}
           open={this.props.aboutMenuOpen}
-          place={this.props.isRtl ? 'right' : 'left'}
+          place={this.props.isRtl ? 'left' : 'left'}
           onRequestClose={this.props.onRequestCloseAbout}
         >
           {onClickAbout.map((itemProps) => (
@@ -670,7 +670,7 @@ class MenuBarGuiSub extends React.Component {
             <MenuBarMenu
               className={classNames(styles.menuBarMenu)}
               open={this.props.fileMenuOpen}
-              place={this.props.isRtl ? 'right' : 'left'}
+              place={this.props.isRtl || this.props.positionModal ? 'left' : 'right'}
               onRequestClose={this.props.onRequestCloseFile}
             >
               <MenuSection>
@@ -763,6 +763,7 @@ const mapStateToProps = (state, ownProps) => {
     isFirst: state.scratchGui.vmStatus.isFirst,
     isLoading: state.scratchGui.vmStatus.isLoading,
     autoSave: state.scratchGui.vmStatus.autoSave,
+    positionModal: state.scratchGui.vmStatus.positionModal,
   }
 }
 
@@ -797,6 +798,7 @@ const mapDispatchToProps = (dispatch) => ({
   setIsSavingStateFalse: () => dispatch(setIsSavingState(false)),
   setProjectName: (name) => dispatch(setProjectName(name)),
   addNotification: (notification) => dispatch(addNotification(notification)),
+
 })
 
 export default compose(

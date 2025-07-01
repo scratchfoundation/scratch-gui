@@ -44,7 +44,7 @@ import soundsIcon from './icon--sounds.svg'
 import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
 import Cat from './icon--cat.svg'
-import { setSpriteClickedState, addNotification, removeNotification, setProjectName } from './../../reducers/vm-status.js'
+import { setSpriteClickedState, addNotification, removeNotification, setProjectName, setPositionModal } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage';
 import { MenuItem, MenuSection } from '../menu/menu.jsx'
@@ -163,7 +163,7 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
-  const [currentLayout, setCurrentLayout] = React.useState('normal')
+  const [currentLayout, setCurrentLayout] = React.useState('normal');
   const [remote, setRemote] = React.useState(null);
   const [connection, setConnection] = React.useState(null);
   
@@ -214,6 +214,12 @@ const GUIComponent = (props) => {
     
     });
   }, [])
+
+  useEffect(() => {
+    if(currentLayout === 'myprojects') {
+      props.setPositionModal(true);
+    }
+  }, [currentLayout])
 
 
   useEffect(() => {
@@ -582,7 +588,6 @@ const mapStateToProps = (state) => ({
   spriteClicked: state.scratchGui.vmStatus.spriteClicked,
   isScratchData: state.scratchGui.vmStatus.isScratchData,
   isSaving: state.scratchGui.vmStatus.isSaving,
-  isSaving: state.scratchGui.vmStatus.isSaving,
   isPendingState: state.scratchGui.vmStatus.isPendingState,
   projectName: state.scratchGui.vmStatus.projectName,
   notifications: state.scratchGui.vmStatus.notifications,
@@ -593,6 +598,7 @@ const mapDispatchToProps = {
   addNotification, 
   removeNotification,
   setProjectName,
+  setPositionModal,
 }
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(GUIComponent))

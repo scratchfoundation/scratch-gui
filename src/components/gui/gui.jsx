@@ -145,6 +145,7 @@ const GUIComponent = (props) => {
     isPendingState,
     projectName,  
     notifications,
+    isEditableProject,
     ...componentProps
   } = omit(props, 'dispatch')
   if (children) {
@@ -308,9 +309,11 @@ const GUIComponent = (props) => {
                   <div className={styles.projectnameEdit}>
                     Scratch - {projectName}
                   </div>
+                  { isEditableProject &&(
                   <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                     <img src={EditAction} />
                   </div>
+                  )}
                 </div>
                 <div className={styles.projectNotifications}>
                 <NotificationStack notifications={notifications} />
@@ -590,6 +593,7 @@ const mapStateToProps = (state) => ({
   isSaving: state.scratchGui.vmStatus.isSaving,
   isPendingState: state.scratchGui.vmStatus.isPendingState,
   projectName: state.scratchGui.vmStatus.projectName,
+  isEditableProject: state.scratchGui.vmStatus.isEditableProject,
   notifications: state.scratchGui.vmStatus.notifications,
 })
 

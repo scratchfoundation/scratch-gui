@@ -19,6 +19,8 @@ const SET_IS_PENDING_STATE = "scratch-gui/vm-status/SET_IS_PENDING_STATE";
 const ADD_NOTIFICATION = "scratch-gui/vm-status/ADD_NOTIFICATION";
 const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
 const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
+const SET_ISEDITABLE_PROJECT = "scratch-gui/vm-status/SET_ISEDITABLE_PROJECT";
+
 
 const initialState = {
     running: false,
@@ -38,6 +40,7 @@ const initialState = {
     isPendingState: false,
     notifications: [],
     positionModal: false,
+    isEditableProject: true, 
 };
 
 const reducer = function (state, action) {
@@ -121,6 +124,11 @@ const reducer = function (state, action) {
                     (n) => n.id !== action.id
                 ),
             };
+        case SET_ISEDITABLE_PROJECT:
+            return {
+                ...state,
+                isEditableProject: action.isEditableProject,
+            }
         default:
             return state;
     }
@@ -195,6 +203,13 @@ const setIsLoadingState = function (isLoading) {
         isLoading: isLoading,
     };
 };
+
+const setIsEditable = function (isEditableProject) {
+    return {
+        type: SET_ISEDITABLE_PROJECT,
+        isEditableProject: isEditableProject,
+    };
+}
 
 const setSpriteClickedState = function (spriteClicked) {
     return {
@@ -275,4 +290,5 @@ export {
     removeNotification,
     greenFlagClicked,
     setPositionModal,
+    setIsEditable,
 };

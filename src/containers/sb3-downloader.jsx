@@ -105,7 +105,7 @@ class SB3Downloader extends React.Component {
             const apiUrl = `${fetchapiurl}/projects/${projectId}`
       
             try {
-              if(!projectId) {
+              if(!projectId || this.props.isEditableProject) {
                 return
               }
               this.props.setIsSavingState(true)
@@ -202,6 +202,7 @@ const mapStateToProps = (state) => ({
   isFirst: state.scratchGui.vmStatus.isFirst,
   projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
   projectName: state.scratchGui.vmStatus.projectName,
+  isEditableProject: state.scratchGui.vmStatus.isEditableProject,
 })
 
 const mapDispatchToProps = {

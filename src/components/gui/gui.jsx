@@ -299,9 +299,15 @@ const GUIComponent = (props) => {
 
             <div className={styles.menuBarWithContent}>
              {currentLayout === 'myprojects' && <div className={styles.backAndTitle}>
-                <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
+             
+                <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}
+                style={{
+                  visibility: !isEditableProject ? 'visible' : 'hidden',
+                  pointerEvents: !isEditableProject ? 'auto' : 'none'
+                }}>
                    <img src={BackArrow} />
                 </button>
+              
                 <div className={styles.projectnameEdit}>
                   <div className={styles.catIcon}>
                   <img src={Cat} />
@@ -309,7 +315,7 @@ const GUIComponent = (props) => {
                   <div className={styles.projectnameEdit}>
                     Scratch - {projectName}
                   </div>
-                  { isEditableProject &&(
+                  { !isEditableProject &&(
                   <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                     <img src={EditAction} />
                   </div>
@@ -319,7 +325,8 @@ const GUIComponent = (props) => {
                 <NotificationStack notifications={notifications} />
                 </div>
               </div>}
-              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>
+
+              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>               
               <div className={styles.languageRes}>
                 <LanguageMenu />
               </div>
@@ -410,7 +417,7 @@ const GUIComponent = (props) => {
                       </Tab>
                     </TabList>}
                     <TabPanel className={tabClassNames.tabPanel}>
-                      <Box className={styles.blocksWrapper}>
+                    <Box className={styles.blocksWrapper} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>                     
                         <Blocks
                           key={`${blocksId}/${theme}`}
                           canUseCloud={canUseCloud}
@@ -442,10 +449,10 @@ const GUIComponent = (props) => {
                         <Watermark />
                       </Box>
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
+                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}} >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
+                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
                   </Tabs>

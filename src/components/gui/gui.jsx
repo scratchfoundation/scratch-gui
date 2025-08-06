@@ -228,17 +228,6 @@ const GUIComponent = (props) => {
     }
   }, [remote, isScratchData, currentLayout]);
 
-  useEffect(() => {
-    if (remote) {
-      remote.isLayoutLoading?.(isSaving)
-    }
-  }, [remote, isSaving]);
-
-  useEffect(()=>{
-    if(remote){
-      remote.isPending?.(isPendingState)
-    }
-  },[remote, isPendingState])
 
   function handleRemoteModal(remote) {
     if (remote) {

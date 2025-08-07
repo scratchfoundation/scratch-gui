@@ -519,7 +519,7 @@ $fade-out-distance: 15px;
 }
 
 .top-nav-icons{
-    width: 4.5rem;
+    width: 7rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -528,12 +528,47 @@ $fade-out-distance: 15px;
 }
 
 .top-nav-icons-left{
-    width: 4.5rem;
+    width: 7rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     position: absolute;
     left: 0;
+}
+
+.share-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.share-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 0;
+}
+
+.share-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.share-btn img{
+    background-color: white;
+    border-radius: 6px;
+    padding: 7px;
+    height: 32px;
+    width: 32px;
+}
+
+.share-btn:hover:not(:disabled) img{
+    background-color: #f5f5f5;
+    transition: 0.1s ease-in-out;
 }
 
 .setting-icon{

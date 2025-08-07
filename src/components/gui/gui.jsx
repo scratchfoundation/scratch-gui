@@ -44,6 +44,7 @@ import soundsIcon from './icon--sounds.svg'
 import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
 import Cat from './icon--cat.svg'
+import ShareIcon from '../menu-bar/share.svg'
 import { setSpriteClickedState, addNotification, removeNotification, setProjectName, setPositionModal } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage';
@@ -253,6 +254,12 @@ const GUIComponent = (props) => {
     }
   }
 
+  function handleShare() {
+    if (remote) {
+      remote.handleShareClick?.();
+    }
+  }
+
 
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
@@ -300,11 +307,7 @@ const GUIComponent = (props) => {
             <div className={styles.menuBarWithContent}>
              {currentLayout === 'myprojects' && <div className={styles.backAndTitle}>
              
-                <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}
-                style={{
-                  visibility: !isEditableProject ? 'visible' : 'hidden',
-                  pointerEvents: !isEditableProject ? 'auto' : 'none'
-                }}>
+             <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
                    <img src={BackArrow} />
                 </button>
               
@@ -330,6 +333,13 @@ const GUIComponent = (props) => {
               <div className={styles.languageRes}>
                 <LanguageMenu />
               </div>
+              { !isEditableProject &&(
+              <div className={styles.shareButton}>
+                <button disabled={isSaving || isPendingState} onClick={() => handleShare()} className={styles.shareBtn}>
+                  <img src={ShareIcon} />
+                </button>
+              </div>
+               )}
               <div className={styles.settingIcon}>
                 <MenuBarGuiSub
                   accountNavOpen={accountNavOpen}

@@ -44,6 +44,7 @@ import soundsIcon from './icon--sounds.svg'
 import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
 import Cat from './icon--cat.svg'
+import ShareIcon from '../menu-bar/share.svg'
 import { setSpriteClickedState, addNotification, removeNotification, setProjectName, setPositionModal } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage';
@@ -145,6 +146,7 @@ const GUIComponent = (props) => {
     isPendingState,
     projectName,  
     notifications,
+    isEditableProject,
     ...componentProps
   } = omit(props, 'dispatch')
   if (children) {
@@ -241,6 +243,12 @@ const GUIComponent = (props) => {
     }
   }
 
+  function handleShare() {
+    if (remote) {
+      remote.handleShareClick?.();
+    }
+  }
+
 
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
@@ -287,9 +295,11 @@ const GUIComponent = (props) => {
 
             <div className={styles.menuBarWithContent}>
              {currentLayout === 'myprojects' && <div className={styles.backAndTitle}>
-                <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
+             
+             <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
                    <img src={BackArrow} />
                 </button>
+              
                 <div className={styles.projectnameEdit}>
                   <div className={styles.catIcon}>
                   <img src={Cat} />
@@ -297,18 +307,28 @@ const GUIComponent = (props) => {
                   <div className={styles.projectnameEdit}>
                     Scratch - {projectName}
                   </div>
+                  { !isEditableProject &&(
                   <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                     <img src={EditAction} />
                   </div>
+                  )}
                 </div>
                 <div className={styles.projectNotifications}>
                 <NotificationStack notifications={notifications} />
                 </div>
               </div>}
-              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>
+
+              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>               
               <div className={styles.languageRes}>
                 <LanguageMenu />
               </div>
+              { !isEditableProject &&(
+              <div className={styles.shareButton}>
+                <button disabled={isSaving || isPendingState} onClick={() => handleShare()} className={styles.shareBtn}>
+                  <img src={ShareIcon} />
+                </button>
+              </div>
+               )}
               <div className={styles.settingIcon}>
                 <MenuBarGuiSub
                   accountNavOpen={accountNavOpen}
@@ -396,7 +416,7 @@ const GUIComponent = (props) => {
                       </Tab>
                     </TabList>}
                     <TabPanel className={tabClassNames.tabPanel}>
-                      <Box className={styles.blocksWrapper}>
+                    <Box className={styles.blocksWrapper} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>                     
                         <Blocks
                           key={`${blocksId}/${theme}`}
                           canUseCloud={canUseCloud}
@@ -428,10 +448,10 @@ const GUIComponent = (props) => {
                         <Watermark />
                       </Box>
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
+                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}} >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel}>
+                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
                   </Tabs>
@@ -579,6 +599,7 @@ const mapStateToProps = (state) => ({
   isSaving: state.scratchGui.vmStatus.isSaving,
   isPendingState: state.scratchGui.vmStatus.isPendingState,
   projectName: state.scratchGui.vmStatus.projectName,
+  isEditableProject: state.scratchGui.vmStatus.isEditableProject,
   notifications: state.scratchGui.vmStatus.notifications,
 })
 

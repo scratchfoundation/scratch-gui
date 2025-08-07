@@ -49,7 +49,7 @@ import {
   remixProject,
   saveProjectAsCopy,
 } from '../../reducers/project-state'
-import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification } from '../../reducers/vm-status.js'
+import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable } from '../../reducers/vm-status.js'
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -420,8 +420,8 @@ class MenuBarGuiSub extends React.Component {
     const scratchSubstatus = url.get('scratchSubstatus')
     const scratchisActivein = url.get('scratchisActivein')
     const fetchapiurl = url.get('fetchapiurl')
-
-
+    const isprojecteditable = url.get('editable')
+    this.props.setIsEditable(isprojecteditable === 'true')
     const challengeId = url.get('challengeId')
     const chapterId = url.get('chapterId')
     const unitId = url.get('unitId')
@@ -798,7 +798,7 @@ const mapDispatchToProps = (dispatch) => ({
   setIsSavingStateFalse: () => dispatch(setIsSavingState(false)),
   setProjectName: (name) => dispatch(setProjectName(name)),
   addNotification: (notification) => dispatch(addNotification(notification)),
-
+  setIsEditable: (isEditable) => dispatch(setIsEditable(isEditable)),
 })
 
 export default compose(

@@ -333,7 +333,7 @@ const GUIComponent = (props) => {
               <div className={styles.languageRes}>
                 <LanguageMenu />
               </div>
-              { !isEditableProject &&(
+              { !isEditableProject && currentLayout === 'student' &&(
               <div className={styles.shareButton}>
                 <button disabled={isSaving || isPendingState} onClick={() => handleShare()} className={styles.shareBtn}>
                   <img src={ShareIcon} />

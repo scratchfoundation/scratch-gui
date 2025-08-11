@@ -229,13 +229,13 @@ const GUIComponent = (props) => {
 
   useEffect(() => {
     if (remote && currentLayout === 'studentChallenge') {
-      remote.updateStateFromScratch?.(isScratchData)
+      remote.updateStateFromScratch(isScratchData)
     }
   }, [remote, isScratchData, currentLayout])
 
   useEffect(() => {
     if (remote) {
-      remote.getLoadingState?.(isSaving || isPendingState)
+      remote.getLoadingState(isSaving || isPendingState)
     }
   }, [remote, isSaving, currentLayout])
 
@@ -247,13 +247,13 @@ const GUIComponent = (props) => {
 
   function handlebacktomyprojects() {
     if (remote) {
-      remote.handleBackButtonClick?.()
+      remote.handleBackButtonClick()
     }
   }
 
   function handleShare() {
     if (remote) {
-      remote.handleShareClick?.()
+      remote.handleShareClick()
     }
   }
 

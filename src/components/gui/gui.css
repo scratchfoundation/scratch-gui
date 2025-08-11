@@ -519,12 +519,15 @@ $fade-out-distance: 15px;
 }
 
 .top-nav-icons{
-    width: 7rem;
+    width: 6.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
     position: absolute;
     right: 0;
+    padding-right: 7px;
+
 }
 
 .top-nav-icons-left{
@@ -540,7 +543,6 @@ $fade-out-distance: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 8px;
 }
 
 .share-btn{
@@ -562,12 +564,11 @@ $fade-out-distance: 15px;
     background-color: white;
     border-radius: 6px;
     padding: 7px;
-    height: 32px;
-    width: 32px;
+    height: 30px;
+    width: 30px;
 }
 
 .share-btn:hover:not(:disabled) img{
-    background-color: #f5f5f5;
     transition: 0.1s ease-in-out;
 }
 

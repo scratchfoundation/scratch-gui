@@ -185,16 +185,16 @@ const GUIComponent = (props) => {
           messenger,
           methods: {
             getScratchState(message) {
-              console.log('Received message from parent:', message)
               props.setProjectName(message)
             },
           },
-          timeout: 5000,
+          timeout: 15000,
         })
 
         const remoteApi = await conn.promise
         setRemote(remoteApi)
         setConnection(conn)
+        console.log('Penpal connection established:', remoteApi)
       } catch (error) {
         console.error('Penpal connection failed:', error)
       }

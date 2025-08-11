@@ -22,7 +22,6 @@ import CostumeLibrary from '../../containers/costume-library.jsx'
 import BackdropLibrary from '../../containers/backdrop-library.jsx'
 import Watermark from '../../containers/watermark.jsx'
 
-
 import Backpack from '../../containers/backpack.jsx'
 import WebGlModal from '../../containers/webgl-modal.jsx'
 import TipsLibrary from '../../containers/tips-library.jsx'
@@ -45,15 +44,21 @@ import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
 import Cat from './icon--cat.svg'
 import ShareIcon from '../menu-bar/share.svg'
-import { setSpriteClickedState, addNotification, removeNotification, setProjectName, setPositionModal } from './../../reducers/vm-status.js'
+import {
+  setSpriteClickedState,
+  addNotification,
+  removeNotification,
+  setProjectName,
+  setPositionModal,
+} from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
-import localforage from 'localforage';
+import localforage from 'localforage'
 import { MenuItem, MenuSection } from '../menu/menu.jsx'
 import sharedMessages from '../../lib/shared-messages'
 import SB3Downloader from '../../containers/sb3-downloader.jsx'
 
 import MenuBarGuiSub from '../menu-bar/menu-bar-gui-sub.jsx'
-import { connect as penpalConnect, WindowMessenger } from 'penpal';
+import { connect as penpalConnect, WindowMessenger } from 'penpal'
 import NotificationStack from '../notifications/NotificationStack.jsx'
 
 const messages = defineMessages({
@@ -67,7 +72,6 @@ const messages = defineMessages({
 // Cache this value to only retrieve it once the first time.
 // Assume that it doesn't change for a session.
 let isRendererSupported = null
-
 
 const GUIComponent = (props) => {
   const {
@@ -144,7 +148,7 @@ const GUIComponent = (props) => {
     isScratchData,
     isSaving,
     isPendingState,
-    projectName,  
+    projectName,
     notifications,
     isEditableProject,
     ...componentProps
@@ -165,90 +169,93 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
-  const [currentLayout, setCurrentLayout] = React.useState('normal');
-  const [remote, setRemote] = React.useState(null);
-  const [connection, setConnection] = React.useState(null);
-  
+  const [currentLayout, setCurrentLayout] = React.useState('normal')
+  const [remote, setRemote] = React.useState(null)
+  const [connection, setConnection] = React.useState(null)
+
   useEffect(() => {
     const connectToParent = async () => {
       try {
         const messenger = new WindowMessenger({
           remoteWindow: window.parent,
           allowedOrigins: [window.location.origin],
-        });
+        })
 
         const conn = penpalConnect({
           messenger,
           methods: {
             getScratchState(message) {
-              console.log('Received message from parent:', message);
-              props.setProjectName(message);
+              console.log('Received message from parent:', message)
+              props.setProjectName(message)
             },
           },
           timeout: 5000,
-        });
+        })
 
-        const remoteApi = await conn.promise;
-        setRemote(remoteApi);
-        setConnection(conn);
+        const remoteApi = await conn.promise
+        setRemote(remoteApi)
+        setConnection(conn)
       } catch (error) {
-        console.error('Penpal connection failed:', error);
+        console.error('Penpal connection failed:', error)
       }
-    };
+    }
 
-    connectToParent();
+    connectToParent()
 
     return () => {
       if (connection) {
-        console.log('Destroying Penpal connection');
-        connection.destroy();
+        console.log('Destroying Penpal connection')
+        connection.destroy()
       }
-    };
-  }, []);
-  
-
-  useEffect(() => {
-    localforage.getItem('currentLayout').then(value => {
-      if (value !== null) {
-        setCurrentLayout(value)
-      }
-    }).catch(err => {
-    
-    });
+    }
   }, [])
 
   useEffect(() => {
-    if(currentLayout === 'myprojects') {
-      props.setPositionModal(true);
+    localforage
+      .getItem('currentLayout')
+      .then((value) => {
+        if (value !== null) {
+          setCurrentLayout(value)
+        }
+      })
+      .catch((err) => {})
+  }, [])
+
+  useEffect(() => {
+    if (currentLayout === 'myprojects') {
+      props.setPositionModal(true)
     }
   }, [currentLayout])
 
-
   useEffect(() => {
     if (remote && currentLayout === 'studentChallenge') {
-      remote.updateStateFromScratch?.(isScratchData);
+      remote.updateStateFromScratch?.(isScratchData)
     }
-  }, [remote, isScratchData, currentLayout]);
+  }, [remote, isScratchData, currentLayout])
 
+  useEffect(() => {
+    if (remote) {
+      remote.getLoadingState?.(isSaving || isPendingState)
+    }
+  }, [remote, isSaving, currentLayout])
 
   function handleRemoteModal(remote) {
     if (remote) {
-      remote.openModal?.();
+      remote.openModal()
     }
   }
-  
+
   function handlebacktomyprojects() {
-    if( remote) {
-      remote.handleBackButtonClick?.();
+    if (remote) {
+      remote.handleBackButtonClick?.()
     }
   }
 
   function handleShare() {
     if (remote) {
-      remote.handleShareClick?.();
+      remote.handleShareClick?.()
     }
   }
-
 
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
@@ -294,81 +301,94 @@ const GUIComponent = (props) => {
             ) : null}
 
             <div className={styles.menuBarWithContent}>
-             {currentLayout === 'myprojects' && <div className={styles.backAndTitle}>
-             
-             <button disabled={isSaving || isPendingState} onClick={()=>handlebacktomyprojects(remote)} className={styles.backButton}>
-                   <img src={BackArrow} />
-                </button>
-              
-                <div className={styles.projectnameEdit}>
-                  <div className={styles.catIcon}>
-                  <img src={Cat} />
-                  </div>
+              {currentLayout === 'myprojects' && (
+                <div className={styles.backAndTitle}>
+                  <button
+                    disabled={isSaving || isPendingState}
+                    onClick={() => handlebacktomyprojects(remote)}
+                    className={styles.backButton}
+                  >
+                    <img src={BackArrow} />
+                  </button>
+
                   <div className={styles.projectnameEdit}>
-                    Scratch - {projectName}
+                    <div className={styles.catIcon}>
+                      <img src={Cat} />
+                    </div>
+                    <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
+                    {!isEditableProject && (
+                      <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
+                        <img src={EditAction} />
+                      </div>
+                    )}
                   </div>
-                  { !isEditableProject &&(
-                  <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
-                    <img src={EditAction} />
+                  <div className={styles.projectNotifications}>
+                    <NotificationStack notifications={notifications} />
                   </div>
+                </div>
+              )}
+
+              <div
+                className={
+                  currentLayout === 'myprojects' ? styles.topNavIcons : styles.topNavIconsLeft
+                }
+              >
+                <div>
+                  {!isEditableProject && currentLayout === 'student' && (
+                    <div className={styles.shareButton}>
+                      <button
+                        disabled={isSaving || isPendingState}
+                        onClick={() => handleShare()}
+                        className={styles.shareBtn}
+                      >
+                        <img src={ShareIcon} />
+                      </button>
+                    </div>
                   )}
                 </div>
-                <div className={styles.projectNotifications}>
-                <NotificationStack notifications={notifications} />
-                </div>
-              </div>}
 
-              <div className={currentLayout === 'myprojects'? styles.topNavIcons : styles.topNavIconsLeft}>               
-              <div className={styles.languageRes}>
-                <LanguageMenu />
-              </div>
-              { !isEditableProject && currentLayout === 'student' &&(
-              <div className={styles.shareButton}>
-                <button disabled={isSaving || isPendingState} onClick={() => handleShare()} className={styles.shareBtn}>
-                  <img src={ShareIcon} />
-                </button>
-              </div>
-               )}
-              <div className={styles.settingIcon}>
-                <MenuBarGuiSub
-                  accountNavOpen={accountNavOpen}
-                  authorId={authorId}
-                  authorThumbnailUrl={authorThumbnailUrl}
-                  authorUsername={authorUsername}
-                  canChangeLanguage={canChangeLanguage}
-                  canChangeTheme={canChangeTheme}
-                  canCreateCopy={canCreateCopy}
-                  canCreateNew={canCreateNew}
-                  canEditTitle={canEditTitle}
-                  canManageFiles={canManageFiles}
-                  canRemix={canRemix}
-                  canSave={canSave}
-                  canShare={canShare}
-                  className={styles.menuBarPosition}
-                  enableCommunity={enableCommunity}
-                  isShared={isShared}
-                  isTotallyNormal={isTotallyNormal}
-                  logo={logo}
-                  renderLogin={renderLogin}
-                  showComingSoon={showComingSoon}
-                  onClickAbout={onClickAbout}
-                  onClickAccountNav={onClickAccountNav}
-                  onClickLogo={onClickLogo}
-                  onCloseAccountNav={onCloseAccountNav}
-                  onLogOut={onLogOut}
-                  onOpenRegistration={onOpenRegistration}
-                  onProjectTelemetryEvent={onProjectTelemetryEvent}
-                  onSeeCommunity={onSeeCommunity}
-                  onShare={onShare}
-                  onStartSelectingFileUpload={onStartSelectingFileUpload}
-                  onToggleLoginOpen={onToggleLoginOpen}
-                  currentLayout={currentLayout}
-                />
+                <div className={styles.languageRes}>
+                  <LanguageMenu />
+                </div>
+
+                <div className={styles.settingIcon}>
+                  <MenuBarGuiSub
+                    accountNavOpen={accountNavOpen}
+                    authorId={authorId}
+                    authorThumbnailUrl={authorThumbnailUrl}
+                    authorUsername={authorUsername}
+                    canChangeLanguage={canChangeLanguage}
+                    canChangeTheme={canChangeTheme}
+                    canCreateCopy={canCreateCopy}
+                    canCreateNew={canCreateNew}
+                    canEditTitle={canEditTitle}
+                    canManageFiles={canManageFiles}
+                    canRemix={canRemix}
+                    canSave={canSave}
+                    canShare={canShare}
+                    className={styles.menuBarPosition}
+                    enableCommunity={enableCommunity}
+                    isShared={isShared}
+                    isTotallyNormal={isTotallyNormal}
+                    logo={logo}
+                    renderLogin={renderLogin}
+                    showComingSoon={showComingSoon}
+                    onClickAbout={onClickAbout}
+                    onClickAccountNav={onClickAccountNav}
+                    onClickLogo={onClickLogo}
+                    onCloseAccountNav={onCloseAccountNav}
+                    onLogOut={onLogOut}
+                    onOpenRegistration={onOpenRegistration}
+                    onProjectTelemetryEvent={onProjectTelemetryEvent}
+                    onSeeCommunity={onSeeCommunity}
+                    onShare={onShare}
+                    onStartSelectingFileUpload={onStartSelectingFileUpload}
+                    onToggleLoginOpen={onToggleLoginOpen}
+                    currentLayout={currentLayout}
+                  />
+                </div>
               </div>
             </div>
-            </div>
-            
-            
 
             <Box className={styles.bodyWrapper}>
               <Box className={styles.flexWrapper}>
@@ -381,42 +401,47 @@ const GUIComponent = (props) => {
                     selectedTabPanelClassName={tabClassNames.tabPanelSelected}
                     onSelect={onActivateTab}
                   >
-                    {currentLayout!=='teacher' && <TabList className={tabClassNames.tabList}>
-                      <Tab className={tabClassNames.tab}>
-                        <img draggable={false} src={codeIcon} />
-                        <FormattedMessage
-                          defaultMessage='Code'
-                          description='Button to get to the code panel'
-                          id='gui.gui.codeTab'
-                        />
-                      </Tab>
-                      <Tab className={tabClassNames.tab} onClick={onActivateCostumesTab}>
-                        <img draggable={false} src={costumesIcon} />
-                        {targetIsStage ? (
+                    {currentLayout !== 'teacher' && (
+                      <TabList className={tabClassNames.tabList}>
+                        <Tab className={tabClassNames.tab}>
+                          <img draggable={false} src={codeIcon} />
                           <FormattedMessage
-                            defaultMessage='Backdrops'
-                            description='Button to get to the backdrops panel'
-                            id='gui.gui.backdropsTab'
+                            defaultMessage='Code'
+                            description='Button to get to the code panel'
+                            id='gui.gui.codeTab'
                           />
-                        ) : (
+                        </Tab>
+                        <Tab className={tabClassNames.tab} onClick={onActivateCostumesTab}>
+                          <img draggable={false} src={costumesIcon} />
+                          {targetIsStage ? (
+                            <FormattedMessage
+                              defaultMessage='Backdrops'
+                              description='Button to get to the backdrops panel'
+                              id='gui.gui.backdropsTab'
+                            />
+                          ) : (
+                            <FormattedMessage
+                              defaultMessage='Costumes'
+                              description='Button to get to the costumes panel'
+                              id='gui.gui.costumesTab'
+                            />
+                          )}
+                        </Tab>
+                        <Tab className={tabClassNames.tab} onClick={onActivateSoundsTab}>
+                          <img draggable={false} src={soundsIcon} />
                           <FormattedMessage
-                            defaultMessage='Costumes'
-                            description='Button to get to the costumes panel'
-                            id='gui.gui.costumesTab'
+                            defaultMessage='Sounds'
+                            description='Button to get to the sounds panel'
+                            id='gui.gui.soundsTab'
                           />
-                        )}
-                      </Tab>
-                      <Tab className={tabClassNames.tab} onClick={onActivateSoundsTab}>
-                        <img draggable={false} src={soundsIcon} />
-                        <FormattedMessage
-                          defaultMessage='Sounds'
-                          description='Button to get to the sounds panel'
-                          id='gui.gui.soundsTab'
-                        />
-                      </Tab>
-                    </TabList>}
+                        </Tab>
+                      </TabList>
+                    )}
                     <TabPanel className={tabClassNames.tabPanel}>
-                    <Box className={styles.blocksWrapper} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>                     
+                      <Box
+                        className={styles.blocksWrapper}
+                        style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      >
                         <Blocks
                           key={`${blocksId}/${theme}`}
                           canUseCloud={canUseCloud}
@@ -431,33 +456,48 @@ const GUIComponent = (props) => {
                           currentLayout={currentLayout}
                         />
                       </Box>
-                     {currentLayout!=='teacher' && <Box className={styles.extensionButtonContainer}>
-                        <button
-                          className={styles.extensionButton}
-                          title={intl.formatMessage(messages.addExtension)}
-                          onClick={onExtensionButtonClick}
-                        >
-                          <img
-                            className={styles.extensionButtonIcon}
-                            draggable={false}
-                            src={addExtensionIcon}
-                          />
-                        </button>
-                      </Box>}
+                      {currentLayout !== 'teacher' && (
+                        <Box className={styles.extensionButtonContainer}>
+                          <button
+                            className={styles.extensionButton}
+                            title={intl.formatMessage(messages.addExtension)}
+                            onClick={onExtensionButtonClick}
+                          >
+                            <img
+                              className={styles.extensionButtonIcon}
+                              draggable={false}
+                              src={addExtensionIcon}
+                            />
+                          </button>
+                        </Box>
+                      )}
                       <Box className={styles.watermark}>
                         <Watermark />
                       </Box>
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}} >
+                    <TabPanel
+                      className={tabClassNames.tabPanel}
+                      style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                    >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
-                    <TabPanel className={tabClassNames.tabPanel} style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}>
+                    <TabPanel
+                      className={tabClassNames.tabPanel}
+                      style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                    >
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
                   </Tabs>
                 </Box>
 
-                <Box className={classNames(currentLayout === 'teacher' || currentLayout === 'student' ? styles.stageAndTargetWrapperStlayout:styles.stageAndTargetWrapper, styles[stageSize])}>
+                <Box
+                  className={classNames(
+                    currentLayout === 'teacher' || currentLayout === 'student'
+                      ? styles.stageAndTargetWrapperStlayout
+                      : styles.stageAndTargetWrapper,
+                    styles[stageSize],
+                  )}
+                >
                   <StageWrapper
                     isFullScreen={isFullScreen}
                     isRendererSupported={isRendererSupported}
@@ -467,26 +507,48 @@ const GUIComponent = (props) => {
                     currentLayout={currentLayout}
                   />
 
-                  <Box  className={
-                    currentLayout === 'student' ? (spriteClicked?styles.targetWrapperStudent:styles.targetWrapperStudentHide) :
-                    currentLayout === 'teacher' ? (spriteClicked?styles.targetWrapperTeacher:styles.targetWrapperTeacherHide)  :
-                    spriteClicked ? styles.targetWrapper : styles.targetWrapperHide
-                  }>
+                  <Box
+                    className={
+                      currentLayout === 'student'
+                        ? spriteClicked
+                          ? styles.targetWrapperStudent
+                          : styles.targetWrapperStudentHide
+                        : currentLayout === 'teacher'
+                          ? spriteClicked
+                            ? styles.targetWrapperTeacher
+                            : styles.targetWrapperTeacherHide
+                          : spriteClicked
+                            ? styles.targetWrapper
+                            : styles.targetWrapperHide
+                    }
+                  >
                     <button
                       className={
-                      currentLayout === 'student' ? styles.canvasPosStudent :
-                      currentLayout === 'teacher' ? styles.canvasPosTeacher :
-                      styles.canvasPos
-                    }
+                        currentLayout === 'student'
+                          ? styles.canvasPosStudent
+                          : currentLayout === 'teacher'
+                            ? styles.canvasPosTeacher
+                            : styles.canvasPos
+                      }
                       onClick={() => props.setSpriteClickedState(false)}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke-width='1.5'
+                        stroke='currentColor'
+                        class='size-6'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          d='M6 18 18 6M6 6l12 12'
+                        />
                       </svg>
                     </button>
                     <TargetPane stageSize={stageSize} vm={vm} currentLayout={currentLayout} />
                   </Box>
-                 
                 </Box>
               </Box>
             </Box>
@@ -605,7 +667,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setSpriteClickedState,
-  addNotification, 
+  addNotification,
   removeNotification,
   setProjectName,
   setPositionModal,

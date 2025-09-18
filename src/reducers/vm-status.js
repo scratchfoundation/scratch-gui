@@ -21,7 +21,6 @@ const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
 const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
 const SET_ISEDITABLE_PROJECT = "scratch-gui/vm-status/SET_ISEDITABLE_PROJECT";
 
-
 const initialState = {
     running: false,
     started: false,
@@ -40,7 +39,7 @@ const initialState = {
     isPendingState: false,
     notifications: [],
     positionModal: false,
-    isEditableProject: true, 
+    isEditableProject: null,
 };
 
 const reducer = function (state, action) {
@@ -128,7 +127,7 @@ const reducer = function (state, action) {
             return {
                 ...state,
                 isEditableProject: action.isEditableProject,
-            }
+            };
         default:
             return state;
     }
@@ -209,7 +208,7 @@ const setIsEditable = function (isEditableProject) {
         type: SET_ISEDITABLE_PROJECT,
         isEditableProject: isEditableProject,
     };
-}
+};
 
 const setSpriteClickedState = function (spriteClicked) {
     return {

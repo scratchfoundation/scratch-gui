@@ -316,7 +316,7 @@ const GUIComponent = (props) => {
                       <img src={Cat} />
                     </div>
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
-                    {!isEditableProject && (
+                    {String(isEditableProject) === 'true' && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
@@ -334,7 +334,7 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                  {!isEditableProject && currentLayout === 'student' && (
+                  {isEditableProject === false && currentLayout === 'student' && (
                     <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}
@@ -440,7 +440,7 @@ const GUIComponent = (props) => {
                     <TabPanel className={tabClassNames.tabPanel}>
                       <Box
                         className={styles.blocksWrapper}
-                        style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                        style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
                       >
                         <Blocks
                           key={`${blocksId}/${theme}`}
@@ -477,13 +477,13 @@ const GUIComponent = (props) => {
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={isEditableProject ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
@@ -671,6 +671,7 @@ const mapDispatchToProps = {
   removeNotification,
   setProjectName,
   setPositionModal,
+
 }
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(GUIComponent))

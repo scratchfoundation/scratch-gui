@@ -105,7 +105,7 @@ class SB3Downloader extends React.Component {
             const apiUrl = `${fetchapiurl}/projects/${projectId}`
       
             try {
-              if(!projectId || this.props.isEditableProject) {
+              if(!projectId || !this.props.isEditableProject) {
                 return
               }
               this.props.setIsSavingState(true)

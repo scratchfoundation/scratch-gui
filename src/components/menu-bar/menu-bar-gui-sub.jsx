@@ -421,7 +421,7 @@ class MenuBarGuiSub extends React.Component {
     const scratchisActivein = url.get('scratchisActivein')
     const fetchapiurl = url.get('fetchapiurl')
     const isprojecteditable = url.get('editable')
-    this.props.setIsEditable(isprojecteditable === 'true')
+    this.props.setIsEditable(isprojecteditable)
     const challengeId = url.get('challengeId')
     const chapterId = url.get('chapterId')
     const unitId = url.get('unitId')

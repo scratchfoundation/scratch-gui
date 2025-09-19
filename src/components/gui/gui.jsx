@@ -303,13 +303,22 @@ const GUIComponent = (props) => {
             <div className={styles.menuBarWithContent}>
               {currentLayout === 'myprojects' && (
                 <div className={styles.backAndTitle}>
-                  <button
-                    disabled={isSaving || isPendingState}
-                    onClick={() => handlebacktomyprojects(remote)}
-                    className={styles.backButton}
-                  >
-                    <img src={BackArrow} />
-                  </button>
+                  <div className={styles.backButtonWrapper}>
+                    <button
+                      disabled={isSaving || isPendingState}
+                      onClick={() => handlebacktomyprojects(remote)}
+                      className={styles.backButton}
+                      title={
+                        isSaving || isPendingState
+                          ? isSaving
+                            ? 'Please wait, saving project...'
+                            : 'Please wait, saving project...'
+                          : 'Back to My Projects'
+                      }
+                    >
+                      <img src={BackArrow} />
+                    </button>
+                  </div>
 
                   <div className={styles.projectnameEdit}>
                     <div className={styles.catIcon}>

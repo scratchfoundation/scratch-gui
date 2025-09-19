@@ -517,6 +517,7 @@ const GUIComponent = (props) => {
                   />
 
                   <Box
+                    style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
                     className={
                       currentLayout === 'student'
                         ? spriteClicked

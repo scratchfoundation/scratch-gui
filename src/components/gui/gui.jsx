@@ -172,7 +172,7 @@ const GUIComponent = (props) => {
   const [currentLayout, setCurrentLayout] = React.useState('myprojects')
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
-
+ 
   useEffect(() => {
     const connectToParent = async () => {
       try {

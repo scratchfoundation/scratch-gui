@@ -95,7 +95,6 @@ import oldtimeyLogo from './oldtimey-logo.svg'
 
 import sharedMessages from '../../lib/shared-messages'
 import { ChevronDoubleDownIcon, FolderIcon } from '@heroicons/react/24/outline'
-import localforage from 'localforage'
 // import data from './content.json';
 
 
@@ -119,7 +118,7 @@ class MenuBarGuiSub extends React.Component {
       'handleRestoreOption',
       'getSaveToComputerHandler',
       'restoreOptionMessage',
-      'onLocalStorageFileUpload',
+      'onLocalStorageFileUploadFromBlob',
       'handleDownloadLocalStorageProject',
       'handleReload',
     ])
@@ -427,11 +426,12 @@ class MenuBarGuiSub extends React.Component {
     const unitId = url.get('unitId')
     const courseId = url.get('courseId')
 
+
     const submissionId = url.get('submissionId')
     const challengeSubmissionType = url.get('challengeSubmissionType')
 
     const scratchUrl = url.get('scratchUrl')
-
+    console.log('consoleogin scratchUrl', scratchUrl, 'currentLayout', currentLayout)
     this.setState({ currentLayout })
 
     try {
@@ -457,11 +457,11 @@ class MenuBarGuiSub extends React.Component {
       } else if(currentLayout === 'student'){
         result = await this.fetchStudentSubmissionData(fetchapiurl, submissionId, challengeSubmissionType)
         this.onLocalStorageFileUploadStudentChallenge(result.submission)
-      } else {
-        const projectName = await localforage.getItem('Current_Project_Name')
-        this.setState({ projectName })
-        this.onLocalStorageFileUpload()
-      }
+      } else if(currentLayout === 'normal'){
+         const response = await fetch(scratchUrl);
+         const blob = await response.blob();
+         this.onLocalStorageFileUploadFromBlob(blob);
+      } 
     } catch(error) {
       console.error('Error fetching project:', error)
     }
@@ -509,17 +509,7 @@ class MenuBarGuiSub extends React.Component {
     this.props.onClickFirstFalse()
   }
 
-  async onLocalStorageFileUpload() {
-    const projectData = await localforage.getItem(this.state.projectName)
-    if (projectData) {
-      const buffer = new Uint8Array(projectData.split('').map((char) => char.charCodeAt(0))).buffer
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      if (buffer.byteLength > 0) {
-        await this.props.vm.loadProject(buffer)
-      }
-    } else {
-    }
-  }
+
 
   async onLocalStorageFileUploadTeacher(base64blocks) {
     let binaryString = atob(base64blocks)
@@ -529,6 +519,42 @@ class MenuBarGuiSub extends React.Component {
     }
     await new Promise((resolve) => setTimeout(resolve, 500))
     await this.props.vm.loadProject(bytes.buffer)
+  }
+
+  async onLocalStorageFileUploadFromBlob(blob) {
+    try {
+      this.props.onClickLoadingTrue()
+      
+      const reader = new FileReader()
+      
+      return new Promise((resolve, reject) => {
+        reader.onloadend = async () => {
+          try {
+            const buffer = reader.result
+            await new Promise((resolve) => setTimeout(resolve, 500))
+            await this.props.vm.loadProject(buffer)
+            this.props.onClickLoadingFalse()
+            resolve()
+          } catch (error) {
+            this.props.onClickLoadingFalse()
+            console.error('Error loading project from blob:', error)
+            reject(error)
+          }
+        }
+        
+        reader.onerror = () => {
+          this.props.onClickLoadingFalse()
+          console.error('FileReader error while processing blob')
+          reject(new Error('FileReader error'))
+        }
+        
+        reader.readAsArrayBuffer(blob)
+      })
+    } catch (error) {
+      this.props.onClickLoadingFalse()
+      console.error('Error processing blob:', error)
+      throw error
+    }
   }
 
   onLocalStorageSave(downloadLocalStorageProject) {

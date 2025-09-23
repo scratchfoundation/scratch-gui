@@ -149,7 +149,6 @@ class SB3Downloader extends React.Component {
         })
       }, 5000)
     } else {
-      const projectName = await localforage.getItem('Current_Project_Name')
       this.props.saveProjectSb3().then((content) => {
         if (this.props.onSaveFinished) {
           this.props.onSaveFinished()
@@ -164,8 +163,6 @@ class SB3Downloader extends React.Component {
             new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
           )
           this.props.setIsScratchData(base64blocks)
-          await localforage.setItem(projectName, binaryString)
-          await localforage.setItem('assignmentProgress', base64blocks)
         }
         reader.readAsArrayBuffer(content)
       })

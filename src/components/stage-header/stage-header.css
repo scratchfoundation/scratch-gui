@@ -74,6 +74,7 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
+    margin-right: 1rem;
 }
 
 .stage-button:active {

@@ -320,7 +320,6 @@ class Blocks extends React.Component {
     this.props.setAutoSaveState(!this.props.autoSave);  
   }
   onWorkspaceMetricsChange() {
-   
     const target = this.props.vm.editingTarget
     if (target && target.id) {
       // Dispatch updateMetrics later, since onWorkspaceMetricsChange may be (very indirectly)
@@ -335,7 +334,9 @@ class Blocks extends React.Component {
         })
       }, 0)
     }
-    this.handleGreenbuttonClick()
+    // REMOVED: this.handleGreenbuttonClick() - This was causing infinite renders
+    // The handleGreenbuttonClick was updating Redux state on every workspace metric change,
+    // which triggered re-renders that caused more workspace metric changes.
   }
   onScriptGlowOn(data) {
     this.workspace.glowStack(data.id, true)

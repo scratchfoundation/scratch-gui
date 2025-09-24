@@ -75,6 +75,7 @@ const messages = defineMessages({
 let isRendererSupported = null
 
 const GUIComponent = (props) => {
+
   const {
     accountNavOpen,
     activeTabIndex,
@@ -204,9 +205,8 @@ const GUIComponent = (props) => {
         const remoteApi = await conn.promise
         setRemote(remoteApi)
         setConnection(conn)
-        console.log('Penpal connection established:', remoteApi)
       } catch (error) {
-        console.error('Penpal connection failed:', error)
+        // Connection failed - this is expected in some environments
       }
     }
 
@@ -214,7 +214,6 @@ const GUIComponent = (props) => {
 
     return () => {
       if (connection) {
-        console.log('Destroying Penpal connection')
         connection.destroy()
       }
     }
@@ -223,9 +222,9 @@ const GUIComponent = (props) => {
 
   useEffect(() => {
     if (currentLayout === 'myprojects') {
-      props.setPositionModal(true)
+      setPositionModal(true)
     }
-  }, [currentLayout, props])
+  }, [currentLayout, setPositionModal])
 
   useEffect(() => {
     if (remote && currentLayout === 'studentChallenge') {

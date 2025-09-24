@@ -13,9 +13,22 @@ import { setCostumeClickedState } from './../../reducers/vm-status.js'
 let contextMenuId = 0
 
 const SpriteSelectorItem = (props) => {
+  const {
+    costumeURLFax,
+    setCostumeClickedState,
+    ...componentProps
+  } = props
+
   useEffect(() => {
-    props.setCostumeClickedState(props.costumeURL)
-  }, [])
+    if (componentProps.costumeURL) {
+      // Use setTimeout to defer the state update to avoid updating during render
+      const timeoutId = setTimeout(() => {
+        setCostumeClickedState(componentProps.costumeURL)
+      }, 0)
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [setCostumeClickedState, componentProps.costumeURL])
 
   return (
     <ContextMenuTrigger

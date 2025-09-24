@@ -575,10 +575,14 @@ class Blocks extends React.Component {
     /* eslint-disable no-unused-vars */
     const {
       anyModalVisible,
+      autoSave,
       canUseCloud,
       customProceduresVisible,
       extensionLibraryVisible,
+      flagClicked,
       options,
+      setAutoSaveState,
+      setFlagClickedState,
       stageSize,
       vm,
       isRtl,

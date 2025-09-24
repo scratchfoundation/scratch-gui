@@ -137,6 +137,12 @@ const GUIComponent = (props) => {
     onTelemetryModalCancel,
     onTelemetryModalOptIn,
     onTelemetryModalOptOut,
+    setPositionModal,
+    setProjectName,
+    setSpriteClickedState,
+    addNotification,
+    removeNotification,
+    setCurrentLayout,
     showComingSoon,
     soundsTabVisible,
     stageSizeMode,
@@ -171,7 +177,6 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
-  // const [currentLayout, setCurrentLayout] = React.useState('studentChallenge')
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
  
@@ -187,7 +192,10 @@ const GUIComponent = (props) => {
           messenger,
           methods: {
             getScratchState(message) {
-              props.setProjectName(message)
+              // Use setTimeout to defer the state update to avoid updating during render
+              setTimeout(() => {
+                props.setProjectName(message)
+              }, 0)
             },
           },
           timeout: 15000,
@@ -212,22 +220,12 @@ const GUIComponent = (props) => {
     }
   }, [])
 
-  // useEffect(() => {
-  //   localforage
-  //     .getItem('currentLayout')
-  //     .then((value) => {
-  //       if (value !== null) {
-  //         setCurrentLayout(value)
-  //       }
-  //     })
-  //     .catch((err) => {})
-  // }, [])
 
   useEffect(() => {
     if (currentLayout === 'myprojects') {
       props.setPositionModal(true)
     }
-  }, [currentLayout])
+  }, [currentLayout, props])
 
   useEffect(() => {
     if (remote && currentLayout === 'studentChallenge') {
@@ -239,7 +237,7 @@ const GUIComponent = (props) => {
     if (remote) {
       remote.getLoadingState(isSaving || isPendingState)
     }
-  }, [remote, isSaving, currentLayout])
+  }, [remote, isSaving, isPendingState])
 
   function handleRemoteModal(remote) {
     if (remote) {
@@ -548,13 +546,13 @@ const GUIComponent = (props) => {
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
                         viewBox='0 0 24 24'
-                        stroke-width='1.5'
+                        strokeWidth='1.5'
                         stroke='currentColor'
-                        class='size-6'
+                        className='size-6'
                       >
                         <path
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
                           d='M6 18 18 6M6 6l12 12'
                         />
                       </svg>

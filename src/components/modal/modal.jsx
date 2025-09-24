@@ -46,7 +46,7 @@ const ModalComponent = (props) => (
           {props.fullScreen ? (
             <Button className={styles.backButton} iconSrc={backIcon} onClick={props.onRequestClose}>
               <FormattedMessage
-                defaultMessage='Back'
+                defaultMessage='Bacsk'
                 description='Back button in modal'
                 id='gui.modal.back'
               />

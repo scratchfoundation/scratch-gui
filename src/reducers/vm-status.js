@@ -20,6 +20,7 @@ const ADD_NOTIFICATION = "scratch-gui/vm-status/ADD_NOTIFICATION";
 const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
 const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
 const SET_ISEDITABLE_PROJECT = "scratch-gui/vm-status/SET_ISEDITABLE_PROJECT";
+const SET_CURRENT_LAYOUT = "scratch-gui/vm-status/SET_CURRENT_LAYOUT";
 
 const initialState = {
     running: false,
@@ -40,6 +41,7 @@ const initialState = {
     notifications: [],
     positionModal: false,
     isEditableProject: null,
+    currentLayout: "studentChallenge",
 };
 
 const reducer = function (state, action) {
@@ -127,6 +129,11 @@ const reducer = function (state, action) {
             return {
                 ...state,
                 isEditableProject: action.isEditableProject,
+            };
+        case SET_CURRENT_LAYOUT:
+            return {
+                ...state,
+                currentLayout: action.currentLayout,
             };
         default:
             return state;
@@ -268,6 +275,13 @@ const greenFlagClicked = function () {
     };
 };
 
+const setCurrentLayout = function (currentLayout) {
+    return {
+        type: SET_CURRENT_LAYOUT,
+        currentLayout: currentLayout,
+    };
+};
+
 export {
     reducer as default,
     initialState as vmStatusInitialState,
@@ -290,4 +304,5 @@ export {
     greenFlagClicked,
     setPositionModal,
     setIsEditable,
+    setCurrentLayout,
 };

@@ -49,7 +49,7 @@ import {
   remixProject,
   saveProjectAsCopy,
 } from '../../reducers/project-state'
-import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable } from '../../reducers/vm-status.js'
+import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable, setCurrentLayout } from '../../reducers/vm-status.js'
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -431,8 +431,7 @@ class MenuBarGuiSub extends React.Component {
     const challengeSubmissionType = url.get('challengeSubmissionType')
 
     const scratchUrl = url.get('scratchUrl')
-    console.log('consoleogin scratchUrl', scratchUrl, 'currentLayout', currentLayout)
-    this.setState({ currentLayout })
+    this.props.setCurrentLayout(currentLayout)
 
     try {
       if (currentLayout === 'teacher') {
@@ -696,7 +695,7 @@ class MenuBarGuiSub extends React.Component {
             <MenuBarMenu
               className={classNames(styles.menuBarMenu)}
               open={this.props.fileMenuOpen}
-              place={this.props.isRtl || this.props.positionModal ? 'left' : 'right'}
+              place={this.props.currentLayout === 'studentChallenge' ? 'right' : (this.props.isRtl || this.props.positionModal ? 'left' : 'right')}
               onRequestClose={this.props.onRequestCloseFile}
             >
               <MenuSection>
@@ -825,6 +824,7 @@ const mapDispatchToProps = (dispatch) => ({
   setProjectName: (name) => dispatch(setProjectName(name)),
   addNotification: (notification) => dispatch(addNotification(notification)),
   setIsEditable: (isEditable) => dispatch(setIsEditable(isEditable)),
+  setCurrentLayout: (currentLayout) => dispatch(setCurrentLayout(currentLayout)),
 })
 
 export default compose(

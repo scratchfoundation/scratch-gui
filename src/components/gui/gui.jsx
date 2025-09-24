@@ -50,6 +50,7 @@ import {
   removeNotification,
   setProjectName,
   setPositionModal,
+  setCurrentLayout,
 } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage'
@@ -151,6 +152,7 @@ const GUIComponent = (props) => {
     projectName,
     notifications,
     isEditableProject,
+    currentLayout,
     ...componentProps
   } = omit(props, 'dispatch')
   if (children) {
@@ -169,7 +171,7 @@ const GUIComponent = (props) => {
   if (isRendererSupported === null) {
     isRendererSupported = Renderer.isSupported()
   }
-  const [currentLayout, setCurrentLayout] = React.useState('myprojects')
+  // const [currentLayout, setCurrentLayout] = React.useState('studentChallenge')
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
  
@@ -210,16 +212,16 @@ const GUIComponent = (props) => {
     }
   }, [])
 
-  useEffect(() => {
-    localforage
-      .getItem('currentLayout')
-      .then((value) => {
-        if (value !== null) {
-          setCurrentLayout(value)
-        }
-      })
-      .catch((err) => {})
-  }, [])
+  // useEffect(() => {
+  //   localforage
+  //     .getItem('currentLayout')
+  //     .then((value) => {
+  //       if (value !== null) {
+  //         setCurrentLayout(value)
+  //       }
+  //     })
+  //     .catch((err) => {})
+  // }, [])
 
   useEffect(() => {
     if (currentLayout === 'myprojects') {
@@ -673,6 +675,7 @@ const mapStateToProps = (state) => ({
   projectName: state.scratchGui.vmStatus.projectName,
   isEditableProject: state.scratchGui.vmStatus.isEditableProject,
   notifications: state.scratchGui.vmStatus.notifications,
+  currentLayout: state.scratchGui.vmStatus.currentLayout,
 })
 
 const mapDispatchToProps = {
@@ -681,7 +684,7 @@ const mapDispatchToProps = {
   removeNotification,
   setProjectName,
   setPositionModal,
-
+  setCurrentLayout,
 }
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(GUIComponent))

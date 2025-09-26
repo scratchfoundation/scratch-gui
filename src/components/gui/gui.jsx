@@ -219,7 +219,6 @@ const GUIComponent = (props) => {
     }
   }, [])
 
-
   useEffect(() => {
     if (currentLayout === 'myprojects') {
       setPositionModal(true)

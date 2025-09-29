@@ -133,7 +133,7 @@
     "react-test-renderer": "16.14.0",
     "redux-mock-store": "1.5.5",
     "rimraf": "2.7.1",
-    "scratch-semantic-release-config": "3.0.0",
+    "scratch-semantic-release-config": "4.0.0",
     "scratch-webpack-configuration": "3.0.0",
     "selenium-webdriver": "3.6.0",
     "semantic-release": "19.0.5",

@@ -163,6 +163,20 @@ class SB3Downloader extends React.Component {
             new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
           )
           this.props.setIsScratchData(base64blocks)
+          
+          setTimeout(() => {
+            this.props.saveProjectSb3().then((freshContent) => {
+              const freshReader = new FileReader()
+              freshReader.onloadend = async () => {
+                const freshBuffer = freshReader.result
+                let freshBase64blocks = btoa(
+                  new Uint8Array(freshBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
+                )
+                this.props.setIsScratchData(freshBase64blocks)
+              }
+              freshReader.readAsArrayBuffer(freshContent)
+            })
+          }, 50)
         }
         reader.readAsArrayBuffer(content)
       })

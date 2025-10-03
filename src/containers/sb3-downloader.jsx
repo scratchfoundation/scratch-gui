@@ -164,7 +164,6 @@ class SB3Downloader extends React.Component {
           )
           this.props.setIsScratchData(base64blocks)
           
-          // Brilliant solution: Re-run entire data capture process to get fresh VM state
           setTimeout(() => {
             this.props.saveProjectSb3().then((freshContent) => {
               const freshReader = new FileReader()
@@ -173,12 +172,11 @@ class SB3Downloader extends React.Component {
                 let freshBase64blocks = btoa(
                   new Uint8Array(freshBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
                 )
-                // This should now contain fresh VM state!
                 this.props.setIsScratchData(freshBase64blocks)
               }
               freshReader.readAsArrayBuffer(freshContent)
             })
-          }, 50) // Small delay to allow VM to update its state
+          }, 50)
         }
         reader.readAsArrayBuffer(content)
       })

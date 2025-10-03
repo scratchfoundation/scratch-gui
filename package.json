@@ -16,7 +16,8 @@
     "default": "./src/index.js"
   },
   "scripts": {
-    "build": "npm run clean && webpack && cp -r ./build/ ../public/scratch",
+    "build": "npm run clean && NODE_ENV=production webpack && cp -r ./build/ ../public/scratch",
+    "build:dev": "npm run clean && webpack && cp -r ./build/ ../public/scratch",
     "clean": "rimraf ./build ./dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"[skip ci] Build for $(git log --pretty=format:%H -n1)\"",
     "prepublish": "node scripts/prepublish.mjs",

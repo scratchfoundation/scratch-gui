@@ -266,6 +266,7 @@ class TargetPane extends React.Component {
       isRtl,
       onActivateTab,
       onCloseImporting,
+      onGreenFlagClicked,
       onHighlightTarget,
       onReceivedBlocks,
       onShowImporting,

@@ -31,6 +31,7 @@ class TurboMode extends React.Component {
     const {
       /* eslint-disable no-unused-vars */
       children,
+      dispatch,
       vm,
       /* eslint-enable no-unused-vars */
       ...props

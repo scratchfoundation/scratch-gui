@@ -15,7 +15,7 @@ import styles from './stage-wrapper.css'
 
 
 const StageWrapperComponent = function (props) {
-  const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked,currentLayout } = props
+  const { isFullScreen, isRtl, isRendererSupported, loading, stageSize, vm, flagClicked, currentLayout, setFlagClickedState } = props
   return (
     <Box
       className={classNames(styles.stageWrapper, { [styles.fullScreen]: isFullScreen })}
@@ -53,8 +53,8 @@ const StageWrapperComponent = function (props) {
               { currentLayout !== 'teacher' && flagClicked&&<div className={styles.relativeContainer}>
               {!isFullScreen && (
                 <div className={styles.canvasPos} onClick={() => props.setFlagClickedState(false)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                   </svg>
                 </div>
               )}

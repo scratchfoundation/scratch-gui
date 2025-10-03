@@ -177,9 +177,9 @@ class MenuBarGuiSub extends React.Component {
       if (this.props.canSave) {
         // save before transitioning to project page
         this.props.autoUpdateProject()
-        waitForUpdate(true) // queue the transition to project page
+        waitForUpdate(true)
       } else {
-        waitForUpdate(false) // immediately transition to project page
+        waitForUpdate(false)
       }
     }
   }
@@ -649,6 +649,11 @@ class MenuBarGuiSub extends React.Component {
     }
   }
   render() {
+    const {
+      greenFlagClicked,
+      ...componentProps
+    } = this.props
+    
     const newProjectMessage = (
       <FormattedMessage
         defaultMessage='New'
@@ -657,7 +662,7 @@ class MenuBarGuiSub extends React.Component {
       />
     )
     return (
-      <Box className={classNames(this.props.className, styles.menuBar)}>
+      <Box className={classNames(componentProps.className, styles.menuBar)}>
         {this.props.canManageFiles && (
           <div
             className={classNames(styles.menuBarItem, styles.hoverable, {

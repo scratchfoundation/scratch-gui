@@ -5,6 +5,9 @@
 
 import JSZip from "jszip";
 
+// Chunk size for efficient Uint8Array to binary string conversion
+const CHUNK_SIZE = 8192; // Process in 8KB chunks
+
 /**
  * Converts base64 compressed .sb3 data to JSON project data
  * @param {string} base64Data - Base64 encoded .sb3 file data
@@ -60,10 +63,11 @@ export const compressJSONToSB3 = async (projectData, originalZip = null) => {
             compressionOptions: { level: 6 },
         });
 
-        // Convert to base64 - need to convert entire binary data at once
+        // Convert to base64 using chunked approach for better performance
         let binaryString = "";
-        for (let i = 0; i < zipBlob.length; i++) {
-            binaryString += String.fromCharCode(zipBlob[i]);
+        for (let i = 0; i < zipBlob.length; i += CHUNK_SIZE) {
+            const chunk = zipBlob.subarray(i, i + CHUNK_SIZE);
+            binaryString += String.fromCharCode.apply(null, chunk);
         }
 
         return btoa(binaryString);

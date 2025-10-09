@@ -96,33 +96,6 @@ class SB3Downloader extends React.Component {
                 });
                 return 
               }
-              
-              // Note: isStage corruption detection for compressed .sb3 files would require
-              // ZIP decompression to access the project.json content. For now, we proceed
-              // with saving and let any corruption issues be handled by the VM.
-
-              // Validate project data before saving
-              try {
-                const validationResult = validateProjectFromBase64(base64blocks)
-                if (validationResult.errors && validationResult.errors.length > 0) {
-                  // Still allow saving but warn user
-                  this.props.addNotification({
-                    type: 'warning',
-                    icon: 'warning',
-                    message: 'Saving',
-                    duration: 1000
-                  });
-                }
-              } catch (validationError) {
-                this.props.setIsPendingState(false)
-                this.props.addNotification({
-                  type: 'error',
-                  icon: 'error',
-                  message: 'Unable to save project',
-                  duration: 10000
-                });
-                return
-              }
             }
 
             const structure = {

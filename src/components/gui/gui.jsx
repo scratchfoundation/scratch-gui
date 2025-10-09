@@ -42,6 +42,7 @@ import costumesIcon from './icon--costumes.svg'
 import soundsIcon from './icon--sounds.svg'
 import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
+import Save from './icon--save.svg'
 import Cat from './icon--cat.svg'
 import ShareIcon from '../menu-bar/share.svg'
 import {
@@ -323,10 +324,32 @@ const GUIComponent = (props) => {
                       <img src={Cat} />
                     </div>
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
+                   
                     {String(isEditableProject) === 'true' && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
+                    )}
+                     {String(isEditableProject) === 'true' && (
+                      <SB3Downloader>
+                        {(className, downloadProjectCallback, downloadLocalStorageProject) => (
+                          <div 
+                            onClick={() => downloadLocalStorageProject()} 
+                            className={styles.saveIcon}
+                            title={
+                              isSaving || isPendingState
+                                ? 'Saving project... Please wait'
+                                : 'Save Project'
+                            }
+                            style={{
+                              opacity: isSaving || isPendingState ? 0.5 : 1,
+                              pointerEvents: isSaving || isPendingState ? 'none' : 'auto'
+                            }}
+                          >
+                            <img src={Save} />
+                          </div>
+                        )}
+                      </SB3Downloader>
                     )}
                   </div>
                   <div className={styles.projectNotifications}>

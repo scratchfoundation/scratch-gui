@@ -191,6 +191,8 @@ class CostumeTab extends React.Component {
   handleCostumeUpload(e) {
     const storage = this.props.vm.runtime.storage
     const targetId = this.props.vm.editingTarget.id
+    const url = new URLSearchParams(window.location.search)
+    const fetchapiurl = url.get('fetchapiurl')
     this.props.onShowImporting()
     handleFileUpload(
       e.target,
@@ -214,6 +216,7 @@ class CostumeTab extends React.Component {
             console.error(error); 
           },
           this.handleSuccessCallback,
+          fetchapiurl
         );
       },
       (error) => {

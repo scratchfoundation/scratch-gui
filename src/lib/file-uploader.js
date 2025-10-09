@@ -103,7 +103,8 @@ const costumeUpload = async function (
     storage,
     handleCostume,
     handleError = () => {},
-    handleSuccessCallback = () => {}
+    handleSuccessCallback = () => {},
+    fetchapiurl
 ) {
     let costumeFormat = null;
     let assetType = null;
@@ -129,7 +130,7 @@ const costumeUpload = async function (
             formData.append("file", blob);
 
             const response = await fetch(
-                "https://api.stage-uae.myqubit.co/projects/compress-file",
+                `${fetchapiurl}/projects/compress-file`,
                 {
                     method: "POST",
                     body: formData,
@@ -294,7 +295,8 @@ const soundUpload = async function (
     storage,
     handleSound,
     handleError,
-    handleSuccessCallback = () => {}
+    handleSuccessCallback = () => {},
+    fetchapiurl
 ) {
     let soundFormat;
 
@@ -303,14 +305,11 @@ const soundUpload = async function (
         const formData = new FormData();
         formData.append("file", blob);
 
-        const response = await fetch(
-            "https://api.stage-uae.myqubit.co/projects/compress-file",
-            {
-                method: "POST",
-                body: formData,
-                credentials: "include",
-            }
-        );
+        const response = await fetch(`${fetchapiurl}/projects/compress-file`, {
+            method: "POST",
+            body: formData,
+            credentials: "include",
+        });
 
         if (!response.ok) {
             throw new Error(
@@ -360,7 +359,8 @@ const spriteUpload = function (
     storage,
     handleSprite,
     handleError = () => {},
-    handleSuccessCallback = () => {}
+    handleSuccessCallback = () => {},
+    fetchapiurl
 ) {
     switch (fileType) {
         case "":
@@ -402,7 +402,8 @@ const spriteUpload = function (
                     handleSprite(JSON.stringify(newSprite));
                 },
                 handleError,
-                handleSuccessCallback
+                handleSuccessCallback,
+                fetchapiurl
             );
             return;
         }

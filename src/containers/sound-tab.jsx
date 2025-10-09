@@ -127,6 +127,8 @@ class SoundTab extends React.Component {
   handleSoundUpload(e) {
     const storage = this.props.vm.runtime.storage
     const targetId = this.props.vm.editingTarget.id
+    const url = new URLSearchParams(window.location.search)
+    const fetchapiurl = url.get('fetchapiurl')
     this.props.onShowImporting()
     handleFileUpload(
       e.target,
@@ -146,6 +148,7 @@ class SoundTab extends React.Component {
           },
           this.props.onCloseImporting,
           this.handleSuccessCallback,
+          fetchapiurl
         )
       },
       this.props.onCloseImporting,

@@ -102,6 +102,29 @@ html, body {
     align-items: center;
     
 }
+
+.save-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    stroke-width: 4px;
+    margin-right: 8px;
+}
+.save-icon img{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    color: #4CAF50;
+    stroke-width: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.save-icon:hover img {
+    filter: brightness(0.8);
+    transition: filter 0.2s ease;
+}
 .page-wrapper {
     height: 100%;
     border-radius: 0.6rem;

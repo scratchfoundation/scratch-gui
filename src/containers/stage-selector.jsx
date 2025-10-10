@@ -105,6 +105,8 @@ class StageSelector extends React.Component {
   }
   handleBackdropUpload(e) {
     const storage = this.props.vm.runtime.storage
+    const url = new URLSearchParams(window.location.search)
+    const fetchapiurl = url.get('fetchapiurl')
     this.props.onShowImporting()
     handleFileUpload(
       e.target,
@@ -125,6 +127,8 @@ class StageSelector extends React.Component {
             })
           },
           this.props.onCloseImporting,
+          () => {},
+          fetchapiurl
         )
       },
       this.props.onCloseImporting,

@@ -75,6 +75,7 @@ import {
 } from '../../reducers/menus'
 
 import collectMetadata from '../../lib/collect-metadata'
+import { processSB3Data } from '../../lib/sb3-processor'
 
 import styles from './menu-bar.css'
 
@@ -260,7 +261,39 @@ class MenuBarGuiSub extends React.Component {
         credentials: 'include',
       })
       const data = await response.json()
+      
       this.props.setProjectName(data.name)
+      
+      // Process the base64 .sb3 data to validate and fix isStage issues
+      if (data.content) {
+        try {
+          const processingResult = await processSB3Data(data.content)
+          
+          if (processingResult.success) {
+            if (processingResult.hadIssues) {
+              this.props.addNotification({
+                type: 'warning',
+                icon: 'warning',
+                message: `Project data fixed: ${processingResult.issues.join(', ')}`,
+                duration: 3000
+              });
+              // Use the corrected base64 data
+              data.content = processingResult.outputBase64
+            }
+          } else {
+            this.props.addNotification({
+              type: 'error',
+              icon: 'error',
+              message: 'Warning: Project data could not be validated',
+              duration: 5000
+            });
+          }
+        } catch (processingError) {
+          console.error('Error processing SB3 data:', processingError)
+          // Continue with original data if processing fails
+        }
+      }
+      
       this.props.addNotification({
         type: 'saving',
         icon: 'saving',

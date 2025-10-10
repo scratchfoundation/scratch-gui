@@ -6,6 +6,7 @@ import { projectTitleInitialState } from '../reducers/project-title'
 import downloadBlob from '../lib/download-blob'
 import localforage from 'localforage'
 import { setIsSavingState, setIsScratchData, setIsSavingStateStatus, setIsPendingState, setProjectName, addNotification } from './../reducers/vm-status.js'
+import { validateProjectFromBase64 } from '../lib/project-validator'
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -76,6 +77,8 @@ class SB3Downloader extends React.Component {
               new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
             )
 
+            // Note: Validation is handled by validateProjectFromBase64 below
+
             if (this.previousBase64 === base64blocks) {
               return
             }
@@ -92,7 +95,8 @@ class SB3Downloader extends React.Component {
                   duration: 10000
                 });
                 return 
-            }}
+              }
+            }
 
             const structure = {
               name: this.props.projectName,
@@ -106,6 +110,7 @@ class SB3Downloader extends React.Component {
       
             try {
               if(!projectId || !this.props.isEditableProject) {
+                this.props.setIsPendingState(false)
                 return
               }
               this.props.setIsSavingState(true)
@@ -114,7 +119,8 @@ class SB3Downloader extends React.Component {
                 icon: 'saving',
                 message: 'Saving project… Please wait.',
               });
-              await fetch(apiUrl, {
+              
+              const response = await fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
@@ -123,6 +129,12 @@ class SB3Downloader extends React.Component {
                 credentials: 'include',
                 signal,
               })
+              
+              if (!response.ok) {
+                const errorText = await response.text()
+                throw new Error(`HTTP ${response.status}: ${errorText || 'Unknown error'}`)
+              }
+              
               this.props.addNotification({
                 type: 'success',
                 icon: 'success',
@@ -132,11 +144,31 @@ class SB3Downloader extends React.Component {
               this.props.setIsPendingState(false)
             } catch (error) {
               this.props.setIsPendingState(false)
+              
+              let errorMessage = 'Failed to save project'
+              if (error.name === 'AbortError') {
+                errorMessage = 'Save operation was cancelled'
+              } else if (error.message.includes('network')) {
+                errorMessage = 'Network error: Check your connection'
+              } else if (error.message.includes('400')) {
+                errorMessage = 'Invalid project data'
+              } else if (error.message.includes('401')) {
+                errorMessage = 'Authentication required'
+              } else if (error.message.includes('403')) {
+                errorMessage = 'Permission denied'
+              } else if (error.message.includes('413')) {
+                errorMessage = 'Project too large'
+              } else if (error.message.includes('500')) {
+                errorMessage = 'Server error: Please try again later'
+              } else if (error.message) {
+                errorMessage = `Save failed: ${error.message}`
+              }
+              
               this.props.addNotification({
                 type: 'error',
                 icon: 'error',
-                message: 'Error!',
-                duration: 3000
+                message: errorMessage,
+                duration: 10000
               });
             } finally {
               this.props.setIsSavingState(false)

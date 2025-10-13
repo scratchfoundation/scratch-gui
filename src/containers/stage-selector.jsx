@@ -21,6 +21,7 @@ import StageSelectorComponent from '../components/stage-selector/stage-selector.
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json'
 import { handleFileUpload, costumeUpload } from '../lib/file-uploader.js'
+import { setAutoSaveState } from '../reducers/vm-status.js'
 
 const dragTypes = [
   DragConstants.COSTUME,
@@ -51,6 +52,7 @@ class StageSelector extends React.Component {
       'handleDrop',
       'setFileInput',
       'setRef',
+      'handleAutoSave',
     ])
   }
   componentDidMount() {
@@ -85,6 +87,7 @@ class StageSelector extends React.Component {
     return Promise.all(
       backdrops.map((backdrop) => this.props.vm.addBackdrop(backdrop.md5, backdrop)),
     ).then(() => {
+      this.handleAutoSave()
       if (shouldActivateTab) {
         return this.props.onActivateTab(COSTUMES_TAB_INDEX)
       }
@@ -147,8 +150,10 @@ class StageSelector extends React.Component {
   handleDrop(dragInfo) {
     if (dragInfo.dragType === DragConstants.COSTUME) {
       this.props.vm.shareCostumeToTarget(dragInfo.index, this.props.id)
+      this.handleAutoSave()
     } else if (dragInfo.dragType === DragConstants.SOUND) {
       this.props.vm.shareSoundToTarget(dragInfo.index, this.props.id)
+      this.handleAutoSave()
     } else if (dragInfo.dragType === DragConstants.BACKPACK_COSTUME) {
       this.props.vm.addCostume(
         dragInfo.payload.body,
@@ -157,6 +162,7 @@ class StageSelector extends React.Component {
         },
         this.props.id,
       )
+      this.handleAutoSave()
     } else if (dragInfo.dragType === DragConstants.BACKPACK_SOUND) {
       this.props.vm.addSound(
         {
@@ -165,10 +171,12 @@ class StageSelector extends React.Component {
         },
         this.props.id,
       )
+      this.handleAutoSave()
     } else if (dragInfo.dragType === DragConstants.BACKPACK_CODE) {
       fetchCode(dragInfo.payload.bodyUrl).then((blocks) => {
         this.props.vm.shareBlocksToTarget(blocks, this.props.id)
         this.props.vm.refreshWorkspace()
+        this.handleAutoSave()
       })
     }
   }
@@ -178,9 +186,13 @@ class StageSelector extends React.Component {
   setRef(ref) {
     this.ref = ref
   }
+  handleAutoSave() {
+    this.props.setAutoSaveState(!this.props.autoSave)
+  }
   render() {
     const componentProps = omit(this.props, [
       'asset',
+      'autoSave',
       'dispatchSetHoveredSprite',
       'id',
       'intl',
@@ -188,6 +200,7 @@ class StageSelector extends React.Component {
       'onSelect',
       'onShowImporting',
       'onCloseImporting',
+      'setAutoSaveState',
     ])
     return (
       <DroppableThrottledStage
@@ -208,11 +221,13 @@ class StageSelector extends React.Component {
 }
 StageSelector.propTypes = {
   ...StageSelectorComponent.propTypes,
+  autoSave: PropTypes.bool,
   id: PropTypes.string,
   intl: intlShape.isRequired,
   onCloseImporting: PropTypes.func,
   onSelect: PropTypes.func,
   onShowImporting: PropTypes.func,
+  setAutoSaveState: PropTypes.func,
 }
 
 const mapStateToProps = (state, { asset, id }) => ({
@@ -221,6 +236,7 @@ const mapStateToProps = (state, { asset, id }) => ({
   receivedBlocks:
     state.scratchGui.hoveredTarget.receivedBlocks && state.scratchGui.hoveredTarget.sprite === id,
   raised: state.scratchGui.blockDrag,
+  autoSave: state.scratchGui.vmStatus.autoSave,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -236,6 +252,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
   onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
+  setAutoSaveState: (autoSave) => dispatch(setAutoSaveState(autoSave)),
 })
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(StageSelector))

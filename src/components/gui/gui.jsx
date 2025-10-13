@@ -232,11 +232,11 @@ const GUIComponent = (props) => {
     }
   }, [remote, isScratchData, currentLayout])
 
-  // useEffect(() => {
-  //   if (remote) {
-  //     remote.getLoadingState(isSaving || isPendingState)
-  //   }
-  // }, [remote, isSaving, currentLayout])
+  useEffect(() => {
+    if (remote) {
+      remote.getLoadingState(isSaving || isPendingState)
+    }
+  }, [remote, isSaving, currentLayout])
 
   function handleRemoteModal(remote) {
     if (remote) {

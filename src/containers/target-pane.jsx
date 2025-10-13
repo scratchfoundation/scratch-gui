@@ -20,7 +20,7 @@ import { highlightTarget } from '../reducers/targets'
 import { fetchSprite, fetchCode } from '../lib/backpack-api'
 import randomizeSpritePosition from '../lib/randomize-sprite-position'
 import downloadBlob from '../lib/download-blob'
-import {greenFlagClicked} from './../reducers/vm-status.js'
+import {greenFlagClicked, setAutoSaveState} from './../reducers/vm-status.js'
 
 class TargetPane extends React.Component {
   constructor(props) {
@@ -47,6 +47,7 @@ class TargetPane extends React.Component {
       'handleSpriteUpload',
       'setFileInput',
       'handleSuccessCallback',
+      'handleAutoSave',
     ])
   }
   componentDidMount() {
@@ -55,26 +56,36 @@ class TargetPane extends React.Component {
   componentWillUnmount() {
     this.props.vm.removeListener('BLOCK_DRAG_END', this.handleBlockDragEnd)
   }
+  handleAutoSave() {
+    this.props.setAutoSaveState(!this.props.autoSave)
+  }
   handleChangeSpriteDirection(direction) {
     this.props.vm.postSpriteInfo({ direction })
+    this.handleAutoSave()
   }
   handleChangeSpriteRotationStyle(rotationStyle) {
     this.props.vm.postSpriteInfo({ rotationStyle })
+    this.handleAutoSave()
   }
   handleChangeSpriteName(name) {
     this.props.vm.renameSprite(this.props.editingTarget, name)
+    this.handleAutoSave()
   }
   handleChangeSpriteSize(size) {
     this.props.vm.postSpriteInfo({ size })
+    this.handleAutoSave()
   }
   handleChangeSpriteVisibility(visible) {
     this.props.vm.postSpriteInfo({ visible })
+    this.handleAutoSave()
   }
   handleChangeSpriteX(x) {
     this.props.vm.postSpriteInfo({ x })
+    this.handleAutoSave()
   }
   handleChangeSpriteY(y) {
     this.props.vm.postSpriteInfo({ y })
+    this.handleAutoSave()
   }
   handleDeleteSprite(id) {
     const restoreSprite = this.props.vm.deleteSprite(id)
@@ -89,6 +100,7 @@ class TargetPane extends React.Component {
   }
   handleDuplicateSprite(id) {
     this.props.vm.duplicateSprite(id)
+    this.handleAutoSave()
   }
   handleExportSprite(id) {
     const spriteName = this.props.vm.runtime.getTargetById(id).getName()
@@ -325,6 +337,7 @@ const mapStateToProps = (state) => ({
   stage: state.scratchGui.targets.stage,
   raiseSprites: state.scratchGui.blockDrag,
   workspaceMetrics: state.scratchGui.workspaceMetrics,
+  autoSave: state.scratchGui.vmStatus.autoSave,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -350,6 +363,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCloseImporting: () => dispatch(closeAlertWithId('importingAsset')),
   onShowImporting: () => dispatch(showStandardAlert('importingAsset')),
   onGreenFlagClicked: () => dispatch(greenFlagClicked()),
+  setAutoSaveState: (autoSave) => dispatch(setAutoSaveState(autoSave)),
 })
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(TargetPane))

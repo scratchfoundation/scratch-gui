@@ -45,6 +45,12 @@ html, body {
     opacity: 0.5;
     cursor: not-allowed;
 }
+.project-notifications{
+    width: 50rem !important;
+    display: flex;
+    flex-direction: row;
+
+}
 .back-button img{
     background-color: white;
     border: 1px solid #E0E0E0;

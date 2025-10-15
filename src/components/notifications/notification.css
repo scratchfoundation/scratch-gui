@@ -51,6 +51,7 @@
     height: 15px;
 } 
 .notification-message {
+ white-space: nowrap;
   flex: 1;
   color: #283B52;
   font-weight: 400;

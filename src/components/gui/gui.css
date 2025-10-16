@@ -60,13 +60,7 @@ html, body {
     width: 32px;
     stroke-width: 2px;
 }
-.projectname-edit {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+
 .cat-icon {
     display: flex;
     flex-direction: row;
@@ -88,6 +82,8 @@ html, body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    white-space: nowrap;
 }
 
 .edit-icon {

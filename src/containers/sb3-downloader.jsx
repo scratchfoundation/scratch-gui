@@ -49,6 +49,10 @@ class SB3Downloader extends React.Component {
       if (this.props.isFirst) {
         return
       }
+       if (String(this.props.isEditableProject) === 'false') {
+        console.log('Project is not editable, skipping save')
+        return
+      }
       if (this.debounceTimeout) {
         clearTimeout(this.debounceTimeout)
       }
@@ -109,7 +113,7 @@ class SB3Downloader extends React.Component {
             const apiUrl = `${fetchapiurl}/projects/${projectId}`
       
             try {
-              if(!projectId || !this.props.isEditableProject) {
+              if(!projectId) {
                 this.props.setIsPendingState(false)
                 return
               }

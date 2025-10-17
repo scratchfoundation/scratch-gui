@@ -475,7 +475,6 @@ const GUIComponent = (props) => {
                     <TabPanel className={tabClassNames.tabPanel}>
                       <Box
                         className={styles.blocksWrapper}
-                        style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
                       >
                         <Blocks
                           key={`${blocksId}/${theme}`}

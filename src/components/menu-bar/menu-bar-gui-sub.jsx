@@ -318,6 +318,12 @@ class MenuBarGuiSub extends React.Component {
   ) {
     if (!scratchElementSettingsId) return
 
+      this.props.addNotification({
+      type: 'saving',
+      icon: 'saving',
+      message: 'Fetching data please wait',
+    });
+
     try {
       const apiUrl = `${fetchapiurl}/challenges/user-submission/${scratchElementSettingsId}?user=${scratchUserId}&type=${scratchSubmissionType}&filter=all`
       const response = await fetch(apiUrl, {
@@ -363,11 +369,23 @@ class MenuBarGuiSub extends React.Component {
     } catch (error) {
       console.error('Error fetching project:', error)
       return null
+    } finally {
+        this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+        duration: 500
+      });
     }
   }
 
   async fetchStudentChallengeSubmissionData(challengeId, chapterId, unitId, courseId, fetchapiurl) {
     this.props.onClickLoadingTrue()
+      this.props.addNotification({
+      type: 'saving',
+      icon: 'saving',
+      message: 'Fetching data please wait',
+    });
     try {
       const apiUrl = `${fetchapiurl}/challenges/details/${challengeId}?chapter=${chapterId}&unit=${unitId}&course=${courseId}`
       const data = await fetch(apiUrl, {
@@ -399,11 +417,23 @@ class MenuBarGuiSub extends React.Component {
       this.props.onClickLoadingFalse()
     } finally {
       this.props.onClickLoadingFalse()
+       this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+        duration: 500
+      });
     }
   }
 
   async fetchChpaterData(scratchUrl) {
     if (!scratchUrl) return
+     this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+      });
+    
     try {
       const response = await fetch(scratchUrl, {
         method: 'GET',
@@ -416,11 +446,23 @@ class MenuBarGuiSub extends React.Component {
       return data
     } catch (error) {
       console.error('Error fetching project:', error)
+    } finally {
+       this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+        duration: 500
+      });
     }
   }
 
   async fetchStudentSubmissionData(fetchapiurl, submissionId, challengeSubmissionType) {
     this.props.onClickLoadingTrue()
+     this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+      });
     try {
       const apiUrl = `${fetchapiurl}/challenges/submission/${submissionId}?type=${challengeSubmissionType}`
       const response = await fetch(apiUrl, {
@@ -436,6 +478,12 @@ class MenuBarGuiSub extends React.Component {
       this.props.onClickLoadingFalse()
     } finally {
       this.props.onClickLoadingFalse()
+       this.props.addNotification({
+        type: 'saving',
+        icon: 'saving',
+        message: 'Fetching data please wait',
+        duration: 500
+      });
     }
   }
   async componentDidMount() {

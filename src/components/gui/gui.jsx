@@ -417,6 +417,11 @@ const GUIComponent = (props) => {
                     currentLayout={currentLayout}
                   />
                 </div>
+                {currentLayout !== 'myprojects' && (
+                  <div className={styles.projectNotifications}>
+                    <NotificationStack notifications={notifications} />
+                  </div>
+                )}
               </div>
             </div>
 

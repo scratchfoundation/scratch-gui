@@ -45,6 +45,12 @@ html, body {
     opacity: 0.5;
     cursor: not-allowed;
 }
+.project-notifications{
+    width: 50rem;
+    display: flex;
+    flex-direction: row;
+
+}
 .back-button img{
     background-color: white;
     border: 1px solid #E0E0E0;
@@ -54,13 +60,7 @@ html, body {
     width: 32px;
     stroke-width: 2px;
 }
-.projectname-edit {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+
 .cat-icon {
     display: flex;
     flex-direction: row;
@@ -82,6 +82,8 @@ html, body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    white-space: nowrap;
 }
 
 .edit-icon {

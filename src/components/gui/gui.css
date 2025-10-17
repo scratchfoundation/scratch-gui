@@ -46,7 +46,7 @@ html, body {
     cursor: not-allowed;
 }
 .project-notifications{
-    width: 50rem !important;
+    width: 50rem;
     display: flex;
     flex-direction: row;
 

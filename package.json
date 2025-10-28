@@ -109,7 +109,13 @@
     "text-encoding": "^0.7.0",
     "to-style": "^1.3.3",
     "wav-encoder": "^1.3.0",
-    "xhr": "^2.5.0"
+    "xhr": "^2.5.0",
+    "@tensorflow-models/handpose": "^0.0.7",
+    "@tensorflow/tfjs": "^3.21.0",
+    "@tensorflow/tfjs-backend-cpu": "^3.21.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.21.0",
+    "@teachablemachine/image": "^0.8.5",
+    "@teachablemachine/pose": "^0.8.6"
   },
   "peerDependencies": {
     "react": "^16.0.0",

@@ -194,7 +194,7 @@ const GUIComponent = (props) => {
           messenger,
           methods: {
             getScratchState(message) {
-              // Use setTimeout to defer the state update to avoid updating during render
+              //81
               setTimeout(() => {
                 props.setProjectName(message)
               }, 0)

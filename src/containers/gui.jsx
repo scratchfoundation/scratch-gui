@@ -41,7 +41,7 @@ import systemPreferencesHOC from '../lib/system-preferences-hoc.jsx';
 
 import GUIComponent from '../components/gui/gui.jsx';
 import {setIsScratchDesktop} from '../lib/isScratchDesktop.js';
-
+import ChatbotPane from './chatbot-pane/index.jsx'; // 이 줄을 추가하세요
 const {RequestMetadata, setMetadata, unsetMetadata} = storage.scratchFetch;
 
 const setProjectIdMetadata = projectId => {
@@ -104,12 +104,15 @@ class GUI extends React.Component {
             ...componentProps
         } = this.props;
         return (
+            <>
             <GUIComponent
                 loading={fetchingProject || isLoading || loadingStateVisible}
                 {...componentProps}
             >
                 {children}
             </GUIComponent>
+            <ChatbotPane />
+            </>
         );
     }
 }

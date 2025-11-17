@@ -364,7 +364,7 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                  {isEditableProject === false && currentLayout === 'student' && currentLayout ==='teacher' && (
+                  {isEditableProject === false && (currentLayout === 'student' || currentLayout ==='teacher') && (
                     <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}

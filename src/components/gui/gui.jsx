@@ -181,7 +181,7 @@ const GUIComponent = (props) => {
   }
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
- 
+
   useEffect(() => {
     const connectToParent = async () => {
       try {
@@ -364,7 +364,7 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                  {isEditableProject === false && (currentLayout === 'student' || currentLayout ==='teacher') && (
+                  {String(isEditableProject) === 'true' && currentLayout === 'myprojects' && (
                     <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}
@@ -472,7 +472,7 @@ const GUIComponent = (props) => {
                         </Tab>
                       </TabList>
                     )}
-                    <TabPanel className={tabClassNames.tabPanel}>
+                    <TabPanel className={tabClassNames.tabPanel} >
                       <Box
                         className={styles.blocksWrapper}
                       >

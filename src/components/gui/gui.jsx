@@ -52,6 +52,7 @@ import {
   setProjectName,
   setPositionModal,
   setCurrentLayout,
+  setIsCloned,
 } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage'
@@ -697,6 +698,7 @@ const mapStateToProps = (state) => ({
   isPendingState: state.scratchGui.vmStatus.isPendingState,
   projectName: state.scratchGui.vmStatus.projectName,
   isEditableProject: state.scratchGui.vmStatus.isEditableProject,
+  isCloned: state.scratchGui.vmStatus.isCloned,
   notifications: state.scratchGui.vmStatus.notifications,
   currentLayout: state.scratchGui.vmStatus.currentLayout,
 })

@@ -161,6 +161,7 @@ const GUIComponent = (props) => {
     projectName,
     notifications,
     isEditableProject,
+    isCloned,
     currentLayout,
     ...componentProps
   } = omit(props, 'dispatch')
@@ -325,13 +326,15 @@ const GUIComponent = (props) => {
                       <img src={Cat} />
                     </div>
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
-                   
-                    {String(isEditableProject) === 'true' && (
+
+                    {((String(isEditableProject) === 'true') || 
+                      (String(isEditableProject) === 'false' && String(isCloned) === 'true')) && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
                     )}
-                     {String(isEditableProject) === 'true' && (
+                    {((String(isEditableProject) === 'true') || 
+                      (String(isEditableProject) === 'false' && String(isCloned) === 'true'))  && (
                       <SB3Downloader>
                         {(className, downloadProjectCallback, downloadLocalStorageProject) => (
                           <div 
@@ -352,6 +355,7 @@ const GUIComponent = (props) => {
                         )}
                       </SB3Downloader>
                     )}
+                    
                   </div>
                   <div className={styles.projectNotifications}>
                     <NotificationStack notifications={notifications} />
@@ -365,8 +369,9 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                  {String(isEditableProject) === 'true' && currentLayout === 'myprojects' && (
-                    <div className={styles.shareButton}>
+                   {((String(isEditableProject) === 'true') || 
+                      (String(isEditableProject) === 'false' && String(isCloned) === 'true')) && currentLayout === 'myprojects' && (
+                      <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}
                         onClick={() => handleShare()}
@@ -512,13 +517,13 @@ const GUIComponent = (props) => {
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && currentLayout === 'myproject') || (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && currentLayout === 'myproject')|| (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
@@ -543,7 +548,7 @@ const GUIComponent = (props) => {
                   />
 
                   <Box
-                    style={String(isEditableProject) === 'false' ? { pointerEvents: 'none', opacity: 1 } : {}}
+                    style={(String(isEditableProject) === 'false' && currentLayout === 'myproject')|| (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
                     className={
                       currentLayout === 'student'
                         ? spriteClicked

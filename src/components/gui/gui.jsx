@@ -332,7 +332,7 @@ const GUIComponent = (props) => {
                       </div>
                     )}
                     {((String(isEditableProject) === 'true') || 
-                      (String(isEditableProject) === 'false' && String(isCloned) === 'true'))  && (
+                      ( currentLayout === 'myprojects' && String(isCloned) === 'true'))  && (
                       <SB3Downloader>
                         {(className, downloadProjectCallback, downloadLocalStorageProject) => (
                           <div 
@@ -514,13 +514,13 @@ const GUIComponent = (props) => {
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={(String(isEditableProject) === 'false' && currentLayout === 'myproject') || (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={(String(isEditableProject) === 'false' && currentLayout === 'myproject')|| (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
@@ -545,7 +545,7 @@ const GUIComponent = (props) => {
                   />
 
                   <Box
-                    style={(String(isEditableProject) === 'false' && currentLayout === 'myproject')|| (String(isEditableProject) === 'false' && String(isCloned) === 'false' && currentLayout === 'myproject') ? { pointerEvents: 'none', opacity: 1 } : {}}
+                     style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
                     className={
                       currentLayout === 'student'
                         ? spriteClicked

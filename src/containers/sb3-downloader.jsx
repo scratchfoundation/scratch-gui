@@ -49,7 +49,7 @@ class SB3Downloader extends React.Component {
       if (this.props.isFirst) {
         return
       }
-       if (String(this.props.isEditableProject) === 'false' || String(this.props.isClone) === 'true') {
+       if (String(this.props.isEditableProject) === 'false' && String(this.props.isCloned) === 'false') {
         console.log('Project is not editable, skipping save')
         return
       }
@@ -250,6 +250,7 @@ const mapStateToProps = (state) => ({
   projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState),
   projectName: state.scratchGui.vmStatus.projectName,
   isEditableProject: state.scratchGui.vmStatus.isEditableProject,
+  isCloned: state.scratchGui.vmStatus.isCloned,
 })
 
 const mapDispatchToProps = {

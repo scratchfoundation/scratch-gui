@@ -326,9 +326,7 @@ const GUIComponent = (props) => {
                       <img src={Cat} />
                     </div>
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
-
-                    {((String(isEditableProject) === 'true') || 
-                      (String(isEditableProject) === 'false' && String(isCloned) === 'true')) && (
+                    {((String(isEditableProject) === 'true') && (String(isCloned) === 'false')) && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
@@ -369,8 +367,7 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                   {((String(isEditableProject) === 'true') || 
-                      (String(isEditableProject) === 'false' && String(isCloned) === 'true')) && currentLayout === 'myprojects' && (
+                   {((String(isEditableProject) === 'true') && (String(isCloned) === 'false')) && currentLayout === 'myprojects' && (
                       <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}

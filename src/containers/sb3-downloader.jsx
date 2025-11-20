@@ -49,7 +49,7 @@ class SB3Downloader extends React.Component {
       if (this.props.isFirst) {
         return
       }
-       if (String(this.props.isEditableProject) === 'false') {
+       if (String(this.props.isEditableProject) === 'false' || String(this.props.isClone) === 'true') {
         console.log('Project is not editable, skipping save')
         return
       }

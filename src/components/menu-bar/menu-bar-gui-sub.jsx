@@ -501,7 +501,7 @@ class MenuBarGuiSub extends React.Component {
     const scratchisActivein = url.get('scratchisActivein')
     const fetchapiurl = url.get('fetchapiurl')
     const isprojecteditable = url.get('editable')
-    const isCloned = url.get('isCloned')
+    const isCloned = url.get('isCloned') === 'true'
     this.props.setIsEditable(isprojecteditable)
     this.props.setIsCloned(isCloned)
     const challengeId = url.get('challengeId')

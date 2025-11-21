@@ -52,7 +52,6 @@ import {
   setProjectName,
   setPositionModal,
   setCurrentLayout,
-  setIsCloned,
 } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage'
@@ -326,13 +325,13 @@ const GUIComponent = (props) => {
                       <img src={Cat} />
                     </div>
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
-                    {((String(isEditableProject) === 'true') && (String(isCloned) === 'false')) && (
+                    {((String(isEditableProject) === 'true')) && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
                     )}
                     {((String(isEditableProject) === 'true') || 
-                      ( currentLayout === 'myprojects' && String(isCloned) === 'true'))  && (
+                      ( currentLayout === 'myprojects' && isCloned))  && (
                       <SB3Downloader>
                         {(className, downloadProjectCallback, downloadLocalStorageProject) => (
                           <div 
@@ -367,7 +366,7 @@ const GUIComponent = (props) => {
                 }
               >
                 <div>
-                   {((String(isEditableProject) === 'true') && (String(isCloned) === 'false')) && currentLayout === 'myprojects' && (
+                   {(String(isEditableProject) === 'true') && currentLayout === 'myprojects' && (
                       <div className={styles.shareButton}>
                       <button
                         disabled={isSaving || isPendingState}
@@ -514,13 +513,13 @@ const GUIComponent = (props) => {
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && !isCloned) )? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {costumesTabVisible ? <CostumeTab vm={vm} /> : null}
                     </TabPanel>
                     <TabPanel
                       className={tabClassNames.tabPanel}
-                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
+                      style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && !isCloned) )? { pointerEvents: 'none', opacity: 1 } : {}}
                     >
                       {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                     </TabPanel>
@@ -545,7 +544,7 @@ const GUIComponent = (props) => {
                   />
 
                   <Box
-                     style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && String(isCloned) === 'false') )? { pointerEvents: 'none', opacity: 1 } : {}}
+                     style={(String(isEditableProject) === 'false' && ( currentLayout === 'myprojects' && !isCloned) )? { pointerEvents: 'none', opacity: 1 } : {}}
                     className={
                       currentLayout === 'student'
                         ? spriteClicked

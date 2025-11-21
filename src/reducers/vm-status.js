@@ -20,6 +20,7 @@ const ADD_NOTIFICATION = "scratch-gui/vm-status/ADD_NOTIFICATION";
 const REMOVE_NOTIFICATION = "scratch-gui/vm-status/REMOVE_NOTIFICATION";
 const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
 const SET_ISEDITABLE_PROJECT = "scratch-gui/vm-status/SET_ISEDITABLE_PROJECT";
+const SET_IS_CLONED = "scratch-gui/vm-status/SET_IS_CLONED";
 const SET_CURRENT_LAYOUT = "scratch-gui/vm-status/SET_CURRENT_LAYOUT";
 
 const initialState = {
@@ -41,6 +42,7 @@ const initialState = {
     notifications: [],
     positionModal: false,
     isEditableProject: null,
+    isCloned: null,
     currentLayout: "studentChallenge",
 };
 
@@ -130,6 +132,11 @@ const reducer = function (state, action) {
                 ...state,
                 isEditableProject: action.isEditableProject,
             };
+        case SET_IS_CLONED:
+            return {
+                ...state,
+                isCloned: action.isCloned,
+            };
         case SET_CURRENT_LAYOUT:
             return {
                 ...state,
@@ -214,6 +221,13 @@ const setIsEditable = function (isEditableProject) {
     return {
         type: SET_ISEDITABLE_PROJECT,
         isEditableProject: isEditableProject,
+    };
+};
+
+const setIsCloned = function (isCloned) {
+    return {
+        type: SET_IS_CLONED,
+        isCloned: isCloned,
     };
 };
 
@@ -304,5 +318,6 @@ export {
     greenFlagClicked,
     setPositionModal,
     setIsEditable,
+    setIsCloned,
     setCurrentLayout,
 };

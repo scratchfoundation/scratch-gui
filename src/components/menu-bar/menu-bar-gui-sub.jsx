@@ -49,7 +49,7 @@ import {
   remixProject,
   saveProjectAsCopy,
 } from '../../reducers/project-state'
-import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable, setCurrentLayout } from '../../reducers/vm-status.js'
+import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable, setIsCloned, setCurrentLayout } from '../../reducers/vm-status.js'
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -501,7 +501,9 @@ class MenuBarGuiSub extends React.Component {
     const scratchisActivein = url.get('scratchisActivein')
     const fetchapiurl = url.get('fetchapiurl')
     const isprojecteditable = url.get('editable')
+    const isCloned = url.get('isCloned') === 'true'
     this.props.setIsEditable(isprojecteditable)
+    this.props.setIsCloned(isCloned)
     const challengeId = url.get('challengeId')
     const chapterId = url.get('chapterId')
     const unitId = url.get('unitId')
@@ -910,6 +912,7 @@ const mapDispatchToProps = (dispatch) => ({
   setProjectName: (name) => dispatch(setProjectName(name)),
   addNotification: (notification) => dispatch(addNotification(notification)),
   setIsEditable: (isEditable) => dispatch(setIsEditable(isEditable)),
+  setIsCloned: (isCloned) => dispatch(setIsCloned(isCloned)),
   setCurrentLayout: (currentLayout) => dispatch(setCurrentLayout(currentLayout)),
 })
 

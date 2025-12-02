@@ -23,7 +23,7 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: test-results
             NODE_OPTIONS: --max-old-space-size=4000
         steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
             - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4
               with:
                   cache: "npm"

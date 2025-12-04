@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { projectTitleInitialState } from '../reducers/project-title'
 import downloadBlob from '../lib/download-blob'
 import localforage from 'localforage'
-import { setIsSavingState, setIsScratchData, setIsSavingStateStatus, setIsPendingState, setProjectName, addNotification } from './../reducers/vm-status.js'
+import { setIsSavingState, setIsScratchData, setIsSavingStateStatus, setIsPendingState, setProjectName, addNotification, pushProjectHistory, setMyProjectsGetPending } from './../reducers/vm-status.js'
 import { validateProjectFromBase64 } from '../lib/project-validator'
 /**
  * Project saver component passes a downloadProject function to its child.
@@ -41,16 +41,19 @@ class SB3Downloader extends React.Component {
     const url = new URLSearchParams(window.location.search)
 
     const projectId = url.get('projectid')
-    // const inputLayout = url.get('inputLayout')
-    const inputLayout = url.get('inputLayout') || 'myprojects'
+    const inputLayout = url.get('inputLayout')
     const fetchapiurl = url.get('fetchapiurl');
 
     if (inputLayout === 'myprojects') {
+      if (this.props.isMyProjectsGetPending) {
+   
+        return;
+      }
+      
       if (this.props.isFirst) {
         return
       }
        if (String(this.props.isEditableProject) === 'false' && !this.props.isCloned) {
-        console.log('Project is not editable, skipping save')
         return
       }
       if (this.debounceTimeout) {
@@ -133,11 +136,17 @@ class SB3Downloader extends React.Component {
                 credentials: 'include',
                 signal,
               })
+
+               this.props.pushProjectHistory(base64blocks)
               
               if (!response.ok) {
                 const errorText = await response.text()
                 throw new Error(`HTTP ${response.status}: ${errorText || 'Unknown error'}`)
               }
+
+              if (this.previousBase64 !== base64blocks) {
+                this.previousBase64 = base64blocks
+               } 
               
               this.props.addNotification({
                 type: 'success',
@@ -199,7 +208,6 @@ class SB3Downloader extends React.Component {
             new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''),
           )
           this.props.setIsScratchData(base64blocks)
-          
           setTimeout(() => {
             this.props.saveProjectSb3().then((freshContent) => {
               const freshReader = new FileReader()
@@ -251,6 +259,7 @@ const mapStateToProps = (state) => ({
   projectName: state.scratchGui.vmStatus.projectName,
   isEditableProject: state.scratchGui.vmStatus.isEditableProject,
   isCloned: state.scratchGui.vmStatus.isCloned,
+  isMyProjectsGetPending: state.scratchGui.vmStatus.isMyProjectsGetPending,
 })
 
 const mapDispatchToProps = {
@@ -260,6 +269,8 @@ const mapDispatchToProps = {
   setIsPendingState,
   setProjectName,
   addNotification,
+  pushProjectHistory,
+  setMyProjectsGetPending,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SB3Downloader)

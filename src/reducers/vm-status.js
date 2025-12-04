@@ -22,6 +22,11 @@ const POSITION_MODAL = "scratch-gui/vm-status/POSITION_MODAL";
 const SET_ISEDITABLE_PROJECT = "scratch-gui/vm-status/SET_ISEDITABLE_PROJECT";
 const SET_IS_CLONED = "scratch-gui/vm-status/SET_IS_CLONED";
 const SET_CURRENT_LAYOUT = "scratch-gui/vm-status/SET_CURRENT_LAYOUT";
+const PUSH_PROJECT_HISTORY = "scratch-gui/vm-status/PUSH_PROJECT_HISTORY";
+const UNDO_HISTORY = "scratch-gui/vm-status/UNDO_HISTORY";
+const REDO_HISTORY = "scratch-gui/vm-status/REDO_HISTORY";
+const SET_MY_PROJECTS_GET_PENDING =
+    "scratch-gui/vm-status/SET_MY_PROJECTS_GET_PENDING";
 
 const initialState = {
     running: false,
@@ -44,6 +49,9 @@ const initialState = {
     isEditableProject: null,
     isCloned: null,
     currentLayout: "studentChallenge",
+    projectHistory: [],
+    currentHistoryIndex: 0,
+    isMyProjectsGetPending: false,
 };
 
 const reducer = function (state, action) {
@@ -141,6 +149,33 @@ const reducer = function (state, action) {
             return {
                 ...state,
                 currentLayout: action.currentLayout,
+            };
+        case PUSH_PROJECT_HISTORY:
+            return {
+                ...state,
+                projectHistory: [
+                    action.historyEntry,
+                    ...state.projectHistory,
+                ].slice(0, 10),
+                currentHistoryIndex: 0,
+            };
+        case UNDO_HISTORY:
+            return {
+                ...state,
+                currentHistoryIndex: Math.min(
+                    state.currentHistoryIndex + 1,
+                    state.projectHistory.length - 1
+                ),
+            };
+        case REDO_HISTORY:
+            return {
+                ...state,
+                currentHistoryIndex: Math.max(state.currentHistoryIndex - 1, 0),
+            };
+        case SET_MY_PROJECTS_GET_PENDING:
+            return {
+                ...state,
+                isMyProjectsGetPending: action.isMyProjectsGetPending,
             };
         default:
             return state;
@@ -296,6 +331,32 @@ const setCurrentLayout = function (currentLayout) {
     };
 };
 
+const pushProjectHistory = function (historyEntry) {
+    return {
+        type: PUSH_PROJECT_HISTORY,
+        historyEntry: historyEntry,
+    };
+};
+
+const undoHistory = function () {
+    return {
+        type: UNDO_HISTORY,
+    };
+};
+
+const redoHistory = function () {
+    return {
+        type: REDO_HISTORY,
+    };
+};
+
+const setMyProjectsGetPending = function (isMyProjectsGetPending) {
+    return {
+        type: SET_MY_PROJECTS_GET_PENDING,
+        isMyProjectsGetPending: isMyProjectsGetPending,
+    };
+};
+
 export {
     reducer as default,
     initialState as vmStatusInitialState,
@@ -320,4 +381,8 @@ export {
     setIsEditable,
     setIsCloned,
     setCurrentLayout,
+    pushProjectHistory,
+    undoHistory,
+    redoHistory,
+    setMyProjectsGetPending,
 };

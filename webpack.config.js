@@ -76,19 +76,19 @@ const baseConfig = new ScratchWebpackConfigBuilder({
             minimizer: [
                 new TerserPlugin({
                     terserOptions: {
-                        compress: {
-                            drop_console: true,
-                            drop_debugger: true,
-                            dead_code: true,
-                            passes: 2,
-                            toplevel: true,
-                            warnings: false,
-                            pure_funcs: [
-                                "console.log",
-                                "console.warn",
-                                "console.info",
-                            ],
-                        },
+                        // compress: {
+                        //     drop_console: true,
+                        //     drop_debugger: true,
+                        //     dead_code: true,
+                        //     passes: 2,
+                        //     toplevel: true,
+                        //     warnings: false,
+                        //     pure_funcs: [
+                        //         "console.log",
+                        //         "console.warn",
+                        //         "console.info",
+                        //     ],
+                        // },
                         output: {
                             comments: false,
                         },

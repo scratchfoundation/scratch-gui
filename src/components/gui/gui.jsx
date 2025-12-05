@@ -404,7 +404,8 @@ const GUIComponent = (props) => {
                         <img src={EditAction} />
                       </div>
                     )}
-                    {((String(isEditableProject) === 'true')) && (
+                    {((String(isEditableProject) === 'true') || 
+                      ( currentLayout === 'myprojects' && isCloned))  && (
                       <div className={styles.historyButtons}>
                         <button
                           className={styles.undoIcon}

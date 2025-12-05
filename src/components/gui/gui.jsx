@@ -167,7 +167,7 @@ const GUIComponent = (props) => {
     notifications,
     isEditableProject,
     isCloned,
-    // currentLayout,
+    currentLayout,
     projectHistory,
     currentHistoryIndex,
     undoHistory,
@@ -193,7 +193,6 @@ const GUIComponent = (props) => {
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
 
-  const currentLayout = 'myprojects'
 
   useEffect(() => {
     const connectToParent = async () => {
@@ -393,48 +392,51 @@ const GUIComponent = (props) => {
                   </div>
 
                   <div className={styles.projectnameEdit}>
+
                     <div className={styles.catIcon}>
                       <img src={Cat} />
                     </div>
+
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
+                    1
                     {((String(isEditableProject) === 'true')) && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
                     )}
+                    {((String(isEditableProject) === 'true')) && (
+                      <div className={styles.historyButtons}>
+                        <button
+                          className={styles.undoIcon}
+                          onClick={handleUndo}
+                          disabled={projectHistory.length === 0 || currentHistoryIndex >= projectHistory.length - 1}
+                          title={
+                            projectHistory.length === 0 
+                              ? 'No history available'
+                              : currentHistoryIndex >= projectHistory.length - 1
+                                ? 'No more actions to undo'
+                                : `Undo to last saved data`
+                          }
+                        >
+                            <img src={UndoButton} />
+                        </button>
+                        <button
+                          className={styles.redoIcon}
+                          onClick={handleRedo}
+                          disabled={projectHistory.length === 0 || currentHistoryIndex <= 0}
 
-                    <div className={styles.historyButtons}>
-                       <button
-                        className={styles.undoIcon}
-                         onClick={handleUndo}
-                         disabled={projectHistory.length === 0 || currentHistoryIndex >= projectHistory.length - 1}
-                         title={
-                           projectHistory.length === 0 
-                             ? 'No history available'
-                             : currentHistoryIndex >= projectHistory.length - 1
-                               ? 'No more actions to undo'
-                               : `Undo to last saved data`
-                         }
-                       >
-                          <img src={UndoButton} />
-                       </button>
-                       <button
-                         className={styles.redoIcon}
-                         onClick={handleRedo}
-                         disabled={projectHistory.length === 0 || currentHistoryIndex <= 0}
-
-                         title={
-                           projectHistory.length === 0
-                             ? 'No history available'  
-                             : currentHistoryIndex <= 0
-                               ? 'No more actions to redo'
-                               : `Redo to last saved data`
-                         }
-                       >
-                         <img src={RedoButton} />
-                       </button>
-                    </div>
-                    
+                          title={
+                            projectHistory.length === 0
+                              ? 'No history available'  
+                              : currentHistoryIndex <= 0
+                                ? 'No more actions to redo'
+                                : `Redo to last saved data`
+                          }
+                        >
+                          <img src={RedoButton} />
+                        </button>
+                      </div>
+                     )}
                     {((String(isEditableProject) === 'true') || 
                       ( currentLayout === 'myprojects' && isCloned))  && (
                       <SB3Downloader>

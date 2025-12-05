@@ -313,7 +313,6 @@ class MenuBarGuiSub extends React.Component {
       this.props.setIsSavingStateFalse()
     } finally {
       this.props.setIsSavingStateFalse()
-      this.props.setMyProjectsGetPending(false);
     }
   }
 
@@ -586,9 +585,11 @@ class MenuBarGuiSub extends React.Component {
     await this.props.vm.loadProject(bytes.buffer)
   }
 
-  async onLocalStorageFileUploadStudentmyproject(base64blocks) {
+ async onLocalStorageFileUploadStudentmyproject(base64blocks) {
+  try {
     if(base64blocks === null) {
       this.props.onClickFirstFalse()
+      return;
     }
     let binaryString = atob(base64blocks)
     let bytes = new Uint8Array(binaryString.length)
@@ -597,8 +598,15 @@ class MenuBarGuiSub extends React.Component {
     }
     await new Promise((resolve) => setTimeout(resolve, 500))
     await this.props.vm.loadProject(bytes.buffer)
+  } catch (error) {
+    console.error('Error loading project:', error)
+    // Handle error appropriately
+  } finally {
+    this.props.setMyProjectsGetPending(false);
     this.props.onClickFirstFalse()
   }
+}
+
 
 
 

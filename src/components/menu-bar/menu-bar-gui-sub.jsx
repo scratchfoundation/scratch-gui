@@ -49,7 +49,7 @@ import {
   remixProject,
   saveProjectAsCopy,
 } from '../../reducers/project-state'
-import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable, setIsCloned, setCurrentLayout } from '../../reducers/vm-status.js'
+import { setIsLoadingState, setIsFirstState, setIsSavingState, setProjectName, addNotification, setIsEditable, setIsCloned, setCurrentLayout, setMyProjectsGetPending, pushProjectHistory } from '../../reducers/vm-status.js'
 import {
   openAboutMenu,
   closeAboutMenu,
@@ -245,6 +245,9 @@ class MenuBarGuiSub extends React.Component {
 
   async fetchProjectData(projectId, fetchapiurl) {
     if (!projectId) return
+    
+    this.props.setMyProjectsGetPending(true);
+    
     this.props.addNotification({
       type: 'saving',
       icon: 'saving',
@@ -292,6 +295,11 @@ class MenuBarGuiSub extends React.Component {
           console.error('Error processing SB3 data:', processingError)
           // Continue with original data if processing fails
         }
+      }
+      
+      // Push the initial project state to history for myprojects layout
+      if (data.content) {
+        this.props.pushProjectHistory(data.content);
       }
       
       this.props.addNotification({
@@ -577,9 +585,11 @@ class MenuBarGuiSub extends React.Component {
     await this.props.vm.loadProject(bytes.buffer)
   }
 
-  async onLocalStorageFileUploadStudentmyproject(base64blocks) {
+ async onLocalStorageFileUploadStudentmyproject(base64blocks) {
+  try {
     if(base64blocks === null) {
       this.props.onClickFirstFalse()
+      return;
     }
     let binaryString = atob(base64blocks)
     let bytes = new Uint8Array(binaryString.length)
@@ -588,8 +598,15 @@ class MenuBarGuiSub extends React.Component {
     }
     await new Promise((resolve) => setTimeout(resolve, 500))
     await this.props.vm.loadProject(bytes.buffer)
+  } catch (error) {
+    console.error('Error loading project:', error)
+    // Handle error appropriately
+  } finally {
+    this.props.setMyProjectsGetPending(false);
     this.props.onClickFirstFalse()
   }
+}
+
 
 
 
@@ -914,6 +931,8 @@ const mapDispatchToProps = (dispatch) => ({
   setIsEditable: (isEditable) => dispatch(setIsEditable(isEditable)),
   setIsCloned: (isCloned) => dispatch(setIsCloned(isCloned)),
   setCurrentLayout: (currentLayout) => dispatch(setCurrentLayout(currentLayout)),
+  setMyProjectsGetPending: (pending) => dispatch(setMyProjectsGetPending(pending)),
+  pushProjectHistory: (historyEntry) => dispatch(pushProjectHistory(historyEntry)),
 })
 
 export default compose(

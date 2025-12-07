@@ -42,6 +42,8 @@ import costumesIcon from './icon--costumes.svg'
 import soundsIcon from './icon--sounds.svg'
 import BackArrow from './icon--back-arrow.svg'
 import EditAction from './icon--edit-action.svg'
+import RedoButton from './icon--redo-button.svg'
+import UndoButton from './icon--undo-button.svg'
 import Save from './icon--save.svg'
 import Cat from './icon--cat.svg'
 import ShareIcon from '../menu-bar/share.svg'
@@ -52,6 +54,10 @@ import {
   setProjectName,
   setPositionModal,
   setCurrentLayout,
+  setIsLoadingState,
+  undoHistory,
+  redoHistory,
+  setMyProjectsGetPending,
 } from './../../reducers/vm-status.js'
 import LanguageMenu from '../menu-bar/language-menu.jsx'
 import localforage from 'localforage'
@@ -162,6 +168,10 @@ const GUIComponent = (props) => {
     isEditableProject,
     isCloned,
     currentLayout,
+    projectHistory,
+    currentHistoryIndex,
+    undoHistory,
+    redoHistory,
     ...componentProps
   } = omit(props, 'dispatch')
   if (children) {
@@ -182,6 +192,7 @@ const GUIComponent = (props) => {
   }
   const [remote, setRemote] = React.useState(null)
   const [connection, setConnection] = React.useState(null)
+
 
   useEffect(() => {
     const connectToParent = async () => {
@@ -257,6 +268,65 @@ const GUIComponent = (props) => {
     }
   }
 
+  // Helper function to load project from base64 (following menu-bar-gui-sub pattern)
+  async function loadProjectFromHistory(base64blocks) {
+    try {
+      setIsLoadingState(true);
+      
+      let binaryString = atob(base64blocks);
+      let bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      await vm.loadProject(bytes.buffer);
+      
+    } catch (error) {
+      console.error('Failed to load project from history:', error);
+      addNotification({
+        type: 'error',
+        icon: 'error', 
+        message: 'Failed to restore project from history',
+        duration: 3000
+      });
+    } finally {
+      setIsLoadingState(false);
+    }
+  }
+
+  // Handle undo with VM loading
+  async function handleUndo() {
+    if (projectHistory.length === 0 || currentHistoryIndex >= projectHistory.length - 1) {
+      return;
+    }
+    
+    const newIndex = Math.min(currentHistoryIndex + 1, projectHistory.length - 1);
+    
+    undoHistory(); // Update Redux state
+    
+    const base64Data = projectHistory[newIndex];
+    if (base64Data) {
+      await loadProjectFromHistory(base64Data);
+    }
+  }
+
+  // Handle redo with VM loading  
+  async function handleRedo() {
+    if (projectHistory.length === 0 || currentHistoryIndex <= 0) {
+      return;
+    }
+    
+    const newIndex = Math.max(currentHistoryIndex - 1, 0);
+    
+    redoHistory(); // Update Redux state
+    
+    const base64Data = projectHistory[newIndex];
+    if (base64Data) {
+      await loadProjectFromHistory(base64Data);
+    }
+  }
+
   return (
     <MediaQuery minWidth={layout.fullSizeMinWidth}>
       {(isFullSize) => {
@@ -301,6 +371,7 @@ const GUIComponent = (props) => {
             ) : null}
 
             <div className={styles.menuBarWithContent}>
+              
               {currentLayout === 'myprojects' && (
                 <div className={styles.backAndTitle}>
                   <div className={styles.backButtonWrapper}>
@@ -316,20 +387,57 @@ const GUIComponent = (props) => {
                           : 'Back to My Projects'
                       }
                     >
-                      <img src={BackArrow} />
+                      <img src={BackArrow} className={styles.editIcon}/>
                     </button>
                   </div>
 
                   <div className={styles.projectnameEdit}>
+
                     <div className={styles.catIcon}>
                       <img src={Cat} />
                     </div>
+
                     <div className={styles.projectnameEdit}>Scratch - {projectName}</div>
+                    1
                     {((String(isEditableProject) === 'true')) && (
                       <div onClick={() => handleRemoteModal(remote)} className={styles.editIcon}>
                         <img src={EditAction} />
                       </div>
                     )}
+                    {((String(isEditableProject) === 'true') || 
+                      ( currentLayout === 'myprojects' && isCloned))  && (
+                      <div className={styles.historyButtons}>
+                        <button
+                          className={styles.undoIcon}
+                          onClick={handleUndo}
+                          disabled={projectHistory.length === 0 || currentHistoryIndex >= projectHistory.length - 1}
+                          title={
+                            projectHistory.length === 0 
+                              ? 'No history available'
+                              : currentHistoryIndex >= projectHistory.length - 1
+                                ? 'No more actions to undo'
+                                : `Undo to last saved data`
+                          }
+                        >
+                            <img src={UndoButton} />
+                        </button>
+                        <button
+                          className={styles.redoIcon}
+                          onClick={handleRedo}
+                          disabled={projectHistory.length === 0 || currentHistoryIndex <= 0}
+
+                          title={
+                            projectHistory.length === 0
+                              ? 'No history available'  
+                              : currentHistoryIndex <= 0
+                                ? 'No more actions to redo'
+                                : `Redo to last saved data`
+                          }
+                        >
+                          <img src={RedoButton} />
+                        </button>
+                      </div>
+                     )}
                     {((String(isEditableProject) === 'true') || 
                       ( currentLayout === 'myprojects' && isCloned))  && (
                       <SB3Downloader>
@@ -425,6 +533,7 @@ const GUIComponent = (props) => {
                   </div>
                 )}
               </div>
+              
             </div>
 
             <Box className={styles.bodyWrapper}>
@@ -702,6 +811,8 @@ const mapStateToProps = (state) => ({
   isCloned: state.scratchGui.vmStatus.isCloned,
   notifications: state.scratchGui.vmStatus.notifications,
   currentLayout: state.scratchGui.vmStatus.currentLayout,
+  projectHistory: state.scratchGui.vmStatus.projectHistory,
+  currentHistoryIndex: state.scratchGui.vmStatus.currentHistoryIndex,
 })
 
 const mapDispatchToProps = {
@@ -711,6 +822,10 @@ const mapDispatchToProps = {
   setProjectName,
   setPositionModal,
   setCurrentLayout,
+  setIsLoadingState,
+  undoHistory,
+  redoHistory,
+  setMyProjectsGetPending,
 }
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(GUIComponent))

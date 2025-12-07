@@ -102,7 +102,50 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+}
+
+.history-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.history-buttons img{
+    width: 18px;
+    height: 18px;
+} 
+
+.redo-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    stroke-width: 4px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.undo-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    stroke-width: 4px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.undo-icon:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #801D80;
+}
+
+.redo-icon:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #801D80;
 }
 
 .save-icon {
@@ -613,6 +656,7 @@ $fade-out-distance: 15px;
     right: 0;
     z-index: 99999 !important;
 }
+
 
 
 @media (max-width: 720px) {

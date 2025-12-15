@@ -5,8 +5,9 @@
 .menu-bar {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: nowrap;
+    gap: 0.5rem;
     align-items: center;
     /*
         For most things, we shouldn't explicitly set height, and let the
@@ -34,6 +35,7 @@
     color: $ui-white;
     /* padding: 1rem 0.3rem 1
     rem 0.3rem; */
+
 }
 
 
@@ -276,7 +278,6 @@
     width:1.1rem;
     color: #801D80;
     stroke-width: 2.1px;
-    padding-bottom: 0.2rem;
 }
 .file-drop-down:hover{
     color: rgb(51, 51, 51);

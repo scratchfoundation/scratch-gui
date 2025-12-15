@@ -640,22 +640,6 @@ $fade-out-distance: 15px;
     transition: 0.1s ease-in-out;
 }
 
-.setting-icon{
-    width: 1.5rem;
-    padding-top: 4px;
-    cursor: pointer;
-    position: relative;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.language-res{
-    color: #c36a6a;
-    position: relative;
-    right: 0;
-    z-index: 99999 !important;
-}
 
 
 

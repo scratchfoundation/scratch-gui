@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import bindAll from 'lodash.bindall'
 import bowser from 'bowser'
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 import VM from 'scratch-vm'
 
@@ -846,7 +847,11 @@ class MenuBarGuiSub extends React.Component {
               })}
               onMouseUp={this.props.onClickEdit}
             >
-              <img src={restore} />
+              <img 
+                src={restore} 
+                data-tip
+                data-for="restore-tooltip"
+              />
               <MenuBarMenu
                 className={classNames(styles.menuBarMenu)}
                 open={this.props.editMenuOpen}
@@ -865,6 +870,17 @@ class MenuBarGuiSub extends React.Component {
                 </DeletionRestorer>
               </MenuBarMenu>
             </div>
+        <ReactTooltip
+          id="restore-tooltip"
+          effect="float"
+          place="bottom"
+        >
+          <FormattedMessage
+            defaultMessage="Restore deleted sprite"
+            description="Tooltip for restore icon button"
+            id="gui.menuBar.restoreTooltip"
+          />
+        </ReactTooltip>
       </Box>
     )
   }

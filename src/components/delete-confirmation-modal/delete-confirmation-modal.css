@@ -1,0 +1,56 @@
+.modalContent {
+    width: 400px;
+    height: auto;
+    background-color: #ebebeb;
+}
+
+.body {
+    padding: 24px;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.message {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: #575e75;
+    line-height: 1.4;
+}
+
+.buttonRow {
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+}
+
+.cancelButton {
+    background-color: #e6e8ea;
+    color: #575e75;
+    border: 1px solid #d0d1d3;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    flex: 1;
+    margin-bottom: 0.5rem;
+}
+
+.cancelButton:hover {
+    background-color: #d0d1d3;
+}
+
+.deleteButton {
+    background-color: #ff6680;
+    color: white;
+    border: 1px solid #ff4757;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    flex: 1;
+}
+
+.deleteButton:hover {
+    background-color: #ff4757;
+}

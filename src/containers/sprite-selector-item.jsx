@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import { setHoveredSprite } from '../reducers/hovered-target'
 import { updateAssetDrag } from '../reducers/asset-drag'
+import { openDeleteConfirmation } from '../reducers/modals'
+import { setDeleteHandler } from './delete-confirmation-modal.jsx'
 import storage from '../lib/storage'
 import VM from 'scratch-vm'
 import getCostumeUrl from '../lib/get-costume-url'
@@ -21,6 +23,8 @@ class SpriteSelectorItem extends React.PureComponent {
       'setRef',
       'handleClick',
       'handleDelete',
+      'handleConfirmDelete',
+      'handleCancelDelete',
       'handleDuplicate',
       'handleExport',
       'handleMouseEnter',
@@ -92,7 +96,20 @@ class SpriteSelectorItem extends React.PureComponent {
   }
   handleDelete(e) {
     e.stopPropagation() // To prevent from bubbling back to handleClick
-    this.props.onDeleteButtonClick(this.props.id)
+    // Set the delete handler and open the modal
+    const deleteHandler = () => {
+      if (this.props.onDeleteButtonClick) {
+        this.props.onDeleteButtonClick(this.props.id)
+      }
+    }
+    setDeleteHandler(deleteHandler)
+    this.props.dispatchOpenDeleteConfirmation()
+  }
+  handleConfirmDelete() {
+    // This method is no longer needed but kept for backward compatibility
+  }
+  handleCancelDelete() {
+    // This method is no longer needed but kept for backward compatibility
   }
   handleDuplicate(e) {
     e.stopPropagation() // To prevent from bubbling back to handleClick
@@ -178,6 +195,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setHoveredSprite(spriteId))
   },
   onDrag: (data) => dispatch(updateAssetDrag(data)),
+  dispatchOpenDeleteConfirmation: () => dispatch(openDeleteConfirmation()),
 })
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(SpriteSelectorItem)

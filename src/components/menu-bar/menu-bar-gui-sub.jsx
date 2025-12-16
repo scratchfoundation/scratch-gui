@@ -96,7 +96,7 @@ import prehistoricLogo from './prehistoric-logo.svg'
 import oldtimeyLogo from './oldtimey-logo.svg'
 
 import sharedMessages from '../../lib/shared-messages'
-import { ChevronDoubleDownIcon, FolderIcon } from '@heroicons/react/24/outline'
+import { ChevronDoubleDownIcon, FolderIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline'
 // import data from './content.json';
 
 
@@ -847,11 +847,7 @@ class MenuBarGuiSub extends React.Component {
               })}
               onMouseUp={this.props.onClickEdit}
             >
-              <img 
-                src={restore} 
-                data-tip
-                data-for="restore-tooltip"
-              />
+              <CloudArrowDownIcon className={styles.fileDropDown} />
               <MenuBarMenu
                 className={classNames(styles.menuBarMenu)}
                 open={this.props.editMenuOpen}
@@ -874,6 +870,7 @@ class MenuBarGuiSub extends React.Component {
           id="restore-tooltip"
           effect="float"
           place="bottom"
+          delayShow={1000}
         >
           <FormattedMessage
             defaultMessage="Restore deleted sprite"

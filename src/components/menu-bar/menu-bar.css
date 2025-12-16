@@ -112,6 +112,11 @@
     height: $menu-bar-height;
 }
 
+.menu-bar-item:hover img{
+
+    background-color: gray !important;
+}
+
 .menu-bar-item.hoverable {
     cursor: pointer;
 }

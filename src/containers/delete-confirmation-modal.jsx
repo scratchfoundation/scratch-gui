@@ -3,14 +3,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import DeleteConfirmationModalComponent from '../components/delete-confirmation-modal/delete-confirmation-modal.jsx'
-import { closeDeleteConfirmation } from '../reducers/modals'
-
-// Global reference to store the current delete handler
-let currentDeleteHandler = null
-
-export const setDeleteHandler = (handler) => {
-  currentDeleteHandler = handler
-}
+import { clearDeletePending } from '../reducers/delete-confirmation'
 
 class DeleteConfirmationModal extends React.Component {
   constructor(props) {
@@ -20,15 +13,14 @@ class DeleteConfirmationModal extends React.Component {
   }
 
   handleDelete() {
-    if (currentDeleteHandler) {
-      currentDeleteHandler()
+    if (this.props.onConfirm) {
+      this.props.onConfirm()
     }
-    this.props.onCancel()
+    this.props.onClearDeletePending()
   }
 
   handleCancel() {
-    currentDeleteHandler = null
-    this.props.onCancel()
+    this.props.onClearDeletePending()
   }
 
   render() {
@@ -47,11 +39,12 @@ class DeleteConfirmationModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  visible: state.scratchGui.modals.deleteConfirmation,
+  visible: state.scratchGui.deleteConfirmation.pendingId !== null,
+  onConfirm: state.scratchGui.deleteConfirmation.onConfirm,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onCancel: () => dispatch(closeDeleteConfirmation()),
+  onClearDeletePending: () => dispatch(clearDeletePending()),
 })
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(DeleteConfirmationModal))

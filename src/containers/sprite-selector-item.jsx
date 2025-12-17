@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { setHoveredSprite } from '../reducers/hovered-target'
 import { updateAssetDrag } from '../reducers/asset-drag'
 import { openDeleteConfirmation } from '../reducers/modals'
-import { setDeleteHandler } from './delete-confirmation-modal.jsx'
+import { setDeletePending } from '../reducers/delete-confirmation'
 import storage from '../lib/storage'
 import VM from 'scratch-vm'
 import getCostumeUrl from '../lib/get-costume-url'
@@ -96,14 +96,13 @@ class SpriteSelectorItem extends React.PureComponent {
   }
   handleDelete(e) {
     e.stopPropagation() // To prevent from bubbling back to handleClick
-    // Set the delete handler and open the modal
+    // Store delete pending info in Redux instead of module-level variable
     const deleteHandler = () => {
       if (this.props.onDeleteButtonClick) {
         this.props.onDeleteButtonClick(this.props.id)
       }
     }
-    setDeleteHandler(deleteHandler)
-    this.props.dispatchOpenDeleteConfirmation()
+    this.props.dispatchSetDeletePending(this.props.id, deleteHandler)
   }
   handleConfirmDelete() {
     // This method is no longer needed but kept for backward compatibility
@@ -167,6 +166,7 @@ class SpriteSelectorItem extends React.PureComponent {
 SpriteSelectorItem.propTypes = {
   asset: PropTypes.instanceOf(storage.Asset),
   costumeURL: PropTypes.string,
+  dispatchSetDeletePending: PropTypes.func.isRequired,
   dispatchSetHoveredSprite: PropTypes.func.isRequired,
   dragPayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dragType: PropTypes.string,
@@ -195,7 +195,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setHoveredSprite(spriteId))
   },
   onDrag: (data) => dispatch(updateAssetDrag(data)),
-  dispatchOpenDeleteConfirmation: () => dispatch(openDeleteConfirmation()),
+  dispatchSetDeletePending: (id, onConfirm) => dispatch(setDeletePending(id, onConfirm)),
 })
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(SpriteSelectorItem)

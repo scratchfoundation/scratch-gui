@@ -9,7 +9,7 @@ import locales from 'scratch-l10n'
 import check from './check.svg'
 import { MenuItem, Submenu } from '../menu/menu.jsx'
 import languageIcon from '../language-selector/language-icon.svg'
-import { languageMenuOpen, openLanguageMenu } from '../../reducers/menus.js'
+import { languageMenuOpen, openLanguageMenu, closeLanguageMenu } from '../../reducers/menus.js'
 import { selectLocale } from '../../reducers/locales.js'
 
 import styles from './settings-menu.css'
@@ -47,8 +47,8 @@ class LanguageMenu extends React.PureComponent {
       <MenuItem expanded={this.props.menuOpen}>
         <div
           className={styles.option}
-          onClick={this.props.onRequestOpen}
-          // onMouseOver={this.handleMouseOver}
+          onClick={() => this.props.onToggleLanguageMenu(this.props.menuOpen)}
+          onMouseOver={this.handleMouseOver}
         >
           {/* <img
                         className={styles.icon}
@@ -67,7 +67,7 @@ class LanguageMenu extends React.PureComponent {
                         src={dropdownCaret}
                     /> */}
         </div>
-        <Submenu className={styles.languageSubmenu} place={this.props.currentLayout === 'studentChallenge' ? 'right' : (this.props.isRtl || this.props.positionModal ? 'left' : 'right')}>
+        <Submenu className={styles.languageSubmenu} place={this.props.currentLayout === 'studentChallenge' ? 'right' : (this.props.isRtl || this.props.positionModal ? 'left' : 'right')} >
           {Object.keys(locales).map((locale) => (
             <MenuItem
               key={locale}
@@ -99,7 +99,7 @@ LanguageMenu.propTypes = {
   menuOpen: PropTypes.bool,
   onChangeLanguage: PropTypes.func,
   onRequestCloseSettings: PropTypes.func,
-  onRequestOpen: PropTypes.func,
+  onToggleLanguageMenu: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
@@ -114,9 +114,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChangeLanguage: (locale) => {
     dispatch(selectLocale(locale))
-    ownProps.onRequestCloseSettings()
+    dispatch(closeLanguageMenu())
   },
-  onRequestOpen: () => dispatch(openLanguageMenu()),
+  onToggleLanguageMenu: (menuOpen) => {
+    if (menuOpen) {
+      dispatch(closeLanguageMenu())
+    } else {
+      dispatch(openLanguageMenu())
+    }
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LanguageMenu)

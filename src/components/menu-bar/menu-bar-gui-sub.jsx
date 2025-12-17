@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import bindAll from 'lodash.bindall'
 import bowser from 'bowser'
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 import VM from 'scratch-vm'
 
@@ -87,7 +88,7 @@ import dropdownCaret from './dropdown-caret.svg'
 import aboutIcon from './icon--about.svg'
 import fileIcon from './icon--file.svg'
 import editIcon from './icon--edit.svg'
-
+import restore from './icon--restore.svg'
 import scratchLogo from './scratch-logo.svg'
 import ninetiesLogo from './nineties_logo.svg'
 import catLogo from './cat_logo.svg'
@@ -95,7 +96,7 @@ import prehistoricLogo from './prehistoric-logo.svg'
 import oldtimeyLogo from './oldtimey-logo.svg'
 
 import sharedMessages from '../../lib/shared-messages'
-import { ChevronDoubleDownIcon, FolderIcon } from '@heroicons/react/24/outline'
+import { ChevronDoubleDownIcon, FolderIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline'
 // import data from './content.json';
 
 
@@ -791,12 +792,6 @@ class MenuBarGuiSub extends React.Component {
             </div>
             <FolderIcon className={styles.fileDropDown} />
 
-            {/* {this.props.isSaving && (
-              <span className={styles.savingState}>
-                Saving data <div className={styles.loader}></div>
-              </span>
-            )} */}
-
             <MenuBarMenu
               className={classNames(styles.menuBarMenu)}
               open={this.props.fileMenuOpen}
@@ -841,21 +836,48 @@ class MenuBarGuiSub extends React.Component {
                   )}
                 </SB3Downloader>
               </MenuSection>
-              {/* <SB3Downloader>{(className, downloadProjectCallback,downloadLocalStorageProject) => (
-                                            <MenuItem
-                                                className={className}
-                                                onClick={this.onLocalStorageSave(downloadLocalStorageProject)}
-                                            >
-                                                <FormattedMessage
-                                                    defaultMessage="Save to your Local Storage"
-                                                    description="Menu bar item for downloading a project to your computer" // eslint-disable-line max-len
-                                                    id="gui.menuBar.downloadToLocalStorage"
-                                                />
-                                            </MenuItem>
-                                        )}</SB3Downloader> */}
+
             </MenuBarMenu>
+            
           </div>
         )}
+          <div
+              className={classNames(styles.menuBarItem, styles.hoverable, {
+                [styles.active]: this.props.editMenuOpen,
+              })}
+              onMouseUp={this.props.onClickEdit}
+            >
+              <CloudArrowDownIcon className={styles.fileDropDown} />
+              <MenuBarMenu
+                className={classNames(styles.menuBarMenu)}
+                open={this.props.editMenuOpen}
+                place={this.props.currentLayout === 'studentChallenge' ? 'right' : (this.props.isRtl || this.props.positionModal ? 'left' : 'right')}
+                onRequestClose={this.props.onRequestCloseEdit}
+              >
+                <DeletionRestorer>
+                  {(handleRestore, { restorable, deletedItem }) => (
+                    <MenuItem
+                      className={classNames({ [styles.disabled]: !restorable })}
+                      onClick={this.handleRestoreOption(handleRestore)}
+                    >
+                      {this.restoreOptionMessage(deletedItem)}
+                    </MenuItem>
+                  )}
+                </DeletionRestorer>
+              </MenuBarMenu>
+            </div>
+        <ReactTooltip
+          id="restore-tooltip"
+          effect="float"
+          place="bottom"
+          delayShow={1000}
+        >
+          <FormattedMessage
+            defaultMessage="Restore deleted sprite"
+            description="Tooltip for restore icon button"
+            id="gui.menuBar.restoreTooltip"
+          />
+        </ReactTooltip>
       </Box>
     )
   }

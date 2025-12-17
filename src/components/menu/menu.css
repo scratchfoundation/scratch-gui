@@ -36,7 +36,7 @@
 .menu-item.active,
 .menu-item:hover,
 .menu-item.expanded {
-    background-color: $ui-black-transparent;
+    background-color: none;
 }
 
 .menu-item.hoverable {
@@ -75,10 +75,6 @@
 }
 
 .menu-item.expanded > .submenu {
-    display: block;
-}
-
-:not(:has(> .menu-item.expanded)) > .menu-item:hover > .submenu {
     display: block;
 }
 

@@ -1,0 +1,100 @@
+name: Git Bundle to S3
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs once a week on Sundays at midnight UTC
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-south-1
+  S3_BUCKET: qubits-git-bundles-bucket
+  REPO_NAME: qubits-scratch_main
+
+jobs:
+  create-and-upload-bundle:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetch all history for complete bundle
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Set Bundle Name
+        run: |
+          SHORT_SHA="${GITHUB_SHA:0:7}"
+          BUNDLE_NAME="${{ env.REPO_NAME }}-dev-${SHORT_SHA}.bundle"
+          echo "BUNDLE_NAME=$BUNDLE_NAME" >> $GITHUB_ENV
+          echo "Creating bundle: $BUNDLE_NAME"
+
+      - name: Create Git Bundle
+        run: |
+          git bundle create $BUNDLE_NAME --all
+          ls -lh $BUNDLE_NAME
+
+      - name: Verify Bundle
+        run: |
+          git bundle verify $BUNDLE_NAME
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.WEB_IDENTITY_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Upload Bundle to S3
+        run: |
+          aws s3 cp $BUNDLE_NAME s3://${{ env.S3_BUCKET }}/$BUNDLE_NAME
+          echo "Bundle uploaded successfully to s3://${{ env.S3_BUCKET }}/$BUNDLE_NAME"
+
+      - name: Setup S3 Lifecycle Policy for 30-day Auto Purge
+        run: |
+          cat > lifecycle-policy.json << 'EOF'
+          {
+            "Rules": [
+              {
+                "ID": "Delete git bundles after 30 days",
+                "Status": "Enabled",
+                "Filter": {
+                  "Prefix": "${{ env.REPO_NAME }}-dev-"
+                },
+                "Expiration": {
+                  "Days": 30
+                }
+              }
+            ]
+          }
+          EOF
+
+          # Check if lifecycle policy already exists
+          if aws s3api get-bucket-lifecycle-configuration --bucket ${{ env.S3_BUCKET }} 2>/dev/null; then
+            echo "Lifecycle policy already exists, skipping..."
+          else
+            echo "Setting up 30-day lifecycle policy..."
+            aws s3api put-bucket-lifecycle-configuration \
+              --bucket ${{ env.S3_BUCKET }} \
+              --lifecycle-configuration file://lifecycle-policy.json
+            echo "✓ Lifecycle policy configured successfully"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Git Bundle Upload Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Bundle Name**: \`$BUNDLE_NAME\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: \`${GITHUB_REF_NAME}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit SHA**: \`${GITHUB_SHA}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **S3 Location**: \`s3://${{ env.S3_BUCKET }}/$BUNDLE_NAME\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Auto Purge**: Files will be automatically deleted after 30 days (SOC2 compliance)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Each commit creates a unique bundle with git SHA to handle concurrent actions." >> $GITHUB_STEP_SUMMARY

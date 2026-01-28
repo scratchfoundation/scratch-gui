@@ -13,7 +13,7 @@ permissions:
 env:
   AWS_REGION: ap-south-1
   S3_BUCKET: qubits-git-bundles-bucket
-  REPO_NAME: qubits-scratch_main
+  REPO_NAME: qubits_scratch_main
 
 jobs:
   create-and-upload-bundle:

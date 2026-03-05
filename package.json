@@ -83,7 +83,7 @@
     "redux": "^3.7.2",
     "redux-throttle": "^0.1.1",
     "scratch-audio": "^2.0.0",
-    "scratch-blocks": "^1.1.6",
+    "scratch-blocks": "^2.0.0",
     "scratch-l10n": "^5.0.0",
     "scratch-paint": "^3.0.0",
     "scratch-render": "^2.0.0",

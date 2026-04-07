@@ -141,7 +141,7 @@
     "url-loader": "4.1.1",
     "web-audio-test-api": "0.5.2",
     "webpack": "5.105.4",
-    "webpack-cli": "5.1.4",
+    "webpack-cli": "7.0.0",
     "webpack-dev-server": "5.2.3",
     "yauzl": "2.10.0"
   },

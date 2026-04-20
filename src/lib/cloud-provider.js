@@ -154,7 +154,9 @@ class CloudProvider {
      * @param {string} data The formatted message to send.
      */
     _sendCloudData (data) {
-        this.connection.send(`${data}\n`);
+        if (this.connection) {
+            this.connection.send(`${data}\n`);
+        }
     }
 
     /**

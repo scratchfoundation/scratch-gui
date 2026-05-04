@@ -141,6 +141,8 @@ class ListMonitor extends React.Component {
             onMouseMove(ev); // Make sure width/height are up-to-date
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('mouseup', onMouseUp);
+            window.removeEventListener('touchmove', onMouseMove);
+            window.removeEventListener('touchend', onMouseUp);
             this.props.vm.runtime.requestUpdateMonitor(Map({
                 id: this.props.id,
                 height: this.state.height,
@@ -150,6 +152,8 @@ class ListMonitor extends React.Component {
 
         window.addEventListener('mousemove', onMouseMove);
         window.addEventListener('mouseup', onMouseUp);
+        window.addEventListener('touchmove', onMouseMove);
+        window.addEventListener('touchend', onMouseUp);
 
     }
 
@@ -199,3 +203,4 @@ ListMonitor.propTypes = {
 const mapStateToProps = state => ({vm: state.scratchGui.vm});
 
 export default connect(mapStateToProps)(ListMonitor);
+

@@ -177,6 +177,9 @@ class Monitor extends React.Component {
             if (numberOfColumns > 1) {
                 const msg = this.props.intl.formatMessage(messages.columnPrompt, {numberOfColumns});
                 columnNumber = parseInt(prompt(msg), 10); // eslint-disable-line no-alert
+                if (!columnNumber || columnNumber < 1 || columnNumber > numberOfColumns) {
+                    return;
+                }
             }
             const newListValue = rows.map(row => row[columnNumber - 1])
                 .filter(item => typeof item === 'string'); // CSV importer can leave undefineds

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import greenFlagIcon from './icon--green-flag.svg';
+import prideFlagIcon from './icon--pride-flag.svg';
 import styles from './green-flag.css';
 
 const GreenFlagComponent = function (props) {
@@ -23,7 +24,7 @@ const GreenFlagComponent = function (props) {
                 }
             )}
             draggable={false}
-            src={greenFlagIcon}
+            src={new Date().getMonth() === 5 ? prideFlagIcon : greenFlagIcon}
             title={title}
             onClick={onClick}
             {...componentProps}

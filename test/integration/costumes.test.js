@@ -182,6 +182,44 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding a costume with larger gif', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/stones.gif'));
+
+        // Verify all frames (1-45)
+        for (let i = 1; i <= 45; i++) {
+            const frameName = i === 1 ? 'stones' : `stones${i}`;
+            await findByText(frameName, scope.costumesTab);
+        }
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+    
+    test('Adding a costume from gif with large number of frames', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/catshocked.gif'));
+
+        // Verify all frames (1-45)
+        for (let i = 1; i <= 45; i++) {
+            const frameName = i === 1 ? 'catshocked' : `catshocked${i}`;
+            await findByText(frameName, scope.costumesTab);
+        }
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a letter costume through the Letters filter in the library', async () => {
         await loadUri(uri);
         await driver.manage()

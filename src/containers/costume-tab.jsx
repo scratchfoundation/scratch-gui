@@ -148,19 +148,27 @@ class CostumeTab extends React.Component {
         const blob = new Blob([item.asset.data], {type: item.asset.assetType.contentType});
         downloadBlob(`${item.name}.${item.asset.dataFormat}`, blob);
     }
-    handleNewCostume (costume, fromCostumeLibrary, targetId) {
+    async handleNewCostume (costume, fromCostumeLibrary, targetId) {
         const costumes = Array.isArray(costume) ? costume : [costume];
 
-        return Promise.all(costumes.map(c => {
+        // Costumes should be added one by one to ensure they are not received out of
+        // order by the VM. Parallel adding of costumes were causing out of order gifs
+        // for large gif costumes per #5875. Additionally, updated to async await
+        // for most up to date syntax.
+        const result = [];
+        for (const c of costumes) {
             if (fromCostumeLibrary) {
-                return this.props.vm.addCostumeFromLibrary(c.md5, c);
+                result.push(await this.props.vm.addCostumeFromLibrary(c.md5, c));
+            } else {
+                // If targetId is falsy, VM should default it to editingTarget.id
+                // However, targetId should be provided to prevent #5876,
+                // if making new costume takes a while
+                result.push(await this.props.vm.addCostume(c.md5, c, targetId));
             }
-            // If targetId is falsy, VM should default it to editingTarget.id
-            // However, targetId should be provided to prevent #5876,
-            // if making new costume takes a while
-            return this.props.vm.addCostume(c.md5, c, targetId);
-        }));
+        }
+        return result;
     }
+
     handleNewBlankCostume () {
         const name = this.props.vm.editingTarget.isStage ?
             this.props.intl.formatMessage(messages.backdrop, {index: 1}) :

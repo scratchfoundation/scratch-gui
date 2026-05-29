@@ -1,4 +1,5 @@
 import layout, {STAGE_DISPLAY_SCALES, STAGE_SIZE_MODES, STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
+import {useEffect, useState} from 'react';
 
 /**
  * @typedef {object} StageDimensions
@@ -36,47 +37,6 @@ const resolveStageSize = (stageSizeMode, isFullSize) => {
 };
 
 /**
- * Retrieve info used to determine the actual stage size based on the current GUI and browser state.
- * @param {STAGE_DISPLAY_SIZES} stageSize - the current fully-resolved stage size.
- * @param {boolean} isFullScreen - true if full-screen mode is enabled.
- * @return {StageDimensions} - an object describing the dimensions of the stage.
- */
-const getStageDimensions = (stageSize, isFullScreen) => {
-    const stageDimensions = {
-        heightDefault: layout.standardStageHeight,
-        widthDefault: layout.standardStageWidth,
-        height: 0,
-        width: 0,
-        scale: 0
-    };
-
-    if (isFullScreen) {
-        stageDimensions.height = window.innerHeight -
-            STAGE_DIMENSION_DEFAULTS.menuHeightAdjustment -
-            STAGE_DIMENSION_DEFAULTS.fullScreenSpacingBorderAdjustment;
-
-        stageDimensions.width = stageDimensions.height + (stageDimensions.height / 3);
-
-        if (stageDimensions.width > window.innerWidth) {
-            stageDimensions.width = window.innerWidth;
-            stageDimensions.height = stageDimensions.width * .75;
-        }
-
-        stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;
-    } else {
-        stageDimensions.scale = STAGE_DISPLAY_SCALES[stageSize];
-        stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
-        stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;
-    }
-
-    // Round off dimensions to prevent resampling/blurriness
-    stageDimensions.height = Math.round(stageDimensions.height);
-    stageDimensions.width = Math.round(stageDimensions.width);
-
-    return stageDimensions;
-};
-
-/**
  * Take a pair of sizes for the stage (a target height and width and a default height and width),
  * calculate the ratio between them, and return a CSS transform to scale to that ratio.
  * @param {object} sizeInfo An object containing dimensions of the target and default stage sizes.
@@ -97,8 +57,48 @@ const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
     return {transform: `scale(${scaleX},${scaleY})`};
 };
 
-export {
-    getStageDimensions,
-    resolveStageSize,
-    stageSizeToTransform
+/**
+ * React hook that monitors a canvas element's dimensions and returns stage sizing information.
+ * @param {HTMLCanvasElement} canvas - The canvas element to monitor
+ * @returns {object} Stage dimension information
+ * @property {number} heightDefault - The default stage height (standardStageHeight)
+ * @property {number} widthDefault - The default stage width (standardStageWidth) 
+ * @property {number} height - The current height of the canvas in pixels
+ * @property {number} width - The current width of the canvas in pixels
+ * @property {number} scale - Scale factor between current width and default width
+ */
+const useCanvasSize = canvas => {
+    const [stageDimensions, setStageDimensions] = useState({
+        heightDefault: layout.standardStageHeight,
+        widthDefault: layout.standardStageWidth,
+        height: canvas?.clientHeight || layout.standardStageHeight,
+        width: canvas?.clientWidth || layout.standardStageWidth,
+        scale: (canvas?.clientWidth || layout.standardStageWidth) / layout.standardStageWidth
+    });
+
+    useEffect(() => {
+        const resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                setStageDimensions({
+                    heightDefault: layout.standardStageHeight,
+                    widthDefault: layout.standardStageWidth,
+                    height: entry.contentRect.height,
+                    width: entry.contentRect.width,
+                    scale: entry.contentRect.width / layout.standardStageWidth
+                });
+            }
+        });
+
+        if (canvas) {
+            resizeObserver.observe(canvas);
+        }
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [canvas]);
+
+    return stageDimensions;
 };
+
+export {resolveStageSize, stageSizeToTransform, useCanvasSize};

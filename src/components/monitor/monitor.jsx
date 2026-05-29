@@ -52,6 +52,7 @@ const MonitorComponent = props => (
             defaultClassNameDragging={styles.dragging}
             disabled={!props.draggable}
             onStop={props.onDragEnd}
+            scale={props.scale}
         >
             <Box
                 className={styles.monitorContainer}
@@ -149,7 +150,8 @@ MonitorComponent.propTypes = {
     onSetModeToLarge: PropTypes.func,
     onSetModeToSlider: PropTypes.func,
     onSliderPromptOpen: PropTypes.func,
-    theme: PropTypes.string.isRequired
+    theme: PropTypes.string.isRequired,
+    scale: PropTypes.number
 };
 
 MonitorComponent.defaultProps = {

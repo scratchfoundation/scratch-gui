@@ -225,6 +225,7 @@ class Monitor extends React.Component {
                     onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
                     onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
                     onSliderPromptOpen={this.handleSliderPromptOpen}
+                    scale={this.props.scale}
                 />
             </React.Fragment>
         );
@@ -265,7 +266,8 @@ Monitor.propTypes = {
     vm: PropTypes.instanceOf(VM),
     width: PropTypes.number,
     x: PropTypes.number,
-    y: PropTypes.number
+    y: PropTypes.number,
+    scale: PropTypes.number
 };
 Monitor.defaultProps = {
     theme: DEFAULT_THEME

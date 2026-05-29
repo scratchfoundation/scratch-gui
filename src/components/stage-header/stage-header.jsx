@@ -8,7 +8,6 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
 import Controls from '../../containers/controls.jsx';
-import {getStageDimensions} from '../../lib/screen-utils';
 import {STAGE_SIZE_MODES} from '../../lib/layout-constants';
 
 import fullScreenIcon from './icon--fullscreen.svg';
@@ -64,7 +63,6 @@ const StageHeaderComponent = function (props) {
     let header = null;
 
     if (isFullScreen) {
-        const stageDimensions = getStageDimensions(null, true);
         const stageButton = showBranding ? (
             <div className={styles.embedScratchLogo}>
                 <a
@@ -99,7 +97,7 @@ const StageHeaderComponent = function (props) {
             <Box className={styles.stageHeaderWrapperOverlay}>
                 <Box
                     className={styles.stageMenuWrapper}
-                    style={{width: stageDimensions.width}}
+                    style={{margin: '0 4px'}}
                 >
                     <Controls vm={vm} />
                     {stageButton}

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
@@ -17,6 +17,7 @@ import SoundTab from '../../containers/sound-tab.jsx';
 import StageWrapper from '../../containers/stage-wrapper.jsx';
 import Loader from '../loader/loader.jsx';
 import Box from '../box/box.jsx';
+import ResizableBox from '../box/resizeableBox.jsx';
 import MenuBar from '../menu-bar/menu-bar.jsx';
 import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
@@ -41,6 +42,8 @@ import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import DebugModal from '../debug-modal/debug-modal.jsx';
+
+import {setStageSize} from '../../reducers/stage-size';
 
 const messages = defineMessages({
     addExtension: {
@@ -127,11 +130,34 @@ const GUIComponent = props => {
         theme,
         tipsLibraryVisible,
         vm,
+        onSetStageLarge,
+        onSetStageSmall,
         ...componentProps
     } = omit(props, 'dispatch');
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
+
+    // This is the width of the stage as set by the user. used as the "large" stage size
+    const [stageUserWidth, setStageUserWidth] = useState(480);
+
+    // callback to set the stage size mode based on the user's defined width
+    const onResize = useCallback(size => {
+        const stageSize = resolveStageSize(stageSizeMode, false);
+        if (size < 480 && stageSize !== STAGE_SIZE_MODES.small) {
+            onSetStageSmall();
+        }
+        else if (stageSize !== STAGE_SIZE_MODES.large) {
+            onSetStageLarge();
+        }
+        setStageUserWidth(size);
+    }, [onSetStageSmall, onSetStageLarge, stageSizeMode]);
+
+
+    const getStageSize = () => {
+        const size = stageSizeMode === STAGE_SIZE_MODES.large ? Math.max(stageUserWidth, 480 + 16 + 2) : 240 + 16 + 2;
+        return size;
+    };
 
     const tabClassNames = {
         tabs: styles.tabs,
@@ -355,7 +381,13 @@ const GUIComponent = props => {
                             ) : null}
                         </Box>
 
-                        <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
+                        <ResizableBox
+                            className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}
+                            onResize={onResize}
+                            minWidth={240 + 16 + 2}
+                            maxWidth={(480 * 4) + 16 + 2}
+                            initialSize={getStageSize()}
+                        >
                             <StageWrapper
                                 isFullScreen={isFullScreen}
                                 isRendererSupported={isRendererSupported}
@@ -369,7 +401,7 @@ const GUIComponent = props => {
                                     vm={vm}
                                 />
                             </Box>
-                        </Box>
+                        </ResizableBox>
                     </Box>
                 </Box>
                 <DragLayer />
@@ -445,7 +477,9 @@ GUIComponent.propTypes = {
     telemetryModalVisible: PropTypes.bool,
     theme: PropTypes.string,
     tipsLibraryVisible: PropTypes.bool,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    onSetStageLarge: PropTypes.func.isRequired,
+    onSetStageSmall: PropTypes.func.isRequired,
 };
 GUIComponent.defaultProps = {
     backpackHost: null,
@@ -478,6 +512,12 @@ const mapStateToProps = state => ({
     theme: state.scratchGui.theme.theme
 });
 
+const mapDispatchToProps = dispatch => ({
+    onSetStageLarge: () => dispatch(setStageSize(STAGE_SIZE_MODES.large)),
+    onSetStageSmall: () => dispatch(setStageSize(STAGE_SIZE_MODES.small))
+});
+
 export default injectIntl(connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(GUIComponent));

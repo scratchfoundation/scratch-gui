@@ -146,6 +146,9 @@ class Stage extends React.Component {
     }
     updateRect () {
         this.rect = this.canvas.getBoundingClientRect();
+        this.renderer.resize(this.rect.width, this.rect.height);
+        this.canvas.width = this.rect.width;
+        this.canvas.height = this.rect.height;
     }
     getScratchCoords (x, y) {
         const nativeSize = this.renderer.getNativeSize();

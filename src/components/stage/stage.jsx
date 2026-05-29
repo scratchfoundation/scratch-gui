@@ -11,8 +11,9 @@ import GreenFlagOverlay from '../../containers/green-flag-overlay.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
+import {useCanvasSize} from '../../lib/screen-utils';
+
 
 const StageComponent = props => {
     const {
@@ -24,7 +25,6 @@ const StageComponent = props => {
         colorInfo,
         micIndicator,
         question,
-        stageSize,
         useEditorDragStyle,
         onDeactivateColorPicker,
         onDoubleClick,
@@ -32,50 +32,48 @@ const StageComponent = props => {
         ...boxProps
     } = props;
 
-    const stageDimensions = getStageDimensions(stageSize, isFullScreen);
+    const stageDimensions = useCanvasSize(canvas);
 
     return (
         <React.Fragment>
             <Box
                 className={classNames(
                     styles.stageWrapper,
+                    {[styles.fullScreen]: isFullScreen},
                     {[styles.withColorPicker]: !isFullScreen && isColorPicking})}
                 onDoubleClick={onDoubleClick}
             >
                 <Box
-                    className={classNames(
-                        styles.stage,
-                        {[styles.fullScreen]: isFullScreen}
-                    )}
-                    style={{
-                        height: stageDimensions.height,
-                        width: stageDimensions.width
-                    }}
+                    className={styles.stageMaxWidth}
                 >
-                    <DOMElementRenderer
-                        domElement={canvas}
-                        style={{
-                            height: stageDimensions.height,
-                            width: stageDimensions.width
-                        }}
-                        {...boxProps}
-                    />
-                    <Box className={styles.monitorWrapper}>
-                        <MonitorList
-                            draggable={useEditorDragStyle}
-                            stageSize={stageDimensions}
+                    <Box
+                        className={classNames(
+                            styles.stage,
+                            {[styles.fullScreen]: isFullScreen}
+                        )}
+                    >
+                        <DOMElementRenderer
+                            domElement={canvas}
+                            className={styles.stageCanvas}
+                            {...boxProps}
                         />
+                        <Box className={styles.monitorWrapper}>
+                            <MonitorList
+                                draggable={useEditorDragStyle}
+                                stageSize={stageDimensions}
+                            />
+                        </Box>
+                        <Box className={styles.frameWrapper}>
+                            <TargetHighlight
+                                className={styles.frame}
+                                stageHeight={stageDimensions.height}
+                                stageWidth={stageDimensions.width}
+                            />
+                        </Box>
+                        {isColorPicking && colorInfo ? (
+                            <Loupe colorInfo={colorInfo} />
+                        ) : null}
                     </Box>
-                    <Box className={styles.frameWrapper}>
-                        <TargetHighlight
-                            className={styles.frame}
-                            stageHeight={stageDimensions.height}
-                            stageWidth={stageDimensions.width}
-                        />
-                    </Box>
-                    {isColorPicking && colorInfo ? (
-                        <Loupe colorInfo={colorInfo} />
-                    ) : null}
                 </Box>
 
                 {/* `stageOverlays` is for items that should *not* have their overflow contained within the stage */}

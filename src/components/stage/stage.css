@@ -24,10 +24,18 @@
 
     /* enforce overflow + reset position of absolutely-positioned children */
     position: relative;
+
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    aspect-ratio: 4/3;
+    box-sizing: border-box;
 }
 
 .stage.full-screen {
     border: $stage-full-screen-border-width solid rgb(126, 133, 151);
+    left: -3px;
 }
 
 .with-color-picker {
@@ -48,6 +56,29 @@
 
 .stage-wrapper {
     position: relative;
+}
+.stage-wrapper.full-screen {
+    height: calc(100vh - 56px);
+    width: calc(100vw - 2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stage-canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+}
+
+.stage-max-width {
+    height: 100%;
+    width: auto;
+    max-width: calc(100% - 2px);
+    aspect-ratio: 4/3;
+    display: grid;
+    place-items: center stretch;
 }
 
 /* we want stage overlays to all be positioned in the same spot as the stage, but can't put them inside the border

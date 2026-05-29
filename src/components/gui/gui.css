@@ -207,9 +207,6 @@
     /* pad entire wrapper to the left and right; allow children to fill width */
     padding-left: $space;
     padding-right: $space;
-
-    /* this will only ever be as wide as the stage */
-    flex-basis: 0;
 }
 
 .target-wrapper {

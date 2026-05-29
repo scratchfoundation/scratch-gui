@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {Component} from 'react';
 import stylePropType from 'react-style-proptype';
 import styles from './box.css';
 
@@ -98,9 +98,13 @@ Box.propTypes = {
     className: PropTypes.string,
     /**
      * A callback function whose first parameter is the underlying dom elements.
-     * This call back will be executed immediately after the component is mounted or unmounted
+     * This call back will be executed immediately after the component is mounted or unmounted.
+     * Also accepts component refs created with createRef() and useRef()
      */
-    componentRef: PropTypes.func,
+    componentRef: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.shape({current: PropTypes.object})
+    ]),
     /** https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction */
     direction: PropTypes.oneOf([
         'row', 'row-reverse', 'column', 'column-reverse'

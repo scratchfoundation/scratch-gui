@@ -8,15 +8,32 @@ import {stageSizeToTransform} from '../../lib/screen-utils';
 
 import styles from './monitor-list.css';
 
+// Use static `monitor-overlay` class for bounds of draggables
+// This is just a dummy div which doesn't scale to make the
+// bounds tracking play nicer with react-draggable
+const MonitorOverlay = () => (
+    <div
+        className="monitor-overlay"
+        style={{
+            width: 480,
+            height: 360,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            visibility: 'hidden'
+        }}
+    />
+);
+
 const MonitorList = props => (
     <Box
-        // Use static `monitor-overlay` class for bounds of draggables
-        className={classNames(styles.monitorList, 'monitor-overlay')}
+        className={styles.monitorList}
         style={{
             width: props.stageSize.width,
             height: props.stageSize.height
         }}
     >
+        <MonitorOverlay />
         <Box
             className={styles.monitorListScaler}
             style={stageSizeToTransform(props.stageSize)}
@@ -41,6 +58,7 @@ const MonitorList = props => (
                         x={monitorData.x}
                         y={monitorData.y}
                         onDragEnd={props.onMonitorChange}
+                        scale={props.stageSize.scale}
                     />
                 ))}
         </Box>
@@ -55,7 +73,8 @@ MonitorList.propTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
         widthDefault: PropTypes.number,
-        heightDefault: PropTypes.number
+        heightDefault: PropTypes.number,
+        scale: PropTypes.number
     }).isRequired
 };
 

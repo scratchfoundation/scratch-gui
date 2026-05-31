@@ -1,0 +1,28 @@
+{
+  "short_name": "Scratch",
+  "name": "Scratch",
+  "icons": [
+    {
+      "src": "/static/favicon-48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/static/favicon-72.png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/static/favicon-96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/static/favicon-144.png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/static/favicon-192.png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}

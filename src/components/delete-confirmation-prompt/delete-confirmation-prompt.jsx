@@ -12,7 +12,6 @@ import arrowRightIcon from './icon--arrow-right.svg';
 
 import styles from './delete-confirmation-prompt.css';
 
-// TODO: Parametrize from outside if we want more custom messaging
 const messages = defineMessages({
     shouldDeleteSpriteMessage: {
         defaultMessage: 'Are you sure you want to delete this sprite?',
@@ -47,8 +46,15 @@ const messages = defineMessages({
 });
 
 const modalWidth = 300;
-const calculateModalPosition = (relativeElemRef, modalPosition) => {
+const calculateModalPosition = (relativeElemRef, modalPosition, isRTL) => {
     const refPosition = relativeElemRef.getBoundingClientRect();
+
+    if (isRTL) {
+        return {
+            top: refPosition.top - refPosition.height,
+            left: refPosition.right + 25
+        };
+    }
 
     if (modalPosition === 'left') {
         return {
@@ -71,11 +77,9 @@ const getMessage = entityType => {
     if (entityType === 'COSTUME') {
         return messages.shouldDeleteCostumeMessage;
     }
-
     if (entityType === 'SOUND') {
         return messages.shouldDeleteSoundMessage;
     }
-
     return messages.shouldDeleteSpriteMessage;
 };
 
@@ -87,12 +91,11 @@ const DeleteConfirmationPrompt = ({
     entityType,
     relativeElemRef
 }) => {
-    const modalPositionValues = calculateModalPosition(relativeElemRef, modalPosition);
+    const isRTL = document.querySelector('[dir="rtl"]') !== null;
+    const modalPositionValues = calculateModalPosition(relativeElemRef, modalPosition, isRTL);
 
     return (<ReactModal
         isOpen
-        // We have to inline the styles, since a part
-        // of them are dynamically generated
         style={{
             content: {
                 ...modalPositionValues,
@@ -103,8 +106,9 @@ const DeleteConfirmationPrompt = ({
                 padding: 0,
                 margin: 0,
                 position: 'absolute',
-                overflowX: 'hidden',
-                zIndex: 1000
+                overflow: 'visible',
+                zIndex: 1000,
+                direction: isRTL ? 'rtl' : 'ltr'
             },
             overlay: {
                 position: 'fixed',
@@ -120,13 +124,23 @@ const DeleteConfirmationPrompt = ({
         onRequestClose={onCancel}
     >
         <Box className={styles.modalContainer}>
-            { modalPosition === 'right' ?
-                <Box className={classNames(styles.arrowContainer, styles.arrowContainerLeft)}>
-                    <img
-                        className={styles.deleteIcon}
-                        src={arrowLeftIcon}
-                    />
-                </Box> : null }
+            <Box
+                className={classNames(
+                    styles.arrowContainer,
+                    isRTL ? styles.arrowContainerRight : styles.arrowContainerLeft
+                )}
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    [isRTL ? 'left' : 'right']: '-10px'
+                }}
+            >
+                <img
+                    className={styles.deleteIcon}
+                    src={isRTL ? arrowLeftIcon : arrowRightIcon}
+                />
+            </Box>
             <Box className={styles.body}>
                 <Box className={styles.label}>
                     <FormattedMessage {...getMessage(entityType)} />
@@ -160,13 +174,6 @@ const DeleteConfirmationPrompt = ({
                     </button>
                 </Box>
             </Box>
-            {modalPosition === 'left' ?
-                <Box className={classNames(styles.arrowContainer, styles.arrowContainerRight)}>
-                    <img
-                        className={styles.deleteIcon}
-                        src={arrowRightIcon}
-                    />
-                </Box> : null }
         </Box>
     </ReactModal>);
 };

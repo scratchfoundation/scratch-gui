@@ -44,7 +44,7 @@ const MonitorComponent = props => (
     <ContextMenuTrigger
         disable={!props.draggable}
         holdToDisplay={props.mode === 'slider' ? -1 : 1000}
-        id={`monitor-${props.label}`}
+        id={`monitor-${props.label}-${props.opcode}`}
     >
         <Draggable
             bounds=".monitor-overlay" // Class for monitor container
@@ -69,7 +69,7 @@ const MonitorComponent = props => (
             // positioning conflicts between the monitors `transform: scale` and
             // the context menus `position: fixed`. For more details, see
             // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
-            <ContextMenu id={`monitor-${props.label}`}>
+            <ContextMenu id={`monitor-${props.label}-${props.opcode}`}>
                 {props.onSetModeToDefault &&
                     <MenuItem onClick={props.onSetModeToDefault}>
                         <FormattedMessage
@@ -140,6 +140,7 @@ MonitorComponent.propTypes = {
     draggable: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(monitorModes),
+    opcode: PropTypes.string,
     onDragEnd: PropTypes.func.isRequired,
     onExport: PropTypes.func,
     onImport: PropTypes.func,
@@ -154,7 +155,8 @@ MonitorComponent.propTypes = {
 
 MonitorComponent.defaultProps = {
     category: 'extension',
-    mode: 'default'
+    mode: 'default',
+    opcode: ''
 };
 
 export {

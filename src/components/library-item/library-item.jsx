@@ -39,6 +39,7 @@ class LibraryItemComponent extends React.PureComponent {
                     <img
                         className={styles.featuredImage}
                         src={this.props.iconURL}
+                        loading="lazy"
                     />
                 </div>
                 {this.props.insetIconURL ? (
@@ -130,6 +131,7 @@ class LibraryItemComponent extends React.PureComponent {
                         <img
                             className={styles.libraryItemImage}
                             src={this.props.iconURL}
+                            loading="lazy"
                         />
                     </Box>
                 </Box>

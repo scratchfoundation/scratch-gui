@@ -136,7 +136,7 @@
     "scratch-semantic-release-config": "3.0.0",
     "scratch-webpack-configuration": "3.1.2",
     "selenium-webdriver": "3.6.0",
-    "semantic-release": "19.0.5",
+    "semantic-release": "24.2.3",
     "stream-browserify": "3.0.0",
     "url-loader": "4.1.1",
     "web-audio-test-api": "0.5.2",
